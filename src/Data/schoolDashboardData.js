@@ -435,11 +435,11 @@ export const DEFAULT_SCHOOL_DASHBOARD_DATA = {
     research: {
       introText:
         "Research clusters across AI, cybersecurity, communication systems, and intelligent infrastructure.",
-      profilePath: "/schools/ict/research/profile",
-      consultancyPath: "/schools/ict/research/consultancy",
-      scholarsPath: "/schools/ict/research/scholars",
-      projectsPath: "/schools/ict/research/projects",
-      patentsPath: "/schools/ict/research/patents",
+      profilePath: "/schools/ict/research-area",
+      consultancyPath: "/schools/ict/training-consultancy",
+      scholarsPath: "/schools/ict/research-scholars",
+      projectsPath: "/schools/ict/research-projects",
+      patentsPath: "/schools/ict/patents",
     },
     placement: {
       path: "/schools/ict/placement",

@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
+import { getSchoolMeta } from "../../utils/schoolMeta";
+
+const VITE_HOST = import.meta.env.VITE_HOST;
+
+const getImageUrl = (url, image) => {
+  if (url && (url.startsWith("http") || url.startsWith("data:"))) return url;
+  if (url) return `${VITE_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
+  if (image) return `${VITE_HOST}/media/${image}`;
+  return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
+};
 
 export default function FacultyResponsiveSlider({
   title = "Faculty",
@@ -11,22 +22,31 @@ export default function FacultyResponsiveSlider({
   visibleCards = 4,
   cardWidth = 280,
   gap = 38,
-  navigateTo = "/schools/ict/faculty",
+  navigateTo,
+  schoolCode,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [disableAnimation, setDisableAnimation] = useState(false);
+  const [dynamicFaculty, setDynamicFaculty] = useState([]);
   const navigate = useNavigate();
+  const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
+
+  const effectiveFacultyList =
+    dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
 
   const moveBy = cardWidth + gap;
 
-  const loopData = [...facultyList, ...facultyList.slice(0, visibleCards)];
+  const loopData = [
+    ...effectiveFacultyList,
+    ...effectiveFacultyList.slice(0, visibleCards),
+  ];
 
   useEffect(() => {
-    if (facultyList.length <= visibleCards) return; 
+    if (effectiveFacultyList.length <= visibleCards) return; 
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
-        if (prev === facultyList.length) {
+        if (prev === effectiveFacultyList.length) {
           setDisableAnimation(true);
           setTimeout(() => {
             setCurrentIndex(0);
@@ -39,23 +59,76 @@ export default function FacultyResponsiveSlider({
     }, autoSlideInterval);
 
     return () => clearInterval(interval);
-  }, [facultyList.length, autoSlideInterval, visibleCards]);
+  }, [effectiveFacultyList.length, autoSlideInterval, visibleCards]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? facultyList.length - 1 : prev - 1
+      prev === 0 ? effectiveFacultyList.length - 1 : prev - 1
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev === facultyList.length ? 0 : prev + 1
+      prev === effectiveFacultyList.length ? 0 : prev + 1
     );
   };
 
   const handleCardClick = () => {
-    navigate(navigateTo);
+    const fallbackPath = schoolCode ? `/schools/${schoolCode}/faculty` : "/schools/ict/faculty";
+    navigate(navigateTo || fallbackPath);
   };
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadFaculty = async () => {
+      if (!schoolCode) {
+        setDynamicFaculty([]);
+        return;
+      }
+
+      try {
+        const preferredSchool = schoolMeta.apiParam || schoolMeta.name || "";
+        const primary = await fetchFacultyPublicList({
+          limit: 1000,
+          school: preferredSchool,
+        });
+        let items = Array.isArray(primary?.items) ? primary.items : [];
+
+        if (!items.length && preferredSchool !== "soict") {
+          const fallback = await fetchFacultyPublicList({
+            limit: 1000,
+            school: "soict",
+          });
+          items = Array.isArray(fallback?.items) ? fallback.items : [];
+        }
+        const mapped = items
+          .map((member) => ({
+            name: member?.name || member?.fullName || "Faculty Member",
+            title: member?.designation || member?.title || "Faculty",
+            image: getImageUrl(
+              member?.imageUrl || member?.profileImageUrl,
+              member?.image
+            ),
+          }))
+          .filter((member) => member.name && member.title);
+
+        if (mounted) {
+          setDynamicFaculty(mapped);
+        }
+      } catch (error) {
+        if (mounted) {
+          setDynamicFaculty([]);
+        }
+      }
+    };
+
+    loadFaculty();
+
+    return () => {
+      mounted = false;
+    };
+  }, [schoolCode, schoolMeta.name]);
 
   return (
     <section className="py-10 bg-white overflow-hidden relative">
@@ -91,7 +164,7 @@ export default function FacultyResponsiveSlider({
             }
             className="flex gap-[38px]"
             style={{
-              width: `${(cardWidth + gap) * (facultyList.length + visibleCards)}px`,
+              width: `${(cardWidth + gap) * (effectiveFacultyList.length + visibleCards)}px`,
             }}
           >
             {loopData.map((member, i) => (

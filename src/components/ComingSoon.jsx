@@ -101,7 +101,9 @@ const ComingSoon = () => {
           <SocialIcon url="https://instagram.com" Icon={Instagram} />
           <SocialIcon url="mailto:info@brand.com" Icon={Mail} />
         </div>
-        <div className="mt-2 text-xs text-gray-400">© 2025 YourBrand. All rights reserved.</div>
+        <div className="mt-2 text-xs text-gray-400">
+          © {new Date().getFullYear()} GBU. All rights reserved.
+        </div>
       </div>
     </div>
   );

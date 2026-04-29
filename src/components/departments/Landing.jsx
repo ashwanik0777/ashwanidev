@@ -1,29 +1,12 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const Landing = () => {
+
+const Landing = ({ slides = [] }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
-    {
-      image: "/assets/ICT.png",
-      title: "School Of ICT",
-      subtitle: "Shaping Tomorrow's Engineers Today",
-    },
-    {
-      image: "/assets/CyberLab.jpeg",
-      title: "State-of-the-Art Laboratories",
-      subtitle: "Where Innovation Meets Technology",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=1920&h=1080&fit=crop",
-      title: "Research & Development",
-      subtitle: "Pioneering Solutions for Tomorrow",
-    },
-  ];
-
   useEffect(() => {
+    if (!slides.length) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -37,6 +20,10 @@ const Landing = () => {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
+
+  if (!slides.length) {
+    return null;
+  }
 
   return (
     <section

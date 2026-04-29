@@ -27,6 +27,11 @@ const toList = (value) => {
   return [];
 };
 
+const getSchoolLabel = (item) =>
+  String(
+    item?.schoolName || item?.school || item?.school_name || item?.department || "GBU"
+  ).trim();
+
 const normalizeNotice = (item) => ({
   id: item?.id ?? "",
   title: String(item?.title || "Notice").trim(),
@@ -37,7 +42,7 @@ const normalizeNotice = (item) => ({
   views: Number(item?.views || 0),
   isNew: Boolean(item?.isNew ?? item?.is_new),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
-  schoolName: "GBU",
+  schoolName: getSchoolLabel(item),
 });
 
 const normalizeNews = (item) => ({
@@ -58,7 +63,7 @@ const normalizeNews = (item) => ({
   image: String(item?.image || item?.imageUrl || item?.coverImageUrl || "").trim(),
   featured: Boolean(item?.featured ?? item?.isFeatured),
   status: String(item?.status || "published").trim(),
-  schoolName: "GBU",
+  schoolName: getSchoolLabel(item),
 });
 
 const normalizeEvent = (item) => {
@@ -93,7 +98,7 @@ const normalizeEvent = (item) => {
     isUpcoming: eventStart ? eventStart >= today : false,
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),
-    schoolName: "GBU",
+    schoolName: getSchoolLabel(item),
   };
 };
 
@@ -107,7 +112,7 @@ const normalizeNewsletter = (item, index) => ({
   pdfLink: String(item?.pdfUrl || item?.pdf_url || "").trim(),
   views: Number(item?.views || 0),
   category: String(item?.category || "School Update").trim(),
-  schoolName: "GBU",
+  schoolName: getSchoolLabel(item),
 });
 
 const normalizeMedia = (item, index) => {
@@ -120,7 +125,7 @@ const normalizeMedia = (item, index) => {
     date: safeDate(item?.publishedDate || item?.published_date),
     images,
     coverImage: images[0] || "",
-    schoolName: "GBU",
+    schoolName: getSchoolLabel(item),
   };
 };
 

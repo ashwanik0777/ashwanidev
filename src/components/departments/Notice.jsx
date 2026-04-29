@@ -1,5 +1,7 @@
 import { Calendar } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { getSchoolMeta } from "../../utils/schoolMeta";
 import {
   getSchoolAnnouncements,
   refreshSchoolAnnouncements,
@@ -57,9 +59,39 @@ const Badge = ({ children, className = "", ...props }) => {
   );
 };
 
-const NoticeEvents = () => {
+const matchesSchool = (item, meta) => {
+  if (!meta || !meta.matchTokens?.length) return true;
+  const labelCandidates = [
+    item?.schoolName,
+    item?.school,
+    item?.department,
+    item?.school_name,
+  ]
+    .filter(Boolean)
+    .map((value) => String(value).toLowerCase());
+
+  return labelCandidates.some((label) =>
+    meta.matchTokens.some((token) => label.includes(String(token).toLowerCase()))
+  );
+};
+
+const filterBySchool = (items, meta) => {
+  if (!Array.isArray(items) || !items.length) return [];
+  if (!meta?.matchTokens?.length) return items;
+
+  const filtered = items.filter((item) => matchesSchool(item, meta));
+  if (filtered.length) return filtered;
+
+  const hasSchoolTags = items.some(
+    (item) => item?.schoolName || item?.school || item?.department || item?.school_name
+  );
+  return hasSchoolTags ? filtered : items;
+};
+
+const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallbackEvents = [] }) => {
   const scrollRef = useRef(null);
   const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements());
+  const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
   // Auto-scroll effect
   useEffect(() => {
@@ -110,8 +142,11 @@ const NoticeEvents = () => {
     };
   }, []);
 
-  const notices = announcements.notices || [];
-  const events = announcements.events || [];
+  const notices = filterBySchool(announcements.notices || [], schoolMeta);
+  const events = filterBySchool(announcements.events || [], schoolMeta);
+  const allowFallback = schoolCode !== "ict";
+  const visibleNotices = notices.length ? notices : allowFallback ? fallbackNotices : [];
+  const visibleEvents = events.length ? events : allowFallback ? fallbackEvents : [];
 
   return (
     <section className="py-20 bg-gray-100">
@@ -149,7 +184,7 @@ const NoticeEvents = () => {
                   msOverflowStyle: "none", // IE 10+
                 }}
               >
-                {notices.map((notice, index) => (
+                {visibleNotices.map((notice, index) => (
                   <div
                     key={index}
                     className="border-l-4 border-blue-500 pl-4 py-2 hover:bg-blue-50 transition-colors"
@@ -165,7 +200,7 @@ const NoticeEvents = () => {
                     <p className="text-xs text-gray-500">{notice.date}</p>
                   </div>
                 ))}
-                {notices.length === 0 ? (
+                {visibleNotices.length === 0 ? (
                   <p className="text-sm text-gray-500">No notices available.</p>
                 ) : null}
               </div>
@@ -180,8 +215,12 @@ const NoticeEvents = () => {
                 Event Gallery
               </h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto h-[calc(100%-30px)] pr-2 custom-scrollbar">
-                {events.map((event, index) => (
-                  <div key={index} className="group cursor-pointer">
+                {visibleEvents.map((event, index) => (
+                  <Link
+                    key={index}
+                    to={`/announcements/event-calendar/${event.id}`}
+                    className="group cursor-pointer"
+                  >
                     <div className="relative overflow-hidden rounded-lg mb-3 bg-gray-100">
                       <img
                         src={event.image}
@@ -199,9 +238,9 @@ const NoticeEvents = () => {
                     <p className="text-xs text-blue-600 font-medium">
                       {event.date}
                     </p>
-                  </div>
+                  </Link>
                 ))}
-                {events.length === 0 ? (
+                {visibleEvents.length === 0 ? (
                   <p className="text-sm text-gray-500">No events available.</p>
                 ) : null}
               </div>

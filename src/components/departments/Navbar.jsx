@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ChevronDown, ChevronUp, Search, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -8,7 +8,11 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileOpenMenus, setMobileOpenMenus] = useState({});
   const [isScrolled, setIsScrolled] = useState(false);
+  const [departmentItems, setDepartmentItems] = useState([]);
   const menuRefs = useRef({});
+
+  const { shortCode } = useParams();
+  const activeSchool = shortCode || "ict";
 
   const toggleMenu = (menuKey) => {
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));
@@ -43,34 +47,74 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    let isActive = true;
+
+    const loadDepartments = async () => {
+      try {
+        const module = await import(`../../Data/schools/${activeSchool}.jsx`);
+        const sections = Array.isArray(module.sectionsConfig)
+          ? module.sectionsConfig
+          : [];
+        const departmentsSection = sections.find(
+          (section) => section?.componentName === "DepartmentsSection"
+        );
+        const departments = Array.isArray(departmentsSection?.props?.departments)
+          ? departmentsSection.props.departments
+          : [];
+
+        const items = departments
+          .map((dept) => ({
+            label: dept?.name || "",
+            href: dept?.link || `/schools/${activeSchool}`,
+          }))
+          .filter((item) => item.label);
+
+        if (isActive) {
+          setDepartmentItems(items);
+        }
+      } catch {
+        if (isActive) {
+          setDepartmentItems([]);
+        }
+      }
+    };
+
+    loadDepartments();
+
+    return () => {
+      isActive = false;
+    };
+  }, [activeSchool]);
+
   const routes = {
-    home: "/schools/ict",
-    faculty: "/schools/ict/faculty",
+    home: `/schools/${activeSchool}`,
+    faculty: `/schools/${activeSchool}/faculty`,
 
     about: {
-      dean: "/schools/ict/about/dean",
-      coeidrone: "/schools/ict/about/coeidrone",
-      cyber: "/schools/ict/about/cyber",
-      coeiraem: "/schools/ict/about/coeiraem",
-      board: "/schools/ict/about/board",
-      staff: "/schools/ict/about/staff",
-      labs: "/schools/ict/about/labs",
-      activities: "/schools/ict/about/activities",
+      dean: `/schools/${activeSchool}/about/dean`,
+      coeidrone: `/schools/${activeSchool}/departments/coedt`,
+      cyber: `/schools/${activeSchool}/departments/cyber-security`,
+      coeiraem: `/schools/${activeSchool}/departments/raem`,
+      board: `/schools/${activeSchool}/about/board`,
+      staff: `/schools/${activeSchool}/about/staff`,
+      labs: `/schools/${activeSchool}/about/labs`,
+      activities: `/schools/${activeSchool}/about/activities`,
     },
     departments: {
-      cse: "/schools/ict/departments/cse",
-      it: "/schools/ict/departments/it",
-      ece: "/schools/ict/departments/ece",
+      cse: `/schools/${activeSchool}/departments/cse`,
+      it: `/schools/${activeSchool}/departments/it`,
+      ece: `/schools/${activeSchool}/departments/ece`,
     },
-    placement: "/schools/ict/placement",
+    placement: `/schools/${activeSchool}/placement`,
     research: {
-      profile: "/schools/ict/research/profile",
-      consultancy: "/schools/ict/research/consultancy",
-      scholars: "/schools/ict/research/scholars",
-      projects: "/schools/ict/research/projects",
-      patents: "/schools/ict/research/patents",
+      profile: `/schools/${activeSchool}/research-area`,
+      consultancy: `/schools/${activeSchool}/training-consultancy`,
+      scholars: `/schools/${activeSchool}/research-scholars`,
+      projects: `/schools/${activeSchool}/research-projects`,
+      patents: `/schools/${activeSchool}/patents`,
     },
-    contact: "/schools/ict/contact",
+    contact: `/schools/${activeSchool}/contact`,
   };
 
   const dropdownMenus = [
@@ -91,20 +135,22 @@ const Navbar = () => {
     {
       key: "departments",
       label: "Departments & Academic Programs",
-      items: [
-        {
-          label: "Department of Computer Science and Engineering",
-          href: routes.departments.cse,
-        },
-        {
-          label: "Department of Information Technology",
-          href: routes.departments.it,
-        },
-        {
-          label: "Department of Electronic & Communication",
-          href: routes.departments.ece,
-        },
-      ],
+      items: departmentItems.length
+        ? departmentItems
+        : [
+            {
+              label: "Department of Computer Science and Engineering",
+              href: routes.departments.cse,
+            },
+            {
+              label: "Department of Information Technology",
+              href: routes.departments.it,
+            },
+            {
+              label: "Department of Electronic & Communication",
+              href: routes.departments.ece,
+            },
+          ],
     },
     {
       key: "research",

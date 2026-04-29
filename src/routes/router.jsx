@@ -43,13 +43,6 @@ import ClubDetail from "../pages/clubs/ClubDetail.jsx";
 import FacultyPortalDashboard from "../pages/Auth/FacultyDashboard.jsx";
 import SchoolDashboard from "../pages/Auth/SchoolDashboard.jsx";
 import AdminPortalDashboard from "../pages/Auth/AdminDashboard.jsx";
-import Biotechnology from "../pages/departments/Biotechnology.jsx";
-import Engineering from "../pages/departments/Engineering.jsx";
-import Law from "../pages/departments/Law.jsx";
-import Management from "../pages/departments/Management.jsx";
-import Humanities from "../pages/departments/Humanities.jsx";
-import Vocational from "../pages/departments/Vocational.jsx";
-import Buddhist from "../pages/departments/Buddhist.jsx";
 import CourseDetails from "../components/departments/CourseDetailed.jsx"; 
 import SitemapMain from "../pages/Sitemap/SitemapMain.jsx";
 import Sitemap from "../pages/Sitemap/Sitemap.jsx";
@@ -118,12 +111,7 @@ const Incubation = lazy(() => import("../pages/Reasearch/incubations/Incubation.
 const Ipr = lazy(() => import("../pages/Reasearch/ipr/Ipr.jsx"));
 
 // ICT School components (lazy loaded) - Update these paths according to your project structure
-const ICTPage = lazy(() => import("../pages/departments/ICTPage"));
 const ICTFaculty = lazy(() => import("../pages/departments/Faculty"));
-const CSE = lazy(() => import("../pages/departments/CSE"));
-const IT = lazy(() => import("../pages/departments/IT"));
-const ECE = lazy(() => import("../pages/departments/ECE"));
-const ICTContact = lazy(() => import("../pages/departments/Contact"));
 const ResearchArea = lazy(() => import("../pages/departments/Research_area"));
 const ResearchProjects = lazy(() =>
   import("../pages/departments/Reasearch_project")
@@ -154,6 +142,11 @@ import StaffMembers from "../pages/departments/StaffMembers.jsx";
 import Coedt from "../pages/departments/Coedt.jsx";
 import Raem from "../pages/departments/Raem.jsx";
 import CyberSecurity from "../pages/departments/CyberSecurity.jsx";
+  import SchoolDetail from "../pages/Academic/SchoolDetail/index.jsx";
+import Contact from "../pages/departments/Contact.jsx";
+import CSE from "../pages/departments/CSE.jsx";
+import IT from "../pages/departments/IT.jsx";
+import ECE from "../pages/departments/ECE.jsx";
 
 import DAC from "../pages/dac/DAC.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
@@ -251,362 +244,32 @@ export default function AppRouter() {
           />
           <Route path="/academics/schools" element={<Schools />} />
 
-          <Route path="/schools/ict" element={<SchoolsLayout />}>
-            {/* ICT Home Page */}
-            <Route index element={<ICTPage />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-            <Route path="placement" element={<PlacementDashboard />} />
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<Coedt />}
-            />
-            <Route path="about/cyber" element={<CyberSecurity />} />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<Raem />}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<StaffMembers />} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
+          <Route path="/schools/:shortCode" element={<SchoolsLayout />}>
+              <Route index element={
+                <Suspense fallback={<div>Loading School...</div>}>
+                  <SchoolDetail />
+                </Suspense>
+              } />
+              <Route path="faculty" element={<ICTFaculty />} />
+              <Route path="placement" element={<PlacementDashboard />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="about/dean" element={<Dean />} />
+              <Route path="about/board" element={<BoardOfStudies />} />
+              <Route path="about/staff" element={<StaffMembers />} />
+              <Route path="about/labs" element={<LaboratoryCards />} />
+              <Route path="about/activities" element={<Conferences />} />
+              <Route path="research-area" element={<ResearchArea />} />
+              <Route path="research-projects" element={<ResearchProjects />} />
+              <Route path="research-scholars" element={<ResearchScholars />} />
+              <Route path="training-consultancy" element={<TrainingConsultancy />} />
+              <Route path="patents" element={<Patents />} />
+              <Route path="departments/cse" element={<CSE />} />
+              <Route path="departments/it" element={<IT />} />
+              <Route path="departments/ece" element={<ECE />} />
+              <Route path="departments/cyber-security" element={<CyberSecurity />} />
+              <Route path="departments/coedt" element={<Coedt />} />
+              <Route path="departments/raem" element={<Raem />} />
           </Route>
-
-          <Route path="/schools/biotechnology" element={<SchoolsLayout />}>
-            {/* Biotechnology Home Page */}
-            <Route index element={<Biotechnology />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-          {/* ------------------------------------------------------------------------------------------------------------------ */}
-
-          <Route path="/schools/engineering" element={<SchoolsLayout />}>
-            {/* Engineering Home Page */}
-            <Route index element={<Engineering />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-
-
-
-          <Route path="/schools/buddhist" element={<SchoolsLayout />}>
-            {/* Buddhist Home Page */}
-            <Route index element={<Buddhist />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-
-
-
-          <Route path="/schools/law" element={<SchoolsLayout />}>
-            {/* Law Home Page */}
-            <Route index element={<Law />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-
-
-
-
-
-          <Route path="/schools/management" element={<SchoolsLayout />}>
-            {/* Management Home Page */}
-            <Route index element={<Management />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-
-
-
-          <Route path="/schools/humanities" element={<SchoolsLayout />}>
-            {/* Humanities Home Page */}
-            <Route index element={<Humanities />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
-
-
-
-          <Route path="/schools/vocational" element={<SchoolsLayout />}>
-            {/* Vocational Home Page */}
-            <Route index element={<Vocational />} />
-
-            {/* Faculty */}
-            <Route path="faculty" element={<ICTFaculty />} />
-
-            {/* About Section */}
-            <Route
-              path="about/coeidrone"
-              element={<h1>COE Drone - Coming Soon</h1>}
-            />
-            <Route path="about/dean" element={<Dean />} />
-            <Route
-              path="about/coeiraem"
-              element={<h1>COE IRAEM - Coming Soon</h1>}
-            />
-            <Route path="about/board" element={<BoardOfStudies />} />
-            <Route path="about/staff" element={<h1>Staff - Coming Soon</h1>} />
-            <Route path="about/labs" element={<LaboratoryCards />} />
-            <Route path="about/activities" element={<Conferences />} />
-
-            {/* Departments */}
-            <Route path="departments/cse" element={<CSE />} />
-            <Route path="departments/it" element={<IT />} />
-            <Route path="departments/ece" element={<ECE />} />
-
-            {/* Research Section */}
-            <Route path="research/profile" element={<ResearchArea />} />
-            <Route
-              path="research/consultancy"
-              element={<TrainingConsultancy />}
-            />
-            <Route path="research/scholars" element={<ResearchScholars />} />
-            <Route path="research/projects" element={<ResearchProjects />} />
-            <Route path="research/patents" element={<Patents />} />
-
-            {/* Contact Page */}
-            <Route path="contact" element={<ICTContact />} />
-          </Route>
-
-
 
           {/* ------------------------------------------------------------------------------------------------------------------ */}
 

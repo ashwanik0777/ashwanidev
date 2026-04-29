@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   Mail, Phone, Search, Filter, X, BookOpen
 } from 'lucide-react';
 import apiClient from "../../services/apiClient";
 import BannerSection from '../../components/HeroBanner';
+import { getSchoolMeta } from "../../utils/schoolMeta";
 
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,18 +35,28 @@ const Faculty = () => {
 
   const [facultyData, setFacultyData] = useState([]);
 
+  const { shortCode } = useParams();
+  const schoolMeta = getSchoolMeta(shortCode);
+
   React.useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const response = await apiClient.get('/faculty/public?school=soict');
-        const items = response.data?.data?.items || [];
+        const preferredSchool = schoolMeta.apiParam || schoolMeta.name || "soict";
+        const response = await apiClient.get(`/faculty/public?school=${preferredSchool}`);
+        let items = response.data?.data?.items || [];
+
+        if (!items.length && preferredSchool !== "soict") {
+          const fallback = await apiClient.get('/faculty/public?school=soict');
+          items = fallback.data?.data?.items || [];
+        }
+
         setFacultyData(items);
       } catch (err) {
         console.error('Error fetching faculty:', err);
       }
     };
     fetchFaculty();
-  }, []);
+  }, [schoolMeta.apiParam, schoolMeta.name]);
 
   const departmentMapping = {
     'Department of Computer Science & Engineering': 'cse',

@@ -1,6 +1,8 @@
 import { Code, Cpu, Database, Users, BookOpen, Award, Lightbulb, GraduationCap } from "lucide-react";
 
 export const cseData = {
+    schoolCode: "ict",
+    departmentId: "cse",
     heroProps: {
         title: "Department of Computer Science & Engineering",
         highlight: "Computer Science & Engineering",

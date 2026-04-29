@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 
 export const itData = {
+    schoolCode: "ict",
+    departmentId: "it",
     heroProps: {
         title: "Department of Information Technology",
         highlight: "Information Technology",

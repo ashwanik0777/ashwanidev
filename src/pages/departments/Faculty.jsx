@@ -6,6 +6,7 @@ import {
 import apiClient from "../../services/apiClient";
 import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
+import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
 
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,14 +43,10 @@ const Faculty = () => {
     const fetchFaculty = async () => {
       try {
         const preferredSchool = schoolMeta.apiParam || schoolMeta.name || "soict";
-        const response = await apiClient.get(`/faculty/public?school=${preferredSchool}`);
-        let items = response.data?.data?.items || [];
-
-        if (!items.length && preferredSchool !== "soict") {
-          const fallback = await apiClient.get('/faculty/public?school=soict');
-          items = fallback.data?.data?.items || [];
-        }
-
+        const response = await apiClient.get("/faculty/public", {
+          params: { school: preferredSchool },
+        });
+        const items = response.data?.data?.items || [];
         setFacultyData(items);
       } catch (err) {
         console.error('Error fetching faculty:', err);
@@ -58,17 +55,8 @@ const Faculty = () => {
     fetchFaculty();
   }, [schoolMeta.apiParam, schoolMeta.name]);
 
-  const departmentMapping = {
-    'Department of Computer Science & Engineering': 'cse',
-    'Department of Information Technology': 'it',
-    'Department of Electronics and Communication Engineering': 'ece',
-    'OCFD': 'ocfd',
-    'IT': 'it',
-    'ECE': 'ece',
-    'CSE': 'cse'
-  };
-
-  const getDeptId = (dept) => departmentMapping[dept] || 'other';
+  const departmentOptions = getDepartmentsForSchool(shortCode);
+  const getDeptId = (dept) => matchDepartmentId(shortCode, dept) || "other";
 
   const getDesignationPriority = (designation) => {
     const desc = (designation || "").toLowerCase();
@@ -90,10 +78,11 @@ const Faculty = () => {
 
   const departments = [
     { id: 'All', name: 'All Departments', count: facultyData.length },
-    { id: 'cse', name: 'CSE', count: facultyData.filter(f => getDeptId(f.department) === 'cse').length },
-    { id: 'it', name: 'IT', count: facultyData.filter(f => getDeptId(f.department) === 'it').length },
-    { id: 'ece', name: 'ECE', count: facultyData.filter(f => getDeptId(f.department) === 'ece').length },
-    { id: 'ocfd', name: 'OCFD', count: facultyData.filter(f => getDeptId(f.department) === 'ocfd').length }
+    ...departmentOptions.map((dept) => ({
+      id: dept.id,
+      name: dept.shortName || dept.name,
+      count: facultyData.filter((f) => getDeptId(f.department) === dept.id).length,
+    })),
   ];
 
   const filteredFaculty = facultyData.filter(faculty => {

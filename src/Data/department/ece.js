@@ -4,6 +4,8 @@ import {
 
 
 export const eceData = {
+  schoolCode: "ict",
+  departmentId: "ece",
    heroProps : {
     title: "Department of Electronics & Communication Engineering",
     highlight: "Electronics & Communication Engineering",

@@ -11,7 +11,8 @@ const DepartmentLayout = ({
   hodProps,
   aboutProps,
   programsData,
-  facultyMembers,
+  schoolCode,
+  departmentId,
   facultyStats,
   researchStats,
   topAchievers,
@@ -28,10 +29,11 @@ const DepartmentLayout = ({
         programs={programsData}
       />
       <FacultyCarousel
-        facultyList={facultyMembers}
         title="Meet Our Faculty"
         subTitle="Experienced educators and researchers dedicated to student success"
-        navigateTo="/faculty"
+        schoolCode={schoolCode}
+        departmentId={departmentId}
+        navigateTo={schoolCode ? `/schools/${schoolCode}/faculty` : "/academics/faculty"}
         autoSlideInterval={5000}
         visibleCards={3}
         bottomStats={facultyStats}

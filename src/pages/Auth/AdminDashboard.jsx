@@ -24,7 +24,6 @@ import {
   AlertTriangle,
   Eye,
   EyeOff,
-  Sparkles,
   FileText,
   BriefcaseBusiness,
 } from "lucide-react";
@@ -32,6 +31,11 @@ import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
 } from "../../Data/schoolDashboardData";
+import {
+  SCHOOLS_META,
+  getSchoolByApiParam,
+  getSchoolByName,
+} from "../../Data/schoolsMeta";
 import {
   ADMIN_PORTAL_ACCOUNTS_KEY,
   DEFAULT_ADMIN_PORTAL_ACCOUNTS,
@@ -706,7 +710,7 @@ const AdminDashboard = () => {
       "Dr. New Faculty",
       "Assistant Professor",
       "Computer Science",
-      schoolData.schoolName || "School of ICT",
+      getSchoolByName(schoolData.schoolName)?.apiParam || "soict",
       "faculty@gbu.ac.in",
       "+91-9876543210",
       "true",
@@ -1305,34 +1309,27 @@ const AdminDashboard = () => {
   };
 
   const departmentOptions = useMemo(() => {
-    const allDepartments = facultyProfiles
-      .map((item) => (item.department || "").trim())
+    return SCHOOLS_META.flatMap((school) => school.departments)
+      .map((dept) => dept.name)
       .filter(Boolean);
-    return [...new Set(allDepartments)].sort((a, b) => a.localeCompare(b));
-  }, [facultyProfiles]);
+  }, []);
 
-  const schoolOptions = useMemo(() => {
-    const options = [
-      String(schoolData.schoolCode || "").trim(),
-      String(schoolData.schoolName || "").trim(),
-      ...facultyProfiles.map((item) => String(item.school || "").trim()),
-      ...accounts.map((item) => String(item.linkedSchool || "").trim()),
-    ].filter(Boolean);
-    return [...new Set(options)].sort((a, b) => a.localeCompare(b));
-  }, [schoolData.schoolCode, schoolData.schoolName, facultyProfiles, accounts]);
+  const schoolOptions = useMemo(
+    () => SCHOOLS_META.map((school) => ({
+      label: school.name,
+      value: school.apiParam,
+    })),
+    []
+  );
 
   const roleAwareDepartmentOptions = useMemo(() => {
     const activeSchool = String(accountEditor?.form?.linkedSchool || "").trim().toLowerCase();
     if (!activeSchool) return departmentOptions;
 
-    const scopedDepartments = facultyProfiles
-      .filter((item) => String(item.school || "").trim().toLowerCase() === activeSchool)
-      .map((item) => String(item.department || "").trim())
-      .filter(Boolean);
-
-    if (!scopedDepartments.length) return departmentOptions;
-    return [...new Set(scopedDepartments)].sort((a, b) => a.localeCompare(b));
-  }, [accountEditor?.form?.linkedSchool, departmentOptions, facultyProfiles]);
+    const schoolMeta = getSchoolByApiParam(activeSchool) || getSchoolByName(activeSchool);
+    const scopedDepartments = schoolMeta?.departments?.map((dept) => dept.name) || [];
+    return scopedDepartments.length ? scopedDepartments : departmentOptions;
+  }, [accountEditor?.form?.linkedSchool, departmentOptions]);
 
   const filteredFacultyProfiles = useMemo(() => {
     const query = facultyFilters.query.trim().toLowerCase();
@@ -2222,7 +2219,9 @@ const AdminDashboard = () => {
 
                 <datalist id="school-options">
                   {schoolOptions.map((option) => (
-                    <option key={option} value={option} />
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
                   ))}
                 </datalist>
 
@@ -2366,9 +2365,17 @@ const AdminDashboard = () => {
     </div>
   );
 
-  const renderFacultyTab = () => (
-    <div className={cardClass}>
-      <div className="mb-3 flex items-center justify-between">
+  const renderFacultyTab = () => {
+    const facultySchoolMeta = getSchoolByApiParam(facultyEditor.form?.school)
+      || getSchoolByName(facultyEditor.form?.school);
+    const facultyDepartmentOptions = (facultySchoolMeta?.departments || []).map((dept) => ({
+      label: dept.name,
+      value: dept.name,
+    }));
+
+    return (
+      <div className={cardClass}>
+        <div className="mb-3 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold text-slate-900">Faculty Management</h2>
           <p className="text-xs text-slate-500">Bulk upload with template + auto faculty login generation supported.</p>
@@ -2495,8 +2502,51 @@ const AdminDashboard = () => {
               <div className="space-y-3">
                 <Field label="Name"><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
                 <Field label="Designation"><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
-                <Field label="Department"><input className={inputClass} value={facultyEditor.form.department || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, department: e.target.value } }))} /></Field>
-                <Field label="School"><input className={inputClass} value={facultyEditor.form.school || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, school: e.target.value } }))} /></Field>
+                <Field label="School">
+                  <select
+                    className={inputClass}
+                    value={facultyEditor.form.school || ""}
+                    onChange={(e) =>
+                      setFacultyEditor((prev) => ({
+                        ...prev,
+                        form: {
+                          ...prev.form,
+                          school: e.target.value,
+                          department: "",
+                        },
+                      }))
+                    }
+                  >
+                    <option value="">Select school</option>
+                    {schoolOptions.map((school) => (
+                      <option key={school.value} value={school.value}>
+                        {school.label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Department">
+                  <select
+                    className={inputClass}
+                    value={facultyEditor.form.department || ""}
+                    onChange={(e) =>
+                      setFacultyEditor((prev) => ({
+                        ...prev,
+                        form: { ...prev.form, department: e.target.value },
+                      }))
+                    }
+                    disabled={!facultyDepartmentOptions.length}
+                  >
+                    <option value="">
+                      {facultyDepartmentOptions.length ? "Select department" : "Select school first"}
+                    </option>
+                    {facultyDepartmentOptions.map((dept) => (
+                      <option key={dept.value} value={dept.value}>
+                        {dept.label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
                 <Field label="Email"><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
                 <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
                 <Field label="Create Login Account">
@@ -2623,8 +2673,9 @@ const AdminDashboard = () => {
           )}
         </div>
       </div>
-    </div>
-  );
+      </div>
+    );
+  };
 
   const renderTendersTab = () => (
     <div className="space-y-4">

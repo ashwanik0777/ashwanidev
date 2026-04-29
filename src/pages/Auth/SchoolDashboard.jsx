@@ -27,6 +27,12 @@ import {
   adminGenerateFacultyPassword
 } from "../../services/facultyDashboardService";
 import { clearPortalSession } from "../../utils/portalSession";
+import {
+  SCHOOLS_META,
+  getSchoolByApiParam,
+  getSchoolByName,
+  getDepartmentsForSchool,
+} from "../../Data/schoolsMeta";
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -113,7 +119,9 @@ const SchoolDashboard = () => {
   React.useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const dataList = await adminGetFacultyList({ school: data.schoolName, limit: 1000 });
+        const schoolMeta = getSchoolByName(data.schoolName);
+        const schoolParam = schoolMeta?.apiParam || data.schoolName;
+        const dataList = await adminGetFacultyList({ school: schoolParam, limit: 1000 });
         setFacultyProfiles(dataList.items || []);
       } catch (err) {
         console.error("Failed to fetch faculty list:", err);
@@ -123,6 +131,23 @@ const SchoolDashboard = () => {
       fetchFaculty();
     }
   }, [data.schoolName, facultyRefreshKey]);
+
+  const schoolOptions = useMemo(
+    () => SCHOOLS_META.map((school) => ({
+      label: school.name,
+      value: school.apiParam,
+    })),
+    []
+  );
+
+  const departmentOptions = useMemo(() => {
+    const schoolMeta = getSchoolByApiParam(facultyEditor.form?.school)
+      || getSchoolByName(facultyEditor.form?.school);
+    return (schoolMeta?.departments || []).map((dept) => ({
+      label: dept.name,
+      value: dept.name,
+    }));
+  }, [facultyEditor.form?.school]);
 
   const summary = useMemo(
     () => [
@@ -205,6 +230,7 @@ const SchoolDashboard = () => {
   };
 
   const addFacultyProfile = () => {
+    const schoolMeta = getSchoolByName(data.schoolName);
     setFacultyEditor({
       index: null,
       form: {
@@ -212,7 +238,7 @@ const SchoolDashboard = () => {
         name: "",
         designation: "",
         department: "",
-        school: data.schoolName || "",
+        school: schoolMeta?.apiParam || "",
         email: "",
         phone: "",
       },
@@ -539,8 +565,51 @@ const SchoolDashboard = () => {
               <div className="space-y-3">
                 <Field label="Name"><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
                 <Field label="Designation"><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
-                <Field label="Department"><input className={inputClass} value={facultyEditor.form.department || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, department: e.target.value } }))} /></Field>
-                <Field label="School"><input className={inputClass} value={facultyEditor.form.school || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, school: e.target.value } }))} /></Field>
+                <Field label="School">
+                  <select
+                    className={inputClass}
+                    value={facultyEditor.form.school || ""}
+                    onChange={(e) =>
+                      setFacultyEditor((prev) => ({
+                        ...prev,
+                        form: {
+                          ...prev.form,
+                          school: e.target.value,
+                          department: "",
+                        },
+                      }))
+                    }
+                  >
+                    <option value="">Select school</option>
+                    {schoolOptions.map((school) => (
+                      <option key={school.value} value={school.value}>
+                        {school.label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="Department">
+                  <select
+                    className={inputClass}
+                    value={facultyEditor.form.department || ""}
+                    onChange={(e) =>
+                      setFacultyEditor((prev) => ({
+                        ...prev,
+                        form: { ...prev.form, department: e.target.value },
+                      }))
+                    }
+                    disabled={!departmentOptions.length}
+                  >
+                    <option value="">
+                      {departmentOptions.length ? "Select department" : "Select school first"}
+                    </option>
+                    {departmentOptions.map((dept) => (
+                      <option key={dept.value} value={dept.value}>
+                        {dept.label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
                 <Field label="Email"><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
                 <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
               </div>

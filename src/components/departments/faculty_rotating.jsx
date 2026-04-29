@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
 import { getSchoolMeta } from "../../utils/schoolMeta";
+import { matchDepartmentId } from "../../Data/schoolsMeta";
 
 const VITE_HOST = import.meta.env.VITE_HOST;
 
@@ -24,6 +25,7 @@ export default function FacultyResponsiveSlider({
   gap = 38,
   navigateTo,
   schoolCode,
+  departmentId,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [disableAnimation, setDisableAnimation] = useState(false);
@@ -31,8 +33,11 @@ export default function FacultyResponsiveSlider({
   const navigate = useNavigate();
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
-  const effectiveFacultyList =
-    dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
+  const effectiveFacultyList = schoolCode
+    ? dynamicFaculty
+    : dynamicFaculty.length > 0
+      ? dynamicFaculty
+      : facultyList;
 
   const moveBy = cardWidth + gap;
 
@@ -95,14 +100,14 @@ export default function FacultyResponsiveSlider({
         });
         let items = Array.isArray(primary?.items) ? primary.items : [];
 
-        if (!items.length && preferredSchool !== "soict") {
-          const fallback = await fetchFacultyPublicList({
-            limit: 1000,
-            school: "soict",
-          });
-          items = Array.isArray(fallback?.items) ? fallback.items : [];
+        let filtered = items;
+        if (departmentId) {
+          filtered = items.filter((member) =>
+            matchDepartmentId(schoolCode, member?.department) === departmentId
+          );
         }
-        const mapped = items
+
+        const mapped = filtered
           .map((member) => ({
             name: member?.name || member?.fullName || "Faculty Member",
             title: member?.designation || member?.title || "Faculty",
@@ -128,7 +133,7 @@ export default function FacultyResponsiveSlider({
     return () => {
       mounted = false;
     };
-  }, [schoolCode, schoolMeta.name]);
+  }, [schoolCode, schoolMeta.name, departmentId]);
 
   return (
     <section className="py-10 bg-white overflow-hidden relative">

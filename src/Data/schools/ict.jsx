@@ -908,6 +908,3 @@ export const sectionsConfig = [
     },
   },
 ];
-
-
-

@@ -1,3 +1,14 @@
+import React from "react";
+import { BookOpen, Globe, Users, Target, Trophy } from "lucide-react";
+
+const sohssSlides = [
+  {
+    image: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1sohss.jpg",
+    title: "School of Humanities and Social Sciences",
+    subtitle: "Exploring culture, society and human values",
+  },
+];
+
 export const sectionsConfig = [
   {
     componentName: "Landing",

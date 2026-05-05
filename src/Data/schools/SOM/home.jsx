@@ -1,3 +1,4 @@
+import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 
 const somBanner =

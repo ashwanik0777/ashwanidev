@@ -169,14 +169,14 @@ const HoverCards = () => {
       features: ["Constitutional Law", "International Law", "Public Policy", "Legal Research"]
     },
     {
-      imageUrl: "https://allegiance-educare.in/storage/uploads/colleges/14974330541497431571kjhldf.jpg",
+      imageUrl: "https://www.onlineresultportal.com/images/university/gautam-buddha-university.jpg",
       label: "School of Management",
       description: "Developing business leaders through innovative MBA programs, entrepreneurship studies, and strategic management education.",
       path: "/schools/SOM",
       features: ["MBA Programs", "Entrepreneurship", "Finance", "Marketing"]
     },
     {
-      imageUrl: "https://www.psychologs.com/wp-content/uploads/2023/03/GBU-final.jpg",
+      imageUrl: "https://media.licdn.com/dms/image/v2/D5622AQFpyFIVNc2KUQ/feedshare-shrink_800/feedshare-shrink_800/0/1724330956316?e=2147483647&v=beta&t=gqRLezCyDV6YOCaEF_zZ6dej78YCHqgR5LWnrBE9HwQ",
       label: "School of Humanities & Social Sciences",
       description: "Exploring human culture, society, and behavior through interdisciplinary approaches in psychology, sociology, and literature.",
       path: "/schools/SOHSS",

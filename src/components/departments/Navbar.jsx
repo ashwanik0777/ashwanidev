@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, Search, Menu, X } from "lucide-react";
 import { resolveSchool } from "../../Data/schoolsMeta";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,9 +12,12 @@ const Navbar = () => {
   const [departmentItems, setDepartmentItems] = useState([]);
   const menuRefs = useRef({});
 
-  const { shortCode } = useParams();
+  const location = useLocation();
+  const pathParts = location.pathname.split("/").filter(Boolean);
+  const shortCode = pathParts[0] === "schools" && pathParts[1] ? pathParts[1] : undefined;
+  
   const school = resolveSchool(shortCode);
-  const activeSchool = shortCode || "SOICT";
+  const activeSchool = school?.code || shortCode || "SOICT";
 
   const toggleMenu = (menuKey) => {
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));

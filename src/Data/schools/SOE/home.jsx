@@ -1,3 +1,14 @@
+import React from "react";
+import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
+
+const soeSlides = [
+  {
+    image: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1soe.jpg",
+    title: "School of Engineering",
+    subtitle: "Innovation, design and application",
+  },
+];
+
 export const sectionsConfig = [
   {
     componentName: "Landing",

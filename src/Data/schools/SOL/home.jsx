@@ -1,3 +1,6 @@
+import React from "react";
+import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
+
 const lawBanner =
   "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1soljg.jpg";
 

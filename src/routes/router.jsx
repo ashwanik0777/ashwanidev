@@ -147,6 +147,7 @@ import Contact from "../pages/departments/Contact.jsx";
 import CSE from "../pages/departments/CSE.jsx";
 import IT from "../pages/departments/IT.jsx";
 import ECE from "../pages/departments/ECE.jsx";
+import GenericDepartment from "../pages/departments/GenericDepartment.jsx";
 
 import DAC from "../pages/dac/DAC.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
@@ -263,6 +264,7 @@ export default function AppRouter() {
               <Route path="research-scholars" element={<ResearchScholars />} />
               <Route path="training-consultancy" element={<TrainingConsultancy />} />
               <Route path="patents" element={<Patents />} />
+              <Route path="departments/:deptId" element={<GenericDepartment />} />
               <Route path="departments/cse" element={<CSE />} />
               <Route path="departments/it" element={<IT />} />
               <Route path="departments/ece" element={<ECE />} />

@@ -32,6 +32,7 @@ import {
   getSchoolByApiParam,
   getSchoolByName,
   getDepartmentsForSchool,
+  resolveSchool,
 } from "../../Data/schoolsMeta";
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
@@ -78,71 +79,97 @@ const toList = (value) => {
   return [];
 };
 
-const getInitialSchoolData = () => {
-  try {
-    const raw = localStorage.getItem(SCHOOL_DASHBOARD_STORAGE_KEY);
-    if (!raw) return deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA);
-    const parsed = JSON.parse(raw);
-    return {
-      ...deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA),
-      ...parsed,
-      highlights: ensureArray(parsed.highlights, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.highlights)),
-      departments: ensureArray(parsed.departments, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.departments)),
-      pages: ensureArray(parsed.pages, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.pages)),
-      announcements: ensureArray(parsed.announcements, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.announcements)),
-      events: ensureArray(parsed.events, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.events || [])),
-      news: ensureArray(parsed.news, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.news || [])),
-      notices: ensureArray(parsed.notices, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.notices || [])),
-      newsletters: ensureArray(parsed.newsletters, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.newsletters || [])),
-      eventGallery: ensureArray(parsed.eventGallery, deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.eventGallery || [])),
-      tabContent: {
-        ...deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.tabContent),
-        ...(parsed.tabContent || {}),
-      },
-    };
-  } catch {
-    return deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA);
-  }
-};
-
 const SchoolDashboard = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState(getInitialSchoolData);
+  const [data, setData] = useState(deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA));
   const [activeTab, setActiveTab] = useState("home");
   const [message, setMessage] = useState("");
   const [facultyRefreshKey, setFacultyRefreshKey] = useState(0);
   const [collectionEditors, setCollectionEditors] = useState({});
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
-
   const [facultyProfiles, setFacultyProfiles] = useState([]);
+  const [isSaving, setIsSaving] = useState(false);
+  const [schoolId, setSchoolId] = useState(null);
+
+  // Get school code from JWT session
+  const session = React.useMemo(() => {
+    try {
+      const raw = localStorage.getItem("portal_auth_session");
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      const token = parsed?.accessToken;
+      if (!token) return null;
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return { schoolCode: payload?.schoolCode || "", ...parsed };
+    } catch {
+      return null;
+    }
+  }, []);
+
+  const mySchoolCode = session?.schoolCode || data.schoolCode || "SOICT";
+
+  // Load school data from backend on mount
+  React.useEffect(() => {
+    const loadSchoolData = async () => {
+      try {
+        const { getSchoolByCode } = await import("../../services/schoolsService");
+        const school = await getSchoolByCode(mySchoolCode);
+        if (school) {
+          setSchoolId(school.id);
+          const c = school.content || {};
+          setData({
+            ...deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA),
+            schoolName: school.name || "",
+            schoolCode: school.code || mySchoolCode,
+            deanName: c.deanName || "",
+            email: c.email || "",
+            phone: c.phone || "",
+            websiteUrl: c.websiteUrl || "",
+            bannerImage: c.bannerImage || "",
+            address: c.address || "",
+            schoolDescription: school.overview || "",
+            events: c.events || [],
+            news: c.news || [],
+            notices: c.notices || [],
+            newsletters: c.newsletters || [],
+            eventGallery: c.eventGallery || [],
+            tabContent: c.tabContent || deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.tabContent),
+          });
+        }
+      } catch (err) {
+        console.error("Failed to load school data:", err);
+        setMessage("Failed to load school data from backend. Using local defaults.");
+      }
+    };
+    loadSchoolData();
+  }, [mySchoolCode]);
 
   React.useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const schoolMeta = getSchoolByName(data.schoolName);
-        const schoolParam = schoolMeta?.apiParam || data.schoolName;
+        const schoolMeta = resolveSchool(mySchoolCode) || getSchoolByName(data.schoolName);
+        const schoolParam = schoolMeta?.code || mySchoolCode || data.schoolName;
         const dataList = await adminGetFacultyList({ school: schoolParam, limit: 1000 });
         setFacultyProfiles(dataList.items || []);
       } catch (err) {
         console.error("Failed to fetch faculty list:", err);
       }
     };
-    if (data.schoolName) {
+    if (mySchoolCode || data.schoolName) {
       fetchFaculty();
     }
-  }, [data.schoolName, facultyRefreshKey]);
+  }, [mySchoolCode, data.schoolName, facultyRefreshKey]);
 
   const schoolOptions = useMemo(
     () => SCHOOLS_META.map((school) => ({
       label: school.name,
-      value: school.apiParam,
+      value: school.code,
     })),
     []
   );
 
   const departmentOptions = useMemo(() => {
-    const schoolMeta = getSchoolByApiParam(facultyEditor.form?.school)
-      || getSchoolByName(facultyEditor.form?.school);
+    const schoolMeta = resolveSchool(facultyEditor.form?.school);
     return (schoolMeta?.departments || []).map((dept) => ({
       label: dept.name,
       value: dept.name,
@@ -179,15 +206,45 @@ const SchoolDashboard = () => {
     setMessage("");
   };
 
-  const saveAll = () => {
-    localStorage.setItem(SCHOOL_DASHBOARD_STORAGE_KEY, JSON.stringify(data));
-    setMessage("School dashboard updated successfully.");
+  const saveAll = async () => {
+    if (!schoolId) {
+      setMessage("School not loaded from backend. Cannot save.");
+      return;
+    }
+    setIsSaving(true);
+    try {
+      const { updateSchool } = await import("../../services/schoolsService");
+      await updateSchool(schoolId, {
+        name: data.schoolName,
+        overview: data.schoolDescription || "",
+        content: {
+          deanName: data.deanName || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          websiteUrl: data.websiteUrl || "",
+          bannerImage: data.bannerImage || "",
+          address: data.address || "",
+          events: data.events || [],
+          news: data.news || [],
+          notices: data.notices || [],
+          newsletters: data.newsletters || [],
+          eventGallery: data.eventGallery || [],
+          tabContent: data.tabContent || {},
+        },
+        is_active: true,
+      });
+      setMessage("School data saved to backend successfully!");
+    } catch (err) {
+      console.error("Failed to save school data:", err);
+      setMessage(`Failed to save: ${err?.response?.data?.message || err.message}`);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const resetAll = () => {
     setData(deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA));
-    localStorage.removeItem(SCHOOL_DASHBOARD_STORAGE_KEY);
-    setMessage("School dashboard reset to default data.");
+    setMessage("School dashboard reset to default data. Save to apply.");
   };
 
   const saveFacultyProfile = async (faculty) => {
@@ -230,7 +287,7 @@ const SchoolDashboard = () => {
   };
 
   const addFacultyProfile = () => {
-    const schoolMeta = getSchoolByName(data.schoolName);
+    const schoolMeta = resolveSchool(data.schoolCode) || getSchoolByName(data.schoolName);
     setFacultyEditor({
       index: null,
       form: {
@@ -238,7 +295,8 @@ const SchoolDashboard = () => {
         name: "",
         designation: "",
         department: "",
-        school: schoolMeta?.apiParam || "",
+        school: schoolMeta?.code || data.schoolCode || "",
+        school_code: schoolMeta?.code || data.schoolCode || "",
         email: "",
         phone: "",
       },
@@ -906,8 +964,8 @@ const SchoolDashboard = () => {
 
             <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3">
               <div className="mt-2 space-y-2">
-                <button onClick={saveAll} className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800">
-                  <Save className="h-4 w-4" /> Save All
+                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50">
+                  <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
                 </button>
                 {/* <button onClick={resetAll} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
                   <RotateCcw className="h-4 w-4" /> Reset
@@ -925,8 +983,11 @@ const SchoolDashboard = () => {
 
         <main className="flex-1 space-y-6">
           <section className={cardClass}>
-            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">School Dashboard</h1>
-            <p className="mt-1 text-sm text-slate-600">Operational dashboard for school-level content and management.</p>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>
+              <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">{mySchoolCode}</span>
+            </div>
+            <p className="mt-1 text-sm text-slate-600">Manage your school's content, events, news, notices &amp; more. All changes are saved per-school.</p>
             {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
           </section>
 

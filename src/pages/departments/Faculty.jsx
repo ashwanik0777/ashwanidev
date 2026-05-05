@@ -42,7 +42,7 @@ const Faculty = () => {
   React.useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const preferredSchool = schoolMeta.apiParam || schoolMeta.name || "soict";
+        const preferredSchool = schoolMeta.apiParam || schoolMeta.name || shortCode || "SOICT";
         const response = await apiClient.get("/faculty/public", {
           params: { school: preferredSchool },
         });
@@ -53,7 +53,7 @@ const Faculty = () => {
       }
     };
     fetchFaculty();
-  }, [schoolMeta.apiParam, schoolMeta.name]);
+  }, [schoolMeta.apiParam, schoolMeta.name, shortCode]);
 
   const departmentOptions = getDepartmentsForSchool(shortCode);
   const getDeptId = (dept) => matchDepartmentId(shortCode, dept) || "other";
@@ -213,23 +213,13 @@ const Faculty = () => {
           </div>
         )}
 
-        {/* Department Sections */}
-        {['cse', 'it', 'ece', 'ocfd'].map((deptId) => {
-          const deptInfo = {
-            cse: { name: "Computer Science & Engineering", shortName: "CSE" },
-            it: { name: "Information Technology", shortName: "IT" },
-            ece: { name: "Electronics & Communication Engineering", shortName: "ECE" },
-            ocfd: { name: "OCFD Faculty", shortName: "OCFD" }
-          };
-          const deptData = deptInfo[deptId];
+        {/* Department Sections — dynamically from schoolsMeta */}
+        {departmentOptions.map((dept) => {
+          const deptFilteredFaculty = filteredFaculty.filter(f => getDeptId(f.department) === dept.id);
 
-          // ✅ Get filtered faculty for this department only
-          const deptFilteredFaculty = filteredFaculty.filter(f => getDeptId(f.department) === deptId);
-
-          // Only render if any match
           if (deptFilteredFaculty.length > 0) {
             return (
-              <div key={deptId} className="mb-12">
+              <div key={dept.id} className="mb-12">
                 <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
                   <div
                     className="absolute inset-0 bg-cover bg-center"
@@ -238,10 +228,10 @@ const Faculty = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />
 
                   <div className="relative h-full flex flex-col justify-center px-8 py-6">
-                    <h2 className="text-3xl font-bold text-white mb-2">{deptData.name}</h2>
-                    <p className="text-gray-300 text-lg">{deptData.shortName} Department</p>
+                    <h2 className="text-3xl font-bold text-white mb-2">{dept.name}</h2>
+                    <p className="text-gray-300 text-lg">{dept.shortName} Department</p>
                     <div className="absolute right-8 top-1/2 -translate-y-1/2 text-[8rem] font-bold text-white/10">
-                      {deptData.shortName}
+                      {dept.shortName}
                     </div>
                   </div>
                 </div>
@@ -303,6 +293,38 @@ const Faculty = () => {
 
           return null;
         })}
+
+        {/* Uncategorized faculty (not matching any known department) */}
+        {(() => {
+          const knownIds = new Set(departmentOptions.map(d => d.id));
+          const uncategorized = filteredFaculty.filter(f => !knownIds.has(getDeptId(f.department)));
+          if (uncategorized.length === 0) return null;
+          return (
+            <div className="mb-12">
+              <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
+                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/assets/GBU.webp)' }} />
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />
+                <div className="relative h-full flex flex-col justify-center px-8 py-6">
+                  <h2 className="text-3xl font-bold text-white mb-2">Other Faculty</h2>
+                  <p className="text-gray-300 text-lg">General / Visiting</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+                {uncategorized.map((faculty) => (
+                  <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div className="p-6">
+                      <div className="flex flex-col items-center text-center">
+                        <img src={faculty.image_url || faculty.image || "/default-avatar.png"} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
+                        <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
       </div>
     </div>

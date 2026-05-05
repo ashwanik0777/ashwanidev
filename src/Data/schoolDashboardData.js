@@ -1,17 +1,15 @@
 export const SCHOOL_DASHBOARD_STORAGE_KEY = "gbu_school_dashboard_data";
 
 export const DEFAULT_SCHOOL_DASHBOARD_DATA = {
-  schoolName: "School of Information and Communication Technology",
-  schoolCode: "SOICT",
-  deanName: "Prof. (Dr.) Rajeev Malhotra",
-  email: "soict.office@gbu.ac.in",
-  phone: "+91-120-234-9988",
-  websiteUrl: "https://www.gbu.ac.in/USICT/",
-  address: "Academic Block A, Gautam Buddha University, Greater Noida",
-  bannerImage:
-    "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
-  schoolDescription:
-    "Leading innovation in computer science, AI, cybersecurity, and digital transformation with cutting-edge research facilities and strong industry collaboration.",
+  schoolName: "",
+  schoolCode: "",
+  deanName: "",
+  email: "",
+  phone: "",
+  websiteUrl: "",
+  address: "",
+  bannerImage: "",
+  schoolDescription: "",
   highlights: ["AI & ML", "Cybersecurity", "Software Engineering", "Data Science"],
   departments: [
     {

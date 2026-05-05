@@ -20,12 +20,12 @@ export const getSchoolDetails = async (id) => {
   }
 };
 
-export const createSchool = async (payload) => {
+export const getSchoolByCode = async (code) => {
   try {
-    const response = await apiClient.post("/admin/schools", payload);
-    return response.data?.data;
+    const response = await apiClient.get(`/schools/code/${code}`);
+    return response.data?.data || null;
   } catch (error) {
-    console.error("Failed to create school", error);
+    console.error(`Failed to fetch school by code ${code}`, error);
     throw error;
   }
 };
@@ -36,16 +36,6 @@ export const updateSchool = async (id, payload) => {
     return response.data?.data;
   } catch (error) {
     console.error(`Failed to update school ${id}`, error);
-    throw error;
-  }
-};
-
-export const deleteSchool = async (id) => {
-  try {
-    const response = await apiClient.delete(`/admin/schools/${id}`);
-    return response.data?.data;
-  } catch (error) {
-    console.error(`Failed to delete school ${id}`, error);
     throw error;
   }
 };

@@ -1,49 +1,25 @@
 export const SCHOOLS_META = [
   {
-    code: "ict",
-    name: "School of Information and Communication Technology",
+    code: "SOICT",
+    name: "School of Information & Communication Technology",
     shortName: "ICT",
-    apiParam: "soict",
+    slug: "soict",
     matchTokens: ["ict", "information & communication technology", "soict", "usict"],
     departments: [
-      {
-        id: "cse",
-        name: "Department of Computer Science & Engineering",
-        shortName: "CSE",
-      },
-      {
-        id: "it",
-        name: "Department of Information Technology",
-        shortName: "IT",
-      },
-      {
-        id: "ece",
-        name: "Department of Electronics & Communication Engineering",
-        shortName: "ECE",
-      },
-      {
-        id: "cyber-security",
-        name: "Department of Cyber Security",
-        shortName: "Cyber Security",
-      },
-      {
-        id: "coedt",
-        name: "COEIDrone Technologies",
-        shortName: "COEIDrone",
-      },
-      {
-        id: "raem",
-        name: "COEIRAEM",
-        shortName: "COEIRAEM",
-      },
+      { id: "cse", name: "Department of Computer Science & Engineering", shortName: "CSE" },
+      { id: "it", name: "Department of Information Technology", shortName: "IT" },
+      { id: "ece", name: "Department of Electronics & Communication Engineering", shortName: "ECE" },
+      { id: "cyber-security", name: "Department of Cyber Security", shortName: "Cyber Security" },
+      { id: "coedt", name: "COEIDrone Technologies", shortName: "COEIDrone" },
+      { id: "raem", name: "COEIRAEM", shortName: "COEIRAEM" },
     ],
   },
   {
-    code: "biotechnology",
+    code: "SOBT",
     name: "School of Biotechnology",
     shortName: "Biotechnology",
-    apiParam: "sbt",
-    matchTokens: ["biotechnology", "sbt"],
+    slug: "sobt",
+    matchTokens: ["biotechnology", "sobt", "sbt"],
     departments: [
       { id: "biotechnology", name: "Department of Biotechnology", shortName: "Biotech" },
       { id: "bioinformatics", name: "Department of Bioinformatics", shortName: "Bioinformatics" },
@@ -51,21 +27,21 @@ export const SCHOOLS_META = [
     ],
   },
   {
-    code: "buddhist",
+    code: "SOBSC",
     name: "School of Buddhist Studies & Civilization",
     shortName: "Buddhist Studies",
-    apiParam: "sbsc",
-    matchTokens: ["buddhist", "buddhist studies", "sbsc"],
+    slug: "sobsc",
+    matchTokens: ["buddhist", "buddhist studies", "sobsc", "sbsc"],
     departments: [
       { id: "buddhist-studies", name: "Department of Buddhist Studies", shortName: "Buddhist" },
       { id: "civilization", name: "Department of Civilization Studies", shortName: "Civilization" },
     ],
   },
   {
-    code: "engineering",
+    code: "SOE",
     name: "School of Engineering",
     shortName: "Engineering",
-    apiParam: "soe",
+    slug: "soe",
     matchTokens: ["engineering", "soe"],
     departments: [
       { id: "mechanical", name: "Department of Mechanical Engineering", shortName: "Mechanical" },
@@ -75,10 +51,10 @@ export const SCHOOLS_META = [
     ],
   },
   {
-    code: "law",
-    name: "School of Law, Justice and Governance",
+    code: "SOL",
+    name: "School of Law, Justice & Governance",
     shortName: "Law",
-    apiParam: "sol",
+    slug: "sol",
     matchTokens: ["law", "legal", "justice", "sol"],
     departments: [
       { id: "law-governance", name: "Department of Law & Governance", shortName: "Law" },
@@ -86,10 +62,10 @@ export const SCHOOLS_META = [
     ],
   },
   {
-    code: "management",
+    code: "SOM",
     name: "School of Management",
     shortName: "Management",
-    apiParam: "som",
+    slug: "som",
     matchTokens: ["management", "som"],
     departments: [
       { id: "general-management", name: "Department of General Management", shortName: "Management" },
@@ -98,11 +74,11 @@ export const SCHOOLS_META = [
     ],
   },
   {
-    code: "humanities",
+    code: "SOHSS",
     name: "School of Humanities & Social Sciences",
     shortName: "Humanities",
-    apiParam: "shss",
-    matchTokens: ["humanities", "social sciences", "shss"],
+    slug: "sohss",
+    matchTokens: ["humanities", "social sciences", "sohss", "shss"],
     departments: [
       { id: "psychology", name: "Department of Psychology", shortName: "Psychology" },
       { id: "sociology", name: "Department of Sociology", shortName: "Sociology" },
@@ -110,11 +86,11 @@ export const SCHOOLS_META = [
     ],
   },
   {
-    code: "vocational",
+    code: "SOVS",
     name: "School of Vocational Studies & Applied Sciences",
     shortName: "Vocational",
-    apiParam: "svs",
-    matchTokens: ["vocational", "applied sciences", "svs"],
+    slug: "sovs",
+    matchTokens: ["vocational", "applied sciences", "sovs", "svs"],
     departments: [
       { id: "applied-sciences", name: "Department of Applied Sciences", shortName: "Applied" },
       { id: "skill-development", name: "Department of Skill Development", shortName: "Skills" },
@@ -123,19 +99,38 @@ export const SCHOOLS_META = [
 ];
 
 export const getSchoolByCode = (code) =>
-  SCHOOLS_META.find((school) => school.code === code) || null;
+  SCHOOLS_META.find(
+    (school) => school.code.toLowerCase() === String(code || "").toLowerCase()
+  ) || null;
 
-export const getSchoolByApiParam = (apiParam) =>
-  SCHOOLS_META.find((school) => school.apiParam === apiParam) || null;
+export const getSchoolBySlug = (slug) =>
+  SCHOOLS_META.find(
+    (school) => school.slug === String(slug || "").toLowerCase()
+  ) || null;
 
 export const getSchoolByName = (name) => {
   if (!name) return null;
   const needle = String(name).toLowerCase();
   return (
     SCHOOLS_META.find((school) =>
-      [school.name, school.shortName, school.code, school.apiParam]
+      [school.name, school.shortName, school.code, school.slug]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase() === needle)
+    ) || null
+  );
+};
+
+/** Resolve a shortCode from the URL (e.g. "SOICT", "soict", or legacy "ict") to a SCHOOLS_META entry */
+export const resolveSchool = (shortCode) => {
+  if (!shortCode) return null;
+  const needle = String(shortCode).toLowerCase();
+  return (
+    SCHOOLS_META.find(
+      (s) =>
+        s.code.toLowerCase() === needle ||
+        s.slug === needle ||
+        s.shortName.toLowerCase() === needle ||
+        s.matchTokens.includes(needle)
     ) || null
   );
 };
@@ -158,4 +153,10 @@ export const matchDepartmentId = (code, departmentName) => {
     needle.includes(String(dept.shortName || dept.name).toLowerCase())
   );
   return partial?.id || "";
+};
+
+/** Legacy compatibility — resolve by API param or slug */
+export const getSchoolByApiParam = (apiParam) => {
+  if (!apiParam) return null;
+  return resolveSchool(apiParam);
 };

@@ -26,6 +26,7 @@ import {
   EyeOff,
   FileText,
   BriefcaseBusiness,
+  Sparkles,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -35,6 +36,7 @@ import {
   SCHOOLS_META,
   getSchoolByApiParam,
   getSchoolByName,
+  resolveSchool,
 } from "../../Data/schoolsMeta";
 import {
   ADMIN_PORTAL_ACCOUNTS_KEY,
@@ -75,9 +77,7 @@ import {
 } from "../../Data/recruitmentData";
 import {
   listSchools,
-  createSchool,
   updateSchool,
-  deleteSchool,
 } from "../../services/schoolsService";
 
 const EMPTY_SCHOOL_DATA = {
@@ -159,7 +159,7 @@ const tabs = [
   { id: "overview", label: "Overview", icon: Shield },
   { id: "accounts", label: "User & Login Management", icon: KeyRound },
   { id: "faculty", label: "Faculty Management", icon: Users },
-  { id: "school", label: "School Content", icon: School },
+  { id: "school", label: "Schools Management", icon: School },
   { id: "tenders", label: "Tender Management", icon: FileText },
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
 ];
@@ -710,7 +710,7 @@ const AdminDashboard = () => {
       "Dr. New Faculty",
       "Assistant Professor",
       "Computer Science",
-      getSchoolByName(schoolData.schoolName)?.apiParam || "soict",
+      getSchoolByName(schoolData.schoolName)?.code || "SOICT",
       "faculty@gbu.ac.in",
       "+91-9876543210",
       "true",
@@ -1090,7 +1090,6 @@ const AdminDashboard = () => {
 
   const handleSaveSchool = async () => {
     const payload = {
-        code: schoolData.schoolCode || schoolData.code || "",
         name: schoolData.schoolName || schoolData.name || "",
         overview: schoolData.schoolDescription || schoolData.overview || "",
         content: {
@@ -1110,8 +1109,8 @@ const AdminDashboard = () => {
         is_active: true
     };
     
-    if (!payload.code || !payload.name) {
-      setMessage("School Code and Name are required.");
+    if (!payload.name) {
+      setMessage("School Name is required.");
       return;
     }
 
@@ -1123,11 +1122,7 @@ const AdminDashboard = () => {
             setSchoolsList(prev => prev.map(s => s.id === selectedSchoolId ? updated : s));
             setMessage("School updated successfully!");
         } else {
-            const created = await createSchool(payload);
-            setSchoolsList(prev => [created, ...prev]);
-            setSelectedSchoolId(created.id);
-            setSchoolEditor({ isCreating: false });
-            setMessage("School created successfully!");
+            setMessage("Schools are pre-seeded. Select a school to update.");
         }
     } catch (error) {
         setSchoolApiError(error?.response?.data?.message || error?.message || "Failed to save school");
@@ -1137,24 +1132,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDeleteSchoolFromList = async (id) => {
-    setSchoolDeletingKey(String(id));
-    setSchoolApiError("");
-    try {
-      await deleteSchool(id);
-      setSchoolsList(prev => prev.filter(s => s.id !== id));
-      if (selectedSchoolId === id) {
-        setSelectedSchoolId(null);
-        setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
-      }
-      setMessage("School deleted successfully.");
-    } catch (error) {
-      setSchoolApiError(error?.response?.data?.message || error?.message || "Failed to delete school");
-      setMessage("Failed to delete school.");
-    } finally {
-      setSchoolDeletingKey("");
-    }
-  };
+
 
   const handleDeleteAccount = async (account) => {
     const accountId = Number(account?.id);
@@ -1317,7 +1295,7 @@ const AdminDashboard = () => {
   const schoolOptions = useMemo(
     () => SCHOOLS_META.map((school) => ({
       label: school.name,
-      value: school.apiParam,
+      value: school.code,
     })),
     []
   );
@@ -1326,7 +1304,7 @@ const AdminDashboard = () => {
     const activeSchool = String(accountEditor?.form?.linkedSchool || "").trim().toLowerCase();
     if (!activeSchool) return departmentOptions;
 
-    const schoolMeta = getSchoolByApiParam(activeSchool) || getSchoolByName(activeSchool);
+    const schoolMeta = resolveSchool(activeSchool) || getSchoolByName(activeSchool);
     const scopedDepartments = schoolMeta?.departments?.map((dept) => dept.name) || [];
     return scopedDepartments.length ? scopedDepartments : departmentOptions;
   }, [accountEditor?.form?.linkedSchool, departmentOptions]);
@@ -2366,7 +2344,7 @@ const AdminDashboard = () => {
   );
 
   const renderFacultyTab = () => {
-    const facultySchoolMeta = getSchoolByApiParam(facultyEditor.form?.school)
+    const facultySchoolMeta = resolveSchool(facultyEditor.form?.school)
       || getSchoolByName(facultyEditor.form?.school);
     const facultyDepartmentOptions = (facultySchoolMeta?.departments || []).map((dept) => ({
       label: dept.name,
@@ -2889,22 +2867,9 @@ const AdminDashboard = () => {
       return (
         <div className="space-y-4">
           <div className={cardClass}>
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-semibold text-slate-900">Schools Management</h2>
-                <p className="text-sm text-slate-500">Manage school content and details across the platform.</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
-                  setSelectedSchoolId(null);
-                  setSchoolEditor({ isCreating: true });
-                }}
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-              >
-                <Plus className="h-4 w-4" /> Add School
-              </button>
+            <div className="mb-4">
+              <h2 className="text-lg font-semibold text-slate-900">Schools Management</h2>
+              <p className="text-sm text-slate-500">All 8 GBU schools are pre-configured. Click a school to manage its content, events, news, notices &amp; more.</p>
             </div>
 
             {schoolApiError && (
@@ -2917,35 +2882,37 @@ const AdminDashboard = () => {
               <div className="py-8 text-center text-sm text-slate-500">Loading schools...</div>
             ) : schoolsList.length === 0 ? (
               <div className="py-8 text-center text-sm text-slate-500 border-2 border-dashed border-slate-200 rounded-xl">
-                No schools found. Create one to get started.
+                No schools found. Backend may not be running.
               </div>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {schoolsList.map((school) => (
-                  <div key={school.id} className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md">
-                    <div>
-                      <h3 className="font-semibold text-slate-900 line-clamp-2">{school.name}</h3>
-                      <p className="mt-1 text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full inline-block">{school.code}</p>
-                      <p className="mt-3 text-sm text-slate-600 line-clamp-2">{school.overview || "No overview provided."}</p>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {schoolsList.map((school) => {
+                  const c = school.content || {};
+                  const counts = [
+                    { label: "Events", n: (c.events || []).length },
+                    { label: "News", n: (c.news || []).length },
+                    { label: "Notices", n: (c.notices || []).length },
+                  ];
+                  return (
+                    <div
+                      key={school.id}
+                      onClick={() => openSchool(school)}
+                      className="group cursor-pointer rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-blue-300 hover:shadow-md hover:ring-2 hover:ring-blue-100"
+                    >
+                      <div className="mb-2 flex items-center gap-2">
+                        <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">{school.code}</span>
+                        <span className="rounded-full bg-green-50 px-2 py-0.5 text-[10px] font-medium text-green-700">Active</span>
+                      </div>
+                      <h3 className="text-sm font-semibold text-slate-900 leading-tight line-clamp-2 group-hover:text-blue-700 transition-colors">{school.name}</h3>
+                      <div className="mt-2.5 flex flex-wrap gap-1 text-[10px] text-slate-500">
+                        {counts.map((c) => (
+                          <span key={c.label} className="rounded bg-slate-50 px-1.5 py-0.5">{c.n} {c.label}</span>
+                        ))}
+                      </div>
+                      <p className="mt-2.5 text-xs font-medium text-blue-600 group-hover:text-blue-700">Manage →</p>
                     </div>
-                    <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                      <button
-                        onClick={() => openSchool(school)}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700"
-                      >
-                        <Pencil className="h-3.5 w-3.5" /> Manage Content
-                      </button>
-                      <button
-                        onClick={() => handleDeleteSchoolFromList(school.id)}
-                        disabled={schoolDeletingKey === String(school.id)}
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-red-600 hover:text-red-700 disabled:opacity-50"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                        {schoolDeletingKey === String(school.id) ? "Deleting..." : "Delete"}
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -2964,16 +2931,16 @@ const AdminDashboard = () => {
                 setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
               }}
               className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+              title="Back to schools list"
             >
               <RotateCcw className="h-5 w-5" />
             </button>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">
-                {schoolEditor.isCreating ? "Create New School" : `Editing: ${schoolData.schoolName || schoolData.schoolCode}`}
-              </h2>
-              <p className="text-sm text-slate-500">
-                {schoolEditor.isCreating ? "Fill in the details to create a new school." : "Update school details and content."}
-              </p>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-semibold text-slate-900">{schoolData.schoolName || "School"}</h2>
+                <span className="rounded-lg bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">{schoolData.schoolCode}</span>
+              </div>
+              <p className="text-sm text-slate-500">Manage this school's content, events, news &amp; more. Data is saved per-school.</p>
             </div>
           </div>
           <button
@@ -2997,11 +2964,11 @@ const AdminDashboard = () => {
                 onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolName: e.target.value }))}
               />
             </Field>
-            <Field label="School Code">
+            <Field label="School Code (Read-only)">
               <input
-                className={inputClass}
+                className={`${inputClass} bg-slate-100 cursor-not-allowed`}
                 value={schoolData.schoolCode || ""}
-                onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolCode: e.target.value }))}
+                readOnly
               />
             </Field>
             <Field label="Dean Name">
@@ -3567,7 +3534,7 @@ const AdminDashboard = () => {
                       {tab.label}
                     </button>
 
-                    {tab.id === "school" && isActive && (
+                    {tab.id === "school" && isActive && selectedSchoolId && (
                       <div className="relative ml-2 mt-2 space-y-2 pl-5">
                         <div className="pointer-events-none absolute bottom-2 left-1 top-2 w-1 rounded-full bg-gradient-to-b from-blue-200 via-indigo-200 to-sky-200" />
                         {schoolContentTabs.map((subTab) => {

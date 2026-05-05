@@ -16,7 +16,7 @@ import RecruitersShowcase from "../../../components/departments/Recuritor_showca
 import ClubsAchievements from "../../../components/departments/Clubs_activevment.jsx";
 import StudentAchievements from "../../../components/departments/Student_achievements.jsx";
 import StudentStartup from "../../../components/departments/Startup.jsx";
-import { getSchoolDetails } from '../../../services/schoolsService';
+import { resolveSchool } from '../../../Data/schoolsMeta';
 
 const componentsMap = {
   Landing,
@@ -39,13 +39,27 @@ export default function SchoolDetail() {
   const { shortCode } = useParams();
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [resolvedCode, setResolvedCode] = useState(shortCode);
 
   useEffect(() => {
     const fetchSections = async () => {
       setLoading(true);
       try {
-        // Load the school-specific structure from their respective configuration file.
-        const structureModule = await import(`../../../Data/schools/${shortCode}.jsx`);
+        // Resolve the URL shortCode (could be SOICT, soict, ict, etc.) to the canonical school code
+        const school = resolveSchool(shortCode);
+        const canonicalCode = school?.code || shortCode.toUpperCase();
+        setResolvedCode(canonicalCode);
+
+        // Try loading from new folder structure: Data/schools/SOICT/home.jsx
+        let structureModule;
+        try {
+          structureModule = await import(`../../../Data/schools/${canonicalCode}/home.jsx`);
+        } catch {
+          // Fallback: try legacy single-file format
+          const legacyCode = school?.slug || shortCode.toLowerCase();
+          structureModule = await import(`../../../Data/schools/${legacyCode}.jsx`);
+        }
+
         const configData = structureModule.sectionsConfig;
 
         if (configData && Array.isArray(configData)) {
@@ -80,8 +94,8 @@ export default function SchoolDetail() {
         const Component = componentsMap[section.componentName];
         if (!Component) return null;
 
-        // Spread the backend/json props directly to the targeted module (the exact way old ICTPage.jsx did it)
-        return <Component key={idx} {...(section.props || {})} schoolCode={shortCode} />;
+        // Spread the backend/json props directly to the targeted module
+        return <Component key={idx} {...(section.props || {})} schoolCode={resolvedCode} />;
       })}
     </div>
   );

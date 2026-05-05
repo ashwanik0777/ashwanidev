@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChevronDown, ChevronUp, Search, Menu, X } from "lucide-react";
+import { resolveSchool } from "../../Data/schoolsMeta";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
@@ -12,7 +13,8 @@ const Navbar = () => {
   const menuRefs = useRef({});
 
   const { shortCode } = useParams();
-  const activeSchool = shortCode || "ict";
+  const school = resolveSchool(shortCode);
+  const activeSchool = shortCode || "SOICT";
 
   const toggleMenu = (menuKey) => {
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));
@@ -52,7 +54,15 @@ const Navbar = () => {
 
     const loadDepartments = async () => {
       try {
-        const module = await import(`../../Data/schools/${activeSchool}.jsx`);
+        const resolvedSchool = resolveSchool(activeSchool);
+        const canonicalCode = resolvedSchool?.code || activeSchool.toUpperCase();
+        let module;
+        try {
+          module = await import(`../../Data/schools/${canonicalCode}/home.jsx`);
+        } catch {
+          const legacyCode = resolvedSchool?.slug || activeSchool.toLowerCase();
+          module = await import(`../../Data/schools/${legacyCode}.jsx`);
+        }
         const sections = Array.isArray(module.sectionsConfig)
           ? module.sectionsConfig
           : [];

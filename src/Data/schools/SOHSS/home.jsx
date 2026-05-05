@@ -140,7 +140,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/humanities/departments/en",
+          link: "/schools/SOHSS/departments/en",
         },
 
         {
@@ -156,7 +156,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/humanities/departments/il",
+          link: "/schools/SOHSS/departments/il",
         },
 
         {
@@ -173,7 +173,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/humanities/departments/mc",
+          link: "/schools/SOHSS/departments/mc",
         },
 
         {
@@ -188,7 +188,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
           gradient: "from-purple-400 to-purple-600",
-          link: "/schools/humanities/departments/ep",
+          link: "/schools/SOHSS/departments/ep",
         },
 
         {
@@ -205,7 +205,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop",
           gradient: "from-purple-500 to-purple-700",
-          link: "/schools/humanities/departments/et",
+          link: "/schools/SOHSS/departments/et",
         },
 
         {
@@ -217,7 +217,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop",
           gradient: "from-indigo-400 to-indigo-600",
-          link: "/schools/humanities/departments/his",
+          link: "/schools/SOHSS/departments/his",
         },
 
         {
@@ -232,7 +232,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=600&h=400&fit=crop",
           gradient: "from-indigo-500 to-indigo-700",
-          link: "/schools/humanities/departments/pir",
+          link: "/schools/SOHSS/departments/pir",
         },
 
         {
@@ -249,7 +249,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=600&h=400&fit=crop",
           gradient: "from-pink-400 to-pink-600",
-          link: "/schools/humanities/departments/psy",
+          link: "/schools/SOHSS/departments/psy",
         },
 
         {
@@ -261,7 +261,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&h=400&fit=crop",
           gradient: "from-pink-500 to-pink-700",
-          link: "/schools/humanities/departments/pa",
+          link: "/schools/SOHSS/departments/pa",
         },
 
         {
@@ -276,7 +276,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&h=400&fit=crop",
           gradient: "from-green-400 to-green-600",
-          link: "/schools/humanities/departments/sw",
+          link: "/schools/SOHSS/departments/sw",
         },
 
         {
@@ -288,7 +288,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop",
           gradient: "from-green-500 to-green-700",
-          link: "/schools/humanities/departments/so",
+          link: "/schools/SOHSS/departments/so",
         },
 
         {
@@ -300,7 +300,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&h=400&fit=crop",
           gradient: "from-teal-400 to-teal-600",
-          link: "/schools/humanities/departments/lis",
+          link: "/schools/SOHSS/departments/lis",
         },
       ],
     },

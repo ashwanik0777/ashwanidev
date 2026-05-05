@@ -152,7 +152,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=400&h=250&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/law",
+          link: "/schools/SOL/departments/law-justice",
         },
       ],
     },

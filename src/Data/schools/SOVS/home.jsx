@@ -43,8 +43,8 @@ export const sectionsConfig = [
     position: 2,
     props: {
       data: {
-        heading: "School of Vocational Studies and Applied Sciences",
-        subtitle: "Overview",
+        heading: "About Us",
+        subtitle: "School of Vocational Studies and Applied Sciences",
         floatingIcons: [
           {
             icon: <Code size={40} />,
@@ -167,7 +167,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/sovsas/departments/applied-mathematics",
+          link: "/schools/SOVS/departments/applied-mathematics",
         },
         {
           name: "Department of Applied Chemistry",
@@ -186,7 +186,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/sovsas/departments/applied-chemistry",
+          link: "/schools/SOVS/departments/applied-chemistry",
         },
         {
           name: "Department of Applied Physics",
@@ -204,7 +204,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/sovsas/departments/applied-physics",
+          link: "/schools/SOVS/departments/applied-physics",
         },
         {
           name: "Department of Environmental Sciences",
@@ -223,7 +223,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/sovsas/departments/environmental-science",
+          link: "/schools/SOVS/departments/environmental-science",
         },
         {
           name: "Department of Food Processing and Technology",
@@ -242,7 +242,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1581092160612-33d00a8b99c1?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/sovsas/departments/food-processing",
+          link: "/schools/SOVS/departments/food-processing",
         },
       ],
     },

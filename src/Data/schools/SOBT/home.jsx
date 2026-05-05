@@ -146,7 +146,7 @@ export const sectionsConfig = [
         image:
           "https://images.unsplash.com/photo-1581093588401-22a67f8b6d9b?w=400",
         gradient: "from-green-400 to-emerald-600",
-        link: "/schools/biotech/departments/biotech",
+        link: "/schools/SOBT/departments/biotech",
       },
 
       {
@@ -165,7 +165,7 @@ export const sectionsConfig = [
         image:
           "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400",
         gradient: "from-blue-400 to-cyan-600",
-        link: "/schools/biotech/departments/bioinformatics",
+        link: "/schools/SOBT/departments/bioinformatics",
       },
 
       {
@@ -184,7 +184,7 @@ export const sectionsConfig = [
         image:
           "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400",
         gradient: "from-purple-400 to-pink-600",
-        link: "/schools/biotech/departments/molecular",
+        link: "/schools/SOBT/departments/molecular",
       }
     ],
   },

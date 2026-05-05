@@ -173,7 +173,7 @@ As an academic community, the school is committed to the belief that expanding o
           image:
             "https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/engineering/departments/ee",
+          link: "/schools/SOE/departments/ee",
         },
 
         {
@@ -196,7 +196,7 @@ As an academic community, the school is committed to the belief that expanding o
           image:
             "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/engineering/departments/me",
+          link: "/schools/SOE/departments/me",
         },
 
         {
@@ -218,7 +218,7 @@ As an academic community, the school is committed to the belief that expanding o
           image:
             "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/engineering/departments/ce",
+          link: "/schools/SOE/departments/ce",
         },
 
         {
@@ -236,7 +236,7 @@ As an academic community, the school is committed to the belief that expanding o
           image:
             "https://images.unsplash.com/photo-1505842465776-3acb1f4a0a94?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/engineering/departments/ar",
+          link: "/schools/SOE/departments/ar",
         },
       ],
     },

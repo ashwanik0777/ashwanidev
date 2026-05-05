@@ -126,7 +126,7 @@ const buddhistslides = [
         image:
           "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400",
         gradient: "from-yellow-400 to-orange-500",
-        link: "/schools/sobsc/departments/buddhist-philosophy",
+        link: "/schools/SOBSC/departments/buddhist-philosophy",
       },
       {
         name: "Buddhist Languages & Literature",
@@ -143,7 +143,7 @@ const buddhistslides = [
         image:
           "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400",
         gradient: "from-orange-500 to-yellow-600",
-        link: "/schools/sobsc/departments/languages",
+        link: "/schools/SOBSC/departments/languages",
       },
       {
         name: "Meditation & Mindfulness Studies",
@@ -160,7 +160,7 @@ const buddhistslides = [
         image:
           "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400",
         gradient: "from-yellow-500 to-orange-600",
-        link: "/schools/sobsc/departments/meditation",
+        link: "/schools/SOBSC/departments/meditation",
       }
     ],
   },

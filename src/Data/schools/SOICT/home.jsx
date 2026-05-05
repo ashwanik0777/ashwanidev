@@ -155,7 +155,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/ict/departments/cse",
+          link: "/schools/SOICT/departments/cse",
         },
         {
           name: "Information Technology",
@@ -178,7 +178,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/ict/departments/it",
+          link: "/schools/SOICT/departments/it",
         },
         {
           name: "Electronics & Communication Engineering",
@@ -200,7 +200,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=250&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/ict/departments/ece",
+          link: "/schools/SOICT/departments/ece",
         },
 
       ],

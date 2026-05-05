@@ -43,8 +43,8 @@ export const sectionsConfig = [
     position: 2,
     props: {
       data: {
-        heading: "School of Management",
-        subtitle: "Overview",
+        heading: "About Us",
+        subtitle: "School of Management",
         floatingIcons: [
           {
             icon: <Code size={40} />,
@@ -168,7 +168,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/som/departments/business-management",
+          link: "/schools/SOM/departments/business-management",
         },
       ],
     },

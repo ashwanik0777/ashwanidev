@@ -214,49 +214,49 @@ const aboutData = {
       name: "School of Engineering",
       icon: "Cpu",
       summary: "Technology-led UG/PG courses",
-      link: "/schools/engineering"
+      link: "/schools/SOE"
     },
     {
       name: "School of ICT",
       icon: "Monitor",
       summary: "Computing & Information Technology",
-      link: "/schools/ict"
+      link: "/schools/SOICT"
     },
     {
       name: "School of Management",
       icon: "Briefcase",
       summary: "Business & Management Studies",
-      link: "/schools/management"
+      link: "/schools/SOM"
     },
     {
       name: "School of Biotechnology",
       icon: "Microscope",
       summary: "Life Sciences & Research",
-      link: "/schools/biotechnology"
+      link: "/schools/SOBT"
     },
     {
       name: "School of Law",
       icon: "Scale",
       summary: "Legal Studies & Practice",
-      link: "/schools/law"
+      link: "/schools/SOL"
     },
     {
       name: "School of Vocational Studies & Applied Sciences",
       icon: "Building",
       summary: "Design & Planning",
-      link: "/schools/vocational"
+      link: "/schools/SOVS"
     },
     {
       name: "School of Buddhist Studies",
       icon: "Flame",
       summary: "Philosophy & Spirituality",
-      link: "/schools/buddhist"
+      link: "/schools/SOBSC"
     },
     {
       name: "School of Humanities",
       icon: "Book",
       summary: "Liberal Arts & Literature",
-      link: "/schools/humanities"
+      link: "/schools/SOHSS"
     }
   ],
 

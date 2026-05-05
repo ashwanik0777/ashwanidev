@@ -144,9 +144,8 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
 
   const notices = filterBySchool(announcements.notices || [], schoolMeta);
   const events = filterBySchool(announcements.events || [], schoolMeta);
-  const allowFallback = schoolCode !== "ict";
-  const visibleNotices = notices.length ? notices : allowFallback ? fallbackNotices : [];
-  const visibleEvents = events.length ? events : allowFallback ? fallbackEvents : [];
+  const visibleNotices = notices.length ? notices : fallbackNotices;
+  const visibleEvents = events.length ? events : fallbackEvents;
 
   return (
     <section className="py-20 bg-gray-100">

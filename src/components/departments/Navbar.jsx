@@ -56,13 +56,7 @@ const Navbar = () => {
       try {
         const resolvedSchool = resolveSchool(activeSchool);
         const canonicalCode = resolvedSchool?.code || activeSchool.toUpperCase();
-        let module;
-        try {
-          module = await import(`../../Data/schools/${canonicalCode}/home.jsx`);
-        } catch {
-          const legacyCode = resolvedSchool?.slug || activeSchool.toLowerCase();
-          module = await import(`../../Data/schools/${legacyCode}.jsx`);
-        }
+        const module = await import(`../../Data/schools/${canonicalCode}/home.jsx`);
         const sections = Array.isArray(module.sectionsConfig)
           ? module.sectionsConfig
           : [];

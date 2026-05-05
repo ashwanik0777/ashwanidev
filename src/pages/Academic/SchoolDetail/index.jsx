@@ -50,15 +50,8 @@ export default function SchoolDetail() {
         const canonicalCode = school?.code || shortCode.toUpperCase();
         setResolvedCode(canonicalCode);
 
-        // Try loading from new folder structure: Data/schools/SOICT/home.jsx
-        let structureModule;
-        try {
-          structureModule = await import(`../../../Data/schools/${canonicalCode}/home.jsx`);
-        } catch {
-          // Fallback: try legacy single-file format
-          const legacyCode = school?.slug || shortCode.toLowerCase();
-          structureModule = await import(`../../../Data/schools/${legacyCode}.jsx`);
-        }
+        // Load from folder structure: Data/schools/SOICT/home.jsx
+        const structureModule = await import(`../../../Data/schools/${canonicalCode}/home.jsx`);
 
         const configData = structureModule.sectionsConfig;
 

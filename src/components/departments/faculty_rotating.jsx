@@ -79,7 +79,7 @@ export default function FacultyResponsiveSlider({
   };
 
   const handleCardClick = () => {
-    const fallbackPath = schoolCode ? `/schools/${schoolCode}/faculty` : "/schools/ict/faculty";
+    const fallbackPath = `/schools/${schoolCode || "SOICT"}/faculty`;
     navigate(navigateTo || fallbackPath);
   };
 

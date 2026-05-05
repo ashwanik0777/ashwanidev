@@ -43,43 +43,43 @@ const HoverCards = () => {
   const cards = [
     {
       imageUrl: "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
-      label: "School Of Information and Communication Technology",
-      path: "/schools/ict"
+      label: "School of Information & Communication Technology",
+      path: "/schools/SOICT"
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUoLwvVWxxxBLWiAC0R019yjKPhFJzb5TuFg&s",
-      label: "School Of Biotechnology",
-      path: "/schools/biotech"
+      label: "School of Biotechnology",
+      path: "/schools/SOBT"
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
-      label: "School Of Engineering",
-      path: "/schools/engineering"
+      label: "School of Engineering",
+      path: "/schools/SOE"
     },
     {
       imageUrl: "https://raw.githubusercontent.com/vishal-pandey/content-gbusite/master/slider/5.jpg",
-      label: "School Of Buddhist Studies & Civilization",
-      path: "/schools/buddhist"
+      label: "School of Buddhist Studies & Civilization",
+      path: "/schools/SOBSC"
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk75RFQPIldQiGk1kAwU7bEURFQV0ORVlqyg&s",
-      label: "School Of Law, Justice and Governance",
-      path: "/schools/law"
+      label: "School of Law, Justice & Governance",
+      path: "/schools/SOL"
     },
     {
       imageUrl: "https://allegiance-educare.in/storage/uploads/colleges/14974330541497431571kjhldf.jpg",
-      label: "School Of Management",
-      path: "/schools/management"
+      label: "School of Management",
+      path: "/schools/SOM"
     },
     {
       imageUrl: "https://www.psychologs.com/wp-content/uploads/2023/03/GBU-final.jpg",
-      label: "School Of Humanities and Social Sciences",
-      path: "/schools/humanities"
+      label: "School of Humanities & Social Sciences",
+      path: "/schools/SOHSS"
     },
     {
       imageUrl: "https://images.shiksha.com/mediadata/images/1742534877phpTHlfCW.jpeg",
-      label: "School Of Vocational Studies",
-      path: "/schools/vocational"
+      label: "School of Vocational Studies & Applied Sciences",
+      path: "/schools/SOVS"
     }
   ];
 

@@ -5,7 +5,7 @@ import { ChevronRight, Users, BookOpen, Award, Globe } from 'lucide-react';
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
-import { DEFAULT_SCHOOL_DASHBOARD_DATA, SCHOOL_DASHBOARD_STORAGE_KEY } from "../../Data/schoolDashboardData";
+
 
 const GlobalStyles = () => (
   <style>{`
@@ -125,18 +125,6 @@ const SchoolCard = ({ imageUrl, label, description, path, features }) => {
 };
 
 const HoverCards = () => {
-  const getManagedSchoolData = () => {
-    try {
-      const raw = localStorage.getItem(SCHOOL_DASHBOARD_STORAGE_KEY);
-      if (!raw) return DEFAULT_SCHOOL_DASHBOARD_DATA;
-      return { ...DEFAULT_SCHOOL_DASHBOARD_DATA, ...JSON.parse(raw) };
-    } catch {
-      return DEFAULT_SCHOOL_DASHBOARD_DATA;
-    }
-  };
-
-  const managedSchool = getManagedSchoolData();
-
   const stats = [
     { icon: Users, numberText: "6500+", title: "Students" },
     { icon: BookOpen, number: 8, title: "Schools" },
@@ -146,59 +134,59 @@ const HoverCards = () => {
 
   const schools = [
     {
-      imageUrl: managedSchool.bannerImage,
-      label: managedSchool.schoolName,
-      description: managedSchool.schoolDescription,
-      path: "/schools/ict",
-      features: managedSchool.highlights
+      imageUrl: "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
+      label: "School of Information & Communication Technology",
+      description: "Leading innovation in computer science, AI, cybersecurity, and digital transformation with cutting-edge research facilities.",
+      path: "/schools/SOICT",
+      features: ["AI & ML", "Cybersecurity", "Data Science", "Software Engineering"]
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUoLwvVWxxxBLWiAC0R019yjKPhFJzb5TuFg&s",
       label: "School of Biotechnology",
       description: "Advancing life sciences through molecular biology, genetic engineering, and biomedical research with state-of-the-art laboratories.",
-      path: "/schools/biotechnology",
+      path: "/schools/SOBT",
       features: ["Genetic Engineering", "Molecular Biology", "Bioinformatics", "Drug Discovery"]
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
       label: "School of Engineering",
       description: "Excellence in mechanical, civil, electrical, and chemical engineering with focus on sustainable technology and innovation.",
-      path: "/schools/engineering",
+      path: "/schools/SOE",
       features: ["Mechanical", "Civil", "Electrical", "Chemical"]
     },
     {
       imageUrl: "https://raw.githubusercontent.com/vishal-pandey/content-gbusite/master/slider/5.jpg",
       label: "School of Buddhist Studies & Civilization",
       description: "Preserving ancient wisdom while exploring contemporary applications of Buddhist philosophy, meditation, and cultural studies.",
-      path: "/schools/buddhist",
+      path: "/schools/SOBSC",
       features: ["Philosophy", "Meditation", "Cultural Studies", "Ancient Texts"]
     },
     {
       imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk75RFQPIldQiGk1kAwU7bEURFQV0ORVlqyg&s",
-      label: "School of Law, Justice and Governance",
+      label: "School of Law, Justice & Governance",
       description: "Shaping future legal minds through comprehensive programs in constitutional law, international law, and public policy.",
-      path: "/schools/law",
+      path: "/schools/SOL",
       features: ["Constitutional Law", "International Law", "Public Policy", "Legal Research"]
     },
     {
       imageUrl: "https://allegiance-educare.in/storage/uploads/colleges/14974330541497431571kjhldf.jpg",
       label: "School of Management",
       description: "Developing business leaders through innovative MBA programs, entrepreneurship studies, and strategic management education.",
-      path: "/schools/management",
+      path: "/schools/SOM",
       features: ["MBA Programs", "Entrepreneurship", "Finance", "Marketing"]
     },
     {
       imageUrl: "https://www.psychologs.com/wp-content/uploads/2023/03/GBU-final.jpg",
-      label: "School of Humanities and Social Sciences",
+      label: "School of Humanities & Social Sciences",
       description: "Exploring human culture, society, and behavior through interdisciplinary approaches in psychology, sociology, and literature.",
-      path: "/schools/humanities",
+      path: "/schools/SOHSS",
       features: ["Psychology", "Sociology", "Literature", "History"]
     },
     {
       imageUrl: "https://images.shiksha.com/mediadata/images/1742534877phpTHlfCW.jpeg",
-      label: "School of Vocational Studies",
+      label: "School of Vocational Studies & Applied Sciences",
       description: "Providing practical skills and industry-ready training through hands-on programs designed for immediate career readiness.",
-      path: "/schools/vocational",
+      path: "/schools/SOVS",
       features: ["Skill Development", "Industry Training", "Certification", "Placement"]
     }
   ];

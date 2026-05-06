@@ -6,20 +6,13 @@ import {
   Clock,
   Star,
   Award,
-  Building,
   Globe,
-  Microscope,
-  Gavel,
-  Briefcase,
-  Monitor,
-  Heart,
-  Brain,
-  Cpu,
 } from "lucide-react";
 import HeroBanner from "../../components/HeroBanner";
 import StatsCard from '../../components/StatsCard';
 import ButtonGroup from "../../components/TabsData";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
+import { ADMISSIONS_CATEGORIES, ADMISSIONS_SCHOOL_BUTTONS } from "../../Data/schools";
 // Mock Navbar component
 
 // UI Components
@@ -53,6 +46,29 @@ const Badge = ({ children, variant = "default", className = "" }) => {
     secondary: "bg-gray-100 text-gray-800",
     outline: "border border-gray-300 text-gray-700 bg-white",
   };
+
+  const activeSchoolData = schoolCategories[activeSchool] ||
+    schoolCategories[ADMISSIONS_SCHOOL_BUTTONS[0]?.id];
+
+  if (!activeSchoolData) {
+    return (
+      <SearchableWrapper>
+        <div className="min-h-screen bg-gray-50 pb-10">
+          <HeroBanner
+            title="Courses Offered"
+            subtitle="Explore our diverse academic programs across multiple schools and degree levels"
+            bgTheme={5}
+          />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  mb-8">
+            <StatsCard stats={educationStatsData} />
+            <div className="rounded-lg border border-dashed border-gray-300 bg-white p-6 text-center text-gray-500">
+              Admissions data is not configured yet.
+            </div>
+          </div>
+        </div>
+      </SearchableWrapper>
+    );
+  }
 
   return (
     <span
@@ -122,334 +138,8 @@ const TabsTrigger = ({
 const TabsContent = ({ children, value, className = "", activeTab }) =>
   activeTab === value ? <div className={className}>{children}</div> : null;
 
-// School Categories Data
-const schoolCategories = {
-  Engineering: {
-    icon: Cpu,
-    color: "from-blue-600 to-blue-800",
-    image: "photo-1581091226825-a6a2a5aee158",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Technology (B.Tech)",
-          specializations: [
-            "Computer Science",
-            "Electronics",
-            "Mechanical",
-            "Civil",
-            "Chemical",
-          ],
-          duration: "4 years",
-          seats: 240,
-          eligibility: "12th with PCM, JEE Main",
-          highlights: [
-            "Industry partnerships",
-            "Internship guaranteed",
-            "Placement assistance",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Technology (M.Tech)",
-          specializations: ["AI & ML", "VLSI Design", "Structural Engineering"],
-          duration: "2 years",
-          seats: 60,
-          eligibility: "B.Tech with valid GATE score",
-          highlights: [
-            "Research opportunities",
-            "Industry exposure",
-            "Advanced labs",
-          ],
-        },
-      ],
-      Doctoral: [
-        {
-          name: "Doctor of Philosophy (Ph.D)",
-          specializations: ["Various Engineering Disciplines"],
-          duration: "3-5 years",
-          seats: 20,
-          eligibility: "M.Tech/M.E with research experience",
-          highlights: [
-            "Research fellowship",
-            "Publication support",
-            "Conference funding",
-          ],
-        },
-      ],
-    },
-  },
-  "Information Technology": {
-    icon: Monitor,
-    color: "from-green-600 to-teal-600",
-    image: "photo-1581092162384-8987c1d64718",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Computer Applications (BCA)",
-          specializations: [
-            "Software Development",
-            "Web Technologies",
-            "Mobile Apps",
-          ],
-          duration: "3 years",
-          seats: 120,
-          eligibility: "12th with Mathematics",
-          highlights: [
-            "Industry projects",
-            "Internship program",
-            "Skill certification",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Computer Applications (MCA)",
-          specializations: ["Data Science", "Cybersecurity", "Cloud Computing"],
-          duration: "2 years",
-          seats: 60,
-          eligibility: "Bachelor's with Mathematics/Statistics",
-          highlights: [
-            "Industry mentorship",
-            "Live projects",
-            "Placement support",
-          ],
-        },
-      ],
-      Doctoral: [],
-    },
-  },
-  Management: {
-    icon: Briefcase,
-    color: "from-purple-600 to-indigo-600",
-    image: "photo-1507003211169-0a1dd7228f2d",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Business Administration (BBA)",
-          specializations: ["Finance", "Marketing", "HR", "Operations"],
-          duration: "3 years",
-          seats: 100,
-          eligibility: "12th from any stream",
-          highlights: [
-            "Industry internships",
-            "Case study method",
-            "Leadership development",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Business Administration (MBA)",
-          specializations: [
-            "Finance",
-            "Marketing",
-            "HR",
-            "Operations",
-            "International Business",
-          ],
-          duration: "2 years",
-          seats: 120,
-          eligibility: "Bachelor's degree with entrance exam",
-          highlights: [
-            "Industry visits",
-            "Global exposure",
-            "100% placement record",
-          ],
-        },
-      ],
-      Doctoral: [
-        {
-          name: "Doctor of Philosophy (Ph.D) in Management",
-          specializations: ["Strategic Management", "Finance", "Marketing"],
-          duration: "3-5 years",
-          seats: 15,
-          eligibility: "MBA/M.Com with research aptitude",
-          highlights: [
-            "Research grants",
-            "International conferences",
-            "Publication support",
-          ],
-        },
-      ],
-    },
-  },
-  Biotechnology: {
-    icon: Microscope,
-    color: "from-emerald-600 to-green-700",
-    image: "photo-1582719471384-894fbb16e074",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Science in Biotechnology",
-          specializations: [
-            "Medical Biotech",
-            "Agricultural Biotech",
-            "Industrial Biotech",
-          ],
-          duration: "3 years",
-          seats: 60,
-          eligibility: "12th with PCB",
-          highlights: [
-            "Advanced laboratories",
-            "Research projects",
-            "Industry collaboration",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Science in Biotechnology",
-          specializations: [
-            "Molecular Biology",
-            "Bioinformatics",
-            "Pharmacology",
-          ],
-          duration: "2 years",
-          seats: 30,
-          eligibility: "B.Sc in Life Sciences",
-          highlights: [
-            "Research opportunities",
-            "Industry internships",
-            "Publication support",
-          ],
-        },
-      ],
-      Doctoral: [],
-    },
-  },
-  Law: {
-    icon: Gavel,
-    color: "from-red-600 to-red-800",
-    image: "photo-1589829545856-d10d557cf95f",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Laws (LLB)",
-          specializations: [
-            "Corporate Law",
-            "Criminal Law",
-            "Constitutional Law",
-          ],
-          duration: "3 years",
-          seats: 80,
-          eligibility: "Bachelor's degree in any discipline",
-          highlights: [
-            "Moot court competitions",
-            "Legal aid clinic",
-            "Internship program",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Laws (LLM)",
-          specializations: ["International Law", "IP Law", "Environmental Law"],
-          duration: "1 year",
-          seats: 40,
-          eligibility: "LLB degree",
-          highlights: [
-            "Specialized curriculum",
-            "Research opportunities",
-            "Bar preparation",
-          ],
-        },
-      ],
-      Doctoral: [],
-    },
-  },
-  Humanities: {
-    icon: Heart,
-    color: "from-pink-600 to-rose-600",
-    image: "photo-1481627834876-b7833e8f5570",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor of Arts (BA)",
-          specializations: ["English", "History", "Psychology", "Sociology"],
-          duration: "3 years",
-          seats: 100,
-          eligibility: "12th from any stream",
-          highlights: [
-            "Research projects",
-            "Cultural activities",
-            "Skill development",
-          ],
-        },
-      ],
-      Postgraduate: [
-        {
-          name: "Master of Arts (MA)",
-          specializations: ["English Literature", "History", "Psychology"],
-          duration: "2 years",
-          seats: 50,
-          eligibility: "Bachelor's in relevant field",
-          highlights: [
-            "Research methodology",
-            "Thesis writing",
-            "Academic excellence",
-          ],
-        },
-      ],
-      Doctoral: [],
-    },
-  },
-  "Buddhist Studies": {
-    icon: Brain,
-    color: "from-orange-600 to-amber-600",
-    image: "photo-1506905925346-21bda4d32df4",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Bachelor in Buddhist Studies",
-          specializations: [
-            "Buddhist Philosophy",
-            "Meditation Studies",
-            "Buddhist Literature",
-          ],
-          duration: "3 years",
-          seats: 40,
-          eligibility: "12th from any stream",
-          highlights: [
-            "Meditation practice",
-            "Philosophy seminars",
-            "Cultural studies",
-          ],
-        },
-      ],
-      Postgraduate: [],
-      Doctoral: [],
-    },
-  },
-  "Vocational Training": {
-    icon: Building,
-    color: "from-gray-600 to-gray-800",
-    image: "photo-1560472354-b33ff0c44a43",
-    programs: {
-      Undergraduate: [
-        {
-          name: "Diploma in Various Trades",
-          specializations: [
-            "Electrical",
-            "Mechanical",
-            "Electronics",
-            "Computer Applications",
-          ],
-          duration: "1-2 years",
-          seats: 200,
-          eligibility: "10th/12th as per course",
-          highlights: [
-            "Hands-on training",
-            "Industry certification",
-            "Job placement",
-          ],
-        },
-      ],
-      Postgraduate: [],
-      Doctoral: [],
-    },
-  },
-};
+// School Categories Data (centralized in Data/schools)
+const schoolCategories = ADMISSIONS_CATEGORIES;
 const educationStatsData = [
   {
     icon: GraduationCap,
@@ -477,13 +167,11 @@ const educationStatsData = [
   },
 ];
 const CoursesOffered = () => {
-  const [activeSchool, setActiveSchool] = useState("Engineering");
+  const [activeSchool, setActiveSchool] = useState(
+    ADMISSIONS_SCHOOL_BUTTONS[0]?.id || ""
+  );
 
-  const schoolButtons = Object.keys(schoolCategories).map((school) => ({
-    id: school,
-    label: school.split(" ")[0],
-    tooltip: school,
-  }));
+  const schoolButtons = ADMISSIONS_SCHOOL_BUTTONS;
 
   const CourseCard = ({ course }) => (
     <Card className="h-full hover:shadow-lg transition-shadow">
@@ -632,9 +320,9 @@ const CoursesOffered = () => {
 
         {/* Program Tabs + Content */}
         <ProgramSection
-          programs={schoolCategories[activeSchool].programs}
+          programs={activeSchoolData.programs}
           schoolName={activeSchool}
-          schoolData={schoolCategories[activeSchool]}
+          schoolData={activeSchoolData}
         />
       </div>
     </div>

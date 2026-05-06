@@ -5,6 +5,7 @@ import { ChevronRight, Users, BookOpen, Award, Globe } from 'lucide-react';
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+import { SCHOOL_CARDS } from "../../Data/schools";
 
 
 const GlobalStyles = () => (
@@ -132,64 +133,7 @@ const HoverCards = () => {
     { icon: Users, numberText: "200+", title: "Faculty Members" }
   ];
 
-  const schools = [
-    {
-      imageUrl: "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
-      label: "School of Information & Communication Technology",
-      description: "Leading innovation in computer science, AI, cybersecurity, and digital transformation with cutting-edge research facilities.",
-      path: "/schools/SOICT",
-      features: ["AI & ML", "Cybersecurity", "Data Science", "Software Engineering"]
-    },
-    {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUoLwvVWxxxBLWiAC0R019yjKPhFJzb5TuFg&s",
-      label: "School of Biotechnology",
-      description: "Advancing life sciences through molecular biology, genetic engineering, and biomedical research with state-of-the-art laboratories.",
-      path: "/schools/SOBT",
-      features: ["Genetic Engineering", "Molecular Biology", "Bioinformatics", "Drug Discovery"]
-    },
-    {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
-      label: "School of Engineering",
-      description: "Excellence in mechanical, civil, electrical, and chemical engineering with focus on sustainable technology and innovation.",
-      path: "/schools/SOE",
-      features: ["Mechanical", "Civil", "Electrical", "Chemical"]
-    },
-    {
-      imageUrl: "https://raw.githubusercontent.com/vishal-pandey/content-gbusite/master/slider/5.jpg",
-      label: "School of Buddhist Studies & Civilization",
-      description: "Preserving ancient wisdom while exploring contemporary applications of Buddhist philosophy, meditation, and cultural studies.",
-      path: "/schools/SOBSC",
-      features: ["Philosophy", "Meditation", "Cultural Studies", "Ancient Texts"]
-    },
-    {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk75RFQPIldQiGk1kAwU7bEURFQV0ORVlqyg&s",
-      label: "School of Law, Justice & Governance",
-      description: "Shaping future legal minds through comprehensive programs in constitutional law, international law, and public policy.",
-      path: "/schools/SOL",
-      features: ["Constitutional Law", "International Law", "Public Policy", "Legal Research"]
-    },
-    {
-      imageUrl: "https://www.onlineresultportal.com/images/university/gautam-buddha-university.jpg",
-      label: "School of Management",
-      description: "Developing business leaders through innovative MBA programs, entrepreneurship studies, and strategic management education.",
-      path: "/schools/SOM",
-      features: ["MBA Programs", "Entrepreneurship", "Finance", "Marketing"]
-    },
-    {
-      imageUrl: "https://media.licdn.com/dms/image/v2/D5622AQFpyFIVNc2KUQ/feedshare-shrink_800/feedshare-shrink_800/0/1724330956316?e=2147483647&v=beta&t=gqRLezCyDV6YOCaEF_zZ6dej78YCHqgR5LWnrBE9HwQ",
-      label: "School of Humanities & Social Sciences",
-      description: "Exploring human culture, society, and behavior through interdisciplinary approaches in psychology, sociology, and literature.",
-      path: "/schools/SOHSS",
-      features: ["Psychology", "Sociology", "Literature", "History"]
-    },
-    {
-      imageUrl: "https://images.shiksha.com/mediadata/images/1742534877phpTHlfCW.jpeg",
-      label: "School of Vocational Studies & Applied Sciences",
-      description: "Providing practical skills and industry-ready training through hands-on programs designed for immediate career readiness.",
-      path: "/schools/SOVS",
-      features: ["Skill Development", "Industry Training", "Certification", "Placement"]
-    }
-  ];
+  const schools = SCHOOL_CARDS;
 
   return (
     <SearchableWrapper>

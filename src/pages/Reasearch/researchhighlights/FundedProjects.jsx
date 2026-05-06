@@ -3,6 +3,7 @@ import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 
 import { FolderOpen, DollarSign, Settings, Building2, Search, Filter, ChevronLeft, ChevronRight, Calendar, User, Building } from "lucide-react";
+import { SCHOOL_BADGES } from "../../../Data/schools";
 
 const FundedProjects = () => {
   const [selectedSchool, setSelectedSchool] = useState("");
@@ -64,7 +65,7 @@ const FundedProjects = () => {
     },
     {
       id: 3,
-      school: "Energy Systems",
+      school: "Engineering",
       title: "Smart Grid Integration with Renewable Energy Sources",
       pi: "Dr. Vikash Patel",
       fundingAgency: "Ministry of New and Renewable Energy (MNRE)",
@@ -92,16 +93,7 @@ const FundedProjects = () => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-  const schools = [
-    "Biotechnology",
-    "Buddhist Studies & Civilization",
-    "Engineering",
-    "Humanities & Social Sciences",
-    "Information & Communication Technology",
-    "Law, Justice and Governance",
-    "Management",
-    "Vocational Studies & Applied Sciences",
-  ];
+  const schools = Object.keys(SCHOOL_BADGES);
 
   const statsData = [
     {

@@ -4,6 +4,7 @@ import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, Ch
 import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../../../components/TabsData.jsx';
+import { SCHOOL_BADGES } from "../../../Data/schools";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
@@ -16,16 +17,7 @@ const Publications = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const schools = [
-    "Biotechnology",
-    "Buddhist Studies & Civilization",
-    "Engineering",
-    "Humanities & Social Sciences",
-    "Information & Communication Technology",
-    "Law, Justice and Governance",
-    "Management",
-    "Vocational Studies & Applied Sciences",
-  ];
+  const schools = Object.keys(SCHOOL_BADGES);
 
   const types = [
     "Article",

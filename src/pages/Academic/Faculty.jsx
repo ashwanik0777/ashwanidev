@@ -8,6 +8,7 @@ import { Mail, Phone, Globe, Award, BookOpen, Users, Search, X } from 'lucide-re
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data/schools";
 
 const VITE_HOST = import.meta.env.VITE_HOST;
 import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
@@ -71,29 +72,26 @@ const Faculty = () => {
     fetchAllData();
   }, []);
 
-  const schools = [
-    'All Schools',
-    'University Schools',
-    'Biotechnology',
-    'Buddhist Studies & Civilization',
-    'Engineering',
-    'Humanities & Social Sciences',
-    'Information & Communication Technology',
-    'Law, Justice and Governance',
-    'Management',
-    'Vocational Studies & Applied Sciences'
-  ];
+  const schools = SCHOOL_FILTERS;
 
   const departments = [
-    'All Departments',
-    'Computer Science & Engineering',
-    'Electronics & Communication Engineering',
-    'Biotechnology',
-    'Management',
-    'Law',
-    'English',
-    'Political Science'
+    "All Departments",
+    ...Array.from(
+      new Set(SCHOOL_DEPARTMENTS.map((dept) => dept.name).filter(Boolean))
+    ),
   ];
+
+  const normalizeSchoolName = (value) => {
+    if (!value) return "";
+    const normalized = String(value).trim().toLowerCase();
+    const match = SCHOOL_DIRECTORY.find(
+      (school) =>
+        school.code.toLowerCase() === normalized ||
+        school.name.toLowerCase() === normalized ||
+        school.short.toLowerCase() === normalized
+    );
+    return match ? match.name : String(value).trim();
+  };
 
   const experienceRanges = [
     'All',
@@ -141,7 +139,9 @@ const Faculty = () => {
       ) ?? false);
 
     const matchesDepartment = selectedDepartment === 'All Departments' || faculty.department === selectedDepartment;
-    const matchesSchool = selectedSchool === 'All Schools' || faculty.school === selectedSchool;
+    const matchesSchool =
+      selectedSchool === "All Schools" ||
+      normalizeSchoolName(faculty.school) === selectedSchool;
 
     const matchesExperience = selectedExperience === 'All' ||
       (selectedExperience === '0-5 years' && faculty.experience_years <= 5) ||

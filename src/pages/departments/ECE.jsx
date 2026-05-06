@@ -1,6 +1,6 @@
 
 import DepartmentLayout from "./DepartmentLayout";
-import { eceData } from "../../Data/department/ece";
+import { departmentLayoutData as eceData } from "../../Data/schools/SOICT/departments/electronics--communication-engineering";
 
 const ECE = () => <DepartmentLayout {...eceData} />;
 export default ECE;

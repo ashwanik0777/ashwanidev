@@ -1,6 +1,7 @@
 
 import React from 'react';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
+import { COURSE_APPLICATIONS, COURSE_APPLICATION_SCHOOLS } from "../../Data/schools";
 // Card components
 const Card = ({ children, className = "" }) => (
   <div className={`bg-white rounded-xl shadow-md border border-gray-200 ${className}`}>{children}</div>
@@ -21,6 +22,10 @@ const Badge = ({ children, variant = "outline", className = "" }) => {
   const variants = {
     outline: "bg-white",
   };
+  const selectedSchoolLabel =
+    COURSE_APPLICATION_SCHOOLS.find((school) => school.id === selectedSchool)?.label ||
+    selectedSchool;
+
   return (
     <span className={`${base} ${variants[variant]} ${className}`}>{children}</span>
   );
@@ -83,32 +88,13 @@ const SelectItem = ({ children, value, onValueChange, onClick }) => (
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const CourseApplications = () => {
-  const schoolData = {
-    'Engineering': [
-      { course: 'B.Tech CSE', applications: 450, approved: 180, pending: 50, rejected: 20 },
-      { course: 'B.Tech ECE', applications: 320, approved: 150, pending: 30, rejected: 15 },
-      { course: 'M.Tech CSE', applications: 180, approved: 80, pending: 15, rejected: 8 }
-    ],
-    'ICT': [
-      { course: 'BCA', applications: 280, approved: 120, pending: 25, rejected: 10 },
-      { course: 'MCA', applications: 200, approved: 90, pending: 20, rejected: 8 }
-    ],
-    'Management': [
-      { course: 'MBA', applications: 280, approved: 120, pending: 25, rejected: 10 },
-      { course: 'BBA', applications: 170, approved: 80, pending: 15, rejected: 5 }
-    ],
-    'Biotechnology': [
-      { course: 'B.Sc Biotech', applications: 150, approved: 90, pending: 20, rejected: 5 },
-      { course: 'M.Sc Biotech', applications: 120, approved: 70, pending: 10, rejected: 3 }
-    ],
-    'Law': [
-      { course: 'LLB', applications: 200, approved: 100, pending: 15, rejected: 8 },
-      { course: 'LLM', applications: 120, approved: 60, pending: 10, rejected: 5 }
-    ]
-  };
-
-  const [selectedSchool, setSelectedSchool] = React.useState('Engineering');
-  const currentData = schoolData[selectedSchool] || schoolData['Engineering'];
+  const [selectedSchool, setSelectedSchool] = React.useState(
+    COURSE_APPLICATION_SCHOOLS[0]?.id || ""
+  );
+  const currentData =
+    COURSE_APPLICATIONS[selectedSchool] ||
+    COURSE_APPLICATIONS[COURSE_APPLICATION_SCHOOLS[0]?.id] ||
+    [];
 
   return (
     <SearchableWrapper>
@@ -123,9 +109,9 @@ const CourseApplications = () => {
                 <SelectValue placeholder="Select School" />
               </SelectTrigger>
               <SelectContent>
-                {Object.keys(schoolData).map((school) => (
-                  <SelectItem key={school} value={school}>
-                    {school}
+                {COURSE_APPLICATION_SCHOOLS.map((school) => (
+                  <SelectItem key={school.id} value={school.id}>
+                    {school.label}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -167,7 +153,7 @@ const CourseApplications = () => {
       {/* Table */}
       <Card>
         <CardHeader>
-          <CardTitle>Detailed Statistics - {selectedSchool}</CardTitle>
+          <CardTitle>Detailed Statistics - {selectedSchoolLabel}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">

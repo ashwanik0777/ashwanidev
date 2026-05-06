@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
+import { deansMessageData } from "./about/deans-message";
 
 
 const ictSlides = [
@@ -120,10 +121,10 @@ export const sectionsConfig = [
     enabled: true,
     position: 4,
     props: {
-      name: "Dr. Arpit Bhardwaj",
-      title: "Dean (I/C) – School of ICT, GBU",
-      image: "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg",
-      description: "Dr. Arpit Bhardwaj, Ph.D. (IIT Indore), serves as the Dean of the School of ICT at Gautam Buddha University. With over 50+ research publications in reputed journals like IEEE, Elsevier, and Springer, his research interests include Genetic Programming, Brain-Computer Interface (BCI), and EEG-based emotion recognition.Since the inception of the School in 2008, he has played a vital role in shaping the academic and research environment, overseeing undergraduate, postgraduate, and doctoral programs. Under his leadership, the school emphasizes innovation, interdisciplinary research, and industry-oriented learning with modern labs and regular expert talks.He continues to contribute actively to academia and industry collaborations, guiding students and faculty alike towards excellence in the field of Information and Communication Technology.",
+      name: deansMessageData.deanName,
+      title: deansMessageData.designation,
+      image: deansMessageData.image,
+      description: deansMessageData.shortMessage || deansMessageData.message,
     },
   },
 

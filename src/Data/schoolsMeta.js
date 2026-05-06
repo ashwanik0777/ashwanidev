@@ -9,9 +9,9 @@ export const SCHOOLS_META = [
       { id: "cse", name: "Department of Computer Science & Engineering", shortName: "CSE" },
       { id: "it", name: "Department of Information Technology", shortName: "IT" },
       { id: "ece", name: "Department of Electronics & Communication Engineering", shortName: "ECE" },
-      { id: "cyber-security", name: "Department of Cyber Security", shortName: "Cyber Security" },
-      { id: "coedt", name: "COEIDrone Technologies", shortName: "COEIDrone" },
-      { id: "raem", name: "COEIRAEM", shortName: "COEIRAEM" },
+      // { id: "cyber-security", name: "Department of Cyber Security", shortName: "Cyber Security" },
+      // { id: "coedt", name: "COEIDrone Technologies", shortName: "COEIDrone" },
+      // { id: "raem", name: "COEIRAEM", shortName: "COEIRAEM" },
     ],
   },
   {

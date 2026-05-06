@@ -19,21 +19,41 @@ import {
   AlertTriangle,
   Phone,
   Globe,
+  BarChart2,
 } from "lucide-react";
 
 import CampusRecruiters from "../Placement/CampusRecruiters";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
-const PlacementDashboard = () => {
-  // Program data from the charts
-  const placementStats = {
-    totalStudents: 500,
-    placedStudents: 320,
-    highestPackage: 12,
-  };
+import { placementData } from "../../Data/schools/SOICT/placement";
 
-  const placementRate = 64;
+const insideIconMap = {
+  BarChart2,
+  Users,
+  Briefcase,
+  Target,
+};
+const PlacementDashboard = () => {
+  const {
+    hero,
+    placementStats,
+    achievers,
+    placementRules,
+    missionObjective,
+    insideItems,
+    brochure,
+    report,
+    growth,
+    sectorDistribution,
+    departmentPlacement,
+    packageDistribution,
+    ugPgStats,
+    domesticInternational,
+    reportDownloadLabel,
+    contactInfo,
+  } = placementData;
+
   const placementStatsData = [
     {
       icon: Users,
@@ -49,7 +69,7 @@ const PlacementDashboard = () => {
     },
     {
       icon: TrendingUp,
-      numberText: `${placementRate}%`,
+      numberText: `${placementStats.placementRate}%`,
       title: "Placement Rate",
       iconColor: "purple",
     },
@@ -59,158 +79,6 @@ const PlacementDashboard = () => {
       title: "Highest Package",
       iconColor: "orange",
     },
-  ];
-  const btechPrograms = [
-    { name: "IT", students: 63, color: "#FF6B94" },
-    { name: "ECE", students: 24, color: "#4ECDC4" },
-    { name: "CSE Core", students: 57, color: "#45B7D1" },
-    { name: "AI", students: 23, color: "#96CEB4" },
-    { name: "ML", students: 6, color: "#FFEAA7" },
-    { name: "CSE DS", students: 6, color: "#DDA0DD" },
-    { name: "Cyber Security", students: 5, color: "#FFB347" },
-    { name: "Self Finance", students: 48, color: "#F4A460" },
-  ];
-  const recruitersData = [
-    {
-      name: "Samsung",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png",
-    },
-    {
-      name: "TCS",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png",
-    },
-    {
-      name: "Adobe",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png",
-    },
-    {
-      name: "Tech Mahindra",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png",
-    },
-    { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
-    {
-      name: "Metro",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png",
-    },
-    {
-      name: "HCL",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png",
-    },
-    {
-      name: "Byjus",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png",
-    },
-    {
-      name: "Nagrro",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png",
-    },
-    {
-      name: "Apple",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png",
-    },
-    { name: "Byju's", logo: "https://logo.clearbit.com/byjus.com" },
-    {
-      name: "White Hat Junior",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png",
-    },
-    {
-      name: "Hexaware",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png",
-    },
-    {
-      name: "Blinkit",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png",
-    },
-    {
-      name: "Toppr",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png",
-    },
-    {
-      name: "Wipro",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png",
-    },
-    {
-      name: "Scaler",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png",
-    },
-    {
-      name: "Chegg",
-      logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png",
-    },
-  ];
-  const otherPrograms = [
-    { name: "B.C.A", enrollment: 53 },
-    { name: "M.C.A-DS", enrollment: 50 },
-    { name: "M.C.A-AI", enrollment: 40 },
-    { name: "M. Tech VLSI Design", enrollment: 20 },
-    { name: "M. Tech CSE DS", enrollment: 30 },
-    { name: "M. Tech CSE AI", enrollment: 20 },
-    { name: "Int B. Tech+ M. Tech", enrollment: 85 },
-  ];
-
-  const PlacementStatistics = {
-    totalStudents: 232,
-    placedStudents: 198,
-    averagePackage: "6.5 LPA",
-    highestPackage: "45 LPA",
-    topRecruiters: [
-      "Microsoft",
-      "Amazon",
-      "Google",
-      "Infosys",
-      "TCS",
-      "Wipro",
-      "Adobe",
-      "Goldman Sachs",
-    ],
-  };
-
-  const achievers = [
-    {
-      name: "Ankit Sharma",
-      company: "Microsoft",
-      package: "45 LPA",
-      program: "B.Tech CSE",
-    },
-    {
-      name: "Priya Singh",
-      company: "Amazon",
-      package: "42 LPA",
-      program: "B.Tech IT",
-    },
-    {
-      name: "Rohit Kumar",
-      company: "Google",
-      package: "40 LPA",
-      program: "B.Tech AI",
-    },
-    {
-      name: "Sneha Patel",
-      company: "Adobe",
-      package: "38 LPA",
-      program: "B.Tech CSE",
-    },
-    {
-      name: "Arjun Verma",
-      company: "Goldman Sachs",
-      package: "35 LPA",
-      program: "B.Tech IT",
-    },
-    {
-      name: "Kavya Gupta",
-      company: "Flipkart",
-      package: "32 LPA",
-      program: "B.Tech ML",
-    },
-  ];
-
-  const placementRules = [
-    "Prior registration required within deadline",
-    "Complete resume submission mandatory",
-    "Attendance in all recruitment rounds compulsory",
-    "No tolerance for misconduct during process",
-    "Off-campus offers must be reported within 24 hours",
-    "Formal attire code strictly enforced",
   ];
 
   const fadeInUp = {
@@ -232,9 +100,9 @@ const PlacementDashboard = () => {
       <div className=" py-10 bg-gradient-to-br from-slate-50 to-blue-50">
         {/* Header */}
         <BannerSection
-          title="Placement Cell"
-          subtitle="Connecting students with opportunities."
-          bgTheme={1} // You can choose any theme number from 1 to 10
+          title={hero.title}
+          subtitle={hero.subtitle}
+          bgTheme={hero.bgTheme}
         />
         <div className="max-w-7xl mx-auto px-6 py-8 space-y-12">
           {/* Stats Overview */}
@@ -257,29 +125,18 @@ const PlacementDashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                  About USICT
+                  {missionObjective.aboutTitle}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Information and Communication Technology is one of the most
-                  fascinating fields for understanding and practicing. The
-                  students of ICT are nurtured in such a way they can be well
-                  recruitable or become researchers after completion of their
-                  degree from our School. We are confident that this bunch of
-                  professional talents will be of great value and a big asset to
-                  any organization they join.
+                  {missionObjective.aboutText}
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-slate-800 mb-4">
-                  Our Objective
+                  {missionObjective.objectiveTitle}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Our objective is to achieve not just 100% placements for
-                  students but also to take care of the placement as per
-                  requirements of every student. The Corporate Relation Cell
-                  with placement coordinators organizes various workshops and
-                  conducts programs that help in developing our students' skills
-                  so that they can meet the industries' expectations.
+                  {missionObjective.objectiveText}
                 </p>
               </div>
             </div>
@@ -291,61 +148,30 @@ const PlacementDashboard = () => {
                 What's Inside?
               </h2>
               <div className="space-y-4">
-                <div className="flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
-                  <div className="w-12 h-12 bg-gradient-to-r from-red-400 to-red-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">📊</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Department-wise Placement Records
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Detailed statistics for all departments
-                    </p>
-                  </div>
-                </div>
+                {insideItems.map((item) => {
+                  const Icon = insideIconMap[item.iconName] || BarChart2;
 
-                <div className="flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">👥</span>
+                  return (
+                  <div
+                    key={item.title}
+                    className="flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl"
+                  >
+                    <div
+                      className={`w-12 h-12 bg-gradient-to-r ${item.accent} rounded-lg flex items-center justify-center`}
+                    >
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Alumni Success Stories
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Inspiring journeys of our graduates
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">💼</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Recruiter Testimonials
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      What companies say about our students
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">🎯</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">
-                      Training & Support Programs
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      Comprehensive career development initiatives
-                    </p>
-                  </div>
-                </div>
+                );
+                })}
               </div>
             </div>
 
@@ -354,10 +180,7 @@ const PlacementDashboard = () => {
               <div
                 className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl inline-block hover:shadow-3xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
                 onClick={() =>
-                  window.open(
-                    "https://www.gbu.ac.in/Content/admissions/brochures/Final_GBU_Brochure_2022.pdf",
-                    "_blank"
-                  )
+                  window.open(brochure.link, "_blank")
                 }
               >
                 <div className="w-64 h-80 bg-gradient-to-b from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white shadow-2xl">
@@ -365,7 +188,7 @@ const PlacementDashboard = () => {
                     <BookOpen className="h-20 w-20 mx-auto mb-6" />
                     <div className="font-bold text-xl mb-2">Placement</div>
                     <div className="font-bold text-xl mb-2">Brochure</div>
-                    <div className="text-md opacity-90">2024-25</div>
+                    <div className="text-md opacity-90">{brochure.year}</div>
                   </div>
                 </div>
                 <p className="text-gray-800 mt-4 text-md">Click to preview</p>
@@ -376,10 +199,7 @@ const PlacementDashboard = () => {
               <div
                 className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl inline-block hover:shadow-3xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
                 onClick={() =>
-                  window.open(
-                    "https://www.gbu.ac.in/Content/admissions/brochures/Final_GBU_Brochure_2022.pdf",
-                    "_blank"
-                  )
+                  window.open(report.link, "_blank")
                 }
               >
                 <div className="w-64 h-80 bg-gradient-to-b from-purple-600 to-purple-400  rounded-lg flex items-center justify-center text-white shadow-2xl">
@@ -387,7 +207,7 @@ const PlacementDashboard = () => {
                     <BookOpen className="h-20 w-20 mx-auto mb-6" />
                     <div className="font-bold text-xl mb-2">Placement</div>
                     <div className="font-bold text-xl mb-2">Report</div>
-                    <div className="text-md opacity-90">2024-25</div>
+                    <div className="text-md opacity-90">{report.year}</div>
                   </div>
                 </div>
                 <p className="text-gray-800 mt-4 text-md">Click to preview</p>
@@ -418,13 +238,7 @@ const PlacementDashboard = () => {
                 Year-wise Placement Growth
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {[
-                  { year: "2020", rate: "75%" },
-                  { year: "2021", rate: "82%" },
-                  { year: "2022", rate: "88%" },
-                  { year: "2023", rate: "90%" },
-                  { year: "2024", rate: "92%" },
-                ].map((data, index) => (
+                {growth.map((data, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -450,28 +264,7 @@ const PlacementDashboard = () => {
                   Sector-wise Distribution
                 </h3>
                 <div className="space-y-4">
-                  {[
-                    {
-                      sector: "IT & Software",
-                      percentage: "45%",
-                      color: "bg-blue-500",
-                    },
-                    {
-                      sector: "Core Engineering",
-                      percentage: "25%",
-                      color: "bg-green-500",
-                    },
-                    {
-                      sector: "Consulting & Finance",
-                      percentage: "20%",
-                      color: "bg-purple-500",
-                    },
-                    {
-                      sector: "Government & Research",
-                      percentage: "10%",
-                      color: "bg-orange-500",
-                    },
-                  ].map((data, index) => (
+                  {sectorDistribution.map((data, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
@@ -502,20 +295,7 @@ const PlacementDashboard = () => {
                   Department-wise Placement
                 </h3>
                 <div className="space-y-4">
-                  {[
-                    {
-                      dept: "Computer Science",
-                      rate: "95%",
-                      color: "bg-green-500",
-                    },
-                    { dept: "Management", rate: "90%", color: "bg-blue-500" },
-                    {
-                      dept: "Electronics & Comm.",
-                      rate: "88%",
-                      color: "bg-purple-500",
-                    },
-                    { dept: "Mechanical", rate: "82%", color: "bg-orange-500" },
-                  ].map((data, index) => (
+                  {departmentPlacement.map((data, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: 20 }}
@@ -549,23 +329,7 @@ const PlacementDashboard = () => {
                   Package Distribution Analysis
                 </h3>
                 <div className="space-y-4">
-                  {[
-                    {
-                      range: "₹10L+ Packages",
-                      percentage: "25%",
-                      color: "bg-green-500",
-                    },
-                    {
-                      range: "₹5-10L Packages",
-                      percentage: "45%",
-                      color: "bg-blue-500",
-                    },
-                    {
-                      range: "₹3-5L Packages",
-                      percentage: "30%",
-                      color: "bg-orange-500",
-                    },
-                  ].map((data, index) => (
+                  {packageDistribution.map((data, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -600,7 +364,7 @@ const PlacementDashboard = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-blue-50 rounded-lg">
                       <div className="text-2xl font-bold text-blue-600">
-                        89%
+                        {ugPgStats.ug}
                       </div>
                       <div className="text-sm text-slate-600">
                         Undergraduate
@@ -608,7 +372,7 @@ const PlacementDashboard = () => {
                     </div>
                     <div className="text-center p-3 bg-purple-50 rounded-lg">
                       <div className="text-2xl font-bold text-purple-600">
-                        96%
+                        {ugPgStats.pg}
                       </div>
                       <div className="text-sm text-slate-600">Postgraduate</div>
                     </div>
@@ -624,13 +388,13 @@ const PlacementDashboard = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-3 bg-green-50 rounded-lg">
                       <div className="text-2xl font-bold text-green-600">
-                        85%
+                        {domesticInternational.domestic}
                       </div>
                       <div className="text-sm text-slate-600">Domestic</div>
                     </div>
                     <div className="text-center p-3 bg-orange-50 rounded-lg">
                       <div className="text-2xl font-bold text-orange-600">
-                        15%
+                        {domesticInternational.international}
                       </div>
                       <div className="text-sm text-slate-600">
                         International
@@ -648,7 +412,7 @@ const PlacementDashboard = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow"
               >
-                Download Full Placement Report (2024)
+                {reportDownloadLabel}
               </motion.button>
             </div>
           </motion.section>
@@ -739,7 +503,7 @@ const PlacementDashboard = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="space-y-4">
-                {placementRules.map((rule, index) => (
+                  {placementRules.map((rule, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -760,26 +524,28 @@ const PlacementDashboard = () => {
                 <div className="space-y-4">
                   <div>
                     <p className="font-semibold text-blue-700">
-                      Dr. Vinay Litoria
+                      {contactInfo.people[0]?.name}
                     </p>
                     <p className="text-blue-600 text-sm">
-                      Director, Corporate Relation Cell
+                      {contactInfo.people[0]?.role}
                     </p>
                   </div>
                   <div>
-                    <p className="font-semibold text-blue-700">Dr. Raju Pal</p>
+                    <p className="font-semibold text-blue-700">
+                      {contactInfo.people[1]?.name}
+                    </p>
                     <p className="text-blue-600 text-sm">
-                      Placement In-charge USICT, GBU
+                      {contactInfo.people[1]?.role}
                     </p>
                   </div>
                   <div className="pt-2 border-t border-blue-200">
                     <div className="flex items-center text-blue-600 text-sm mb-1">
                       <Mail className="w-4 h-4 mr-2" />
-                      crc@gbu.ac.in
+                      {contactInfo.emails[0]}
                     </div>
                     <div className="flex items-center text-blue-600 text-sm">
                       <Mail className="w-4 h-4 mr-2" />
-                      placement.usict@gbu.ac.in
+                      {contactInfo.emails[1]}
                     </div>
                   </div>
                 </div>

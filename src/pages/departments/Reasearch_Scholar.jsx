@@ -1,19 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import {
-  ArrowLeft,
-  Users,
-  Award,
-  BookOpen,
-  GraduationCap,
-  Star,
-  Calendar,
-  Mail,
-  CheckCircle,
-} from "lucide-react";
+import { Calendar, CheckCircle } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
+import { researchScholarsData } from "../../Data/schools/SOICT/research/research-scholars";
 
 // Hero Section
 const HeroSection = ({ title, subtitle }) => (
@@ -288,189 +278,17 @@ const ContactSection = ({ contacts }) => (
   </section>
 );
 
-// ✅ Featured Scholars Dummy Data
-const scholars = [
-  {
-    initials: "AJ",
-    name: "Amit Joshi",
-    designation: "Senior Research Scholar",
-    department: "Department of Computer Science",
-    area: "Artificial Intelligence & Machine Learning",
-    supervisorTitle: "Supervisor",
-    supervisor: "Dr. Neha Sharma",
-    publicationsTitle: "Publications",
-    publications: "8 international journals",
-    achievementTitle: "Notable Achievement",
-    achievement: "Received Best Paper Award at ICML 2024",
-    bg: "from-purple-100 to-purple-200",
-    avatarColor: "bg-purple-600",
-    textColor: "text-purple-600",
-  },
-  {
-    initials: "RS",
-    name: "Ritika Singh",
-    designation: "Junior Research Fellow",
-    department: "Department of Electronics",
-    area: "VLSI Design & Embedded Systems",
-    supervisorTitle: "Supervisor",
-    supervisor: "Prof. Rajeev Mehta",
-    publicationsTitle: "Publications",
-    publications: "5 IEEE conference papers",
-    achievementTitle: "Notable Achievement",
-    achievement: "Patent granted for IoT device prototype",
-    bg: "from-pink-100 to-pink-200",
-    avatarColor: "bg-pink-600",
-    textColor: "text-pink-600",
-  },
-  {
-    initials: "VK",
-    name: "Vikas Kumar",
-    designation: "Research Associate",
-    department: "Department of Mechanical Engineering",
-    area: "Renewable Energy Systems",
-    supervisorTitle: "Supervisor",
-    supervisor: "Dr. Anita Verma",
-    publicationsTitle: "Publications",
-    publications: "6 SCI-indexed journals",
-    achievementTitle: "Notable Achievement",
-    achievement: "Presented research at World Energy Congress",
-    bg: "from-green-100 to-green-200",
-    avatarColor: "bg-green-600",
-    textColor: "text-green-600",
-  },
-];
-
-// ✅ Department Distribution Dummy Data
-const departments = [
-  {
-    name: "Computer Science",
-    desc: "AI, ML, Data Science, IoT",
-    count: 40,
-    bg: "bg-purple-50",
-    color: "text-purple-600",
-  },
-  {
-    name: "Electronics",
-    desc: "VLSI, Embedded, Communication",
-    count: 25,
-    bg: "bg-pink-50",
-    color: "text-pink-600",
-  },
-  {
-    name: "Mechanical Engineering",
-    desc: "Energy, Robotics, Manufacturing",
-    count: 18,
-    bg: "bg-green-50",
-    color: "text-green-600",
-  },
-  {
-    name: "Civil Engineering",
-    desc: "Smart Cities, Structures",
-    count: 12,
-    bg: "bg-blue-50",
-    color: "text-blue-600",
-  },
-];
-
-// ✅ Fellowships Dummy Data
-const fellowships = [
-  {
-    name: "Junior Research Fellowship (JRF)",
-    detail: "Funded by UGC for meritorious scholars.",
-    note: "Applied through NET/JRF exam.",
-    border: "border-purple-600",
-  },
-  {
-    name: "Senior Research Fellowship (SRF)",
-    detail: "Awarded for advanced stage scholars.",
-    note: "Upgraded after review.",
-    border: "border-green-600",
-  },
-  {
-    name: "Institute Funded",
-    detail: "University funded assistantships.",
-    note: "Available for limited candidates.",
-    border: "border-blue-600",
-  },
-];
-
-// ✅ Achievements Dummy Data
-const achievements = [
-  {
-    icon: Award,
-    color: "text-green-600",
-    title: "Best Paper Award",
-    desc: "Our scholars won Best Paper Award at IEEE ICML 2024.",
-    date: "April 2024",
-    bg: "from-green-100 to-green-200",
-  },
-  {
-    icon: Star,
-    color: "text-yellow-600",
-    title: "Patent Granted",
-    desc: "Patent granted for IoT-based energy monitoring system.",
-    date: "Jan 2024",
-    bg: "from-yellow-100 to-yellow-200",
-  },
-  {
-    icon: BookOpen,
-    color: "text-purple-600",
-    title: "Publication Milestone",
-    desc: "Published over 50 papers in top journals in 2024.",
-    date: "May 2024",
-    bg: "from-purple-100 to-purple-200",
-  },
-];
-
-// ✅ Application Timeline Dummy Data
-const timeline = [
-  {
-    title: "Application Opens",
-    desc: "Applications open from 1st April 2024.",
-    color: "text-purple-600",
-  },
-  {
-    title: "Entrance Test",
-    desc: "Entrance exam scheduled for 15th May 2024.",
-    color: "text-blue-600",
-  },
-  {
-    title: "Interviews",
-    desc: "Shortlisted candidates interviewed in June 2024.",
-    color: "text-green-600",
-  },
-];
-
-// ✅ Application Fee Dummy Data
-const fee = {
-  application: "INR 1000 (non-refundable)",
-  annual: "INR 50,000 per year (approx.)",
-};
-
-// ✅ Contact Details Dummy Data
-const contacts = [
-  {
-    icon: Mail,
-    color: "text-purple-600",
-    title: "General Enquiry",
-    email: "research@techvision.edu",
-    phone: "+91 12345 67890",
-  },
-  {
-    icon: Mail,
-    color: "text-green-600",
-    title: "Ph.D. Admissions",
-    email: "admissions@techvision.edu",
-    phone: "+91 98765 43210",
-  },
-  {
-    icon: Mail,
-    color: "text-blue-600",
-    title: "Research Office",
-    email: "office.research@techvision.edu",
-    phone: "+91 11223 44556",
-  },
-];
+const {
+  hero,
+  stats,
+  scholars,
+  departments,
+  fellowships,
+  achievements,
+  timeline,
+  fee,
+  contacts,
+} = researchScholarsData;
 
 
 
@@ -479,17 +297,10 @@ export default function ResearchScholars() {
    return (
     <div className="min-h-screen">
       <HeroSection
-        title="Our Research Community"
-        subtitle="Meet the exceptional Ph.D. scholars and research associates who are pushing the boundaries of knowledge and innovation across various engineering disciplines at TechVision."
+        title={hero.title}
+        subtitle={hero.subtitle}
       />
-      <StatsSection
-        stats={[
-          { icon: GraduationCap, color: "text-purple-600", count: 95, label: "Ph.D. Scholars" },
-          { icon: Users, color: "text-blue-600", count: 28, label: "Research Associates" },
-          { icon: Award, color: "text-green-600", count: 45, label: "Graduated Scholars" },
-          { icon: Star, color: "text-orange-600", count: 12, label: "Award Winners" },
-        ]}
-      />
+      <StatsSection stats={stats} />
       <FeaturedScholars scholars={scholars} />
       <DistributionSection departments={departments} fellowships={fellowships} />
       <AchievementsSection achievements={achievements} />

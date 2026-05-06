@@ -1,7 +1,3 @@
-/**
- * SOICT — Activities
- * School of Information & Communication Technology
- */
 export const activitiesData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

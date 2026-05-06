@@ -1,7 +1,3 @@
-/**
- * SOICT — Information Technology
- * School of Information & Communication Technology
- */
 export const departmentData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

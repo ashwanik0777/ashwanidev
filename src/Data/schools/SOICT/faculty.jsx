@@ -1,7 +1,3 @@
-/**
- * SOICT — Faculty Page Data
- * School of Information & Communication Technology
- */
 export const facultyPageData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

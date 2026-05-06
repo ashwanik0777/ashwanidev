@@ -1,7 +1,3 @@
-/**
- * SOICT — Dean's Message
- * School of Information & Communication Technology
- */
 export const deansMessageData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

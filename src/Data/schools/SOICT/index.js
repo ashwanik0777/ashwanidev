@@ -31,9 +31,9 @@ export const departmentPages = [
   { id: "cse", name: "Computer Science & Engineering", path: "departments/cse" },
   { id: "it", name: "Information Technology", path: "departments/it" },
   { id: "ece", name: "Electronics & Communication Engineering", path: "departments/ece" },
-  { id: "cyber-security", name: "Cyber Security", path: "departments/cyber-security" },
-  { id: "coedt", name: "COEDT", path: "departments/coedt" },
-  { id: "raem", name: "RAEM", path: "departments/raem" },
+  // { id: "cyber-security", name: "Cyber Security", path: "departments/cyber-security" },
+  // { id: "coedt", name: "COEDT", path: "departments/coedt" },
+  // { id: "raem", name: "RAEM", path: "departments/raem" },
 ];
 
 // Research page meta

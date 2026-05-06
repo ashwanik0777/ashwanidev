@@ -1,7 +1,3 @@
-/**
- * SOICT — About Us
- * School of Information & Communication Technology
- */
 export const aboutUsData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

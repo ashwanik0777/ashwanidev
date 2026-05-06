@@ -1,7 +1,3 @@
-/**
- * SOICT — Research Areas
- * School of Information & Communication Technology
- */
 export const researchAreaData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",

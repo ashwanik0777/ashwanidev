@@ -36,6 +36,7 @@ import {
   SCHOOLS_META,
   getSchoolByApiParam,
   getSchoolByName,
+  matchDepartmentId,
   resolveSchool,
 } from "../../Data/schoolsMeta";
 import {
@@ -149,6 +150,16 @@ const toBool = (value, fallback = false) => {
     if (normalized === "false" || normalized === "no" || normalized === "0") return false;
   }
   return fallback;
+};
+
+const getApiErrorMessage = (error, fallback) => {
+  const baseMessage = error?.response?.data?.message || error?.message || fallback || "Request failed";
+  const errors = Array.isArray(error?.response?.data?.errors) ? error.response.data.errors : [];
+  const detail = errors
+    .map((item) => String(item?.message || "").trim())
+    .filter(Boolean)
+    .join(" | ");
+  return detail ? `${baseMessage} | ${detail}` : baseMessage;
 };
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
@@ -766,7 +777,7 @@ const AdminDashboard = () => {
           name: row.name,
           designation: row.designation,
           department: row.department,
-          school: row.school || schoolData.schoolName || "",
+          school: row.school || schoolData.schoolCode || schoolData.schoolName || "",
           email: row.email,
           phone: row.phone,
         };
@@ -1245,12 +1256,25 @@ const AdminDashboard = () => {
       }
     }
 
+    const resolvedSchoolMeta = resolveSchool(form.linkedSchool) || getSchoolByName(form.linkedSchool);
+    const linkedSchoolValue = resolvedSchoolMeta?.code || String(form.linkedSchool || "").trim();
+    const linkedDepartmentValue =
+      (resolvedSchoolMeta?.code
+        ? matchDepartmentId(resolvedSchoolMeta.code, form.linkedDepartment)
+        : "") || String(form.linkedDepartment || "").trim();
+
+    const payload = {
+      ...form,
+      linkedSchool: linkedSchoolValue,
+      linkedDepartment: linkedDepartmentValue,
+    };
+
     setIsAccountSaving(true);
     setAccountApiError("");
 
     try {
       if (accountEditor.index === null) {
-        await createAdminAccount(form);
+        await createAdminAccount(payload);
         setAccountPagination((prev) => ({ ...prev, page: 1 }));
       } else {
         const current = accounts[accountEditor.index];
@@ -1259,7 +1283,7 @@ const AdminDashboard = () => {
           setMessage("Unable to update unsynced account. Please refresh and retry.");
           return;
         }
-        await updateAdminAccount(accountId, form);
+        await updateAdminAccount(accountId, payload);
       }
 
       setAccountsReloadToken((prev) => prev + 1);
@@ -1268,7 +1292,7 @@ const AdminDashboard = () => {
       setActivityLog((prev) => [
         {
           id: `log-${Date.now()}`,
-          action: `Updated login account: ${form.username}`,
+          action: `Updated login account: ${payload.username}`,
           time: new Date().toISOString(),
         },
         ...prev,
@@ -1277,10 +1301,9 @@ const AdminDashboard = () => {
       setAccountEditor({ index: null, form: null });
       setMessage("Login account synced with backend successfully.");
     } catch (error) {
-      setAccountApiError(
-        error?.response?.data?.message || error?.message || "Failed to save account to backend.",
-      );
-      setMessage("Account save failed. Please check API error.");
+      const errorMessage = getApiErrorMessage(error, "Failed to save account to backend.");
+      setAccountApiError(errorMessage);
+      setMessage(`Account save failed. ${errorMessage}`);
     } finally {
       setIsAccountSaving(false);
     }
@@ -1494,6 +1517,146 @@ const AdminDashboard = () => {
       archived: (prev.archived || []).filter((entry) => entry.id !== item.id),
     }));
     setMessage("Archived recruitment post deleted.");
+  };
+
+  const handleSaveFacultyProfile = async () => {
+    if (!facultyEditor.form?.name?.trim()) {
+      setMessage("Faculty name is required.");
+      return;
+    }
+
+    const facultyForm = {
+      ...facultyEditor.form,
+      createLoginAccount: toBool(facultyEditor.form.createLoginAccount, true),
+      sendCredentialsEmail: toBool(facultyEditor.form.sendCredentialsEmail, true),
+    };
+
+    const isEdit = facultyEditor.index !== null;
+    setIsFacultySaving(true);
+    setFacultyApiError("");
+
+    let savedFaculty;
+    let resultMessage = "Faculty profile synced with backend successfully.";
+
+    try {
+      if (isEdit) {
+        if (!facultyForm.id) {
+          setMessage("Faculty id missing. Please refresh and retry.");
+          return;
+        }
+        savedFaculty = await updateFacultyProfile(facultyForm.id, facultyForm);
+      } else {
+        savedFaculty = await createFacultyProfile(facultyForm);
+      }
+
+      setFacultyProfiles((prev) => {
+        const next = [...prev];
+        const existingIndex = next.findIndex((item) => item.id === savedFaculty.id);
+        if (existingIndex >= 0) next[existingIndex] = savedFaculty;
+        else next.unshift(savedFaculty);
+        return next;
+      });
+      setFacultyReloadToken((prev) => prev + 1);
+
+      if (facultyForm.createLoginAccount) {
+        const generatedPassword = facultyForm.generatedPassword || generateStrongPassword();
+        const resolvedSchoolMeta = resolveSchool(savedFaculty.school) || getSchoolByName(savedFaculty.school);
+        const linkedSchoolValue = resolvedSchoolMeta?.code || String(savedFaculty.school || "").trim();
+        const linkedDepartmentValue =
+          (resolvedSchoolMeta?.code
+            ? matchDepartmentId(resolvedSchoolMeta.code, savedFaculty.department)
+            : "") || String(savedFaculty.department || "").trim();
+
+        const existingAccount = accounts.find(
+          (item) => String(item?.linkedFacultyId || "").toLowerCase() === String(savedFaculty.id || "").toLowerCase(),
+        );
+
+        if (existingAccount) {
+          resultMessage = "Is faculty ke liye login account pehle se exist karta hai.";
+        } else {
+          const accountDraft = createFacultyAccount(
+            {
+              ...savedFaculty,
+              school: linkedSchoolValue,
+              department: linkedDepartmentValue,
+            },
+            accounts,
+            generatedPassword,
+          );
+
+          if (!accountDraft.linkedFacultyId || !accountDraft.linkedSchool || !accountDraft.linkedDepartment) {
+            resultMessage = "Login account ke liye Linked Faculty ID, School, aur Department required hai.";
+          } else {
+            try {
+              await createAdminAccount(accountDraft);
+              setAccountPagination((prev) => ({ ...prev, page: 1 }));
+              setAccountsReloadToken((prev) => prev + 1);
+              setAuditReloadToken((prev) => prev + 1);
+
+              if (facultyForm.sendCredentialsEmail && savedFaculty.email) {
+                const queueItem = {
+                  id: `mail-${Date.now()}`,
+                  to: savedFaculty.email,
+                  subject: "GBU Faculty Portal Credentials",
+                  status: "pending-backend",
+                  payload: {
+                    facultyName: savedFaculty.name,
+                    username: accountDraft.username,
+                    password: generatedPassword,
+                    linkedFacultyId: savedFaculty.id,
+                  },
+                  createdAt: new Date().toISOString(),
+                };
+
+                setMailQueue((prev) => [queueItem, ...prev].slice(0, 100));
+
+                try {
+                  const dispatchResult = await dispatchCredentialEmails([queueItem]);
+                  const resultItem = dispatchResult?.items?.[0];
+                  if (resultItem?.status) {
+                    setMailQueue((prev) =>
+                      prev.map((item) =>
+                        item.id === queueItem.id
+                          ? { ...item, status: resultItem.status, error: resultItem.error || "" }
+                          : item,
+                      ),
+                    );
+                  }
+
+                  if (dispatchResult?.summary?.notConfigured) {
+                    resultMessage = "Login account bana, lekin email service configured nahi hai.";
+                  }
+                } catch (mailError) {
+                  resultMessage = `Login account bana, lekin email send failed. ${getApiErrorMessage(mailError)}`;
+                }
+              }
+            } catch (accountError) {
+              const accountErrorMessage = getApiErrorMessage(accountError, "Failed to create login account.");
+              setAccountApiError(accountErrorMessage);
+              resultMessage = `Login account creation failed. ${accountErrorMessage}`;
+            }
+          }
+        }
+      }
+
+      setActivityLog((prev) => [
+        {
+          id: `log-${Date.now()}`,
+          action: `Updated faculty profile: ${savedFaculty.name}`,
+          time: new Date().toISOString(),
+        },
+        ...prev,
+      ].slice(0, 12));
+
+      setFacultyEditor({ index: null, form: null });
+      setMessage(resultMessage);
+    } catch (error) {
+      const errorMessage = getApiErrorMessage(error, "Failed to save faculty to backend.");
+      setFacultyApiError(errorMessage);
+      setMessage(`Faculty save failed. ${errorMessage}`);
+    } finally {
+      setIsFacultySaving(false);
+    }
   };
 
   const handleDeleteFaculty = async (faculty, actualIndex) => {
@@ -2427,7 +2590,7 @@ const AdminDashboard = () => {
                   name: "",
                   designation: "",
                   department: "",
-                  school: schoolData.schoolName || "",
+                  school: schoolData.schoolCode || schoolData.schoolName || "",
                   email: "",
                   phone: "",
                   createLoginAccount: true,
@@ -2442,6 +2605,18 @@ const AdminDashboard = () => {
           </button>
         </div>
       </div>
+
+      {isFacultyLoading ? (
+        <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
+          Loading faculty profiles from backend API...
+        </div>
+      ) : null}
+
+      {facultyApiError ? (
+        <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+          API Error: {facultyApiError}
+        </div>
+      ) : null}
 
       <div className="grid gap-4 lg:grid-cols-2">
         <div>
@@ -2619,70 +2794,11 @@ const AdminDashboard = () => {
 
               <button
                 type="button"
-                onClick={() => {
-                  if (!facultyEditor.form?.name?.trim()) {
-                    setMessage("Faculty name is required.");
-                    return;
-                  }
-                  const facultyForm = {
-                    ...facultyEditor.form,
-                    createLoginAccount: toBool(facultyEditor.form.createLoginAccount, true),
-                    sendCredentialsEmail: toBool(facultyEditor.form.sendCredentialsEmail, true),
-                  };
-
-                  setFacultyProfiles((prev) => {
-                    const next = [...prev];
-                    if (facultyEditor.index === null) next.push(facultyForm);
-                    else next[facultyEditor.index] = facultyForm;
-                    return next;
-                  });
-
-                  if (facultyForm.createLoginAccount) {
-                    const isEdit = facultyEditor.index !== null;
-                    const existingForFaculty = accounts.find(
-                      (item) => item.linkedFacultyId && item.linkedFacultyId === facultyForm.id,
-                    );
-                    const generatedPassword = facultyForm.generatedPassword || generateStrongPassword();
-                    const account = createFacultyAccount(facultyForm, accounts, generatedPassword);
-
-                    if (!(isEdit && existingForFaculty)) {
-                      setAccounts((prev) => [...prev, account]);
-                    }
-
-                    if (facultyForm.sendCredentialsEmail && facultyForm.email) {
-                      setMailQueue((prev) => [
-                        {
-                          id: `mail-${Date.now()}`,
-                          to: facultyForm.email,
-                          subject: "GBU Faculty Portal Credentials",
-                          status: "pending-backend",
-                          payload: {
-                            facultyName: facultyForm.name,
-                            username: account.username,
-                            password: account.password,
-                            linkedFacultyId: facultyForm.id,
-                          },
-                          createdAt: new Date().toISOString(),
-                        },
-                        ...prev,
-                      ].slice(0, 100));
-                    }
-                  }
-
-                  setActivityLog((prev) => [
-                    {
-                      id: `log-${Date.now()}`,
-                      action: `Updated faculty profile: ${facultyForm.name}`,
-                      time: new Date().toISOString(),
-                    },
-                    ...prev,
-                  ].slice(0, 12));
-                  setFacultyEditor({ index: null, form: null });
-                  setMessage("Faculty profile updated. Login + email queue processed as selected.");
-                }}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                onClick={handleSaveFacultyProfile}
+                disabled={isFacultySaving}
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Save Faculty
+                {isFacultySaving ? "Saving..." : "Save Faculty"}
               </button>
             </>
           ) : (

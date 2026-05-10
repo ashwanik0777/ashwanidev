@@ -23,6 +23,10 @@ function App() {
   const isSchoolPortalPage = location.pathname.startsWith("/school-portal");
   const isAdminPortalPage = location.pathname.startsWith("/admin-portal");
   const isPortalPage = isFacultyPortalPage || isSchoolPortalPage || isAdminPortalPage;
+  const isAuthPage = ["/login", "/login/forgot-password", "/admission/login"].includes(
+    location.pathname
+  );
+  const shouldHideChrome = isPortalPage || isAuthPage;
 
   useEffect(() => {
     if (isPreloadComplete) {
@@ -39,8 +43,8 @@ function App() {
         ) : (
           <>
           <ScrollToTop>
-            {!isPortalPage && <Primarynavbar />}
-            {!isPortalPage &&
+            {!shouldHideChrome && <Primarynavbar />}
+            {!shouldHideChrome &&
               (isICTPage ? (
                 <div className="mt-9">
                   <DepartmentNavbar />
@@ -48,10 +52,10 @@ function App() {
               ) : (
                 <Navbar />
               ))}
-            <div className={isPortalPage ? "pt-0" : isICTPage ? "pt-8" : "pt-[6.3rem]"}>
+            <div className={shouldHideChrome ? "pt-0" : isICTPage ? "pt-8" : "pt-[6.3rem]"}>
               <AppRouter />
             </div>
-            {!isPortalPage && <Footer />}
+            {!shouldHideChrome && <Footer />}
             </ScrollToTop>
           </>
         )}

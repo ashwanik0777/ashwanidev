@@ -1,6 +1,15 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { UserCog, School, GraduationCap, Eye, EyeOff, ShieldCheck, Building2 } from "lucide-react";
+import {
+  ArrowLeft,
+  UserCog,
+  School,
+  GraduationCap,
+  Eye,
+  EyeOff,
+  ShieldCheck,
+  Building2
+} from "lucide-react";
 import { loginByRole, verifyLoginOtpService } from "../../services/authService";
 import { getRoleHomeRoute, setPortalSession } from "../../utils/portalSession";
 
@@ -108,11 +117,9 @@ const LoginPortal = () => {
         navigate(getRoleHomeRoute(authData.user.role));
       }
     } catch (err) {
-      setError(
-        err?.response?.data?.errors?.[0]?.message ||
-          err?.response?.data?.message ||
-          "Invalid credentials or OTP."
-      );
+      const serverMessage =
+        err?.response?.data?.errors?.[0]?.message || err?.response?.data?.message;
+      setError(serverMessage || (requiresOtp ? "Invalid OTP." : "Invalid credentials."));
     } finally {
       setLoading(false);
     }
@@ -120,6 +127,15 @@ const LoginPortal = () => {
 
   return (
     <div className="min-h-screen bg-stone-100 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto mb-4 max-w-7xl">
+        <Link
+          to="/academics/schools"
+          className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white px-3 py-1.5 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-stone-500 hover:text-stone-900"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to school
+        </Link>
+      </div>
       <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-3xl border border-stone-300 bg-white shadow-2xl lg:grid-cols-[1.1fr_1fr]">
         <section className="relative border-b border-stone-200 bg-stone-900 p-8 text-stone-100 lg:border-b-0 lg:border-r lg:p-12">
           <div className="absolute inset-0 opacity-10" aria-hidden="true">

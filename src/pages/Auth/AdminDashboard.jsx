@@ -1496,6 +1496,43 @@ const AdminDashboard = () => {
     setMessage("Archived recruitment post deleted.");
   };
 
+  const handleDeleteFaculty = async (faculty, actualIndex) => {
+    const key = faculty?.id || `faculty-${actualIndex}`;
+    const previous = [...facultyProfiles];
+
+    setFacultyApiError("");
+    setFacultyDeletingKey(String(key));
+    setFacultyProfiles((prev) => prev.filter((_, i) => i !== actualIndex));
+
+    if (!faculty?.id) {
+      setMessage("Local faculty entry removed. Backend delete skipped because no ID was found.");
+      setFacultyDeletingKey("");
+      return;
+    }
+
+    try {
+      await deleteFacultyProfile(faculty.id);
+      setFacultyReloadToken((prev) => prev + 1);
+      setActivityLog((prev) => [
+        {
+          id: `log-${Date.now()}`,
+          action: `Deleted faculty profile: ${faculty.name || faculty.id}`,
+          time: new Date().toISOString(),
+        },
+        ...prev,
+      ].slice(0, 12));
+      setMessage("Faculty deleted successfully.");
+    } catch (error) {
+      setFacultyProfiles(previous);
+      setFacultyApiError(
+        error?.response?.data?.message || error?.message || "Failed to delete faculty from backend.",
+      );
+      setMessage("Faculty delete failed. Previous data restored.");
+    } finally {
+      setFacultyDeletingKey("");
+    }
+  };
+
   const handleDeleteTender = async (tender, actualIndex) => {
     const key = tender.localId || tender.id || `tender-${actualIndex}`;
     const previous = [...tenders];
@@ -2448,10 +2485,14 @@ const AdminDashboard = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setFacultyProfiles((prev) => prev.filter((_, i) => i !== actualIndex))}
-                    className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
+                    onClick={() => handleDeleteFaculty(faculty, actualIndex)}
+                    disabled={facultyDeletingKey === String(faculty?.id || `faculty-${actualIndex}`)}
+                    className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    <Trash2 className="h-3.5 w-3.5" /> Delete
+                    <Trash2 className="h-3.5 w-3.5" />
+                    {facultyDeletingKey === String(faculty?.id || `faculty-${actualIndex}`)
+                      ? "Deleting..."
+                      : "Delete"}
                   </button>
                 </div>
               </div>

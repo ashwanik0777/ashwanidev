@@ -36,7 +36,6 @@ import {
   SCHOOLS_META,
   getSchoolByApiParam,
   getSchoolByName,
-  matchDepartmentId,
   resolveSchool,
 } from "../../Data/schoolsMeta";
 import {
@@ -150,6 +149,18 @@ const toBool = (value, fallback = false) => {
     if (normalized === "false" || normalized === "no" || normalized === "0") return false;
   }
   return fallback;
+};
+
+const resolveDepartmentName = (schoolMeta, departmentInput) => {
+  const fallback = String(departmentInput || "").trim();
+  if (!schoolMeta || !fallback) return fallback;
+  const needle = fallback.toLowerCase();
+  const match = (schoolMeta.departments || []).find((dept) =>
+    [dept.id, dept.shortName, dept.name]
+      .filter(Boolean)
+      .some((value) => String(value).toLowerCase() === needle),
+  );
+  return match?.name || fallback;
 };
 
 const getApiErrorMessage = (error, fallback) => {
@@ -1254,14 +1265,20 @@ const AdminDashboard = () => {
         setMessage("Is faculty ke liye login account pehle se exist karta hai.");
         return;
       }
+
+      const linkedFacultyExists = facultyProfiles.some(
+        (item) => String(item?.id || "").trim().toLowerCase() === normalizedFacultyId,
+      );
+
+      if (!linkedFacultyExists) {
+        setMessage("Linked Faculty ID not found. Please select a valid faculty profile.");
+        return;
+      }
     }
 
     const resolvedSchoolMeta = resolveSchool(form.linkedSchool) || getSchoolByName(form.linkedSchool);
     const linkedSchoolValue = resolvedSchoolMeta?.code || String(form.linkedSchool || "").trim();
-    const linkedDepartmentValue =
-      (resolvedSchoolMeta?.code
-        ? matchDepartmentId(resolvedSchoolMeta.code, form.linkedDepartment)
-        : "") || String(form.linkedDepartment || "").trim();
+    const linkedDepartmentValue = resolveDepartmentName(resolvedSchoolMeta, form.linkedDepartment);
 
     const payload = {
       ...form,
@@ -1562,10 +1579,7 @@ const AdminDashboard = () => {
         const generatedPassword = facultyForm.generatedPassword || generateStrongPassword();
         const resolvedSchoolMeta = resolveSchool(savedFaculty.school) || getSchoolByName(savedFaculty.school);
         const linkedSchoolValue = resolvedSchoolMeta?.code || String(savedFaculty.school || "").trim();
-        const linkedDepartmentValue =
-          (resolvedSchoolMeta?.code
-            ? matchDepartmentId(resolvedSchoolMeta.code, savedFaculty.department)
-            : "") || String(savedFaculty.department || "").trim();
+        const linkedDepartmentValue = resolveDepartmentName(resolvedSchoolMeta, savedFaculty.department);
 
         const existingAccount = accounts.find(
           (item) => String(item?.linkedFacultyId || "").toLowerCase() === String(savedFaculty.id || "").toLowerCase(),

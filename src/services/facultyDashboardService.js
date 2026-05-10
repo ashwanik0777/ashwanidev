@@ -62,7 +62,12 @@ export const adminGetFacultyProfile = async (facultyId) => {
 
 export const adminCreateFacultyProfile = async (profileData) => {
   const response = await authApiClient().post("/admin/faculty", profileData);
-  return response?.data?.data || null;
+  const data = response?.data?.data || null;
+  // Preserve loginAccount credentials if backend auto-created a login
+  if (data && data.loginAccount) {
+    return { ...data };
+  }
+  return data;
 };
 
 export const adminUpdateFacultyProfile = async (facultyId, profileData) => {

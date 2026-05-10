@@ -1563,7 +1563,57 @@ const AdminDashboard = () => {
         }
         savedFaculty = await updateFacultyProfile(facultyForm.id, facultyForm);
       } else {
-        savedFaculty = await createFacultyProfile(facultyForm);
+        const rawResponse = await createFacultyProfile(facultyForm);
+        savedFaculty = rawResponse;
+
+        // Backend auto-creates login account and returns credentials
+        if (rawResponse?.loginAccount) {
+          const { username, password } = rawResponse.loginAccount;
+          resultMessage = `Faculty "${savedFaculty.name}" created successfully! Login credentials — Username: ${username} | Password: ${password}`;
+          
+          // Refresh accounts list since a new account was created
+          setAccountPagination((prev) => ({ ...prev, page: 1 }));
+          setAccountsReloadToken((prev) => prev + 1);
+          setAuditReloadToken((prev) => prev + 1);
+
+          // Queue credential email if requested
+          if (facultyForm.sendCredentialsEmail && savedFaculty.email) {
+            const queueItem = {
+              id: `mail-${Date.now()}`,
+              to: savedFaculty.email,
+              subject: "GBU Faculty Portal Credentials",
+              status: "pending-backend",
+              payload: {
+                facultyName: savedFaculty.name,
+                username,
+                password,
+                linkedFacultyId: savedFaculty.id,
+              },
+              createdAt: new Date().toISOString(),
+            };
+
+            setMailQueue((prev) => [queueItem, ...prev].slice(0, 100));
+
+            try {
+              const dispatchResult = await dispatchCredentialEmails([queueItem]);
+              const resultItem = dispatchResult?.items?.[0];
+              if (resultItem?.status) {
+                setMailQueue((prev) =>
+                  prev.map((item) =>
+                    item.id === queueItem.id
+                      ? { ...item, status: resultItem.status, error: resultItem.error || "" }
+                      : item,
+                  ),
+                );
+              }
+            } catch (mailError) {
+              // Email send failed but account was created
+              console.error("Credential email dispatch failed:", mailError);
+            }
+          }
+        } else if (!isEdit && facultyForm.createLoginAccount) {
+          resultMessage = `Faculty "${savedFaculty.name}" created. Login account may already exist or email was missing.`;
+        }
       }
 
       setFacultyProfiles((prev) => {
@@ -1575,88 +1625,10 @@ const AdminDashboard = () => {
       });
       setFacultyReloadToken((prev) => prev + 1);
 
-      if (facultyForm.createLoginAccount) {
-        const generatedPassword = facultyForm.generatedPassword || generateStrongPassword();
-        const resolvedSchoolMeta = resolveSchool(savedFaculty.school) || getSchoolByName(savedFaculty.school);
-        const linkedSchoolValue = resolvedSchoolMeta?.code || String(savedFaculty.school || "").trim();
-        const linkedDepartmentValue = resolveDepartmentName(resolvedSchoolMeta, savedFaculty.department);
-
-        const existingAccount = accounts.find(
-          (item) => String(item?.linkedFacultyId || "").toLowerCase() === String(savedFaculty.id || "").toLowerCase(),
-        );
-
-        if (existingAccount) {
-          resultMessage = "Is faculty ke liye login account pehle se exist karta hai.";
-        } else {
-          const accountDraft = createFacultyAccount(
-            {
-              ...savedFaculty,
-              school: linkedSchoolValue,
-              department: linkedDepartmentValue,
-            },
-            accounts,
-            generatedPassword,
-          );
-
-          if (!accountDraft.linkedFacultyId || !accountDraft.linkedSchool || !accountDraft.linkedDepartment) {
-            resultMessage = "Login account ke liye Linked Faculty ID, School, aur Department required hai.";
-          } else {
-            try {
-              await createAdminAccount(accountDraft);
-              setAccountPagination((prev) => ({ ...prev, page: 1 }));
-              setAccountsReloadToken((prev) => prev + 1);
-              setAuditReloadToken((prev) => prev + 1);
-
-              if (facultyForm.sendCredentialsEmail && savedFaculty.email) {
-                const queueItem = {
-                  id: `mail-${Date.now()}`,
-                  to: savedFaculty.email,
-                  subject: "GBU Faculty Portal Credentials",
-                  status: "pending-backend",
-                  payload: {
-                    facultyName: savedFaculty.name,
-                    username: accountDraft.username,
-                    password: generatedPassword,
-                    linkedFacultyId: savedFaculty.id,
-                  },
-                  createdAt: new Date().toISOString(),
-                };
-
-                setMailQueue((prev) => [queueItem, ...prev].slice(0, 100));
-
-                try {
-                  const dispatchResult = await dispatchCredentialEmails([queueItem]);
-                  const resultItem = dispatchResult?.items?.[0];
-                  if (resultItem?.status) {
-                    setMailQueue((prev) =>
-                      prev.map((item) =>
-                        item.id === queueItem.id
-                          ? { ...item, status: resultItem.status, error: resultItem.error || "" }
-                          : item,
-                      ),
-                    );
-                  }
-
-                  if (dispatchResult?.summary?.notConfigured) {
-                    resultMessage = "Login account bana, lekin email service configured nahi hai.";
-                  }
-                } catch (mailError) {
-                  resultMessage = `Login account bana, lekin email send failed. ${getApiErrorMessage(mailError)}`;
-                }
-              }
-            } catch (accountError) {
-              const accountErrorMessage = getApiErrorMessage(accountError, "Failed to create login account.");
-              setAccountApiError(accountErrorMessage);
-              resultMessage = `Login account creation failed. ${accountErrorMessage}`;
-            }
-          }
-        }
-      }
-
       setActivityLog((prev) => [
         {
           id: `log-${Date.now()}`,
-          action: `Updated faculty profile: ${savedFaculty.name}`,
+          action: `${isEdit ? "Updated" : "Created"} faculty profile: ${savedFaculty.name}`,
           time: new Date().toISOString(),
         },
         ...prev,

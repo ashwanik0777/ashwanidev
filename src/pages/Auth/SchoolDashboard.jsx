@@ -250,14 +250,22 @@ const SchoolDashboard = () => {
   const saveFacultyProfile = async (faculty) => {
     try {
       if (faculty.id && faculty.id.startsWith("faculty-")) {
-        // Assume it's a new profile being created with a local timestamp ID, so remove the ID to let backend generate it or keep it depending on your API logic
-        // The backend adminCreateFacultyProfile accepts an id or generates one
-        await adminCreateFacultyProfile(faculty);
+        // New faculty – auto-create login account
+        const result = await adminCreateFacultyProfile({
+          ...faculty,
+          createLoginAccount: true,
+        });
+        setFacultyRefreshKey((prev) => prev + 1);
+        if (result?.loginAccount) {
+          setMessage(`Faculty "${faculty.name}" created! Login — Username: ${result.loginAccount.username} | Password: ${result.loginAccount.password}`);
+        } else {
+          setMessage(`Faculty profile created: ${faculty.name}`);
+        }
       } else {
         await adminUpdateFacultyProfile(faculty.id, faculty);
+        setFacultyRefreshKey((prev) => prev + 1);
+        setMessage(`Faculty profile updated: ${faculty.name}`);
       }
-      setFacultyRefreshKey((prev) => prev + 1);
-      setMessage(`Faculty profile updated: ${faculty.name}`);
     } catch (err) {
       console.error(err);
       setMessage(`Failed to update faculty: ${err?.response?.data?.message || err.message}`);

@@ -40,6 +40,8 @@ const toPayload = (faculty) => ({
   email: String(faculty?.email || "").trim(),
   phone: String(faculty?.phone || "").trim(),
   isActive: faculty?.isActive !== false,
+  createLoginAccount: faculty?.createLoginAccount === true || faculty?.createLoginAccount === "true",
+  password: faculty?.password || "",
 });
 
 export const listFacultyProfiles = async (params = {}) => {
@@ -62,7 +64,13 @@ export const listFacultyProfiles = async (params = {}) => {
 
 export const createFacultyProfile = async (faculty) => {
   const response = await apiClient.post("/admin/faculty", toPayload(faculty));
-  return normalizeFaculty(response?.data?.data || {});
+  const data = response?.data?.data || {};
+  const normalized = normalizeFaculty(data);
+  // Preserve loginAccount credentials if backend auto-created a login
+  if (data.loginAccount) {
+    normalized.loginAccount = data.loginAccount;
+  }
+  return normalized;
 };
 
 export const updateFacultyProfile = async (id, faculty) => {

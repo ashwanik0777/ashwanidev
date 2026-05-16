@@ -1,11 +1,101 @@
-/**
- * SOE — Research Areas
- * School of Engineering
- */
 export const researchAreaData = {
   schoolCode: "SOE",
   schoolName: "School of Engineering",
   heading: "Research Areas — SOE",
-  subheading: "Explore the research focus areas of School of Engineering.",
-  areas: [],
+  subheading:
+    "Explore the research focus areas of School of Engineering.",
+  hero: {
+    title: "Research Excellence at SOE",
+    subtitle:
+      "Our research ecosystem spans cutting-edge domains in mechanical, civil, electrical, and automobile engineering, fostering innovation that addresses real-world challenges in infrastructure, energy, manufacturing, and transportation.",
+  },
+  stats: [
+    { iconName: "BookOpen", color: "text-indigo-600", number: "20+", label: "Active Research Projects" },
+    { iconName: "Users", color: "text-blue-600", number: 35, label: "Research Faculty" },
+    { iconName: "Award", color: "text-cyan-600", number: "150+", label: "Publications" },
+    { iconName: "TrendingUp", color: "text-purple-600", number: "₹4Cr+", label: "Research Funding" },
+  ],
+  domains: [
+    {
+      iconName: "Zap",
+      color: "text-indigo-600",
+      bg: "from-indigo-50 to-blue-100",
+      title: "Renewable Energy & Power Systems",
+      tagline: "Leading Research Domain",
+      points: [
+        { title: "Solar Thermal Systems", desc: "Design and optimization of solar collectors, thermal energy storage, and solar desalination" },
+        { title: "Wind Energy", desc: "Aerodynamic analysis of wind turbine blades, wind farm optimization" },
+        { title: "Smart Grid Technology", desc: "Grid integration of renewables, power quality, and demand-side management" },
+        { title: "Electric Vehicles", desc: "EV drivetrain design, battery management, charging infrastructure" },
+      ],
+      faculty: "Prof. R.S. Mishra, Dr. O.V. Singh, Dr. Pankaj Swarnkar",
+      projects: "8",
+      funding: "₹1.5 Cr",
+    },
+    {
+      iconName: "Shield",
+      color: "text-blue-600",
+      bg: "from-blue-50 to-cyan-100",
+      title: "Structural Engineering & Smart Infrastructure",
+      tagline: "Building for the Future",
+      points: [
+        { title: "Earthquake Engineering", desc: "Seismic analysis, base isolation, and earthquake-resistant design" },
+        { title: "Smart Structures", desc: "IoT-based structural health monitoring using embedded sensors" },
+        { title: "Green Building", desc: "Sustainable construction materials, energy-efficient design, and LEED standards" },
+        { title: "BIM & Digital Twin", desc: "Building Information Modeling for infrastructure lifecycle management" },
+      ],
+      faculty: "Dr. Prashant Garg, Dr. Arvind Dewangan, Dr. Neha Sharma",
+      projects: "5",
+      funding: "₹1.0 Cr",
+    },
+    {
+      iconName: "Database",
+      color: "text-purple-600",
+      bg: "from-purple-50 to-indigo-100",
+      title: "Advanced Manufacturing & Materials",
+      tagline: "Industry 4.0 Ready",
+      points: [
+        { title: "Additive Manufacturing", desc: "3D printing of metals, polymers, and composites for engineering applications" },
+        { title: "Nanomaterials", desc: "Synthesis and characterization of nanomaterials for coatings and composites" },
+        { title: "CNC & Automation", desc: "Computer-aided manufacturing, robotic automation, and smart factory" },
+        { title: "Tribology", desc: "Friction, wear, and lubrication studies for automotive and industrial applications" },
+      ],
+      faculty: "Dr. Anil Kumar Tiwari, Dr. Sunil Kumar, Dr. Rajiv Chaudhary",
+      projects: "4",
+      funding: "₹0.8 Cr",
+    },
+    {
+      iconName: "Brain",
+      color: "text-orange-600",
+      bg: "from-orange-50 to-amber-100",
+      title: "Thermal Engineering & Energy Systems",
+      tagline: "Efficient Energy Solutions",
+      points: [
+        { title: "Heat Transfer Enhancement", desc: "Nanofluids, heat exchangers, and thermal management of electronics" },
+        { title: "IC Engines & Biofuels", desc: "Alternative fuels, emission reduction, and engine performance optimization" },
+        { title: "Refrigeration & HVAC", desc: "Energy-efficient cooling systems and sustainable refrigerants" },
+        { title: "Waste Heat Recovery", desc: "Organic Rankine Cycle and thermoelectric generators for waste heat utilization" },
+      ],
+      faculty: "Prof. R.S. Mishra, Dr. Manish Kumar",
+      projects: "3",
+      funding: "₹0.7 Cr",
+    },
+  ],
+  funding: [
+    { title: "DST-SERB", subtitle: "Core research grants", amount: "₹1.5 Cr", bg: "bg-blue-50", color: "text-blue-600" },
+    { title: "AICTE", subtitle: "Lab modernization & projects", amount: "₹0.8 Cr", bg: "bg-green-50", color: "text-green-600" },
+    { title: "DST-FIST", subtitle: "Infrastructure development", amount: "₹1.0 Cr", bg: "bg-indigo-50", color: "text-indigo-600" },
+    { title: "Industry", subtitle: "Corporate collaborations", amount: "₹0.7 Cr", bg: "bg-purple-50", color: "text-purple-600" },
+  ],
+  collaborations: [
+    { title: "IIT Delhi", desc: "Joint research in thermal engineering and energy systems", extra: "Faculty exchange program", border: "border-blue-500" },
+    { title: "NIT Allahabad", desc: "Collaborative research in structural engineering", extra: "MoU signed 2022", border: "border-green-500" },
+    { title: "CSIR-CMERI", desc: "Materials testing and characterization research", extra: "Ongoing projects", border: "border-indigo-500" },
+    { title: "Tata Motors", desc: "EV research, internships, and industry projects", extra: "Industry partnership 2023", border: "border-purple-500" },
+  ],
+  quickLinks: [
+    { title: "Research Projects", desc: "Active and completed projects", href: "/schools/SOE/research-projects", iconName: "BookOpen", color: "text-blue-600" },
+    { title: "Research Scholars", desc: "Our PhD community", href: "/schools/SOE/research-scholars", iconName: "Users", color: "text-green-600" },
+    { title: "Patents", desc: "Innovation and IP", href: "/schools/SOE/patents", iconName: "Award", color: "text-purple-600" },
+  ],
 };

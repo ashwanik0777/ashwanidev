@@ -15,7 +15,7 @@ const HeroSection = ({ title, subtitle }) => (
 );
 
 // Stats Section
-const StatsSection = ({ stats }) => (
+const StatsSection = ({ stats = [] }) => (
   <StatsCard
     stats={stats.map((item) => ({
       icon: item.icon,
@@ -26,7 +26,7 @@ const StatsSection = ({ stats }) => (
 );
 
 // Featured Scholars
-const FeaturedScholars = ({ scholars }) => (
+const FeaturedScholars = ({ scholars = [] }) => (
   <section className="py-16 px-4 bg-white">
     <div className="max-w-7xl mx-auto">
       <motion.h2
@@ -93,7 +93,7 @@ const FeaturedScholars = ({ scholars }) => (
 );
 
 // Research Areas Distribution
-const DistributionSection = ({ departments, fellowships }) => (
+const DistributionSection = ({ departments = [], fellowships = [] }) => (
   <section className="py-16 px-4 bg-gray-50">
     <div className="max-w-7xl mx-auto">
       <motion.h2
@@ -154,7 +154,7 @@ const DistributionSection = ({ departments, fellowships }) => (
 );
 
 // Achievements
-const AchievementsSection = ({ achievements }) => (
+const AchievementsSection = ({ achievements = [] }) => (
   <section className="py-16 px-4 bg-white">
     <div className="max-w-7xl mx-auto">
       <motion.h2
@@ -186,7 +186,7 @@ const AchievementsSection = ({ achievements }) => (
 );
 
 // Application Process
-const ApplicationProcess = ({ timeline, fee }) => (
+const ApplicationProcess = ({ timeline = [], fee = {} }) => (
   <section className="py-16 px-4 bg-gray-50">
     <div className="max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -258,7 +258,7 @@ const ApplicationProcess = ({ timeline, fee }) => (
 );
 
 // Contact
-const ContactSection = ({ contacts }) => (
+const ContactSection = ({ contacts = [] }) => (
   <section className="py-16 px-4 text-gray-900 bg-white">
     <div className="max-w-7xl mx-auto text-center">
       <h2 className="text-3xl font-bold mb-8">

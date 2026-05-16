@@ -21,7 +21,7 @@ const Hero = ({ data }) => (
   />
 );
 
-const Stats = ({ data }) => (
+const Stats = ({ data = [] }) => (
   <StatsCard 
     stats={data.map((item) => ({
       icon: item.icon,
@@ -33,7 +33,7 @@ const Stats = ({ data }) => (
   />
 );
 
-const OngoingProjects = ({ projects }) => (
+const OngoingProjects = ({ projects = [] }) => (
   <motion.section
     className="py-16 px-4 bg-gradient-to-br from-indigo-50 to-purple-50"
     initial="hidden"
@@ -69,7 +69,7 @@ const OngoingProjects = ({ projects }) => (
   </motion.section>
 );
 
-const ProjectCategories = ({ categories }) => (
+const ProjectCategories = ({ categories = [] }) => (
   <motion.section
     className="py-16 px-4 bg-white"
     initial="hidden"
@@ -86,8 +86,10 @@ const ProjectCategories = ({ categories }) => (
             className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
             whileHover={{ scale: 1.03 }}
           >
-            <div className={`w-12 h-12 flex items-center justify-center rounded-full ${cat.bg} mb-4`}>
-              <cat.icon className={`${cat.iconColor} w-6 h-6`} />
+            <div className={`w-12 h-12 flex items-center justify-center rounded-full ${cat.bg || "bg-gray-100"} mb-4`}>
+              {cat.icon ? (
+                <cat.icon className={`${cat.iconColor || "text-gray-700"} w-6 h-6`} />
+              ) : null}
             </div>
             <h4 className="text-xl font-bold mb-2">{cat.title}</h4>
             <ul className="text-gray-600 mb-4 space-y-1">
@@ -107,7 +109,7 @@ const ProjectCategories = ({ categories }) => (
   </motion.section>
 );
 
-const CompletedProjects = ({ projects }) => (
+const CompletedProjects = ({ projects = [] }) => (
   <motion.section
     className="py-16 px-4 bg-gradient-to-br from-purple-50 to-pink-50"
     initial="hidden"
@@ -124,7 +126,9 @@ const CompletedProjects = ({ projects }) => (
             className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
             whileHover={{ scale: 1.02 }}
           >
-            <proj.icon className="w-8 h-8 text-green-600 mb-2" />
+            {proj.icon ? (
+              <proj.icon className="w-8 h-8 text-green-600 mb-2" />
+            ) : null}
             <h4 className="text-xl font-bold mb-2">{proj.title}</h4>
             <p className="text-gray-700 mb-2">{proj.description}</p>
             <div className="text-sm text-gray-500 space-y-1">
@@ -141,7 +145,7 @@ const CompletedProjects = ({ projects }) => (
   </motion.section>
 );
 
-const UpcomingProjects = ({ projects }) => (
+const UpcomingProjects = ({ projects = [] }) => (
   <motion.section
     className="py-16 px-4 bg-white"
     initial="hidden"
@@ -158,7 +162,9 @@ const UpcomingProjects = ({ projects }) => (
             className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 border-solid hover:shadow-xl transition-all"
             whileHover={{ scale: 1.03 }}
           >
-            <proj.icon className="w-8 h-8 text-blue-600 mb-2" />
+            {proj.icon ? (
+              <proj.icon className="w-8 h-8 text-blue-600 mb-2" />
+            ) : null}
             <h4 className="text-xl font-bold mb-1">{proj.title}</h4>
             <span className="text-sm inline-block px-2 py-1 bg-blue-100 text-blue-700 rounded-full mb-2">
               {proj.status}
@@ -176,7 +182,7 @@ const UpcomingProjects = ({ projects }) => (
   </motion.section>
 );
 
-const ImpactPublications = ({ items }) => (
+const ImpactPublications = ({ items = [] }) => (
   <motion.section
     className="py-16 px-4 bg-gradient-to-br from-indigo-50 to-blue-50"
     initial="hidden"
@@ -203,7 +209,7 @@ const ImpactPublications = ({ items }) => (
   </motion.section>
 );
 
-const ImpactSocial = ({ items }) => (
+const ImpactSocial = ({ items = [] }) => (
   <motion.section
     className="py-16 px-4 bg-white"
     initial="hidden"
@@ -229,7 +235,7 @@ const ImpactSocial = ({ items }) => (
   </motion.section>
 );
 
-const ContactDetails = ({ contacts }) => (
+const ContactDetails = ({ contacts = [] }) => (
   <motion.section
     className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50"
     initial="hidden"

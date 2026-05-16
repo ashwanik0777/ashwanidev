@@ -151,6 +151,9 @@ import GenericDepartment from "../pages/departments/GenericDepartment.jsx";
 import CoeBioinformatics from "../pages/departments/CoeBioinformatics.jsx";
 import MolecularBiologyLab from "../pages/departments/MolecularBiologyLab.jsx";
 import ResearchCellPage from "../pages/departments/ResearchCellPage.jsx";
+import SoeAdvancedComputing from "../pages/departments/SoeAdvancedComputing.jsx";
+import SoeDesignLab from "../pages/departments/SoeDesignLab.jsx";
+import SoeInnovationCell from "../pages/departments/SoeInnovationCell.jsx";
 
 import DAC from "../pages/dac/DAC.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
@@ -270,6 +273,9 @@ export default function AppRouter() {
               <Route path="departments/coe-bioinformatics" element={<CoeBioinformatics />} />
               <Route path="departments/molecular-biology-lab" element={<MolecularBiologyLab />} />
               <Route path="departments/research-cell" element={<ResearchCellPage />} />
+              <Route path="departments/advanced-computing-center" element={<SoeAdvancedComputing />} />
+              <Route path="departments/engineering-design-lab" element={<SoeDesignLab />} />
+              <Route path="departments/innovation-research-cell" element={<SoeInnovationCell />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />
               <Route path="departments/cse" element={<CSE />} />
               <Route path="departments/it" element={<IT />} />

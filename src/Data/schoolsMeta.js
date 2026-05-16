@@ -47,7 +47,7 @@ export const SCHOOLS_META = [
       { id: "mechanical", name: "Department of Mechanical Engineering", shortName: "Mechanical" },
       { id: "civil", name: "Department of Civil Engineering", shortName: "Civil" },
       { id: "electrical", name: "Department of Electrical Engineering", shortName: "Electrical" },
-      { id: "electronics", name: "Department of Electronics Engineering", shortName: "Electronics" },
+      { id: "automobile", name: "Department of Automobile Engineering", shortName: "Automobile" },
     ],
   },
   {

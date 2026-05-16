@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import BannerSection from "../../components/HeroBanner";
-import { boardofstudiesData } from "../../Data/schools/SOICT/about/board-of-studies";
 
 const BoardOfStudies = ({ departments }) => {
   return (
@@ -79,6 +79,42 @@ const BoardOfStudies = ({ departments }) => {
 };
 
 export default function BoardOfStudyPage() {
+  const { shortCode } = useParams();
+  const [boardofstudiesData, setBoardofstudiesData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/about/board-of-studies.jsx`);
+        setBoardofstudiesData(module.boardofstudiesData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/about/board-of-studies.jsx");
+          setBoardofstudiesData(fallback.boardofstudiesData);
+        } catch {
+          setBoardofstudiesData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!boardofstudiesData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Board of Studies data not available.</div>;
+  }
+
   return (
     <>
       <BannerSection

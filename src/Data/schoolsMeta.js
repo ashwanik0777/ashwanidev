@@ -22,8 +22,8 @@ export const SCHOOLS_META = [
     matchTokens: ["biotechnology", "sobt", "sbt"],
     departments: [
       { id: "biotechnology", name: "Department of Biotechnology", shortName: "Biotech" },
-      { id: "bioinformatics", name: "Department of Bioinformatics", shortName: "Bioinformatics" },
-      { id: "life-sciences", name: "Department of Life Sciences", shortName: "Life Sciences" },
+      { id: "bioinformatics", name: "Department of Bioinformatics & Computational Biology", shortName: "Bioinformatics" },
+      { id: "molecular", name: "Department of Molecular Medicine & Microbial Biotechnology", shortName: "Molecular Medicine" },
     ],
   },
   {

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   Phone,
   Mail,
@@ -12,7 +13,6 @@ import {
   Youtube,
 } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
-import { contactData } from "../../Data/schools/SOICT/contact";
 
 // Reusable Card Components
 const Card = ({ children, className = "" }) => (
@@ -150,6 +150,7 @@ const Contact = ({ data, departments, officeHours, generalInfo }) => {
       </section>
 
       {/* COE Contacts */}
+      {data && data.length > 0 && (
       <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -202,18 +203,61 @@ const Contact = ({ data, departments, officeHours, generalInfo }) => {
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 };
 
-// Rendering Contact Component
-const ContactPage = () => (
-  <Contact
-    data={contactData.coeContacts}
-    departments={contactData.departments}
-    officeHours={contactData.officeHours}
-    generalInfo={contactData.generalInfo}
-  />
-);
+// Dynamic Contact Page Component
+const ContactPage = () => {
+  const { shortCode } = useParams();
+  const [contactData, setContactData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/contact.jsx`);
+        setContactData(module.contactData);
+      } catch (err) {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/contact.jsx");
+          setContactData(fallback.contactData);
+        } catch {
+          setContactData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!contactData) {
+    return (
+      <div className="flex justify-center items-center h-screen text-gray-500">
+        Contact data not available for this school.
+      </div>
+    );
+  }
+
+  return (
+    <Contact
+      data={contactData.coeContacts}
+      departments={contactData.departments}
+      officeHours={contactData.officeHours}
+      generalInfo={contactData.generalInfo}
+    />
+  );
+};
 
 export default ContactPage;

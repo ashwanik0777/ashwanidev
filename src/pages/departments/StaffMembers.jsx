@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import BannerSection from "../../components/HeroBanner";
-import { staffmembersData } from "../../Data/schools/SOICT/about/staff-members";
 
-const StaffMembers = ({ staffData }) => {
+const StaffMembers = ({ staffData, heading, subheading }) => {
   const [activeDept, setActiveDept] = useState(staffData[0]?.short || "");
 
   const activeMembers = useMemo(() => {
@@ -13,8 +13,8 @@ const StaffMembers = ({ staffData }) => {
   return (
     <>
       <BannerSection
-        title={staffmembersData.heading}
-        subtitle={staffmembersData.subheading}
+        title={heading}
+        subtitle={subheading}
         bgTheme={4}
       />
       <div className="min-h-screen bg-white py-12 px-6">
@@ -107,5 +107,41 @@ const StaffMembers = ({ staffData }) => {
 };
 
 export default function StaffPage() {
-  return <StaffMembers staffData={staffmembersData.departments} />;
+  const { shortCode } = useParams();
+  const [staffmembersData, setStaffmembersData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/about/staff-members.jsx`);
+        setStaffmembersData(module.staffmembersData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/about/staff-members.jsx");
+          setStaffmembersData(fallback.staffmembersData);
+        } catch {
+          setStaffmembersData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!staffmembersData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Staff data not available.</div>;
+  }
+
+  return <StaffMembers staffData={staffmembersData.departments} heading={staffmembersData.heading} subheading={staffmembersData.subheading} />;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import DepartmentLayout from './DepartmentLayout';
 
@@ -59,11 +59,10 @@ const generateDummyData = (schoolCode, deptId) => {
         image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&h=400&fit=crop"
       }
     ],
-    facultyStats: [
-      { numberText: "10+", subtitle: "Professors" },
-      { numberText: "25+", subtitle: "Assistant Professors" },
-      { numberText: "15+", subtitle: "Research Scholars" },
-    ],
+    facultyStats: {
+      text: "",
+      stats: [],
+    },
     researchStats: [
       { numberText: "50+", subtitle: "Publications" },
       { numberText: "5+", subtitle: "Patents" },
@@ -79,10 +78,42 @@ const generateDummyData = (schoolCode, deptId) => {
 
 const GenericDepartment = () => {
   const { shortCode, deptId } = useParams();
-  
-  const dummyData = generateDummyData(shortCode, deptId);
+  const [departmentData, setDepartmentData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  return <DepartmentLayout {...dummyData} />;
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/departments/${deptId}.jsx`);
+        if (module.departmentLayoutData) {
+          setDepartmentData(module.departmentLayoutData);
+        } else {
+          // Fallback to dummy data if the module doesn't export departmentLayoutData
+          setDepartmentData(null);
+        }
+      } catch (err) {
+        console.warn(`No department data found for ${shortCode}/${deptId}, using fallback.`, err);
+        setDepartmentData(null);
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode, deptId]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  // Use actual data from the file if available, otherwise use dummy data
+  const data = departmentData || generateDummyData(shortCode, deptId);
+
+  return <DepartmentLayout {...data} />;
 };
 
 export default GenericDepartment;

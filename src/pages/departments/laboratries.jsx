@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import BannerSection from "../../components/HeroBanner";
-import { laboratoriesData } from "../../Data/schools/SOICT/about/laboratories";
 
 const LaboratoryCard = ({ lab, index }) => {
   return (
@@ -44,21 +44,58 @@ const LaboratoryCard = ({ lab, index }) => {
 };
 
 export default function Laboratories() {
+  const { shortCode } = useParams();
+  const [laboratoriesData, setLaboratoriesData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("All");
 
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/about/laboratories.jsx`);
+        setLaboratoriesData(module.laboratoriesData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/about/laboratories.jsx");
+          setLaboratoriesData(fallback.laboratoriesData);
+        } catch {
+          setLaboratoriesData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
   const categories = useMemo(() => {
+    if (!laboratoriesData?.laboratories) return ["All"];
     const unique = new Set(
       laboratoriesData.laboratories.map((lab) => lab.category)
     );
     return ["All", ...Array.from(unique)];
-  }, []);
+  }, [laboratoriesData]);
 
   const filteredLabs = useMemo(() => {
+    if (!laboratoriesData?.laboratories) return [];
     if (filter === "All") {
       return laboratoriesData.laboratories;
     }
     return laboratoriesData.laboratories.filter((lab) => lab.category === filter);
-  }, [filter]);
+  }, [filter, laboratoriesData]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!laboratoriesData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Laboratories data not available.</div>;
+  }
 
   return (
     <div className="min-h-screen bg-white">

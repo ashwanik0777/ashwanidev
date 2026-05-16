@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { CalendarDays, Briefcase, ArrowRight, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import BannerSection from "../../components/HeroBanner";
-import { activitiesData } from "../../Data/schools/SOICT/about/activities";
 
 const ConferenceCard = ({ title, details, date, index }) => {
   const [expanded, setExpanded] = useState(false);
@@ -230,6 +230,42 @@ const Conferences = ({ conferenceData, heading, subheading }) => {
 };
 
 const App = () => {
+  const { shortCode } = useParams();
+  const [activitiesData, setActivitiesData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/about/activities.jsx`);
+        setActivitiesData(module.activitiesData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/about/activities.jsx");
+          setActivitiesData(fallback.activitiesData);
+        } catch {
+          setActivitiesData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!activitiesData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Activities data not available.</div>;
+  }
+
   return (
     <Conferences
       conferenceData={activitiesData.activities}

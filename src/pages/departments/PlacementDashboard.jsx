@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Users,
@@ -26,7 +27,6 @@ import CampusRecruiters from "../Placement/CampusRecruiters";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
-import { placementData } from "../../Data/schools/SOICT/placement";
 
 const insideIconMap = {
   BarChart2,
@@ -34,7 +34,49 @@ const insideIconMap = {
   Briefcase,
   Target,
 };
+
 const PlacementDashboard = () => {
+  const { shortCode } = useParams();
+  const [placementData, setPlacementData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/placement.jsx`);
+        setPlacementData(module.placementData);
+      } catch (err) {
+        // Fallback to SOICT
+        try {
+          const fallback = await import("../../Data/schools/SOICT/placement.jsx");
+          setPlacementData(fallback.placementData);
+        } catch {
+          setPlacementData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!placementData) {
+    return (
+      <div className="flex justify-center items-center h-screen text-gray-500">
+        Placement data not available for this school.
+      </div>
+    );
+  }
+
   const {
     hero,
     placementStats,

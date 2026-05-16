@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, CheckCircle } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
-import { researchScholarsData } from "../../Data/schools/SOICT/research/research-scholars";
 
 // Hero Section
 const HeroSection = ({ title, subtitle }) => (
@@ -278,23 +278,57 @@ const ContactSection = ({ contacts }) => (
   </section>
 );
 
-const {
-  hero,
-  stats,
-  scholars,
-  departments,
-  fellowships,
-  achievements,
-  timeline,
-  fee,
-  contacts,
-} = researchScholarsData;
-
-
-
 // Main Parent
 export default function ResearchScholars() {
-   return (
+  const { shortCode } = useParams();
+  const [researchScholarsData, setResearchScholarsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/research/research-scholars.jsx`);
+        setResearchScholarsData(module.researchScholarsData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/research/research-scholars.jsx");
+          setResearchScholarsData(fallback.researchScholarsData);
+        } catch {
+          setResearchScholarsData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!researchScholarsData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Research scholars data not available.</div>;
+  }
+
+  const {
+    hero,
+    stats,
+    scholars,
+    departments,
+    fellowships,
+    achievements,
+    timeline,
+    fee,
+    contacts,
+  } = researchScholarsData;
+
+  return (
     <div className="min-h-screen">
       <HeroSection
         title={hero.title}

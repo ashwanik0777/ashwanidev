@@ -146,7 +146,7 @@ export const sectionsConfig = [
         image:
           "https://images.unsplash.com/photo-1581093588401-22a67f8b6d9b?w=400",
         gradient: "from-green-400 to-emerald-600",
-        link: "/schools/SOBT/departments/biotech",
+        link: "/schools/SOBT/departments/biotechnology",
       },
 
       {

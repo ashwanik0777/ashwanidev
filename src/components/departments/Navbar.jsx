@@ -124,20 +124,41 @@ const Navbar = () => {
     contact: `/schools/${activeSchool}/contact`,
   };
 
+  // Build About Us dropdown items based on the active school
+  const getAboutItems = () => {
+    const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+    
+    if (schoolCode === "SOBT") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
+        { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
+        { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
+        { label: "SOBT Board of Studies", href: routes.about.board },
+        { label: "SOBT Staff Members", href: routes.about.staff },
+        { label: "SOBT Laboratories", href: routes.about.labs },
+        { label: "SOBT Activities", href: routes.about.activities },
+      ];
+    }
+    
+    // Default SOICT items
+    return [
+      { label: "Dean's Message", href: routes.about.dean },
+      { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
+      { label: "USICT Cyber Security Lab", href: routes.about.cyber },
+      { label: "USICT COEIRAEM", href: routes.about.coeiraem },
+      { label: "USICT Board of Studies", href: routes.about.board },
+      { label: "USICT Staff Members", href: routes.about.staff },
+      { label: "USICT Laboratories", href: routes.about.labs },
+      { label: "USICT Activities", href: routes.about.activities },
+    ];
+  };
+
   const dropdownMenus = [
     {
       key: "about",
       label: "About Us",
-      items: [
-        { label: "Dean's Message", href: routes.about.dean },
-        { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
-        { label: "USICT Cyber Security Lab", href: routes.about.cyber },
-        { label: "USICT COEIRAEM", href: routes.about.coeiraem },
-        { label: "USICT Board of Studies", href: routes.about.board },
-        { label: "USICT Staff Members", href: routes.about.staff },
-        { label: "USICT Laboratories", href: routes.about.labs },
-        { label: "USICT Activities", href: routes.about.activities },
-      ],
+      items: getAboutItems(),
     },
     {
       key: "departments",

@@ -27,9 +27,8 @@ export const aboutData = {
 
 export const departmentPages = [
   { id: "biotechnology", name: "Biotechnology", path: "departments/biotechnology" },
-  { id: "bioinformatics", name: "Bioinformatics", path: "departments/bioinformatics" },
-  { id: "microbiology", name: "Microbiology", path: "departments/microbiology" },
-  { id: "food-technology", name: "Food Technology", path: "departments/food-technology" },
+  { id: "bioinformatics", name: "Bioinformatics & Computational Biology", path: "departments/bioinformatics" },
+  { id: "molecular", name: "Molecular Medicine & Microbial Biotechnology", path: "departments/molecular" },
 ];
 
 export const researchPages = [

@@ -1,21 +1,10 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
-import { researchProjectsData } from "../../Data/schools/SOICT/research/research-projects";
 
 /* -------------------------- Data Definitions -------------------------- */
-
-const {
-  hero,
-  stats,
-  ongoingProjects,
-  projectCategories,
-  completedProjects,
-  upcomingProjects,
-  impactPublications,
-  impactSocial,
-  contactDetails,
-} = researchProjectsData;
 
 /* ---------------------------- Components ---------------------------- */
 
@@ -270,6 +259,54 @@ const ContactDetails = ({ contacts }) => (
 /* ---------------------------- Main Page ---------------------------- */
 
 const ResearchProjects = () => {
+  const { shortCode } = useParams();
+  const [researchProjectsData, setResearchProjectsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/research/research-projects.jsx`);
+        setResearchProjectsData(module.researchProjectsData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/research/research-projects.jsx");
+          setResearchProjectsData(fallback.researchProjectsData);
+        } catch {
+          setResearchProjectsData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!researchProjectsData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Research projects data not available.</div>;
+  }
+
+  const {
+    hero,
+    stats,
+    ongoingProjects,
+    projectCategories,
+    completedProjects,
+    upcomingProjects,
+    impactPublications,
+    impactSocial,
+    contactDetails,
+  } = researchProjectsData;
+
   return (
     <div className="min-h-screen">
       <Hero data={hero} />

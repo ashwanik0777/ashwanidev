@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import {
   BookOpen,
   Users,
@@ -11,7 +12,6 @@ import {
 } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
-import { researchAreaData } from "../../Data/schools/SOICT/research/research-area-profile";
 
 const iconMap = {
   BookOpen,
@@ -134,6 +134,42 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations }) => {
 };
 
 export default function ResearchPage() {
+  const { shortCode } = useParams();
+  const [researchAreaData, setResearchAreaData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const schoolCode = (shortCode || "SOICT").toUpperCase();
+        const module = await import(`../../Data/schools/${schoolCode}/research/research-area-profile.jsx`);
+        setResearchAreaData(module.researchAreaData);
+      } catch {
+        try {
+          const fallback = await import("../../Data/schools/SOICT/research/research-area-profile.jsx");
+          setResearchAreaData(fallback.researchAreaData);
+        } catch {
+          setResearchAreaData(null);
+        }
+      }
+      setLoading(false);
+    };
+    loadData();
+  }, [shortCode]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  if (!researchAreaData) {
+    return <div className="flex justify-center items-center h-screen text-gray-500">Research data not available.</div>;
+  }
+
   const stats = researchAreaData.stats.map((item) => ({
     ...item,
     icon: iconMap[item.iconName] || BookOpen,

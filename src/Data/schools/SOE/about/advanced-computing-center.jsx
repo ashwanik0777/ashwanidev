@@ -1,0 +1,205 @@
+/**
+ * SOE — Advanced Computing Center
+ * School of Engineering
+ * Full data module following the Coedt pattern
+ */
+export const advancedComputingData = {
+  schoolCode: "SOE",
+  schoolName: "School of Engineering",
+  hero: {
+    title: "Advanced Computing Center",
+    subtitle: "Powering Engineering Innovation Through High-Performance Computing",
+    bgTheme: 5,
+  },
+  about: {
+    visionTitle: "Our Vision",
+    visionDescription: [
+      "To be a premier computing facility that enables cutting-edge engineering research through advanced simulation, modeling, and data analytics capabilities.",
+      "The Advanced Computing Center supports faculty and students in leveraging high-performance computing for solving complex engineering problems across all disciplines.",
+    ],
+    missionTitle: "Our Mission",
+    missionPoints: [
+      "Provide state-of-the-art computing infrastructure for engineering research",
+      "Enable advanced simulation and modeling using industry-standard software",
+      "Train students in computational methods and HPC technologies",
+      "Support data-driven engineering research and AI/ML applications",
+      "Foster interdisciplinary computational research collaborations",
+    ],
+    storyTitle: "Our Story",
+    storyText:
+      "The Advanced Computing Center was established to bridge the gap between theoretical engineering knowledge and computational practice. With a 64-node HPC cluster, GPU workstations, and licenses for ANSYS, COMSOL, MATLAB, and LabVIEW, the center has become the computational backbone of SOE research.",
+    whatWeDoTitle: "What We Do",
+    whatWeDoText:
+      "We provide high-performance computing resources for CFD simulations, structural analysis, power system modeling, machine learning, and IoT-based research. The center also conducts regular training programs on computational tools.",
+    commitmentTitle: "Our Commitment",
+    commitmentText:
+      "We are committed to democratizing access to advanced computing for all SOE researchers and students, enabling them to tackle real-world engineering challenges through simulation and data analytics.",
+    photos: [
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    ],
+  },
+  mentors: [
+    {
+      type: "GBU",
+      image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
+      name: "Prof. R.S. Mishra",
+      role: "Director — Advanced Computing Center",
+      qualifications: "Ph.D. in Mechanical Engineering (Thermal)",
+      expertise: "Thermal Engineering, CFD, Energy Systems, HPC Applications",
+      linkedin: "#",
+    },
+    {
+      type: "GBU",
+      image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
+      name: "Dr. Pankaj Swarnkar",
+      role: "Co-Director — Computing Center",
+      qualifications: "Ph.D. in Electrical Engineering",
+      expertise: "Power Electronics, MATLAB/Simulink, Control Systems, AI/ML",
+      linkedin: "#",
+    },
+    {
+      type: "GBU",
+      image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
+      name: "Dr. Anil Kumar Tiwari",
+      role: "Faculty Member — Computing Center",
+      qualifications: "Ph.D. in Mechanical Engineering",
+      expertise: "FEA, CAD/CAM, ANSYS, Manufacturing Simulation",
+      linkedin: "#",
+    },
+  ],
+  partners: [
+    {
+      name: "ANSYS Inc.",
+      type: "Software Partner",
+      description: "Academic license partnership for ANSYS Mechanical, Fluent, and CFX for structural and fluid dynamics simulations.",
+      image: "https://picsum.photos/200?41",
+      year: "2020",
+    },
+    {
+      name: "MathWorks",
+      type: "Software Partner",
+      description: "Campus-wide MATLAB and Simulink license for research and teaching in all engineering departments.",
+      image: "https://picsum.photos/200?42",
+      year: "2019",
+    },
+    {
+      name: "NVIDIA",
+      type: "Hardware Partner",
+      description: "GPU computing support with NVIDIA A100 cards for AI/ML research and deep learning model training.",
+      image: "https://picsum.photos/200?43",
+      year: "2023",
+    },
+  ],
+  projects: [
+    {
+      name: "CFD Analysis of Wind Turbine Blades",
+      description: "Computational fluid dynamics simulation of aerodynamic performance of wind turbine blade profiles using ANSYS Fluent.",
+      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80",
+      category: "CFD",
+      year: "2024",
+      status: "Ongoing",
+      technologies: ["ANSYS Fluent", "HPC Cluster", "ParaView"],
+    },
+    {
+      name: "AI-Based Structural Health Monitoring",
+      description: "Deep learning models for predicting structural degradation in bridges and buildings using sensor data and image analysis.",
+      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80",
+      category: "AI/ML",
+      year: "2024",
+      status: "Ongoing",
+      technologies: ["TensorFlow", "Python", "IoT Sensors"],
+    },
+    {
+      name: "Thermal Analysis of EV Battery Packs",
+      description: "COMSOL-based thermal simulation and optimization of lithium-ion battery pack cooling systems for electric vehicles.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+      category: "Simulation",
+      year: "2023",
+      status: "Completed",
+      technologies: ["COMSOL", "MATLAB", "CAD"],
+    },
+  ],
+  course: {
+    sectionTitle: "Training Programs",
+    sectionSubtitle: "Build expertise in computational engineering tools",
+    imageSrc: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "Computing Workshop",
+    badgeText: "NEW",
+    courseTitle: "Certificate Course in Computational Engineering & Simulation",
+    courseDescription: "Hands-on training on ANSYS, COMSOL, MATLAB, and Python for engineering simulation, FEA, CFD, and data analysis.",
+    duration: "6 Weeks",
+    price: "₹12,000",
+    eligibility: "B.Tech/M.Tech students in any engineering discipline",
+    startDate: "September 2025",
+    venue: "Advanced Computing Center, SOE, GBU, Greater Noida",
+    highlights: [
+      "ANSYS Mechanical & Fluent",
+      "COMSOL Multiphysics",
+      "MATLAB & Simulink",
+      "Python for Engineers",
+      "FEA & CFD Fundamentals",
+      "AI/ML for Engineering",
+      "Hands-on Projects",
+      "Certificate on Completion",
+    ],
+    syllabusLink: "",
+  },
+  facilities: [
+    {
+      title: "HPC Cluster — 64 Compute Nodes",
+      description: "High-performance computing cluster with 64 cores, 512 GB RAM, and InfiniBand interconnect for large-scale simulations.",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "GPU Workstations",
+      description: "NVIDIA A100 GPU workstations for deep learning, AI research, and GPU-accelerated simulations.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "Simulation Software Suite",
+      description: "Licensed software including ANSYS, COMSOL, MATLAB, LabVIEW, SolidWorks, and AutoCAD for all engineering departments.",
+      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      title: "60-Seat Computing Lab",
+      description: "Modern computing lab with high-spec workstations, projector, and collaborative workspace for courses and workshops.",
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
+    },
+  ],
+  talks: [
+    {
+      title: "Introduction to HPC for Engineering Research",
+      speaker: "Prof. R.S. Mishra",
+      dateTime: "10th March 2025 · 11 AM",
+      venue: "Computing Center, SOE, GBU",
+      description: "Overview of high-performance computing architecture and its applications in engineering simulations.",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80",
+      youtubeLink: "",
+    },
+    {
+      title: "ANSYS Workshop — From CAD to Simulation",
+      speaker: "Dr. Anil Kumar Tiwari",
+      dateTime: "5th January 2025 · 2 PM",
+      venue: "Computing Center, SOE, GBU",
+      description: "Hands-on workshop on importing CAD models into ANSYS and performing structural and thermal analysis.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+      youtubeLink: "",
+    },
+  ],
+  mediaItems: [
+    {
+      title: "SOE Computing Center Upgraded with NVIDIA GPUs",
+      date: "2024-10-15",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+      description: "The Advanced Computing Center received NVIDIA A100 GPUs for AI/ML research and GPU-accelerated simulations.",
+      link: "",
+    },
+    {
+      title: "50+ Students Complete Computational Engineering Course",
+      date: "2024-08-20",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80",
+      description: "The first batch of the certificate course in computational engineering graduated with industry-ready simulation skills.",
+      link: "",
+    },
+  ],
+};

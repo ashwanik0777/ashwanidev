@@ -51,8 +51,6 @@ import SitemapContact from "../pages/Sitemap/SitemapContact.jsx";
 import SitemapAcademics from "../pages/Sitemap/SitemapAcademics.jsx";
 import InstitutionInnovation from "../pages/Reasearch/InstitutionInnovation.jsx";
 import GBUHistory from "../pages/Aboutus/History.jsx";
-import Registration from "../pages/Admission/NewRegistration.jsx";
-import LoginNewStudent from "../pages/Admission/login.jsx";
 import LoginPortal from "../pages/Auth/LoginPortal.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import ProtectedPortalRoute from "../components/Auth/ProtectedPortalRoute.jsx";

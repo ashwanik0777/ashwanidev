@@ -312,9 +312,9 @@ const LoginPortal = () => {
               >
                 Forgot password?
               </button>
-              <Link to="/admission/login" className="font-semibold text-stone-900 hover:underline">
+              <a href="https://gbuadm.samarth.edu.in/" className="font-semibold text-stone-900 hover:underline">
                 Admission Login
-              </Link>
+              </a>
             </div>
           </div>
         </section>

@@ -8,7 +8,11 @@ import {
 export default function LatestUpdates() {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [categories] = useState([
+    { category: 'Latest News' },
+    { category: 'Notice/Circulars' },
+    { category: 'Upcoming Events' },
+  ]);
 
   const buildSchoolUpdates = () => {
     const announcements = getSchoolAnnouncements();
@@ -68,8 +72,6 @@ export default function LatestUpdates() {
 
       const notices = buildSchoolUpdates();
       setData(notices);
-      const uniqueCategories = [...new Map(notices.map(item => [item.category.trim(), item])).values()];
-      setCategories(uniqueCategories);
     };
 
     loadUpdates();
@@ -97,6 +99,12 @@ export default function LatestUpdates() {
       'Upcoming Events': 'bg-yellow-100 text-yellow-600 border-yellow-200'
     };
     return colors[category.trim()] || 'bg-gray-100 text-gray-600 border-gray-200';
+  };
+
+  const emptyMessages = {
+    'Latest News': 'No latest news available right now.',
+    'Notice/Circulars': 'No notices or circulars available right now.',
+    'Upcoming Events': 'No upcoming events at the moment.',
   };
 
   const NoticeCard = ({ item, index, category }) => (
@@ -162,6 +170,8 @@ export default function LatestUpdates() {
         {categories.map((catItem, catIndex) => {
           const category = catItem.category.trim();
           const filtered = data.filter(item => item.category.trim() === category);
+          const hasItems = filtered.length > 0;
+          const marqueeDuration = `${Math.max(filtered.length, 1) * 5}s`;
 
           return (
             <div key={catIndex} className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden flex flex-col relative">
@@ -171,11 +181,28 @@ export default function LatestUpdates() {
 
               <div className="relative flex-1 flex flex-col">
                 <div className="marquee-wrapper">
-                  <div className="marquee-content space-y-3" style={{ animationDuration: `${filtered.length * 5}s` }}>
-                    {filtered.concat(filtered).map((item, i) => (
-                      <NoticeCard key={`${item.id}-${i}`} item={item} index={i} category={category} />
-                    ))}
-                  </div>
+                  {hasItems ? (
+                    <div className="marquee-content space-y-3" style={{ animationDuration: marqueeDuration }}>
+                      {filtered.concat(filtered).map((item, i) => (
+                        <NoticeCard key={`${item.id}-${i}`} item={item} index={i} category={category} />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-4">
+                      <div className="flex items-start gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50">
+                        <div className="w-1.5 h-16 bg-gray-300 rounded-full flex-shrink-0 mt-1"></div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-gray-700 text-sm leading-snug mb-2">
+                            {emptyMessages[category]}
+                          </h4>
+                          <p className="text-xs text-gray-500">Please check back later.</p>
+                        </div>
+                        <span className={`px-3 py-1.5 rounded-full text-xs font-medium flex-shrink-0 border ${getTypeColor(category)}`}>
+                          {category}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex align-middle justify-end z-10 mt-8 h-10">

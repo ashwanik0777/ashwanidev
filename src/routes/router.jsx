@@ -199,10 +199,8 @@ export default function AppRouter() {
 
           {/* Academics */}
           <Route path="/academics" element={<h1>Academics</h1>} />
-          <Route path="/new-registration" element={<Registration/>} />
           <Route path="/login" element={<LoginPortal />} />
           <Route path="/login/forgot-password" element={<ForgotPassword />} />
-          <Route path="/admission/login" element={<LoginNewStudent/>} />
           <Route
             path="/faculty-portal/dashboard"
             element={

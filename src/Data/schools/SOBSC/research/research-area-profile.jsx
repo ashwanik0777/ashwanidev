@@ -1,11 +1,103 @@
 /**
- * SOBSC — Research Areas
- * School of Buddhist Studies & Civilization
+ * SOBSC — Research Areas & Profile
  */
 export const researchAreaData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
   heading: "Research Areas — SOBSC",
-  subheading: "Explore the research focus areas of School of Buddhist Studies & Civilization.",
-  areas: [],
+  subheading: "Explore the research focus areas of the School of Buddhist Studies & Civilization.",
+  hero: {
+    title: "Research Excellence at SOBSC",
+    subtitle: "Our research spans Buddhist philosophy, textual studies, meditation science, archaeological heritage, and applied Buddhist ethics — fostering scholarship that bridges ancient wisdom and contemporary challenges.",
+  },
+  stats: [
+    { iconName: "BookOpen", color: "text-yellow-600", number: "25+", label: "Active Research Projects" },
+    { iconName: "Users", color: "text-orange-600", number: 11, label: "Research Faculty" },
+    { iconName: "Award", color: "text-amber-600", number: "100+", label: "Publications" },
+    { iconName: "TrendingUp", color: "text-red-600", number: "₹2Cr+", label: "Research Funding" },
+  ],
+  domains: [
+    {
+      iconName: "Brain",
+      color: "text-yellow-600",
+      bg: "from-yellow-50 to-orange-100",
+      title: "Buddhist Philosophy & Comparative Studies",
+      tagline: "Core Research Domain",
+      points: [
+        { title: "Madhyamaka & Yogācāra Philosophy", desc: "Analysis of Nāgārjuna's Śūnyatā and Vasubandhu's consciousness-only theory" },
+        { title: "Abhidharma Studies", desc: "Systematic study of Buddhist phenomenology and psychology" },
+        { title: "Comparative Philosophy", desc: "Buddhist philosophy in dialogue with Western and Indian philosophical traditions" },
+        { title: "Buddhist Ethics & Human Values", desc: "Application of Buddhist ethical principles to contemporary moral issues" },
+      ],
+      faculty: "Dr. C.V. Sivasai, Dr. Arvind Kumar Singh, Dr. Chandrashekhar Paswan",
+      projects: "10",
+      funding: "₹80L",
+    },
+    {
+      iconName: "BookOpen",
+      color: "text-orange-600",
+      bg: "from-orange-50 to-amber-100",
+      title: "Buddhist Textual Studies & Philology",
+      tagline: "Language & Literature Research",
+      points: [
+        { title: "Pali Canon Studies", desc: "Critical analysis of Tipiṭaka texts and commentarial traditions" },
+        { title: "Sanskrit Buddhist Literature", desc: "Study of Mahāyāna sūtras, Abhidharma-kośa, and philosophical treatises" },
+        { title: "Digital Text Analysis", desc: "Computational linguistics applied to Buddhist canonical corpora" },
+        { title: "Translation Projects", desc: "Translation and annotation of Buddhist texts into Hindi and English" },
+      ],
+      faculty: "Dr. Manish T. Meshram, Dr. Gyanaditya Shakya",
+      projects: "8",
+      funding: "₹45L",
+    },
+    {
+      iconName: "Heart",
+      color: "text-red-600",
+      bg: "from-red-50 to-pink-100",
+      title: "Meditation Science & Mindfulness Research",
+      tagline: "Contemplative Practice Research",
+      points: [
+        { title: "Vipassana Meditation Studies", desc: "Scientific investigation of Vipassana meditation effects on brain and behavior" },
+        { title: "Mindfulness-Based Interventions", desc: "MBSR and MBCT programs for mental health and stress reduction" },
+        { title: "Neuroscience of Meditation", desc: "EEG and fMRI studies of contemplative states" },
+        { title: "Applied Well-being Programs", desc: "Meditation programs for healthcare, education, and workplace settings" },
+      ],
+      faculty: "Dr. Priyadarsini Mitra, Dr. Chandrashekhar Paswan",
+      projects: "5",
+      funding: "₹35L",
+    },
+    {
+      iconName: "Globe",
+      color: "text-amber-600",
+      bg: "from-amber-50 to-yellow-100",
+      title: "Buddhist Heritage, Art & Archaeology",
+      tagline: "Cultural Heritage Research",
+      points: [
+        { title: "Buddhist Archaeological Sites", desc: "Field studies at Sanchi, Sarnath, Bodh Gaya, Nalanda, and Ajanta" },
+        { title: "Buddhist Art & Iconography", desc: "Study of Buddhist sculptural traditions, murals, and thangka paintings" },
+        { title: "Heritage Conservation", desc: "Digital documentation and preservation of Buddhist cultural heritage" },
+        { title: "Buddhist Architecture", desc: "Analysis of stūpa, vihāra, and cave temple architectural traditions" },
+      ],
+      faculty: "Dr. Priyadarsini Mitra, Dr. Arvind Kumar Singh",
+      projects: "4",
+      funding: "₹40L",
+    },
+  ],
+  funding: [
+    { title: "UGC", subtitle: "Major research grants", amount: "₹80L", bg: "bg-yellow-50", color: "text-yellow-600" },
+    { title: "ICSSR", subtitle: "Social science research", amount: "₹45L", bg: "bg-orange-50", color: "text-orange-600" },
+    { title: "ICCR", subtitle: "Cultural exchange research", amount: "₹35L", bg: "bg-amber-50", color: "text-amber-600" },
+    { title: "International", subtitle: "International collaborations", amount: "₹40L", bg: "bg-red-50", color: "text-red-600" },
+  ],
+  collaborations: [
+    { title: "Nalanda University", desc: "Joint research in Buddhist studies and archaeology", extra: "MoU signed 2019", border: "border-yellow-500" },
+    { title: "International Buddhist College, Thailand", desc: "Student exchange and collaborative research", extra: "Active partnership", border: "border-orange-500" },
+    { title: "Mahachulalongkorn University", desc: "Buddhist education and meditation research", extra: "Faculty exchange program", border: "border-amber-500" },
+    { title: "University of Delhi", desc: "Collaborative research in Buddhist philosophy", extra: "Joint doctoral supervision", border: "border-red-500" },
+  ],
+  quickLinks: [
+    { title: "Research Projects", desc: "Active and completed projects", href: "/schools/SOBSC/research-projects", iconName: "BookOpen", color: "text-yellow-600" },
+    { title: "Research Scholars", desc: "Our Ph.D. community", href: "/schools/SOBSC/research-scholars", iconName: "Users", color: "text-orange-600" },
+    { title: "Patents", desc: "Innovation and IP", href: "/schools/SOBSC/patents", iconName: "Award", color: "text-amber-600" },
+    { title: "Training & Consultancy", desc: "Industry engagement", href: "/schools/SOBSC/training-consultancy", iconName: "TrendingUp", color: "text-red-600" },
+  ],
 };

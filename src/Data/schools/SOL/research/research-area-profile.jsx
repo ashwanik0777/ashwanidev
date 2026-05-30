@@ -1,11 +1,102 @@
-/**
- * SOL — Research Areas
- * School of Law, Justice & Governance
- */
 export const researchAreaData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
   heading: "Research Areas — SOL",
-  subheading: "Explore the research focus areas of School of Law, Justice & Governance.",
-  areas: [],
+  subheading:
+    "Explore the interdisciplinary research focus areas of the School of Law, Justice & Governance at Gautam Buddha University.",
+  hero: {
+    title: "Research Excellence at SOL",
+    subtitle:
+      "Our research ecosystem encompasses critical domains in constitutional jurisprudence, criminal justice, cyber law, and corporate governance — fostering scholarship that strengthens the rule of law and advances justice in contemporary India.",
+  },
+  stats: [
+    { iconName: "BookOpen", color: "text-red-700", number: "18+", label: "Active Research Projects" },
+    { iconName: "Users", color: "text-maroon-600", number: 14, label: "Research Faculty" },
+    { iconName: "Award", color: "text-crimson-600", number: "120+", label: "Publications" },
+    { iconName: "TrendingUp", color: "text-rose-700", number: "₹1.2Cr", label: "Research Funding" },
+  ],
+  domains: [
+    {
+      iconName: "Scale",
+      color: "text-red-700",
+      bg: "from-red-50 to-rose-100",
+      title: "Constitutional Law & Human Rights",
+      tagline: "Foundational Legal Research",
+      points: [
+        { title: "Fundamental Rights Jurisprudence", desc: "Evolving interpretation of Part III of the Indian Constitution and its judicial enforcement" },
+        { title: "Human Rights & Social Justice", desc: "Protection of marginalized communities, gender justice, and LGBTQ+ rights in Indian legal framework" },
+        { title: "Federalism & Centre-State Relations", desc: "Division of powers, cooperative federalism, and emerging constitutional disputes" },
+        { title: "Judicial Review & Constitutional Remedies", desc: "Writ jurisdiction, PIL trends, and access to justice in the Indian judicial system" },
+      ],
+      faculty: "Dr. Krishna Kant Dwivedi, Dr. Poonam Verma",
+      projects: "6",
+      funding: "₹35 Lakh",
+    },
+    {
+      iconName: "Shield",
+      color: "text-rose-700",
+      bg: "from-rose-50 to-pink-100",
+      title: "Criminal Law & Criminology",
+      tagline: "Justice & Penology Research",
+      points: [
+        { title: "Criminal Justice Reform", desc: "Analysis of Bharatiya Nyaya Sanhita and procedural reforms in Indian criminal law" },
+        { title: "Victimology & Restorative Justice", desc: "Victim-centric approaches, compensation schemes, and alternative dispute resolution in criminal matters" },
+        { title: "Penology & Prison Reforms", desc: "Rehabilitation models, overcrowding, rights of prisoners, and correctional administration" },
+        { title: "White-Collar Crime & Economic Offences", desc: "Corporate fraud, money laundering, and enforcement of Prevention of Corruption Act" },
+      ],
+      faculty: "Dr. Santosh Kumar Tiwari, Dr. Satish Chandra",
+      projects: "5",
+      funding: "₹28 Lakh",
+    },
+    {
+      iconName: "Monitor",
+      color: "text-amber-700",
+      bg: "from-amber-50 to-orange-100",
+      title: "Cyber Law & Digital Governance",
+      tagline: "Technology & Law Convergence",
+      points: [
+        { title: "Data Protection & Privacy Law", desc: "Analysis of Digital Personal Data Protection Act and right to privacy jurisprudence" },
+        { title: "Cybercrime & Digital Forensics", desc: "Legal frameworks for combating phishing, ransomware, identity theft, and online harassment" },
+        { title: "E-Governance & Digital Regulation", desc: "Legal dimensions of Aadhaar, UPI, digital public infrastructure, and open data policies" },
+        { title: "Artificial Intelligence & Law", desc: "Regulatory challenges of AI, algorithmic accountability, and liability frameworks for autonomous systems" },
+      ],
+      faculty: "Dr. Akshay Kumar Singh, Dr. Priyanka Singh",
+      projects: "4",
+      funding: "₹30 Lakh",
+    },
+    {
+      iconName: "Briefcase",
+      color: "text-maroon-700",
+      bg: "from-stone-50 to-red-100",
+      title: "Corporate Law & Commercial Jurisprudence",
+      tagline: "Business & Regulatory Law",
+      points: [
+        { title: "Corporate Governance & Compliance", desc: "Board accountability, ESG norms, SEBI regulations, and shareholder activism" },
+        { title: "Insolvency & Bankruptcy Law", desc: "IBC framework, NCLT adjudication, resolution mechanisms, and cross-border insolvency" },
+        { title: "Intellectual Property Rights", desc: "Patent law, copyright in the digital age, trademark disputes, and traditional knowledge protection" },
+        { title: "International Trade & Investment Law", desc: "WTO dispute settlement, bilateral investment treaties, and FDI regulatory frameworks" },
+      ],
+      faculty: "Dr. Mamta Sharma, Dr. Rama Sharma",
+      projects: "3",
+      funding: "₹22 Lakh",
+    },
+  ],
+  funding: [
+    { title: "UGC", subtitle: "University Grants Commission projects", amount: "₹42 Lakh", bg: "bg-red-50", color: "text-red-700" },
+    { title: "ICSSR", subtitle: "Social science research grants", amount: "₹35 Lakh", bg: "bg-rose-50", color: "text-rose-700" },
+    { title: "University", subtitle: "GBU internal research fund", amount: "₹25 Lakh", bg: "bg-amber-50", color: "text-amber-700" },
+    { title: "Bar Council", subtitle: "Bar Council of India initiatives", amount: "₹18 Lakh", bg: "bg-stone-50", color: "text-stone-700" },
+  ],
+  collaborations: [
+    { title: "NLSIU Bangalore", desc: "Joint seminars and faculty exchange on constitutional law research", extra: "MoU signed 2023", border: "border-red-500" },
+    { title: "NLU Delhi", desc: "Collaborative projects on cyber law and digital governance", extra: "Research partnership since 2022", border: "border-rose-500" },
+    { title: "NUJS Kolkata", desc: "Joint Ph.D. supervision and criminal justice reform studies", extra: "Academic collaboration", border: "border-amber-500" },
+    { title: "Delhi High Court", desc: "Judicial internships, moot court mentoring, and access-to-justice research", extra: "Ongoing institutional partnership", border: "border-stone-500" },
+  ],
+  quickLinks: [
+    { title: "Research Projects", desc: "Active and completed projects", href: "/schools/SOL/research-projects", iconName: "BookOpen", color: "text-red-700" },
+    { title: "Research Scholars", desc: "Our Ph.D. community", href: "/schools/SOL/research-scholars", iconName: "Users", color: "text-rose-700" },
+    { title: "Patents", desc: "Innovation and IP", href: "/schools/SOL/patents", iconName: "Award", color: "text-amber-700" },
+    { title: "Training & Consultancy", desc: "Legal consultancy and training", href: "/schools/SOL/training-consultancy", iconName: "TrendingUp", color: "text-stone-700" },
+  ],
 };

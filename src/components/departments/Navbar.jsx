@@ -153,6 +153,32 @@ const Navbar = () => {
         { label: "SOE Activities", href: routes.about.activities },
       ];
     }
+
+    if (schoolCode === "SOBSC") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SBSC Centre for Buddhist Studies", href: `/schools/${activeSchool}/departments/centre-buddhist-studies` },
+        { label: "SBSC Pali & Sanskrit Studies Cell", href: `/schools/${activeSchool}/departments/pali-sanskrit-studies` },
+        { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
+        { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
+        { label: "SBSC Board of Studies", href: routes.about.board },
+        { label: "SBSC Staff Members", href: routes.about.staff },
+        { label: "SBSC Activities", href: routes.about.activities },
+      ];
+    }
+
+    if (schoolCode === "SOL") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
+        { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
+        { label: "SLJG Centre for Constitutional Law & Governance", href: `/schools/${activeSchool}/departments/constitutional-governance` },
+        { label: "SLJG Centre for Cyber Law & Digital Rights", href: `/schools/${activeSchool}/departments/cyber-law-centre` },
+        { label: "SLJG Board of Studies", href: routes.about.board },
+        { label: "SLJG Staff Members", href: routes.about.staff },
+        { label: "SLJG Activities", href: routes.about.activities },
+      ];
+    }
     
     // Default SOICT items
     return [

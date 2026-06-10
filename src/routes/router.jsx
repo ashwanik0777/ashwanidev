@@ -152,6 +152,7 @@ import ResearchCellPage from "../pages/departments/ResearchCellPage.jsx";
 import SoeAdvancedComputing from "../pages/departments/SoeAdvancedComputing.jsx";
 import SoeDesignLab from "../pages/departments/SoeDesignLab.jsx";
 import SoeInnovationCell from "../pages/departments/SoeInnovationCell.jsx";
+import GenericCentrePage from "../pages/departments/GenericCentrePage.jsx";
 
 import DAC from "../pages/dac/DAC.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
@@ -272,6 +273,16 @@ export default function AppRouter() {
               <Route path="departments/advanced-computing-center" element={<SoeAdvancedComputing />} />
               <Route path="departments/engineering-design-lab" element={<SoeDesignLab />} />
               <Route path="departments/innovation-research-cell" element={<SoeInnovationCell />} />
+              {/* SOBSC Centre Pages */}
+              <Route path="departments/centre-buddhist-studies" element={<GenericCentrePage />} />
+              <Route path="departments/pali-sanskrit-studies" element={<GenericCentrePage />} />
+              <Route path="departments/heritage-archaeology" element={<GenericCentrePage />} />
+              <Route path="departments/meditation-mindfulness-centre" element={<GenericCentrePage />} />
+              {/* SOL Centre Pages */}
+              <Route path="departments/moot-court-cell" element={<GenericCentrePage />} />
+              <Route path="departments/legal-aid-clinic" element={<GenericCentrePage />} />
+              <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
+              <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />
               <Route path="departments/cse" element={<CSE />} />
               <Route path="departments/it" element={<IT />} />

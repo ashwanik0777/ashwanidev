@@ -1,7 +1,7 @@
 import React from "react";
 import { ExternalLink, Save } from "lucide-react";
 
-const TopSummary = ({ profile, summary, message, onSave, onOpenPublic }) => {
+const TopSummary = ({ profile, summary, message, onSave, onOpenPublic, showStats }) => {
   return (
     <>
       <header id="dashboard-header" className="rounded-3xl border border-stone-300 bg-white p-5 shadow-sm md:p-6">
@@ -23,14 +23,16 @@ const TopSummary = ({ profile, summary, message, onSave, onOpenPublic }) => {
         {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
       </header>
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {summary.map((item) => (
-          <div key={item.label} className="rounded-2xl border border-stone-300 bg-white p-4 shadow-sm">
-            <p className="text-xs uppercase tracking-wide text-stone-500">{item.label}</p>
-            <p className="mt-1 text-lg font-bold text-stone-900">{item.value}</p>
-          </div>
-        ))}
-      </section>
+      {showStats && (
+        <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {summary.map((item) => (
+            <div key={item.label} className="rounded-2xl border border-stone-300 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-wide text-stone-500">{item.label}</p>
+              <p className="mt-1 text-lg font-bold text-stone-900">{item.value}</p>
+            </div>
+          ))}
+        </section>
+      )}
     </>
   );
 };

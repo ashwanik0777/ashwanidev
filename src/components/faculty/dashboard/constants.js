@@ -1,11 +1,15 @@
 export const FACULTY_SIDEBAR_SECTIONS = [
-  { id: "dashboard-header", label: "Dashboard" },
+  { id: "dashboard", label: "Dashboard" },
   { id: "personal-details", label: "Personal Details" },
-  { id: "contact-links", label: "Contact & Links" },
-  { id: "academic-content", label: "Academic Content" },
-  { id: "research-areas", label: "Research Areas" },
-  { id: "tab-data-editors", label: "Tab Data Editors" },
-  { id: "profile-preview", label: "Public Preview" },
+  { id: "qualifications", label: "Qualifications" },
+  { id: "certifications", label: "Certifications" },
+  { id: "teaching", label: "Teaching" },
+  { id: "administration", label: "Administration" },
+  { id: "research-projects", label: "Research Projects" },
+  { id: "publications", label: "Publications" },
+  { id: "talks", label: "Invited Talks" },
+  { id: "awards", label: "Awards" },
+  { id: "other", label: "Other" }
 ];
 
 export const inputClass =

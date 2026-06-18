@@ -52,6 +52,7 @@ import SitemapAcademics from "../pages/Sitemap/SitemapAcademics.jsx";
 import InstitutionInnovation from "../pages/Reasearch/InstitutionInnovation.jsx";
 import GBUHistory from "../pages/Aboutus/History.jsx";
 import LoginPortal from "../pages/Auth/LoginPortal.jsx";
+import FacultyRegister from "../pages/Auth/FacultyRegister.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import ProtectedPortalRoute from "../components/Auth/ProtectedPortalRoute.jsx";
 
@@ -201,6 +202,7 @@ export default function AppRouter() {
           {/* Academics */}
           <Route path="/academics" element={<h1>Academics</h1>} />
           <Route path="/login" element={<LoginPortal />} />
+          <Route path="/faculty-register" element={<FacultyRegister />} />
           <Route path="/login/forgot-password" element={<ForgotPassword />} />
           <Route
             path="/faculty-portal/dashboard"

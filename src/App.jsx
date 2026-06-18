@@ -23,7 +23,7 @@ function App() {
   const isSchoolPortalPage = location.pathname.startsWith("/school-portal");
   const isAdminPortalPage = location.pathname.startsWith("/admin-portal");
   const isPortalPage = isFacultyPortalPage || isSchoolPortalPage || isAdminPortalPage;
-  const isAuthPage = ["/login", "/login/forgot-password", "/admission/login"].includes(
+  const isAuthPage = ["/login", "/login/forgot-password", "/admission/login", "/faculty-register"].includes(
     location.pathname
   );
   const shouldHideChrome = isPortalPage || isAuthPage;

@@ -21,7 +21,22 @@ const getDefaultProfile = () => ({
   name: "", designation: "", department: "", school: "", email: "", phone: "",
   experience_years: 0, publications: 0, education: "", shortBio: "", fullBio: "",
   office: "", image_url: "", faculty_url: "", cv: "", googleScholar: "", orcid: "",
-  tags: [], researchAreas: [], tabData: {}
+  tags: [], researchAreas: [], tabData: {
+    talksCount: 0,
+    projectsCount: 0,
+    qualifications: { qualifications: [], experience: [] },
+    teaching: { philosophy: "", courses: [] },
+    administration: { administrativeRoles: [], committees: [] },
+    researchProjects: { projects: [] },
+    researchGroup: { phdScholars: [], postdocs: [], researchAssistants: [] },
+    publications: { publications: [], patents: [] },
+    patents: { patents: [] },
+    certifications: { certifications: [], professionalDevelopment: [] },
+    talks: { invitedTalks: [] },
+    awards: { awards: [] },
+    socialImpact: { socialActivities: [] },
+    other: { message: "" }
+  }
 });
 
 const FacultyDashboard = () => {
@@ -33,7 +48,7 @@ const FacultyDashboard = () => {
   const [newAreaTitle, setNewAreaTitle] = useState("");
   const [newAreaDesc, setNewAreaDesc] = useState("");
   const [tagsInput, setTagsInput] = useState("");
-  const [activeSection, setActiveSection] = useState("dashboard-header");
+  const [activeSection, setActiveSection] = useState("dashboard");
   const [linkedFacultyId, setLinkedFacultyId] = useState("");
 
   // Load profile from backend on mount
@@ -43,16 +58,25 @@ const FacultyDashboard = () => {
       try {
         const data = await fetchMyFacultyProfile();
         if (data) {
+          const defaults = getDefaultProfile();
+          const rawTabData = data.tabData || {};
+
+          // Carefully merge each section to ensure lists are initialized
+          const tabData = {};
+          Object.keys(defaults.tabData).forEach((key) => {
+            tabData[key] = {
+              ...defaults.tabData[key],
+              ...(rawTabData[key] || {})
+            };
+          });
+
           const merged = {
-            ...getDefaultProfile(),
+            ...defaults,
             ...data,
-            tabData: {
-              ...getDefaultProfile().tabData,
-              ...(data.tabData || {}),
-            },
+            tabData,
             researchAreas: Array.isArray(data.researchAreas)
               ? data.researchAreas
-              : getDefaultProfile().researchAreas,
+              : defaults.researchAreas,
           };
           setProfile(merged);
           setLinkedFacultyId(data.id || "");
@@ -181,35 +205,6 @@ const FacultyDashboard = () => {
     }
   }, [profile]);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    setActiveSection(id);
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  useEffect(() => {
-    const onScroll = () => {
-      const candidates = FACULTY_SIDEBAR_SECTIONS
-        .map((section) => {
-          const element = document.getElementById(section.id);
-          if (!element) return null;
-          const { top } = element.getBoundingClientRect();
-          return { id: section.id, top: Math.abs(top - 120) };
-        })
-        .filter(Boolean)
-        .sort((a, b) => a.top - b.top);
-
-      if (candidates.length) {
-        setActiveSection(candidates[0].id);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   const facultyPublicId = linkedFacultyId || "";
 
   if (loading) {
@@ -229,9 +224,8 @@ const FacultyDashboard = () => {
         <SidebarNav
           sections={FACULTY_SIDEBAR_SECTIONS}
           activeSection={activeSection}
-          onSelect={scrollToSection}
+          onSelect={setActiveSection}
           onSave={handleSave}
-          onReset={() => {}}
           onViewPublic={() => facultyPublicId ? navigate(`/academics/faculty/${facultyPublicId}`) : alert("Profile not linked yet.")}
           onLogout={() => {
             clearPortalSession();
@@ -246,6 +240,7 @@ const FacultyDashboard = () => {
             message={message}
             onSave={handleSave}
             onOpenPublic={() => facultyPublicId ? navigate(`/academics/faculty/${facultyPublicId}`) : alert("Profile not linked yet.")}
+            showStats={activeSection === "dashboard"}
           />
 
           {saving && (
@@ -255,26 +250,66 @@ const FacultyDashboard = () => {
             </div>
           )}
 
-          <ProfileForms
-            profile={profile}
-            tagsInput={tagsInput}
-            onUpdateField={updateField}
-            onUpdateTags={updateTags}
-            onUpdateResearchArea={updateResearchArea}
-            onAddResearchArea={addResearchArea}
-            onRemoveResearchArea={removeResearchArea}
-            newAreaTitle={newAreaTitle}
-            newAreaDesc={newAreaDesc}
-            setNewAreaTitle={setNewAreaTitle}
-            setNewAreaDesc={setNewAreaDesc}
-          />
+          {/* Render forms conditionally based on activeSection */}
+          {activeSection === "personal-details" && (
+            <ProfileForms
+              activeSection={activeSection}
+              profile={profile}
+              tagsInput={tagsInput}
+              onUpdateField={updateField}
+              onUpdateTags={updateTags}
+              onUpdateResearchArea={updateResearchArea}
+              onAddResearchArea={addResearchArea}
+              onRemoveResearchArea={removeResearchArea}
+              newAreaTitle={newAreaTitle}
+              newAreaDesc={newAreaDesc}
+              setNewAreaTitle={setNewAreaTitle}
+              setNewAreaDesc={setNewAreaDesc}
+              onUpdateTabDataField={(key, val) => {
+                setProfile((prev) => ({
+                  ...prev,
+                  tabData: {
+                    ...(prev.tabData || {}),
+                    [key]: val
+                  }
+                }));
+              }}
+            />
+          )}
 
-          <TabDataEditors
-            tabData={profile.tabData || {}}
-            onReplaceTabData={replaceTabDataSection}
-          />
+          {["qualifications", "teaching", "administration", "research-projects", "publications", "certifications", "talks", "awards", "other"].includes(activeSection) && (
+            <TabDataEditors
+              tabData={profile.tabData || {}}
+              activeSection={activeSection}
+              onReplaceTabData={replaceTabDataSection}
+            />
+          )}
 
-          <ProfilePreview profile={profile} />
+          {activeSection === "profile-preview" && (
+            <ProfilePreview profile={profile} />
+          )}
+
+          {activeSection === "dashboard" && (
+            <div className="rounded-2xl border border-stone-300 bg-white p-6 shadow-sm">
+              <h2 className="text-base font-bold text-stone-900 mb-2">Welcome to your Faculty Profile Portal</h2>
+              <p className="text-sm text-stone-600 mb-4">
+                Use the sidebar navigation tabs to update your personal details, stats, external profile links, and detail tabs.
+              </p>
+              <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h4 className="text-sm font-semibold text-stone-800">Need to preview your page?</h4>
+                  <p className="text-xs text-stone-500">See how your public profile looks to students and visitors.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveSection("profile-preview")}
+                  className="rounded-lg bg-stone-950 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-850 self-start sm:self-center"
+                >
+                  Go to Preview
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

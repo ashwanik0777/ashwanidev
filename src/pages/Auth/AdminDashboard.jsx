@@ -79,6 +79,11 @@ import {
   listSchools,
   updateSchool,
 } from "../../services/schoolsService";
+import {
+  listFacultyRegistrationRequests,
+  approveFacultyRegistration,
+  rejectFacultyRegistration,
+} from "../../services/facultyRegistrationService";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -181,6 +186,7 @@ const tabs = [
   { id: "overview", label: "Overview", icon: Shield },
   { id: "accounts", label: "User & Login Management", icon: KeyRound },
   { id: "faculty", label: "Faculty Management", icon: Users },
+  { id: "faculty-requests", label: "Faculty Requests", icon: UserPlus },
   { id: "school", label: "Schools Management", icon: School },
   { id: "tenders", label: "Tender Management", icon: FileText },
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
@@ -397,6 +403,15 @@ const AdminDashboard = () => {
   const [isDispatchingMailQueue, setIsDispatchingMailQueue] = useState(false);
   const backupInputRef = useRef(null);
   const bulkFacultyInputRef = useRef(null);
+
+  /* ── Faculty Registration Requests state ── */
+  const [regRequests, setRegRequests] = useState([]);
+  const [regRequestsLoading, setRegRequestsLoading] = useState(false);
+  const [regRequestsError, setRegRequestsError] = useState("");
+  const [regStatusFilter, setRegStatusFilter] = useState("pending");
+  const [regSearchQuery, setRegSearchQuery] = useState("");
+  const [regReloadToken, setRegReloadToken] = useState(0);
+  const [regActionLoading, setRegActionLoading] = useState("");
 
   const tenderSplit = useMemo(() => splitTendersByStatus(tenders), [tenders]);
   const recruitmentPostCount = useMemo(
@@ -684,6 +699,32 @@ const AdminDashboard = () => {
       isMounted = false;
     };
   }, []);
+
+  /* ── Fetch faculty registration requests ── */
+  useEffect(() => {
+    let isMounted = true;
+    const fetchRegRequests = async () => {
+      setRegRequestsLoading(true);
+      setRegRequestsError("");
+      try {
+        const data = await listFacultyRegistrationRequests({
+          status: regStatusFilter,
+          query: regSearchQuery,
+          page: 1,
+          limit: 100,
+        });
+        if (!isMounted) return;
+        setRegRequests(data?.items || []);
+      } catch (err) {
+        if (!isMounted) return;
+        setRegRequestsError(err?.response?.data?.message || err?.message || "Failed to fetch requests");
+      } finally {
+        if (isMounted) setRegRequestsLoading(false);
+      }
+    };
+    fetchRegRequests();
+    return () => { isMounted = false; };
+  }, [regStatusFilter, regSearchQuery, regReloadToken]);
 
   const buildUniqueUsername = (seed, existingAccounts) => {
     const sanitized = String(seed || "faculty.user")
@@ -3356,6 +3397,170 @@ const AdminDashboard = () => {
   );
 };
 
+  /* ── Faculty Registration Requests Tab ── */
+  const handleApproveRequest = async (reqId) => {
+    setRegActionLoading(`approve-${reqId}`);
+    try {
+      await approveFacultyRegistration(reqId);
+      setMessage("Faculty registration approved. Login credentials sent to their email.");
+      setRegReloadToken((p) => p + 1);
+      setFacultyReloadToken((p) => p + 1);
+    } catch (err) {
+      setMessage(`Approve failed: ${getApiErrorMessage(err, "Could not approve request")}`);
+    } finally {
+      setRegActionLoading("");
+    }
+  };
+
+  const handleRejectRequest = async (reqId) => {
+    const reason = prompt("Enter rejection reason (optional):");
+    setRegActionLoading(`reject-${reqId}`);
+    try {
+      await rejectFacultyRegistration(reqId, reason || "");
+      setMessage("Faculty registration request rejected.");
+      setRegReloadToken((p) => p + 1);
+    } catch (err) {
+      setMessage(`Reject failed: ${getApiErrorMessage(err, "Could not reject request")}`);
+    } finally {
+      setRegActionLoading("");
+    }
+  };
+
+  const renderFacultyRequestsTab = () => (
+    <div className="space-y-4">
+      <div className={cardClass}>
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
+            <p className="text-sm text-slate-600">Review and approve faculty registration requests.</p>
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <div className="relative min-w-[200px] flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input
+              className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
+              type="text"
+              value={regSearchQuery}
+              onChange={(e) => setRegSearchQuery(e.target.value)}
+              placeholder="Search by name, email, school..."
+            />
+          </div>
+          <select
+            className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-slate-700"
+            value={regStatusFilter}
+            onChange={(e) => setRegStatusFilter(e.target.value)}
+          >
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="all">All</option>
+          </select>
+          <button
+            type="button"
+            onClick={() => { setRegSearchQuery(""); setRegStatusFilter("pending"); }}
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Clear
+          </button>
+        </div>
+
+        {/* Error */}
+        {regRequestsError && (
+          <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
+            <AlertTriangle className="mr-1 inline h-4 w-4" /> {regRequestsError}
+          </div>
+        )}
+
+        {/* Loading */}
+        {regRequestsLoading && (
+          <div className="py-8 text-center text-sm text-slate-500">Loading requests...</div>
+        )}
+
+        {/* Empty */}
+        {!regRequestsLoading && regRequests.length === 0 && (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
+            No {regStatusFilter !== "all" ? regStatusFilter : ""} registration requests found.
+          </div>
+        )}
+
+        {/* Table */}
+        {!regRequestsLoading && regRequests.length > 0 && (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-xs font-semibold uppercase text-slate-500">
+                  <th className="px-3 py-2">Name / Designation</th>
+                  <th className="px-3 py-2">Category</th>
+                  <th className="px-3 py-2">School</th>
+                  <th className="px-3 py-2">Department</th>
+                  <th className="px-3 py-2">Contact Details</th>
+                  <th className="px-3 py-2">Status</th>
+                  <th className="px-3 py-2">Date</th>
+                  <th className="px-3 py-2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {regRequests.map((req) => (
+                  <tr key={req.id} className="border-b border-slate-100 hover:bg-slate-50">
+                    <td className="px-3 py-2.5">
+                      <div className="font-semibold text-slate-900">{req.name}</div>
+                      <div className="text-xs text-slate-500">{req.designation}</div>
+                    </td>
+                    <td className="px-3 py-2.5 text-slate-600">{req.category}</td>
+                    <td className="px-3 py-2.5 text-slate-600 font-semibold uppercase">{req.school_code}</td>
+                    <td className="px-3 py-2.5 text-slate-600">{req.department}</td>
+                    <td className="px-3 py-2.5">
+                      <div className="text-slate-700 font-medium">{req.email}</div>
+                      <div className="text-xs text-slate-500">{req.mobile}</div>
+                    </td>
+                    <td className="px-3 py-2.5">
+                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${
+                        req.status === "pending" ? "bg-amber-100 text-amber-800" :
+                        req.status === "approved" ? "bg-emerald-100 text-emerald-800" :
+                        "bg-rose-100 text-rose-800"
+                      }`}>
+                        {req.status}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2.5 text-slate-500 text-xs">{new Date(req.created_at).toLocaleDateString()}</td>
+                    <td className="px-3 py-2.5">
+                      {req.status === "pending" && (
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => handleApproveRequest(req.id)}
+                            disabled={regActionLoading === `approve-${req.id}`}
+                            className="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
+                          >
+                            {regActionLoading === `approve-${req.id}` ? "..." : "Approve"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleRejectRequest(req.id)}
+                            disabled={regActionLoading === `reject-${req.id}`}
+                            className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100 disabled:opacity-50"
+                          >
+                            {regActionLoading === `reject-${req.id}` ? "..." : "Reject"}
+                          </button>
+                        </div>
+                      )}
+                      {req.status === "rejected" && req.rejection_reason && (
+                        <span className="text-xs text-slate-500" title={req.rejection_reason}>Reason: {req.rejection_reason.slice(0, 30)}{req.rejection_reason.length > 30 ? "..." : ""}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
   const renderRecruitmentTab = () => {
     const defaultDocumentsText =
       "Extension Notice|Official extension notification|#\nDetailed Advertisement|Complete vacancy details|#";
@@ -3656,7 +3861,7 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-80 lg:self-start">
+        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-80 lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Admin Navigation</h2>
 
@@ -3758,7 +3963,7 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 space-y-6">
+        <main className="flex-1 min-w-0 space-y-6">
           <section className={cardClass}>
             <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
             <p className="mt-1 text-sm text-slate-600">
@@ -3863,6 +4068,7 @@ const AdminDashboard = () => {
 
           {activeTab === "accounts" && renderAccountsTab()}
           {activeTab === "faculty" && renderFacultyTab()}
+          {activeTab === "faculty-requests" && renderFacultyRequestsTab()}
           {activeTab === "school" && renderSchoolTab()}
           {activeTab === "tenders" && renderTendersTab()}
           {activeTab === "recruitment" && renderRecruitmentTab()}

@@ -30,11 +30,16 @@ const FacultyDetail = () => {
     administrations: member.tabData?.administrations || member.administrations || [],
     achievements: member.tabData?.achievements || member.achievements || [],
     recentPublications: member.tabData?.recentPublications || member.recentPublications || [],
-    projects: member.tabData?.projects || member.projects || [],
+    projects: member.tabData?.projectsCount !== undefined && member.tabData?.projectsCount !== null && member.tabData?.projectsCount !== ""
+      ? Number(member.tabData.projectsCount)
+      : (member.tabData?.researchProjects?.projects || member.tabData?.projects || member.projects || []),
+    talks: member.tabData?.talksCount !== undefined && member.tabData?.talksCount !== null && member.tabData?.talksCount !== ""
+      ? Number(member.tabData.talksCount)
+      : (member.tabData?.talks?.invitedTalks || member.tabData?.invitedTalks || member.talks || []),
     researchGroup: member.tabData?.researchGroup || member.researchGroup || [],
     patents: member.tabData?.patents || member.patents || [],
     certifications: member.tabData?.certifications || member.certifications || [],
-    invitedTalks: member.tabData?.invitedTalks || member.invitedTalks || [],
+    invitedTalks: member.tabData?.talks?.invitedTalks || member.tabData?.invitedTalks || member.invitedTalks || [],
     socialImpact: member.tabData?.socialImpact || member.socialImpact || [],
     quickLinks: member.quickLinks || [
       { label: 'Curriculum Vitae', icon: FileText, color: 'blue' },

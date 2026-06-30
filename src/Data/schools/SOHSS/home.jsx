@@ -117,10 +117,10 @@ export const sectionsConfig = [
     enabled: true,
     position: 4,
     props: {
-      name: "Prof. Bandana Pandey",
+      name: "Prof. Madhav Govind",
       title: "Dean, School of Humanities & Social Sciences",
       image:
-        "https://www.gbu.ac.in/Content/gbudata/Employee/img/ProfBandana_Pandey.jpg",
+        "https://faculty.gbu.ac.in/uploads/photos/69b1734dae066_Prof.%20Madhav%20Govind.jpg",
       description: `Welcome to the School of Humanities and Social Sciences. We are proud to be in the plurality of fields being primarily concerned with application of multidirectional education with firm foundation in Humanities and Social Sciences. We expound the essential qualities of language, literature, culture and expression. We have embarked on a journey with a desire of expanding our intellectual horizons. School of Humanities and Social Sciences is a dynamic collaboration of faculty and students contributing to ambitious research agenda and striving for the well being of the society. Our education programme creates broad spectrum perspective in our students to transcend traditional disciplines boundaries keeping pace with global development in their respective fields. The school chooses its mission to propagate learning and appreciating as well as preserving Buddhist Ethics and Values.`,
     },
   },
@@ -140,7 +140,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?w=600&h=400&fit=crop",
           gradient: "from-blue-400 to-blue-600",
-          link: "/schools/SOHSS/departments/en",
+          link: "/schools/SOHSS/departments/english",
         },
 
         {
@@ -156,7 +156,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/SOHSS/departments/il",
+          link: "/schools/SOHSS/departments/indian-languages",
         },
 
         {
@@ -173,7 +173,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/SOHSS/departments/mc",
+          link: "/schools/SOHSS/departments/mass-communication",
         },
 
         {
@@ -188,7 +188,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=400&fit=crop",
           gradient: "from-purple-400 to-purple-600",
-          link: "/schools/SOHSS/departments/ep",
+          link: "/schools/SOHSS/departments/economics",
         },
 
         {
@@ -205,7 +205,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop",
           gradient: "from-purple-500 to-purple-700",
-          link: "/schools/SOHSS/departments/et",
+          link: "/schools/SOHSS/departments/education-training",
         },
 
         {
@@ -217,7 +217,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop",
           gradient: "from-indigo-400 to-indigo-600",
-          link: "/schools/SOHSS/departments/his",
+          link: "/schools/SOHSS/departments/history-civilization",
         },
 
         {
@@ -232,7 +232,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=600&h=400&fit=crop",
           gradient: "from-indigo-500 to-indigo-700",
-          link: "/schools/SOHSS/departments/pir",
+          link: "/schools/SOHSS/departments/political-science",
         },
 
         {
@@ -249,7 +249,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1527689368864-3a821dbccc34?w=600&h=400&fit=crop",
           gradient: "from-pink-400 to-pink-600",
-          link: "/schools/SOHSS/departments/psy",
+          link: "/schools/SOHSS/departments/psychology",
         },
 
         {
@@ -261,7 +261,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&h=400&fit=crop",
           gradient: "from-pink-500 to-pink-700",
-          link: "/schools/SOHSS/departments/pa",
+          link: "/schools/SOHSS/departments/public-administration",
         },
 
         {
@@ -276,7 +276,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=600&h=400&fit=crop",
           gradient: "from-green-400 to-green-600",
-          link: "/schools/SOHSS/departments/sw",
+          link: "/schools/SOHSS/departments/social-work",
         },
 
         {
@@ -288,7 +288,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop",
           gradient: "from-green-500 to-green-700",
-          link: "/schools/SOHSS/departments/so",
+          link: "/schools/SOHSS/departments/sociology",
         },
 
         {
@@ -300,7 +300,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=600&h=400&fit=crop",
           gradient: "from-teal-400 to-teal-600",
-          link: "/schools/SOHSS/departments/lis",
+          link: "/schools/SOHSS/departments/library-information-science",
         },
       ],
     },
@@ -786,7 +786,7 @@ export const sectionsConfig = [
           name: "Dr. Anu",
           title: "Assistant Professor (OCFD) – Psychology and Mental Health",
           image:
-            "image-URLhttps://faculty.gbu.ac.in/uploads/photos/67c9465f4346d_offc.JPG",
+            "https://faculty.gbu.ac.in/uploads/photos/67c9465f4346d_offc.JPG",
         },
         {
           name: "Dr. Ashfia Nishat",
@@ -877,7 +877,7 @@ export const sectionsConfig = [
       data: {
         title: "Placements",
         subTitle: "School of Humanities and Social Sciences",
-        heroImage: "image-URL",
+        heroImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=300&fit=crop",
 
         placementStats: [
           {

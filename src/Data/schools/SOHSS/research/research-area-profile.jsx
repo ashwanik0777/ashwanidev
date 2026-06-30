@@ -1,11 +1,119 @@
 /**
- * SOHSS — Research Areas
+ * SOHSS — Research Areas & Profile
  * School of Humanities & Social Sciences
  */
 export const researchAreaData = {
   schoolCode: "SOHSS",
   schoolName: "School of Humanities & Social Sciences",
   heading: "Research Areas — SOHSS",
-  subheading: "Explore the research focus areas of School of Humanities & Social Sciences.",
-  areas: [],
+  subheading: "Explore the research focus areas of the School of Humanities & Social Sciences at Gautam Buddha University.",
+  hero: {
+    title: "Research Excellence at SOHSS",
+    subtitle: "Our research ecosystem spans critical domains in literary studies, social sciences, psychology, education, and media studies — fostering scholarship that addresses contemporary societal challenges.",
+  },
+  stats: [
+    { iconName: "BookOpen", color: "text-pink-600", number: "25+", label: "Active Research Projects" },
+    { iconName: "Users", color: "text-rose-600", number: 40, label: "Research Faculty" },
+    { iconName: "Award", color: "text-purple-600", number: "150+", label: "Publications" },
+    { iconName: "TrendingUp", color: "text-indigo-600", number: "₹2Cr+", label: "Research Funding" },
+  ],
+  domains: [
+    {
+      iconName: "Brain",
+      color: "text-purple-600",
+      bg: "from-purple-50 to-pink-100",
+      title: "Psychology & Mental Health Research",
+      tagline: "Behavioral & Cognitive Science",
+      points: [
+        { title: "Clinical Psychology & Psychotherapy", desc: "Mental health interventions, counseling, and therapeutic approaches" },
+        { title: "Cognitive & Neuropsychology", desc: "Memory, attention, decision-making, and brain-behavior relationships" },
+        { title: "Health Psychology & Well-being", desc: "Stress management, mindfulness, and psychological resilience" },
+        { title: "Industrial & Organizational Psychology", desc: "Workplace behavior, leadership, and employee well-being" },
+      ],
+      faculty: "Dr. Anand Pratap Singh, Dr. Anu Malik, Dr. Neha Sharma",
+      projects: "8",
+      funding: "₹45 Lakhs",
+    },
+    {
+      iconName: "BookOpen",
+      color: "text-blue-600",
+      bg: "from-blue-50 to-indigo-100",
+      title: "English & Comparative Literature",
+      tagline: "Language, Literature & Culture",
+      points: [
+        { title: "Postcolonial & Diaspora Literature", desc: "Voices from margins, identity politics, and cultural hybridity" },
+        { title: "Linguistics & Discourse Analysis", desc: "Language structures, sociolinguistics, and communication studies" },
+        { title: "Gender & Feminist Literary Criticism", desc: "Representation, agency, and feminist readings of texts" },
+        { title: "Digital Humanities", desc: "Computational approaches to literary and cultural analysis" },
+      ],
+      faculty: "Dr. Sumitra Huidrom, Dr. Manjri Suman, Dr. Bipasha Som Gune",
+      projects: "5",
+      funding: "₹25 Lakhs",
+    },
+    {
+      iconName: "Users",
+      color: "text-green-600",
+      bg: "from-green-50 to-emerald-100",
+      title: "Sociology & Social Work",
+      tagline: "Society & Development",
+      points: [
+        { title: "Social Inclusion & Marginalization", desc: "Caste, class, gender, and tribal studies in India" },
+        { title: "Community Development", desc: "Rural and urban community interventions and participatory research" },
+        { title: "Health & Society", desc: "Public health, medical sociology, and health governance" },
+        { title: "Social Policy & Governance", desc: "Welfare schemes, governance models, and policy evaluation" },
+      ],
+      faculty: "Prof. Madhav Govind, Dr. Rahul Kapoor, Dr. Siddaramu B",
+      projects: "6",
+      funding: "₹35 Lakhs",
+    },
+    {
+      iconName: "Shield",
+      color: "text-red-600",
+      bg: "from-red-50 to-rose-100",
+      title: "Political Science & International Relations",
+      tagline: "Governance & Geopolitics",
+      points: [
+        { title: "Indian Politics & Governance", desc: "Federalism, local governance, and democratic institutions" },
+        { title: "International Relations & Foreign Policy", desc: "India's foreign policy, geopolitics, and Central Asian studies" },
+        { title: "Human Rights & Social Justice", desc: "Rights-based approaches, constitutional law, and social movements" },
+        { title: "Non-Conventional Security", desc: "Migration, climate security, and transnational threats" },
+      ],
+      faculty: "Dr. Pankaj Deep, Dr. Vivek Kumar Mishra",
+      projects: "4",
+      funding: "₹20 Lakhs",
+    },
+    {
+      iconName: "Zap",
+      color: "text-orange-600",
+      bg: "from-orange-50 to-amber-100",
+      title: "Education & Pedagogy",
+      tagline: "Teaching & Learning Science",
+      points: [
+        { title: "Curriculum Development & NEP 2020", desc: "National Education Policy implementation and curriculum reform" },
+        { title: "Inclusive Education", desc: "Special education, disability studies, and accessible learning" },
+        { title: "Educational Technology", desc: "ICT in education, e-learning platforms, and blended pedagogy" },
+        { title: "Teacher Education", desc: "Pre-service and in-service teacher training methodologies" },
+      ],
+      faculty: "Dr. Vinod Kumar Shanwal, Dr. Shrutee Kanwar, Dr. Mamta Rani",
+      projects: "4",
+      funding: "₹20 Lakhs",
+    },
+  ],
+  funding: [
+    { title: "ICSSR", subtitle: "Social Science Research Grants", amount: "₹60 Lakhs", bg: "bg-pink-50", color: "text-pink-600" },
+    { title: "UGC", subtitle: "University Research Projects", amount: "₹45 Lakhs", bg: "bg-blue-50", color: "text-blue-600" },
+    { title: "DST", subtitle: "Science & Humanities Projects", amount: "₹30 Lakhs", bg: "bg-green-50", color: "text-green-600" },
+    { title: "SQA/International", subtitle: "International Collaborations", amount: "₹15 Lakhs", bg: "bg-purple-50", color: "text-purple-600" },
+  ],
+  collaborations: [
+    { title: "Scottish Qualifications Authority (SQA)", desc: "International MoU for quality assurance and academic collaboration", extra: "International partnership", border: "border-blue-500" },
+    { title: "ICSSR", desc: "Funding for seminars, research methodology courses, and social science research projects", extra: "Annual grants & sponsorships", border: "border-green-500" },
+    { title: "National Institute of Mental Health (NIMHANS)", desc: "Collaboration for clinical psychology training and mental health research", extra: "Faculty exchange & joint programs", border: "border-purple-500" },
+  ],
+  quickLinks: [
+    { title: "Research Projects", desc: "Active and completed projects", href: "/schools/SOHSS/research-projects", iconName: "BookOpen", color: "text-blue-600" },
+    { title: "Research Scholars", desc: "Our PhD community", href: "/schools/SOHSS/research-scholars", iconName: "Users", color: "text-green-600" },
+    { title: "Patents", desc: "Innovation and IP", href: "/schools/SOHSS/patents", iconName: "Award", color: "text-purple-600" },
+    { title: "Training & Consultancy", desc: "Community engagement", href: "/schools/SOHSS/training-consultancy", iconName: "TrendingUp", color: "text-orange-600" },
+  ],
 };

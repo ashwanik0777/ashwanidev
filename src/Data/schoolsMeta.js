@@ -68,9 +68,10 @@ export const SCHOOLS_META = [
     slug: "som",
     matchTokens: ["management", "som"],
     departments: [
-      { id: "general-management", name: "Department of General Management", shortName: "Management" },
-      { id: "finance", name: "Department of Finance", shortName: "Finance" },
-      { id: "marketing", name: "Department of Marketing", shortName: "Marketing" },
+      { id: "business-management", name: "Department of Business Management", shortName: "Business Management" },
+      { id: "finance", name: "Finance (Specialization)", shortName: "Finance" },
+      { id: "marketing", name: "Marketing (Specialization)", shortName: "Marketing" },
+      { id: "human-resource-management", name: "HRM (Specialization)", shortName: "HRM" },
     ],
   },
   {
@@ -80,9 +81,18 @@ export const SCHOOLS_META = [
     slug: "sohss",
     matchTokens: ["humanities", "social sciences", "sohss", "shss"],
     departments: [
-      { id: "psychology", name: "Department of Psychology", shortName: "Psychology" },
+      { id: "english", name: "Department of English & Modern European Languages", shortName: "English" },
+      { id: "indian-languages", name: "Department of Indian Languages & Literature", shortName: "Indian Languages" },
+      { id: "mass-communication", name: "Department of Mass Communication & Media Studies", shortName: "Mass Communication" },
+      { id: "economics", name: "Department of Economics, Planning & Development", shortName: "Economics" },
+      { id: "education-training", name: "Department of Education & Training", shortName: "Education" },
+      { id: "history-civilization", name: "Department of History & Civilization", shortName: "History" },
+      { id: "political-science", name: "Department of Political Science & International Relations", shortName: "Political Science" },
+      { id: "psychology", name: "Department of Psychology & Mental Health", shortName: "Psychology" },
+      { id: "public-administration", name: "Department of Public Administration, Governance & Policy Research", shortName: "Public Admin" },
+      { id: "social-work", name: "Department of Social Work", shortName: "Social Work" },
       { id: "sociology", name: "Department of Sociology", shortName: "Sociology" },
-      { id: "literature", name: "Department of Literature", shortName: "Literature" },
+      { id: "library-information-science", name: "Department of Library & Information Science", shortName: "Library Science" },
     ],
   },
   {
@@ -92,8 +102,11 @@ export const SCHOOLS_META = [
     slug: "sovs",
     matchTokens: ["vocational", "applied sciences", "sovs", "svs"],
     departments: [
-      { id: "applied-sciences", name: "Department of Applied Sciences", shortName: "Applied" },
-      { id: "skill-development", name: "Department of Skill Development", shortName: "Skills" },
+      { id: "applied-mathematics", name: "Department of Applied Mathematics", shortName: "Mathematics" },
+      { id: "applied-chemistry", name: "Department of Applied Chemistry", shortName: "Chemistry" },
+      { id: "applied-physics", name: "Department of Applied Physics", shortName: "Physics" },
+      { id: "environmental-science", name: "Department of Environmental Sciences", shortName: "Environmental Science" },
+      { id: "food-processing-technology", name: "Department of Food Processing and Technology", shortName: "Food Tech" },
     ],
   },
 ];

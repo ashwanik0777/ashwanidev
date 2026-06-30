@@ -139,7 +139,7 @@ export const sectionsConfig = [
       title:
         "Professor and Dean - School of Vocational Studies and Applied Sciences",
       image:
-        "https://faculty.gbu.ac.in/../uploads/photos/68ef9005eec78_cks.jpeg",
+        "https://faculty.gbu.ac.in/uploads/photos/68ef9005eec78_cks.jpeg",
       description:
         "Prof. Chander Kumar Singh leads USoVSAS with a focus on applied sciences, environmental research, and community impact. His work bridges hydrogeochemistry, public health, and geospatial modeling to translate research into practical solutions for society.",
     },
@@ -203,7 +203,7 @@ export const sectionsConfig = [
           labs: 6,
           image:
             "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&h=400&fit=crop",
-          gradient: "from-blue-500 to-blue-700",
+          gradient: "from-blue-50 to-blue-700",
           link: "/schools/SOVS/departments/applied-physics",
         },
         {
@@ -242,7 +242,7 @@ export const sectionsConfig = [
           image:
             "https://images.unsplash.com/photo-1581092160612-33d00a8b99c1?w=600&h=400&fit=crop",
           gradient: "from-blue-600 to-blue-800",
-          link: "/schools/SOVS/departments/food-processing",
+          link: "/schools/SOVS/departments/food-processing-technology",
         },
       ],
     },

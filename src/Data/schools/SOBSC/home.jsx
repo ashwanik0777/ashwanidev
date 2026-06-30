@@ -3,13 +3,13 @@ import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 const buddhistslides = [
   {
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSAkYj4I9sawa_oLwgyVPf9hf-ooy83Ieytw&s",
-    title: "School of Buddhist Studies and Civilization ",
-    subtitle: "Advancing Life Sciences",
+    title: "School of Buddhist Studies and Civilization",
+    subtitle: "Promoting Peace, Harmony & Mindfulness",
   },
   {
     image: "https://www.gbu.ac.in/Content/schools/img/sobs/buddhism.jpg",
-    title: "Established and successfully running since 2011More Than 90% International Students students from 10 Countries"  ,
-    subtitle: "Hands-on Training",
+    title: "Established and successfully running since 2011, with over 90% international students from 10 countries",
+    subtitle: "Scientific & Non-Sectarian Research",
   },
 ];
  export const sectionsConfig = [
@@ -98,9 +98,9 @@ const buddhistslides = [
   enabled: true,
   position: 4,
   props: {
-    name: "Dean, SoBSC",
-    title: "School of Buddhist Studies and Civilization",
-    image: "https://via.placeholder.com/300",
+    name: "Prof. Rajeev Varshney",
+    title: "Dean, School of Buddhist Studies and Civilization",
+    image: "https://ui-avatars.com/api/?name=Rajeev+Varshney&background=F97316&color=fff&size=300",
     description: `The School of Buddhist Studies & Civilization aims to develop scholars and researchers in Buddhism through interdisciplinary and scientific approaches. The school promotes peace, harmony, and global understanding through education and research in Buddhist philosophy and ethics.`,
   },
 },

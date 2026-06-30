@@ -12,24 +12,24 @@ export const SCHOOL_SHORT = "SOM";
 export { sectionsConfig } from "./home.jsx";
 
 export const contactInfo = {
-  address: "Academic Block F, Gautam Buddha University, Greater Noida, UP 201312",
-  phone: "+91-120-234-9904",
-  email: "som.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/SOM/",
-  dean: "",
+  address: "Gautam Buddha University, Yamuna Expressway, Greater Noida, Gautam Budh Nagar, UP 201312",
+  phone: "0120-2346144",
+  email: "som@gbu.ac.in",
+  website: "https://www.gbu.ac.in/school/som",
+  dean: "Dr. Indu Uprety",
 };
 
 export const aboutData = {
-  mission: "To develop business leaders with ethical values and global perspective through excellence in management education.",
-  vision: "To be a nationally recognized management school producing industry-ready professionals.",
+  mission: "To develop business leaders with ethical values and global perspective through excellence in management education, fostering innovation, research-driven culture, and strategic collaborations with institutions and enterprises of national and international repute.",
+  vision: "To be a nationally recognized management school producing industry-ready professionals endowed with character, creativity, competence, and commitment who can inspire meaningful transformations to ensure the holistic growth and development of society.",
   established: "2008",
 };
 
 export const departmentPages = [
-  { id: "management", name: "Management Studies", path: "departments/management" },
-  { id: "finance", name: "Finance & Banking", path: "departments/finance" },
-  { id: "marketing", name: "Marketing", path: "departments/marketing" },
-  { id: "hr", name: "Human Resource Management", path: "departments/hr" },
+  { id: "business-management", name: "Department of Business Management", path: "departments/business-management" },
+  { id: "finance", name: "Finance Specialization", path: "departments/finance" },
+  { id: "marketing", name: "Marketing Specialization", path: "departments/marketing" },
+  { id: "hr", name: "HRM Specialization", path: "departments/human-resource-management" },
 ];
 
 export const researchPages = [

@@ -30,7 +30,7 @@ export const DEFAULT_ADMIN_PORTAL_ACCOUNTS = [
     password: "faculty123",
     role: "teacher",
     status: "active",
-    linkedFacultyId: "gbu-faculty-demo-1",
+    linkedFacultyId: "SOICT-F0001",
     linkedSchool: "SOICT",
     linkedDepartment: "Computer Science",
   },

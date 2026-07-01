@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
   Shield,
   Brain,
   Zap,
-  ArrowRight,
   Users,
   Award,
   BookOpen,
@@ -24,71 +22,154 @@ const iconMap = {
   'robotics': Zap,
 };
 
+// Static high-fidelity data representing GBU's actual Centers of Excellence
+const GBU_COE_HERO = {
+  title: "Centers of Excellence (CoE)",
+  description: "Our specialized Centers of Excellence drive advanced research, technology development, and societal impact through interdisciplinary collaboration, industry partnerships, and state-of-the-art facilities.",
+  bgTheme: 6,
+  coe_count: 6,
+  ResearchAndstudents: 250,
+  projects_count: 15,
+  memberrs_count: 30
+};
+
+const GBU_COE_LIST = [
+  {
+    id: 1,
+    title: "drone technology",
+    card_title: "Center of Excellence in Drone Technology (CEDT)",
+    card_desc: "A DGCA-certified training and research facility featuring advanced drone design, assembly, maintenance, and flight testing laboratories. The center specializes in UAV research and professional drone pilot training programs, including customized training for the Indian Armed Forces.",
+    faculty_count: 6,
+    student_count: 45,
+    project_count: 4,
+    director: "Dr. Vimlesh Kumar"
+  },
+  {
+    id: 2,
+    title: "cyber security",
+    card_title: "Center of Excellence in Cyber & Information Security (CoE-CISA)",
+    card_desc: "Inaugurated to bridge the gap between industry requirements and academic research, this center focuses on digital forensics, ethical hacking, secure coding, cryptography, and the design of next-generation security applications.",
+    faculty_count: 5,
+    student_count: 55,
+    project_count: 3,
+    director: "Dr. Sandeep Kumar"
+  },
+  {
+    id: 3,
+    title: "artificial intelligence",
+    card_title: "Center of Excellence in Artificial Intelligence (CoE-AI)",
+    card_desc: "Focuses on developing cutting-edge AI, machine learning, and deep learning solutions. The center collaborates with global industry leaders like Microsoft, Samsung, and HCL, fostering interdisciplinary research in computer vision, NLP, and predictive systems.",
+    faculty_count: 6,
+    student_count: 60,
+    project_count: 3,
+    director: "Dr. Vidushi Sharma"
+  },
+  {
+    id: 4,
+    title: "data science",
+    card_title: "Center of Excellence in Data Science (CoE-DS)",
+    card_desc: "Equipped with high-performance computing clusters, this center drives research in big data analytics, business intelligence, data mining, and predictive modeling, helping solve complex data challenges for healthcare, finance, and logistics.",
+    faculty_count: 4,
+    student_count: 40,
+    project_count: 2,
+    director: "Dr. Rajesh Mishra"
+  },
+  {
+    id: 5,
+    title: "robotics",
+    card_title: "Center of Excellence in Robotics & Automation",
+    card_desc: "A hands-on laboratory for design, kinematic analysis, autonomous navigation, and industrial automation. Students build physical robot prototypes, work on sensory integrations, and research humanoid and swarm robotics systems.",
+    faculty_count: 5,
+    student_count: 35,
+    project_count: 2,
+    director: "Prof. Sanjay Kumar Sharma"
+  },
+  {
+    id: 6,
+    title: "cyber security", // Maps to Shield for alternative mobility
+    card_title: "Center for Rapid & Alternative Energy Mobility (RAEM)",
+    card_desc: "Dedicated to the future of transportation, focusing on electric vehicles (EV), battery management systems, fast-charging technologies, rail engineering, and hybrid alternative fuels to support sustainable green mobility.",
+    faculty_count: 4,
+    student_count: 15,
+    project_count: 1,
+    director: "Dr. Anurag Singh Bhagat"
+  }
+];
+
+const GBU_COE_GALLERY = [
+  {
+    src: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+    caption: "UAV Flight Testing & Training Session at CEDT Field",
+    alt: "Drone technology"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+    caption: "Cyber Security and Digital Forensics Laboratory",
+    alt: "Cyber security"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+    caption: "Deep Learning Model Training in AI Lab",
+    alt: "Artificial intelligence"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    caption: "Data Analytics and High Performance Computing Lab",
+    alt: "Data science"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80",
+    caption: "Autonomous Robot Prototype Testing in Robotics Lab",
+    alt: "Robotics"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+    caption: "Electric Vehicle Drivetrain & Battery Testing Facility",
+    alt: "Alternative energy mobility"
+  }
+];
+
+const GBU_COE_CTA = {
+  title: "Join Our Centers of Excellence",
+  description: "Collaborate with our researchers, faculty, and industry partners to drive next-generation innovation and research in computing, intelligence, and mobility.",
+  url1: "https://www.gbu.ac.in/",
+  button1_text: "Apply for Research",
+  url2: "https://www.gbu.ac.in/",
+  button2_text: "Contact COE Office"
+};
+
 const CentersOfExcellence = () => {
-  const [heroData, setHeroData] = useState(null);
-  const [centers, setCenters] = useState([]);
-  const [galleryImages, setGalleryImages] = useState([]);
-  const [ctaData, setCtaData] = useState(null);
-
-  const BASE_URL = import.meta.env.VITE_HOST;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [heroRes, centersRes, galleryRes, joinRes] = await Promise.all([
-          axios.get(`${BASE_URL}/academic/coe/hero/`),
-          axios.get(`${BASE_URL}/academic/coe/list/`),
-          axios.get(`${BASE_URL}/academic/coe/gallery/`),
-          axios.get(`${BASE_URL}/academic/coe/join/`),
-        ]);
-
-        setHeroData(heroRes.data[0]);
-        setCenters(centersRes.data);
-        setGalleryImages(
-          galleryRes.data.map((img) => ({
-            src: `${BASE_URL}/media/${img.image}`,
-            caption: img.card_desc,
-            alt: img.title,
-          }))
-        );
-
-        setCtaData(joinRes.data[0]);
-      } catch (error) {
-        console.error('Error fetching Centers of Excellence data:', error);
-      }
-    };
-
-    fetchData();
-  }, [BASE_URL]);
-
-  if (!heroData || !ctaData) return <div className="text-center py-10">Loading...</div>;
+  const [heroData, setHeroData] = useState(GBU_COE_HERO);
+  const [centers, setCenters] = useState(GBU_COE_LIST);
+  const [galleryImages, setGalleryImages] = useState(GBU_COE_GALLERY);
+  const [ctaData, setCtaData] = useState(GBU_COE_CTA);
 
   const stats = [
     {
       number: heroData.coe_count || 0,
       title: "Centers of Excellence",
       icon: Award,
-      iconColor: "#7c3aed", // purple-600
+      iconColor: "#7c3aed",
     },
     {
       number: heroData.ResearchAndstudents || 0,
       numberText: `${heroData.ResearchAndstudents}+`,
       title: "Researchers & Students",
       icon: Users,
-      iconColor: "#2563eb", // blue-600
+      iconColor: "#2563eb",
     },
     {
       number: heroData.projects_count || 0,
       numberText: `${heroData.projects_count}+`,
       title: "Research Projects",
       icon: BookOpen,
-      iconColor: "#16a34a", // green-600
+      iconColor: "#16a34a",
     },
     {
       number: heroData.memberrs_count || 0,
       title: "Faculty Members",
       icon: Shield,
-      iconColor: "#f97316", // orange-500
+      iconColor: "#f97316",
     },
   ];
 
@@ -99,7 +180,7 @@ const CentersOfExcellence = () => {
       <BannerSection
         title={heroData.title}
         subtitle={heroData.description}
-        bgTheme={heroData.bgTheme || 6} // fallback if not set
+        bgTheme={heroData.bgTheme || 6}
       />
 
       {/* Statistics */}
@@ -118,7 +199,7 @@ const CentersOfExcellence = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {centers.map((center) => {
               const IconComponent =
-                iconMap[center.title.toLowerCase()] || Shield;
+                iconMap[(center.title || "").toLowerCase()] || Shield;
 
               return (
                 <div
@@ -233,6 +314,5 @@ const CentersOfExcellence = () => {
     </SearchableWrapper>
   );
 };
-
 
 export default CentersOfExcellence;

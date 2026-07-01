@@ -22,7 +22,12 @@ const getImageUrl = (url, image) => {
 
 const Faculty = () => {
   const [facultyMembers, setFacultyMembers] = useState([]);
-  const [directoryStats, setDirectoryStats] = useState(null);
+  const [directoryStats, setDirectoryStats] = useState({
+    faculty_members: 0,
+    phd_qualified: 0,
+    Research_publications: 0,
+    collaborations_count: 0
+  });
   const [joinData, setJoinData] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState('');

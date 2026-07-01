@@ -11,6 +11,7 @@ export const DEFAULT_SCHOOL_DASHBOARD_DATA = {
   bannerImage: "",
   schoolDescription: "",
   highlights: [],
+  clubs: [],
   departments: [],
   pages: [],
   announcements: [

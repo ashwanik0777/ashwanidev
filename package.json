@@ -21,7 +21,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
     "@tailwindcss/vite": "^4.1.8",
-    "axios": "^1.10.0",
+    "axios": "^1.18.1",
     "bootstrap": "^5.3.6",
     "cd": "^0.3.3",
     "class-variance-authority": "^0.7.1",
@@ -42,7 +42,7 @@
     "react-router-dom": "^7.6.2",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "swiper": "^11.2.8"
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

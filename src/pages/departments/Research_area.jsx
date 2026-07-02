@@ -170,23 +170,28 @@ export default function ResearchPage() {
     return <div className="flex justify-center items-center h-screen text-gray-500">Research data not available.</div>;
   }
 
-  const stats = researchAreaData.stats.map((item) => ({
+  const stats = (researchAreaData.stats || []).map((item) => ({
     ...item,
     icon: iconMap[item.iconName] || BookOpen,
   }));
 
-  const domains = researchAreaData.domains.map((domain) => ({
+  const domains = (researchAreaData.domains || []).map((domain) => ({
     ...domain,
     icon: iconMap[domain.iconName] || Brain,
   }));
 
+  const hero = researchAreaData.hero || {
+    title: researchAreaData.heading || "Research",
+    subtitle: researchAreaData.subheading || "",
+  };
+
   return (
     <ResearchArea
-      hero={researchAreaData.hero}
+      hero={hero}
       stats={stats}
       domains={domains}
-      funding={researchAreaData.funding}
-      collaborations={researchAreaData.collaborations}
+      funding={researchAreaData.funding || []}
+      collaborations={researchAreaData.collaborations || []}
     />
   );
 }

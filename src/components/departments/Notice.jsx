@@ -66,6 +66,10 @@ const matchesSchool = (item, meta) => {
     item?.school,
     item?.department,
     item?.school_name,
+    item?.title,
+    item?.description,
+    item?.content,
+    item?.organizer,
   ]
     .filter(Boolean)
     .map((value) => String(value).toLowerCase());
@@ -83,7 +87,7 @@ const filterBySchool = (items, meta) => {
   if (filtered.length) return filtered;
 
   const hasSchoolTags = items.some(
-    (item) => item?.schoolName || item?.school || item?.department || item?.school_name
+    (item) => item?.schoolName || item?.school || item?.department || item?.school_name || item?.organizer
   );
   return hasSchoolTags ? filtered : items;
 };
@@ -144,8 +148,8 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
 
   const notices = filterBySchool(announcements.notices || [], schoolMeta);
   const events = filterBySchool(announcements.events || [], schoolMeta);
-  const visibleNotices = notices.length ? notices : fallbackNotices;
-  const visibleEvents = events.length ? events : fallbackEvents;
+  const visibleNotices = notices;
+  const visibleEvents = events;
 
   return (
     <section className="py-20 bg-gray-100">

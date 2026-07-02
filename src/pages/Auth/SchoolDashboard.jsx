@@ -54,6 +54,7 @@ const ACTIVE_TABS = [
   { id: "newsletters", label: "Newsletters", icon: Newspaper },
   { id: "notices", label: "Notices", icon: Bell },
   { id: "event-gallery", label: "Event Gallery", icon: Images },
+  { id: "clubs", label: "Clubs & Societies", icon: Users },
 ];
 
 const INACTIVE_TABS = [
@@ -151,6 +152,7 @@ const SchoolDashboard = () => {
             notices: c.notices || [],
             newsletters: c.newsletters || [],
             eventGallery: c.eventGallery || [],
+            clubs: c.clubs || [],
             tabContent: c.tabContent || deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.tabContent),
           });
         }
@@ -274,6 +276,7 @@ const SchoolDashboard = () => {
           newsletters: data.newsletters || [],
           eventGallery: data.eventGallery || [],
           tabContent: data.tabContent || {},
+          clubs: data.clubs || [],
         },
         is_active: true,
       });
@@ -369,6 +372,40 @@ const SchoolDashboard = () => {
   };
 
   const openCollectionEdit = (listKey, index, item) => {
+    if (listKey === "clubs") {
+      const flatClub = {
+        id: item.id || `club-${Date.now()}`,
+        name: item.name || "",
+        tagline: item.tagline || "",
+        category: item.category || "Technical",
+        logo: item.logo || "",
+        banner: item.banner || "",
+        memberCount: item.memberCount || 0,
+        description: item.description || "",
+        history: item.history || "",
+        facultyAdvisor: item.team?.facultyCoordinator?.name || item.facultyAdvisor || "",
+        facultyAdvisorDept: item.team?.facultyCoordinator?.department || item.facultyAdvisorDept || "",
+        presidentName: item.team?.president?.name || item.presidentName || "",
+        presidentDept: item.team?.president?.department || item.presidentDept || "",
+        vicePresidentName: item.team?.vicePresident?.name || item.vicePresidentName || "",
+        vicePresidentDept: item.team?.vicePresident?.department || item.vicePresidentDept || "",
+        secretaryName: item.team?.secretary?.name || item.secretaryName || "",
+        secretaryDept: item.team?.secretary?.department || item.secretaryDept || "",
+        treasurerName: item.team?.treasurer?.name || item.treasurerName || "",
+        treasurerDept: item.team?.treasurer?.department || item.treasurerDept || "",
+        instagram: item.socialMedia?.instagram || item.instagram || "",
+        linkedin: item.socialMedia?.linkedin || item.linkedin || "",
+        youtube: item.socialMedia?.youtube || item.youtube || "",
+        objectives: Array.isArray(item.objectives) ? item.objectives.join(", ") : (item.objectives || ""),
+        achievements: Array.isArray(item.achievements) ? item.achievements.join(", ") : (item.achievements || "")
+      };
+      setCollectionEditors((prev) => ({
+        ...prev,
+        [listKey]: { index, form: flatClub },
+      }));
+      return;
+    }
+
     if (listKey === "eventGallery") {
       const sourceImages = toList(item.images);
       const baseImages = [item.imageUrl, ...sourceImages].map((image) => String(image || "").trim()).filter(Boolean);
@@ -420,6 +457,83 @@ const SchoolDashboard = () => {
     if (!editor?.form) return;
 
     let nextForm = { ...editor.form };
+    if (listKey === "clubs") {
+      const objectivesArray = typeof nextForm.objectives === "string" 
+        ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
+        : (nextForm.objectives || []);
+      const achievementsArray = typeof nextForm.achievements === "string" 
+        ? nextForm.achievements.split(",").map(x => x.trim()).filter(Boolean) 
+        : (nextForm.achievements || []);
+
+      nextForm = {
+        id: nextForm.id || nextForm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        name: nextForm.name || "",
+        tagline: nextForm.tagline || "",
+        category: nextForm.category || "Technical",
+        logo: nextForm.logo || "",
+        banner: nextForm.banner || "",
+        memberCount: Number(nextForm.memberCount || 0),
+        description: nextForm.description || "",
+        history: nextForm.history || "",
+        objectives: objectivesArray,
+        achievements: achievementsArray,
+        team: {
+          facultyCoordinator: {
+            name: nextForm.facultyAdvisor || "",
+            role: "Faculty Advisor",
+            department: nextForm.facultyAdvisorDept || ""
+          },
+          president: {
+            name: nextForm.presidentName || "",
+            role: "President",
+            department: nextForm.presidentDept || ""
+          },
+          vicePresident: {
+            name: nextForm.vicePresidentName || "",
+            role: "Vice President",
+            department: nextForm.vicePresidentDept || ""
+          },
+          secretary: {
+            name: nextForm.secretaryName || "",
+            role: "Secretary",
+            department: nextForm.secretaryDept || ""
+          },
+          treasurer: {
+            name: nextForm.treasurerName || "",
+            role: "Treasurer",
+            department: nextForm.treasurerDept || ""
+          },
+          members: []
+        },
+        socialMedia: {
+          instagram: nextForm.instagram || "",
+          linkedin: nextForm.linkedin || "",
+          youtube: nextForm.youtube || ""
+        },
+        policies: {
+          codeOfConduct: [
+            "Respect all members regardless of skill level",
+            "Contribute positively to club activities",
+            "Follow ethical practices"
+          ],
+          eligibility: [
+            "Open to all students of the school",
+            "Passion to learn and collaborate",
+            "Commitment to attend regular sessions"
+          ],
+          responsibilities: [
+            "President: Strategic planning & leadership",
+            "Vice-President: Event coordination & engagement",
+            "Secretary: Communication & documentation",
+            "Treasurer: Budget management"
+          ],
+          meetingFrequency: "Weekly sessions as scheduled by coordinator"
+        },
+        events: [],
+        reports: []
+      };
+    }
+
     if (listKey === "eventGallery") {
       const galleryImages = [
         nextForm.imageUrl,
@@ -1102,36 +1216,97 @@ const SchoolDashboard = () => {
       );
     }
 
-    return renderCollectionEditor(
-      "eventGallery",
-      "Event Gallery Management",
-      [
-        { key: "title", label: "Gallery Title" },
-        { key: "eventDate", label: "Event Date", type: "date" },
-        { key: "category", label: "Category" },
-        { key: "imageUrl", label: "Image 1 URL" },
-        { key: "imageUrl2", label: "Image 2 URL" },
-        { key: "imageUrl3", label: "Image 3 URL" },
-        { key: "imageUrl4", label: "Image 4 URL" },
-        { key: "imageLink", label: "Image Click Link" },
-      ],
-      {
-        title: "",
-        eventDate: "",
-        category: "Events",
-        imageUrl: "",
-        imageUrl2: "",
-        imageUrl3: "",
-        imageUrl4: "",
-        imageLink: "",
-      }
-    );
+    if (activeTab === "event-gallery") {
+      return renderCollectionEditor(
+        "eventGallery",
+        "Event Gallery Management",
+        [
+          { key: "title", label: "Gallery Title" },
+          { key: "eventDate", label: "Event Date", type: "date" },
+          { key: "category", label: "Category" },
+          { key: "imageUrl", label: "Image 1 URL" },
+          { key: "imageUrl2", label: "Image 2 URL" },
+          { key: "imageUrl3", label: "Image 3 URL" },
+          { key: "imageUrl4", label: "Image 4 URL" },
+          { key: "imageLink", label: "Image Click Link" },
+        ],
+        {
+          title: "",
+          eventDate: "",
+          category: "Events",
+          imageUrl: "",
+          imageUrl2: "",
+          imageUrl3: "",
+          imageUrl4: "",
+          imageLink: "",
+        }
+      );
+    }
+
+    if (activeTab === "clubs") {
+      return renderCollectionEditor(
+        "clubs",
+        "Clubs & Societies Management",
+        [
+          { key: "name", label: "Club Name" },
+          { key: "tagline", label: "Tagline" },
+          { key: "category", label: "Category (Technical / Cultural / Sports / Social)" },
+          { key: "logo", label: "Logo URL" },
+          { key: "banner", label: "Banner Image URL" },
+          { key: "memberCount", label: "Member Count", type: "number" },
+          { key: "facultyAdvisor", label: "Faculty Advisor Name" },
+          { key: "facultyAdvisorDept", label: "Faculty Advisor Department" },
+          { key: "presidentName", label: "President Name" },
+          { key: "presidentDept", label: "President Department/Year" },
+          { key: "vicePresidentName", label: "Vice President Name" },
+          { key: "vicePresidentDept", label: "Vice President Department/Year" },
+          { key: "secretaryName", label: "Secretary Name" },
+          { key: "secretaryDept", label: "Secretary Department/Year" },
+          { key: "treasurerName", label: "Treasurer Name" },
+          { key: "treasurerDept", label: "Treasurer Department/Year" },
+          { key: "instagram", label: "Instagram URL" },
+          { key: "linkedin", label: "LinkedIn URL" },
+          { key: "youtube", label: "YouTube URL" },
+          { key: "description", label: "Description", type: "textarea" },
+          { key: "objectives", label: "Objectives (comma separated)", type: "textarea" },
+          { key: "history", label: "History", type: "textarea" },
+          { key: "achievements", label: "Achievements (comma separated)", type: "textarea" },
+        ],
+        {
+          name: "",
+          tagline: "",
+          category: "Technical",
+          logo: "",
+          banner: "",
+          memberCount: 0,
+          facultyAdvisor: "",
+          facultyAdvisorDept: "",
+          presidentName: "",
+          presidentDept: "",
+          vicePresidentName: "",
+          vicePresidentDept: "",
+          secretaryName: "",
+          secretaryDept: "",
+          treasurerName: "",
+          treasurerDept: "",
+          instagram: "",
+          linkedin: "",
+          youtube: "",
+          description: "",
+          objectives: "",
+          history: "",
+          achievements: "",
+        }
+      );
+    }
+
+    return null;
   };
 
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-80 lg:shrink-0 lg:self-start">
+      <div className="mx-auto flex w-full max-w-[98%] flex-col gap-6 lg:flex-row">
+        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-[20%] min-w-[240px] max-w-[290px] lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">School Navigation</h2>
 
@@ -1191,7 +1366,7 @@ const SchoolDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
           <section className={cardClass}>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>

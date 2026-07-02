@@ -1,6 +1,6 @@
  
 import React, { useState, useEffect, Children, cloneElement } from 'react';
-import { FileText, Download, ChevronDown, ChevronUp, Calendar } from 'lucide-react';
+import { FileText, Download, ChevronDown, ChevronUp, Calendar, Handshake, UserCheck, Users } from 'lucide-react';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 // Card Components
@@ -76,9 +76,9 @@ const ClubPolicies = ({ club }) => {
   };
 
   const policyData = [
-    { id: 'conduct', title: 'Code of Conduct', icon: '🤝', items: club.policies?.codeOfConduct || [], color: 'blue' },
-    { id: 'eligibility', title: 'Eligibility Criteria', icon: '✅', items: club.policies?.eligibility || [], color: 'green' },
-    { id: 'responsibilities', title: 'Roles & Responsibilities', icon: '👥', items: club.policies?.responsibilities || [], color: 'purple' }
+    { id: 'conduct', title: 'Code of Conduct', icon: Handshake, items: club.policies?.codeOfConduct || [], color: 'blue' },
+    { id: 'eligibility', title: 'Eligibility Criteria', icon: UserCheck, items: club.policies?.eligibility || [], color: 'green' },
+    { id: 'responsibilities', title: 'Roles & Responsibilities', icon: Users, items: club.policies?.responsibilities || [], color: 'purple' }
   ];
 
   const colorMap = {
@@ -104,7 +104,7 @@ const ClubPolicies = ({ club }) => {
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <span className="text-2xl">{policy.icon}</span>
+                        <policy.icon className={`w-6 h-6 ${colorMap[policy.color].split(' ')[0]}`} />
                         <CardTitle className={`text-lg  text-gray-900 font-bold ${colorMap[policy.color].split(' ')[0]}`}>{policy.title}</CardTitle>
                       </div>
                       {openSections[policy.id] ? <ChevronUp className="w-5 h-5 text-gray-500" /> : <ChevronDown className="w-5 h-5 text-gray-500" />}

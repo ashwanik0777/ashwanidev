@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BookOpen, ClipboardList, Users, Calendar, BarChart3 } from 'lucide-react';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
 const Card = ({ children, ...props }) => (
@@ -13,12 +14,11 @@ const ClubNavigation = () => {
   const [activeSection, setActiveSection] = useState('about');
 
   const navigationItems = [
-    { id: 'about', label: 'About', icon: '📖' },
-    { id: 'policies', label: 'Policies', icon: '📋' },
-    { id: 'team', label: 'Team', icon: '👥' },
-    { id: 'events', label: 'Events', icon: '📅' },
-    { id: 'reports', label: 'Reports', icon: '📊' },
-    { id: 'join', label: 'Join Club', icon: '🚀' }
+    { id: 'about', label: 'About', icon: BookOpen },
+    { id: 'policies', label: 'Policies', icon: ClipboardList },
+    { id: 'team', label: 'Team', icon: Users },
+    { id: 'events', label: 'Events', icon: Calendar },
+    { id: 'reports', label: 'Reports', icon: BarChart3 }
   ];
 
   useEffect(() => {
@@ -58,20 +58,23 @@ const ClubNavigation = () => {
       <CardContent className="p-4">
         <h3 className="font-semibold text-gray-900 mb-4">Quick Navigation</h3>
         <nav className="space-y-2">
-          {navigationItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 ${
-                activeSection === item.id
-                  ? 'bg-blue-100 text-blue-700 font-medium'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-            >
-              <span className="text-sm">{item.icon}</span>
-              <span className="text-sm">{item.label}</span>
-            </button>
-          ))}
+          {navigationItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 ${
+                  activeSection === item.id
+                    ? 'bg-blue-100 text-blue-700 font-medium'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                <span className="text-sm">{item.label}</span>
+              </button>
+            );
+          })}
         </nav>
       </CardContent>
     </Card>

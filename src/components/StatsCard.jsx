@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 
 const StatItem = ({
   icon: Icon,
@@ -12,93 +12,117 @@ const StatItem = ({
   const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef();
 
-  const isPureNumber = typeof number === "number" && !numberText;
-  const displayText = isPureNumber ? count : numberText || "";
-
- useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting && isPureNumber && !hasAnimated) {
-        animateCount();
-        setHasAnimated(true);
-        observer.unobserve(entry.target); 
-      }
-    },
-    { threshold: 0.5 }
-  );
-
-  if (ref.current && !hasAnimated) {
-    observer.observe(ref.current);
-  }
-
-  return () => {
-    if (ref.current) {
-      observer.unobserve(ref.current);
+  // Parse numeric part and suffix from either number or numberText
+  const parsed = useMemo(() => {
+    if (typeof number === "number") {
+      return { target: number, suffix: "", hasDigit: true };
     }
-  };
-}, [hasAnimated, isPureNumber]); 
-
-
+    
+    const text = String(numberText || "");
+    const match = text.match(/^(\d+)(.*)$/); // Match digits at the beginning
+    if (match) {
+      return {
+        target: parseInt(match[1], 10),
+        suffix: match[2] || "",
+        hasDigit: true,
+      };
+    }
+    
+    return { target: 0, suffix: text, hasDigit: false };
+  }, [number, numberText]);
 
   const animateCount = () => {
-    let start = 0;
-    const end = number;
-    const duration = 1000;
-    const stepTime = Math.max(10, Math.floor(duration / end));
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= end) clearInterval(timer);
-    }, stepTime);
+    let startTimestamp = null;
+    const duration = 1500; // 1.5 seconds duration
+    const startValue = 0;
+    const endValue = parsed.target;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
+      
+      setCount(currentValue);
+      
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setCount(endValue); // Guarantee ending precisely on target
+      }
+    };
+
+    requestAnimationFrame(step);
   };
+
+  useEffect(() => {
+    if (parsed.target <= 0) {
+      setCount(0);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          animateCount();
+          setHasAnimated(true);
+          observer.unobserve(entry.target); 
+        }
+      },
+      { threshold: 0.15 } // Trigger when 15% visible
+    );
+
+    if (ref.current && !hasAnimated) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [hasAnimated, parsed.target]);
+
+  const displayText = parsed.hasDigit ? count + parsed.suffix : parsed.suffix;
 
   return (
     <div
       ref={ref}
-      className="text-center group transition-all duration-300 hover:shadow-2xl shadow-md rounded-2xl p-8 border-2 border-purple-200 bg-white"
+      className="text-center group transition-all duration-500 hover:shadow-xl shadow-md rounded-2xl p-6 md:p-8 border border-slate-100 hover:border-slate-200 bg-white transform hover:-translate-y-1.5"
     >
       {Icon && (
-        <Icon className="w-12 h-12 mx-auto mb-4" style={{ color: iconColor }} />
-      )}
-      {(isPureNumber || numberText) && (
-        <div className="text-4xl font-bold text-gray-900 mb-2">
-          {displayText}
+        <div className="p-3 bg-slate-50 rounded-2xl w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-slate-100 group-hover:scale-110 transition-transform duration-300">
+          <Icon className="w-8 h-8" style={{ color: iconColor }} />
         </div>
       )}
-      {title && <div className="text-gray-800 font-semibold">{title}</div>}
-      {subtitle && <div className="text-gray-500 text-sm">{subtitle}</div>}
+      <div className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">
+        {displayText}
+      </div>
+      {title && <div className="text-slate-700 font-bold text-sm md:text-base">{title}</div>}
+      {subtitle && <div className="text-slate-400 text-xs mt-1 font-medium">{subtitle}</div>}
     </div>
   );
 };
 
 const StatsCard = ({ stats = [] }) => {
-  // Dynamic grid column logic
   const getGridClasses = () => {
     const count = stats.length;
     if (count === 4) {
-      return "grid-cols-2 md:grid-cols-4";
+      return "grid-cols-2 lg:grid-cols-4";
     } else if (count === 5) {
-      return "grid-cols-3 md:grid-cols-5";
+      return "grid-cols-2 md:grid-cols-3 lg:grid-cols-5";
     } else if (count <= 2) {
-      return "grid-cols-1 md:grid-cols-2";
+      return "grid-cols-1 sm:grid-cols-2";
     } else if (count === 3) {
-      return "grid-cols-2 md:grid-cols-3";
+      return "grid-cols-1 sm:grid-cols-3";
     } else {
-      return "grid-cols-2 md:grid-cols-4"; // fallback
+      return "grid-cols-2 lg:grid-cols-4"; // fallback
     }
   };
 
   return (
-    <section className="relative py-20 px-6 bg-white overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-40 h-40 bg-purple-100 rounded-full blur-2xl opacity-30" />
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-indigo-100 rounded-full blur-2xl opacity-20" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] border-2 border-dashed border-purple-200 rounded-full opacity-20" />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto">
-        <div className={`grid gap-8 ${getGridClasses()}`}>
+    <section className="relative py-8 px-4 bg-transparent overflow-hidden">
+      <div className="relative max-w-7xl mx-auto">
+        <div className={`grid gap-6 ${getGridClasses()}`}>
           {stats.map((stat, index) => (
             <StatItem
               key={index}

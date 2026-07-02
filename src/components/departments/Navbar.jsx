@@ -180,6 +180,34 @@ const Navbar = () => {
       ];
     }
     
+    if (schoolCode === "SOM") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SOM Board of Studies", href: routes.about.board },
+        { label: "SOM Staff Members", href: routes.about.staff },
+        { label: "SOM Activities", href: routes.about.activities },
+      ];
+    }
+
+    if (schoolCode === "SOHSS") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SOHSS Board of Studies", href: routes.about.board },
+        { label: "SOHSS Staff Members", href: routes.about.staff },
+        { label: "SOHSS Activities", href: routes.about.activities },
+      ];
+    }
+
+    if (schoolCode === "SOVS") {
+      return [
+        { label: "Dean's Message", href: routes.about.dean },
+        { label: "SOVS Board of Studies", href: routes.about.board },
+        { label: "SOVS Staff Members", href: routes.about.staff },
+        { label: "SOVS Laboratories", href: routes.about.labs },
+        { label: "SOVS Activities", href: routes.about.activities },
+      ];
+    }
+
     // Default SOICT items
     return [
       { label: "Dean's Message", href: routes.about.dean },

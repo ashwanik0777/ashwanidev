@@ -118,14 +118,6 @@ const ClubHero = ({ club }) => {
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4">
                 <Button 
-                 variant="outline" 
-                  size="lg" 
-                  className="border-white/30 text-blue-900 hover:bg-white/10 backdrop-blur-sm px-6 py-3"
-                  onClick={() => document.getElementById('join')?.scrollIntoView({ behavior: 'smooth' })}
-                >
-                  Join Club
-                </Button>
-                <Button 
                   variant="outline" 
                   size="lg"
                   className="border-white/30 text-blue-900 hover:bg-white/10 backdrop-blur-sm px-6 py-3"

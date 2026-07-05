@@ -825,7 +825,6 @@ const AdminDashboard = () => {
         if (!row.name) continue;
 
         const facultyDraft = {
-          id: `faculty-${Date.now()}-${i}`,
           name: row.name,
           designation: row.designation,
           department: row.department,
@@ -1281,20 +1280,20 @@ const AdminDashboard = () => {
     }
 
     if (normalizedRole === "teacher") {
-      if (!normalizedFacultyId) {
-        setMessage("Faculty account ke liye Linked Faculty ID required hai.");
-        return;
-      }
+  if (!normalizedFacultyId) {
+    setMessage("Linked Faculty ID is required for a faculty account.");
+    return;
+  }
 
-      if (!normalizedSchool) {
-        setMessage("Faculty account ke liye Linked School required hai.");
-        return;
-      }
+  if (!normalizedSchool) {
+    setMessage("Linked School is required for a faculty account.");
+    return;
+  }
 
-      if (!normalizedDepartment) {
-        setMessage("Faculty account ke liye Linked Department required hai.");
-        return;
-      }
+  if (!normalizedDepartment) {
+    setMessage("Linked Department is required for a faculty account.");
+    return;
+  }
 
       const duplicateFacultyAccount = accounts.some((item, idx) => {
         if (idx === accountEditor.index) return false;
@@ -2369,7 +2368,7 @@ const AdminDashboard = () => {
                       list="faculty-id-options"
                       placeholder={
                         accountEditor.form.role === "teacher"
-                          ? "Example: gbu-faculty-101"
+                          ? "Example: SOICT-F0001"
                           : "Optional"
                       }
                       disabled={accountEditor.form.role === "admin" || accountEditor.form.role === "school"}

@@ -2792,150 +2792,296 @@ const AdminDashboard = () => {
     }));
 
     return (
-      <div className={cardClass}>
-        <div className="mb-3 flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-slate-900">Faculty Management</h2>
-          <p className="text-xs text-slate-500">Bulk upload with template + auto faculty login generation supported.</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={downloadFacultyTemplate}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-          >
-            <Download className="h-3.5 w-3.5" /> Download Template
-          </button>
-          <button
-            type="button"
-            onClick={() => bulkFacultyInputRef.current?.click()}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-          >
-            <Upload className="h-3.5 w-3.5" /> Bulk Upload CSV
-          </button>
-          <input
-            ref={bulkFacultyInputRef}
-            type="file"
-            accept=".csv,text/csv"
-            onChange={handleBulkFacultyUpload}
-            className="hidden"
-          />
-          <button
-            type="button"
-            onClick={() =>
-              setFacultyEditor({
-                index: null,
-                form: {
-                  id: `faculty-${Date.now()}`,
-                  name: "",
-                  designation: "",
-                  department: "",
-                  school: schoolData.schoolCode || schoolData.schoolName || "",
-                  email: "",
-                  phone: "",
-                  createLoginAccount: true,
-                  sendCredentialsEmail: true,
-                  generatedPassword: generateStrongPassword(),
-                },
-              })
-            }
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
-          >
-            <Plus className="h-3.5 w-3.5" /> Add Faculty
-          </button>
-        </div>
-      </div>
+      <div className="space-y-4">
+        <div className={cardClass}>
+          {/* Header */}
+          <div className="mb-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Faculty Profiles Management</h2>
+              <p className="text-xs text-slate-500">Manage institutional profiles, generate credentials, and upload in bulk.</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={downloadFacultyTemplate}
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+              >
+                <Download className="h-3.5 w-3.5" /> Download Template
+              </button>
+              <button
+                type="button"
+                onClick={() => bulkFacultyInputRef.current?.click()}
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+              >
+                <Upload className="h-3.5 w-3.5" /> Bulk Upload CSV
+              </button>
+              <input
+                ref={bulkFacultyInputRef}
+                type="file"
+                accept=".csv,text/csv"
+                onChange={handleBulkFacultyUpload}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  setFacultyEditor({
+                    index: null,
+                    form: {
+                      id: "",
+                      name: "",
+                      designation: "",
+                      department: "",
+                      school: schoolData.schoolCode || schoolData.schoolName || "",
+                      email: "",
+                      phone: "",
+                      createLoginAccount: true,
+                      sendCredentialsEmail: true,
+                      generatedPassword: generateStrongPassword(),
+                      isActive: true,
+                    },
+                  })
+                }
+                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+              >
+                <Plus className="h-3.5 w-3.5" /> Add Faculty
+              </button>
+            </div>
+          </div>
 
-      {isFacultyLoading ? (
-        <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
-          Loading faculty profiles from backend API...
-        </div>
-      ) : null}
+          {/* Loader and Errors */}
+          {isFacultyLoading && (
+            <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800 flex items-center gap-2">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading faculty profiles...
+            </div>
+          )}
 
-      {facultyApiError ? (
-        <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
-          API Error: {facultyApiError}
-        </div>
-      ) : null}
+          {facultyApiError && (
+            <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+              {facultyApiError}
+            </div>
+          )}
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div>
-          <FilterBar
-            searchValue={facultyFilters.query}
-            onSearchChange={(value) => setFacultyFilters((prev) => ({ ...prev, query: value }))}
-            searchPlaceholder="Search by name, designation, department, email, phone..."
-            onClear={() => setFacultyFilters({ query: "", department: "all" })}
-          >
-            <select
-              className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
-              value={facultyFilters.department}
-              onChange={(e) => setFacultyFilters((prev) => ({ ...prev, department: e.target.value }))}
+          {/* Search/Filter Bar */}
+          <div className="w-full">
+            <FilterBar
+              searchValue={facultyFilters.query}
+              onSearchChange={(value) => {
+                setFacultyFilters((prev) => ({ ...prev, query: value }));
+                setFacultyPagination((prev) => ({ ...prev, page: 1 }));
+              }}
+              searchPlaceholder="Search by name, designation, email, ID..."
+              onClear={() => {
+                setFacultyFilters({ query: "", department: "all" });
+                setFacultyPagination((prev) => ({ ...prev, page: 1 }));
+              }}
             >
-              <option value="all">All Departments</option>
-              {departmentOptions.map((department) => (
-                <option key={department} value={department}>
-                  {department}
-                </option>
-              ))}
-            </select>
-          </FilterBar>
+              <select
+                className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+                value={facultyFilters.department}
+                onChange={(e) => {
+                  setFacultyFilters((prev) => ({ ...prev, department: e.target.value }));
+                  setFacultyPagination((prev) => ({ ...prev, page: 1 }));
+                }}
+              >
+                <option value="all">All Departments</option>
+                {departmentOptions.map((department) => (
+                  <option key={department} value={department}>
+                    {department}
+                  </option>
+                ))}
+              </select>
+            </FilterBar>
 
-          <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
-            {filteredFacultyProfiles.map(({ faculty, index: actualIndex }, index) => {
-              return (
-            <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
-                  <p className="text-xs text-slate-500">{faculty.designation || "No designation"}</p>
-                </div>
+            {/* Profiles Widescreen Table */}
+            <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+              <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <tr>
+                    <th className="px-4 py-3">Faculty Member</th>
+                    <th className="px-4 py-3">Designation & Dept</th>
+                    <th className="px-4 py-3">School</th>
+                    <th className="px-4 py-3">Contact info</th>
+                    <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                  {facultyProfiles.length > 0 ? (
+                    facultyProfiles.map((faculty, idx) => (
+                      <tr key={faculty.id || idx} className="hover:bg-slate-55/50 transition-colors">
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-3">
+                            {faculty.image_url ? (
+                              <img
+                                src={faculty.image_url}
+                                alt={faculty.name}
+                                className="h-10 w-10 rounded-xl object-cover ring-2 ring-slate-100 flex-shrink-0"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "";
+                                }}
+                              />
+                            ) : (
+                              <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center ring-2 ring-slate-100 text-slate-400 flex-shrink-0">
+                                <User className="h-5 w-5" />
+                              </div>
+                            )}
+                            <div className="min-w-0">
+                              <p className="font-bold text-slate-900 truncate">{faculty.name}</p>
+                              <p className="text-[10px] text-slate-400 font-mono select-all mt-0.5">{faculty.id}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <p className="text-slate-800 font-semibold">{faculty.designation || "No Designation"}</p>
+                          <p className="text-xs text-slate-400 mt-0.5">{faculty.department || "No Department"}</p>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className="rounded bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700 border border-indigo-100">
+                            {faculty.school || "N/A"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3">
+                          <p className="text-xs text-slate-600 truncate">{faculty.email || "No Email"}</p>
+                          <p className="text-[11px] text-slate-400 mt-0.5">{faculty.phone || "No Phone"}</p>
+                        </td>
+                        <td className="px-4 py-3">
+                          <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                            faculty.isActive 
+                              ? "bg-emerald-105 bg-emerald-100 text-emerald-700" 
+                              : "bg-rose-105 bg-rose-100 text-rose-700"
+                          }`}>
+                            {faculty.isActive ? "Active" : "Inactive"}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => setFacultyEditor({ index: faculty.id, form: { ...faculty } })}
+                              className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                            >
+                              <Pencil className="h-3 w-3" /> Edit
+                            </button>
+                            <button
+                              type="button"
+                              disabled={facultyDeletingKey === String(faculty.id)}
+                              onClick={() => handleDeleteFaculty(faculty, idx)}
+                              className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                              {facultyDeletingKey === String(faculty.id) ? "Deleting" : "Delete"}
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="px-4 py-8 text-center text-slate-500 font-normal">
+                        No faculty profiles found. Click "Add Faculty" to create one.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
 
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setFacultyEditor({ index: actualIndex, form: { ...faculty } })}
-                    className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                  >
-                    <Pencil className="h-3.5 w-3.5" /> Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteFaculty(faculty, actualIndex)}
-                    disabled={facultyDeletingKey === String(faculty?.id || `faculty-${actualIndex}`)}
-                    className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                    {facultyDeletingKey === String(faculty?.id || `faculty-${actualIndex}`)
-                      ? "Deleting..."
-                      : "Delete"}
-                  </button>
-                </div>
+            {/* Pagination Controls */}
+            <div className="mt-4 flex flex-col items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-700 sm:flex-row">
+              <div className="flex items-center gap-2">
+                <span>Show</span>
+                <select
+                  className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 outline-none"
+                  value={facultyPagination.limit}
+                  onChange={(e) => {
+                    const newLimit = Number(e.target.value);
+                    setFacultyPagination((prev) => ({ ...prev, limit: newLimit, page: 1 }));
+                  }}
+                >
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+                <span>entries</span>
+                <span className="text-slate-400">|</span>
+                <span>
+                  Showing {facultyPagination.total ? (facultyPagination.page - 1) * facultyPagination.limit + 1 : 0}
+                  -
+                  {Math.min(facultyPagination.page * facultyPagination.limit, facultyPagination.total)} of{" "}
+                  {facultyPagination.total}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={isFacultyLoading || facultyPagination.page <= 1}
+                  onClick={() => setFacultyPagination((prev) => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
+                  className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+                >
+                  Previous
+                </button>
+                <span className="font-semibold text-slate-800">
+                  Page {facultyPagination.page} / {facultyPagination.totalPages}
+                </span>
+                <button
+                  type="button"
+                  disabled={isFacultyLoading || facultyPagination.page >= facultyPagination.totalPages}
+                  onClick={() => setFacultyPagination((prev) => ({ ...prev, page: Math.min(prev.totalPages, prev.page + 1) }))}
+                  className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+                >
+                  Next
+                </button>
               </div>
             </div>
-              );
-            })}
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          {facultyEditor.form ? (
-            <>
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-semibold text-slate-800">
-                  {facultyEditor.index === null ? "Add Faculty" : "Edit Faculty"}
-                </p>
+        {/* Modal Overlay for Add/Edit Faculty Profile */}
+        {facultyEditor.form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+            <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
+              {/* Modal Header */}
+              <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">
+                    {facultyEditor.index === null ? "➕ Add Faculty Profile" : "Edit Faculty Profile"}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {facultyEditor.index === null
+                      ? "Create a new institutional profile and optionally generate login credentials."
+                      : `Update profile information for ${facultyEditor.form.name}.`}
+                  </p>
+                </div>
                 <button
                   type="button"
                   onClick={() => setFacultyEditor({ index: null, form: null })}
-                  className="text-xs font-medium text-slate-500 hover:text-slate-700"
+                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                 >
-                  Cancel
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
-              <div className="space-y-3">
-                <Field label="Name"><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
-                <Field label="Designation"><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
+              {/* Modal Body */}
+              <div className="flex-1 overflow-y-auto pr-1 space-y-3">
+                <Field label="Full Name">
+                  <input
+                    className={inputClass}
+                    value={facultyEditor.form.name || ""}
+                    placeholder="Enter full name"
+                    onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))}
+                  />
+                </Field>
+                <Field label="Designation">
+                  <input
+                    className={inputClass}
+                    value={facultyEditor.form.designation || ""}
+                    placeholder="e.g. Associate Professor"
+                    onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))}
+                  />
+                </Field>
                 <Field label="School">
                   <select
                     className={inputClass}

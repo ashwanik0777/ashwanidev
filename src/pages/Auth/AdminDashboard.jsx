@@ -196,8 +196,12 @@ const tabs = [
   { id: "faculty", label: "Faculty Management", icon: Users },
   { id: "faculty-requests", label: "Faculty Requests", icon: UserPlus },
   { id: "school", label: "Schools Management", icon: School },
+  { id: "nss", label: "NSS Management", icon: Sparkles },
+  { id: "ncc", label: "NCC Management", icon: Activity },
   { id: "tenders", label: "Tender Management", icon: FileText },
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
+  { id: "bookings", label: "Booking Management", icon: CalendarDays },
+  { id: "dac", label: "DAC Management", icon: Cpu },
 ];
 
 const schoolContentTabs = [
@@ -376,14 +380,27 @@ const AdminDashboard = () => {
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [collectionEditors, setCollectionEditors] = useState({});
   const [tenderEditor, setTenderEditor] = useState({ index: null, form: null });
+  const [dacMembers, setDacMembers] = useState({ faculty: [], student: [], all: [] });
+  const [dacEditor, setDacEditor] = useState({ index: null, form: null });
+  const [isDacLoading, setIsDacLoading] = useState(false);
+  const [isDacSaving, setIsDacSaving] = useState(false);
+  const [dacDeletingKey, setDacDeletingKey] = useState("");
+  const [dacApiError, setDacApiError] = useState("");
+  const [dacReloadToken, setDacReloadToken] = useState(0);
+  const [dacFilters, setDacFilters] = useState({ query: "", teamType: "all" });
   const [recruitmentEditor, setRecruitmentEditor] = useState({ mode: null, index: null, form: null });
   const [accountFilters, setAccountFilters] = useState({ query: "", role: "all", status: "all" });
-  const [accountPagination, setAccountPagination] = useState({ page: 1, limit: 10, total: 0, totalPages: 1 });
+  const [accountPagination, setAccountPagination] = useState({ page: 1, limit: 20, total: 0, totalPages: 1 });
   const [accountsReloadToken, setAccountsReloadToken] = useState(0);
   const [facultyFilters, setFacultyFilters] = useState({ query: "", department: "all" });
+  const [facultyPagination, setFacultyPagination] = useState({ page: 1, limit: 20, total: 0, totalPages: 1 });
   const [tenderFilters, setTenderFilters] = useState({ query: "", status: "all" });
+  const [tenderPagination, setTenderPagination] = useState({ page: 1, limit: 10 });
+  const [recruitmentCurrentPagination, setRecruitmentCurrentPagination] = useState({ page: 1, limit: 10 });
+  const [recruitmentArchivedPagination, setRecruitmentArchivedPagination] = useState({ page: 1, limit: 10 });
   const [recruitmentFilter, setRecruitmentFilter] = useState("");
   const [collectionFilters, setCollectionFilters] = useState({});
+  const [collectionPagination, setCollectionPagination] = useState({});
   const [isFacultyLoading, setIsFacultyLoading] = useState(false);
   const [isFacultySaving, setIsFacultySaving] = useState(false);
   const [facultyDeletingKey, setFacultyDeletingKey] = useState("");
@@ -730,6 +747,29 @@ const AdminDashboard = () => {
       isMounted = false;
     };
   }, []);
+
+  /* ── Fetch DAC team members ── */
+  useEffect(() => {
+    let isMounted = true;
+    const fetchDacTeam = async () => {
+      setIsDacLoading(true);
+      setDacApiError("");
+      try {
+        const data = await listDacMembers();
+        if (!isMounted) return;
+        setDacMembers(data);
+      } catch (error) {
+        if (!isMounted) return;
+        setDacApiError(getApiErrorMessage(error, "Failed to load DAC team members."));
+      } finally {
+        if (isMounted) setIsDacLoading(false);
+      }
+    };
+    fetchDacTeam();
+    return () => {
+      isMounted = false;
+    };
+  }, [dacReloadToken]);
 
   /* ── Fetch faculty registration requests ── */
   useEffect(() => {
@@ -1122,6 +1162,40 @@ const AdminDashboard = () => {
   };
 
   const openCollectionEdit = (listKey, index, item) => {
+    if (listKey === "clubs") {
+      const flatClub = {
+        id: item.id || `club-${Date.now()}`,
+        name: item.name || "",
+        tagline: item.tagline || "",
+        category: item.category || "Technical",
+        logo: item.logo || "",
+        banner: item.banner || "",
+        memberCount: item.memberCount || 0,
+        description: item.description || "",
+        history: item.history || "",
+        facultyAdvisor: item.team?.facultyCoordinator?.name || item.facultyAdvisor || "",
+        facultyAdvisorDept: item.team?.facultyCoordinator?.department || item.facultyAdvisorDept || "",
+        presidentName: item.team?.president?.name || item.presidentName || "",
+        presidentDept: item.team?.president?.department || item.presidentDept || "",
+        vicePresidentName: item.team?.vicePresident?.name || item.vicePresidentName || "",
+        vicePresidentDept: item.team?.vicePresident?.department || item.vicePresidentDept || "",
+        secretaryName: item.team?.secretary?.name || item.secretaryName || "",
+        secretaryDept: item.team?.secretary?.department || item.secretaryDept || "",
+        treasurerName: item.team?.treasurer?.name || item.treasurerName || "",
+        treasurerDept: item.team?.treasurer?.department || item.treasurerDept || "",
+        instagram: item.socialMedia?.instagram || item.instagram || "",
+        linkedin: item.socialMedia?.linkedin || item.linkedin || "",
+        youtube: item.socialMedia?.youtube || item.youtube || "",
+        objectives: Array.isArray(item.objectives) ? item.objectives.join(", ") : (item.objectives || ""),
+        achievements: Array.isArray(item.achievements) ? item.achievements.join(", ") : (item.achievements || "")
+      };
+      setCollectionEditors((prev) => ({
+        ...prev,
+        [listKey]: { index, form: flatClub },
+      }));
+      return;
+    }
+
     if (listKey === "eventGallery") {
       const sourceImages = toList(item.images);
       const baseImages = [item.imageUrl, ...sourceImages].map((image) => String(image || "").trim()).filter(Boolean);
@@ -1166,6 +1240,83 @@ const AdminDashboard = () => {
     if (!editor?.form) return;
 
     let nextForm = { ...editor.form };
+    if (listKey === "clubs") {
+      const objectivesArray = typeof nextForm.objectives === "string" 
+        ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
+        : (nextForm.objectives || []);
+      const achievementsArray = typeof nextForm.achievements === "string" 
+        ? nextForm.achievements.split(",").map(x => x.trim()).filter(Boolean) 
+        : (nextForm.achievements || []);
+
+      nextForm = {
+        id: nextForm.id || nextForm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        name: nextForm.name || "",
+        tagline: nextForm.tagline || "",
+        category: nextForm.category || "Technical",
+        logo: nextForm.logo || "",
+        banner: nextForm.banner || "",
+        memberCount: Number(nextForm.memberCount || 0),
+        description: nextForm.description || "",
+        history: nextForm.history || "",
+        objectives: objectivesArray,
+        achievements: achievementsArray,
+        team: {
+          facultyCoordinator: {
+            name: nextForm.facultyAdvisor || "",
+            role: "Faculty Advisor",
+            department: nextForm.facultyAdvisorDept || ""
+          },
+          president: {
+            name: nextForm.presidentName || "",
+            role: "President",
+            department: nextForm.presidentDept || ""
+          },
+          vicePresident: {
+            name: nextForm.vicePresidentName || "",
+            role: "Vice President",
+            department: nextForm.vicePresidentDept || ""
+          },
+          secretary: {
+            name: nextForm.secretaryName || "",
+            role: "Secretary",
+            department: nextForm.secretaryDept || ""
+          },
+          treasurer: {
+            name: nextForm.treasurerName || "",
+            role: "Treasurer",
+            department: nextForm.treasurerDept || ""
+          },
+          members: []
+        },
+        socialMedia: {
+          instagram: nextForm.instagram || "",
+          linkedin: nextForm.linkedin || "",
+          youtube: nextForm.youtube || ""
+        },
+        policies: {
+          codeOfConduct: [
+            "Respect all members regardless of skill level",
+            "Contribute positively to club activities",
+            "Follow ethical practices"
+          ],
+          eligibility: [
+            "Open to all students of the school",
+            "Passion to learn and collaborate",
+            "Commitment to attend regular sessions"
+          ],
+          responsibilities: [
+            "President: Strategic planning & leadership",
+            "Vice-President: Event coordination & engagement",
+            "Secretary: Communication & documentation",
+            "Treasurer: Budget management"
+          ],
+          meetingFrequency: "Weekly sessions as scheduled by coordinator"
+        },
+        events: [],
+        reports: []
+      };
+    }
+
     if (listKey === "eventGallery") {
       const galleryImages = [
         nextForm.imageUrl,
@@ -1225,10 +1376,203 @@ const AdminDashboard = () => {
         notices: content.notices || [],
         newsletters: content.newsletters || [],
         eventGallery: content.eventGallery || [],
+        clubs: content.clubs || [],
         tabContent: content.tabContent || {}
     });
     setSchoolEditor({ isCreating: false });
     setActiveSchoolSubTab("basic");
+  };
+
+  const openNss = (school) => {
+    setSelectedSchoolId(school.id);
+    const content = school.content || {};
+    setSchoolData({
+        schoolCode: school.code || "NSS",
+        schoolName: school.name || "National Service Scheme (NSS)",
+        schoolDescription: school.overview || "",
+        email: content.email || "",
+        phone: content.phone || "",
+        websiteUrl: content.websiteUrl || "",
+        bannerImage: content.bannerImage || "",
+        address: content.address || "",
+        events: content.events || [],
+        news: content.news || [],
+        notices: content.notices || [],
+        newsletters: content.newsletters || [],
+        eventGallery: content.eventGallery || [],
+        clubs: content.clubs || [],
+        tabContent: content.tabContent || {},
+        coordinator: content.coordinator || {
+          name: "Dr. Gaurav Kumar",
+          designation: "NSS Coordinator & Senior Programme Officer",
+          department: "Assistant Professor, School of ICT",
+          tenure: "2025 - Present",
+          email: "gaurav.kumar@gbu.ac.in",
+          linkedin: "https://www.linkedin.com/in/gauravjnu/",
+          twitter: "https://x.com/gauravkjnu",
+          image: "https://nss.onlinegbu.com/images/GauravKumar.png",
+        },
+        coreCouncil: content.coreCouncil || [
+          {
+            name: "Akanksha Pandey",
+            role: "Vice President",
+            image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1755153073/uploads/general/1755153072503-84fb0ce1b8cd-a12.webp.webp",
+            email: "245dcs025@gbu.ac.in",
+            achievements: "NSS Core Team Lead, Community Service Lead",
+          },
+          {
+            name: "Ashwani Kushwaha",
+            role: "Vice President & Tech Head",
+            image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1764310861/uploads/general/1764310859023-ea2b935030a4-20251124_153222.jpg.jpg",
+            email: "235ucs039@gbu.ac.in",
+            achievements: "NSS Portal Developer, Digital Outreach Lead",
+          },
+        ],
+        units: content.units || [
+          {
+            unitNumber: 1,
+            programOfficer: { name: "Dr. Gaurav Kumar", department: "School of ICT", image: "https://nss.onlinegbu.com/images/GauravKumar.png" },
+            facultyMentor: { name: "Dr. Nishta Pareek", department: "School of Humanities", image: "" },
+            convenors: "Anjali Yadav, Jaysuvankar Pradhan",
+            coConvenors: "Anushka Shakya, Ashish"
+          },
+          {
+            unitNumber: 2,
+            programOfficer: { name: "Dr. Bhaswati Banerjee", department: "School of Vocational Studies", image: "" },
+            facultyMentor: { name: "Dr. Lalita Mehra", department: "School of Biotechnology", image: "https://faculty.gbu.ac.in/uploads/photos/67c162743188f_2.jpg" },
+            convenors: "Bhakti Gupta, Roshan Baburao Ingle",
+            coConvenors: "Disha Dalmiya, Harshita Rao"
+          },
+          {
+            unitNumber: 3,
+            programOfficer: { name: "Dr. Rahul Kapoor", department: "School of Law", image: "https://faculty.gbu.ac.in/uploads/photos/660f98bf501e0_Screenshot_20240405_115043_Facebook.jpg" },
+            facultyMentor: { name: "Dr. Aparna Verma", department: "School of Humanities", image: "" },
+            convenors: "Nitish Kumar Pradhan, Prerna",
+            coConvenors: "Saumya Singh, Rabi Narayan Patra"
+          },
+          {
+            unitNumber: 4,
+            programOfficer: { name: "Dr. Rakesh Kumar", department: "School of ICT", image: "" },
+            facultyMentor: { name: "Ms Srijana Jaiswal", department: "School of Engineering", image: "" },
+            convenors: "Aryan Kumar Rathore, Prince Kumar Singh",
+            coConvenors: "Pari Tyagi, Deepak Kumar"
+          },
+          {
+            unitNumber: 5,
+            programOfficer: { name: "Dr. Shrutee Kanwar", department: "School of Management", image: "https://faculty.gbu.ac.in/uploads/photos/675823651da3b_IMG-20241127-WA0005.jpg" },
+            facultyMentor: { name: "Dr. Anuj Singh", department: "School of Vocational Studies", image: "" },
+            convenors: "Prabhanshi Gupta, Sameeksha Sharma",
+            coConvenors: "Abhay Singh, Priyanshi Nautiyal"
+          },
+          {
+            unitNumber: 6,
+            programOfficer: { name: "Dr. Indrajeet Singh", department: "School of Engineering", image: "https://faculty.gbu.ac.in/uploads/photos/67c53dfff3fa3_DSC_4677%20(1).jpg" },
+            facultyMentor: { name: "Dr. Shobha Devi", department: "School of Buddhist Studies", image: "" },
+            convenors: "Vanshika Pal, Priyanshi",
+            coConvenors: "Naitik, Abhishek Singh"
+          }
+        ],
+        socialMedia: content.socialMedia || {
+          facebook: "",
+          twitter: "",
+          instagram: "",
+          youtube: "",
+          linkedin: ""
+        }
+    });
+    setSchoolEditor({ isCreating: false });
+    setActiveNssSubTab("basic");
+  };
+
+  const openNcc = (school) => {
+    setSelectedSchoolId(school.id);
+    const content = school.content || {};
+    setSchoolData({
+        schoolCode: school.code || "NCC",
+        schoolName: school.name || "National Cadet Corps (NCC)",
+        schoolDescription: school.overview || "",
+        email: content.email || "",
+        phone: content.phone || "",
+        websiteUrl: content.websiteUrl || "",
+        bannerImage: content.bannerImage || "",
+        address: content.address || "",
+        events: content.events || [],
+        news: content.news || [],
+        notices: content.notices || [],
+        newsletters: content.newsletters || [],
+        eventGallery: content.eventGallery || [],
+        clubs: content.clubs || [],
+        tabContent: content.tabContent || {},
+        anoDetails: content.anoDetails || {
+          name: 'Lt. Col. Rajesh Kumar',
+          designation: 'Associate NCC Officer (ANO)',
+          email: 'rajesh.kumar@university.edu',
+          phone: '+91-9876543210',
+          image: '/placeholder.svg',
+          serviceRecord: '15 years in Indian Army',
+          qualifications: 'B.Tech, M.Tech, Military Leadership Course',
+          awards: 'Vishisht Seva Medal, Commendation Card'
+        },
+        cadetLeaders: content.cadetLeaders || [
+          {
+            name: 'Cadet Under Officer Vikram Singh',
+            rank: 'CUO',
+            year: 'Final Year',
+            program: 'B.Tech Mechanical',
+            email: 'vikram.singh@student.edu',
+            image: '/placeholder.svg',
+            achievements: 'Best Cadet 2023, RDC Participant, NCC B Certificate'
+          },
+          {
+            name: 'Cadet Sergeant Major Anita Sharma',
+            rank: 'CSM',
+            year: 'Third Year',
+            program: 'B.Sc Physics',
+            email: 'anita.sharma@student.edu',
+            image: '/placeholder.svg',
+            achievements: 'Drill Competition Winner, CATC Participant, NCC A Certificate'
+          },
+          {
+            name: 'Cadet Sergeant Rohit Patel',
+            rank: 'SGT',
+            year: 'Second Year',
+            program: 'B.Com',
+            email: 'rohit.patel@student.edu',
+            image: '/placeholder.svg',
+            achievements: 'Shooting Competition Winner, Adventure Camp Participant'
+          }
+        ],
+        platoons: content.platoons || [
+          { name: 'Alpha Platoon', cadets: 35, commander: 'CUO Vikram Singh', focus: 'Drill & Discipline' },
+          { name: 'Bravo Platoon', cadets: 32, commander: 'CSM Anita Sharma', focus: 'Adventure Activities' },
+          { name: 'Charlie Platoon', cadets: 30, commander: 'SGT Rohit Patel', focus: 'Social Service' },
+          { name: 'Delta Platoon', cadets: 28, commander: 'SGT Priya Gupta', focus: 'Cultural Activities' }
+        ],
+        socialMedia: content.socialMedia || {
+          facebook: "",
+          twitter: "",
+          instagram: "",
+          youtube: "",
+          linkedin: ""
+        }
+    });
+    setSchoolEditor({ isCreating: false });
+    setActiveNccSubTab("basic");
+  };
+
+  const selectMainTab = (tabId) => {
+    setActiveTab(tabId);
+    if (tabId === "nss") {
+      const nss = schoolsList.find((s) => s.code === "NSS");
+      if (nss) openNss(nss);
+    } else if (tabId === "ncc") {
+      const ncc = schoolsList.find((s) => s.code === "NCC");
+      if (ncc) openNcc(ncc);
+    } else if (tabId === "school") {
+      setSelectedSchoolId(null);
+      setSchoolEditor({ isCreating: false });
+      setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
+    }
   };
 
   const handleSaveSchool = async () => {
@@ -1983,106 +2327,242 @@ const AdminDashboard = () => {
     ];
   }, [accounts, facultyProfiles, schoolData]);
 
-  const renderCollectionEditor = (listKey, title, fields, newItemTemplate) => (
-    <div className={cardClass}>
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-base font-semibold text-slate-900">{title}</h3>
-        <button
-          type="button"
-          onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-          className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
-        >
-          <Plus className="h-3.5 w-3.5" /> Add
-        </button>
-      </div>
+  const renderCollectionEditor = (listKey, title, fields, newItemTemplate) => {
+    const pagination = collectionPagination[listKey] || { page: 1, limit: 10 };
+    const setPagination = (updateFn) => {
+      setCollectionPagination((prev) => {
+        const curr = prev[listKey] || { page: 1, limit: 10 };
+        const updated = typeof updateFn === "function" ? updateFn(curr) : updateFn;
+        return {
+          ...prev,
+          [listKey]: updated,
+        };
+      });
+    };
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div>
+    const filteredItems = (schoolData[listKey] || [])
+      .map((item, index) => ({ item, index }))
+      .filter(({ item }) => {
+        const query = (collectionFilters[listKey] || "").trim().toLowerCase();
+        if (!query) return true;
+        
+        const checkValue = (val) => {
+          if (val === null || val === undefined) return false;
+          if (typeof val === "object") {
+            return Object.values(val).some(checkValue);
+          }
+          return String(val).toLowerCase().includes(query);
+        };
+        
+        return Object.values(item || {}).some(checkValue);
+      });
+
+    const total = filteredItems.length;
+    const page = pagination.page;
+    const limit = pagination.limit;
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+    const startIndex = (page - 1) * limit;
+    const paginatedItems = filteredItems.slice(startIndex, startIndex + limit);
+
+    return (
+      <div className={cardClass}>
+        {/* Tab Header */}
+        <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          <div>
+            <h3 className="text-base font-semibold text-slate-900">{title} List</h3>
+            <p className="text-xs text-slate-500 mt-0.5">Showing list of {title.toLowerCase()} for this school/organization.</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => openCollectionAdd(listKey, newItemTemplate)}
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+          >
+            <Plus className="h-3.5 w-3.5" /> Add New
+          </button>
+        </div>
+
+        {/* Filter / Search Bar */}
+        <div className="w-full">
           <FilterBar
             searchValue={collectionFilters[listKey] || ""}
-            onSearchChange={(value) =>
-              setCollectionFilters((prev) => ({
-                ...prev,
-                [listKey]: value,
-              }))
-            }
+            onSearchChange={(value) => {
+              setCollectionFilters((prev) => ({ ...prev, [listKey]: value }));
+              setPagination((prev) => ({ ...prev, page: 1 }));
+            }}
             searchPlaceholder={`Search ${title.toLowerCase()}...`}
-            onClear={() =>
-              setCollectionFilters((prev) => ({
-                ...prev,
-                [listKey]: "",
-              }))
-            }
+            onClear={() => {
+              setCollectionFilters((prev) => ({ ...prev, [listKey]: "" }));
+              setPagination((prev) => ({ ...prev, page: 1 }));
+            }}
           />
 
-          <div className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
-            {(schoolData[listKey] || [])
-              .map((item, index) => ({ item, index }))
-              .filter(({ item }) => {
-                const query = (collectionFilters[listKey] || "").trim().toLowerCase();
-                if (!query) return true;
-                return Object.values(item || {})
-                  .filter((value) => value !== null && value !== undefined)
-                  .join(" ")
-                  .toLowerCase()
-                  .includes(query);
-              })
-              .map(({ item, index }) => {
-                const primaryValue = item.title || item.name || item.id || `Item ${index + 1}`;
-                return (
-                  <div key={`${listKey}-${item.id || index}`} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-900">{primaryValue}</p>
-                        <p className="text-xs text-slate-500">Item {index + 1}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => openCollectionEdit(listKey, index, item)}
-                          className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                        >
-                          <Pencil className="h-3.5 w-3.5" /> Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteCollectionItem(listKey, index)}
-                          className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" /> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+          {/* Paginated Widescreen Table */}
+          <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+            <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+              <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                <tr>
+                  <th className="px-4 py-3">{listKey === "clubs" ? "Club Name" : "Title / Name"}</th>
+                  {listKey !== "clubs" && <th className="px-4 py-3">Date</th>}
+                  <th className="px-4 py-3">Category / Type</th>
+                  {listKey === "events" && <th className="px-4 py-3">Venue</th>}
+                  {listKey === "clubs" && <th className="px-4 py-3">Faculty Advisor</th>}
+                  <th className="px-4 py-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                {paginatedItems.length > 0 ? (
+                  paginatedItems.map(({ item, index }) => {
+                    const primaryValue = item.title || item.name || item.id || `Item ${index + 1}`;
+                    const itemDate = item.date || item.eventDate || "";
+                    const categoryValue = item.category || item.type || "N/A";
+
+                    return (
+                      <tr key={`${listKey}-${item.id || index}`} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="px-4 py-3">
+                          <div className="min-w-0">
+                            <p className="font-bold text-slate-900 truncate max-w-xs sm:max-w-md md:max-w-lg">{primaryValue}</p>
+                            {item.tagline && <p className="text-xs text-slate-400 mt-0.5">{item.tagline}</p>}
+                            {item.excerpt && <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{item.excerpt}</p>}
+                          </div>
+                        </td>
+                        {listKey !== "clubs" && (
+                          <td className="px-4 py-3 text-xs font-semibold text-slate-600">
+                            {itemDate || "N/A"}
+                          </td>
+                        )}
+                        <td className="px-4 py-3">
+                          <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 border border-indigo-100 uppercase tracking-wider">
+                            {categoryValue}
+                          </span>
+                        </td>
+                        {listKey === "events" && (
+                          <td className="px-4 py-3 text-xs text-slate-600 font-semibold truncate max-w-xs">
+                            {item.venue || "N/A"}
+                          </td>
+                        )}
+                        {listKey === "clubs" && (
+                          <td className="px-4 py-3 text-xs text-slate-600 font-semibold">
+                            {item.facultyAdvisor || "N/A"}
+                          </td>
+                        )}
+                        <td className="px-4 py-3 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              type="button"
+                              onClick={() => openCollectionEdit(listKey, index, item)}
+                              className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                            >
+                              <Pencil className="h-3.5 w-3.5" /> Edit
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => deleteCollectionItem(listKey, index)}
+                              className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" /> Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="px-4 py-8 text-center text-slate-500 font-normal">
+                      No items found in {title.toLowerCase()}. Click "Add New" to create one.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Local Pagination Controls */}
+          <div className="mt-4 flex flex-col items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-700 sm:flex-row">
+            <div className="flex items-center gap-2">
+              <span>Show</span>
+              <select
+                className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 outline-none"
+                value={limit}
+                onChange={(e) => {
+                  const newLimit = Number(e.target.value);
+                  setPagination({ page: 1, limit: newLimit });
+                }}
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </select>
+              <span>entries</span>
+              <span className="text-slate-400">|</span>
+              <span>
+                Showing {total ? startIndex + 1 : 0}
+                -
+                {Math.min(startIndex + limit, total)} of{" "}
+                {total}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                disabled={page <= 1}
+                onClick={() => setPagination((prev) => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+              >
+                Previous
+              </button>
+              <span className="font-semibold text-slate-800">
+                Page {page} / {totalPages}
+              </span>
+              <button
+                type="button"
+                disabled={page >= totalPages}
+                onClick={() => setPagination((prev) => ({ ...prev, page: Math.min(totalPages, prev.page + 1) }))}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          {collectionEditors[listKey]?.form ? (
-            <>
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-semibold text-slate-800">
-                  {collectionEditors[listKey].index === null ? "Add Item" : "Edit Item"}
-                </p>
+        {/* Modal Overlay for Add/Edit Collection Item */}
+        {collectionEditors[listKey]?.form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+            <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
+              {/* Modal Header */}
+              <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">
+                    {collectionEditors[listKey].index === null ? `➕ Add ${title}` : `Edit ${title}`}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {collectionEditors[listKey].index === null
+                      ? `Create a new entry in ${title.toLowerCase()}`
+                      : `Update details for ${collectionEditors[listKey].form.title || collectionEditors[listKey].form.name || "item"}.`}
+                  </p>
+                </div>
                 <button
                   type="button"
                   onClick={() => setCollectionEditors((prev) => ({ ...prev, [listKey]: { index: null, form: null } }))}
-                  className="text-xs font-medium text-slate-500 hover:text-slate-700"
+                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                 >
-                  Cancel
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
-              <div className="max-h-[350px] space-y-3 overflow-y-auto pr-1">
+              {/* Modal Body */}
+              <div className="flex-1 overflow-y-auto pr-1 space-y-3">
                 {fields.map((field) => (
                   <Field key={`${listKey}-${field.key}`} label={field.label}>
                     {field.type === "textarea" ? (
                       <textarea
-                        className={`${inputClass} min-h-20`}
+                        className={`${inputClass} min-h-[90px]`}
                         value={collectionEditors[listKey].form[field.key] || ""}
                         onChange={(e) => updateCollectionFormField(listKey, field, e.target.value)}
+                        placeholder={`Enter ${field.label.toLowerCase()}`}
                       />
                     ) : field.type === "boolean" ? (
                       <select
@@ -3127,283 +3607,917 @@ const AdminDashboard = () => {
                     ))}
                   </select>
                 </Field>
-                <Field label="Email"><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
-                <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
-                <Field label="Create Login Account">
+                <Field label="Email Address">
+                  <input
+                    className={inputClass}
+                    type="email"
+                    value={facultyEditor.form.email || ""}
+                    placeholder="e.g. email@gbu.ac.in"
+                    onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))}
+                  />
+                </Field>
+                <Field label="Phone Number">
+                  <input
+                    className={inputClass}
+                    value={facultyEditor.form.phone || ""}
+                    placeholder="Enter phone number"
+                    onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))}
+                  />
+                </Field>
+
+                <Field label="Status">
                   <select
                     className={inputClass}
-                    value={String(facultyEditor.form.createLoginAccount ?? true)}
+                    value={String(facultyEditor.form.isActive ?? true)}
                     onChange={(e) =>
                       setFacultyEditor((prev) => ({
                         ...prev,
-                        form: { ...prev.form, createLoginAccount: e.target.value === "true" },
+                        form: { ...prev.form, isActive: e.target.value === "true" },
                       }))
                     }
                   >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value="true">Active</option>
+                    <option value="false">Inactive</option>
                   </select>
                 </Field>
-                <Field label="Send Credentials Email (queue for backend)">
-                  <select
-                    className={inputClass}
-                    value={String(facultyEditor.form.sendCredentialsEmail ?? true)}
-                    onChange={(e) =>
-                      setFacultyEditor((prev) => ({
-                        ...prev,
-                        form: { ...prev.form, sendCredentialsEmail: e.target.value === "true" },
-                      }))
-                    }
-                  >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </Field>
-                <Field label="Generated Password">
-                  <div className="flex items-center gap-2">
-                    <input className={inputClass} value={facultyEditor.form.generatedPassword || ""} readOnly />
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFacultyEditor((prev) => ({
-                          ...prev,
-                          form: { ...prev.form, generatedPassword: generateStrongPassword() },
-                        }))
-                      }
-                      className="inline-flex h-10 items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                    >
-                      <Sparkles className="h-3.5 w-3.5" /> Regenerate
-                    </button>
-                  </div>
-                </Field>
+
+                {facultyEditor.index === null && (
+                  <>
+                    <div className="my-4 border-t border-dashed border-slate-200 pt-4">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Portal Login Account</h4>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Configure automatic account creation on submission.</p>
+                    </div>
+
+                    <Field label="Create Login Account">
+                      <select
+                        className={inputClass}
+                        value={String(facultyEditor.form.createLoginAccount ?? true)}
+                        onChange={(e) =>
+                          setFacultyEditor((prev) => ({
+                            ...prev,
+                            form: { ...prev.form, createLoginAccount: e.target.value === "true" },
+                          }))
+                        }
+                      >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </Field>
+                    <Field label="Send Credentials Email">
+                      <select
+                        className={inputClass}
+                        value={String(facultyEditor.form.sendCredentialsEmail ?? true)}
+                        onChange={(e) =>
+                          setFacultyEditor((prev) => ({
+                            ...prev,
+                            form: { ...prev.form, sendCredentialsEmail: e.target.value === "true" },
+                          }))
+                        }
+                      >
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                      </select>
+                    </Field>
+                    <Field label="Generated Temporary Password">
+                      <div className="flex items-center gap-2">
+                        <input className={inputClass} value={facultyEditor.form.generatedPassword || ""} readOnly />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setFacultyEditor((prev) => ({
+                              ...prev,
+                              form: { ...prev.form, generatedPassword: generateStrongPassword() },
+                            }))
+                          }
+                          className="inline-flex h-10 items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                        >
+                          <Sparkles className="h-3.5 w-3.5" /> Regenerate
+                        </button>
+                      </div>
+                    </Field>
+                  </>
+                )}
               </div>
 
-              <button
-                type="button"
-                onClick={handleSaveFacultyProfile}
-                disabled={isFacultySaving}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {isFacultySaving ? "Saving..." : "Save Faculty"}
-              </button>
-            </>
-          ) : (
-            <div className="flex h-full min-h-[180px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Select faculty to edit or create new profile.
+              {/* Modal Footer Actions */}
+              <div className="mt-6 flex items-center justify-end gap-2 border-t border-slate-100 pt-4 text-right">
+                <button
+                  type="button"
+                  onClick={() => setFacultyEditor({ index: null, form: null })}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  disabled={isFacultySaving}
+                  onClick={handleSaveFacultyProfile}
+                  className="rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50 transition"
+                >
+                  {isFacultySaving ? "Saving..." : "Save Profile"}
+                </button>
+              </div>
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
       </div>
     );
   };
 
-  const renderTendersTab = () => (
-    <div className="space-y-4">
-      <div className={cardClass}>
-        <div className="mb-3 flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-semibold text-slate-900">Tender Management</h2>
-          </div>
-          <button
-            type="button"
-            onClick={() =>
-              setTenderEditor({
-                index: null,
-                form: {
-                  id: "",
-                  title: "",
-                  description: "",
-                  closingDate: "",
-                  documentUrl: "",
-                  localId: `tender-${Date.now()}`,
-                },
-              })
-            }
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
-          >
-            <Plus className="h-3.5 w-3.5" /> Add Tender
-          </button>
-        </div>
+  const renderTendersTab = () => {
+    const totalTenders = filteredTenders.length;
+    const tenderPage = tenderPagination.page;
+    const tenderLimit = tenderPagination.limit;
+    const tenderTotalPages = Math.max(1, Math.ceil(totalTenders / tenderLimit));
+    const tenderStartIndex = (tenderPage - 1) * tenderLimit;
+    const paginatedTenders = filteredTenders.slice(tenderStartIndex, tenderStartIndex + tenderLimit);
 
-        {isTenderLoading ? (
-          <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
-            Loading tenders from backend API...
+    return (
+      <div className="space-y-4">
+        <div className={cardClass}>
+          {/* Header */}
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Tender Management</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Manage active and archived university procurement tenders.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                setTenderEditor({
+                  index: null,
+                  form: {
+                    id: "",
+                    title: "",
+                    description: "",
+                    closingDate: "",
+                    documentUrl: "",
+                    localId: `tender-${Date.now()}`,
+                  },
+                })
+              }
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+            >
+              <Plus className="h-3.5 w-3.5" /> Add Tender
+            </button>
           </div>
-        ) : null}
 
-        {tenderApiError ? (
-          <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
-            API Error: {tenderApiError}
-          </div>
-        ) : null}
+          {/* Loader and Errors */}
+          {isTenderLoading && (
+            <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800 flex items-center gap-2">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading tenders...
+            </div>
+          )}
 
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div>
+          {tenderApiError && (
+            <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+              {tenderApiError}
+            </div>
+          )}
+
+          {/* Search/Filter Bar */}
+          <div className="w-full">
             <FilterBar
               searchValue={tenderFilters.query}
-              onSearchChange={(value) => setTenderFilters((prev) => ({ ...prev, query: value }))}
+              onSearchChange={(value) => {
+                setTenderFilters((prev) => ({ ...prev, query: value }));
+                setTenderPagination((prev) => ({ ...prev, page: 1 }));
+              }}
               searchPlaceholder="Search by title, description, document url..."
-              onClear={() => setTenderFilters({ query: "", status: "all" })}
+              onClear={() => {
+                setTenderFilters({ query: "", status: "all" });
+                setTenderPagination((prev) => ({ ...prev, page: 1 }));
+              }}
             >
               <select
-                className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+                className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700 outline-none"
                 value={tenderFilters.status}
-                onChange={(e) => setTenderFilters((prev) => ({ ...prev, status: e.target.value }))}
+                onChange={(e) => {
+                  setTenderFilters((prev) => ({ ...prev, status: e.target.value }));
+                  setTenderPagination((prev) => ({ ...prev, page: 1 }));
+                }}
               >
-                <option value="all">All</option>
+                <option value="all">All Status</option>
                 <option value="active">Active</option>
                 <option value="archived">Archived</option>
               </select>
             </FilterBar>
 
-            <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
-              {filteredTenders.map(({ tender, index: actualIndex }) => {
-                const autoHideDate = getTenderAutoHideDate(tender.closingDate);
-                const isActive = isTenderActive(tender);
-                return (
-                  <div key={tender.localId || tender.id || actualIndex} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-slate-900">{tender.title || "Untitled Tender"}</p>
-                        <p className="text-xs text-slate-500">
-                          Closing: {tender.closingDate || "N/A"} | Auto-hide: {autoHideDate ? autoHideDate.toISOString().slice(0, 10) : "N/A"}
-                        </p>
-                        <p className="mt-1 text-xs font-medium text-slate-700">
-                          Status: {isActive ? "active" : "archived"}
-                        </p>
-                      </div>
+            {/* Tenders Table */}
+            <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+              <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <tr>
+                    <th className="px-4 py-3">Tender Title & Description</th>
+                    <th className="px-4 py-3">Closing Date</th>
+                    <th className="px-4 py-3">Auto-Hide Date</th>
+                    <th className="px-4 py-3">Status</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                  {paginatedTenders.length > 0 ? (
+                    paginatedTenders.map(({ tender, index: actualIndex }) => {
+                      const autoHideDate = getTenderAutoHideDate(tender.closingDate);
+                      const isActive = isTenderActive(tender);
+                      return (
+                        <tr key={tender.localId || tender.id || actualIndex} className="hover:bg-slate-55/50 transition-colors">
+                          <td className="px-4 py-3">
+                            <div className="min-w-0">
+                              <p className="font-bold text-slate-900 truncate max-w-xs sm:max-w-md md:max-w-lg">{tender.title || "Untitled Tender"}</p>
+                              {tender.description && <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{tender.description}</p>}
+                              {tender.id && <p className="text-[10px] text-slate-400 font-mono mt-0.5 select-all">{tender.id}</p>}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-600 font-semibold">
+                            {tender.closingDate || "N/A"}
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-400 font-semibold">
+                            {autoHideDate ? autoHideDate.toISOString().slice(0, 10) : "N/A"}
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                              isActive 
+                                ? "bg-emerald-100 text-emerald-700 border border-emerald-250" 
+                                : "bg-rose-100 text-rose-700 border border-rose-250"
+                            }`}>
+                              {isActive ? "Active" : "Archived"}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <div className="flex items-center justify-end gap-1.5">
+                              <button
+                                type="button"
+                                disabled={isTenderSaving || tenderDeletingKey === String(tender.localId || tender.id || actualIndex)}
+                                onClick={() =>
+                                  setTenderEditor({
+                                    index: actualIndex,
+                                    form: {
+                                      id: tender.id || "",
+                                      title: tender.title || "",
+                                      description: tender.description || "",
+                                      closingDate: tender.closingDate || "",
+                                      documentUrl: tender.documentUrl || "",
+                                      localId: tender.localId || `tender-${Date.now()}`,
+                                    },
+                                  })
+                                }
+                                className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                              >
+                                <Pencil className="h-3 w-3" /> Edit
+                              </button>
+                              <button
+                                type="button"
+                                disabled={isTenderSaving || tenderDeletingKey === String(tender.localId || tender.id || actualIndex)}
+                                onClick={() => handleDeleteTender(tender, actualIndex)}
+                                className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                              >
+                                <Trash2 className="h-3 w-3" />
+                                {tenderDeletingKey === String(tender.localId || tender.id || actualIndex) ? "Deleting" : "Delete"}
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="px-4 py-8 text-center text-slate-500 font-normal">
+                        No tenders found. Click "Add Tender" to create one.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
 
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          disabled={isTenderSaving || tenderDeletingKey === String(tender.localId || tender.id || actualIndex)}
-                          onClick={() =>
-                            setTenderEditor({
-                              index: actualIndex,
-                              form: {
-                                id: tender.id || "",
-                                title: tender.title || "",
-                                description: tender.description || "",
-                                closingDate: tender.closingDate || "",
-                                documentUrl: tender.documentUrl || "",
-                                localId: tender.localId || `tender-${Date.now()}`,
-                              },
-                            })
-                          }
-                          className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                        >
-                          <Pencil className="h-3.5 w-3.5" /> Edit
-                        </button>
-                        <button
-                          type="button"
-                          disabled={isTenderSaving || tenderDeletingKey === String(tender.localId || tender.id || actualIndex)}
-                          onClick={() => handleDeleteTender(tender, actualIndex)}
-                          className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                          {tenderDeletingKey === String(tender.localId || tender.id || actualIndex) ? "Deleting..." : "Delete"}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            {/* Pagination Controls */}
+            <div className="mt-4 flex flex-col items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs text-slate-700 sm:flex-row">
+              <div className="flex items-center gap-2">
+                <span>Show</span>
+                <select
+                  className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 outline-none"
+                  value={tenderLimit}
+                  onChange={(e) => {
+                    const newLimit = Number(e.target.value);
+                    setTenderPagination((prev) => ({ ...prev, limit: newLimit, page: 1 }));
+                  }}
+                >
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+                <span>entries</span>
+                <span className="text-slate-400">|</span>
+                <span>
+                  Showing {totalTenders ? tenderStartIndex + 1 : 0}
+                  -
+                  {Math.min(tenderStartIndex + tenderLimit, totalTenders)} of{" "}
+                  {totalTenders}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={tenderPage <= 1}
+                  onClick={() => setTenderPagination((prev) => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
+                  className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+                >
+                  Previous
+                </button>
+                <span className="font-semibold text-slate-800">
+                  Page {tenderPage} / {tenderTotalPages}
+                </span>
+                <button
+                  type="button"
+                  disabled={tenderPage >= tenderTotalPages}
+                  onClick={() => setTenderPagination((prev) => ({ ...prev, page: Math.min(tenderTotalPages, prev.page + 1) }))}
+                  className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 transition"
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
-            {tenderEditor.form ? (
-              <>
-                <div className="mb-3 flex items-center justify-between">
-                  <p className="text-sm font-semibold text-slate-800">
-                    {tenderEditor.index === null ? "Add Tender" : "Edit Tender"}
+        {/* Tender Snapshot */}
+        <div className={cardClass}>
+          <h3 className="mb-3 text-base font-semibold text-slate-900">Tender Snapshot</h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Active Tenders</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.current.length}</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Archived Tenders</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.archived.length}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Modal Overlay for Add/Edit Tender */}
+        {tenderEditor.form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+            <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
+              {/* Modal Header */}
+              <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">
+                    {tenderEditor.index === null ? "➕ Add New Tender" : "Edit Tender"}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {tenderEditor.index === null
+                      ? "Publish a new procurement tender notice on the smart campus portal."
+                      : `Update procurement details for tender: ${tenderEditor.form.title}.`}
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => setTenderEditor({ index: null, form: null })}
-                    className="text-xs font-medium text-slate-500 hover:text-slate-700"
-                  >
-                    Cancel
-                  </button>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setTenderEditor({ index: null, form: null })}
+                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-                <div className="space-y-3">
-                  <Field label="Tender ID (Backend Generated)">
-                    <input className={inputClass} value={tenderEditor.form.id || "Auto-generated by backend"} disabled />
-                  </Field>
-                  <Field label="Title">
-                    <input
-                      className={inputClass}
-                      value={tenderEditor.form.title || ""}
-                      onChange={(e) =>
-                        setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, title: e.target.value } }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Description">
-                    <textarea
-                      className={`${inputClass} min-h-24`}
-                      value={tenderEditor.form.description || ""}
-                      onChange={(e) =>
-                        setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, description: e.target.value } }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Closing Date">
-                    <input
-                      className={inputClass}
-                      type="date"
-                      value={tenderEditor.form.closingDate || ""}
-                      onChange={(e) =>
-                        setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, closingDate: e.target.value } }))
-                      }
-                    />
-                  </Field>
-                  <Field label="Document URL">
-                    <input
-                      className={inputClass}
-                      value={tenderEditor.form.documentUrl || ""}
-                      onChange={(e) =>
-                        setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: e.target.value } }))
-                      }
-                    />
-                  </Field>
-                </div>
+              {/* Modal Body */}
+              <div className="flex-1 overflow-y-auto pr-1 space-y-3">
+                <Field label="Tender ID (Backend Generated)">
+                  <input className={`${inputClass} bg-slate-100 cursor-not-allowed`} value={tenderEditor.form.id || "Auto-generated by backend"} disabled />
+                </Field>
+                <Field label="Title">
+                  <input
+                    className={inputClass}
+                    value={tenderEditor.form.title || ""}
+                    placeholder="Enter tender title"
+                    onChange={(e) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, title: e.target.value } }))
+                    }
+                  />
+                </Field>
+                <Field label="Description">
+                  <textarea
+                    className={`${inputClass} min-h-24`}
+                    value={tenderEditor.form.description || ""}
+                    placeholder="Provide a detailed description of the tender"
+                    onChange={(e) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, description: e.target.value } }))
+                    }
+                  />
+                </Field>
+                <Field label="Closing Date">
+                  <input
+                    className={inputClass}
+                    type="date"
+                    value={tenderEditor.form.closingDate || ""}
+                    onChange={(e) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, closingDate: e.target.value } }))
+                    }
+                  />
+                </Field>
+                <Field label="Document URL">
+                  <input
+                    className={inputClass}
+                    value={tenderEditor.form.documentUrl || ""}
+                    placeholder="Enter link to download official PDF/Doc"
+                    onChange={(e) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: e.target.value } }))
+                    }
+                  />
+                </Field>
+              </div>
 
+              {/* Modal Footer Actions */}
+              <div className="mt-6 flex items-center justify-end gap-2 border-t border-slate-100 pt-4 text-right">
+                <button
+                  type="button"
+                  onClick={() => setTenderEditor({ index: null, form: null })}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
                 <button
                   type="button"
                   disabled={isTenderSaving}
                   onClick={handleSaveTender}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="rounded-lg bg-slate-950 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
                 >
                   {isTenderSaving ? "Saving..." : "Save Tender"}
                 </button>
-              </>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderDacTab = () => {
+    const filtered = dacMembers.all.filter((member) => {
+      const query = dacFilters.query.toLowerCase();
+      const matchesSearch = 
+        member.name.toLowerCase().includes(query) ||
+        member.role.toLowerCase().includes(query) ||
+        member.designation.toLowerCase().includes(query) ||
+        member.department.toLowerCase().includes(query);
+      
+      const matchesType = dacFilters.teamType === "all" || member.teamType === dacFilters.teamType;
+      
+      return matchesSearch && matchesType;
+    });
+
+    const filteredFaculty = filtered.filter((m) => m.teamType === "faculty");
+    const filteredStudent = filtered.filter((m) => m.teamType === "student");
+
+    const renderMemberCard = (member) => {
+      const actualIndex = dacMembers.all.findIndex((m) => m.id === member.id);
+      
+      // Filter same-team members to enable conditional arrows
+      const teamMembers = dacMembers.all.filter(m => m.teamType === member.teamType);
+      const subIndex = teamMembers.findIndex(m => m.id === member.id);
+      const isFirst = subIndex === 0;
+      const isLast = subIndex === teamMembers.length - 1;
+
+      return (
+        <div
+          key={member.id || member.localId}
+          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between"
+        >
+          <div className="flex items-start gap-3 min-w-0">
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.name}
+                className="h-14 w-14 rounded-2xl object-cover ring-2 ring-slate-100 flex-shrink-0"
+              />
             ) : (
-              <div className="flex h-full min-h-[180px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-                Select tender to edit or add a new tender.
+              <div className="h-14 w-14 rounded-2xl bg-slate-100 flex items-center justify-center ring-2 ring-slate-100 text-slate-400 flex-shrink-0">
+                <User className="h-7 w-7" />
               </div>
             )}
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <p className="font-bold text-slate-900 truncate text-sm">{member.name}</p>
+                <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${
+                  member.teamType === "faculty" 
+                    ? "bg-indigo-100 text-indigo-700" 
+                    : "bg-emerald-100 text-emerald-700"
+                }`}>
+                  {member.teamType}
+                </span>
+                {!member.isActive ? (
+                  <span className="rounded bg-rose-100 px-1.5 py-0.5 text-[9px] font-semibold text-rose-700">
+                    Inactive
+                  </span>
+                ) : null}
+              </div>
+              <p className="text-xs font-semibold text-blue-700 mt-0.5">{member.role}</p>
+              <p className="text-[11px] text-slate-500 mt-0.5 leading-tight">{member.designation} • {member.department}</p>
+              <p className="text-[10px] font-medium text-slate-400 mt-1.5 bg-slate-50 border border-slate-100 rounded px-1.5 py-0.5 inline-block">Position Index: {member.sortOrder}</p>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div className={cardClass}>
-        <h3 className="mb-3 text-base font-semibold text-slate-900">Tender Snapshot</h3>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Active Tenders</p>
-            <p className="mt-1 text-2xl font-bold text-slate-900">{tenderSplit.current.length}</p>
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-xs uppercase tracking-wide text-slate-500">Archived Tenders</p>
-            <p className="mt-1 text-2xl font-bold text-slate-900">{tenderSplit.archived.length}</p>
+          <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 gap-2">
+            {/* Reordering Controls */}
+            <div className="flex gap-1">
+              <button
+                type="button"
+                disabled={isFirst || isDacSaving}
+                onClick={() => handleDacReorder(actualIndex, "up")}
+                className="p-1.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-600 disabled:opacity-30 disabled:hover:bg-slate-50 transition border border-slate-200"
+                title="Move Up"
+              >
+                <ArrowUp className="h-3.5 w-3.5" />
+              </button>
+              <button
+                type="button"
+                disabled={isLast || isDacSaving}
+                onClick={() => handleDacReorder(actualIndex, "down")}
+                className="p-1.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-600 disabled:opacity-30 disabled:hover:bg-slate-50 transition border border-slate-200"
+                title="Move Down"
+              >
+                <ArrowDown className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            
+            {/* Actions */}
+            <div className="flex gap-1.5">
+              <button
+                type="button"
+                onClick={() =>
+                  setDacEditor({
+                    index: actualIndex,
+                    form: {
+                      id: member.id,
+                      name: member.name,
+                      role: member.role,
+                      department: member.department,
+                      designation: member.designation,
+                      image: member.image,
+                      email: member.email,
+                      linkedin: member.linkedin,
+                      portfolio: member.portfolio,
+                      bio: member.bio,
+                      skills: Array.isArray(member.skills) ? member.skills.join(", ") : member.skills,
+                      teamType: member.teamType,
+                      sortOrder: member.sortOrder,
+                      isActive: member.isActive,
+                    },
+                  })
+                }
+                className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+              >
+                <Pencil className="h-3 w-3" /> Edit
+              </button>
+              <button
+                type="button"
+                disabled={isDacSaving || dacDeletingKey === String(member.id)}
+                onClick={() => handleDeleteDacMember(actualIndex)}
+                className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+              >
+                <Trash2 className="h-3 w-3" />
+                {dacDeletingKey === String(member.id) ? "..." : "Delete"}
+              </button>
+            </div>
           </div>
         </div>
+      );
+    };
+
+    return (
+      <div className="space-y-4">
+        <div className={cardClass}>
+          <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Digital Automation Cell (DAC) Team</h2>
+              <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main DAC page.</p>
+            </div>
+            <button
+              type="button"
+              onClick={() =>
+                setDacEditor({
+                  index: null,
+                  form: {
+                    name: "",
+                    role: "",
+                    department: "",
+                    designation: "",
+                    image: "",
+                    email: "",
+                    linkedin: "",
+                    portfolio: "",
+                    bio: "",
+                    skills: "",
+                    teamType: "student",
+                    sortOrder: "",
+                    isActive: true,
+                  },
+                })
+              }
+              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition shadow-sm self-start sm:self-auto"
+            >
+              <Plus className="h-4 w-4" /> Add Team Member
+            </button>
+          </div>
+
+          {isDacLoading ? (
+            <div className="mb-4 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800 flex items-center gap-2">
+              <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading team members...
+            </div>
+          ) : null}
+
+          {dacApiError ? (
+            <div className="mb-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+              API Error: {dacApiError}
+            </div>
+          ) : null}
+
+          <div className="space-y-4">
+            <FilterBar
+              searchValue={dacFilters.query}
+              onSearchChange={(value) => setDacFilters((prev) => ({ ...prev, query: value }))}
+              searchPlaceholder="Search by name, role, department..."
+              onClear={() => setDacFilters({ query: "", teamType: "all" })}
+            >
+              <select
+                className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-semibold text-slate-700"
+                value={dacFilters.teamType}
+                onChange={(e) => setDacFilters((prev) => ({ ...prev, teamType: e.target.value }))}
+              >
+                <option value="all">All Teams</option>
+                <option value="faculty">Faculty Team</option>
+                <option value="student">Student Team</option>
+              </select>
+            </FilterBar>
+
+            <div className="space-y-6 max-h-[650px] overflow-y-auto pr-1 py-1">
+              {/* Faculty Team Section */}
+              {(dacFilters.teamType === "all" || dacFilters.teamType === "faculty") && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <h3 className="text-xs font-bold text-indigo-700 uppercase tracking-wider">Faculty Advisors / Mentors</h3>
+                    <span className="rounded-full bg-indigo-50 border border-indigo-100 px-2 py-0.5 text-[10px] font-bold text-indigo-700">
+                      {filteredFaculty.length}
+                    </span>
+                  </div>
+                  {filteredFaculty.length === 0 ? (
+                    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center text-xs text-slate-400">
+                      No faculty members found matching search filters.
+                    </div>
+                  ) : (
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                      {filteredFaculty.map(renderMemberCard)}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Student Team Section */}
+              {(dacFilters.teamType === "all" || dacFilters.teamType === "student") && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Student Developers / Builders</h3>
+                    <span className="rounded-full bg-emerald-50 border border-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                      {filteredStudent.length}
+                    </span>
+                  </div>
+                  {filteredStudent.length === 0 ? (
+                    <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center text-xs text-slate-400">
+                      No student members found matching search filters.
+                    </div>
+                  ) : (
+                    <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                      {filteredStudent.map(renderMemberCard)}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Modal Overlay for Add/Edit Member */}
+        {dacEditor.form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+            <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
+              {/* Modal Header */}
+              <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">
+                    {dacEditor.index === null ? "➕ Add DAC Member" : "Edit DAC Member"}
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {dacEditor.index === null 
+                      ? "Create a new Digital Automation Cell member profile." 
+                      : `Modify details for ${dacEditor.form.name}.`}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDacEditor({ index: null, form: null })}
+                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Scrollable Form Body */}
+              <div className="flex-1 overflow-y-auto space-y-4 pr-1 text-left">
+                {dacApiError && (
+                  <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+                    {dacApiError}
+                  </div>
+                )}
+
+                <Field label="Name">
+                  <input
+                    className={inputClass}
+                    value={dacEditor.form.name || ""}
+                    onChange={(e) =>
+                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))
+                    }
+                    placeholder="e.g. Ashwani Kushwaha"
+                  />
+                </Field>
+
+                <div className="grid gap-3 grid-cols-2">
+                  <Field label="Team Type">
+                    <select
+                      className={inputClass}
+                      value={dacEditor.form.teamType || "student"}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, teamType: e.target.value } }))
+                      }
+                    >
+                      <option value="student">Student Team</option>
+                      <option value="faculty">Faculty Team</option>
+                    </select>
+                  </Field>
+
+                  <Field label="Sort Order / Position (Blank = Bottom)">
+                    <input
+                      className={inputClass}
+                      type="number"
+                      value={dacEditor.form.sortOrder ?? ""}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, sortOrder: e.target.value } }))
+                      }
+                      placeholder="e.g. 0 for top, 1 for second"
+                    />
+                  </Field>
+                </div>
+
+                <Field label="Role">
+                  <input
+                    className={inputClass}
+                    value={dacEditor.form.role || ""}
+                    onChange={(e) =>
+                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, role: e.target.value } }))
+                    }
+                    placeholder="e.g. Lead Full-Stack Developer or Chief Patron"
+                  />
+                </Field>
+
+                <div className="grid gap-3 grid-cols-2">
+                  <Field label="Designation">
+                    <input
+                      className={inputClass}
+                      value={dacEditor.form.designation || ""}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))
+                      }
+                      placeholder="e.g. Student Lead or Vice Chancellor"
+                    />
+                  </Field>
+
+                  <Field label="Department">
+                    <input
+                      className={inputClass}
+                      value={dacEditor.form.department || ""}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, department: e.target.value } }))
+                      }
+                      placeholder="e.g. B.Tech CSE or School of ICT"
+                    />
+                  </Field>
+                </div>
+
+                <Field label="Image URL">
+                  <input
+                    className={inputClass}
+                    value={dacEditor.form.image || ""}
+                    onChange={(e) =>
+                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, image: e.target.value } }))
+                    }
+                    placeholder="https://..."
+                  />
+                </Field>
+
+                <Field label="Email Address">
+                  <input
+                    className={inputClass}
+                    type="email"
+                    value={dacEditor.form.email || ""}
+                    onChange={(e) =>
+                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))
+                    }
+                    placeholder="e.g. example@gbu.ac.in"
+                  />
+                </Field>
+
+                <div className="grid gap-3 grid-cols-2">
+                  <Field label="LinkedIn Profile URL">
+                    <input
+                      className={inputClass}
+                      value={dacEditor.form.linkedin || ""}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, linkedin: e.target.value } }))
+                      }
+                      placeholder="https://linkedin.com/in/..."
+                    />
+                  </Field>
+
+                  <Field label="Portfolio / Website URL">
+                    <input
+                      className={inputClass}
+                      value={dacEditor.form.portfolio || ""}
+                      onChange={(e) =>
+                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, portfolio: e.target.value } }))
+                      }
+                      placeholder="https://github.com/..."
+                    />
+                  </Field>
+                </div>
+
+                {dacEditor.form.teamType === "student" && (
+                  <>
+                    <Field label="Short Bio">
+                      <textarea
+                        className={`${inputClass} min-h-[80px]`}
+                        value={dacEditor.form.bio || ""}
+                        onChange={(e) =>
+                          setDacEditor((prev) => ({ ...prev, form: { ...prev.form, bio: e.target.value } }))
+                        }
+                        placeholder="Briefly describe key contributions..."
+                      />
+                    </Field>
+
+                    <Field label="Skills (Comma-separated)">
+                      <input
+                        className={inputClass}
+                        value={dacEditor.form.skills || ""}
+                        onChange={(e) =>
+                          setDacEditor((prev) => ({ ...prev, form: { ...prev.form, skills: e.target.value } }))
+                        }
+                        placeholder="React, Node.js, PostgreSQL"
+                      />
+                    </Field>
+                  </>
+                )}
+
+                <div className="flex items-center gap-2 py-1">
+                  <input
+                    type="checkbox"
+                    id="dacIsActive"
+                    checked={dacEditor.form.isActive}
+                    onChange={(e) =>
+                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, isActive: e.target.checked } }))
+                    }
+                    className="rounded border-slate-300 text-slate-900 focus:ring-slate-700 h-4 w-4"
+                  />
+                  <label htmlFor="dacIsActive" className="text-xs font-semibold text-slate-700 cursor-pointer">
+                    Is Active Member
+                  </label>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setDacEditor({ index: null, form: null })}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  disabled={isDacSaving}
+                  onClick={handleSaveDacMember}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                >
+                  {isDacSaving ? "Saving..." : "Save Member"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderSchoolTab = () => {
     if (selectedSchoolId === null && !schoolEditor.isCreating) {
@@ -3411,8 +4525,8 @@ const AdminDashboard = () => {
         <div className="space-y-4">
           <div className={cardClass}>
             <div className="mb-4">
-              <h2 className="text-lg font-semibold text-slate-900">Schools Management</h2>
-              <p className="text-sm text-slate-500">All 8 GBU schools are pre-configured. Click a school to manage its content, events, news, notices &amp; more.</p>
+              <h2 className="text-lg font-semibold text-slate-900">Schools & Organizations Management</h2>
+              <p className="text-sm text-slate-500">Select a school to view and manage its content, events, news, notices, and clubs.</p>
             </div>
 
             {schoolApiError && (
@@ -3428,31 +4542,40 @@ const AdminDashboard = () => {
                 No schools found. Backend may not be running.
               </div>
             ) : (
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {schoolsList.map((school) => {
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {schoolsList.filter((s) => s.code !== "NSS" && s.code !== "NCC").map((school) => {
                   const c = school.content || {};
                   const counts = [
-                    { label: "Events", n: (c.events || []).length },
-                    { label: "News", n: (c.news || []).length },
-                    { label: "Notices", n: (c.notices || []).length },
+                    { label: "Events", n: (c.events || []).length, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
+                    { label: "News", n: (c.news || []).length, bg: "bg-emerald-50 text-emerald-700 border-emerald-100" },
+                    { label: "Notices", n: (c.notices || []).length, bg: "bg-sky-50 text-sky-700 border-sky-100" },
                   ];
                   return (
                     <div
                       key={school.id}
                       onClick={() => openSchool(school)}
-                      className="group cursor-pointer rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-blue-300 hover:shadow-md hover:ring-2 hover:ring-blue-100"
+                      className="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-350 hover:shadow-lg flex flex-col justify-between min-h-[170px]"
                     >
-                      <div className="mb-2 flex items-center gap-2">
-                        <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">{school.code}</span>
-                        <span className="rounded-full bg-green-50 px-2 py-0.5 text-[10px] font-medium text-green-700">Active</span>
+                      <div>
+                        <div className="mb-3 flex items-center justify-between">
+                          <span className="rounded-lg bg-slate-900 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase">{school.code}</span>
+                          <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-250">Active</span>
+                        </div>
+                        <h3 className="text-base font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-slate-950 transition-colors">{school.name}</h3>
                       </div>
-                      <h3 className="text-sm font-semibold text-slate-900 leading-tight line-clamp-2 group-hover:text-blue-700 transition-colors">{school.name}</h3>
-                      <div className="mt-2.5 flex flex-wrap gap-1 text-[10px] text-slate-500">
-                        {counts.map((c) => (
-                          <span key={c.label} className="rounded bg-slate-50 px-1.5 py-0.5">{c.n} {c.label}</span>
-                        ))}
+                      
+                      <div className="mt-4">
+                        <div className="flex items-center gap-1.5 text-[10px] font-semibold">
+                          {counts.map((cnt) => (
+                            <span key={cnt.label} className={`rounded-md border px-2 py-0.5 ${cnt.bg}`}>
+                              {cnt.n} {cnt.label}
+                            </span>
+                          ))}
+                        </div>
+                        <p className="mt-3.5 text-xs font-bold text-slate-800 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                          Configure Content &rarr;
+                        </p>
                       </div>
-                      <p className="mt-2.5 text-xs font-medium text-blue-600 group-hover:text-blue-700">Manage →</p>
                     </div>
                   );
                 })}
@@ -3752,9 +4875,1094 @@ const AdminDashboard = () => {
             imageLink: "",
           },
         )}
+
+      {activeSchoolSubTab === "clubs" && schoolData.schoolCode !== "NSS" && schoolData.schoolCode !== "NCC" &&
+        renderCollectionEditor(
+          "clubs",
+          "Clubs & Societies",
+          [
+            { key: "name", label: "Club Name" },
+            { key: "tagline", label: "Tagline" },
+            { key: "category", label: "Category (Technical / Cultural / Sports / Social)" },
+            { key: "logo", label: "Logo URL" },
+            { key: "banner", label: "Banner Image URL" },
+            { key: "memberCount", label: "Member Count", type: "number" },
+            { key: "facultyAdvisor", label: "Faculty Advisor Name" },
+            { key: "facultyAdvisorDept", label: "Faculty Advisor Department" },
+            { key: "presidentName", label: "President Name" },
+            { key: "presidentDept", label: "President Department/Year" },
+            { key: "vicePresidentName", label: "Vice President Name" },
+            { key: "vicePresidentDept", label: "Vice President Department/Year" },
+            { key: "secretaryName", label: "Secretary Name" },
+            { key: "secretaryDept", label: "Secretary Department/Year" },
+            { key: "treasurerName", label: "Treasurer Name" },
+            { key: "treasurerDept", label: "Treasurer Department/Year" },
+            { key: "instagram", label: "Instagram URL" },
+            { key: "linkedin", label: "LinkedIn URL" },
+            { key: "youtube", label: "YouTube URL" },
+            { key: "description", label: "Description", type: "textarea" },
+            { key: "objectives", label: "Objectives (comma separated)", type: "textarea" },
+            { key: "history", label: "History", type: "textarea" },
+            { key: "achievements", label: "Achievements (comma separated)", type: "textarea" },
+          ],
+          {
+            name: "",
+            tagline: "",
+            category: "Technical",
+            logo: "",
+            banner: "",
+            memberCount: 0,
+            facultyAdvisor: "",
+            facultyAdvisorDept: "",
+            presidentName: "",
+            presidentDept: "",
+            vicePresidentName: "",
+            vicePresidentDept: "",
+            secretaryName: "",
+            secretaryDept: "",
+            treasurerName: "",
+            treasurerDept: "",
+            instagram: "",
+            linkedin: "",
+            youtube: "",
+            description: "",
+            objectives: "",
+            history: "",
+            achievements: "",
+          }
+        )}
     </div>
   );
 };
+
+  const renderNssTab = () => {
+    return (
+      <div className="space-y-4">
+        {/* Header Panel */}
+        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">National Service Scheme (NSS) Management</h2>
+              <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p>
+            </div>
+          </div>
+          <button
+            onClick={handleSaveSchool}
+            disabled={isSchoolSaving}
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            <Save className="h-4 w-4" />
+            {isSchoolSaving ? "Saving..." : "Save NSS Settings"}
+          </button>
+        </div>
+
+        {/* Dynamic sub-tab rendering */}
+        {activeNssSubTab === "basic" && (
+          <div className="space-y-4">
+            {/* Overview & Basic Info Card */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">NSS Overview & Basic Settings</h3>
+              <div className="space-y-4">
+                <Field label="NSS Name">
+                  <input
+                    className={inputClass}
+                    value={schoolData.schoolName || ""}
+                    onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolName: e.target.value }))}
+                  />
+                </Field>
+                <Field label="NSS Description / Mission Statement">
+                  <textarea
+                    className={`${inputClass} min-h-28`}
+                    value={schoolData.schoolDescription || ""}
+                    onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolDescription: e.target.value }))}
+                  />
+                </Field>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field label="Official Website Link">
+                    <input
+                      className={inputClass}
+                      value={schoolData.websiteUrl || ""}
+                      onChange={(e) => setSchoolData((prev) => ({ ...prev, websiteUrl: e.target.value }))}
+                    />
+                  </Field>
+                  <Field label="Volunteer Registration Link">
+                    <input
+                      className={inputClass}
+                      value={schoolData.email || ""}
+                      onChange={(e) => setSchoolData((prev) => ({ ...prev, email: e.target.value }))}
+                    />
+                  </Field>
+                </div>
+              </div>
+            </div>
+
+            {/* Coordinator Details Card */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">NSS Coordinator Details</h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                <Field label="Coordinator Name">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.name || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, name: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Designation">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.designation || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, designation: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Department">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.department || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, department: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Tenure (e.g. 2025 - Present)">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.tenure || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, tenure: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Email Address">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.email || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, email: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Image URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.image || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, image: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="LinkedIn Profile">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.linkedin || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, linkedin: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Twitter Profile">
+                  <input
+                    className={inputClass}
+                    value={schoolData.coordinator?.twitter || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        coordinator: { ...prev.coordinator, twitter: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+            </div>
+
+            {/* Social Media Links Card */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">Social Media Links</h3>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Field label="Facebook Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.facebook || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, facebook: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Twitter / X Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.twitter || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, twitter: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Instagram Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.instagram || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, instagram: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="YouTube Channel URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.youtube || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, youtube: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="LinkedIn Page URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.linkedin || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, linkedin: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeNssSubTab === "council" && (
+          <div className={cardClass}>
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-semibold text-slate-900">NSS Core Council Members</h3>
+                <p className="text-xs text-slate-500">Add, edit, or remove members in the NSS Core Council.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const name = prompt("Enter Member Name:");
+                  if (!name) return;
+                  const role = prompt("Enter Role (e.g. Vice President):");
+                  const email = prompt("Enter Email:");
+                  const image = prompt("Enter Image URL:");
+                  const achievements = prompt("Enter Achievements (comma separated):");
+                  const newMember = { name, role, email, image, achievements };
+                  setSchoolData((prev) => ({
+                    ...prev,
+                    coreCouncil: [...(prev.coreCouncil || []), newMember]
+                  }));
+                }}
+                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+              >
+                <Plus className="h-3.5 w-3.5" /> Add Member
+              </button>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-left text-sm text-slate-600">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-700">
+                    <th className="px-4 py-3">Photo</th>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Role</th>
+                    <th className="px-4 py-3">Email</th>
+                    <th className="px-4 py-3">Achievements</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {(schoolData.coreCouncil || []).map((member, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/50">
+                      <td className="px-4 py-3">
+                        <img src={member.image || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
+                      </td>
+                      <td className="px-4 py-3 font-medium text-slate-900">{member.name}</td>
+                      <td className="px-4 py-3">{member.role}</td>
+                      <td className="px-4 py-3">{member.email}</td>
+                      <td className="px-4 py-3 max-w-[200px] truncate">{member.achievements}</td>
+                      <td className="px-4 py-3 text-right">
+                        <div className="inline-flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const name = prompt("Enter Member Name:", member.name) || member.name;
+                              const role = prompt("Enter Role:", member.role) || member.role;
+                              const email = prompt("Enter Email:", member.email) || member.email;
+                              const image = prompt("Enter Image URL:", member.image) || member.image;
+                              const achievements = prompt("Enter Achievements:", member.achievements) || member.achievements;
+                              const updated = { name, role, email, image, achievements };
+                              setSchoolData((prev) => {
+                                const list = [...prev.coreCouncil];
+                                list[idx] = updated;
+                                return { ...prev, coreCouncil: list };
+                              });
+                            }}
+                            className="text-slate-500 hover:text-slate-900"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm(`Remove ${member.name}?`)) {
+                                setSchoolData((prev) => ({
+                                  ...prev,
+                                  coreCouncil: prev.coreCouncil.filter((_, i) => i !== idx)
+                                }));
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {(schoolData.coreCouncil || []).length === 0 && (
+                    <tr>
+                      <td colSpan={6} className="py-8 text-center text-slate-400">No members configured in the council list.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {activeNssSubTab === "units" && (
+          <div className={cardClass}>
+            <h3 className="mb-4 text-base font-semibold text-slate-900">NSS Units (Units 1 to 6)</h3>
+            <div className="space-y-6">
+              {(schoolData.units || []).map((unit, idx) => (
+                <div key={idx} className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                  <div className="mb-4 border-b border-slate-200 pb-2">
+                    <span className="text-sm font-bold text-slate-800">Unit {unit.unitNumber || idx + 1}</span>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
+                      <span className="text-xs font-semibold text-indigo-600">Programme Officer</span>
+                      <Field label="Officer Name">
+                        <input
+                          className={inputClass}
+                          value={unit.programOfficer?.name || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              programOfficer: { ...units[idx].programOfficer, name: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                      <Field label="Officer Department">
+                        <input
+                          className={inputClass}
+                          value={unit.programOfficer?.department || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              programOfficer: { ...units[idx].programOfficer, department: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                      <Field label="Officer Image URL">
+                        <input
+                          className={inputClass}
+                          value={unit.programOfficer?.image || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              programOfficer: { ...units[idx].programOfficer, image: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                    </div>
+
+                    <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
+                      <span className="text-xs font-semibold text-indigo-600">Faculty Mentor</span>
+                      <Field label="Mentor Name">
+                        <input
+                          className={inputClass}
+                          value={unit.facultyMentor?.name || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              facultyMentor: { ...units[idx].facultyMentor, name: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                      <Field label="Mentor Department">
+                        <input
+                          className={inputClass}
+                          value={unit.facultyMentor?.department || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              facultyMentor: { ...units[idx].facultyMentor, department: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                      <Field label="Mentor Image URL">
+                        <input
+                          className={inputClass}
+                          value={unit.facultyMentor?.image || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = {
+                              ...units[idx],
+                              facultyMentor: { ...units[idx].facultyMentor, image: e.target.value }
+                            };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                    </div>
+
+                    <div className="md:col-span-2 grid gap-4 sm:grid-cols-2">
+                      <Field label="Convenors (comma separated names)">
+                        <input
+                          className={inputClass}
+                          value={unit.convenors || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = { ...units[idx], convenors: e.target.value };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                      <Field label="Co-Convenors (comma separated names)">
+                        <input
+                          className={inputClass}
+                          value={unit.coConvenors || ""}
+                          onChange={(e) => {
+                            const units = [...schoolData.units];
+                            units[idx] = { ...units[idx], coConvenors: e.target.value };
+                            setSchoolData(prev => ({ ...prev, units }));
+                          }}
+                        />
+                      </Field>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeNssSubTab === "events" &&
+          renderCollectionEditor(
+            "events",
+            "NSS Events",
+            [
+              { key: "title", label: "Event Title" },
+              { key: "date", label: "Date", type: "date" },
+              { key: "venue", label: "Venue" },
+              { key: "organizer", label: "Organizer" },
+              { key: "image", label: "Image URL" },
+              { key: "description", label: "Description", type: "textarea" },
+            ],
+            {
+              title: "",
+              date: "",
+              venue: "",
+              organizer: "NSS Unit",
+              image: "",
+              description: "",
+            }
+          )}
+
+        {activeNssSubTab === "notices" &&
+          renderCollectionEditor(
+            "notices",
+            "NSS Notices",
+            [
+              { key: "title", label: "Notice Title" },
+              { key: "date", label: "Date", type: "date" },
+              { key: "priority", label: "Priority" },
+              { key: "pdfUrl", label: "PDF Document URL" },
+              { key: "content", label: "Content", type: "textarea" },
+            ],
+            {
+              title: "",
+              date: "",
+              priority: "medium",
+              pdfUrl: "",
+              content: "",
+            }
+          )}
+
+        {activeNssSubTab === "gallery" &&
+          renderCollectionEditor(
+            "eventGallery",
+            "NSS Event Gallery",
+            [
+              { key: "title", label: "Gallery Title" },
+              { key: "eventDate", label: "Event Date", type: "date" },
+              { key: "imageUrl", label: "Image URL" },
+            ],
+            {
+              title: "",
+              eventDate: "",
+              imageUrl: "",
+            }
+          )}
+      </div>
+    );
+  };
+
+  const renderNccTab = () => {
+    return (
+      <div className="space-y-4">
+        {/* Header Panel */}
+        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">National Cadet Corps (NCC) Management</h2>
+              <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p>
+            </div>
+          </div>
+          <button
+            onClick={handleSaveSchool}
+            disabled={isSchoolSaving}
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            <Save className="h-4 w-4" />
+            {isSchoolSaving ? "Saving..." : "Save NCC Settings"}
+          </button>
+        </div>
+
+        {/* Dynamic sub-tab rendering */}
+        {activeNccSubTab === "basic" && (
+          <div className="space-y-4">
+            {/* Overview & Basic Info Card */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">NCC Overview & Basic Settings</h3>
+              <div className="space-y-4">
+                <Field label="NCC Name">
+                  <input
+                    className={inputClass}
+                    value={schoolData.schoolName || ""}
+                    onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolName: e.target.value }))}
+                  />
+                </Field>
+                <Field label="NCC Description / Mission Statement">
+                  <textarea
+                    className={`${inputClass} min-h-28`}
+                    value={schoolData.schoolDescription || ""}
+                    onChange={(e) => setSchoolData((prev) => ({ ...prev, schoolDescription: e.target.value }))}
+                  />
+                </Field>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field label="Official Website Link">
+                    <input
+                      className={inputClass}
+                      value={schoolData.websiteUrl || ""}
+                      onChange={(e) => setSchoolData((prev) => ({ ...prev, websiteUrl: e.target.value }))}
+                    />
+                  </Field>
+                  <Field label="Registration Link">
+                    <input
+                      className={inputClass}
+                      value={schoolData.email || ""}
+                      onChange={(e) => setSchoolData((prev) => ({ ...prev, email: e.target.value }))}
+                    />
+                  </Field>
+                </div>
+              </div>
+            </div>
+
+            {/* Associate NCC Officer (ANO) Details */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">Associate NCC Officer (ANO) Details</h3>
+              <div className="grid gap-4 md:grid-cols-2">
+                <Field label="ANO Name">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.name || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, name: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Designation">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.designation || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, designation: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Email Address">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.email || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, email: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Phone Number">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.phone || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, phone: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Service Record (e.g. 15 years in Army)">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.serviceRecord || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, serviceRecord: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Image URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.anoDetails?.image || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        anoDetails: { ...prev.anoDetails, image: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <div className="md:col-span-2 grid gap-4 sm:grid-cols-2">
+                  <Field label="Qualifications (comma separated)">
+                    <input
+                      className={inputClass}
+                      value={schoolData.anoDetails?.qualifications || ""}
+                      onChange={(e) =>
+                        setSchoolData((prev) => ({
+                          ...prev,
+                          anoDetails: { ...prev.anoDetails, qualifications: e.target.value }
+                        }))
+                      }
+                    />
+                  </Field>
+                  <Field label="Awards & Commendations (comma separated)">
+                    <input
+                      className={inputClass}
+                      value={schoolData.anoDetails?.awards || ""}
+                      onChange={(e) =>
+                        setSchoolData((prev) => ({
+                          ...prev,
+                          anoDetails: { ...prev.anoDetails, awards: e.target.value }
+                        }))
+                      }
+                    />
+                  </Field>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Media Links Card */}
+            <div className={cardClass}>
+              <h3 className="mb-4 text-base font-semibold text-slate-900">Social Media Links</h3>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Field label="Facebook Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.facebook || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, facebook: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Twitter / X Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.twitter || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, twitter: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="Instagram Profile URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.instagram || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, instagram: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="YouTube Channel URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.youtube || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, youtube: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+                <Field label="LinkedIn Page URL">
+                  <input
+                    className={inputClass}
+                    value={schoolData.socialMedia?.linkedin || ""}
+                    onChange={(e) =>
+                      setSchoolData((prev) => ({
+                        ...prev,
+                        socialMedia: { ...prev.socialMedia, linkedin: e.target.value }
+                      }))
+                    }
+                  />
+                </Field>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeNccSubTab === "leaders" && (
+          <div className={cardClass}>
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-semibold text-slate-900">NCC Cadet Leadership</h3>
+                <p className="text-xs text-slate-500">Configure the cadet leadership hierarchy.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const name = prompt("Enter Cadet Name:");
+                  if (!name) return;
+                  const rank = prompt("Enter Rank (e.g. CUO, CSM):");
+                  const year = prompt("Enter Academic Year:");
+                  const program = prompt("Enter Study Program:");
+                  const email = prompt("Enter Email:");
+                  const image = prompt("Enter Image URL:");
+                  const achievements = prompt("Enter Achievements (comma separated):");
+                  const newLeader = { name, rank, year, program, email, image, achievements };
+                  setSchoolData((prev) => ({
+                    ...prev,
+                    cadetLeaders: [...(prev.cadetLeaders || []), newLeader]
+                  }));
+                }}
+                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+              >
+                <Plus className="h-3.5 w-3.5" /> Add Cadet Leader
+              </button>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-left text-sm text-slate-600">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-700">
+                    <th className="px-4 py-3">Photo</th>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Rank</th>
+                    <th className="px-4 py-3">Details</th>
+                    <th className="px-4 py-3">Email</th>
+                    <th className="px-4 py-3">Achievements</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {(schoolData.cadetLeaders || []).map((leader, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/50">
+                      <td className="px-4 py-3">
+                        <img src={leader.image || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
+                      </td>
+                      <td className="px-4 py-3 font-medium text-slate-900">{leader.name}</td>
+                      <td className="px-4 py-3">
+                        <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-bold text-slate-800">{leader.rank}</span>
+                      </td>
+                      <td className="px-4 py-3">{leader.year} • {leader.program}</td>
+                      <td className="px-4 py-3">{leader.email}</td>
+                      <td className="px-4 py-3 max-w-[200px] truncate">{leader.achievements}</td>
+                      <td className="px-4 py-3 text-right">
+                        <div className="inline-flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const name = prompt("Enter Name:", leader.name) || leader.name;
+                              const rank = prompt("Enter Rank:", leader.rank) || leader.rank;
+                              const year = prompt("Enter Year:", leader.year) || leader.year;
+                              const program = prompt("Enter Program:", leader.program) || leader.program;
+                              const email = prompt("Enter Email:", leader.email) || leader.email;
+                              const image = prompt("Enter Image URL:", leader.image) || leader.image;
+                              const achievements = prompt("Enter Achievements:", leader.achievements) || leader.achievements;
+                              const updated = { name, rank, year, program, email, image, achievements };
+                              setSchoolData((prev) => {
+                                const list = [...prev.cadetLeaders];
+                                list[idx] = updated;
+                                return { ...prev, cadetLeaders: list };
+                              });
+                            }}
+                            className="text-slate-500 hover:text-slate-900"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm(`Remove ${leader.name}?`)) {
+                                setSchoolData((prev) => ({
+                                  ...prev,
+                                  cadetLeaders: prev.cadetLeaders.filter((_, i) => i !== idx)
+                                }));
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {(schoolData.cadetLeaders || []).length === 0 && (
+                    <tr>
+                      <td colSpan={7} className="py-8 text-center text-slate-400">No cadet leaders configured.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {activeNccSubTab === "platoons" && (
+          <div className={cardClass}>
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h3 className="text-base font-semibold text-slate-900">NCC Platoon Structure</h3>
+                <p className="text-xs text-slate-500">Configure platoon strengths, commanders, and focus areas.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const name = prompt("Enter Platoon Name (e.g. Alpha Platoon):");
+                  if (!name) return;
+                  const cadets = Number(prompt("Enter Number of Cadets:")) || 0;
+                  const commander = prompt("Enter Commander Name:");
+                  const focus = prompt("Enter Focus Area:");
+                  const newPlatoon = { name, cadets, commander, focus };
+                  setSchoolData((prev) => ({
+                    ...prev,
+                    platoons: [...(prev.platoons || []), newPlatoon]
+                  }));
+                }}
+                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+              >
+                <Plus className="h-3.5 w-3.5" /> Add Platoon
+              </button>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-left text-sm text-slate-600">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold uppercase text-slate-700">
+                    <th className="px-4 py-3">Platoon Name</th>
+                    <th className="px-4 py-3">Cadets Count</th>
+                    <th className="px-4 py-3">Commander</th>
+                    <th className="px-4 py-3">Focus Area</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {(schoolData.platoons || []).map((platoon, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/50">
+                      <td className="px-4 py-3 font-semibold text-slate-800">{platoon.name}</td>
+                      <td className="px-4 py-3 font-medium text-slate-900">{platoon.cadets}</td>
+                      <td className="px-4 py-3">{platoon.commander}</td>
+                      <td className="px-4 py-3">
+                        <span className="rounded bg-orange-50 px-2.5 py-1 text-xs font-semibold text-orange-700">{platoon.focus}</span>
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <div className="inline-flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const name = prompt("Enter Platoon Name:", platoon.name) || platoon.name;
+                              const cadets = Number(prompt("Enter Cadets Count:", platoon.cadets)) || platoon.cadets;
+                              const commander = prompt("Enter Commander Name:", platoon.commander) || platoon.commander;
+                              const focus = prompt("Enter Focus:", platoon.focus) || platoon.focus;
+                              const updated = { name, cadets, commander, focus };
+                              setSchoolData((prev) => {
+                                const list = [...prev.platoons];
+                                list[idx] = updated;
+                                return { ...prev, platoons: list };
+                              });
+                            }}
+                            className="text-slate-500 hover:text-slate-900"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm(`Remove Platoon ${platoon.name}?`)) {
+                                setSchoolData((prev) => ({
+                                  ...prev,
+                                  platoons: prev.platoons.filter((_, i) => i !== idx)
+                                }));
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {(schoolData.platoons || []).length === 0 && (
+                    <tr>
+                      <td colSpan={5} className="py-8 text-center text-slate-400">No platoons configured.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {activeNccSubTab === "events" &&
+          renderCollectionEditor(
+            "events",
+            "NCC Events",
+            [
+              { key: "title", label: "Event Title" },
+              { key: "date", label: "Date", type: "date" },
+              { key: "venue", label: "Venue" },
+              { key: "organizer", label: "Organizer" },
+              { key: "image", label: "Image URL" },
+              { key: "description", label: "Description", type: "textarea" },
+            ],
+            {
+              title: "",
+              date: "",
+              venue: "",
+              organizer: "NCC Platoon",
+              image: "",
+              description: "",
+            }
+          )}
+
+        {activeNccSubTab === "notices" &&
+          renderCollectionEditor(
+            "notices",
+            "NCC Notices",
+            [
+              { key: "title", label: "Notice Title" },
+              { key: "date", label: "Date", type: "date" },
+              { key: "priority", label: "Priority" },
+              { key: "pdfUrl", label: "PDF Document URL" },
+              { key: "content", label: "Content", type: "textarea" },
+            ],
+            {
+              title: "",
+              date: "",
+              priority: "medium",
+              pdfUrl: "",
+              content: "",
+            }
+          )}
+
+        {activeNccSubTab === "gallery" &&
+          renderCollectionEditor(
+            "eventGallery",
+            "NCC Event Gallery",
+            [
+              { key: "title", label: "Gallery Title" },
+              { key: "eventDate", label: "Event Date", type: "date" },
+              { key: "imageUrl", label: "Image URL" },
+            ],
+            {
+              title: "",
+              eventDate: "",
+              imageUrl: "",
+            }
+          )}
+      </div>
+    );
+  };
 
   /* ── Faculty Registration Requests Tab ── */
   const handleApproveRequest = async (reqId) => {
@@ -4427,10 +6635,40 @@ const AdminDashboard = () => {
           {activeTab === "faculty" && renderFacultyTab()}
           {activeTab === "faculty-requests" && renderFacultyRequestsTab()}
           {activeTab === "school" && renderSchoolTab()}
+          {activeTab === "nss" && renderNssTab()}
+          {activeTab === "ncc" && renderNccTab()}
           {activeTab === "tenders" && renderTendersTab()}
           {activeTab === "recruitment" && renderRecruitmentTab()}
+          {activeTab === "bookings" && renderBookingsTab()}
+          {activeTab === "dac" && renderDacTab()}
         </main>
       </div>
+
+      {/* Toast Notification */}
+      {message && (() => {
+        const isError = String(message).toLowerCase().includes("fail") || 
+                        String(message).toLowerCase().includes("error") || 
+                        String(message).toLowerCase().includes("decline") ||
+                        String(message).toLowerCase().includes("invalid");
+        return (
+          <div className={`fixed top-4 right-4 z-[9999] max-w-sm w-full bg-white/95 backdrop-blur-md border ${isError ? "border-rose-200 bg-rose-50/90" : "border-emerald-200 bg-emerald-50/90"} shadow-2xl rounded-2xl p-4 flex items-start gap-3 animate-toast-in`}>
+            <div className={`rounded-full p-1.5 flex-shrink-0 ${isError ? "bg-rose-100 text-rose-700" : "bg-emerald-100 text-emerald-700"}`}>
+              {isError ? <AlertTriangle className="h-4 w-4" /> : <CheckCircle2 className="h-4 w-4" />}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold text-slate-900">{isError ? "Operation Failed" : "Success"}</p>
+              <p className="text-xs font-medium text-slate-600 mt-0.5 leading-relaxed">{message}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setMessage("")}
+              className="text-slate-400 hover:text-slate-600 rounded-lg p-1 transition flex-shrink-0"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        );
+      })()}
     </div>
   );
 };

@@ -220,7 +220,7 @@ const FacultyDashboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
+      <div className="mx-auto flex w-full max-w-[98%] flex-col gap-6 lg:flex-row">
         <SidebarNav
           sections={FACULTY_SIDEBAR_SECTIONS}
           activeSection={activeSection}
@@ -233,7 +233,7 @@ const FacultyDashboard = () => {
           }}
         />
 
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-6 lg:w-[80%]">
           <TopSummary
             profile={profile}
             summary={summary}

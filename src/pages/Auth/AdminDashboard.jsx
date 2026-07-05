@@ -28,6 +28,10 @@ import {
   BriefcaseBusiness,
   Sparkles,
   Cpu,
+  Loader2,
+  CheckCircle2,
+  X,
+  User,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -438,6 +442,16 @@ const AdminDashboard = () => {
   const [regSearchQuery, setRegSearchQuery] = useState("");
   const [regReloadToken, setRegReloadToken] = useState(0);
   const [regActionLoading, setRegActionLoading] = useState("");
+
+  /* ── Booking Management state ── */
+  const [bookingRequests, setBookingRequests] = useState([]);
+  const [bookingFilters, setBookingFilters] = useState({ status: "all", facilityId: "all", search: "" });
+  const [bookingPage, setBookingPage] = useState(1);
+  const [bookingPagination, setBookingPagination] = useState({ currentPage: 1, totalPages: 1, totalItems: 0 });
+  const [bookingReloadToken, setBookingReloadToken] = useState(0);
+  const [isBookingsLoading, setIsBookingsLoading] = useState(false);
+  const [bookingSubSection, setBookingSubSection] = useState("requests");
+  const [inCharges, setInCharges] = useState([]);
 
   const tenderSplit = useMemo(() => splitTendersByStatus(tenders), [tenders]);
   const recruitmentPostCount = useMemo(
@@ -4048,6 +4062,262 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+      </div>
+    );
+  };
+
+
+  const renderBookingsTab = () => {
+    const handleApprove = async (id) => {
+      try {
+        await approveBookingRequest(id);
+        setMessage("Booking request approved successfully.");
+        setBookingReloadToken((t) => t + 1);
+      } catch (err) {
+        setMessage("Failed to approve booking request.");
+      }
+    };
+
+    const handleReject = async (id) => {
+      const reason = prompt("Rejection reason (optional):");
+      try {
+        await rejectBookingRequest(id, reason || "");
+        setMessage("Booking request rejected.");
+        setBookingReloadToken((t) => t + 1);
+      } catch (err) {
+        setMessage("Failed to reject booking request.");
+      }
+    };
+
+    const handleUpdateInCharge = async (facilityId, email, name) => {
+      try {
+        await updateFacilityInCharge(facilityId, { email, name });
+        setMessage("In-charge updated successfully.");
+        setBookingReloadToken((t) => t + 1);
+      } catch (err) {
+        setMessage("Failed to update in-charge.");
+      }
+    };
+
+    const statusBadge = (status) => {
+      const map = {
+        pending: "bg-amber-50 text-amber-700 border-amber-200",
+        approved: "bg-emerald-50 text-emerald-700 border-emerald-200",
+        rejected: "bg-rose-50 text-rose-700 border-rose-200",
+      };
+      return (
+        <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${map[status] || "bg-slate-50 text-slate-600 border-slate-200"}`}>
+          {status}
+        </span>
+      );
+    };
+
+    return (
+      <div className="space-y-4">
+        <div className={cardClass}>
+          <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Booking Management</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Review and manage facility booking requests.</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setBookingSubSection("requests")}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "requests" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+              >
+                Requests
+              </button>
+              <button
+                type="button"
+                onClick={() => setBookingSubSection("in-charges")}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "in-charges" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+              >
+                In-Charges
+              </button>
+            </div>
+          </div>
+
+          {bookingSubSection === "requests" && (
+            <>
+              {/* Filters */}
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <select
+                  className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+                  value={bookingFilters.status}
+                  onChange={(e) => { setBookingFilters((p) => ({ ...p, status: e.target.value })); setBookingPage(1); }}
+                >
+                  <option value="all">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+
+                <select
+                  className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+                  value={bookingFilters.facilityId}
+                  onChange={(e) => { setBookingFilters((p) => ({ ...p, facilityId: e.target.value })); setBookingPage(1); }}
+                >
+                  <option value="all">All Facilities</option>
+                  {facilities.map((f) => (
+                    <option key={f.id} value={f.id}>{f.name}</option>
+                  ))}
+                </select>
+
+                <input
+                  type="text"
+                  placeholder="Search by name, email, token..."
+                  className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-700 w-56"
+                  value={bookingFilters.search}
+                  onChange={(e) => { setBookingFilters((p) => ({ ...p, search: e.target.value })); setBookingPage(1); }}
+                />
+              </div>
+
+              {isBookingsLoading ? (
+                <div className="py-8 text-center text-sm text-slate-500 flex items-center justify-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" /> Loading booking requests...
+                </div>
+              ) : bookingRequests.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center text-xs text-slate-400">
+                  No booking requests found for the selected filters.
+                </div>
+              ) : (
+                <>
+                  <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                    <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                      <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                        <tr>
+                          <th className="px-4 py-3">Token</th>
+                          <th className="px-4 py-3">Applicant</th>
+                          <th className="px-4 py-3">Facility</th>
+                          <th className="px-4 py-3">Date</th>
+                          <th className="px-4 py-3">Status</th>
+                          <th className="px-4 py-3 text-right">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                        {bookingRequests.map((req) => (
+                          <tr key={req.id} className="hover:bg-slate-50/80 transition-colors">
+                            <td className="px-4 py-3 text-xs font-mono font-bold text-slate-900">{req.token_number || "—"}</td>
+                            <td className="px-4 py-3">
+                              <p className="font-bold text-slate-900 text-xs">{req.applicant_name}</p>
+                              <p className="text-[11px] text-slate-400">{req.applicant_email}</p>
+                            </td>
+                            <td className="px-4 py-3 text-xs">{req.facility_name || req.facility_id}</td>
+                            <td className="px-4 py-3 text-xs">{req.requested_date}</td>
+                            <td className="px-4 py-3">{statusBadge(req.status)}</td>
+                            <td className="px-4 py-3 text-right">
+                              {req.status === "pending" && (
+                                <div className="flex items-center justify-end gap-1.5">
+                                  <button
+                                    type="button"
+                                    onClick={() => handleApprove(req.id)}
+                                    className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 hover:bg-emerald-100 transition"
+                                  >
+                                    Approve
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleReject(req.id)}
+                                    className="rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 transition"
+                                  >
+                                    Reject
+                                  </button>
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Pagination */}
+                  <div className="mt-3 flex items-center justify-between text-xs text-slate-600">
+                    <span>Page {bookingPagination.currentPage} of {bookingPagination.totalPages} ({bookingPagination.totalItems} total)</span>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        disabled={bookingPage <= 1}
+                        onClick={() => setBookingPage((p) => Math.max(1, p - 1))}
+                        className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold hover:bg-slate-50 disabled:opacity-50 transition"
+                      >
+                        Previous
+                      </button>
+                      <button
+                        type="button"
+                        disabled={bookingPage >= bookingPagination.totalPages}
+                        onClick={() => setBookingPage((p) => p + 1)}
+                        className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 font-semibold hover:bg-slate-50 disabled:opacity-50 transition"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+
+          {bookingSubSection === "in-charges" && (
+            <div className="space-y-3">
+              <p className="text-xs text-slate-500">Assign an in-charge for each facility. They will receive email notifications when new bookings are submitted.</p>
+              <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                  <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    <tr>
+                      <th className="px-4 py-3">Facility</th>
+                      <th className="px-4 py-3">In-Charge Name</th>
+                      <th className="px-4 py-3">In-Charge Email</th>
+                      <th className="px-4 py-3 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+                    {facilities.map((facility) => {
+                      const ic = inCharges.find((c) => c.facility_id === facility.id) || {};
+                      return (
+                        <tr key={facility.id} className="hover:bg-slate-50/80 transition-colors">
+                          <td className="px-4 py-3 text-xs font-bold text-slate-900">{facility.name}</td>
+                          <td className="px-4 py-3">
+                            <input
+                              type="text"
+                              defaultValue={ic.in_charge_name || ""}
+                              id={`ic-name-${facility.id}`}
+                              className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-44"
+                              placeholder="Name"
+                            />
+                          </td>
+                          <td className="px-4 py-3">
+                            <input
+                              type="email"
+                              defaultValue={ic.in_charge_email || ""}
+                              id={`ic-email-${facility.id}`}
+                              className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-52"
+                              placeholder="email@gbu.ac.in"
+                            />
+                          </td>
+                          <td className="px-4 py-3 text-right">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const name = document.getElementById(`ic-name-${facility.id}`)?.value || "";
+                                const email = document.getElementById(`ic-email-${facility.id}`)?.value || "";
+                                handleUpdateInCharge(facility.id, email, name);
+                              }}
+                              className="rounded-lg bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 transition"
+                            >
+                              Save
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   };

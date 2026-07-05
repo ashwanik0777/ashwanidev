@@ -84,6 +84,14 @@ import {
   approveFacultyRegistration,
   rejectFacultyRegistration,
 } from "../../services/facultyRegistrationService";
+import {
+  listBookingRequests,
+  approveBookingRequest,
+  rejectBookingRequest,
+  listFacilityInCharges,
+  updateFacilityInCharge,
+} from "../../services/bookingService";
+import { facilities } from "../../components/bookingData/facilities";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -559,12 +567,20 @@ const AdminDashboard = () => {
       setFacultyApiError("");
       try {
         const response = await listFacultyProfiles({
-          query: "",
-          page: 1,
-          limit: 200,
+          query: facultyFilters.query,
+          department: facultyFilters.department === "all" ? "" : facultyFilters.department,
+          page: facultyPagination.page,
+          limit: facultyPagination.limit,
         });
         if (!isMounted) return;
         setFacultyProfiles(Array.isArray(response?.items) ? response.items : []);
+        if (response?.pagination) {
+          setFacultyPagination((prev) => ({
+            ...prev,
+            total: response.pagination.total || 0,
+            totalPages: response.pagination.totalPages || 1,
+          }));
+        }
       } catch (error) {
         if (!isMounted) return;
         setFacultyApiError(
@@ -582,7 +598,22 @@ const AdminDashboard = () => {
     return () => {
       isMounted = false;
     };
-  }, [facultyReloadToken]);
+  }, [
+    facultyFilters.query,
+    facultyFilters.department,
+    facultyPagination.page,
+    facultyPagination.limit,
+    facultyReloadToken,
+  ]);
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   useEffect(() => {
     let isMounted = true;
@@ -725,6 +756,56 @@ const AdminDashboard = () => {
     fetchRegRequests();
     return () => { isMounted = false; };
   }, [regStatusFilter, regSearchQuery, regReloadToken]);
+
+  /* ── Fetch booking requests for admin ── */
+  useEffect(() => {
+    if (activeTab !== "bookings") return;
+
+    let isMounted = true;
+    const fetchRequests = async () => {
+      setIsBookingsLoading(true);
+      try {
+        const data = await listBookingRequests({
+          status: bookingFilters.status,
+          facilityId: bookingFilters.facilityId,
+          search: bookingFilters.search,
+          page: bookingPage,
+          limit: 10,
+        });
+        if (!isMounted) return;
+        if (data) {
+          setBookingRequests(data.requests || []);
+          setBookingPagination(data.pagination || { currentPage: 1, totalPages: 1, totalItems: 0 });
+        }
+      } catch (err) {
+        console.error("Failed to fetch booking requests:", err);
+      } finally {
+        if (isMounted) setIsBookingsLoading(false);
+      }
+    };
+
+    fetchRequests();
+    return () => { isMounted = false; };
+  }, [activeTab, bookingFilters.status, bookingFilters.facilityId, bookingFilters.search, bookingPage, bookingReloadToken]);
+
+  /* ── Fetch facility in-charges for admin ── */
+  useEffect(() => {
+    if (activeTab !== "bookings" || bookingSubSection !== "in-charges") return;
+
+    let isMounted = true;
+    const fetchInChargesList = async () => {
+      try {
+        const data = await listFacilityInCharges();
+        if (!isMounted) return;
+        if (data) setInCharges(data);
+      } catch (err) {
+        console.error("Failed to fetch in-charges:", err);
+      }
+    };
+
+    fetchInChargesList();
+    return () => { isMounted = false; };
+  }, [activeTab, bookingSubSection, bookingReloadToken]);
 
   const buildUniqueUsername = (seed, existingAccounts) => {
     const sanitized = String(seed || "faculty.user")
@@ -1390,22 +1471,8 @@ const AdminDashboard = () => {
   }, [accountEditor?.form?.linkedSchool, departmentOptions]);
 
   const filteredFacultyProfiles = useMemo(() => {
-    const query = facultyFilters.query.trim().toLowerCase();
-    return facultyProfiles
-      .map((faculty, index) => ({ faculty, index }))
-      .filter(({ faculty }) => {
-      const matchesQuery =
-        !query ||
-        [faculty.name, faculty.designation, faculty.department, faculty.email, faculty.phone]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase()
-          .includes(query);
-      const matchesDepartment =
-        facultyFilters.department === "all" || faculty.department === facultyFilters.department;
-      return matchesQuery && matchesDepartment;
-      });
-  }, [facultyProfiles, facultyFilters]);
+    return facultyProfiles.map((faculty, index) => ({ faculty, index }));
+  }, [facultyProfiles]);
 
   const filteredTenders = useMemo(() => {
     const query = tenderFilters.query.trim().toLowerCase();
@@ -2138,54 +2205,201 @@ const AdminDashboard = () => {
               </select>
             </FilterBar>
 
-            <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
-              {accounts.map((acc, actualIndex) => {
-                return (
-              <div key={acc.id || actualIndex} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900">{acc.name || acc.username}</p>
-                    <p className="text-xs text-slate-500">
-                      @{acc.username} • {acc.role} • {acc.status}
-                    </p>
+            {/* Filter and group accounts into two categories */}
+            {(() => {
+              const adminAndSchoolAccounts = accounts.filter(acc => acc.role === "admin" || acc.role === "school");
+              const facultyAccounts = accounts.filter(acc => acc.role === "teacher");
+
+              return (
+                <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1 pb-2">
+                  {/* Category 1: Admins and School Management Accounts */}
+                  <div className="space-y-2">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-blue-500" />
+                      Admin & School Portal Accounts ({adminAndSchoolAccounts.length})
+                    </h3>
+                    {adminAndSchoolAccounts.length > 0 ? (
+                      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                        <table className="w-full border-collapse text-left text-xs">
+                          <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200">
+                            <tr>
+                              <th className="px-4 py-2.5">Full Name</th>
+                              <th className="px-4 py-2.5">Username</th>
+                              <th className="px-4 py-2.5">Role</th>
+                              <th className="px-4 py-2.5">Linked School</th>
+                              <th className="px-4 py-2.5 text-center">Status</th>
+                              <th className="px-4 py-2.5 text-right">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 font-medium">
+                            {adminAndSchoolAccounts.map((acc) => {
+                              const isActive = acc.status === "active";
+                              const isDeleting = accountDeletingKey === String(acc.id || "");
+                              return (
+                                <tr key={acc.id} className="hover:bg-slate-50/50">
+                                  <td className="px-4 py-2.5 text-slate-900 font-bold">{acc.name || "-"}</td>
+                                  <td className="px-4 py-2.5 text-slate-500">@{acc.username}</td>
+                                  <td className="px-4 py-2.5">
+                                    <span className={`inline-block rounded-full px-2 py-0.5 border text-[10px] font-bold uppercase tracking-wider ${
+                                      acc.role === "admin" ? "bg-blue-50 text-blue-800 border-blue-200" : "bg-indigo-50 text-indigo-800 border-indigo-200"
+                                    }`}>
+                                      {acc.role}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-2.5 text-slate-700">{acc.linkedSchool || "-"}</td>
+                                  <td className="px-4 py-2.5 text-center">
+                                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                                      isActive ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-slate-100 text-slate-600 border-slate-200"
+                                    }`}>
+                                      <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-emerald-500" : "bg-slate-400"}`} />
+                                      {acc.status}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-2.5 text-right">
+                                    <div className="flex items-center justify-end gap-1.5">
+                                      <button
+                                        type="button"
+                                        disabled={isAccountSaving || isDeleting}
+                                        onClick={() => setAccountEditor({ index: accounts.indexOf(acc), form: { ...acc } })}
+                                        className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-50 transition"
+                                      >
+                                        Edit
+                                      </button>
+                                      <button
+                                        type="button"
+                                        disabled={isAccountSaving || isDeleting}
+                                        onClick={() => handleDeleteAccount(acc)}
+                                        className="rounded border border-rose-200 bg-rose-50 px-2 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 transition"
+                                      >
+                                        {isDeleting ? "Deleting..." : "Delete"}
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-4 text-center text-xs text-slate-500">
+                        No admin or school accounts found on this page.
+                      </div>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      disabled={isAccountSaving || accountDeletingKey === String(acc.id || "")}
-                      onClick={() => setAccountEditor({ index: actualIndex, form: { ...acc } })}
-                      className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                    >
-                      <Pencil className="h-3.5 w-3.5" /> Edit
-                    </button>
-                    <button
-                      type="button"
-                      disabled={isAccountSaving || accountDeletingKey === String(acc.id || "")}
-                      onClick={() => handleDeleteAccount(acc)}
-                      className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                      {accountDeletingKey === String(acc.id || "") ? "Deleting..." : "Delete"}
-                    </button>
+
+                  {/* Category 2: Faculty Portal Accounts */}
+                  <div className="space-y-2">
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                      Faculty Portal Accounts ({facultyAccounts.length})
+                    </h3>
+                    {facultyAccounts.length > 0 ? (
+                      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                        <table className="w-full border-collapse text-left text-xs">
+                          <thead className="bg-slate-50 text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-slate-200">
+                            <tr>
+                              <th className="px-4 py-2.5">Full Name</th>
+                              <th className="px-4 py-2.5">Username</th>
+                              <th className="px-4 py-2.5">Linked Faculty ID</th>
+                              <th className="px-4 py-2.5">School / Dept</th>
+                              <th className="px-4 py-2.5 text-center">Status</th>
+                              <th className="px-4 py-2.5 text-right">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100 font-medium">
+                            {facultyAccounts.map((acc) => {
+                              const isActive = acc.status === "active";
+                              const isDeleting = accountDeletingKey === String(acc.id || "");
+                              return (
+                                <tr key={acc.id} className="hover:bg-slate-50/50">
+                                  <td className="px-4 py-2.5 text-slate-900 font-bold">{acc.name || "-"}</td>
+                                  <td className="px-4 py-2.5 text-slate-500">@{acc.username}</td>
+                                  <td className="px-4 py-2.5">
+                                    <span className="font-mono bg-slate-50 border border-slate-200 px-1.5 py-0.5 rounded text-[11px] text-slate-700 select-all">
+                                      {acc.linkedFacultyId || "-"}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-2.5 text-slate-700">
+                                    {acc.linkedSchool || acc.linkedDepartment ? (
+                                      <span className="truncate max-w-[200px] block" title={`${acc.linkedSchool || ""} - ${acc.linkedDepartment || ""}`}>
+                                        {acc.linkedSchool || "-"}{acc.linkedDepartment ? ` / ${acc.linkedDepartment}` : ""}
+                                      </span>
+                                    ) : (
+                                      "-"
+                                    )}
+                                  </td>
+                                  <td className="px-4 py-2.5 text-center">
+                                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                                      isActive ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-slate-100 text-slate-600 border-slate-200"
+                                    }`}>
+                                      <span className={`h-1.5 w-1.5 rounded-full ${isActive ? "bg-emerald-500" : "bg-slate-400"}`} />
+                                      {acc.status}
+                                    </span>
+                                  </td>
+                                  <td className="px-4 py-2.5 text-right">
+                                    <div className="flex items-center justify-end gap-1.5">
+                                      <button
+                                        type="button"
+                                        disabled={isAccountSaving || isDeleting}
+                                        onClick={() => setAccountEditor({ index: accounts.indexOf(acc), form: { ...acc } })}
+                                        className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-semibold text-slate-700 hover:bg-slate-50 transition"
+                                      >
+                                        Edit
+                                      </button>
+                                      <button
+                                        type="button"
+                                        disabled={isAccountSaving || isDeleting}
+                                        onClick={() => handleDeleteAccount(acc)}
+                                        className="rounded border border-rose-200 bg-rose-50 px-2 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 transition"
+                                      >
+                                        {isDeleting ? "Deleting..." : "Delete"}
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-4 text-center text-xs text-slate-500">
+                        No faculty accounts found on this page.
+                      </div>
+                    )}
                   </div>
+                </div>
+              );
+            })()}
+
+            {/* Pagination Controls Footer */}
+            <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs text-slate-700">
+              <div className="flex items-center gap-4 flex-wrap">
+                <span>
+                  Showing {accountPagination.total ? (accountPagination.page - 1) * accountPagination.limit + 1 : 0}
+                  -
+                  {Math.min(accountPagination.page * accountPagination.limit, accountPagination.total)} of{" "}
+                  {accountPagination.total}
+                </span>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-slate-500 font-medium">Show:</span>
+                  <select
+                    value={accountPagination.limit}
+                    onChange={(e) => {
+                      const newLimit = parseInt(e.target.value, 10);
+                      setAccountPagination((prev) => ({ ...prev, limit: newLimit, page: 1 }));
+                    }}
+                    className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs font-semibold text-slate-700 focus:outline-none"
+                  >
+                    <option value={20}>20 rows</option>
+                    <option value={50}>50 rows</option>
+                    <option value={100}>100 rows</option>
+                  </select>
                 </div>
               </div>
-                );
-              })}
-              {!isAccountsLoading && !accounts.length ? (
-                <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-xs text-slate-600">
-                  No accounts found for selected filters.
-                </div>
-              ) : null}
-            </div>
 
-            <div className="mt-3 flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700">
-              <span>
-                Showing {accountPagination.total ? (accountPagination.page - 1) * accountPagination.limit + 1 : 0}
-                -
-                {Math.min(accountPagination.page * accountPagination.limit, accountPagination.total)} of{" "}
-                {accountPagination.total}
-              </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -3962,27 +4176,25 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6">
-          <section className={cardClass}>
-            <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
-            <p className="mt-1 text-sm text-slate-600">
-                Manage your school data, faculty profiles, and user accounts all in one place.
-
-            </p>
-            {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
-          </section>
-
-          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {summary.map((item) => (
-              <div key={item.label} className={cardClass}>
-                <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
-              </div>
-            ))}
-          </section>
-
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
           {activeTab === "overview" && (
-            <section className="space-y-4">
+            <section className="space-y-6">
+              <section className={cardClass}>
+                <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
+                <p className="mt-1 text-sm text-slate-600">
+                  Manage your school data, faculty profiles, and user accounts all in one place.
+                </p>
+              </section>
+
+              <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {summary.map((item) => (
+                  <div key={item.label} className={cardClass}>
+                    <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
+                    <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
+                  </div>
+                ))}
+              </section>
+
               <div className={cardClass}>
                 <h2 className="mb-4 text-lg font-semibold text-slate-900">What You Can Control</h2>
                 <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">

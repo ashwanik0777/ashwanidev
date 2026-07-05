@@ -453,6 +453,10 @@ const AdminDashboard = () => {
   const [bookingSubSection, setBookingSubSection] = useState("requests");
   const [inCharges, setInCharges] = useState([]);
 
+  /* ── NSS / NCC sub-tab state ── */
+  const [activeNssSubTab, setActiveNssSubTab] = useState("basic");
+  const [activeNccSubTab, setActiveNccSubTab] = useState("basic");
+
   const tenderSplit = useMemo(() => splitTendersByStatus(tenders), [tenders]);
   const recruitmentPostCount = useMemo(
     () =>

@@ -27,6 +27,7 @@ import {
   FileText,
   BriefcaseBusiness,
   Sparkles,
+  Cpu,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,

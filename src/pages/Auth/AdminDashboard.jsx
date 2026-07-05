@@ -2592,16 +2592,12 @@ const AdminDashboard = () => {
               >
                 Save
               </button>
-            </>
-          ) : (
-            <div className="flex h-full min-h-[140px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Select item to edit or click Add.
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderAccountsTab = () => (
     <div className="space-y-4">

@@ -29,7 +29,7 @@ const iconMap = {
 
 const SidebarNav = ({ sections, activeSection, onSelect, onSave, onViewPublic, onLogout }) => {
   return (
-    <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 lg:shrink-0 lg:self-start">
+    <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-[20%] min-w-[240px] max-w-[290px] lg:shrink-0 lg:self-start">
       <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Faculty Navigation</h2>
         <p className="mt-1 text-xs text-slate-500">Profile management panel</p>

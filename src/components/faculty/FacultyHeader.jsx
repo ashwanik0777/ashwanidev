@@ -112,32 +112,36 @@ const Button = ({ className = '', variant = 'solid', children, ...props }) => {
 };
 
 const FacultyHeader = ({ faculty }) => {
-  const getImageUrl = (url, image, name) => {
-    let cleanUrl = String(url || "").trim();
-    if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
-      const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-      const match = cleanUrl.match(driveRegex);
-      if (match && match[1]) {
-        return `https://lh3.googleusercontent.com/d/${match[1]}`;
+  const getImageUrl = (url, image) => {
+    let resolvedUrl = url;
+    if (url && typeof url === 'string') {
+      if (url.includes('drive.google.com/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+          const fileId = parts[1].split('/')[0];
+          resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+        }
+      } else if (url.includes('drive.google.com/open?id=')) {
+        const parts = url.split('?id=');
+        if (parts[1]) {
+          const fileId = parts[1].split('&')[0];
+          resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+        }
+      } else if (url.includes('docs.google.com/file/d/')) {
+        const parts = url.split('/file/d/');
+        if (parts[1]) {
+          const fileId = parts[1].split('/')[0];
+          resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+        }
       }
     }
-    if (cleanUrl && (cleanUrl.startsWith('http') || cleanUrl.startsWith('data:'))) return cleanUrl;
-    if (cleanUrl) return `${import.meta.env.VITE_HOST}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
 
-    let cleanImg = String(image || "").trim();
-    if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
-      const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-      const match = cleanImg.match(driveRegex);
-      if (match && match[1]) {
-        return `https://lh3.googleusercontent.com/d/${match[1]}`;
-      }
-    }
-    if (cleanImg && (cleanImg.startsWith('http') || cleanImg.startsWith('data:'))) return cleanImg;
-    if (cleanImg) return `${import.meta.env.VITE_HOST}/media/${cleanImg}`;
-
-    return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
+    if (resolvedUrl && (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:'))) return resolvedUrl;
+    if (resolvedUrl) return `${import.meta.env.VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
+    if (image) return `${import.meta.env.VITE_HOST}/media/${image}`;
+    return "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty?.name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
   };
-  const profileImage = getImageUrl(faculty?.image_url, faculty?.image, faculty?.name);
+  const profileImage = getImageUrl(faculty?.image_url, faculty?.image);
 
   return (
     <Card className="p-8 my-8 shadow-lg mx-auto w-5/6 hover:shadow-xl transition-shadow duration-300">

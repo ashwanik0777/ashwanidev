@@ -13,30 +13,34 @@ import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data
 const VITE_HOST = import.meta.env.VITE_HOST;
 import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
 
-const getImageUrl = (url, image, name) => {
-  let cleanUrl = String(url || "").trim();
-  if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
-    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-    const match = cleanUrl.match(driveRegex);
-    if (match && match[1]) {
-      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+const getImageUrl = (url, image) => {
+  let resolvedUrl = url;
+  if (url && typeof url === 'string') {
+    if (url.includes('drive.google.com/file/d/')) {
+      const parts = url.split('/file/d/');
+      if (parts[1]) {
+        const fileId = parts[1].split('/')[0];
+        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+      }
+    } else if (url.includes('drive.google.com/open?id=')) {
+      const parts = url.split('?id=');
+      if (parts[1]) {
+        const fileId = parts[1].split('&')[0];
+        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+      }
+    } else if (url.includes('docs.google.com/file/d/')) {
+      const parts = url.split('/file/d/');
+      if (parts[1]) {
+        const fileId = parts[1].split('/')[0];
+        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+      }
     }
   }
-  if (cleanUrl && (cleanUrl.startsWith('http') || cleanUrl.startsWith('data:'))) return cleanUrl;
-  if (cleanUrl) return `${VITE_HOST}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
 
-  let cleanImg = String(image || "").trim();
-  if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
-    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-    const match = cleanImg.match(driveRegex);
-    if (match && match[1]) {
-      return `https://lh3.googleusercontent.com/d/${match[1]}`;
-    }
-  }
-  if (cleanImg && (cleanImg.startsWith('http') || cleanImg.startsWith('data:'))) return cleanImg;
-  if (cleanImg) return `${VITE_HOST}/media/${cleanImg}`;
-
-  return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
+  if (resolvedUrl && (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:'))) return resolvedUrl;
+  if (resolvedUrl) return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
+  if (image) return `${VITE_HOST}/media/${image}`;
+  return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
 };
 
 const Faculty = () => {
@@ -356,10 +360,10 @@ const Faculty = () => {
                         <div className="p-6">
                           <div className="flex flex-col items-center text-center">
                             <img
-                              src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
+                              src={getImageUrl(faculty.image_url, faculty.image)}
                               alt={faculty.name}
                               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-300 transition-colors shadow-sm"
-                              onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty.name) + "&background=0D8ABC&color=fff"; }}
+                              onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty.name) + "&background=random&color=fff"; }}
                             />
                             <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">{faculty.name}</h3>
                             <p className="text-blue-600 font-semibold mb-4">{faculty.designation}</p>

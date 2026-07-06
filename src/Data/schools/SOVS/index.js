@@ -42,7 +42,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1sovsas.jpg",
+  imageUrl: "https://i.ytimg.com/vi/IfisxZvHfFs/maxresdefault.jpg",
   label: SCHOOL_NAME,
   description:
     "Fostering scientific innovation and vocational competence through advanced labs and research in mathematics, physics, chemistry, environmental science, and food technology.",

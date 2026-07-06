@@ -8,32 +8,26 @@ import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
 
-const VITE_HOST = import.meta.env.VITE_HOST;
+const resolveFacultyImage = (url, image) => {
+  const target = url || image;
+  if (!target) return "/default-avatar.png";
 
-const getImageUrl = (url, image, name) => {
-  let cleanUrl = String(url || "").trim();
-  if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
-    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-    const match = cleanUrl.match(driveRegex);
-    if (match && match[1]) {
-      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+  let resolvedUrl = target;
+  if (typeof target === 'string') {
+    const matchFile = target.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (matchFile && matchFile[1]) {
+      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
+    } else {
+      const matchOpen = target.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (matchOpen && matchOpen[1] && target.includes('drive.google.com')) {
+        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
+      }
     }
   }
-  if (cleanUrl && (cleanUrl.startsWith('http') || cleanUrl.startsWith('data:'))) return cleanUrl;
-  if (cleanUrl) return `${VITE_HOST}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
 
-  let cleanImg = String(image || "").trim();
-  if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
-    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
-    const match = cleanImg.match(driveRegex);
-    if (match && match[1]) {
-      return `https://lh3.googleusercontent.com/d/${match[1]}`;
-    }
-  }
-  if (cleanImg && (cleanImg.startsWith('http') || cleanImg.startsWith('data:'))) return cleanImg;
-  if (cleanImg) return `${VITE_HOST}/media/${cleanImg}`;
-
-  return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
+  const host = import.meta.env.VITE_HOST || "";
+  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
+  return `${host}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
 };
 
 const Faculty = () => {
@@ -274,10 +268,10 @@ const Faculty = () => {
                       <div className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <img
-                            src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
-                            alt={faculty.name}
-                            className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
-                          />
+                             src={resolveFacultyImage(faculty.image_url, faculty.image)}
+                             alt={faculty.name}
+                             className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
+                           />
                           <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                           <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                           <div className="w-full space-y-3 mb-6">
@@ -342,7 +336,7 @@ const Faculty = () => {
                   <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="p-6">
                       <div className="flex flex-col items-center text-center">
-                        <img src={getImageUrl(faculty.image_url, faculty.image, faculty.name)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <img src={resolveFacultyImage(faculty.image_url, faculty.image)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                         <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                       </div>

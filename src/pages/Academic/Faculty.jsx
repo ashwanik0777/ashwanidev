@@ -14,33 +14,27 @@ const VITE_HOST = import.meta.env.VITE_HOST;
 import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
 
 const getImageUrl = (url, image) => {
+  if (!url) {
+    if (image) return `${VITE_HOST}/media/${image}`;
+    return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
+  }
+
+  // Resolve Google Drive URLs
   let resolvedUrl = url;
-  if (url && typeof url === 'string') {
-    if (url.includes('drive.google.com/file/d/')) {
-      const parts = url.split('/file/d/');
-      if (parts[1]) {
-        const fileId = parts[1].split('/')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-    } else if (url.includes('drive.google.com/open?id=')) {
-      const parts = url.split('?id=');
-      if (parts[1]) {
-        const fileId = parts[1].split('&')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-    } else if (url.includes('docs.google.com/file/d/')) {
-      const parts = url.split('/file/d/');
-      if (parts[1]) {
-        const fileId = parts[1].split('/')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+  if (typeof url === 'string') {
+    const matchFile = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (matchFile && matchFile[1]) {
+      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
+    } else {
+      const matchOpen = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (matchOpen && matchOpen[1] && url.includes('drive.google.com')) {
+        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
       }
     }
   }
 
-  if (resolvedUrl && (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:'))) return resolvedUrl;
-  if (resolvedUrl) return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
-  if (image) return `${VITE_HOST}/media/${image}`;
-  return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
+  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
+  return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
 };
 
 const Faculty = () => {

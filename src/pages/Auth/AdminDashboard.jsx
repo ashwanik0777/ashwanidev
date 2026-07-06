@@ -362,6 +362,33 @@ const generateStrongPassword = () => {
   return password;
 };
 
+const resolveFacultyImage = (url, image, name) => {
+  const VITE_HOST = import.meta.env.VITE_HOST || '';
+  let cleanUrl = String(url || "").trim();
+  if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanUrl.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanUrl && (cleanUrl.startsWith('http') || cleanUrl.startsWith('data:'))) return cleanUrl;
+  if (cleanUrl) return `${VITE_HOST}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
+
+  let cleanImg = String(image || "").trim();
+  if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanImg.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanImg && (cleanImg.startsWith('http') || cleanImg.startsWith('data:'))) return cleanImg;
+  if (cleanImg) return `${VITE_HOST}/media/${cleanImg}`;
+
+  return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
+};
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
@@ -3423,14 +3450,14 @@ const AdminDashboard = () => {
                       <tr key={faculty.id || idx} className="hover:bg-slate-55/50 transition-colors">
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-3">
-                            {faculty.image_url ? (
+                            {faculty.image_url || faculty.image ? (
                               <img
-                                src={faculty.image_url}
+                                src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)}
                                 alt={faculty.name}
                                 className="h-10 w-10 rounded-xl object-cover ring-2 ring-slate-100 flex-shrink-0"
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = "";
+                                  e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty.name) + "&background=0D8ABC&color=fff&size=150";
                                 }}
                               />
                             ) : (

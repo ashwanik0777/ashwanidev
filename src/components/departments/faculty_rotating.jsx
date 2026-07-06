@@ -8,11 +8,30 @@ import { matchDepartmentId } from "../../Data/schoolsMeta";
 
 const VITE_HOST = import.meta.env.VITE_HOST;
 
-const getImageUrl = (url, image) => {
-  if (url && (url.startsWith("http") || url.startsWith("data:"))) return url;
-  if (url) return `${VITE_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
-  if (image) return `${VITE_HOST}/media/${image}`;
-  return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
+const getImageUrl = (url, image, name) => {
+  let cleanUrl = String(url || "").trim();
+  if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanUrl.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanUrl && (cleanUrl.startsWith("http") || cleanUrl.startsWith("data:"))) return cleanUrl;
+  if (cleanUrl) return `${VITE_HOST}${cleanUrl.startsWith("/") ? "" : "/"}${cleanUrl}`;
+
+  let cleanImg = String(image || "").trim();
+  if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanImg.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanImg && (cleanImg.startsWith("http") || cleanImg.startsWith("data:"))) return cleanImg;
+  if (cleanImg) return `${VITE_HOST}/media/${cleanImg}`;
+
+  return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
 };
 
 export default function FacultyResponsiveSlider({
@@ -112,8 +131,9 @@ export default function FacultyResponsiveSlider({
             name: member?.name || member?.fullName || "Faculty Member",
             title: member?.designation || member?.title || "Faculty",
             image: getImageUrl(
-              member?.imageUrl || member?.profileImageUrl,
-              member?.image
+              member?.image_url || member?.imageUrl || member?.profileImageUrl,
+              member?.image,
+              member?.name
             ),
           }))
           .filter((member) => member.name && member.title);

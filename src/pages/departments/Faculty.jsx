@@ -8,6 +8,34 @@ import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
 
+const VITE_HOST = import.meta.env.VITE_HOST;
+
+const getImageUrl = (url, image, name) => {
+  let cleanUrl = String(url || "").trim();
+  if (cleanUrl.includes('drive.google.com') || cleanUrl.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanUrl.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanUrl && (cleanUrl.startsWith('http') || cleanUrl.startsWith('data:'))) return cleanUrl;
+  if (cleanUrl) return `${VITE_HOST}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
+
+  let cleanImg = String(image || "").trim();
+  if (cleanImg.includes('drive.google.com') || cleanImg.includes('docs.google.com')) {
+    const driveRegex = /(?:https?:\/\/)?(?:drive|docs)\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=download&)?id=)([a-zA-Z0-9_-]{25,})/;
+    const match = cleanImg.match(driveRegex);
+    if (match && match[1]) {
+      return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    }
+  }
+  if (cleanImg && (cleanImg.startsWith('http') || cleanImg.startsWith('data:'))) return cleanImg;
+  if (cleanImg) return `${VITE_HOST}/media/${cleanImg}`;
+
+  return "https://ui-avatars.com/api/?name=" + encodeURIComponent(name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
+};
+
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All');
@@ -246,7 +274,7 @@ const Faculty = () => {
                       <div className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <img
-                            src={faculty.image_url || faculty.image || "/default-avatar.png"}
+                            src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
                             alt={faculty.name}
                             className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
                           />
@@ -314,7 +342,7 @@ const Faculty = () => {
                   <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="p-6">
                       <div className="flex flex-col items-center text-center">
-                        <img src={faculty.image_url || faculty.image || "/default-avatar.png"} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <img src={getImageUrl(faculty.image_url, faculty.image, faculty.name)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                         <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                       </div>

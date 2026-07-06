@@ -49,7 +49,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1sohss.jpg",
+  imageUrl: "https://media.licdn.com/dms/image/v2/D5622AQFpyFIVNc2KUQ/feedshare-shrink_800/feedshare-shrink_800/0/1724330956316?e=2147483647&v=beta&t=gqRLezCyDV6YOCaEF_zZ6dej78YCHqgR5LWnrBE9HwQ",
   label: SCHOOL_NAME,
   description:
     "Exploring human culture, society, and behavior through interdisciplinary approaches in psychology, sociology, literature, political science, education, and media studies.",

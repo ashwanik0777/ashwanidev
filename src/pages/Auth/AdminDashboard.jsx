@@ -2659,8 +2659,7 @@ const AdminDashboard = () => {
           </div>
         ) : null}
 
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div>
+        <div className="w-full">
             <FilterBar
               searchValue={accountFilters.query}
               onSearchChange={(value) => {
@@ -2924,27 +2923,38 @@ const AdminDashboard = () => {
                 >
                   Next
                 </button>
-              </div>
             </div>
           </div>
+        </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-4">
-            {accountEditor.form ? (
-              <>
-                <div className="mb-3 flex items-center justify-between">
-                  <p className="text-sm font-semibold text-slate-800">
-                    {accountEditor.index === null ? "Create Account" : "Edit Account"}
-                  </p>
+          {/* Modal Overlay for Add/Edit Account */}
+          {accountEditor.form && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
+              <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
+                {/* Modal Header */}
+                <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3 text-left">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                      {accountEditor.index === null ? "➕ Create Login Account" : "Edit Login Account"}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      {accountEditor.index === null
+                        ? "Create a new portal login account."
+                        : `Modify portal login settings for ${accountEditor.form.name}.`}
+                    </p>
+                  </div>
                   <button
                     type="button"
                     onClick={() => setAccountEditor({ index: null, form: null })}
-                    className="text-xs font-medium text-slate-500 hover:text-slate-700"
+                    className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                   >
-                    Cancel
+                    <X className="h-5 w-5" />
                   </button>
                 </div>
 
-                <div className="space-y-3">
+                {/* Scrollable Form Body */}
+                <div className="flex-1 overflow-y-auto space-y-4 pr-1 text-left">
+
                   <Field label="Full Name">
                     <input
                       className={inputClass}
@@ -3118,7 +3128,6 @@ const AdminDashboard = () => {
                       />
                     </Field>
                   ) : null}
-                </div>
 
                 <datalist id="faculty-id-options">
                   {facultyProfiles
@@ -3144,22 +3153,29 @@ const AdminDashboard = () => {
                   ))}
                 </datalist>
 
-                <button
-                  type="button"
-                  disabled={isAccountSaving}
-                  onClick={handleSaveAccount}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-                >
-                  {isAccountSaving ? "Saving..." : "Save Account"}
-                </button>
-              </>
-            ) : (
-              <div className="flex h-full min-h-[180px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-                Select account to edit or create new login ID.
+                </div>
+
+                {/* Modal Footer */}
+                <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4 text-left">
+                  <button
+                    type="button"
+                    onClick={() => setAccountEditor({ index: null, form: null })}
+                    className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isAccountSaving}
+                    onClick={handleSaveAccount}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                  >
+                    {isAccountSaving ? "Saving..." : "Save Account"}
+                  </button>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          )}
       </div>
 
       <div className={cardClass}>

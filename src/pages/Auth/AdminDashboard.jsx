@@ -32,6 +32,9 @@ import {
   CheckCircle2,
   X,
   User,
+  Megaphone,
+  ArrowUp,
+  ArrowDown,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -96,6 +99,12 @@ import {
   listFacilityInCharges,
   updateFacilityInCharge,
 } from "../../services/bookingService";
+import {
+  listDacMembers,
+  createDacMember,
+  updateDacMember,
+  deleteDacMember
+} from "../../services/dacService";
 import { facilities } from "../../components/bookingData/facilities";
 
 const EMPTY_SCHOOL_DATA = {
@@ -195,12 +204,183 @@ const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 const inputClass =
   "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
 
+const NOTICES_FIELDS = [
+  { key: "title", label: "Notice Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "type", label: "Type", type: "select", options: ["General", "Academic", "Examination", "Admission", "Placement", "Tenders", "Important", "Sports", "NSS/NCC", "Research", "Student Corner"], required: true },
+  { key: "priority", label: "Priority", type: "select", options: ["medium", "low", "high"], required: true },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "pdfUrl", label: "PDF URL", required: true },
+  { key: "content", label: "Content", type: "textarea", required: true },
+];
+
+const NOTICES_TEMPLATE = {
+  title: "",
+  date: "",
+  type: "General",
+  priority: "medium",
+  level: "college",
+  pdfUrl: "",
+  content: "",
+};
+
+const EVENTS_FIELDS = [
+  { key: "title", label: "Event Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "startsAt", label: "Starts At (e.g. 10:00 AM)" },
+  { key: "endDate", label: "End Date", type: "date" },
+  { key: "endsAt", label: "Ends At (e.g. 04:00 PM)" },
+  { key: "time", label: "Time Description (e.g. 10:00 AM - 04:00 PM)" },
+  { key: "venue", label: "Venue (e.g. Seminar Hall)", required: true },
+  { key: "location", label: "Location (e.g. ICT Block)" },
+  { key: "type", label: "Type", type: "select", options: ["Seminar", "Workshop", "Conference", "Competition", "Sports", "Cultural", "Guest Lecture", "Orientation", "Convocation", "Other"], required: true },
+  { key: "mode", label: "Mode", type: "select", options: ["Offline", "Online", "Hybrid"], required: true },
+  { key: "organizer", label: "Organizer (e.g. School Office)", required: true },
+  { key: "attendees", label: "Expected Attendees", type: "number" },
+  { key: "price", label: "Price / Registration Fee" },
+  { key: "tags", label: "Tags (comma separated)" },
+  { key: "image", label: "Image URL" },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "coverImageUrl", label: "Cover Image URL" },
+  { key: "images", label: "Gallery Images (comma separated URLs)" },
+  { key: "registrationUrl", label: "Registration Link / URL" },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "description", label: "Description", type: "textarea", required: true },
+];
+
+const EVENTS_TEMPLATE = {
+  title: "",
+  date: "",
+  startsAt: "",
+  endDate: "",
+  endsAt: "",
+  time: "",
+  venue: "",
+  location: "",
+  type: "Seminar",
+  mode: "Offline",
+  organizer: "",
+  attendees: 0,
+  price: "Free",
+  tags: "",
+  image: "",
+  imageLink: "",
+  coverImageUrl: "",
+  images: "",
+  registrationUrl: "",
+  level: "college",
+  description: "",
+};
+
+const NEWS_FIELDS = [
+  { key: "title", label: "News Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Academic", "Research", "Technology", "Sports", "Environment", "Awards & Recognition", "Cultural", "Other"], required: true },
+  { key: "priority", label: "Priority", type: "select", options: ["medium", "low", "high"], required: true },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "excerpt", label: "Excerpt (Short Summary)", type: "textarea", required: true },
+  { key: "content", label: "Content (Full Details)", type: "textarea", required: true },
+  { key: "author", label: "Author" },
+  { key: "department", label: "Department" },
+  { key: "tags", label: "Tags (comma separated)" },
+  { key: "featured", label: "Featured News", type: "boolean" },
+  { key: "views", label: "Views Count", type: "number" },
+  { key: "likes", label: "Likes Count", type: "number" },
+  { key: "image", label: "Image URL" },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "coverImageUrl", label: "Cover Image URL" },
+  { key: "pdfUrl", label: "PDF URL" },
+  { key: "link", label: "External Link" },
+  { key: "status", label: "Status", type: "select", options: ["published", "draft"], required: true },
+];
+
+const NEWS_TEMPLATE = {
+  title: "",
+  date: "",
+  category: "Academic",
+  author: "School Office",
+  department: "",
+  tags: "",
+  priority: "medium",
+  featured: false,
+  views: 0,
+  likes: 0,
+  image: "",
+  imageLink: "",
+  coverImageUrl: "",
+  pdfUrl: "",
+  link: "",
+  excerpt: "",
+  content: "",
+  level: "college",
+  status: "published",
+};
+
+const NEWSLETTERS_FIELDS = [
+  { key: "title", label: "Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "issueNumber", label: "Issue Number (e.g. Vol. 1, Issue 2)", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Monthly Digest", "Special Edition", "Annual Report", "Academic Update", "Student Newsletter", "Other"], required: true },
+  { key: "views", label: "Views Count", type: "number" },
+  { key: "coverImage", label: "Cover Image URL", required: true },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "pdfLink", label: "PDF Link / URL", required: true },
+  { key: "excerpt", label: "Excerpt (Short Summary)", type: "textarea", required: true },
+  { key: "content", label: "Content (Full Details)", type: "textarea", required: true },
+  { key: "isPublished", label: "Published", type: "boolean", required: true },
+];
+
+const NEWSLETTERS_TEMPLATE = {
+  title: "",
+  date: "",
+  category: "Monthly Digest",
+  issueNumber: "",
+  views: 0,
+  coverImage: "",
+  imageLink: "",
+  pdfLink: "",
+  excerpt: "",
+  content: "",
+  isPublished: true,
+};
+
+const GALLERY_FIELDS = [
+  { key: "title", label: "Gallery Title", required: true },
+  { key: "eventDate", label: "Event Date", type: "date", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Events", "Research", "Sports", "Cultural", "Infrastructure", "Other"], required: true },
+  { key: "imageUrl", label: "Image 1 URL", required: true },
+  { key: "imageUrl2", label: "Image 2 URL" },
+  { key: "imageUrl3", label: "Image 3 URL" },
+  { key: "imageUrl4", label: "Image 4 URL" },
+  { key: "imageLink", label: "Image Click Link" },
+];
+
+const GALLERY_TEMPLATE = {
+  title: "",
+  eventDate: "",
+  category: "Events",
+  imageUrl: "",
+  imageUrl2: "",
+  imageUrl3: "",
+  imageUrl4: "",
+  imageLink: "",
+};
+
+const FIELDS_CONFIG = {
+  notices: NOTICES_FIELDS,
+  news: NEWS_FIELDS,
+  events: EVENTS_FIELDS,
+  newsletters: NEWSLETTERS_FIELDS,
+  eventGallery: GALLERY_FIELDS,
+};
+
 const tabs = [
   { id: "overview", label: "Overview", icon: Shield },
   { id: "accounts", label: "User & Login Management", icon: KeyRound },
   { id: "faculty", label: "Faculty Management", icon: Users },
   { id: "faculty-requests", label: "Faculty Requests", icon: UserPlus },
   { id: "school", label: "Schools Management", icon: School },
+  { id: "announcements", label: "Announcement", icon: Megaphone },
   { id: "nss", label: "NSS Management", icon: Sparkles },
   { id: "ncc", label: "NCC Management", icon: Activity },
   { id: "tenders", label: "Tender Management", icon: FileText },
@@ -218,9 +398,11 @@ const schoolContentTabs = [
   { id: "gallery", label: "Event Gallery", icon: Images },
 ];
 
-const Field = ({ label, children }) => (
+const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">{label}</label>
+    <label className="mb-1 block text-sm font-medium text-slate-700">
+      {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
+    </label>
     {children}
   </div>
 );
@@ -394,6 +576,7 @@ const AdminDashboard = () => {
   const [dacReloadToken, setDacReloadToken] = useState(0);
   const [dacFilters, setDacFilters] = useState({ query: "", teamType: "all" });
   const [recruitmentEditor, setRecruitmentEditor] = useState({ mode: null, index: null, form: null });
+  const [recruitmentTabMode, setRecruitmentTabMode] = useState("current"); // "current" or "archived"
   const [accountFilters, setAccountFilters] = useState({ query: "", role: "all", status: "all" });
   const [accountPagination, setAccountPagination] = useState({ page: 1, limit: 20, total: 0, totalPages: 1 });
   const [accountsReloadToken, setAccountsReloadToken] = useState(0);
@@ -866,6 +1049,44 @@ const AdminDashboard = () => {
     return () => { isMounted = false; };
   }, [activeTab, bookingSubSection, bookingReloadToken]);
 
+  /* ── Sync GBU administration school data when announcements tab is active ── */
+  useEffect(() => {
+    if (activeTab === "announcements") {
+      const gbuSchool = schoolsList.find((s) => s.code === "GBU");
+      if (gbuSchool && selectedSchoolId !== gbuSchool.id) {
+        setSelectedSchoolId(gbuSchool.id);
+        const content = gbuSchool.content || {};
+        setSchoolData({
+          schoolCode: gbuSchool.code || "",
+          schoolName: gbuSchool.name || "",
+          deanName: content.deanName || "",
+          email: content.email || "",
+          phone: content.phone || "",
+          websiteUrl: content.websiteUrl || "",
+          bannerImage: content.bannerImage || "",
+          address: content.address || "",
+          schoolDescription: gbuSchool.overview || "",
+          events: content.events || [],
+          news: content.news || [],
+          notices: content.notices || [],
+          newsletters: content.newsletters || [],
+          eventGallery: content.eventGallery || [],
+          clubs: content.clubs || [],
+          tabContent: content.tabContent || {}
+        });
+        if (activeSchoolSubTab === "basic" || activeSchoolSubTab === "gallery" || activeSchoolSubTab === "clubs") {
+          setActiveSchoolSubTab("notices");
+        }
+      }
+    } else if (activeTab === "school") {
+      const gbuSchool = schoolsList.find((s) => s.code === "GBU");
+      if (gbuSchool && selectedSchoolId === gbuSchool.id) {
+        setSelectedSchoolId(null);
+        setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
+      }
+    }
+  }, [activeTab, schoolsList, selectedSchoolId]);
+
   const buildUniqueUsername = (seed, existingAccounts) => {
     const sanitized = String(seed || "faculty.user")
       .trim()
@@ -1253,12 +1474,24 @@ const AdminDashboard = () => {
       },
     }));
   };
-
   const saveCollectionForm = (listKey) => {
     const editor = collectionEditors[listKey];
     if (!editor?.form) return;
 
     let nextForm = { ...editor.form };
+    const fieldsToValidate = FIELDS_CONFIG[listKey];
+    if (fieldsToValidate) {
+      for (const field of fieldsToValidate) {
+        if (field.required) {
+          const val = nextForm[field.key];
+          if (val === undefined || val === null || String(val).trim() === "") {
+            alert(`${field.label} is required.`);
+            return;
+          }
+        }
+      }
+    }
+
     if (listKey === "clubs") {
       const objectivesArray = typeof nextForm.objectives === "string" 
         ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
@@ -2185,6 +2418,121 @@ const AdminDashboard = () => {
     }
   };
 
+  /* ── DAC Team Management Handlers ── */
+  const handleSaveDacMember = async () => {
+    const form = dacEditor.form;
+    if (!form?.name || !form?.role || !form?.department || !form?.designation || !form?.teamType) {
+      setMessage("Name, role, department, designation, and team type are required.");
+      return;
+    }
+
+    setIsDacSaving(true);
+    setDacApiError("");
+
+    let skillsArray = [];
+    if (typeof form.skills === "string") {
+      skillsArray = form.skills.split(",").map(s => s.trim()).filter(Boolean);
+    } else if (Array.isArray(form.skills)) {
+      skillsArray = form.skills;
+    }
+
+    const payload = {
+      name: String(form.name).trim(),
+      role: String(form.role).trim(),
+      department: String(form.department).trim(),
+      designation: String(form.designation).trim(),
+      image: String(form.image || "").trim(),
+      email: String(form.email || "").trim(),
+      linkedin: String(form.linkedin || "").trim(),
+      portfolio: String(form.portfolio || "").trim(),
+      bio: String(form.bio || "").trim(),
+      skills: skillsArray,
+      teamType: String(form.teamType).trim(),
+      sortOrder: Number(form.sortOrder || 0),
+      isActive: Boolean(form.isActive),
+    };
+
+    const isCreate = dacEditor.index === null;
+
+    try {
+      if (isCreate) {
+        await createDacMember(payload);
+        setMessage("DAC member added successfully.");
+      } else {
+        await updateDacMember(form.id, payload);
+        setMessage("DAC member updated successfully.");
+      }
+      setDacEditor({ index: null, form: null });
+      setDacReloadToken((prev) => prev + 1);
+    } catch (error) {
+      setDacApiError(
+        error?.response?.data?.message || error?.message || "Failed to save DAC member."
+      );
+      setMessage("Failed to save DAC member.");
+    } finally {
+      setIsDacSaving(false);
+    }
+  };
+
+  const handleDeleteDacMember = async (index) => {
+    const member = dacMembers.all[index];
+    if (!member) return;
+
+    if (!confirm(`Are you sure you want to delete DAC member ${member.name}?`)) {
+      return;
+    }
+
+    setDacDeletingKey(String(member.id));
+    setDacApiError("");
+
+    try {
+      await deleteDacMember(member.id);
+      setMessage("DAC member deleted successfully.");
+      setDacReloadToken((prev) => prev + 1);
+    } catch (error) {
+      setDacApiError(
+        error?.response?.data?.message || error?.message || "Failed to delete DAC member."
+      );
+      setMessage("Failed to delete DAC member.");
+    } finally {
+      setDacDeletingKey("");
+    }
+  };
+
+  const handleDacReorder = async (actualIndex, direction) => {
+    const member = dacMembers.all[actualIndex];
+    if (!member) return;
+
+    const teamMembers = dacMembers.all.filter(m => m.teamType === member.teamType);
+    const subIdx = teamMembers.findIndex(m => m.id === member.id);
+    if (subIdx === -1) return;
+
+    let swapWithSubIdx = direction === "up" ? subIdx - 1 : subIdx + 1;
+    if (swapWithSubIdx < 0 || swapWithSubIdx >= teamMembers.length) return;
+
+    const otherMember = teamMembers[swapWithSubIdx];
+    if (!otherMember) return;
+
+    setIsDacSaving(true);
+    setDacApiError("");
+
+    try {
+      const tempSortOrder = member.sortOrder;
+      await updateDacMember(member.id, { ...member, sortOrder: otherMember.sortOrder });
+      await updateDacMember(otherMember.id, { ...otherMember, sortOrder: tempSortOrder });
+
+      setMessage("Display order updated.");
+      setDacReloadToken((prev) => prev + 1);
+    } catch (error) {
+      setDacApiError(
+        error?.response?.data?.message || error?.message || "Failed to update display order."
+      );
+      setMessage("Failed to update display order.");
+    } finally {
+      setIsDacSaving(false);
+    }
+  };
+
   const handleSaveTender = async () => {
     const form = tenderEditor.form;
     if (!form?.title || !form?.description || !form?.closingDate || !form?.documentUrl) {
@@ -2571,11 +2919,10 @@ const AdminDashboard = () => {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-
               {/* Modal Body */}
               <div className="flex-1 overflow-y-auto pr-1 space-y-3">
                 {fields.map((field) => (
-                  <Field key={`${listKey}-${field.key}`} label={field.label}>
+                  <Field key={`${listKey}-${field.key}`} label={field.label} required={field.required}>
                     {field.type === "textarea" ? (
                       <textarea
                         className={`${inputClass} min-h-[90px]`}
@@ -2591,6 +2938,18 @@ const AdminDashboard = () => {
                       >
                         <option value="true">true</option>
                         <option value="false">false</option>
+                      </select>
+                    ) : field.type === "select" ? (
+                      <select
+                        className={inputClass}
+                        value={collectionEditors[listKey].form[field.key] || ""}
+                        onChange={(e) => updateCollectionFormField(listKey, field, e.target.value)}
+                      >
+                        {(field.options || []).map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
                       </select>
                     ) : (
                       <input
@@ -4845,7 +5204,7 @@ const AdminDashboard = () => {
               </div>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {schoolsList.filter((s) => s.code !== "NSS" && s.code !== "NCC").map((school) => {
+                {schoolsList.filter((s) => s.code !== "NSS" && s.code !== "NCC" && s.code !== "GBU").map((school) => {
                   const c = school.content || {};
                   const counts = [
                     { label: "Events", n: (c.events || []).length, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
@@ -5018,6 +5377,7 @@ const AdminDashboard = () => {
             { key: "coverImageUrl", label: "Cover Image URL" },
             { key: "images", label: "Gallery Images (comma separated URLs)" },
             { key: "registrationUrl", label: "Registration URL" },
+            { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"] },
             { key: "description", label: "Description", type: "textarea" },
           ],
           {
@@ -5040,6 +5400,7 @@ const AdminDashboard = () => {
             coverImageUrl: "",
             images: "",
             registrationUrl: "",
+            level: "college",
             description: "",
           },
         )}
@@ -5066,6 +5427,7 @@ const AdminDashboard = () => {
             { key: "link", label: "External Link" },
             { key: "excerpt", label: "Excerpt", type: "textarea" },
             { key: "content", label: "Content", type: "textarea" },
+            { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"] },
             { key: "status", label: "Status" },
           ],
           {
@@ -5086,6 +5448,7 @@ const AdminDashboard = () => {
             link: "",
             excerpt: "",
             content: "",
+            level: "college",
             status: "draft",
           },
         )}
@@ -5094,30 +5457,8 @@ const AdminDashboard = () => {
         renderCollectionEditor(
           "notices",
           "Notices",
-          [
-            { key: "title", label: "Notice Title" },
-            { key: "date", label: "Date", type: "date" },
-            { key: "type", label: "Type" },
-            { key: "priority", label: "Priority" },
-            { key: "isNew", label: "New Badge", type: "boolean" },
-            { key: "views", label: "Views", type: "number" },
-            { key: "image", label: "Image URL" },
-            { key: "imageLink", label: "Image Click Link" },
-            { key: "pdfUrl", label: "PDF URL" },
-            { key: "content", label: "Content", type: "textarea" },
-          ],
-          {
-            title: "",
-            date: "",
-            type: "General",
-            priority: "medium",
-            isNew: true,
-            views: 0,
-            image: "",
-            imageLink: "",
-            pdfUrl: "",
-            content: "",
-          },
+          NOTICES_FIELDS,
+          NOTICES_TEMPLATE
         )}
 
       {activeSchoolSubTab === "newsletters" &&
@@ -5156,26 +5497,8 @@ const AdminDashboard = () => {
         renderCollectionEditor(
           "eventGallery",
           "Event Gallery",
-          [
-            { key: "title", label: "Gallery Title" },
-            { key: "eventDate", label: "Event Date", type: "date" },
-            { key: "category", label: "Category" },
-            { key: "imageUrl", label: "Image 1 URL" },
-            { key: "imageUrl2", label: "Image 2 URL" },
-            { key: "imageUrl3", label: "Image 3 URL" },
-            { key: "imageUrl4", label: "Image 4 URL" },
-            { key: "imageLink", label: "Image Click Link" },
-          ],
-          {
-            title: "",
-            eventDate: "",
-            category: "Events",
-            imageUrl: "",
-            imageUrl2: "",
-            imageUrl3: "",
-            imageUrl4: "",
-            imageLink: "",
-          },
+          GALLERY_FIELDS,
+          GALLERY_TEMPLATE
         )}
 
       {activeSchoolSubTab === "clubs" && schoolData.schoolCode !== "NSS" && schoolData.schoolCode !== "NCC" &&
@@ -5236,6 +5559,81 @@ const AdminDashboard = () => {
     </div>
   );
 };
+
+  const renderAnnouncementsTab = () => {
+    const gbuSchool = schoolsList.find((s) => s.code === "GBU");
+    if (!gbuSchool) {
+      return (
+        <div className="space-y-4">
+          <div className={cardClass}>
+            <p className="text-sm text-slate-500">Loading Gautam Buddha University Administration database...</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-slate-900">University Announcements Management</h2>
+              <span className="rounded-lg bg-slate-900 px-2 py-0.5 text-xs font-bold text-white">GBU</span>
+            </div>
+            <p className="text-sm text-slate-500">Manage notices, news, events, and newsletters showing on the main GBU website announcements.</p>
+          </div>
+          <button
+            onClick={handleSaveSchool}
+            disabled={isSchoolSaving}
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            <Save className="h-4 w-4" />
+            {isSchoolSaving ? "Saving..." : "Save Announcements"}
+          </button>
+        </div>
+
+        {activeSchoolSubTab === "events" &&
+          renderCollectionEditor(
+            "events",
+            "Events",
+            EVENTS_FIELDS,
+            EVENTS_TEMPLATE
+          )}
+
+        {activeSchoolSubTab === "news" &&
+          renderCollectionEditor(
+            "news",
+            "News",
+            NEWS_FIELDS,
+            NEWS_TEMPLATE
+          )}
+
+        {activeSchoolSubTab === "notices" &&
+          renderCollectionEditor(
+            "notices",
+            "Notices",
+            NOTICES_FIELDS,
+            NOTICES_TEMPLATE
+          )}
+
+        {activeSchoolSubTab === "newsletters" &&
+          renderCollectionEditor(
+            "newsletters",
+            "Newsletters",
+            NEWSLETTERS_FIELDS,
+            NEWSLETTERS_TEMPLATE
+          )}
+
+        {activeSchoolSubTab === "gallery" &&
+          renderCollectionEditor(
+            "eventGallery",
+            "Event Gallery",
+            GALLERY_FIELDS,
+            GALLERY_TEMPLATE
+          )}
+      </div>
+    );
+  };
 
   const renderNssTab = () => {
     return (
@@ -6437,9 +6835,10 @@ const AdminDashboard = () => {
     return (
       <div className="space-y-4">
         <div className={cardClass}>
-          <div className="mb-3 flex items-center justify-between">
+          <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-semibold text-slate-900">Recruitment Management</h2>
+              <h2 className="text-lg font-bold text-slate-950">Recruitment Management</h2>
+              <p className="text-xs text-slate-500 mt-1">Manage active vacancies, career advertisements, and archives.</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <button
@@ -6460,9 +6859,9 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
               >
-                <Plus className="h-3.5 w-3.5" /> Add Current
+                <Plus className="h-4 w-4" /> Add Current
               </button>
               <button
                 type="button"
@@ -6481,147 +6880,189 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition"
               >
-                <Plus className="h-3.5 w-3.5" /> Add Archived
+                <Plus className="h-4 w-4" /> Add Archived
               </button>
             </div>
           </div>
 
           {isRecruitmentLoading ? (
-            <div className="mb-3 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
-              Loading recruitments from backend API...
+            <div className="mb-4 rounded-2xl border border-blue-100 bg-blue-50/50 p-4 text-xs text-blue-800 flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+              Loading recruitments from database...
             </div>
           ) : null}
 
           {recruitmentApiError ? (
-            <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+            <div className="mb-4 rounded-2xl border border-rose-100 bg-rose-50/50 p-4 text-xs text-rose-700">
               API Error: {recruitmentApiError}
             </div>
           ) : null}
 
+          {/* Subtab selection */}
+          <div className="mb-4 flex gap-1 rounded-2xl bg-slate-100 p-1.5 max-w-sm">
+            <button
+              type="button"
+              onClick={() => setRecruitmentTabMode("current")}
+              className={`flex-1 rounded-xl py-2 text-center text-xs font-bold transition-all duration-200 ${
+                recruitmentTabMode === "current"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500 hover:text-slate-900"
+              }`}
+            >
+              Current Recruitment
+            </button>
+            <button
+              type="button"
+              onClick={() => setRecruitmentTabMode("archived")}
+              className={`flex-1 rounded-xl py-2 text-center text-xs font-bold transition-all duration-200 ${
+                recruitmentTabMode === "archived"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500 hover:text-slate-900"
+              }`}
+            >
+              Archived Recruitment
+            </button>
+          </div>
+
           <FilterBar
             searchValue={recruitmentFilter}
             onSearchChange={setRecruitmentFilter}
-            searchPlaceholder="Search recruitment title, reference, year..."
+            searchPlaceholder={recruitmentTabMode === "current" ? "Search active recruitment title, ref..." : "Search archived recruitment title, ref, year..."}
             onClear={() => setRecruitmentFilter("")}
           />
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <h3 className="mb-3 text-sm font-semibold text-slate-900">Current Recruitment Tabs</h3>
-              <div className="max-h-[430px] space-y-2 overflow-y-auto pr-1">
-                {filteredRecruitmentCurrentItems.map((item) => (
-                  <div key={`${item.categoryType}-${item.id}`} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                        <p className="text-xs text-slate-500">{item.categoryTitle} • {item.ref} • {item.date}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setRecruitmentEditor({
-                              mode: "current",
-                              index: null,
-                              form: {
-                                id: item.id,
-                                categoryType: item.categoryType,
-                                label: item.label || "",
-                                title: item.title || "",
-                                ref: item.ref || "",
-                                date: item.date || "",
-                                status: item.status || "active",
-                                documentsText: formatRecruitmentDocuments(item.documents),
-                              },
-                            })
-                          }
-                          className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                        >
-                          <Pencil className="h-3.5 w-3.5" /> Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteRecruitmentCurrent(item)}
-                          className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" /> Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <h3 className="mb-3 text-sm font-semibold text-slate-900">Archived Recruitment Years</h3>
-              <div className="max-h-[430px] space-y-2 overflow-y-auto pr-1">
-                {filteredRecruitmentArchivedItems.map((item) => (
-                  <div key={item.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                        <p className="text-xs text-slate-500">Year {item.year} • {item.ref} • {item.date}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setRecruitmentEditor({
-                              mode: "archived",
-                              index: null,
-                              form: {
-                                id: item.id,
-                                year: item.year || "",
-                                title: item.title || "",
-                                ref: item.ref || "",
-                                date: item.date || "",
-                                status: "archived",
-                                documentsText: formatRecruitmentDocuments(item.documents),
-                              },
-                            })
-                          }
-                          className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                        >
-                          <Pencil className="h-3.5 w-3.5" /> Edit
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteRecruitmentArchived(item)}
-                          className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" /> Delete
-                        </button>
+          <div className="mt-4">
+            {recruitmentTabMode === "current" ? (
+              <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                <h3 className="mb-3 text-sm font-bold text-slate-900">Current Recruitment Listings</h3>
+                <div className="max-h-[500px] space-y-2 overflow-y-auto pr-1">
+                  {filteredRecruitmentCurrentItems.map((item) => (
+                    <div key={`${item.categoryType}-${item.id}`} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3 hover:bg-slate-50 transition">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-slate-950">{item.title}</p>
+                          <p className="text-xs text-slate-500 mt-1">
+                            <span className="rounded bg-blue-50 px-2 py-0.5 font-bold text-blue-700 uppercase mr-2 text-[10px]">{item.categoryTitle}</span>
+                            Ref: {item.ref} • Published: {item.date}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1.5 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setRecruitmentEditor({
+                                mode: "current",
+                                index: null,
+                                form: {
+                                  id: item.id,
+                                  categoryType: item.categoryType,
+                                  label: item.label || "",
+                                  title: item.title || "",
+                                  ref: item.ref || "",
+                                  date: item.date || "",
+                                  status: item.status || "active",
+                                  documentsText: formatRecruitmentDocuments(item.documents),
+                                },
+                              })
+                            }
+                            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                          >
+                            <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteRecruitmentCurrent(item)}
+                            className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                          >
+                            <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                  {filteredRecruitmentCurrentItems.length === 0 && (
+                    <p className="py-8 text-center text-xs text-slate-400">No active recruitment entries found.</p>
+                  )}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                <h3 className="mb-3 text-sm font-bold text-slate-900">Archived Recruitment Listings</h3>
+                <div className="max-h-[500px] space-y-2 overflow-y-auto pr-1">
+                  {filteredRecruitmentArchivedItems.map((item) => (
+                    <div key={item.id} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3 hover:bg-slate-50 transition">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-semibold text-slate-950">{item.title}</p>
+                          <p className="text-xs text-slate-500 mt-1">
+                            <span className="rounded bg-amber-50 px-2 py-0.5 font-bold text-amber-700 uppercase mr-2 text-[10px]">Year {item.year}</span>
+                            Ref: {item.ref} • Published: {item.date}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1.5 flex-shrink-0">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setRecruitmentEditor({
+                                mode: "archived",
+                                index: null,
+                                form: {
+                                  id: item.id,
+                                  year: item.year || "",
+                                  title: item.title || "",
+                                  ref: item.ref || "",
+                                  date: item.date || "",
+                                  status: "archived",
+                                  documentsText: formatRecruitmentDocuments(item.documents),
+                                },
+                              })
+                            }
+                            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                          >
+                            <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => deleteRecruitmentArchived(item)}
+                            className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                          >
+                            <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {filteredRecruitmentArchivedItems.length === 0 && (
+                    <p className="py-8 text-center text-xs text-slate-400">No archived recruitment entries found.</p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className={cardClass}>
-          {recruitmentEditor.form ? (
-            <>
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-base font-semibold text-slate-900">
-                  {recruitmentEditor.mode === "archived" ? "Edit Archived Recruitment" : "Edit Current Recruitment"}
+        {/* Modal Editor Dialog for Recruitment */}
+        {recruitmentEditor.form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-fade-in">
+            <div className="w-full max-w-2xl transform rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl transition-all animate-scale-in">
+              <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-slate-950">
+                  {recruitmentEditor.form.id ? "Edit Recruitment Details" : "Add New Recruitment Entry"}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setRecruitmentEditor({ mode: null, index: null, form: null })}
-                  className="text-xs font-medium text-slate-500 hover:text-slate-700"
+                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                 >
-                  Cancel
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-2 max-h-[60vh] overflow-y-auto pr-1 py-1">
                 {recruitmentEditor.mode === "current" ? (
-                  <Field label="Category Type">
+                  <Field label="Category Type" required>
                     <select
                       className={inputClass}
                       value={recruitmentEditor.form.categoryType || "teaching"}
@@ -6640,49 +7081,54 @@ const AdminDashboard = () => {
                     </select>
                   </Field>
                 ) : (
-                  <Field label="Year">
+                  <Field label="Year" required>
                     <input
                       className={inputClass}
                       value={recruitmentEditor.form.year || ""}
                       onChange={(e) =>
                         setRecruitmentEditor((prev) => ({ ...prev, form: { ...prev.form, year: e.target.value } }))
                       }
+                      placeholder="e.g. 2026"
                     />
                   </Field>
                 )}
 
-                <Field label="Tab Label">
-                  <input
-                    className={inputClass}
-                    value={recruitmentEditor.form.label || ""}
-                    onChange={(e) =>
-                      setRecruitmentEditor((prev) => ({ ...prev, form: { ...prev.form, label: e.target.value } }))
-                    }
-                    placeholder="Example: Assistant Professor's"
-                  />
-                </Field>
+                {recruitmentEditor.mode === "current" && (
+                  <Field label="Tab Label">
+                    <input
+                      className={inputClass}
+                      value={recruitmentEditor.form.label || ""}
+                      onChange={(e) =>
+                        setRecruitmentEditor((prev) => ({ ...prev, form: { ...prev.form, label: e.target.value } }))
+                      }
+                      placeholder="Example: Assistant Professor's"
+                    />
+                  </Field>
+                )}
 
-                <Field label="Title">
+                <Field label="Title" required>
                   <input
                     className={inputClass}
                     value={recruitmentEditor.form.title || ""}
                     onChange={(e) =>
                       setRecruitmentEditor((prev) => ({ ...prev, form: { ...prev.form, title: e.target.value } }))
                     }
+                    placeholder="e.g. Recruitment Advertisement for Teaching Posts"
                   />
                 </Field>
 
-                <Field label="Reference Number">
+                <Field label="Reference Number" required>
                   <input
                     className={inputClass}
                     value={recruitmentEditor.form.ref || ""}
                     onChange={(e) =>
                       setRecruitmentEditor((prev) => ({ ...prev, form: { ...prev.form, ref: e.target.value } }))
                     }
+                    placeholder="e.g. GBU/Admin/2026/02"
                   />
                 </Field>
 
-                <Field label="Published Date">
+                <Field label="Published Date" required>
                   <input
                     className={inputClass}
                     type="date"
@@ -6692,45 +7138,52 @@ const AdminDashboard = () => {
                     }
                   />
                 </Field>
+
+                <div className="md:col-span-2">
+                  <Field label="Documents (one per line format: Name|Description|URL)" required>
+                    <textarea
+                      className={`${inputClass} min-h-32 font-mono text-xs`}
+                      value={recruitmentEditor.form.documentsText || ""}
+                      onChange={(e) =>
+                        setRecruitmentEditor((prev) => ({
+                          ...prev,
+                          form: { ...prev.form, documentsText: e.target.value },
+                        }))
+                      }
+                      placeholder="Extension Notice|Official extension notification|#&#10;Detailed Advertisement|Complete vacancy details|#"
+                    />
+                  </Field>
+                </div>
               </div>
 
-              <div className="mt-4">
-                <Field label="Documents (one per line format: Name|Description|URL)">
-                  <textarea
-                    className={`${inputClass} min-h-32`}
-                    value={recruitmentEditor.form.documentsText || ""}
-                    onChange={(e) =>
-                      setRecruitmentEditor((prev) => ({
-                        ...prev,
-                        form: { ...prev.form, documentsText: e.target.value },
-                      }))
-                    }
-                  />
-                </Field>
+              {/* Modal Action Buttons */}
+              <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setRecruitmentEditor({ mode: null, index: null, form: null })}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={saveRecruitmentEditor}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                >
+                  Save Recruitment Data
+                </button>
               </div>
-
-              <button
-                type="button"
-                onClick={saveRecruitmentEditor}
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800"
-              >
-                Save Recruitment Data
-              </button>
-            </>
-          ) : (
-            <div className="flex min-h-[170px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Select a current or archived recruitment entry to edit.
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
   };
 
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-80 lg:shrink-0 lg:self-start">
+      <div className="flex w-full flex-col gap-6 lg:flex-row">
+        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Admin Navigation</h2>
 
@@ -6755,6 +7208,42 @@ const AdminDashboard = () => {
                       <div className="relative ml-2 mt-2 space-y-2 pl-5">
                         <div className="pointer-events-none absolute bottom-2 left-1 top-2 w-1 rounded-full bg-gradient-to-b from-blue-200 via-indigo-200 to-sky-200" />
                         {schoolContentTabs.map((subTab) => {
+                          const SubIcon = subTab.icon;
+                          const isSubActive = activeSchoolSubTab === subTab.id;
+                          return (
+                            <button
+                              key={subTab.id}
+                              type="button"
+                              onClick={() => setActiveSchoolSubTab(subTab.id)}
+                              className={`group relative flex w-full items-center gap-2 rounded-2xl border px-3 py-2.5 text-left text-xs font-semibold transition-all duration-200 ${
+                                isSubActive
+                                  ? "border-blue-400 bg-blue-50 text-slate-900 shadow-sm"
+                                  : "border-transparent bg-slate-50/70 text-slate-600 hover:border-slate-200 hover:bg-white hover:text-slate-900"
+                              }`}
+                            >
+                              <span
+                                className={`absolute -left-[18px] h-2.5 w-2.5 rounded-full ring-4 ring-white transition ${
+                                  isSubActive ? "bg-blue-500" : "bg-slate-300 group-hover:bg-slate-400"
+                                }`}
+                              />
+                              <SubIcon className={`h-3.5 w-3.5 ${isSubActive ? "text-blue-600" : "text-slate-500"}`} />
+                              {subTab.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {tab.id === "announcements" && isActive && (
+                      <div className="relative ml-2 mt-2 space-y-2 pl-5">
+                        <div className="pointer-events-none absolute bottom-2 left-1 top-2 w-1 rounded-full bg-gradient-to-b from-blue-200 via-indigo-200 to-sky-200" />
+                        {[
+                          { id: "notices", label: "Notices", icon: Bell },
+                          { id: "news", label: "News", icon: Newspaper },
+                          { id: "events", label: "Events", icon: CalendarDays },
+                          { id: "newsletters", label: "Newsletters", icon: Newspaper },
+                          { id: "gallery", label: "Event Gallery", icon: Images },
+                        ].map((subTab) => {
                           const SubIcon = subTab.icon;
                           const isSubActive = activeSchoolSubTab === subTab.id;
                           return (
@@ -6937,6 +7426,7 @@ const AdminDashboard = () => {
           {activeTab === "faculty" && renderFacultyTab()}
           {activeTab === "faculty-requests" && renderFacultyRequestsTab()}
           {activeTab === "school" && renderSchoolTab()}
+          {activeTab === "announcements" && renderAnnouncementsTab()}
           {activeTab === "nss" && renderNssTab()}
           {activeTab === "ncc" && renderNccTab()}
           {activeTab === "tenders" && renderTendersTab()}

@@ -70,9 +70,181 @@ const inputClass =
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 
-const Field = ({ label, children }) => (
+const NOTICES_FIELDS = [
+  { key: "title", label: "Notice Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "type", label: "Type", type: "select", options: ["General", "Academic", "Examination", "Admission", "Placement", "Tenders", "Important", "Sports", "NSS/NCC", "Research", "Student Corner"], required: true },
+  { key: "priority", label: "Priority", type: "select", options: ["medium", "low", "high"], required: true },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "pdfUrl", label: "PDF URL", required: true },
+  { key: "content", label: "Content", type: "textarea", required: true },
+];
+
+const NOTICES_TEMPLATE = {
+  title: "",
+  date: "",
+  type: "General",
+  priority: "medium",
+  level: "college",
+  pdfUrl: "",
+  content: "",
+};
+
+const EVENTS_FIELDS = [
+  { key: "title", label: "Event Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "startsAt", label: "Starts At (e.g. 10:00 AM)" },
+  { key: "endDate", label: "End Date", type: "date" },
+  { key: "endsAt", label: "Ends At (e.g. 04:00 PM)" },
+  { key: "time", label: "Time Description (e.g. 10:00 AM - 04:00 PM)" },
+  { key: "venue", label: "Venue (e.g. Seminar Hall)", required: true },
+  { key: "location", label: "Location (e.g. ICT Block)" },
+  { key: "type", label: "Type", type: "select", options: ["Seminar", "Workshop", "Conference", "Competition", "Sports", "Cultural", "Guest Lecture", "Orientation", "Convocation", "Other"], required: true },
+  { key: "mode", label: "Mode", type: "select", options: ["Offline", "Online", "Hybrid"], required: true },
+  { key: "organizer", label: "Organizer (e.g. School Office)", required: true },
+  { key: "attendees", label: "Expected Attendees", type: "number" },
+  { key: "price", label: "Price / Registration Fee" },
+  { key: "tags", label: "Tags (comma separated)" },
+  { key: "image", label: "Image URL" },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "coverImageUrl", label: "Cover Image URL" },
+  { key: "images", label: "Gallery Images (comma separated URLs)" },
+  { key: "registrationUrl", label: "Registration Link / URL" },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "description", label: "Description", type: "textarea", required: true },
+];
+
+const EVENTS_TEMPLATE = {
+  title: "",
+  date: "",
+  startsAt: "",
+  endDate: "",
+  endsAt: "",
+  time: "",
+  venue: "",
+  location: "",
+  type: "Seminar",
+  mode: "Offline",
+  organizer: "",
+  attendees: 0,
+  price: "Free",
+  tags: "",
+  image: "",
+  imageLink: "",
+  coverImageUrl: "",
+  images: "",
+  registrationUrl: "",
+  level: "college",
+  description: "",
+};
+
+const NEWS_FIELDS = [
+  { key: "title", label: "News Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Academic", "Research", "Technology", "Sports", "Environment", "Awards & Recognition", "Cultural", "Other"], required: true },
+  { key: "priority", label: "Priority", type: "select", options: ["medium", "low", "high"], required: true },
+  { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"], required: true },
+  { key: "excerpt", label: "Excerpt (Short Summary)", type: "textarea", required: true },
+  { key: "content", label: "Content (Full Details)", type: "textarea", required: true },
+  { key: "author", label: "Author" },
+  { key: "department", label: "Department" },
+  { key: "tags", label: "Tags (comma separated)" },
+  { key: "featured", label: "Featured News", type: "boolean" },
+  { key: "views", label: "Views Count", type: "number" },
+  { key: "likes", label: "Likes Count", type: "number" },
+  { key: "image", label: "Image URL" },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "coverImageUrl", label: "Cover Image URL" },
+  { key: "pdfUrl", label: "PDF URL" },
+  { key: "link", label: "External Link" },
+  { key: "status", label: "Status", type: "select", options: ["published", "draft"], required: true },
+];
+
+const NEWS_TEMPLATE = {
+  title: "",
+  date: "",
+  category: "Academic",
+  author: "School Office",
+  department: "",
+  tags: "",
+  priority: "medium",
+  featured: false,
+  views: 0,
+  likes: 0,
+  image: "",
+  imageLink: "",
+  coverImageUrl: "",
+  pdfUrl: "",
+  link: "",
+  excerpt: "",
+  content: "",
+  level: "college",
+  status: "published",
+};
+
+const NEWSLETTERS_FIELDS = [
+  { key: "title", label: "Title", required: true },
+  { key: "date", label: "Date", type: "date", required: true },
+  { key: "issueNumber", label: "Issue Number (e.g. Vol. 1, Issue 2)", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Monthly Digest", "Special Edition", "Annual Report", "Academic Update", "Student Newsletter", "Other"], required: true },
+  { key: "views", label: "Views Count", type: "number" },
+  { key: "coverImage", label: "Cover Image URL", required: true },
+  { key: "imageLink", label: "Image Click Link" },
+  { key: "pdfLink", label: "PDF Link / URL", required: true },
+  { key: "excerpt", label: "Excerpt (Short Summary)", type: "textarea", required: true },
+  { key: "content", label: "Content (Full Details)", type: "textarea", required: true },
+  { key: "isPublished", label: "Published", type: "boolean", required: true },
+];
+
+const NEWSLETTERS_TEMPLATE = {
+  title: "",
+  date: "",
+  category: "Monthly Digest",
+  issueNumber: "",
+  views: 0,
+  coverImage: "",
+  imageLink: "",
+  pdfLink: "",
+  excerpt: "",
+  content: "",
+  isPublished: true,
+};
+
+const GALLERY_FIELDS = [
+  { key: "title", label: "Gallery Title", required: true },
+  { key: "eventDate", label: "Event Date", type: "date", required: true },
+  { key: "category", label: "Category", type: "select", options: ["Events", "Research", "Sports", "Cultural", "Infrastructure", "Other"], required: true },
+  { key: "imageUrl", label: "Image 1 URL", required: true },
+  { key: "imageUrl2", label: "Image 2 URL" },
+  { key: "imageUrl3", label: "Image 3 URL" },
+  { key: "imageUrl4", label: "Image 4 URL" },
+  { key: "imageLink", label: "Image Click Link" },
+];
+
+const GALLERY_TEMPLATE = {
+  title: "",
+  eventDate: "",
+  category: "Events",
+  imageUrl: "",
+  imageUrl2: "",
+  imageUrl3: "",
+  imageUrl4: "",
+  imageLink: "",
+};
+
+const FIELDS_CONFIG = {
+  notices: NOTICES_FIELDS,
+  news: NEWS_FIELDS,
+  events: EVENTS_FIELDS,
+  newsletters: NEWSLETTERS_FIELDS,
+  eventGallery: GALLERY_FIELDS,
+};
+
+const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">{label}</label>
+    <label className="mb-1 block text-sm font-medium text-slate-700">
+      {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
+    </label>
     {children}
   </div>
 );
@@ -457,6 +629,19 @@ const SchoolDashboard = () => {
     if (!editor?.form) return;
 
     let nextForm = { ...editor.form };
+    const fieldsToValidate = FIELDS_CONFIG[listKey];
+    if (fieldsToValidate) {
+      for (const field of fieldsToValidate) {
+        if (field.required) {
+          const val = nextForm[field.key];
+          if (val === undefined || val === null || String(val).trim() === "") {
+            alert(`${field.label} is required.`);
+            return;
+          }
+        }
+      }
+    }
+
     if (listKey === "clubs") {
       const objectivesArray = typeof nextForm.objectives === "string" 
         ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
@@ -663,7 +848,7 @@ const SchoolDashboard = () => {
 
               <div className="max-h-[440px] space-y-3 overflow-y-auto pr-1">
                 {fields.map((field) => (
-                  <Field key={`${listKey}-${field.key}`} label={field.label}>
+                  <Field key={`${listKey}-${field.key}`} label={field.label} required={field.required}>
                     {field.type === "textarea" ? (
                       <textarea
                         className={`${inputClass} min-h-20`}
@@ -678,6 +863,18 @@ const SchoolDashboard = () => {
                       >
                         <option value="true">true</option>
                         <option value="false">false</option>
+                      </select>
+                    ) : field.type === "select" ? (
+                      <select
+                        className={inputClass}
+                        value={collectionEditors[listKey].form[field.key] || ""}
+                        onChange={(e) => updateCollectionFormField(listKey, field, e.target.value)}
+                      >
+                        {(field.options || []).map((opt) => (
+                          <option key={opt} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
                       </select>
                     ) : (
                       <input
@@ -1058,50 +1255,8 @@ const SchoolDashboard = () => {
       return renderCollectionEditor(
         "events",
         "Events Management",
-        [
-          { key: "title", label: "Event Title" },
-          { key: "date", label: "Date", type: "date" },
-          { key: "startsAt", label: "Starts At (ISO or date/time text)" },
-          { key: "endDate", label: "End Date", type: "date" },
-          { key: "endsAt", label: "Ends At (ISO or date/time text)" },
-          { key: "time", label: "Time" },
-          { key: "venue", label: "Venue" },
-          { key: "location", label: "Location" },
-          { key: "organizer", label: "Organizer" },
-          { key: "type", label: "Type" },
-          { key: "mode", label: "Mode (Offline/Online/Hybrid)" },
-          { key: "attendees", label: "Attendees", type: "number" },
-          { key: "price", label: "Price" },
-          { key: "tags", label: "Tags (comma separated)" },
-          { key: "image", label: "Image URL" },
-          { key: "imageLink", label: "Image Click Link" },
-          { key: "coverImageUrl", label: "Cover Image URL" },
-          { key: "images", label: "Gallery Images (comma separated URLs)" },
-          { key: "registrationUrl", label: "Registration URL" },
-          { key: "description", label: "Description", type: "textarea" },
-        ],
-        {
-          title: "",
-          date: "",
-          startsAt: "",
-          endDate: "",
-          endsAt: "",
-          time: "",
-          venue: "",
-          location: "",
-          organizer: "",
-          type: "",
-          mode: "Offline",
-          attendees: 0,
-          price: "Free",
-          tags: "",
-          image: "",
-          imageLink: "",
-          coverImageUrl: "",
-          images: "",
-          registrationUrl: "",
-          description: "",
-        }
+        EVENTS_FIELDS,
+        EVENTS_TEMPLATE
       );
     }
 
@@ -1109,46 +1264,8 @@ const SchoolDashboard = () => {
       return renderCollectionEditor(
         "news",
         "News Management",
-        [
-          { key: "title", label: "News Title" },
-          { key: "date", label: "Date", type: "date" },
-          { key: "category", label: "Category" },
-          { key: "author", label: "Author" },
-          { key: "department", label: "Department" },
-          { key: "tags", label: "Tags (comma separated)" },
-          { key: "priority", label: "Priority" },
-          { key: "featured", label: "Featured", type: "boolean" },
-          { key: "views", label: "Views", type: "number" },
-          { key: "likes", label: "Likes", type: "number" },
-          { key: "image", label: "Image URL" },
-          { key: "imageLink", label: "Image Click Link" },
-          { key: "coverImageUrl", label: "Cover Image URL" },
-          { key: "pdfUrl", label: "PDF URL" },
-          { key: "link", label: "External Link" },
-          { key: "excerpt", label: "Excerpt", type: "textarea" },
-          { key: "content", label: "Content", type: "textarea" },
-          { key: "status", label: "Status" },
-        ],
-        {
-          title: "",
-          date: "",
-          category: "Academic",
-          author: "School Office",
-          department: "",
-          tags: "",
-          priority: "medium",
-          featured: false,
-          views: 0,
-          likes: 0,
-          image: "",
-          imageLink: "",
-          coverImageUrl: "",
-          pdfUrl: "",
-          link: "",
-          excerpt: "",
-          content: "",
-          status: "draft",
-        }
+        NEWS_FIELDS,
+        NEWS_TEMPLATE
       );
     }
 
@@ -1156,32 +1273,8 @@ const SchoolDashboard = () => {
       return renderCollectionEditor(
         "newsletters",
         "Newsletter Management",
-        [
-          { key: "title", label: "Title" },
-          { key: "date", label: "Date", type: "date" },
-          { key: "category", label: "Category" },
-          { key: "issueNumber", label: "Issue Number" },
-          { key: "views", label: "Views", type: "number" },
-          { key: "coverImage", label: "Cover Image URL" },
-          { key: "imageLink", label: "Image Click Link" },
-          { key: "pdfLink", label: "PDF Link" },
-          { key: "excerpt", label: "Excerpt", type: "textarea" },
-          { key: "content", label: "Content", type: "textarea" },
-          { key: "isPublished", label: "Published", type: "boolean" },
-        ],
-        {
-          title: "",
-          date: "",
-          category: "School Update",
-          issueNumber: "",
-          views: 0,
-          coverImage: "",
-          imageLink: "",
-          pdfLink: "",
-          excerpt: "",
-          content: "",
-          isPublished: true,
-        }
+        NEWSLETTERS_FIELDS,
+        NEWSLETTERS_TEMPLATE
       );
     }
 
@@ -1189,30 +1282,8 @@ const SchoolDashboard = () => {
       return renderCollectionEditor(
         "notices",
         "Notice Management",
-        [
-          { key: "title", label: "Notice Title" },
-          { key: "date", label: "Date", type: "date" },
-          { key: "type", label: "Type" },
-          { key: "priority", label: "Priority" },
-          { key: "isNew", label: "New Badge", type: "boolean" },
-          { key: "views", label: "Views", type: "number" },
-          { key: "image", label: "Image URL" },
-          { key: "imageLink", label: "Image Click Link" },
-          { key: "pdfUrl", label: "PDF URL" },
-          { key: "content", label: "Content", type: "textarea" },
-        ],
-        {
-          title: "",
-          date: "",
-          type: "General",
-          priority: "medium",
-          isNew: true,
-          views: 0,
-          image: "",
-          imageLink: "",
-          pdfUrl: "",
-          content: "",
-        }
+        NOTICES_FIELDS,
+        NOTICES_TEMPLATE
       );
     }
 
@@ -1220,26 +1291,8 @@ const SchoolDashboard = () => {
       return renderCollectionEditor(
         "eventGallery",
         "Event Gallery Management",
-        [
-          { key: "title", label: "Gallery Title" },
-          { key: "eventDate", label: "Event Date", type: "date" },
-          { key: "category", label: "Category" },
-          { key: "imageUrl", label: "Image 1 URL" },
-          { key: "imageUrl2", label: "Image 2 URL" },
-          { key: "imageUrl3", label: "Image 3 URL" },
-          { key: "imageUrl4", label: "Image 4 URL" },
-          { key: "imageLink", label: "Image Click Link" },
-        ],
-        {
-          title: "",
-          eventDate: "",
-          category: "Events",
-          imageUrl: "",
-          imageUrl2: "",
-          imageUrl3: "",
-          imageUrl4: "",
-          imageLink: "",
-        }
+        GALLERY_FIELDS,
+        GALLERY_TEMPLATE
       );
     }
 
@@ -1305,8 +1358,8 @@ const SchoolDashboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="mx-auto flex w-full max-w-[98%] flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-[20%] min-w-[240px] max-w-[290px] lg:shrink-0 lg:self-start">
+      <div className="flex w-full flex-col gap-6 lg:flex-row">
+        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">School Navigation</h2>
 

@@ -17,6 +17,7 @@ import {
   Pencil,
   Search,
   AlertTriangle,
+  X,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -779,79 +780,82 @@ const SchoolDashboard = () => {
 
   const renderCollectionEditor = (listKey, title, fields, newItemTemplate) => (
     <div className={cardClass}>
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
+        <div>
+          <h2 className="text-lg font-bold text-slate-950">{title}</h2>
+          <p className="text-xs text-slate-500 mt-1">Manage, add, and update school listings.</p>
+        </div>
         <button
           type="button"
           onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-          className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
         >
-          <Plus className="h-3.5 w-3.5" /> Add New
+          <Plus className="h-4 w-4" /> Add New
         </button>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
-          {(data[listKey] || []).map((item, index) => {
-            const primaryValue = item.title || item.name || item.id || `Item ${index + 1}`;
-            return (
-              <div key={`${listKey}-${item.id || index}`} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-slate-900">{primaryValue}</p>
-                    <p className="text-xs text-slate-500">Item {index + 1}</p>
-                  </div>
+      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+        {(data[listKey] || []).map((item, index) => {
+          const primaryValue = item.title || item.name || item.id || `Item ${index + 1}`;
+          return (
+            <div key={`${listKey}-${item.id || index}`} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-slate-900">{primaryValue}</p>
+                  <p className="text-xs text-slate-500 mt-1">Entry #{index + 1}</p>
+                </div>
 
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => openCollectionEdit(listKey, index, item)}
-                      className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                    >
-                      <Pencil className="h-3.5 w-3.5" /> Edit
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => deleteCollectionItem(listKey, index)}
-                      className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" /> Delete
-                    </button>
-                  </div>
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => openCollectionEdit(listKey, index, item)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                  >
+                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deleteCollectionItem(listKey, index)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                  >
+                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                  </button>
                 </div>
               </div>
-            );
-          })}
-
-          {(data[listKey] || []).length === 0 && (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
-              No items yet. Click Add New to create one.
             </div>
-          )}
-        </div>
+          );
+        })}
 
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          {collectionEditors[listKey]?.form ? (
-            <>
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-semibold text-slate-800">
-                  {collectionEditors[listKey].index === null ? "Add New Item" : "Edit Item"}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => cancelCollectionEdit(listKey)}
-                  className="text-xs font-medium text-slate-500 hover:text-slate-700"
-                >
-                  Cancel
-                </button>
-              </div>
+        {(data[listKey] || []).length === 0 && (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+            No entries found. Click "Add New" to get started.
+          </div>
+        )}
+      </div>
 
-              <div className="max-h-[440px] space-y-3 overflow-y-auto pr-1">
-                {fields.map((field) => (
-                  <Field key={`${listKey}-${field.key}`} label={field.label} required={field.required}>
+      {collectionEditors[listKey]?.form && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-2xl transform rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl transition-all animate-scale-in">
+            <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-slate-950">
+                {collectionEditors[listKey].index === null ? `Add New ${title}` : `Edit ${title} Details`}
+              </h3>
+              <button
+                type="button"
+                onClick={() => cancelCollectionEdit(listKey)}
+                className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 max-h-[60vh] overflow-y-auto pr-1 py-1">
+              {fields.map((field) => (
+                <div key={`${listKey}-${field.key}`} className={field.type === "textarea" ? "md:col-span-2" : ""}>
+                  <Field label={field.label} required={field.required}>
                     {field.type === "textarea" ? (
                       <textarea
-                        className={`${inputClass} min-h-20`}
+                        className={`${inputClass} min-h-24`}
                         value={collectionEditors[listKey].form[field.key] || ""}
                         onChange={(e) => updateCollectionFormField(listKey, field, e.target.value)}
                       />
@@ -885,174 +889,182 @@ const SchoolDashboard = () => {
                       />
                     )}
                   </Field>
-                ))}
-              </div>
+                </div>
+              ))}
+            </div>
 
+            <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+              <button
+                type="button"
+                onClick={() => cancelCollectionEdit(listKey)}
+                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+              >
+                Cancel
+              </button>
               <button
                 type="button"
                 onClick={() => saveCollectionForm(listKey)}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Item
               </button>
-            </>
-          ) : (
-            <div className="flex h-full min-h-[180px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Select an item to edit, or click Add New.
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 
   const renderFacultyEditor = () => (
     <div className={cardClass}>
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-          <h2 className="text-lg font-semibold text-slate-900">Faculty Management</h2>
-          <p className="text-sm text-slate-600">Compact single form with add, edit and delete actions.</p>
+          <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
+          <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
         </div>
         <button
           type="button"
           onClick={addFacultyProfile}
-          className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
         >
-          <Plus className="h-3.5 w-3.5" /> Add New
+          <Plus className="h-4 w-4" /> Add New
         </button>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <div className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
-          {facultyProfiles.map((faculty, index) => (
-            <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
-                  <p className="text-xs text-slate-500">{faculty.designation || "No designation"}</p>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => generateFacultyPassword(faculty.id)}
-                    className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                    title="Generate Initial Login Password"
-                  >
-                    <Lock className="h-3.5 w-3.5" /> Gen Pass
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
-                    className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                  >
-                    <Pencil className="h-3.5 w-3.5" /> Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => deleteFacultyProfile(faculty.id)}
-                    className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" /> Delete
-                  </button>
-                </div>
+      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+        {facultyProfiles.map((faculty, index) => (
+          <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
+                <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
               </div>
-            </div>
-          ))}
 
-          {facultyProfiles.length === 0 && (
-            <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 text-sm text-slate-500">
-              No faculty found. Click Add New to create one.
-            </div>
-          )}
-        </div>
-
-        <div className="rounded-xl border border-slate-200 bg-white p-4">
-          {facultyEditor.form ? (
-            <>
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-semibold text-slate-800">
-                  {facultyEditor.index === null ? "Add Faculty" : "Edit Faculty"}
-                </p>
+              <div className="flex items-center gap-1.5 flex-shrink-0">
                 <button
                   type="button"
-                  onClick={() => setFacultyEditor({ index: null, form: null })}
-                  className="text-xs font-medium text-slate-500 hover:text-slate-700"
+                  onClick={() => generateFacultyPassword(faculty.id)}
+                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                  title="Generate Initial Login Password"
                 >
-                  Cancel
+                  <Lock className="h-3 w-3 text-slate-500" /> Gen Pass
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
+                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                >
+                  <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => deleteFacultyProfile(faculty.id)}
+                  className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                >
+                  <Trash2 className="h-3 w-3 text-rose-500" /> Delete
                 </button>
               </div>
+            </div>
+          </div>
+        ))}
 
-              <div className="space-y-3">
-                <Field label="Name"><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
-                <Field label="Designation"><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
-                <Field label="School">
-                  <select
-                    className={inputClass}
-                    value={facultyEditor.form.school || ""}
-                    onChange={(e) =>
-                      setFacultyEditor((prev) => ({
-                        ...prev,
-                        form: {
-                          ...prev.form,
-                          school: e.target.value,
-                          department: "",
-                        },
-                      }))
-                    }
-                  >
-                    <option value="">Select school</option>
-                    {schoolOptions.map((school) => (
-                      <option key={school.value} value={school.value}>
-                        {school.label}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Department">
-                  <select
-                    className={inputClass}
-                    value={facultyEditor.form.department || ""}
-                    onChange={(e) =>
-                      setFacultyEditor((prev) => ({
-                        ...prev,
-                        form: { ...prev.form, department: e.target.value },
-                      }))
-                    }
-                    disabled={!departmentOptions.length}
-                  >
-                    <option value="">
-                      {departmentOptions.length ? "Select department" : "Select school first"}
+        {facultyProfiles.length === 0 && (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+            No faculty profiles found. Click "Add New" to create one.
+          </div>
+        )}
+      </div>
+
+      {facultyEditor.form && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-2xl transform rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl transition-all animate-scale-in">
+            <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="text-base font-bold text-slate-950">
+                {facultyEditor.index === null ? "Add Faculty Profile" : "Edit Faculty Details"}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setFacultyEditor({ index: null, form: null })}
+                className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 max-h-[60vh] overflow-y-auto pr-1 py-1">
+              <Field label="Name" required><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
+              <Field label="Designation" required><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
+              <Field label="School" required>
+                <select
+                  className={inputClass}
+                  value={facultyEditor.form.school || ""}
+                  onChange={(e) =>
+                    setFacultyEditor((prev) => ({
+                      ...prev,
+                      form: {
+                        ...prev.form,
+                        school: e.target.value,
+                        department: "",
+                      },
+                    }))
+                  }
+                >
+                  <option value="">Select school</option>
+                  {schoolOptions.map((school) => (
+                    <option key={school.value} value={school.value}>
+                      {school.label}
                     </option>
-                    {departmentOptions.map((dept) => (
-                      <option key={dept.value} value={dept.value}>
-                        {dept.label}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="Email"><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
-                <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
-              </div>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Department" required>
+                <select
+                  className={inputClass}
+                  value={facultyEditor.form.department || ""}
+                  onChange={(e) =>
+                    setFacultyEditor((prev) => ({
+                      ...prev,
+                      form: { ...prev.form, department: e.target.value },
+                    }))
+                  }
+                  disabled={!departmentOptions.length}
+                >
+                  <option value="">
+                    {departmentOptions.length ? "Select department" : "Select school first"}
+                  </option>
+                  {departmentOptions.map((dept) => (
+                    <option key={dept.value} value={dept.value}>
+                      {dept.label}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Email" required><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
+              <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
+            </div>
 
+            <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+              <button
+                type="button"
+                onClick={() => setFacultyEditor({ index: null, form: null })}
+                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+              >
+                Cancel
+              </button>
               <button
                 type="button"
                 onClick={() => {
                   saveFacultyProfile(facultyEditor.form);
                   setFacultyEditor({ index: null, form: null });
                 }}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Faculty
               </button>
-            </>
-          ) : (
-            <div className="flex h-full min-h-[180px] items-center justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
-              Select a faculty to edit, or click Add New.
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 

@@ -9,31 +9,8 @@ import { matchDepartmentId } from "../../Data/schoolsMeta";
 const VITE_HOST = import.meta.env.VITE_HOST;
 
 const getImageUrl = (url, image) => {
-  let resolvedUrl = url;
-  if (url && typeof url === 'string') {
-    if (url.includes('drive.google.com/file/d/')) {
-      const parts = url.split('/file/d/');
-      if (parts[1]) {
-        const fileId = parts[1].split('/')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-    } else if (url.includes('drive.google.com/open?id=')) {
-      const parts = url.split('?id=');
-      if (parts[1]) {
-        const fileId = parts[1].split('&')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-    } else if (url.includes('docs.google.com/file/d/')) {
-      const parts = url.split('/file/d/');
-      if (parts[1]) {
-        const fileId = parts[1].split('/')[0];
-        resolvedUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-      }
-    }
-  }
-
-  if (resolvedUrl && (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:'))) return resolvedUrl;
-  if (resolvedUrl) return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
+  if (url && (url.startsWith("http") || url.startsWith("data:"))) return url;
+  if (url) return `${VITE_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
   if (image) return `${VITE_HOST}/media/${image}`;
   return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
 };

@@ -22,15 +22,12 @@ import MediaGallery from "../pages/Announcements/MediaGallery.jsx";
 import Notice from "../pages/Announcements/Notice.jsx";
 import NoticeDetail from "../pages/Announcements/NoticeDetail.jsx";
 
-import AlumniNetwork from "../pages/Alumni/AlumniNetwork.jsx";
-import EventsReunions from "../pages/Alumni/EventsReunions.jsx";
-import AlumniRegistration from "../pages/Alumni/AlumniRegistration.jsx";
-import SuccessStories from "../pages/Alumni/SuccessStories.jsx";
+
 
 import ContactDirectory from "../pages/directory/ContactDirectory.jsx";
 
 import HostelDining from "../pages/campusLife/HostelDining.jsx";
-import HostelDetailed from "../pages/campusLife/HostelDetailed.jsx";
+
 import SportsCultural from "../pages/campusLife/SportsCultural.jsx";
 import ClubsMain from "../pages/clubs/ClubsMain.jsx";
 
@@ -89,6 +86,15 @@ const Governance = lazy(() => import("../pages/Aboutus/Governance.jsx"));
 const ViceChancellor = lazy(() =>
   import("../pages/Aboutus/ViceChancellor.jsx")
 );
+const DeansOfSchools = lazy(() =>
+  import("../pages/Aboutus/DeansOfSchools.jsx")
+);
+const Registrar = lazy(() =>
+  import("../pages/Aboutus/Registrar.jsx")
+);
+
+const PrivacyPolicy = lazy(() => import("../pages/Legal/PrivacyPolicy.jsx"));
+const TermsOfUse = lazy(() => import("../pages/Legal/TermsOfUse.jsx"));
 
 const FundedProjects = lazy(() =>
   import("../pages/Reasearch/researchhighlights/FundedProjects")
@@ -132,6 +138,7 @@ import RecruitMain from "../pages/recruitments/RecruitMain.jsx";
 
 import BookingMain from "../pages/booking/BookingMain.jsx";
 import FacilityBookingPage from "../components/booking/FacilityBookingPage.jsx";
+import BookingTrack from "../pages/booking/BookingTrack.jsx";
 import TenderMain from "../pages/tenders/TenderMain.jsx";
 
 
@@ -184,6 +191,22 @@ export default function AppRouter() {
           <Route
             path="/about-us/vice-chancellor-message"
             element={<ViceChancellor />}
+          />
+          <Route
+            path="/deans-of-schools"
+            element={<DeansOfSchools />}
+          />
+          <Route
+            path="/about-us/deans-of-schools"
+            element={<DeansOfSchools />}
+          />
+          <Route
+            path="/registrar"
+            element={<Registrar />}
+          />
+          <Route
+            path="/about-us/registrar"
+            element={<Registrar />}
           />
           <Route
             path="/about-us/governance-committees"
@@ -335,7 +358,7 @@ export default function AppRouter() {
             path="/campus-life/hostel-facilities"
             element={<HostelDining />}
           />
-          <Route path="/campus-life/hostel-detailed" element={<HostelDetailed />} />
+
           <Route path="/campus-life/hero" element={<Overview />} />
           <Route
             path="/campus-life/sports-fitness"
@@ -387,17 +410,7 @@ export default function AppRouter() {
           {/* Placements Routes */}
           <Route path="/placements" element={<Placement_home />} />
 
-          {/* Alumni Routes */}
-          <Route path="/alumni/alumni-network" element={<AlumniNetwork />} />
-          <Route path="/alumni/alumni-events" element={<EventsReunions />} />
-          <Route
-            path="/alumni/success-stories"
-            element={<SuccessStories />}
-          />
-          <Route
-            path="/alumni/become-mentor"
-            element={<AlumniRegistration />}
-          />
+
 
 
           {/* <Route path="/dacMain" element={<DACmain/>}/> */}
@@ -408,6 +421,7 @@ export default function AppRouter() {
 
           <Route path="/booking" element={<BookingMain />} />
           <Route path="/booking/:facilityId" element={<FacilityBookingPage />} />
+          <Route path="/booking/track" element={<BookingTrack />} />
 
 
 
@@ -428,6 +442,8 @@ export default function AppRouter() {
           <Route path="/sitemapAbout" element={<SitemapAbout />} />
           <Route path="/sitemapContact" element={<SitemapContact />} />
           <Route path="/sitemapAcademics" element={<SitemapAcademics />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
 
           <Route path="/contactDirectory" element={<ContactDirectory/>}/>
 

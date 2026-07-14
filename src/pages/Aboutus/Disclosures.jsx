@@ -126,7 +126,7 @@ const Disclosures = () => {
         { title: 'Campus Facilities', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
         { title: 'Library Resources', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
         { title: 'Laboratory Details', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/academics/centers-of-excellence", },
-        { title: 'Hostel Facilities', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hostel-detailed", }
+        { title: 'Hostel Facilities', status: 'completed', lastUpdated: '2024', link: "https://hostels.gbu.ac.in/", }
       ]
     }
   ];

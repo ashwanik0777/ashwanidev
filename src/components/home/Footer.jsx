@@ -197,14 +197,18 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex gap-4 mt-2 md:mt-0">
-          {["Privacy Policy", "Terms of Use", "Sitemap"].map((link) => (
-            <a
-              key={link}
-              href="#"
-              className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded"
+          {[
+            { name: "Privacy Policy", path: "/privacy-policy" },
+            { name: "Terms of Use", path: "/terms-of-use" },
+            { name: "Sitemap", path: "/sitemap" },
+          ].map((item) => (
+            <Link
+              key={item.name}
+              to={item.path}
+              className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded text-gray-400 transition-colors duration-300"
             >
-              {link}
-            </a>
+              {item.name}
+            </Link>
           ))}
         </div>
       </div>

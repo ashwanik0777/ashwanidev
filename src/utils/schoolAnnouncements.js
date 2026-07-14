@@ -60,7 +60,7 @@ let lastAnnouncementsRefreshAt = 0;
 
 export const getSchoolAnnouncements = () => announcementsCache;
 
-export const refreshSchoolAnnouncements = async () => {
+export const refreshSchoolAnnouncements = async (schoolCode) => {
   const now = Date.now();
 
   if (announcementsRefreshPromise) {
@@ -71,7 +71,7 @@ export const refreshSchoolAnnouncements = async () => {
     return announcementsCache;
   }
 
-  announcementsRefreshPromise = fetchAnnouncementsSnapshot()
+  announcementsRefreshPromise = fetchAnnouncementsSnapshot(schoolCode)
     .then((latest) => {
       announcementsCache = toSafeAnnouncements(latest);
       saveToCache(announcementsCache);

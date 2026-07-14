@@ -125,7 +125,7 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
 
     const loadAnnouncements = async () => {
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }

@@ -139,13 +139,14 @@ export const EMPTY_ANNOUNCEMENTS = Object.freeze({
   eventGallery: [],
 });
 
-export const fetchAnnouncementsSnapshot = async () => {
+export const fetchAnnouncementsSnapshot = async (schoolCode) => {
+  const queryParam = schoolCode ? `?schoolCode=${encodeURIComponent(schoolCode)}` : "";
   const [noticesRes, newsRes, eventsRes, newslettersRes, mediaRes] = await Promise.allSettled([
-    apiClient.get("/announcements"),
-    apiClient.get("/news"),
-    apiClient.get("/events"),
-    apiClient.get("/newsletters"),
-    apiClient.get("/media-gallery"),
+    apiClient.get(`/announcements${queryParam}`),
+    apiClient.get(`/news${queryParam}`),
+    apiClient.get(`/events${queryParam}`),
+    apiClient.get(`/newsletters${queryParam}`),
+    apiClient.get(`/media-gallery${queryParam}`),
   ]);
 
   const notices = noticesRes.status === "fulfilled" ? toArray(unwrapData(noticesRes.value)).map(normalizeNotice) : [];

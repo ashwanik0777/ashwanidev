@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import homeData from "../../Data/home.json";
 
 export default function WelcomePage() {
@@ -16,6 +17,36 @@ export default function WelcomePage() {
     return `/${cleanPath}`;
   };
 
+  const [typedTitle, setTypedTitle] = useState("");
+  const [isTitleDone, setIsTitleDone] = useState(false);
+
+  const fullTitle = bannerData?.title || "Welcome to Gautam Buddha University";
+
+  useEffect(() => {
+    if (!bannerData) return;
+    
+    // Initial short delay to let the background load and capture attention
+    const startTimeout = setTimeout(() => {
+      let currentIndex = 0;
+      let currentText = "";
+      
+      const typingInterval = setInterval(() => {
+        if (currentIndex < fullTitle.length) {
+          currentText += fullTitle[currentIndex];
+          setTypedTitle(currentText);
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setIsTitleDone(true);
+        }
+      }, 50); // Nice, deliberate, and smooth character typing speed (50ms)
+      
+      return () => clearInterval(typingInterval);
+    }, 400);
+
+    return () => clearTimeout(startTimeout);
+  }, [fullTitle, bannerData]);
+
   if (!bannerData) return null;
 
   const videoSrc = resolveAssetUrl(bannerData.video);
@@ -23,7 +54,7 @@ export default function WelcomePage() {
   return (
     <>
       {/* Main welcome section */}
-      <div className="relative h-[82.4vh] w-full flex flex-col justify-center  overflow-hidden">
+      <div className="relative h-[82.4vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -50,22 +81,40 @@ export default function WelcomePage() {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 z-10" />
 
-        {/* Content - Improved mobile responsiveness */}
+        {/* Content - Improved mobile responsiveness with animated entrance */}
         <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
           <div className="max-w-4xl mx-auto lg:mx-0">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight">
-              {bannerData.title}
+            {/* Title with Typing Effect */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight select-none">
+              {typedTitle}
+              {!isTitleDone && (
+                <span className="inline-block w-[3px] h-[0.9em] bg-blue-400 ml-1 animate-blink align-middle" />
+              )}
             </h1>
-            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl mx-auto sm:mx-0 leading-relaxed">
+
+            {/* Description Fades In after Title types */}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl mx-auto sm:mx-0 leading-relaxed font-medium"
+            >
               {bannerData.content}
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center sm:justify-start gap-2 sm:gap-4">
+            </motion.p>
+
+            {/* Buttons Cascade In after Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+              className="flex flex-col sm:flex-row justify-center sm:justify-start gap-2 sm:gap-4"
+            >
               {bannerData.button1_text && bannerData.button1_url && (
                 <a
                   href={bannerData.button1_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-200 text-center text-xs sm:text-sm md:text-base"
+                  className="border-2 border-green-400 text-green-600 bg-green-200 hover:bg-green-300 hover:text-green-700 hover:border-green-500 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 text-center text-xs sm:text-sm md:text-base"
                 >
                   {bannerData.button1_text}
                 </a>
@@ -75,12 +124,12 @@ export default function WelcomePage() {
                   href={bannerData.button2_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-lime-500 hover:bg-lime-600 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-lime-400 transition-all duration-200 text-center text-xs sm:text-sm md:text-base"
+                  className="border-2 border-blue-400 text-blue-600 bg-blue-200 hover:bg-blue-300 hover:text-blue-700 hover:border-blue-500 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 text-center text-xs sm:text-sm md:text-base"
                 >
                   {bannerData.button2_text}
                 </a>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -89,10 +138,8 @@ export default function WelcomePage() {
       <div
         role="region"
         aria-label="Latest announcements"
-
         className="bg-blue-800 text-white overflow-hidden relative py-2 "
         style={{ height: "auto", minHeight: "40px" }}
-
       >
         <div
           className="inline-block absolute whitespace-nowrap animate-scroll text-sm sm:text-base"
@@ -109,6 +156,13 @@ export default function WelcomePage() {
         .video-responsive {
           object-fit: cover;
           object-position: center center;
+        }
+
+        @keyframes blink {
+          50% { opacity: 0; }
+        }
+        .animate-blink {
+          animation: blink 0.8s step-end infinite;
         }
 
         @keyframes scrollText {

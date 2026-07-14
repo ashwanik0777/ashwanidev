@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, X, ChevronRight, Hash, ExternalLink, Sparkles, ArrowUpDown, CornerDownLeft } from "lucide-react";
 
 const NAVIGATION_CONFIG = [
@@ -87,16 +88,12 @@ const NAVIGATION_CONFIG = [
   {
     key: "alumni",
     label: "Alumni",
-    baseRoute: "/alumni",
-    items: [
-      { slug: "alumni-network", label: "Alumni Network" },
-      { slug: "alumni-events", label: "Alumni Events" },
-      { slug: "become-mentor", label: "Become a Mentor" },
-    ],
+    directPath: "https://alumni.gbu.ac.in/",
   },
 ];
 
 const Searchbar = ({ isMobile = false, onClose }) => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -295,10 +292,12 @@ const Searchbar = ({ isMobile = false, onClose }) => {
         }, 3000);
       }
     } else if (item.type === "nav") {
-      // Handle navigation (you can integrate with your router here)
       console.log(`Navigating to: ${item.path}`);
-      // For React Router: navigate(item.path)
-      // For Next.js: router.push(item.path)
+      if (item.path.startsWith("http")) {
+        window.open(item.path, "_blank", "noopener,noreferrer");
+      } else {
+        navigate(item.path);
+      }
     }
     
     setOpen(false);

@@ -28,8 +28,13 @@ const Primarynavbar = () => {
       <div className="w-full py-2 px-6 xl:px-16 flex justify-between items-center">
         {/* Mobile menu button */}
         <div className="xl:hidden">
-          <button onClick={() => setIsOpen(true)} aria-label="Open menu">
-            <Menu size={20} />
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none"
+            aria-label="Open quick links menu"
+          >
+            <Menu size={18} />
+            <span className="font-semibold text-xs uppercase tracking-wider">Quick Links</span>
           </button>
         </div>
 
@@ -93,87 +98,141 @@ const Primarynavbar = () => {
 
         {/* Mobile slide-in sidebar and overlay */}
         <div
-          className={`fixed inset-0 z-[9999] transition-opacity duration-300 ease-in-out ${
-            isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          className={`fixed inset-0 z-[9999] transition-all duration-300 ${
+            isOpen ? "visible" : "invisible"
           }`}
         >
           {/* Overlay */}
           <div
-            className="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm"
+            className={`absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300 ${
+              isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
             onClick={() => setIsOpen(false)}
             aria-label="Close menu"
-
           />
 
           {/* Sidebar */}
-          <div className="relative bg-white w-64 h-full p-6 overflow-y-auto">
-            {/* Close button */}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-gray-600"
-              aria-label="Close sidebar"
-            >
-
-          
-            <X size={24} />
-          </button>
-
-          <div className="mt-12 space-y-6 text-sm font-medium">
-            {/* Quick Links */}
-            <div>
-              <p className="text-gray-500 uppercase tracking-wider text-xs mb-2">Quick Links</p>
-              <div className="space-y-2">
-                <a href="/tender" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Tenders
-                </a>
-                <a href="/recruitments" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Recruitments
-                </a>
-                <a href="/booking" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Booking
-                </a>
-                <a href="/rti" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  RTI
-                </a>
-
-                <a href="/sitemapMain" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-  Sitemap
-</a>
-
-
-
+          <div
+            className={`absolute left-0 top-0 bg-white w-72 h-full p-6 overflow-y-auto text-slate-800 shadow-2xl transition-transform duration-300 ease-in-out ${
+              isOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+              <div className="flex items-center gap-2">
+                <img
+                  src="/assets/logo.svg"
+                  alt="GBU Logo"
+                  className="h-9 w-auto"
+                />
+               
               </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-150 hover:text-slate-800 transition"
+                aria-label="Close sidebar"
+              >
+                <X size={20} />
+              </button>
             </div>
 
-            <hr className="border-gray-300" />
+            <div className="space-y-6 text-sm font-medium">
+              {/* Quick Links */}
+              <div>
+                <p className="text-slate-400 uppercase tracking-wider text-[10px] font-bold mb-3 px-3">Quick Links</p>
+                <div className="space-y-1">
+                  <a
+                    href="/tender"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Send size={15} className="text-blue-500" />
+                    <span>Tenders</span>
+                  </a>
+                  <a
+                    href="/recruitments"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Send size={15} className="text-blue-500" />
+                    <span>Recruitments</span>
+                  </a>
+                  <a
+                    href="/booking"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <CreditCard size={15} className="text-blue-500" />
+                    <span>Booking</span>
+                  </a>
+                  <a
+                    href="/rti"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Info size={15} className="text-blue-500" />
+                    <span>RTI</span>
+                  </a>
+                  <a
+                    href="/sitemapMain"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Map size={15} className="text-blue-500" />
+                    <span>Sitemap</span>
+                  </a>
+                </div>
+              </div>
 
-            {/* Portals */}
-            <div>
-              <p className="text-gray-500 uppercase tracking-wider text-xs mb-2">Portals</p>
-              <div className="space-y-2">
-                <a href="https://csms.gbu.ac.in/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Online Fee Payment
-                </a>
-                <a href="https://gbu.samarth.ac.in/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Student Portal
-                </a>
-                <a href="https://gbu.samarth.ac.in/" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Employee Login
-                </a>
-                <a href="/contactDirectory" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Directory
-                </a>
+              <hr className="border-slate-100" />
 
-                <Link to="/contactUs" className="block px-3 py-2 rounded-md hover:bg-gray-100">
-                  Contact Us
-                </Link>
+              {/* Portals */}
+              <div>
+                <p className="text-slate-400 uppercase tracking-wider text-[10px] font-bold mb-3 px-3">Portals</p>
+                <div className="space-y-1">
+                  <a
+                    href="https://csms.gbu.ac.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <CreditCard size={15} className="text-blue-500" />
+                    <span>Online Fee Payment</span>
+                  </a>
+                  <a
+                    href="https://gbu.samarth.ac.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <User size={15} className="text-blue-500" />
+                    <span>Student Portal</span>
+                  </a>
+                  <a
+                    href="https://gbu.samarth.ac.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <LogIn size={15} className="text-blue-500" />
+                    <span>Employee Login</span>
+                  </a>
+                  <a
+                    href="/contactDirectory"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Map size={15} className="text-blue-500" />
+                    <span>Directory</span>
+                  </a>
+                  <Link
+                    to="/contactUs"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Phone size={15} className="text-blue-500" />
+                    <span>Contact Us</span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-      </div> {/* Mobile overlay & sidebar container */}
-    </nav>  
+      </nav>  
 
     </SearchableWrapper>
   );

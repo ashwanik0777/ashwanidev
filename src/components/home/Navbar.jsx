@@ -81,7 +81,7 @@ const NAVIGATION_CONFIG = [
     baseRoute: "/campus-life",
     items: [
       { slug: "hero", label: "Overview" },
-      { slug: "hostel-detailed", label: "Hostels" },
+      { slug: "https://hostels.gbu.ac.in/", label: "Hostels", isExternal: true },
       { slug: "sports-fitness", label: "Sports" },
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },
@@ -118,13 +118,7 @@ const NAVIGATION_CONFIG = [
     key: "alumni",
     label: "Alumni",
     icon: Users,
-    baseRoute: "/alumni",
-    items: [
-      { slug: "alumni-network", label: "Alumni Network" },
-      { slug: "alumni-events", label: "Alumni Events" },
-      { slug: "become-mentor", label: "Become a Mentor" },
-      { slug: "success-stories", label: "Success Stories" },
-    ],
+    directPath: "https://alumni.gbu.ac.in/",
   },
 ];
 
@@ -238,15 +232,28 @@ const DropdownMenu = ({ items, baseRoute, onItemClick }) => (
 
 const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => {
   if (menu.directPath) {
+    const isExternal = menu.directPath.startsWith("http");
     return (
       <li>
-        <Link
-          to={menu.directPath}
-          className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
-        >
-          <MenuIcon icon={menu.icon} />
-          {menu.label}
-        </Link>
+        {isExternal ? (
+          <a
+            href={menu.directPath}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
+          >
+            <MenuIcon icon={menu.icon} />
+            {menu.label}
+          </a>
+        ) : (
+          <Link
+            to={menu.directPath}
+            className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
+          >
+            <MenuIcon icon={menu.icon} />
+            {menu.label}
+          </Link>
+        )}
       </li>
     );
   }
@@ -276,7 +283,20 @@ const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => 
 
 const MobileMenuItem = ({ menu, isExpanded, onToggle, onSubmenuToggle }) => {
   if (menu.directPath) {
-    return (
+    const isExternal = menu.directPath.startsWith("http");
+    return isExternal ? (
+      <a
+        href={menu.directPath}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+      >
+        <span className="flex items-center gap-2">
+          <MenuIcon icon={menu.icon} />
+          {menu.label}
+        </span>
+      </a>
+    ) : (
       <Link
         to={menu.directPath}
         className="block px-4 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 transition-colors"

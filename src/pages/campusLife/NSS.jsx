@@ -14,15 +14,12 @@ import {
 
 import NSSIntroduction from "../../components/nss/NSSIntroduction";
 import NSSStructure from "../../components/nss/NSSStructure";
-import NSSActivities from "../../components/nss/NSSActivities";
-import NSSRegistration from "../../components/nss/NSSRegistration";
 import NSSEvents from "../../components/nss/NSSEvents";
-import NSSAchievements from "../../components/nss/NSSAchievements";
-import NSSResources from "../../components/nss/NSSResources";
 import NSSGallery from "../../components/nss/NSSGallery";
 import NSSSocialMedia from "../../components/nss/NSSSocialMedia";
 import HeroBanner from "../../components/HeroBanner";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
+import { getSchoolByCode } from "../../services/schoolsService";
 
 const TabsContext = createContext();
 
@@ -79,15 +76,27 @@ const TabsContent = ({ value, children, ...props }) => {
 
 const NSS = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [nssData, setNssData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadNssData = async () => {
+      try {
+        const data = await getSchoolByCode("NSS");
+        setNssData(data);
+      } catch (err) {
+        console.error("Failed to load NSS data from database", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadNssData();
+  }, []);
 
   const tabs = [
     { value: "overview", label: "Overview", icon: FileText },
     { value: "structure", label: "Structure", icon: Building2 },
-    { value: "activities", label: "Activities", icon: Target },
-    { value: "register", label: "Register", icon: UserPlus },
     { value: "events", label: "Events", icon: Calendar },
-    { value: "achievements", label: "Achievements", icon: Trophy },
-    { value: "resources", label: "Resources", icon: BookOpen },
     { value: "gallery", label: "Gallery", icon: Camera },
     { value: "social", label: "Social", icon: MessageCircle },
   ];
@@ -128,31 +137,19 @@ const NSS = () => {
           </div>
           <div className="container mx-auto px-4 py-8">
             <TabsContent value="overview">
-              <NSSIntroduction />
+              <NSSIntroduction nssData={nssData} />
             </TabsContent>
             <TabsContent value="structure">
-              <NSSStructure />
-            </TabsContent>
-            <TabsContent value="activities">
-              <NSSActivities />
-            </TabsContent>
-            <TabsContent value="register">
-              <NSSRegistration />
+              <NSSStructure nssData={nssData} />
             </TabsContent>
             <TabsContent value="events">
-              <NSSEvents />
-            </TabsContent>
-            <TabsContent value="achievements">
-              <NSSAchievements />
-            </TabsContent>
-            <TabsContent value="resources">
-              <NSSResources />
+              <NSSEvents nssData={nssData} />
             </TabsContent>
             <TabsContent value="gallery">
-              <NSSGallery />
+              <NSSGallery nssData={nssData} />
             </TabsContent>
             <TabsContent value="social">
-              <NSSSocialMedia />
+              <NSSSocialMedia nssData={nssData} />
             </TabsContent>
           </div>
         </Tabs>

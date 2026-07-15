@@ -11,14 +11,11 @@ import {
 import HeroBanner from "../../components/HeroBanner";
 import NCCIntroduction from "../../components/ncc/NCCIntroduction";
 import NCCStructure from "../../components/ncc/NCCStructure";
-import NCCTraining from "../../components/ncc/NCCTraining";
-import NCCRegistration from "../../components/ncc/NCCRegistration";
 import NCCEvents from "../../components/ncc/NCCEvents";
-import NCCAchievements from "../../components/ncc/NCCAchievements";
-import NCCResources from "../../components/ncc/NCCResources";
 import NCCGallery from "../../components/ncc/NCCGallery";
 import NCCSocialMedia from "../../components/ncc/NCCSocialMedia";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
+import { getSchoolByCode } from "../../services/schoolsService";
 
 // Tabs Context and Components
 const TabsContext = createContext();
@@ -81,15 +78,27 @@ const TabsContent = ({ value, children, ...props }) => {
 // Main NCC Component
 const NCC = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [nccData, setNccData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadNccData = async () => {
+      try {
+        const data = await getSchoolByCode("NCC");
+        setNccData(data);
+      } catch (err) {
+        console.error("Failed to load NCC data from database", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadNccData();
+  }, []);
 
   const tabs = [
     { value: "overview", label: "Overview", icon: BookOpen },
     { value: "structure", label: "Structure", icon: Shield },
-    { value: "training", label: "Training", icon: Users },
-    { value: "register", label: "Register", icon: Globe },
     { value: "events", label: "Events", icon: Globe },
-    { value: "achievements", label: "Achievements", icon: Award },
-    { value: "resources", label: "Resources", icon: BookOpen },
     { value: "gallery", label: "Gallery", icon: Image },
     { value: "social", label: "Social", icon: Globe },
   ];
@@ -136,31 +145,19 @@ const NCC = () => {
 
           <div className="py-4 sm:py-8 px-2 sm:px-4">
           <TabsContent value="overview">
-            <NCCIntroduction />
+            <NCCIntroduction nccData={nccData} />
           </TabsContent>
           <TabsContent value="structure">
-            <NCCStructure />
-          </TabsContent>
-          <TabsContent value="training">
-            <NCCTraining />
-          </TabsContent>
-          <TabsContent value="register">
-            <NCCRegistration />
+            <NCCStructure nccData={nccData} />
           </TabsContent>
           <TabsContent value="events">
-            <NCCEvents />
-          </TabsContent>
-          <TabsContent value="achievements">
-            <NCCAchievements />
-          </TabsContent>
-          <TabsContent value="resources">
-            <NCCResources />
+            <NCCEvents nccData={nccData} />
           </TabsContent>
           <TabsContent value="gallery">
-            <NCCGallery />
+            <NCCGallery nccData={nccData} />
           </TabsContent>
           <TabsContent value="social">
-            <NCCSocialMedia />
+            <NCCSocialMedia nccData={nccData} />
           </TabsContent>
           </div>
         </Tabs>

@@ -1,401 +1,338 @@
-
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-
-// Badge component
-const Badge = ({ children, className = '', variant = '', ...props }) => {
-  const base =
-    'inline-block px-2 py-1 rounded-full text-xs font-semibold';
-  const variants = {
-    outline: 'border border-orange-600 text-orange-600 bg-white',
-    secondary: 'bg-gray-200 text-gray-800',
-    default: 'bg-orange-600 text-white',
-  };
-  return (
-    <span
-      className={`${base} ${variants[variant] || variants.default} ${className}`}
-      {...props}
-    >
-      {children}
-    </span>
-  );
-};
-
-// Dialog components (basic modal)
-const DialogContext = React.createContext();
-
-const Dialog = ({ open, onOpenChange, children }) => {
-  const [internalOpen, setInternalOpen] = useState(false);
-  const isControlled = typeof open === 'boolean';
-  const actualOpen = isControlled ? open : internalOpen;
-  const setOpen = isControlled ? onOpenChange : setInternalOpen;
-
-  return (
-    <DialogContext.Provider value={{ open: actualOpen, setOpen }}>
-      {children}
-      {actualOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
-          onClick={() => setOpen && setOpen(false)}
-        />
-      )}
-    </DialogContext.Provider>
-  );
-};
-
-const DialogTrigger = ({ asChild, children }) => {
-  const { setOpen } = React.useContext(DialogContext);
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, {
-      onClick: (e) => {
-        if (children.props.onClick) children.props.onClick(e);
-        setOpen && setOpen(true);
-      },
-    });
-  }
-  return (
-    <button onClick={() => setOpen && setOpen(true)}>
-      {children}
-    </button>
-  );
-};
-
-const DialogContent = ({ children, className = '' }) => {
-  const { open, setOpen } = React.useContext(DialogContext);
-  if (!open) return null;
-  return (
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center`}
-      style={{ pointerEvents: 'none' }}
-    >
-      <div
-        className={`relative z-50 ${className}`}
-        style={{ pointerEvents: 'auto' }}
-        onClick={e => e.stopPropagation()}
-      >
-        <button
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-700"
-          onClick={() => setOpen && setOpen(false)}
-          aria-label="Close"
-        >
-          ×
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-};
-
-const DialogHeader = ({ children }) => (
-  <div className="mb-4">{children}</div>
-);
-
-const DialogTitle = ({ children }) => (
-  <h3 className="text-lg font-bold mb-2">{children}</h3>
-);
-
-// Input component
-const Input = React.forwardRef(({ className = '', ...props }, ref) => (
-  <input
-    ref={ref}
-    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${className}`}
-    {...props}
-  />
-));
-
-// Label component
-const Label = ({ htmlFor, children, className = '' }) => (
-  <label
-    htmlFor={htmlFor}
-    className={`block text-sm font-medium text-gray-700 mb-1 ${className}`}
-  >
-    {children}
-  </label>
-);
-
-// Textarea component
-const Textarea = React.forwardRef(({ className = '', ...props }, ref) => (
-  <textarea
-    ref={ref}
-    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${className}`}
-    {...props}
-  />
-));
-
-// Carousel components (basic horizontal scroll)
-const Carousel = ({ children, className = '' }) => (
-  <div className={`relative ${className}`}>{children}</div>
-);
-
-const CarouselContent = ({ children }) => (
-  <div className="flex   gap-4 pb-2">{children}</div>
-);
-
-const CarouselItem = ({ children, className = '' }) => (
-  <div className={`flex-shrink-0 ${className}`}>{children}</div>
-);
-
-const CarouselPrevious = () => null;
-const CarouselNext = () => null;
-
-import { Coffee } from 'lucide-react';
-
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Coffee, Utensils, Star, MapPin, Sparkles, Clock, X, ChefHat, User, Mail, MessageSquare } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
-const Button = ({ children, className = '', variant = 'default', ...props }) => {
-  const baseStyle =
-    'px-4 py-2 rounded-lg font-semibold transition-all duration-300 focus:outline-none';
-  const variants = {
-    default: 'bg-red-600 text-white hover:bg-red-700',
-    outline: 'border border-red-600 text-red-600 hover:bg-red-600 hover:text-white',
-  };
-  return (
-    <button className={`${baseStyle} ${variants[variant]} ${className}`} {...props}>
-      {children}
-    </button>
-  );
-};
+const GBU_FOOD_CATEGORIES = [
+  { title: "All Cafes", description: "All Outlets", icon: Utensils },
+  { title: "Coffee & Tea", description: "Hot & Cold Brews", icon: Coffee },
+  { title: "Quick Snacks", description: "Bites & Appetizers", icon: ChefHat },
+  { title: "Full Meals", description: "Lunches & Dinners", icon: Utensils }
+];
 
-
-
-const Card = ({ className = "", children, ...props }) => (
-  <div
-    className={`rounded-lg border-gray-300 bg-white text-black shadow-sm ${className}`}
-    {...props}
-  >
-    {children}
-  </div>
-);
-
-const CardContent = ({ className = "", children, ...props }) => (
-  <div className={`p-6 pt-0 ${className}`} {...props}>
-    {children}
-  </div>
-);
+const GBU_FOOD_OUTLETS = [
+  {
+    id: 1,
+    name: "Central Food Court (G.D. Market)",
+    image: "/assets/guest_house_dining_1.jpg",
+    description: "The multi-cuisine core hub of GBU. Features popular local food stalls, massive indoor seating, and student-friendly pricing.",
+    rating: 4.5,
+    review_count: 340,
+    is_open: true,
+    location: "G.D. Market Complex, GBU",
+    price_range: "₹60 - ₹250",
+    categories: ["Full Meals", "Quick Snacks"],
+    menu: [
+      { section: "Main Course", items: ["North Indian Thali - ₹120", "Masala Dosa - ₹80", "Veg Biryani - ₹100"] },
+      { section: "Snacks", items: ["Paneer Patty - ₹25", "Samosa (2 pcs) - ₹20", "Cold Drinks - ₹20"] }
+    ]
+  },
+  {
+    id: 2,
+    name: "Nescafé Kiosk",
+    image: "/assets/convention_1.jpg",
+    description: "The ultimate destination for late-night coffee runs, iced teas, hot Maggi, and quick baked snacks between lectures.",
+    rating: 4.8,
+    review_count: 512,
+    is_open: true,
+    location: "Opposite School of ICT, GBU",
+    price_range: "₹20 - ₹80",
+    categories: ["Coffee & Tea", "Quick Snacks"],
+    menu: [
+      { section: "Brews", items: ["Hot Nescafe Classic - ₹25", "Hazelnut Cold Coffee - ₹50", "Lemon Iced Tea - ₹35"] },
+      { section: "Quick Bites", items: ["Cheese Maggi - ₹45", "Veg Grilled Sandwich - ₹40", "Chocolate Muffin - ₹30"] }
+    ]
+  },
+  {
+    id: 3,
+    name: "Baskin Robbins & Snacks Parlor",
+    image: "/assets/guest_house_1.jpg",
+    description: "Satisfy your cravings with premium scoop ice creams, thick milkshakes, sundae waffles, and quick refreshments.",
+    rating: 4.3,
+    review_count: 180,
+    is_open: true,
+    location: "Shopping Complex (Near BH-1)",
+    price_range: "₹50 - ₹180",
+    categories: ["Quick Snacks"],
+    menu: [
+      { section: "Ice Creams", items: ["Gold Medal Ribbon - ₹80", "Bavarian Chocolate - ₹80", "Cotton Candy - ₹70"] },
+      { section: "Shakes", items: ["Belgian Chocolate Shake - ₹120", "Mango Shake - ₹100"] }
+    ]
+  },
+  {
+    id: 4,
+    name: "Gargi Girls Cafeteria",
+    image: "/assets/guest_house_dining_1.jpg",
+    description: "A cozy and secure cafe adjacent to the girls' residential zone, serving fresh parathas, juices, and South Indian delicacies.",
+    rating: 4.6,
+    review_count: 220,
+    is_open: true,
+    location: "Girls' Hostel Area, GBU",
+    price_range: "₹40 - ₹150",
+    categories: ["Coffee & Tea", "Full Meals", "Quick Snacks"],
+    menu: [
+      { section: "Breakfast", items: ["Aloo Paratha - ₹40", "Idli Sambhar - ₹50", "Fresh Fruit Juice - ₹40"] },
+      { section: "Meals", items: ["Chole Bhature - ₹70", "Mini Thali - ₹80"] }
+    ]
+  }
+];
 
 const CafesFood = () => {
-  const [categories, setCategories] = useState([]);
-  const [outlets, setOutlets] = useState([]);
-  const [tags, setTags] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('All Cafes');
-  const [selectedCafe, setSelectedCafe] = useState(null);
-
+  const [selectedCafeMenu, setSelectedCafeMenu] = useState(null);
+  const [reviewCafe, setReviewCafe] = useState(null);
   const { toast } = useToast();
 
-  const VITE_HOST = import.meta.env.VITE_HOST;
-
-  // ✅ Fetch all data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [categoriesRes, outletsRes, tagsRes] = await Promise.all([
-          axios.get(`${VITE_HOST}/campuslife/food-court-categories/`),
-          axios.get(`${VITE_HOST}/campuslife/food-outlets/`),
-          axios.get(`${VITE_HOST}/campuslife/tags/`),
-        ]);
-
-        setCategories(categoriesRes.data);
-        setOutlets(outletsRes.data);
-        setTags(tagsRes.data);
-
-      } catch (error) {
-        console.error('Error fetching cafes data:', error);
-      }
-    };
-
-    fetchData();
-  }, [VITE_HOST]);
-
-  const filteredOutlets =
-    selectedFilter === 'All Cafes'
-      ? outlets
-      : outlets.filter(outlet =>
-          tags.find(
-            tag => tag.outlet === outlet.id && tag.name.includes(selectedFilter)
-          )
-        );
-
-  const handleViewMenu = (cafe) => {
-    setSelectedCafe(cafe);
-  };
-
-  const handleWriteReview = (cafe) => {
-    toast({
-      title: 'Review Form',
-      description: `Opening review form for ${cafe.name}. Share your dining experience!`,
-    });
-  };
+  const filteredOutlets = selectedFilter === 'All Cafes'
+    ? GBU_FOOD_OUTLETS
+    : GBU_FOOD_OUTLETS.filter(outlet => outlet.categories.includes(selectedFilter));
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const reviewData = {
-      cafe: selectedCafe?.name,
-      reviewerName: formData.get('reviewerName'),
-      email: formData.get('email'),
-      rating: formData.get('rating'),
-      review: formData.get('review'),
-    };
-
-    console.log('Review submitted:', reviewData);
-
+    const data = new FormData(e.target);
     toast({
-      title: 'Review Submitted Successfully',
-      description: 'Thank you for your feedback! Your review will be published after moderation.',
+      title: "Review Submitted!",
+      description: `Thank you for reviewing ${reviewCafe.name}. Your rating of ${data.get('rating')} stars has been recorded.`,
     });
-
-    e.target.reset();
+    setReviewCafe(null);
   };
 
   return (
     <SearchableWrapper>
-    <section id="cafes-food" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Cafes & <span className="text-orange-600">Food Courts</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover delicious dining options across campus, from quick snacks to full meals.
-          </p>
-        </div>
-
-        {/* === Filters Carousel === */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <Carousel className="w-full">
-            <CarouselContent>
-              {categories.map((filter, index) => (
-                <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <Card
-                    className={`cursor-pointer transition-all duration-300 hover:scale-105 ${
-                      selectedFilter === filter.title ? 'ring-4 ring-orange-500 ring-opacity-50' : ''
-                    }`}
-                    onClick={() => setSelectedFilter(filter.title)}
-                  >
-                    <CardContent className="p-4">
-                      <div className={`bg-orange-600 text-white rounded-2xl p-6 text-center shadow-lg`}>
-                        <div className="text-3xl mb-2">{filter.description}</div>
-                        <h3 className="font-bold text-sm">{filter.title}</h3>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-
-        {/* === Food Outlets === */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredOutlets.map((cafe, index) => (
-            <Card
-              key={index}
-              className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl rounded-2xl"
+      <section id="cafes-food" className="py-24 bg-white relative overflow-hidden font-sans text-left">
+        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
+          
+          {/* Header */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-50 text-orange-600 text-xs font-bold uppercase tracking-wider mb-4 border border-orange-100"
             >
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={cafe.image || 'https://via.placeholder.com/400x300?text=Cafe'}
-                    alt={cafe.name}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute top-3 right-3 flex flex-col space-y-2">
-                    <Badge className="bg-orange-600">⭐ {cafe.rating}</Badge>
-                    {cafe.is_open ? (
-                      <Badge className="bg-green-600">Open Now</Badge>
-                    ) : (
-                      <Badge className="bg-red-600">Closed</Badge>
-                    )}
+              <ChefHat size={13} />
+              <span>Campus Dining</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            >
+              Cafes & Food Courts
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-slate-600 text-lg leading-relaxed"
+            >
+              Discover delicious snack stalls, brand kiosks, and multi-cuisine cafeterias operating within the university boundaries.
+            </motion.p>
+          </div>
+
+          {/* Category Filters Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 max-w-4xl mx-auto">
+            {GBU_FOOD_CATEGORIES.map((cat, idx) => (
+              <motion.div
+                key={idx}
+                onClick={() => setSelectedFilter(cat.title)}
+                whileHover={{ y: -3 }}
+                className={`cursor-pointer rounded-2xl p-5 border text-center transition-all duration-300 relative overflow-hidden group ${
+                  selectedFilter === cat.title ? 'bg-orange-600 text-white border-transparent shadow-lg shadow-orange-500/15' : 'bg-slate-50 border-slate-100 text-slate-700 hover:bg-slate-100/60'
+                }`}
+              >
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${
+                    selectedFilter === cat.title ? 'bg-white/20 text-white' : 'bg-orange-50 text-orange-600'
+                  }`}>
+                    {React.createElement(cat.icon, { size: 18 })}
+                  </div>
+                  <h4 className="font-bold text-sm leading-snug">{cat.title}</h4>
+                  <p className={`text-[10px] mt-0.5 ${selectedFilter === cat.title ? 'text-orange-100' : 'text-slate-400'}`}>{cat.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Outlets Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredOutlets.map((cafe) => (
+              <motion.div
+                key={cafe.id}
+                layout
+                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+              >
+                <div>
+                  <div className="h-48 relative overflow-hidden">
+                    <img src={cafe.image} alt={cafe.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+                    <div className="absolute top-4 right-4 flex gap-2">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold border border-white/10">
+                        <Star size={12} className="fill-yellow-400 text-yellow-400" />
+                        <span>{cafe.rating}</span>
+                      </span>
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-green-500/80 backdrop-blur-md text-white text-xs font-bold border border-white/10">
+                        Open
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-bold text-xl text-slate-950 mb-2 leading-tight">{cafe.name}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-4">{cafe.description}</p>
+                    <div className="space-y-2 text-xs text-slate-600 border-t border-slate-50 pt-4">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin size={13} className="text-slate-400" />
+                        <span>{cafe.location}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock size={13} className="text-slate-400" />
+                        <span>Average Cost: {cafe.price_range}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{cafe.name}</h3>
-                  <p className="text-gray-600 mb-3">{cafe.description}</p>
-                  <div className="space-y-1 text-sm text-gray-500 mb-4">
-                    <div>{cafe.location}</div>
-                    <div>💰 {cafe.price_range}</div>
-                    <div>⭐ {cafe.rating}/5.0 ({cafe.review_count} reviews)</div>
-                  </div>
-
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={() => handleViewMenu(cafe)}
-                      className="flex-1 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg shadow-md"
-                    >
-                      {cafe.button1_text || 'View Menu'}
-                    </Button>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="border-orange-600 border-solid border text-orange-600 hover:bg-orange-50 px-4 py-2 rounded-lg shadow-md"
-                        >
-                          {cafe.button2_text || 'Write Review'}
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-md bg-white">
-                        <DialogHeader>
-                          <DialogTitle>Write a Review for {cafe.name}</DialogTitle>
-                        </DialogHeader>
-                        <form onSubmit={handleReviewSubmit} className="space-y-4">
-                          <div>
-                            <Label htmlFor="reviewerName">Your Name</Label>
-                            <Input id="reviewerName" name="reviewerName" placeholder="Enter your name" required />
-                          </div>
-                          <div>
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" name="email" type="email" placeholder="your.email@example.com" required />
-                          </div>
-                          <div>
-                            <Label htmlFor="rating">Rating</Label>
-                            <select id="rating" name="rating" className="w-full p-2 border rounded-md" required>
-                              <option value="">Select rating</option>
-                              <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
-                              <option value="4">⭐⭐⭐⭐ (4 stars)</option>
-                              <option value="3">⭐⭐⭐ (3 stars)</option>
-                              <option value="2">⭐⭐ (2 stars)</option>
-                              <option value="1">⭐ (1 star)</option>
-                            </select>
-                          </div>
-                          <div>
-                            <Label htmlFor="review">Your Review</Label>
-                            <Textarea id="review" name="review" placeholder="Share your dining experience..." required />
-                          </div>
-                          <Button type="submit" className="w-full bg-orange-600 hover:bg-orange-700">
-                            Submit Review
-                          </Button>
-                        </form>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
+                <div className="p-6 border-t border-slate-100 bg-slate-50/50 flex gap-3">
+                  <button
+                    onClick={() => setSelectedCafeMenu(cafe)}
+                    className="flex-1 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md hover:shadow-orange-500/10 transition-all cursor-pointer text-center"
+                  >
+                    View Menu List
+                  </button>
+                  <button
+                    onClick={() => setReviewCafe(cafe)}
+                    className="px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 font-semibold text-xs transition-all cursor-pointer text-center"
+                  >
+                    Write Review
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
 
-        {/* === Cafe Details Modal === */}
-        {selectedCafe && (
-          <Dialog open={!!selectedCafe} onOpenChange={() => setSelectedCafe(null)}>
-            <DialogContent className="max-w-2xl bg-white">
-              <DialogHeader>
-                <DialogTitle>{selectedCafe.name} - Details</DialogTitle>
-              </DialogHeader>
-              <img
-                src={selectedCafe.image || 'https://via.placeholder.com/400x300?text=Cafe'}
-                alt={selectedCafe.name}
-                className="w-full h-48 object-cover rounded-lg mb-4"
+        {/* Menu Dialog */}
+        <AnimatePresence>
+          {selectedCafeMenu && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+                onClick={() => setSelectedCafeMenu(null)}
               />
-              <p>{selectedCafe.description}</p>
-            </DialogContent>
-          </Dialog>
-        )}
-      </div>
-    </section>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="relative bg-white rounded-3xl shadow-2xl p-8 w-full max-w-lg z-10 border border-slate-100 max-h-[90vh] overflow-y-auto"
+              >
+                <button
+                  className="absolute top-6 right-6 text-slate-400 hover:text-slate-950 p-1.5 hover:bg-slate-100 rounded-full cursor-pointer"
+                  onClick={() => setSelectedCafeMenu(null)}
+                >
+                  <X size={20} />
+                </button>
+                <div className="mb-6 flex flex-col gap-1">
+                  <h2 className="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <ChefHat className="text-orange-600" size={24} />
+                    <span>{selectedCafeMenu.name} Menu</span>
+                  </h2>
+                  <p className="text-xs text-slate-500">Authentic university prices & fresh dishes.</p>
+                </div>
+                <div className="space-y-6">
+                  {selectedCafeMenu.menu.map((sec, i) => (
+                    <div key={i} className="space-y-2">
+                      <h4 className="font-bold text-slate-900 border-b border-slate-100 pb-1 text-sm uppercase tracking-wider text-orange-600">{sec.section}</h4>
+                      <ul className="divide-y divide-slate-50">
+                        {sec.items.map((item, idx) => (
+                          <li key={idx} className="py-2 text-sm text-slate-700 flex justify-between">
+                            <span>{item.split(' - ')[0]}</span>
+                            <span className="font-bold text-slate-950">{item.split(' - ')[1]}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* Review Dialog */}
+        <AnimatePresence>
+          {reviewCafe && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+                onClick={() => setReviewCafe(null)}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="relative bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md z-10 border border-slate-100 max-h-[90vh] overflow-y-auto"
+              >
+                <button
+                  className="absolute top-6 right-6 text-slate-400 hover:text-slate-950 p-1.5 hover:bg-slate-100 rounded-full cursor-pointer"
+                  onClick={() => setReviewCafe(null)}
+                >
+                  <X size={20} />
+                </button>
+                <div className="mb-6 flex flex-col gap-1">
+                  <h2 className="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    <MessageSquare className="text-orange-600" size={24} />
+                    <span>Rate & Review</span>
+                  </h2>
+                  <p className="text-sm text-slate-500">Share your dining feedback for {reviewCafe.name}.</p>
+                </div>
+                <form onSubmit={handleReviewSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="reviewerName" className="block mb-1.5 text-xs font-semibold text-slate-700 uppercase tracking-wider">Your Name</label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><User size={16} /></span>
+                      <input id="reviewerName" name="reviewerName" required placeholder="Enter your name" className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm text-slate-900" />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block mb-1.5 text-xs font-semibold text-slate-700 uppercase tracking-wider">Email Address</label>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><Mail size={16} /></span>
+                      <input id="email" name="email" type="email" required placeholder="your.email@example.com" className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm text-slate-900" />
+                    </div>
+                  </div>
+                  <div>
+                    <label htmlFor="rating" className="block mb-1.5 text-xs font-semibold text-slate-700 uppercase tracking-wider">Rating</label>
+                    <select id="rating" name="rating" required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm text-slate-900">
+                      <option value="5">⭐⭐⭐⭐⭐ (5/5 Excellent)</option>
+                      <option value="4">⭐⭐⭐⭐ (4/5 Good)</option>
+                      <option value="3">⭐⭐⭐ (3/5 Average)</option>
+                      <option value="2">⭐⭐ (2/5 Poor)</option>
+                      <option value="1">⭐ (1/5 Very Bad)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="review" className="block mb-1.5 text-xs font-semibold text-slate-700 uppercase tracking-wider">Your Experience</label>
+                    <textarea id="review" name="review" required placeholder="Write a short review about the food quality, service, hygiene..." className="w-full px-4 py-3 bg-slate-50 border border-slate-200 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm text-slate-900 h-24 resize-none" />
+                  </div>
+                  <button type="submit" className="w-full py-4 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm shadow-lg hover:shadow-orange-500/25 transition-all cursor-pointer mt-2">
+                    Submit Dining Review
+                  </button>
+                </form>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+      </section>
     </SearchableWrapper>
   );
 };

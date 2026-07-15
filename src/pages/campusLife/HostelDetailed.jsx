@@ -1,8 +1,197 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import HeroBanner from "../../components/HeroBanner";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
+
+const GBU_HOSTEL_CATEGORIES = [
+  {
+    id: "boys",
+    name: "Boys' Hostels (BH-1 to BH-12)",
+    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80",
+    capacity: "11 Hostels (6,000+ Rooms)",
+    description: "Spacious, single-occupancy rooms with scenic campus views, modern furnishings, and round-the-clock facilities.",
+    fullDescription: "The boys' hostel complex at Gautam Buddha University comprises 11 beautifully constructed high-rise buildings designed for modern student living. Each hostel features independent common rooms, recreational areas, and reading halls. The architecture prioritizes natural ventilation and green surroundings, offering students a healthy and peaceful academic environment.",
+    amenities: ["Single Occupancy Rooms", "24/7 Power Backup", "High-Speed Wi-Fi/LAN", "Gymnasium", "Indoor Sports Room", "Washing Machines", "Cooperative Mess", "24/7 Security"],
+    rules: [
+      "Hostel gates close strictly at 10:00 PM.",
+      "Daily biometric attendance must be marked between 9:00 PM and 10:00 PM.",
+      "Electrical appliances such as heaters or induction stoves are strictly prohibited in student rooms.",
+      "Prior permission from the Warden is mandatory for any leaves."
+    ]
+  },
+  {
+    id: "girls",
+    name: "Girls' Hostels (GH-1 to GH-6)",
+    image: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+    capacity: "6 Hostels (3,000+ Rooms)",
+    description: "Secure, elegantly designed, and peaceful residential complex dedicated to female students.",
+    fullDescription: "The girls' residential zone includes 6 high-capacity hostels nestled within a secure and beautifully manicured green belt. These hostels offer robust security, in-house convenience shops, beauty salons, and well-stocked reading rooms. It is a nurturing space that ensures complete peace of mind for both students and parents.",
+    amenities: ["Single Occupancy Rooms", "Multi-Tier CCTV Security", "24/7 Wardens & Female Guards", "Beauty Parlor", "In-house Convenience Store", "Indoor Badminton & Gym", "High-Speed Wi-Fi", "Laundry Facilities"],
+    rules: [
+      "Hostel gates close strictly at 8:30 PM.",
+      "Daily biometric attendance must be marked between 8:00 PM and 8:30 PM.",
+      "Overnight leave requires prior written consent from parents and approval from the Warden.",
+      "Guests are not allowed inside student rooms without written permission."
+    ]
+  },
+  {
+    id: "phd",
+    name: "Ph.D. & Scholar Hostels (BH-10)",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+    capacity: "1 Dedicated Hostel (400+ Rooms)",
+    description: "Quiet and academic-centric residential rooms customized for doctoral candidates and senior research scholars.",
+    fullDescription: "Understanding the unique, demanding schedules of doctoral candidates, GBU offers dedicated research scholar hostels (like BH-10 for men and designated wings for women). These facilities provide round-the-clock high-speed internet access, silent zones for reading, and flexible entry/exit timings for laboratory work, ensuring research is never interrupted.",
+    amenities: ["24/7 Library & Silent Study Zones", "High-speed LAN/Wi-Fi", "Flexible Lab Timings Access", "Comfortable Single Rooms", "Dedicated Recreation Lounge", "Geysers & Water Coolers"],
+    rules: [
+      "Academic decorum and silence must be maintained in residential corridors.",
+      "Research scholars must register their late-night lab timings with the warden.",
+      "Maintenance of hygiene in common kitchenettes and dining areas is required."
+    ]
+  },
+  {
+    id: "international",
+    name: "International & AC Suites",
+    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80",
+    capacity: "Special Premium Wings (200+ Rooms)",
+    description: "Premium air-conditioned single suites with attached kitchenettes and upscale amenities for international scholars.",
+    fullDescription: "GBU takes pride in hosting international students from over 15 countries. The international student residences feature premium single air-conditioned rooms, a dedicated helpdesk, self-cooking kitchenettes, satellite television lounges, and high-quality multi-cuisine food hubs.",
+    amenities: ["Full Air Conditioning", "Attached Self-Cooking Kitchenette", "Multi-Cuisine Dining Options", "24/7 International Helpdesk", "Premium Lounges", "Satellite TV & Entertainment Hub"],
+    rules: [
+      "Adherence to all national visa, passport, and FRRO registration timelines is mandatory.",
+      "Self-cooking zones must be kept clean and fire safety guidelines followed.",
+      "Quiet hours are observed from 11:00 PM to 6:00 AM."
+    ]
+  }
+];
+
+const GBU_HOSTELS_DATA = {
+  boys: [
+    {
+      name: "Birsa Munda Hostel (BH-1)",
+      image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80",
+      description: "Home to first-year undergraduate students, focusing on a welcoming and ragging-free atmosphere. Features extensive outdoor recreational space.",
+      facilities: {
+        rooms: "Single Seated, fully furnished (Bed, Table, Chair, Wardrobe)",
+        common_rooms: "Equipped with LCD TV, Chess, Carrom, and Table Tennis",
+        sports: "Outdoor Badminton court and Volleyball court inside hostel premises",
+        dining: "Spacious dining hall offering nutritious vegetarian and non-vegetarian meals",
+        internet: "Wi-Fi enabled campus network with high-speed internet access",
+        security: "24/7 guard security and biometric entry gates"
+      }
+    },
+    {
+      name: "Guru Ghasi Das Hostel (BH-2)",
+      image: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+      description: "Spacious hostel block for senior undergraduate students, offering excellent sports and fitness facilities.",
+      facilities: {
+        rooms: "600 single rooms with balcony access",
+        fitness: "In-house mini gym with modern treadmill, weights, and cycles",
+        dining: "Student-managed cooperative mess serving delicious North/South Indian food",
+        recreation: "Large common hall with satellite TV and board games",
+        laundry: "Washing machine facilities available on each floor",
+        backup: "24-hour generator power backup for study lamps and fans"
+      }
+    },
+    {
+      name: "Chhatrapati Shahuji Maharaj Hostel (BH-3)",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80",
+      description: "Designed for postgraduate and professional course students, featuring a highly studious environment and excellent reading rooms.",
+      facilities: {
+        rooms: "Single occupancy rooms with ergonomic desks",
+        reading_room: "Fully air-conditioned reading room open until midnight",
+        dining: "Hygienic mess serving breakfast, lunch, high tea, and dinner",
+        sports: "Basketball court and net practice area for cricket",
+        dispensary: "First-aid room with essential medicines and regular doctor visits",
+        gardens: "Beautiful interior lawns for morning walks and meditation"
+      }
+    },
+    {
+      name: "Sant Kabir Das Hostel (BH-4)",
+      image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80",
+      description: "A modern hostel block housing engineering and technology students, close to the School of ICT labs.",
+      facilities: {
+        rooms: "Single-occupancy rooms with high-speed LAN points",
+        tech_lounge: "Coding and discussion room with high-speed Wi-Fi",
+        dining: "Fully automated kitchen serving healthy steam-cooked meals",
+        recreation: "Recreation hall with Table Tennis and Foosball tables",
+        sanitation: "Daily room cleaning service and clean drinking water purifiers",
+        security: "CCTV surveillance in all corridors and common areas"
+      }
+    }
+  ],
+  girls: [
+    {
+      name: "Mahamaya Girls Hostel (GH-1)",
+      image: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+      description: "Elegantly designed residential block for female undergraduate students, focusing on complete safety and comfortable living.",
+      facilities: {
+        rooms: "500 single-occupancy rooms with private balconies",
+        security: "Triple-tier security check-in, female guards, and CCTV coverage",
+        dining: "In-house mess offering delicious home-style meals and snacks",
+        convenience: "In-hostel stationery shop, juice center, and convenience store",
+        wellbeing: "Fully functional beauty parlor and salon services inside the hostel",
+        fitness: "Indoor gym and outdoor badminton courts inside the boundary"
+      }
+    },
+    {
+      name: "Savitribai Phule Girls Hostel (GH-2)",
+      image: "https://images.unsplash.com/photo-1567521464027-f123fed55043?auto=format&fit=crop&w=800&q=80",
+      description: "Home to senior female students, providing a peaceful environment for competitive exam preparation and studies.",
+      facilities: {
+        rooms: "Comfortable single-seated rooms with ample wardrobe space",
+        reading_hall: "Dedicated reading room with daily newspapers and magazines",
+        mess: "Nutritious and balanced menu planned by the student mess committee",
+        laundry: "Commercial washing machines and drying areas",
+        recreation: "Spacious TV room and green lawn for evening yoga and exercise",
+        wifi: "High-speed Wi-Fi coverage across all rooms and lawns"
+      }
+    },
+    {
+      name: "Sanghamitra Girls Hostel (GH-3)",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+      description: "A premium block for postgraduate female students, close to the academic schools and administrative block.",
+      facilities: {
+        rooms: "Fully ventilated single rooms with custom study desks",
+        medical_room: "Dedicated sick-room with round-the-clock nurse and ambulance access",
+        dining: "Clean mess with premium dining tables and modern kitchen",
+        sports: "Indoor games room for carrom, chess, and skipping",
+        water_heaters: "Solar water heaters installed for winter hot water supply",
+        warden_support: "Resident warden available 24/7 for student guidance"
+      }
+    }
+  ],
+  phd: [
+    {
+      name: "Ramanujam Ph.D. Hostel (BH-10)",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+      description: "The premier residential block for doctoral candidates, research scholars, and junior faculty members.",
+      facilities: {
+        rooms: "Single-seated quiet suites with study desks and high-speed LAN",
+        study_lounge: "24/7 silent study and coding hall for night researchers",
+        connectivity: "Direct high-speed link to the university central library network",
+        dining: "Dedicated mess with flexible timings to accommodate late-night research",
+        laundry: "In-house laundry service and dry cleaning drop-off",
+        parking: "Secured bicycle and two-wheeler parking lot"
+      }
+    }
+  ],
+  international: [
+    {
+      name: "International AC Residence (GH-1 Wing)",
+      image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80",
+      description: "Exclusive residential wing for international students and visiting professors, offering global living standards.",
+      facilities: {
+        rooms: "Air-conditioned single rooms with premium wooden furnishings",
+        kitchenette: "Attached kitchenette equipped with microwave, induction cooktop, and refrigerator",
+        dining: "International mess offering continental, Asian, and Indian cuisines",
+        lounge: "Common lounge with satellite TV, international channels, and magazines",
+        helpdesk: "24/7 student support desk for visa, transport, and local guidance",
+        internet: "Ultra-fast dedicated internet connection for global communication"
+      }
+    }
+  ]
+};
+
 const Card = ({ children, className = "", ...props }) => (
   <div
     className={`rounded-xl bg-white shadow-md hover:shadow-xl transition-transform duration-300 cursor-pointer overflow-hidden ${className}`}
@@ -19,31 +208,10 @@ const CardContent = ({ children, className = "", ...props }) => (
 );
 
 const HostelDetailed = () => {
-  const BASE = "https://meow.tilchattaas.com";
-  const [categories, setCategories] = useState([]);
-  const [hostelData, setHostelData] = useState({});
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [categories, setCategories] = useState(GBU_HOSTEL_CATEGORIES);
+  const [hostelData, setHostelData] = useState(GBU_HOSTELS_DATA);
+  const [currentCategory, setCurrentCategory] = useState(GBU_HOSTEL_CATEGORIES[0]);
   const [selectedHostel, setSelectedHostel] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const catRes = await axios.get(`${BASE}/campuslife/data`);
-        const hostelsRes = await axios.get(`${BASE}/campuslife/hostelss`);
-
-        setCategories(catRes.data[0].hostels || []);
-        setHostelData(hostelsRes.data[0].hostels || {});
-
-        const defaultCategory = catRes.data[0].hostels.find((h) =>
-          h.name.toLowerCase().includes("boys")
-        );
-        if (defaultCategory) setCurrentCategory(defaultCategory);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
 
   const handleCategoryClick = (cat) => {
     setCurrentCategory(cat);

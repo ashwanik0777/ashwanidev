@@ -1,310 +1,283 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useToast } from '../../hooks/use-toast';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Bed, ShieldCheck, Utensils, Clock, MapPin, ArrowUpRight, Info, Sparkles, Building2, UserCheck } from 'lucide-react';
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
-// === Minimal UI elements ===
-const Button = ({ children, className = '', ...props }) => (
-  <button className={`px-4 py-2 rounded-md font-medium ${className}`} {...props}>
-    {children}
-  </button>
-);
-
-const Input = ({ className = '', ...props }) => (
-  <input className={`w-full p-2 border rounded-md ${className}`} {...props} />
-);
-
-const Textarea = ({ className = '', ...props }) => (
-  <textarea className={`w-full p-2 border rounded-md ${className}`} {...props} />
-);
-
-const Label = ({ htmlFor, children }) => (
-  <label htmlFor={htmlFor} className="block mb-1 text-sm font-medium text-gray-700">
-    {children}
-  </label>
-);
-
-const Card = ({ children, className = '', ...props }) => (
-  <div className={`rounded-lg border-gray-300 bg-white shadow-sm ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-const CardContent = ({ children, className = '', ...props }) => (
-  <div className={`p-6 pt-0 ${className}`} {...props}>
-    {children}
-  </div>
-);
-
-// === Custom Dialog ===
-const Dialog = ({ open, onOpenChange, children }) => {
-  if (!open) return null;
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-      onClick={() => onOpenChange(false)}
-    >
-      <div onClick={(e) => e.stopPropagation()}>{children}</div>
-    </div>
-  );
+const GBU_HOSTELS_DATA = {
+  girls: [
+    { name: "Savitri Bai Phule Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
+    { name: "Rani Laxmi Bai Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
+    { name: "Rama Bai Ambedkar Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
+    { name: "Mahamaya Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
+    { name: "Mahadevi Verma Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
+    { name: "Ismat Chughtai Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" }
+  ],
+  boys: [
+    { name: "Sant Ravidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
+    { name: "Sant Kabir Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
+    { name: "Birsa Munda Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/completegbu.webp" },
+    { name: "Ram Sharan Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
+    { name: "Shri Narayan Guru Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/about.jpg" },
+    { name: "Tulsidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
+    { name: "Guru Ghasi Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
+    { name: "Malik Mohammad Jaysi Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/completegbu.webp" },
+    { name: "Munshi Premchand Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
+    { name: "Raheem Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/about.jpg" },
+    { name: "Maharshi Valmiki Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" }
+  ],
+  married: [
+    { name: "Married Research Scholars Hostel", capacity: "Furnished Family Suites", image: "/assets/completegbu.webp" }
+  ],
+  dining: {
+    description: "Gautam Buddha University operates a highly collaborative dining ecosystem. Centralized hostal kitchens, monitored closely by student-led mess committees, serve fresh, nutritious, and purely vegetarian meals daily. Menus rotate weekly to present seasonal options and cultural variety.",
+    timings: [
+      { meal: "Breakfast", time: "7:30 AM - 9:00 AM", menu: "Milk, Sprouts, Bread-butter, Seasonal Paratha/Poha/Idli" },
+      { meal: "Lunch", time: "12:30 PM - 2:00 PM", menu: "Seasonal Green Veg, Dal Tadka, Roti, Plain Rice, Curd & Salad" },
+      { meal: "Evening Tea", time: "5:00 PM - 6:00 PM", menu: "Tea/Coffee with Quick Snacks (Samosa/Sandwiches/Biscuits)" },
+      { meal: "Dinner", time: "8:00 PM - 9:30 PM", menu: "Paneer/Special Sabzi, Dal Makhani, Pulao, Chapati & Dessert" }
+    ],
+    features: [
+      { title: "Student Mess Committee", desc: "Weekly review of hygiene, raw material supplies, and custom menu additions." },
+      { title: "Diverse Menus", desc: "Serving wholesome meals tailored to support student health and research schedules." },
+      { title: "Pure Vegetarian & Hygiene", desc: "Strict quality control, steam sterilizers for utensils, and organic ingredients." }
+    ]
+  }
 };
 
-const DialogContent = ({ className = '', children }) => (
-  <div className={`bg-white rounded-lg shadow-xl p-6 ${className}`}>{children}</div>
-);
+const HostelDining = () => {
+  const [activeMainTab, setActiveMainTab] = useState('hostels'); // 'hostels' | 'dining'
+  const [hostelCategory, setHostelCategory] = useState('boys'); // 'boys' | 'girls' | 'married'
 
-const DialogHeader = ({ children }) => <div className="mb-4">{children}</div>;
-const DialogTitle = ({ children, className = '' }) => (
-  <h2 className={`text-lg font-bold ${className}`}>{children}</h2>
-);
-
-// === Booking Modal ===
-const HostelBookingModal = ({ isOpen, onClose, hostel, onSubmit }) => (
-  <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent className="max-w-md bg-white">
-      <DialogHeader>
-        <DialogTitle>Book Room - {hostel?.name}</DialogTitle>
-      </DialogHeader>
-      <form onSubmit={onSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="studentName">Full Name *</Label>
-          <Input id="studentName" name="studentName" required placeholder="Enter your full name" />
-        </div>
-        <div>
-          <Label htmlFor="email">Email Address *</Label>
-          <Input id="email" name="email" type="email" required placeholder="your.email@example.com" />
-        </div>
-        <div>
-          <Label htmlFor="phone">Phone Number *</Label>
-          <Input id="phone" name="phone" required placeholder="+91 XXXXX XXXXX" />
-        </div>
-        <div>
-          <Label htmlFor="roomType">Room Type *</Label>
-          <select id="roomType" name="roomType" required className="w-full p-2 border rounded-md">
-            <option value="">Select room type</option>
-            <option value="single">Single Room</option>
-            <option value="double">Double Sharing</option>
-            <option value="triple">Triple Sharing</option>
-          </select>
-        </div>
-        <div>
-          <Label htmlFor="duration">Duration *</Label>
-          <select id="duration" name="duration" required className="w-full p-2 border rounded-md">
-            <option value="">Select duration</option>
-            <option value="semester">One Semester</option>
-            <option value="year">One Academic Year</option>
-            <option value="custom">Custom Duration</option>
-          </select>
-        </div>
-        <div>
-          <Label htmlFor="specialRequests">Special Requests</Label>
-          <Textarea id="specialRequests" name="specialRequests" placeholder="Any special requirements or preferences..." />
-        </div>
-        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-          Submit Booking Request
-        </Button>
-      </form>
-    </DialogContent>
-  </Dialog>
-);
-
-// === Hostel Cards ===
-const HostelCarousel = ({ hostels, currentHostel, onHostelClick }) => (
-  <div className="max-w-6xl mx-auto">
-    <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
-      {hostels.map((hostel, index) => (
-        <Card
-          key={index}
-          className={`cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
-            currentHostel === index ? 'ring-4 ring-blue-500 ring-opacity-50' : ''
-          }`}
-          onClick={() => onHostelClick(index)}
-        >
-          <CardContent className="p-0">
-            <div className="relative overflow-hidden">
-              <img
-                src={hostel.image}
-                alt={hostel.name}
-                className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-4 left-4 text-white">
-                <h3 className="text-lg font-bold">{hostel.name}</h3>
-                <p className="text-sm opacity-90">{hostel.capacity}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </div>
-);
-
-// === Hostel Details Card ===
-const HostelDetails = ({ hostel, onViewDetails, onBookRoom }) => (
-  <div className="mt-12">
-    <Card className="overflow-hidden shadow-2xl">
-      <CardContent className="p-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="relative">
-            <img
-              src={hostel.image}
-              alt={hostel.name}
-              className="w-full h-64 lg:h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent" />
-          </div>
-          <div className="p-8 lg:p-12">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">{hostel.name}</h3>
-            <p className="text-gray-600 mb-6 text-lg">{hostel.description}</p>
-            <div className="mb-6">
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">Amenities</h4>
-              <div className="grid grid-cols-2 gap-2">
-                {hostel.amenities.map((a, i) => (
-                  <div key={i} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-blue-600 rounded-full" />
-                    <span className="text-gray-700">{a}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex space-x-4">
-              <Button
-                className="bg-blue-600 hover:bg-blue-700"
-                onClick={() => onViewDetails(hostel)}
-              >
-                View Details
-              </Button>
-              <Button
-                className="border-blue-600 text-blue-600 hover:bg-blue-50"
-                onClick={() => onBookRoom(hostel)}
-              >
-                Book Room
-              </Button>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  </div>
-);
-
-// === Main Component ===
-const HostelLife = () => {
-  const [hostels, setHostels] = useState([]);
-  const [currentHostel, setCurrentHostel] = useState(0);
-  const [selectedHostelDetails, setSelectedHostelDetails] = useState(null);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const { toast } = useToast();
-
-  const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, '');
-
-  useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(`${BASE}/campuslife/data`);
-      const raw = res.data[0]?.hostels || [];
-      const cleaned = raw.map(h => ({
-        id: h.id,
-        name: h.name,
-        image: h.image,
-        capacity: h.capacity || "N/A",
-        description: h.description,
-        fullDescription: h.fullDescription || h.description,
-        amenities: h.amenities || [],
-        rules: h.rules || [],
-        images: h.images || [h.image],
-      }));
-      setHostels(cleaned);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  fetchData();
-}, [BASE]);
-
-
-  const handleViewDetails = (hostel) => setSelectedHostelDetails(hostel);
-  const handleBookRoom = (hostel) => {
-    setCurrentHostel(hostels.findIndex((h) => h.id === hostel.id));
-    setIsBookingOpen(true);
-  };
-
-  const handleBookingSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    toast({
-      title: 'Booking Submitted',
-      description: `Your booking for ${hostels[currentHostel].name} has been submitted.`,
-    });
-    setIsBookingOpen(false);
-    e.target.reset();
-  };
-
-  if (hostels.length === 0) return <div className="text-center py-20">Loading...</div>;
+  const currentHostelsList = GBU_HOSTELS_DATA[hostelCategory];
 
   return (
     <SearchableWrapper>
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-6">Hostel Life</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our hostels with modern amenities and comfortable living.
-          </p>
-        </div>
+      <section id="hostel-life" className="py-24 bg-slate-50 relative overflow-hidden font-sans text-left">
+        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
+          
+          {/* Section Header */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
+            >
+              <Bed size={13} />
+              <span>Residential Campus</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            >
+              Hostel Accommodation & Dining
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-slate-600 text-lg leading-relaxed font-normal"
+            >
+              Discover our extensive student residential blocks. GBU provides separate, fully-equipped single-occupancy hostels to guarantee quiet study time, privacy, and personal focus.
+            </motion.p>
+          </div>
 
-        <HostelCarousel hostels={hostels} currentHostel={currentHostel} onHostelClick={setCurrentHostel} />
-        <HostelDetails hostel={hostels[currentHostel]} onViewDetails={handleViewDetails} onBookRoom={handleBookRoom} />
+          {/* OHMS Notice / External Portal redirect */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 p-6 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-500/10"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
+                <Info size={22} className="text-blue-100" />
+              </div>
+              <div>
+                <h4 className="font-bold text-lg leading-tight">Online Hostel Management System (OHMS)</h4>
+                <p className="text-sm text-blue-100/90 mt-1">Room allotments, mess selection, registration, and approvals are directly processed via the official hostels portal.</p>
+              </div>
+            </div>
+            <a
+              href="https://hostels.gbu.ac.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-full bg-white text-blue-600 hover:bg-blue-50 font-bold transition-all duration-300 shadow-sm text-sm whitespace-nowrap cursor-pointer"
+            >
+              Go to Hostels Portal
+            </a>
+          </motion.div>
 
-        {selectedHostelDetails && (
-          <Dialog open onOpenChange={() => setSelectedHostelDetails(null)}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="text-2xl">{selectedHostelDetails.name}</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {selectedHostelDetails.images.map((img, i) => (
-                    <img key={i} src={img} alt="" className="w-full h-48 object-cover rounded-lg" />
-                  ))}
-                </div>
-                <p className="text-gray-600">{selectedHostelDetails.fullDescription}</p>
-                {selectedHostelDetails.facilities && (
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">Facilities</h3>
-                    <ul className="space-y-2">
-                      {Object.entries(selectedHostelDetails.facilities).map(([key, val]) => (
-                        <li key={key}>
-                          <span className="font-medium">{key.replace(/_/g, ' ')}:</span> {val}
-                        </li>
-                      ))}
-                    </ul>
+          {/* Main Option Tabs (Hostels vs Dining) */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-slate-200/60 p-1.5 rounded-full flex gap-1 border border-slate-200">
+              <button
+                onClick={() => setActiveMainTab('hostels')}
+                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
+                  activeMainTab === 'hostels' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Student Accommodations
+              </button>
+              <button
+                onClick={() => setActiveMainTab('dining')}
+                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
+                  activeMainTab === 'dining' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                Dining & Mess Info
+              </button>
+            </div>
+          </div>
+
+          {activeMainTab === 'hostels' ? (
+            <div>
+              {/* Category subtabs (boys vs girls vs married) */}
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                <button
+                  onClick={() => setHostCategory('boys')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
+                    hostelCategory === 'boys' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  Boys' Hostels ({GBU_HOSTELS_DATA.boys.length})
+                </button>
+                <button
+                  onClick={() => setHostCategory('girls')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
+                    hostelCategory === 'girls' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  Girls' Hostels ({GBU_HOSTELS_DATA.girls.length})
+                </button>
+                <button
+                  onClick={() => setHostCategory('married')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
+                    hostelCategory === 'married' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  Married Accommodation ({GBU_HOSTELS_DATA.married.length})
+                </button>
+              </div>
+
+              {/* Hostels Grid Overhaul */}
+              <motion.div
+                layout
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {currentHostelsList.map((hostel, idx) => (
+                  <motion.div
+                    key={idx}
+                    layout
+                    whileHover={{ y: -4 }}
+                    className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="h-48 relative overflow-hidden">
+                        <img
+                          src={hostel.image}
+                          alt={hostel.name}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-103 select-none"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                        <div className="absolute bottom-4 left-4">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/10">
+                            <Building2 size={10} />
+                            <span>{hostel.capacity}</span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h4 className="font-bold text-lg text-slate-950 leading-tight mb-2">{hostel.name}</h4>
+                        <div className="space-y-2 text-xs text-slate-500 pt-3 border-t border-slate-50">
+                          <div className="flex items-center gap-1.5">
+                            <MapPin size={13} className="text-slate-400" />
+                            <span>GBU Residential Zone</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <UserCheck size={13} className="text-slate-400" />
+                            <span>Biometric Attendance Registry</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-6 border-t border-slate-100 bg-slate-50/50">
+                      <a
+                        href="https://hostels.gbu.ac.in/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md hover:shadow-blue-500/10 transition-all flex items-center justify-center gap-1 cursor-pointer"
+                      >
+                        <span>View Now !!</span>
+                        <ArrowUpRight size={13} />
+                      </a>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          ) : (
+            // Cooperative Dining Showcase
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl text-left"
+            >
+              <div className="max-w-3xl mb-12">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <Utensils size={24} className="text-blue-600" />
+                  <span>Centralized Cooperative Mess Management</span>
+                </h3>
+                <p className="text-slate-600 text-base leading-relaxed">{GBU_HOSTELS_DATA.dining.description}</p>
+              </div>
+
+              {/* Dining Features */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                {GBU_HOSTELS_DATA.dining.features.map((feature, i) => (
+                  <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+                    <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">{feature.desc}</p>
                   </div>
-                )}
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">Rules</h3>
-                  <ul className="space-y-2">
-                    {selectedHostelDetails.rules.map((rule, i) => (
-                      <li key={i}>{rule}</li>
-                    ))}
-                  </ul>
+                ))}
+              </div>
+
+              {/* Timings Table */}
+              <div>
+                <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-6 flex items-center gap-2">
+                  <Clock size={16} className="text-blue-500 animate-pulse" />
+                  <span>Mess Operational Schedule</span>
+                </h4>
+                <div className="overflow-x-auto border border-slate-100 rounded-2xl">
+                  <table className="w-full border-collapse text-left text-sm text-slate-600">
+                    <thead className="bg-slate-50 text-slate-950 font-bold border-b border-slate-100">
+                      <tr>
+                        <th className="p-4">Meal</th>
+                        <th className="p-4">Timings</th>
+                        <th className="p-4">Example Diet Menu</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {GBU_HOSTELS_DATA.dining.timings.map((time, idx) => (
+                        <tr key={idx} className="hover:bg-slate-50/50">
+                          <td className="p-4 font-bold text-slate-950">{time.meal}</td>
+                          <td className="p-4 text-blue-600 font-medium">{time.time}</td>
+                          <td className="p-4 text-xs">{time.menu}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            </DialogContent>
-          </Dialog>
-        )}
+            </motion.div>
+          )}
 
-        <HostelBookingModal
-          isOpen={isBookingOpen}
-          onClose={() => setIsBookingOpen(false)}
-          hostel={hostels[currentHostel]}
-          onSubmit={handleBookingSubmit}
-        />
-      </div>
-    </section>
+        </div>
+      </section>
     </SearchableWrapper>
   );
 };
 
-export default HostelLife;
+export default HostelDining;

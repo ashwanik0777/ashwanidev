@@ -1,28 +1,29 @@
-
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Quote, ChevronLeft, ChevronRight, MessageSquare, User } from 'lucide-react';
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
-const testimonials = [
+const TESTIMONIALS = [
   {
     name: "Priya Sharma",
     course: "Computer Science Engineering",
     year: "Final Year",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-    quote: "The campus life here has been transformative. From participating in coding competitions to leading the robotics club, every day brings new opportunities to learn and grow."
+    image: null,
+    quote: "The campus life at GBU has been truly transformative. From coding inside the digital library labs to leading the university robotics club, every single day presents opportunities to explore and grow."
   },
   {
     name: "Rahul Kumar",
     course: "Mechanical Engineering",
     year: "Third Year",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-    quote: "The hostel life and campus events have given me lifelong friendships. The annual tech fest and sports competitions create an atmosphere of healthy competition and collaboration."
+    image: null,
+    quote: "Living inside the single-seated hostels at GBU has taught me independence while giving me lifelong friendships. The sports facilities in the Eklavya indoor arena are outstanding."
   },
   {
     name: "Anita Patel",
     course: "Electronics Engineering",
     year: "Second Year",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
-    quote: "Being part of the cultural committee has helped me discover my creative side while maintaining academic excellence. The faculty support and peer learning environment are exceptional."
+    image: null,
+    quote: "Being a core member of the cultural and coding committees helped me polish my project management skills. The green surroundings and friendly faculty create a highly nurturing space."
   }
 ];
 
@@ -31,90 +32,138 @@ const StudentTestimonials = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 5000);
-
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % TESTIMONIALS.length);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % TESTIMONIALS.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
   return (
     <SearchableWrapper>
-    <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Student Voices
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Hear from our students about their experiences, achievements, and the memories 
-            they've created during their journey with us.
-          </p>
-        </div>
+      <section className="py-24 bg-slate-50 relative overflow-hidden font-sans text-left border-t border-slate-100">
+        {/* Background blobs */}
+        <div className="absolute top-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/5 rounded-full filter blur-3xl pointer-events-none" />
 
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl">
-            <div 
-              className="flex transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-5xl relative z-10">
+          
+          {/* Header */}
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
             >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="w-full flex-shrink-0">
-                  <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg mx-4">
-                    <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-24 h-24 rounded-full object-cover shadow-lg"
-                        />
-                      </div>
-                      
-                      <div className="flex-1 text-center md:text-left">
-                        <div className="mb-6">
-                          <svg className="w-12 h-12 text-blue-200 mx-auto md:mx-0" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                          </svg>
-                        </div>
-                        
-                        <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 italic">
-                          "{testimonial.quote}"
-                        </p>
-                        
-                        <div>
-                          <h4 className="text-xl font-bold text-gray-900 mb-1">
-                            {testimonial.name}
-                          </h4>
-                          <p className="text-blue-600 font-medium mb-1">
-                            {testimonial.course}
-                          </p>
-                          <p className="text-gray-500">
-                            {testimonial.year}
-                          </p>
-                        </div>
-                      </div>
+              <MessageSquare size={13} />
+              <span>Student Voices</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+            >
+              What Our Students Say
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-slate-600 text-base"
+            >
+              Hear directly from students about their academic journey, hostel experiences, and life inside Gautam Buddha University.
+            </motion.p>
+          </div>
+
+          {/* Testimonial card slider */}
+          <div className="relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 25 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -25 }}
+                transition={{ duration: 0.4 }}
+                className="bg-white rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl flex flex-col md:flex-row items-center md:items-start gap-8"
+              >
+                {/* Photo or Fallback User Icon */}
+                <div className="flex-shrink-0 relative animate-fade-in">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full opacity-10 filter blur" />
+                  {TESTIMONIALS[currentIndex].image ? (
+                    <img
+                      src={TESTIMONIALS[currentIndex].image}
+                      alt={TESTIMONIALS[currentIndex].name}
+                      className="w-24 h-24 rounded-full object-cover shadow-md relative z-10 border-2 border-white select-none"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 rounded-full bg-slate-100 flex items-center justify-center shadow-md relative z-10 border-2 border-white select-none text-slate-400">
+                      <User size={36} />
                     </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 text-center md:text-left">
+                  <div className="mb-4">
+                    <Quote className="w-12 h-12 text-blue-200 fill-blue-50/50" />
+                  </div>
+                  <p className="text-lg md:text-xl text-slate-700 leading-relaxed italic mb-6">
+                    "{TESTIMONIALS[currentIndex].quote}"
+                  </p>
+                  <div>
+                    <h4 className="text-xl font-bold text-slate-950 mb-1">{TESTIMONIALS[currentIndex].name}</h4>
+                    <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">{TESTIMONIALS[currentIndex].course}</span>
+                    <p className="text-xs text-slate-400 mt-1">{TESTIMONIALS[currentIndex].year}</p>
                   </div>
                 </div>
-              ))}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Slider control buttons */}
+            <div className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-16 z-20">
+              <button
+                onClick={handlePrev}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 hover:text-blue-600 transition-all shadow-md cursor-pointer"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-16 z-20">
+              <button
+                onClick={handleNext}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 hover:text-blue-600 transition-all shadow-md cursor-pointer"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
           </div>
 
-          <div className="flex justify-center space-x-3 mt-8">
-            {testimonials.map((_, index) => (
+          {/* Indicator dots */}
+          <div className="flex justify-center gap-2 mt-8">
+            {TESTIMONIALS.map((_, idx) => (
               <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-blue-600 scale-125' 
-                    : 'bg-gray-300 hover:bg-gray-400'
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  currentIndex === idx ? 'bg-blue-600 scale-125 w-6' : 'bg-slate-300 hover:bg-slate-400'
                 }`}
+                aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
           </div>
+
         </div>
-      </div>
-    </section>
+      </section>
     </SearchableWrapper>
   );
 };

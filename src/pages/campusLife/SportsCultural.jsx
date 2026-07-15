@@ -1,312 +1,269 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import HeroBanner from "../../components/HeroBanner";
+import React, { useState, useRef } from "react";
+import { ChevronLeft, ChevronRight, Trophy, Target, Dribbble, Activity, Flame, Shield, MapPin, Clock, Phone, Info, X } from "lucide-react";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
-// Carousel Components
-const Carousel = ({ className = "", children }) => (
-  <div className={`relative ${className}`}>{children}</div>
-);
 
-const CarouselContent = ({ className = "", children }) => (
-  <div className={`flex overflow-x-auto scrollbar-hide ${className}`}>
-    {children}
-  </div>
-);
-
-const CarouselItem = ({ className = "", children }) => (
-  <div className={`flex-shrink-0 w-full md:w-1/2 lg:w-1/3 px-2 ${className}`}>
-    {children}
-  </div>
-);
-
-const CarouselPrevious = ({ onClick }) => (
-  <button
-    type="button"
-    aria-label="Previous"
-    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-green-600 hover:text-white text-green-600 rounded-full shadow p-2 transition-all"
-    onClick={() => {
-      const container = document.querySelector(".overflow-x-auto");
-      if (container)
-        container.scrollBy({
-          left: -container.offsetWidth,
-          behavior: "smooth",
-        });
-      if (onClick) onClick();
-    }}
-  >
-    <svg
-      width="24"
-      height="24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M15 18l-6-6 6-6" />
-    </svg>
-  </button>
-);
-
-const CarouselNext = ({ onClick }) => (
-  <button
-    type="button"
-    aria-label="Next"
-    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-green-600 hover:text-white text-green-600 rounded-full shadow p-2 transition-all"
-    onClick={() => {
-      const container = document.querySelector(".overflow-x-auto");
-      if (container)
-        container.scrollBy({ left: container.offsetWidth, behavior: "smooth" });
-      if (onClick) onClick();
-    }}
-  >
-    <svg
-      width="24"
-      height="24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M9 6l6 6-6 6" />
-    </svg>
-  </button>
-);
-
-// Dialog Components
-const Dialog = ({ open, onOpenChange, children }) => {
-  React.useEffect(() => {
-    if (open) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-  if (!open) return null;
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={onOpenChange}
-    >
-      <div className="relative" onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
-    </div>
-  );
-};
-
-const DialogContent = ({ className = "", children }) => (
-  <div className={`bg-white rounded-lg shadow-xl p-6 ${className}`}>
-    {children}
-  </div>
-);
-
-const DialogHeader = ({ children }) => <div className="mb-4">{children}</div>;
-
-const DialogTitle = ({ className = "", children }) => (
-  <h2 className={`font-bold text-xl ${className}`}>{children}</h2>
-);
-
-const Card = ({ className = "", children, ...props }) => (
-  <div
-    className={`rounded-lg border-gray-300 bg-white text-black shadow-sm ${className}`}
-    {...props}
-  >
-    {children}
-  </div>
-);
-
-const CardContent = ({ className = "", children, ...props }) => (
-  <div className={`p-6 pt-0 ${className}`} {...props}>
-    {children}
-  </div>
-);
+const GBU_SPORTS_FACILITIES = [
+  {
+    id: 1,
+    icon: Dribbble,
+    title: "Eklavya Indoor Sports Stadium",
+    image: "/assets/campusimg/Ellavya_Sports_complex.jpg",
+    type: "Olympic-Standard Indoor Arena",
+    location: "Opposite School of ICT, GBU",
+    capacity: "3,000+ Spectators",
+    access: "Open to all GBU Students, Faculty, and Staff",
+    timings: "6:00 AM - 9:00 AM & 5:00 PM - 9:00 PM (Daily)",
+    contact: "Dr. Dinesh Kumar (Sports Officer) - Ext: 4122",
+    bookingInfo: "Prior registration required at the Sports Office. Daily slot booking available for badminton/squash.",
+    description: "The Eklavya Indoor Stadium is a world-class sports arena equipped with an Olympic-standard maple-wood flooring court for basketball, four professional squash courts, a dedicated table tennis arena with 8 tables, a gymnastics zone, and state-of-the-art wooden flooring badminton courts. It has hosted several state and national-level collegiate championships and provides high-intensity floodlighting and spectator galleries."
+  },
+  {
+    id: 2,
+    icon: Trophy,
+    title: "GBU Cricket Stadium",
+    image: "/assets/sports2.jpg",
+    type: "Ranji-Standard Grass Pitch",
+    location: "East Campus Sports Zone",
+    capacity: "5,000+ Spectators",
+    access: "GBU Cricket Club Members & Inter-School Teams",
+    timings: "6:00 AM - 10:00 AM & 4:00 PM - 7:00 PM",
+    contact: "Coach Rajeev Sharma - Ext: 4125",
+    bookingInfo: "Booking required for inter-departmental or external matches through the Registrar's Office.",
+    description: "Featuring a lush green outfield and turf wickets prepared under the guidance of BCCI curators, the GBU Cricket Stadium is a magnificent facility. It has a beautiful pavilion, players' dressing rooms, electronic scoreboard capability, and a turf-wicket practice net facility. The ground is standard size, suitable for hosting Ranji-level practice sessions and all major university tournaments."
+  },
+  {
+    id: 3,
+    icon: Target,
+    title: "Main Athletic & Football Stadium",
+    image: "/assets/sports3.jpg",
+    type: "Synthetic Athletics Track & Arena",
+    location: "Central Sports Area",
+    capacity: "10,000+ Spectators",
+    access: "Open to all students for running/athletics and football",
+    timings: "5:00 AM - 8:00 AM & 5:00 PM - 8:30 PM",
+    contact: "Mr. Satish Giri (Athletics Coach) - Ext: 4126",
+    bookingInfo: "Free access for general athletics. Football tournament bookings must be routed via the Sports Committee.",
+    description: "This massive stadium boasts an 8-lane synthetic running track certified for national athletic meets, surrounding a lush, professional-grade grass football field. It is equipped with high-intensity floodlights for night matches, a grandstand for thousands of spectators, and top-tier training equipment for track and field events (long jump pit, high jump mats, shotput circle, javelin throw sector)."
+  },
+  {
+    id: 4,
+    icon: Flame,
+    title: "Olympic-size Swimming Pool",
+    image: "/assets/completegbu.webp",
+    type: "Aquatic Swimming Complex",
+    location: "Adjacent to Eklavya Stadium",
+    capacity: "500 Spectators",
+    access: "Registered students & staff with swimming passes",
+    timings: "6:00 AM - 9:00 AM & 5:00 PM - 8:30 PM (Separate slots for girls and boys)",
+    contact: "Life Guard & Instructor - Ext: 4128",
+    bookingInfo: "Monthly/Semester swimming passes must be obtained from the Finance Office after medical fitness clearance.",
+    description: "An Olympic-standard 50-meter swimming pool featuring 10 lanes, crystal clear temperature-controlled water, state-of-the-art filtration plant, and a separate diving pool with multiple springboards. Experienced lifeguards and swimming coaches are on duty during all operational hours to ensure maximum safety and professional training for students."
+  },
+  {
+    id: 5,
+    icon: Activity,
+    title: "Decoturf Tennis Arena",
+    image: "/assets/sports1.jpg",
+    type: "Decoturf Synthetic Courts",
+    location: "Behind BH-4 & BH-5",
+    capacity: "100 Spectators",
+    access: "Open to all GBU tennis enthusiasts",
+    timings: "6:00 AM - 8:30 AM & 5:00 PM - 9:00 PM",
+    contact: "Tennis Coordinator - Ext: 4129",
+    bookingInfo: "Slot booking registry kept with the hostel security gate.",
+    description: "A set of four premium synthetic Decoturf tennis courts, designed to match professional tournament standards. These courts are fully floodlit, allowing students to play late into the evening. Perfect for both beginners learning the game and advanced university players training for inter-varsity meets."
+  },
+  {
+    id: 6,
+    icon: Shield,
+    title: "Central Gymnasium & Fitness Center",
+    image: "/assets/campusimg/Ellavya_Sports_complex.jpg",
+    type: "Equipped Gym Complex",
+    location: "First Floor, Eklavya Indoor Stadium",
+    capacity: "100+ Athletes at a time",
+    access: "All students with valid GBU ID cards",
+    timings: "6:00 AM - 10:00 AM & 4:30 PM - 9:30 PM",
+    contact: "Gym Instructor - Ext: 4130",
+    bookingInfo: "No booking fee. Registration form must be submitted at the gym reception for slot allocation.",
+    description: "A fully air-conditioned, state-of-the-art gymnasium equipped with top-of-the-line cardio equipment (treadmills, cross-trainers, spin bikes), a comprehensive strength training section (free weights, multi-gym stations, Olympic lifting platforms), and a dedicated aerobics and yoga floor. Professional fitness trainers are present to guide students through workouts."
+  }
+];
 
 const SportsWellness = () => {
-  const [sportsFacilities, setSportsFacilities] = useState([]);
   const [selectedFacility, setSelectedFacility] = useState(null);
+  const scrollRef = useRef(null);
 
-  useEffect(() => {
-    const fetchFacilities = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.VITE_HOST}/campuslife/sport-facilities/`
-        );
-        const transformed = res.data.map((item) => ({
-          id: item.id,
-          icon: item.name.split(" ")[0],
-          title: item.name.slice(2).trim(),
-          image: item.image,
-          type: item.facility_type,
-          location: item.location,
-          capacity: item.capacity,
-          access: item.access,
-          timings: item.timings,
-          contact: item.contact,
-          bookingInfo: item.booking,
-          description: item.description,
-        }));
-        setSportsFacilities(transformed);
-      } catch (error) {
-        console.error("Error fetching sports facilities:", error);
-      }
-    };
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
 
-    fetchFacilities();
-  }, []);
-
-  const handleFacilityClick = (facility) => {
-    setSelectedFacility(facility);
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
   };
 
   return (
     <SearchableWrapper>
-    <section id="sports-wellness" className=" bg-white">
-        <HeroBanner
-          title="Sports and Wellness Facilities"
-          subtitle="Discover our world-class sports facilities designed for excellence in athletics and wellness."
-          bgTheme={10}
-        />
-      <div className="container mx-auto px-4">
-      
-        <div className="max-w-7xl mx-auto  m-10">
-          <Carousel className="w-full">
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {sportsFacilities.map((facility) => (
-                <CarouselItem
-                  key={facility.id}
-                  className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
-                >
-                  <Card
-                    className="cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden h-full"
-                    onClick={() => handleFacilityClick(facility)}
-                  >
-                    <CardContent className="p-0">
-                      <div className="relative">
-                        <img
-                          src={facility.image}
-                          alt={facility.title}
-                          className="w-full h-48 object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                        <div className="absolute top-4 left-4 text-4xl">
-                          {facility.icon}
-                        </div>
-                        <div className="absolute bottom-4 left-4 right-4 text-white">
-                          <h3 className="text-lg font-bold mb-1">
-                            {facility.title}
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="p-4">
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="font-medium text-gray-600">
-                              Location:
-                            </span>
-                            <span className="text-gray-800">
-                              {facility.location}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium text-gray-600">
-                              Capacity:
-                            </span>
-                            <span className="text-gray-800">
-                              {facility.capacity}
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="font-medium text-gray-600">
-                              Timings:
-                            </span>
-                            <span className="text-gray-800">
-                              {facility.timings}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="mt-4 text-center">
-                          <span className="text-green-600 text-sm font-medium hover:text-green-700">
-                            Click for more details →
-                          </span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        </div>
+      <section id="sports-wellness" className="py-24 bg-white font-sans text-left">
+        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl">
+          
+          {/* Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100">
+                <Trophy size={13} />
+                <span>Athletics & Training</span>
+              </div>
+              <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Sports & Fitness Venues</h2>
+              <p className="text-slate-500 text-sm mt-1">Olympic-standard courts and stadiums spread across the GBU campus.</p>
+            </div>
+            
+            {/* Custom slider navigation controls */}
+            <div className="flex gap-2">
+              <button
+                onClick={scrollLeft}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 hover:text-blue-600 transition-colors shadow-sm cursor-pointer"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={scrollRight}
+                className="w-11 h-11 rounded-full border border-slate-200 bg-white text-slate-600 flex items-center justify-center hover:bg-slate-50 hover:text-blue-600 transition-colors shadow-sm cursor-pointer"
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
 
-        {selectedFacility && (
-          <Dialog
-            open={!!selectedFacility}
-            onOpenChange={() => setSelectedFacility(null)}
+          {/* Cards container with horizontal scrollbar hidden */}
+          <div
+            ref={scrollRef}
+            className="flex gap-6 overflow-x-auto pb-8 scrollbar-hide scroll-smooth snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <DialogContent className="bg-white max-w-4xl max-h-[90vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold flex items-center gap-3">
-                  <span className="text-3xl">{selectedFacility.icon}</span>
-                  {selectedFacility.title}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="space-y-6">
-                <img
-                  src={selectedFacility.image}
-                  alt={selectedFacility.title}
-                  className="w-full h-64 object-cover rounded-lg"
-                />
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                      Facility Details
-                    </h3>
-                    <div className="space-y-2">
-                      <div>
-                        <span className="font-medium">Type:</span>{" "}
-                        {selectedFacility.type}
-                      </div>
-                      <div>
-                        <span className="font-medium">Location:</span>{" "}
-                        {selectedFacility.location}
-                      </div>
-                      <div>
-                        <span className="font-medium">Capacity:</span>{" "}
-                        {selectedFacility.capacity}
-                      </div>
-                      <div>
-                        <span className="font-medium">Access:</span>{" "}
-                        {selectedFacility.access}
-                      </div>
-                      <div>
-                        <span className="font-medium">Timings:</span>{" "}
-                        {selectedFacility.timings}
-                      </div>
-                      <div>
-                        <span className="font-medium">Contact:</span>{" "}
-                        {selectedFacility.contact}
-                      </div>
-                      <div>
-                        <span className="font-medium">Booking:</span>{" "}
-                        {selectedFacility.bookingInfo}
-                      </div>
-                    </div>
+            {GBU_SPORTS_FACILITIES.map((facility) => (
+              <div
+                key={facility.id}
+                onClick={() => setSelectedFacility(facility)}
+                className="flex-shrink-0 w-80 md:w-96 snap-start bg-white border border-slate-100 hover:border-blue-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+              >
+                <div className="h-52 relative overflow-hidden">
+                  <img
+                    src={facility.image}
+                    alt={facility.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                  <div className="absolute top-4 left-4 w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white">
+                    {React.createElement(facility.icon, { size: 22 })}
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                      Description
-                    </h3>
-                    <p className="text-gray-600">
-                      {selectedFacility.description}
-                    </p>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-300">{facility.type}</span>
+                    <h3 className="font-bold text-lg mt-0.5 leading-tight">{facility.title}</h3>
+                  </div>
+                </div>
+                
+                <div className="p-6 text-sm text-slate-600 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <MapPin size={15} className="text-slate-400" />
+                    <span>{facility.location}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Trophy size={15} className="text-slate-400" />
+                    <span>{facility.capacity}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock size={15} className="text-slate-400" />
+                    <span>{facility.timings}</span>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-blue-600 font-semibold group-hover:translate-x-1 transition-transform">
+                    <span>View Scheduling Details</span>
+                    <ChevronRight size={16} />
                   </div>
                 </div>
               </div>
-            </DialogContent>
-          </Dialog>
-        )}
-      </div>
-    </section>
+            ))}
+          </div>
+
+          {/* Details Dialog / Modal */}
+          {selectedFacility && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div
+                className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+                onClick={() => setSelectedFacility(null)}
+              />
+              <div className="relative bg-white rounded-3xl shadow-2xl p-8 w-full max-w-3xl z-10 border border-slate-100 max-h-[90vh] overflow-y-auto">
+                <button
+                  className="absolute top-6 right-6 text-slate-400 hover:text-slate-950 p-1.5 hover:bg-slate-100 rounded-full cursor-pointer"
+                  onClick={() => setSelectedFacility(null)}
+                >
+                  <X size={20} />
+                </button>
+                <div className="mb-6 flex flex-col gap-1 text-left">
+                  <h2 className="text-2xl font-bold text-slate-950 flex items-center gap-2">
+                    {React.createElement(selectedFacility.icon, { size: 24, className: "text-blue-600" })}
+                    <span>{selectedFacility.title}</span>
+                  </h2>
+                  <p className="text-xs text-slate-500 uppercase font-semibold tracking-wider mt-1">{selectedFacility.type}</p>
+                </div>
+                
+                <div className="space-y-6 text-left">
+                  <img
+                    src={selectedFacility.image}
+                    alt={selectedFacility.title}
+                    className="w-full h-64 object-cover rounded-2xl border border-slate-100"
+                  />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-4 flex items-center gap-1.5">
+                        <Info size={16} className="text-blue-600" />
+                        <span>Venue Guidelines</span>
+                      </h4>
+                      <div className="space-y-3 text-sm text-slate-600">
+                        <div className="flex gap-2">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Location:</span>
+                          <span>{selectedFacility.location}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Capacity:</span>
+                          <span>{selectedFacility.capacity}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Timings:</span>
+                          <span>{selectedFacility.timings}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Access:</span>
+                          <span>{selectedFacility.access}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Contact:</span>
+                          <span className="text-blue-600">{selectedFacility.contact}</span>
+                        </div>
+                        <div className="flex gap-2 pt-2 border-t border-slate-100">
+                          <span className="font-semibold text-slate-950 w-20 flex-shrink-0">Booking:</span>
+                          <span className="text-slate-500 text-xs leading-relaxed">{selectedFacility.bookingInfo}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-4">Description</h4>
+                      <p className="text-sm text-slate-600 leading-relaxed">{selectedFacility.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </section>
     </SearchableWrapper>
   );
 };

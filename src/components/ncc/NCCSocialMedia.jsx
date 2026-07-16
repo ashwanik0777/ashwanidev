@@ -31,13 +31,14 @@ const Button = ({ className = '', children, ...props }) => (
   </button>
 );
 
-const NCCSocialMedia = () => {
+const NCCSocialMedia = ({ nccData }) => {
+  const socialMedia = nccData?.content?.socialMedia || {};
   const socialHandles = [
     {
       platform: 'Facebook',
       handle: '@UniversityNCC',
       followers: '1.8K',
-      link: 'https://facebook.com/universityncc',
+      link: socialMedia.facebook || 'https://facebook.com/universityncc',
       description: 'Updates on training, camps, and achievements',
       color: 'bg-blue-600',
       icon: <Facebook className="w-6 h-6 text-white" />
@@ -46,7 +47,7 @@ const NCCSocialMedia = () => {
       platform: 'Instagram',
       handle: '@university_ncc_cadets',
       followers: '2.3K',
-      link: 'https://instagram.com/university_ncc_cadets',
+      link: socialMedia.instagram || 'https://instagram.com/university_ncc_cadets',
       description: 'Visual stories of cadet life and training',
       color: 'bg-pink-600',
       icon: <Instagram className="w-6 h-6 text-white" />
@@ -55,7 +56,7 @@ const NCCSocialMedia = () => {
       platform: 'YouTube',
       handle: 'University NCC Wing',
       followers: '1.2K',
-      link: 'https://youtube.com/@universityncc',
+      link: socialMedia.youtube || 'https://youtube.com/@universityncc',
       description: 'Training videos and camp documentaries',
       color: 'bg-red-600',
       icon: <Youtube className="w-6 h-6 text-white" />
@@ -64,7 +65,7 @@ const NCCSocialMedia = () => {
       platform: 'Twitter',
       handle: '@UniversityNCC',
       followers: '950',
-      link: 'https://twitter.com/universityncc',
+      link: socialMedia.twitter || 'https://twitter.com/universityncc',
       description: 'Real-time updates and announcements',
       color: 'bg-blue-500',
       icon: <Twitter className="w-6 h-6 text-white" />

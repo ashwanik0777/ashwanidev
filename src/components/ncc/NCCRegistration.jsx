@@ -1,6 +1,6 @@
  import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Upload, Shield, Award } from "lucide-react";
+import { Upload, Shield, Award, ChevronDown } from "lucide-react";
 import { useToast } from "../../hooks/use-toast";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
@@ -88,14 +88,7 @@ const Select = ({ value, onValueChange, placeholder, children }) => {
         className="w-full flex items-center justify-between px-3 py-2 border border-gray-300 rounded bg-white text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
         <span className={value ? "" : "text-gray-400"}>{selectedLabel}</span>
-        <svg
-          className="h-4 w-4 text-gray-400 ml-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDown className="h-4 w-4 text-gray-400 ml-2" />
       </button>
       {open && (
         <div className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg max-h-60 overflow-auto">

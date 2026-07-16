@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Clock,
   MapPin,
+  ChevronDown,
 } from "lucide-react";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
@@ -82,109 +83,13 @@ const Badge = ({ children, className = "", ...props }) => (
   </span>
 );
 
-const Select = ({ value, onValueChange, children }) => {
-  const [open, setOpen] = useState(false);
 
-  // Find the label for the selected value
-  let selectedLabel = null;
-  React.Children.forEach(children, (child) => {
-    if (child.type === SelectTrigger) return;
-    if (child.type === SelectContent) {
-      React.Children.forEach(child.props.children, (item) => {
-        if (item.props.value === value) {
-          selectedLabel = item.props.children;
-        }
-      });
-    }
-  });
 
-  // Clone children and inject open/setOpen/value/onValueChange as needed
-  return (
-    <div className="relative">
-      {React.Children.map(children, (child) => {
-        if (child.type === SelectTrigger) {
-          return React.cloneElement(child, {
-            onClick: () => setOpen((o) => !o),
-            children: (
-              <>
-                <SelectValue
-                  value={selectedLabel}
-                  placeholder={child.props.children.props.placeholder}
-                />
-                <svg
-                  className="ml-2 h-4 w-4 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </>
-            ),
-          });
-        }
-        if (child.type === SelectContent && open) {
-          return React.cloneElement(child, {
-            children: React.Children.map(child.props.children, (item) =>
-              React.cloneElement(item, {
-                onValueChange: (val) => {
-                  onValueChange(val);
-                  setOpen(false);
-                },
-                selected: value === item.props.value,
-              })
-            ),
-          });
-        }
-        return null;
-      })}
-    </div>
-  );
-};
-
-const SelectTrigger = ({ children, className = "", ...props }) => (
-  <button
-    type="button"
-    className={`flex items-center justify-between border-gray-300 rounded px-3 py-2 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
-    {...props}
-  >
-    {children}
-  </button>
-);
-const SelectValue = ({ placeholder, value } = {}) => (
-  <span className="truncate">{value || placeholder}</span>
-);
-
-const SelectContent = ({ children }) => (
-  <div className="absolute z-10 mt-1 w-full bg-white border-gray-300 rounded shadow-lg max-h-60 overflow-auto">
-    {children}
-  </div>
-);
-
-const SelectItem = ({ value, children, onValueChange, selected }) => (
-  <div
-    className={`px-4 py-2 cursor-pointer hover:bg-blue-100 text-gray-700 ${
-      selected ? "bg-blue-100 font-bold" : ""
-    }`}
-    onClick={() => onValueChange && onValueChange(value)}
-    tabIndex={0}
-    role="option"
-    aria-selected={selected ? "true" : "false"}
-  >
-    {children}
-  </div>
-);
-
-const NCCEvents = () => {
+const NCCEvents = ({ nccData }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [filterCategory, setFilterCategory] = useState("all");
 
-  const events = [
+  const defaultEvents = [
     {
       id: 1,
       title: "Weekly Drill Practice",
@@ -233,6 +138,19 @@ const NCCEvents = () => {
         "Annual NCC Day celebration with cultural programs and parade",
     },
   ];
+
+  const dbEvents = nccData?.content?.events || [];
+  const events = dbEvents.length > 0
+    ? dbEvents.map((e, idx) => ({
+        id: idx + 1,
+        title: e.title,
+        date: e.date ? new Date(e.date) : new Date(),
+        time: e.startsAt || e.time || "06:00",
+        venue: e.venue || "Campus",
+        category: e.organizer || "NCC Wing",
+        description: e.description || ""
+      }))
+    : defaultEvents;
 
   const upcomingDeadlines = [
     {
@@ -474,20 +392,18 @@ const NCCEvents = () => {
           <CardHeader>
             <div className="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
               <CardTitle>Upcoming Events</CardTitle>
-              <Select
+              <select
                 value={filterCategory}
-                onValueChange={setFilterCategory}
-                placeholder="Filter by category"
+                onChange={(e) => setFilterCategory(e.target.value)}
+                className="border border-gray-300 rounded px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium"
               >
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Training">Training</SelectItem>
-                  <SelectItem value="Camp">Camps</SelectItem>
-                  <SelectItem value="Competition">Competitions</SelectItem>
-                  <SelectItem value="Deadline">Deadlines</SelectItem>
-                  <SelectItem value="Celebration">Celebrations</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="all">All Categories</option>
+                <option value="Training">Training</option>
+                <option value="Camp">Camps</option>
+                <option value="Competition">Competitions</option>
+                <option value="Deadline">Deadlines</option>
+                <option value="Celebration">Celebrations</option>
+              </select>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">

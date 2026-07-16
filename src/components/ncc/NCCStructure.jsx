@@ -52,8 +52,8 @@ const Badge = ({ className = "", variant, children, ...props }) => {
   );
 };
 
-const NCCStructure = () => {
-  const anoDetails = {
+const NCCStructure = ({ nccData }) => {
+  const defaultAnoDetails = {
     name: 'Lt. Col. Rajesh Kumar',
     designation: 'Associate NCC Officer (ANO)',
     email: 'rajesh.kumar@university.edu',
@@ -64,7 +64,7 @@ const NCCStructure = () => {
     awards: ['Vishisht Seva Medal', 'Commendation Card']
   };
 
-  const cadetLeaders = [
+  const defaultCadetLeaders = [
     {
       name: 'Cadet Under Officer Vikram Singh',
       rank: 'CUO',
@@ -94,12 +94,32 @@ const NCCStructure = () => {
     }
   ];
 
-  const platoons = [
+  const defaultPlatoons = [
     { name: 'Alpha Platoon', cadets: 35, commander: 'CUO Vikram Singh', focus: 'Drill & Discipline' },
     { name: 'Bravo Platoon', cadets: 32, commander: 'CSM Anita Sharma', focus: 'Adventure Activities' },
     { name: 'Charlie Platoon', cadets: 30, commander: 'SGT Rohit Patel', focus: 'Social Service' },
     { name: 'Delta Platoon', cadets: 28, commander: 'SGT Priya Gupta', focus: 'Cultural Activities' }
   ];
+
+  const rawAno = nccData?.content?.anoDetails || defaultAnoDetails;
+  const anoDetails = {
+    ...rawAno,
+    qualifications: typeof rawAno.qualifications === 'string'
+      ? rawAno.qualifications.split(',').map(q => q.trim()).filter(Boolean)
+      : (Array.isArray(rawAno.qualifications) ? rawAno.qualifications : []),
+    awards: typeof rawAno.awards === 'string'
+      ? rawAno.awards.split(',').map(a => a.trim()).filter(Boolean)
+      : (Array.isArray(rawAno.awards) ? rawAno.awards : [])
+  };
+
+  const cadetLeaders = (nccData?.content?.cadetLeaders || defaultCadetLeaders).map(leader => ({
+    ...leader,
+    achievements: typeof leader.achievements === 'string'
+      ? leader.achievements.split(',').map(a => a.trim()).filter(Boolean)
+      : (Array.isArray(leader.achievements) ? leader.achievements : [])
+  }));
+
+  const platoons = nccData?.content?.platoons || defaultPlatoons;
 
   const getRankBadge = (rank) => {
     const rankColors = {
@@ -115,10 +135,10 @@ const NCCStructure = () => {
       <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
 
         {/* ANO Section */}
-        <Card className="overflow-hidden">
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-            <CardTitle className="text-xl sm:text-2xl flex items-center">
-              <Shield className="h-6 w-6 mr-2" />
+        <Card className="overflow-hidden border border-slate-100">
+          <CardHeader className="bg-gradient-to-r from-blue-50/50 to-indigo-50/50 border-b border-slate-100">
+            <CardTitle className="text-xl sm:text-2xl flex items-center text-slate-850">
+              <Shield className="h-6 w-6 mr-2 text-indigo-600" />
               Associate NCC Officer (ANO)
             </CardTitle>
           </CardHeader>
@@ -236,27 +256,27 @@ const NCCStructure = () => {
         </Card>
 
         {/* Training Schedule */}
-        <Card className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+        <Card className="bg-gradient-to-br from-indigo-50/40 via-white to-blue-50/30 border border-indigo-100/50 text-slate-800">
           <CardHeader>
-            <CardTitle className="text-xl sm:text-2xl text-center">Training Schedule</CardTitle>
+            <CardTitle className="text-xl sm:text-2xl text-center text-indigo-800 font-bold">Training Schedule</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-4 text-center gap-4">
               <div>
-                <div className="text-xl font-bold">Saturday</div>
-                <div className="text-blue-100">Weekly Parade</div>
+                <div className="text-xl font-bold text-slate-800">Saturday</div>
+                <div className="text-slate-500 text-sm mt-1">Weekly Parade</div>
               </div>
               <div>
-                <div className="text-xl font-bold">Sunday</div>
-                <div className="text-blue-100">Adventure Training</div>
+                <div className="text-xl font-bold text-slate-800">Sunday</div>
+                <div className="text-slate-500 text-sm mt-1">Adventure Training</div>
               </div>
               <div>
-                <div className="text-xl font-bold">4 Hours</div>
-                <div className="text-blue-100">Weekly Training</div>
+                <div className="text-xl font-bold text-slate-800">4 Hours</div>
+                <div className="text-slate-500 text-sm mt-1">Weekly Training</div>
               </div>
               <div>
-                <div className="text-xl font-bold">120 Periods</div>
-                <div className="text-blue-100">Annual Training</div>
+                <div className="text-xl font-bold text-slate-800">120 Periods</div>
+                <div className="text-slate-500 text-sm mt-1">Annual Training</div>
               </div>
             </div>
           </CardContent>

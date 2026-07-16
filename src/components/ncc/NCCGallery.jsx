@@ -10,6 +10,8 @@ import {
   CalendarDays,
   Video,
   Image,
+  X,
+  ChevronDown,
 } from 'lucide-react';
 import StatsCard from '../StatsCard';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
@@ -74,70 +76,7 @@ const Badge = ({ children, className = '', variant = 'default' }) => {
   );
 };
 
-/* Select Components */
-
-const Select = ({ value, onValueChange, children }) => (
-  <div className="relative inline-block">
-    {React.Children.map(children, (child) =>
-      React.cloneElement(child, { value, onValueChange })
-    )}
-  </div>
-);
-
-const SelectTrigger = ({ children, className = '', ...props }) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`relative ${className}`}>
-      <button
-        type="button"
-        className="w-full flex items-center justify-between border border-gray-300 bg-white rounded-md px-3 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => setOpen((o) => !o)}
-        {...props}
-      >
-        {children}
-        <svg
-          className="ml-2 h-4 w-4 text-gray-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {open &&
-        React.Children.map(props.children, (child) =>
-          React.cloneElement(child, { open, setOpen })
-        )}
-    </div>
-  );
-};
-
-const SelectValue = ({ placeholder }) => (
-  <span className="truncate">{placeholder}</span>
-);
-
-const SelectContent = ({ children, open, setOpen, value, onValueChange }) =>
-  open ? (
-    <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
-      {React.Children.map(children, (child) =>
-        React.cloneElement(child, { setOpen, value, onValueChange })
-      )}
-    </div>
-  ) : null;
-
-const SelectItem = ({ value: itemValue, children, setOpen, value, onValueChange }) => (
-  <div
-    className={`px-4 py-2 cursor-pointer hover:bg-blue-100 text-sm ${
-      value === itemValue ? 'font-semibold text-blue-700' : 'text-gray-700'
-    }`}
-    onClick={() => {
-      onValueChange(itemValue);
-      setOpen(false);
-    }}
-  >
-    {children}
-  </div>
-);
+// Select Components removed for standard HTML select
 
 /* Dialog Components */
 
@@ -176,14 +115,7 @@ const DialogContent = ({ children, setOpen, className = '' }) => (
         onClick={() => setOpen(false)}
         aria-label="Close"
       >
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
+        <X className="h-6 w-6" />
       </button>
       <div className="p-4">{children}</div>
     </div>
@@ -192,11 +124,11 @@ const DialogContent = ({ children, setOpen, className = '' }) => (
 
 /* Main NCCGallery Component */
 
-const NCCGallery = () => {
+const NCCGallery = ({ nccData }) => {
   const [selectedYear, setSelectedYear] = useState('2024');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const galleryItems = [
+  const defaultGalleryItems = [
     {
       id: 1,
       title: 'Republic Day Camp 2024',
@@ -223,8 +155,22 @@ const NCCGallery = () => {
         { url: '/placeholder.svg', caption: 'Camp closing ceremony' },
       ],
     },
-    // Add more items as you like
   ];
+
+  const dbGallery = nccData?.content?.eventGallery || [];
+  const galleryItems = dbGallery.length > 0
+    ? dbGallery.map((g, idx) => ({
+        id: idx + 1,
+        title: g.title || "NCC Event Image",
+        category: "Social",
+        event: g.title || "NCC Event",
+        year: g.eventDate ? g.eventDate.split('-')[0] : "2024",
+        date: g.eventDate || "2024-01-15",
+        images: [
+          { url: g.imageUrl || g.image || "/placeholder.svg", caption: g.title || "Event Photo" }
+        ]
+      }))
+    : defaultGalleryItems;
 const galleryStatsData = [
   {
     icon: Image,
@@ -302,29 +248,29 @@ const [dialogImage, setDialogImage] = useState(null);
                 <Filter className="h-4 w-4 text-gray-600" />
                 <span className="text-sm font-medium text-gray-700">Filter by:</span>
               </div>
-              <Select value={selectedYear} onValueChange={setSelectedYear}>
-                <SelectTrigger className="w-32">
-                  <SelectValue placeholder="Year" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Years</SelectItem>
-                  <SelectItem value="2024">2024</SelectItem>
-                  <SelectItem value="2023">2023</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-36">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Training">Training</SelectItem>
-                  <SelectItem value="Camps">Camps</SelectItem>
-                  <SelectItem value="Adventure">Adventure</SelectItem>
-                  <SelectItem value="Competitions">Competitions</SelectItem>
-                  <SelectItem value="Drill">Drill</SelectItem>
-                </SelectContent>
-              </Select>
+              <select
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                className="w-32 px-3 py-2 border border-gray-300 rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Years</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+              </select>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-36 px-3 py-2 border border-gray-300 rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Categories</option>
+                <option value="Training">Training</option>
+                <option value="Camps">Camps</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Competitions">Competitions</option>
+                <option value="Drill">Drill</option>
+                <option value="Social">Social</option>
+              </select>
             </div>
           </CardContent>
         </Card>
@@ -436,20 +382,7 @@ const [dialogImage, setDialogImage] = useState(null);
                 onClick={() => setDialogImage(null)}
                 aria-label="Close"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <X className="h-6 w-6" />
               </button>
 
               <div className="space-y-3">

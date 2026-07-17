@@ -20,7 +20,11 @@ const CardContent = ({ children, className = '' }) => (
   <div className={`px-6 pb-6 ${className}`}>{children}</div>
 );
 
-const NSSIntroduction = () => {
+const NSSIntroduction = ({ nssData }) => {
+  const missionText = nssData?.overview || `The National Service Scheme (NSS) is a government-sponsored public service program under the Ministry of Youth Affairs & Sports, aimed at building social consciousness, civic responsibility, and leadership among students through voluntary community service. We believe in the philosophy of "Not Me, But You" - emphasizing service before self.`;
+  const registerUrl = nssData?.content?.email || "https://nss-dash.onlinegbu.com/register";
+  const mainUrl = nssData?.content?.websiteUrl || "https://nss.onlinegbu.com/";
+
   const statsData = [
     {
       icon: Users,
@@ -103,10 +107,7 @@ const NSSIntroduction = () => {
             </CardHeader>
             <CardContent>
               <p className="text-lg leading-relaxed text-gray-700">
-                The National Service Scheme (NSS) is a government-sponsored public service program under the
-                Ministry of Youth Affairs & Sports, aimed at building social consciousness, civic responsibility,
-                and leadership among students through voluntary community service. We believe in the philosophy
-                of "Not Me, But You" - emphasizing service before self.
+                {missionText}
               </p>
             </CardContent>
           </Card>
@@ -153,19 +154,19 @@ const NSSIntroduction = () => {
 
         {/* Call to Action */}
         <motion.div variants={fadeInUp}>
-          <Card className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+          <Card className="bg-gradient-to-br from-blue-50 via-white to-indigo-50/50 border border-blue-100/60 text-slate-800">
             <CardContent className="p-8 text-center">
-              <h2 className="text-3xl font-bold mb-4">Join the Movement</h2>
-              <p className="text-xl mb-6">
+              <h2 className="text-3xl font-bold mb-4 text-blue-900">Join the Movement</h2>
+              <p className="text-xl mb-6 text-slate-650">
                 Be part of a community that believes in making a difference. Together, we can create positive change.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href={registerUrl} target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block">
                   Become a Volunteer
-                </button>
-                <button className="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                </a>
+                <a href={mainUrl} target="_blank" rel="noopener noreferrer" className="border border-slate-300 text-slate-700 bg-white px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors inline-block">
                   Learn More
-                </button>
+                </a>
               </div>
             </CardContent>
           </Card>

@@ -78,13 +78,38 @@ const SelectContent = ({ children }) => <>{children}</>;
 const SelectItem = ({ value, children }) => (
   <option value={value}>{children}</option>
 );
-const NSSEvents = () => {
+const NSSEvents = ({ nssData }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [filterMonth, setFilterMonth] = useState('all');
-  const [filterYear, setFilterYear] = useState('2024');
+  const [filterYear, setFilterYear] = useState('all');
   const [filterCategory, setFilterCategory] = useState('all');
+  const [apiEvents, setApiEvents] = useState([]);
 
-  const events = [
+  useEffect(() => {
+    const fetchApiEvents = async () => {
+      try {
+        const response = await fetch("https://nss.onlinegbu.com/api/events");
+        const data = await response.json();
+        if (data && Array.isArray(data.events)) {
+          setApiEvents(data.events);
+        }
+      } catch (err) {
+        console.error("Failed to fetch NSS API events:", err);
+      }
+    };
+    fetchApiEvents();
+  }, []);
+
+  const detectCategory = (title, desc) => {
+    const t = (title + ' ' + (desc || '')).toLowerCase();
+    if (t.includes('health') || t.includes('blood') || t.includes('yoga') || t.includes('doctor') || t.includes('medical')) return 'Health';
+    if (t.includes('literacy') || t.includes('education') || t.includes('teach') || t.includes('school') || t.includes('learning') || t.includes('poster') || t.includes('competition')) return 'Education';
+    if (t.includes('tree') || t.includes('plant') || t.includes('environment') || t.includes('earth') || t.includes('green') || t.includes('clean') || t.includes('waste')) return 'Environment';
+    if (t.includes('village') || t.includes('slum') || t.includes('community') || t.includes('social') || t.includes('distribution') || t.includes('sharing')) return 'Community';
+    return 'Community';
+  };
+
+  const defaultEvents = [
     {
       id: 1,
       title: 'Blood Donation Camp',
@@ -126,6 +151,54 @@ const NSSEvents = () => {
       description: 'Health checkup and awareness program'
     }
   ];
+
+  const dbEvents = nssData?.content?.events || [];
+  const manualEvents = dbEvents.length > 0
+    ? dbEvents.map((e, idx) => ({
+        id: `manual-${idx}`,
+        title: e.title,
+        date: e.date ? new Date(e.date) : new Date(),
+        category: e.organizer || 'Social',
+        status: e.date && new Date(e.date) < new Date() ? 'completed' : 'upcoming',
+        description: e.description || e.venue || ''
+      }))
+    : defaultEvents;
+
+  const mappedApiEvents = apiEvents.map((e) => {
+    const eventDateObj = e.startTime ? new Date(e.startTime) : (e.eventDate ? new Date(e.eventDate) : new Date());
+    const isPast = eventDateObj < new Date();
+    const detectedCat = detectCategory(e.title, e.description);
+    return {
+      id: e._id || Math.random().toString(),
+      title: e.title,
+      date: eventDateObj,
+      category: detectedCat,
+      status: isPast ? 'completed' : 'upcoming',
+      description: e.description || '',
+      venue: e.location || 'Online'
+    };
+  });
+
+  const allEvents = [...manualEvents, ...mappedApiEvents];
+
+  // Sort: current/upcoming events on top (ascending), past events below (descending)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcomingEvents = allEvents.filter(e => {
+    const eventDay = new Date(e.date.getFullYear(), e.date.getMonth(), e.date.getDate());
+    return eventDay >= today;
+  });
+
+  const pastEvents = allEvents.filter(e => {
+    const eventDay = new Date(e.date.getFullYear(), e.date.getMonth(), e.date.getDate());
+    return eventDay < today;
+  });
+
+  upcomingEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
+  pastEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+  const events = [...upcomingEvents, ...pastEvents];
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -172,7 +245,7 @@ const NSSEvents = () => {
 
   const filteredEvents = events.filter(event => {
     const monthMatch = filterMonth === 'all' || event.date.getMonth() === parseInt(filterMonth);
-    const yearMatch = event.date.getFullYear() === parseInt(filterYear);
+    const yearMatch = filterYear === 'all' || event.date.getFullYear() === parseInt(filterYear);
     const categoryMatch = filterCategory === 'all' || event.category === filterCategory;
     return monthMatch && yearMatch && categoryMatch;
   });
@@ -266,8 +339,39 @@ const NSSEvents = () => {
                 <Filter className="h-4 w-4 text-gray-600" />
                 <span className="text-sm font-medium text-gray-700">Filters:</span>
               </div>
-              {/* Selects */}
-              {/* Keep your Select components here unchanged */}
+              <select
+                value={filterMonth}
+                onChange={(e) => setFilterMonth(e.target.value)}
+                className="px-3 py-1.5 border border-gray-300 rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Months</option>
+                {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m, idx) => (
+                  <option key={idx} value={idx}>{m}</option>
+                ))}
+              </select>
+
+              <select
+                value={filterYear}
+                onChange={(e) => setFilterYear(e.target.value)}
+                className="px-3 py-1.5 border border-gray-300 rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Years</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+
+              <select
+                value={filterCategory}
+                onChange={(e) => setFilterCategory(e.target.value)}
+                className="px-3 py-1.5 border border-gray-300 rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="all">All Categories</option>
+                <option value="Health">Health</option>
+                <option value="Education">Education</option>
+                <option value="Environment">Environment</option>
+                <option value="Community">Community</option>
+              </select>
             </div>
           </CardContent>
         </Card>
@@ -321,50 +425,49 @@ const NSSEvents = () => {
             visible: { opacity: 1, x: 0 }
           }}
         >
-          <Card className="h-[500px] md:h-[600px] flex flex-col">
-
-            <CardHeader>
-              <CardTitle>Upcoming Events</CardTitle>
+          <Card className="h-[500px] md:h-[600px] flex flex-col border border-gray-200">
+            <CardHeader className="bg-gradient-to-r from-blue-50/50 to-indigo-50/50 border-b border-slate-100">
+              <CardTitle>Events Feed</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1 overflow-y-hidden relative">
-              <motion.div
-                animate={{
-                  y: ["0%", "-50%"]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  duration: 20,
-                  ease: "linear"
-                }}
-                className="space-y-4"
-              >
-                {filteredEvents.concat(filteredEvents).map((event, index) => (
+            <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
+              {filteredEvents.length === 0 ? (
+                <div className="text-center text-gray-500 py-8">No events found matching the filters.</div>
+              ) : (
+                filteredEvents.map((event, index) => (
                   <motion.div
-                    key={index}
+                    key={event.id || index}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                    transition={{ delay: Math.min(index * 0.05, 0.5) }}
+                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow bg-white"
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold text-gray-900">{event.title}</h3>
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base">{event.title}</h3>
                       <Badge className={getStatusColor(event.status)}>
                         {event.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-600 mb-2">{event.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500">
-                        {event.date.toLocaleDateString('en-IN')}
+                    {event.description && (
+                      <p className="text-xs sm:text-sm text-gray-650 mb-2 leading-relaxed">{event.description}</p>
+                    )}
+                    {event.venue && (
+                      <p className="text-xs text-gray-500 mb-2">Venue: {event.venue}</p>
+                    )}
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-gray-500 font-medium">
+                        {event.date.toLocaleDateString('en-IN', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric'
+                        })}
                       </span>
                       <Badge className={getCategoryColor(event.category)}>
                         {event.category}
                       </Badge>
                     </div>
                   </motion.div>
-                ))}
-              </motion.div>
+                ))
+              )}
             </CardContent>
           </Card>
         </motion.div>

@@ -61,8 +61,8 @@ const Button = ({
   );
 };
 
-const NSSSocialMedia = () => {
-  const socialHandles = [
+const NSSSocialMedia = ({ nssData }) => {
+  const defaultHandles = [
     {
       platform: "Facebook",
       handle: "@UniversityNSS",
@@ -100,6 +100,19 @@ const NSSSocialMedia = () => {
       icon: Twitter,
     },
   ];
+
+  const dbSocial = nssData?.content?.socialMedia || {};
+  const socialHandles = defaultHandles.map(handle => {
+    const key = handle.platform.toLowerCase();
+    if (dbSocial[key]) {
+      return {
+        ...handle,
+        link: dbSocial[key],
+        handle: dbSocial[key].split('/').pop() || handle.handle
+      };
+    }
+    return handle;
+  });
 
   const socialImpactStats = [
     {

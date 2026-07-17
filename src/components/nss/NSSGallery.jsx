@@ -8,17 +8,18 @@ import {
   Calendar,
   Video,
   Image,
+  X,
 } from "lucide-react";
 import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
-const NSSGallery = () => {
+const NSSGallery = ({ nssData }) => {
   const [selectedYear, setSelectedYear] = useState("2024");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedEvent, setSelectedEvent] = useState("all");
   const [dialogImage, setDialogImage] = useState(null);
 
-  const galleryItems = [
+  const defaultGalleryItems = [
     {
       id: 1,
       title: "Blood Donation Camp 2024",
@@ -102,6 +103,21 @@ const NSSGallery = () => {
       ],
     },
   ];
+
+  const dbGallery = nssData?.content?.eventGallery || [];
+  const galleryItems = dbGallery.length > 0
+    ? dbGallery.map((g, idx) => ({
+        id: idx + 1,
+        title: g.title || "NSS Event Image",
+        category: "Social",
+        event: g.title || "NSS Event",
+        year: g.eventDate ? g.eventDate.split('-')[0] : "2024",
+        date: g.eventDate || "2024-01-15",
+        images: [
+          { url: g.imageUrl || g.image || "/placeholder.svg", caption: g.title || "Event Photo" }
+        ]
+      }))
+    : defaultGalleryItems;
 
   const filteredItems = galleryItems.filter((item) => {
     const yearMatch = selectedYear === "all" || item.year === selectedYear;
@@ -342,20 +358,7 @@ const NSSGallery = () => {
                   onClick={() => setDialogImage(null)}
                   aria-label="Close"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <X className="h-6 w-6" />
                 </button>
 
                 <div className="space-y-3">

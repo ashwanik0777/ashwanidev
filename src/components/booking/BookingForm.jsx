@@ -1,24 +1,11 @@
 import * as React from "react";
 import { format } from "date-fns";
+import { CheckCircle2, AlertCircle, ShieldAlert, Loader2 } from "lucide-react";
+import { sendBookingOtp, verifyBookingOtp } from "../../services/bookingService";
 
-// Utility
+// Helper to join class names
 function cn(...inputs) {
   return inputs.filter(Boolean).join(" ");
-}
-
-// Slot helper for asChild usage
-const Slot = React.forwardRef(({ children, ...props }, ref) =>
-  React.cloneElement(children, { ref, ...props })
-);
-Slot.displayName = "Slot";
-
-// cva helper for button styling
-function cva(base, config) {
-  return ({ variant, size, className } = {}) => {
-    const variantClass = variant ? config.variants.variant[variant] : "";
-    const sizeClass = size ? config.variants.size[size] : "";
-    return cn(base, variantClass, sizeClass);
-  };
 }
 
 // Card components
@@ -26,7 +13,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-gray-200 bg-white shadow-sm flex flex-col h-full",
+      "rounded-2xl border border-stone-200 bg-white shadow-sm flex flex-col h-full overflow-hidden",
       className
     )}
     {...props}
@@ -37,7 +24,7 @@ Card.displayName = "Card";
 const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    className={cn("flex flex-col space-y-1.5 p-6 border-b border-stone-100 bg-stone-50/50", className)}
     {...props}
   />
 ));
@@ -47,7 +34,7 @@ const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h3
     ref={ref}
     className={cn(
-      "text-2xl font-semibold leading-none tracking-tight text-blue-700",
+      "text-xl font-bold leading-none tracking-tight text-stone-900",
       className
     )}
     {...props}
@@ -60,48 +47,28 @@ const CardContent = React.forwardRef(({ className, ...props }, ref) => (
 ));
 CardContent.displayName = "CardContent";
 
-// Button component
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all duration-200 ease-in-out ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 shadow-sm hover:shadow-md",
-  {
-    variants: {
-      variant: {
-        default: "bg-blue-600 text-white hover:bg-blue-700",
-        outline: "border border-blue-600 text-blue-600 hover:bg-blue-50",
-      },
-      size: {
-        default: "h-12 px-5",
-        sm: "h-10 px-4 text-sm",
-        lg: "h-14 px-8 text-base",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
-
-const Button = React.forwardRef(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Button.displayName = "Button";
+// Label
+const Label = React.forwardRef(({ className, required, ...props }, ref) => (
+  <label
+    ref={ref}
+    className={cn(
+      "block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2 flex items-center gap-1",
+      className
+    )}
+    {...props}
+  >
+    {props.children}
+    {required && <span className="text-red-500">*</span>}
+  </label>
+));
+Label.displayName = "Label";
 
 // Input
-const Input = React.forwardRef(({ className, type, ...props }, ref) => (
+const Input = React.forwardRef(({ className, type = "text", ...props }, ref) => (
   <input
     type={type}
     className={cn(
-      "flex h-12 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-base shadow-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "flex h-11 w-full rounded-xl border border-stone-200 bg-stone-50/30 px-3.5 py-2 text-stone-900 text-sm shadow-sm placeholder:text-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:border-transparent transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60",
       className
     )}
     ref={ref}
@@ -110,24 +77,11 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => (
 ));
 Input.displayName = "Input";
 
-// Label
-const Label = React.forwardRef(({ className, ...props }, ref) => (
-  <label
-    ref={ref}
-    className={cn(
-      "block text-sm font-medium leading-none text-gray-700 mb-2",
-      className
-    )}
-    {...props}
-  />
-));
-Label.displayName = "Label";
-
 // Textarea
 const Textarea = React.forwardRef(({ className, ...props }, ref) => (
   <textarea
     className={cn(
-      "flex min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-base shadow-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "flex min-h-[90px] w-full rounded-xl border border-stone-200 bg-stone-50/30 px-3.5 py-2 text-stone-900 text-sm shadow-sm placeholder:text-stone-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:border-transparent transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60",
       className
     )}
     ref={ref}
@@ -136,69 +90,29 @@ const Textarea = React.forwardRef(({ className, ...props }, ref) => (
 ));
 Textarea.displayName = "Textarea";
 
-// Select components
-const Select = ({ children }) => <div className="relative">{children}</div>;
-
-const SelectTrigger = ({ children, onClick }) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className="flex h-12 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-  >
-    {children}
-  </button>
-);
-
-const SelectContent = ({ children }) => (
-  <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-200 bg-white shadow-md">
-    {children}
-  </div>
-);
-
-const SelectItem = ({ children, value, onValueChange }) => (
-  <div
-    onClick={() => onValueChange(value)}
-    className="cursor-pointer px-4 py-2 hover:bg-blue-50"
-  >
-    {children}
-  </div>
-);
-
-const SelectValue = ({ placeholder, value }) => (
-  <span className={cn(!value && "text-gray-400")}>
-    {value || placeholder}
-  </span>
-);
-
 const BookingForm = ({ facility, selectedDate, onSubmit, onCancel }) => {
   const [formData, setFormData] = React.useState({
-    facilityId: facility.id,
-    date: format(selectedDate, "yyyy-MM-dd"),
-    startTime: "",
-    endTime: "",
+    userName: "",
+    userEmail: "",
+    userPhonePrimary: "",
+    userPhoneSecondary: "",
+    organization: "",
     purpose: "",
-    organizingDept: "",
-    contactEmail: "",
-    contactMobile: "",
+    startTime: "09:00",
+    endTime: "17:00",
   });
 
   const [totalCost, setTotalCost] = React.useState(0);
-  const [startOpen, setStartOpen] = React.useState(false);
-  const [endOpen, setEndOpen] = React.useState(false);
+  const [emailOtpState, setEmailOtpState] = React.useState("idle"); // idle, sending, sent, verifying, verified
+  const [otpCode, setOtpCode] = React.useState("");
+  const [verificationToken, setVerificationToken] = React.useState("");
+  const [otpError, setOtpError] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const timeSlots = [
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
+    "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00",
+    "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00",
+    "20:00", "21:00", "22:00"
   ];
 
   const calculateCost = (start, end) => {
@@ -207,186 +121,298 @@ const BookingForm = ({ facility, selectedDate, onSubmit, onCancel }) => {
     const endHour = parseInt(end.split(":")[0]);
     const duration = endHour - startHour;
     if (duration <= 0) return 0;
-    const hourlyRate = facility.rentRate.offPeak / 8;
-    return hourlyRate * duration + 500 + 2000;
+
+    const rate = facility.rentRate?.offPeak || 10000;
+    const hourlyRate = rate / 8;
+    return Math.round(hourlyRate * duration + 1000 + 5000); // base + cleaning + security
   };
 
+  React.useEffect(() => {
+    setTotalCost(calculateCost(formData.startTime, formData.endTime));
+  }, [formData.startTime, formData.endTime, facility]);
+
   const handleInputChange = (field, value) => {
-    const updated = { ...formData, [field]: value };
-    setFormData(updated);
-    if (field === "startTime" || field === "endTime") {
-      setTotalCost(
-        calculateCost(
-          field === "startTime" ? value : formData.startTime,
-          field === "endTime" ? value : formData.endTime
-        )
-      );
+    // Validate digit inputs for mobile
+    if ((field === "userPhonePrimary" || field === "userPhoneSecondary") && value !== "") {
+      const cleanVal = value.replace(/[^0-9]/g, "");
+      if (cleanVal.length > 10) return;
+      setFormData(prev => ({ ...prev, [field]: cleanVal }));
+      return;
+    }
+
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSendOtp = async () => {
+    if (!formData.userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.userEmail)) {
+      setOtpError("Please enter a valid email address");
+      return;
+    }
+    setOtpError("");
+    setEmailOtpState("sending");
+    try {
+      await sendBookingOtp({ email: formData.userEmail });
+      setEmailOtpState("sent");
+    } catch (err) {
+      setOtpError(err.response?.data?.message || "Failed to send OTP code.");
+      setEmailOtpState("idle");
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
+  const handleVerifyOtp = async () => {
+    if (!otpCode || otpCode.length !== 6) {
+      setOtpError("Please enter the 6-digit verification code");
+      return;
+    }
+    setOtpError("");
+    setEmailOtpState("verifying");
+    try {
+      const data = await verifyBookingOtp({ email: formData.userEmail, otp: otpCode });
+      setVerificationToken(data.verificationToken);
+      setEmailOtpState("verified");
+    } catch (err) {
+      setOtpError(err.response?.data?.message || "Invalid OTP code entered.");
+      setEmailOtpState("sent");
+    }
   };
 
-  const handleCancel = () => {
-    onCancel();
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    if (emailOtpState !== "verified" || !verificationToken) {
+      setOtpError("Email verification is mandatory to book the facility.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const submissionData = {
+        ...formData,
+        facilityId: facility.id,
+        facilityName: facility.name,
+        startTime: `${format(selectedDate, "yyyy-MM-dd")}T${formData.startTime}:00`,
+        endTime: `${format(selectedDate, "yyyy-MM-dd")}T${formData.endTime}:00`,
+        emailVerificationToken: verificationToken,
+      };
+      await onSubmit(submissionData);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const isFormValid =
+    formData.userName.trim().length > 0 &&
+    formData.purpose.trim().length > 0 &&
+    formData.userPhonePrimary.length === 10 &&
+    formData.userPhoneSecondary.length === 10 &&
+    emailOtpState === "verified" &&
+    verificationToken;
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Book {facility.name}</CardTitle>
-        <p className="text-md mt-2 text-gray-500">
-          Date: {format(selectedDate, "PPPP")}
+        <CardTitle>Booking Application Form</CardTitle>
+        <p className="text-xs text-stone-500 font-medium">
+          Date Chosen: {format(selectedDate, "PPPP")}
         </p>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <Label>Start Time</Label>
-              <Select>
-                <SelectTrigger onClick={() => setStartOpen(!startOpen)}>
-                  <SelectValue
-                    placeholder="Select start time"
-                    value={formData.startTime}
-                  />
-                </SelectTrigger>
-                {startOpen && (
-                  <SelectContent>
-                    {timeSlots.map((time) => (
-                      <SelectItem
-                        key={time}
-                        value={time}
-                        onValueChange={(v) => {
-                          handleInputChange("startTime", v);
-                          setStartOpen(false);
-                        }}
-                      >
-                        {time}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                )}
-              </Select>
-            </div>
-            <div>
-              <Label>End Time</Label>
-              <Select>
-                <SelectTrigger onClick={() => setEndOpen(!endOpen)}>
-                  <SelectValue
-                    placeholder="Select end time"
-                    value={formData.endTime}
-                  />
-                </SelectTrigger>
-                {endOpen && (
-                  <SelectContent>
-                    {timeSlots.map((time) => (
-                      <SelectItem
-                        key={time}
-                        value={time}
-                        onValueChange={(v) => {
-                          handleInputChange("endTime", v);
-                          setEndOpen(false);
-                        }}
-                      >
-                        {time}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                )}
-              </Select>
-            </div>
-          </div>
-
+        <form onSubmit={handleFormSubmit} className="space-y-5">
           <div>
-            <Label>Purpose of Event</Label>
-            <Textarea
-              placeholder="Describe the purpose of your event..."
-              value={formData.purpose}
-              onChange={(e) => handleInputChange("purpose", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <Label>Organizing Department/Person</Label>
+            <Label required>Applicant Full Name</Label>
             <Input
-              placeholder="Department or person organizing the event"
-              value={formData.organizingDept}
-              onChange={(e) => handleInputChange("organizingDept", e.target.value)}
+              placeholder="e.g. John Doe"
+              value={formData.userName}
+              onChange={(e) => handleInputChange("userName", e.target.value)}
+              required
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label>Contact Email</Label>
+              <Label required>Start Time</Label>
+              <select
+                className="w-full h-11 rounded-xl border border-stone-200 bg-stone-50/30 px-3.5 py-2 text-stone-900 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent transition-all duration-200"
+                value={formData.startTime}
+                onChange={(e) => handleInputChange("startTime", e.target.value)}
+              >
+                {timeSlots.map((time) => (
+                  <option key={time} value={time}>{time}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <Label required>End Time</Label>
+              <select
+                className="w-full h-11 rounded-xl border border-stone-200 bg-stone-50/30 px-3.5 py-2 text-stone-900 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent transition-all duration-200"
+                value={formData.endTime}
+                onChange={(e) => handleInputChange("endTime", e.target.value)}
+              >
+                {timeSlots.filter(t => t > formData.startTime).map((time) => (
+                  <option key={time} value={time}>{time}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Email verification flow */}
+          <div>
+            <Label required>Contact Email</Label>
+            <div className="flex gap-2">
               <Input
                 type="email"
-                placeholder="contact@example.com"
-                value={formData.contactEmail}
-                onChange={(e) => handleInputChange("contactEmail", e.target.value)}
+                placeholder="contact@gbu.ac.in"
+                value={formData.userEmail}
+                onChange={(e) => handleInputChange("userEmail", e.target.value)}
+                disabled={emailOtpState === "verified" || emailOtpState === "verifying"}
+                required
+              />
+              {emailOtpState !== "verified" && (
+                <button
+                  type="button"
+                  onClick={handleSendOtp}
+                  disabled={emailOtpState === "sending" || !formData.userEmail}
+                  className="rounded-xl bg-stone-900 px-4 text-xs font-semibold text-white hover:bg-stone-850 transition disabled:opacity-50 whitespace-nowrap min-w-[90px] flex items-center justify-center"
+                >
+                  {emailOtpState === "sending" ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : emailOtpState === "sent" ? (
+                    "Resend OTP"
+                  ) : (
+                    "Send OTP"
+                  )}
+                </button>
+              )}
+            </div>
+
+            {emailOtpState === "verified" && (
+              <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium mt-1.5">
+                <CheckCircle2 className="h-4 w-4" />
+                <span>Email verified successfully</span>
+              </div>
+            )}
+
+            {otpError && (
+              <div className="flex items-center gap-1.5 text-xs text-red-600 font-medium mt-1.5">
+                <ShieldAlert className="h-4 w-4" />
+                <span>{otpError}</span>
+              </div>
+            )}
+
+            {(emailOtpState === "sent" || emailOtpState === "verifying") && (
+              <div className="mt-3 p-4 border border-stone-200 bg-stone-50/50 rounded-xl space-y-2">
+                <Label required>Enter 6-Digit OTP</Label>
+                <div className="flex gap-2">
+                  <Input
+                    maxLength={6}
+                    placeholder="123456"
+                    value={otpCode}
+                    onChange={(e) => setOtpCode(e.target.value.replace(/[^0-9]/g, ""))}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleVerifyOtp}
+                    disabled={emailOtpState === "verifying" || otpCode.length !== 6}
+                    className="rounded-xl bg-emerald-600 px-4 text-xs font-semibold text-white hover:bg-emerald-700 transition disabled:opacity-50 flex items-center justify-center min-w-[90px]"
+                  >
+                    {emailOtpState === "verifying" ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      "Verify"
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label required>Primary Mobile Number</Label>
+              <Input
+                type="tel"
+                placeholder="10 digit number"
+                value={formData.userPhonePrimary}
+                onChange={(e) => handleInputChange("userPhonePrimary", e.target.value)}
+                required
               />
             </div>
             <div>
-              <Label>Contact Mobile</Label>
+              <Label required>Secondary / Emergency Mobile</Label>
               <Input
                 type="tel"
-                placeholder="+91 12345 67890"
-                value={formData.contactMobile}
-                onChange={(e) => handleInputChange("contactMobile", e.target.value)}
+                placeholder="10 digit number"
+                value={formData.userPhoneSecondary}
+                onChange={(e) => handleInputChange("userPhoneSecondary", e.target.value)}
+                required
               />
             </div>
+          </div>
+
+          <div>
+            <Label>Organization Name (if applicable)</Label>
+            <Input
+              placeholder="e.g. GBU Department of CSE"
+              value={formData.organization}
+              onChange={(e) => handleInputChange("organization", e.target.value)}
+            />
+          </div>
+
+          <div>
+            <Label required>Purpose of Booking</Label>
+            <Textarea
+              placeholder="Describe the nature and purpose of your event in detail..."
+              value={formData.purpose}
+              onChange={(e) => handleInputChange("purpose", e.target.value)}
+              required
+            />
           </div>
 
           {totalCost > 0 && (
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <h4 className="font-semibold mb-2 text-blue-700">Cost Breakdown</h4>
-              <div className="space-y-1 text-sm">
+            <div className="p-4 bg-stone-50 rounded-xl border border-stone-200">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2.5">Estimated Charges</h4>
+              <div className="space-y-1.5 text-sm text-stone-600">
                 <div className="flex justify-between">
-                  <span>Facility Rent:</span>
-                  <span>₹{(totalCost - 2500).toLocaleString()}</span>
+                  <span>Usage Rent:</span>
+                  <span className="font-semibold text-stone-900">₹{(totalCost - 6000).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Cleaning Charge:</span>
-                  <span>₹500</span>
+                  <span>Cleaning Service:</span>
+                  <span className="font-semibold text-stone-900">₹1,000</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Security Deposit:</span>
-                  <span>₹2,000</span>
+                  <span>Security deposit (Refundable):</span>
+                  <span className="font-semibold text-stone-900">₹5,000</span>
                 </div>
-                <hr className="my-2" />
-                <div className="flex justify-between font-semibold">
-                  <span>Total Amount:</span>
+                <div className="border-t border-stone-200 my-2 pt-2 flex justify-between font-bold text-stone-900 text-base">
+                  <span>Total Payable:</span>
                   <span>₹{totalCost.toLocaleString()}</span>
                 </div>
               </div>
             </div>
           )}
-          <div className="flex flex-col md:flex-row gap-4">
-            <Button
-              type="submit"
-              size="lg" // ✅ Bigger button
-              className="flex-1"
-              disabled={
-                !formData.startTime ||
-                !formData.endTime ||
-                !formData.purpose
-              }
-            >
-              Submit Booking
-            </Button>
-            <Button
+
+          <div className="flex gap-3 pt-2">
+            <button
               type="button"
-              variant="outline"
-              size="lg" // ✅ Bigger button
-              onClick={handleCancel}
-              className="flex-1"
+              onClick={onCancel}
+              className="flex-1 rounded-xl border border-stone-300 py-3 text-sm font-semibold text-stone-700 hover:bg-stone-50 transition"
             >
               Cancel
-            </Button>
+            </button>
+            <button
+              type="submit"
+              disabled={!isFormValid || isSubmitting}
+              className="flex-1 rounded-xl bg-stone-900 py-3 text-sm font-semibold text-white hover:bg-stone-850 active:bg-stone-950 transition disabled:opacity-50 shadow-sm flex items-center justify-center"
+            >
+              {isSubmitting ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                "Submit Booking Request"
+              )}
+            </button>
           </div>
-
         </form>
       </CardContent>
     </Card>

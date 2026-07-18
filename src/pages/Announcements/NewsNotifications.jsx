@@ -1014,7 +1014,7 @@ const NewsListCard = ({ news }) => {
 };
 
 // Main Component
-const NewsNotifications = () => {
+const NewsNotifications = ({ schoolCode }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -1033,7 +1033,7 @@ const NewsNotifications = () => {
 
     const loadNews = async () => {
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }

@@ -333,8 +333,7 @@ function format(date, formatStr) {
   };
   return formatStr.replace(/MMMM|MMM|MM|dd|yyyy|yy/g, (match) => map[match]);
 }
-
-const Notice = () => {
+const Notice = ({ schoolCode }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -352,7 +351,7 @@ const Notice = () => {
     const loadNotices = async () => {
       setIsLoading(true);
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }

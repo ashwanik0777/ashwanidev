@@ -43,27 +43,27 @@ export const corePillars = [
 
 export const currentProgress = [
   {
-    title: "Registration Portal",
+    title: "Faculty Registration Portal",
     status: "Completed",
-    description: "Smart Campus registration system with automated workflows",
+    description: "Smart Campus faculty registration system with automated approval workflows",
     progress: 100,
   },
   {
-    title: "Class Attendance Testing",
+    title: "Multi-School Platform Integration",
     status: "In Progress",
-    description: "Automated attendance tracking system for classes",
-    progress: 75,
+    description: "Integrating and wiring APIs/data for 8 major schools of Gautam Buddha University",
+    progress: 85,
   },
   {
-    title: "Complaint/Feedback Module",
+    title: "Club Management System",
     status: "In Progress",
-    description: "Centralized system for campus complaints and feedback",
-    progress: 60,
+    description: "Dynamic campus club directory and administrative management controls",
+    progress: 40,
   },
   {
-    title: "Exam Attendance Prototype",
+    title: "Departmental Academic Portals",
     status: "Completed",
-    description: "Prototype for automated exam attendance management",
+    description: "Customized course structures, programs, and curriculum systems per department",
     progress: 100,
   },
 ];

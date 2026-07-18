@@ -777,7 +777,7 @@ const useEventFiltering = ({ events, itemsPerPage }) => {
 };
 
 // Main Events Page Component - Updated with only 2 tabs
-const EventsPage = () => {
+const EventsPage = ({ schoolCode }) => {
   const [activeTab, setActiveTab] = useState("upcoming");
   const [itemsPerPage, setItemsPerPage] = useState(6); // Default 6 events per page
   const [eventsData, seteventsData] = useState(() => getSchoolAnnouncements().events);
@@ -810,7 +810,7 @@ const EventsPage = () => {
 
     const loadEvents = async () => {
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }

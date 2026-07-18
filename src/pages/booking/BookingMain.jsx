@@ -44,7 +44,7 @@ const BookingMain = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-stone-50 pb-24">
       <HeroBanner />
 
       <main className="container mx-auto px-4 py-12">
@@ -54,7 +54,7 @@ const BookingMain = () => {
         />
 
         <section className="mb-12 mx-15 sm:mx-5 mt-6">
-          <h2 className="text-3xl font-bold text-gbu-blue mb-8 text-center">
+          <h2 className="text-3xl font-bold text-stone-900 mb-8 text-center">
             Available Facilities
           </h2>
 
@@ -67,7 +67,7 @@ const BookingMain = () => {
 
             return (
               <div className="mb-12 mx-10">
-                <h3 className="text-2xl font-semibold text-gbu-blue mb-6">
+                <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Auditorium Facilities
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -91,7 +91,7 @@ const BookingMain = () => {
 
             return (
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-gbu-blue mb-6">
+                <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Conference Facilities
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -115,7 +115,7 @@ const BookingMain = () => {
 
             return (
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-gbu-blue mb-6">
+                <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Accommodation Facilities
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -139,7 +139,7 @@ const BookingMain = () => {
 
             return (
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-gbu-blue mb-6">
+                <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Sports Facilities
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -163,7 +163,7 @@ const BookingMain = () => {
 
             return (
               <div className="mb-12">
-                <h3 className="text-2xl font-semibold text-gbu-blue mb-6">
+                <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Kitchen & Dining Facilities
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -180,6 +180,19 @@ const BookingMain = () => {
             );
           })()}
         </section>
+
+        <div className="max-w-5xl mx-auto my-12 p-6 bg-white border border-stone-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+          <div>
+            <h4 className="font-semibold text-stone-900 text-lg">Already submitted a booking request?</h4>
+            <p className="text-stone-500 text-sm">Use your unique tracking token to check status, admin responses, and facility in-charge details.</p>
+          </div>
+          <button
+            onClick={() => navigate('/booking/track')}
+            className="w-full md:w-auto rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold px-6 py-3.5 transition shadow-sm text-sm whitespace-nowrap"
+          >
+            Track Request Status
+          </button>
+        </div>
       </main>
     </div>
   );

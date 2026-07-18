@@ -136,7 +136,7 @@ const InstitutionInnovation = () => {
             attendees: "2000+ students, 300+ faculty",
             type: "Keynote Lecture",
             description: "Comprehensive session on transforming academic research into successful startups",
-            image: "🎓"
+            icon: GraduationCap
         },
         {
             title: "National Innovation Day",
@@ -146,7 +146,7 @@ const InstitutionInnovation = () => {
             attendees: "University Wide",
             type: "Celebration",
             description: "Commemorating the birth anniversary of Dr. Kalam with innovation activities",
-            image: "🚀"
+            icon: Sparkles
         },
         {
             title: "Machine Learning for Process Design",
@@ -156,7 +156,7 @@ const InstitutionInnovation = () => {
             attendees: "Online Training",
             type: "Training Program",
             description: "Comprehensive training on ML techniques and tools in Python",
-            image: "🤖"
+            icon: Cpu
         }
     ];
 
@@ -405,48 +405,52 @@ const InstitutionInnovation = () => {
                 </section>
 
                 {/* Featured Events Carousel */}
-                <section className="py-15 bg-gradient-to-r px-20 from-blue-900 to-purple-900">
-                    <div className="container mx-auto px-4">
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">
+                <section className="py-20 bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30 border-y border-slate-100 px-20">
+                    <div className="container mx-auto px-4 max-w-5xl">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                 Featured Events
                             </h2>
-                            <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+                            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
                                 Highlighting our most impactful innovation and entrepreneurship events
                             </p>
                         </div>
 
                         <div className="relative">
-                            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12">
+                            <div className="bg-white border border-slate-100 shadow-xl rounded-3xl p-8 md:p-12 transition-all duration-500">
                                 <div className="grid md:grid-cols-2 gap-12 items-center">
                                     <div>
-                                        <div className="text-8xl mb-6">{featuredEvents[currentEventIndex].image}</div>
+                                        {/* Professional Icon Badge */}
+                                        <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-500/20">
+                                            {React.createElement(featuredEvents[currentEventIndex].icon, { className: "w-8 h-8 animate-pulse" })}
+                                        </div>
                                         <div className="flex items-center mb-4">
-                                            <span className={`px-4 py-2 rounded-full text-sm font-medium ${featuredEvents[currentEventIndex].type === 'Keynote Lecture' ? 'bg-blue-500/20 text-blue-300' :
-                                                featuredEvents[currentEventIndex].type === 'Celebration' ? 'bg-purple-500/20 text-purple-300' :
-                                                    'bg-green-500/20 text-green-300'
-                                                }`}>
+                                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                                                featuredEvents[currentEventIndex].type === 'Keynote Lecture' ? 'bg-blue-100 text-blue-700' :
+                                                featuredEvents[currentEventIndex].type === 'Celebration' ? 'bg-purple-100 text-purple-700' :
+                                                'bg-green-100 text-green-700'
+                                            }`}>
                                                 {featuredEvents[currentEventIndex].type}
                                             </span>
                                         </div>
-                                        <h3 className="text-2xl font-bold text-white mb-4">{featuredEvents[currentEventIndex].title}</h3>
-                                        <p className="text-blue-200 text-lg mb-2">{featuredEvents[currentEventIndex].speaker}</p>
-                                        <p className="text-blue-300 mb-4">{featuredEvents[currentEventIndex].designation}</p>
-                                        <p className="text-gray-300 leading-relaxed">{featuredEvents[currentEventIndex].description}</p>
+                                        <h3 className="text-2xl font-bold text-slate-800 mb-3">{featuredEvents[currentEventIndex].title}</h3>
+                                        <p className="text-blue-600 font-semibold text-lg mb-1">{featuredEvents[currentEventIndex].speaker}</p>
+                                        <p className="text-slate-500 text-sm mb-4">{featuredEvents[currentEventIndex].designation}</p>
+                                        <p className="text-slate-600 leading-relaxed text-sm">{featuredEvents[currentEventIndex].description}</p>
                                     </div>
 
-                                    <div className="space-y-6">
-                                        <div className="flex items-center text-blue-200">
-                                            <Calendar className="w-5 h-5 mr-3" />
-                                            <span>{featuredEvents[currentEventIndex].date}</span>
+                                    <div className="space-y-6 bg-slate-50 p-6 rounded-2xl border border-slate-100/50">
+                                        <div className="flex items-center text-slate-700">
+                                            <Calendar className="w-5 h-5 mr-3 text-blue-600" />
+                                            <span className="font-medium text-sm">{featuredEvents[currentEventIndex].date}</span>
                                         </div>
-                                        <div className="flex items-center text-blue-200">
-                                            <Users className="w-5 h-5 mr-3" />
-                                            <span>{featuredEvents[currentEventIndex].attendees}</span>
+                                        <div className="flex items-center text-slate-700">
+                                            <Users className="w-5 h-5 mr-3 text-purple-600" />
+                                            <span className="font-medium text-sm">{featuredEvents[currentEventIndex].attendees}</span>
                                         </div>
-                                        <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                                        <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold shadow-md hover:shadow-lg hover:shadow-blue-500/20 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center">
                                             Learn More
-                                            <ExternalLink className="w-5 h-5 ml-2" />
+                                            <ExternalLink className="w-4 h-4 ml-2" />
                                         </button>
                                     </div>
                                 </div>
@@ -458,8 +462,9 @@ const InstitutionInnovation = () => {
                                     <button
                                         key={index}
                                         onClick={() => setCurrentEventIndex(index)}
-                                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentEventIndex ? 'bg-white' : 'bg-white/30'
-                                            }`}
+                                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                                            index === currentEventIndex ? 'bg-blue-600 w-6' : 'bg-slate-300 hover:bg-slate-400'
+                                        }`}
                                     />
                                 ))}
                             </div>
@@ -513,30 +518,7 @@ const InstitutionInnovation = () => {
                     </div>
                 </section>
 
-                {/* Call to Action */}
-                <section className="py-15 bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900">
-                    <div className="container mx-auto px-4 text-center">
-                        <div className="max-w-4xl mx-auto">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                                Join the Innovation Journey
-                            </h2>
-                            <p className="text-xl mb-8 text-blue-200 leading-relaxed">
-                                Be part of GBU's thriving innovation ecosystem and transform your ideas into reality.
-                                Connect with like-minded innovators, access cutting-edge resources, and build the future.
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center group">
-                                    Get Involved
-                                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold hover:bg-white/20 transition-all duration-300">
-                                    Contact Us
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section >
+              
             </div>
         </SearchableWrapper>
     );

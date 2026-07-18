@@ -5,8 +5,8 @@ import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
 export default function ContactDetails() {
   return (
     <SearchableWrapper>
-      <section className="py-16   to-white">
-        <div className="container mx-auto px-4 max-w-3xl">
+      <section className="py-16 to-white">
+        <div className="max-w-3xl mx-auto px-4 w-full">
 
           <h1 className="text-3xl font-bold text-center mb-8 ">Contact Details
 

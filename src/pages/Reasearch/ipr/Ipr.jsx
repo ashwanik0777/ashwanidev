@@ -43,53 +43,55 @@ const Ipr = () => {
         {/* About Section */}
         <div
           id="about"
-          className="bg-white pb-12 sm:py-16 sm:px-10 md:px-20"
+          className="bg-white pb-12 sm:py-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-transparent text-center bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-8">
-                About Us
-              </h2>
-          <div className="flex flex-col md:flex-row items-center px-30 gap-8 md:gap-12">
-            
-            {/* Text Section - Wider */}
-            <div className="md:w-2/3 text-center md:text-left">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <h2 className="text-3xl md:text-4xl font-bold text-transparent text-center bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-8">
+              About Us
+            </h2>
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
               
-              <p className="text-gray-700 text-base sm:text-lg mb-4">
-                Gautam Buddha University was established in the year 2008 by the
-                Uttar Pradesh Act (9) of 2002. The University is recognized by the
-                University Grants Commission of India under section 2(f) of UGC
-                Act 1956 and approved by UGC under section 12-B. The University
-                had initiated research activities since its inception with the
-                help of qualified faculty members and ambitious students. The
-                University aspires to conduct R&D in diverse areas aiming to cover
-                the full spectrum, from fundamental and theoretical studies,
-                through research of relevance to business and industry with
-                practice-based studies in Science, Engineering, Management, and
-                allied areas.
-              </p>
-              <p className="text-gray-700 text-base sm:text-lg mb-4">
-                The focus of the University in promoting interdisciplinary
-                research is to bring together experts from a variety of
-                disciplines to identify challenges and deliver practical
-                solutions. University also guides and encourages the faculty
-                members to propose new research projects and ideas to carry out
-                innovative research, apply for externally funded research projects
-                to different national and international funding agencies, and also
-                in helping the researchers in filing the Intellectual Properties
-                (IPs) generated and protecting their rights.
-              </p>
-              
-            </div>
+              {/* Text Section - Wider */}
+              <div className="md:w-2/3 text-center md:text-left">
+                
+                <p className="text-gray-700 text-base sm:text-lg mb-4">
+                  Gautam Buddha University was established in the year 2008 by the
+                  Uttar Pradesh Act (9) of 2002. The University is recognized by the
+                  University Grants Commission of India under section 2(f) of UGC
+                  Act 1956 and approved by UGC under section 12-B. The University
+                  had initiated research activities since its inception with the
+                  help of qualified faculty members and ambitious students. The
+                  University aspires to conduct R&D in diverse areas aiming to cover
+                  the full spectrum, from fundamental and theoretical studies,
+                  through research of relevance to business and industry with
+                  practice-based studies in Science, Engineering, Management, and
+                  allied areas.
+                </p>
+                <p className="text-gray-700 text-base sm:text-lg mb-4">
+                  The focus of the University in promoting interdisciplinary
+                  research is to bring together experts from a variety of
+                  disciplines to identify challenges and deliver practical
+                  solutions. University also guides and encourages the faculty
+                  members to propose new research projects and ideas to carry out
+                  innovative research, apply for externally funded research projects
+                  to different national and international funding agencies, and also
+                  in helping the researchers in filing the Intellectual Properties
+                  (IPs) generated and protecting their rights.
+                </p>
+                
+              </div>
 
-            {/* Image Section - Smaller */}
-            <div className="relative md:w-1/3 w-full mt-8 md:mt-0">
-              <img
-                src="https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"
-                alt="Library"
-                className="rounded-xl shadow-xl w-full object-cover"
-              />
-              <div className="absolute bottom-4 right-4 bg-orange-600 text-white text-center px-5 py-3 rounded-lg shadow-lg text-sm sm:text-base">
-                <div className="text-xl sm:text-2xl font-bold">15+</div>
-                <div>Years of Excellence</div>
+              {/* Image Section - Smaller */}
+              <div className="relative md:w-1/3 w-full mt-8 md:mt-0">
+                <img
+                  src="https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"
+                  alt="Library"
+                  className="rounded-xl shadow-xl w-full object-cover"
+                />
+                <div className="absolute bottom-4 right-4 bg-orange-600 text-white text-center px-5 py-3 rounded-lg shadow-lg text-sm sm:text-base">
+                  <div className="text-xl sm:text-2xl font-bold">15+</div>
+                  <div>Years of Excellence</div>
+                </div>
               </div>
             </div>
           </div>
@@ -97,8 +99,8 @@ const Ipr = () => {
         <IPRObjectives />
         <Team />
         <IprCourses />
-        <section className="py-16  to-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
             <h1 className="text-3xl font-bold text-center mb-8 ">GBU IPR Policy</h1>
             <div

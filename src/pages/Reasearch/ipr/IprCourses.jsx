@@ -45,7 +45,7 @@ export default function IprCourses() {
   return (
     <SearchableWrapper>
       <section className="py-16 bg-white">
-        <div className="container mx-auto px-30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
           <h1 className="text-3xl font-bold text-center mb-8">IPR Courses Offered</h1>
           <div className="flex flex-wrap justify-center gap-6">

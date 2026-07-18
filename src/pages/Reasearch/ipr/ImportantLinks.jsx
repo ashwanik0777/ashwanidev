@@ -38,8 +38,8 @@ const importantLinks = [
 export default function ImportantLinks() {
   return (
     <SearchableWrapper>
-    <section className="py-16 px-30 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <h1 className="text-3xl font-bold text-center mb-8">
           Important Links
         </h1>

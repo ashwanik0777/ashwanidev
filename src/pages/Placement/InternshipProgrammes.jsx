@@ -9,6 +9,14 @@ import {
   Target,
   Award,
   TrendingUp,
+  Sun,
+  Factory,
+  Microscope,
+  Globe,
+  ShoppingBag,
+  Flame,
+  Palette,
+  Rocket,
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
@@ -19,21 +27,21 @@ const Card = ({ children, className = "" }) => (
 );
 
 const CardContent = ({ children, className = "" }) => (
-  <div className={`p-4 ${className}`}>{children}</div>
+  <div className={`${className}`}>{children}</div>
 );
 
 const Button = ({
   children,
   className = "",
-  variant = "default",
+  variant = "solid",
   ...props
 }) => {
   const baseStyle =
-    "px-4 py-2 rounded-lg font-semibold transition-all duration-300 focus:outline-none";
+    "px-4 py-2 rounded-lg font-semibold transition-all duration-300 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2";
   const variants = {
-    default: "bg-red-600 text-white hover:bg-red-700",
+    solid: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500",
     outline:
-      "border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white",
+      "border-2 border-slate-200 text-slate-700 hover:bg-slate-50 focus:ring-slate-500",
   };
   return (
     <button
@@ -51,7 +59,7 @@ const InternshipProgrammes = () => {
       title: "Summer Internships",
       description:
         "Comprehensive 8-12 week programs for 2nd and 3rd year students",
-      icon: "☀️",
+      icon: Sun,
       color: "from-orange-400 to-orange-600",
       duration: "8-12 weeks",
       stipend: "₹15,000 - ₹50,000/month",
@@ -64,7 +72,7 @@ const InternshipProgrammes = () => {
       title: "Industrial Training",
       description:
         "Hands-on experience with DRDO, IBM, and government agencies",
-      icon: "🏭",
+      icon: Factory,
       color: "from-blue-400 to-blue-600",
       duration: "6 months",
       stipend: "₹20,000 - ₹40,000/month",
@@ -77,7 +85,7 @@ const InternshipProgrammes = () => {
       title: "Research Internships",
       description:
         "Academic research opportunities in cutting-edge technologies",
-      icon: "🔬",
+      icon: Microscope,
       color: "from-purple-400 to-purple-600",
       duration: "3-6 months",
       stipend: "₹10,000 - ₹25,000/month",
@@ -89,7 +97,7 @@ const InternshipProgrammes = () => {
     {
       title: "International Programs",
       description: "Global exposure through MoUs and exchange programs",
-      icon: "🌍",
+      icon: Globe,
       color: "from-green-400 to-green-600",
       duration: "2-4 months",
       stipend: "Varies by country",
@@ -103,25 +111,29 @@ const InternshipProgrammes = () => {
   const topProviders = [
     {
       name: "Amazon",
-      logo: "🛒",
+      icon: ShoppingBag,
+      iconColor: "#ff9900",
       positions: "45+ interns",
       domains: ["Software", "Cloud", "ML"],
     },
     {
       name: "ONGC",
-      logo: "🛢️",
+      icon: Flame,
+      iconColor: "#e11d48",
       positions: "30+ interns",
       domains: ["Petroleum", "Geology", "Chemical"],
     },
     {
       name: "Adobe",
-      logo: "🎨",
+      icon: Palette,
+      iconColor: "#fa1500",
       positions: "25+ interns",
       domains: ["Design", "Software", "Research"],
     },
     {
       name: "Startups",
-      logo: "🚀",
+      icon: Rocket,
+      iconColor: "#8b5cf6",
       positions: "100+ interns",
       domains: ["Tech", "Product", "Marketing"],
     },
@@ -181,9 +193,9 @@ const InternshipProgrammes = () => {
               >
                 <CardContent className="p-6">
                   <div
-                    className={`w-16 h-16 bg-gradient-to-r ${internship.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    className={`w-16 h-16 bg-gradient-to-r ${internship.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 text-white`}
                   >
-                    <span className="text-2xl">{internship.icon}</span>
+                    <internship.icon className="h-7 w-7" />
                   </div>
 
                   <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">
@@ -265,8 +277,8 @@ const InternshipProgrammes = () => {
                   className="bg-white/80 backdrop-blur-sm border-0 shadow-xl pt-5 transition-all duration-300 hover-scale text-center"
                 >
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 bg-gradient-to-r from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <span className="text-2xl">{provider.logo}</span>
+                    <div className="w-16 h-16 bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <provider.icon className="h-7 w-7" style={{ color: provider.iconColor }} />
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">
                       {provider.name}

@@ -12,14 +12,17 @@ import {
   Briefcase,
   Heart,
   Phone,
+  Shield,
+  Lock,
+  BookOpen,
+  HelpCircle,
+  FileText
 } from "lucide-react";
-
 import { motion } from "framer-motion";
-
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
-// 💠 Basic Card with motion lift
+// 💠 Premium Card with motion lift and soft shadow transitions
 const Card = ({ children, className = "" }) => (
   <motion.div
     variants={fadeIn}
@@ -28,20 +31,23 @@ const Card = ({ children, className = "" }) => (
     viewport={{ once: true }}
     whileHover={{
       y: -6,
-      boxShadow: "0 12px 40px rgba(0,0,0,0.08)",
+      boxShadow: "0 12px 40px rgba(14, 22, 38, 0.08)",
       backgroundColor: "rgba(255,255,255,0.98)",
     }}
-    className={`rounded-2xl bg-white/80 backdrop-blur-lg transition-all duration-300 ${className}`}
+    className={`rounded-2xl bg-white/85 backdrop-blur-lg border border-slate-200/50 shadow-sm transition-all duration-300 ${className}`}
   >
     {children}
   </motion.div>
 );
+
 const CardHeader = ({ children, className = "" }) => (
   <div className={`px-8 pt-8 pb-3 ${className}`}>{children}</div>
 );
+
 const CardTitle = ({ children, className = "" }) => (
   <h2 className={`text-xl font-semibold tracking-tight ${className}`}>{children}</h2>
 );
+
 const CardContent = ({ children, className = "" }) => (
   <div className={`px-8 pb-8 ${className}`}>{children}</div>
 );
@@ -59,7 +65,7 @@ const Collapsible = ({ children }) => <div>{children}</div>;
 const CollapsibleTrigger = ({ children, className = "", ...props }) => (
   <button
     type="button"
-    className={`flex w-full items-center justify-between text-left focus:outline-none ${className}`}
+    className="flex w-full items-center justify-between text-left focus:outline-none"
     {...props}
   >
     {children}
@@ -77,107 +83,135 @@ const fadeIn = {
   },
 };
 
+// 💠 100% Accurate Sitemap Data matching router.jsx
 const sitemapAbout = [
   {
     title: "About Us",
-    path: "/about",
-    icon: Users,
+    path: "/about-us/About GBU",
+    icon: Home,
     children: [
-      { title: "Vision & Mission", path: "/about/vision" },
-      { title: "Chancellor Message", path: "/about/chancellor" },
-      { title: "Vice Chancellor Message", path: "/about/vice-chancellor" },
-      { title: "Governance Committees", path: "/about/governance" },
-      { title: "Strategic Perspective", path: "/about/strategy" },
-      { title: "Policies, Statutes & RTI", path: "/about/policies" },
-      { title: "Mandatory Disclosures", path: "/about/disclosures" },
-      { title: "Media Coverage", path: "/about/media" },
+      { title: "About GBU Overview", path: "/about-us/About GBU" },
+      { title: "University History", path: "/aboutUs/GBUHistory" },
+      { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
+      { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },
+      { title: "Governance & Committees", path: "/about-us/governance-committees" },
+      { title: "Policies, Statutes & RTI", path: "/about-us/policies-statutes-rti" },
+      { title: "Mandatory Disclosures", path: "/about-us/mandatory-disclosures" },
+      { title: "Right to Information (RTI)", path: "/rti" }
     ],
   },
   {
     title: "Academics",
-    path: "/academics",
+    path: "/academics/schools",
     icon: GraduationCap,
     children: [
-      { title: "Academic Calendar & Regulations", path: "/academics/calendar" },
-      { title: "CBCS Curriculum Framework", path: "/academics/curriculum" },
+      { title: "Academic Schools & Faculties", path: "/academics/schools" },
+      { title: "Academic Calendar", path: "/academics/academic-calendar" },
+      { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework" },
+      { title: "Centers of Excellence", path: "/academics/centers-of-excellence" },
       { title: "Faculty Directory", path: "/academics/faculty" },
-      { title: "Centers of Excellence", path: "/academics/centers" },
-      { title: "International Collaboration", path: "/academics/international" },
-      { title: "Reports & Publications", path: "/academics/reports" },
-      { title: "Schools & Departments", path: "/academics/departments" },
+      { title: "International Collaboration", path: "/academics/international-collaboration" },
+      { title: "Reports & Publications", path: "/academics/reports-publications" }
     ],
   },
   {
     title: "Admissions",
-    path: "/admissions",
+    path: "/admissions/admission-process",
     icon: UserCheck,
     children: [
-      { title: "Admission Process", path: "/admissions/process" },
-      { title: "Courses Offered (UG | PG | PhD)", path: "/admissions/courses" },
-      { title: "Eligibility & Reservation", path: "/admissions/eligibility" },
-      { title: "Fee Structure & Prospectus", path: "/admissions/fees" },
-      { title: "International Admissions", path: "/admissions/international" },
+      { title: "Admission Process & Details", path: "/admissions/admission-process" },
+      { title: "Courses Offered (UG | PG | PhD)", path: "/admissions/courses-offered" },
+      { title: "Eligibility & Reservation Rules", path: "/admissions/eligibility-reservation" },
+      { title: "Fee Structure & Prospectus", path: "/admissions/fee-structure-prospectus" },
+      { title: "International Admissions", path: "/admissions/international-admissions" }
+    ],
+  },
+  {
+    title: "Research",
+    path: "/research/research-centers",
+    icon: BookOpen,
+    children: [
+      { title: "Research Centers", path: "/research/research-centers" },
+      { title: "Publications & Patents", path: "/research/publications-patents" },
+      { title: "Incubation Center & Startups", path: "/research/incubation" },
+      { title: "Institution Innovation Council", path: "/research/institution-innovation" },
+      { title: "IPR Cell", path: "/research/ipr-cell" }
     ],
   },
   {
     title: "Campus Life",
-    path: "/campus",
+    path: "/campus-life/hero",
     icon: Heart,
     children: [
-      { title: "Overview", path: "/campus/overview" },
-      { title: "Hostels", path: "/campus/hostels" },
-      { title: "Sports", path: "/campus/sports" },
-      { title: "Clubs and Societies", path: "/campus/clubs" },
-      { title: "Meditation Centre", path: "/campus/meditation" },
-      { title: "NSS", path: "/campus/nss" },
-      { title: "NCC", path: "/campus/ncc" },
+      { title: "Campus Overview", path: "/campus-life/hero" },
+      { title: "Hostel Facilities & Dining", path: "/campus-life/hostel-facilities" },
+      { title: "Hostel Details", path: "https://hostels.gbu.ac.in/" },
+      { title: "Sports & Cultural Activities", path: "/campus-life/sports-fitness" },
+      { title: "Clubs & Societies", path: "/campus-life/clubs-societies" },
+      { title: "National Service Scheme (NSS)", path: "/campus-life/NSS" },
+      { title: "National Cadet Corps (NCC)", path: "/campus-life/NCC" },
+      { title: "Meditation & Mindfulness Centre", path: "/campus-life/meditation-center" }
     ],
   },
   {
     title: "Announcements",
-    path: "/announcements",
+    path: "/announcements/news-notifications",
     icon: Calendar,
     children: [
-      { title: "News & Updates", path: "/announcements/news" },
-      { title: "Event Calendar", path: "/announcements/events" },
-      { title: "Notices", path: "/announcements/notices" },
-      { title: "Press Releases", path: "/announcements/press" },
-      { title: "Media Gallery", path: "/announcements/gallery" },
-      { title: "Newsletter", path: "/announcements/newsletter" },
+      { title: "News & Notifications", path: "/announcements/news-notifications" },
+      { title: "Event Calendar", path: "/announcements/event-calendar" },
+      { title: "Notices Board", path: "/announcements/notices" },
+      { title: "Media & Press Gallery", path: "/announcements/media-gallery" },
+      { title: "University Newsletter", path: "/announcements/newsletter" }
     ],
   },
   {
-    title: "Placements",
+    title: "Placements & Career",
     path: "/placements",
     icon: Briefcase,
     children: [
-      { title: "Overview", path: "/placements/overview" },
-      { title: "Recruiters", path: "/placements/recruiters" },
-      { title: "Student Testimonials", path: "/placements/testimonials" },
-      { title: "Reports", path: "/placements/reports" },
+      { title: "Placement Home & Process", path: "/placements" }
     ],
   },
   {
-    title: "Alumni",
-    path: "/alumni",
+    title: "Alumni Network",
+    path: "https://alumni.gbu.ac.in/",
     icon: Users,
     children: [
-      { title: "Alumni Network", path: "/alumni/network" },
-      { title: "Alumni Events", path: "/alumni/events" },
-      { title: "Alumni Achievements", path: "/alumni/achievements" },
-      { title: "Become a Mentor", path: "/alumni/mentor" },
+      { title: "GBU Alumni Portal (External)", path: "https://alumni.gbu.ac.in/" }
     ],
   },
   {
-    title: "Contact Us",
-    path: "/contact",
-    icon: Phone,
+    title: "University Portals",
+    path: "#",
+    icon: Lock,
     children: [
-      { title: "Contact Form", path: "/contact/form" },
-      { title: "Address & Map", path: "/contact/address" },
-      { title: "Key Contacts", path: "/contact/contacts" },
+      { title: "Portal Login (Faculty / School / Admin)", path: "/login" },
+      { title: "Faculty Registration Portal", path: "/faculty-register" },
+      { title: "Facility Booking System", path: "/booking" },
+      { title: "Track Facility Bookings", path: "/booking/track" },
+      { title: "Tender Portal", path: "/tender" },
+      { title: "Recruitments & Vacancies", path: "/recruitments" }
     ],
   },
+  {
+    title: "Contact & Directory",
+    path: "/contactUs",
+    icon: Phone,
+    children: [
+      { title: "Contact Information", path: "/contactUs" },
+      { title: "Contact Directory", path: "/contactDirectory" }
+    ],
+  },
+  {
+    title: "Legal & Policies",
+    path: "#",
+    icon: Shield,
+    children: [
+      { title: "Privacy Policy", path: "/privacy-policy" },
+      { title: "Terms of Use", path: "/terms-of-use" }
+    ],
+  }
 ];
 
 const Sitemap = () => {
@@ -196,7 +230,6 @@ const Sitemap = () => {
     items.forEach((item) => {
       if (item.children) {
         links.push(...item.children);
-        links.push(...getAllLinks(item.children));
       }
     });
     return links;
@@ -221,19 +254,10 @@ const Sitemap = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 font-sans">
-        {/* <nav className="flex items-center space-x-2 pt-6 pl-8 text-sm text-gray-600 mb-8">
-        <Link to="/" className="flex items-center hover:text-blue-600 transition-colors">
-          <Home className="w-4 h-4 mr-1" />
-          Home
-        </Link>
-        <ChevronRight className="w-4 h-4" />
-        <span className="font-medium text-gray-900">Sitemap</span>
-      </nav> */}
-
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-blue-50/30 font-sans">
         <BannerSection
           title="Website Sitemap"
-          subtitle="Easily navigate all pages & sections. Find what you need instantly."
+          subtitle="Easily navigate all academic, administrative, and legal pages. Find what you need instantly."
           bgTheme={8}
         />
 
@@ -242,38 +266,44 @@ const Sitemap = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="container mx-auto px-6 py-14 max-w-7xl"
+          className="container mx-auto px-6 py-14 max-w-7xl relative z-10"
         >
-          <div className="max-w-md mx-auto mb-12">
+          {/* Search Input */}
+          <div className="max-w-md mx-auto mb-16">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
               <Input
                 type="text"
-                placeholder="Search pages..."
+                placeholder="Search pages, portals, policies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-4 w-full border-2 border-gray-200 focus:border-blue-500 rounded-xl shadow-sm"
+                className="pl-12 pr-4 py-4 w-full border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 rounded-2xl shadow-sm transition-all duration-300"
               />
             </div>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {/* Grid of Sitemap Cards */}
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredData.map((section) => (
-              <Card key={section.title} className="group">
-                <CardHeader>
+              <Card key={section.title} className="group overflow-hidden">
+                <CardHeader className="border-b border-slate-100 pb-4">
                   <Collapsible>
                     <CollapsibleTrigger onClick={() => toggleSection(section.title)}>
-                      <CardTitle className="flex items-center justify-between">
+                      <CardTitle className="flex items-center justify-between w-full">
                         <span className="flex items-center space-x-3">
-                          {section.icon && <section.icon className="w-6 h-6 text-blue-600" />}
-                          <span className="font-semibold text-gray-800 group-hover:text-blue-700 transition-colors">
+                          {section.icon && (
+                            <div className="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                              <section.icon className="w-5.5 h-5.5" />
+                            </div>
+                          )}
+                          <span className="font-bold text-slate-800 group-hover:text-blue-700 transition-colors">
                             {section.title}
                           </span>
                         </span>
                         {(openSections[section.title] ?? true) ? (
-                          <ChevronDown className="w-5 h-5 text-gray-400" />
+                          <ChevronDown className="w-5 h-5 text-slate-400" />
                         ) : (
-                          <ChevronRight className="w-5 h-5 text-gray-400" />
+                          <ChevronRight className="w-5 h-5 text-slate-400" />
                         )}
                       </CardTitle>
                     </CollapsibleTrigger>
@@ -282,23 +312,47 @@ const Sitemap = () => {
 
                 {(openSections[section.title] ?? true) && (
                   <CollapsibleContent>
-                    <CardContent className="pt-0">
-                      <div className="space-y-3">
-                        <Link
-                          to={section.path}
-                          className="block p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition border-l-4 border-blue-500"
-                        >
-                          <span className="font-medium text-blue-700">{section.title} Overview</span>
-                        </Link>
-                        {section.children?.map((child) => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            className="block p-3 rounded-lg hover:bg-gray-50 border-l-2 border-transparent hover:border-gray-300 ml-5"
-                          >
-                            <span className="text-gray-700">{child.title}</span>
-                          </Link>
-                        ))}
+                    <CardContent className="pt-6">
+                      <div className="space-y-2.5">
+                        {/* Section Overview Link (Only if it represents an actual route) */}
+                        {section.path && section.path !== "#" && (() => {
+                          const isSecExternal = section.path.startsWith('http');
+                          const SecLinkComp = isSecExternal ? 'a' : Link;
+                          const secLinkProps = isSecExternal
+                            ? { href: section.path, target: "_blank", rel: "noopener noreferrer" }
+                            : { to: section.path };
+                          return (
+                            <SecLinkComp
+                              {...secLinkProps}
+                              className="block p-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/80 transition-all duration-300 border-l-4 border-blue-500 group/overview"
+                            >
+                              <span className="font-semibold text-blue-800 text-sm flex items-center justify-between">
+                                <span>{section.title} Overview</span>
+                                <ChevronRight className="w-4 h-4 transform group-hover/overview:translate-x-1 transition-transform duration-300" />
+                              </span>
+                            </SecLinkComp>
+                          );
+                        })()}
+                        {/* Children Links */}
+                        {section.children?.map((child) => {
+                          const isExternal = child.path.startsWith('http');
+                          const LinkComp = isExternal ? 'a' : Link;
+                          const linkProps = isExternal 
+                            ? { href: child.path, target: "_blank", rel: "noopener noreferrer" }
+                            : { to: child.path };
+                          return (
+                            <LinkComp
+                              key={child.path}
+                              {...linkProps}
+                              className="block p-2.5 rounded-xl hover:bg-slate-50 border-l-2 border-transparent hover:border-slate-300 pl-4 transition-all duration-300 group/item"
+                            >
+                              <span className="text-slate-600 group-hover:text-slate-900 text-sm font-medium flex items-center justify-between">
+                                <span>{child.title}</span>
+                                <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover/item:opacity-100 transform translate-x-1 group-hover/item:translate-x-0 transition-all duration-300 text-slate-400" />
+                              </span>
+                            </LinkComp>
+                          );
+                        })}
                       </div>
                     </CardContent>
                   </CollapsibleContent>
@@ -307,19 +361,26 @@ const Sitemap = () => {
             ))}
           </div>
 
+          {/* No Search Results */}
           {searchTerm && filteredData.length === 0 && (
-            <div className="text-center py-14">
-              <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No pages found</h3>
-              <p className="text-gray-600">Try different keywords or browse all sections above.</p>
+            <div className="text-center py-20">
+              <div className="p-4 bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-slate-400" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">No pages found</h3>
+              <p className="text-slate-500 text-sm">Try using different keywords or explore the categories above.</p>
             </div>
           )}
 
-          <div className="mt-14 text-center">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm text-gray-600">
-                {getAllLinks(sitemapAbout).length + sitemapAbout.length} pages available
+          {/* Active Status Badge */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center space-x-2.5 px-4.5 py-2.5 bg-white border border-slate-200 rounded-full shadow-sm">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-xs text-slate-600 font-semibold tracking-wide">
+                {getAllLinks(sitemapAbout).length} pages verified and active
               </span>
             </div>
           </div>

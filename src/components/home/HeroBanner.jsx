@@ -54,7 +54,7 @@ export default function WelcomePage() {
   return (
     <>
       {/* Main welcome section */}
-      <div className="relative h-[82.4vh] w-full flex flex-col justify-center overflow-hidden">
+      <div className="relative h-[79.8vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -62,7 +62,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-18"
+            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-21"
             poster={bannerData.poster_image}
             preload="metadata"
           >

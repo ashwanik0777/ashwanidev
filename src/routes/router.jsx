@@ -41,7 +41,6 @@ import FacultyPortalDashboard from "../pages/Auth/FacultyDashboard.jsx";
 import SchoolDashboard from "../pages/Auth/SchoolDashboard.jsx";
 import AdminPortalDashboard from "../pages/Auth/AdminDashboard.jsx";
 import CourseDetails from "../components/departments/CourseDetailed.jsx"; 
-import SitemapMain from "../pages/Sitemap/SitemapMain.jsx";
 import Sitemap from "../pages/Sitemap/Sitemap.jsx";
 import SitemapAbout from "../pages/Sitemap/SitemapAbout.jsx";
 import SitemapContact from "../pages/Sitemap/SitemapContact.jsx";
@@ -437,7 +436,6 @@ export default function AppRouter() {
           <Route path="/recruitments" element={<RecruitMain />} />
 
 
-          <Route path="/sitemapMain" element={<SitemapMain />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/sitemapAbout" element={<SitemapAbout />} />
           <Route path="/sitemapContact" element={<SitemapContact />} />

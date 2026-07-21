@@ -82,20 +82,20 @@ const Footer = () => {
           <h3 className="font-semibold text-lg mb-3">Quick Links</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
             {[
-              "About GBU",
-              "Admissions",
-              "Academic Programs",
-              "Research",
-              "Campus Life",
-              "Placements",
+              { name: "About GBU", path: "/about-us/About GBU" },
+              { name: "Admissions", path: "/admissions/admission-process" },
+              { name: "Academic Programs", path: "/admissions/courses-offered" },
+              { name: "Research", path: "/research/research-centers" },
+              { name: "Campus Life", path: "/campus-life/hero" },
+              { name: "Placements", path: "/placements" },
             ].map((link) => (
-              <li key={link}>
-                <a
-                  href="#"
-                  className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded"
+              <li key={link.name}>
+                <Link
+                  to={link.path}
+                  className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
                 >
-                  {link}
-                </a>
+                  {link.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -106,20 +106,31 @@ const Footer = () => {
           <h3 className="font-semibold text-lg mb-3">Important Links</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
             {[
-              "Student Portal",
-              "Faculty Portal",
-              "Online Fee Payment",
-              "Library",
-              "Examination",
-              "Alumni",
+              { name: "Login Portal", path: "/login" },
+              { name: "Online Fee Payment", path: "https://csms.gbu.ac.in/", isExternal: true },
+              { name: "Library", path: "https://library.gbu.ac.in/", isExternal: true },
+              { name: "Hostels", path: "https://hostels.gbu.ac.in/", isExternal: true },
+              { name: "Examination", path: "https://exams.gbu.ac.in/", isExternal: true },
+              { name: "Alumni", path: "https://alumni.gbu.ac.in/", isExternal: true },
             ].map((link) => (
-              <li key={link}>
-                <a
-                  href="#"
-                  className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded"
-                >
-                  {link}
-                </a>
+              <li key={link.name}>
+                {link.isExternal ? (
+                  <a
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

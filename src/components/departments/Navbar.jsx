@@ -264,11 +264,11 @@ const Navbar = () => {
   ];
 
   const navVariants = {
-    initial: { y: -100, opacity: 0 },
+    initial: { y: -50, opacity: 0 },
     animate: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
@@ -282,28 +282,28 @@ const Navbar = () => {
   const dropdownVariants = {
     hidden: {
       opacity: 0,
-      y: -10,
-      scale: 0.95,
-      transition: { duration: 0.2 },
+      y: -5,
+      scale: 0.98,
+      transition: { duration: 0.15 },
     },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
         ease: "easeOut",
-        staggerChildren: 0.05,
+        staggerChildren: 0.02,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -10 },
+    hidden: { opacity: 0, x: -5 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.2 },
+      transition: { duration: 0.15 },
     },
   };
 
@@ -311,15 +311,15 @@ const Navbar = () => {
     hidden: {
       opacity: 0,
       height: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
+      transition: { duration: 0.2, ease: "easeInOut" },
     },
     visible: {
       opacity: 1,
       height: "auto",
       transition: {
-        duration: 0.4,
+        duration: 0.25,
         ease: "easeOut",
-        staggerChildren: 0.1,
+        staggerChildren: 0.05,
       },
     },
   };
@@ -354,9 +354,9 @@ const Navbar = () => {
           src="/assets/logo.svg"
           alt="USICT Logo"
           className="w-64 h-12 mr-3"
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
         />
       </motion.div>
 
@@ -398,7 +398,7 @@ const Navbar = () => {
         className="hidden md:flex flex-wrap justify-center gap-6 text-sm text-gray-700 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
       >
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link

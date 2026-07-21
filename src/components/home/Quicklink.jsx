@@ -60,7 +60,8 @@ const defaultQuickLinks = [
     iconName: "clipboard",
     color: "from-amber-500 to-orange-500",
     iconColor: "#f59e0b",
-    link: "/comingSoon",
+    link: "https://exams.gbu.ac.in/",
+    external: true,
   },
   {
     title: "Library",
@@ -68,7 +69,8 @@ const defaultQuickLinks = [
     iconName: "book",
     color: "from-indigo-500 to-violet-500",
     iconColor: "#6366f1",
-    link: "/comingSoon",
+    link: "https://library.gbu.ac.in/",
+    external: true,
   },
   {
     title: "NSS/NCC",

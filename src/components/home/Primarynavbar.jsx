@@ -54,14 +54,8 @@ const Primarynavbar = () => {
 
           
             <Link to="/rti" className="flex items-center gap-1 hover:underline">
-
               <Info size={14} /> RTI
             </Link>
-            <Link to="/sitemapMain" className="hover:underline">Sitemap</Link>
-
-
-
-
           </div>
 
           {/* Right links */}
@@ -168,13 +162,6 @@ const Primarynavbar = () => {
                   >
                     <Info size={15} className="text-blue-500" />
                     <span>RTI</span>
-                  </a>
-                  <a
-                    href="/sitemapMain"
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
-                  >
-                    <Map size={15} className="text-blue-500" />
-                    <span>Sitemap</span>
                   </a>
                 </div>
               </div>

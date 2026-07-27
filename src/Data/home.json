@@ -11,7 +11,7 @@
         "video": "/GBU_drone_shot_2.mp4",
         "button1_text": "Explore Programs",
         "button2_text": "Virtual Tour",
-        "button1_url": "https://gbu-website.vercel.app/admissions/courses-offered",
+        "button1_url": "/academics/schools",
         "button2_url": "https://www.youtube.com/watch?v=aV-XncxVM-Q"
       }
     ],
@@ -24,7 +24,7 @@
         "image": "/assets/about.jpg",
         "button1_text": "Learn More",
         "button2_text": "Our Mission",
-        "button1_url": "https://gbu-website.vercel.app/about-us/About%20GBU"
+        "button1_url": "/about-us/About%20Gbu"
       }
     ],
     "leadership": [
@@ -67,28 +67,28 @@
         "image": "/assets/campusimg/WhatsApp_Image_2025-06-25_at_4.28.55_PM.jpeg",
         "text": "Philippines Delegation Visits at GBU to strengthen the Academic and Cultural Collaboration",
         "button1_text": "View more",
-        "button1_url": "http://google.com"
+        "button1_url": "/announcements/media-gallery"
       },
       {
         "id": 10,
         "image": "/assets/campusimg/Yoda_Day.jpg",
         "text": "International Yoga Day Celebration at GBU",
         "button1_text": "View more",
-        "button1_url": "http://google.com"
+        "button1_url": "/announcements/media-gallery"
       },
       {
         "id": 11,
         "image": "/assets/campusimg/5.jpg",
         "text": "Australian Delegation Visited Gautam Buddha University (GBU) for Strengthening  Activities in the areas of Education, Training and Research.",
         "button1_text": "View more",
-        "button1_url": "http://google.com"
+        "button1_url": "/announcements/media-gallery"
       },
       {
         "id": 12,
         "image": "/assets/campusimg/Vesak_Day.jpg",
         "text": "Vesak Day Celebration at GBU",
         "button1_text": "View more",
-        "button1_url": "http://google.com"
+        "button1_url": "/announcements/media-gallery"
       }
     ],
     "excellence_in_education": [

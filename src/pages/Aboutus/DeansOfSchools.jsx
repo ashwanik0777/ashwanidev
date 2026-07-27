@@ -9,7 +9,7 @@ const deansList = [
     schoolCode: "SOICT",
     schoolName: "School of Information & Communication Technology",
     deanName: "Dr. Arpit Bhardwaj",
-    designation: "Dean (I/C) - School of ICT, GBU",
+    designation: "Dean (I/C) & Associate Professor",
     image: "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg",
     message: "The School of Information and Communication Technology is committed to academic excellence, innovation, and industry-ready learning. We focus on strong fundamentals, research culture, and real-world problem solving to prepare our students for global careers.",
     link: "/schools/SOICT"
@@ -18,7 +18,7 @@ const deansList = [
     schoolCode: "SOE",
     schoolName: "School of Engineering",
     deanName: "Dr. Kirti Pal",
-    designation: "Dean (I/C) and Associate Professor, School of Engineering",
+    designation: "Dean (I/C) and Associate Professor",
     image: "https://faculty.gbu.ac.in/uploads/photos/660531da1be80_kirti.pal.jpg",
     message: "Welcome to the School of Engineering. We are dedicated to providing world-class engineering education and fostering high-quality research, innovation, and practical skills to shape the builders of tomorrow.",
     link: "/schools/SOE"
@@ -27,7 +27,7 @@ const deansList = [
     schoolCode: "SOM",
     schoolName: "School of Management",
     deanName: "Dr. Indu Uprety",
-    designation: "Dean (I/C) & Associate Professor - School of Management, GBU",
+    designation: "Dean (I/C) & Associate Professor",
     image: "https://faculty.gbu.ac.in/uploads/photos/6605384ccc2da_induu%20(1).jpg",
     message: "The School of Management nurtures future business leaders and entrepreneurs. Our curriculum combines cutting-edge management principles with real-world applications to empower students.",
     link: "/schools/SOM"
@@ -36,7 +36,7 @@ const deansList = [
     schoolCode: "SOHSS",
     schoolName: "School of Humanities & Social Sciences",
     deanName: "Prof. Madhav Govind",
-    designation: "Professor & Dean — School of Humanities & Social Sciences, GBU",
+    designation: "Dean & Professor",
     image: "https://faculty.gbu.ac.in/uploads/photos/69b1734dae066_Prof.%20Madhav%20Govind.jpg",
     message: "Welcome to the School of Humanities & Social Sciences. Our school aims to foster critical thinking, creativity, and values of humanity, understanding social developments and cultural contexts.",
     link: "/schools/SOHSS"
@@ -45,8 +45,8 @@ const deansList = [
     schoolCode: "SOVS",
     schoolName: "School of Vocational Studies & Applied Sciences",
     deanName: "Prof. Chander Kumar Singh",
-    designation: "Dean & Professor - School of Vocational Studies & Applied Sciences, GBU",
-    image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
+    designation: "Dean & Professor",
+    image: "https://i1.rgstatic.net/ii/profile.image/337623269822466-1457507069206_Q512/Chander-Singh.jpg",
     message: "Our school focuses on applied sciences, vocational courses, and skill-based learning to bridge the gap between academia and industry. Welcome to a path of practical expertise.",
     link: "/schools/SOVS"
   },
@@ -54,7 +54,7 @@ const deansList = [
     schoolCode: "SOL",
     schoolName: "School of Law, Justice & Governance",
     deanName: "Dr. Krishna Kant Dwivedi",
-    designation: "Dean (I/C), School of Law, Justice & Governance",
+    designation: "Dean (I/C) & Associate Professor",
     image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
     message: "The School of Law, Justice & Governance is committed to producing competent legal professionals who are not only well-versed in the intricacies of law but are also deeply committed to the ideals of justice and ethics.",
     link: "/schools/SOL"
@@ -62,18 +62,18 @@ const deansList = [
   {
     schoolCode: "SOBSC",
     schoolName: "School of Buddhist Studies & Civilization",
-    deanName: "Prof. Karam Tej Sarao",
-    designation: "Dean, School of Buddhist Studies & Civilization",
-    image: "https://ui-avatars.com/api/?name=Karam+Tej+Sarao&size=300&background=F59E0B&color=fff",
+    deanName: "Prof. Rajeev Varshney",
+    designation: "Dean & Professor",
+    image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
     message: "Welcome to the School of Buddhist Studies & Civilization. We study the rich legacy of Buddhist thoughts, history, philosophy, and their applications in modern society.",
     link: "/schools/SOBSC"
   },
   {
     schoolCode: "SOBT",
     schoolName: "School of Biotechnology",
-    deanName: "Prof. S.K. Khare",
-    designation: "Dean, School of Biotechnology",
-    image: "https://ui-avatars.com/api/?name=S.K.+Khare&size=300&background=10B981&color=fff",
+    deanName: "Prof. S Dhanalaxmi",
+    designation: "Dean & Professor ",
+    image: "https://faculty.gbu.ac.in/uploads/photos/68c152fb1cc8f_Lakshmi_photo_1.png",
     message: "Welcome to School of Biotechnology at Gautam Buddha University. Our school is committed to providing world-class education and fostering innovation through cutting-edge research and industry collaboration.",
     link: "/schools/SOBT"
   }

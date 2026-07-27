@@ -486,6 +486,7 @@ const Navbar = () => {
             Contact us
           </Link>
         </motion.li>
+
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link
             to="/login"
@@ -587,6 +588,7 @@ const Navbar = () => {
                 <Search size={16} />
                 Search
               </motion.li>
+
               <motion.li variants={mobileItemVariants}>
                 <Link
                   to="/login"

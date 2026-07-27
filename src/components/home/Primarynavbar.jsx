@@ -63,14 +63,14 @@ const Primarynavbar = () => {
             <a href="https://csms.gbu.ac.in/" className="flex items-center gap-1 hover:underline">
               <CreditCard size={14} /> Online Fee Payment
             </a>
-            <a href="https://gbu.samarth.ac.in/" className="flex items-center gap-1 hover:underline">
+            <a href="https://semester.mayank-prabhakar.me/index.php" className="flex items-center gap-1 hover:underline">
               <User size={14} /> Student Portal
             </a>
-            <a href="https://gbu.samarth.ac.in/" className="flex items-center gap-1 hover:underline">
+            <a href="/login" className="flex items-center gap-1 hover:underline">
               <LogIn size={14} /> Faculty Login
             </a>
 
-            <a href="https://gbu.samarth.ac.in/" className="flex items-center gap-1 hover:underline">
+            <a href="/login" className="flex items-center gap-1 hover:underline">
               <LogIn size={14} /> Admin Login
             </a>
             <a href="/contactDirectory" className="flex items-center gap-1 hover:underline">
@@ -182,7 +182,7 @@ const Primarynavbar = () => {
                     <span>Online Fee Payment</span>
                   </a>
                   <a
-                    href="https://gbu.samarth.ac.in/"
+                    href="https://semester.mayank-prabhakar.me/index.php"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
@@ -191,7 +191,7 @@ const Primarynavbar = () => {
                     <span>Student Portal</span>
                   </a>
                   <a
-                    href="https://gbu.samarth.ac.in/"
+                    href="/login"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"

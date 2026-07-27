@@ -28,7 +28,6 @@ const NAVIGATION_CONFIG = [
       { slug: "About Gbu", label: "About GBU" },
       { slug: "chancellor-message", label: "Chancellor Message" },
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
-      { slug: "registrar", label: "Registrar's Office" },
       { slug: "deans-of-schools", label: "Deans of Schools" },
       { slug: "governance-committees", label: "Governance Committees" },
       { slug: "policies-statutes-rti", label: "Policies Statutes RTI" },

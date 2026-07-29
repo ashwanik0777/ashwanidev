@@ -52,6 +52,13 @@ import FacultyRegister from "../pages/Auth/FacultyRegister.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import ProtectedPortalRoute from "../components/Auth/ProtectedPortalRoute.jsx";
 
+/* Semester Registration — disabled for now, not part of the current release.
+   Re-enable together with the routes below and the student login option in
+   pages/Auth/LoginPortal.jsx.
+const SemesterRegistration = lazy(() => import("../pages/SemesterRegistration/SemesterRegistration.jsx"));
+const RegistrationPreview = lazy(() => import("../pages/SemesterRegistration/RegistrationPreview.jsx"));
+*/
+
 
 const AcademicCalendar = React.lazy(() =>
   import("../pages/Academic/AcademicCalendar.jsx")
@@ -448,6 +455,19 @@ export default function AppRouter() {
           {/* Course Details Routes - Dynamic Course Pages */}
           <Route path="/schools/departments/courseDetailed" element={<CourseDetails />} />
           {/* <Route path="/schools/departments/courseDetailed/:school/:course" element={<CourseDetails />} /> */}
+
+          {/* Semester Registration Routes — disabled for now (not being shipped yet)
+          <Route path="/semester-registration" element={
+            <ProtectedPortalRoute>
+              <SemesterRegistration />
+            </ProtectedPortalRoute>
+          } />
+          <Route path="/semester-registration/preview" element={
+            <ProtectedPortalRoute>
+              <RegistrationPreview />
+            </ProtectedPortalRoute>
+          } />
+          */}
 
         </Routes>
     </Suspense>

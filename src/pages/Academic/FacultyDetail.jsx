@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import SimpleLayout from '../../components/faculty/SimpleLayout';
 import FacultyHeader from '../../components/faculty/FacultyHeader';
 import SummaryDashboard from '../../components/faculty/SummaryDashboard';
@@ -10,37 +10,64 @@ import { fetchFacultyPublicProfile } from '../../services/facultyDashboardServic
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
+const TAB_ITEMS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'qualifications', label: 'Qualifications & Experience' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'teaching', label: 'Teaching' },
+  { id: 'administration', label: 'Administration' },
+  { id: 'research-projects', label: 'Research Projects' },
+  { id: 'publications', label: 'Publications' },
+  { id: 'talks', label: 'Invited Talks' },
+  { id: 'awards', label: 'Awards' },
+  { id: 'other', label: 'Other' },
+];
+
+const TAB_IDS = TAB_ITEMS.map((tab) => tab.id);
+
 const FacultyDetail = () => {
   const { id } = useParams();
   const [faculty, setFaculty] = useState(null);
-  const [activeTab, setActiveTab] = useState('overview');
   const [loading, setLoading] = useState(true);
+
+  /* The active tab lives in the URL (?tab=teaching) so the browser back button
+     steps through tabs instead of leaving the profile entirely, and so a tab can
+     be linked to or reloaded directly. */
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedTab = searchParams.get('tab');
+  const activeTab = useMemo(
+    () => (TAB_IDS.includes(requestedTab) ? requestedTab : 'overview'),
+    [requestedTab],
+  );
+
+  const handleTabChange = useCallback(
+    (tabId) => {
+      if (tabId === activeTab) return;
+      const next = new URLSearchParams(searchParams);
+      if (tabId === 'overview') next.delete('tab');
+      else next.set('tab', tabId);
+      // Push (not replace) so each tab becomes its own history entry.
+      setSearchParams(next);
+    },
+    [activeTab, searchParams, setSearchParams],
+  );
 
   const normalizeFacultyProfile = (member) => ({
     ...member,
     image_url: member.image_url,
+    // Used by FacultyHeader stats
     experience: `${member.experience_years || 0} years`,
-    bio: member.faculty_url ? `View detailed profile here: ${member.faculty_url}` : '',
+    // Used by OverviewTab
     shortBio: member.shortBio || member.bio || 'Faculty profile is available.',
     fullBio: member.fullBio || member.bio || 'Faculty profile details are available.',
-    qualifications: member.tabData?.qualifications || member.qualifications || [member.education].filter(Boolean),
-    experiences: member.tabData?.experiences || member.experiences || [],
-    researchInterests: member.tabData?.researchInterests || member.researchInterests || [],
-    courses: member.tabData?.courses || member.courses || [],
-    administrations: member.tabData?.administrations || member.administrations || [],
-    achievements: member.tabData?.achievements || member.achievements || [],
-    recentPublications: member.tabData?.recentPublications || member.recentPublications || [],
+    // Used by FacultyHeader & FacultyDetail stats (projects/talks counts)
     projects: member.tabData?.projectsCount !== undefined && member.tabData?.projectsCount !== null && member.tabData?.projectsCount !== ""
       ? Number(member.tabData.projectsCount)
       : (member.tabData?.researchProjects?.projects || member.tabData?.projects || member.projects || []),
     talks: member.tabData?.talksCount !== undefined && member.tabData?.talksCount !== null && member.tabData?.talksCount !== ""
       ? Number(member.tabData.talksCount)
       : (member.tabData?.talks?.invitedTalks || member.tabData?.invitedTalks || member.talks || []),
-    researchGroup: member.tabData?.researchGroup || member.researchGroup || [],
-    patents: member.tabData?.patents || member.patents || [],
-    certifications: member.tabData?.certifications || member.certifications || [],
-    invitedTalks: member.tabData?.talks?.invitedTalks || member.tabData?.invitedTalks || member.invitedTalks || [],
-    socialImpact: member.tabData?.socialImpact || member.socialImpact || [],
+    // Used by OverviewTab quick links
     quickLinks: member.quickLinks || [
       { label: 'Curriculum Vitae', icon: FileText, color: 'blue' },
       { label: 'Research Profile', icon: FlaskConical, color: 'green' },
@@ -91,21 +118,6 @@ const FacultyDetail = () => {
     );
   }
 
-  const tabItems = [
-    { id: 'overview', label: 'OVERVIEW' },
-    { id: 'qualifications', label: 'QUALIFICATIONS & EXPERIENCE' },
-    { id: 'teaching', label: 'TEACHING' },
-    { id: 'administration', label: 'ADMINISTRATIONS' },
-    { id: 'research-projects', label: 'RESEARCH PROJECTS' },
-    { id: 'research-group', label: 'RESEARCH GROUP' },
-    { id: 'publications', label: 'PUBLICATION' },
-    { id: 'patents', label: 'PATENTS' },
-    { id: 'certifications', label: 'CERTIFICATIONS' },
-    { id: 'talks', label: 'INVITED-TALKS' },
-    { id: 'awards', label: 'AWARDS & ACHIEVEMENTS' },
-    { id: 'social-impact', label: 'SOCIAL IMPACT' }
-  ];
-
   const summaryStats = [
     {
       icon: TrendingUp,
@@ -141,7 +153,7 @@ const FacultyDetail = () => {
     <SearchableWrapper>
       <SimpleLayout>
         <FacultyHeader faculty={faculty} />
-        <FacultyTabs tabItems={tabItems} activeTab={activeTab} onTabChange={setActiveTab} />
+        <FacultyTabs tabItems={TAB_ITEMS} activeTab={activeTab} onTabChange={handleTabChange} />
         <TabContent activeTab={activeTab} profile={faculty} />
       </SimpleLayout>
     </SearchableWrapper>

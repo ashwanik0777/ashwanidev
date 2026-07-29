@@ -35,6 +35,9 @@ const componentsMap = {
   StudentStartup,
 };
 
+// Semester registration is not live yet — banner + link kept out of the build.
+// import SemesterRegistrationBanner from "../../../components/home/SemesterRegistrationBanner.jsx";
+
 export default function SchoolDetail() {
   const { shortCode } = useParams();
   const [sections, setSections] = useState([]);
@@ -88,7 +91,12 @@ export default function SchoolDetail() {
         if (!Component) return null;
 
         // Spread the backend/json props directly to the targeted module
-        return <Component key={idx} {...(section.props || {})} schoolCode={resolvedCode} />;
+        return (
+          <React.Fragment key={idx}>
+            <Component {...(section.props || {})} schoolCode={resolvedCode} />
+            {/* {section.componentName === 'Landing' && <SemesterRegistrationBanner />} */}
+          </React.Fragment>
+        );
       })}
     </div>
   );

@@ -35,6 +35,7 @@ import {
   Megaphone,
   ArrowUp,
   ArrowDown,
+  ClipboardList,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -57,6 +58,7 @@ import {
   isTenderActive,
   splitTendersByStatus,
 } from "../../Data/tendersData";
+import { getFullRegistrationControl, setGlobalRegistration, setSchoolRegistration, REASON_OPTIONS } from '../../services/registrationControl';
 import {
   createTender,
   deleteTender,
@@ -106,6 +108,14 @@ import {
   deleteDacMember
 } from "../../services/dacService";
 import { facilities } from "../../components/bookingData/facilities";
+/* Semester Registration is held back from this release — the modules below are
+   not shipped, so the imports stay commented and the tab is hidden. Restore the
+   two imports (and drop the stubs) when the feature goes live.
+import { fetchAllRegistrations } from "../../services/semesterRegistrationService";
+import { parseDriveLink } from "../../Data/semesterRegistrationData";
+*/
+const fetchAllRegistrations = async () => ({ data: [] });
+const parseDriveLink = (url) => url || "";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -387,6 +397,7 @@ const tabs = [
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
   { id: "dac", label: "DAC Management", icon: Cpu },
+  // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
 const schoolContentTabs = [
@@ -558,6 +569,9 @@ const AdminDashboard = () => {
   const [schoolDeletingKey, setSchoolDeletingKey] = useState("");
   const [schoolApiError, setSchoolApiError] = useState("");
   const [schoolEditor, setSchoolEditor] = useState({ isCreating: false });
+  // Collection edits (notices/news/events/gallery/clubs) are staged in schoolData
+  // and only persisted by the tab's Save button — flag it so it is not missed.
+  const [hasUnsavedSchoolChanges, setHasUnsavedSchoolChanges] = useState(false);
   const [accounts, setAccounts] = useState(getInitialAccounts);
   const [tenders, setTenders] = useState(getInitialTenders);
   const [recruitmentData, setRecruitmentData] = useState(getInitialRecruitmentData);
@@ -640,6 +654,14 @@ const AdminDashboard = () => {
   const [activeNssSubTab, setActiveNssSubTab] = useState("basic");
   const [activeNccSubTab, setActiveNccSubTab] = useState("basic");
 
+  /* ── Semester Registrations state ── */
+  const [regControl, setRegControl] = useState(null);
+  const [semRegData, setSemRegData] = useState([]);
+  const [semRegLoading, setSemRegLoading] = useState(false);
+  const [semRegError, setSemRegError] = useState("");
+  const [semRegFilters, setSemRegFilters] = useState({ school: "all", programme: "all", semester: "all", search: "" });
+  const [semRegExpanded, setSemRegExpanded] = useState(null);
+
   const tenderSplit = useMemo(() => splitTendersByStatus(tenders), [tenders]);
   const recruitmentPostCount = useMemo(
     () =>
@@ -714,6 +736,10 @@ const AdminDashboard = () => {
   useEffect(() => {
     localStorage.setItem(ADMIN_ACTIVITY_LOG_KEY, JSON.stringify(activityLog));
   }, [activityLog]);
+
+  useEffect(() => {
+    setRegControl(getFullRegistrationControl());
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(FACULTY_MAIL_QUEUE_KEY, JSON.stringify(mailQueue));
@@ -1048,6 +1074,33 @@ const AdminDashboard = () => {
     fetchInChargesList();
     return () => { isMounted = false; };
   }, [activeTab, bookingSubSection, bookingReloadToken]);
+
+  /* ── Fetch Semester Registrations when tab is active ── */
+  useEffect(() => {
+    if (activeTab !== "semester-registrations") return;
+    let isMounted = true;
+    const loadData = async () => {
+      setSemRegLoading(true);
+      setSemRegError("");
+      try {
+        const result = await fetchAllRegistrations({
+          school: semRegFilters.school === "all" ? undefined : semRegFilters.school,
+          programme: semRegFilters.programme === "all" ? undefined : semRegFilters.programme,
+          semester: semRegFilters.semester === "all" ? undefined : semRegFilters.semester,
+          search: semRegFilters.search || undefined,
+        });
+        if (!isMounted) return;
+        setSemRegData(result?.data || []);
+      } catch (err) {
+        if (!isMounted) return;
+        setSemRegError(err?.message || "Failed to load registrations");
+      } finally {
+        if (isMounted) setSemRegLoading(false);
+      }
+    };
+    loadData();
+    return () => { isMounted = false; };
+  }, [activeTab, semRegFilters]);
 
   /* ── Sync GBU administration school data when announcements tab is active ── */
   useEffect(() => {
@@ -1601,6 +1654,7 @@ const AdminDashboard = () => {
       return { ...prev, [listKey]: next };
     });
     setCollectionEditors((prev) => ({ ...prev, [listKey]: { index: null, form: null } }));
+    setHasUnsavedSchoolChanges(true);
   };
 
   const deleteCollectionItem = (listKey, index) => {
@@ -1608,6 +1662,7 @@ const AdminDashboard = () => {
       ...prev,
       [listKey]: (prev[listKey] || []).filter((_, i) => i !== index),
     }));
+    setHasUnsavedSchoolChanges(true);
   };
 
   const openSchool = (school) => {
@@ -1827,27 +1882,29 @@ const AdminDashboard = () => {
     }
   };
 
+  // Keys held in schoolData that are UI-only and must not be written into content.
+  const SCHOOL_META_KEYS = new Set(["schoolCode", "schoolName", "schoolDescription", "name", "overview", "id"]);
+
   const handleSaveSchool = async () => {
+    /* Every school tab (School, Announcement, NSS, NCC) shares this handler and
+       the same schoolData state, but each one only edits a slice of it. Building
+       the payload from a fixed key list used to drop everything the current tab
+       does not know about — saving NSS wiped its coordinator/units, and saving
+       announcements wiped the school's clubs. Start from the stored content and
+       overlay whatever is currently in state instead. */
+    const storedContent = schoolsList.find((s) => s.id === selectedSchoolId)?.content || {};
+
+    const editedContent = Object.fromEntries(
+      Object.entries(schoolData).filter(([key]) => !SCHOOL_META_KEYS.has(key)),
+    );
+
     const payload = {
         name: schoolData.schoolName || schoolData.name || "",
         overview: schoolData.schoolDescription || schoolData.overview || "",
-        content: {
-            deanName: schoolData.deanName || "",
-            email: schoolData.email || "",
-            phone: schoolData.phone || "",
-            websiteUrl: schoolData.websiteUrl || "",
-            bannerImage: schoolData.bannerImage || "",
-            address: schoolData.address || "",
-            events: schoolData.events || [],
-            news: schoolData.news || [],
-            notices: schoolData.notices || [],
-            newsletters: schoolData.newsletters || [],
-            eventGallery: schoolData.eventGallery || [],
-            tabContent: schoolData.tabContent || {},
-        },
+        content: { ...storedContent, ...editedContent },
         is_active: true
     };
-    
+
     if (!payload.name) {
       setMessage("School Name is required.");
       return;
@@ -1859,13 +1916,23 @@ const AdminDashboard = () => {
         if (selectedSchoolId) {
             const updated = await updateSchool(selectedSchoolId, payload);
             setSchoolsList(prev => prev.map(s => s.id === selectedSchoolId ? updated : s));
+            setHasUnsavedSchoolChanges(false);
             setMessage("School updated successfully!");
         } else {
             setMessage("Schools are pre-seeded. Select a school to update.");
         }
     } catch (error) {
-        setSchoolApiError(error?.response?.data?.message || error?.message || "Failed to save school");
-        setMessage("Failed to save school");
+        const status = error?.response?.status;
+        let detail;
+        if (status === 401) {
+          detail = "Your session expired. Please log in again — your edits are still on screen.";
+        } else if (status === 413) {
+          detail = "This school's content is too large to save in one request. Remove some gallery images or older items and try again.";
+        } else {
+          detail = getApiErrorMessage(error, "Failed to save school");
+        }
+        setSchoolApiError(detail);
+        setMessage(detail);
     } finally {
         setIsSchoolSaving(false);
     }
@@ -2968,8 +3035,11 @@ const AdminDashboard = () => {
                 onClick={() => saveCollectionForm(listKey)}
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
               >
-                Save
+                Apply Changes
               </button>
+              <p className="mt-2 text-center text-xs text-slate-500">
+                Applies to the list below. Click the Save button at the top of the page to store it in the database.
+              </p>
             </div>
           </div>
         )}
@@ -5582,15 +5652,26 @@ const AdminDashboard = () => {
             </div>
             <p className="text-sm text-slate-500">Manage notices, news, events, and newsletters showing on the main GBU website announcements.</p>
           </div>
-          <button
-            onClick={handleSaveSchool}
-            disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-          >
-            <Save className="h-4 w-4" />
-            {isSchoolSaving ? "Saving..." : "Save Announcements"}
-          </button>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              onClick={handleSaveSchool}
+              disabled={isSchoolSaving}
+              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            >
+              <Save className="h-4 w-4" />
+              {isSchoolSaving ? "Saving..." : "Save Announcements"}
+            </button>
+            {hasUnsavedSchoolChanges && !isSchoolSaving && (
+              <span className="text-xs font-semibold text-amber-600">Unsaved changes</span>
+            )}
+          </div>
         </div>
+
+        {schoolApiError ? (
+          <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
+            {schoolApiError}
+          </div>
+        ) : null}
 
         {activeSchoolSubTab === "events" &&
           renderCollectionEditor(
@@ -7180,6 +7261,299 @@ const AdminDashboard = () => {
     );
   };
 
+  const renderSemesterRegistrationsTab = () => {
+    const totalRegs = semRegData.length;
+    const uniqueSchools = new Set(semRegData.map(r => r.school)).size;
+    const uniqueProgrammes = new Set(semRegData.map(r => r.programme)).size;
+    
+    // last 7 days
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const recentRegs = semRegData.filter(r => new Date(r.registrationDate) >= sevenDaysAgo).length;
+
+    const programmes = ['B.Tech', 'M.Tech', 'Ph.D', 'B.Sc', 'M.Sc', 'BA', 'MA', 'BBA', 'MBA', 'BA LLB', 'LLM'];
+    const semesters = Array.from({ length: 10 }, (_, i) => i + 1);
+
+    return (
+      <div className="space-y-6 animate-fade-in">
+        {/* Registration Control Panel */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h3 className="text-lg font-bold text-slate-800">Registration Control</h3>
+              <p className="text-sm text-slate-500">Manage semester registration access for all schools</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className={`text-sm font-semibold ${regControl?.global?.active !== false ? 'text-green-600' : 'text-red-600'}`}>
+                {regControl?.global?.active !== false ? '● Active' : '● Inactive'}
+              </span>
+              <button
+                onClick={() => {
+                  if (regControl?.global?.active !== false) {
+                    const reason = prompt('Select reason:\\n1. Registration Closed\\n2. Not Started Yet\\n3. Under Maintenance\\n4. Other', '1');
+                    const reasonMap = { '1': 'closed', '2': 'not_started', '3': 'maintenance', '4': 'other' };
+                    const selectedReason = reasonMap[reason] || 'closed';
+                    let customMsg = '';
+                    if (selectedReason === 'other') {
+                      customMsg = prompt('Enter custom message (max 100 chars):', '') || '';
+                    }
+                    setGlobalRegistration(false, selectedReason, customMsg);
+                  } else {
+                    setGlobalRegistration(true);
+                  }
+                  setRegControl(getFullRegistrationControl());
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                  regControl?.global?.active !== false
+                    ? 'bg-red-50 text-red-700 hover:bg-red-100 border border-red-200'
+                    : 'bg-green-50 text-green-700 hover:bg-green-100 border border-green-200'
+                }`}
+              >
+                {regControl?.global?.active !== false ? 'Turn Off All' : 'Turn On All'}
+              </button>
+            </div>
+          </div>
+
+          {/* Per-School Controls */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {SCHOOLS_META.map(school => {
+              const schoolState = regControl?.schools?.[school.code];
+              const isActive = schoolState?.active !== false;
+              return (
+                <div key={school.code} className={`rounded-xl border p-3 flex items-center justify-between ${isActive ? 'border-green-200 bg-green-50/50' : 'border-red-200 bg-red-50/50'}`}>
+                  <div>
+                    <p className="text-sm font-bold text-slate-800">{school.shortName}</p>
+                    <p className={`text-xs ${isActive ? 'text-green-600' : 'text-red-600'}`}>
+                      {isActive ? 'Open' : (schoolState?.reason === 'other' ? schoolState?.customMessage?.slice(0, 20) + '...' : (REASON_OPTIONS?.find(r => r.value === schoolState?.reason)?.label || 'Closed'))}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (isActive) {
+                        const reason = prompt('Reason: 1=Closed 2=Not Started 3=Maintenance 4=Other', '1');
+                        const reasonMap = { '1': 'closed', '2': 'not_started', '3': 'maintenance', '4': 'other' };
+                        const selectedReason = reasonMap[reason] || 'closed';
+                        let customMsg = '';
+                        if (selectedReason === 'other') customMsg = prompt('Custom message (max 100 chars):', '') || '';
+                        setSchoolRegistration(school.code, false, selectedReason, customMsg);
+                      } else {
+                        setSchoolRegistration(school.code, true);
+                      }
+                      setRegControl(getFullRegistrationControl());
+                    }}
+                    className={`w-10 h-6 rounded-full relative transition-colors ${isActive ? 'bg-green-500' : 'bg-slate-300'}`}
+                  >
+                    <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${isActive ? 'left-[18px]' : 'left-0.5'}`}></span>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Header */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl bg-white p-5 shadow-sm border border-slate-200">
+          <div>
+            <h2 className="text-xl font-bold text-slate-800">Semester Registrations</h2>
+            <p className="text-sm text-slate-500">Manage and view student semester registrations.</p>
+          </div>
+          <button
+            onClick={() => setSemRegFilters({ ...semRegFilters })}
+            className="flex items-center gap-2 rounded-xl bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-100 transition"
+          >
+            <RotateCcw className={`h-4 w-4 ${semRegLoading ? "animate-spin" : ""}`} />
+            Refresh Data
+          </button>
+        </div>
+
+        {/* Stats */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { label: "Total Registrations", value: totalRegs, icon: ClipboardList, color: "text-blue-600", bg: "bg-blue-50" },
+            { label: "Recent (7 Days)", value: recentRegs, icon: Activity, color: "text-emerald-600", bg: "bg-emerald-50" },
+            { label: "Schools Involved", value: uniqueSchools, icon: School, color: "text-purple-600", bg: "bg-purple-50" },
+            { label: "Programmes", value: uniqueProgrammes, icon: FileText, color: "text-amber-600", bg: "bg-amber-50" }
+          ].map((stat, idx) => {
+            const StatIcon = stat.icon;
+            return (
+              <div key={idx} className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${stat.bg} ${stat.color}`}>
+                  <StatIcon className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-slate-500">{stat.label}</p>
+                  <p className="text-2xl font-bold text-slate-800">{stat.value}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Filters */}
+        <FilterBar
+          searchValue={semRegFilters.search}
+          onSearchChange={(val) => setSemRegFilters(prev => ({ ...prev, search: val }))}
+          searchPlaceholder="Search by name, roll no, or email..."
+          onClear={() => setSemRegFilters({ school: "all", programme: "all", semester: "all", search: "" })}
+        >
+          <select
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+            value={semRegFilters.school}
+            onChange={(e) => setSemRegFilters(prev => ({ ...prev, school: e.target.value }))}
+          >
+            <option value="all">All Schools</option>
+            {SCHOOLS_META.map(school => (
+              <option key={school.code} value={school.code}>{school.name}</option>
+            ))}
+          </select>
+          <select
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+            value={semRegFilters.programme}
+            onChange={(e) => setSemRegFilters(prev => ({ ...prev, programme: e.target.value }))}
+          >
+            <option value="all">All Programmes</option>
+            {programmes.map(p => <option key={p} value={p}>{p}</option>)}
+          </select>
+          <select
+            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
+            value={semRegFilters.semester}
+            onChange={(e) => setSemRegFilters(prev => ({ ...prev, semester: e.target.value }))}
+          >
+            <option value="all">All Semesters</option>
+            {semesters.map(s => <option key={s} value={s}>Semester {s}</option>)}
+          </select>
+        </FilterBar>
+
+        {/* Content */}
+        <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          {semRegLoading ? (
+            <div className="flex h-64 items-center justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+                <p className="text-sm font-medium text-slate-500">Loading registrations...</p>
+              </div>
+            </div>
+          ) : semRegError ? (
+            <div className="flex h-64 items-center justify-center p-6 text-center">
+              <div className="rounded-xl bg-rose-50 p-4 text-rose-600">
+                <AlertTriangle className="mx-auto mb-2 h-6 w-6" />
+                <p className="font-semibold">{semRegError}</p>
+              </div>
+            </div>
+          ) : semRegData.length === 0 ? (
+            <div className="flex h-64 flex-col items-center justify-center p-6 text-center text-slate-500">
+              <ClipboardList className="mb-4 h-12 w-12 text-slate-300" />
+              <p className="text-lg font-medium text-slate-600">No Registrations Found</p>
+              <p className="text-sm">Adjust your filters or try a different search query.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm text-slate-600">
+                <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+                  <tr>
+                    <th className="px-6 py-4 font-semibold">Student</th>
+                    <th className="px-6 py-4 font-semibold">Program & Sem</th>
+                    <th className="px-6 py-4 font-semibold">School</th>
+                    <th className="px-6 py-4 font-semibold">Date</th>
+                    <th className="px-6 py-4 font-semibold">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {semRegData.map((reg) => (
+                    <React.Fragment key={reg.id}>
+                      <tr 
+                        className={`hover:bg-slate-50 transition-colors cursor-pointer ${semRegExpanded === reg.id ? 'bg-blue-50/50' : ''}`}
+                        onClick={() => setSemRegExpanded(semRegExpanded === reg.id ? null : reg.id)}
+                      >
+                        <td className="px-6 py-4">
+                          <div className="font-medium text-slate-900">{reg.studentName}</div>
+                          <div className="text-xs text-slate-500">{reg.rollNumber}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="font-medium text-slate-800">{reg.programme} - {reg.specialisation}</div>
+                          <div className="text-xs text-slate-500">Semester {reg.semester} (Year {reg.year})</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="font-medium text-slate-800 max-w-[200px] truncate" title={reg.schoolName || reg.school}>
+                            {reg.school}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-slate-500">
+                          {new Date(reg.registrationDate).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
+                            reg.status === 'approved' ? 'bg-emerald-100 text-emerald-700' :
+                            reg.status === 'rejected' ? 'bg-rose-100 text-rose-700' :
+                            'bg-amber-100 text-amber-700'
+                          }`}>
+                            {reg.status || 'Pending'}
+                          </span>
+                        </td>
+                      </tr>
+                      {semRegExpanded === reg.id && (
+                        <tr>
+                          <td colSpan={5} className="bg-slate-50/80 px-6 py-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                              <div className="space-y-2">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-200 pb-1">Contact Info</h4>
+                                <p className="text-sm"><span className="font-medium text-slate-700">Email:</span> {reg.email}</p>
+                                <p className="text-sm"><span className="font-medium text-slate-700">Mobile:</span> {reg.mobile}</p>
+                              </div>
+                              <div className="space-y-2">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-200 pb-1">Personal Details</h4>
+                                <p className="text-sm"><span className="font-medium text-slate-700">Gender:</span> {reg.gender}</p>
+                                <p className="text-sm"><span className="font-medium text-slate-700">Category:</span> {reg.category}</p>
+                                <p className="text-sm"><span className="font-medium text-slate-700">Aadhar:</span> {reg.aadharNumber}</p>
+                              </div>
+                              <div className="space-y-2 lg:col-span-1 md:col-span-2">
+                                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-200 pb-1">Documents</h4>
+                                <div className="flex gap-4 mt-2">
+                                  {reg.photoUrl ? (
+                                    <a 
+                                      href={parseDriveLink(reg.photoUrl)} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="flex flex-col items-center gap-1 p-2 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                                      onClick={e => e.stopPropagation()}
+                                    >
+                                      <Images className="w-6 h-6 text-slate-400" />
+                                      <span className="text-xs font-medium text-slate-600">View Photo</span>
+                                    </a>
+                                  ) : (
+                                    <span className="text-xs text-slate-400 italic">No Photo</span>
+                                  )}
+                                  {reg.signatureUrl ? (
+                                    <a 
+                                      href={parseDriveLink(reg.signatureUrl)} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      className="flex flex-col items-center gap-1 p-2 border border-slate-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                                      onClick={e => e.stopPropagation()}
+                                    >
+                                      <FileText className="w-6 h-6 text-slate-400" />
+                                      <span className="text-xs font-medium text-slate-600">View Signature</span>
+                                    </a>
+                                  ) : (
+                                    <span className="text-xs text-slate-400 italic">No Signature</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4">
       <div className="flex w-full flex-col gap-6 lg:flex-row">
@@ -7433,6 +7807,7 @@ const AdminDashboard = () => {
           {activeTab === "recruitment" && renderRecruitmentTab()}
           {activeTab === "bookings" && renderBookingsTab()}
           {activeTab === "dac" && renderDacTab()}
+          {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>
 

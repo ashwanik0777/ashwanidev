@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   UserCog,
@@ -15,28 +15,39 @@ import { getRoleHomeRoute, setPortalSession } from "../../utils/portalSession";
 
 const ROLE_OPTIONS = [
   {
+    id: "admin",
+    title: "Admin Login",
+    subtitle: "Central administration",
+    icon: UserCog
+  },
+  {
+    id: "school",
+    title: "School Login",
+    subtitle: "School office",
+    icon: School
+  },
+  {
     id: "teacher",
     title: "Teacher Login",
     subtitle: "Faculty and teaching staff",
     icon: GraduationCap
   },
+  /* Student Login — disabled until semester registration ships.
   {
-    id: "school",
-    title: "School Login",
-    subtitle: "School office and coordinators",
-    icon: School
-  },
-  {
-    id: "admin",
-    title: "Admin Login",
-    subtitle: "Central administration",
-    icon: UserCog
+    id: "student",
+    title: "Student Login",
+    subtitle: "Semester registration",
+    icon: BookOpen
   }
+  */
 ];
 
 const LoginPortal = () => {
   const navigate = useNavigate();
-  const [role, setRole] = useState("teacher");
+  // Set when a portal could not renew the session and bounced the user here.
+  const [searchParams] = useSearchParams();
+  const sessionExpired = searchParams.get("session") === "expired";
+  const [role, setRole] = useState("admin");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -136,7 +147,7 @@ const LoginPortal = () => {
           Back to school
         </Link>
       </div>
-      <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-7xl overflow-hidden rounded-3xl border border-stone-300 bg-white shadow-2xl lg:grid-cols-[1.1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl overflow-hidden rounded-3xl border border-stone-300 bg-white shadow-2xl lg:grid-cols-[1.1fr_1fr]">
         <section className="relative border-b border-stone-200 bg-stone-900 p-8 text-stone-100 lg:border-b-0 lg:border-r lg:p-12">
           <div className="absolute inset-0 opacity-10" aria-hidden="true">
             <div className="h-full w-full bg-[radial-gradient(circle_at_20%_20%,#f5f5f4_1px,transparent_1px)] bg-[length:18px_18px]" />
@@ -177,7 +188,7 @@ const LoginPortal = () => {
              
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               {ROLE_OPTIONS.map((item) => {
                 const Icon = item.icon;
                 const isActive = role === item.id;
@@ -186,19 +197,31 @@ const LoginPortal = () => {
                     key={item.id}
                     type="button"
                     onClick={() => setRole(item.id)}
-                    className={`rounded-xl border p-3 text-left transition-all ${
+                    className={`flex items-start gap-3 rounded-xl border-2 p-4 text-left transition-all duration-200 ${
                       isActive
-                        ? "border-stone-900 bg-stone-900 text-white shadow"
-                        : "border-stone-300 bg-white text-stone-800 hover:border-stone-500"
+                        ? "border-stone-900 bg-stone-900 text-white shadow-lg ring-2 ring-stone-900/20"
+                        : "border-stone-200 bg-white text-stone-800 hover:border-stone-400 hover:shadow-sm"
                     }`}
                   >
-                    <Icon className="mb-2 h-5 w-5" />
-                    <p className="text-sm font-semibold">{item.title}</p>
-                    <p className={`text-xs ${isActive ? "text-stone-300" : "text-stone-500"}`}>{item.subtitle}</p>
+                    <div className={`flex shrink-0 h-11 w-11 items-center justify-center rounded-full ${
+                      isActive ? "bg-white/15" : "bg-stone-100 text-stone-600"
+                    }`}>
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="mt-0.5">
+                      <p className="text-[15px] font-bold leading-tight">{item.title}</p>
+                      <p className={`mt-1 text-xs leading-snug ${isActive ? "text-stone-300" : "text-stone-500"}`}>{item.subtitle}</p>
+                    </div>
                   </button>
                 );
               })}
             </div>
+
+            {sessionExpired && !requiresOtp ? (
+              <div className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-800">
+                Your session expired. Please sign in again to continue.
+              </div>
+            ) : null}
 
             <div className="mt-6 rounded-xl border border-stone-300 bg-stone-50 p-4 text-sm text-stone-700">
               Active role: <span className="font-semibold text-stone-900">{selectedRole.title}</span>

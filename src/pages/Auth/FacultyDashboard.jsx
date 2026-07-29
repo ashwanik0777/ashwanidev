@@ -62,12 +62,18 @@ const FacultyDashboard = () => {
           const rawTabData = data.tabData || {};
 
           // Carefully merge each section to ensure lists are initialized
-          const tabData = {};
+          const tabData = { ...rawTabData };
           Object.keys(defaults.tabData).forEach((key) => {
-            tabData[key] = {
-              ...defaults.tabData[key],
-              ...(rawTabData[key] || {})
-            };
+            const defaultVal = defaults.tabData[key];
+            const rawVal = rawTabData[key];
+            if (typeof defaultVal === "object" && defaultVal !== null && !Array.isArray(defaultVal)) {
+              tabData[key] = {
+                ...defaultVal,
+                ...(rawVal || {})
+              };
+            } else {
+              tabData[key] = rawVal !== undefined ? rawVal : defaultVal;
+            }
           });
 
           const merged = {
@@ -193,13 +199,26 @@ const FacultyDashboard = () => {
 
       const updated = await updateMyFacultyProfile(payload);
       if (updated) {
-        setProfile((prev) => ({ ...prev, ...updated }));
+        setProfile((prev) => ({
+          ...prev,
+          ...updated,
+          tabData: {
+            ...(prev.tabData || {}),
+            ...(updated.tabData || {}),
+          },
+        }));
         setMessage("Profile saved successfully to database!");
       }
     } catch (err) {
       console.error("Save failed:", err);
-      const errMsg = err?.response?.data?.message || err.message || "Unknown error";
-      setMessage(`Save failed: ${errMsg}`);
+      // A 401 here means even the refresh token is gone — the API client already
+      // retried once with a fresh access token before giving up.
+      if (err?.response?.status === 401) {
+        setMessage("Your session has expired. Please log in again — your unsaved edits are still on screen.");
+      } else {
+        const errMsg = err?.response?.data?.message || err.message || "Unknown error";
+        setMessage(`Save failed: ${errMsg}`);
+      }
     } finally {
       setSaving(false);
     }

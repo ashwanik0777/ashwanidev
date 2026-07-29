@@ -29,3 +29,10 @@ tt.md
 *.sw?
 
 gbu_frontend_report_April.md
+# Semester Registration — feature held back from this release, not pushed yet.
+# Remove this block (and un-comment the routes/links) when it goes live.
+src/pages/SemesterRegistration/
+src/Data/semesterRegistrationData.js
+src/config/semesterRegistrationConfig.js
+src/services/semesterRegistrationService.js
+src/services/registrationControl.js

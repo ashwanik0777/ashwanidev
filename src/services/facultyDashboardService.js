@@ -1,22 +1,22 @@
 import apiClient from "./apiClient";
 import axios from "axios";
 import { backendBaseUrl } from "../config/apiConfig";
-import { getPortalSession } from "../utils/portalSession";
+import { attachAuthInterceptors } from "./sessionManager";
 
 /* ─── Auth-aware client for /api/v1 endpoints ─── */
 
-const authApiClient = () => {
-  const session = getPortalSession();
-  const headers = { "Content-Type": "application/json" };
-  if (session?.accessToken) {
-    headers.Authorization = `Bearer ${session.accessToken}`;
-  }
-  return axios.create({
+// One shared instance: the interceptors read a freshly refreshed token per
+// request, so the old "snapshot the token at call time" approach (which broke
+// every save once the 15m access token aged out) is no longer needed.
+const authApi = attachAuthInterceptors(
+  axios.create({
     baseURL: `${backendBaseUrl}/api/v1`,
     timeout: 15000,
-    headers,
-  });
-};
+    headers: { "Content-Type": "application/json" },
+  }),
+);
+
+const authApiClient = () => authApi;
 
 /* ─── Faculty self-service (logged-in faculty) ─── */
 

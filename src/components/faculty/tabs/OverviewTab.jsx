@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Info } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink, Info } from "lucide-react";
+import { asArray, asText, pickText } from "./fieldUtils";
  export const Card = ({ className = "", children, ...props }) => (
    <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
      {children}
@@ -35,6 +36,9 @@ const Button = ({ children, onClick, className = "" }) => (
   </button>
 );
 const OverviewTab = ({ activeTab, profile }) => {
+  // Hooks must run on every render — keep this above the loading early-return.
+  const [expanded, setExpanded] = useState(false);
+
   if (!profile) {
     return (
       <div className="text-center text-gray-600 py-12">
@@ -43,16 +47,26 @@ const OverviewTab = ({ activeTab, profile }) => {
     );
   }
 
-  const [expanded, setExpanded] = useState(false);
+  const name = asText(profile.name, 'this faculty member');
+  const shortBio = asText(profile.shortBio);
+  const fullBio = asText(profile.fullBio, shortBio);
+  const hasLongBio = Boolean(fullBio) && fullBio !== shortBio;
 
-  // ✅ Add default fallback
-  const {
-    name,
-    shortBio,
-    fullBio,
-    researchAreas = [],
-    quickLinks = [],
-  } = profile;
+  // Research areas may be stored as objects ({title, description}) or as plain
+  // strings coming from the tags field.
+  const researchAreas = asArray(profile.researchAreas).map((area) =>
+    typeof area === 'string'
+      ? { title: area, description: '' }
+      : { title: pickText(area, ['title', 'name']), description: pickText(area, ['description']) },
+  );
+
+  // Only surface links the faculty has actually filled in.
+  const quickLinks = [
+    { label: 'Curriculum Vitae', url: asText(profile.cv) },
+    { label: 'Google Scholar', url: asText(profile.googleScholar) },
+    { label: 'ORCID Profile', url: asText(profile.orcid) },
+    { label: 'Faculty Page', url: asText(profile.faculty_url) },
+  ].filter((link) => link.url);
 
   return (
     <div className="space-y-6 bg-gray-50">
@@ -68,25 +82,27 @@ const OverviewTab = ({ activeTab, profile }) => {
         <CardContent>
           <div className="prose max-w-none">
             <p className="text-gray-700 leading-relaxed">
-              {expanded ? fullBio : shortBio}
+              {(expanded ? fullBio : shortBio) || 'No biography added yet.'}
             </p>
-            <Button
-              variant="ghost"
-              onClick={() => setExpanded(!expanded)}
-              className="mt-4 p-0 h-auto text-blue-600 hover:text-blue-700"
-            >
-              {expanded ? (
-                <>
-                  <ChevronUp className="w-4 h-4 mr-1" />
-                  Read Less
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-4 h-4 mr-1" />
-                  Read More
-                </>
-              )}
-            </Button>
+            {hasLongBio && (
+              <Button
+                variant="ghost"
+                onClick={() => setExpanded(!expanded)}
+                className="mt-4 p-0 h-auto text-blue-600 hover:text-blue-700"
+              >
+                {expanded ? (
+                  <>
+                    <ChevronUp className="w-4 h-4 mr-1" />
+                    Read Less
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="w-4 h-4 mr-1" />
+                    Read More
+                  </>
+                )}
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -108,33 +124,44 @@ const OverviewTab = ({ activeTab, profile }) => {
                 <h3 className="font-semibold text-blue-900 mb-2">
                   {area.title}
                 </h3>
-                <p className="text-sm text-blue-700">{area.description}</p>
+                {area.description && (
+                  <p className="text-sm text-blue-700">{area.description}</p>
+                )}
               </div>
             ))}
+            {researchAreas.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500 md:col-span-2">
+                No research areas added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
 
       {/* Quick Links */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Quick Links</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {quickLinks.map((link, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                className={`h-auto p-4 justify-start bg-gradient-to-br from-${link.color}-50 to-${link.color}-100 border-${link.color}-200 hover:from-${link.color}-100 hover:to-${link.color}-150 transition-all duration-200`}
-              >
-                <link.icon className="w-4 h-4 mr-2" />
-                <span className="text-sm">{link.label}</span>
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {quickLinks.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-xl text-gray-900">Quick Links</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {quickLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-auto items-center rounded-lg border border-blue-200 border-solid bg-gradient-to-br from-blue-50 to-blue-100 p-4 transition-all duration-200 hover:from-blue-100 hover:to-blue-200"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2 text-blue-700" />
+                  <span className="text-sm text-blue-900">{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };

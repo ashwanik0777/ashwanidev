@@ -66,27 +66,54 @@ export const Button = ({
     </button>
   );
 };
-import { BookOpen, Clock, Users, Filter, Upload, FileText, Download, Eye } from 'lucide-react';
+import { BookOpen, Clock, Users, Filter, FileText, Download, Eye } from 'lucide-react';
+import { asArray, asText, pick, pickArray, pickNumber, pickText } from './fieldUtils';
+
+const LEVEL_COLORS = {
+  UG: 'bg-green-100 text-green-800',
+  PG: 'bg-blue-100 text-blue-800',
+  PhD: 'bg-purple-100 text-purple-800',
+};
+
+// The dashboard stores long level names; the filter chips here use short codes.
+const toLevelCode = (value) => {
+  const level = asText(value).toLowerCase();
+  if (level.startsWith('under') || level === 'ug') return 'UG';
+  if (level.startsWith('post') || level === 'pg') return 'PG';
+  if (level.startsWith('doctor') || level === 'phd') return 'PhD';
+  return asText(value, 'Other');
+};
+
+// Bridges the dashboard's editor field names to what this tab renders.
+const normalizeCourse = (item) => ({
+  code: pickText(item, ['code', 'courseCode']),
+  name: pickText(item, ['name', 'title', 'courseTitle']),
+  description: pickText(item, ['description', 'summary']),
+  semester: pickText(item, ['semester', 'term']),
+  students: pickNumber(item, ['students', 'enrolled'], 0),
+  credits: pickNumber(item, ['credits'], 0),
+  batch: pickText(item, ['batch', 'school', 'programme']),
+  role: pickText(item, ['role']),
+  level: toLevelCode(pick(item, ['level'])),
+  slides: pickArray(item, ['slides']),
+});
 
 export const TeachingTab = ({ profile }) => {
   const [selectedLevel, setSelectedLevel] = useState('all');
   const tabData = profile?.tabData?.teaching || {};
-  const courses = tabData.courses || [];
+  const courses = asArray(tabData.courses).map(normalizeCourse);
 
-  const filteredCourses = selectedLevel === 'all' 
-    ? courses 
+  const filteredCourses = selectedLevel === 'all'
+    ? courses
     : courses.filter(course => course.level === selectedLevel);
 
-  const getLevelColor = (level) => {
-    switch (level) {
-      case 'UG': return 'bg-green-100 text-green-800';
-      case 'PG': return 'bg-blue-100 text-blue-800';
-      case 'PhD': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  const getLevelColor = (level) => LEVEL_COLORS[level] || 'bg-gray-100 text-gray-800';
 
-  const teachingPhilosophy = tabData.philosophy || "";
+  const totalStudents = courses.reduce((sum, course) => sum + course.students, 0);
+  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+  const totalSlides = courses.reduce((sum, course) => sum + course.slides.length, 0);
+
+  const teachingPhilosophy = asText(tabData.philosophy);
 
   return (
     <div className="space-y-6 bg-gray-50">
@@ -106,21 +133,15 @@ export const TeachingTab = ({ profile }) => {
               <div className="text-sm text-blue-700">Total Courses</div>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {courses.reduce((sum, course) => sum + course.students, 0)}
-              </div>
+              <div className="text-2xl font-bold text-green-600">{totalStudents}</div>
               <div className="text-sm text-green-700">Total Students</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {courses.reduce((sum, course) => sum + course.credits, 0)}
-              </div>
+              <div className="text-2xl font-bold text-purple-600">{totalCredits}</div>
               <div className="text-sm text-purple-700">Total Credits</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {courses.reduce((sum, course) => sum + course.slides.length, 0)}
-              </div>
+              <div className="text-2xl font-bold text-orange-600">{totalSlides}</div>
               <div className="text-sm text-orange-700">Lecture Slides</div>
             </div>
           </div>
@@ -135,7 +156,9 @@ export const TeachingTab = ({ profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-700 leading-relaxed">{teachingPhilosophy}</p>
+          <p className="text-gray-700 leading-relaxed">
+            {teachingPhilosophy || 'No teaching philosophy added yet.'}
+          </p>
         </CardContent>
       </Card>
 
@@ -169,71 +192,98 @@ export const TeachingTab = ({ profile }) => {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-start gap-3 mb-3">
-                      <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded">
-                        {course.code}
-                      </div>
+                      {course.code && (
+                        <div className="bg-blue-600 text-white text-sm font-bold px-3 py-1 rounded">
+                          {course.code}
+                        </div>
+                      )}
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900">{course.name}</h3>
-                        <p className="text-sm text-gray-600 mt-1">{course.description}</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {course.semester}
-                      </div>
-                      <div className="flex items-center">
-                        <Users className="w-4 h-4 mr-1" />
-                        {course.students} students
-                      </div>
-                      <div>
-                        <span className="font-medium">Credits:</span> {course.credits}
-                      </div>
-                      <div>
-                        <span className="font-medium">Batch:</span> {course.batch}
+                        {course.description && (
+                          <p className="text-sm text-gray-600 mt-1">{course.description}</p>
+                        )}
                       </div>
                     </div>
 
-                    {/* Lecture Slides Section */}
-                    <div className="border-t pt-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h4 className="text-md font-semibold text-gray-800 flex items-center">
-                          <FileText className="w-4 h-4 mr-2" />
-                          Lecture Slides ({course.slides.length})
-                        </h4>
-                        <Button size="sm" variant="outline" className="text-xs">
-                          <Upload className="w-3 h-3 mr-1" />
-                          Upload New
-                        </Button>
-                      </div>
-                      
-                      <div className="grid gap-2">
-                        {course.slides.map((slide) => (
-                          <div key={slide.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200 border-solid hover:bg-gray-100 transition-colors">
-                            <div className="flex items-center gap-3">
-                              <FileText className="w-4 h-4 text-blue-600" />
-                              <div>
-                                <p className="text-sm font-medium text-gray-900">{slide.title}</p>
-                                <p className="text-xs text-gray-600">
-                                  {slide.filename} • Uploaded on {new Date(slide.uploadDate).toLocaleDateString()}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                                <Eye className="w-3 h-3" />
-                              </Button>
-                              <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                                <Download className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                      {course.semester && (
+                        <div className="flex items-center">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {course.semester}
+                        </div>
+                      )}
+                      {course.students > 0 && (
+                        <div className="flex items-center">
+                          <Users className="w-4 h-4 mr-1" />
+                          {course.students} students
+                        </div>
+                      )}
+                      {course.credits > 0 && (
+                        <div>
+                          <span className="font-medium">Credits:</span> {course.credits}
+                        </div>
+                      )}
+                      {course.batch && (
+                        <div>
+                          <span className="font-medium">Batch:</span> {course.batch}
+                        </div>
+                      )}
+                      {course.role && (
+                        <div>
+                          <span className="font-medium">Role:</span> {course.role}
+                        </div>
+                      )}
                     </div>
+
+                    {/* Lecture Slides Section */}
+                    {course.slides.length > 0 && (
+                      <div className="border-t pt-4">
+                        <div className="flex items-center justify-between mb-3">
+                          <h4 className="text-md font-semibold text-gray-800 flex items-center">
+                            <FileText className="w-4 h-4 mr-2" />
+                            Lecture Slides ({course.slides.length})
+                          </h4>
+                        </div>
+
+                        <div className="grid gap-2">
+                          {course.slides.map((slide, slideIdx) => (
+                            <div key={slide?.id || slideIdx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200 border-solid hover:bg-gray-100 transition-colors">
+                              <div className="flex items-center gap-3">
+                                <FileText className="w-4 h-4 text-blue-600" />
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900">
+                                    {pickText(slide, ['title', 'name'], 'Lecture slide')}
+                                  </p>
+                                  <p className="text-xs text-gray-600">
+                                    {pickText(slide, ['filename', 'file'])}
+                                  </p>
+                                </div>
+                              </div>
+                              {pickText(slide, ['url', 'fileUrl']) && (
+                                <div className="flex items-center gap-2">
+                                  <a
+                                    href={pickText(slide, ['url', 'fileUrl'])}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                                      <Eye className="w-3 h-3" />
+                                    </Button>
+                                  </a>
+                                  <a href={pickText(slide, ['url', 'fileUrl'])} download>
+                                    <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
+                                      <Download className="w-3 h-3" />
+                                    </Button>
+                                  </a>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  
+
                   <div className="flex-shrink-0">
                     <Badge className={getLevelColor(course.level)}>
                       {course.level}
@@ -242,6 +292,13 @@ export const TeachingTab = ({ profile }) => {
                 </div>
               </div>
             ))}
+            {filteredCourses.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                {courses.length === 0
+                  ? 'No courses added yet.'
+                  : 'No courses match the selected level.'}
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

@@ -1,6 +1,9 @@
 import React from "react";
 import { ExternalLink, Save } from "lucide-react";
 
+// Failures were being painted the same green as a successful save.
+const isFailureMessage = (message) => /fail|error|expired|⚠️/i.test(String(message || ""));
+
 const TopSummary = ({ profile, summary, message, onSave, onOpenPublic, showStats }) => {
   return (
     <>
@@ -20,7 +23,15 @@ const TopSummary = ({ profile, summary, message, onSave, onOpenPublic, showStats
             </button>
           </div>
         </div>
-        {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
+        {message ? (
+          <p
+            className={`mt-3 text-sm font-medium ${
+              isFailureMessage(message) ? "text-rose-700" : "text-emerald-700"
+            }`}
+          >
+            {message}
+          </p>
+        ) : null}
       </header>
 
       {showStats && (

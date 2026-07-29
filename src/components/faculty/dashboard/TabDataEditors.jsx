@@ -216,7 +216,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("teaching", "courses", {
-                    code: "", title: "", level: "Undergraduate", semester: "", school: "", role: "Instructor"
+                    code: "", title: "", level: "Undergraduate", semester: "", school: "",
+                    role: "Instructor", description: "", students: 0, credits: 0, batch: ""
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -251,6 +252,76 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                           <option value="Other">Other</option>
                         </select>
                       </Field>
+                      <Field label="Credits"><input className={inputClass} type="number" min="0" value={item.credits ?? 0} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "credits", Number(e.target.value || 0))} placeholder="e.g. 4" /></Field>
+                      <Field label="Students Enrolled"><input className={inputClass} type="number" min="0" value={item.students ?? 0} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "students", Number(e.target.value || 0))} placeholder="e.g. 60" /></Field>
+                      <Field label="Batch"><input className={inputClass} value={item.batch || ""} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "batch", e.target.value)} placeholder="e.g. B.Tech CSE 2023-27" /></Field>
+                      <div className="sm:col-span-2 md:col-span-3">
+                        <Field label="Course Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "description", e.target.value)} placeholder="Short summary of the syllabus and outcomes..." /></Field>
+                      </div>
+                    </div>
+
+                    {/* Lecture Slides */}
+                    <div className="mt-4 pt-3 border-t border-stone-200">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-xs font-semibold text-stone-600 uppercase tracking-wider">Lecture Slides</h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const currentSlides = item.slides || [];
+                            const updatedCourses = [...courses];
+                            updatedCourses[index] = { ...item, slides: [...currentSlides, { title: "", filename: "", url: "" }] };
+                            onReplaceTabData("teaching", { ...section, courses: updatedCourses });
+                          }}
+                          className="inline-flex items-center gap-1 rounded-md bg-stone-100 px-2 py-1 text-xs font-medium text-stone-700 hover:bg-stone-200 border border-stone-200"
+                        >
+                          <Plus className="h-3 w-3" /> Add Slide
+                        </button>
+                      </div>
+                      {(item.slides || []).length === 0 && (
+                        <p className="text-xs text-stone-400 text-center py-2">No lecture slides added for this course.</p>
+                      )}
+                      <div className="space-y-2">
+                        {(item.slides || []).map((slide, sIdx) => (
+                          <div key={`slide-${index}-${sIdx}`} className="flex items-start gap-2 p-2 rounded-md bg-white border border-stone-200">
+                            <div className="flex-1 grid gap-2 sm:grid-cols-3">
+                              <input className={inputClass} value={slide.title || ""} onChange={(e) => {
+                                const updatedCourses = [...courses];
+                                const updatedSlides = [...(item.slides || [])];
+                                updatedSlides[sIdx] = { ...updatedSlides[sIdx], title: e.target.value };
+                                updatedCourses[index] = { ...item, slides: updatedSlides };
+                                onReplaceTabData("teaching", { ...section, courses: updatedCourses });
+                              }} placeholder="Slide title" />
+                              <input className={inputClass} value={slide.filename || ""} onChange={(e) => {
+                                const updatedCourses = [...courses];
+                                const updatedSlides = [...(item.slides || [])];
+                                updatedSlides[sIdx] = { ...updatedSlides[sIdx], filename: e.target.value };
+                                updatedCourses[index] = { ...item, slides: updatedSlides };
+                                onReplaceTabData("teaching", { ...section, courses: updatedCourses });
+                              }} placeholder="Filename (e.g. Lec01.pdf)" />
+                              <input className={inputClass} value={slide.url || ""} onChange={(e) => {
+                                const updatedCourses = [...courses];
+                                const updatedSlides = [...(item.slides || [])];
+                                updatedSlides[sIdx] = { ...updatedSlides[sIdx], url: e.target.value };
+                                updatedCourses[index] = { ...item, slides: updatedSlides };
+                                onReplaceTabData("teaching", { ...section, courses: updatedCourses });
+                              }} placeholder="URL (Google Drive / link)" />
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updatedCourses = [...courses];
+                                const updatedSlides = [...(item.slides || [])];
+                                updatedSlides.splice(sIdx, 1);
+                                updatedCourses[index] = { ...item, slides: updatedSlides };
+                                onReplaceTabData("teaching", { ...section, courses: updatedCourses });
+                              }}
+                              className="mt-1 rounded-md p-1.5 text-rose-500 hover:bg-rose-50"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -278,7 +349,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("administration", "administrativeRoles", {
-                    role: "", level: "University", duration: "", description: ""
+                    role: "", level: "University", duration: "", description: "",
+                    department: "", institution: "", status: "ongoing", responsibilities: []
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -310,8 +382,21 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                           <option value="External">External Body</option>
                         </select>
                       </Field>
+                      <Field label="Department / School"><input className={inputClass} value={item.department || ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "department", e.target.value)} placeholder="e.g. School of ICT" /></Field>
+                      <Field label="Institution / Body"><input className={inputClass} value={item.institution || ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "institution", e.target.value)} placeholder="e.g. Gautam Buddha University" /></Field>
+                      <Field label="Status">
+                        <select className={inputClass} value={item.status || "ongoing"} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "status", e.target.value)}>
+                          <option value="ongoing">Ongoing</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                      </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Brief Role Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "description", e.target.value)} placeholder="Responsibilities and accomplishments in this role..." /></Field>
+                      </div>
+                      <div className="sm:col-span-2 md:col-span-3">
+                        <Field label="Key Responsibilities (One per line)">
+                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.responsibilities)} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "responsibilities", setListValue(e.target.value))} placeholder="e.g. Chair academic council meetings&#10;Coordinate curriculum revisions" />
+                        </Field>
                       </div>
                     </div>
                   </div>
@@ -388,7 +473,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("researchProjects", "projects", {
-                    title: "", role: "Principal Investigator", fundingAgency: "", grantAmount: "", duration: "", status: "ongoing", description: ""
+                    title: "", role: "Principal Investigator", fundingAgency: "", grantAmount: "",
+                    duration: "", status: "ongoing", description: "", collaborators: [], deliverables: []
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -426,11 +512,33 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                           <textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "description", e.target.value)} placeholder="Provide a brief abstract/scope of the project..." />
                         </Field>
                       </div>
+                      <div className="sm:col-span-2 md:col-span-3 grid gap-3 sm:grid-cols-2">
+                        <Field label="Collaborators (One per line)">
+                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.collaborators)} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "collaborators", setListValue(e.target.value))} placeholder="e.g. Dr. A. Sharma, IIT Delhi&#10;Prof. R. Verma, GBU" />
+                        </Field>
+                        <Field label="Key Deliverables (One per line)">
+                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.deliverables)} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "deliverables", setListValue(e.target.value))} placeholder="e.g. Prototype system&#10;2 journal papers" />
+                        </Field>
+                      </div>
                     </div>
                   </div>
                 ))}
                 {projects.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No projects added yet.</p>}
               </div>
+            </div>
+
+            {/* Research Group Overview */}
+            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
+              <h3 className="mb-2 text-base font-semibold text-stone-800">Research Group Overview</h3>
+              <p className="mb-3 text-xs text-stone-500">Shown at the top of the Research Group tab on your public profile.</p>
+              <Field label="Group Description">
+                <textarea
+                  className={`${inputClass} min-h-24`}
+                  value={groupSection.overview || ""}
+                  onChange={(e) => updateSectionKey("researchGroup", "overview", e.target.value)}
+                  placeholder="Describe your group's focus areas and how members collaborate..."
+                />
+              </Field>
             </div>
 
             {/* PhD Scholars */}
@@ -443,7 +551,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("researchGroup", "phdScholars", {
-                    name: "", topic: "", status: "ongoing", year: ""
+                    name: "", topic: "", status: "ongoing", year: "",
+                    program: "", researchArea: "", publications: 0, email: "", profileUrl: ""
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -467,7 +576,12 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Scholar Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "name", e.target.value)} placeholder="e.g. Anita Sharma" /></Field>
                       <Field label="Thesis Topic"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "topic", e.target.value)} placeholder="e.g. Deep Learning in Healthcare" /></Field>
+                      <Field label="Research Area"><input className={inputClass} value={item.researchArea || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "researchArea", e.target.value)} placeholder="e.g. Medical Image Analysis" /></Field>
+                      <Field label="Programme"><input className={inputClass} value={item.program || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "program", e.target.value)} placeholder="e.g. PhD Computer Science" /></Field>
                       <Field label="Year"><input className={inputClass} value={item.year || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "year", e.target.value)} placeholder="e.g. 2025" /></Field>
+                      <Field label="Publications Count"><input className={inputClass} type="number" min="0" value={item.publications ?? 0} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "publications", Number(e.target.value || 0))} placeholder="e.g. 3" /></Field>
+                      <Field label="Email"><input className={inputClass} value={item.email || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "email", e.target.value)} placeholder="e.g. scholar@gbu.ac.in" /></Field>
+                      <Field label="Profile Link"><input className={inputClass} value={item.profileUrl || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "profileUrl", e.target.value)} placeholder="https://..." /></Field>
                       <Field label="Status">
                         <select className={inputClass} value={item.status || "ongoing"} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "status", e.target.value)}>
                           <option value="ongoing">Ongoing</option>
@@ -492,7 +606,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("researchGroup", "postdocs", {
-                    name: "", topic: "", status: "ongoing", year: ""
+                    name: "", topic: "", status: "ongoing", year: "",
+                    program: "", researchArea: "", previousInstitute: "", publications: 0, email: "", profileUrl: ""
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -516,7 +631,13 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Scholar Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "name", e.target.value)} /></Field>
                       <Field label="Research Topic"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "topic", e.target.value)} /></Field>
-                      <Field label="Year"><input className={inputClass} value={item.year || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "year", e.target.value)} /></Field>
+                      <Field label="Research Area"><input className={inputClass} value={item.researchArea || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "researchArea", e.target.value)} placeholder="e.g. Natural Language Processing" /></Field>
+                      <Field label="Position"><input className={inputClass} value={item.program || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "program", e.target.value)} placeholder="e.g. Postdoctoral Fellow" /></Field>
+                      <Field label="Previous Institute"><input className={inputClass} value={item.previousInstitute || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "previousInstitute", e.target.value)} placeholder="e.g. IIT Kanpur" /></Field>
+                      <Field label="Year / Duration"><input className={inputClass} value={item.year || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "year", e.target.value)} /></Field>
+                      <Field label="Publications Count"><input className={inputClass} type="number" min="0" value={item.publications ?? 0} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "publications", Number(e.target.value || 0))} /></Field>
+                      <Field label="Email"><input className={inputClass} value={item.email || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "email", e.target.value)} /></Field>
+                      <Field label="Profile Link"><input className={inputClass} value={item.profileUrl || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "profileUrl", e.target.value)} placeholder="https://..." /></Field>
                       <Field label="Status">
                         <select className={inputClass} value={item.status || "ongoing"} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "status", e.target.value)}>
                           <option value="ongoing">Ongoing</option>
@@ -540,7 +661,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("researchGroup", "researchAssistants", {
-                    name: "", topic: "", status: "ongoing", year: ""
+                    name: "", topic: "", status: "ongoing", year: "",
+                    program: "", email: "", profileUrl: ""
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -563,8 +685,11 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Member Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "name", e.target.value)} /></Field>
-                      <Field label="Role / Topic"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "topic", e.target.value)} placeholder="e.g. RA - Data Analytics" /></Field>
+                      <Field label="Project / Role"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "topic", e.target.value)} placeholder="e.g. RA - Data Analytics" /></Field>
+                      <Field label="Programme"><input className={inputClass} value={item.program || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "program", e.target.value)} placeholder="e.g. M.Tech CSE" /></Field>
                       <Field label="Year"><input className={inputClass} value={item.year || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "year", e.target.value)} /></Field>
+                      <Field label="Email"><input className={inputClass} value={item.email || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "email", e.target.value)} /></Field>
+                      <Field label="Profile Link"><input className={inputClass} value={item.profileUrl || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "profileUrl", e.target.value)} placeholder="https://..." /></Field>
                       <Field label="Status">
                         <select className={inputClass} value={item.status || "ongoing"} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "status", e.target.value)}>
                           <option value="ongoing">Ongoing</option>
@@ -760,7 +885,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("certifications", "certifications", {
-                    title: "", issuingOrganization: "", issueDate: "", expirationDate: "", credentialId: "", credentialUrl: ""
+                    title: "", issuingOrganization: "", issueDate: "", expirationDate: "",
+                    credentialId: "", credentialUrl: "", level: "", skills: [], verified: false
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -788,6 +914,26 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Expiration Date"><input className={inputClass} value={item.expirationDate || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "expirationDate", e.target.value)} placeholder="e.g. January 2028 (or N/A)" /></Field>
                       <Field label="Credential ID"><input className={inputClass} value={item.credentialId || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "credentialId", e.target.value)} placeholder="e.g. AWS-12345" /></Field>
                       <Field label="Credential Link"><input className={inputClass} value={item.credentialUrl || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "credentialUrl", e.target.value)} placeholder="https://..." /></Field>
+                      <Field label="Level">
+                        <select className={inputClass} value={item.level || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "level", e.target.value)}>
+                          <option value="">Not specified</option>
+                          <option value="Professional">Professional</option>
+                          <option value="Associate">Associate</option>
+                          <option value="Specialization">Specialization</option>
+                          <option value="Foundation">Foundation</option>
+                        </select>
+                      </Field>
+                      <Field label="Verified Credential">
+                        <select className={inputClass} value={item.verified ? "yes" : "no"} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "verified", e.target.value === "yes")}>
+                          <option value="no">No</option>
+                          <option value="yes">Yes</option>
+                        </select>
+                      </Field>
+                      <div className="sm:col-span-2 md:col-span-3">
+                        <Field label="Skills Covered (One per line)">
+                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.skills)} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "skills", setListValue(e.target.value))} placeholder="e.g. Cloud Architecture&#10;Network Security" />
+                        </Field>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -805,7 +951,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("certifications", "professionalDevelopment", {
-                    programName: "", organizer: "", duration: "", year: new Date().getFullYear(), description: ""
+                    programName: "", organizer: "", duration: "", year: new Date().getFullYear(), description: "", type: "fdp"
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -831,6 +977,14 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Organizer"><input className={inputClass} value={item.organizer || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "organizer", e.target.value)} placeholder="e.g. NPTEL" /></Field>
                       <Field label="Duration"><input className={inputClass} value={item.duration || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "duration", e.target.value)} placeholder="e.g. 1 Week" /></Field>
                       <Field label="Year"><input className={inputClass} type="number" value={item.year || new Date().getFullYear()} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "year", Number(e.target.value))} /></Field>
+                      <Field label="Program Type">
+                        <select className={inputClass} value={item.type || "fdp"} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "type", e.target.value)}>
+                          <option value="fdp">FDP</option>
+                          <option value="workshop">Workshop</option>
+                          <option value="conference">Conference</option>
+                          <option value="training">Training</option>
+                        </select>
+                      </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Key Learnings / Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "description", e.target.value)} placeholder="Topics covered and outcomes..." /></Field>
                       </div>
@@ -858,7 +1012,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
               <button
                 type="button"
                 onClick={() => handleAddArrayItem("talks", "invitedTalks", {
-                  title: "", event: "", organizer: "", location: "", date: ""
+                  title: "", event: "", organizer: "", location: "", date: "",
+                  type: "invited", description: "", role: "", audience: "", slidesUrl: "", recordingUrl: ""
                 })}
                 className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
               >
@@ -885,8 +1040,23 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                     <Field label="Event Name"><input className={inputClass} value={item.event || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "event", e.target.value)} placeholder="e.g. National Cyber Con" /></Field>
                     <Field label="Organizer"><input className={inputClass} value={item.organizer || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "organizer", e.target.value)} placeholder="e.g. GBU IEEE Student Branch" /></Field>
-                    <Field label="Location"><input className={inputClass} value={item.location || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "location", e.target.value)} placeholder="e.g. Greater Noida, India" /></Field>
+                    <Field label="Location / Venue"><input className={inputClass} value={item.location || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "location", e.target.value)} placeholder="e.g. Greater Noida, India" /></Field>
                     <Field label="Date"><input className={inputClass} value={item.date || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "date", e.target.value)} placeholder="e.g. January 12, 2026" /></Field>
+                    <Field label="Talk Type">
+                      <select className={inputClass} value={item.type || "invited"} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "type", e.target.value)}>
+                        <option value="invited">Invited Talk</option>
+                        <option value="keynote">Keynote</option>
+                        <option value="guest-lecture">Guest Lecture</option>
+                        <option value="panel">Panel Discussion</option>
+                      </select>
+                    </Field>
+                    <Field label="Your Role"><input className={inputClass} value={item.role || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "role", e.target.value)} placeholder="e.g. Keynote Speaker" /></Field>
+                    <Field label="Audience"><input className={inputClass} value={item.audience || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "audience", e.target.value)} placeholder="e.g. 200+ researchers and students" /></Field>
+                    <Field label="Slides Link"><input className={inputClass} value={item.slidesUrl || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "slidesUrl", e.target.value)} placeholder="https://..." /></Field>
+                    <Field label="Recording Link"><input className={inputClass} value={item.recordingUrl || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "recordingUrl", e.target.value)} placeholder="https://..." /></Field>
+                    <div className="sm:col-span-2 md:col-span-3">
+                      <Field label="Talk Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "description", e.target.value)} placeholder="What the talk covered..." /></Field>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -914,7 +1084,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("awards", "awards", {
-                    name: "", organization: "", year: "", description: ""
+                    name: "", organization: "", year: "", description: "", level: ""
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -941,6 +1111,16 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </div>
                       <Field label="Awarding Body / Org"><input className={inputClass} value={item.organization || ""} onChange={(e) => handleUpdateArrayItem("awards", "awards", index, "organization", e.target.value)} placeholder="e.g. GBU Research Council" /></Field>
                       <Field label="Year"><input className={inputClass} value={item.year || ""} onChange={(e) => handleUpdateArrayItem("awards", "awards", index, "year", e.target.value)} placeholder="e.g. 2025" /></Field>
+                      <Field label="Level">
+                        <select className={inputClass} value={item.level || ""} onChange={(e) => handleUpdateArrayItem("awards", "awards", index, "level", e.target.value)}>
+                          <option value="">Not specified</option>
+                          <option value="International">International</option>
+                          <option value="National">National</option>
+                          <option value="State">State</option>
+                          <option value="University">University</option>
+                          <option value="School">School</option>
+                        </select>
+                      </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Award Description">
                           <textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("awards", "awards", index, "description", e.target.value)} placeholder="Brief summary of the honor and research details..." />
@@ -963,7 +1143,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("socialImpact", "socialActivities", {
-                    name: "", organization: "", role: "", duration: "", description: ""
+                    name: "", organization: "", role: "", duration: "", description: "",
+                    location: "", type: "", beneficiaries: "", impact: []
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -989,9 +1170,26 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Organization"><input className={inputClass} value={item.organization || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "organization", e.target.value)} placeholder="e.g. GBU Social Club" /></Field>
                       <Field label="Role / Contribution"><input className={inputClass} value={item.role || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "role", e.target.value)} placeholder="e.g. Organizer / Volunteer" /></Field>
                       <Field label="Duration"><input className={inputClass} value={item.duration || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "duration", e.target.value)} placeholder="e.g. 2 Months" /></Field>
+                      <Field label="Location"><input className={inputClass} value={item.location || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "location", e.target.value)} placeholder="e.g. Greater Noida, UP" /></Field>
+                      <Field label="Beneficiaries"><input className={inputClass} value={item.beneficiaries || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "beneficiaries", e.target.value)} placeholder="e.g. 500 village students" /></Field>
+                      <Field label="Focus Area">
+                        <select className={inputClass} value={item.type || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "type", e.target.value)}>
+                          <option value="">Not specified</option>
+                          <option value="community-outreach">Community Outreach</option>
+                          <option value="awareness">Awareness</option>
+                          <option value="environmental">Environmental</option>
+                          <option value="education">Education</option>
+                          <option value="healthcare">Healthcare</option>
+                        </select>
+                      </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Activity Description">
                           <textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "description", e.target.value)} placeholder="Describe the activity and its social impact..." />
+                        </Field>
+                      </div>
+                      <div className="sm:col-span-2 md:col-span-3">
+                        <Field label="Key Impact Points (One per line)">
+                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.impact)} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "impact", setListValue(e.target.value))} placeholder="e.g. 500 villagers trained in digital literacy&#10;3 community centres set up" />
                         </Field>
                       </div>
                     </div>

@@ -33,20 +33,28 @@ const Badge = ({ className = '', children }) => (
   </span>
 );
 import { Calendar, MapPin, GraduationCap } from 'lucide-react';
+import { asArray, asText, matchKey, pickArray } from './fieldUtils';
+
+const TYPE_COLORS = {
+  doctorate: 'bg-purple-100 text-purple-800',
+  masters: 'bg-blue-100 text-blue-800',
+  bachelors: 'bg-green-100 text-green-800',
+  academic: 'bg-indigo-100 text-indigo-800',
+};
 
 export const QualificationsTab = ({ profile }) => {
   const tabData = profile?.tabData?.qualifications || {};
-  const qualifications = tabData.qualifications || [];
-  const experience = tabData.experience || [];
+  const qualifications = asArray(tabData.qualifications);
+  const experience = asArray(tabData.experience);
 
-  const getTypeColor = (type) => {
-    switch (type) {
-      case 'doctorate': return 'bg-purple-100 text-purple-800';
-      case 'masters': return 'bg-blue-100 text-blue-800';
-      case 'bachelors': return 'bg-green-100 text-green-800';
-      case 'academic': return 'bg-indigo-100 text-indigo-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
+  const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
+
+  // "3 Years", or "2021 - Present" when only from/to are filled in.
+  const formatPeriod = (exp) => {
+    const duration = asText(exp.duration);
+    if (duration) return duration;
+    const range = [asText(exp.from), asText(exp.to)].filter(Boolean).join(' - ');
+    return range || '—';
   };
 
   return (
@@ -68,17 +76,25 @@ export const QualificationsTab = ({ profile }) => {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">{qual.degree}</h3>
-                      <p className="text-blue-600 font-medium mb-1">{qual.institution}</p>
-                      <p className="text-sm text-gray-600 mb-2">{qual.specialization}</p>
+                      {qual.institution && (
+                        <p className="text-blue-600 font-medium mb-1">{qual.institution}</p>
+                      )}
+                      {qual.specialization && (
+                        <p className="text-sm text-gray-600 mb-2">{qual.specialization}</p>
+                      )}
                       <div className="flex flex-wrap gap-2 text-sm text-gray-500">
-                        <div className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {qual.year}
-                        </div>
-                        <div className="flex items-center">
-                          <MapPin className="w-4 h-4 mr-1" />
-                          {qual.location}
-                        </div>
+                        {qual.year && (
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {qual.year}
+                          </div>
+                        )}
+                        {qual.location && (
+                          <div className="flex items-center">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {qual.location}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <Badge className={getTypeColor(qual.type)}>
@@ -88,6 +104,11 @@ export const QualificationsTab = ({ profile }) => {
                 </div>
               </div>
             ))}
+            {qualifications.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No educational qualifications added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -104,8 +125,10 @@ export const QualificationsTab = ({ profile }) => {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-1">{exp.position}</h3>
-                    <p className="text-blue-600 font-medium mb-1">{exp.department}</p>
-                    <p className="text-gray-700">{exp.institution}</p>
+                    {exp.department && (
+                      <p className="text-blue-600 font-medium mb-1">{exp.department}</p>
+                    )}
+                    {exp.institution && <p className="text-gray-700">{exp.institution}</p>}
                   </div>
                   <div className="flex flex-col items-start lg:items-end gap-2">
                     <Badge className={getTypeColor(exp.type)}>
@@ -113,23 +136,30 @@ export const QualificationsTab = ({ profile }) => {
                     </Badge>
                     <span className="text-sm text-gray-600 flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
-                      {exp.duration || `${exp.from} - ${exp.to}`}
+                      {formatPeriod(exp)}
                     </span>
                   </div>
                 </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
-                  <ul className="space-y-1">
-                    {(exp.responsibilities || []).map((responsibility, idx) => (
-                      <li key={idx} className="text-sm text-gray-700 flex items-start">
-                        <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                        {responsibility}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {pickArray(exp, ['responsibilities']).length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
+                    <ul className="space-y-1">
+                      {pickArray(exp, ['responsibilities']).map((responsibility, idx) => (
+                        <li key={idx} className="text-sm text-gray-700 flex items-start">
+                          <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          {responsibility}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
+            {experience.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No professional experience added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

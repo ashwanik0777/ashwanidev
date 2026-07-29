@@ -12,6 +12,50 @@ import {
   Users,
   Target,
 } from "lucide-react";
+import {
+  asArray,
+  asText,
+  matchKey,
+  pickArray,
+  pickNumber,
+  pickText,
+  displayOr,
+} from "./fieldUtils";
+
+const PATENT_STATUS_VARIANTS = {
+  filed: "blue",
+  "under examination": "yellow",
+  published: "green",
+  granted: "purple",
+};
+
+// Bridges the dashboard's editor field names to what this tab renders.
+const normalizePublication = (item) => ({
+  title: pickText(item, ["title", "name"]),
+  authors: pickText(item, ["authors"]),
+  venue: pickText(item, ["venue", "journal", "conference"]),
+  type: asText(pickText(item, ["type"], "journal")).toLowerCase(),
+  quartile: pickText(item, ["quartile"]),
+  ranking: pickText(item, ["ranking"]),
+  year: pickNumber(item, ["year"], 0),
+  citations: pickNumber(item, ["citations"], 0),
+  impactFactor: pickText(item, ["impactFactor", "impact_factor"]),
+  paperUrl: pickText(item, ["paperUrl", "url", "doi"]),
+  pdfUrl: pickText(item, ["pdfUrl", "pdf"]),
+});
+
+const normalizePatent = (item) => ({
+  title: pickText(item, ["title", "name"]),
+  description: pickText(item, ["description", "abstract"]),
+  applicationNo: pickText(item, ["applicationNo", "applicationNumber"]),
+  technicalField: pickText(item, ["technicalField", "field"]),
+  applicationDate: pickText(item, ["applicationDate", "filingDate"]),
+  country: pickText(item, ["country"], "India"),
+  patentOffice: pickText(item, ["patentOffice", "office"]),
+  filedYear: pickNumber(item, ["filedYear", "year"], 0),
+  status: pickText(item, ["status"], "Filed"),
+  inventors: pickArray(item, ["inventors", "authors"]),
+});
 
 // Card Components
 const Card = ({ className = "", children }) => (
@@ -98,35 +142,35 @@ export default function PublicationsTab({ profile }) {
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const tabData = profile?.tabData?.publications || {};
-  const publications = tabData.publications || [];
-  const patents = tabData.patents || [];
+  const publications = asArray(tabData.publications).map(normalizePublication);
+  // Dashboard saves patents under publications.patents; legacy fallback to patents.patents
+  const pubPatents = asArray(tabData.patents);
+  const patents = (pubPatents.length
+    ? pubPatents
+    : asArray(profile?.tabData?.patents?.patents)
+  ).map(normalizePatent);
 
-  const years = [...new Set(publications.map((p) => p.year))].sort(
+  const years = [...new Set(publications.map((p) => p.year).filter(Boolean))].sort(
     (a, b) => b - a
   );
-  const types = [...new Set(publications.map((p) => p.type))];
+  const types = [...new Set(publications.map((p) => p.type).filter(Boolean))];
 
   const filteredPublications = publications.filter((pub) => {
-    const yearMatch =
-      selectedYear === "all" || pub.year.toString() === selectedYear;
+    const yearMatch = selectedYear === "all" || String(pub.year) === selectedYear;
     const typeMatch = selectedType === "all" || pub.type === selectedType;
     return yearMatch && typeMatch;
   });
 
-  const getStatusColor = (status) => {
-    switch (status.toLowerCase()) {
-      case "filed":
-        return "blue";
-      case "under examination":
-        return "yellow";
-      case "published":
-        return "green";
-      case "granted":
-        return "purple";
-      default:
-        return "outline";
-    }
-  };
+  const totalCitations = publications.reduce((sum, pub) => sum + pub.citations, 0);
+  const journalCount = publications.filter((p) => p.type === "journal").length;
+
+  const getStatusColor = (status) => matchKey(status, PATENT_STATUS_VARIANTS, "outline");
+
+  const countPatentsByStatus = (status) =>
+    patents.filter((patent) => asText(patent.status).toLowerCase() === status).length;
+
+  // Sort a copy — `.sort()` on the source array mutates state during render.
+  const patentsByYear = [...patents].sort((a, b) => b.filedYear - a.filedYear);
 
   const getTypeColor = (type) => {
     return type === "journal" ? "blue" : "green";
@@ -213,7 +257,7 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-purple-600">
-                      {publications.filter((p) => p.type === "journal").length}
+                      {journalCount}
                     </div>
                     <div className="text-sm text-purple-700 font-medium">
                       Journal Papers
@@ -225,10 +269,7 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-green-600">
-                      {publications.reduce(
-                        (sum, pub) => sum + pub.citations,
-                        0
-                      )}
+                      {totalCitations}
                     </div>
                     <div className="text-sm text-green-700 font-medium">
                       Total Citations
@@ -239,7 +280,9 @@ export default function PublicationsTab({ profile }) {
               <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
                 <CardContent>
                   <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-blue-600">2024</div>
+                    <div className="text-3xl font-bold text-blue-600">
+                      {years.length ? years[0] : "--"}
+                    </div>
                     <div className="text-sm text-blue-700 font-medium">
                       Latest Year
                     </div>
@@ -258,61 +301,10 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
-                  Research excellence demonstrated through high-impact
-                  publications in premier journals and conferences, contributing
-                  to advancements in cybersecurity, machine learning, and
-                  educational technology with significant citations and
-                  international recognition.
+                  {publications.length > 0
+                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals and conferences${totalCitations > 0 ? `, with ${totalCitations} recorded citation${totalCitations === 1 ? "" : "s"}` : ""}.`
+                    : "No publications have been added to this profile yet."}
                 </p>
-              </CardContent>
-            </Card>
-
-            {/* Additional Achievements */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Additional Achievements</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                        <Users className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900">
-                          Reviewer for Top-Tier Journals
-                        </h3>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Regular reviewer for IEEE Transactions, ACM journals,
-                          and other prestigious publications
-                        </p>
-                        <Badge variant="blue" className="mt-2">
-                          15+ JOURNALS
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                        <Target className="w-5 h-5 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900">
-                          Conference Program Committee
-                        </h3>
-                        <p className="text-sm text-gray-600 mt-1">
-                          Served on program committees of international
-                          conferences in AI and cybersecurity
-                        </p>
-                        <Badge variant="green" className="mt-2">
-                          10+ CONFERENCES
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
@@ -397,9 +389,11 @@ export default function PublicationsTab({ profile }) {
                                 </Badge>
                               )}
 
-                              <Badge variant="outline">
-                                {publication.year}
-                              </Badge>
+                              {publication.year > 0 && (
+                                <Badge variant="outline">
+                                  {publication.year}
+                                </Badge>
+                              )}
                             </div>
 
                             <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
@@ -416,20 +410,43 @@ export default function PublicationsTab({ profile }) {
                             </div>
 
                             <div className="flex gap-2">
-                              <Button variant="outline" size="sm">
-                                <ExternalLink className="w-4 h-4 mr-1" />
-                                View Paper
-                              </Button>
-                              <Button variant="outline" size="sm">
-                                <Download className="w-4 h-4 mr-1" />
-                                Download PDF
-                              </Button>
+                              {publication.paperUrl && (
+                                <a
+                                  href={publication.paperUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <Button variant="outline" size="sm">
+                                    <ExternalLink className="w-4 h-4 mr-1" />
+                                    View Paper
+                                  </Button>
+                                </a>
+                              )}
+                              {publication.pdfUrl && (
+                                <a
+                                  href={publication.pdfUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <Button variant="outline" size="sm">
+                                    <Download className="w-4 h-4 mr-1" />
+                                    Download PDF
+                                  </Button>
+                                </a>
+                              )}
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   ))}
+                  {filteredPublications.length === 0 && (
+                    <p className="py-6 text-center text-sm text-gray-500">
+                      {publications.length === 0
+                        ? "No publications added yet."
+                        : "No publications match the selected filters."}
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -456,7 +473,7 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-blue-600">
-                      {patents.filter((p) => p.status === "Filed").length}
+                      {countPatentsByStatus("filed")}
                     </div>
                     <div className="text-sm text-blue-700 font-medium">
                       Filed
@@ -468,7 +485,7 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-green-600">
-                      {patents.filter((p) => p.status === "Published").length}
+                      {countPatentsByStatus("published")}
                     </div>
                     <div className="text-sm text-green-700 font-medium">
                       Published
@@ -480,7 +497,9 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-purple-600">
-                      2024
+                      {patentsByYear.length && patentsByYear[0].filedYear > 0
+                        ? patentsByYear[0].filedYear
+                        : "--"}
                     </div>
                     <div className="text-sm text-purple-700 font-medium">
                       Latest Year
@@ -500,11 +519,9 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
-                  Dr. Kumar's patent portfolio reflects his commitment to
-                  translating research innovations into practical solutions. His
-                  patents span across cybersecurity, machine learning, and
-                  educational technology, demonstrating the real-world
-                  applicability of his research work.
+                  {patents.length > 0
+                    ? `${patents.length} patent application${patents.length === 1 ? "" : "s"} translating research work into practical, real-world solutions.`
+                    : "No patents have been added to this profile yet."}
                 </p>
               </CardContent>
             </Card>
@@ -516,8 +533,7 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {patents
-                    .sort((a, b) => b.filedYear - a.filedYear)
+                  {patentsByYear
                     .map((patent, index) => (
                       <div
                         key={index}
@@ -530,9 +546,11 @@ export default function PublicationsTab({ profile }) {
                               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                                 {patent.title}
                               </h3>
-                              <p className="text-gray-700 mb-4 leading-relaxed">
-                                {patent.description}
-                              </p>
+                              {patent.description && (
+                                <p className="text-gray-700 mb-4 leading-relaxed">
+                                  {patent.description}
+                                </p>
+                              )}
 
                               <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
                                 <div className="space-y-2">
@@ -540,20 +558,20 @@ export default function PublicationsTab({ profile }) {
                                     <span className="font-medium">
                                       Application No:
                                     </span>{" "}
-                                    {patent.applicationNo}
+                                    {displayOr(patent.applicationNo)}
                                   </p>
                                   <p className="text-gray-600">
                                     <span className="font-medium">
                                       Technical Field:
                                     </span>{" "}
-                                    {patent.technicalField}
+                                    {displayOr(patent.technicalField)}
                                   </p>
                                   <p className="text-gray-600 flex items-center">
                                     <Calendar className="w-4 h-4 mr-1" />
                                     <span className="font-medium">
                                       Filed:
                                     </span>{" "}
-                                    {patent.applicationDate}
+                                    {displayOr(patent.applicationDate)}
                                   </p>
                                 </div>
                                 <div className="space-y-2">
@@ -562,44 +580,35 @@ export default function PublicationsTab({ profile }) {
                                     <span className="font-medium">
                                       Country:
                                     </span>{" "}
-                                    {patent.country}
+                                    {displayOr(patent.country)}
                                   </p>
                                   <p className="text-gray-600">
                                     <span className="font-medium">
                                       Patent Office:
                                     </span>{" "}
-                                    {patent.patentOffice}
+                                    {displayOr(patent.patentOffice)}
                                   </p>
                                   <p className="text-gray-600">
                                     <span className="font-medium">Year:</span>{" "}
-                                    {patent.filedYear}
+                                    {patent.filedYear || "—"}
                                   </p>
                                 </div>
                               </div>
 
-                              <div className="mb-4">
-                                <h4 className="font-medium text-gray-900 mb-2">
-                                  Inventors:
-                                </h4>
-                                <div className="flex flex-wrap gap-2">
-                                  {patent.inventors.map((inventor, idx) => (
-                                    <Badge key={idx} variant="outline">
-                                      {inventor}
-                                    </Badge>
-                                  ))}
+                              {patent.inventors.length > 0 && (
+                                <div className="mb-4">
+                                  <h4 className="font-medium text-gray-900 mb-2">
+                                    Inventors:
+                                  </h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {patent.inventors.map((inventor, idx) => (
+                                      <Badge key={idx} variant="outline">
+                                        {inventor}
+                                      </Badge>
+                                    ))}
+                                  </div>
                                 </div>
-                              </div>
-
-                              <div className="flex gap-2">
-                                <Button variant="outline" size="sm">
-                                  <FileText className="w-4 h-4 mr-1" />
-                                  View Application
-                                </Button>
-                                <Button variant="outline" size="sm">
-                                  <ExternalLink className="w-4 h-4 mr-1" />
-                                  Patent Office Link
-                                </Button>
-                              </div>
+                              )}
                             </div>
 
                             <div className="flex-shrink-0">
@@ -611,6 +620,11 @@ export default function PublicationsTab({ profile }) {
                         </div>
                       </div>
                     ))}
+                  {patentsByYear.length === 0 && (
+                    <p className="py-6 text-center text-sm text-gray-500">
+                      No patents added yet.
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>

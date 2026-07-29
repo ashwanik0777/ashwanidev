@@ -70,29 +70,58 @@ export const Button = ({
   );
 };
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
+import { asArray, matchKey, pickArray, pickText, displayOr } from './fieldUtils';
+
+const LEVEL_COLORS = {
+  professional: 'bg-purple-100 text-purple-800',
+  associate: 'bg-blue-100 text-blue-800',
+  specialization: 'bg-green-100 text-green-800',
+};
+
+const TYPE_COLORS = {
+  workshop: 'bg-orange-100 text-orange-800',
+  fdp: 'bg-blue-100 text-blue-800',
+  conference: 'bg-green-100 text-green-800',
+};
+
+// Bridges the dashboard's editor field names to what this tab renders.
+const normalizeCertification = (item) => ({
+  title: pickText(item, ['title', 'name']),
+  platform: pickText(item, ['platform', 'issuingOrganization', 'organization', 'issuer']),
+  year: pickText(item, ['year', 'issueDate', 'issuedOn']),
+  validUntil: pickText(item, ['validUntil', 'expirationDate', 'expiryDate']),
+  credentialId: pickText(item, ['credentialId', 'credential_id']),
+  credentialUrl: pickText(item, ['credentialUrl', 'credential_url', 'url']),
+  level: pickText(item, ['level']),
+  skills: pickArray(item, ['skills', 'topics']),
+  verified: Boolean(item?.verified),
+});
+
+const normalizeProgram = (item) => ({
+  title: pickText(item, ['title', 'programName', 'name']),
+  organizer: pickText(item, ['organizer', 'organisation', 'organization']),
+  duration: pickText(item, ['duration']),
+  type: pickText(item, ['type', 'category']),
+  year: pickText(item, ['year']),
+  description: pickText(item, ['description']),
+});
 
 export const CertificationsTab = ({ profile }) => {
   const tabData = profile?.tabData?.certifications || {};
-  const certifications = tabData.certifications || [];
-  const professionalDevelopment = tabData.professionalDevelopment || [];
+  const certifications = asArray(tabData.certifications).map(normalizeCertification);
+  const professionalDevelopment = asArray(tabData.professionalDevelopment).map(normalizeProgram);
 
-  const getLevelColor = (level) => {
-    switch (level.toLowerCase()) {
-      case 'professional': return 'bg-purple-100 text-purple-800';
-      case 'associate': return 'bg-blue-100 text-blue-800';
-      case 'specialization': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  const getLevelColor = (level) => matchKey(level, LEVEL_COLORS, 'bg-gray-100 text-gray-800');
+  const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
 
-  const getTypeColor = (type) => {
-    switch (type.toLowerCase()) {
-      case 'workshop': return 'bg-orange-100 text-orange-800';
-      case 'fdp': return 'bg-blue-100 text-blue-800';
-      case 'conference': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  // Earliest certification year drives the "years of learning" tile. The editor
+  // stores free text ("January 2025"), so pull the 4-digit year out of it.
+  const certificationYears = certifications
+    .map((cert) => Number(String(cert.year).match(/\d{4}/)?.[0] || 0))
+    .filter((year) => year > 1900);
+  const yearsOfLearning = certificationYears.length
+    ? `${new Date().getFullYear() - Math.min(...certificationYears)}+`
+    : '--';
 
   return (
     <div className="space-y-6">
@@ -123,17 +152,15 @@ export const CertificationsTab = ({ profile }) => {
               <div className="text-sm text-purple-700">Professional Level</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {new Date().getFullYear() - Math.min(...certifications.map(c => c.year))}+
-              </div>
+              <div className="text-2xl font-bold text-orange-600">{yearsOfLearning}</div>
               <div className="text-sm text-orange-700">Years of Learning</div>
             </div>
           </div>
           
           <p className="text-gray-700 leading-relaxed">
-            Dr. Kumar maintains current industry certifications in cloud computing, cybersecurity, 
-            and machine learning, ensuring his knowledge stays aligned with the latest technological 
-            advancements and industry best practices.
+            {pickText(profile, ['name'], 'This faculty member')} maintains current professional
+            certifications and takes part in faculty development programs, keeping their teaching
+            and research aligned with the latest advances and industry best practices.
           </p>
         </CardContent>
       </Card>
@@ -166,43 +193,47 @@ export const CertificationsTab = ({ profile }) => {
                       <div>
                         <p className="flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Obtained:</span> {cert.year}
+                          <span className="font-medium">Obtained:</span> {displayOr(cert.year)}
                         </p>
-                        <p><span className="font-medium">Valid Until:</span> {cert.validUntil}</p>
+                        <p><span className="font-medium">Valid Until:</span> {displayOr(cert.validUntil)}</p>
                       </div>
                       <div>
-                        <p><span className="font-medium">Credential ID:</span> {cert.credentialId}</p>
-                        <p><span className="font-medium">Level:</span> {cert.level}</p>
+                        <p><span className="font-medium">Credential ID:</span> {displayOr(cert.credentialId)}</p>
+                        <p><span className="font-medium">Level:</span> {displayOr(cert.level)}</p>
                       </div>
                     </div>
-                    
-                    <div className="mb-4">
-                      <h4 className="font-medium text-gray-900 mb-2">Skills Covered:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {cert.skills.map((skill, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
+
+                    {cert.skills.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-gray-900 mb-2">Skills Covered:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {cert.skills.map((skill, idx) => (
+                            <Badge key={idx} variant="outline" className="text-xs">
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        View Credential
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Award className="w-4 h-4 mr-1" />
-                        Verify
-                      </Button>
-                    </div>
+                    )}
+
+                    {cert.credentialUrl && (
+                      <div className="flex gap-2">
+                        <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" size="sm">
+                            <ExternalLink className="w-4 h-4 mr-1" />
+                            View Credential
+                          </Button>
+                        </a>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex flex-col items-start lg:items-end gap-2">
-                    <Badge className={getLevelColor(cert.level)}>
-                      {cert.level}
-                    </Badge>
+                    {cert.level && (
+                      <Badge className={getLevelColor(cert.level)}>
+                        {cert.level}
+                      </Badge>
+                    )}
                     {cert.verified && (
                       <Badge className="bg-green-100 text-green-800">
                         Verified
@@ -212,6 +243,11 @@ export const CertificationsTab = ({ profile }) => {
                 </div>
               </div>
             ))}
+            {certifications.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No certifications added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -229,20 +265,34 @@ export const CertificationsTab = ({ profile }) => {
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900 mb-1">{activity.title}</h3>
                     <p className="text-blue-600 text-sm mb-2">{activity.organizer}</p>
-                    <p className="text-xs text-gray-600">Duration: {activity.duration}</p>
+                    {activity.duration && (
+                      <p className="text-xs text-gray-600">Duration: {activity.duration}</p>
+                    )}
+                    {activity.description && (
+                      <p className="text-xs text-gray-600 mt-1">{activity.description}</p>
+                    )}
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge className={getTypeColor(activity.type)}>
-                      {activity.type}
-                    </Badge>
-                    <span className="text-sm text-gray-600 flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {activity.year}
-                    </span>
+                    {activity.type && (
+                      <Badge className={getTypeColor(activity.type)}>
+                        {activity.type}
+                      </Badge>
+                    )}
+                    {activity.year && (
+                      <span className="text-sm text-gray-600 flex items-center">
+                        <Calendar className="w-4 h-4 mr-1" />
+                        {activity.year}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
+            {professionalDevelopment.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No professional development programs added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

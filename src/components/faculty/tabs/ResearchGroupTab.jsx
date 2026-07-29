@@ -1,5 +1,12 @@
-
 import React from 'react';
+import { Users, Mail, ExternalLink, Calendar, FileText } from 'lucide-react';
+import { asArray, matchKey, pickText, displayOr } from './fieldUtils';
+import {
+  GROUP_STATUS_COLORS,
+  normalizeGroupMember,
+  sumPublications,
+} from './researchNormalizers';
+
 // Card Component
 const Card = ({ className = "", children }) => (
   <div className={`rounded-xl bg-white border shadow-sm ${className}`}>{children}</div>
@@ -49,22 +56,47 @@ const Button = ({
     </button>
   );
 };
-import { Users, Mail, ExternalLink, Calendar, FileText } from 'lucide-react';
+
+// Contact / profile buttons only render for members that actually have links.
+const GroupMemberLinks = ({ member, className = "" }) => {
+  if (!member.email && !member.profileUrl) return null;
+  return (
+    <div className={`flex gap-2 ${className}`}>
+      {member.email && (
+        <a href={`mailto:${member.email}`}>
+          <Button variant="outline" size="sm">
+            <Mail className="w-4 h-4 mr-1" />
+            Contact
+          </Button>
+        </a>
+      )}
+      {member.profileUrl && (
+        <a href={member.profileUrl} target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" size="sm">
+            <ExternalLink className="w-4 h-4 mr-1" />
+            Profile
+          </Button>
+        </a>
+      )}
+    </div>
+  );
+};
 
 export const ResearchGroupTab = ({ profile }) => {
   const tabData = profile?.tabData?.researchGroup || {};
-  const phdScholars = tabData.phdScholars || [];
-  const postdocs = tabData.postdocs || [];
-  const researchAssistants = tabData.researchAssistants || [];
+  const phdScholars = asArray(tabData.phdScholars).map(normalizeGroupMember);
+  const postdocs = asArray(tabData.postdocs).map(normalizeGroupMember);
+  const researchAssistants = asArray(tabData.researchAssistants).map(normalizeGroupMember);
 
-  const getStatusColor = (status) => {
-    switch (status.toLowerCase()) {
-      case 'first year': return 'bg-green-100 text-green-800';
-      case 'second year': return 'bg-blue-100 text-blue-800';
-      case 'third year': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  const getStatusColor = (status) =>
+    matchKey(status, GROUP_STATUS_COLORS, 'bg-gray-100 text-gray-800');
+
+  const totalPublications = sumPublications(phdScholars, postdocs);
+  const groupOverview = pickText(
+    tabData,
+    ['overview', 'description'],
+    `Research group led by ${pickText(profile, ['name'], 'this faculty member')}, bringing together PhD scholars, postdoctoral fellows and research assistants working on collaborative projects.`,
+  );
 
   return (
     <div className="space-y-6">
@@ -91,20 +123,12 @@ export const ResearchGroupTab = ({ profile }) => {
               <div className="text-sm text-purple-700">Research Assistants</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {phdScholars.reduce((sum, scholar) => sum + scholar.publications, 0) + 
-                 postdocs.reduce((sum, postdoc) => sum + postdoc.publications, 0)}
-              </div>
+              <div className="text-2xl font-bold text-orange-600">{totalPublications}</div>
               <div className="text-sm text-orange-700">Total Publications</div>
             </div>
           </div>
-          
-          <p className="text-gray-700 leading-relaxed">
-            Our research group focuses on cutting-edge areas of computer science including machine learning, 
-            cybersecurity, natural language processing, and recommendation systems. We foster a collaborative 
-            environment where students and researchers work together on innovative projects that address 
-            real-world challenges.
-          </p>
+
+          <p className="text-gray-700 leading-relaxed">{groupOverview}</p>
         </CardContent>
       </Card>
 
@@ -122,42 +146,44 @@ export const ResearchGroupTab = ({ profile }) => {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900">{scholar.name}</h3>
-                        <p className="text-blue-600 text-sm">{scholar.program}</p>
+                        {scholar.program && (
+                          <p className="text-blue-600 text-sm">{scholar.program}</p>
+                        )}
                       </div>
                       <Badge className={getStatusColor(scholar.status)}>
                         {scholar.status}
                       </Badge>
                     </div>
-                    
+
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <p><span className="font-medium">Research Area:</span> {scholar.researchArea}</p>
-                      <p><span className="font-medium">Thesis:</span> {scholar.thesis}</p>
+                      <p><span className="font-medium">Research Area:</span> {displayOr(scholar.researchArea)}</p>
+                      <p><span className="font-medium">Thesis:</span> {displayOr(scholar.thesis)}</p>
                       <div className="flex items-center gap-4">
-                        <span className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {scholar.year}
-                        </span>
-                        <span className="flex items-center">
-                          <FileText className="w-4 h-4 mr-1" />
-                          {scholar.publications} Publications
-                        </span>
+                        {scholar.year && (
+                          <span className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {scholar.year}
+                          </span>
+                        )}
+                        {scholar.publications > 0 && (
+                          <span className="flex items-center">
+                            <FileText className="w-4 h-4 mr-1" />
+                            {scholar.publications} Publications
+                          </span>
+                        )}
                       </div>
                     </div>
-                    
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <Mail className="w-4 h-4 mr-1" />
-                        Contact
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Profile
-                      </Button>
-                    </div>
+
+                    <GroupMemberLinks member={scholar} />
                   </div>
                 </div>
               </div>
             ))}
+            {phdScholars.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No PhD scholars added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -174,37 +200,41 @@ export const ResearchGroupTab = ({ profile }) => {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">{postdoc.name}</h3>
-                    <p className="text-blue-600 text-sm mb-3">{postdoc.position}</p>
-                    
+                    {postdoc.program && (
+                      <p className="text-blue-600 text-sm mb-3">{postdoc.program}</p>
+                    )}
+
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <p><span className="font-medium">Research Area:</span> {postdoc.researchArea}</p>
-                      <p><span className="font-medium">Previous Institute:</span> {postdoc.previousInstitute}</p>
+                      <p><span className="font-medium">Research Area:</span> {displayOr(postdoc.researchArea)}</p>
+                      {postdoc.previousInstitute && (
+                        <p><span className="font-medium">Previous Institute:</span> {postdoc.previousInstitute}</p>
+                      )}
                       <div className="flex items-center gap-4">
-                        <span className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {postdoc.duration}
-                        </span>
-                        <span className="flex items-center">
-                          <FileText className="w-4 h-4 mr-1" />
-                          {postdoc.publications} Publications
-                        </span>
+                        {postdoc.duration && (
+                          <span className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {postdoc.duration}
+                          </span>
+                        )}
+                        {postdoc.publications > 0 && (
+                          <span className="flex items-center">
+                            <FileText className="w-4 h-4 mr-1" />
+                            {postdoc.publications} Publications
+                          </span>
+                        )}
                       </div>
                     </div>
-                    
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <Mail className="w-4 h-4 mr-1" />
-                        Contact
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Profile
-                      </Button>
-                    </div>
+
+                    <GroupMemberLinks member={postdoc} />
                   </div>
                 </div>
               </div>
             ))}
+            {postdocs.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No postdoctoral fellows added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -219,23 +249,28 @@ export const ResearchGroupTab = ({ profile }) => {
             {researchAssistants.map((assistant, index) => (
               <div key={index} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 border-solid">
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{assistant.name}</h3>
-                <p className="text-green-600 text-sm mb-2">{assistant.program}</p>
-                
+                {assistant.program && (
+                  <p className="text-green-600 text-sm mb-2">{assistant.program}</p>
+                )}
+
                 <div className="space-y-1 text-sm text-gray-600 mb-3">
-                  <p><span className="font-medium">Project:</span> {assistant.project}</p>
-                  <p><span className="font-medium">Role:</span> {assistant.role}</p>
-                  <p className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {assistant.year}
-                  </p>
+                  <p><span className="font-medium">Project / Role:</span> {displayOr(assistant.project)}</p>
+                  {assistant.year && (
+                    <p className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {assistant.year}
+                    </p>
+                  )}
                 </div>
-                
-                <Button variant="outline" size="sm" className="w-full">
-                  <Mail className="w-4 h-4 mr-1" />
-                  Contact
-                </Button>
+
+                <GroupMemberLinks member={assistant} />
               </div>
             ))}
+            {researchAssistants.length === 0 && (
+              <p className="col-span-full py-6 text-center text-sm text-gray-500">
+                No research assistants added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

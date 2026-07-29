@@ -114,8 +114,8 @@ const ProfileForms = ({
               className={inputClass}
               type="number"
               min="0"
-              value={profile.tabData?.talksCount || 0}
-              onChange={(e) => onUpdateTabDataField("talksCount", Number(e.target.value || 0))}
+              value={Number(profile.tabData?.talksCount ?? 0)}
+              onChange={(e) => onUpdateTabDataField("talksCount", Number(e.target.value) || 0)}
             />
           </Field>
           <Field label="Projects count">
@@ -123,8 +123,8 @@ const ProfileForms = ({
               className={inputClass}
               type="number"
               min="0"
-              value={profile.tabData?.projectsCount || 0}
-              onChange={(e) => onUpdateTabDataField("projectsCount", Number(e.target.value || 0))}
+              value={Number(profile.tabData?.projectsCount ?? 0)}
+              onChange={(e) => onUpdateTabDataField("projectsCount", Number(e.target.value) || 0)}
             />
           </Field>
         </div>

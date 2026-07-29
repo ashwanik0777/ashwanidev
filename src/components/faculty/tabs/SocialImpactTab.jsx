@@ -45,37 +45,64 @@ const Button = ({ variant = "solid", size = "md", className = '', children, ...p
   );
 };
 import { Heart, Users, Calendar, MapPin, TreePine, GraduationCap, Lightbulb, Camera } from 'lucide-react';
+import { asArray, asText, matchKey, pickArray, pickText, displayOr } from './fieldUtils';
+
+const TYPE_COLORS = {
+  'community-outreach': 'bg-blue-100 text-blue-800',
+  awareness: 'bg-orange-100 text-orange-800',
+  environmental: 'bg-green-100 text-green-800',
+  education: 'bg-purple-100 text-purple-800',
+  healthcare: 'bg-red-100 text-red-800',
+};
+
+const TYPE_ICONS = {
+  'community-outreach': Users,
+  awareness: Lightbulb,
+  environmental: TreePine,
+  education: GraduationCap,
+  healthcare: Heart,
+};
+
+// Bridges the dashboard's editor field names to what this tab renders.
+const normalizeActivity = (item) => ({
+  title: pickText(item, ['title', 'name']),
+  organization: pickText(item, ['organization', 'organisation']),
+  description: pickText(item, ['description']),
+  duration: pickText(item, ['duration']),
+  location: pickText(item, ['location']),
+  role: pickText(item, ['role']),
+  beneficiaries: pickText(item, ['beneficiaries']),
+  type: asText(pickText(item, ['type'])).toLowerCase(),
+  impact: pickArray(item, ['impact', 'outcomes']),
+  photosUrl: pickText(item, ['photosUrl', 'gallery']),
+});
 
 export const SocialImpactTab = ({ profile }) => {
   const tabData = profile?.tabData?.socialImpact || {};
-  const socialActivities = tabData.socialActivities || [];
+  const socialActivities = asArray(tabData.socialActivities).map(normalizeActivity);
 
-  const getTypeColor = (type) => {
-    switch (type) {
-      case 'community-outreach': return 'bg-blue-100 text-blue-800';
-      case 'awareness': return 'bg-orange-100 text-orange-800';
-      case 'environmental': return 'bg-green-100 text-green-800';
-      case 'education': return 'bg-purple-100 text-purple-800';
-      case 'healthcare': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getTypeIcon = (type) => {
-    switch (type) {
-      case 'community-outreach': return Users;
-      case 'awareness': return Lightbulb;
-      case 'environmental': return TreePine;
-      case 'education': return GraduationCap;
-      case 'healthcare': return Heart;
-      default: return Heart;
-    }
-  };
+  const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
+  const getTypeIcon = (type) => matchKey(type, TYPE_ICONS, Heart);
 
   const formatType = (type) => {
-    if (!type) return 'Social Impact';
-    return type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    const value = asText(type);
+    if (!value) return 'Social Impact';
+    return value
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
+
+  const organisationCount = new Set(
+    socialActivities.map((activity) => activity.organization).filter(Boolean),
+  ).size;
+  const focusAreaCount = new Set(
+    socialActivities.map((activity) => activity.type).filter(Boolean),
+  ).size;
+  const impactPointCount = socialActivities.reduce(
+    (sum, activity) => sum + activity.impact.length,
+    0,
+  );
 
   return (
     <div className="space-y-6">
@@ -94,23 +121,23 @@ export const SocialImpactTab = ({ profile }) => {
               <div className="text-sm text-blue-700">Active Initiatives</div>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">13,000+</div>
-              <div className="text-sm text-green-700">Lives Impacted</div>
+              <div className="text-2xl font-bold text-green-600">{organisationCount}</div>
+              <div className="text-sm text-green-700">Partner Organisations</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">4+</div>
-              <div className="text-sm text-purple-700">Years of Service</div>
+              <div className="text-2xl font-bold text-purple-600">{focusAreaCount}</div>
+              <div className="text-sm text-purple-700">Focus Areas</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">5</div>
-              <div className="text-sm text-orange-700">Focus Areas</div>
+              <div className="text-2xl font-bold text-orange-600">{impactPointCount}</div>
+              <div className="text-sm text-orange-700">Recorded Outcomes</div>
             </div>
           </div>
-          
+
           <p className="text-gray-700 leading-relaxed">
-            Dr. Kumar is deeply committed to creating positive social impact through technology and education. 
-            His initiatives focus on bridging the digital divide, environmental conservation, and community 
-            empowerment, demonstrating the transformative power of academic-community partnerships.
+            {socialActivities.length > 0
+              ? `${pickText(profile, ['name'], 'This faculty member')} contributes to community service and outreach through ${socialActivities.length} recorded initiative${socialActivities.length === 1 ? '' : 's'}.`
+              : 'No social impact activities have been added to this profile yet.'}
           </p>
         </CardContent>
       </Card>
@@ -134,55 +161,66 @@ export const SocialImpactTab = ({ profile }) => {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-gray-900 mb-1">{activity.title}</h3>
-                          <p className="text-blue-600 font-medium mb-2">{activity.organization}</p>
-                          <p className="text-gray-700 leading-relaxed mb-3">{activity.description}</p>
+                          {activity.organization && (
+                            <p className="text-blue-600 font-medium mb-2">{activity.organization}</p>
+                          )}
+                          {activity.description && (
+                            <p className="text-gray-700 leading-relaxed mb-3">{activity.description}</p>
+                          )}
                         </div>
                       </div>
-                      
+
                       <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
                         <div className="space-y-1">
                           <p className="flex items-center">
                             <Calendar className="w-4 h-4 mr-1" />
-                            <span className="font-medium">Duration:</span> {activity.duration}
+                            <span className="font-medium">Duration:</span>&nbsp;{displayOr(activity.duration)}
                           </p>
                           <p className="flex items-center">
                             <MapPin className="w-4 h-4 mr-1" />
-                            <span className="font-medium">Location:</span> {activity.location}
+                            <span className="font-medium">Location:</span>&nbsp;{displayOr(activity.location)}
                           </p>
                         </div>
                         <div className="space-y-1">
-                          <p className="flex items-center">
-                            <Users className="w-4 h-4 mr-1" />
-                            <span className="font-medium">Beneficiaries:</span> {activity.beneficiaries}
-                          </p>
-                          <p className="flex items-center">
-                            <Camera className="w-4 h-4 mr-1" />
-                            <span className="font-medium">Photos:</span> {activity.images} available
-                          </p>
+                          {activity.role && (
+                            <p className="flex items-center">
+                              <Users className="w-4 h-4 mr-1" />
+                              <span className="font-medium">Role:</span>&nbsp;{activity.role}
+                            </p>
+                          )}
+                          {activity.beneficiaries && (
+                            <p className="flex items-center">
+                              <Users className="w-4 h-4 mr-1" />
+                              <span className="font-medium">Beneficiaries:</span>&nbsp;{activity.beneficiaries}
+                            </p>
+                          )}
                         </div>
                       </div>
-                      
-                      <div className="mb-4">
-                        <h4 className="font-medium text-gray-900 mb-2">Key Impact:</h4>
-                        <ul className="space-y-1">
-                          {(activity.impact || []).map((impact, idx) => (
-                            <li key={idx} className="text-sm text-gray-700 flex items-start">
-                              <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                              {impact}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          <Camera className="w-4 h-4 mr-1" />
-                          View Photos
-                        </Button>
-                        <Button variant="outline" size="sm">
-                          Learn More
-                        </Button>
-                      </div>
+
+                      {activity.impact.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="font-medium text-gray-900 mb-2">Key Impact:</h4>
+                          <ul className="space-y-1">
+                            {activity.impact.map((impact, idx) => (
+                              <li key={idx} className="text-sm text-gray-700 flex items-start">
+                                <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                {impact}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {activity.photosUrl && (
+                        <div className="flex gap-2">
+                          <a href={activity.photosUrl} target="_blank" rel="noopener noreferrer">
+                            <Button variant="outline" size="sm">
+                              <Camera className="w-4 h-4 mr-1" />
+                              View Photos
+                            </Button>
+                          </a>
+                        </div>
+                      )}
                     </div>
                     
                     <div className="flex-shrink-0">
@@ -194,61 +232,11 @@ export const SocialImpactTab = ({ profile }) => {
                 </div>
               );
             })}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Impact Summary */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Social Impact Summary</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                title: "Community Outreach",
-                description: "Digital literacy and skill development programs",
-                metric: "500+ villagers trained",
-                color: "blue"
-              },
-              {
-                title: "Environmental Conservation",
-                description: "Tree plantation and sustainability initiatives",
-                metric: "1000+ trees planted",
-                color: "green"
-              },
-              {
-                title: "Education Access",
-                description: "Free coding bootcamps for underprivileged students",
-                metric: "200+ students trained",
-                color: "purple"
-              },
-              {
-                title: "Cybersecurity Awareness",
-                description: "Public awareness campaigns on digital safety",
-                metric: "10,000+ people reached",
-                color: "orange"
-              },
-              {
-                title: "Healthcare Support",
-                description: "Digital health solutions during COVID-19",
-                metric: "2000+ individuals helped",
-                color: "red"
-              },
-              {
-                title: "Technology for Good",
-                description: "Developing solutions for social challenges",
-                metric: "5 mobile applications",
-                color: "indigo"
-              }
-            ].map((impact, index) => (
-              <div key={index} className={`bg-gradient-to-br from-${impact.color}-50 to-${impact.color}-100 rounded-lg p-4 border border-${impact.color}-200`}>
-                <h3 className={`font-semibold text-${impact.color}-900 mb-2`}>{impact.title}</h3>
-                <p className={`text-sm text-${impact.color}-700 mb-3`}>{impact.description}</p>
-                <div className={`text-lg font-bold text-${impact.color}-600`}>{impact.metric}</div>
-              </div>
-            ))}
+            {socialActivities.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No community initiatives added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

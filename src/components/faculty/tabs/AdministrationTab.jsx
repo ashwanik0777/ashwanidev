@@ -28,16 +28,40 @@ const Badge = ({ children, className = '' }) => (
   </span>
 );
 import { Calendar, MapPin, Settings, Users } from 'lucide-react';
+import { asArray, asText, pickArray, pickText } from './fieldUtils';
+
+// Bridges the dashboard's editor field names to what this tab renders.
+const normalizeRole = (item) => ({
+  role: pickText(item, ['role', 'title', 'position']),
+  department: pickText(item, ['department', 'level', 'scope']),
+  institution: pickText(item, ['institution', 'organization', 'organisation']),
+  duration: pickText(item, ['duration', 'period']),
+  status: pickText(item, ['status'], 'ongoing'),
+  description: pickText(item, ['description']),
+  responsibilities: pickArray(item, ['responsibilities', 'keyResponsibilities']),
+});
+
+const normalizeCommittee = (item) => ({
+  name: pickText(item, ['name', 'title']),
+  role: pickText(item, ['role', 'designation', 'position']),
+  period: pickText(item, ['period', 'duration']),
+  responsibility: pickText(item, ['responsibility', 'contribution', 'description']),
+});
 
 export const AdministrationTab = ({ profile }) => {
   const tabData = profile?.tabData?.administration || {};
-  const administrativeRoles = tabData.administrativeRoles || [];
-  const committees = tabData.committees || [];
+  const administrativeRoles = asArray(tabData.administrativeRoles).map(normalizeRole);
+  const committees = asArray(tabData.committees).map(normalizeCommittee);
 
   const getStatusColor = (status) => {
-    return status === 'ongoing' 
-      ? 'bg-green-100 text-green-800' 
+    return asText(status).toLowerCase() === 'ongoing'
+      ? 'bg-green-100 text-green-800'
       : 'bg-blue-100 text-blue-800';
+  };
+
+  const titleCase = (value, fallback) => {
+    const text = asText(value, fallback);
+    return text.charAt(0).toUpperCase() + text.slice(1);
   };
 
   return (
@@ -88,33 +112,48 @@ export const AdministrationTab = ({ profile }) => {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{role.role}</h3>
-                    <p className="text-blue-600 font-medium mb-1">{role.department}</p>
-                    <p className="text-gray-700 mb-2">{role.institution}</p>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {role.duration}
+                    {role.department && (
+                      <p className="text-blue-600 font-medium mb-1">{role.department}</p>
+                    )}
+                    {role.institution && <p className="text-gray-700 mb-2">{role.institution}</p>}
+                    {role.duration && (
+                      <div className="flex items-center gap-4 text-sm text-gray-600">
+                        <div className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {role.duration}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
-                  <Badge className={getStatusColor(role.status || 'active')}>
-                    {(role.status || 'Active').charAt(0).toUpperCase() + (role.status || 'active').slice(1)}
+                  <Badge className={getStatusColor(role.status)}>
+                    {titleCase(role.status, 'Active')}
                   </Badge>
                 </div>
-                
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
-                  <ul className="space-y-1">
-                    {role.responsibilities.map((responsibility, idx) => (
-                      <li key={idx} className="text-sm text-gray-700 flex items-start">
-                        <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                        {responsibility}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+                {role.description && (
+                  <p className="mb-3 text-sm text-gray-700">{role.description}</p>
+                )}
+
+                {role.responsibilities.length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
+                    <ul className="space-y-1">
+                      {role.responsibilities.map((responsibility, idx) => (
+                        <li key={idx} className="text-sm text-gray-700 flex items-start">
+                          <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                          {responsibility}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
+            {administrativeRoles.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No administrative roles added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -134,15 +173,25 @@ export const AdministrationTab = ({ profile }) => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div>
                     <h3 className="font-semibold text-gray-900">{committee.name}</h3>
-                    <p className="text-sm text-blue-600">{committee.role}</p>
+                    {committee.role && <p className="text-sm text-blue-600">{committee.role}</p>}
+                    {committee.responsibility && (
+                      <p className="mt-1 text-sm text-gray-700">{committee.responsibility}</p>
+                    )}
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {committee.period}
-                  </div>
+                  {committee.period && (
+                    <div className="flex items-center text-sm text-gray-600">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {committee.period}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
+            {committees.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">
+                No committee memberships added yet.
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>

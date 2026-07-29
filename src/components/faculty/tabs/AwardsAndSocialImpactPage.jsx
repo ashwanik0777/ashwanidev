@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Heart, Trophy, Calendar } from "lucide-react";
+import { asArray, pickText } from "./fieldUtils";
 
 const Card = ({ className = "", children }) => (
   <div className={`rounded-xl bg-white border border-gray-200 shadow-sm ${className}`}>
@@ -21,19 +22,39 @@ const Badge = ({ className = "", children }) => (
   </span>
 );
 
+// Bridges the dashboard's editor field names to what this page renders.
+const normalizeAward = (item) => ({
+  title: pickText(item, ["title", "name"]),
+  level: pickText(item, ["level"]),
+  awardingBody: pickText(item, ["awardingBody", "organization", "organisation", "awardedBy"]),
+  description: pickText(item, ["description"]),
+  year: pickText(item, ["year"]),
+});
+
+const normalizeActivity = (item) => ({
+  title: pickText(item, ["title", "name"]),
+  organization: pickText(item, ["organization", "organisation"]),
+  description: pickText(item, ["description"]),
+  duration: pickText(item, ["duration"]),
+  location: pickText(item, ["location", "role"]),
+});
+
 const AwardsAndSocialImpactPage = ({ profile }) => {
   const [activeTab, setActiveTab] = useState("awards");
 
   const awardsData = profile?.tabData?.awards || {};
   const socialData = profile?.tabData?.socialImpact || {};
 
-  const awards = awardsData?.awards || [];
-  const achievements = awardsData?.achievements || [];
-  const socialActivities = socialData?.socialActivities || [];
+  const awards = asArray(awardsData?.awards).map(normalizeAward);
+  const achievements = asArray(awardsData?.achievements);
+  const socialActivities = asArray(socialData?.socialActivities).map(normalizeActivity);
 
   const recentYear = useMemo(() => {
-    if (!awards.length) return "-";
-    return Math.max(...awards.map((a) => a.year || 0));
+    // Award years are free text in the editor — pull out any 4-digit year.
+    const years = awards
+      .map((award) => Number(String(award.year).match(/\d{4}/)?.[0] || 0))
+      .filter((year) => year > 1900);
+    return years.length ? Math.max(...years) : "-";
   }, [awards]);
 
   return (
@@ -97,15 +118,28 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
                     <div key={index} className="rounded-lg border border-gray-200 bg-white p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <h3 className="font-semibold text-gray-900">{award.title}</h3>
-                        <Badge className="bg-blue-100 text-blue-700">{award.level}</Badge>
+                        {award.level && (
+                          <Badge className="bg-blue-100 text-blue-700">{award.level}</Badge>
+                        )}
                       </div>
-                      <p className="text-sm text-blue-700 mt-1">{award.awardingBody}</p>
-                      <p className="text-sm text-gray-700 mt-2">{award.description}</p>
-                      <p className="text-xs text-gray-500 mt-2 flex items-center">
-                        <Calendar className="w-3 h-3 mr-1" /> {award.year}
-                      </p>
+                      {award.awardingBody && (
+                        <p className="text-sm text-blue-700 mt-1">{award.awardingBody}</p>
+                      )}
+                      {award.description && (
+                        <p className="text-sm text-gray-700 mt-2">{award.description}</p>
+                      )}
+                      {award.year && (
+                        <p className="text-xs text-gray-500 mt-2 flex items-center">
+                          <Calendar className="w-3 h-3 mr-1" /> {award.year}
+                        </p>
+                      )}
                     </div>
                   ))}
+                  {awards.length === 0 && (
+                    <p className="py-6 text-center text-sm text-gray-500">
+                      No awards added yet.
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -121,11 +155,24 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
                   {socialActivities.map((item, index) => (
                     <div key={index} className="rounded-lg border border-gray-200 bg-white p-4">
                       <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                      <p className="text-sm text-blue-700 mt-1">{item.organization}</p>
-                      <p className="text-sm text-gray-700 mt-2">{item.description}</p>
-                      <p className="text-xs text-gray-500 mt-2">{item.duration} • {item.location}</p>
+                      {item.organization && (
+                        <p className="text-sm text-blue-700 mt-1">{item.organization}</p>
+                      )}
+                      {item.description && (
+                        <p className="text-sm text-gray-700 mt-2">{item.description}</p>
+                      )}
+                      {(item.duration || item.location) && (
+                        <p className="text-xs text-gray-500 mt-2">
+                          {[item.duration, item.location].filter(Boolean).join(" • ")}
+                        </p>
+                      )}
                     </div>
                   ))}
+                  {socialActivities.length === 0 && (
+                    <p className="py-6 text-center text-sm text-gray-500">
+                      No social impact activities added yet.
+                    </p>
+                  )}
                 </div>
               </CardContent>
             </Card>

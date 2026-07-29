@@ -68,20 +68,42 @@ export const Button = ({
   );
 };
 import { Award, Calendar, MapPin, FileText, ExternalLink } from 'lucide-react';
+import { asArray, asText, matchKey, pickArray, pickNumber, pickText, displayOr } from './fieldUtils';
+
+const STATUS_COLORS = {
+  filed: 'bg-blue-100 text-blue-800',
+  'under examination': 'bg-yellow-100 text-yellow-800',
+  published: 'bg-green-100 text-green-800',
+  granted: 'bg-purple-100 text-purple-800',
+};
+
+const normalizePatent = (item) => ({
+  title: pickText(item, ['title', 'name']),
+  description: pickText(item, ['description', 'abstract']),
+  applicationNo: pickText(item, ['applicationNo', 'applicationNumber', 'application_no']),
+  technicalField: pickText(item, ['technicalField', 'field']),
+  applicationDate: pickText(item, ['applicationDate', 'filingDate', 'filedOn']),
+  country: pickText(item, ['country'], 'India'),
+  patentOffice: pickText(item, ['patentOffice', 'office']),
+  filedYear: pickNumber(item, ['filedYear', 'year'], 0),
+  status: pickText(item, ['status'], 'Filed'),
+  inventors: pickArray(item, ['inventors', 'authors']),
+  applicationUrl: pickText(item, ['applicationUrl', 'url', 'documentUrl']),
+});
+
+const countByStatus = (patents, status) =>
+  patents.filter((patent) => asText(patent.status).toLowerCase() === status).length;
 
 export const PatentsTab = ({ profile }) => {
-  const tabData = profile?.tabData?.patents || {};
-  const patents = tabData.patents || [];
+  // Dashboard saves patents under publications.patents; read that first, legacy fallback to patents.patents
+  const pubPatents = asArray(profile?.tabData?.publications?.patents);
+  const legacyPatents = asArray(profile?.tabData?.patents?.patents);
+  const patents = (pubPatents.length ? pubPatents : legacyPatents).map(normalizePatent);
 
-  const getStatusColor = (status) => {
-    switch (status.toLowerCase()) {
-      case 'filed': return 'bg-blue-100 text-blue-800';
-      case 'under examination': return 'bg-yellow-100 text-yellow-800';
-      case 'published': return 'bg-green-100 text-green-800';
-      case 'granted': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  const getStatusColor = (status) => matchKey(status, STATUS_COLORS, 'bg-gray-100 text-gray-800');
+
+  // Sort a copy — `.sort()` on the source array mutates state during render.
+  const patentsByYear = [...patents].sort((a, b) => b.filedYear - a.filedYear);
 
   return (
     <div className="space-y-6">
@@ -101,28 +123,27 @@ export const PatentsTab = ({ profile }) => {
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
               <div className="text-2xl font-bold text-green-600">
-                {patents.filter(p => p.status === 'Filed').length}
+                {countByStatus(patents, 'filed')}
               </div>
               <div className="text-sm text-green-700">Filed</div>
             </div>
             <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 text-center border border-yellow-200 border-solid">
               <div className="text-2xl font-bold text-yellow-600">
-                {patents.filter(p => p.status === 'Under Examination').length}
+                {countByStatus(patents, 'under examination')}
               </div>
               <div className="text-sm text-yellow-700">Under Review</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
               <div className="text-2xl font-bold text-purple-600">
-                {patents.filter(p => p.status === 'Published').length}
+                {countByStatus(patents, 'published')}
               </div>
               <div className="text-sm text-purple-700">Published</div>
             </div>
           </div>
-          
+
           <p className="text-gray-700 leading-relaxed">
-            Dr. Kumar's patent portfolio reflects his commitment to translating research innovations into 
-            practical solutions. His patents span across cybersecurity, machine learning, and educational 
-            technology, demonstrating the real-world applicability of his research work.
+            This patent portfolio reflects {pickText(profile, ['name'], 'the faculty member')}&apos;s work
+            on translating research innovations into practical, real-world solutions.
           </p>
         </CardContent>
       </Card>
@@ -139,58 +160,62 @@ export const PatentsTab = ({ profile }) => {
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{patent.title}</h3>
-                    <p className="text-gray-700 mb-4 leading-relaxed">{patent.description}</p>
-                    
+                    {patent.description && (
+                      <p className="text-gray-700 mb-4 leading-relaxed">{patent.description}</p>
+                    )}
+
                     <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
                       <div className="space-y-2">
                         <p className="text-gray-600">
-                          <span className="font-medium">Application No:</span> {patent.applicationNo}
+                          <span className="font-medium">Application No:</span> {displayOr(patent.applicationNo)}
                         </p>
                         <p className="text-gray-600">
-                          <span className="font-medium">Technical Field:</span> {patent.technicalField}
+                          <span className="font-medium">Technical Field:</span> {displayOr(patent.technicalField)}
                         </p>
                         <p className="text-gray-600 flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Filed:</span> {patent.applicationDate}
+                          <span className="font-medium">Filed:</span> {displayOr(patent.applicationDate)}
                         </p>
                       </div>
                       <div className="space-y-2">
                         <p className="text-gray-600 flex items-center">
                           <MapPin className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Country:</span> {patent.country}
+                          <span className="font-medium">Country:</span> {displayOr(patent.country)}
                         </p>
                         <p className="text-gray-600">
-                          <span className="font-medium">Patent Office:</span> {patent.patentOffice}
+                          <span className="font-medium">Patent Office:</span> {displayOr(patent.patentOffice)}
                         </p>
                         <p className="text-gray-600">
-                          <span className="font-medium">Year:</span> {patent.filedYear}
+                          <span className="font-medium">Year:</span> {patent.filedYear || '—'}
                         </p>
                       </div>
                     </div>
-                    
-                    <div className="mb-4">
-                      <h4 className="font-medium text-gray-900 mb-2">Inventors:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {patent.inventors.map((inventor, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {inventor}
-                          </Badge>
-                        ))}
+
+                    {patent.inventors.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="font-medium text-gray-900 mb-2">Inventors:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {patent.inventors.map((inventor, idx) => (
+                            <Badge key={idx} variant="outline" className="text-xs">
+                              {inventor}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <FileText className="w-4 h-4 mr-1" />
-                        View Application
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        Patent Office Link
-                      </Button>
-                    </div>
+                    )}
+
+                    {patent.applicationUrl && (
+                      <div className="flex gap-2">
+                        <a href={patent.applicationUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="outline" size="sm">
+                            <FileText className="w-4 h-4 mr-1" />
+                            View Application
+                          </Button>
+                        </a>
+                      </div>
+                    )}
                   </div>
-                  
+
                   <div className="flex-shrink-0">
                     <Badge className={getStatusColor(patent.status)}>
                       {patent.status}
@@ -199,18 +224,22 @@ export const PatentsTab = ({ profile }) => {
                 </div>
               </div>
             ))}
+            {patents.length === 0 && (
+              <p className="py-6 text-center text-sm text-gray-500">No patents added yet.</p>
+            )}
           </div>
         </CardContent>
       </Card>
 
       {/* Patent Timeline */}
+      {patentsByYear.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900">Patent Filing Timeline</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {patents.sort((a, b) => b.filedYear - a.filedYear).map((patent, index) => (
+            {patentsByYear.map((patent, index) => (
               <div key={index} className="relative pl-8 pb-4 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-100">
@@ -223,7 +252,9 @@ export const PatentsTab = ({ profile }) => {
                       <Badge className={getStatusColor(patent.status)}>
                         {patent.status}
                       </Badge>
-                      <span className="text-xs text-gray-600">{patent.filedYear}</span>
+                      {patent.filedYear > 0 && (
+                        <span className="text-xs text-gray-600">{patent.filedYear}</span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -232,6 +263,7 @@ export const PatentsTab = ({ profile }) => {
           </div>
         </CardContent>
       </Card>
+      )}
     </div>
   );
 };

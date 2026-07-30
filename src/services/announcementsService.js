@@ -14,7 +14,35 @@ const unwrapData = (response) => {
   return null;
 };
 
-const safeDate = (value) => (value ? String(value).slice(0, 10) : "");
+/** Normalizes any date-ish value to YYYY-MM-DD, or "" when unusable. */
+const safeDate = (value) => {
+  if (!value) return "";
+  const text = String(value).trim();
+  if (!text) return "";
+  // Already an ISO date or datetime — take the date part.
+  if (/^\d{4}-\d{2}-\d{2}/.test(text)) return text.slice(0, 10);
+  const parsed = new Date(text);
+  if (Number.isNaN(parsed.getTime())) return "";
+  return parsed.toISOString().slice(0, 10);
+};
+
+/**
+ * First present date across the given keys.
+ *
+ * The API has historically named this field `publishedAt`, `publishedDate`,
+ * `published_date` or `date` depending on the endpoint. Reading only one of them
+ * yielded an empty string, which the pages then fed to `new Date("")` and
+ * rendered as "Invalid Date".
+ */
+const pickDate = (item, keys) => {
+  for (const key of keys) {
+    const value = safeDate(item?.[key]);
+    if (value) return value;
+  }
+  return "";
+};
+
+const DATE_KEYS = ["date", "publishedDate", "published_date", "publishedAt", "published_at"];
 
 const toList = (value) => {
   if (Array.isArray(value)) return value.map((item) => String(item).trim()).filter(Boolean);
@@ -35,9 +63,10 @@ const getSchoolLabel = (item) =>
 const normalizeNotice = (item) => ({
   id: item?.id ?? "",
   title: String(item?.title || "Notice").trim(),
-  content: String(item?.content || "").trim(),
-  date: safeDate(item?.publishedDate || item?.published_date),
-  type: String(item?.type || "General").trim(),
+  content: String(item?.content || item?.summary || "").trim(),
+  date: pickDate(item, DATE_KEYS),
+  // The notices endpoint exposes the notice type as `category`.
+  type: String(item?.type || item?.category || "General").trim(),
   priority: String(item?.priority || "medium").trim(),
   views: Number(item?.views || 0),
   isNew: Boolean(item?.isNew ?? item?.is_new),
@@ -48,9 +77,10 @@ const normalizeNotice = (item) => ({
 const normalizeNews = (item) => ({
   id: item?.id ?? "",
   title: String(item?.title || "News").trim(),
-  date: safeDate(item?.publishedAt || item?.published_date),
-  publishedAt: safeDate(item?.publishedAt || item?.published_date),
-  excerpt: String(item?.excerpt || "").trim(),
+  date: pickDate(item, DATE_KEYS),
+  publishedAt: pickDate(item, DATE_KEYS),
+  // The news endpoint exposes the short summary as `summary`.
+  excerpt: String(item?.excerpt || item?.summary || "").trim(),
   content: String(item?.content || "").trim(),
   author: String(item?.author || "School Office").trim(),
   department: String(item?.department || "").trim(),
@@ -67,7 +97,7 @@ const normalizeNews = (item) => ({
 });
 
 const normalizeEvent = (item) => {
-  const eventDate = safeDate(item?.starts_at || item?.startsAt || item?.date);
+  const eventDate = pickDate(item, ["starts_at", "startsAt", ...DATE_KEYS]);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const eventStart = eventDate ? new Date(eventDate) : null;
@@ -106,10 +136,10 @@ const normalizeNewsletter = (item, index) => ({
   id: item?.id ?? `newsletter-${index + 1}`,
   title: String(item?.title || "Newsletter").trim(),
   issueNumber: String(item?.issueNumber || item?.issue_number || "").trim(),
-  date: safeDate(item?.publishedDate || item?.published_date),
-  coverImage: String(item?.coverImage || item?.cover_image_url || "").trim(),
+  date: pickDate(item, DATE_KEYS),
+  coverImage: String(item?.coverImage || item?.coverImageUrl || item?.cover_image_url || "").trim(),
   excerpt: String(item?.excerpt || "").trim(),
-  pdfLink: String(item?.pdfUrl || item?.pdf_url || "").trim(),
+  pdfLink: String(item?.pdfLink || item?.pdfUrl || item?.pdf_url || "").trim(),
   views: Number(item?.views || 0),
   category: String(item?.category || "School Update").trim(),
   schoolName: getSchoolLabel(item),
@@ -122,7 +152,7 @@ const normalizeMedia = (item, index) => {
     title: String(item?.title || `Gallery ${index + 1}`).trim(),
     category: String(item?.category || "Events").trim(),
     year: String(item?.year || ""),
-    date: safeDate(item?.publishedDate || item?.published_date),
+    date: pickDate(item, DATE_KEYS),
     images,
     coverImage: images[0] || "",
     schoolName: getSchoolLabel(item),

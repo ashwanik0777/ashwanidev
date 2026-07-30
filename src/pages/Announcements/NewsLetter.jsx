@@ -10,6 +10,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
+import { collectYears, getAnnouncementYear } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
 
 // === Modern Card Components ===
@@ -122,7 +123,8 @@ const NewsLetter = () => {
     [mockNewsletters],
   );
   const allYears = useMemo(
-    () => Array.from(new Set(mockNewsletters.map((n) => new Date(n.date).getFullYear().toString()))),
+    // Undated newsletters are skipped rather than producing a "NaN" year option.
+    () => collectYears(mockNewsletters),
     [mockNewsletters],
   );
 
@@ -139,7 +141,7 @@ const NewsLetter = () => {
         selectedCategory === "all" || newsletter.category === selectedCategory;
       const matchesYear =
         selectedYear === "all" ||
-        new Date(newsletter.date).getFullYear().toString() === selectedYear;
+        getAnnouncementYear(newsletter.date) === selectedYear;
 
       return matchesSearch && matchesCategory && matchesYear;
     });
@@ -156,7 +158,8 @@ const NewsLetter = () => {
 
   // Dynamic values for StatsCard
   const uniqueCategoriesCount = new Set(mockNewsletters.map(n => n.category)).size || 0;
-  const latestYear = mockNewsletters.length > 0 ? new Date(mockNewsletters[0].date).getFullYear() : new Date().getFullYear();
+  const latestYear =
+    getAnnouncementYear(mockNewsletters[0]?.date) || String(new Date().getFullYear());
   const totalViews = mockNewsletters.reduce((sum, n) => sum + Number(n.views || 0), 0);
 
   const getCategoryColor = (category) => {

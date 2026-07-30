@@ -7,6 +7,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
+import { formatAnnouncementDate } from '../../utils/announcementDate';
 // Button component
 const Button = ({ children, variant = "default", size = "md", className = "", ...props }) => {
   const base =
@@ -122,17 +123,8 @@ const Badge = ({ children, className = "" }) => (
 
 
 // Date formatter
-function format(date, formatStr) {
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  const d = new Date(date);
-  const month = months[d.getMonth()];
-  const day = String(d.getDate()).padStart(2, "0");
-  const year = d.getFullYear();
-  return `${month} ${day}, ${year}`;
-}
+// Undated notices render a placeholder rather than the string "Invalid Date".
+const format = (date) => formatAnnouncementDate(date, "MMMM dd, yyyy");
 
 const NoticeDetail = () => {
   const { id } = useParams();

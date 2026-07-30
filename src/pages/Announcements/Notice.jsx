@@ -24,6 +24,12 @@ import {
   syncAnnouncementsFromCache,
 } from "../../utils/schoolAnnouncements";
 import UnifiedAnnouncementFilter from "../../components/announcement/UnifiedAnnouncementFilter";
+import {
+  collectYears,
+  formatAnnouncementDate,
+  getAnnouncementYear,
+  toValidDate,
+} from "../../utils/announcementDate";
 
 // Enhanced Card components with modern styling
 const Card = ({ children, className = "", hover = true }) => (
@@ -320,19 +326,8 @@ const EnhancedSearchFilter = ({
   );
 };
 
-function format(date, formatStr) {
-  const d = new Date(date);
-  const pad = (n) => n.toString().padStart(2, "0");
-  const map = {
-    MMMM: d.toLocaleString("default", { month: "long" }),
-    MMM: d.toLocaleString("default", { month: "short" }),
-    MM: pad(d.getMonth() + 1),
-    dd: pad(d.getDate()),
-    yyyy: d.getFullYear(),
-    yy: d.getFullYear().toString().slice(-2),
-  };
-  return formatStr.replace(/MMMM|MMM|MM|dd|yyyy|yy/g, (match) => map[match]);
-}
+// Undated notices render a placeholder rather than the string "Invalid Date".
+const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 const Notice = ({ schoolCode }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState(null);
@@ -378,13 +373,8 @@ const Notice = ({ schoolCode }) => {
 const allTypes = Array.from(
   new Set(mockNotices.map((notice) => notice.type))
 );
-const allYears = Array.from(
-  new Set(
-    mockNotices.map((notice) =>
-      new Date(notice.date).getFullYear().toString()
-    )
-  )
-);
+// Undated notices are skipped rather than producing a "NaN" year option.
+const allYears = collectYears(mockNotices);
 
   // Filtered and sorted data
   const filteredAndSortedNews = useMemo(() => {
@@ -395,20 +385,23 @@ const allYears = Array.from(
           notice.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           notice.content.toLowerCase().includes(searchQuery.toLowerCase());
 
-        const noticeDate = new Date(notice.date);
+        // An undated notice cannot match a range or year filter, but must still
+        // show when neither filter is active.
+        const noticeDate = toValidDate(notice.date);
         const matchesDateRange =
-          (!startDate || noticeDate >= startDate) &&
-          (!endDate || noticeDate <= endDate);
+          (!startDate && !endDate) ||
+          (noticeDate &&
+            (!startDate || noticeDate >= startDate) &&
+            (!endDate || noticeDate <= endDate));
 
         const matchesType =
           selectedType === "all" || notice.type === selectedType;
         const matchesYear =
-          selectedYear === "all" ||
-          new Date(notice.date).getFullYear().toString() === selectedYear;
+          selectedYear === "all" || getAnnouncementYear(notice.date) === selectedYear;
 
         return matchesSearch && matchesDateRange && matchesType && matchesYear;
       })
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .sort((a, b) => (toValidDate(b.date)?.getTime() || 0) - (toValidDate(a.date)?.getTime() || 0));
   }, [
     mockNotices,
     searchQuery,

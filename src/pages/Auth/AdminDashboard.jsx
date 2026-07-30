@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Save,
@@ -12,6 +12,7 @@ import {
   Newspaper,
   Bell,
   Images,
+  Clock,
   Pencil,
   Trash2,
   Plus,
@@ -116,6 +117,10 @@ import { parseDriveLink } from "../../Data/semesterRegistrationData";
 */
 const fetchAllRegistrations = async () => ({ data: [] });
 const parseDriveLink = (url) => url || "";
+
+import AnnouncementManager from "../../components/announcement/AnnouncementManager";
+import ApprovalQueue from "../../components/announcement/ApprovalQueue";
+import { listPendingAnnouncements } from "../../services/announcementsAdminService";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -569,9 +574,12 @@ const AdminDashboard = () => {
   const [schoolDeletingKey, setSchoolDeletingKey] = useState("");
   const [schoolApiError, setSchoolApiError] = useState("");
   const [schoolEditor, setSchoolEditor] = useState({ isCreating: false });
-  // Collection edits (notices/news/events/gallery/clubs) are staged in schoolData
-  // and only persisted by the tab's Save button — flag it so it is not missed.
+  // Collection edits (clubs, NSS/NCC content) are staged in schoolData and only
+  // persisted by the tab's Save button — flag it so it is not missed.
+  // Announcements are exempt: they save per item, straight to their own tables.
   const [hasUnsavedSchoolChanges, setHasUnsavedSchoolChanges] = useState(false);
+  // Badge count for college-level announcements submitted by schools.
+  const [pendingApprovalCount, setPendingApprovalCount] = useState(0);
   const [accounts, setAccounts] = useState(getInitialAccounts);
   const [tenders, setTenders] = useState(getInitialTenders);
   const [recruitmentData, setRecruitmentData] = useState(getInitialRecruitmentData);
@@ -1102,34 +1110,12 @@ const AdminDashboard = () => {
     return () => { isMounted = false; };
   }, [activeTab, semRegFilters]);
 
-  /* ── Sync GBU administration school data when announcements tab is active ── */
+  /* ── Announcements own their sub-tab; they no longer read schoolData ── */
   useEffect(() => {
     if (activeTab === "announcements") {
-      const gbuSchool = schoolsList.find((s) => s.code === "GBU");
-      if (gbuSchool && selectedSchoolId !== gbuSchool.id) {
-        setSelectedSchoolId(gbuSchool.id);
-        const content = gbuSchool.content || {};
-        setSchoolData({
-          schoolCode: gbuSchool.code || "",
-          schoolName: gbuSchool.name || "",
-          deanName: content.deanName || "",
-          email: content.email || "",
-          phone: content.phone || "",
-          websiteUrl: content.websiteUrl || "",
-          bannerImage: content.bannerImage || "",
-          address: content.address || "",
-          schoolDescription: gbuSchool.overview || "",
-          events: content.events || [],
-          news: content.news || [],
-          notices: content.notices || [],
-          newsletters: content.newsletters || [],
-          eventGallery: content.eventGallery || [],
-          clubs: content.clubs || [],
-          tabContent: content.tabContent || {}
-        });
-        if (activeSchoolSubTab === "basic" || activeSchoolSubTab === "gallery" || activeSchoolSubTab === "clubs") {
-          setActiveSchoolSubTab("notices");
-        }
+      // "basic"/"clubs" belong to the School tab and have no announcements view.
+      if (!["notices", "news", "events", "newsletters", "gallery", "approvals"].includes(activeSchoolSubTab)) {
+        setActiveSchoolSubTab("notices");
       }
     } else if (activeTab === "school") {
       const gbuSchool = schoolsList.find((s) => s.code === "GBU");
@@ -1138,7 +1124,27 @@ const AdminDashboard = () => {
         setSchoolData(deepClone(EMPTY_SCHOOL_DATA));
       }
     }
-  }, [activeTab, schoolsList, selectedSchoolId]);
+  }, [activeTab, activeSchoolSubTab, schoolsList, selectedSchoolId]);
+
+  /* ── Approval queue badge ── */
+  const refreshPendingApprovalCount = useCallback(async () => {
+    try {
+      const pending = await listPendingAnnouncements();
+      setPendingApprovalCount(pending.length);
+    } catch {
+      // A failed count is not worth surfacing; the queue itself reports errors.
+      setPendingApprovalCount(0);
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshPendingApprovalCount();
+    // Poll while the admin is on the announcements tab so newly submitted
+    // school requests show up without a manual reload.
+    if (activeTab !== "announcements") return undefined;
+    const intervalId = setInterval(refreshPendingApprovalCount, 60000);
+    return () => clearInterval(intervalId);
+  }, [activeTab, refreshPendingApprovalCount]);
 
   const buildUniqueUsername = (seed, existingAccounts) => {
     const sanitized = String(seed || "faculty.user")
@@ -5340,14 +5346,20 @@ const AdminDashboard = () => {
               <p className="text-sm text-slate-500">Manage this school's content, events, news &amp; more. Data is saved per-school.</p>
             </div>
           </div>
-          <button
-            onClick={handleSaveSchool}
-            disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-          >
-            <Save className="h-4 w-4" />
-            {isSchoolSaving ? "Saving..." : "Save School"}
-          </button>
+          <div className="flex flex-col items-end gap-1">
+            <button
+              onClick={handleSaveSchool}
+              disabled={isSchoolSaving}
+              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            >
+              <Save className="h-4 w-4" />
+              {isSchoolSaving ? "Saving..." : "Save School"}
+            </button>
+            {/* Clubs and NSS/NCC content is still staged locally until this Save. */}
+            {hasUnsavedSchoolChanges && !isSchoolSaving && (
+              <span className="text-xs font-semibold text-amber-600">Unsaved changes</span>
+            )}
+          </div>
         </div>
 
       {activeSchoolSubTab === "basic" && (
@@ -5423,153 +5435,20 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {activeSchoolSubTab === "events" &&
-        renderCollectionEditor(
-          "events",
-          "Events",
-          [
-            { key: "title", label: "Event Title" },
-            { key: "date", label: "Date", type: "date" },
-            { key: "startsAt", label: "Starts At" },
-            { key: "endDate", label: "End Date", type: "date" },
-            { key: "endsAt", label: "Ends At" },
-            { key: "time", label: "Time" },
-            { key: "venue", label: "Venue" },
-            { key: "location", label: "Location" },
-            { key: "type", label: "Type" },
-            { key: "mode", label: "Mode" },
-            { key: "organizer", label: "Organizer" },
-            { key: "attendees", label: "Attendees", type: "number" },
-            { key: "price", label: "Price" },
-            { key: "tags", label: "Tags (comma separated)" },
-            { key: "image", label: "Image URL" },
-            { key: "imageLink", label: "Image Click Link" },
-            { key: "coverImageUrl", label: "Cover Image URL" },
-            { key: "images", label: "Gallery Images (comma separated URLs)" },
-            { key: "registrationUrl", label: "Registration URL" },
-            { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"] },
-            { key: "description", label: "Description", type: "textarea" },
-          ],
-          {
-            title: "",
-            date: "",
-            startsAt: "",
-            endDate: "",
-            endsAt: "",
-            time: "",
-            venue: "",
-            location: "",
-            type: "",
-            mode: "Offline",
-            organizer: "",
-            attendees: 0,
-            price: "Free",
-            tags: "",
-            image: "",
-            imageLink: "",
-            coverImageUrl: "",
-            images: "",
-            registrationUrl: "",
-            level: "college",
-            description: "",
-          },
-        )}
-
-      {activeSchoolSubTab === "news" &&
-        renderCollectionEditor(
-          "news",
-          "News",
-          [
-            { key: "title", label: "News Title" },
-            { key: "date", label: "Date", type: "date" },
-            { key: "category", label: "Category" },
-            { key: "author", label: "Author" },
-            { key: "department", label: "Department" },
-            { key: "tags", label: "Tags (comma separated)" },
-            { key: "priority", label: "Priority" },
-            { key: "featured", label: "Featured", type: "boolean" },
-            { key: "views", label: "Views", type: "number" },
-            { key: "likes", label: "Likes", type: "number" },
-            { key: "image", label: "Image URL" },
-            { key: "imageLink", label: "Image Click Link" },
-            { key: "coverImageUrl", label: "Cover Image URL" },
-            { key: "pdfUrl", label: "PDF URL" },
-            { key: "link", label: "External Link" },
-            { key: "excerpt", label: "Excerpt", type: "textarea" },
-            { key: "content", label: "Content", type: "textarea" },
-            { key: "level", label: "Announcement Level", type: "select", options: ["college", "school"] },
-            { key: "status", label: "Status" },
-          ],
-          {
-            title: "",
-            date: "",
-            category: "Academic",
-            author: "School Office",
-            department: "",
-            tags: "",
-            priority: "medium",
-            featured: false,
-            views: 0,
-            likes: 0,
-            image: "",
-            imageLink: "",
-            coverImageUrl: "",
-            pdfUrl: "",
-            link: "",
-            excerpt: "",
-            content: "",
-            level: "college",
-            status: "draft",
-          },
-        )}
-
-      {activeSchoolSubTab === "notices" &&
-        renderCollectionEditor(
-          "notices",
-          "Notices",
-          NOTICES_FIELDS,
-          NOTICES_TEMPLATE
-        )}
-
-      {activeSchoolSubTab === "newsletters" &&
-        renderCollectionEditor(
-          "newsletters",
-          "Newsletters",
-          [
-            { key: "title", label: "Title" },
-            { key: "date", label: "Date", type: "date" },
-            { key: "issueNumber", label: "Issue Number" },
-            { key: "category", label: "Category" },
-            { key: "views", label: "Views", type: "number" },
-            { key: "coverImage", label: "Cover Image URL" },
-            { key: "imageLink", label: "Image Click Link" },
-            { key: "pdfLink", label: "PDF Link" },
-            { key: "excerpt", label: "Excerpt", type: "textarea" },
-            { key: "content", label: "Content", type: "textarea" },
-            { key: "isPublished", label: "Published", type: "boolean" },
-          ],
-          {
-            title: "",
-            date: "",
-            issueNumber: "",
-            category: "School Update",
-            views: 0,
-            coverImage: "",
-            imageLink: "",
-            pdfLink: "",
-            excerpt: "",
-            content: "",
-            isPublished: true,
-          },
-        )}
-
-      {activeSchoolSubTab === "gallery" &&
-        renderCollectionEditor(
-          "eventGallery",
-          "Event Gallery",
-          GALLERY_FIELDS,
-          GALLERY_TEMPLATE
-        )}
+      {/* A school's announcements live in the announcement tables, shared with
+          the public site — not in this school's content blob. */}
+      {["events", "news", "notices", "newsletters", "gallery"].includes(activeSchoolSubTab) && (
+        <AnnouncementManager
+          key={`${schoolData.schoolCode}-${activeSchoolSubTab}`}
+          kind={activeSchoolSubTab === "gallery" ? "gallery" : activeSchoolSubTab}
+          actorRole="admin"
+          schoolCode={schoolData.schoolCode}
+          onMessage={(text, isError) => {
+            setMessage(text);
+            setSchoolApiError(isError ? text : "");
+          }}
+        />
+      )}
 
       {activeSchoolSubTab === "clubs" && schoolData.schoolCode !== "NSS" && schoolData.schoolCode !== "NCC" &&
         renderCollectionEditor(
@@ -5630,88 +5509,74 @@ const AdminDashboard = () => {
   );
 };
 
+  /*
+   * Announcements are read from and written to their own database tables via
+   * /admin/announcements/:kind. They used to be stored in the schools.content
+   * JSONB blob, which the public pages never read — so nothing entered here ever
+   * appeared on the website.
+   */
   const renderAnnouncementsTab = () => {
-    const gbuSchool = schoolsList.find((s) => s.code === "GBU");
-    if (!gbuSchool) {
-      return (
-        <div className="space-y-4">
-          <div className={cardClass}>
-            <p className="text-sm text-slate-500">Loading Gautam Buddha University Administration database...</p>
-          </div>
-        </div>
-      );
-    }
+    // The sub-tab ids in the sidebar map onto the API's announcement kinds.
+    const subTabToKind = {
+      notices: "notices",
+      news: "news",
+      events: "events",
+      newsletters: "newsletters",
+      gallery: "gallery",
+    };
+    const activeKind = subTabToKind[activeSchoolSubTab];
 
     return (
       <div className="space-y-4">
-        <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="flex flex-col justify-between gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center">
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-slate-900">University Announcements Management</h2>
               <span className="rounded-lg bg-slate-900 px-2 py-0.5 text-xs font-bold text-white">GBU</span>
             </div>
-            <p className="text-sm text-slate-500">Manage notices, news, events, and newsletters showing on the main GBU website announcements.</p>
+            <p className="text-sm text-slate-500">
+              Notices, news, events, newsletters and gallery albums shown on the public Announcements
+              pages.
+            </p>
           </div>
-          <div className="flex flex-col items-end gap-1">
-            <button
-              onClick={handleSaveSchool}
-              disabled={isSchoolSaving}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-            >
-              <Save className="h-4 w-4" />
-              {isSchoolSaving ? "Saving..." : "Save Announcements"}
-            </button>
-            {hasUnsavedSchoolChanges && !isSchoolSaving && (
-              <span className="text-xs font-semibold text-amber-600">Unsaved changes</span>
+          <button
+            type="button"
+            onClick={() => setActiveSchoolSubTab("approvals")}
+            className="inline-flex items-center gap-2 self-start rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-800 hover:bg-amber-100 sm:self-auto"
+          >
+            <Clock className="h-4 w-4" />
+            Approval Queue
+            {pendingApprovalCount > 0 && (
+              <span className="rounded-full bg-amber-600 px-1.5 py-0.5 text-xs font-bold text-white">
+                {pendingApprovalCount}
+              </span>
             )}
-          </div>
+          </button>
         </div>
 
-        {schoolApiError ? (
-          <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
-            {schoolApiError}
+        {activeSchoolSubTab === "approvals" ? (
+          <ApprovalQueue
+            onMessage={(text, isError) => {
+              setMessage(text);
+              setSchoolApiError(isError ? text : "");
+              refreshPendingApprovalCount();
+            }}
+          />
+        ) : activeKind ? (
+          <AnnouncementManager
+            key={activeKind}
+            kind={activeKind}
+            actorRole="admin"
+            onMessage={(text, isError) => {
+              setMessage(text);
+              setSchoolApiError(isError ? text : "");
+            }}
+          />
+        ) : (
+          <div className={cardClass}>
+            <p className="text-sm text-slate-500">Select a section from the sidebar.</p>
           </div>
-        ) : null}
-
-        {activeSchoolSubTab === "events" &&
-          renderCollectionEditor(
-            "events",
-            "Events",
-            EVENTS_FIELDS,
-            EVENTS_TEMPLATE
-          )}
-
-        {activeSchoolSubTab === "news" &&
-          renderCollectionEditor(
-            "news",
-            "News",
-            NEWS_FIELDS,
-            NEWS_TEMPLATE
-          )}
-
-        {activeSchoolSubTab === "notices" &&
-          renderCollectionEditor(
-            "notices",
-            "Notices",
-            NOTICES_FIELDS,
-            NOTICES_TEMPLATE
-          )}
-
-        {activeSchoolSubTab === "newsletters" &&
-          renderCollectionEditor(
-            "newsletters",
-            "Newsletters",
-            NEWSLETTERS_FIELDS,
-            NEWSLETTERS_TEMPLATE
-          )}
-
-        {activeSchoolSubTab === "gallery" &&
-          renderCollectionEditor(
-            "eventGallery",
-            "Event Gallery",
-            GALLERY_FIELDS,
-            GALLERY_TEMPLATE
-          )}
+        )}
       </div>
     );
   };
@@ -7617,6 +7482,7 @@ const AdminDashboard = () => {
                           { id: "events", label: "Events", icon: CalendarDays },
                           { id: "newsletters", label: "Newsletters", icon: Newspaper },
                           { id: "gallery", label: "Event Gallery", icon: Images },
+                          { id: "approvals", label: "Approval Queue", icon: Clock, badge: pendingApprovalCount },
                         ].map((subTab) => {
                           const SubIcon = subTab.icon;
                           const isSubActive = activeSchoolSubTab === subTab.id;
@@ -7638,6 +7504,11 @@ const AdminDashboard = () => {
                               />
                               <SubIcon className={`h-3.5 w-3.5 ${isSubActive ? "text-blue-600" : "text-slate-500"}`} />
                               {subTab.label}
+                              {subTab.badge > 0 && (
+                                <span className="ml-auto rounded-full bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                                  {subTab.badge}
+                                </span>
+                              )}
                             </button>
                           );
                         })}

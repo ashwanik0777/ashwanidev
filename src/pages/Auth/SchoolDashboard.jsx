@@ -58,6 +58,8 @@ const setSchoolRegistration = () => {};
 const getRegistrationStatus = () => ({ active: false, reason: "", customMessage: "" });
 const REASON_OPTIONS = [];
 
+import AnnouncementManager from "../../components/announcement/AnnouncementManager";
+
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
 const ACTIVE_TABS = [
@@ -1338,48 +1340,26 @@ const SchoolDashboard = () => {
 
     if (activeTab === "faculty-requests") return renderFacultyRequestsTab();
 
-    if (activeTab === "events") {
-      return renderCollectionEditor(
-        "events",
-        "Events Management",
-        EVENTS_FIELDS,
-        EVENTS_TEMPLATE
-      );
-    }
+    /* Announcements are real database rows shared with the public site, not
+       part of this school's content blob. Each item saves on its own; a
+       college-level item goes to the university admin for approval first. */
+    const announcementKind = {
+      events: "events",
+      news: "news",
+      newsletters: "newsletters",
+      notices: "notices",
+      "event-gallery": "gallery",
+    }[activeTab];
 
-    if (activeTab === "news") {
-      return renderCollectionEditor(
-        "news",
-        "News Management",
-        NEWS_FIELDS,
-        NEWS_TEMPLATE
-      );
-    }
-
-    if (activeTab === "newsletters") {
-      return renderCollectionEditor(
-        "newsletters",
-        "Newsletter Management",
-        NEWSLETTERS_FIELDS,
-        NEWSLETTERS_TEMPLATE
-      );
-    }
-
-    if (activeTab === "notices") {
-      return renderCollectionEditor(
-        "notices",
-        "Notice Management",
-        NOTICES_FIELDS,
-        NOTICES_TEMPLATE
-      );
-    }
-
-    if (activeTab === "event-gallery") {
-      return renderCollectionEditor(
-        "eventGallery",
-        "Event Gallery Management",
-        GALLERY_FIELDS,
-        GALLERY_TEMPLATE
+    if (announcementKind) {
+      return (
+        <AnnouncementManager
+          key={announcementKind}
+          kind={announcementKind}
+          actorRole="school"
+          schoolCode={mySchoolCode}
+          onMessage={(text) => setMessage(text)}
+        />
       );
     }
 

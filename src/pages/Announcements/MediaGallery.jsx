@@ -15,6 +15,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
+import { formatAnnouncementDate } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
 
 // === Professional Card Components ===
@@ -293,12 +294,8 @@ const ProfessionalSearchFilter = ({
 };
 
 // === Format date function ===
-function format(date, formatStr) {
-  const d = typeof date === 'string' ? new Date(date) : date;
-  const pad = (n) => (n < 10 ? '0' + n : n);
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  return formatStr.replace('MMMM', monthNames[d.getMonth()]).replace('dd', pad(d.getDate())).replace('yyyy', d.getFullYear());
-}
+// Undated albums render a placeholder rather than the string "Invalid Date".
+const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 
 // === Mock Data ===
 // const mockMedia = [

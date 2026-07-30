@@ -89,3 +89,13 @@ export const syncAnnouncementsFromCache = () => {
   announcementsCache = readFromCache();
   return announcementsCache;
 };
+
+/**
+ * Clears the refresh throttle so the very next refresh hits the API.
+ *
+ * Called after a dashboard writes an announcement — without this the 5s
+ * throttle could serve a stale snapshot and the new item would look missing.
+ */
+export const invalidateAnnouncementsCache = () => {
+  lastAnnouncementsRefreshAt = 0;
+};

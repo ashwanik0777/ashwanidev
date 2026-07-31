@@ -14,12 +14,11 @@ const getImageUrl = (path) => {
       : `${BASE}/${path.startsWith("media") ? "" : "media/"}${path}`;
 };
 
-const StatItem = ({ icon, end, duration, suffix = "", separator = "", text, start }) => {
+const StatItem = ({  end, duration, suffix = "", separator = "", text, start }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
     <div className="text-center" ref={ref}>
-      <img src={getImageUrl(icon)} className="w-10 h-10 mx-auto mb-3" alt="icon" />
       <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
         {inView ? (
           <CountUp end={end} duration={duration} suffix={suffix} separator={separator} start={start ?? 0} />
@@ -142,20 +141,17 @@ const HiringSection = () => {
       <div className="w-[90vw] max-w-4xl mx-auto mt-24 sm:mt-28 bg-white shadow-xl rounded-2xl p-6 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
           <StatItem
-            icon="https://cdn.iconscout.com/icon/free/png-256/free-infosys-logo-icon-download-in-svg-png-gif-file-formats--multinational-company-brand-logos-icons-2370783.png"
             end={parseInt(first?.Companies_hiring?.replace(/\D/g, "") || 0)}
             duration={2}
             text="Companies hiring worldwide"
           />
           <StatItem
-            icon="https://imgs.search.brave.com/anSX7MPt3oE9_CvMuzZYj0PIEtCLBHe8BE56bK-VkIQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/YnJhbmRmZXRjaC5p/by9pZDF1SUNvNDk3/L3cvNDAwL2gvNDAw/L3RoZW1lL2Rhcmsv/aWNvbi5qcGVnP2M9/MWJ4aWQ2NE11cDdh/Y3pld1NBWU1YJnQ9/MTY2NzU2OTU3Njg3/Mw"
             end={parseInt(first?.alumini_count?.replace(/\D/g, "") || 0)}
             duration={3}
             separator=","
             text="Successful Alumni worldwide"
           />
           <StatItem
-            icon="https://imgs.search.brave.com/gpzFly2lPEAGVUnvwsQkVqbIvTjIplHBojJUseMNT8w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vq/alRhRHh1dWdXTlZr/R0ozVDF5Rkd0N25S/bkI4bHVqbFlIMkxs/NndFX1A0d0FoTElR/TTdRRFBDT2laaVN5/Y1drbGtmTXBZV0hO/X1hSbnJHUEZaRE9N/dEItN2JVT3NGYnh1/a1YwdndYN0l2bXFN/S3NFME1NajQ4eDY5/U05SejBOMm5mYUR6/cFlZU3VoaWMvczYw/MC1ydy9JQk0rTG9n/bystK0Rvd25sb2Fk/K0ZyZWUrVmVjdG9y/K1NWRy53ZWJw"
             end={parseInt(first?.placement_rate?.replace(/\D/g, "") || 0)}
             start={65}
             duration={2.5}

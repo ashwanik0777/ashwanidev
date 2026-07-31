@@ -190,7 +190,7 @@ const Glance = () => {
     },
     {
       label: "Enrolled Students",
-      value: glanceData?.student_count || "6500+",
+      value: glanceData?.student_count || "8200+",
       description: "Vibrant, diverse community of future leaders",
       icon: Users,
       iconColor: "#8b5cf6", // Violet-500
@@ -198,7 +198,7 @@ const Glance = () => {
     },
     {
       label: "Expert Faculty",
-      value: glanceData?.faculty_member || "200+",
+      value: glanceData?.faculty_member || "350+",
       description: "Distinguished scholars and industry pioneers",
       icon: Briefcase,
       iconColor: "#f97316", // Orange-500

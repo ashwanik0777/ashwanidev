@@ -51,9 +51,9 @@
       {
         "id": 1,
         "label": "GBU at a Glance",
-        "student_count": "6500+",
+        "student_count": "8200+",
         "programs_count": "160+",
-        "faculty_member": "200+",
+        "faculty_member": "350+",
         "acres_camus": 511,
         "placement_rate": "90%",
         "icon": "abc",
@@ -186,72 +186,72 @@
         "title": "Companies Hiring",
         "logo": "/assets/companies/pngwing_4SsB6jC.com.png",
         "content_text": "Prestigious companies regularly hire students from G.B.U.",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30000+",
-        "placement_rate": "100"
+        "placement_rate": "90%"
       },
       {
         "id": 2,
         "title": "Companies Hiring",
         "logo": "/assets/companies/Screenshot_2025-06-24_at_1.35.32AM.png",
         "content_text": "Prestigious companies regularly hire students from G.B.U.",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 3,
         "title": "Companies Hiring",
         "logo": "/assets/companies/Screenshot_2025-06-24_at_1.38.14AM.png",
         "content_text": "Prestigious companies regularly hire students from G.B.U.",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 4,
         "title": "HCL",
         "logo": "/assets/companies/pngwing.com_1.png",
         "content_text": "Prestigious companies regularly hire students from G.B.U.",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30,000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 5,
         "title": "wipro",
         "logo": "/assets/companies/pngwing.com.png",
         "content_text": "wipro",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30,000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 6,
         "title": "amazon",
         "logo": "/assets/companies/pngwing.com_2.png",
         "content_text": "amazon",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30,000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 7,
         "title": "meta",
         "logo": "/assets/companies/pngwing.com_3.png",
         "content_text": "meta",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30,000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       },
       {
         "id": 8,
         "title": "infosis",
         "logo": "/assets/companies/pngwing.com_4.png",
         "content_text": "infosis",
-        "Companies_hiring": "600+",
+        "Companies_hiring": "300+",
         "alumini_count": "30,000+",
-        "placement_rate": "100%"
+        "placement_rate": "90%"
       }
     ],
     "virtual_experience": [

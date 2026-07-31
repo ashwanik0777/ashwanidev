@@ -92,7 +92,7 @@ const Button = ({
 const ResearchProjectsTab = ({ profile }) => {
   const [filterStatus, setFilterStatus] = useState("all");
   const tabData = profile?.tabData?.researchProjects || {};
-  const projects = asArray(tabData.projects).map(normalizeProject);
+  const projects = asArray(tabData.projects)?.map(normalizeProject);
 
   const filteredProjects =
     filterStatus === "all"
@@ -107,7 +107,7 @@ const ResearchProjectsTab = ({ profile }) => {
 
   const ongoingCount = projects.filter((project) => project.status === "ongoing").length;
   const collaboratorCount = new Set(
-    projects.flatMap((project) => project.collaborators).map((name) => asText(name)),
+    projects.flatMap((project) => project.collaborators)?.map((name) => asText(name)),
   ).size;
 
   return (
@@ -155,7 +155,7 @@ const ResearchProjectsTab = ({ profile }) => {
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <div className="flex gap-2">
-                {["all", "ongoing", "completed"].map((status) => (
+                {["all", "ongoing", "completed"]?.map((status) => (
                   <Button
                     key={status}
                     variant={filterStatus === status ? "default" : "outline"}
@@ -174,7 +174,7 @@ const ResearchProjectsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects?.map((project, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
@@ -228,7 +228,7 @@ const ResearchProjectsTab = ({ profile }) => {
                           Collaborators:
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {project.collaborators.map((collaborator, idx) => (
+                          {project.collaborators?.map((collaborator, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {collaborator}
                             </Badge>
@@ -242,7 +242,7 @@ const ResearchProjectsTab = ({ profile }) => {
                           Key Deliverables:
                         </h4>
                         <ul className="space-y-1">
-                          {project.deliverables.slice(0, 2).map((deliverable, idx) => (
+                          {project.deliverables.slice(0, 2)?.map((deliverable, idx) => (
                             <li
                               key={idx}
                               className="text-xs text-gray-600 flex items-start"
@@ -300,9 +300,9 @@ const GroupMemberLinks = ({ member, className = "" }) => {
 // Research Group Tab Component
 const ResearchGroupTab = ({ profile }) => {
   const tabData = profile?.tabData?.researchGroup || {};
-  const phdScholars = asArray(tabData.phdScholars).map(normalizeGroupMember);
-  const postdocs = asArray(tabData.postdocs).map(normalizeGroupMember);
-  const researchAssistants = asArray(tabData.researchAssistants).map(normalizeGroupMember);
+  const phdScholars = asArray(tabData.phdScholars)?.map(normalizeGroupMember);
+  const postdocs = asArray(tabData.postdocs)?.map(normalizeGroupMember);
+  const researchAssistants = asArray(tabData.researchAssistants)?.map(normalizeGroupMember);
 
   const getStatusColor = (status) =>
     matchKey(status, GROUP_STATUS_COLORS, "bg-gray-100 text-gray-800");
@@ -361,7 +361,7 @@ const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {phdScholars.map((scholar, index) => (
+            {phdScholars?.map((scholar, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
@@ -430,7 +430,7 @@ const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {postdocs.map((postdoc, index) => (
+            {postdocs?.map((postdoc, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100"
@@ -494,7 +494,7 @@ const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            {researchAssistants.map((assistant, index) => (
+            {researchAssistants?.map((assistant, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 border-solid"

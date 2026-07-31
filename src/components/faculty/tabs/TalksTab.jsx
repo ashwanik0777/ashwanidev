@@ -119,7 +119,7 @@ const normalizeTalk = (item) => ({
 
 export const TalksTab = ({ profile }) => {
   const tabData = profile?.tabData?.talks || {};
-  const invitedTalks = asArray(tabData.invitedTalks).map(normalizeTalk);
+  const invitedTalks = asArray(tabData.invitedTalks)?.map(normalizeTalk);
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
   const formatType = (type) => matchKey(type, TYPE_LABELS, asText(type, 'Talk'));
@@ -128,19 +128,19 @@ export const TalksTab = ({ profile }) => {
   const recordedCount = invitedTalks.filter((talk) => talk.recordingUrl).length;
 
   const talkYears = invitedTalks
-    .map((talk) => Number(String(talk.date).match(/\d{4}/)?.[0] || 0))
+    ?.map((talk) => Number(String(talk.date).match(/\d{4}/)?.[0] || 0))
     .filter((year) => year > 1900);
   const latestYear = talkYears.length ? Math.max(...talkYears) : '--';
 
   // Speaking expertise mirrors the faculty's own research areas/tags rather than
   // a hardcoded list.
   const expertiseTopics = [
-    ...asArray(profile?.researchAreas).map((area) =>
+    ...asArray(profile?.researchAreas)?.map((area) =>
       typeof area === 'string' ? area : pickText(area, ['title', 'name']),
     ),
     ...asArray(profile?.tags),
   ]
-    .map((topic) => asText(topic))
+    ?.map((topic) => asText(topic))
     .filter(Boolean)
     .slice(0, 6);
 
@@ -191,7 +191,7 @@ export const TalksTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {invitedTalks.map((talk, index) => (
+            {invitedTalks?.map((talk, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div className="flex-1">
@@ -273,7 +273,7 @@ export const TalksTab = ({ profile }) => {
           </CardHeader>
           <CardContent>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {expertiseTopics.map((topic, index) => (
+              {expertiseTopics?.map((topic, index) => (
                 <div
                   key={`${topic}-${index}`}
                   className={`rounded-lg p-4 border border-solid ${EXPERTISE_STYLES[index % EXPERTISE_STYLES.length]}`}

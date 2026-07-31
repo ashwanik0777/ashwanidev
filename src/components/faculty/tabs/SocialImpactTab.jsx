@@ -79,7 +79,7 @@ const normalizeActivity = (item) => ({
 
 export const SocialImpactTab = ({ profile }) => {
   const tabData = profile?.tabData?.socialImpact || {};
-  const socialActivities = asArray(tabData.socialActivities).map(normalizeActivity);
+  const socialActivities = asArray(tabData.socialActivities)?.map(normalizeActivity);
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
   const getTypeIcon = (type) => matchKey(type, TYPE_ICONS, Heart);
@@ -89,18 +89,18 @@ export const SocialImpactTab = ({ profile }) => {
     if (!value) return 'Social Impact';
     return value
       .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      ?.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
 
   const organisationCount = new Set(
-    socialActivities.map((activity) => activity.organization).filter(Boolean),
+    socialActivities?.map((activity) => activity.organization).filter(Boolean),
   ).size;
   const focusAreaCount = new Set(
-    socialActivities.map((activity) => activity.type).filter(Boolean),
+    socialActivities?.map((activity) => activity.type).filter(Boolean),
   ).size;
   const impactPointCount = socialActivities.reduce(
-    (sum, activity) => sum + activity.impact.length,
+    (sum, activity) => sum + (activity?.impact?.length || 0),
     0,
   );
 
@@ -149,7 +149,7 @@ export const SocialImpactTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {socialActivities.map((activity, index) => {
+            {socialActivities?.map((activity, index) => {
               const IconComponent = getTypeIcon(activity.type);
               return (
                 <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
@@ -201,7 +201,7 @@ export const SocialImpactTab = ({ profile }) => {
                         <div className="mb-4">
                           <h4 className="font-medium text-gray-900 mb-2">Key Impact:</h4>
                           <ul className="space-y-1">
-                            {activity.impact.map((impact, idx) => (
+                            {activity.impact?.map((impact, idx) => (
                               <li key={idx} className="text-sm text-gray-700 flex items-start">
                                 <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                                 {impact}

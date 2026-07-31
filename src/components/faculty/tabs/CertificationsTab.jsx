@@ -108,8 +108,8 @@ const normalizeProgram = (item) => ({
 
 export const CertificationsTab = ({ profile }) => {
   const tabData = profile?.tabData?.certifications || {};
-  const certifications = asArray(tabData.certifications).map(normalizeCertification);
-  const professionalDevelopment = asArray(tabData.professionalDevelopment).map(normalizeProgram);
+  const certifications = asArray(tabData.certifications)?.map(normalizeCertification);
+  const professionalDevelopment = asArray(tabData.professionalDevelopment)?.map(normalizeProgram);
 
   const getLevelColor = (level) => matchKey(level, LEVEL_COLORS, 'bg-gray-100 text-gray-800');
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
@@ -117,7 +117,7 @@ export const CertificationsTab = ({ profile }) => {
   // Earliest certification year drives the "years of learning" tile. The editor
   // stores free text ("January 2025"), so pull the 4-digit year out of it.
   const certificationYears = certifications
-    .map((cert) => Number(String(cert.year).match(/\d{4}/)?.[0] || 0))
+    ?.map((cert) => Number(String(cert.year).match(/\d{4}/)?.[0] || 0))
     .filter((year) => year > 1900);
   const yearsOfLearning = certificationYears.length
     ? `${new Date().getFullYear() - Math.min(...certificationYears)}+`
@@ -172,7 +172,7 @@ export const CertificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {certifications.map((cert, index) => (
+            {certifications?.map((cert, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
@@ -207,7 +207,7 @@ export const CertificationsTab = ({ profile }) => {
                       <div className="mb-4">
                         <h4 className="font-medium text-gray-900 mb-2">Skills Covered:</h4>
                         <div className="flex flex-wrap gap-2">
-                          {cert.skills.map((skill, idx) => (
+                          {cert.skills?.map((skill, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {skill}
                             </Badge>
@@ -259,7 +259,7 @@ export const CertificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {professionalDevelopment.map((activity, index) => (
+            {professionalDevelopment?.map((activity, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-100">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">

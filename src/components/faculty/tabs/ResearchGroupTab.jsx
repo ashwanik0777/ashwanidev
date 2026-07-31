@@ -84,9 +84,9 @@ const GroupMemberLinks = ({ member, className = "" }) => {
 
 export const ResearchGroupTab = ({ profile }) => {
   const tabData = profile?.tabData?.researchGroup || {};
-  const phdScholars = asArray(tabData.phdScholars).map(normalizeGroupMember);
-  const postdocs = asArray(tabData.postdocs).map(normalizeGroupMember);
-  const researchAssistants = asArray(tabData.researchAssistants).map(normalizeGroupMember);
+  const phdScholars = asArray(tabData.phdScholars)?.map(normalizeGroupMember);
+  const postdocs = asArray(tabData.postdocs)?.map(normalizeGroupMember);
+  const researchAssistants = asArray(tabData.researchAssistants)?.map(normalizeGroupMember);
 
   const getStatusColor = (status) =>
     matchKey(status, GROUP_STATUS_COLORS, 'bg-gray-100 text-gray-800');
@@ -139,7 +139,7 @@ export const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {phdScholars.map((scholar, index) => (
+            {phdScholars?.map((scholar, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
@@ -195,7 +195,7 @@ export const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
-            {postdocs.map((postdoc, index) => (
+            {postdocs?.map((postdoc, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
@@ -246,7 +246,7 @@ export const ResearchGroupTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            {researchAssistants.map((assistant, index) => (
+            {researchAssistants?.map((assistant, index) => (
               <div key={index} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 border-solid">
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{assistant.name}</h3>
                 {assistant.program && (

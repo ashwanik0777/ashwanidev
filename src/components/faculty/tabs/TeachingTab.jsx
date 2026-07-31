@@ -101,7 +101,7 @@ const normalizeCourse = (item) => ({
 export const TeachingTab = ({ profile }) => {
   const [selectedLevel, setSelectedLevel] = useState('all');
   const tabData = profile?.tabData?.teaching || {};
-  const courses = asArray(tabData.courses).map(normalizeCourse);
+  const courses = asArray(tabData.courses)?.map(normalizeCourse);
 
   const filteredCourses = selectedLevel === 'all'
     ? courses
@@ -109,9 +109,9 @@ export const TeachingTab = ({ profile }) => {
 
   const getLevelColor = (level) => LEVEL_COLORS[level] || 'bg-gray-100 text-gray-800';
 
-  const totalStudents = courses.reduce((sum, course) => sum + course.students, 0);
-  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
-  const totalSlides = courses.reduce((sum, course) => sum + course.slides.length, 0);
+  const totalStudents = courses.reduce((sum, course) => sum + (course?.students || 0), 0);
+  const totalCredits = courses.reduce((sum, course) => sum + (course?.credits || 0), 0);
+  const totalSlides = courses.reduce((sum, course) => sum + (course?.slides?.length || 0), 0);
 
   const teachingPhilosophy = asText(tabData.philosophy);
 
@@ -170,7 +170,7 @@ export const TeachingTab = ({ profile }) => {
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <div className="flex gap-2">
-                {['all', 'UG', 'PG', 'PhD'].map((level) => (
+                {['all', 'UG', 'PG', 'PhD']?.map((level) => (
                   <Button
                     key={level}
                     variant={selectedLevel === level ? "default" : "outline"}
@@ -187,7 +187,7 @@ export const TeachingTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-6">
-            {filteredCourses.map((course, index) => (
+            {filteredCourses?.map((course, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-all duration-200">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
@@ -246,7 +246,7 @@ export const TeachingTab = ({ profile }) => {
                         </div>
 
                         <div className="grid gap-2">
-                          {course.slides.map((slide, slideIdx) => (
+                          {course.slides?.map((slide, slideIdx) => (
                             <div key={slide?.id || slideIdx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200 border-solid hover:bg-gray-100 transition-colors">
                               <div className="flex items-center gap-3">
                                 <FileText className="w-4 h-4 text-blue-600" />

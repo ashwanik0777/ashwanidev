@@ -54,7 +54,7 @@ const OverviewTab = ({ activeTab, profile }) => {
 
   // Research areas may be stored as objects ({title, description}) or as plain
   // strings coming from the tags field.
-  const researchAreas = asArray(profile.researchAreas).map((area) =>
+  const researchAreas = asArray(profile.researchAreas)?.map((area) =>
     typeof area === 'string'
       ? { title: area, description: '' }
       : { title: pickText(area, ['title', 'name']), description: pickText(area, ['description']) },
@@ -116,7 +116,7 @@ const OverviewTab = ({ activeTab, profile }) => {
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            {researchAreas.map((area, index) => (
+            {researchAreas?.map((area, index) => (
               <div
                 key={index}
                 className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
@@ -146,7 +146,7 @@ const OverviewTab = ({ activeTab, profile }) => {
           </CardHeader>
           <CardContent>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickLinks.map((link, index) => (
+              {quickLinks?.map((link, index) => (
                 <a
                   key={index}
                   href={link.url}

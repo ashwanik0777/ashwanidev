@@ -69,7 +69,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {qualifications.map((qual, index) => (
+            {qualifications?.map((qual, index) => (
               <div key={index} className="relative pl-8 pb-6 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-sm border border-gray-100 border-solid hover:shadow-md transition-shadow">
@@ -120,7 +120,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {experience.map((exp, index) => (
+            {experience?.map((exp, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div>
@@ -144,7 +144,7 @@ export const QualificationsTab = ({ profile }) => {
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
                     <ul className="space-y-1">
-                      {pickArray(exp, ['responsibilities']).map((responsibility, idx) => (
+                      {pickArray(exp, ['responsibilities'])?.map((responsibility, idx) => (
                         <li key={idx} className="text-sm text-gray-700 flex items-start">
                           <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                           {responsibility}

@@ -45,14 +45,14 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
   const awardsData = profile?.tabData?.awards || {};
   const socialData = profile?.tabData?.socialImpact || {};
 
-  const awards = asArray(awardsData?.awards).map(normalizeAward);
+  const awards = asArray(awardsData?.awards)?.map(normalizeAward);
   const achievements = asArray(awardsData?.achievements);
-  const socialActivities = asArray(socialData?.socialActivities).map(normalizeActivity);
+  const socialActivities = asArray(socialData?.socialActivities)?.map(normalizeActivity);
 
   const recentYear = useMemo(() => {
     // Award years are free text in the editor — pull out any 4-digit year.
     const years = awards
-      .map((award) => Number(String(award.year).match(/\d{4}/)?.[0] || 0))
+      ?.map((award) => Number(String(award.year).match(/\d{4}/)?.[0] || 0))
       .filter((year) => year > 1900);
     return years.length ? Math.max(...years) : "-";
   }, [awards]);
@@ -114,7 +114,7 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {awards.map((award, index) => (
+                  {awards?.map((award, index) => (
                     <div key={index} className="rounded-lg border border-gray-200 bg-white p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <h3 className="font-semibold text-gray-900">{award.title}</h3>
@@ -152,7 +152,7 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {socialActivities.map((item, index) => (
+                  {socialActivities?.map((item, index) => (
                     <div key={index} className="rounded-lg border border-gray-200 bg-white p-4">
                       <h3 className="font-semibold text-gray-900">{item.title}</h3>
                       {item.organization && (

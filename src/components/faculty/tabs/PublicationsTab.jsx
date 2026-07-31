@@ -142,18 +142,18 @@ export default function PublicationsTab({ profile }) {
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const tabData = profile?.tabData?.publications || {};
-  const publications = asArray(tabData.publications).map(normalizePublication);
+  const publications = asArray(tabData.publications)?.map(normalizePublication);
   // Dashboard saves patents under publications.patents; legacy fallback to patents.patents
   const pubPatents = asArray(tabData.patents);
   const patents = (pubPatents.length
     ? pubPatents
     : asArray(profile?.tabData?.patents?.patents)
-  ).map(normalizePatent);
+  )?.map(normalizePatent);
 
-  const years = [...new Set(publications.map((p) => p.year).filter(Boolean))].sort(
+  const years = [...new Set(publications?.map((p) => p.year).filter(Boolean))].sort(
     (a, b) => b - a
   );
-  const types = [...new Set(publications.map((p) => p.type).filter(Boolean))];
+  const types = [...new Set(publications?.map((p) => p.type).filter(Boolean))];
 
   const filteredPublications = publications.filter((pub) => {
     const yearMatch = selectedYear === "all" || String(pub.year) === selectedYear;
@@ -161,7 +161,7 @@ export default function PublicationsTab({ profile }) {
     return yearMatch && typeMatch;
   });
 
-  const totalCitations = publications.reduce((sum, pub) => sum + pub.citations, 0);
+  const totalCitations = publications.reduce((sum, pub) => sum + (pub?.citations || 0), 0);
   const journalCount = publications.filter((p) => p.type === "journal").length;
 
   const getStatusColor = (status) => matchKey(status, PATENT_STATUS_VARIANTS, "outline");
@@ -322,7 +322,7 @@ export default function PublicationsTab({ profile }) {
                         className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="all">All Years</option>
-                        {years.map((year) => (
+                        {years?.map((year) => (
                           <option key={year} value={year}>
                             {year}
                           </option>
@@ -334,7 +334,7 @@ export default function PublicationsTab({ profile }) {
                         className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         <option value="all">All Types</option>
-                        {types.filter(Boolean).map((type) => (
+                        {types.filter(Boolean)?.map((type) => (
                           <option key={type} value={type}>
                             {type.charAt(0).toUpperCase() + type.slice(1)}
                           </option>
@@ -346,7 +346,7 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {filteredPublications.map((publication, index) => (
+                  {filteredPublications?.map((publication, index) => (
                     <div
                       key={index}
                       className="relative pl-8 pb-6 border-l-2 border-yellow-200 last:border-l-0 last:pb-0"
@@ -534,7 +534,7 @@ export default function PublicationsTab({ profile }) {
               <CardContent>
                 <div className="space-y-4">
                   {patentsByYear
-                    .map((patent, index) => (
+                    ?.map((patent, index) => (
                       <div
                         key={index}
                         className="relative pl-8 pb-6 border-l-2 border-yellow-200 last:border-l-0 last:pb-0"
@@ -601,7 +601,7 @@ export default function PublicationsTab({ profile }) {
                                     Inventors:
                                   </h4>
                                   <div className="flex flex-wrap gap-2">
-                                    {patent.inventors.map((inventor, idx) => (
+                                    {patent.inventors?.map((inventor, idx) => (
                                       <Badge key={idx} variant="outline">
                                         {inventor}
                                       </Badge>

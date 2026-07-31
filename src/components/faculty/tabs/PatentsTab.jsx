@@ -98,7 +98,7 @@ export const PatentsTab = ({ profile }) => {
   // Dashboard saves patents under publications.patents; read that first, legacy fallback to patents.patents
   const pubPatents = asArray(profile?.tabData?.publications?.patents);
   const legacyPatents = asArray(profile?.tabData?.patents?.patents);
-  const patents = (pubPatents.length ? pubPatents : legacyPatents).map(normalizePatent);
+  const patents = (pubPatents.length ? pubPatents : legacyPatents)?.map(normalizePatent);
 
   const getStatusColor = (status) => matchKey(status, STATUS_COLORS, 'bg-gray-100 text-gray-800');
 
@@ -155,7 +155,7 @@ export const PatentsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {patents.map((patent, index) => (
+            {patents?.map((patent, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div className="flex-1">
@@ -195,7 +195,7 @@ export const PatentsTab = ({ profile }) => {
                       <div className="mb-4">
                         <h4 className="font-medium text-gray-900 mb-2">Inventors:</h4>
                         <div className="flex flex-wrap gap-2">
-                          {patent.inventors.map((inventor, idx) => (
+                          {patent.inventors?.map((inventor, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {inventor}
                             </Badge>
@@ -239,7 +239,7 @@ export const PatentsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {patentsByYear.map((patent, index) => (
+            {patentsByYear?.map((patent, index) => (
               <div key={index} className="relative pl-8 pb-4 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 border border-blue-100">

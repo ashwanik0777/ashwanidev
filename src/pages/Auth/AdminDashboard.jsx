@@ -59,7 +59,16 @@ import {
   isTenderActive,
   splitTendersByStatus,
 } from "../../Data/tendersData";
+/* Semester Registration is held back from this release, so its modules are not
+   committed. Keeping the import live breaks the deployment build with
+   "Could not resolve ../../services/registrationControl". Restore this import
+   (and delete the stubs below) when the feature ships.
 import { getFullRegistrationControl, setGlobalRegistration, setSchoolRegistration, REASON_OPTIONS } from '../../services/registrationControl';
+*/
+const getFullRegistrationControl = () => ({ global: { active: false }, schools: {} });
+const setGlobalRegistration = () => {};
+const setSchoolRegistration = () => {};
+const REASON_OPTIONS = [];
 import {
   createTender,
   deleteTender,

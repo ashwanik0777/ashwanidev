@@ -44,13 +44,13 @@ import {
   getDepartmentsForSchool,
   resolveSchool,
 } from "../../Data/schoolsMeta";
-/* Semester Registration is held back from this release — the modules below are
-   not shipped, so the imports stay commented and the tab is hidden. Restore the
-   three imports (and drop the stubs) when the feature goes live.
-import { fetchRegistrationsBySchool } from "../../services/semesterRegistrationService";
-import { parseDriveLink } from "../../Data/semesterRegistrationData";
-import { getSchoolRegistrationState, setSchoolRegistration, getRegistrationStatus, REASON_OPTIONS } from '../../services/registrationControl';
-*/
+// Semester Registration is held back from this release, so its modules are not
+// committed to the repository. Keeping these imports live breaks the deployment
+// build with "Could not resolve ../../services/registrationControl".
+// To re-enable: delete the stubs below and restore these three imports.
+//   import { fetchRegistrationsBySchool } from "../../services/semesterRegistrationService";
+//   import { parseDriveLink } from "../../Data/semesterRegistrationData";
+//   import { getSchoolRegistrationState, setSchoolRegistration, getRegistrationStatus, REASON_OPTIONS } from "../../services/registrationControl";
 const fetchRegistrationsBySchool = async () => ({ data: [] });
 const parseDriveLink = (url) => url || "";
 const getSchoolRegistrationState = () => ({ active: false, reason: "", customMessage: "" });

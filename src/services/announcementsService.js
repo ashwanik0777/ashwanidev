@@ -241,17 +241,26 @@ const toRecruitmentDashboardShape = (items) => {
     return acc;
   }, {});
 
-  return {
-    categories: Object.values(categoriesMap),
-    archived: archived.map((item) => ({
-      id: `archived-${item.id}`,
-      year: String(item.year || ""),
+  // Group archived items by year
+  const archivedByYear = {};
+  archived.forEach((item) => {
+    const yr = String(item.year || "Unknown");
+    if (!archivedByYear[yr]) {
+      archivedByYear[yr] = { id: `archived-${yr}`, year: yr, items: [] };
+    }
+    archivedByYear[yr].items.push({
+      id: item.id,
       ref: item.ref,
       date: item.date,
       title: item.title,
-      status: "archived",
+      categoryType: item.categoryType,
       documents: item.documents,
-    })),
+    });
+  });
+
+  return {
+    categories: Object.values(categoriesMap),
+    archived: Object.values(archivedByYear).sort((a, b) => Number(b.year) - Number(a.year)),
   };
 };
 

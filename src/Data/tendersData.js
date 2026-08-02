@@ -3,43 +3,45 @@ export const TENDERS_STORAGE_KEY = "gbu_tenders_data";
 export const DEFAULT_TENDERS = [
   {
     id: 1,
-    title: "Supply of IT Equipment and Software Licenses",
-    description:
-      "Procurement of computers, servers, and enterprise software licenses for government offices.",
-    closingDate: "2025-07-15",
-    documentUrl: "/documents/tender-001.pdf",
+    title: "Cancellation of e-BID",
+    description: "Cancellation of e-BID",
+    closingDate: "2025-08-04",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=2114572845_Notice%20%282%29.pdf",
   },
   {
     id: 2,
-    title: "Construction of Municipal Water Treatment Plant",
-    description:
-      "Design, construction and commissioning of water treatment facility with 50ML/day capacity.",
-    closingDate: "2025-07-22",
-    documentUrl: "/documents/tender-002.pdf",
+    title: "EOI from Consultant and firm for Moisture Testing, Seepage mapping in the roof slab, wash rooms, walls, foundations etc.",
+    description: "EOI from Consultant and firm for Moisture Testing, Seepage mapping in the roof slab, wash rooms, walls, foundations etc. and their remedies in the two storey Faculty Club Building in the campus of GBU",
+    closingDate: "2026-05-04",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=1440973854_EOI-1%20%281%29.pdf",
   },
   {
     id: 3,
-    title: "Digital Infrastructure Upgrade Project",
-    description:
-      "Upgrade of fiber optic network and installation of 5G infrastructure across the city.",
-    closingDate: "2025-08-10",
-    documentUrl: "/documents/tender-004.pdf",
+    title: "EOI from Consultant and firm for Providing Consultancy service for establishing of Artifician Intelligence centre",
+    description: "EOI from Consultant and firm for Providing Consultancy service for establishing of Artifician Intelligence centre in faculty club building at campus of GBU.",
+    closingDate: "2026-05-04",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=-608616474_EOI-2%20%281%29.pdf",
   },
   {
     id: 4,
-    title: "Maintenance Services for Public Transportation Fleet",
-    description:
-      "Comprehensive maintenance and repair services for city bus fleet including spare parts.",
-    closingDate: "2025-06-30",
-    documentUrl: "/documents/tender-003.pdf",
+    title: "GEM Bid Notice dated 24.05.2026",
+    description: "GEM Bid Notice dated 24.05.2026",
+    closingDate: "2026-05-25",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=-614183091_GeM%20Bid%20Notice%20%281%29.pdf",
   },
   {
     id: 5,
-    title: "Renewable Energy Solar Panel Installation",
-    description:
-      "Installation of solar panels on government buildings with total capacity of 2MW.",
-    closingDate: "2025-07-05",
-    documentUrl: "/documents/tender-005.pdf",
+    title: "Newspaper advt. Financial Express dated 24.05.2026",
+    description: "Newspaper advt. Financial Express dated 24.05.2026",
+    closingDate: "2026-05-25",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=-175315928_GeM%20bid%20Advertisement%20Financial%20Express%20%28English%29.pdf",
+  },
+  {
+    id: 6,
+    title: "Newspaper Advt. Jansatta dated 24.05.2026",
+    description: "Newspaper Advt. Jansatta dated 24.05.2026",
+    closingDate: "2026-05-25",
+    documentUrl: "https://www.gbu.ac.in/page/GetTender?nName=118799583_GeM%20bid%20Advertisement%20Jansatta%20%28Hindi%29.pdf",
   },
 ];
 

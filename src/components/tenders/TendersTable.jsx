@@ -130,14 +130,17 @@ const TendersTable = () => {
               There are no archived tenders available right now.
             </div>
           ) : (
-            <div className="mt-6 rounded-lg border-l-4 border-orange-400 bg-gray-50 p-4">
+            <>
+            
+            {/* <div className="mt-6 rounded-lg border-l-4 border-orange-400 bg-gray-50 p-4">
               <p className="text-sm text-gray-600 italic">
                The auto-hide cutoff for these tenders happens 1 day after the closing date.
               </p>
               <p className="mt-1 text-xs text-gray-500">
                 Latest cutoff: {formatAutoHideLabel(archivedTenders[0]?.closingDate)}
               </p>
-            </div>
+            </div> */}
+            </>
           )}
         </div>
       )}

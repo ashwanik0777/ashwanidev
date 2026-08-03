@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useUniversityStats } from "../../hooks/useUniversityStats";
 import { 
   GraduationCap, 
   Star, 
@@ -32,6 +33,8 @@ import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
 
 export default function AboutUsPage() {
+  // Campus acreage comes from the shared university-stats source.
+  const universityStats = useUniversityStats();
   const [isVisible, setIsVisible] = useState({});
 
   // Intersection Observer for animations
@@ -140,7 +143,7 @@ export default function AboutUsPage() {
           
     <StatsCard
       stats={[
-        { number: 511, subtitle: "Acres of Green Campus", icon: TreePine, iconColor: "#16a34a" },
+        { numberText: universityStats.acres_campus, subtitle: "Acres of Green Campus", icon: TreePine, iconColor: "#16a34a" },
         { numberText: "17+", subtitle: "Years of Academic Excellence", icon: Calendar, iconColor: "#4f46e5" },
         { numberText: "B+", subtitle: "NAAC Accreditation", icon: Medal, iconColor: "#eab308" },
         { numberText: "4+", subtitle: "Statutory Approvals", icon: Shield, iconColor: "#a855f7" }
@@ -195,7 +198,7 @@ export default function AboutUsPage() {
                 <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                   <Sprout className="w-8 h-8 text-green-600 mb-3" />
                   <h3 className="font-bold text-gray-900 mb-2">Campus</h3>
-                  <p className="text-gray-600">511 Acres</p>
+                  <p className="text-gray-600">{universityStats.acres_campus} Acres</p>
                   <p className="text-sm text-green-600 mt-1">Greater Noida</p>
                 </div>
               </div>

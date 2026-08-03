@@ -1,48 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Trees, Building2, BookOpen, Trophy, Globe, Sparkles } from 'lucide-react';
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
+import { useUniversityStats } from '../../hooks/useUniversityStats';
 
-const GBU_STATS = [
-  {
-    id: 1,
-    icon: Trees,
-    value: "511 Acres",
-    title: "Lush Green Campus",
-    color: "from-green-500/10 to-emerald-500/10 border-green-500/20 text-green-600"
-  },
-  {
-    id: 2,
-    icon: Building2,
-    value: "18",
-    title: "Single-Seated Hostels",
-    color: "from-blue-500/10 to-indigo-500/10 border-blue-500/20 text-blue-600"
-  },
-  {
-    id: 3,
-    icon: BookOpen,
-    value: "2.5L+",
-    title: "Library Book Collection",
-    color: "from-purple-500/10 to-pink-500/10 border-purple-500/20 text-purple-600"
-  },
-  {
-    id: 4,
-    icon: Trophy,
-    value: "3,000+",
-    title: "Stadium Seating Capacity",
-    color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600"
-  },
-  {
-    id: 5,
-    icon: Globe,
-    value: "15+",
-    title: "Countries Represented",
-    color: "from-sky-500/10 to-cyan-500/10 border-sky-500/20 text-sky-600"
-  }
+// Icons, titles and colours are configured here; the figures come from the
+// shared university-stats source so campus numbers cannot drift from the rest
+// of the site. `suffix` covers the "511 Acres" style label.
+const GBU_STATS_META = [
+  { id: 1, icon: Trees, statKey: "acres_campus", suffix: " Acres", title: "Lush Green Campus", color: "from-green-500/10 to-emerald-500/10 border-green-500/20 text-green-600" },
+  { id: 2, icon: Building2, statKey: "hostels", title: "Single-Seated Hostels", color: "from-blue-500/10 to-indigo-500/10 border-blue-500/20 text-blue-600" },
+  { id: 3, icon: BookOpen, statKey: "library_books", title: "Library Book Collection", color: "from-purple-500/10 to-pink-500/10 border-purple-500/20 text-purple-600" },
+  { id: 4, icon: Trophy, statKey: "stadium_capacity", title: "Stadium Seating Capacity", color: "from-amber-500/10 to-orange-500/10 border-amber-500/20 text-amber-600" },
+  { id: 5, icon: Globe, statKey: "countries_represented", title: "Countries Represented", color: "from-sky-500/10 to-cyan-500/10 border-sky-500/20 text-sky-600" }
 ];
 
 const CampusStats = () => {
-  const [stats] = useState(GBU_STATS);
+  const universityStats = useUniversityStats();
+  const stats = GBU_STATS_META.map(({ statKey, suffix = "", ...meta }) => ({
+    ...meta,
+    value: `${universityStats[statKey] ?? ""}${suffix}`,
+  }));
 
   return (
     <SearchableWrapper>

@@ -90,7 +90,13 @@ import {
   updateFacultyProfile,
 } from "../../services/facultyService";
 import { clearPortalSession } from "../../utils/portalSession";
-import { getRecruitmentDashboardData } from "../../services/announcementsService";
+import {
+  createRecruitment,
+  deleteRecruitment,
+  listRecruitments,
+  toRecruitmentDashboardShape,
+  updateRecruitment,
+} from "../../services/recruitmentsService";
 import {
   DEFAULT_RECRUITMENT_DASHBOARD_DATA,
   RECRUITMENT_DASHBOARD_STORAGE_KEY,
@@ -118,6 +124,7 @@ import {
   deleteDacMember
 } from "../../services/dacService";
 import { facilities } from "../../components/bookingData/facilities";
+import UniversityStatsManager from "../../components/admin/UniversityStatsManager";
 /* Semester Registration is held back from this release — the modules below are
    not shipped, so the imports stay commented and the tab is hidden. Restore the
    two imports (and drop the stubs) when the feature goes live.
@@ -640,6 +647,7 @@ const AdminDashboard = () => {
   const [tenderDeletingKey, setTenderDeletingKey] = useState("");
   const [tenderApiError, setTenderApiError] = useState("");
   const [isRecruitmentLoading, setIsRecruitmentLoading] = useState(false);
+  const [isRecruitmentSaving, setIsRecruitmentSaving] = useState(false);
   const [recruitmentApiError, setRecruitmentApiError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [activityLog, setActivityLog] = useState(getInitialActivityLog);
@@ -753,6 +761,25 @@ const AdminDashboard = () => {
   useEffect(() => {
     localStorage.setItem(ADMIN_ACTIVITY_LOG_KEY, JSON.stringify(activityLog));
   }, [activityLog]);
+
+  /**
+   * Re-reads recruitment postings from the database and regroups them into the
+   * { categories, archived } shape both this dashboard and the public
+   * Recruitments page render. Called on mount and after every save/delete so the
+   * two views never drift apart.
+   */
+  const reloadRecruitments = useCallback(async () => {
+    setIsRecruitmentLoading(true);
+    setRecruitmentApiError("");
+    try {
+      const { items } = await listRecruitments({ limit: 200 });
+      setRecruitmentData(toRecruitmentDashboardShape(items));
+    } catch (error) {
+      setRecruitmentApiError(getApiErrorMessage(error, "Unable to fetch recruitments from backend."));
+    } finally {
+      setIsRecruitmentLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     setRegControl(getFullRegistrationControl());
@@ -947,22 +974,8 @@ const AdminDashboard = () => {
     };
 
     const syncRecruitmentsFromServer = async () => {
-      setIsRecruitmentLoading(true);
-      setRecruitmentApiError("");
-      try {
-        const serverRecruitments = await getRecruitmentDashboardData();
-        if (!isMounted) return;
-        setRecruitmentData(serverRecruitments);
-      } catch (error) {
-        if (!isMounted) return;
-        setRecruitmentApiError(
-          error?.response?.data?.message ||
-            error?.message ||
-            "Unable to fetch recruitments from backend.",
-        );
-      } finally {
-        if (isMounted) setIsRecruitmentLoading(false);
-      }
+      if (!isMounted) return;
+      await reloadRecruitments();
     };
 
     const syncSchoolsFromServer = async () => {
@@ -2238,7 +2251,15 @@ const AdminDashboard = () => {
       .join("\n");
   };
 
-  const saveRecruitmentEditor = () => {
+  /**
+   * Persists a recruitment posting to the database.
+   *
+   * This used to write to local React state (mirrored into localStorage) only,
+   * so nothing added here ever appeared on the public Recruitments page, which
+   * reads from the API. Saves now go through the backend and the list is
+   * re-read, keeping the dashboard and the website in step.
+   */
+  const saveRecruitmentEditor = async () => {
     const form = recruitmentEditor.form;
     if (!form?.title?.trim() || !form?.ref?.trim() || !form?.date) {
       setMessage("Recruitment title, reference number and date are required.");
@@ -2246,80 +2267,66 @@ const AdminDashboard = () => {
     }
 
     const payload = {
-      id: form.id || `rec-${Date.now()}`,
+      ...form,
       label: form.label || form.title,
-      title: form.title,
-      ref: form.ref,
-      date: form.date,
-      status: form.status || "active",
+      year: form.year || String(form.date).slice(0, 4),
       documents: parseRecruitmentDocuments(form.documentsText),
     };
 
-    if (recruitmentEditor.mode === "current") {
-      setRecruitmentData((prev) => {
-        const categories = [...(prev.categories || [])];
-        const targetCategory = categories.find((item) => item.type === form.categoryType);
-        if (!targetCategory) return prev;
+    setIsRecruitmentSaving(true);
+    setRecruitmentApiError("");
 
-        const tabs = [...(targetCategory.tabs || [])];
-        const existingIndex = tabs.findIndex((item) => item.id === form.id);
-        const nextTab = {
-          ...payload,
-          id: form.id || `tab-${Date.now()}`,
-          label: form.label || payload.label,
-        };
+    try {
+      // Only a positive integer id is a real database row. Legacy localStorage
+      // entries carry ids like "tab-1699..." and "" coerces to 0, so both must
+      // fall through to a create rather than updating row 0.
+      const existingId = Number(form.id);
+      const isExisting = Number.isInteger(existingId) && existingId > 0;
 
-        if (existingIndex >= 0) tabs[existingIndex] = nextTab;
-        else tabs.push(nextTab);
+      if (isExisting) {
+        await updateRecruitment(existingId, payload);
+      } else {
+        await createRecruitment(payload);
+      }
 
-        const targetCategoryIndex = categories.findIndex((item) => item.type === form.categoryType);
-        categories[targetCategoryIndex] = { ...targetCategory, tabs };
-        return { ...prev, categories };
-      });
-      setMessage("Current recruitment post updated.");
-    }
-
-    if (recruitmentEditor.mode === "archived") {
-      setRecruitmentData((prev) => {
-        const archived = [...(prev.archived || [])];
-        const existingIndex = archived.findIndex((item) => item.id === form.id);
-        const nextArchived = {
-          ...payload,
-          id: form.id || `archived-${form.year || Date.now()}`,
-          year: form.year || "",
-          status: "archived",
-        };
-
-        if (existingIndex >= 0) archived[existingIndex] = nextArchived;
-        else archived.push(nextArchived);
-
-        return { ...prev, archived };
-      });
-      setMessage("Archived recruitment post updated.");
+      await reloadRecruitments();
+      setMessage(
+        isExisting ? "Recruitment updated and published." : "Recruitment created and published.",
+      );
+    } catch (error) {
+      const detail = getApiErrorMessage(error, "Failed to save recruitment");
+      setRecruitmentApiError(detail);
+      setMessage(detail);
+      return;
+    } finally {
+      setIsRecruitmentSaving(false);
     }
 
     setRecruitmentEditor({ mode: null, index: null, form: null });
   };
 
-  const deleteRecruitmentCurrent = (item) => {
-    setRecruitmentData((prev) => {
-      const categories = [...(prev.categories || [])];
-      const categoryIndex = categories.findIndex((category) => category.type === item.categoryType);
-      if (categoryIndex < 0) return prev;
-      const tabs = (categories[categoryIndex].tabs || []).filter((tab) => tab.id !== item.id);
-      categories[categoryIndex] = { ...categories[categoryIndex], tabs };
-      return { ...prev, categories };
-    });
-    setMessage("Current recruitment post deleted.");
+  /** Deletes a posting from the database, then refreshes the list. */
+  const removeRecruitment = async (item, label) => {
+    const id = Number(item?.id);
+    if (!Number.isFinite(id)) {
+      setMessage("This entry is not saved in the database yet.");
+      return;
+    }
+
+    setRecruitmentApiError("");
+    try {
+      await deleteRecruitment(id);
+      await reloadRecruitments();
+      setMessage(`${label} recruitment post deleted.`);
+    } catch (error) {
+      const detail = getApiErrorMessage(error, "Failed to delete recruitment");
+      setRecruitmentApiError(detail);
+      setMessage(detail);
+    }
   };
 
-  const deleteRecruitmentArchived = (item) => {
-    setRecruitmentData((prev) => ({
-      ...prev,
-      archived: (prev.archived || []).filter((entry) => entry.id !== item.id),
-    }));
-    setMessage("Archived recruitment post deleted.");
-  };
+  const deleteRecruitmentCurrent = (item) => removeRecruitment(item, "Current");
+  const deleteRecruitmentArchived = (item) => removeRecruitment(item, "Archived");
 
   const handleSaveFacultyProfile = async () => {
     if (!facultyEditor.form?.name?.trim()) {
@@ -4224,6 +4231,20 @@ const AdminDashboard = () => {
 
     return (
       <div className="space-y-4">
+            {/* Tender Snapshot */}
+        <div className={cardClass}>
+          <h3 className="mb-3 text-base font-semibold text-slate-900">Tender Snapshot</h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Active Tenders</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.current.length}</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Archived Tenders</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.archived.length}</p>
+            </div>
+          </div>
+        </div>
         <div className={cardClass}>
           {/* Header */}
           <div className="mb-3 flex items-center justify-between">
@@ -4433,20 +4454,7 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Tender Snapshot */}
-        <div className={cardClass}>
-          <h3 className="mb-3 text-base font-semibold text-slate-900">Tender Snapshot</h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Active Tenders</p>
-              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.current.length}</p>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Archived Tenders</p>
-              <p className="mt-1 text-2xl font-bold text-slate-955">{tenderSplit.archived.length}</p>
-            </div>
-          </div>
-        </div>
+    
 
         {/* Modal Overlay for Add/Edit Tender */}
         {tenderEditor.form && (
@@ -6787,8 +6795,32 @@ const AdminDashboard = () => {
     const defaultDocumentsText =
       "Extension Notice|Official extension notification|#\nDetailed Advertisement|Complete vacancy details|#";
 
+    const activeRecruitmentCount = (recruitmentData?.categories || []).reduce(
+      (sum, cat) => sum + (cat?.tabs || []).length,
+      0
+    );
+    const archivedRecruitmentCount = (recruitmentData?.archived || []).reduce(
+      (sum, arch) => sum + (arch?.items || []).length,
+      0
+    );
+
     return (
       <div className="space-y-4">
+        {/* Recruitment Snapshot */}
+        <div className={cardClass}>
+          <h3 className="mb-3 text-base font-semibold text-slate-900">Recruitment Snapshot</h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Active Vacancies</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{activeRecruitmentCount}</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-slate-500 font-bold">Archived Vacancies</p>
+              <p className="mt-1 text-2xl font-bold text-slate-955">{archivedRecruitmentCount}</p>
+            </div>
+          </div>
+        </div>
+
         <div className={cardClass}>
           <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
             <div>
@@ -7123,9 +7155,10 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   onClick={saveRecruitmentEditor}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                  disabled={isRecruitmentSaving}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition disabled:opacity-50"
                 >
-                  Save Recruitment Data
+                  {isRecruitmentSaving ? "Saving..." : "Save Recruitment Data"}
                 </button>
               </div>
             </div>
@@ -7673,6 +7706,10 @@ const AdminDashboard = () => {
                   )}
                 </div>
               </div>
+
+              {/* Single source of truth for the figures shown across the
+                  homepage, About, Admissions and Campus Life pages. */}
+              <UniversityStatsManager onMessage={setMessage} />
             </section>
           )}
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useUniversityStats } from "../../hooks/useUniversityStats";
 import { Link } from 'react-router-dom';
 import {
   Lightbulb,
@@ -150,12 +151,13 @@ const aboutData = {
     backgroundImage: "https://images.unsplash.com/photo-1496307653780-42ee777d4833?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
   },
 
-  statistics: [
-    { icon: MapPin, number: 511, title: "Acres Campus", iconColor: "#3b82f6" },
-    { icon: Users, numberText: "6500+", title: "Students", iconColor: "#10b981" },
-    { icon: Award, numberText: "200+", title: "Faculty Members", iconColor: "#8b5cf6" },
-    { icon: BookOpen, numberText: "160+", title: "Programs", iconColor: "#f97316" },
-
+  // Values are injected from the university-stats source at render time; only
+  // the icons and colours are configured here. See buildStatistics() below.
+  statisticsMeta: [
+    { icon: MapPin, statKey: "acres_campus", title: "Acres Campus", iconColor: "#3b82f6" },
+    { icon: Users, statKey: "students", title: "Students", iconColor: "#10b981" },
+    { icon: Award, statKey: "faculty_members", title: "Faculty Members", iconColor: "#8b5cf6" },
+    { icon: BookOpen, statKey: "programs", title: "Programs", iconColor: "#f97316" },
   ],
 
   overview: {
@@ -363,8 +365,26 @@ const iconMap = {
   Calendar, UserCheck, Phone, Mail, Download, ExternalLink
 };
 
+/** Pairs the icon/colour config with the current university-wide figures. */
+const buildStatistics = (stats) =>
+  aboutData.statisticsMeta.map((meta) => {
+    const value = stats[meta.statKey] ?? "";
+    const numeric = Number(String(value).replace(/[^0-9.]/g, ""));
+    // StatsCard animates a plain number and prints numberText verbatim, so a
+    // value carrying a "+"/"%" suffix has to go through numberText.
+    const isPlainNumber = /^\d+$/.test(String(value).trim());
+    return {
+      icon: meta.icon,
+      title: meta.title,
+      iconColor: meta.iconColor,
+      ...(isPlainNumber ? { number: numeric } : { numberText: String(value) }),
+    };
+  });
+
 const AboutGbu = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const universityStats = useUniversityStats();
+  const statistics = buildStatistics(universityStats);
 
   useEffect(() => {
     setIsVisible(true);
@@ -387,7 +407,7 @@ const AboutGbu = () => {
 
 
         {/* Statistics Section */}
-        <StatsCard stats={aboutData.statistics} />
+        <StatsCard stats={statistics} />
 
         {/* Overview Section */}
         <section className="py-20 bg-gradient-to-r from-gray-50 to-white">

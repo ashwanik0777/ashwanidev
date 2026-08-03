@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useUniversityStats } from "../../hooks/useUniversityStats";
 import {
   GraduationCap,
   BookOpen,
@@ -77,34 +78,27 @@ const Badge = ({ children, variant = "default", className = "" }) => {
 // School Categories Data
 const schoolCategories = ADMISSIONS_CATEGORIES;
 
-const educationStatsData = [
-  {
-    icon: GraduationCap,
-    numberText: "8",
-    title: "Academic Schools",
-    iconColor: "#2563eb",
-  },
-  {
-    icon: BookOpen,
-    numberText: "80+",
-    title: "Dynamic Programs",
-    iconColor: "#16a34a",
-  },
-  {
-    icon: Award,
-    numberText: "2500+",
-    title: "Available Seats",
-    iconColor: "#9333ea",
-  },
-  {
-    icon: Globe,
-    numberText: "95%",
-    title: "Placement Rate",
-    iconColor: "#f97316",
-  },
+// Icons and colours are configured here; the figures come from the shared
+// university-stats source. This page used to show 80+ programmes and a 95%
+// placement rate while the homepage said 160+ and 90%.
+const educationStatsMeta = [
+  { icon: GraduationCap, statKey: "academic_schools", title: "Academic Schools", iconColor: "#2563eb" },
+  { icon: BookOpen, statKey: "programs", title: "Dynamic Programs", iconColor: "#16a34a" },
+  { icon: Award, statKey: "available_seats", title: "Available Seats", iconColor: "#9333ea" },
+  { icon: Globe, statKey: "placement_rate", title: "Placement Rate", iconColor: "#f97316" },
 ];
 
+const buildEducationStats = (stats) =>
+  educationStatsMeta.map(({ icon, statKey, title, iconColor }) => ({
+    icon,
+    title,
+    iconColor,
+    numberText: String(stats[statKey] ?? ""),
+  }));
+
 const CoursesOffered = () => {
+  const universityStats = useUniversityStats();
+  const educationStatsData = buildEducationStats(universityStats);
   const [activeProgram, setActiveProgram] = useState("Undergraduate");
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");

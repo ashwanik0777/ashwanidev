@@ -6,8 +6,16 @@ import {
   getTenderAutoHideDate,
   splitTendersByStatus,
 } from "../../Data/tendersData";
+import { listTenders } from "../../services/tendersService";
 
-const getInitialTenders = () => {
+/*
+ * Tenders come from the database (GET /tenders), which is what the admin
+ * dashboard writes to. localStorage is kept only as an offline cache for the
+ * first paint: it used to be the sole source, so a visitor whose browser had
+ * never run the dashboard saw the hardcoded DEFAULT_TENDERS instead of the real
+ * ones. The rendering below is unchanged.
+ */
+const getCachedTenders = () => {
   try {
     const raw = localStorage.getItem(TENDERS_STORAGE_KEY);
     if (!raw) return DEFAULT_TENDERS;
@@ -16,6 +24,14 @@ const getInitialTenders = () => {
     return parsed;
   } catch {
     return DEFAULT_TENDERS;
+  }
+};
+
+const cacheTenders = (items) => {
+  try {
+    localStorage.setItem(TENDERS_STORAGE_KEY, JSON.stringify(items));
+  } catch {
+    // Cache write failures are not fatal — the API data is already rendered.
   }
 };
 
@@ -67,15 +83,32 @@ const TenderCard = ({ tender, index, variant = "current" }) => (
 // ✅ Tenders Table Page
 const TendersTable = () => {
   const [activeTab, setActiveTab] = useState("current");
-  const [tenders, setTenders] = useState(getInitialTenders);
+  const [tenders, setTenders] = useState(getCachedTenders);
 
   useEffect(() => {
-    const syncTenders = () => setTenders(getInitialTenders());
-    window.addEventListener("storage", syncTenders);
-    window.addEventListener("tenders-data-updated", syncTenders);
+    let isMounted = true;
+
+    const loadTenders = async () => {
+      try {
+        const items = await listTenders();
+        if (!isMounted) return;
+        setTenders(items);
+        cacheTenders(items);
+      } catch {
+        // Offline or API down — keep showing the cached list.
+        if (isMounted) setTenders(getCachedTenders());
+      }
+    };
+
+    loadTenders();
+    window.addEventListener("storage", loadTenders);
+    window.addEventListener("focus", loadTenders);
+    window.addEventListener("tenders-data-updated", loadTenders);
     return () => {
-      window.removeEventListener("storage", syncTenders);
-      window.removeEventListener("tenders-data-updated", syncTenders);
+      isMounted = false;
+      window.removeEventListener("storage", loadTenders);
+      window.removeEventListener("focus", loadTenders);
+      window.removeEventListener("tenders-data-updated", loadTenders);
     };
   }, []);
 

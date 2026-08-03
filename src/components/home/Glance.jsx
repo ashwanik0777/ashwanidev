@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import homeData from "../../Data/home.json";
+import { useUniversityStats } from "../../hooks/useUniversityStats";
 
 // --- Utility ---
 const cn = (...classes) => classes.filter(Boolean).join(" ");
@@ -162,11 +163,14 @@ const GlanceStatItem = ({ label, rawValue, description, icon: Icon, iconColor, t
 
 const Glance = () => {
   const glanceData = homeData?.sections?.glance_stat?.[0] || null;
+  // Figures come from the single university-stats source so this section can
+  // never disagree with the About / Admissions / Campus Life pages.
+  const universityStats = useUniversityStats();
 
   const stats = [
     {
       label: "Acres Campus",
-      value: glanceData?.acres_camus || 511,
+      value: universityStats.acres_campus,
       description: "Lush green, eco-friendly smart campus design",
       icon: Compass,
       iconColor: "#10b981", // Emerald-500
@@ -174,7 +178,7 @@ const Glance = () => {
     },
     {
       label: "Academic Schools",
-      value: 8,
+      value: universityStats.academic_schools,
       description: "Multidisciplinary research and learning centers",
       icon: School,
       iconColor: "#2563eb", // Blue-600
@@ -182,7 +186,7 @@ const Glance = () => {
     },
     {
       label: "Dynamic Programs",
-      value: glanceData?.programs_count || "160+",
+      value: universityStats.programs,
       description: "Comprehensive industry-aligned global curricula",
       icon: BookMarked,
       iconColor: "#6366f1", // Indigo-500
@@ -190,7 +194,7 @@ const Glance = () => {
     },
     {
       label: "Enrolled Students",
-      value: glanceData?.student_count || "8200+",
+      value: universityStats.students,
       description: "Vibrant, diverse community of future leaders",
       icon: Users,
       iconColor: "#8b5cf6", // Violet-500
@@ -198,7 +202,7 @@ const Glance = () => {
     },
     {
       label: "Expert Faculty",
-      value: glanceData?.faculty_member || "350+",
+      value: universityStats.faculty_members,
       description: "Distinguished scholars and industry pioneers",
       icon: Briefcase,
       iconColor: "#f97316", // Orange-500
@@ -206,7 +210,7 @@ const Glance = () => {
     },
     {
       label: "Placement Rate",
-      value: glanceData?.placement_rate || "90%",
+      value: universityStats.placement_rate,
       description: "Excellent career pathways & global network",
       icon: TrendingUp,
       iconColor: "#f43f5e", // Rose-500

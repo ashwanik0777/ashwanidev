@@ -1,8 +1,7 @@
 import React from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Phone, Building2, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Smooth single-direction slide up + fade in
 const containerVariants = {
   hidden: {},
   show: {
@@ -13,106 +12,81 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.5 } },
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.4 } },
 };
 
-const ContactCard = ({ contact }) => {
+const ContactCard = ({ group }) => {
+  if (!group) return null;
+
   return (
     <motion.div
-      className="bg-white/90 backdrop-blur border border-slate-200 border-solid rounded-2xl p-6 group h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-500"
+      className="bg-white border border-slate-200 rounded-3xl p-6 h-full flex flex-col relative overflow-hidden shadow-sm hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300"
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
     >
-      {/* Smooth hover gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-transparent to-emerald-50/30 opacity-0 group-hover:opacity-100 transition duration-500" />
+      {/* Decorative top gradient accent */}
+      <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-80" />
 
-      <div className="flex flex-col items-center text-center relative z-10">
-        {/* Photo */}
-        <motion.div
-          className="w-24 h-24 rounded-full overflow-hidden my-5 bg-gradient-to-br from-slate-100 to-slate-50 ring-4 ring-white shadow-sm group-hover:ring-blue-100 transition duration-500"
-          variants={itemVariants}
-        >
-          
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-emerald-500 text-white font-bold text-xl">
-            {contact.name
-              ? contact.name.split(' ').map((n) => n[0]).join('').toUpperCase()
-              : ''}
-          </div>
-
-        
-        </motion.div>
-
-        {/* Name &*/}
-        <motion.div className="my-4" variants={itemVariants}>
-          <h3 className="text-lg font-bold text-slate-800 leading-tight mb-3 group-hover:text-blue-700 transition-colors duration-300">
-            {contact.name}
+      {/* Header Section: Office / Category Name */}
+      <div className="flex items-center gap-4 mb-5 pb-4 border-b border-slate-100">
+        <div className="w-12 h-12 shrink-0 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 shadow-sm">
+          <Building2 className="w-6 h-6" />
+        </div>
+        <div className="flex-1">
+          <h3 className="text-xl font-bold text-slate-900 leading-tight font-outfit">
+            {group.category}
           </h3>
-          {/* <p className="text-blue-600 text-sm font-medium bg-blue-50 px-3 py-2 rounded-full inline-block group-hover:bg-blue-100 transition-colors duration-300">
-            {contact.designation}
-          </p> */}
-        </motion.div>
-
-        {/* Department */}
-        {/* <motion.div className="mb-5" variants={itemVariants}>
-          <p className="text-slate-600 text-sm font-medium bg-slate-50 px-3 py-1 rounded-md border hover:bg-slate-600 hover:text-white border-slate-200 border-solid">
-            {contact.department}
+          <p className="text-xs font-medium text-slate-500 mt-1 flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5" />
+            {group.members?.length || 0} Contacts
           </p>
-        </motion.div> */}
-
-        {/* Contact Info */}
-        <div className="w-full space-y-3 mt-auto">
-          {/* Email */}
-          {/* <motion.a
-            href={`mailto:${contact.email}`}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200"
-            variants={itemVariants}
-          >
-            <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Mail className="h-4 w-4 text-blue-600" />
-            </div>
-            <div className="flex-1 min-w-0 text-left">
-              <p className="text-xs text-gray-500 mb-0.5">Email</p>
-              <p className="text-sm text-gray-700 truncate">{contact.email}</p>
-            </div>
-          </motion.a> */}
-
-          {/* Phone */}
-          <motion.a
-            href={`tel:${contact.phone}`}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-green-50 transition-colors duration-200"
-            variants={itemVariants}
-          >
-            <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-              <Phone className="h-4 w-4 text-green-600" />
-            </div>
-            <div className="flex-1 min-w-0 text-left">
-              <p className="text-xs text-gray-500 mb-0.5">Phone</p>
-              <p className="text-sm text-gray-700">{contact.phone}</p>
-            </div>
-          </motion.a>
-
-          {/* Location */}
-          {contact.location ? (
-            <motion.div
-              className="flex items-center gap-3 p-3 rounded-lg bg-gray-50"
-              variants={itemVariants}
-            >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                <MapPin className="h-4 w-4 text-gray-600" />
-              </div>
-              <div className="flex-1 min-w-0 text-left">
-                <p className="text-xs text-gray-500 mb-0.5">Office</p>
-                <p className="text-sm text-gray-700 truncate">{contact.location}</p>
-              </div>
-            </motion.div>
-          ) : (
-            <div className="min-h-[2rem]"></div>
-          )}
         </div>
       </div>
+
+      {/* Members / Contacts List */}
+      <div className="flex-1 overflow-y-auto pr-2 space-y-4 max-h-72 custom-scrollbar">
+        {group.members?.map((member, idx) => {
+          // Some members have multiple numbers merged by " / "
+          const phoneNumbers = member.phone ? member.phone.split(' / ') : [];
+          
+          return (
+            <motion.div 
+              key={idx} 
+              variants={itemVariants}
+              className="group/item flex flex-col sm:flex-row sm:items-start justify-between gap-3 p-3 rounded-xl hover:bg-slate-50 border border-transparent hover:border-slate-100 transition-colors"
+            >
+              {/* Name & Designation */}
+              <div className="flex-1">
+                <p className="text-sm font-bold text-slate-800 group-hover/item:text-blue-700 transition-colors">
+                  {member.name}
+                </p>
+                {/* Fallback if a specific location is different from category */}
+                {member.location && member.location !== group.category && (
+                  <p className="text-xs text-slate-500 mt-0.5">{member.location}</p>
+                )}
+              </div>
+
+              {/* Phone Numbers */}
+              <div className="flex flex-col gap-1.5 sm:items-end shrink-0">
+                {phoneNumbers.map((phone, pIdx) => (
+                  <a
+                    key={pIdx}
+                    href={`tel:${phone.trim()}`}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 hover:text-emerald-800 text-xs font-semibold transition-colors"
+                  >
+                    <Phone className="w-3 h-3" />
+                    {phone.trim()}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+      
     </motion.div>
   );
 };

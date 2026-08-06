@@ -73,12 +73,12 @@ const defaultQuickLinks = [
     external: true,
   },
   {
-    title: "NSS/NCC",
-    desc: "Engage in social leadership & community building initiatives",
+    title: "Time Table",
+    desc: "View and download your academic schedule and class timetables",
     iconName: "award",
     color: "from-rose-500 to-pink-500",
     iconColor: "#f43f5e",
-    link: "/campus-life/NSS",
+    link: "https://www.gbu.ac.in/academics/timetables",
   },
 ];
 

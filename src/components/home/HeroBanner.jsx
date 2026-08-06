@@ -148,7 +148,7 @@ export default function WelcomePage() {
             zIndex: 0,
           }}
         >
-          Admissions open for 2026-27 academic session | Admissions open for 2026-27 academic session | Admissions open for 2026-27 academic session
+          ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
         </div>
       </div>
 

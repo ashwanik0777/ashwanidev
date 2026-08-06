@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import homeData from '../../Data/home.json';
+import { getSchoolAnnouncements, refreshSchoolAnnouncements, syncAnnouncementsFromCache } from '../../utils/schoolAnnouncements';
 
 export default function CampusGallery() {
   const [galleryData, setGalleryData] = useState([]);
@@ -10,6 +10,12 @@ export default function CampusGallery() {
 
   const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
+    // Match drive links first
+    const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
+    const match = path.match(driveRegex);
+    if (match && match[1]) {
+      return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+    }
     if (/^https?:\/\//i.test(path)) return path;
     if (path.startsWith('/')) return path;
     const cleanPath = path.replace(/^\/+/, '');
@@ -20,12 +26,35 @@ export default function CampusGallery() {
   };
 
   useEffect(() => {
-    const rawGallery = homeData?.sections?.campus_gallery || [];
-    const normalized = rawGallery.map((item) => ({
-      ...item,
-      image: getImageUrl(item.image),
-    }));
-    setGalleryData(normalized);
+    let isMounted = true;
+    
+    const loadGallery = async () => {
+      try {
+        await refreshSchoolAnnouncements();
+      } catch {
+        syncAnnouncementsFromCache();
+      }
+      if (!isMounted) return;
+      
+      const mediaItems = getSchoolAnnouncements().mediaGallery || [];
+      // Only show events that have at least one image
+      const normalized = mediaItems
+        .filter(item => item.images && item.images.length > 0)
+        .map(item => ({
+          ...item,
+          image: getImageUrl(item.images[0]),
+          text: item.title
+        }));
+        
+      setGalleryData(normalized);
+    };
+
+    loadGallery();
+    window.addEventListener("announcements-data-updated", loadGallery);
+    return () => {
+      isMounted = false;
+      window.removeEventListener("announcements-data-updated", loadGallery);
+    };
   }, []);
 
   useEffect(() => {

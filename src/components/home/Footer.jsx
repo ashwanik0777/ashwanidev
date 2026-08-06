@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import {
   Facebook,
   Instagram,
-  Camera,
+  Mail,
+  Twitter,
   Linkedin,
   Youtube,
 } from "lucide-react";
@@ -40,40 +41,82 @@ const Footer = () => {
       className="flex gap-5 mt-4 text-[22px]"
       aria-label="Social media links"
     >
-      <Facebook
-        strokeWidth={1.5}
-        className="text-[#1877F2]/80 transition-all duration-300 ease-out 
-        hover:text-[#1877F2] hover:opacity-100 hover:scale-110 
-        hover:drop-shadow-[0_0_8px_rgba(24,119,242,0.35)] cursor-pointer"
-      />
+       <a
+    href="http://mail.gbu.ac.in/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Email"
+  >
+    <Mail
+      strokeWidth={1.5}
+      className="text-gray-600 transition-all duration-300  hover:scale-110 cursor-pointer"
+    />
+  </a>
 
-      <Instagram
-        strokeWidth={1.5}
-        className="text-[#E4405F]/80 transition-all duration-300 ease-out 
-        hover:text-[#E4405F] hover:opacity-100 hover:scale-110 
-        hover:drop-shadow-[0_0_8px_rgba(228,64,95,0.35)] cursor-pointer"
-      />
+  {/* Facebook */}
+  <a
+    href="https://www.facebook.com/gbugrnoida.dic/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+  >
+    <Facebook
+      strokeWidth={1.5}
+      className="text-[#1877F2]/80 transition-all duration-300 hover:text-[#1877F2] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(24,119,242,0.35)] cursor-pointer"
+    />
+  </a>
 
-      <Camera
-        strokeWidth={1.5}
-        className="text-gray-500/80 transition-all duration-300 ease-out 
-        hover:text-gray-700 hover:scale-110 
-        hover:drop-shadow-[0_0_6px_rgba(0,0,0,0.25)] cursor-pointer"
-      />
+  {/* X (Twitter) */}
+  <a
+    href="https://x.com/gbugrnoida"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="X"
+  >
+    <Twitter
+      strokeWidth={1.5}
+      className=" transition-all duration-300  hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.35)] cursor-pointer"
+    />
+  </a>
 
-      <Linkedin
-        strokeWidth={1.5}
-        className="text-[#0A66C2]/80 transition-all duration-300 ease-out 
-        hover:text-[#0A66C2] hover:scale-110 
-        hover:drop-shadow-[0_0_8px_rgba(10,102,194,0.35)] cursor-pointer"
-      />
+  {/* YouTube */}
+  <a
+    href="https://www.youtube.com/channel/UCOfkhzLuMRTfqSKMFr9LBCA"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="YouTube"
+  >
+    <Youtube
+      strokeWidth={1.5}
+      className="text-[#FF0000]/80 transition-all duration-300 hover:text-[#FF0000] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.35)] cursor-pointer"
+    />
+  </a>
 
-      <Youtube
-        strokeWidth={1.5}
-        className="text-[#FF0000]/80 transition-all duration-300 ease-out 
-        hover:text-[#FF0000] hover:scale-110 
-        hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.35)] cursor-pointer"
-      />
+  {/* Instagram */}
+  <a
+    href="https://www.instagram.com/gbugrnoida/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+  >
+    <Instagram
+      strokeWidth={1.5}
+      className="text-[#E4405F]/80 transition-all duration-300 hover:text-[#E4405F] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(228,64,95,0.35)] cursor-pointer"
+    />
+  </a>
+
+  {/* LinkedIn */}
+  <a
+    href="https://www.linkedin.com/school/gautam-buddha-university/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+  >
+    <Linkedin
+      strokeWidth={1.5}
+      className="text-[#0A66C2]/80 transition-all duration-300 hover:text-[#0A66C2] hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(10,102,194,0.35)] cursor-pointer"
+    />
+  </a>
     </div>
         </div>
 

@@ -17,7 +17,6 @@ import {
 } from '../../utils/schoolAnnouncements';
 import { formatAnnouncementDate } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
-import { parseDriveLink } from '../../Data/semesterRegistrationData';
 
 // === Professional Card Components ===
 const Card = ({ children, className = '', onClick }) => (
@@ -562,7 +561,19 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //   },
 // ];
 
-const BASE = (import.meta.env.VITE_HOST || '').replace(/\/$/, '');
+const VITE_HOST = import.meta.env.VITE_HOST;
+const BASE_URL = VITE_HOST ? (VITE_HOST.endsWith('/') ? VITE_HOST.slice(0, -1) : VITE_HOST) : 'http://localhost:3000';
+
+const parseDriveLink = (url) => {
+  if (!url) return '';
+  const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
+  const match = url.match(driveRegex);
+  if (match && match[1]) {
+    const fileId = match[1];
+    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w400`;
+  }
+  return url;
+};
 
 const getImageUrl = (path) => {
   if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';

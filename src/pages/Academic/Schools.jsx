@@ -6,8 +6,7 @@ import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import { SCHOOL_CARDS } from "../../Data/schools";
-
-
+import { useUniversityStats } from "../../hooks/useUniversityStats";
 const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -126,11 +125,13 @@ const SchoolCard = ({ imageUrl, label, description, path, features }) => {
 };
 
 const HoverCards = () => {
+  const univStats = useUniversityStats();
+
   const stats = [
-    { icon: Users, numberText: "6500+", title: "Students" },
-    { icon: BookOpen, number: 8, title: "Schools" },
-    { icon: Award, numberText: "160+", title: "Programs" },
-    { icon: Users, numberText: "200+", title: "Faculty Members" }
+    { icon: Users, numberText: univStats.students, title: "Students" },
+    { icon: BookOpen, numberText: univStats.academic_schools, title: "Schools" },
+    { icon: Award, numberText: univStats.programs, title: "Programs" },
+    { icon: Users, numberText: univStats.faculty_members, title: "Faculty Members" }
   ];
 
   const schools = SCHOOL_CARDS;

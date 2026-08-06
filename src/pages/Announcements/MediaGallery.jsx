@@ -17,6 +17,7 @@ import {
 } from '../../utils/schoolAnnouncements';
 import { formatAnnouncementDate } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
+import { parseDriveLink } from '../../Data/semesterRegistrationData';
 
 // === Professional Card Components ===
 const Card = ({ children, className = '', onClick }) => (
@@ -561,6 +562,23 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //   },
 // ];
 
+const BASE = (import.meta.env.VITE_HOST || '').replace(/\/$/, '');
+
+const getImageUrl = (path) => {
+  if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
+  // If it's already a drive link returned by parseDriveLink, it will start with https://drive.google.com
+  const parsedDriveLink = parseDriveLink(path);
+  if (parsedDriveLink && parsedDriveLink !== path) return parsedDriveLink;
+  
+  if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+  
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  if (BASE) {
+    return `${BASE}${cleanPath}`;
+  }
+  return cleanPath;
+};
+
 // === Main Component ===
 const MediaGallery = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -716,7 +734,7 @@ const MediaGallery = () => {
                       : 'h-48'
                   } overflow-hidden`}>
                     <img
-                      src={item.images[0]}
+                      src={getImageUrl(item.images[0])}
                       alt=""
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       onError={(e) => {
@@ -796,7 +814,7 @@ const MediaGallery = () => {
                 <div className="relative bg-white rounded-xl overflow-hidden max-w-4xl mx-auto">
                   <div className="relative">
                     <img 
-                      src={selectedMediaItem.images[selectedImageIndex]} 
+                      src={getImageUrl(selectedMediaItem.images[selectedImageIndex])} 
                       alt="" 
                       className="w-full max-h-[70vh] object-contain"
                       onError={(e) => {

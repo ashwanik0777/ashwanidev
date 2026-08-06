@@ -10,19 +10,21 @@ export default function CampusGallery() {
 
   const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
+    
     // Match drive links first
     const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
     const match = path.match(driveRegex);
     if (match && match[1]) {
       return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
     }
-    if (/^https?:\/\//i.test(path)) return path;
-    if (path.startsWith('/')) return path;
-    const cleanPath = path.replace(/^\/+/, '');
+    
+    if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+    
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
     if (BASE) {
-      return `${BASE}/${cleanPath.startsWith('media/') ? cleanPath : `media/${cleanPath}`}`;
+      return `${BASE}${cleanPath}`;
     }
-    return `/${cleanPath}`;
+    return cleanPath;
   };
 
   useEffect(() => {

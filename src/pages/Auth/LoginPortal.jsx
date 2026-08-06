@@ -27,8 +27,8 @@ const ROLE_OPTIONS = [
     icon: School
   },
   {
-    id: "teacher",
-    title: "Teacher Login",
+    id: "faculty",
+    title: "Faculty Login",
     subtitle: "Faculty and teaching staff",
     icon: GraduationCap
   },
@@ -163,7 +163,7 @@ const LoginPortal = () => {
                 Unified Access Portal
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-300 lg:text-lg">
-                Secure login portal for Teacher, School, and Admin accounts.
+                Secure login portal for Faculty, School, and Admin accounts.
               </p>
             </div>
 

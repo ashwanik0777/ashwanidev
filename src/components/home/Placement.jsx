@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 import homeData from "../../Data/home.json";
 
 // Helper to safely build image URLs
@@ -115,26 +116,25 @@ const HiringSection = () => {
 
       {/* Placement Button */}
       <div className="text-center mt-16 sm:mt-20">
-        <a href="https://gbu-website.vercel.app/placements"><button
-          onClick={() => {
-            console.log("View Placements clicked!");
-          }}
-          className="relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 group overflow-hidden animate-pulse"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping"></div>
-          <span className="relative z-10 flex items-center gap-2">
-            View Placements
-            <svg
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </span>
-          <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
-        </button></a>
+        <Link to="/placements">
+          <button
+            className="relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 group overflow-hidden animate-pulse"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping"></div>
+            <span className="relative z-10 flex items-center gap-2">
+              View Placements
+              <svg
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+            <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
+          </button>
+        </Link>
       </div>
 
       {/* Stats Section */}

@@ -7,7 +7,7 @@ const unwrap = (response) => {
   return null;
 };
 
-const normalizeDacMember = (item) => ({
+const normalizeItcellMember = (item) => ({
   id: item?.id ?? "",
   name: String(item?.name || "").trim(),
   role: String(item?.role || "").trim(),
@@ -22,7 +22,7 @@ const normalizeDacMember = (item) => ({
   teamType: String(item?.teamType || "student").trim(),
   sortOrder: Number(item?.sortOrder ?? 0),
   isActive: Boolean(item?.isActive ?? true),
-  localId: String(item?.id || item?.localId || `dac-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
+  localId: String(item?.id || item?.localId || `itcell-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`),
 });
 
 const toRequestPayload = (member) => ({
@@ -41,28 +41,28 @@ const toRequestPayload = (member) => ({
   isActive: Boolean(member?.isActive ?? true),
 });
 
-export const listDacMembers = async () => {
-  const response = await apiClient.get("/dac/team");
+export const listItcellMembers = async () => {
+  const response = await apiClient.get("/itcell/team");
   const payload = unwrap(response);
-  const faculty = Array.isArray(payload?.faculty) ? payload.faculty.map(normalizeDacMember) : [];
-  const student = Array.isArray(payload?.student) ? payload.student.map(normalizeDacMember) : [];
-  const all = Array.isArray(payload?.all) ? payload.all.map(normalizeDacMember) : [];
+  const faculty = Array.isArray(payload?.faculty) ? payload.faculty.map(normalizeItcellMember) : [];
+  const student = Array.isArray(payload?.student) ? payload.student.map(normalizeItcellMember) : [];
+  const all = Array.isArray(payload?.all) ? payload.all.map(normalizeItcellMember) : [];
   return { faculty, student, all };
 };
 
-export const createDacMember = async (member) => {
-  const response = await apiClient.post("/dac/team", toRequestPayload(member));
+export const createItcellMember = async (member) => {
+  const response = await apiClient.post("/itcell/team", toRequestPayload(member));
   const payload = unwrap(response);
-  return normalizeDacMember(payload);
+  return normalizeItcellMember(payload);
 };
 
-export const updateDacMember = async (id, member) => {
-  const response = await apiClient.put(`/dac/team/${id}`, toRequestPayload(member));
+export const updateItcellMember = async (id, member) => {
+  const response = await apiClient.put(`/itcell/team/${id}`, toRequestPayload(member));
   const payload = unwrap(response);
-  return normalizeDacMember(payload);
+  return normalizeItcellMember(payload);
 };
 
-export const deleteDacMember = async (id) => {
-  await apiClient.delete(`/dac/team/${id}`);
+export const deleteItcellMember = async (id) => {
+  await apiClient.delete(`/itcell/team/${id}`);
   return id;
 };

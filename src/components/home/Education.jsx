@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import homeData from '../../Data/home.json';
 
 import aiLab from '../../assets/coe/aiLab.jpg'; 
@@ -41,6 +42,12 @@ const manualImageMap = {
 };
 
 
+const linkMap = {
+  'centers of excellence': '/research/research-centers',
+  'research labs': '/research/research-centers',
+  'infrastructure': '/campus-life/hero',
+};
+
 export default function ExcellenceSection() {
   const [activeTab, setActiveTab] = useState('Centers of Excellence');
   const [groupedData, setGroupedData] = useState({
@@ -67,6 +74,7 @@ export default function ExcellenceSection() {
             ...item,
             gradient: gradientMap[key] || 'from-gray-500 to-gray-600',
             icon: iconMap[key] || '📌',
+            link: linkMap[key] || '/campus-life/hero',
           });
           break;
         }
@@ -124,9 +132,10 @@ export default function ExcellenceSection() {
         {/* Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {(groupedData[activeTab] || []).map((item, index) => (
-            <div
+            <Link
+              to={item.link}
               key={`${activeTab}-${index}`}
-              className="group relative bg-white backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-xl transform hover:scale-102 transition-all duration-150"
+              className="group relative bg-white backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-xl transform hover:scale-102 transition-all duration-150 block"
             >
               <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0 group-hover:opacity-5 rounded-3xl`}></div>
 
@@ -153,8 +162,24 @@ export default function ExcellenceSection() {
                 </p>
                 <div className={`h-1 bg-gradient-to-r ${item.gradient} mt-4 rounded-full`}></div>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* Explore Button */}
+        <div className="text-center mt-12">
+          <Link to={linkMap[activeTab.toLowerCase().trim()] || '/campus-life/hero'}>
+            <button className="relative bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 group overflow-hidden animate-pulse">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping"></div>
+              <span className="relative z-10 flex items-center gap-2">
+                Explore {activeTab}
+                <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

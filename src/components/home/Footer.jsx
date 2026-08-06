@@ -241,8 +241,8 @@ const Footer = () => {
         <div>
           <p>
             Designed and developed by{" "}
-            <Link to="/dac" className="hover:text-white font-semibold">
-              DAC
+            <Link to="/it-cell" className="hover:text-white font-semibold">
+              IT Cell
             </Link>{" "}
             and supported by{" "}
             <Link to="https://ccc.gbu.ac.in/" className="hover:text-white font-semibold">

@@ -1,17 +1,16 @@
 import React from "react";
 import { Mail, CircleCheck, Clock } from "lucide-react";
-import TeamSection from "../../components/dac/TeamSection";
-import DevelopmentGlimpses from "../../components/dac/DevelopmentGlimpses";
-import ApplicationForm from "../../components/dac/ApplicationForm";
-import RoadmapTimeline from "../../components/dac/RoadmapTimeline";
+import TeamSection from "../../components/itcell/TeamSection";
+import DevelopmentGlimpses from "../../components/itcell/DevelopmentGlimpses";
+import ApplicationForm from "../../components/itcell/ApplicationForm";
+import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
 import { motion } from "framer-motion";
 import {
-  corePillars,
+  responsibilities,
   currentProgress,
-  dacFeatures,
   visionMission,
-  dacDescription,
-} from "./dacData";
+  itcellDescription,
+} from "./itcellData";
 
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -101,20 +100,18 @@ const fadeUp = {
   },
 };
 
-const DAC = () => {
+const ITCell = () => {
   React.useEffect(() => {
-    document.title = "Digital Automation Cell - MyGBU Smart Campus";
+    document.title = "IT Cell - MyGBU Smart Campus";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Explore the initiatives, team, and progress of GBU's Digital Automation Cell transforming university operations through AI and automation.",
-      );
+      document.querySelector('meta[name="description"]')?.setAttribute("content", "Explore the initiatives, team, and progress of GBU's IT Cell transforming university operations through AI and automation.");
+      document.querySelector('meta[property="og:description"]')?.setAttribute("content", "Explore the initiatives, team, and progress of GBU's IT Cell transforming university operations through AI and automation.");
     } else {
       const meta = document.createElement("meta");
       meta.name = "description";
       meta.content =
-        "Explore the initiatives, team, and progress of GBU's Digital Automation Cell transforming university operations through AI and automation.";
+        "Explore the initiatives, team, and progress of GBU's IT Cell transforming university operations through AI and automation.";
       document.getElementsByTagName("head")[0].appendChild(meta);
     }
   }, []);
@@ -130,7 +127,7 @@ const DAC = () => {
             animate="visible"
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
           >
-            Digital Automation Cell (DAC)
+            IT Cell
           </motion.h1>
           <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 opacity-90">
             Building practical automation for Smart GBU
@@ -186,33 +183,17 @@ const DAC = () => {
           <Card className="mb-12 bg-indigo-50 border-indigo-200">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-2">
-                {dacDescription.title}
+                {itcellDescription.title}
               </CardTitle>
               <CardDescription className="text-base text-gray-700 max-w-3xl mx-auto">
-                {dacDescription.subtitle}
+                {itcellDescription.subtitle}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-center mb-6">
                 <blockquote className="text-lg italic text-indigo-700 font-medium">
-                  "{dacDescription.quote}"
+                  "{itcellDescription.quote}"
                 </blockquote>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {dacFeatures.map((feature, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ scale: 0.94, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="text-center p-3 rounded-lg bg-white border border-gray-200"
-                  >
-                    <feature.icon className="w-6 h-6 mx-auto mb-2 text-indigo-600" />
-                    <p className="text-xs sm:text-sm font-semibold text-gray-700 mb-1">{feature.title}</p>
-                    <p className="text-xs text-gray-500 hidden sm:block">{feature.description}</p>
-                  </motion.div>
-                ))}
               </div>
             </CardContent>
           </Card>
@@ -228,19 +209,19 @@ const DAC = () => {
           className="mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 text-gray-800">
-            Core Pillars
+            Responsibilities of the Committee
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {corePillars.map((pillar, index) => (
+            {responsibilities.map((resp, index) => (
               <Card key={index} className="hover:border-blue-200 transition-colors duration-200">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 sm:gap-3 leading-tight">
-                    <pillar.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">{pillar.title}</span>
+                    <resp.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
+                    <span className="text-sm sm:text-base">{resp.title}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{pillar.description}</p>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{resp.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -251,7 +232,7 @@ const DAC = () => {
 
         <section className="mb-8">
           <div className="mb-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind DAC</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind IT Cell</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-600">
               Faculty mentors and student builders driving real campus transformation.
             </p>
@@ -262,12 +243,12 @@ const DAC = () => {
         <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-6 md:grid-cols-[1.2fr_auto] md:items-center">
             <div>
-              <h3 className="text-2xl font-bold text-slate-900">Join DAC Team</h3>
+              <h3 className="text-2xl font-bold text-slate-900">Join IT Cell Team</h3>
               <p className="mt-2 text-sm text-slate-600 max-w-2xl">
                 If you are passionate about web development, AI systems, product design, or automation, apply to contribute to real university systems.
               </p>
               <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-slate-700">
-                <Mail className="h-4 w-4" /> dac@gbu.ac.in
+                <Mail className="h-4 w-4" /> itcell@gbu.ac.in
               </p>
             </div>
 
@@ -281,4 +262,4 @@ const DAC = () => {
   );
 };
 
-export default DAC;
+export default ITCell;

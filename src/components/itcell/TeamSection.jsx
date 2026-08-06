@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { Mail, Linkedin, Search, Users, GraduationCap, Star, Globe, User, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
-import { listDacMembers } from "../../services/dacService";
+import { listItcellMembers } from "../../services/itcellService";
 
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -105,13 +105,13 @@ const TeamSection = () => {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const data = await listDacMembers();
+        const data = await listItcellMembers();
         setTeamData({
           faculty: (data.faculty || []).filter((m) => m.isActive),
           student: (data.student || []).filter((m) => m.isActive),
         });
       } catch (error) {
-        console.error("Failed to fetch DAC team members:", error);
+        console.error("Failed to fetch IT Cell team members:", error);
       } finally {
         setLoading(false);
       }
@@ -141,7 +141,7 @@ const TeamSection = () => {
       <div className="flex h-48 items-center justify-center rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-col items-center gap-2 text-slate-500">
           <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-          <p className="text-sm font-medium">Loading DAC team members...</p>
+          <p className="text-sm font-medium">Loading IT Cell team members...</p>
         </div>
       </div>
     );

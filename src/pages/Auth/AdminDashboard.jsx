@@ -118,11 +118,11 @@ import {
   updateFacilityInCharge,
 } from "../../services/bookingService";
 import {
-  listDacMembers,
-  createDacMember,
-  updateDacMember,
-  deleteDacMember
-} from "../../services/dacService";
+  listItcellMembers,
+  createItcellMember,
+  updateItcellMember,
+  deleteItcellMember
+} from "../../services/itcellService";
 import { facilities } from "../../components/bookingData/facilities";
 import UniversityStatsManager from "../../components/admin/UniversityStatsManager";
 /* Semester Registration is held back from this release — the modules below are
@@ -417,7 +417,7 @@ const tabs = [
   { id: "tenders", label: "Tender Management", icon: FileText },
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
-  { id: "dac", label: "DAC Management", icon: Cpu },
+  { id: "itcell", label: "IT Cell Management", icon: Cpu },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -626,14 +626,14 @@ const AdminDashboard = () => {
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [collectionEditors, setCollectionEditors] = useState({});
   const [tenderEditor, setTenderEditor] = useState({ index: null, form: null });
-  const [dacMembers, setDacMembers] = useState({ faculty: [], student: [], all: [] });
-  const [dacEditor, setDacEditor] = useState({ index: null, form: null });
-  const [isDacLoading, setIsDacLoading] = useState(false);
-  const [isDacSaving, setIsDacSaving] = useState(false);
-  const [dacDeletingKey, setDacDeletingKey] = useState("");
-  const [dacApiError, setDacApiError] = useState("");
-  const [dacReloadToken, setDacReloadToken] = useState(0);
-  const [dacFilters, setDacFilters] = useState({ query: "", teamType: "all" });
+  const [itcellMembers, setItcellMembers] = useState({ faculty: [], student: [], all: [] });
+  const [itcellEditor, setItcellEditor] = useState({ index: null, form: null });
+  const [isItcellLoading, setIsItcellLoading] = useState(false);
+  const [isItcellSaving, setIsItcellSaving] = useState(false);
+  const [itcellDeletingKey, setItcellDeletingKey] = useState("");
+  const [itcellApiError, setItcellApiError] = useState("");
+  const [itcellReloadToken, setItcellReloadToken] = useState(0);
+  const [itcellFilters, setItcellFilters] = useState({ query: "", teamType: "all" });
   const [recruitmentEditor, setRecruitmentEditor] = useState({ mode: null, index: null, form: null });
   const [recruitmentTabMode, setRecruitmentTabMode] = useState("current"); // "current" or "archived"
   const [accountFilters, setAccountFilters] = useState({ query: "", role: "all", status: "all" });
@@ -1041,28 +1041,28 @@ const AdminDashboard = () => {
     };
   }, []);
 
-  /* ── Fetch DAC team members ── */
+  /* ── Fetch IT Cell team members ── */
   useEffect(() => {
     let isMounted = true;
-    const fetchDacTeam = async () => {
-      setIsDacLoading(true);
-      setDacApiError("");
+    const fetchItcellTeam = async () => {
+      setIsItcellLoading(true);
+      setItcellApiError("");
       try {
-        const data = await listDacMembers();
+        const data = await listItcellMembers();
         if (!isMounted) return;
-        setDacMembers(data);
+        setItcellMembers(data);
       } catch (error) {
         if (!isMounted) return;
-        setDacApiError(getApiErrorMessage(error, "Failed to load DAC team members."));
+        setItcellApiError(getApiErrorMessage(error, "Failed to load IT Cell team members."));
       } finally {
-        if (isMounted) setIsDacLoading(false);
+        if (isMounted) setIsItcellLoading(false);
       }
     };
-    fetchDacTeam();
+    fetchItcellTeam();
     return () => {
       isMounted = false;
     };
-  }, [dacReloadToken]);
+  }, [itcellReloadToken]);
 
   /* ── Fetch faculty registration requests ── */
   useEffect(() => {
@@ -2581,16 +2581,16 @@ const AdminDashboard = () => {
     }
   };
 
-  /* ── DAC Team Management Handlers ── */
-  const handleSaveDacMember = async () => {
-    const form = dacEditor.form;
+  /* ── IT Cell Team Management Handlers ── */
+  const handleSaveItcellMember = async () => {
+    const form = itcellEditor.form;
     if (!form?.name || !form?.role || !form?.department || !form?.designation || !form?.teamType) {
       setMessage("Name, role, department, designation, and team type are required.");
       return;
     }
 
-    setIsDacSaving(true);
-    setDacApiError("");
+    setIsItcellSaving(true);
+    setItcellApiError("");
 
     let skillsArray = [];
     if (typeof form.skills === "string") {
@@ -2615,58 +2615,58 @@ const AdminDashboard = () => {
       isActive: Boolean(form.isActive),
     };
 
-    const isCreate = dacEditor.index === null;
+    const isCreate = itcellEditor.index === null;
 
     try {
       if (isCreate) {
-        await createDacMember(payload);
-        setMessage("DAC member added successfully.");
+        await createItcellMember(payload);
+        setMessage("IT Cell member added successfully.");
       } else {
-        await updateDacMember(form.id, payload);
-        setMessage("DAC member updated successfully.");
+        await updateItcellMember(form.id, payload);
+        setMessage("IT Cell member updated successfully.");
       }
-      setDacEditor({ index: null, form: null });
-      setDacReloadToken((prev) => prev + 1);
+      setItcellEditor({ index: null, form: null });
+      setItcellReloadToken((prev) => prev + 1);
     } catch (error) {
-      setDacApiError(
-        error?.response?.data?.message || error?.message || "Failed to save DAC member."
+      setItcellApiError(
+        error?.response?.data?.message || error?.message || "Failed to save IT Cell member."
       );
-      setMessage("Failed to save DAC member.");
+      setMessage("Failed to save IT Cell member.");
     } finally {
-      setIsDacSaving(false);
+      setIsItcellSaving(false);
     }
   };
 
-  const handleDeleteDacMember = async (index) => {
-    const member = dacMembers.all[index];
+  const handleDeleteItcellMember = async (index) => {
+    const member = itcellMembers.all[index];
     if (!member) return;
 
-    if (!confirm(`Are you sure you want to delete DAC member ${member.name}?`)) {
+    if (!confirm(`Are you sure you want to delete IT Cell member ${member.name}?`)) {
       return;
     }
 
-    setDacDeletingKey(String(member.id));
-    setDacApiError("");
+    setItcellDeletingKey(String(member.id));
+    setItcellApiError("");
 
     try {
-      await deleteDacMember(member.id);
-      setMessage("DAC member deleted successfully.");
-      setDacReloadToken((prev) => prev + 1);
+      await deleteItcellMember(member.id);
+      setMessage("IT Cell member deleted successfully.");
+      setItcellReloadToken((prev) => prev + 1);
     } catch (error) {
-      setDacApiError(
-        error?.response?.data?.message || error?.message || "Failed to delete DAC member."
+      setItcellApiError(
+        error?.response?.data?.message || error?.message || "Failed to delete IT Cell member."
       );
-      setMessage("Failed to delete DAC member.");
+      setMessage("Failed to delete IT Cell member.");
     } finally {
-      setDacDeletingKey("");
+      setItcellDeletingKey("");
     }
   };
 
-  const handleDacReorder = async (actualIndex, direction) => {
-    const member = dacMembers.all[actualIndex];
+  const handleItcellReorder = async (actualIndex, direction) => {
+    const member = itcellMembers.all[actualIndex];
     if (!member) return;
 
-    const teamMembers = dacMembers.all.filter(m => m.teamType === member.teamType);
+    const teamMembers = itcellMembers.all.filter(m => m.teamType === member.teamType);
     const subIdx = teamMembers.findIndex(m => m.id === member.id);
     if (subIdx === -1) return;
 
@@ -2676,23 +2676,23 @@ const AdminDashboard = () => {
     const otherMember = teamMembers[swapWithSubIdx];
     if (!otherMember) return;
 
-    setIsDacSaving(true);
-    setDacApiError("");
+    setIsItcellSaving(true);
+    setItcellApiError("");
 
     try {
       const tempSortOrder = member.sortOrder;
-      await updateDacMember(member.id, { ...member, sortOrder: otherMember.sortOrder });
-      await updateDacMember(otherMember.id, { ...otherMember, sortOrder: tempSortOrder });
+      await updateItcellMember(member.id, { ...member, sortOrder: otherMember.sortOrder });
+      await updateItcellMember(otherMember.id, { ...otherMember, sortOrder: tempSortOrder });
 
       setMessage("Display order updated.");
-      setDacReloadToken((prev) => prev + 1);
+      setItcellReloadToken((prev) => prev + 1);
     } catch (error) {
-      setDacApiError(
+      setItcellApiError(
         error?.response?.data?.message || error?.message || "Failed to update display order."
       );
       setMessage("Failed to update display order.");
     } finally {
-      setIsDacSaving(false);
+      setIsItcellSaving(false);
     }
   };
 
@@ -4883,16 +4883,16 @@ const AdminDashboard = () => {
     );
   };
 
-  const renderDacTab = () => {
-    const filtered = dacMembers.all.filter((member) => {
-      const query = dacFilters.query.toLowerCase();
+  const renderItcellTab = () => {
+    const filtered = itcellMembers.all.filter((member) => {
+      const query = itcellFilters.query.toLowerCase();
       const matchesSearch = 
         member.name.toLowerCase().includes(query) ||
         member.role.toLowerCase().includes(query) ||
         member.designation.toLowerCase().includes(query) ||
         member.department.toLowerCase().includes(query);
       
-      const matchesType = dacFilters.teamType === "all" || member.teamType === dacFilters.teamType;
+      const matchesType = itcellFilters.teamType === "all" || member.teamType === itcellFilters.teamType;
       
       return matchesSearch && matchesType;
     });
@@ -4901,10 +4901,10 @@ const AdminDashboard = () => {
     const filteredStudent = filtered.filter((m) => m.teamType === "student");
 
     const renderMemberCard = (member) => {
-      const actualIndex = dacMembers.all.findIndex((m) => m.id === member.id);
+      const actualIndex = itcellMembers.all.findIndex((m) => m.id === member.id);
       
       // Filter same-team members to enable conditional arrows
-      const teamMembers = dacMembers.all.filter(m => m.teamType === member.teamType);
+      const teamMembers = itcellMembers.all.filter(m => m.teamType === member.teamType);
       const subIndex = teamMembers.findIndex(m => m.id === member.id);
       const isFirst = subIndex === 0;
       const isLast = subIndex === teamMembers.length - 1;
@@ -4953,8 +4953,8 @@ const AdminDashboard = () => {
             <div className="flex gap-1">
               <button
                 type="button"
-                disabled={isFirst || isDacSaving}
-                onClick={() => handleDacReorder(actualIndex, "up")}
+                disabled={isFirst || isItcellSaving}
+                onClick={() => handleItcellReorder(actualIndex, "up")}
                 className="p-1.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-600 disabled:opacity-30 disabled:hover:bg-slate-50 transition border border-slate-200"
                 title="Move Up"
               >
@@ -4962,8 +4962,8 @@ const AdminDashboard = () => {
               </button>
               <button
                 type="button"
-                disabled={isLast || isDacSaving}
-                onClick={() => handleDacReorder(actualIndex, "down")}
+                disabled={isLast || isItcellSaving}
+                onClick={() => handleItcellReorder(actualIndex, "down")}
                 className="p-1.5 rounded bg-slate-50 hover:bg-slate-100 text-slate-600 disabled:opacity-30 disabled:hover:bg-slate-50 transition border border-slate-200"
                 title="Move Down"
               >
@@ -4976,7 +4976,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={() =>
-                  setDacEditor({
+                  setItcellEditor({
                     index: actualIndex,
                     form: {
                       id: member.id,
@@ -5002,12 +5002,12 @@ const AdminDashboard = () => {
               </button>
               <button
                 type="button"
-                disabled={isDacSaving || dacDeletingKey === String(member.id)}
-                onClick={() => handleDeleteDacMember(actualIndex)}
+                disabled={isItcellSaving || itcellDeletingKey === String(member.id)}
+                onClick={() => handleDeleteItcellMember(actualIndex)}
                 className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
               >
                 <Trash2 className="h-3 w-3" />
-                {dacDeletingKey === String(member.id) ? "..." : "Delete"}
+                {itcellDeletingKey === String(member.id) ? "..." : "Delete"}
               </button>
             </div>
           </div>
@@ -5020,13 +5020,13 @@ const AdminDashboard = () => {
         <div className={cardClass}>
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Digital Automation Cell (DAC) Team</h2>
-              <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main DAC page.</p>
+              <h2 className="text-lg font-bold text-slate-900">IT Cell Team</h2>
+              <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main IT Cell page.</p>
             </div>
             <button
               type="button"
               onClick={() =>
-                setDacEditor({
+                setItcellEditor({
                   index: null,
                   form: {
                     name: "",
@@ -5051,29 +5051,29 @@ const AdminDashboard = () => {
             </button>
           </div>
 
-          {isDacLoading ? (
+          {isItcellLoading ? (
             <div className="mb-4 rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800 flex items-center gap-2">
               <Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading team members...
             </div>
           ) : null}
 
-          {dacApiError ? (
+          {itcellApiError ? (
             <div className="mb-4 rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
-              API Error: {dacApiError}
+              API Error: {itcellApiError}
             </div>
           ) : null}
 
           <div className="space-y-4">
             <FilterBar
-              searchValue={dacFilters.query}
-              onSearchChange={(value) => setDacFilters((prev) => ({ ...prev, query: value }))}
+              searchValue={itcellFilters.query}
+              onSearchChange={(value) => setItcellFilters((prev) => ({ ...prev, query: value }))}
               searchPlaceholder="Search by name, role, department..."
-              onClear={() => setDacFilters({ query: "", teamType: "all" })}
+              onClear={() => setItcellFilters({ query: "", teamType: "all" })}
             >
               <select
                 className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-semibold text-slate-700"
-                value={dacFilters.teamType}
-                onChange={(e) => setDacFilters((prev) => ({ ...prev, teamType: e.target.value }))}
+                value={itcellFilters.teamType}
+                onChange={(e) => setItcellFilters((prev) => ({ ...prev, teamType: e.target.value }))}
               >
                 <option value="all">All Teams</option>
                 <option value="faculty">Faculty Team</option>
@@ -5083,7 +5083,7 @@ const AdminDashboard = () => {
 
             <div className="space-y-6 max-h-[650px] overflow-y-auto pr-1 py-1">
               {/* Faculty Team Section */}
-              {(dacFilters.teamType === "all" || dacFilters.teamType === "faculty") && (
+              {(itcellFilters.teamType === "all" || itcellFilters.teamType === "faculty") && (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
                     <h3 className="text-xs font-bold text-indigo-700 uppercase tracking-wider">Faculty Advisors / Mentors</h3>
@@ -5104,7 +5104,7 @@ const AdminDashboard = () => {
               )}
 
               {/* Student Team Section */}
-              {(dacFilters.teamType === "all" || dacFilters.teamType === "student") && (
+              {(itcellFilters.teamType === "all" || itcellFilters.teamType === "student") && (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
                     <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Student Developers / Builders</h3>
@@ -5128,24 +5128,24 @@ const AdminDashboard = () => {
         </div>
 
         {/* Modal Overlay for Add/Edit Member */}
-        {dacEditor.form && (
+        {itcellEditor.form && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 overflow-y-auto">
             <div className="relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl flex flex-col max-h-[90vh] my-8 animate-in fade-in zoom-in-95 duration-150">
               {/* Modal Header */}
               <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
                   <h3 className="text-lg font-bold text-slate-900">
-                    {dacEditor.index === null ? "➕ Add DAC Member" : "Edit DAC Member"}
+                    {itcellEditor.index === null ? "➕ Add IT Cell Member" : "Edit IT Cell Member"}
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    {dacEditor.index === null 
-                      ? "Create a new Digital Automation Cell member profile." 
-                      : `Modify details for ${dacEditor.form.name}.`}
+                    {itcellEditor.index === null 
+                      ? "Create a new IT Cell member profile." 
+                      : `Modify details for ${itcellEditor.form.name}.`}
                   </p>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setDacEditor({ index: null, form: null })}
+                  onClick={() => setItcellEditor({ index: null, form: null })}
                   className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                 >
                   <X className="h-5 w-5" />
@@ -5154,18 +5154,18 @@ const AdminDashboard = () => {
 
               {/* Scrollable Form Body */}
               <div className="flex-1 overflow-y-auto space-y-4 pr-1 text-left">
-                {dacApiError && (
+                {itcellApiError && (
                   <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
-                    {dacApiError}
+                    {itcellApiError}
                   </div>
                 )}
 
                 <Field label="Name">
                   <input
                     className={inputClass}
-                    value={dacEditor.form.name || ""}
+                    value={itcellEditor.form.name || ""}
                     onChange={(e) =>
-                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))
+                      setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))
                     }
                     placeholder="e.g. Ashwani Kushwaha"
                   />
@@ -5175,9 +5175,9 @@ const AdminDashboard = () => {
                   <Field label="Team Type">
                     <select
                       className={inputClass}
-                      value={dacEditor.form.teamType || "student"}
+                      value={itcellEditor.form.teamType || "student"}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, teamType: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, teamType: e.target.value } }))
                       }
                     >
                       <option value="student">Student Team</option>
@@ -5189,9 +5189,9 @@ const AdminDashboard = () => {
                     <input
                       className={inputClass}
                       type="number"
-                      value={dacEditor.form.sortOrder ?? ""}
+                      value={itcellEditor.form.sortOrder ?? ""}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, sortOrder: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, sortOrder: e.target.value } }))
                       }
                       placeholder="e.g. 0 for top, 1 for second"
                     />
@@ -5201,9 +5201,9 @@ const AdminDashboard = () => {
                 <Field label="Role">
                   <input
                     className={inputClass}
-                    value={dacEditor.form.role || ""}
+                    value={itcellEditor.form.role || ""}
                     onChange={(e) =>
-                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, role: e.target.value } }))
+                      setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, role: e.target.value } }))
                     }
                     placeholder="e.g. Lead Full-Stack Developer or Chief Patron"
                   />
@@ -5213,9 +5213,9 @@ const AdminDashboard = () => {
                   <Field label="Designation">
                     <input
                       className={inputClass}
-                      value={dacEditor.form.designation || ""}
+                      value={itcellEditor.form.designation || ""}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))
                       }
                       placeholder="e.g. Student Lead or Vice Chancellor"
                     />
@@ -5224,9 +5224,9 @@ const AdminDashboard = () => {
                   <Field label="Department">
                     <input
                       className={inputClass}
-                      value={dacEditor.form.department || ""}
+                      value={itcellEditor.form.department || ""}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, department: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, department: e.target.value } }))
                       }
                       placeholder="e.g. B.Tech CSE or School of ICT"
                     />
@@ -5236,9 +5236,9 @@ const AdminDashboard = () => {
                 <Field label="Image URL">
                   <input
                     className={inputClass}
-                    value={dacEditor.form.image || ""}
+                    value={itcellEditor.form.image || ""}
                     onChange={(e) =>
-                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, image: e.target.value } }))
+                      setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, image: e.target.value } }))
                     }
                     placeholder="https://..."
                   />
@@ -5248,9 +5248,9 @@ const AdminDashboard = () => {
                   <input
                     className={inputClass}
                     type="email"
-                    value={dacEditor.form.email || ""}
+                    value={itcellEditor.form.email || ""}
                     onChange={(e) =>
-                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))
+                      setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))
                     }
                     placeholder="e.g. example@gbu.ac.in"
                   />
@@ -5260,9 +5260,9 @@ const AdminDashboard = () => {
                   <Field label="LinkedIn Profile URL">
                     <input
                       className={inputClass}
-                      value={dacEditor.form.linkedin || ""}
+                      value={itcellEditor.form.linkedin || ""}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, linkedin: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, linkedin: e.target.value } }))
                       }
                       placeholder="https://linkedin.com/in/..."
                     />
@@ -5271,23 +5271,23 @@ const AdminDashboard = () => {
                   <Field label="Portfolio / Website URL">
                     <input
                       className={inputClass}
-                      value={dacEditor.form.portfolio || ""}
+                      value={itcellEditor.form.portfolio || ""}
                       onChange={(e) =>
-                        setDacEditor((prev) => ({ ...prev, form: { ...prev.form, portfolio: e.target.value } }))
+                        setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, portfolio: e.target.value } }))
                       }
                       placeholder="https://github.com/..."
                     />
                   </Field>
                 </div>
 
-                {dacEditor.form.teamType === "student" && (
+                {itcellEditor.form.teamType === "student" && (
                   <>
                     <Field label="Short Bio">
                       <textarea
                         className={`${inputClass} min-h-[80px]`}
-                        value={dacEditor.form.bio || ""}
+                        value={itcellEditor.form.bio || ""}
                         onChange={(e) =>
-                          setDacEditor((prev) => ({ ...prev, form: { ...prev.form, bio: e.target.value } }))
+                          setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, bio: e.target.value } }))
                         }
                         placeholder="Briefly describe key contributions..."
                       />
@@ -5296,9 +5296,9 @@ const AdminDashboard = () => {
                     <Field label="Skills (Comma-separated)">
                       <input
                         className={inputClass}
-                        value={dacEditor.form.skills || ""}
+                        value={itcellEditor.form.skills || ""}
                         onChange={(e) =>
-                          setDacEditor((prev) => ({ ...prev, form: { ...prev.form, skills: e.target.value } }))
+                          setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, skills: e.target.value } }))
                         }
                         placeholder="React, Node.js, PostgreSQL"
                       />
@@ -5309,14 +5309,14 @@ const AdminDashboard = () => {
                 <div className="flex items-center gap-2 py-1">
                   <input
                     type="checkbox"
-                    id="dacIsActive"
-                    checked={dacEditor.form.isActive}
+                    id="itcellIsActive"
+                    checked={itcellEditor.form.isActive}
                     onChange={(e) =>
-                      setDacEditor((prev) => ({ ...prev, form: { ...prev.form, isActive: e.target.checked } }))
+                      setItcellEditor((prev) => ({ ...prev, form: { ...prev.form, isActive: e.target.checked } }))
                     }
                     className="rounded border-slate-300 text-slate-900 focus:ring-slate-700 h-4 w-4"
                   />
-                  <label htmlFor="dacIsActive" className="text-xs font-semibold text-slate-700 cursor-pointer">
+                  <label htmlFor="itcellIsActive" className="text-xs font-semibold text-slate-700 cursor-pointer">
                     Is Active Member
                   </label>
                 </div>
@@ -5326,18 +5326,18 @@ const AdminDashboard = () => {
               <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
                 <button
                   type="button"
-                  onClick={() => setDacEditor({ index: null, form: null })}
+                  onClick={() => setItcellEditor({ index: null, form: null })}
                   className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="button"
-                  disabled={isDacSaving}
-                  onClick={handleSaveDacMember}
+                  disabled={isItcellSaving}
+                  onClick={handleSaveItcellMember}
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
                 >
-                  {isDacSaving ? "Saving..." : "Save Member"}
+                  {isItcellSaving ? "Saving..." : "Save Member"}
                 </button>
               </div>
             </div>
@@ -7797,7 +7797,7 @@ const AdminDashboard = () => {
           {activeTab === "tenders" && renderTendersTab()}
           {activeTab === "recruitment" && renderRecruitmentTab()}
           {activeTab === "bookings" && renderBookingsTab()}
-          {activeTab === "dac" && renderDacTab()}
+          {activeTab === "itcell" && renderItcellTab()}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>

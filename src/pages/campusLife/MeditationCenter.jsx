@@ -1118,7 +1118,7 @@ const MeditationCenter = () => {
         </div>
       </section>
       {/* Contact Section */}
-      <section id="contact" className="py-24 ">
+      {/* <section id="contact" className="py-24 ">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`transition-all duration-1000 ease-out ${
@@ -1195,7 +1195,7 @@ const MeditationCenter = () => {
             </form>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
     </SearchableWrapper>
   );

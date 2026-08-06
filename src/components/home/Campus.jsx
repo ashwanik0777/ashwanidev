@@ -64,7 +64,7 @@ export default function CampusLifeSection() {
     
     switch(item.id) {
       case 1:
-        src = '/campus-life/students-life';
+        src = '/campus-life/hero';
         break;
       case 2:
         src = '/campus-life/sports-fitness';

@@ -136,7 +136,7 @@ const ApplicationForm = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center text-blue-800">
-              Join the DAC Team
+              Join the IT Cell Team
             </DialogTitle>
           </DialogHeader>
 
@@ -258,7 +258,7 @@ const ApplicationForm = () => {
 
             <div>
               <Label htmlFor="motivation">
-                Why do you want to join DAC? *
+                Why do you want to join IT Cell? *
               </Label>
               <Textarea
                 id="motivation"

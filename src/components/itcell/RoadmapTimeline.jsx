@@ -165,7 +165,7 @@ const RoadmapTimeline = () => {
   return (
     <div className="my-20 relative px-4 md:px-0">
       <h2 className="text-4xl font-extrabold text-center mb-3 text-slate-800 tracking-tight">
-        DAC Progress Timeline
+        IT Cell Progress Timeline
       </h2>
       <p className="text-center text-slate-500 mb-16 text-lg max-w-xl mx-auto">
         Development Roadmap & Platform Modernization Phases (2025 – 2026)

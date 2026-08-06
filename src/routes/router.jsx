@@ -168,11 +168,11 @@ import SoeDesignLab from "../pages/departments/SoeDesignLab.jsx";
 import SoeInnovationCell from "../pages/departments/SoeInnovationCell.jsx";
 import GenericCentrePage from "../pages/departments/GenericCentrePage.jsx";
 
-import DAC from "../pages/dac/DAC.jsx";
+import ITCell from "../pages/itcell/ITCell.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
 import ContactBanner from "../pages/Contact/ContactBanner.jsx";
 import ComingSoon from "../components/ComingSoon.jsx";
-// import DACmain from "../pages/dac/DACmain.jsx";
+// import DACmain from "../pages/itcell/DACmain.jsx";
 
 
 
@@ -419,8 +419,8 @@ export default function AppRouter() {
 
 
 
-          {/* <Route path="/dacMain" element={<DACmain/>}/> */}
-          <Route path="/dac" element={<DAC />} />
+          {/* <Route path="/itcellMain" element={<DACmain/>}/> */}
+          <Route path="/it-cell" element={<ITCell />} />
 
 
 

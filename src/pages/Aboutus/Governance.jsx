@@ -162,7 +162,7 @@ const governanceData = {
       },
       {
         photo: "/images/governance/bp.jpg",
-        name: "Prof. Bandana Pandey",
+        name: "Prof. Rajeev Varshney",
         role: "Dean, Humanities and Social Sciences, GBU",
       },
       {
@@ -187,7 +187,7 @@ const governanceData = {
       },
       {
         photo: "/images/governance/vt.jpg",
-        name: "Dr. Vishwas Tripathi",
+        name: "Prof. Chander Kumar Singh",
         role: "Registrar, Gautam Buddha University",
       },
     ],

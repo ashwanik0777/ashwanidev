@@ -13,10 +13,19 @@ import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data
 const VITE_HOST = import.meta.env.VITE_HOST;
 import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
 
-const getImageUrl = (url, image) => {
+const getInitials = (name) => {
+  if (!name) return 'F';
+  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
+  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  if (parts.length === 0) return 'F';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+const getImageUrl = (url, image, name) => {
   if (!url) {
     if (image) return `${VITE_HOST}/media/${image}`;
-    return "https://ui-avatars.com/api/?name=Faculty&background=0D8ABC&color=fff&size=150";
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
   }
 
   // Resolve Google Drive URLs
@@ -52,6 +61,13 @@ const Faculty = () => {
   const [selectedExperience, setSelectedExperience] = useState('All');
   const [selectedQualification, setSelectedQualification] = useState('All');
   const [selectedSchool, setSelectedSchool] = useState('All Schools');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 30;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedDepartment, selectedExperience, selectedQualification, selectedSchool]);
 
   const { id } = useParams();
 
@@ -323,7 +339,7 @@ const Faculty = () => {
                   </div>
 
                   <div className="text-sm text-gray-600">
-                    Showing {filteredFaculty.length} of {facultyMembers.length} faculty members
+                    Showing {filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, filteredFaculty.length)} of {filteredFaculty.length} matched (out of {facultyMembers.length} total)
                   </div>
                 </div>
               </div>
@@ -344,20 +360,26 @@ const Faculty = () => {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredFaculty.map((faculty, index) => (
-                      <Link
-                        to={`/academics/faculty/${faculty.id}`}
-                        key={faculty.id}
+                    {(() => {
+                      const totalPages = Math.max(1, Math.ceil(filteredFaculty.length / itemsPerPage));
+                      const paginatedFaculty = filteredFaculty.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+                      
+                      return (
+                        <>
+                          {paginatedFaculty.map((faculty, index) => (
+                            <Link
+                              to={`/academics/faculty/${faculty.id}`}
+                              key={faculty.id}
                         className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in group cursor-pointer"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
                         <div className="p-6">
                           <div className="flex flex-col items-center text-center">
                             <img
-                              src={getImageUrl(faculty.image_url, faculty.image)}
+                              src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
                               alt={faculty.name}
                               className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-300 transition-colors shadow-sm"
-                              onError={(e) => { e.target.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty.name) + "&background=random&color=fff"; }}
+                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
                             />
                             <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">{faculty.name}</h3>
                             <p className="text-blue-600 font-semibold mb-4">{faculty.designation}</p>
@@ -393,8 +415,60 @@ const Faculty = () => {
                             </div>
                           </div>
                         </div>
-                      </Link>
-                    ))}
+                            </Link>
+                          ))}
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Pagination */}
+                {Math.ceil(filteredFaculty.length / itemsPerPage) > 1 && (
+                  <div className="mt-12 flex justify-center items-center space-x-2">
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Previous
+                    </button>
+                    
+                    <div className="flex items-center space-x-1 hidden sm:flex">
+                      {[...Array(Math.ceil(filteredFaculty.length / itemsPerPage))].map((_, i) => {
+                        const pageNum = i + 1;
+                        const totalPages = Math.ceil(filteredFaculty.length / itemsPerPage);
+                        const isClose = Math.abs(pageNum - currentPage) <= 2;
+                        const isEnd = pageNum === 1 || pageNum === totalPages;
+                        
+                        if (!isClose && !isEnd) {
+                          if (pageNum === 2 || pageNum === totalPages - 1) return <span key={i} className="px-2 text-gray-400">...</span>;
+                          return null;
+                        }
+                        
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => setCurrentPage(pageNum)}
+                            className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                              currentPage === pageNum 
+                                ? 'bg-blue-600 text-white shadow-md' 
+                                : 'text-gray-600 hover:bg-gray-100 border border-gray-200'
+                            }`}
+                          >
+                            {pageNum}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredFaculty.length / itemsPerPage)))}
+                      disabled={currentPage === Math.ceil(filteredFaculty.length / itemsPerPage)}
+                      className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Next
+                    </button>
                   </div>
                 )}
               </div>

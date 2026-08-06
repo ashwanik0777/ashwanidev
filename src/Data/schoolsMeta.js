@@ -21,9 +21,9 @@ export const SCHOOLS_META = [
     slug: "sobt",
     matchTokens: ["biotechnology", "sobt", "sbt"],
     departments: [
-      { id: "biotechnology", name: "Department of Biotechnology", shortName: "Biotech" },
-      { id: "bioinformatics", name: "Department of Bioinformatics & Computational Biology", shortName: "Bioinformatics" },
-      { id: "molecular", name: "Department of Molecular Medicine & Microbial Biotechnology", shortName: "Molecular Medicine" },
+      { id: "biotechnology", name: "Biotechnology", shortName: "Biotech" },
+      { id: "bioinformatics", name: "Bioinformatics & Computational Biology", shortName: "Bioinformatics" },
+      { id: "molecular", name: "Molecular Medicine & Microbial Biotechnology", shortName: "Molecular Medicine" },
     ],
   },
   {
@@ -33,8 +33,7 @@ export const SCHOOLS_META = [
     slug: "sobsc",
     matchTokens: ["buddhist", "buddhist studies", "sobsc", "sbsc"],
     departments: [
-      { id: "buddhist-studies", name: "Department of Buddhist Studies", shortName: "Buddhist" },
-      { id: "civilization", name: "Department of Civilization Studies", shortName: "Civilization" },
+      { id: "buddhist-studies", name: "Buddhist Studies & Civilization", shortName: "Buddhist Studies" },
     ],
   },
   {
@@ -44,10 +43,11 @@ export const SCHOOLS_META = [
     slug: "soe",
     matchTokens: ["engineering", "soe"],
     departments: [
-      { id: "mechanical", name: "Department of Mechanical Engineering", shortName: "Mechanical" },
-      { id: "civil", name: "Department of Civil Engineering", shortName: "Civil" },
-      { id: "electrical", name: "Department of Electrical Engineering", shortName: "Electrical" },
-      { id: "automobile", name: "Department of Automobile Engineering", shortName: "Automobile" },
+      { id: "mechanical", name: "Mechanical Engineering", shortName: "Mechanical" },
+      { id: "civil", name: "Civil Engineering", shortName: "Civil" },
+      { id: "electrical", name: "Electrical Engineering", shortName: "Electrical" },
+      { id: "automobile", name: "Automobile Engineering", shortName: "Automobile" },
+      { id: "architecture", name: "Architecture & Planning", shortName: "Architecture" },
     ],
   },
   {
@@ -57,7 +57,7 @@ export const SCHOOLS_META = [
     slug: "sol",
     matchTokens: ["law", "legal", "justice", "sol"],
     departments: [
-      { id: "law-governance", name: "Department of Law & Governance", shortName: "Law" },
+      { id: "law-governance", name: "Law, Justice & Governance", shortName: "Law" },
       { id: "corporate", name: "Department of Corporate & Business Law", shortName: "Corporate" },
     ],
   },
@@ -68,7 +68,7 @@ export const SCHOOLS_META = [
     slug: "som",
     matchTokens: ["management", "som"],
     departments: [
-      { id: "business-management", name: "Department of Business Management", shortName: "Business Management" },
+      { id: "business-management", name: "Management", shortName: "Management" },
       { id: "finance", name: "Finance (Specialization)", shortName: "Finance" },
       { id: "marketing", name: "Marketing (Specialization)", shortName: "Marketing" },
       { id: "human-resource-management", name: "HRM (Specialization)", shortName: "HRM" },
@@ -105,8 +105,8 @@ export const SCHOOLS_META = [
       { id: "applied-mathematics", name: "Department of Applied Mathematics", shortName: "Mathematics" },
       { id: "applied-chemistry", name: "Department of Applied Chemistry", shortName: "Chemistry" },
       { id: "applied-physics", name: "Department of Applied Physics", shortName: "Physics" },
-      { id: "environmental-science", name: "Department of Environmental Sciences", shortName: "Environmental Science" },
-      { id: "food-processing-technology", name: "Department of Food Processing and Technology", shortName: "Food Tech" },
+      { id: "environmental-science", name: "Environmental Science", shortName: "Environmental Science" },
+      { id: "food-processing-technology", name: "Food Processing Technology", shortName: "Food Tech" },
     ],
   },
 ];
@@ -156,15 +156,17 @@ export const getDepartmentsForSchool = (code) => {
 export const matchDepartmentId = (code, departmentName) => {
   if (!departmentName) return "";
   const departments = getDepartmentsForSchool(code);
-  const needle = String(departmentName).toLowerCase();
+  const needle = String(departmentName).toLowerCase().replace(/^department of\s+/i, "").trim();
+  
   const exact = departments.find(
-    (dept) => String(dept.name).toLowerCase() === needle
+    (dept) => String(dept.name).toLowerCase().replace(/^department of\s+/i, "").trim() === needle
   );
   if (exact) return exact.id;
 
-  const partial = departments.find((dept) =>
-    needle.includes(String(dept.shortName || dept.name).toLowerCase())
-  );
+  const partial = departments.find((dept) => {
+    const deptNeedle = String(dept.shortName || dept.name).toLowerCase().replace(/^department of\s+/i, "").trim();
+    return needle.includes(deptNeedle) || deptNeedle.includes(needle);
+  });
   return partial?.id || "";
 };
 

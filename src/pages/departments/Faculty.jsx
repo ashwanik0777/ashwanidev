@@ -8,9 +8,18 @@ import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
 
-const resolveFacultyImage = (url, image) => {
+const getInitials = (name) => {
+  if (!name) return 'F';
+  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
+  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  if (parts.length === 0) return 'F';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+const resolveFacultyImage = (url, image, name) => {
   const target = url || image;
-  if (!target) return "/default-avatar.png";
+  if (!target) return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
 
   let resolvedUrl = target;
   if (typeof target === 'string') {
@@ -66,7 +75,7 @@ const Faculty = () => {
       try {
         const preferredSchool = schoolMeta.apiParam || schoolMeta.name || shortCode || "SOICT";
         const response = await apiClient.get("/faculty/public", {
-          params: { school: preferredSchool },
+          params: { school: preferredSchool, limit: 500 },
         });
         const items = response.data?.data?.items || [];
         setFacultyData(items);
@@ -268,7 +277,7 @@ const Faculty = () => {
                       <div className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <img
-                             src={resolveFacultyImage(faculty.image_url, faculty.image)}
+                             src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)}
                              alt={faculty.name}
                              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
                            />
@@ -336,7 +345,7 @@ const Faculty = () => {
                   <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="p-6">
                       <div className="flex flex-col items-center text-center">
-                        <img src={resolveFacultyImage(faculty.image_url, faculty.image)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <img src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                         <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                       </div>

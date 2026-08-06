@@ -28,7 +28,7 @@ export const DEFAULT_ADMIN_PORTAL_ACCOUNTS = [
     name: "Default Faculty",
     username: "faculty",
     password: "faculty123",
-    role: "teacher",
+    role: "faculty",
     status: "active",
     linkedFacultyId: "SOICT-F0001",
     linkedSchool: "SOICT",

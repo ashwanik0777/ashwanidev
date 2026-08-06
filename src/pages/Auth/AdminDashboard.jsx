@@ -637,7 +637,7 @@ const AdminDashboard = () => {
   const [recruitmentEditor, setRecruitmentEditor] = useState({ mode: null, index: null, form: null });
   const [recruitmentTabMode, setRecruitmentTabMode] = useState("current"); // "current" or "archived"
   const [accountFilters, setAccountFilters] = useState({ query: "", role: "all", status: "all" });
-  const [accountPagination, setAccountPagination] = useState({ page: 1, limit: 20, total: 0, totalPages: 1 });
+  const [accountPagination, setAccountPagination] = useState({ page: 1, limit: 300, total: 0, totalPages: 1 });
   const [accountsReloadToken, setAccountsReloadToken] = useState(0);
   const [facultyFilters, setFacultyFilters] = useState({ query: "", department: "all" });
   const [facultyPagination, setFacultyPagination] = useState({ page: 1, limit: 20, total: 0, totalPages: 1 });

@@ -600,6 +600,27 @@ const AdminDashboard = () => {
   const [tenders, setTenders] = useState(getInitialTenders);
   const [recruitmentData, setRecruitmentData] = useState(getInitialRecruitmentData);
   const [facultyProfiles, setFacultyProfiles] = useState(getFacultyProfiles);
+  
+  const [uploadState, setUploadState] = useState({
+    isUploading: false,
+    progress: 0,
+    total: 0,
+    successCount: 0,
+    failedCount: 0,
+    currentName: "",
+  });
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (uploadState.isUploading) {
+        e.preventDefault();
+        e.returnValue = "Upload in progress. Are you sure you want to leave?";
+        return e.returnValue;
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [uploadState.isUploading]);
 
   const [accountEditor, setAccountEditor] = useState({ index: null, form: null });
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
@@ -637,6 +658,20 @@ const AdminDashboard = () => {
   const [accountDeletingKey, setAccountDeletingKey] = useState("");
   const [accountApiError, setAccountApiError] = useState("");
   const [auditFilters, setAuditFilters] = useState({ query: "", action: "all" });
+  
+  const [confirmModal, setConfirmModal] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
+
+  const requestConfirmation = (title, message, onConfirm) => {
+    setConfirmModal({
+      isOpen: true,
+      title,
+      message,
+      onConfirm: async () => {
+        setConfirmModal({ isOpen: false, title: "", message: "", onConfirm: null });
+        await onConfirm();
+      }
+    });
+  };
   const [auditLogs, setAuditLogs] = useState([]);
   const [auditPagination, setAuditPagination] = useState({ page: 1, limit: 8, total: 0, totalPages: 1 });
   const [auditReloadToken, setAuditReloadToken] = useState(0);
@@ -1192,7 +1227,7 @@ const AdminDashboard = () => {
       name: faculty.name || username,
       username,
       password,
-      role: "teacher",
+      role: "faculty",
       status: "active",
       linkedFacultyId: faculty.id || "",
       linkedSchool: faculty.school || schoolData.schoolCode || "",
@@ -1260,11 +1295,23 @@ const AdminDashboard = () => {
       const failedFacultyRows = [];
       const failedAccountRows = [];
       let createdAccountCount = 0;
+      
+      const totalRows = lines.length - 1;
+      setUploadState({
+        isUploading: true,
+        progress: 0,
+        total: totalRows,
+        successCount: 0,
+        failedCount: 0,
+        currentName: "Starting...",
+      });
 
       for (let i = 1; i < lines.length; i += 1) {
         const values = parseCsvRow(lines[i]);
         const row = Object.fromEntries(headers.map((header, idx) => [header, values[idx] || ""]));
         if (!row.name) continue;
+        
+        setUploadState((prev) => ({ ...prev, currentName: row.name }));
 
         const facultyDraft = {
           name: row.name,
@@ -1280,11 +1327,14 @@ const AdminDashboard = () => {
           faculty = await createFacultyProfile(facultyDraft);
           uploadedFaculty.push(faculty);
         } catch (error) {
+          let reason = error?.response?.data?.message || error?.message || "Faculty save failed";
+          if (error?.response?.data?.errors?.length) {
+            reason = error.response.data.errors.map(e => e.message).join(", ");
+          }
           failedFacultyRows.push({
             row: i + 1,
             faculty: facultyDraft.name,
-            reason:
-              error?.response?.data?.message || error?.message || "Faculty save failed",
+            reason,
           });
           continue;
         }
@@ -1315,15 +1365,27 @@ const AdminDashboard = () => {
               });
             }
           } catch (error) {
+            let reason = error?.response?.data?.message || error?.message || "Account creation failed";
+            if (error?.response?.data?.errors?.length) {
+              reason = error.response.data.errors.map(e => e.message).join(", ");
+            }
             failedAccountRows.push({
               row: i + 1,
               faculty: faculty.name,
-              reason:
-                error?.response?.data?.message || error?.message || "Account creation failed",
+              reason,
             });
           }
         }
+        
+        setUploadState((prev) => ({
+          ...prev,
+          progress: i,
+          successCount: uploadedFaculty.length,
+          failedCount: failedFacultyRows.length + failedAccountRows.length,
+        }));
       }
+      
+      setUploadState((prev) => ({ ...prev, isUploading: false }));
 
       if (!uploadedFaculty.length) {
         if (failedFacultyRows.length) {
@@ -1375,6 +1437,7 @@ const AdminDashboard = () => {
       }
     } catch {
       setMessage("Bulk upload failed. Please upload a valid CSV template file.");
+      setUploadState((prev) => ({ ...prev, isUploading: false }));
     } finally {
       event.target.value = "";
     }
@@ -1968,41 +2031,47 @@ const AdminDashboard = () => {
 
 
 
-  const handleDeleteAccount = async (account) => {
+  const handleDeleteAccount = (account) => {
     const accountId = Number(account?.id);
     if (!Number.isInteger(accountId) || accountId <= 0) {
       setMessage("Only backend synced accounts can be deleted.");
       return;
     }
 
-    setAccountApiError("");
-    setAccountDeletingKey(String(accountId));
+    requestConfirmation(
+      "Delete Account",
+      "Are you sure you want to delete this account? This will revoke their access to the portal.",
+      async () => {
+        setAccountApiError("");
+        setAccountDeletingKey(String(accountId));
 
-    try {
-      await deleteAdminAccount(accountId);
-      const shouldMoveToPreviousPage = accounts.length === 1 && accountPagination.page > 1;
-      if (shouldMoveToPreviousPage) {
-        setAccountPagination((prev) => ({ ...prev, page: prev.page - 1 }));
+        try {
+          await deleteAdminAccount(accountId);
+          const shouldMoveToPreviousPage = accounts.length === 1 && accountPagination.page > 1;
+          if (shouldMoveToPreviousPage) {
+            setAccountPagination((prev) => ({ ...prev, page: prev.page - 1 }));
+          }
+          setAccountsReloadToken((prev) => prev + 1);
+          setAuditReloadToken((prev) => prev + 1);
+          setActivityLog((prev) => [
+            {
+              id: `log-${Date.now()}`,
+              action: `Deleted login account: ${account.username || account.name || accountId}`,
+              time: new Date().toISOString(),
+            },
+            ...prev,
+          ].slice(0, 12));
+          setMessage("Login account deleted from backend.");
+        } catch (error) {
+          setAccountApiError(
+            error?.response?.data?.message || error?.message || "Failed to delete account from backend.",
+          );
+          setMessage("Account delete failed. Please retry.");
+        } finally {
+          setAccountDeletingKey("");
+        }
       }
-      setAccountsReloadToken((prev) => prev + 1);
-      setAuditReloadToken((prev) => prev + 1);
-      setActivityLog((prev) => [
-        {
-          id: `log-${Date.now()}`,
-          action: `Deleted login account: ${account.username || account.name || accountId}`,
-          time: new Date().toISOString(),
-        },
-        ...prev,
-      ].slice(0, 12));
-      setMessage("Login account deleted from backend.");
-    } catch (error) {
-      setAccountApiError(
-        error?.response?.data?.message || error?.message || "Failed to delete account from backend.",
-      );
-      setMessage("Account delete failed. Please retry.");
-    } finally {
-      setAccountDeletingKey("");
-    }
+    );
   };
 
   const handleSaveAccount = async () => {
@@ -2069,7 +2138,7 @@ const AdminDashboard = () => {
 
       const duplicateFacultyAccount = accounts.some((item, idx) => {
         if (idx === accountEditor.index) return false;
-        if (String(item.role || "").toLowerCase() !== "teacher") return false;
+        if (String(item.role || "").toLowerCase() !== "faculty") return false;
         return String(item.linkedFacultyId || "").trim().toLowerCase() === normalizedFacultyId;
       });
 
@@ -2437,9 +2506,13 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleDeleteFaculty = async (faculty, actualIndex) => {
-    const key = faculty?.id || `faculty-${actualIndex}`;
-    const previous = [...facultyProfiles];
+  const handleDeleteFaculty = (faculty, actualIndex) => {
+    requestConfirmation(
+      "Delete Faculty Profile",
+      `Are you sure you want to delete ${faculty.name || "this faculty"}? This action cannot be undone.`,
+      async () => {
+        const key = faculty?.id || `faculty-${actualIndex}`;
+        const previous = [...facultyProfiles];
 
     setFacultyApiError("");
     setFacultyDeletingKey(String(key));
@@ -2463,15 +2536,16 @@ const AdminDashboard = () => {
         ...prev,
       ].slice(0, 12));
       setMessage("Faculty deleted successfully.");
-    } catch (error) {
-      setFacultyProfiles(previous);
-      setFacultyApiError(
-        error?.response?.data?.message || error?.message || "Failed to delete faculty from backend.",
-      );
-      setMessage("Faculty delete failed. Previous data restored.");
-    } finally {
-      setFacultyDeletingKey("");
-    }
+      } catch (error) {
+        setFacultyProfiles(previous);
+        setFacultyApiError(
+          error?.response?.data?.message || error?.message || "Failed to delete faculty from backend.",
+        );
+        setMessage("Faculty delete failed. Previous data restored.");
+      } finally {
+        setFacultyDeletingKey("");
+      }
+    });
   };
 
   const handleDeleteTender = async (tender, actualIndex) => {
@@ -3084,7 +3158,7 @@ const AdminDashboard = () => {
                   name: "",
                   username: "",
                   password: "",
-                  role: "teacher",
+                  role: "faculty",
                   status: "active",
                   linkedFacultyId: "",
                   linkedSchool: schoolData.schoolCode || "",
@@ -3134,7 +3208,7 @@ const AdminDashboard = () => {
                 <option value="all">All Roles</option>
                 <option value="admin">admin</option>
                 <option value="school">school</option>
-                <option value="teacher">teacher</option>
+                <option value="faculty">faculty</option>
               </select>
               <select
                 className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700"
@@ -3153,7 +3227,7 @@ const AdminDashboard = () => {
             {/* Filter and group accounts into two categories */}
             {(() => {
               const adminAndSchoolAccounts = accounts.filter(acc => acc.role === "admin" || acc.role === "school");
-              const facultyAccounts = accounts.filter(acc => acc.role === "teacher");
+              const facultyAccounts = accounts.filter(acc => acc.role === "faculty");
 
               return (
                 <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1 pb-2">
@@ -3459,7 +3533,7 @@ const AdminDashboard = () => {
                   <Field label="Role">
                     <select
                       className={inputClass}
-                      value={accountEditor.form.role || "teacher"}
+                      value={accountEditor.form.role || "faculty"}
                       onChange={(e) => {
                         const nextRole = e.target.value;
                         setAccountEditor((prev) => {
@@ -3504,7 +3578,7 @@ const AdminDashboard = () => {
                     >
                       <option value="admin">admin</option>
                       <option value="school">school</option>
-                      <option value="teacher">teacher</option>
+                      <option value="faculty">faculty</option>
                     </select>
                   </Field>
                   <Field label="Status">
@@ -3521,7 +3595,7 @@ const AdminDashboard = () => {
                   </Field>
                   <Field
                     label={
-                      accountEditor.form.role === "teacher"
+                      accountEditor.form.role === "faculty"
                         ? "Linked Faculty ID (required)"
                         : "Linked Faculty ID"
                     }
@@ -3537,7 +3611,7 @@ const AdminDashboard = () => {
                       }
                       list="faculty-id-options"
                       placeholder={
-                        accountEditor.form.role === "teacher"
+                        accountEditor.form.role === "faculty"
                           ? "Example: SOICT-F0001"
                           : "Optional"
                       }
@@ -3548,7 +3622,7 @@ const AdminDashboard = () => {
                     label={
                       accountEditor.form.role === "admin"
                         ? "Linked School"
-                        : "Linked School (required for school/teacher)"
+                        : "Linked School (required for school/faculty)"
                     }
                   >
                     <input
@@ -3563,7 +3637,7 @@ const AdminDashboard = () => {
                     />
                   </Field>
 
-                  {accountEditor.form.role === "teacher" ? (
+                  {accountEditor.form.role === "faculty" ? (
                     <Field label="Linked Department (required)">
                       <input
                         className={inputClass}
@@ -7727,6 +7801,96 @@ const AdminDashboard = () => {
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>
+
+      {/* Bulk Upload Progress Overlay */}
+      {uploadState.isUploading && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity duration-300">
+          <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col transform transition-all duration-300 scale-100">
+            <div className="bg-gradient-to-r from-indigo-600 to-blue-600 p-6 text-white text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/10 opacity-20 transform -skew-x-12 -translate-x-full animate-[pulse_2s_infinite]"></div>
+              <Loader2 className="w-12 h-12 mx-auto animate-spin mb-4 text-white/90" />
+              <h2 className="text-2xl font-bold tracking-tight">Uploading Faculty Data</h2>
+              <p className="text-indigo-100 text-sm mt-1.5 font-medium tracking-wide">Please do not refresh or close this page</p>
+            </div>
+            
+            <div className="p-7">
+              <div className="mb-3 flex justify-between items-end">
+                <span className="text-sm font-bold text-slate-700 uppercase tracking-wider">Progress</span>
+                <span className="text-lg font-black text-indigo-600">
+                  {Math.round((uploadState.progress / Math.max(1, uploadState.total)) * 100)}%
+                </span>
+              </div>
+              <div className="w-full bg-slate-100 rounded-full h-4 mb-6 overflow-hidden relative shadow-inner">
+                <div 
+                  className="bg-indigo-600 h-4 rounded-full transition-all duration-500 ease-out relative" 
+                  style={{ width: `${Math.round((uploadState.progress / Math.max(1, uploadState.total)) * 100)}%` }}
+                >
+                  <div className="absolute top-0 bottom-0 left-0 right-0 overflow-hidden rounded-full">
+                    <div className="absolute top-0 bottom-0 w-[50%] bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[pulse_1.5s_ease-in-out_infinite]" />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-slate-500 font-medium">Processing:</span>
+                  <span className="font-bold text-slate-800 truncate max-w-[200px]" title={uploadState.currentName}>
+                    {uploadState.currentName || "Starting..."}
+                  </span>
+                </div>
+                <div className="h-px bg-slate-200/60 w-full" />
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-slate-500 font-medium">Rows Completed:</span>
+                  <span className="font-bold text-slate-700 bg-slate-200/50 px-2.5 py-0.5 rounded-md">{uploadState.progress} / {uploadState.total}</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-slate-500 font-medium">Successful:</span>
+                  <span className="font-bold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-md">{uploadState.successCount}</span>
+                </div>
+                {uploadState.failedCount > 0 && (
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-slate-500 font-medium">Failed:</span>
+                    <span className="font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-md">{uploadState.failedCount}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation Modal */}
+      {confirmModal.isOpen && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 transition-opacity duration-300">
+          <div className="w-full max-w-sm bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col p-7 border border-slate-100 transform transition-all duration-300 scale-100">
+            <div className="flex items-center gap-4 mb-5 text-rose-600">
+              <div className="p-3 bg-rose-50 rounded-2xl">
+                <AlertTriangle className="h-7 w-7" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-900 leading-tight">{confirmModal.title}</h2>
+            </div>
+            <p className="text-slate-600 font-medium mb-8 leading-relaxed">
+              {confirmModal.message}
+            </p>
+            <div className="flex justify-end gap-3 mt-auto">
+              <button
+                type="button"
+                onClick={() => setConfirmModal({ isOpen: false, title: "", message: "", onConfirm: null })}
+                className="px-5 py-2.5 rounded-xl text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmModal.onConfirm}
+                className="px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-lg shadow-rose-200/50 transition-colors"
+              >
+                Yes, Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Toast Notification */}
       {message && (() => {

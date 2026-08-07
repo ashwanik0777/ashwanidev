@@ -16,10 +16,19 @@ const ContactUs = () => {
 
   return (
     <SearchableWrapper>
-      <section className="px-4 py-15 ">
-        <h1 className="text-3xl font-bold text-center mb-15">CONTACT US</h1>
+      <section className="bg-slate-50 py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+              Contact Us
+            </h2>
+            <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full mb-6"></div>
+            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+              Get in touch with the Incubation Center for any queries or support
+            </p>
+          </div>
 
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg hover:shadow-lg hover:scale-[1.02] transition-transform duration-300 overflow-hidden flex flex-col md:flex-row">
+          <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col md:flex-row border border-slate-100">
           {/* Contact Info */}
           <div className="w-full md:w-1/2 p-8">
 
@@ -69,11 +78,10 @@ const ContactUs = () => {
               </div>
             </div>
 
-            {/* Get in Touch Button */}
-            <div className="mt-8">
+            <div className="mt-10">
               <a
                 href="mailto:incubator@gbu.ac.in"
-                className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition"
+                className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-indigo-700 shadow-md hover:shadow-lg transition-all"
               >
                 Get in Touch
               </a>
@@ -92,6 +100,7 @@ const ContactUs = () => {
               className="border-0"
             ></iframe>
           </div>
+        </div>
         </div>
       </section>
     </SearchableWrapper>

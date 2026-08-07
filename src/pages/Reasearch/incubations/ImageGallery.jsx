@@ -49,11 +49,16 @@ export default function GallerySlider() {
 
   return (
     <SearchableWrapper>
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 py-15 px-4">
+    <div className="w-full min-h-screen bg-slate-50 py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-5">
-          <h1 className="text-3xl font-bold text-center mb-8">PHOTO GALLERY</h1>
-          
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+            Photo Gallery
+          </h2>
+          <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full mb-6"></div>
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+            Glimpses of activities, events, and facilities at the Incubation Center
+          </p>
         </div>
 
         {/* Main Image */}

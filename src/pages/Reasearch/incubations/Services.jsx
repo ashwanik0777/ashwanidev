@@ -1,6 +1,6 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import Meditation from '../../../assets/Meditation.jpeg';
-
 import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
 
 export default function Services() {
@@ -24,30 +24,50 @@ export default function Services() {
 
   return (
     <SearchableWrapper>
-      <div className="lg:px-15 md:px-20 py-15 bg-gray-50">
-        <h1 className="text-3xl font-bold text-center mb-8">SERVICES</h1>
+      <section className="bg-white py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+              Our Services
+            </h2>
+            <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+            <p className="mt-6 text-slate-600 max-w-2xl mx-auto text-lg">
+              Providing state-of-the-art facilities and support systems to nurture innovation and drive research excellence.
+            </p>
+          </div>
 
-        {/* Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
-          {content.map((item, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-blue-500"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="h-48 w-full object-cover"
-                loading="lazy"
-              />
-              <div className="p-5">
-                <h3 className="font-semibold text-lg text-gray-800">{item.title}</h3>
-                <p className="text-sm text-gray-600 mt-2">{item.description}</p>
-              </div>
-            </div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {content.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group flex flex-col bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-56 overflow-hidden">
+                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all z-10 duration-300"></div>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="font-bold text-xl text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed flex-grow">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </SearchableWrapper>
   );
 }

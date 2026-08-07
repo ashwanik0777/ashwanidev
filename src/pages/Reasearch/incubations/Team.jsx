@@ -1,6 +1,6 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
+import { Linkedin, ChevronLeft, ChevronRight, User } from "lucide-react";
 
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
 
@@ -43,20 +43,18 @@ const teamMembers = [
   }
 ];
 
-// Duplicate for infinite scrolling
 const repeatedTeam = [...teamMembers, ...teamMembers];
 
 export default function TeamSlider() {
   const [x, setX] = useState(0);
-  const cardWidth = 220;
-  const gap = 24;
+  const cardWidth = 260; // Slightly larger cards for premium look
+  const gap = 32;
   const moveBy = cardWidth + gap;
-  const totalCards = repeatedTeam.length;
-
+  
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -78,62 +76,74 @@ export default function TeamSlider() {
 
   return (
     <SearchableWrapper>
-    <section className="py-10 bg-gray-50 overflow-hidden">
-      <h1 className="text-3xl font-bold text-center mb-8">MEET OUR TEAM</h1>
+      <section className="py-24 bg-white border-t border-gray-100 overflow-hidden">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+            Meet Our Team
+          </h2>
+          <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full mb-6"></div>
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+            The visionary minds driving innovation at the Incubation Center
+          </p>
+        </div>
 
-      <div className="relative w-full max-w-7xl mx-auto px-4 overflow-hidden">
-        <button
-          onClick={handlePrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border rounded-full p-2 shadow hover:bg-gray-100"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={handleNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border rounded-full p-2 shadow hover:bg-gray-100"
-        >
-          <ChevronRight size={20} />
-        </button>
+        <div className="relative w-full max-w-7xl mx-auto px-4 overflow-hidden">
+          <button
+            onClick={handlePrev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white border border-slate-200 rounded-full p-3 shadow-md hover:shadow-lg hover:bg-slate-50 transition-all text-slate-700"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <button
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white border border-slate-200 rounded-full p-3 shadow-md hover:shadow-lg hover:bg-slate-50 transition-all text-slate-700"
+          >
+            <ChevronRight size={24} />
+          </button>
 
-        <motion.div
-          animate={{ x }}
-          transition={{ ease: "easeInOut", duration: 0.6 }}
-          className="flex py-4"
-          style={{
-            width: `${(cardWidth + gap) * totalCards}px`,
-            columnGap: `${gap}px`,
-          }}
-        >
-          {repeatedTeam.map((member, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 bg-white rounded-xl shadow-md border border-blue-100 p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-lg hover:scale-105 transform transition-all duration-300"
-              style={{ width: `${cardWidth}px` }}
-            >
-              <img
-                src={member.image || "https://cdn-icons-png.flaticon.com/512/21/21104.png"}
-                alt={member.name}
-                className="w-24 h-28 object-cover rounded-md shadow mb-3"
-              />
-              <h3 className="text-sm font-semibold text-gray-800 mb-1">
-                {member.name}
-              </h3>
-              <p className="text-xs text-gray-500 mb-2">{member.position}</p>
-              <a
-                href={member.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2 py-1 rounded bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-medium"
-                aria-label={`View ${member.name}'s LinkedIn`}
+          <motion.div
+            animate={{ x }}
+            transition={{ ease: "easeInOut", duration: 0.7 }}
+            className="flex px-12 py-4"
+            style={{ width: `${repeatedTeam.length * moveBy}px`, gap: `${gap}px` }}
+          >
+            {repeatedTeam.map((member, index) => (
+              <div
+                key={index}
+                style={{ width: cardWidth }}
+                className="flex-shrink-0 group bg-slate-50 border border-slate-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <Linkedin className="w-3 h-3" />
-                LinkedIn
-              </a>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+                <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-md relative bg-slate-200 flex items-center justify-center">
+                  {member.image ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
+                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                    />
+                  ) : null}
+                  <div className={`absolute inset-0 flex items-center justify-center bg-slate-200 ${member.image ? 'hidden' : ''}`}>
+                    <User className="w-12 h-12 text-slate-400" />
+                  </div>
+                </div>
+                
+                <h3 className="font-bold text-lg text-slate-900 mb-1">{member.name}</h3>
+                <p className="text-sm text-indigo-600 font-medium mb-4">{member.position}</p>
+                
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 text-slate-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300"
+                >
+                  <Linkedin size={18} />
+                </a>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
     </SearchableWrapper>
   );
 }

@@ -6,7 +6,6 @@ import { Lightbulb } from "lucide-react";
 import StartUp from "./StartUp";
 
 import Team from "./Team";
-import ImageGallery from "./ImageGallery";
 import EventSlider from "./EventSlider";
 import ContactUs from "./ContactUs";
 // import IncubationNav from "./IncubationNav";
@@ -26,10 +25,13 @@ const Incubation = () => {
         />
 
         {/* About Section */}
-        <div className="bg-white py-12 lg:px-40 sm:py-16 sm:px-10 md:px-20">
-          <h2 className="text-3xl md:text-4xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-blue-700 to-red-500 mb-10">
-            About Us
-          </h2>
+        <div className="bg-white py-16 lg:px-40 sm:px-10 md:px-20 border-b border-gray-100">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+              About Us
+            </h2>
+            <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+          </div>
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
 
             <div className="md:w-1/2 text-center md:text-left">
@@ -54,14 +56,15 @@ const Incubation = () => {
               </p>
             </div>
 
-            <div className="relative md:w-1/2 w-full mt-8 md:mt-0">
+            <div className="relative md:w-1/2 w-full mt-8 md:mt-0 group">
+              <div className="absolute inset-0 bg-indigo-600/10 rounded-2xl transform translate-x-4 translate-y-4 transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
               <img
                 src="https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"
                 alt="Library"
-                className="rounded-xl shadow-xl w-full object-cover"
+                className="relative rounded-2xl shadow-lg w-full object-cover z-10 grayscale-[20%] transition-all duration-300 group-hover:grayscale-0"
               />
-              <div className="absolute bottom-4 right-4 bg-orange-600 text-white text-center px-5 py-3 rounded-lg shadow-lg text-sm sm:text-base">
-                <div className="text-xl sm:text-2xl font-bold">15+</div>
+              <div className="absolute -bottom-6 -right-6 z-20 bg-slate-900 text-white text-center px-6 py-4 rounded-xl shadow-xl">
+                <div className="text-2xl sm:text-3xl font-bold text-indigo-400">15+</div>
                 <div>Years of Excellence</div>
               </div>
             </div>
@@ -73,20 +76,22 @@ const Incubation = () => {
         <Services />
 
         <Team />
-
         <StartupsCarousel />
 
         <StartUp />
 
-        <div class="text-center mb-15">
+        <div className="text-center py-20 bg-slate-50 border-t border-gray-200">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 mb-6">Have an innovative idea?</h3>
+          <p className="text-slate-600 max-w-2xl mx-auto mb-8 text-lg">
+            Join the GBU Incubation Center and turn your vision into a successful startup. We provide mentorship, infrastructure, and funding support.
+          </p>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2dX1NwPluJ1A1-2cHY39ck3CYhrdCskgIQZUxCj981eDwew/viewform"
             target="_blank"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-500 text-white text-lg font-semibold rounded-full shadow-lg hover:scale-105 transform transition duration-300">
-            < Lightbulb size={80} className="w-5 h-5" />
+            className="inline-flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-medium rounded-xl shadow-md hover:shadow-xl transform transition-all duration-200">
+            <Lightbulb size={24} className="w-6 h-6" />
             Submit Your Idea
           </a>
         </div>
-        <ImageGallery />
 
         <EventSlider />
 

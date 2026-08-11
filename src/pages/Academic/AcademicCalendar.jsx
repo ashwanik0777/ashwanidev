@@ -120,7 +120,7 @@ const AcademicCalendar = () => {
         {/* Hero Banner */}
         <BannerSection
           title="Academic Calendars"
-          subtitle="Official session-wise academic calendar documents published by Gautam Buddha University."
+          subtitle="Academics"
           bgTheme={5}
         />
 

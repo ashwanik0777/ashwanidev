@@ -157,7 +157,7 @@ export default function LatestUpdates() {
       `}</style>
 
       {/* <div className={`text-center mb-12 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
-        <h2 className="text-3xl md:text-4xl font-bold  my-4 ">
+        <h2 className="text-3xl md:text-4xl font-bold text-blue-800 my-4 ">
           Latest Updates & Announcements
         </h2>
         <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full shadow-lg"></div>

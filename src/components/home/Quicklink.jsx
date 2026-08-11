@@ -143,7 +143,7 @@ export default function QuickLinks() {
           
           <h2
             id="quick-access-heading"
-            className="text-3xl md:text-4xl font-bold text-slate-800"
+            className="text-3xl md:text-4xl font-black text-blue-800 tracking-tight leading-none"
           >
             Quick Access
           </h2>

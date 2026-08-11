@@ -70,7 +70,7 @@ const HiringSection = () => {
     <>
     <div className="bg-[#f5f9ff]">
      <div className="text-center px-4 mt-5">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 ">{first?.title || "Companies Hiring"}</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 ">{first?.title || "Companies Hiring"}</h2>
       </div>
     <section className="bg-[#f5f9ff] py-6 sm:py-10 overflow-hidden">
 

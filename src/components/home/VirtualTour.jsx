@@ -33,7 +33,7 @@ function VirtualTour() {
       }}
     >
       <div className="bg-black/50 p-6 rounded-lg max-w-3xl">
-        <h2 className="text-5xl font-extrabold mb-6">Explore GBU in #360</h2>
+        <h2 className="text-5xl font-extrabold mb-6 text-white">Explore GBU in #360</h2>
         {/* {data.title} */}
         <p className="text-lg mb-8 leading-relaxed">{data.desc}</p>
         <a

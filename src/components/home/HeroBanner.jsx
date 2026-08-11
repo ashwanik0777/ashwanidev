@@ -84,7 +84,7 @@ export default function WelcomePage() {
 
         {/* Content - Improved mobile responsiveness with animated entrance */}
         <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
-          <div className="max-w-4xl mx-auto lg:mx-0">
+          <div className="max-w-5xl mx-auto lg:mx-0">
             {/* Title with Typing Effect */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight select-none whitespace-pre-line">
               {typedTitle}

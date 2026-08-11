@@ -110,7 +110,7 @@ export default function AboutSection() {
             {/* Left Content (Text + Stats) */}
             <div className="lg:w-5/12 flex flex-col justify-center items-start text-left py-4 relative z-10">
               
-              <h2 className="text-xl md:text-3xl font-black text-slate-800 tracking-tight leading-tight mb-6">
+              <h2 className="text-xl md:text-3xl font-black text-blue-800 tracking-tight leading-tight mb-6">
                 {aboutData.title || "Gautam Buddha University"}
               </h2>
 

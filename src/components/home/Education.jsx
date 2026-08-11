@@ -100,10 +100,9 @@ export default function ExcellenceSection() {
       <div className="relative z-10 px-6 md:px-20 py-2 mb-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-600 bg-clip-text text-transparent mb-2 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-blue-800">
             Excellence in Education
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Tab Navigation */}

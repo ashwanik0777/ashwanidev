@@ -73,12 +73,12 @@ const defaultQuickLinks = [
     external: true,
   },
   {
-    title: "Time Table",
+    title: "Sports",
     desc: "View and download your academic schedule and class timetables",
     iconName: "award",
     color: "from-rose-500 to-pink-500",
     iconColor: "#f43f5e",
-    link: "https://www.gbu.ac.in/academics/timetables",
+    link: "/campus-life/sports-fitness",
   },
 ];
 
@@ -127,7 +127,7 @@ export default function QuickLinks() {
 
   return (
     <section
-      className="relative py-10 md:py-14 bg-gradient-to-b from-white to-slate-50 border-b border-slate-100 overflow-hidden"
+      className="relative py-2 md:py-5 bg-gradient-to-b from-white to-slate-50 border-b border-slate-100 overflow-hidden"
       role="region"
       aria-labelledby="quick-access-heading"
     >
@@ -143,7 +143,7 @@ export default function QuickLinks() {
           
           <h2
             id="quick-access-heading"
-            className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight leading-none"
+            className="text-3xl md:text-4xl font-black text-blue-800 tracking-tight leading-none"
           >
             Quick Access
           </h2>

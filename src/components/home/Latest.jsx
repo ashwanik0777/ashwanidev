@@ -131,7 +131,7 @@ export default function LatestUpdates() {
   );
 
   return (
-    <section className="px-4 md:px-8 lg:px-16 py-6 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
+    <section className="px-4 md:px-8 lg:px-16 py-10 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
       <style jsx>{`
         @keyframes slide-in {
           from { opacity: 0; transform: translateY(20px); }
@@ -156,12 +156,12 @@ export default function LatestUpdates() {
         }
       `}</style>
 
-      <div className={`text-center mb-12 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+      {/* <div className={`text-center mb-12 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
+        <h2 className="text-3xl md:text-4xl font-bold text-blue-800 my-4 ">
           Latest Updates & Announcements
         </h2>
         <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full shadow-lg"></div>
-      </div>
+      </div> */}
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((catItem, catIndex) => {

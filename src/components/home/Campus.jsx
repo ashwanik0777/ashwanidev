@@ -86,10 +86,9 @@ export default function CampusLifeSection() {
     <div className="px-6 md:px-20 py-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-[65vh]">
       {/* Header Section */}
       <div className="text-center mb-8">
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-800 via-purple-800 to-blue-800 bg-clip-text text-transparent mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-800">
           Campus Life at GBU
         </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-500 mx-auto mb-6 rounded-full" />
       </div>
 
       {/* Cards Grid */}

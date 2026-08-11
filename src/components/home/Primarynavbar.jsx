@@ -49,10 +49,10 @@ const Primarynavbar = () => {
               <Send size={14} /> Recruitments
             </Link>
 
-            <Link to="/booking" className="hover:underline">Booking</Link>
-            
+            <Link to="/booking" className="hover:underline">
+              <span>Facilities</span>
+            </Link>
 
-          
             <Link to="/rti" className="flex items-center gap-1 hover:underline">
               <Info size={14} /> RTI
             </Link>
@@ -154,7 +154,7 @@ const Primarynavbar = () => {
                     className="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors"
                   >
                     <CreditCard size={15} className="text-blue-500" />
-                    <span>Booking</span>
+                    <span>Facilities</span>
                   </a>
                   <a
                     href="/rti"

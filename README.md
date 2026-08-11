@@ -1363,7 +1363,7 @@ firebase deploy
 - Strategic initiatives
 - Leadership message
 
-##### Governance (`/about-us/governance-committees`)
+##### Governance (`/about-us/governing-bodies`)
 **File**: `src/pages/Aboutus/Governance.jsx`
 **Features**:
 - Board of Governors

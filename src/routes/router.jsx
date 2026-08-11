@@ -215,7 +215,7 @@ export default function AppRouter() {
             element={<Registrar />}
           />
           <Route
-            path="/about-us/governance-committees"
+            path="/about-us/governing-bodies"
             element={<Governance />}
           />
 

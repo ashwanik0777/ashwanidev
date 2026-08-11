@@ -381,7 +381,7 @@ const UniversityGovernance = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 ">
         {/* Hero Section */}
         <BannerSection
-          title="Governance & Committees"
+          title="Governing Bodies"
           subtitle="Leadership Structure and Academic Governance"
           bgTheme={9}
         />

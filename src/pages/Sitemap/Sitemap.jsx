@@ -94,7 +94,7 @@ const sitemapAbout = [
       { title: "University History", path: "/aboutUs/GBUHistory" },
       { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
       { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },
-      { title: "Governance & Committees", path: "/about-us/governance-committees" },
+      { title: "Governing Bodies", path: "/about-us/governing-bodies" },
       { title: "Policies, Statutes & RTI", path: "/about-us/policies-statutes-rti" },
       { title: "Mandatory Disclosures", path: "/about-us/mandatory-disclosures" },
       { title: "Right to Information (RTI)", path: "/rti" }

@@ -5,7 +5,7 @@ import Glance from "../../components/home/Glance.jsx";
 import VisionaryLeadership from "../../components/home/Visionary.jsx";
 import LatestUpdates from "../../components/home/Latest.jsx";
 import CampusGallery from "../../components/home/Gallery.jsx";
-import ExcellenceSection from "../../components/home/Education.jsx";
+// import ExcellenceSection from "../../components/home/Education.jsx";
 import CampusLifeSection from "../../components/home/Campus.jsx";
 import HiringSection from "../../components/home/Placement.jsx";
 import VirtualTour from "../../components/home/VirtualTour.jsx";
@@ -21,7 +21,7 @@ function Home() {
         <QuickLinks />
         <LatestUpdates />
         <CampusGallery />
-        <ExcellenceSection />
+        {/* <ExcellenceSection /> */}
         <CampusLifeSection />
 
         <HiringSection />

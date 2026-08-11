@@ -83,7 +83,7 @@ export default function CampusLifeSection() {
   };
 
   return (
-    <div className="px-6 md:px-20 py-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-[65vh]">
+    <div className="px-6 md:px-20 py-14 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header Section */}
       <div className="text-center mb-8">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-800">
@@ -96,76 +96,47 @@ export default function CampusLifeSection() {
         {testimonials.map((item, index) => {
           const category = getCategory(item.card_content);
           const icon = getCategoryIcon(category);
-          const gradient = getCategoryGradient(category);
           
           return (
             <div
               key={item.id}
               onClick={() => handleCardClick(item)}
-              className="group relative bg-white rounded-3xl overflow-hidden border border-gray-200/50 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-[21rem] hover:h-96"
+              className="group relative bg-white rounded-3xl overflow-hidden border border-gray-200/50 shadow-md cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* Image container */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 sm:h-56 overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
                 
-                {/* Image overlay */}
-                <div className={`absolute inset-0  opacity-40`} />
+                {/* Image overlay gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80`} />
 
                 {/* Icon container */}
-                <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center text-xl shadow-lg border border-white/30">
+                <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-lg shadow-lg border border-white/30 text-white">
                   {icon}
                 </div>
-               
-              </div>
-
-              {/* Content container - now expands with card */}
-              <div className="p-6 flex flex-col h-32 group-hover:h-48 transition-all duration-300">
-                {/* Basic content - always visible */}
-                <div className="mb-4">
-                  <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2">
+                
+                {/* Title Overlay */}
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="font-bold text-xl text-white drop-shadow-md">
                     {category}
                   </h3>
-                  
-                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
-                    {item.description}
-                  </p>
                 </div>
+              </div>
 
-                {/* Expanded content - shows on hover */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-1 flex flex-col justify-end">
-                  {/* Progress bar */}
-                  <div className="relative h-1 bg-gray-200 rounded-full overflow-hidden mb-3">
-                    <div className={`h-full bg-gradient-to-r ${gradient} rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`} />
-                  </div>
-
-                  {/* Call to action */}
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-gray-500 font-medium">Explore more</span>
-                    <div className={`w-4 h-4 bg-gradient-to-r ${gradient} rounded-full flex items-center justify-center`}>
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Additional info for hostel */}
-                  {item.id === 4 && (
-                    <div className="mt-1">
-                      <div className="flex items-center space-x-2">
-                        <div className="flex space-x-1">
-                          {['📶', '🍽️', '🏥', '🎮'].map((emoji, i) => (
-                            <span key={i} className="text-xs opacity-70">{emoji}</span>
-                          ))}
-                        </div>
-                        <span className="text-xs text-gray-500">Wi-Fi • Food • Medical • Recreation</span>
-                      </div>
-                    </div>
-                  )}
+              {/* Bottom interaction bar */}
+              <div className="px-5 py-3 flex items-center justify-between bg-gray-50 group-hover:bg-blue-50 transition-colors">
+                <span className="text-sm font-semibold text-gray-600 group-hover:text-blue-700 transition-colors">
+                  Explore Life
+                </span>
+                <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gray-200 group-hover:bg-blue-600 transition-colors`}>
+                  <svg className="w-3 h-3 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                  </svg>
                 </div>
               </div>
 

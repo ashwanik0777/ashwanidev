@@ -116,7 +116,6 @@ export default function QuickLinks() {
         const theme = getIconAndColor(item.title);
         return {
           title: item.title || "Quick Link",
-          desc: item.description || "Access official university portal and services",
           iconName: theme.iconName,
           color: theme.color,
           iconColor: theme.iconColor,
@@ -128,7 +127,7 @@ export default function QuickLinks() {
 
   return (
     <section
-      className="relative py-20 md:py-24 bg-gradient-to-b from-white to-slate-50 border-b border-slate-100 overflow-hidden"
+      className="relative py-10 md:py-14 bg-gradient-to-b from-white to-slate-50 border-b border-slate-100 overflow-hidden"
       role="region"
       aria-labelledby="quick-access-heading"
     >
@@ -137,10 +136,10 @@ export default function QuickLinks() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header section */}
-        <div className="text-center mb-16 flex flex-col items-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/60 mb-3">
+        <div className="text-center mb-10 flex flex-col items-center">
+          {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/60 mb-3">
             <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Essential Links</span>
-          </div>
+          </div> */}
           
           <h2
             id="quick-access-heading"
@@ -148,7 +147,7 @@ export default function QuickLinks() {
           >
             Quick Access
           </h2>
-          <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto mt-4 rounded-full" />
+          {/* <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto mt-4 rounded-full" /> */}
         
         </div>
 
@@ -157,43 +156,32 @@ export default function QuickLinks() {
           {normalizedQuickLinks.map((item, idx) => {
             const Card = (
               <div className={cn(
-                "group relative bg-white/90 backdrop-blur-sm rounded-2xl p-6 sm:p-7 border border-slate-100 hover:border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-xl",
-                "hover:-translate-y-2 focus:-translate-y-2 focus:outline-none transition-all duration-300 ease-out h-full flex flex-col justify-between overflow-hidden"
+                "group relative bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-slate-100 hover:border-slate-200/80 shadow-sm hover:shadow-lg",
+                "hover:-translate-y-1 focus:-translate-y-1 focus:outline-none transition-all duration-300 ease-out flex items-center gap-4 overflow-hidden"
               )}>
                 {/* Hover spotlight background effect */}
                 <div className={cn(
-                  "absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-500 bg-gradient-to-br pointer-events-none",
+                  "absolute inset-0 opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500 bg-gradient-to-br pointer-events-none",
                   item.color
                 )} />
 
-                {/* Card Top / Middle Content */}
-                <div>
-                  {/* Icon Container */}
-                  <div className="mb-6 flex items-center justify-start">
-                    <div className="relative p-3 bg-slate-50 border border-slate-100 rounded-xl text-slate-800 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm overflow-hidden">
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: item.iconColor }} />
-                      <IconComponent name={item.iconName} className="h-6 w-6 relative z-10" style={{ color: item.iconColor }} />
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-base sm:text-lg font-extrabold text-slate-800 mb-2 group-hover:text-blue-700 transition-colors duration-300 tracking-tight leading-tight">
-                    {item.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
-                    {item.desc}
-                  </p>
+                {/* Icon Container */}
+                <div className="relative p-2.5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm overflow-hidden">
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: item.iconColor }} />
+                  <IconComponent name={item.iconName} className="h-5 w-5 relative z-10" style={{ color: item.iconColor }} />
                 </div>
 
-                {/* Card Bottom CTA Link */}
-                <div className="mt-6 pt-2 flex items-center gap-1.5 text-xs font-bold text-blue-600/80 group-hover:text-blue-700 transition-colors duration-300">
-                  <span>Open Portal</span>
+                {/* Title */}
+                <h3 className="text-sm sm:text-base font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300 flex-grow leading-tight">
+                  {item.title}
+                </h3>
+                
+                {/* Redirect Icon */}
+                <div className="text-slate-400 group-hover:text-blue-600 transition-colors duration-300 shrink-0">
                   {item.external ? (
-                    <ExternalLink className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                    <ExternalLink className="w-4 h-4 transform group-hover:scale-110 transition-transform duration-300" />
                   ) : (
-                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                   )}
                 </div>
               </div>

@@ -49,6 +49,7 @@ const NAVIGATION_CONFIG = [
       { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
       { slug: "centers-of-excellence", label: "Centers of Excellence" },
       { slug: "international-collaboration", label: "International Collaboration" },
+      { slug: "national-academic-depository", label: "National Academic Depository (NAD)" },
       { slug: "reports-publications", label: "Reports & Publications" },
     ],
   },

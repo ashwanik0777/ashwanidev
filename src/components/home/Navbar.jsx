@@ -30,6 +30,7 @@ const NAVIGATION_CONFIG = [
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
       { slug: "organization", label: "Organization" },
       { slug: "governing-bodies", label: "Governing Bodies" },
+      { slug: "regulatory-bodies", label: "Regulatory Bodies" },
       { slug: "committee", label: "Committees" },
       { slug: "act", label: "GBU Act, Statute & Ordinance" },
       { slug: "policies-statutes-rti", label: "Policies Statutes RTI" },

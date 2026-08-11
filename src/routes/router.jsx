@@ -88,6 +88,7 @@ const Policies = lazy(() => import("../pages/Aboutus/Policies.jsx"));
 const AboutGbu = lazy(() => import("../pages/Aboutus/AboutGbu.jsx"));
 const Act = lazy(() => import("../pages/Aboutus/Act.jsx"));
 const Committee = lazy(() => import("../pages/Aboutus/Committee.jsx"));
+const RegulatoryBodies = lazy(() => import("../pages/Aboutus/RegulatoryBodies.jsx"));
 
 const Chancellor = lazy(() => import("../pages/Aboutus/Chancellor.jsx"));
 const Governance = lazy(() => import("../pages/Aboutus/Governance.jsx"));
@@ -199,6 +200,8 @@ export default function AppRouter() {
           <Route path="/about/act" element={<Act />} />
           <Route path="/about-us/committee" element={<Committee />} />
           <Route path="/about/committee" element={<Committee />} />
+          <Route path="/about-us/regulatory-bodies" element={<RegulatoryBodies />} />
+          <Route path="/about/regulatorybodies" element={<RegulatoryBodies />} />
           <Route path="/aboutUs/GBUHistory" element={<History />} />
           <Route path="/about-us/chancellor-message" element={<Chancellor />} />
           <Route

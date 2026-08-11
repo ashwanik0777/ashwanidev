@@ -131,7 +131,7 @@ export default function LatestUpdates() {
   );
 
   return (
-    <section className="px-4 md:px-8 lg:px-16 py-12 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30 min-h-screen">
+    <section className="px-4 md:px-8 lg:px-16 py-6 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
       <style jsx>{`
         @keyframes slide-in {
           from { opacity: 0; transform: translateY(20px); }
@@ -157,12 +157,9 @@ export default function LatestUpdates() {
       `}</style>
 
       <div className={`text-center mb-12 ${isVisible ? 'animate-slide-in' : 'opacity-0'}`}>
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
           Latest Updates & Announcements
         </h2>
-        <p className="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
-          Stay informed with the latest news and important notices from our institution.
-        </p>
         <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full shadow-lg"></div>
       </div>
 
@@ -205,7 +202,7 @@ export default function LatestUpdates() {
                   )}
                 </div>
 
-                <div className="flex align-middle justify-end z-10 mt-8 h-10">
+                <div className="flex align-middle justify-end z-10 mt-4 h-10">
                   <button
                     onClick={() => {
                       const url = viewMoreUrls[category] || '/announcements/news-notifications';

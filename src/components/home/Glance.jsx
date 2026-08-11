@@ -26,7 +26,7 @@ const GlanceStatItem = ({ label, rawValue, description, icon: Icon, iconColor, t
       return { target: rawValue, suffix: "" };
     }
     const text = String(rawValue || "");
-    const match = text.match(/^(\d+)(.*)$/); // Match digits at the beginning
+    const match = text.match(/^(\d+)(.*)$/); 
     if (match) {
       return {
         target: parseInt(match[1], 10),
@@ -38,7 +38,7 @@ const GlanceStatItem = ({ label, rawValue, description, icon: Icon, iconColor, t
 
   const animateCount = () => {
     let startTimestamp = null;
-    const duration = 1600; // Smooth 1.6s duration
+    const duration = 1600; 
     const startValue = 0;
     const endValue = parsed.target;
 
@@ -185,7 +185,7 @@ const Glance = () => {
       themeColor: "from-blue-600 to-indigo-600",
     },
     {
-      label: "Dynamic Programs",
+      label: "Programs",
       value: universityStats.programs,
       description: "Comprehensive industry-aligned global curricula",
       icon: BookMarked,
@@ -230,7 +230,7 @@ const Glance = () => {
   return (
     <section
       aria-label="GBU statistics overview"
-      className="relative py-24 md:py-28 bg-slate-50/70 border-y border-slate-200/60 overflow-hidden bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]"
+      className="relative py-10 md:py-14 bg-slate-50/70 border-y border-slate-200/60 overflow-hidden bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]"
     >
       {/* Background ambient grids/bubbles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -241,15 +241,7 @@ const Glance = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20 flex flex-col items-center">
-          {/* Glowing Top Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-100/80 backdrop-blur-md shadow-sm mb-4">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-xs font-bold text-blue-750 uppercase tracking-widest leading-none">University Metrics</span>
-          </div>
+        <div className="text-center  flex flex-col items-center">
 
           <h2 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight leading-tight capitalize">
             {glanceData?.label || "GBU at a Glance"}
@@ -263,10 +255,6 @@ const Glance = () => {
             </div>
             <div className="h-[2px] flex-1 bg-gradient-to-r from-emerald-500/50 to-transparent" />
           </div>
-
-          <p className="text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-medium">
-            Explore the key milestones, massive infrastructure, and outstanding achievements that place Gautam Buddha University at the forefront of global education.
-          </p>
         </div>
 
         <motion.div
@@ -281,7 +269,6 @@ const Glance = () => {
               key={stat.label}
               label={stat.label}
               rawValue={stat.value}
-              description={stat.description}
               icon={stat.icon}
               iconColor={stat.iconColor}
               themeColor={stat.themeColor}

@@ -138,49 +138,42 @@
       {
         "id": 1,
         "title": "Artificial Intelligence Center",
-        "content_text": "Cutting-edge research in machine learning, deep learning, and AI applications across various domains.",
         "category": "Centers OF EXcellence",
         "image": "/assets/realtedimg/ai_center.jpg"
       },
       {
         "id": 2,
         "title": "Drone Technology Hub",
-        "content_text": "Advanced drone research facility focusing on autonomous systems and aerial robotics.",
         "category": "Centers OF EXcellence",
         "image": "/assets/realtedimg/drone_center.webp"
       },
       {
         "id": 3,
         "title": "Cybersecurity Institute",
-        "content_text": "State-of-the-art cybersecurity research and training center for digital security solutions.",
         "category": "Centers OF EXcellence",
         "image": "/assets/realtedimg/cyberlab1.jpeg"
       },
       {
         "id": 4,
         "title": "Bioinformatics Lab",
-        "content_text": "Pioneering research at the intersection of biology and computational science.",
         "category": "Research Labs",
         "image": "/assets/realtedimg/Screenshot_2025-06-24_at_10.24.53AM.png"
       },
       {
         "id": 5,
         "title": "Materials Research Facility",
-        "content_text": "Innovative lab exploring new materials and nanotechnology applications.",
         "category": "Research Labs",
         "image": "/assets/realtedimg/xps1_0.jpg"
       },
       {
         "id": 6,
         "title": "High Performance Computing Center",
-        "content_text": "Robust computational infrastructure supporting large-scale data processing.",
         "category": "infrastructure",
         "image": "/assets/realtedimg/Copy_of_Building_Central_lecture_Theatre.jpg"
       },
       {
         "id": 7,
         "title": "Smart Campus Network",
-        "content_text": "IoT-enabled infrastructure for real-time campus monitoring and management.",
         "category": "infrastructure",
         "image": "/assets/realtedimg/campus-network-higher-education-products-1.jpg"
       }
@@ -189,7 +182,6 @@
       {
         "id": 1,
         "title": "Campus Life at GBU",
-        "description": "GBU has smart classrooms, libraries, labs, mentoring, and career support.",
         "image": "/assets/realtedimg/gautam-buddha-university-gbu-greaternoida909284720_2023-09-22.webp",
         "card_content": "Students Life",
         "name": ".",
@@ -198,7 +190,6 @@
       {
         "id": 2,
         "title": "Campus Life at GBU",
-        "description": "GBU has modern sports facilities, grounds, courts, gyms, and indoor stadiums.",
         "image": "/assets/realtedimg/Indoor_Stadium_5.jpg",
         "card_content": "Sports & Recreation",
         "name": ".",
@@ -207,7 +198,6 @@
       {
         "id": 3,
         "title": "Campus Life at GBU",
-        "description": "GBU hosts theatres and festivals like Youth Fest, promoting music, dance, drama, and arts.",
         "image": "/assets/realtedimg/20240412_130604.jpg",
         "card_content": "Cultural Activities",
         "name": ".",
@@ -216,7 +206,6 @@
       {
         "id": 4,
         "title": "Campus Life at GBU",
-        "description": "GBU offers secure hostels with Wi-Fi, hygienic food, medical aid, and recreation lounges.",
         "image": "/assets/realtedimg/gautam-buddha-university-greater-noida-283008.jpg",
         "card_content": "Hostel Life - GBU offers secure and well-maintained hostel facilities designed to feel like a home away from home. Students enjoy uninterrupted high-speed Wi-Fi for studies and leisure, clean and nutritious meals prepared in hygienic kitchens, prompt medical aid available at all hours, and lively recreation lounges where they can relax, socialize, and build lasting memories.",
         "name": ".",

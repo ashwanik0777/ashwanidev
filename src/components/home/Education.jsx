@@ -149,14 +149,10 @@ export default function ExcellenceSection() {
                 </div>
               </div>
 
-              <div className="text-center p-6 relative">
-                <h3 className="font-bold text-xl text-gray-800 mb-3">
+              <div className="text-center p-2 relative">
+                <h3 className="font-bold text-balance text-gray-800 mb-2">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {item.content_text}
-                </p>
-                <div className={`h-1 bg-gradient-to-r ${item.gradient} mt-4 rounded-full`}></div>
               </div>
             </Link>
           ))}

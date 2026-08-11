@@ -149,7 +149,11 @@ export default function WelcomePage() {
             zIndex: 0,
           }}
         >
-          <span className="bg-[#dc2626] text-white text-[10px] sm:text-xs font-black uppercase px-2 py-0.5 rounded-sm shadow-[0_0_8px_rgba(220,38,38,0.6)] animate-pulse mr-3 border border-red-500 tracking-wider">
+          <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider mr-3">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+            </span>
             NEW
           </span>
           <span className="font-medium tracking-wide">

@@ -83,7 +83,7 @@ const schoolCategories = ADMISSIONS_CATEGORIES;
 // placement rate while the homepage said 160+ and 90%.
 const educationStatsMeta = [
   { icon: GraduationCap, statKey: "academic_schools", title: "Academic Schools", iconColor: "#2563eb" },
-  { icon: BookOpen, statKey: "programs", title: "Dynamic Programs", iconColor: "#16a34a" },
+  { icon: BookOpen, statKey: "programs", title: "Programs", iconColor: "#16a34a" },
   { icon: Award, statKey: "available_seats", title: "Available Seats", iconColor: "#9333ea" },
   { icon: Globe, statKey: "placement_rate", title: "Placement Rate", iconColor: "#f97316" },
 ];

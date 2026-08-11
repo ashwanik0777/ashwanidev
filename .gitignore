@@ -36,3 +36,4 @@ src/Data/semesterRegistrationData.js
 src/config/semesterRegistrationConfig.js
 src/services/semesterRegistrationService.js
 src/services/registrationControl.js
+README.md

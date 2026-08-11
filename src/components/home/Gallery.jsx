@@ -100,7 +100,7 @@ export default function CampusGallery() {
           }
         `}</style>
 
-        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+        <div className="text-center mb-2 sm:mb-5 lg:mb-8">
           <h2 className="text-3xl h-14 md:text-5xl md:h-15 font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 mb-4">
             Ongoing Events
           </h2>
@@ -109,7 +109,7 @@ export default function CampusGallery() {
 
         {/* Main Image */}
         {currentImage && (
-          <div className="relative w-full rounded-xl overflow-hidden shadow-xl mb-8 group">
+          <div className="relative w-full rounded-xl overflow-hidden shadow-xl mb-3 group">
             <img
               src={currentImage.image}
               alt={currentImage.text}

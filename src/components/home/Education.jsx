@@ -97,20 +97,17 @@ export default function ExcellenceSection() {
 
   return (
     <div className="relative bg-gray-50 overflow-hidden">
-      <div className="relative z-10 px-6 md:px-20 py-10">
+      <div className="relative z-10 px-6 md:px-20 py-2">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-600 bg-clip-text text-transparent mb-4 tracking-tight">
+        <div className="text-center mb-8">
+          <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-600 bg-clip-text text-transparent mb-2 tracking-tight">
             Excellence in Education
           </h2>
           <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full"></div>
-          <p className="text-gray-600 text-lg mt-6 max-w-2xl mx-auto">
-            Discover our world-class facilities and cutting-edge research infrastructure
-          </p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 border border-gray-200 shadow-lg">
             <div className="flex flex-wrap gap-2">
               {tabs.map((tab) => (

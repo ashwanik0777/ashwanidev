@@ -83,18 +83,13 @@ export default function CampusLifeSection() {
   };
 
   return (
-    <div className="px-6 md:px-20 py-16 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+    <div className="px-6 md:px-20 py-4 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-[65vh]">
       {/* Header Section */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-8">
         <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-800 via-purple-800 to-blue-800 bg-clip-text text-transparent mb-4">
           Campus Life at GBU
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-pink-500 mx-auto mb-6 rounded-full" />
-        <p className="text-gray-600 mb-4 max-w-3xl mx-auto text-lg leading-relaxed">
-          Experience a vibrant campus life filled with learning, growth, and
-          unforgettable memories. Our diverse community of students creates an
-          environment where everyone can thrive.
-        </p>
       </div>
 
       {/* Cards Grid */}

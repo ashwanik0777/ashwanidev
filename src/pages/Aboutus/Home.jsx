@@ -19,7 +19,6 @@ function Home() {
         <VisionaryLeadership />
         <AboutSection />
         <QuickLinks />
-        <Glance />
         <LatestUpdates />
         <CampusGallery />
         <ExcellenceSection />

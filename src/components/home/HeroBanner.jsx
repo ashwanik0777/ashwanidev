@@ -20,7 +20,8 @@ export default function WelcomePage() {
   const [typedTitle, setTypedTitle] = useState("");
   const [isTitleDone, setIsTitleDone] = useState(false);
 
-  const fullTitle = bannerData?.title || "Welcome to Gautam Buddha University";
+  const rawTitle = bannerData?.title || "Welcome to Gautam Buddha University";
+  const fullTitle = rawTitle.replace(/Welcome to /i, "Welcome to\n");
 
   useEffect(() => {
     if (!bannerData) return;
@@ -85,7 +86,7 @@ export default function WelcomePage() {
         <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
           <div className="max-w-4xl mx-auto lg:mx-0">
             {/* Title with Typing Effect */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight select-none">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight select-none whitespace-pre-line">
               {typedTitle}
               {!isTitleDone && (
                 <span className="inline-block w-[3px] h-[0.9em] bg-blue-400 ml-1 animate-blink align-middle" />
@@ -142,13 +143,18 @@ export default function WelcomePage() {
         style={{ height: "auto", minHeight: "40px" }}
       >
         <div
-          className="inline-block absolute whitespace-nowrap animate-scroll text-sm sm:text-base"
+          className="inline-flex items-center absolute whitespace-nowrap animate-scroll text-sm sm:text-base px-4"
           style={{
-            animation: "scrollText 15s linear infinite", // Slower on mobile
+            animation: "scrollText 15s linear infinite",
             zIndex: 0,
           }}
         >
-          ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
+          <span className="bg-[#dc2626] text-white text-[10px] sm:text-xs font-black uppercase px-2 py-0.5 rounded-sm shadow-[0_0_8px_rgba(220,38,38,0.6)] animate-pulse mr-3 border border-red-500 tracking-wider">
+            NEW
+          </span>
+          <span className="font-medium tracking-wide">
+            ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
+          </span>
         </div>
       </div>
 

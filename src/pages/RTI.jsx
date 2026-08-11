@@ -207,7 +207,7 @@ const RTI = () => {
           </motion.section>
 
                    {/* Important Notes */}
-          <motion.section
+          {/* <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -240,10 +240,10 @@ const RTI = () => {
                 </ul>
               </div>
             </div>
-          </motion.section>
+          </motion.section> */}
 
           {/* Downloadable Forms */}
-          <motion.section
+          {/* <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -281,10 +281,10 @@ const RTI = () => {
                 ))}
               </div>
             </div>
-          </motion.section>
+          </motion.section> */}
 
           {/* Contact Information */}
-          <motion.section
+          {/* <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -323,7 +323,7 @@ const RTI = () => {
                 </div>
               </div>
             </div>
-          </motion.section>
+          </motion.section> */}
         </main>
       </div>
     </SearchableWrapper>

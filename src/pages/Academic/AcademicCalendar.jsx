@@ -1,10 +1,98 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, BookOpen, FileText, Download, Bell, Search, ArrowRight } from 'lucide-react';
+import { 
+  Calendar, 
+  Clock, 
+  BookOpen, 
+  FileText, 
+  Download, 
+  Bell, 
+  Search, 
+  ArrowRight,
+  ExternalLink,
+  FolderDown,
+  FileSpreadsheet
+} from 'lucide-react';
 
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../../components/TabsData.jsx';
+
+// Official Downloadable Academic Calendars (GBU Repository Archives)
+const OFFICIAL_CALENDARS = [
+  {
+    session: "2026-27",
+    title: "Academic Calendar 2026-27",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic%20Calendar%202026-27.pdf",
+    type: "PDF Document",
+    badge: "Latest",
+    badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-300"
+  },
+  {
+    session: "2024-25",
+    title: "Academic Calendar 2024-25",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic%20Calendar%202024-25.pdf",
+    type: "PDF Document",
+    badge: "Active",
+    badgeColor: "bg-blue-100 text-blue-800 border-blue-300"
+  },
+  {
+    session: "2023-24",
+    title: "Academic Calendar 2023-24",
+    fileUrl: "https://www.gbu.ac.in/Admissions/DownloadFile?nName=17906680_6252a53d.jpgAcademic%20calander%202034-24%20.jpg",
+    type: "JPG Image",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  },
+  {
+    session: "2022-23",
+    title: "Revised Academic Calendar 2022-23 (1st Year)",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Revised%20Academic%20Calendar%202022-23_14Sept2022.pdf",
+    type: "PDF Document",
+    badge: "Revised",
+    badgeColor: "bg-amber-100 text-amber-800 border-amber-300"
+  },
+  {
+    session: "2022-23",
+    title: "Academic Calendar 2022-23",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic%20Calendar%202022-23.pdf",
+    type: "PDF Document",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  },
+  {
+    session: "2021-22",
+    title: "Academic Calendar 2021-22 (Revised)",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Revised_AcademicCalendar_7Dec2021.pdf",
+    type: "PDF Document",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  },
+  {
+    session: "2020-21",
+    title: "Academic Calendar 2020-21",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic-Calendar-20-21.jpg",
+    type: "JPG Image",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  },
+  {
+    session: "2019-20",
+    title: "Academic Calendar 2019-20 (Updated)",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic-Calendar-19-20_updated_22Aug19.jpg",
+    type: "JPG Image",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  },
+  {
+    session: "2018-19",
+    title: "Academic Calendar 2018-19",
+    fileUrl: "https://www.gbu.ac.in/Content/gbudata/General/Academic-Calendar-18-19.jpg",
+    type: "JPG Image",
+    badge: "Archive",
+    badgeColor: "bg-slate-100 text-slate-700 border-slate-300"
+  }
+];
 
 // Static high-fidelity data representing GBU's actual Academic Calendar and Regulations
 const GBU_STATS = [
@@ -421,6 +509,61 @@ const AcademicCalendar = () => {
                   ))
                 )}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Official Downloadable Academic Calendars Section */}
+        <section id="official-downloads" className="py-16 bg-slate-100 border-t border-slate-200">
+          <div className="container mx-auto px-4 max-w-6xl">
+            <div className="text-center mb-12">
+              <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                Official Documents & PDF Archives
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-2">
+                Download Academic Calendars
+              </h2>
+              <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+                Official session-wise academic calendar documents published by Gautam Buddha University from session 2018-19 to 2026-27.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {OFFICIAL_CALENDARS.map((cal, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${cal.badgeColor}`}>
+                        Session {cal.session} • {cal.badge}
+                      </span>
+                      <span className="text-xs text-slate-500 font-medium bg-slate-100 px-2 py-0.5 rounded">
+                        {cal.type}
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      {cal.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs mb-6">
+                      Official notification issued by Office of the Dean Academics, Gautam Buddha University.
+                    </p>
+                  </div>
+
+                  <a
+                    href={cal.fileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-slate-900 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-2 group-hover:shadow-md"
+                  >
+                    <FolderDown className="w-4 h-4" />
+                    <span>Download / View Document</span>
+                    <ExternalLink className="w-3.5 h-3.5 opacity-70 ml-auto" />
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
         </section>

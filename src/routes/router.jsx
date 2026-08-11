@@ -274,6 +274,18 @@ export default function AppRouter() {
             path="/academics/academic-calendar"
             element={<AcademicCalendar />}
           />
+          <Route
+            path="/academics/academic-calendars"
+            element={<AcademicCalendar />}
+          />
+          <Route
+            path="/page/academicCalender"
+            element={<AcademicCalendar />}
+          />
+          <Route
+            path="/page/academicCalendar"
+            element={<AcademicCalendar />}
+          />
           <Route path="/academics/cbcs-framework" element={<CBCSFramework />} />
           <Route
             path="/academics/centers-of-excellence"

@@ -12,7 +12,7 @@ function VirtualTour() {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center min-h-[80vh]">
+      <div className="flex justify-center items-center min-h-[60vh]">
         <p className="text-lg font-semibold">Loading virtual experience...</p>
       </div>
     );
@@ -24,7 +24,7 @@ function VirtualTour() {
       style={{
         backgroundImage: `url(${gbuimage})`,
         backgroundColor: data.background_color || '#000',
-        minHeight: '80vh',
+        minHeight: '60vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

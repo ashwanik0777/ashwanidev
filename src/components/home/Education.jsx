@@ -97,7 +97,7 @@ export default function ExcellenceSection() {
 
   return (
     <div className="relative bg-gray-50 overflow-hidden">
-      <div className="relative z-10 px-6 md:px-20 py-2">
+      <div className="relative z-10 px-6 md:px-20 py-2 mb-4">
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-indigo-800 via-purple-700 to-blue-600 bg-clip-text text-transparent mb-2 tracking-tight">
@@ -161,22 +161,6 @@ export default function ExcellenceSection() {
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* Explore Button */}
-        <div className="text-center mt-12">
-          <Link to={linkMap[activeTab.toLowerCase().trim()] || '/campus-life/hero'}>
-            <button className="relative bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 group overflow-hidden animate-pulse">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping"></div>
-              <span className="relative z-10 flex items-center gap-2">
-                Explore {activeTab}
-                <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </span>
-              <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
-            </button>
-          </Link>
         </div>
       </div>
     </div>

@@ -80,6 +80,9 @@ const InternationalCollaboration = React.lazy(() =>
 const ReportsPublications = React.lazy(() =>
   import("../pages/Academic/ReportsPublications.jsx")
 );
+const NationalAcademicDepository = React.lazy(() =>
+  import("../pages/Academic/NationalAcademicDepository.jsx")
+);
 const Schools = React.lazy(() => import("../pages/Academic/Schools.jsx"));
 
 const Disclosures = lazy(() => import("../pages/Aboutus/Disclosures.jsx"));
@@ -271,6 +274,18 @@ export default function AppRouter() {
             path="/academics/academic-calendar"
             element={<AcademicCalendar />}
           />
+          <Route
+            path="/academics/academic-calendars"
+            element={<AcademicCalendar />}
+          />
+          <Route
+            path="/page/academicCalender"
+            element={<AcademicCalendar />}
+          />
+          <Route
+            path="/page/academicCalendar"
+            element={<AcademicCalendar />}
+          />
           <Route path="/academics/cbcs-framework" element={<CBCSFramework />} />
           <Route
             path="/academics/centers-of-excellence"
@@ -286,6 +301,14 @@ export default function AppRouter() {
           <Route
             path="/academics/reports-publications"
             element={<ReportsPublications />}
+          />
+          <Route
+            path="/academics/national-academic-depository"
+            element={<NationalAcademicDepository />}
+          />
+          <Route
+            path="/academics/nad"
+            element={<NationalAcademicDepository />}
           />
           <Route path="/academics/schools" element={<Schools />} />
 

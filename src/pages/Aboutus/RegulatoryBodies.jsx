@@ -89,7 +89,7 @@ const regulatoryBodiesData = [
     category: "Teacher Education Council",
     approvalStatus: "Approved Pedagogy & B.Ed Programs",
     badge: "NCTE Recognized",
-    logo: "/assets/home/NIClogo.jpeg",
+    logo: "/assets/home/NCTElogo.jpeg",
     icon: BookOpen,
     color: "from-amber-600 to-orange-700",
     bgColor: "bg-amber-50/70 border-amber-100",
@@ -238,16 +238,12 @@ const RegulatoryBodies = () => {
                   <div className="grid lg:grid-cols-12 gap-8 items-center">
                     {/* Left Details */}
                     <div className="lg:col-span-8 space-y-4">
-                      <div className="flex flex-wrap items-center gap-4">
-                        {/* Official Logo Container */}
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2 shadow-md border border-gray-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <img
-                            src={item.logo}
-                            alt={`${item.acronym} Official Logo`}
-                            className="w-full h-full object-contain"
-                          />
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`p-3 rounded-2xl bg-gradient-to-r ${item.color} text-white shadow-md shrink-0 group-hover:scale-105 transition-transform`}
+                        >
+                          <IconComp className="w-6 h-6" />
                         </div>
-
                         <div>
                           <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100 inline-block mb-1">
                             {item.badge}
@@ -280,13 +276,13 @@ const RegulatoryBodies = () => {
                       </div>
                     </div>
 
-                    {/* Right Promotional Action Card with Official Logo Thumbnail */}
+                    {/* Right Promotional Action Card with High-Res Prominent Logo */}
                     <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-2xl border border-slate-200/80 text-center space-y-4">
-                      <div className="w-20 h-20 rounded-2xl bg-white p-3 shadow-md border border-gray-100 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-32 sm:w-36 h-20 sm:h-24 rounded-2xl bg-white p-3 shadow-md border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
                         <img
                           src={item.logo}
-                          alt={`${item.acronym} Logo`}
-                          className="w-full h-full object-contain"
+                          alt={`${item.acronym} Official Logo`}
+                          className="w-full h-full object-contain mix-blend-multiply scale-125 group-hover:scale-135 transition-transform duration-300"
                         />
                       </div>
                       <div>

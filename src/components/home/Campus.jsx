@@ -120,23 +120,16 @@ export default function CampusLifeSection() {
                   {icon}
                 </div>
                 
-                {/* Title Overlay */}
-                <div className="absolute bottom-4 left-4 right-4">
+                {/* Title Overlay with arrow */}
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                   <h3 className="font-bold text-xl text-white drop-shadow-md">
                     {category}
                   </h3>
-                </div>
-              </div>
-
-              {/* Bottom interaction bar */}
-              <div className="px-5 py-3 flex items-center justify-between bg-gray-50 group-hover:bg-blue-50 transition-colors">
-                <span className="text-sm font-semibold text-gray-600 group-hover:text-blue-700 transition-colors">
-                  Explore Life
-                </span>
-                <div className={`w-6 h-6 rounded-full flex items-center justify-center bg-gray-200 group-hover:bg-blue-600 transition-colors`}>
-                  <svg className="w-3 h-3 text-gray-500 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-                  </svg>
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center bg-white/20 backdrop-blur-sm border border-white/30 group-hover:bg-white/40 transition-all">
+                    <svg className="w-3.5 h-3.5 text-white group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
                 </div>
               </div>
 

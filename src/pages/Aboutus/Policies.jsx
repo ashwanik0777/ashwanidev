@@ -192,7 +192,7 @@ const Policies = () => {
         </section>
 
         {/* RTI Section */}
-        <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
+        {/* <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Right to Information (RTI)</h2>
 
@@ -237,7 +237,7 @@ const Policies = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </>
     </SearchableWrapper>
   );

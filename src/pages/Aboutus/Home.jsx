@@ -16,10 +16,10 @@ function Home() {
       <div className="min-h-screen flex flex-col">
 
         <WelcomePage />
-        <QuickLinks />
-        <AboutSection />
-        <Glance />
         <VisionaryLeadership />
+        <AboutSection />
+        <QuickLinks />
+        <Glance />
         <LatestUpdates />
         <CampusGallery />
         <ExcellenceSection />

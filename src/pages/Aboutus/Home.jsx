@@ -10,11 +10,13 @@ import CampusLifeSection from "../../components/home/Campus.jsx";
 import HiringSection from "../../components/home/Placement.jsx";
 import VirtualTour from "../../components/home/VirtualTour.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
+import SocialSidebar from "../../components/home/SocialSidebar.jsx";
+import RegulatorySlider from "../../components/home/RegulatorySlider.jsx";
 function Home() {
   return (
     <SearchableWrapper>
       <div className="min-h-screen flex flex-col">
-
+        <SocialSidebar />
         <WelcomePage />
         <VisionaryLeadership />
         <AboutSection />
@@ -25,6 +27,7 @@ function Home() {
         <CampusLifeSection />
 
         <HiringSection />
+        <RegulatorySlider />
         <VirtualTour />
 
       </div>

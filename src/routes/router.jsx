@@ -199,11 +199,11 @@ export default function AppRouter() {
             element={<ViceChancellor />}
           />
           <Route
-            path="/deans-of-schools"
+            path="/organization"
             element={<DeansOfSchools />}
           />
           <Route
-            path="/about-us/deans-of-schools"
+            path="/about-us/organization"
             element={<DeansOfSchools />}
           />
           <Route

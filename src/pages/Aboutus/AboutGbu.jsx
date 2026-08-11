@@ -200,7 +200,7 @@ const aboutData = {
       icon: "GraduationCap",
       title: "Deans of Schools",
       subtitle: "Academic Departments",
-      link: "/deans-of-schools"
+      link: "/organization"
     },
     {
       icon: "BookOpen",

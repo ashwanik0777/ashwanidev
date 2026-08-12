@@ -94,6 +94,7 @@ const Committee = lazy(() => import("../pages/Aboutus/Committee.jsx"));
 const RegulatoryBodies = lazy(() => import("../pages/Aboutus/RegulatoryBodies.jsx"));
 
 const Chancellor = lazy(() => import("../pages/Aboutus/Chancellor.jsx"));
+const StrategicPerspective = lazy(() => import("../pages/Aboutus/StrategicPerspective.jsx"));
 const Governance = lazy(() => import("../pages/Aboutus/Governance.jsx"));
 const ViceChancellor = lazy(() =>
   import("../pages/Aboutus/ViceChancellor.jsx")
@@ -155,6 +156,7 @@ import TenderMain from "../pages/tenders/TenderMain.jsx";
 
 
 import RTI from "../pages/RTI.jsx";
+import Guidelines from "../pages/Aboutus/Guidelines.jsx";
 
 import StaffMembers from "../pages/departments/StaffMembers.jsx";
 import Coedt from "../pages/departments/Coedt.jsx";
@@ -212,6 +214,14 @@ export default function AppRouter() {
             element={<ViceChancellor />}
           />
           <Route
+            path="/about-us/strategic-perspective"
+            element={<StrategicPerspective />}
+          />
+          <Route
+            path="/about/vc"
+            element={<StrategicPerspective />}
+          />
+          <Route
             path="/organization"
             element={<DeansOfSchools />}
           />
@@ -233,12 +243,48 @@ export default function AppRouter() {
           />
 
           <Route
+            path="/about-us/policies"
+            element={<Policies />}
+          />
+          <Route
             path="/about-us/policies-statutes-rti"
+            element={<Policies />}
+          />
+          <Route
+            path="/page/policy"
+            element={<Policies />}
+          />
+          <Route
+            path="/about/policy"
             element={<Policies />}
           />
           <Route
             path="/about-us/mandatory-disclosures"
             element={<Disclosures />}
+          />
+          <Route
+            path="/about-us/rti"
+            element={<RTI />}
+          />
+          <Route
+            path="/about/rti"
+            element={<RTI />}
+          />
+          <Route
+            path="/about-us/guidelines"
+            element={<Guidelines />}
+          />
+          <Route
+            path="/about/guidelines"
+            element={<Guidelines />}
+          />
+          <Route
+            path="/about/Guidelines"
+            element={<Guidelines />}
+          />
+          <Route
+            path="/guidelines"
+            element={<Guidelines />}
           />
 
           {/* Academics */}

@@ -169,17 +169,19 @@ const aboutData = {
   vision: {
     icon: "Eye",
     title: "Our Vision",
-    description: "To emerge as a world-class university that promotes excellence in teaching, research, and innovation while fostering global citizenship and sustainable development for the betterment of society."
+    description: "A globally acclaimed integrated academic and research institution that creates a vibrant community of intellectuals and entrepreneurs endowed with Character, Creativity, Competence and Commitment, who can inspire meaningful transformations to ensure holistic growth and development of the society."
   },
 
   mission: {
     icon: "Target",
     title: "Our Mission",
+    subtitle: "The Mission of University is expressed through the following goals:",
     points: [
-      "Provide quality education and research opportunities",
-      "Foster innovation and entrepreneurship",
-      "Promote ethical values and social responsibility",
-      "Build global partnerships and collaborations"
+      "To generate a community of scholars who can manage continuity and change.",
+      "To seek and incorporate the best practices in teaching and learning from around the world.",
+      "To inculcate in the learners due appreciation for ethical, ecological & economic issues of knowledge.",
+      "To provide knowledge based scientific solutions to satisfy the need of society and industry.",
+      "To ensure an academic environment that guarantees avenues for all historically excluded sections of the society."
     ]
   },
 
@@ -469,11 +471,16 @@ const AboutGbu = () => {
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900">{aboutData.mission.title}</h3>
                   </div>
+                  {aboutData.mission.subtitle && (
+                    <p className="text-base font-semibold text-gray-800 mb-4 italic">
+                      {aboutData.mission.subtitle}
+                    </p>
+                  )}
                   <ul className="space-y-4">
                     {aboutData.mission.points.map((point, index) => (
                       <li key={index} className="flex items-start">
                         <Check className="text-green-600 mr-3 mt-1 w-5 h-5 flex-shrink-0" />
-                        <span className="text-lg text-gray-700">{point}</span>
+                        <span className="text-base sm:text-lg text-gray-700 leading-snug">{point}</span>
                       </li>
                     ))}
                   </ul>

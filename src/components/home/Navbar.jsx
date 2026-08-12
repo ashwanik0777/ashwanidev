@@ -28,13 +28,16 @@ const NAVIGATION_CONFIG = [
       { slug: "About Gbu", label: "About GBU" },
       { slug: "chancellor-message", label: "Chancellor Message" },
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
+      { slug: "strategic-perspective", label: "GBU: A Strategic Perspective" },
       { slug: "organization", label: "Organization" },
       { slug: "governing-bodies", label: "Governing Bodies" },
       { slug: "regulatory-bodies", label: "Regulatory Bodies" },
       { slug: "committee", label: "Committees" },
       { slug: "act", label: "GBU Act, Statute & Ordinance" },
-      { slug: "policies-statutes-rti", label: "Policies Statutes RTI" },
+      { slug: "policies", label: "Policies" },
       { slug: "mandatory-disclosures", label: "Mandatory Disclosures" },
+      { slug: "rti", label: "Right to Information (RTI)", overridePath: "/rti" },
+      { slug: "guidelines", label: "Guidelines / GO" },
     ],
   },
   {
@@ -205,9 +208,10 @@ const useMobileMenu = () => {
 const MenuIcon = ({ icon: Icon, size = 16 }) => <Icon size={size} />;
 
 const DropdownMenuItem = ({ item, baseRoute, onClick }) => {
+  const targetPath = item.overridePath || `${baseRoute}/${item.slug}`;
   const linkProps = item.isExternal
     ? { href: item.slug, target: "_blank", rel: "noopener noreferrer" }
-    : { to: `${baseRoute}/${item.slug}` };
+    : { to: targetPath };
 
   const LinkComponent = item.isExternal ? 'a' : Link;
 

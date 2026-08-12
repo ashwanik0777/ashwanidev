@@ -304,11 +304,12 @@ const aboutData = {
   ],
 
   hostelFeatures: [
-    { text: "18+ Modern Hostels", icon: "Home" },
-    { text: "Wi-Fi Enabled Campus", icon: "Wifi" },
-    { text: "In-house Dining Facilities", icon: "Utensils" },
-    { text: "24×7 Medical Support", icon: "Heart" },
-    { text: "Banking & ATM Services", icon: "CreditCard" }
+    { text: "18 On-Campus Hostels (11 Boys', 6 Girls' & Married Scholar Hostel)", icon: "Home" },
+    { text: "Online Hostel Management System (OHMS)", icon: "Monitor" },
+    { text: "Single Occupancy Furnished Rooms & Wi-Fi", icon: "Wifi" },
+    { text: "Hygienic Dining Halls & Mess Facilities", icon: "Utensils" },
+    { text: "Gymnasium, Indoor Games & Sports Facilities", icon: "Dumbbell" },
+    { text: "24×7 Security, CCTV & Medical Support", icon: "Shield" }
   ],
 
   greenFeatures: [
@@ -494,17 +495,14 @@ const AboutGbu = () => {
         <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4">
             {/* Header */}
-            <div className="text-center mb-20">
+            <div className="text-center mb-14">
               {/* <Badge color="purple" className="inline-flex items-center px-4 py-2 text-sm font-semibold bg-purple-100 text-purple-700 rounded-full shadow-md mb-5">
                 <Shield className="w-5 h-5 mr-2" />
                 Leadership
               </Badge> */}
-              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
                 Governance & Organizational Leadership
               </h2>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-                Our distinguished leadership team guides the university with vision and expertise.
-              </p>
             </div>
 
             {/* Grid */}
@@ -534,40 +532,31 @@ const AboutGbu = () => {
         {/* Schools Section */}
         <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12">
               {/* <Badge color="blue" className="mb-4">
                 <BookOpen className="w-4 h-4 mr-2" />
                 Academic Excellence
               </Badge> */}
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl font-bold text-gray-900">
                 Academic Schools & Programs
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Comprehensive education across diverse disciplines
-              </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {aboutData.schools.map((school, index) => (
                 <Link key={index} to={school.link} className="block">
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-48 flex flex-col">
-                    <CardContent className="p-4 text-center flex flex-col justify-between h-full">
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-36 flex flex-col justify-center">
+                    <CardContent className="p-4 text-center flex flex-col items-center justify-center">
                       <div className="mb-3 flex justify-center">
-                        <div className="p-2 bg-gradient-to-r from-purple-300 to-purple-700 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                        <div className="p-2.5 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
                           {renderIcon(school.icon, "w-6 h-6")}
                         </div>
                       </div>
 
-                      <div className="flex-1 flex flex-col justify-center">
-                        <h3 className={`font-bold text-gray-900 mb-2 leading-tight ${school.name.length > 20 ? 'text-sm' : 'text-base'
-                          }`}>
-                          {school.name}
-                        </h3>
-                        <p className={`text-gray-600 leading-tight ${school.summary.length > 30 ? 'text-xs' : 'text-sm'
-                          }`}>
-                          {school.summary}
-                        </p>
-                      </div>
+                      <h3 className={`font-bold text-gray-900 leading-tight ${school.name.length > 22 ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'
+                        }`}>
+                        {school.name}
+                      </h3>
                     </CardContent>
                   </Card>
                 </Link>
@@ -589,18 +578,17 @@ const AboutGbu = () => {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {aboutData.facilities.map((facility, index) => (
                 <Link key={index} to={facility.link} className="block">
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <CardContent className="p-8 text-center">
-                      <div className="mb-6 flex justify-center">
-                        <div className="p-4 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
-                          {renderIcon(facility.icon, "w-8 h-8")}
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-36 flex flex-col justify-center">
+                    <CardContent className="p-6 text-center flex flex-col items-center justify-center">
+                      <div className="mb-3 flex justify-center">
+                        <div className="p-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
+                          {renderIcon(facility.icon, "w-6 h-6")}
                         </div>
                       </div>
-                      <h3 className="font-bold text-gray-900 mb-3 text-lg">{facility.title}</h3>
-                      <p className="text-gray-600">{facility.summary}</p>
+                      <h3 className="font-bold text-gray-900 text-base">{facility.title}</h3>
                     </CardContent>
                   </Card>
                 </Link>
@@ -610,45 +598,61 @@ const AboutGbu = () => {
         </section>
 
         {/* Hostel Section */}
-        <section className="py-20 bg-gradient-to-r from-amber-50 to-orange-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="space-y-6">
-                <Badge color="orange" className="mb-4">
+        <section className="py-10 sm:py-16 lg:py-20 bg-gradient-to-r from-amber-50 to-orange-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <Badge color="orange" className="mb-2 sm:mb-4">
                   <Home className="w-4 h-4 mr-2" />
                   Residential Life
                 </Badge>
-                <h2 className="text-4xl font-bold text-gray-900 mb-8">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight">
                   Hostel & Residential Experience
                 </h2>
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {aboutData.hostelFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center p-4 bg-white/60 rounded-xl backdrop-blur-sm">
-                      <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white mr-4">
-                        {renderIcon(feature.icon, "w-5 h-5")}
+                    <div key={index} className="flex items-center p-3 sm:p-4 bg-white/70 rounded-xl backdrop-blur-sm shadow-sm border border-orange-100/80">
+                      <div className="p-2 sm:p-2.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white mr-3 sm:mr-4 shrink-0 shadow-sm">
+                        {renderIcon(feature.icon, "w-4 h-4 sm:w-5 sm:h-5")}
                       </div>
-                      <span className="text-lg text-gray-700 font-medium">{feature.text}</span>
+                      <span className="text-xs sm:text-base lg:text-lg text-gray-800 font-semibold leading-snug">{feature.text}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-center">
-                    <img src="/assets/hostels.jpg" alt="Hostel" className="w-80 object-contain rounded-2xl" />
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostels.jpg"
+                      alt="GBU Hostel Building Overview"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <div className="h-32 bg-gradient-to-br from-blue-200 to-purple-200 rounded-2xl flex items-center justify-center">
-                    <Wifi className="w-12 h-12 text-blue-600" />
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel 1.jpg"
+                      alt="GBU Hostel Residence Block"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                 </div>
-                <div className="space-y-4 pt-8">
-                  <div className="h-32 bg-gradient-to-br from-green-200 to-teal-200 rounded-2xl flex items-center justify-center">
-                    <Utensils className="w-12 h-12 text-green-600" />
+                <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-8">
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel 2.jpg"
+                      alt="GBU Hostel Landscape & Greenery"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <div className="flex items-center justify-center">
-                    <img src="/assets/hostel2.jpg" alt="Hostel 2" className="w-80 object-contain rounded-2xl" />
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel2.jpg"
+                      alt="GBU Student Residential Complex"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                 </div>
               </div>

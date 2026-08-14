@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Power Systems", "Electrical Machines", "Control Systems", "Power Electronics",
         "Instrumentation", "Renewable Energy", "EV Technology", "Industry Internship",
       ],
+      syllabus: [],
     },
     {
       title: "Integrated B.Tech–M.Tech/MBA (EE)",
@@ -118,6 +119,7 @@ export const departmentLayoutData = {
         "Power Systems", "Instrumentation & Control", "Power Electronics & Drives",
         "Renewable Energy", "Signal Processing", "MBA Option", "Research Project", "Industry Placement",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Power Systems / Power Electronics",
@@ -131,6 +133,7 @@ export const departmentLayoutData = {
         "Power System Analysis", "Smart Grid", "FACTS Devices", "Power Converters",
         "Motor Drives", "EV Systems", "MATLAB/Simulink", "Research Thesis",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Electrical Engineering",
@@ -145,6 +148,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
         "Patent Filing", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

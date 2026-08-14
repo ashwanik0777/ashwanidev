@@ -109,6 +109,7 @@ export const departmentLayoutData = {
         "Solid & Hazardous Waste Management",
         "Field Dissertation Project",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Environmental Sciences",
@@ -126,6 +127,7 @@ export const departmentLayoutData = {
         "High-impact journal publishing",
         "Thesis Submission & Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

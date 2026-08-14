@@ -125,6 +125,8 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "imageLink", label: "Image Click Link" },
     { key: "images", label: "Gallery Images (comma separated URLs)", type: "textarea" },
     { key: "registrationUrl", label: "Registration Link" },
+    { key: "brochureUrl", label: "Brochure PDF URL", placeholder: "https://.../brochure.pdf" },
+    { key: "flyerUrl", label: "Flyer Image URL", placeholder: "https://.../flyer.jpg" },
     { key: "description", label: "Description", type: "textarea", required: true },
   ],
 

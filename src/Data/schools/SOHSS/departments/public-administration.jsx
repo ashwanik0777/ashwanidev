@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Administrative Theory", "Public Policy", "Governance", "Administrative Law",
         "E-Governance", "Rural Development", "Research Methods", "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Public Administration",
@@ -119,6 +120,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Field Research", "Policy Analysis",
         "Teaching Assistantship", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

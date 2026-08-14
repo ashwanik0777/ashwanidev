@@ -109,6 +109,7 @@ export const departmentLayoutData = {
         "Python Programming for Math",
         "Mini Projects",
       ],
+      syllabus: [],
     },
     {
       title: "M.Sc. Applied Mathematics",
@@ -127,6 +128,7 @@ export const departmentLayoutData = {
         "MATLAB & Scientific Computing Lab",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Applied Mathematics",
@@ -144,6 +146,7 @@ export const departmentLayoutData = {
         "Journal Publications",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

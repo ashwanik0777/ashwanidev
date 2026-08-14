@@ -109,6 +109,7 @@ export const departmentLayoutData = {
         "Polymer Chemistry basics",
         "Laboratory Safety Training",
       ],
+      syllabus: [],
     },
     {
       title: "M.Sc. Applied Chemistry",
@@ -127,6 +128,7 @@ export const departmentLayoutData = {
         "Instrumental Analysis Lab",
         "Dissertation Research",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Applied Chemistry",
@@ -144,6 +146,7 @@ export const departmentLayoutData = {
         "Scientific Writing & Patents",
         "Thesis Submission & Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

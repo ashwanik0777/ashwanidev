@@ -115,6 +115,7 @@ export const departmentLayoutData = {
         "Database Design",
         "Research Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Bioinformatics",
@@ -135,6 +136,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

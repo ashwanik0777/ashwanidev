@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Research Project",
         "Industry Internship",
       ],
+      syllabus: [],
     },
     {
       title: "M.Sc Biotechnology (DBT Sponsored)",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Dissertation Project",
         "Industry Exposure",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Biotechnology",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Research Thesis",
         "Industrial Training",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Biotechnology",
@@ -176,6 +179,7 @@ export const departmentLayoutData = {
         "Patent Filing",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

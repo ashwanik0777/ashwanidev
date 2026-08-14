@@ -106,6 +106,7 @@ export const departmentLayoutData = {
         "Social Group Work", "Rural Development", "Fieldwork Practicum",
         "Human Rights", "Research Methods",
       ],
+      syllabus: [],
     },
     {
       title: "MSW (Master of Social Work)",
@@ -120,6 +121,7 @@ export const departmentLayoutData = {
         "Disability Studies", "Counseling Skills", "CSR Management",
         "Concurrent Fieldwork", "Block Placement",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Social Work",
@@ -134,6 +136,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Community-Based Research", "Field Studies",
         "Teaching Assistantship", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

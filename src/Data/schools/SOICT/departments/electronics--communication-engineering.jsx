@@ -126,6 +126,7 @@ export const departmentLayoutData = {
         "IoT Applications",
         "Wireless Networks",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Electronics & Communication Engineering",
@@ -146,6 +147,7 @@ export const departmentLayoutData = {
         "Research Methodology",
         "Thesis Project",
       ],
+      syllabus: [],
     },
     {
       title: "PhD Electronics & Communication",
@@ -166,6 +168,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

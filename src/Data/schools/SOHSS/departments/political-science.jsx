@@ -106,6 +106,7 @@ export const departmentLayoutData = {
         "Comparative Politics", "Public Administration", "Foreign Policy",
         "Research Methods", "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Political Science",
@@ -120,6 +121,7 @@ export const departmentLayoutData = {
         "Research Methodology", "Comparative Politics", "Public Policy",
         "Dissertation", "Seminar Presentations",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Political Science & International Relations",
@@ -134,6 +136,7 @@ export const departmentLayoutData = {
         "Diplomacy & Negotiations", "Security Studies", "Global Governance",
         "Area Studies", "Research Thesis",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Political Science",
@@ -148,6 +151,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Field Research",
         "Policy Analysis", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

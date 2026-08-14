@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Translation Studies",
         "Journalism in Hindi",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Hindi",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Applied Hindi",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "B.A. (Hons.) Sanskrit",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Epigraphy",
         "Translation",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Urdu",
@@ -176,6 +179,7 @@ export const departmentLayoutData = {
         "Script & Calligraphy",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Hindi",
@@ -196,6 +200,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

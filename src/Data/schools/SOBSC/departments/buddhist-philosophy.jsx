@@ -120,6 +120,7 @@ export const departmentLayoutData = {
         "Research Methodology",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.Phil Buddhist Studies",
@@ -138,6 +139,7 @@ export const departmentLayoutData = {
         "Seminar Presentations",
         "Thesis Research",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Buddhist Studies",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

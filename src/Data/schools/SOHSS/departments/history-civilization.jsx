@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Archaeology Basics",
         "Heritage Studies",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. History",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Museum Studies",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. History",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Field Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

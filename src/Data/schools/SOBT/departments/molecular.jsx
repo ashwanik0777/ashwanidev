@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Clinical Research",
         "Research Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.Sc Microbial Biotechnology",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Quality Control",
         "Research Project",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Molecular Biology / Microbiology",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

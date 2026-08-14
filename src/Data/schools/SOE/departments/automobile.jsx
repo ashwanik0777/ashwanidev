@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Vehicle Design", "IC Engines", "Vehicle Dynamics", "EV Systems",
         "Auto Manufacturing", "Automotive Electronics", "SAE Projects", "Industry Internship",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Automobile Engineering",
@@ -118,6 +119,7 @@ export const departmentLayoutData = {
         "EV Research", "Alternative Fuels", "Aerodynamics", "Advanced Manufacturing",
         "Publications", "Conference Presentations", "Patent Filing", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

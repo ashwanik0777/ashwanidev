@@ -118,6 +118,7 @@ export const departmentLayoutData = {
         "Web Development",
         "Mobile App Development",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Computer Science & Engineering",
@@ -138,6 +139,7 @@ export const departmentLayoutData = {
         "Research Methodology",
         "Thesis Project",
       ],
+      syllabus: [],
     },
     {
       title: "PhD Computer Science",
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Patent Filing",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

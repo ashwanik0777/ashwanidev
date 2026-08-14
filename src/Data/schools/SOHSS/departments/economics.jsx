@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Public Finance",
         "International Trade",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Economics",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Environmental Economics",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Economics",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

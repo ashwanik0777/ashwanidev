@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Compensation Design", "Industrial Relations", "Leadership",
         "Training & Development", "International HRM",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

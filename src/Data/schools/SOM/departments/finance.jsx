@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Financial Modeling", "International Finance", "Tax Planning",
         "Risk Management", "Microfinance",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

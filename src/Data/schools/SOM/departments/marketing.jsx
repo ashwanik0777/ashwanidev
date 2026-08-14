@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Sales & Distribution", "Advertising", "CRM",
         "Marketing Analytics", "International Marketing",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

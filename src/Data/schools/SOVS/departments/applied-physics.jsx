@@ -109,6 +109,7 @@ export const departmentLayoutData = {
         "Computational Physics with C++/Python",
         "Modern Physics experiments",
       ],
+      syllabus: [],
     },
     {
       title: "M.Sc. Applied Physics",
@@ -127,6 +128,7 @@ export const departmentLayoutData = {
         "Thin Film Fabrication Lab",
         "M.Sc. Research Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Applied Physics",
@@ -144,6 +146,7 @@ export const departmentLayoutData = {
         "Journal Publications",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

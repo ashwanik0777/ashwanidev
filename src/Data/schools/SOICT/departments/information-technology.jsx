@@ -123,6 +123,7 @@ export const departmentLayoutData = {
         "DevOps & Automation",
         "Capstone Project",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Information Technology",
@@ -142,6 +143,7 @@ export const departmentLayoutData = {
         "DevOps Practices",
         "Dissertation Project",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Information Technology",
@@ -161,6 +163,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Research",
         "Research Funding Support",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

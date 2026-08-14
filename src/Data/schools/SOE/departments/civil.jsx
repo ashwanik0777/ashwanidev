@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Structural Analysis", "Concrete Technology", "Soil Mechanics", "Surveying",
         "Environmental Engineering", "Transportation", "BIM", "Site Visit",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Structural Engineering",
@@ -118,6 +119,7 @@ export const departmentLayoutData = {
         "Advanced Structural Analysis", "Earthquake Engineering", "Bridge Design",
         "BIM Technology", "Pre-Stressed Concrete", "FEM", "Research Thesis", "Industry Project",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Environmental Engineering",
@@ -131,6 +133,7 @@ export const departmentLayoutData = {
         "Water Treatment", "Waste Management", "Air Pollution Control", "EIA",
         "Wastewater Engineering", "Solid Waste", "Research Project", "Field Work",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Civil Engineering",
@@ -145,6 +148,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
         "Patent Filing", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

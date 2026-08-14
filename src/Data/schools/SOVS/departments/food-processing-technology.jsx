@@ -110,6 +110,7 @@ export const departmentLayoutData = {
         "In-plant training",
         "B.Tech Project & Seminar",
       ],
+      syllabus: [],
     },
     {
       title: "B.Voc. Food Processing",
@@ -128,6 +129,7 @@ export const departmentLayoutData = {
         "Multiple exit options (Diploma/B.Voc)",
         "Industrial project training",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech. Food Processing & Technology",
@@ -146,6 +148,7 @@ export const departmentLayoutData = {
         "Industrial Internship",
         "Dissertation Research",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Food Processing & Technology",
@@ -163,6 +166,7 @@ export const departmentLayoutData = {
         "High impact publication",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

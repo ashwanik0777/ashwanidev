@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Machine Design", "Thermodynamics", "Manufacturing Processes", "CAD/CAM",
         "Fluid Mechanics", "Material Science", "Robotics", "Industry Internship",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Thermal Engineering",
@@ -118,6 +119,7 @@ export const departmentLayoutData = {
         "Advanced Heat Transfer", "IC Engines", "Renewable Energy", "CFD",
         "Refrigeration & HVAC", "Power Plant Engineering", "Research Thesis", "Lab Work",
       ],
+      syllabus: [],
     },
     {
       title: "M.Tech Production & Industrial Engineering",
@@ -131,6 +133,7 @@ export const departmentLayoutData = {
         "CNC Programming", "CAD/CAM", "Quality Engineering", "Supply Chain",
         "3D Printing", "Automation", "Research Project", "Industry Training",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Mechanical Engineering",
@@ -145,6 +148,7 @@ export const departmentLayoutData = {
         "Conference Funding", "Teaching Assistantship", "Patent Filing",
         "Industry Collaboration", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

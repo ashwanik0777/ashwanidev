@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Advertising Basics",
         "Internship",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Mass Communication",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Public Relations",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Linguistics",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Language & Society",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Journalism & Mass Communication",
@@ -176,6 +179,7 @@ export const departmentLayoutData = {
         "Content Strategy",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Mass Communication",
@@ -196,6 +200,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

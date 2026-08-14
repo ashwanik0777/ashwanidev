@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Legal Aid Clinic",
         "Internship with Courts & Firms",
       ],
+      syllabus: [],
     },
     {
       title: "LL.M. (1 Year Full-Time)",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Dissertation",
         "Seminar Presentations",
       ],
+      syllabus: [],
     },
     {
       title: "LL.M. (2 Year Weekend Programme)",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Labour & Industrial Law",
         "Research Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. in Law",
@@ -176,6 +179,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

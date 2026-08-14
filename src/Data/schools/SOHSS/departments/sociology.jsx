@@ -106,6 +106,7 @@ export const departmentLayoutData = {
         "Rural Sociology", "Urban Sociology", "Gender Studies",
         "Medical Sociology", "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Sociology",
@@ -120,6 +121,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Field Research", "Ethnographic Methods",
         "Teaching Assistantship", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

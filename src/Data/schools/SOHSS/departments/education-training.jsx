@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Teaching Practice",
         "School Internship",
       ],
+      syllabus: [],
     },
     {
       title: "B.Sc B.Ed./B.Com. B.Ed./B.A. B.Ed. ITEP",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "ICT in Education",
         "Action Research",
       ],
+      syllabus: [],
     },
     {
       title: "BPES (Bachelor of Physical Education & Sports)",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Sports Management",
         "Practical Training",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. Education",
@@ -176,6 +179,7 @@ export const departmentLayoutData = {
         "Special Education",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Education",
@@ -196,6 +200,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Linguistics",
         "Postcolonial Literature",
       ],
+      syllabus: [],
     },
     {
       title: "M.A. English",
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Cultural Studies",
         "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. English",
@@ -156,6 +158,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyMembers: [

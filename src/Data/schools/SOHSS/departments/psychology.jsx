@@ -106,6 +106,7 @@ export const departmentLayoutData = {
         "Abnormal Psychology", "Cognitive Psychology", "Research Methods",
         "Psychometric Testing", "Research Project",
       ],
+      syllabus: [],
     },
     {
       title: "M.A./M.Sc. Applied Psychology",
@@ -120,6 +121,7 @@ export const departmentLayoutData = {
         "Organizational Psychology", "Psychopathology", "Psychological Assessment",
         "Research Methodology", "Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "M.Phil. Clinical Psychology",
@@ -134,6 +136,7 @@ export const departmentLayoutData = {
         "Child & Adolescent Psychology", "Rehabilitation Psychology", "Clinical Practicum",
         "OPD Training", "Research Dissertation",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Psychology",
@@ -148,6 +151,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Clinical Supervision", "Teaching Assistantship",
         "Community Outreach", "Thesis Defense",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

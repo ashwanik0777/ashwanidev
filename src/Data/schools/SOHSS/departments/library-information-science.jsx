@@ -110,6 +110,7 @@ export const departmentLayoutData = {
         "ICT in Libraries",
         "Internship Program",
       ],
+      syllabus: [],
     },
     {
       title: "M.Lib.I.Sc. (Master of Library and Information Science)",
@@ -129,6 +130,7 @@ export const departmentLayoutData = {
         "Professional Dissertation",
         "Field Visit & Report",
       ],
+      syllabus: [],
     },
     {
       title: "Ph.D. Library & Information Science",
@@ -147,6 +149,7 @@ export const departmentLayoutData = {
         "Scholarly Communication",
         "Journal Publications",
       ],
+      syllabus: [],
     },
   ],
   facultyStats: {

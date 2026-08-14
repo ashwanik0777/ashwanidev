@@ -392,12 +392,6 @@ const Faculty = () => {
 
                           {/* Department & School */}
                           <div className="space-y-2 mb-4">
-                            {faculty.department && (
-                              <div className="flex items-start gap-2">
-                                <BookOpen className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                                <p className="text-sm text-gray-700 leading-snug line-clamp-2">{faculty.department}</p>
-                              </div>
-                            )}
                             <div className="flex items-start gap-2">
                               <Award className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
                               <p className="text-sm text-gray-600 leading-snug line-clamp-2">{normalizeSchoolName(faculty.school)}</p>

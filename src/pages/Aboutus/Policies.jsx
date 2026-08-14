@@ -1,244 +1,74 @@
-
-import React, { useState } from 'react';
-
-import { FileText, Download, Search, Filter, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { FileText, ShieldCheck, Building2, Layers } from 'lucide-react';
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import BannerSection from "../../components/HeroBanner.jsx";
 
 const Policies = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [expandedFAQ, setExpandedFAQ] = useState(null);
-
-  const policies = [
-
-    {
-      title: "Admission Policy",
-      category: "admission",
-      year: "2025",
-      description: "Detailed admission criteria and procedures for all programs",
-      icon: FileText,
-      color: "from-green-400 to-green-600",
-      link: "https://pravesh.gbu.ac.in/Content/Data/GBU-BROCHURE-2025.pdf"
-    },
-    {
-      title: "Research Policy",
-      category: "research",
-      year: "2025",
-      description: "Guidelines for research activities and intellectual property",
-      icon: FileText,
-      color: "from-purple-400 to-purple-600",
-      link: "https://www.gbu.ac.in/Content/gbudata/IIC/GBU-Innovation-StartupPolicy-Mar2025.pdf"
-    },
-    {
-      title: "Anti-Ragging Policy",
-      category: "student",
-      year: "2025",
-      description: "Zero tolerance policy against ragging and harassment",
-      icon: FileText,
-      color: "from-red-400 to-red-600",
-      link: "https://www.gbu.ac.in/content/gbudata/general/AntiRagging-Home-rev.pdf"
-    },
-    {
-      title: "Fee Structure & Refund Policy",
-      category: "financial",
-      year: "2025",
-      description: "Comprehensive fee structure and refund guidelines",
-      icon: FileText,
-      color: "from-yellow-400 to-orange-500",
-      link: "https://gbu-website.vercel.app/admissions/fee-structure-prospectus"
-    },
-    {
-      title: "Academic Policy 2024",
-      category: "academic",
-      year: "2024",
-      description: "Comprehensive guidelines for academic procedures and standards",
-      icon: FileText,
-      color: "from-blue-400 to-blue-600"
-    },
-
-  ];
-
-  const rtiData = [
-    {
-      question: "How to file an RTI application?",
-      answer: "RTI applications can be filed online through the university portal or submitted physically at the registrar's office with the prescribed fee."
-    },
-    {
-      question: "What is the fee for RTI application?",
-      answer: "The fee for RTI application is ₹10 for general information and ₹2 per page for photocopies of documents."
-    },
-    {
-      question: "Who is the Public Information Officer (PIO)?",
-      answer: "The Registrar of the university serves as the Public Information Officer for RTI matters."
-    },
-    {
-      question: "What is the time limit for RTI response?",
-      answer: "The university is required to respond to RTI applications within 30 days of receipt."
-    },
-    {
-      question: "How to appeal against RTI decisions?",
-      answer: "Appeals can be filed with the First Appellate Authority within 30 days of receiving the decision or non-response."
-    }
-  ];
-
-  const filteredPolicies = policies.filter(policy => {
-    const matchesFilter = activeFilter === 'all' || policy.category === activeFilter;
-    const matchesSearch = policy.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      policy.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
-
-  const toggleFAQ = (index) => {
-    setExpandedFAQ(expandedFAQ === index ? null : index);
-  };
+  const policyStatement = `The procedure and policies for maintaing and utilizing physical and support facilities are as per the rules and regulations issued by the Govt. from time to time. First of all the estimates are prepared as per the norms and then it is sent for the financial and administrative approval of competent authority. After the approval, the tenders are floated through wide publicity in newspapers and E tenders. After this, the work is awarded to the lowest firm. After the time completion, new tenders are again floated and the same procedures are followed again. The different facilities are utilized by the students/faculty/staff and the families of faculty staff being the residential campus. From time to time new facilities are added as per the requirements. The policies are made by different internal committees and the recommendations are sent for the approval.`;
 
   return (
     <SearchableWrapper>
-      <>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/30 to-slate-100">
         {/* Hero Section */}
         <BannerSection
-          title="Policies, Statutes & RTI"
-          subtitle="Transparency and Compliance Guidelines"
+          title="Procedure & Policies"
+          subtitle="Maintaining & Utilizing Physical and Support Facilities"
           bgTheme={1}
         />
-        {/* Search and Filter Section */}
-        <section className="py-8 bg-gradient-to-br from-teal-50 to-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/20 border-solid">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Search Bar */}
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type="text"
-                      placeholder="Search policies..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    />
-                  </div>
 
-                  {/* Filter Dropdown */}
-                  <div className="relative">
-                    <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <select
-                      value={activeFilter}
-                      onChange={(e) => setActiveFilter(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 border-solid rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 appearance-none"
-                    >
-                      <option value="all">All Categories</option>
-                      <option value="academic">Academic</option>
-                      <option value="admission">Admission</option>
-                      <option value="research">Research</option>
-                      <option value="student">Student Affairs</option>
-                      <option value="financial">Financial</option>
-                    </select>
-                  </div>
+        {/* Content Section */}
+        <section className="py-12 sm:py-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-teal-100 p-6 sm:p-10 transition-all duration-300">
+              
+              {/* Header Badge */}
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-teal-50 text-teal-700 rounded-2xl border border-teal-100 shadow-sm">
+                  <Building2 className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
+                    Institutional Maintenance & Facility Guidelines
+                  </h2>
+                  <p className="text-xs sm:text-sm text-teal-700 font-semibold mt-0.5">
+                    Official University Compliance Statement
+                  </p>
                 </div>
               </div>
+
+              <hr className="border-slate-100 mb-6" />
+
+              {/* Policy Body */}
+              <div className="prose max-w-none">
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed sm:leading-loose text-justify font-medium">
+                  {policyStatement}
+                </p>
+              </div>
+
+              {/* Structured Key Principles */}
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-100 pt-6">
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                  <ShieldCheck className="w-5 h-5 text-teal-600 mx-auto mb-2" />
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Government Norms</h4>
+                  <p className="text-xs text-slate-600">Estimates and approvals per Govt. rules</p>
+                </div>
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                  <FileText className="w-5 h-5 text-teal-600 mx-auto mb-2" />
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">E-Tendering</h4>
+                  <p className="text-xs text-slate-600">Wide publicity & transparent tendering</p>
+                </div>
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+                  <Layers className="w-5 h-5 text-teal-600 mx-auto mb-2" />
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-1">Committee Review</h4>
+                  <p className="text-xs text-slate-600">Internal committee recommendations</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
-
-        {/* Policies Grid */}
-        <section className="py-16 bg-gradient-to-br from-cyan-50 to-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">University Policies</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPolicies.map((policy, index) => (
-                <div
-                  key={index}
-                  className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 border-solid hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                >
-                  <div className="p-8">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${policy.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <policy.icon className="w-8 h-8 text-white" />
-                    </div>
-
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-gray-800 group-hover:text-teal-600 transition-colors">
-                        {policy.title}
-                      </h3>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {policy.year}
-                      </div>
-                    </div>
-
-                    <p className="text-gray-600 mb-6">{policy.description}</p>
-
-                    <div className="flex justify-between items-center">
-                      <span className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
-                        {policy.category}
-                      </span>
-                      <a
-                        href={policy.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-emerald-600 hover:text-emerald-800 transition-colors"
-                      >
-                        <Download className="w-5 h-5" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* RTI Section */}
-        {/* <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Right to Information (RTI)</h2>
-
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 border-solid overflow-hidden">
-                <div className="bg-gradient-to-r from-blue-600 to-teal-600 p-8 text-white text-center">
-                  <FileText className="w-16 h-16 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold mb-2">RTI Information Center</h3>
-                  <p className="opacity-90">Frequently Asked Questions about RTI Procedures</p>
-                </div>
-
-                <div className="p-8">
-                  <div className="space-y-4">
-                    {rtiData.map((item, index) => (
-                      <div key={index} className="border border-gray-200 border-solid rounded-xl overflow-hidden">
-                        <button
-                          onClick={() => toggleFAQ(index)}
-                          className="w-full p-6 text-left bg-white hover:bg-gray-50 transition-colors flex justify-between items-center"
-                        >
-                          <span className="font-semibold text-gray-800">{item.question}</span>
-                          {expandedFAQ === index ? (
-                            <ChevronUp className="w-5 h-5 text-gray-500" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-gray-500" />
-                          )}
-                        </button>
-                        {expandedFAQ === index && (
-                          <div className="p-6 bg-gray-50 border-t border-gray-200 border-solid">
-                            <p className="text-gray-700">{item.answer}</p>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="text-center mt-8">
-                    <button className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300">
-                      File RTI Application
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-      </>
+      </div>
     </SearchableWrapper>
   );
 };

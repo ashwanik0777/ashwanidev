@@ -1,252 +1,205 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import {
-  CheckCircle,
-  Download,
-  Eye,
   FileText,
   Award,
-  Users,
-  DollarSign,
-  Calendar, ShieldCheck
+  ShieldCheck,
+  ExternalLink,
+  Building2,
+  FileCheck2
 } from 'lucide-react';
 
 import BannerSection from "../../components/HeroBanner.jsx";
-import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
+const mandatoryDisclosuresData = [
+  {
+    sno: 1,
+    title: "AICTE approved Courses",
+    category: "Approval & Recognition",
+    icon: ShieldCheck,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/AICTE_approved_courses.pdf"
+      }
+    ]
+  },
+  {
+    sno: 2,
+    title: "Approved Letter by UGC under Section 12 B",
+    category: "UGC Approvals",
+    icon: FileCheck2,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/UGC_12BCertificate_28June19.pdf"
+      }
+    ]
+  },
+  {
+    sno: 3,
+    title: "Approved Letter by UGC under Section 2(f)",
+    category: "UGC Approvals",
+    icon: FileCheck2,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/UGC-GBU%202f.pdf"
+      }
+    ]
+  },
+  {
+    sno: 4,
+    title: "NAAC accredition with B+ Grade",
+    category: "Accreditation",
+    icon: Award,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/NAAC%20Certificate_31Dec18.jpg"
+      }
+    ]
+  },
+  {
+    sno: 5,
+    title: "Recognition Order from National Council for Teacher Education",
+    category: "Council Recognition",
+    icon: Building2,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/Deppt_Education_NCT_17May2017.pdf"
+      }
+    ]
+  },
+  {
+    sno: 6,
+    title: "ISO Manual and Certificate",
+    category: "Certifications",
+    icon: Award,
+    links: [
+      {
+        label: "Quality Manual",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/Certificate.pdf"
+      },
+      {
+        label: "Certificate",
+        url: "https://www.gbu.ac.in/Content/gbudata/approval/Quality_Manual.pdf"
+      }
+    ]
+  },
+  {
+    sno: 7,
+    title: "MoU between GBU and NSDC for introducing Skill Development Programmes in University",
+    category: "MoUs & Collaborations",
+    icon: FileText,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/General/MOU_NSDC_DOC_1July15.pdf"
+      }
+    ]
+  },
+  {
+    sno: 8,
+    title: "Certificate for Educational Society Registration",
+    category: "Society Registration",
+    icon: ShieldCheck,
+    links: [
+      {
+        label: "View Document",
+        url: "https://www.gbu.ac.in/Content/gbudata/General/GBU_SocietyRegistration.pdf"
+      }
+    ]
+  }
+];
+
 const Disclosures = () => {
-  const [expandedSection, setExpandedSection] = useState(null);
+  return (
+    <SearchableWrapper>
+      <>
+        {/* Hero Banner Section */}
+        <BannerSection
+          title="Mandatory Disclosures"
+          subtitle="Statutory Approvals, Recognition Orders, MoUs, and Official Compliance Documents"
+          bgTheme={9}
+        />
 
-  const disclosures = [
-     {
-      category: 'Regulatory Approvals & MoUs',
-      icon: FileText, // or ShieldCheck, or CheckSquare for approvals
-      color: 'from-indigo-400 to-indigo-600',
-      items: [
-        {
-          title: 'AICTE Approved Courses',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/approval/AICTE_Approved_Courses.pdf'
-        },
-        {
-          title: 'UGC Approval Letter under Section 12(B)',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/approval/UGC_12BCertificate_28June19.pdf'
-        },
-        {
-          title: 'UGC Approval Letter under Section 2(f)',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/approval/UGC-GBU%202f.pdf'
-        },
-        {
-          title: 'NCTE Recognition Order',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/approval/Deppt_Education_NCT_17May2017.pdf'
-        },
-        {
-          title: 'MoU with Cybertick India Pvt. Ltd.',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/General/Matter%20for%20Media%20Press.pdf'
-        },
-        {
-          title: 'ISO Manual & Certificate',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/approval/Certificate.pdf'
-        },
-        {
-          title: 'MoU with NSDC (Skill Development)',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/General/MOU_NSDC_DOC_1July15.pdf'
-        },
-        {
-          title: 'Educational Society Registration Certificate',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/Content/gbudata/General/GBU_SocietyRegistration.pdf'
-        }
-      ]
-    }
-    ,
-    {
-      category: 'Academic Information',
-      icon: FileText,
-      color: 'from-blue-400 to-blue-600',
-      items: [
-        { title: 'NAAC Accreditation Certificate', status: 'completed', lastUpdated: '2024', link: "https://www.gbu.ac.in/Content/gbudata/approval/NAAC%20Certificate_31Dec18.jpg", },
-        { title: 'Academic Calendar 2024-25', status: 'completed', lastUpdated: '2024', link: "https://www.gbu.ac.in/Content/gbudata/General/Academic%20Calendar%202024-25.pdf", },
-        { title: 'Fee Structure', status: 'completed', lastUpdated: '2024', link: "https://pravesh.gbu.ac.in/Content/Data/Fee_Structure2024-25.pdf", },
-        { title: 'Admission Criteria', status: 'completed', lastUpdated: '2024', link: "https://pravesh.gbu.ac.in/Content/Data/GBU-BROCHURE-2025.pdf", },
-        {
-          title: 'Anti Ragging Guidelines',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/page/AntiRagging'
-        }
-      ]
-    },
-    {
-      category: 'Faculty Information',
-      icon: Users,
-      color: 'from-purple-400 to-purple-600',
-      items: [
-        {
-          title: 'Faculty List',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://gbu-website.vercel.app/academics/faculty'
-        },
-        {
-          title: 'Schools & Departments',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://gbu-website.vercel.app/academics/schools'
-        },
-        {
-          title: 'Research Publications',
-          status: 'completed',
-          lastUpdated: '2024',
-          link: 'https://www.gbu.ac.in/public/publications'
-        }
-      ]
-    }
-    ,
-    {
-      category: 'Infrastructure Details',
-      icon: Award,
-      color: 'from-red-400 to-red-600',
-      items: [
-        { title: 'Campus Facilities', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
-        { title: 'Library Resources', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/campus-life/hero", },
-        { title: 'Laboratory Details', status: 'completed', lastUpdated: '2024', link: "https://gbu-website.vercel.app/academics/centers-of-excellence", },
-        { title: 'Hostel Facilities', status: 'completed', lastUpdated: '2024', link: "https://hostels.gbu.ac.in/", }
-      ]
-    }
-  ];
+        {/* Mandatory Disclosures Table Section */}
+        <section className="py-16 bg-gradient-to-br from-slate-50 via-teal-50/40 to-slate-100 min-h-screen">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+            
+            {/* Table View */}
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-teal-100 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-900 text-slate-100 text-xs sm:text-sm uppercase font-semibold tracking-wider">
+                      <th scope="col" className="py-4 px-6 text-center w-16">S.No.</th>
+                      <th scope="col" className="py-4 px-6">Description</th>
+                      <th scope="col" className="py-4 px-6 text-center w-56 sm:w-64">Download Link</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 text-slate-700 text-sm font-medium">
+                    {mandatoryDisclosuresData.map((item) => (
+                      <tr
+                        key={item.sno}
+                        className="hover:bg-teal-50/60 transition-colors duration-150 group"
+                      >
+                        {/* S.No */}
+                        <td className="py-5 px-6 text-center font-bold text-teal-700 group-hover:text-teal-900">
+                          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-teal-50 group-hover:bg-teal-100 border border-teal-200">
+                            {item.sno}
+                          </span>
+                        </td>
 
-  const complianceMetrics = [
-    { icon: Award, numberText: "B+", title: "NAAC Grade" },
-    { icon: ShieldCheck, numberText: "16:1", title: "Student–Faculty Ratio" },
-    { icon: FileText, number: 21, title: "Funded Projects" },
-    { icon: CheckCircle, numberText: "3+", title: "MoUs Signed" },
-  ];
-
-  const toggleSection = (index) => {
-    setExpandedSection(expandedSection === index ? null : index);
-  };
-
-  return (<SearchableWrapper><>
-
-    {/* Hero Section */}
-    <BannerSection
-      title="Mandatory Disclosures"
-      subtitle="Transparency and Accountability in Education"
-      bgTheme={9}
-    />
-
-    {/* Disclosure Categories */}
-    <section className="pb-16 bg-gradient-to-br from-teal-50 to-white">
-      <StatsCard stats={complianceMetrics} />
-      <div className="container pt-10 mx-auto px-4">
-        <div className="max-w-6xl mx-auto space-y-8">
-          {disclosures.map((disclosure, index) => (
-            <div key={index} className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 border-solid overflow-hidden">
-              <button
-                onClick={() => toggleSection(index)}
-                className="w-full p-8 text-left hover:bg-white/50 transition-colors flex items-center justify-between"
-              >
-                <div className="flex items-center">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${disclosure.color} rounded-2xl flex items-center justify-center mr-6`}>
-                    <disclosure.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-800">{disclosure.category}</h3>
-                    <p className="text-gray-600">{disclosure.items.length} items available</p>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <span className="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mr-4">
-                    ✓ Complete
-                  </span>
-                  <Eye className="w-6 h-6 text-gray-400" />
-                </div>
-              </button>
-
-              {expandedSection === index && (
-                <div className="border-t border-gray-200 border-solid">
-                  <div className="p-8 bg-gray-50/50">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {disclosure.items.map((item, itemIndex) => (
-                        <div key={itemIndex} className="bg-white rounded-xl p-6 shadow-md border border-gray-100 border-solid">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center mb-2">
-                                <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                                <h4 className="text-lg font-semibold text-gray-800">{item.title}</h4>
-                              </div>
-                              <div className="flex items-center text-sm text-gray-500 mb-4">
-                                <Calendar className="w-4 h-4 mr-2" />
-                                Last Updated: {item.lastUpdated}
-                              </div>
+                        {/* Description */}
+                        <td className="py-5 px-6">
+                          <div className="flex items-start gap-3">
+                            <div className="p-2 rounded-lg bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors mt-0.5 hidden sm:block">
+                              <item.icon className="w-4 h-4" />
                             </div>
-                            <a
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-emerald-600 hover:text-emerald-800 transition-colors"
-                            >
-                              <Download className="w-5 h-5" />
-                            </a>
-
+                            <div>
+                              <h3 className="text-base font-semibold text-slate-900 group-hover:text-teal-800 transition-colors leading-snug">
+                                {item.title}
+                              </h3>
+                              <span className="inline-block mt-1 text-xs font-medium text-teal-700 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-100">
+                                {item.category}
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+                        </td>
 
-    {/* Regulatory Compliance */}
-    <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Regulatory Compliance</h2>
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl p-12 border border-white/20 border-solid">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <RegulatoryCard icon={<Award className="w-10 h-10 text-white" />} title="UGC Recognition" desc="Recognized by University Grants Commission" color="from-blue-400 to-blue-600" />
-              <RegulatoryCard icon={<CheckCircle className="w-10 h-10 text-white" />} title="NAAC Accredited" desc="National Assessment and Accreditation Council" color="from-green-400 to-green-600" />
-              <RegulatoryCard icon={<FileText className="w-10 h-10 text-white" />} title="AICTE Approved" desc="All India Council for Technical Education" color="from-purple-400 to-purple-600" />
+                        {/* Links */}
+                        <td className="py-5 px-6 text-center">
+                          <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+                            {item.links.map((link, lIdx) => (
+                              <a
+                                key={lIdx}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 w-full sm:w-auto"
+                              >
+                                <span>{link.label}</span>
+                                <ExternalLink className="w-3.5 h-3.5" />
+                              </a>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
+
           </div>
-        </div>
-      </div>
-    </section>
-  </>
-  </SearchableWrapper>
+        </section>
+      </>
+    </SearchableWrapper>
   );
 };
 
-const RegulatoryCard = ({ icon, title, desc, color }) => (
-  <div className="text-center">
-    <div className={`w-20 h-20 bg-gradient-to-br ${color} rounded-full flex items-center justify-center mx-auto mb-6`}>
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
-    <p className="text-gray-600">{desc}</p>
-  </div>
-
-);
-
 export default Disclosures;
+

@@ -80,60 +80,82 @@ const RTI = () => {
             <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-gray-900">
               RTI Authorities
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
                   title: 'Appellate Authority',
-                  name: 'Dr. Krishna Kant Dwivedi',
-                  role: 'Deputy Registrar (I/C)',
+                  name: 'Prof. Uttam Kumar',
+                  role: 'Deputy Registrar',
+                  dept: 'Gautam Buddha University',
                   phone: '+91-120-2344212',
                   email: 'dr@gbu.ac.in',
-                  color: 'blue',
+                  accentBg: 'bg-blue-600',
+                  accentBorder: 'border-blue-600',
+                  accentText: 'text-blue-700',
+                  iconText: 'text-blue-600',
+                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-100',
                 },
                 {
-                  title: 'Public Information Officer (PIO)',
-                  name: 'Dr. Vivek Kumar Mishra',
-                  role: 'Director Works',
+                  title: 'Nodal PIO (RTI)',
+                  name: 'Dr. Vikram Karuna',
+                  role: 'Public Information Officer (PIO)',
+                  dept: 'Gautam Buddha University',
                   phone: '+91-120-2344260',
-                  email: 'director.works@gbu.ac.in',
-                  color: 'green',
+                  email: 'pio@gbu.ac.in',
+                  accentBg: 'bg-teal-600',
+                  accentBorder: 'border-teal-600',
+                  accentText: 'text-teal-700',
+                  iconText: 'text-teal-600',
+                  badgeBg: 'bg-teal-50 text-teal-700 border-teal-100',
                 },
                 {
                   title: 'Assistant PIO (APIO)',
                   name: 'Sh. Umakant Ahirwar',
                   role: 'Section Superintendent',
+                  dept: 'Gautam Buddha University',
                   phone: '+91-120-2344218',
                   email: 'umakant@gbu.ac.in',
-                  color: 'orange',
+                  accentBg: 'bg-amber-600',
+                  accentBorder: 'border-amber-600',
+                  accentText: 'text-amber-700',
+                  iconText: 'text-amber-600',
+                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-100',
                 },
               ].map((officer, idx) => (
                 <motion.div
-                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-                  className={`bg-white rounded-xl shadow-md p-8 border-t-4 border-${officer.color}-500`}
+                  whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                  className={`bg-white rounded-2xl shadow-md p-6 sm:p-8 border-t-4 ${officer.accentBorder} flex flex-col justify-between`}
                   key={idx}
                 >
-                  <div className="text-center mb-4">
-                    <div className={`w-16 h-16 bg-${officer.color}-500 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                      <Users className="text-white" size={28} />
+                  <div>
+                    <div className="text-center mb-5">
+                      <div className={`w-14 h-14 ${officer.accentBg} rounded-2xl flex items-center justify-center mx-auto mb-3.5 shadow-md shadow-slate-200`}>
+                        <Users className="text-white" size={26} />
+                      </div>
+                      <span className={`inline-block text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${officer.badgeBg} mb-2`}>
+                        {officer.title}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">
+                        {officer.name}
+                      </h3>
+                      <p className={`text-xs sm:text-sm font-semibold ${officer.accentText} mt-1`}>{officer.role}</p>
+                      <p className="text-xs text-slate-500 font-medium">{officer.dept}</p>
                     </div>
-                    <h3 className={`text-xl font-bold text-${officer.color}-700 mb-2`}>
-                      {officer.title}
-                    </h3>
                   </div>
-                  <div className="space-y-2 text-gray-700">
-                    <p className="font-semibold">{officer.name}</p>
-                    <p>{officer.role}</p>
-                    <p>Gautam Buddha University</p>
-                    <div className="border-t border-gray-200 pt-3">
-                      <p className="flex items-center">
-                        <Phone size={16} className={`mr-2 text-${officer.color}-500`} />
+
+                  <div className="border-t border-slate-100 pt-4 space-y-2 text-xs sm:text-sm text-slate-700">
+                    <p className="flex items-center gap-2.5">
+                      <Phone size={15} className={`${officer.iconText} shrink-0`} />
+                      <a href={`tel:${officer.phone.replace(/[^0-9+]/g, '')}`} className="hover:underline font-medium">
                         {officer.phone}
-                      </p>
-                      <p className="flex items-center">
-                        <Mail size={16} className={`mr-2 text-${officer.color}-500`} />
+                      </a>
+                    </p>
+                    <p className="flex items-center gap-2.5">
+                      <Mail size={15} className={`${officer.iconText} shrink-0`} />
+                      <a href={`mailto:${officer.email}`} className="hover:underline font-medium break-all">
                         {officer.email}
-                      </p>
-                    </div>
+                      </a>
+                    </p>
                   </div>
                 </motion.div>
               ))}

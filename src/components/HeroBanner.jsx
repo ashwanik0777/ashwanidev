@@ -76,7 +76,7 @@ const bgThemes = {
 };
 
 
-const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
+const BannerSection = ({ title, bgTheme = 1 }) => {
   const theme = bgThemes[bgTheme] || bgThemes[1];
 
   return (
@@ -91,12 +91,9 @@ const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="transition-all duration-1000 ease-out opacity-100 translate-y-0">
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
             {title}
           </h1>
-          <p className="text-xl md:text-2xl text-blue-600 mb-8 font-medium">
-            {subtitle}
-          </p>
         </div>
       </div>
     </section>
@@ -105,7 +102,6 @@ const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
 
 BannerSection.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
   bgTheme: PropTypes.number,
 };
 

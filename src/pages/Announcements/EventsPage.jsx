@@ -19,6 +19,7 @@ import {
   syncAnnouncementsFromCache,
 } from "../../utils/schoolAnnouncements";
 import UnifiedAnnouncementFilter from "../../components/announcement/UnifiedAnnouncementFilter";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 
 // Complete Events Data
 // const eventsData = [
@@ -369,16 +370,17 @@ const EventCard = ({ event }) => {
   const dateInfo = formatDate(event.date);
 
   return (
-    <div className="group bg-white/90 backdrop-blur-sm rounded-2xl border border-white/50 overflow-hidden shadow-md transition-transform duration-300 ease-in-out hover:scale-[1.05] hover:shadow-lg">
+    <div className="group bg-white/90 backdrop-blur-sm rounded-2xl border border-white/50 overflow-hidden shadow-md transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg flex flex-col h-full">
       {/* Event Image */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden flex-shrink-0">
         <img
-          src={event.coverImageUrl}
+          src={parseImageUrl(event.coverImageUrl || event.image)}
           alt={event.title}
           className="w-full h-48 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
           loading="lazy"
+          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=250&fit=crop'; }}
         />
-        <div className="absolute top-4 left-4 bg-white/95 rounded-lg px-3 py-2 text-center shadow-sm transition-all duration-300 ease-in-out">
+        <div className="absolute top-4 left-4 bg-white/95 rounded-lg px-3 py-2 text-center shadow-sm">
           <div className="text-2xl font-bold text-gray-900">{dateInfo.day}</div>
           <div className="text-sm text-gray-600">{dateInfo.month}</div>
         </div>
@@ -409,8 +411,8 @@ const EventCard = ({ event }) => {
       </div>
 
       {/* Event Content */}
-      <div className="p-6 transition-colors duration-300 ease-in-out">
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
           {event.title}
         </h3>
 
@@ -418,60 +420,33 @@ const EventCard = ({ event }) => {
           {event.schoolName}
         </p>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-          {event.description}
-        </p>
-
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center text-gray-600 text-sm">
-            <Clock className="w-4 h-4 mr-2 text-blue-500" />
-            {event.time} • {event.date}
+        <div className="space-y-1.5 mb-3">
+          <div className="flex items-center text-gray-500 text-sm">
+            <Calendar className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+            {event.date ? new Date(event.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
+            {event.time ? ` • ${event.time}` : ''}
           </div>
-          <div className="flex items-center text-gray-600 text-sm">
-            <MapPin className="w-4 h-4 mr-2 text-red-500" />
-            {event.location}
-          </div>
-          <div className="flex items-center text-gray-600 text-sm">
-            <Users className="w-4 h-4 mr-2 text-green-500" />
-            {event.attendees} attendees
+          <div className="flex items-center text-gray-500 text-sm">
+            <MapPin className="w-4 h-4 mr-2 text-red-500 flex-shrink-0" />
+            <span className="truncate">{event.location || event.venue}</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-600">
-            by{" "}
-            <span className="font-medium text-gray-900">{event.organizer}</span>
-          </div>
-          <div className="flex items-center text-yellow-500">
-            <Star className="w-4 h-4 fill-current" />
-            <span className="text-sm text-gray-600 ml-1">4.8</span>
-          </div>
+        <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
+          <span>by <span className="font-medium text-gray-700">{event.organizer}</span></span>
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-50 text-blue-600">{event.mode}</span>
         </div>
 
-        {/* Tags */}
-        {/* <div className="flex flex-wrap gap-2 mt-4">
-          {event.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full transition-colors duration-300"
-            >
-              {tag}
-            </span>
-          ))}
-        </div> */}
-
-        {/* Action Button */}
-        {/* <button className="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 ease-in-out shadow hover:shadow-md">
-          {event.status === "past" ? "View Details" : "Register Noww"}
-        </button> */}
+        {/* Spacer to push button down */}
+        <div className="flex-grow" />
 
         <Link to={`/announcements/event-calendar/${event.id}`}>
-          <button className={`w-full mt-4 py-3 rounded-xl font-medium transition-colors duration-300 ease-in-out shadow hover:shadow-md ${
+          <button className={`w-full py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
             isUpcoming
-              ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
-              : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}>
-            {isUpcoming ? "Register Now" : "View Details"}
+            {isUpcoming ? "View & Register" : "View Details"}
           </button>
         </Link>
       </div>

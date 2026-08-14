@@ -125,6 +125,8 @@ const normalizeEvent = (item) => {
     price: String(item?.price || "Free").trim(),
     organizer: String(item?.organizer || "GBU").trim(),
     registrationUrl: String(item?.registration_url || item?.registrationUrl || "").trim(),
+    brochureUrl: String(item?.brochure_url || item?.brochureUrl || "").trim(),
+    flyerUrl: String(item?.flyer_url || item?.flyerUrl || "").trim(),
     isUpcoming: eventStart ? eventStart >= today : false,
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),

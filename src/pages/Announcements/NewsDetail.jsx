@@ -8,6 +8,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
+import { parseImageUrl } from '../../utils/imageUtils.js';
 // Button component
 const Button = ({
   children,
@@ -290,7 +291,7 @@ const nextNews = currentIndex < mockNews.length - 1 ? mockNews[currentIndex + 1]
           {news.image && (
             <div className="relative aspect-video w-full overflow-hidden group">
               <img
-                src={news.image}
+                src={parseImageUrl(news.image)}
                 alt={news.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />

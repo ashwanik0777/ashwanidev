@@ -12,6 +12,7 @@ import {
 } from '../../utils/schoolAnnouncements';
 import { collectYears, getAnnouncementYear } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
+import { parseImageUrl } from '../../utils/imageUtils.js';
 
 // === Modern Card Components ===
 const Card = ({ children, className = "" }) => (
@@ -270,7 +271,7 @@ const NewsLetter = () => {
                     {/* Cover Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
-                        src={newsletter.coverImage}
+                        src={parseImageUrl(newsletter.coverImage)}
                         alt={newsletter.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         onError={(e) => {

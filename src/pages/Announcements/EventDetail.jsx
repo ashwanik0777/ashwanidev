@@ -8,9 +8,6 @@ import {
   ExternalLink,
   CalendarPlus,
   Download,
-  Phone,
-  Mail,
-  QrCode,
 } from "lucide-react";
 import Header from "../../components/announcement/Header";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -20,6 +17,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from "../../utils/schoolAnnouncements";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 
 // --- Solid Color Button ---
 const Button = ({
@@ -424,7 +422,6 @@ function format(date, formatStr) {
 
 const EventDetail = () => {
   const { id } = useParams();
-  const [showQR, setShowQR] = useState(false);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -493,32 +490,15 @@ const EventDetail = () => {
     window.open(googleCalendarUrl, "_blank");
   };
 
-  const agenda = [
-    { time: "09:00 AM", activity: "Registration & Welcome Coffee" },
-    { time: "10:00 AM", activity: "Opening Ceremony" },
-    { time: "11:00 AM", activity: "Keynote Address" },
-    { time: "12:30 PM", activity: "Panel Discussion" },
-    { time: "01:30 PM", activity: "Lunch Break" },
-    { time: "02:30 PM", activity: "Technical Sessions" },
-    { time: "04:00 PM", activity: "Networking & Closing" },
-  ];
-  const speakers = [
-    {
-      name: "Dr. Rajesh Kumar",
-      designation: "Professor, IIT Delhi",
-      topic: "AI in Healthcare",
-    },
-    {
-      name: "Prof. Anita Sharma",
-      designation: "Director, AIIMS",
-      topic: "Medical Innovation",
-    },
-    {
-      name: "Mr. Vikram Singh",
-      designation: "CTO, TechCorp",
-      topic: "Industry Perspective",
-    },
-  ];
+  // Parse images: handle both array and comma-separated string
+  const eventImages = Array.isArray(event.images)
+    ? event.images.filter(Boolean)
+    : typeof event.images === 'string' && event.images.trim()
+      ? event.images.split(',').map(s => s.trim()).filter(Boolean)
+      : [];
+
+  // Cover image: try coverImageUrl, then image, then first gallery image
+  const coverImage = event.coverImageUrl || event.image || eventImages[0] || '';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
@@ -534,18 +514,18 @@ const EventDetail = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2">
-            <div className="relative rounded-3xl h-[22rem] overflow-hidden mb-10 shadow-2xl border border-blue-100">
-              {/* {Array.isArray(event.coverImageUrl) && event.images[0] && ( */}
-              {event.coverImageUrl && (
+            <div className="relative rounded-3xl h-[22rem] overflow-hidden mb-10 shadow-2xl border border-blue-100 bg-blue-900">
+              {coverImage && (
                 <div className="absolute inset-0">
                   <img
-                    src={event.coverImageUrl}
+                    src={parseImageUrl(coverImage)}
                     alt={event.title}
-                    className="w-full h-full object-cover scale-105 brightness-80"
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.style.display = 'none'; }}
                   />
-                  <div className="absolute inset-0 bg-transparent" />
                 </div>
               )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
               <div className="relative p-10 md:p-16 text-white">
                 <div className="flex flex-wrap gap-3 mb-6">
                   <Badge className={`${getTypeColor(event.type)} shadow-lg`}>
@@ -563,7 +543,9 @@ const EventDetail = () => {
                     </Badge>
                   )}
                 </div>
-                <h1 className="text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg">
+                <h1 className={`font-extrabold mb-4 drop-shadow-lg line-clamp-2 ${
+                  event.title.length > 60 ? 'text-2xl md:text-3xl' : event.title.length > 35 ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'
+                }`}>
                   {event.title}
                 </h1>
                 <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-blue-100">
@@ -596,11 +578,11 @@ const EventDetail = () => {
             </div>
 
             <Tabs defaultValue="overview" className="space-y-8 ">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className={`grid w-full ${eventImages.length > 0 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="agenda">Agenda</TabsTrigger>
-                <TabsTrigger value="speakers">Speakers</TabsTrigger>
-                <TabsTrigger value="gallery">Gallery</TabsTrigger>
+                {eventImages.length > 0 && (
+                  <TabsTrigger value="gallery">Gallery</TabsTrigger>
+                )}
               </TabsList>
 
               <TabsContent value="overview" className="h-full">
@@ -609,182 +591,125 @@ const EventDetail = () => {
                     <CardTitle>About This Event</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-700 leading-relaxed mb-8 text-lg">
+                    <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
                       {event.description}
                     </p>
-                    <div className="border-t pt-8">
-                      <h3 className="text-xl font-bold mb-4 text-blue-700">
-                        Contact Information
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex items-center">
-                          <Phone size={18} className="mr-3 text-blue-600" />
-                          <span className="text-base font-medium">
-                            +91 120 234 5678
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <Mail size={18} className="mr-3 text-blue-600" />
-                          <span className="text-base font-medium">
-                            events@gbu.ac.in
-                          </span>
-                        </div>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
 
-              <TabsContent value="agenda" className="h-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Event Schedule</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-5 ">
-                      {agenda.map((item, index) => (
-                        <div
-                          key={index}
-                          className="flex items-start space-x-5 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-sm"
-                        >
-                          <div className="bg-blue-600 text-white px-4 py-2 rounded-lg text-base font-bold min-w-[90px] text-center shadow">
-                            {item.time}
-                          </div>
-                          <div className="flex-1">
-                            <p className="font-semibold text-lg">
-                              {item.activity}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="speakers">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Speakers</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
-                      {speakers.map((speaker, index) => (
-                        <div
-                          key={index}
-                          className="p-6 border rounded-xl bg-gradient-to-br from-blue-50 to-purple-50 shadow"
-                        >
-                          <h4 className="font-bold text-xl mb-1">
-                            {speaker.name}
-                          </h4>
-                          <p className="text-blue-600 text-base font-medium">
-                            {speaker.designation}
-                          </p>
-                          <p className="text-gray-700 mt-3">{speaker.topic}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="gallery">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Event Gallery</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {Array.isArray(event.images) && event.images.length > 0 ? (
+              {eventImages.length > 0 && (
+                <TabsContent value="gallery">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Event Gallery</CardTitle>
+                    </CardHeader>
+                    <CardContent>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {event.images.map((image, index) => (
+                        {eventImages.map((image, index) => (
                           <div
                             key={index}
-                            className="aspect-video  h-[300px] overflow-hidden rounded-xl shadow-lg group relative"
+                            className="aspect-video h-[300px] overflow-hidden rounded-xl shadow-lg group relative"
                           >
                             <img
-                              src={image}
+                              src={parseImageUrl(image)}
                               alt={`${event.title} - Image ${index + 1}`}
                               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              onError={(e) => { e.target.style.display = 'none'; }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                           </div>
                         ))}
                       </div>
-                    ) : (
-                      <p className="text-gray-500">
-                        No images available for this event.
-                      </p>
-                    )}
-                  </CardContent>
-                </Card>
-              </TabsContent>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              )}
             </Tabs>
           </div>
 
-          <div className="space-y-8">
-            <div className="sticky top-24">
-              <Card className="flex flex-col min-h-140  overflow-y-auto">
+          <div className="space-y-6">
+            <div className="sticky top-24 space-y-6">
+              {/* Event Info Card */}
+              <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl">Actions</CardTitle>
+                  <CardTitle className="text-lg">Event Details</CardTitle>
                 </CardHeader>
-
-                <CardContent className="flex flex-col gap-4 flex-grow">
-                  {event.isUpcoming && event.registrationUrl && (
-                    <Button size="lg" className="w-full animate-pulse" asChild>
-                      <a
-                        href={event.registrationUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink size={22} className="mr-2" />
-                        Register Now
-                      </a>
-                    </Button>
-                  )}
-
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full"
-                    onClick={addToGoogleCalendar}
-                  >
-                    <CalendarPlus size={22} className="mr-2" />
-                    Add to Calendar
-                  </Button>
-
-                  <Button size="lg" variant="outline" className="w-full">
-                    <Download size={22} className="mr-2" />
-                    Download Brochure
-                  </Button>
-
-                  <SocialShare
-                    url={window.location.href}
-                    title={event.title}
-                    className="w-full"
-                  />
-
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => setShowQR(!showQR)}
-                  >
-                    <QrCode size={22} className="mr-2" />
-                    QR Code
-                  </Button>
-
-                  {showQR && (
-                    <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl text-center shadow">
-                      <div className="w-32 h-32 bg-gray-200 mx-auto rounded-xl flex items-center justify-center">
-                        <span className="text-gray-500 text-sm">QR Code</span>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-2">
-                        Scan to share
+                <CardContent className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Calendar size={18} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Date</p>
+                      <p className="text-sm font-medium text-gray-800">
+                        {event.startsAt ? new Date(event.startsAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'TBA'}
                       </p>
+                      {event.time && <p className="text-xs text-gray-500 mt-0.5">{event.time}</p>}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin size={18} className="text-red-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Venue</p>
+                      <p className="text-sm font-medium text-gray-800">{event.venue || event.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Users size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Organizer</p>
+                      <p className="text-sm font-medium text-gray-800">{event.organizer}</p>
+                    </div>
+                  </div>
+                  {event.mode && (
+                    <div className="pt-2 border-t">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700">{event.mode}</span>
+                      {event.price && event.price !== 'Free' && (
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">{event.price}</span>
+                      )}
+                      {event.price === 'Free' && (
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">Free Entry</span>
+                      )}
                     </div>
                   )}
                 </CardContent>
               </Card>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-3">
+                {event.isUpcoming && event.registrationUrl && (
+                  <Button size="lg" className="w-full" asChild>
+                    <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink size={18} className="mr-2" />
+                      Register Now
+                    </a>
+                  </Button>
+                )}
+
+                {event.brochureUrl && (
+                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
+                    <a href={event.brochureUrl} target="_blank" rel="noopener noreferrer">
+                      <Download size={18} className="mr-2 text-blue-600" />
+                      Download Brochure
+                    </a>
+                  </Button>
+                )}
+
+                {event.flyerUrl && (
+                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
+                    <a href={event.flyerUrl} target="_blank" rel="noopener noreferrer">
+                      <Download size={18} className="mr-2 text-blue-600" />
+                      Download Flyer
+                    </a>
+                  </Button>
+                )}
+
+                <Button size="md" variant="outline" className="w-full" onClick={addToGoogleCalendar}>
+                  <CalendarPlus size={18} className="mr-2" />
+                  Add to Calendar
+                </Button>
+
+                <SocialShare url={window.location.href} title={event.title} className="w-full" />
+              </div>
             </div>
           </div>
         </div>

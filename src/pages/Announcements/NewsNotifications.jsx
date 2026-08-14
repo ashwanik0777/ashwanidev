@@ -10,6 +10,7 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from "../../utils/schoolAnnouncements";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 
 // Enhanced Card Components with Professional Design
 const Card = ({ children, className = "", featured = false, ...props }) => (
@@ -737,7 +738,7 @@ const NewsGridCard = ({ news }) => {
       {news.coverImageUrl && (
         <div className="relative aspect-video overflow-hidden rounded-t-2xl">
           <img
-            src={news.coverImageUrl}
+            src={parseImageUrl(news.coverImageUrl)}
             alt={news.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -903,7 +904,7 @@ const NewsListCard = ({ news }) => {
           {news.coverImageUrl && (
             <div className="flex-shrink-0">
               <img
-                src={news.coverImageUrl}
+                src={parseImageUrl(news.coverImageUrl)}
                 alt={news.title}
                 className="w-32 h-24 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
               />

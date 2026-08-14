@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowLeft, Trophy
 } from 'lucide-react';
+import { parseImageUrl } from '../../utils/imageUtils.js';
 
 const StudentAchievements = () => {
   const [selectedAchievement, setSelectedAchievement] = useState(null);
@@ -227,7 +228,7 @@ const StudentAchievements = () => {
           {(showArchived ? archivedAchievements : filteredAchievements).length > 0 ? (
             (showArchived ? archivedAchievements : filteredAchievements).map((achievement, index) => (
               <div key={index} className="bg-white border border-gray-200 border-solid rounded-xl p-6 shadow hover:shadow-lg transition-all">
-                <img src={achievement.image} alt="" className="w-full h-48 object-cover rounded-lg mb-4" />
+                <img src={parseImageUrl(achievement.image)} alt="" className="w-full h-48 object-cover rounded-lg mb-4" />
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{achievement.title}</h3>
                 <p className="text-sm text-gray-600 mb-1">{achievement.student} - {achievement.department} ({achievement.year})</p>
                 <p className="text-sm text-gray-700 mb-2">{achievement.description}</p>

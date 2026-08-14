@@ -90,6 +90,7 @@ import {
   updateFacultyProfile,
 } from "../../services/facultyService";
 import { clearPortalSession } from "../../utils/portalSession";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
   createRecruitment,
   deleteRecruitment,
@@ -132,7 +133,7 @@ import { fetchAllRegistrations } from "../../services/semesterRegistrationServic
 import { parseDriveLink } from "../../Data/semesterRegistrationData";
 */
 const fetchAllRegistrations = async () => ({ data: [] });
-const parseDriveLink = (url) => url || "";
+const parseDriveLink = (url) => parseImageUrl(url);
 
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
 import ApprovalQueue from "../../components/announcement/ApprovalQueue";
@@ -3950,22 +3951,7 @@ const AdminDashboard = () => {
                           <div className="flex items-center gap-3">
                             {faculty.image_url ? (
                               <img
-                                src={
-                                  (() => {
-                                    const url = faculty.image_url;
-                                    if (typeof url === "string") {
-                                      const matchFile = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-                                      if (matchFile && matchFile[1]) {
-                                        return `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
-                                      }
-                                      const matchOpen = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-                                      if (matchOpen && matchOpen[1] && url.includes("drive.google.com")) {
-                                        return `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
-                                      }
-                                    }
-                                    return url;
-                                  })()
-                                }
+                                src={parseImageUrl(faculty.image_url)}
                                 alt={faculty.name}
                                 className="h-10 w-10 rounded-xl object-cover ring-2 ring-slate-100 flex-shrink-0"
                                 onError={(e) => {
@@ -4917,7 +4903,7 @@ const AdminDashboard = () => {
           <div className="flex items-start gap-3 min-w-0">
             {member.image ? (
               <img
-                src={member.image}
+                src={parseImageUrl(member.image)}
                 alt={member.name}
                 className="h-14 w-14 rounded-2xl object-cover ring-2 ring-slate-100 flex-shrink-0"
               />
@@ -5950,7 +5936,7 @@ const AdminDashboard = () => {
                   {(schoolData.coreCouncil || []).map((member, idx) => (
                     <tr key={idx} className="hover:bg-slate-50/50">
                       <td className="px-4 py-3">
-                        <img src={member.image || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
+                        <img src={parseImageUrl(member.image) || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
                       </td>
                       <td className="px-4 py-3 font-medium text-slate-900">{member.name}</td>
                       <td className="px-4 py-3">{member.role}</td>
@@ -6483,7 +6469,7 @@ const AdminDashboard = () => {
                   {(schoolData.cadetLeaders || []).map((leader, idx) => (
                     <tr key={idx} className="hover:bg-slate-50/50">
                       <td className="px-4 py-3">
-                        <img src={leader.image || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
+                        <img src={parseImageUrl(leader.image) || "/placeholder.svg"} className="h-10 w-10 rounded-full object-cover border border-slate-200" alt="" />
                       </td>
                       <td className="px-4 py-3 font-medium text-slate-900">{leader.name}</td>
                       <td className="px-4 py-3">

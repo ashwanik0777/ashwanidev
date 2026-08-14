@@ -8,6 +8,7 @@ import {
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
 import { formatAnnouncementDate } from '../../utils/announcementDate';
+import { parseImageUrl } from '../../utils/imageUtils.js';
 // Button component
 const Button = ({ children, variant = "default", size = "md", className = "", ...props }) => {
   const base =
@@ -202,6 +203,16 @@ const NoticeDetail = () => {
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">{notice.title}</h1>
         <p className="text-sm font-semibold uppercase tracking-wide text-indigo-600 mb-2">{notice.schoolName}</p>
         <p className="text-gray-500 mb-6">Published on {format(notice.date, 'MMMM dd, yyyy')}</p>
+
+        {(notice.image || notice.imageUrl) && (
+          <div className="mb-6 rounded-2xl overflow-hidden shadow-md">
+            <img
+              src={parseImageUrl(notice.image || notice.imageUrl)}
+              alt={notice.title}
+              className="w-full max-h-96 object-cover"
+            />
+          </div>
+        )}
 
         <div className="prose max-w-none mb-6">
           <p className="text-lg text-gray-700 leading-relaxed">{notice.content}</p>

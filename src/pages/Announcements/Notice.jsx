@@ -30,6 +30,7 @@ import {
   getAnnouncementYear,
   toValidDate,
 } from "../../utils/announcementDate";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 
 // Enhanced Card components with modern styling
 const Card = ({ children, className = "", hover = true }) => (

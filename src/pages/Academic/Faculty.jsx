@@ -370,49 +370,56 @@ const Faculty = () => {
                             <Link
                               to={`/academics/faculty/${faculty.id}`}
                               key={faculty.id}
-                        className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-fade-in group cursor-pointer"
-                        style={{ animationDelay: `${index * 0.1}s` }}
+                        className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer flex flex-col h-full border border-gray-100"
+                        style={{ animationDelay: `${index * 0.05}s` }}
                       >
-                        <div className="p-6">
-                          <div className="flex flex-col items-center text-center">
+                        {/* Top accent bar */}
+                        <div className="h-1.5 bg-blue-600 w-full" />
+                        <div className="p-6 flex flex-col flex-grow">
+                          {/* Photo + Name row */}
+                          <div className="flex items-start gap-4 mb-4">
                             <img
                               src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
                               alt={faculty.name}
-                              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-300 transition-colors shadow-sm"
+                              className="w-20 h-20 rounded-full object-cover border-3 border-blue-100 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0"
                               onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
                             />
-                            <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">{faculty.name}</h3>
-                            <p className="text-blue-600 font-semibold mb-4">{faculty.designation}</p>
-                            <div className="w-full space-y-3 mb-6">
-                              <div className="bg-gray-50 rounded-lg p-3">
-                                <p className="text-sm font-semibold text-gray-600 mb-1">Specialization</p>
-                                <p className="text-gray-800">{faculty.specialization}</p>
-                              </div>
-                              <div className="grid grid-cols-2 gap-3">
-                                <div className="bg-blue-50 rounded-lg p-3 text-center">
-                                  <p className="text-lg font-bold text-blue-600">{faculty.experience_years} years</p>
-                                  <p className="text-xs text-gray-600">Experience</p>
-                                </div>
-                                <div className="bg-green-50 rounded-lg p-3 text-center">
-                                  <p className="text-lg font-bold text-green-600">{faculty.publications}</p>
-                                  <p className="text-xs text-gray-600">Publications</p>
-                                </div>
-                              </div>
-                              <div className="bg-gray-50 rounded-lg p-3">
-                                <p className="text-sm font-semibold text-gray-600 mb-1">Education</p>
-                                <p className="text-sm text-gray-800">{faculty.education}</p>
-                              </div>
+                            <div className="min-w-0">
+                              <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">{faculty.name}</h3>
+                              <p className="text-blue-600 font-semibold text-sm mt-1">{faculty.designation}</p>
                             </div>
-                            <div className="w-full space-y-2">
-                              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                                <Mail className="w-4 h-4" />
-                                <span>{faculty.email}</span>
+                          </div>
+
+                          {/* Department & School */}
+                          <div className="space-y-2 mb-4">
+                            {faculty.department && (
+                              <div className="flex items-start gap-2">
+                                <BookOpen className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                                <p className="text-sm text-gray-700 leading-snug line-clamp-2">{faculty.department}</p>
                               </div>
-                              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                                <Phone className="w-4 h-4" />
-                                <span>{faculty.phone}</span>
-                              </div>
+                            )}
+                            <div className="flex items-start gap-2">
+                              <Award className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                              <p className="text-sm text-gray-600 leading-snug line-clamp-2">{normalizeSchoolName(faculty.school)}</p>
                             </div>
+                          </div>
+
+                          {/* Specialization */}
+                          {faculty.specialization && (
+                            <div className="bg-gray-50 rounded-lg px-3 py-2.5 mb-4">
+                              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Specialization</p>
+                              <p className="text-sm text-gray-800 line-clamp-2">{faculty.specialization}</p>
+                            </div>
+                          )}
+
+                          {/* Spacer */}
+                          <div className="flex-grow" />
+
+                          {/* View Profile link */}
+                          <div className="pt-3 border-t border-gray-100">
+                            <span className="text-sm font-semibold text-blue-600 group-hover:text-blue-700 transition-colors">
+                              View Profile →
+                            </span>
                           </div>
                         </div>
                             </Link>

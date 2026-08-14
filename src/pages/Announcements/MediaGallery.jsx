@@ -17,6 +17,7 @@ import {
 } from '../../utils/schoolAnnouncements';
 import { formatAnnouncementDate } from '../../utils/announcementDate';
 import UnifiedAnnouncementFilter from '../../components/announcement/UnifiedAnnouncementFilter';
+import { parseImageUrl, getImageUrl as sharedGetImageUrl } from '../../utils/imageUtils.js';
 
 // === Professional Card Components ===
 const Card = ({ children, className = '', onClick }) => (
@@ -565,29 +566,12 @@ const VITE_HOST = import.meta.env.VITE_HOST;
 const BASE_URL = VITE_HOST ? (VITE_HOST.endsWith('/') ? VITE_HOST.slice(0, -1) : VITE_HOST) : 'http://localhost:3000';
 
 const parseDriveLink = (url) => {
-  if (!url) return '';
-  const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
-  const match = url.match(driveRegex);
-  if (match && match[1]) {
-    const fileId = match[1];
-    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w400`;
-  }
-  return url;
+  return parseImageUrl(url);
 };
 
 const getImageUrl = (path) => {
   if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
-  // If it's already a drive link returned by parseDriveLink, it will start with https://drive.google.com
-  const parsedDriveLink = parseDriveLink(path);
-  if (parsedDriveLink && parsedDriveLink !== path) return parsedDriveLink;
-  
-  if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
-  
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  if (BASE) {
-    return `${BASE}${cleanPath}`;
-  }
-  return cleanPath;
+  return parseImageUrl(path) || 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
 };
 
 // === Main Component ===

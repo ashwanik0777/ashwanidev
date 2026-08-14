@@ -44,6 +44,7 @@ import {
   getDepartmentsForSchool,
   resolveSchool,
 } from "../../Data/schoolsMeta";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 // Semester Registration is held back from this release, so its modules are not
 // committed to the repository. Keeping these imports live breaks the deployment
 // build with "Could not resolve ../../services/registrationControl".
@@ -52,7 +53,7 @@ import {
 //   import { parseDriveLink } from "../../Data/semesterRegistrationData";
 //   import { getSchoolRegistrationState, setSchoolRegistration, getRegistrationStatus, REASON_OPTIONS } from "../../services/registrationControl";
 const fetchRegistrationsBySchool = async () => ({ data: [] });
-const parseDriveLink = (url) => url || "";
+const parseDriveLink = (url) => parseImageUrl(url);
 const getSchoolRegistrationState = () => ({ active: false, reason: "", customMessage: "" });
 const setSchoolRegistration = () => {};
 const getRegistrationStatus = () => ({ active: false, reason: "", customMessage: "" });

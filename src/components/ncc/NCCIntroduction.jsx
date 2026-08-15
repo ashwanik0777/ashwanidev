@@ -24,7 +24,7 @@ const CardTitle = ({ className = "", children }) => (
 const CardContent = ({ className = "", children }) => (
   <div className={`px-6 pb-6 ${className}`}>{children}</div>
 );
-import { Shield, Target, Users, Award, Star, Flag } from 'lucide-react';
+import { Shield, Target, Users, Award, Star, Flag, ArrowRight, ExternalLink } from 'lucide-react';
 import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
  
@@ -97,28 +97,59 @@ const nccStatsData = [
   return (
     <SearchableWrapper>
     <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
-      {/* Mission & Vision Statement Card */}
-      <Card className="border-l-4 border-l-orange-600 bg-gradient-to-r from-orange-50/40 via-white to-blue-50/30 shadow-md p-6 sm:p-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex-1">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-orange-600 mb-3">Our Vision</h2>
-            <p className="text-base sm:text-lg leading-relaxed text-slate-700">
-              {visionText}
-            </p>
-          </div>
-          <div className="shrink-0">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
-              alt="Official NCC Emblem"
-              className="w-28 h-28 sm:w-32 sm:h-32 object-contain bg-white rounded-2xl p-2 border border-slate-100 shadow-md"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "https://panducollege.ac.in/images/ncc-new-logo.png";
-              }}
-            />
+      {/* Hero Mission Statement Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="bg-gradient-to-br from-blue-950 via-indigo-900 to-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="max-w-3xl">
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-amber-500 text-slate-950 mb-4">
+                OFFICIAL NCC GBU CELL
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 leading-tight">
+                National Cadet Corps <span className="text-amber-400">(NCC GBU)</span>
+              </h2>
+              <p className="text-base md:text-lg text-blue-200 font-medium mb-6">
+                राष्ट्रीय कैडेट कोर - गौतम बुद्ध विश्वविद्यालय
+              </p>
+              <p className="text-sm md:text-base text-slate-200 leading-relaxed mb-8">
+                {visionText}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href={registerUrl}
+                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:scale-105"
+                >
+                  Start Cadet Registration <ArrowRight size={18} />
+                </a>
+                <a
+                  href={mainUrl}
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3 rounded-xl font-bold backdrop-blur-sm transition-all"
+                >
+                  Cadet Login <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
+
+            {/* Official NCC Emblem Logo */}
+            <div className="shrink-0 self-center md:self-auto">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                alt="Official NCC Logo"
+                className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain bg-white rounded-full p-2.5 shadow-2xl border-4 border-amber-400/80"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://panducollege.ac.in/images/ncc-new-logo.png";
+                }}
+              />
+            </div>
           </div>
         </div>
-      </Card>
+      </motion.div>
 
       {/* Unit Information */}
       <div>

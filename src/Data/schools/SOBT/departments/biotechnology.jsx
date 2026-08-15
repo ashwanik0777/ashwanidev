@@ -103,7 +103,7 @@ export const departmentLayoutData = {
         level: "Dual Degree",
         duration: "5 Years",
         intake: "60 Students",
-        description: "Comprehensive 5-year integrated program covering recombinant DNA technology, bioprocess engineering, and biotech management.",
+        description: "Comprehensive 5-year integrated dual degree covering recombinant DNA technology, bioprocess engineering, and bio-management.",
         image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80",
         gradient: "from-emerald-500 to-teal-600",
         highlights: [
@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Bio-Management",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf",
+        syllabusUrl: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf"
+                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+                url: "/schools/biotechnology/Course_Content_Integrated_BTech-MTech_ALL_SEMSETRS.pdf"
             }
         ]
     },
@@ -144,6 +144,10 @@ export const departmentLayoutData = {
             {
                 session: "Course Structure",
                 url: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf"
             }
         ]
     },
@@ -153,20 +157,51 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "3-4 Years",
         intake: "40 Students",
-        description: "Rigorous forensic education covering crime scene investigation, forensic toxicology, serology, DNA fingerprinting, and digital forensics.",
+        description: "Forensic analysis, crime scene documentation, toxicology, digital forensics, DNA profiling, and legal evidence procedures.",
         image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-500 to-indigo-600",
         highlights: [
-            "Crime Scene Investigation",
+            "Crime Scene Management",
             "Forensic Toxicology",
-            "DNA Profiling",
-            "Forensic Ballistics"
+            "DNA Fingerprinting",
+            "Ballistics Analysis"
         ],
         syllabusUrl: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf",
         syllabus: [
             {
                 session: "Course Structure",
                 url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+            }
+        ]
+    },
+    {
+        id: "int-btech-mtech-legacy",
+        title: "Integrated B.Tech.-M.Tech./MBA (Legacy Batch)",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Curriculum scheme for integrated biotechnology batches enrolled up to 2018.",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-amber-600",
+        highlights: [
+            "Cellular Biology",
+            "Enzyme Technology",
+            "Industrial Microbiology",
+            "Management Modules"
+        ],
+        syllabusUrl: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
             }
         ]
     },
@@ -176,20 +211,24 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "NEP-aligned undergraduate degree providing research immersion in molecular biology, biochemistry, enzymology, and cell cultures.",
+        description: "NEP-aligned undergraduate curriculum with intensive lab research in biochemistry, genetics, and cell cultures.",
         image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=400&q=80",
         gradient: "from-teal-500 to-cyan-600",
         highlights: [
             "Molecular Genetics",
             "Cell Culture Techniques",
             "Enzymology",
-            "Undergraduate Research Thesis"
+            "Undergraduate Thesis"
         ],
         syllabusUrl: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf",
         syllabus: [
             {
                 session: "Course Structure",
                 url: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
             }
         ]
     },
@@ -199,7 +238,7 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "25 Students",
-        description: "Postgraduate curriculum focusing on disease mechanisms, gene therapy, immunotherapy, and molecular diagnostic platforms.",
+        description: "Focuses on translational medicine, disease pathophysiology, genetic therapeutics, and modern clinical diagnostics.",
         image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=400&q=80",
         gradient: "from-rose-500 to-pink-600",
         highlights: [
@@ -208,11 +247,15 @@ export const departmentLayoutData = {
             "Cancer Biology",
             "Pharmacogenomics"
         ],
-        syllabusUrl: "/schools/biotechnology/Course_Struture_M.Sc._Nuclear_Medicine_Final_25426.docx.pdf",
+        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Course_Struture_M.Sc._Nuclear_Medicine_Final_25426.docx.pdf"
+                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
             }
         ]
     },
@@ -222,14 +265,14 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "25 Students",
-        description: "Advanced computational biology, genome sequencing analysis, structural bioinformatics, and drug design workflows.",
+        description: "Computational genomics, NGS data analysis, structural bioinformatics, Python scripting, and drug modeling.",
         image: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=400&q=80",
         gradient: "from-purple-500 to-indigo-600",
         highlights: [
-            "Next-Generation Sequencing",
+            "Next-Gen Sequencing (NGS)",
             "Structural Bioinformatics",
             "Molecular Docking",
-            "Python for Genomics"
+            "Python for Biology"
         ],
         syllabusUrl: "/schools/biotechnology/MSc_Bioinformatics_CourseContent.pdf",
         syllabus: [
@@ -245,7 +288,7 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "30 Students",
-        description: "Advanced study of industrial fermentation, virology, immunology, environmental microbiology, and antimicrobial resistance.",
+        description: "Advanced study of industrial fermentation, virology, immunology, antimicrobial resistance, and microbial genetics.",
         image: "https://images.unsplash.com/photo-1583912267670-6575ad36248b?auto=format&fit=crop&w=400&q=80",
         gradient: "from-amber-500 to-orange-600",
         highlights: [
@@ -259,12 +302,39 @@ export const departmentLayoutData = {
             {
                 session: "Course Structure",
                 url: "/schools/biotechnology/MSc-Microbiology-CS-2025-27.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/MSc-Microbiology-CS-2025-27.pdf"
+            }
+        ]
+    },
+    {
+        id: "msc-life-sciences-specialization",
+        title: "M.Sc. Life Sciences (Specializations)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Integrated life science study covering Molecular Medicine, Genomics & Bioinformatics, and Systems Medicine.",
+        image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-emerald-700",
+        highlights: [
+            "Molecular Pathology",
+            "Genomic Analysis",
+            "Systems Physiology",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
             }
         ]
     },
     {
         id: "mtech-biotech",
-        title: "M.Tech. Biotechnology (2 Years)",
+        title: "M.Tech. Biotechnology",
         level: "PG",
         duration: "2 Years",
         intake: "30 Students",
@@ -277,21 +347,25 @@ export const departmentLayoutData = {
             "Metabolic Engineering",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf",
+        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
+                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/Course_Content_Integrated_BTech-MTech_ALL_SEMSETRS.pdf"
             }
         ]
     },
     {
         id: "msc-biotech",
-        title: "M.Sc. Biotechnology (2 Years)",
+        title: "M.Sc. Biotechnology",
         level: "PG",
         duration: "2 Years",
         intake: "40 Students",
-        description: "Advanced curriculum covering plant & animal biotechnology, genetic engineering, biostatistics, and cellular therapeutics.",
+        description: "Advanced curriculum covering plant and animal biotechnology, genetic engineering, biostatistics, and cellular therapeutics.",
         image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
         gradient: "from-emerald-600 to-teal-700",
         highlights: [
@@ -300,11 +374,111 @@ export const departmentLayoutData = {
             "Immunotechnology",
             "Research Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf",
+        syllabusUrl: "/schools/biotechnology/MSc_Mol._Med._Course_structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf"
+                url: "/schools/biotechnology/MSc_Mol._Med._Course_structure.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/MSc-Microbial-Biotech-Content.pdf"
+            }
+        ]
+    },
+    {
+        id: "int-msc-phd-lifesciences",
+        title: "Integrated M.Sc.-Ph.D. Life Sciences & Systems Medicine",
+        level: "Doctoral",
+        duration: "5 Years",
+        intake: "15 Students",
+        description: "Direct doctoral research pathway bridging master's level modules with comprehensive Ph.D. dissertation research.",
+        image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-violet-600 to-purple-700",
+        highlights: [
+            "Integrated Doctoral Track",
+            "Systems Medicine",
+            "Translational Lab Research",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-biotech",
+        title: "Ph.D. in Biotechnology",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "20 Students",
+        description: "Doctoral research program promoting original scientific discovery in industrial microbiology, molecular medicine, and agriculture.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-teal-800",
+        highlights: [
+            "Independent Research",
+            "Indexed Journal Publications",
+            "Instrument Access",
+            "Doctoral Defense"
+        ],
+        syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+            },
+            {
+                session: "Course Content",
+                url: "/schools/biotechnology/PhD__Course_Contents_2020_onwards.pdf"
+            }
+        ]
+    },
+    {
+        id: "msc-research-biotech",
+        title: "M.Sc. (Research) in Biotechnology (1 Year)",
+        level: "PG",
+        duration: "1 Year",
+        intake: "15 Students",
+        description: "Intensive 1-year research-centric master's program dedicated to full-time laboratory investigation and thesis writing.",
+        image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-cyan-700",
+        highlights: [
+            "1-Year Intensive Track",
+            "Dedicated Lab Project",
+            "Research Methodology",
+            "Thesis Publication"
+        ],
+        syllabusUrl: "/schools/biotechnology/SOBT_ResearchTeachingLaboratories.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/SOBT_ResearchTeachingLaboratories.pdf"
+            }
+        ]
+    },
+    {
+        id: "msc-life-sciences-bioinfo",
+        title: "M.Sc. Life Sciences (Bioinformatics & Systems Medicine)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "Postgraduate degree emphasizing systems biology modeling, molecular genetics, and computational drug discovery.",
+        image: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Systems Biology",
+            "Computational Modeling",
+            "Genomics Analysis",
+            "Master Thesis"
+        ],
+        syllabusUrl: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf"
             }
         ]
     },
@@ -314,7 +488,7 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "15 Students",
-        description: "Specialized clinical curriculum in radio-pharmacy, radiation physics, SPECT/PET imaging instrumentation, and radiation safety.",
+        description: "Clinical postgraduate program in radiopharmacy, radiation safety, instrumentation, and PET/SPECT imaging workflows.",
         image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-600 to-violet-700",
         highlights: [
@@ -328,52 +502,6 @@ export const departmentLayoutData = {
             {
                 session: "Course Structure",
                 url: "/schools/biotechnology/Course_Struture_M.Sc._Nuclear_Medicine_Final_25426.docx.pdf"
-            }
-        ]
-    },
-    {
-        id: "msc-life-sciences",
-        title: "M.Sc. Life Sciences",
-        level: "PG",
-        duration: "2 Years",
-        intake: "30 Students",
-        description: "Specializations in Molecular Medicine, Bioinformatics & Genomics, and Systems Medicine with interdisciplinary lab modules.",
-        image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-teal-600 to-emerald-700",
-        highlights: [
-            "Molecular Pathology",
-            "Genomic Analysis",
-            "Systems Physiology",
-            "Dissertation"
-        ],
-        syllabusUrl: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf"
-            }
-        ]
-    },
-    {
-        id: "phd-biotech",
-        title: "Ph.D. in Biotechnology",
-        level: "Doctoral",
-        duration: "3-5 Years",
-        intake: "20 Students",
-        description: "Doctoral research program promoting original scientific discoveries across industrial biotechnology, healthcare, and genomics.",
-        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-green-600 to-teal-800",
-        highlights: [
-            "Independent Research",
-            "Indexed Journal Publications",
-            "Specialized Instrument Access",
-            "Thesis Defense"
-        ],
-        syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
             }
         ]
     }

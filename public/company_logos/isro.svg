@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="100%" height="100%">
+  <g transform="translate(20, 20)">
+    <!-- Rocket Vector -->
+    <path d="M20,65 Q40,15 60,65 L40,50 Z" fill="#F97316"/>
+    <path d="M40,15 L48,35 L32,35 Z" fill="#2563EB"/>
+    <circle cx="40" cy="42" r="5" fill="#FFFFFF"/>
+    <text x="75" y="46" font-family="'Arial Black', sans-serif" font-size="36" font-weight="900" fill="#F97316">ISRO</text>
+    <text x="75" y="66" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#2563EB" letter-spacing="0.5">INDIAN SPACE RESEARCH ORG.</text>
+  </g>
+</svg>

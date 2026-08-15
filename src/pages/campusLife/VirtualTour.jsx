@@ -17,13 +17,6 @@ const VirtualTour = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
-  const tourHighlights = [
-    { title: 'Academic Excellence', description: 'State-of-the-art smart classrooms and advanced research labs.', icon: GraduationCap },
-    { title: 'Modern Architecture', description: 'Tallest campus structures, design excellence, and vast auditoriums.', icon: Compass },
-    { title: 'Green Sanctuary', description: 'Eco-friendly sprawling campus with native flora, solar grid, and STP.', icon: Leaf },
-    { title: 'Residential Ecosystem', description: 'Vibrant single-occupancy hostels and multi-cuisine central food complex.', icon: Users }
-  ];
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -36,37 +29,19 @@ const VirtualTour = () => {
 
   return (
     <SearchableWrapper>
-      <section id="campus-tour" className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden font-sans">
+      <section id="campus-tour" className="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden font-sans">
         <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl">
           {/* Header */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
-            >
-              <Video size={13} className="animate-pulse" />
-              <span>360° View</span>
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight"
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
             >
               {tour.title}
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-slate-600 leading-relaxed font-normal"
-            >
-              {tour.description}
-            </motion.p>
           </div>
 
           {/* Video Container */}
@@ -74,7 +49,7 @@ const VirtualTour = () => {
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-950 mb-16"
+            className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-950 mb-0"
           >
             {!isVideoPlaying ? (
               <div className="absolute inset-0 w-full h-full flex items-center justify-center">
@@ -113,44 +88,6 @@ const VirtualTour = () => {
               />
             )}
           </motion.div>
-
-          {/* Highlights Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {tourHighlights.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 border border-slate-100 hover:border-blue-100 shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1"
-              >
-                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <item.icon className="text-blue-600 group-hover:text-white transition-colors duration-300" size={24} />
-                </div>
-                <h3 className="text-lg font-bold text-slate-950 mb-3">{item.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Schedule/CTA Section */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
-              onClick={() => setIsVideoPlaying(true)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-blue-500/25 cursor-pointer text-base"
-            >
-              <Play className="fill-white" size={16} />
-              <span>Full 360° Tour</span>
-            </button>
-            <button
-              onClick={() => setIsDialogOpen(true)}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-slate-50 text-blue-600 border border-blue-200 shadow-sm font-semibold transition-all duration-300 hover:scale-[1.03] cursor-pointer text-base"
-            >
-              <Calendar size={18} />
-              <span>Schedule Physical Visit</span>
-            </button>
-          </div>
         </div>
 
         {/* Dialog / Modal Overhaul */}

@@ -80,8 +80,6 @@ const Library = () => {
   const [libraryInfo, setLibraryInfo] = useState(FALLBACK_LIBRARY_INFO);
   const [features, setFeatures] = useState(FALLBACK_FEATURES);
   const [stats, setStats] = useState(FALLBACK_STATS);
-  const [spaces] = useState(FALLBACK_SPACES);
-  const [selectedSpace, setSelectedSpace] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const BASE_URL = import.meta.env.VITE_HOST;
 
@@ -133,7 +131,7 @@ const Library = () => {
 
   return (
     <SearchableWrapper>
-      <section id="library" className="py-24 bg-white relative overflow-hidden font-sans text-left">
+      <section id="library" className="py-16 bg-white relative overflow-hidden font-sans text-left">
         {/* Floating background decorative details */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 rounded-full filter blur-3xl pointer-events-none" />
@@ -141,7 +139,7 @@ const Library = () => {
         <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
           
           {/* Main Info showcase */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-14">
             <div className="lg:col-span-6 relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl opacity-10 filter blur-xl group-hover:opacity-15 transition-opacity" />
               <img
@@ -156,10 +154,6 @@ const Library = () => {
             </div>
             
             <div className="lg:col-span-6">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100">
-                <BookOpen size={13} />
-                <span>Central Knowledge Hub</span>
-              </div>
               <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
                 {libraryInfo.title}
               </h2>
@@ -180,7 +174,7 @@ const Library = () => {
           </div>
 
           {/* Quick Stats Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-0">
             {stats.map((stat, i) => (
               <motion.div
                 key={i}
@@ -199,116 +193,7 @@ const Library = () => {
             ))}
           </div>
 
-          {/* Key Stacks Spaces Grid */}
-          <div className="mb-24">
-            <div className="mb-12">
-              <h3 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-                <span>Specialized Library Spaces</span>
-              </h3>
-              <p className="text-sm text-slate-500 mt-1">Explore custom facilities inside Dr. Ambedkar Central Library.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {spaces.map((space, idx) => (
-                <div
-                  key={space.id}
-                  onClick={() => setSelectedSpace(space)}
-                  className="group cursor-pointer bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div className="h-48 relative overflow-hidden">
-                    <img src={space.image} alt={space.name} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <h4 className="font-bold text-base">{space.name}</h4>
-                    </div>
-                  </div>
-                  <div className="p-5 flex justify-between items-center bg-slate-50/50">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Capacity: {space.capacity}</span>
-                    <span className="text-blue-600 font-semibold text-xs group-hover:translate-x-1 transition-transform">Explore →</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Core Features Grid */}
-          <div>
-            <div className="mb-12">
-              <h3 className="text-2xl font-bold text-slate-900">Library Services & Access Rules</h3>
-              <p className="text-sm text-slate-500 mt-1">Providing student-focused reference tools and extensive research assistance.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {features.map((feature, i) => (
-                <div key={i} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 border border-blue-100">
-                    {React.createElement(feature.icon || Clock, { size: 18 })}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 mb-1.5">{feature.name}</h4>
-                    <p className="text-xs text-slate-500 leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
-
-        {/* Space Details Dialog */}
-        <AnimatePresence>
-          {selectedSpace && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
-                onClick={() => setSelectedSpace(null)}
-              />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 15 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 15 }}
-                className="relative bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl z-10 border border-slate-100 max-h-[90vh] overflow-y-auto"
-              >
-                <button
-                  className="absolute top-6 right-6 text-slate-400 hover:text-slate-950 p-1.5 hover:bg-slate-100 rounded-full cursor-pointer"
-                  onClick={() => setSelectedSpace(null)}
-                >
-                  <X size={20} />
-                </button>
-                <div className="mb-6 flex flex-col gap-1">
-                  <h2 className="text-2xl font-bold text-slate-950 flex items-center gap-2">
-                    <GraduationCap className="text-blue-600" size={24} />
-                    <span>{selectedSpace.name}</span>
-                  </h2>
-                  <p className="text-xs text-slate-500 uppercase font-semibold tracking-wider mt-1">Space Overview & Guidelines</p>
-                </div>
-                <div className="space-y-6">
-                  <img src={selectedSpace.image} alt={selectedSpace.name} className="w-full h-56 object-cover rounded-xl border border-slate-100" />
-                  <p className="text-sm text-slate-600 leading-relaxed">{selectedSpace.description}</p>
-                  
-                  <div className="grid grid-cols-2 gap-6 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                    <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 mb-2">Space Capacity</h4>
-                      <p className="text-sm text-slate-600">{selectedSpace.capacity}</p>
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 mb-2">Key Amenities</h4>
-                      <ul className="space-y-1">
-                        {selectedSpace.amenities.map((item, idx) => (
-                          <li key={idx} className="text-xs text-slate-600 flex items-center gap-1.5">
-                            <span className="w-1 h-1 rounded-full bg-blue-600" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
 
       </section>
     </SearchableWrapper>

@@ -54,8 +54,35 @@ export default function WelcomePage() {
 
   return (
     <>
+      {/* Scrolling Ticker - Placed on top right after header */}
+      <div
+        role="region"
+        aria-label="Latest announcements"
+        className="bg-blue-800 text-white overflow-hidden relative py-2.5 z-20 shadow-md"
+        style={{ height: "auto", minHeight: "40px" }}
+      >
+        <div
+          className="inline-flex items-center absolute whitespace-nowrap animate-scroll text-sm sm:text-base px-4"
+          style={{
+            animation: "scrollText 15s linear infinite",
+            zIndex: 0,
+          }}
+        >
+          <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider mr-3">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+            </span>
+            NEW
+          </span>
+          <span className="font-medium tracking-wide">
+            ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
+          </span>
+        </div>
+      </div>
+
       {/* Main welcome section */}
-      <div className="relative h-[79.8vh] w-full flex flex-col justify-center overflow-hidden">
+      <div className="relative h-[80vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -63,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-21"
+            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-24 xl:-mt-21"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -135,32 +162,6 @@ export default function WelcomePage() {
         </div>
       </div>
 
-      {/* Scrolling Ticker - Mobile optimized */}
-      <div
-        role="region"
-        aria-label="Latest announcements"
-        className="bg-blue-800 text-white overflow-hidden relative py-2 "
-        style={{ height: "auto", minHeight: "40px" }}
-      >
-        <div
-          className="inline-flex items-center absolute whitespace-nowrap animate-scroll text-sm sm:text-base px-4"
-          style={{
-            animation: "scrollText 15s linear infinite",
-            zIndex: 0,
-          }}
-        >
-          <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider mr-3">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-            </span>
-            NEW
-          </span>
-          <span className="font-medium tracking-wide">
-            ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
-          </span>
-        </div>
-      </div>
 
       <style jsx>{`
         .video-responsive {

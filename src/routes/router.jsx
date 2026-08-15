@@ -145,6 +145,7 @@ import Dean from "../components/departments/Dean.jsx";
 import Conferences from "../pages/departments/Usict_activities.jsx";
 import LaboratoryCards from "../pages/departments/laboratries.jsx";
 import Placement_home from "../pages/Placement/Placement_home.jsx";
+import AlumniMain from "../pages/Alumni/AlumniMain.jsx";
 
 import RecruitMain from "../pages/recruitments/RecruitMain.jsx";
 
@@ -364,7 +365,7 @@ export default function AppRouter() {
                   <SchoolDetail />
                 </Suspense>
               } />
-              <Route path="faculty" element={<ICTFaculty />} />
+              <Route path="faculty" element={<Faculty />} />
               <Route path="placement" element={<PlacementDashboard />} />
               <Route path="contact" element={<Contact />} />
               <Route path="about/dean" element={<Dean />} />
@@ -494,6 +495,9 @@ export default function AppRouter() {
 
           {/* Placements Routes */}
           <Route path="/placements" element={<Placement_home />} />
+
+          {/* Alumni Routes */}
+          <Route path="/alumni" element={<AlumniMain />} />
 
 
 

@@ -176,9 +176,10 @@ const sitemapAbout = [
   },
   {
     title: "Alumni Network",
-    path: "https://alumni.gbu.ac.in/",
+    path: "/alumni",
     icon: Users,
     children: [
+      { title: "GBU Alumni Network & Directory", path: "/alumni" },
       { title: "GBU Alumni Portal (External)", path: "https://alumni.gbu.ac.in/" }
     ],
   },

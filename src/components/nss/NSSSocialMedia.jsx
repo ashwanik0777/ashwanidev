@@ -1,11 +1,11 @@
- import React from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   ExternalLink,
   Facebook,
   Instagram,
-  Youtube,
   Twitter,
+  Linkedin,
   Users,
   BarChart,
   Activity,
@@ -16,10 +16,10 @@ import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 const Card = ({ className = "", children }) => (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
+    initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className={`rounded-lg shadow shadow-gray-300 bg-white ${className}`}
+    transition={{ duration: 0.4 }}
+    className={`rounded-2xl border border-slate-100 shadow-md bg-white hover:shadow-xl transition-all duration-300 ${className}`}
   >
     {children}
   </motion.div>
@@ -37,16 +37,14 @@ const Button = ({
   ...props
 }) => {
   const base =
-    "inline-flex items-center justify-center rounded-md font-medium transition focus:outline-none focus:ring-2 focus:ring-offset-2";
+    "inline-flex items-center justify-center rounded-xl font-bold transition-all focus:outline-none cursor-pointer";
   const variants = {
-    default: "bg-blue-600 text-white hover:bg-blue-700",
-    outline: "border border-blue-600 text-blue-600 bg-white hover:bg-blue-50",
-    secondary:
-      "bg-white text-green-600 border border-green-600 hover:bg-green-50",
+    default: "bg-slate-900 text-white hover:bg-slate-800 shadow-md hover:scale-102",
+    outline: "border border-slate-200 text-slate-700 bg-white hover:bg-slate-50",
   };
   const sizes = {
-    sm: "px-2 py-1 text-xs",
-    md: "px-4 py-2 text-sm",
+    sm: "px-3 py-1.5 text-xs",
+    md: "px-4 py-2.5 text-sm",
     lg: "px-6 py-3 text-base",
   };
   return (
@@ -65,50 +63,49 @@ const NSSSocialMedia = ({ nssData }) => {
   const defaultHandles = [
     {
       platform: "Facebook",
-      handle: "@UniversityNSS",
-      followers: "2.5K",
-      link: "https://facebook.com/universitynss",
-      description: "Updates on events, activities, and community impact",
+      handle: "@gbunss",
+      followers: "2.5K+",
+      link: "https://www.facebook.com/gbunss/",
+      description: "Official event updates, community drives, and social impact stories.",
       color: "bg-blue-600",
       icon: Facebook,
     },
     {
       platform: "Instagram",
-      handle: "@university_nss",
-      followers: "3.2K",
-      link: "https://instagram.com/university_nss",
-      description: "Visual stories of our volunteer work and achievements",
-      color: "bg-pink-600",
+      handle: "@gbu.nss",
+      followers: "3.2K+",
+      link: "https://www.instagram.com/gbu.nss",
+      description: "Visual photo stories and volunteer highlights from NSS GBU.",
+      color: "bg-gradient-to-tr from-amber-500 via-pink-600 to-purple-600",
       icon: Instagram,
     },
     {
-      platform: "YouTube",
-      handle: "University NSS",
-      followers: "1.8K",
-      link: "https://youtube.com/@universitynss",
-      description: "Training videos, event highlights, and impact stories",
-      color: "bg-red-600",
-      icon: Youtube,
+      platform: "Twitter / X",
+      handle: "@gbunss",
+      followers: "1.2K+",
+      link: "https://x.com/gbunss",
+      description: "Real-time news, announcements, and Ministry of Youth Affairs updates.",
+      color: "bg-slate-950",
+      icon: Twitter,
     },
     {
-      platform: "Twitter",
-      handle: "@UniversityNSS",
-      followers: "1.2K",
-      link: "https://twitter.com/universitynss",
-      description: "Real-time updates and community engagement",
-      color: "bg-blue-500",
-      icon: Twitter,
+      platform: "LinkedIn",
+      handle: "@gbunsstest",
+      followers: "1.8K+",
+      link: "https://www.linkedin.com/company/gbunsstest/",
+      description: "Professional networking, leadership recognitions, and annual reports.",
+      color: "bg-sky-700",
+      icon: Linkedin,
     },
   ];
 
   const dbSocial = nssData?.content?.socialMedia || {};
   const socialHandles = defaultHandles.map(handle => {
-    const key = handle.platform.toLowerCase();
+    const key = handle.platform.toLowerCase().replace(/[^a-z]/g, "");
     if (dbSocial[key]) {
       return {
         ...handle,
         link: dbSocial[key],
-        handle: dbSocial[key].split('/').pop() || handle.handle
       };
     }
     return handle;
@@ -119,13 +116,13 @@ const NSSSocialMedia = ({ nssData }) => {
       icon: Users,
       numberText: "8,700+",
       title: "Total Followers",
-      iconColor: "#3b82f6",
+      iconColor: "#2563eb",
     },
     {
       icon: BarChart,
       numberText: "25,000+",
       title: "Monthly Reach",
-      iconColor: "#10b981",
+      iconColor: "#16a34a",
     },
     {
       icon: Activity,
@@ -135,38 +132,34 @@ const NSSSocialMedia = ({ nssData }) => {
     },
     {
       icon: Calendar,
-      numberText: "24",
+      numberText: "24+",
       title: "Posts This Month",
-      iconColor: "#ef4444",
+      iconColor: "#9333ea",
     },
   ];
 
   return (
     <SearchableWrapper>
-      <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
+      <div className="space-y-12 px-4 sm:px-6 lg:px-12 mx-auto max-w-7xl">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Social Media Hub
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-3">
+            NSS GBU Social Media Hub
           </h2>
-          <p className="text-md sm:text-lg text-gray-600">
-            Connect with us across platforms and stay updated with our latest
-            activities.
+          <p className="text-base text-slate-600 leading-relaxed">
+            Connect with Gautam Buddha University National Service Scheme across official platforms.
           </p>
         </motion.div>
 
-        {/* Engagement Statistics */}
-        <StatsCard stats={socialImpactStats} />
-
-        {/* Social Media Handles */}
+        {/* Social Media Handles Grid */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">
-            Follow Us
+          <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
+            Follow Our Official Handles
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {socialHandles.map((handle, index) => {
@@ -174,30 +167,26 @@ const NSSSocialMedia = ({ nssData }) => {
               return (
                 <Card
                   key={index}
-                  className="hover:shadow-lg shadow-gray-300 transition-all duration-300 hover:-translate-y-1"
+                  className="hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
                 >
-                  <CardContent className="p-4 sm:p-6 text-center flex flex-col items-center">
-                    <div
-                      className={`w-14 h-14 sm:w-16 sm:h-16 ${handle.color} rounded-full flex items-center justify-center mb-4`}
-                    >
-                      <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <CardContent className="p-6 text-center flex flex-col items-center h-full justify-between">
+                    <div className="flex flex-col items-center">
+                      <div
+                        className={`w-16 h-16 ${handle.color} rounded-2xl flex items-center justify-center mb-4 shadow-md text-white`}
+                      >
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                      <h4 className="text-xl font-bold text-slate-900 mb-1">
+                        {handle.platform}
+                      </h4>
+                      <p className="text-sm font-semibold text-blue-600 mb-6">{handle.handle}</p>
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                      {handle.platform}
-                    </h4>
-                    <p className="text-gray-600 mb-2">{handle.handle}</p>
-                    <div className="text-xl sm:text-2xl font-bold text-blue-600 mb-4">
-                      {handle.followers}
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4">
-                      {handle.description}
-                    </p>
                     <Button
-                      className="w-full"
+                      className="w-full mt-auto"
                       onClick={() => window.open(handle.link, "_blank")}
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Follow
+                      Connect on {handle.platform}
                     </Button>
                   </CardContent>
                 </Card>

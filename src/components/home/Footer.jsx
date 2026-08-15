@@ -154,7 +154,7 @@ const Footer = () => {
               { name: "Library", path: "https://library.gbu.ac.in/", isExternal: true },
               { name: "Hostels", path: "https://hostels.gbu.ac.in/", isExternal: true },
               { name: "Examination", path: "https://exams.gbu.ac.in/", isExternal: true },
-              { name: "Alumni", path: "https://alumni.gbu.ac.in/", isExternal: true },
+              { name: "Alumni", path: "/alumni" },
             ].map((link) => (
               <li key={link.name}>
                 {link.isExternal ? (

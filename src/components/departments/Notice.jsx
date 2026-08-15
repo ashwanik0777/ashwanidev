@@ -2,50 +2,12 @@ import { Calendar } from "lucide-react";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getSchoolMeta } from "../../utils/schoolMeta";
+import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
   getSchoolAnnouncements,
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from "../../utils/schoolAnnouncements";
-
-// Card Components
-const Card = ({ children, className = "", ...props }) => {
-  return (
-    <div
-      className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-};
-
-const CardHeader = ({ children, className = "", ...props }) => {
-  return (
-    <div className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props}>
-      {children}
-    </div>
-  );
-};
-
-const CardTitle = ({ children, className = "", ...props }) => {
-  return (
-    <h3
-      className={`text-2xl font-semibold leading-none tracking-tight ${className}`}
-      {...props}
-    >
-      {children}
-    </h3>
-  );
-};
-
-const CardContent = ({ children, className = "", ...props }) => {
-  return (
-    <div className={`p-6 pt-0 ${className}`} {...props}>
-      {children}
-    </div>
-  );
-};
 
 // Badge Component
 const Badge = ({ children, className = "", ...props }) => {
@@ -90,6 +52,18 @@ const filterBySchool = (items, meta) => {
     (item) => item?.schoolName || item?.school || item?.department || item?.school_name || item?.organizer
   );
   return hasSchoolTags ? filtered : items;
+};
+
+/** Resolve the best available image URL from an event object. */
+const resolveEventImage = (event) => {
+  const raw =
+    event?.coverImageUrl ||
+    event?.cover_image ||
+    event?.image ||
+    event?.coverImage ||
+    (Array.isArray(event?.images) ? event.images[0] : null) ||
+    "";
+  return raw ? parseImageUrl(raw) : "";
 };
 
 const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallbackEvents = [] }) => {
@@ -159,9 +133,6 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
           <h2 className="text-4xl font-bold text-blue-900 mb-3">
             Notices and Events
           </h2>
-          <p className="text-xl text-gray-600">
-            Stay updated with latest notices and events
-          </p>
         </div>
 
         {/* Main Grid */}
@@ -217,34 +188,51 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
               <h3 className="text-blue-800 text-lg font-bold mb-4">
                 Event Gallery
               </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto h-[calc(100%-30px)] pr-2 custom-scrollbar">
-                {visibleEvents.map((event, index) => (
-                  <Link
-                    key={index}
-                    to={`/announcements/event-calendar/${event.id}`}
-                    className="group cursor-pointer"
-                  >
-                    <div className="relative overflow-hidden rounded-lg mb-3 bg-gray-100">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h4 className="font-semibold text-blue-900 text-sm mb-1">
-                      {event.title}
-                    </h4>
-                    <p className="text-xs text-gray-600 mb-1">
-                      {event.description}
-                    </p>
-                    <p className="text-xs text-blue-600 font-medium">
-                      {event.date}
-                    </p>
-                  </Link>
-                ))}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-y-auto h-[calc(100%-30px)] pr-2 custom-scrollbar">
+                {visibleEvents.map((event, index) => {
+                  const imgSrc = resolveEventImage(event);
+                  return (
+                    <Link
+                      key={index}
+                      to={`/announcements/event-calendar/${event.id}`}
+                      className="group cursor-pointer block"
+                    >
+                      <div className="relative overflow-hidden rounded-xl bg-gray-200 h-48 shadow-md group-hover:shadow-xl transition-shadow duration-300">
+                        {imgSrc ? (
+                          <img
+                            src={imgSrc}
+                            alt={event.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = "none";
+                              e.target.nextElementSibling && (e.target.nextElementSibling.style.display = "flex");
+                            }}
+                          />
+                        ) : null}
+                        {/* Fallback when no image */}
+                        <div
+                          className={`absolute inset-0 items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 ${imgSrc ? 'hidden' : 'flex'}`}
+                        >
+                          <Calendar size={40} className="text-white/50" />
+                        </div>
+                        {/* Overlay gradient with title */}
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-10">
+                          <h4 className="font-semibold text-white text-sm leading-snug line-clamp-2">
+                            {event.title}
+                          </h4>
+                          {event.date && (
+                            <p className="text-xs text-blue-200 mt-1 font-medium">
+                              {event.date}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
                 {visibleEvents.length === 0 ? (
-                  <p className="text-sm text-gray-500">No events available.</p>
+                  <p className="text-sm text-gray-500 col-span-full">No events available.</p>
                 ) : null}
               </div>
             </div>
@@ -256,3 +244,4 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
 };
 
 export default NoticeEvents;
+

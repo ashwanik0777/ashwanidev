@@ -98,104 +98,52 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "Integrated B.Tech–M.Tech Biotechnology",
-      duration: "5 Years",
-      intake: "40 Students",
-      description:
-        "A comprehensive dual-degree program combining undergraduate and postgraduate studies in Biotechnology with specializations in Genetic Engineering and Bioinformatics.",
-      image:
-        "https://images.unsplash.com/photo-1581091012184-5c0c9b4f5f5f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Molecular Biology",
-        "Genetic Engineering",
-        "Bioinformatics",
-        "Biochemistry",
-        "Immunology",
-        "Fermentation Technology",
-        "Research Project",
-        "Industry Internship",
-      ],
-      syllabusUrl: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf",
-      syllabus: [
-        {
-                session: "2020-21",
-                url: "/schools/biotechnology/Course_Struture_MTech_2020_onwards.pdf"
-        }
+        id: "bsc-biotech",
+        title: "B.Sc. (Hons.) Biotechnology",
+        level: "UG",
+        duration: "3 Years",
+        intake: "60 Students",
+        description: "Undergraduate curriculum covering molecular biology, genetics, microbiology, and biochemical assays.",
+        image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-500 to-emerald-600",
+        highlights: [
+            "Cell Biology & Genetics",
+            "Microbiology & Immunology",
+            "Biochemistry & Enzymology",
+            "Bioinformatics Fundamentals"
+        ],
+        syllabusUrl: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf",
+        syllabus: [
+            {
+                session: "2022-23",
+                url: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf"
+            }
+        ]
+    },
+    {
+        id: "int-btech-mtech-biotech",
+        title: "Integrated B.Tech-M.Tech Biotechnology",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "5-year dual degree in bioprocess engineering, genetic engineering, drug design, and industrial fermentation.",
+        image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-500 to-teal-600",
+        highlights: [
+            "Recombinant DNA Technology",
+            "Bioprocess & Fermentation",
+            "Downstream Processing",
+            "Genomics & Proteomics"
+        ],
+        syllabusUrl: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf"
+            }
+        ]
+    }
 ],
-    },
-    {
-      title: "M.Sc Biotechnology (DBT Sponsored)",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "DBT-sponsored postgraduate program with focus on research and innovation in biotechnology.",
-      image:
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Advanced Molecular Biology",
-        "Genomics & Proteomics",
-        "Bioprocess Technology",
-        "Bioinformatics Tools",
-        "Research Methodology",
-        "Lab Rotations",
-        "Dissertation Project",
-        "Industry Exposure",
-      ],
-      syllabusUrl: "/schools/biotechnology/Course_Struture_M.Sc._Biotech.pdf",
-    syllabus: [],
-    },
-    {
-      title: "M.Tech Biotechnology",
-      duration: "2 Years",
-      intake: "25 Students",
-      description:
-        "Advanced postgraduate program focusing on applied biotechnology, genetic engineering, and bioinformatics with industry-relevant specializations.",
-      image:
-        "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Genetic Engineering",
-        "Bioprocess Engineering",
-        "Bioinformatics",
-        "Industrial Biotechnology",
-        "Environmental Biotechnology",
-        "Advanced Instrumentation",
-        "Research Thesis",
-        "Industrial Training",
-      ],
-      syllabusUrl: "/schools/biotechnology/Course_Struture_MTech_2020_onwards.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. in Biotechnology",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral program focused on advanced research in diverse areas of biotechnology.",
-      image:
-        "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Publications",
-        "Industry Collaborations",
-        "Teaching Assistantship",
-        "International Exposure",
-        "Patent Filing",
-        "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
-      syllabus: [
-        {
-                session: "2020-21",
-                url: "/schools/bioinformatics/Course_Structure_PHD_2020_onwards.pdf"
-        }
-],
-    },
-  ],
   facultyMembers: [
     {
       name: "Prof. S. Dhanalakshmi",

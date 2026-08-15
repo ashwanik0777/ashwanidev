@@ -94,72 +94,52 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech Mechanical Engineering",
-      duration: "4 Years",
-      intake: "60 Students",
-      description:
-        "Comprehensive undergraduate program covering design, manufacturing, thermal engineering, and industrial automation with industry internships.",
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Machine Design", "Thermodynamics", "Manufacturing Processes", "CAD/CAM",
-        "Fluid Mechanics", "Material Science", "Robotics", "Industry Internship",
-      ],
-      syllabusUrl: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf",
-      syllabus: [
-        {
+        id: "btech-me",
+        title: "B.Tech Mechanical Engineering",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Thermodynamics, fluid mechanics, CAD/CAM manufacturing, machine design, and automotive engineering.",
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-500 to-blue-600",
+        highlights: [
+            "CAD/CAM & CNC Manufacturing",
+            "Thermal & Fluid Engineering",
+            "Finite Element Machine Design",
+            "Robotics & Automation"
+        ],
+        syllabusUrl: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf",
+        syllabus: [
+            {
                 session: "2023-24",
                 url: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf"
-        }
+            }
+        ]
+    },
+    {
+        id: "mtech-me-thermal",
+        title: "M.Tech Mechanical (Design & Thermal)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced computational fluid dynamics (CFD), heat transfer modeling, advanced materials, and mechanical vibrations.",
+        image: "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-500 to-indigo-600",
+        highlights: [
+            "Computational Fluid Dynamics",
+            "Advanced Heat Exchangers",
+            "Vibration Analysis",
+            "Design Optimization"
+        ],
+        syllabusUrl: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf"
+            }
+        ]
+    }
 ],
-    },
-    {
-      title: "M.Tech Thermal Engineering",
-      duration: "2 Years",
-      intake: "15 Students",
-      description:
-        "Specialization in heat transfer, combustion, refrigeration, and renewable energy systems with research orientation.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Heat Transfer", "IC Engines", "Renewable Energy", "CFD",
-        "Refrigeration & HVAC", "Power Plant Engineering", "Research Thesis", "Lab Work",
-      ],
-      syllabusUrl: "/schools/mechanical/M._Tech_Thermal_ME_Syllabus.pdf",
-      syllabus: [],
-    },
-    {
-      title: "M.Tech Production & Industrial Engineering",
-      duration: "2 Years",
-      intake: "15 Students",
-      description:
-        "Focus on advanced manufacturing, CNC, CAD/CAM, quality engineering, and supply chain management.",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlights: [
-        "CNC Programming", "CAD/CAM", "Quality Engineering", "Supply Chain",
-        "3D Printing", "Automation", "Research Project", "Industry Training",
-      ],
-      syllabusUrl: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. in Mechanical Engineering",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral research in thermal engineering, materials science, manufacturing, tribology, and renewable energy.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Publications",
-        "Conference Funding", "Teaching Assistantship", "Patent Filing",
-        "Industry Collaboration", "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/mechanical/PhD_ME_May2023.pdf",
-      syllabus: [],
-    },
-  ],
   facultyStats: {
     text: "Our department has 9+ experienced faculty members with expertise in thermal, manufacturing, and design engineering.",
     stats: [

@@ -94,77 +94,75 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech Electrical Engineering",
-      duration: "4 Years",
-      intake: "50 Students",
-      description:
-        "Core program with specialization tracks in Industrial Automation, Electric Vehicles, AI & ML, Biomedical, and Computer Engineering.",
-      image: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Power Systems", "Electrical Machines", "Control Systems", "Power Electronics",
-        "Instrumentation", "Renewable Energy", "EV Technology", "Industry Internship",
-      ],
-      syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
-      syllabus: [
-        {
+        id: "btech-ee",
+        title: "B.Tech Electrical Engineering",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Power generation, smart grid distribution, control systems, and renewable energy integration.",
+        image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-amber-600",
+        highlights: [
+            "Power Systems & High Voltage",
+            "Electric Drives & Machines",
+            "Smart Grids & Renewables",
+            "Control Automation"
+        ],
+        syllabusUrl: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf",
+        syllabus: [
+            {
                 session: "2023-24",
                 url: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf"
-        }
-],
+            }
+        ]
     },
     {
-      title: "Integrated B.Tech–M.Tech/MBA (EE)",
-      duration: "5 Years",
-      intake: "30 Students",
-      description:
-        "Dual-degree program combining undergraduate and postgraduate study with specializations in Power Systems, Renewable Energy, and Control.",
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Power Systems", "Instrumentation & Control", "Power Electronics & Drives",
-        "Renewable Energy", "Signal Processing", "MBA Option", "Research Project", "Industry Placement",
-      ],
-      syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
-    syllabus: [
-        {
+        id: "btech-ee-comp",
+        title: "B.Tech Electrical & Computer Engineering",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Interdisciplinary blend of electrical hardware systems with computer architecture, networking, and robotics.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-500 to-indigo-600",
+        highlights: [
+            "Computer Architecture",
+            "Embedded Control Systems",
+            "Robotics & Cybernetics",
+            "Power Electronic Hardware"
+        ],
+        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "int-btech-mtech-ee",
+        title: "Integrated B.Tech-M.Tech / MBA (Electrical)",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Comprehensive 5-year integrated program leading to dual engineering or technical management qualification.",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-500 to-purple-600",
+        highlights: [
+            "Advanced Power Electronics",
+            "Energy Storage Systems",
+            "Techno-Commercial Management",
+            "Industry Master Thesis"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
                 session: "2023-24",
                 url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
-        }
+            }
+        ]
+    }
 ],
-    },
-    {
-      title: "M.Tech Power Systems / Power Electronics",
-      duration: "2 Years",
-      intake: "10 Students each",
-      description:
-        "Advanced postgraduate programs in power system analysis, smart grid, power converters, and EV drive systems.",
-      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Power System Analysis", "Smart Grid", "FACTS Devices", "Power Converters",
-        "Motor Drives", "EV Systems", "MATLAB/Simulink", "Research Thesis",
-      ],
-      syllabusUrl: "/schools/electrical/M.Tech.__WP_Electrical_All.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. in Electrical Engineering",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "Doctoral research in power systems, renewable energy, electric vehicles, AI/ML, and power electronics.",
-      image: "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "IEEE Publications",
-        "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
-        "Patent Filing", "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf",
-      syllabus: [],
-    },
-  ],
   facultyStats: {
     text: "Our department has 16+ faculty members with expertise in power, control, electronics, and renewable energy.",
     stats: [

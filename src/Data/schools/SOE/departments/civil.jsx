@@ -94,77 +94,75 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech Civil Engineering",
-      duration: "4 Years",
-      intake: "55 Students",
-      description:
-        "Comprehensive program covering structural, geotechnical, environmental, and transportation engineering.",
-      image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Structural Analysis", "Concrete Technology", "Soil Mechanics", "Surveying",
-        "Environmental Engineering", "Transportation", "BIM", "Site Visit",
-      ],
-      syllabusUrl: "/schools/civil/Syllabus_CivilEngg_April23.pdf",
-      syllabus: [
-        {
+        id: "btech-civil",
+        title: "B.Tech Civil Engineering",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Structural design, concrete technology, geomatics, hydrology, and transportation systems.",
+        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-amber-600",
+        highlights: [
+            "Structural Analysis",
+            "Geotechnical Engineering",
+            "Transportation Planning",
+            "Environmental Hydrology"
+        ],
+        syllabusUrl: "/schools/civil/Syllabus_CivilEngg_April23.pdf",
+        syllabus: [
+            {
                 session: "2023-24",
                 url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
-        }
-],
+            }
+        ]
     },
     {
-      title: "M.Tech Structural Engineering",
-      duration: "2 Years",
-      intake: "12 Students",
-      description:
-        "Advanced study in structural analysis, earthquake engineering, bridge design, and BIM technology.",
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Structural Analysis", "Earthquake Engineering", "Bridge Design",
-        "BIM Technology", "Pre-Stressed Concrete", "FEM", "Research Thesis", "Industry Project",
-      ],
-      syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
-      syllabus: [
-        {
+        id: "mtech-civil-struct",
+        title: "M.Tech Structural Engineering",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced structural mechanics, earthquake-resistant design, bridge engineering, and finite element modeling.",
+        image: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-500 to-blue-600",
+        highlights: [
+            "Finite Element Analysis",
+            "Seismic Structural Design",
+            "Tall Buildings & Bridges",
+            "Prestressed Concrete"
+        ],
+        syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
+        syllabus: [
+            {
                 session: "2023-24",
                 url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
-        }
+            }
+        ]
+    },
+    {
+        id: "mtech-civil-trans",
+        title: "M.Tech Transportation Engineering",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Traffic flow theory, highway geometric design, pavement material design, and urban transit planning.",
+        image: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-500 to-emerald-600",
+        highlights: [
+            "Pavement Analysis & Design",
+            "Urban Transportation Planning",
+            "Traffic Flow Modeling",
+            "Intelligent Transport Systems"
+        ],
+        syllabusUrl: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf"
+            }
+        ]
+    }
 ],
-    },
-    {
-      title: "M.Tech Environmental Engineering",
-      duration: "2 Years",
-      intake: "10 Students",
-      description:
-        "Specialization in water treatment, waste management, air pollution control, and environmental impact assessment.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlights: [
-        "Water Treatment", "Waste Management", "Air Pollution Control", "EIA",
-        "Wastewater Engineering", "Solid Waste", "Research Project", "Field Work",
-      ],
-      syllabusUrl: "/schools/civil/Mtech_Geotechnical_GeoEnvrtEnggCStr_May2023.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. in Civil Engineering",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "Research in structural, geotechnical, environmental, and smart infrastructure engineering.",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Journal Publications",
-        "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
-        "Patent Filing", "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/civil/CourseStr_CivilEngg_April23.pdf",
-      syllabus: [],
-    },
-  ],
   facultyStats: {
     text: "Our department has 13+ faculty members with expertise across all civil engineering domains.",
     stats: [

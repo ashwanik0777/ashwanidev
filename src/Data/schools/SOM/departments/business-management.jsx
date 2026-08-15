@@ -102,81 +102,29 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "MBA (Full-Time)",
-      duration: "2 Years (4 Semesters)",
-      intake: "120 Students",
-      description:
-        "Flagship MBA program with specializations in Finance, HRM, Marketing, Operations, Strategy, and Business Analytics. Includes summer internships from 2nd semester.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Finance", "HRM", "Marketing", "Operations",
-        "Strategy", "Business Analytics", "Summer Internship", "Industry Projects",
-      ],
-      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
-    syllabus: [],
-    },
-    {
-      title: "Dual Degree BBA+MBA (with exit option)",
-      duration: "5 Years",
-      intake: "60 Students",
-      description:
-        "Integrated dual degree program building strong foundations in business management. Students have the option to exit after BBA.",
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Business Fundamentals", "Finance", "Marketing", "HRM",
-        "Operations", "Strategy", "Exit after BBA", "Industry Exposure",
-      ],
-      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
-    syllabus: [],
-    },
-    {
-      title: "B.Com (Honours)",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "Undergraduate commerce program with a strong base in accounting, taxation, financial management, and business economics.",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Accounting", "Taxation", "Financial Management", "Business Law",
-        "Economics", "Corporate Governance", "Auditing", "Business Statistics",
-      ],
-      syllabusUrl: "/schools/business-management/BCom-_Syllabus-17Apr25.pdf",
-    syllabus: [],
-    },
-    {
-      title: "MBA (Business Analytics & Data Science)",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Analytics-focused MBA in association with IBM. Covers predictive analytics, data mining, AI/ML applications, and Python programming for business.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Predictive Analytics", "Data Mining", "AI/ML in Business", "Python",
-        "Business Intelligence", "Big Data", "IBM Partnership", "Data Visualization",
-      ],
-      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
-    syllabus: [],
-    },
-    {
-      title: "Ph.D. (Business Management)",
-      duration: "3-5 Years",
-      intake: "15 Students",
-      description:
-        "Doctoral research program across all functional areas of management including Finance, Marketing, HRM, Operations, and Strategy.",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Independent Research", "Finance Research", "Marketing Research", "HRM Research",
-        "Operations Research", "Conference Publications", "UGC-NET/JRF", "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/business-management/PhD-CStr-17apr25.pdf",
-    syllabus: [],
-    },
-  ],
+        id: "bcom-hons",
+        title: "B.Com (Honours) NEP",
+        level: "UG",
+        duration: "3 Years",
+        intake: "60 Students",
+        description: "Undergraduate commerce curriculum aligned with NEP guidelines covering accounting, corporate tax, and auditing.",
+        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-500 to-blue-600",
+        highlights: [
+            "Financial & Corporate Accounting",
+            "Income Tax & GST Regulations",
+            "Financial Management",
+            "Auditing & Assurance"
+        ],
+        syllabusUrl: "/schools/business-management/B.Com_(Hons.)__NEP_2023.docx.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/business-management/B.Com_(Hons.)__NEP_2023.docx.pdf"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our 17+ faculty members bring rich academic expertise and industry experience across Finance, HRM, Marketing, Operations, Strategy, and Analytics.",
     stats: [

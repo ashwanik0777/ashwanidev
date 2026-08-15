@@ -93,84 +93,29 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech. Food Processing & Technology",
-      duration: "4 Years",
-      intake: "60 Students",
-      description:
-        "Four-year engineering degree covering food physics, chemical analysis, unit operations, dairy engineering, and regulatory standards.",
-      image: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-50 to-orange-100",
-      highlights: [
-        "Food Biochemistry & Nutrition",
-        "Food Engineering Unit Operations",
-        "Food Microbiology & Fermentation",
-        "Beverage & Bakery Technology",
-        "Dairy & Meat Processing Technology",
-        "Quality Control & HACCP",
-        "In-plant training",
-        "B.Tech Project & Seminar",
-      ],
-      syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
-      syllabus: [],
-    },
-    {
-      title: "B.Voc. Food Processing",
-      duration: "3 Years",
-      intake: "50 Students",
-      description:
-        "Skill-based undergraduate program aligned with NSQF guidelines, focused on food preservation, processing line operations, and packaging.",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-yellow-50 to-yellow-100",
-      highlights: [
-        "NSQF level certifications",
-        "Food preservation techniques",
-        "Grain & Pulses milling",
-        "Packaging operations",
-        "Entrepreneurship modules",
-        "Multiple exit options (Diploma/B.Voc)",
-        "Industrial project training",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "M.Tech. Food Processing & Technology",
-      duration: "2 Years",
-      intake: "18 Students",
-      description:
-        "Advanced postgraduate program specializing in food safety audit, novel product formulation, process optimization, and industrial automation.",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-50 to-red-100",
-      highlights: [
-        "Advanced Food Engineering",
-        "Novel Food Processing Technologies",
-        "Bioprocess Engineering",
-        "Food safety standards & auditing",
-        "Advanced Food Packaging",
-        "Industrial Internship",
-        "Dissertation Research",
-      ],
-      syllabusUrl: "/schools/food-processing-technology/PhD_FPT_CS_21March24.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Food Processing & Technology",
-      duration: "3-5 Years",
-      intake: "4 Students",
-      description:
-        "Doctoral research in functional foods, value-added products, packaging innovations, and waste valorization.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Independent Research",
-        "Functional Compound Extraction",
-        "Research Methodology",
-        "Lab automation studies",
-        "High impact publication",
-        "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "btech-fpt",
+        title: "B.Tech Food Processing & Technology",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Food preservation, packaging tech, quality assurance, FSSAI compliance, and dairy/grain engineering.",
+        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-orange-600",
+        highlights: [
+            "Food Chemistry & Microbiology",
+            "Dairy & Beverage Technology",
+            "Food Packaging & Quality",
+            "FSSAI Food Safety Standards"
+        ],
+        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "2023-24",
+                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 6 dedicated faculty members with research expertise in food engineering, preservation, bio-active compounds, and dairy technology.",
     stats: [

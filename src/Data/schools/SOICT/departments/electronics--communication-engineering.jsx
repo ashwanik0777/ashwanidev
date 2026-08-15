@@ -197,6 +197,29 @@ export const departmentLayoutData = {
         ]
     },
     {
+        id: "int-btech-mtech-ece",
+        title: "Integrated B.Tech.-M.Tech. (ECE)",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Comprehensive 5-year integrated dual degree providing seamless progression into advanced telecommunication systems and VLSI research.",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-amber-600",
+        highlights: [
+            "Integrated Dual Degree",
+            "Wireless Communication Lab",
+            "VLSI Research",
+            "Master Thesis"
+        ],
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
+        syllabus: [
+            {
+                session: "Current Scheme",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
+            }
+        ]
+    },
+    {
         id: "mtech-ece-wireless",
         title: "M.Tech ECE (Wireless Communication & Networks)",
         level: "PG",

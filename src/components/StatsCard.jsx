@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 
 const StatItem = ({
   icon: Icon,
@@ -9,97 +9,19 @@ const StatItem = ({
   iconColor = "#6b21a8",
   compact = true,
 }) => {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef();
-
-  // Parse prefix, numeric target, leading zero pad, and suffix from number or numberText
-  const parsed = useMemo(() => {
+  // Directly format the display text from number or numberText without starting at 0
+  const displayText = useMemo(() => {
+    if (numberText !== undefined && numberText !== null) {
+      return String(numberText);
+    }
     if (typeof number === "number") {
-      return { prefix: "", target: number, padLen: 0, suffix: "", hasDigit: true };
+      return number.toLocaleString();
     }
-
-    const text = String(numberText || number || "");
-    const match = text.match(/^(.*?)(\d+)(.*)$/); // Match optional prefix, digits, and optional suffix
-    if (match) {
-      const rawDigits = match[2];
-      const hasLeadingZero = rawDigits.length > 1 && rawDigits.startswith ? rawDigits.startsWith("0") : rawDigits[0] === "0";
-      return {
-        prefix: match[1] || "",
-        target: parseInt(rawDigits, 10),
-        padLen: hasLeadingZero ? rawDigits.length : 0,
-        suffix: match[3] || "",
-        hasDigit: true,
-      };
-    }
-
-    return { prefix: "", target: 0, padLen: 0, suffix: text, hasDigit: false };
+    return String(number || "");
   }, [number, numberText]);
-
-  const animateCount = () => {
-    let startTimestamp = null;
-    const duration = 1500; // 1.5 seconds animation
-    const startValue = 0;
-    const endValue = parsed.target;
-
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
-
-      setCount(currentValue);
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        setCount(endValue); // Ensure precise ending on target
-      }
-    };
-
-    requestAnimationFrame(step);
-  };
-
-  useEffect(() => {
-    if (!parsed.hasDigit || parsed.target <= 0) {
-      setCount(0);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          animateCount();
-          setHasAnimated(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current && !hasAnimated) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [hasAnimated, parsed.hasDigit, parsed.target]);
-
-  // Format current count display string with prefix, padding, and suffix
-  const formattedNumber = useMemo(() => {
-    if (!parsed.hasDigit) return parsed.suffix;
-    let numStr = String(count);
-    if (parsed.padLen > 0) {
-      numStr = numStr.padStart(parsed.padLen, "0");
-    }
-    return `${parsed.prefix}${numStr}${parsed.suffix}`;
-  }, [count, parsed]);
 
   return (
     <div
-      ref={ref}
       className={`text-center group transition-all duration-300 hover:shadow-lg shadow-sm rounded-xl md:rounded-2xl border border-slate-100 hover:border-slate-200 bg-white transform hover:-translate-y-1 ${
         compact ? "p-3.5 sm:p-4" : "p-6 md:p-8"
       }`}
@@ -121,7 +43,7 @@ const StatItem = ({
           compact ? "text-xl sm:text-2xl mb-0.5" : "text-3xl md:text-4xl mb-2"
         } font-extrabold text-slate-900 tracking-tight`}
       >
-        {formattedNumber}
+        {displayText}
       </div>
       {title && (
         <div

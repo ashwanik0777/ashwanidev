@@ -163,16 +163,16 @@ const CentersOfExcellence = () => {
         <StatsCard stats={stats} />
 
         {/* Centers Grid */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-10 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">Centers of Excellence</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="text-center mb-10 md:mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 md:mb-4">Centers of Excellence</h2>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 Our centers drive excellence in research, technology, and societal impact through interdisciplinary collaboration and innovation.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
               {centers.map((center) => {
                 const IconComponent =
                   iconMap[(center.title || "").toLowerCase()] || Shield;
@@ -194,8 +194,8 @@ const CentersOfExcellence = () => {
                       )}
                     </div>
 
-                    <div className="p-6">
-                      <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                    <div className="p-5 md:p-6">
+                      <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3">
                         {center.card_title}
                       </h3>
                       <p className="text-gray-600 mb-4 text-sm leading-relaxed">
@@ -278,18 +278,18 @@ const CentersOfExcellence = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-white">
+        <section className="py-10 md:py-16 bg-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">{ctaData.title}</h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6">{ctaData.title}</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-3xl mx-auto">
               {ctaData.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <a
                 href={ctaData.url1}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors transform hover:scale-105"
+                className="bg-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-purple-700 transition-all text-center w-full sm:w-auto"
               >
                 {ctaData.button1_text}
               </a>
@@ -297,7 +297,7 @@ const CentersOfExcellence = () => {
                 href={ctaData.url2}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-purple-600 border-solid text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
+                className="border border-purple-600 border-solid text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-50 transition-all text-center w-full sm:w-auto"
               >
                 {ctaData.button2_text}
               </a>

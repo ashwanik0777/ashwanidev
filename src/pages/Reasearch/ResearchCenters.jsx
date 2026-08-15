@@ -76,13 +76,12 @@ const ResearchCenters = () => {
         {/* Stats */}
         <StatsCard stats={statsData} />
         {/* Filters */}
-        <div className="max-w-6xl mx-auto mt-10 px-4">
-          <div className="flex flex-wrap gap-4 items-center ">
+        <div className="max-w-6xl mx-auto mt-6 md:mt-10 px-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 items-stretch sm:items-center">
             {/* School Filter */}
-            <div className="flex flex-col ">
-
+            <div className="flex flex-col w-full sm:w-auto">
               <select
-                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                 value={selectedSchool}
                 onChange={(e) => setSelectedSchool(e.target.value)}
               >
@@ -96,10 +95,9 @@ const ResearchCenters = () => {
             </div>
 
             {/* Technology Filter */}
-            <div className="flex flex-col">
-
+            <div className="flex flex-col w-full sm:w-auto">
               <select
-                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                 value={selectedTechnology}
                 onChange={(e) => setSelectedTechnology(e.target.value)}
               >
@@ -113,14 +111,13 @@ const ResearchCenters = () => {
             </div>
 
             {/* Search Bar */}
-            <div className="flex flex-col flex-grow min-w-[200px]">
-
+            <div className="flex flex-col flex-grow min-w-[200px] w-full sm:w-auto">
               <input
                 type="text"
                 placeholder="Search by name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
               />
             </div>
           </div>

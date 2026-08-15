@@ -249,18 +249,18 @@ const Publications = () => {
           />
 
           {/* Filters & View Switch Header */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-8 mb-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <Filter size={20} className="text-blue-600" />
-                <h2 className="text-lg font-semibold text-gray-900">Filter & Display Options</h2>
+                <h2 className="text-base sm:text-lg font-semibold text-gray-900">Filter & Display Options</h2>
               </div>
 
               {/* View Switch Controls */}
-              <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200">
+              <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200 w-full sm:w-auto justify-center">
                 <button
                   onClick={() => setViewMode("table")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
                     viewMode === "table"
                       ? "bg-white text-blue-700 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
@@ -270,7 +270,7 @@ const Publications = () => {
                 </button>
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
                     viewMode === "grid"
                       ? "bg-white text-blue-700 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
@@ -281,7 +281,7 @@ const Publications = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* School Filter */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">School</label>

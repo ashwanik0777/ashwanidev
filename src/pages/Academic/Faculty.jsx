@@ -59,7 +59,6 @@ const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('All Departments');
   const [selectedExperience, setSelectedExperience] = useState('All');
-  const [selectedQualification, setSelectedQualification] = useState('All');
   const [selectedSchool, setSelectedSchool] = useState('All Schools');
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +66,7 @@ const Faculty = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedDepartment, selectedExperience, selectedQualification, selectedSchool]);
+  }, [searchTerm, selectedDepartment, selectedExperience, selectedSchool]);
 
   const { id, shortCode } = useParams();
 
@@ -120,13 +119,6 @@ const Faculty = () => {
     }
   }, [isSchoolScoped, schoolScopedName]);
 
-  const departments = [
-    "All Departments",
-    ...Array.from(
-      new Set(SCHOOL_DEPARTMENTS.map((dept) => dept.name).filter(Boolean))
-    ),
-  ];
-
   const normalizeSchoolName = (value) => {
     if (!value) return "";
     const normalized = String(value).trim().toLowerCase();
@@ -139,21 +131,38 @@ const Faculty = () => {
     return match ? match.name : String(value).trim();
   };
 
+  // Determine the active school name for department filtering
+  const activeSchoolName = isSchoolScoped ? schoolScopedName : selectedSchool;
+
+  // Filter departments by the selected/scoped school
+  const departments = (() => {
+    if (activeSchoolName && activeSchoolName !== 'All Schools') {
+      const schoolDepts = SCHOOL_DEPARTMENTS
+        .filter((dept) => dept.schoolName === activeSchoolName)
+        .map((dept) => dept.name)
+        .filter(Boolean);
+      return ["All Departments", ...Array.from(new Set(schoolDepts))];
+    }
+    // Show all departments when no school is selected
+    return [
+      "All Departments",
+      ...Array.from(new Set(SCHOOL_DEPARTMENTS.map((dept) => dept.name).filter(Boolean))),
+    ];
+  })();
+
+  // Reset department when school changes and selected department is not in the new list
+  useEffect(() => {
+    if (selectedDepartment !== 'All Departments' && !departments.includes(selectedDepartment)) {
+      setSelectedDepartment('All Departments');
+    }
+  }, [activeSchoolName]);
+
   const experienceRanges = [
     'All',
     '0-5 years',
     '6-10 years',
     '11-15 years',
     '16+ years'
-  ];
-
-  const qualifications = [
-    'All',
-    'PhD',
-    'M.Tech',
-    'M.Sc',
-    'MBA',
-    'B.Tech'
   ];
 
   const getDesignationPriority = (designation) => {
@@ -195,15 +204,12 @@ const Faculty = () => {
       (selectedExperience === '11-15 years' && faculty.experience_years >= 11 && faculty.experience_years <= 15) ||
       (selectedExperience === '16+ years' && faculty.experience_years >= 16);
 
-    const matchesQualification = selectedQualification === 'All' || faculty.qualification === selectedQualification;
-
-    return matchesSearch && matchesDepartment && matchesSchool && matchesExperience && matchesQualification;
+    return matchesSearch && matchesDepartment && matchesSchool && matchesExperience;
   }).sort(sortFaculty);
 
   const clearFilters = () => {
     setSelectedDepartment('All Departments');
     setSelectedExperience('All');
-    setSelectedQualification('All');
     if (!isSchoolScoped) {
       setSelectedSchool('All Schools');
     }
@@ -268,94 +274,77 @@ const Faculty = () => {
             {/* Statistics */}
            {/* <StatsCard stats={stats} /> */}
 
-            {/* Search + Filters */}
-            <section className="py-6 w-full bg-gray-50">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
-                  {/* Search and Clear All Row */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                    <div className="relative w-full sm:max-w-lg flex-grow">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            {/* Search + Filters — Single Row */}
+            <section className="py-4 w-full bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+                <div className="bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-3">
+                  <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-3">
+                    {/* Search */}
+                    <div className="relative flex-grow min-w-0">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                       <input
                         type="text"
-                        placeholder="Search faculty by name, department, specialization..."
+                        placeholder="Search by name, specialization..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                       />
                     </div>
-                    
-                    {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || selectedQualification !== 'All' || (!isSchoolScoped && selectedSchool !== 'All Schools') || searchTerm) && (
-                      <button
-                        onClick={clearFilters}
-                        className="flex items-center space-x-2 text-red-600 bg-red-50 hover:bg-red-100 px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap"
-                      >
-                        <X className="w-4 h-4" />
-                        <span className="font-medium text-sm">Clear Filters</span>
-                      </button>
-                    )}
-                  </div>
 
-                  {/* Filter Dropdowns */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    {/* Divider (desktop) */}
+                    <div className="hidden lg:block w-px h-8 bg-gray-200 flex-shrink-0" />
+
+                    {/* Filters — inline */}
+                    <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
                       {!isSchoolScoped && (
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">School</label>
                         <select
                           value={selectedSchool}
                           onChange={(e) => setSelectedSchool(e.target.value)}
-                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
                         >
                           {schools.map(school => (
                             <option key={school} value={school}>{school}</option>
                           ))}
                         </select>
-                      </div>
                       )}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Department</label>
-                        <select
-                          value={selectedDepartment}
-                          onChange={(e) => setSelectedDepartment(e.target.value)}
-                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      <select
+                        value={selectedDepartment}
+                        onChange={(e) => setSelectedDepartment(e.target.value)}
+                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                      >
+                        {departments.map(dept => (
+                          <option key={dept} value={dept}>{dept}</option>
+                        ))}
+                      </select>
+                      <select
+                        value={selectedExperience}
+                        onChange={(e) => setSelectedExperience(e.target.value)}
+                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                      >
+                        <option value="All">Experience</option>
+                        {experienceRanges.filter(r => r !== 'All').map(range => (
+                          <option key={range} value={range}>{range}</option>
+                        ))}
+                      </select>
+                      {/* Clear Filters */}
+                      {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || (!isSchoolScoped && selectedSchool !== 'All Schools') || searchTerm) && (
+                        <button
+                          onClick={clearFilters}
+                          className="flex items-center gap-1.5 text-red-600 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-lg transition-colors whitespace-nowrap"
                         >
-                          {departments.map(dept => (
-                            <option key={dept} value={dept}>{dept}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Experience</label>
-                        <select
-                          value={selectedExperience}
-                          onChange={(e) => setSelectedExperience(e.target.value)}
-                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        >
-                          {experienceRanges.map(range => (
-                            <option key={range} value={range}>{range}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Qualification</label>
-                        <select
-                          value={selectedQualification}
-                          onChange={(e) => setSelectedQualification(e.target.value)}
-                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                        >
-                          {qualifications.map(qual => (
-                            <option key={qual} value={qual}>{qual}</option>
-                          ))}
-                        </select>
-                      </div>
+                          <X className="w-3.5 h-3.5" />
+                          <span className="font-medium text-sm">Clear</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  
-                  {/* Results Count */}
-                  <div className="pt-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-600">
-                    <span>
-                      Showing <strong>{filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, filteredFaculty.length)}</strong> of <strong>{filteredFaculty.length}</strong> matched (out of {facultyMembers.length} total)
-                    </span>
-                  </div>
+                </div>
+
+                {/* Results Count */}
+                <div className="px-1 flex justify-between items-center text-sm text-gray-500">
+                  <span>
+                    Showing <strong className="text-gray-700">{filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–{Math.min(currentPage * itemsPerPage, filteredFaculty.length)}</strong> of <strong className="text-gray-700">{filteredFaculty.length}</strong> results
+                  </span>
                 </div>
               </div>
             </section>

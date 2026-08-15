@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Camera,
   Filter,
   Eye,
-  Download,
   Calendar,
-  Video,
   Image,
   X,
+  Award,
+  Heart,
+  Users,
 } from "lucide-react";
 import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
 
 const NSSGallery = ({ nssData }) => {
-  const [selectedYear, setSelectedYear] = useState("2024");
+  const [selectedYear, setSelectedYear] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedEvent, setSelectedEvent] = useState("all");
   const [dialogImage, setDialogImage] = useState(null);
@@ -22,84 +22,82 @@ const NSSGallery = ({ nssData }) => {
   const defaultGalleryItems = [
     {
       id: 1,
-      title: "Blood Donation Camp 2024",
+      title: "Mega Blood Donation Camp 2024",
       category: "Health",
       event: "Blood Donation Camp",
       year: "2024",
-      date: "2024-01-15",
+      date: "2024-04-19",
       images: [
         {
           url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b818913d_WhatsApp%20Image%202024-04-19%20at%201.59.17%20PM%20(1).jpeg",
-          caption: "Volunteers registering donors",
+          caption: "Volunteers registering blood donors at GBU Health Centre",
         },
         {
           url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5215672_WhatsApp%20Image%202024-04-19%20at%201.28.41%20PM%20(1).jpeg",
-          caption: "Medical team conducting checkups",
+          caption: "Medical team conducting pre-donation health checkups",
         },
         {
           url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b43cda9a_WhatsApp%20Image%202024-04-19%20at%202.00.34%20PM.jpeg",
-          caption: "Blood collection in progress",
+          caption: "GBU student volunteers donating blood",
         },
         {
           url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5c4bf7a_WhatsApp%20Image%202024-04-19%20at%204.04.40%20PM.jpeg",
-          caption: "Volunteers with certificates",
+          caption: "Volunteer team with donor appreciation certificates",
         },
       ],
     },
     {
       id: 2,
-      title: "Tree Plantation Drive",
+      title: "Cyber Sanskar & Awareness Campaign",
+      category: "Education",
+      event: "Cyber Awareness",
+      year: "2024",
+      date: "2024-03-12",
+      images: [
+        {
+          url: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
+          caption: "NSS GBU Cyber Sanskar workshop launch",
+        },
+        {
+          url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQskMRga2F9mYN9FclMItZ1uhC-XCXkCDM6NuH1ryD_EGqplR1XrarhOZpafQ2V-WPvBs&usqp=CAU",
+          caption: "NSS GBU official emblem badge and volunteers interactive session",
+        },
+      ],
+    },
+    {
+      id: 3,
+      title: "Campus Cleanliness & Tree Plantation Drive",
       category: "Environment",
       event: "Environmental Drive",
       year: "2024",
       date: "2024-02-05",
       images: [
-        { url: "/placeholder.svg", caption: "Volunteers planting saplings" },
-        { url: "/placeholder.svg", caption: "Community participation" },
-        { url: "/placeholder.svg", caption: "Before and after comparison" },
-      ],
-    },
-    {
-      id: 3,
-      title: "Digital Literacy Program",
-      category: "Education",
-      event: "Digital Literacy",
-      year: "2024",
-      date: "2024-01-22",
-      images: [
-        { url: "/placeholder.svg", caption: "Teaching computer basics" },
         {
-          url: "/placeholder.svg",
-          caption: "Children learning digital skills",
+          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b818913d_WhatsApp%20Image%202024-04-19%20at%201.59.17%20PM%20(1).jpeg",
+          caption: "Volunteers planting saplings across GBU campus green belts",
         },
-        { url: "/placeholder.svg", caption: "Volunteer instructors" },
-        { url: "/placeholder.svg", caption: "Certificate distribution" },
+        {
+          url: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
+          caption: "Swachh Bharat Abhiyan cleanliness drive team",
+        },
       ],
     },
     {
       id: 4,
-      title: "Community Health Camp",
-      category: "Health",
-      event: "Health Camp",
-      year: "2023",
-      date: "2023-12-10",
-      images: [
-        { url: "/placeholder.svg", caption: "Free health checkups" },
-        { url: "/placeholder.svg", caption: "Medicine distribution" },
-        { url: "/placeholder.svg", caption: "Health awareness session" },
-      ],
-    },
-    {
-      id: 5,
-      title: "Rural Development Project",
+      title: "Youth Leadership & Village Outreach Program",
       category: "Community",
       event: "Rural Development",
       year: "2023",
-      date: "2023-11-15",
+      date: "2023-11-20",
       images: [
-        { url: "/placeholder.svg", caption: "Infrastructure development work" },
-        { url: "/placeholder.svg", caption: "Community interaction" },
-        { url: "/placeholder.svg", caption: "Project completion ceremony" },
+        {
+          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b43cda9a_WhatsApp%20Image%202024-04-19%20at%202.00.34%20PM.jpeg",
+          caption: "NSS volunteers interacting with adopted village community members",
+        },
+        {
+          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5c4bf7a_WhatsApp%20Image%202024-04-19%20at%204.04.40%20PM.jpeg",
+          caption: "Community service recognition ceremony",
+        },
       ],
     },
   ];
@@ -114,7 +112,7 @@ const NSSGallery = ({ nssData }) => {
         year: g.eventDate ? g.eventDate.split('-')[0] : "2024",
         date: g.eventDate || "2024-01-15",
         images: [
-          { url: g.imageUrl || g.image || "/placeholder.svg", caption: g.title || "Event Photo" }
+          { url: g.imageUrl || g.image || "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg", caption: g.title || "Event Photo" }
         ]
       }))
     : defaultGalleryItems;
@@ -129,37 +127,38 @@ const NSSGallery = ({ nssData }) => {
 
   const getCategoryColor = (category) => {
     const colors = {
-      Health: "bg-red-100 text-red-800",
-      Education: "bg-purple-100 text-purple-800",
-      Environment: "bg-green-100 text-green-800",
-      Community: "bg-orange-100 text-orange-800",
+      Health: "bg-red-50 text-red-700 border border-red-200",
+      Education: "bg-purple-50 text-purple-700 border border-purple-200",
+      Environment: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+      Community: "bg-amber-50 text-amber-700 border border-amber-200",
     };
-    return colors[category] || "bg-gray-100 text-gray-800";
+    return colors[category] || "bg-slate-100 text-slate-700 border border-slate-200";
   };
+
   const galleryStatsData = [
     {
-      icon: Image, // Use appropriate icon like Image or Photo
+      icon: Image,
       numberText: "500+",
-      title: "Total Photos",
-      iconColor: "#3b82f6",
+      title: "Photos Captured",
+      iconColor: "#2563eb",
     },
     {
       icon: Calendar,
       numberText: "50+",
       title: "Events Documented",
-      iconColor: "#10b981",
+      iconColor: "#16a34a",
     },
     {
-      icon: Video,
-      numberText: "25+",
-      title: "Video Records",
-      iconColor: "#f59e0b",
+      icon: Users,
+      numberText: "500+",
+      title: "Active Volunteers",
+      iconColor: "#9333ea",
     },
     {
-      icon: Eye,
-      numberText: "10K+",
-      title: "Views & Downloads",
-      iconColor: "#ef4444",
+      icon: Award,
+      numberText: "10+",
+      title: "Years of Service",
+      iconColor: "#f97316",
     },
   ];
 
@@ -169,33 +168,38 @@ const NSSGallery = ({ nssData }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl"
+        className="space-y-10 px-4 sm:px-6 lg:px-12 mx-auto max-w-7xl"
       >
         {/* Header */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="text-center"
+          transition={{ delay: 0.15 }}
+          className="text-center max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">NSS Gallery</h2>
-          <p className="text-lg text-gray-600">
-            Capturing moments of service, impact, and community engagement
+          <h2 className="text-3xl font-extrabold text-slate-900 mb-3">
+            NSS GBU Photo Gallery
+          </h2>
+          <p className="text-base text-slate-600 leading-relaxed">
+            Visual highlights capturing moments of selfless community service, tree plantation drives, and student engagement.
           </p>
         </motion.div>
-        <StatsCard stats={galleryStatsData} />;{/* Filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white rounded-lg shadow p-6"
-        >
-           <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
 
-            <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4 text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">
-                Filter by:
+        {/* Gallery Statistics */}
+        <StatsCard stats={galleryStatsData} />
+
+        {/* Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="bg-white rounded-2xl border border-slate-100 shadow-md p-6"
+        >
+          <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
+            <div className="flex items-center space-x-2 mr-2">
+              <Filter className="h-4 w-4 text-blue-600" />
+              <span className="text-sm font-bold text-slate-800">
+                Filter Gallery:
               </span>
             </div>
 
@@ -203,7 +207,7 @@ const NSSGallery = ({ nssData }) => {
               {
                 value: selectedYear,
                 setValue: setSelectedYear,
-                options: ["all", "2024", "2023", "2022"],
+                options: ["all", "2024", "2023"],
                 label: "Year",
                 width: "w-32",
               },
@@ -226,20 +230,19 @@ const NSSGallery = ({ nssData }) => {
                 options: [
                   "all",
                   "Blood Donation Camp",
+                  "Cyber Awareness",
                   "Environmental Drive",
-                  "Digital Literacy",
-                  "Health Camp",
                   "Rural Development",
                 ],
                 label: "Event",
-                width: "w-40",
+                width: "w-44",
               },
             ].map(({ value, setValue, options, label, width }, i) => (
               <div key={i} className={`relative ${width}`}>
                 <select
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="w-full px-3 py-2 border rounded bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3.5 py-2 border border-slate-200 rounded-xl bg-white text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all cursor-pointer shadow-sm"
                 >
                   {options.map((opt) => (
                     <option key={opt} value={opt}>
@@ -251,6 +254,7 @@ const NSSGallery = ({ nssData }) => {
             ))}
           </div>
         </motion.div>
+
         {/* Gallery Grid */}
         <motion.div
           className="space-y-8"
@@ -258,7 +262,7 @@ const NSSGallery = ({ nssData }) => {
           animate="visible"
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.2 } },
+            visible: { transition: { staggerChildren: 0.15 } },
           }}
         >
           {filteredItems.map((item) => (
@@ -268,115 +272,111 @@ const NSSGallery = ({ nssData }) => {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
-              className="bg-white rounded-lg shadow overflow-hidden"
+              className="bg-white rounded-3xl border border-slate-100 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
             >
-              <div className="p-4 border-b border-gray-200">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-semibold text-xl text-gray-900">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 mt-1">
+              <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h3 className="font-extrabold text-xl text-slate-900 mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
+                    <Calendar size={13} className="text-blue-600" />
+                    <span>
                       {new Date(item.date).toLocaleDateString("en-IN", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
                       })}
-                    </p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${getCategoryColor(
-                        item.category
-                      )}`}
-                    >
-                      {item.category}
                     </span>
-                    <span className="inline-block px-2 py-0.5 rounded text-xs font-semibold border border-gray-300 text-gray-700 bg-white">
-                      {item.year}
-                    </span>
-                  </div>
+                  </p>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(
+                      item.category
+                    )}`}
+                  >
+                    {item.category}
+                  </span>
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-bold border border-slate-200 text-slate-700 bg-slate-50">
+                    {item.year}
+                  </span>
                 </div>
               </div>
 
-              <div className="p-4">
-             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
+              <div className="p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                   {item.images.map((image, index) => (
                     <motion.div
                       key={index}
-                      whileHover={{ scale: 1.05 }}
-                      className="relative group cursor-pointer"
+                      whileHover={{ scale: 1.02 }}
+                      className="relative group cursor-pointer rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
                       onClick={() => setDialogImage(image)}
                     >
                       <img
                         src={image.url}
                         alt={image.caption}
-                        className="w-full h-32 object-cover rounded-lg"
+                        className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105"
                       />
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        whileHover={{ opacity: 1 }}
-                        className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center"
-                      >
-                        <Eye className="h-6 w-6 text-white" />
-                      </motion.div>
+                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4 text-white">
+                        <div className="self-end bg-white/20 backdrop-blur-md p-1.5 rounded-full">
+                          <Eye className="h-4 w-4 text-white" />
+                        </div>
+                        <p className="text-xs font-medium line-clamp-2 leading-relaxed">
+                          {image.caption}
+                        </p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
 
-                <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
-                  <span className="text-sm text-gray-600">
-                    {item.images.length} photos
-                  </span>
+                <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
+                  <span>{item.images.length} Verified Photos</span>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-        {/* Dialog */}
+
+        {/* Image Dialog Modal */}
         <AnimatePresence>
           {dialogImage && (
-            <motion.div
-              className="fixed inset-0 z-50 flex items-start justify-center bg-white/80 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm"
               onClick={() => setDialogImage(null)}
             >
               <motion.div
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -20, opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-30"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-3xl relative border border-slate-100 max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Close Button */}
                 <button
-                  className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 focus:outline-none"
+                  className="absolute top-4 right-4 text-slate-400 hover:text-slate-950 p-2 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
                   onClick={() => setDialogImage(null)}
                   aria-label="Close"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5" />
                 </button>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-center">
+                <div className="space-y-4">
+                  <div className="overflow-hidden rounded-2xl border border-slate-100">
                     <img
                       src={dialogImage.url}
                       alt={dialogImage.caption}
-                      className="rounded-md object-contain max-h-[60vh] w-full"
+                      className="w-full max-h-[65vh] object-contain bg-slate-900"
                     />
                   </div>
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-                    <p className="text-gray-700 text-center sm:text-left">
+                  <div className="pt-2 text-center sm:text-left">
+                    <p className="text-sm font-semibold text-slate-800 leading-relaxed">
                       {dialogImage.caption}
                     </p>
                   </div>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           )}
         </AnimatePresence>
       </motion.div>

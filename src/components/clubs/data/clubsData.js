@@ -1,1133 +1,438 @@
 import tcclogo from "../../../assets/tcclogo.png";
 import musiclogo from "../../../assets/musiclogo.png";
+
 export const clubsData = [
   {
-    id: 'tech-innovators',
-    name: 'Tech Innovators Club',
-    tagline: "Building Tomorrow's Technology Today",
+    id: 'qalakriti-dramatics',
+    name: 'Qalakriti (Dishayan) – Dramatics Club',
+    tagline: 'Theatrical Expression, Stagecraft & Street Plays',
+    category: 'Cultural',
+    logo: tcclogo,
+    banner: 'https://www.gbu.ac.in/Content/img/club/techno.jpg',
+    memberCount: 220,
+    description: 'Qalakriti (Dishayan) is the premier dramatics society of Gautam Buddha University, fostering theatrical expression, stage productions, street plays (Nukkad Natak), scriptwriting, and national drama festival participation.',
+    objectives: [
+      'Nurture acting talent, stagecraft, and scriptwriting skills',
+      'Perform social awareness street plays across North India',
+      'Organize annual theatrical productions during Abhivyanjana',
+      'Represent GBU in inter-university drama competitions'
+    ],
+    history: 'Founded under the Cultural Council as one of GBU’s earliest societies, Qalakriti has won multiple awards at national theater festivals for impactful stage plays and socially relevant Nukkad Natak performances.',
+    achievements: [
+      '1st Rank in Inter-University Nukkad Natak Championship',
+      'Staged 30+ major theater productions in campus auditoriums',
+      'Hosted annual drama workshops with NSD guest alumni'
+    ],
+    policies: {
+      codeOfConduct: [
+        'Uphold artistic integrity and respect team members',
+        'Maintain discipline during rehearsals and stage calls'
+      ],
+      eligibility: ['Open to all GBU students passionate about theater and acting'],
+      responsibilities: ['Secretary: Production management and rehearsal scheduling'],
+      meetingFrequency: 'Rehearsals 4 days a week at Main Auditorium Complex'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Manmohan Singh Shishodia', role: 'Faculty Advisor', department: 'Student Affairs' },
+      president: { name: 'Aarav Sharma', role: 'Club Head', department: 'SOE, 4th Year' }
+    },
+    events: [
+      { id: 'q1', title: 'Nukkad Natak Street Fest', date: 'Annual Fest', description: 'Social awareness street play performance across campus grounds.' }
+    ]
+  },
+  {
+    id: 'swaranjali-music',
+    name: 'Swaranjali – Music Club',
+    tagline: 'Melodic Harmonies & Classical Rhythms',
+    category: 'Cultural',
+    logo: musiclogo,
+    banner: 'https://www.gbu.ac.in/Content/clubs/img/music/music1.jpg',
+    memberCount: 180,
+    description: 'Swaranjali brings together vocalists, instrumentalists, and university bands to celebrate Indian classical, semi-classical, western fusion, and choir performances.',
+    objectives: [
+      'Provide professional vocal and instrumental practice opportunities',
+      'Form student music bands and acoustic ensembles',
+      'Perform live music during major university functions & Abhivyanjana'
+    ],
+    history: 'Swaranjali has been the musical voice of GBU since inception, training budding singers and hosting musical jam sessions in campus open-air theaters.',
+    achievements: [
+      'Best Vocal Ensemble award at Regional Youth Fest',
+      'Composed official GBU university anthem renditions',
+      'Organized 20+ acoustic jam nights and musical evenings'
+    ],
+    policies: {
+      codeOfConduct: ['Respect all musical genres and instruments'],
+      eligibility: ['Open to all vocalists and instrumentalists'],
+      responsibilities: ['Band Lead: Arranging musical pieces and rehearsals'],
+      meetingFrequency: 'Weekly music sessions in Cultural Center'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Nidhi Singh', role: 'Faculty Advisor', department: 'Humanities' },
+      president: { name: 'Rohan Mehra', role: 'President', department: 'USICT, 3rd Year' }
+    },
+    events: [
+      { id: 's1', title: 'Swar Sandhya Musical Night', date: 'Semester Event', description: 'Live classical & rock music concert by student bands.' }
+    ]
+  },
+  {
+    id: 'nrityangana-dance',
+    name: 'Nrityangana – Dance Club',
+    tagline: 'Rhythm, Grace & Expression in Motion',
+    category: 'Cultural',
+    logo: tcclogo,
+    banner: 'https://www.gbu.ac.in/Content/clubs/img/buddha25.jpg',
+    memberCount: 195,
+    description: 'Nrityangana is GBU’s official dance society, specializing in classical Kathak/Bharatanatyam, hip-hop, contemporary, Bollywood fusion, and folk dance forms.',
+    objectives: [
+      'Train dancers in diverse choreographic styles',
+      'Represent GBU in inter-college dance face-offs and national fests',
+      'Promote cultural folk heritage through group dance productions'
+    ],
+    history: 'Known for high-energy stage performances, Nrityangana regularly mesmerizes audiences at Abhivyanjana and state cultural showcases.',
+    achievements: [
+      'Winners of Inter-University Group Dance Competition',
+      'Choreographed grand inaugural dance performances for GBU Convocation'
+    ],
+    policies: {
+      codeOfConduct: ['Maintain dedication and teamwork during group dance practices'],
+      eligibility: ['Open to all students interested in dance and rhythm'],
+      responsibilities: ['Choreographer Lead: Group formations and dance routines'],
+      meetingFrequency: 'Practice sessions 3 days a week at Sports Complex Dance Studio'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Sumitra Huidrom', role: 'Faculty Advisor', department: 'SoVS' },
+      president: { name: 'Ananya Verma', role: 'Dance President', department: 'SOM, 3rd Year' }
+    },
+    events: [
+      { id: 'nd1', title: 'Footloose Dance Battle', date: 'Abhivyanjana Fest', description: 'Solo, dual, and group dance competitions.' }
+    ]
+  },
+  {
+    id: 'drishtikon-debate',
+    name: 'Drishtikon – Debating Society',
+    tagline: 'Voice, Vision & Critical Thought',
+    category: 'Literary',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800',
+    memberCount: 140,
+    description: 'Drishtikon is the premier debating body of GBU fostering parliamentary debate formats, Model United Nations (MUN), declamation, and articulate public speaking.',
+    objectives: [
+      'Develop sharp analytical thinking, rhetoric, and public speaking skills',
+      'Host GBU Model United Nations (GBUMUN) conferences',
+      'Organize parliamentary debates on national & global socio-economic issues'
+    ],
+    history: 'Drishtikon delegates have consistently won Best Parliamentarian and Best Delegate awards at national Model UNs across India.',
+    achievements: [
+      'Hosted GBU Model UN with 400+ delegates from 50+ universities',
+      'Won Best Delegation at National Parliamentary Debate'
+    ],
+    policies: {
+      codeOfConduct: ['Uphold respectful discourse and parliamentary etiquette'],
+      eligibility: ['Open to all students interested in public speaking and debates'],
+      responsibilities: ['President: MUN Secretariat & Debate League Coordination'],
+      meetingFrequency: 'Weekly debate sessions every Thursday'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Om Prakash', role: 'Faculty Advisor', department: 'Humanities' },
+      president: { name: 'Kabir Das', role: 'President', department: 'SOLJG, 4th Year' }
+    },
+    events: [
+      { id: 'dr1', title: 'GBU Model United Nations', date: 'Annual Event', description: 'Simulated UN committees debating global diplomacy.' }
+    ]
+  },
+  {
+    id: 'chitrakala-art',
+    name: 'Chitrakala – Fine Arts & Painting Club',
+    tagline: 'Brushing Dreams onto Canvas',
+    category: 'Cultural',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800',
+    memberCount: 160,
+    description: 'Chitrakala is GBU’s fine arts and painting society encouraging sketching, oil & acrylic painting, rangoli, wall murals, poster design, and digital art exhibitions.',
+    objectives: [
+      'Promote visual arts and creative aesthetic expression across campus',
+      'Beautify campus spaces through eco-friendly wall art murals',
+      'Organize art exhibitions and live painting contests'
+    ],
+    history: 'Chitrakala artists are responsible for creating stunning campus murals and decorating major university fests with hand-crafted installations.',
+    achievements: [
+      'Created 10+ large-scale eco-art murals on GBU academic walls',
+      'Organized annual Art-O-Mania exhibition during Abhivyanjana'
+    ],
+    policies: {
+      codeOfConduct: ['Respect original art and encourage budding creators'],
+      eligibility: ['Open to all art and design enthusiasts'],
+      responsibilities: ['Art Lead: Gallery curation and event installations'],
+      meetingFrequency: 'Bi-weekly creative workshops'
+    },
+    team: {
+      facultyCoordinator: { name: 'Prof. Kavita Mehta', role: 'Faculty Advisor', department: 'Fine Arts' },
+      president: { name: 'Isha Saxena', role: 'Art Head', department: 'SOE, 3rd Year' }
+    },
+    events: [
+      { id: 'ck1', title: 'Art-O-Mania Live Canvas', date: 'Annual Exhibition', description: 'Live painting and art gallery showcase.' }
+    ]
+  },
+  {
+    id: 'mirage-society',
+    name: 'Mirage (Pradarsh) – Audio Visual Education Club',
+    tagline: 'Capturing Moments, Telling Stories',
+    category: 'Media',
+    logo: musiclogo,
+    banner: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800',
+    memberCount: 110,
+    description: 'The official audio-visual and media team of GBU (Pradarsh), dedicated to photography, videography, short filmmaking, and visual event coverage.',
+    objectives: [
+      'Document major university events through photography & videography',
+      'Produce creative visual content, interviews, and short films',
+      'Teach camera operation, lighting, and video editing to students'
+    ],
+    history: 'Founded to chronicle campus life through a lens, Mirage has evolved into GBU’s trusted media body for official coverage and creative narratives.',
+    achievements: [
+      'Organized "Art of Light" photo exhibition under Abhivyanjana',
+      'Covered 100+ university events with professional photo archives',
+      'Produced short documentaries on campus life'
+    ],
+    policies: {
+      codeOfConduct: ['Ensure professionalism and ethical media coverage'],
+      eligibility: ['Students interested in media, photography, and video editing'],
+      responsibilities: ['Secretary: Team coordination and video production'],
+      meetingFrequency: 'Production meetings aligned with campus events'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Ritika Joshi', role: 'Faculty Advisor', department: 'Mass Communication' },
+      president: { name: 'Siddharth Roy', role: 'General Secretary', department: 'SOE, 4th Year' }
+    },
+    events: [
+      { id: 'mr1', title: 'Art of Light Photo Exhibition', date: 'Abhivyanjana Fest', description: 'Photography exhibition showcasing lighting and camera techniques.' }
+    ]
+  },
+  {
+    id: 'literary-club-arhant',
+    name: 'Arhant – Literary Club',
+    tagline: 'Where Words Come Alive',
+    category: 'Literary',
+    logo: musiclogo,
+    banner: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=800',
+    memberCount: 135,
+    description: 'Arhant is GBU’s literary society fostering creative writing, book reviews, poetry recitations (Kavi Sammelan), open-mics, and literary magazines.',
+    objectives: [
+      'Promote love for literature, reading, and creative writing',
+      'Provide open-mic platforms for aspiring poets and writers',
+      'Publish annual campus literary anthologies and newsletters'
+    ],
+    history: 'Arhant hosts popular signature events like "Spell Nerd" and "Kavya Sangam", bringing literary enthusiasts together.',
+    achievements: [
+      'Organized Spell Nerd vocabulary contest & Kavya Sangam open-mic',
+      'Published student poetry collections'
+    ],
+    policies: {
+      codeOfConduct: ['Promote creative freedom and avoid plagiarism'],
+      eligibility: ['Open to all literature enthusiasts'],
+      responsibilities: ['Secretary: Managing editorial board & events'],
+      meetingFrequency: 'Weekly literary meetups every Wednesday'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Bipasha Som Gune', role: 'Faculty Advisor', department: 'Humanities' },
+      president: { name: 'Mohd. Shoaib Khan', role: 'General Secretary', department: 'SOE, 4th Year' }
+    },
+    events: [
+      { id: 'lh1', title: 'Kavya Sangam Open-Mic', date: 'Semester Event', description: 'Poetry recitation and spoken word performance.' }
+    ]
+  },
+  {
+    id: 'techno-cultural-club',
+    name: 'Techno-Cultural Club (TCC)',
+    tagline: 'Innovating at the Intersection of Tech & Art',
     category: 'Technical',
     logo: tcclogo,
     banner: 'https://www.gbu.ac.in/Content/img/club/techno.jpg',
-    memberCount: 156,
-    description: 'A vibrant community of tech enthusiasts dedicated to exploring cutting-edge technologies, fostering innovation, and building solutions that matter. We bridge the gap between academic learning and real-world application.',
+    memberCount: 310,
+    description: 'The Techno-Cultural Club bridges digital technology and creative expression through hackathons, open-source coding, robotics, web development, and tech fests.',
     objectives: [
-      'Foster innovation and creativity in technology',
-      'Provide hands-on experience with latest tech stacks',
-      'Create networking opportunities with industry professionals',
-      'Develop leadership and project management skills'
+      'Foster coding culture, open-source contribution, and AI/ML projects',
+      'Conduct hands-on technical workshops and university hackathons',
+      'Build digital utility applications for the campus community'
     ],
-    history: 'Founded in 2019, Tech Innovators Club has grown from a small group of coding enthusiasts to one of the most active technical communities on campus. Our journey began with weekly coding sessions and has evolved into organizing hackathons, tech talks, and industry collaborations.',
+    history: 'TCC has grown into one of GBU’s largest technical societies, conducting annual hackathons and building real-world student projects.',
     achievements: [
-      'Winner of Inter-University Hackathon 2023',
-      'Organized 15+ workshops with industry experts',
-      '3 startup ideas incubated through club initiatives',
-      'Placed 50+ members in tech internships'
+      'Organized 24-Hour Hackathon with ₹1,00,000+ prize pool',
+      'Built open-source campus web applications and student portals'
     ],
     policies: {
-      codeOfConduct: [
-        'Respect all members regardless of skill level',
-        'Contribute positively to club activities',
-        'Maintain confidentiality of sensitive project information',
-        'Follow ethical coding and development practices'
-      ],
-      eligibility: [
-        'Open to all students regardless of branch',
-        'Basic programming knowledge preferred',
-        'Enthusiasm to learn and collaborate',
-        'Commitment to attend regular meetings'
-      ],
-      responsibilities: [
-        'President: Overall club leadership and strategic planning',
-        'Vice-President: Event coordination and member engagement',
-        'Secretary: Documentation and communication management',
-        'Treasurer: Budget management and financial planning'
-      ],
-      meetingFrequency: 'Weekly meetings every Friday at 5:00 PM in Tech Lab'
+      codeOfConduct: ['Promote collaborative coding and ethical development practices'],
+      eligibility: ['Open to all branches and skill levels'],
+      responsibilities: ['Tech Lead: Managing dev sprints and workshops'],
+      meetingFrequency: 'Weekly tech huddles every Friday'
     },
     team: {
-      facultyCoordinator: {
-        id: 'fc1',
-        name: 'Dr. Priya Sharma',
-        role: 'Faculty Coordinator',
-        photo: '',
-        department: 'Computer Science & Engineering'
-      },
-      president: {
-        id: 'p1',
-        name: 'Rahul Kumar',
-        role: 'President',
-        photo: '',
-        department: 'CSE, 4th Year'
-      },
-      vicePresident: {
-        id: 'vp1',
-        name: 'Ananya Singh',
-        role: 'Vice President',
-        photo: '',
-        department: 'IT, 3rd Year'
-      },
-      secretary: {
-        id: 's1',
-        name: 'Arjun Patel',
-        role: 'Secretary',
-        photo: '',
-        department: 'CSE, 3rd Year'
-      },
-      treasurer: {
-        id: 't1',
-        name: 'Sneha Gupta',
-        role: 'Treasurer',
-        photo: '',
-        department: 'IT, 2nd Year'
-      },
-      members: [
-        {
-          id: 'm1',
-          name: 'Vikash Yadav',
-          role: 'Technical Lead',
-          photo: '',
-          department: 'CSE, 4th Year'
-        },
-        {
-          id: 'm2',
-          name: 'Priyanka Joshi',
-          role: 'Event Coordinator',
-          photo: '',
-          department: 'IT, 3rd Year'
-        }
-      ]
+      facultyCoordinator: { name: 'Dr. Nagendra Singh', role: 'Faculty Advisor', department: 'USICT' },
+      president: { name: 'Utkarsh Srivastava', role: 'President', department: 'USICT, 4th Year' }
     },
     events: [
-      {
-        id: 'e1',
-        title: 'AI/ML Workshop Series',
-        date: '2024-01-15',
-        description: 'Comprehensive workshop covering machine learning fundamentals and practical applications',
-        image: '',
-        type: 'workshop',
-        registrationLink: '#'
-      },
-      {
-        id: 'e2',
-        title: 'CodeFest 2024',
-        date: '2024-02-20',
-        description: 'Annual coding competition with prizes worth ₹50,000',
-        image: '',
-        type: 'competition',
-        registrationLink: '#'
-      }
-    ],
-    socialMedia: {
-      instagram: 'https://instagram.com/techinnovators_gbu',
-      linkedin: 'https://linkedin.com/company/techinnovators-gbu',
-      youtube: 'https://youtube.com/techinnovatorsgbu'
-    },
-    reports: [
-      {
-        id: 'r1',
-        title: 'Annual Report 2023-24',
-        year: '2023-24',
-        downloadUrl: '#',
-        summary: 'Comprehensive overview of club activities, achievements, and financial summary for the academic year 2023-24'
-      },
-      {
-        id: 'r2',
-        title: 'Annual Report 2022-23',
-        year: '2022-23',
-        downloadUrl: '#',
-        summary: 'Complete documentation of club initiatives and member achievements for 2022-23'
-      }
-    ],
-    joinFormUrl: 'https://forms.google.com/techinnovators'
+      { id: 'tcc1', title: 'HackGBU 24-Hour Hackathon', date: 'Annual Event', description: '24-hour hackathon for building smart campus software & hardware.' }
+    ]
   },
   {
-    id: 'cultural-society',
-    name: 'Cultural Society',
-    tagline: 'Celebrating Art, Music, and Heritage',
-    category: 'Cultural',
-    logo: musiclogo,
-    banner: 'https://www.gbu.ac.in/Content/img/indexpageimg.jpg',
-    memberCount: 203,
-    description: 'A vibrant platform for artistic expression, cultural preservation, and creative collaboration. We celebrate diversity through music, dance, drama, literature, and visual arts.',
+    id: 'nature-club-gbu',
+    name: "Trisha – Nature's Club",
+    tagline: 'Living in Harmony with Nature',
+    category: 'Environmental',
+    logo: tcclogo,
+    banner: 'https://www.gbu.ac.in/Content/img/club/nature.jpg',
+    memberCount: 150,
+    description: 'Trisha is the environmental conservation club of Gautam Buddha University devoted to green initiatives, campus biodiversity drives, tree plantations, and eco-sustainability.',
     objectives: [
-      'Promote cultural awareness and appreciation',
-      'Provide platform for artistic expression',
-      'Organize cultural events and festivals',
-      'Preserve and showcase traditional arts'
+      'Promote campus tree plantation and botanical conservation',
+      'Organize plastic reduction drives and waste recycling awareness',
+      'Conduct nature photography and eco-crafting workshops'
     ],
-    history: 'Established in 2018, Cultural Society has been the heartbeat of artistic activities on campus. From humble poetry readings to grand cultural festivals, we have created countless memories and nurtured artistic talents.',
+    history: 'Trisha operates under the School of Environmental Sciences, driving GBU’s green campus sustainability initiatives.',
     achievements: [
-      'Organized the largest cultural fest in university history',
-      'Won Best Cultural Club award for 3 consecutive years',
-      'Collaborated with renowned artists and performers',
-      'Raised ₹2,00,000 for charity through cultural programs'
+      'Planted 1,000+ native saplings across university campus',
+      'Organized Nature Photography & Eco-Crafting Contests'
     ],
     policies: {
-      codeOfConduct: [
-        'Respect all forms of artistic expression',
-        'Maintain punctuality for rehearsals and events',
-        'Support fellow artists and performers',
-        'Uphold the cultural values of the institution'
-      ],
-      eligibility: [
-        'Open to students from all academic programs',
-        'Passion for arts and culture required',
-        'No prior experience necessary',
-        'Willingness to participate in events'
-      ],
-      responsibilities: [
-        'President: Overall leadership and event planning',
-        'Vice-President: Artist coordination and performance management',
-        'Secretary: Documentation and member communication',
-        'Treasurer: Budget allocation and expense management'
-      ],
-      meetingFrequency: 'Bi-weekly meetings every alternate Tuesday at 4:00 PM in Arts Hall'
+      codeOfConduct: ['Commitment to environmental preservation and eco-responsibility'],
+      eligibility: ['Open to all eco-conscious GBU students'],
+      responsibilities: ['General Secretary: Eco-drive planning'],
+      meetingFrequency: 'Bi-weekly green drives'
     },
     team: {
-      facultyCoordinator: {
-        id: 'fc2',
-        name: 'Prof. Kavita Mehta',
-        role: 'Faculty Coordinator',
-        photo: '',
-        department: 'Fine Arts & Literature'
-      },
-      president: {
-        id: 'p2',
-        name: 'Aditya Raj',
-        role: 'President',
-        photo: '',
-        department: 'English, 4th Year'
-      },
-      vicePresident: {
-        id: 'vp2',
-        name: 'Meera Kapoor',
-        role: 'Vice President',
-        photo: '',
-        department: 'Music, 3rd Year'
-      },
-      secretary: {
-        id: 's2',
-        name: 'Rohan Verma',
-        role: 'Secretary',
-        photo: '',
-        department: 'Drama, 2nd Year'
-      },
-      treasurer: {
-        id: 't2',
-        name: 'Ishita Sharma',
-        role: 'Treasurer',
-        photo: '',
-        department: 'Fine Arts, 3rd Year'
-      },
-      members: [
-        {
-          id: 'm3',
-          name: 'Karan Singh',
-          role: 'Music Director',
-          photo: '',
-          department: 'Music, 4th Year'
-        },
-        {
-          id: 'm4',
-          name: 'Nisha Patel',
-          role: 'Dance Coordinator',
-          photo: '',
-          department: 'Dance, 2nd Year'
-        }
-      ]
+      facultyCoordinator: { name: 'Dr. Nirmita Mehrotra', role: 'Faculty Advisor', department: 'Environmental Sciences' },
+      president: { name: 'Arnav Sharma', role: 'General Secretary', department: 'SOES, 4th Year' }
     },
     events: [
-      {
-        id: 'e3',
-        title: 'Spring Cultural Festival',
-        date: '2024-03-15',
-        description: 'Annual cultural extravaganza featuring music, dance, drama, and art exhibitions',
-        image: 'https://www.gbu.ac.in/Content/clubs/img/music/music1.jpg',
-        type: 'cultural',
-        registrationLink: '#'
-      },
-      {
-        id: 'e4',
-        title: 'Poetry Evening',
-        date: '2024-01-30',
-        description: 'An intimate evening of poetry recitation and spoken word performances',
-        image: 'https://www.gbu.ac.in/Content/clubs/img/music/IMG_0591.jpg',
-        type: 'cultural'
-      }
-    ],
-    socialMedia: {
-      instagram: 'https://instagram.com/cultural_society_gbu',
-      youtube: 'https://youtube.com/culturalsocietygbu'
-    },
-    reports: [
-      {
-        id: 'r3',
-        title: 'Cultural Activities Report 2023-24',
-        year: '2023-24',
-        downloadUrl: '#',
-        summary: 'Detailed account of all cultural programs, artist collaborations, and community engagement activities'
-      }
-    ],
-    joinFormUrl: 'https://forms.google.com/culturalsociety'
+      { id: 'nc1', title: 'Campus Plantation Drive', date: 'Monsoon Drive', description: 'Mass tree plantation drive across GBU campus.' }
+    ]
   },
-
   {
-  id: 'nature-club-gbu',
-  name: "Nature's Club – Trisha",
-  tagline: 'Living in Harmony with Nature',
-  category: 'Environmental',
-  logo: '/assets/NatureClub.jpg',
-  banner: 'https://www.gbu.ac.in/Content/img/club/nature.jpg',
-  memberCount: 35,
-  description: 'Trisha – Nature Club of Gautam Buddha University is a vibrant community devoted to environmental conservation, sustainability, biodiversity awareness, and green initiatives...',
-  objectives: [ /* as before */ ],
-  history: 'Founded in 2021 under the School of Environmental Sciences...',
-  achievements: [ /* as before */ ],
-  policies: { /* same as prior structure */ },
-  team: {
-    facultyCoordinator: {
-      id: 'fc1',
-      name: 'Dr. Nirmita Mehrotra',
-      role: 'Faculty Coordinator',
-      photo: '',
-      department: 'School of Environmental Sciences',
-      phone: '9818617933',
-      email: 'nirmitam@gbu.ac.in'
-    },
-    president: {
-      id: 'sc-arnav',
-      name: 'Arnav Sharma',
-      role: 'General Secretary',
-      photo: '',
-      phone: '73008800389',
-      email: 'akshay.nain555@gmail.com'
-    },
-    vicePresident: null,
-    secretary: {
-      id: 'sc-rajan',
-      name: 'Rajan Chauhan',
-      role: 'Secretary',
-      photo: '',
-      phone: '9149345917',
-      email: 'rajanchauhan3549@gmail.com'
-    },
-    treasurer: null,
-    members: [
-      {
-        id: 'sc2',
-        name: 'Pooja Bidhuri',
-        role: 'Event Coordinator',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9643105100',
-      },
-      {
-        id: 'sc3',
-        name: 'Vineeta Bhardwaj',
-        role: 'Social Media Coordinator',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9811003865',
-      },
-      {
-        id: 'sc4',
-        name: 'Aarushi Giri',
-        role: 'Environmental Outreach Coordinator',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9315094419',
-      },
-      {
-        id: 'sc5',
-        name: 'Bhargvi Kumari',
-        role: 'Membership Coordinator',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '8057537898',
-      },
-      {
-        id: 'v1',
-        name: 'Niketan Keshari',
-        role: 'Volunteer',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9012644865',
-      },
-      {
-        id: 'v2',
-        name: 'Anshika',
-        role: 'Volunteer',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9319433263',
-      },
-      {
-        id: 'v3',
-        name: 'Deeptanshu',
-        role: 'Volunteer',
-        photo: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-        phone: '9899862114',
-      },
-    ],
-  },
-  events: [
-    {
-      id: 'e1',
-      title: 'Photography Contest',
-      date: '2024-09-05',
-      description:
-        'Macro, Plant, and Animal Photography competition to showcase biodiversity and beauty of nature...',
-      image: 'https://www.gbu.ac.in/Content/img/events/nature_photo.jpg',
-      type: 'contest',
-      registrationLink: 'https://forms.gle/naturephotogbu',
-    },
-    {
-      id: 'e2',
-      title: 'Creative Crafting with Nature',
-      date: '2024-09-18',
-      description:
-        'Eco-crafting workshop using natural materials to create sustainable art...',
-      image: 'https://www.gbu.ac.in/Content/img/events/crafting_green.jpg',
-      type: 'workshop',
-      registrationLink: 'https://forms.gle/craftinggreen',
-    },
-    {
-      id: 'e3',
-      title: 'Visit to Yamuna Biotech Park',
-      date: '2024-10-10',
-      description:
-        'An academic visit to explore biotechnology’s role in environmental sustainability...',
-      image: 'https://www.gbu.ac.in/Content/img/events/biotech_visit.jpg',
-      type: 'field visit',
-      registrationLink: 'https://forms.gle/biotechvisitgbu',
-    },
-    {
-      id: 'e4',
-      title: 'Poster Competition',
-      date: '2024-11-01',
-      description:
-        'Poster-making competition based on themes like climate change, biodiversity, and nature conservation...',
-      image: 'https://www.gbu.ac.in/Content/img/events/poster_enviro.jpg',
-      type: 'competition',
-      registrationLink: 'https://forms.gle/postergbu',
-    },
-    {
-      id: 'e5',
-      title: 'Nature-Based Quiz Contest',
-      date: '2024-04-10',
-      description:
-        'Quiz contest covering topics on sustainability, environment, flora-fauna...',
-      image: 'https://www.gbu.ac.in/Content/img/events/quiz_green.jpg',
-      type: 'quiz',
-      registrationLink: 'https://forms.gle/naturequizgbu',
-    },
-  ],
-  socialMedia:  {
-    instagram: 'https://instagram.com/natureclubgbu',
-    linkedin: 'https://linkedin.com/company/natureclub-gbu',
-    youtube: 'https://youtube.com/@natureclubgbu',
-  },
-  reports:  [
-    {
-      id: 'r1',
-      title: 'Annual Report 2023-24',
-      year: '2023-24',
-      downloadUrl: 'https://www.gbu.ac.in/Content/pdf/reports/natureclub2023.pdf',
-      summary:
-        'Detailed report of the environmental activities, collaborations, and impact during 2023–24.',
-    },
-  ],
-  joinFormUrl: 'https://forms.gle/joinnatureclubgbu'
-},
- {
-  id: 'mirage-society',
-  name: 'The Mirage Society',
-  tagline: 'Capturing Moments, Telling Stories',
-  category: 'Audio Visual / Media',
-  logo: '/assets/Mirage.jpg',
-  banner: '/assets/Mirage.jpg',
-  memberCount: 5, // Estimated team size
-  description:
-    'The official audio visual/media team of GBU (also known as Pradarsh), dedicated to photography, videography, and visual event coverage.',
-  objectives: [
-    'Document major university events through photography & videography',
-    'Produce creative visual content (interviews, short films)',
-    'Teach camera and editing skills to students',
-    'Create promotional content for the university'
-  ],
-  history:
-    'Founded to chronicle campus life through a lens, Mirage (Pradarsh) has evolved into GBU’s trusted media body for official coverage and creative narratives.',
-  achievements: [
-    'Organized “Art of Light” photo exhibition under Abhivyanjana',
-    'Covered 100+ university events',
-    'Produced multiple short films and interviews',
-    'Conducted photography/media workshops for students'
-  ],
-  policies: {
-    codeOfConduct: [
-      'Respect privacy and obtain permission before capturing media',
-      'Ensure professionalism during coverage',
-      'Maintain integrity in storytelling',
-      'Collaborate respectfully within the team'
-    ],
-    eligibility: [
-      'Students interested in media, photography, production',
-      'Basic camera/editing knowledge preferred',
-      'Willingness to attend shoots and workshops',
-      'Commitment to ethical visual documentation'
-    ],
-    responsibilities: [
-      'Secretary: Team coordination and documentation',
-      'General Secretary: Manages production strategy'
-    ],
-    meetingFrequency:
-      'Meetings scheduled around event shoots and production deadlines'
-  },
-  team: {
-    facultyCoordinator: {
-      id: 'fc1',
-      name: 'Dr. Ritika Joshi',
-      role: 'Faculty Coordinator',
-      department: 'Mass Communication and Media Studies',
-      specialization: 'Photography & Production',
-      photo: '',
-      phone: '',
-      email: ''
-    },
-    president: null,
-    vicePresident: null,
-    secretary: {
-      id: 's1',
-      name: 'Sheryl',
-      role: 'Secretary',
-      photo: '',
-      department: '',
-      phone: '9528846685',
-      email: ''
-    },
-    treasurer: null,
-    members: [
-      {
-        id: 'm1',
-        name: 'Siddharth',
-        role: 'General Secretary',
-        photo: '',
-        department: '',
-        phone: '6202969798',
-        email: ''
-      }
-    ]
-  },
-  events: [
-    {
-      id: 'e1',
-      title: 'Art of Light Photo Exhibition',
-      date: '2024-11-22', // Approximate date during Abhivyanjana
-      description:
-        'Photo exhibition showcasing lighting techniques, held under Abhivyanjana “Pradarsh” theme',
-      image: '',
-      type: 'exhibition',
-      registrationLink: ''
-    },
-    {
-      id: 'e2',
-      title: 'Photography Workshop',
-      date: 'TBD',
-      description:
-        'Hands on sessions on DSLR photography, lighting, and editing for beginners',
-      image: '',
-      type: 'workshop',
-      registrationLink: ''
-    },
-    {
-      id: 'e3',
-      title: 'Campus Stories Short Film Series',
-      date: 'TBD',
-      description:
-        'Short documentary series highlighting compelling narratives from GBU campus',
-      image: '',
-      type: 'production',
-      registrationLink: ''
-    }
-  ],
-  socialMedia: {
-    instagram: '', // GBU's Frames GBU reels feature their work
-    linkedin: '',
-    youtube: ''
-  },
-  reports: [],
-  joinFormUrl: ''
-},
-
- {
-  id: 'literary-club-arhant',
-  name: 'Literary Club (Arhant)',
-  tagline: 'Where Words Come Alive',
-  category: 'Literary',
-  logo: '/assets/literaryclub.jpeg',
-  banner: '/assets/literaryclub.jpeg',
-  memberCount: 5,
-  description: 'A vibrant community for book lovers and aspiring writers, the Literary Club “Arhant” fosters a space for creative expression through writing, open-mics, and literary discussions.',
-  objectives: [
-    'Promote love for reading and writing',
-    'Provide a platform for aspiring writers and performers',
-    'Encourage experimentation and creativity',
-    'Collaborate with authors, publishers, and literary groups',
-    'Organize literary competitions to engage talent'
-  ],
-  history: 'Established to nurture literary talent on campus, Arhant hosts poetry readings, workshops, and competitions, serving as a core cultural body within GBU.',
-  achievements: [
-    'Organized annual events like Spell Nerd and Kavya Sangam',
-    'Hosted guest sessions with literary figures',
-    'Facilitated inter-university literary exchanges',
-    'Promoted budding writers through publishing support'
-  ],
-  policies: {
-    codeOfConduct: [
-      'Respect diverse literary expression',
-      'Maintain decorum during sessions',
-      'Provide positive feedback to peers',
-      'Promote originality and avoid plagiarism'
-    ],
-    eligibility: [
-      'Open to all students with literary interest',
-      'Respect for creative freedom',
-      'Willing to participate in events',
-      'Commitment to ethical conduct'
-    ],
-    responsibilities: [
-      'General Secretary: Leads planning and collaborations',
-      'Secretary: Manages communications and documentation'
-    ],
-    meetingFrequency: 'Weekly meetings every Wednesday at 4:00 PM in the Literary Hall'
-  },
-  team: {
-    facultyCoordinator: [
-      {
-        id: 'fc1',
-        name: 'Dr. Om Prakash',
-        role: 'Faculty Coordinator',
-        photo: '',
-        phone: '+918800259977',
-        department: ''
-      },
-      
-    {
-        id: 'fc2',
-        name: 'Ms. Priyanka Singh',
-        role: 'Faculty Coordinator',
-        photo: '',
-        phone: '+919650845746',
-        department: ''
-      },
-    {
-        id: 'fc3',
-        name: 'Dr. Bipasha Som Gune',
-        role: 'Faculty Coordinator',
-        photo: '',
-        phone: '+919560965071',
-        department: ''
-      },
-    ],
-    secretary: {
-      id: 's1',
-      name: 'Moh. Shoaib Khan',
-      role: 'General Secretary',
-      photo: '',
-      phone: '+919140279180',
-      email: 'zain.khan830@gmail.com',
-      department: ''
-    },
-    treasurer: null,
-    members: [
-      {
-        id: 'm1',
-        name: 'Utkarsh Singh',
-        role: 'Secretary',
-        photo: '',
-        phone: '+919305089149',
-        department: ''
-      },
-      {
-        id: 'm2',
-        name: 'Sneha Tiwari',
-        role: 'General Secretary',
-        photo: '',
-        phone: '+919711753879',
-        department: ''
-      },
-      {
-        id: 'm3',
-        name: 'Ayush Jaiswal',
-        role: 'General Secretary',
-        photo: '',
-        phone: '+918630332017',
-        department: ''
-      }
-    ]
-  },
-  events: [
-    {
-      id: 'e1',
-      title: 'Spell Nerd',
-      date: '2024-04-27',
-      description: 'Campus spelling competition testing vocabulary and linguistic skills.',
-      image: '',
-      type: 'competition',
-      registrationLink: ''
-    },
-    {
-      id: 'e2',
-      title: 'Kavya Sangam',
-      date: 'TBD',
-      description: 'An open-mic & poetry reading event blending classical and contemporary styles.',
-      image: '',
-      type: 'open mic',
-      registrationLink: ''
-    },
-    {
-      id: 'e3',
-      title: 'Sarfarosh',
-      date: 'TBD',
-      description: 'Performance event featuring poetry, storytelling, and monologues.',
-      image: '',
-      type: 'performance',
-      registrationLink: ''
-    }
-  ],
-  socialMedia: {
-    instagram: 'https://www.instagram.com/didacticclub/' ,
-    linkedin: '',
-    youtube: ''
-  },
-  reports: [],
-  joinFormUrl: ''
-},
-
-{
     id: 'yoga-meditation-club',
     name: 'Yoga & Meditation Club',
     tagline: 'Find Balance, Breathe Peace',
     category: 'Wellness',
-    logo: '/assets/yoga.png',
-    banner: '/assets/yoga.png',
-    memberCount: 10,
-    description: 'The Yoga and Meditation Club at GBU is a peaceful sanctuary for students to practice mindfulness, balance, and holistic well-being through yoga, pranayama, and meditation',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800',
+    memberCount: 175,
+    description: 'The Yoga and Meditation Club provides a tranquil sanctuary for students to practice pranayama, mindfulness, stress relief, and holistic well-being.',
     objectives: [
-      'Promote physical and mental well-being',
-    'Encourage mindfulness and emotional resilience',
-    'Provide a calm, inclusive space for holistic practices',
-    'Foster self-awareness and personal growth'
-
+      'Promote physical fitness, mental health, and emotional resilience',
+      'Conduct daily guided yoga sessions and meditation circles',
+      'Host International Yoga Day celebrations on campus'
     ],
-    history: 'Established to support students’ holistic development, the club has been offering structured yoga and meditation sessions regularly.',
+    history: 'Dedicated to holistic health, the club conducts regular sessions at the university Meditation Center.',
     achievements: [
-      'Hosted weekly guided yoga and meditation sessions',
-    'Invited certified yoga instructors and wellness coaches',
-    'Organized stress relief camps and exam support workshops',
-    'Built a consistent student community for holistic health'
-
+      'Organized campus-wide International Yoga Day sessions',
+      'Conducted pre-examination stress management workshops'
     ],
     policies: {
-      codeOfConduct: [
-              'Respect participants and instructors',
-      'Maintain silence and focus during sessions',
-      'Follow safety guidelines during asanas',
-      'Promote inclusivity and wellness'
-
-      ],
-      eligibility: [
-        'Open to all GBU students',
-      'Interest in mindfulness or yoga',
-      'Commitment to regular attendance',
-      'Respect for discipline and peaceful atmosphere'
-
-      ],
-      responsibilities: [
-        'President: Overall club leadership and strategic planning',
-        'Vice-President: Event coordination and member engagement',
-        'Secretary: Documentation and communication management',
-        'Treasurer: Budget management and financial planning'
-      ],
-      meetingFrequency: 'Weekly sessions every Monday & Thursday at 6:30 AM in Meditation Hall'
+      codeOfConduct: ['Maintain silence, discipline, and respect during meditation sessions'],
+      eligibility: ['Open to all GBU students and faculty'],
+      responsibilities: ['Yoga Instructor Lead: Session guidance'],
+      meetingFrequency: 'Daily morning sessions at Meditation Hall'
     },
     team: {
-      facultyCoordinator: {
-        id: 'fc1',
-        name: 'Dr. Nagendra Singh',
-        role: 'Faculty Coordinator',
-        photo: '',
-        department: 'Computer Science & Engineering'
-      },
-    
-      facultyCoordinator: {
-        id: 'fc2',
-        name: 'Dr. Jitendra Rathore',
-        role: 'Faculty Coordinator',
-        photo: '',
-        department: ''
-      },
-      facultyCoordinator: {
-        id: 'fc3',
-        name: 'Dr. Manish T. Meshram',
-        role: 'Faculty Coordinator',
-        photo: '',
-        department: ''
-      },
-      // president: {
-      //   id: '',
-      //   name: '',
-      //   role: '',
-      //   photo: '',
-      //   department: ''
-      // },
-      // vicePresident: {
-      //   id: '',
-      //   name: '',
-      //   role: '',
-      //   photo: '',
-      //   department: ''
-      // },
-      secretary: {
-        id: 's1',
-        name: 'Anupam Tiwari',
-        role: 'Secretary',
-        photo: '',
-        department: ''
-      },
-      // treasurer: {
-      //   id: '',
-      //   name: '',
-      //   role: '',
-      //   photo: '',
-      //   department: ''
-      // },
-      members: [
-        {
-          id: 'm1',
-          name: 'Abhishek Kumar',
-          role: 'General Secretary',
-          photo: '',
-          department: ''
-        },
-        {
-          id: 'm2',
-          name: 'Ekta Chauhan',
-          role: 'Joint Secretary',
-          photo: '',
-          department: ''
-        }
-      ]
+      facultyCoordinator: { name: 'Dr. Jitendra Rathore', role: 'Faculty Advisor', department: 'Buddhist Studies' },
+      president: { name: 'Anupam Tiwari', role: 'Secretary', department: 'SOVS, 3rd Year' }
     },
     events: [
-      {
-        id: 'e1',
-        title: '10 Day Basic Hybrid Course on Yoga & Mindfulness',
-        date: '2025 02 17 to 2025 02 26',
-        description: 'A 10-day hybrid (online + in-person) course covering yoga asanas, pranayama, mindfulness meditation and daily practice integration',
-        image: '/assests/yoga.png',
-        type: 'online & in-person course',
-        registrationLink: '#'
-      },
-      
-    ],
-    socialMedia: {
-      instagram: '',
-      linkedin: '',
-      youtube: ''
-    },
-    reports: [
-      {
-        id: 'r1',
-        title: 'Annual Report 2023-24',
-        year: '2023-24',
-        downloadUrl: '#',
-        summary: 'Comprehensive overview of club activities, achievements, and financial summary for the academic year 2023-24'
-      },
-      {
-        id: 'r2',
-        title: 'Annual Report 2022-23',
-        year: '2022-23',
-        downloadUrl: '#',
-        summary: 'Complete documentation of club initiatives and member achievements for 2022-23'
-      }
-    ],
-    joinFormUrl: ''
-  },
-
-  {
-  id: 'drishtikon-debate-society',
-  name: 'Drishtikon Debate Society',
-  tagline: 'Where Every Viewpoint Matters',
-  category: 'Debate',
-  logo: '/assets/debate.jpg',
-  banner: '/assets/debate.jpg',
-  memberCount: 7,
-  description: 'Drishtikon Debate Society is the beating heart of intellectual discourse at Gautam Buddha University. It is a dynamic space where students sharpen critical thinking, hone public speaking, and engage in thought-provoking discussions across diverse topics. Rooted in the belief that diverse perspectives lead to better solutions, the club nurtures an inclusive culture of healthy debate, active listening, and respectful dialogue. From regular debates to high-profile panels, Drishtikon offers opportunities for all—from beginners to seasoned debaters—to grow, lead, and be heard.',
-  objectives: [
-    'Foster critical thinking and respectful argumentation',
-    'Enhance public speaking and communication skills',
-    'Promote understanding through diverse perspectives',
-    'Encourage active listening and leadership among members',
-    'Create a platform for structured intellectual engagement'
-  ],
-  history: 'Founded to promote meaningful debates at GBU, Drishtikon has grown into a respected society known for engaging panels, thought-provoking competitions, and inclusive discussion forums.',
-  achievements: [
-    'Conducted 5+ major debate events in AY 2023–24',
-    'Hosted inter-university panel discussions and summits',
-    'Provided a launchpad for student leaders and thinkers',
-    'Fostered a diverse and inclusive debating community'
-  ],
-  policies: {
-    codeOfConduct: [
-      'Respect all opinions and viewpoints',
-      'Avoid personal attacks; argue the idea, not the person',
-      'Maintain decorum during sessions and events',
-      'Promote inclusivity, fairness, and intellectual honesty'
-    ],
-    eligibility: [
-      'Open to all GBU students',
-      'No prior debate experience required',
-      'Willingness to learn, listen, and engage constructively',
-      'Active participation in meetings and competitions'
-    ],
-    responsibilities: [
-      'General Secretary: Oversees club operations and event planning',
-      'Ex-General Secretary: Provides mentorship and legacy guidance'
-    ],
-    meetingFrequency: 'Bi-weekly debate sessions on Fridays at 4:00 PM in Discussion Hall B'
-  },
-    team: {
-      facultyCoordinator: [
-        {
-          id: 'fc1',
-          name: 'Dr. Manjri Suman',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: ''
-        },
-        {
-          id: 'fc2',
-          name: 'Dr. Tanvi Vats',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: '—'
-        },
-        {
-          id: 'fc3',
-          name: 'Dr. Vibhavari',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: ''
-        }
-      ],
-      president: null,
-      vicePresident: null,
-      secretary: {
-        id: 's1',
-        name: 'Tiyziys',
-        role: 'General Secretary',
-        photo: '',
-        
-        department: ''
-      },
-      treasurer: null,
-      members: [
-        {
-          id: 'm1',
-          name: 'Sakshi Jha',
-          role: 'General Secretary',
-          photo: '',
-          
-          department: ''
-        },
-        {
-          id: 'm2',
-          name: 'Karan Pandey',
-          role: 'Ex-General Secretary',
-          photo: '',
-          
-          department: ''
-        },
-        {
-          id: 'm3',
-          name: 'Shrishti Singh Rawal',
-          role: 'Ex-General Secretary',
-          photo: '',
-          
-          department: ''
-        }
-      ]
-    },
-    events: [
-      {
-        id: 'e1',
-        title: 'Speech Competition – 75 YEARS OF BHARAT',
-        date: '2023-08-11',
-        description: 'Speech competition on the occasion of the 75th Independence Day, reflecting on India\'s journey.',
-        image: '',
-        type: 'competition',
-        registrationLink: '#'
-      },
-      {
-        id: 'e2',
-        title: 'February Rendezvous',
-        date: '2024-02-09',
-        description: 'Debate: "Educational Evolution: Are Indian systems adapting?" & Panel: "Working 70 Hours: A Need or a Capitalist’s Dream?"',
-        image: '',
-        type: 'debate + panel',
-        registrationLink: '#'
-      },
-      {
-        id: 'e3',
-        title: 'Beyond The Binary – Glitch Summit',
-        date: '2024-04-13',
-        description: 'A panel discussion on inclusivity and representation at the Glitch Fest.',
-        image: '',
-        type: 'panel discussion',
-        registrationLink: '#'
-      },
-      {
-        id: 'e4',
-        title: 'Vaad-Vivaad: Women Reservation and Real Equality',
-        date: '2024-10-12',
-        description: 'A spirited debate on whether reservation for women leads to real equality in India.',
-        image: '',
-        type: 'debate',
-        registrationLink: '#'
-      },
-      {
-        id: 'e5',
-        title: 'Debate: Veganism as Capitalist Propaganda?',
-        date: '2024-11-22',
-        description: 'Debating whether veganism is morally driven or a capitalist marketing trend.',
-        image: '',
-        type: 'debate',
-        registrationLink: '#'
-      }
-    ],
-    socialMedia: {
-      instagram: '',
-      linkedin: '',
-      youtube: ''
-    },
-    reports: [
-      {
-      id: 'r1',
-      title: 'Annual Report 2023-24',
-      year: '2023-24',
-      downloadUrl: 'https://www.gbu.ac.in/Content/pdf/reports/natureclub2023.pdf',
-      summary:
-        'Detailed report of the environmental activities, collaborations, and impact during 2023–24.',
-    },
-  ],
-    joinFormUrl: ''
+      { id: 'ym1', title: 'International Yoga Day Celebration', date: 'June 21', description: 'Mass yoga session at Meditation Complex.' }
+    ]
   },
   {
-    id: 'nrityangana-dance-club',
-    name: 'Nrityangana Dance Club',
-    tagline: 'Dance – The Hidden Language of the Soul',
-    category: 'Cultural',
-    logo: '/assets/dance.jpeg', // Replace with actual logo path or import
-    banner: '/assets/dance.jpeg', // Replace with actual banner if available
-    memberCount: 2, // Update as needed
-    description: '“Dance is the hidden language of the soul.” These beautiful words by Martha Graham capture the spirit of Nrityangana, the official Dance Club of Gautam Buddha University. Dancing is more than movement — it is an expression of joy, freedom, and connection. Nrityangana provides a stage to explore known and hidden talents. It is a space where confidence blossoms, memories are made, and every student, regardless of background or experience, can express themselves. Through classes, performances, and inclusive opportunities, we aim to spread happiness and inspire the soul.',
+    id: 'adventure-sports-club',
+    name: 'Adventure & Outdoor Club',
+    tagline: 'Thrill, Fitness & Outdoor Exploration',
+    category: 'Sports',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800',
+    memberCount: 130,
+    description: 'The Adventure Club organizes outdoor trekking, camping trips, wall climbing, obstacle runs, and fitness expeditions for GBU students.',
     objectives: [
-      'Promote dance as a means of expression and well-being',
-      'Provide a platform for students to showcase dance talent',
-      'Encourage both experienced and novice dancers to participate',
-      'Foster creativity, confidence, and community through dance',
-      'Support physical and mental fitness via regular practice'
+      'Promote outdoor fitness, endurance, and team leadership',
+      'Organize Himalayan treks, cycling expeditions, and camping trips'
     ],
-    history: 'Nrityangana was founded to nurture the love of dance within the university community. Since its beginning, the club has organized performances, trained new dancers, and brought cultural vibrancy to university events.',
+    history: 'Operates in collaboration with the Eklavya Sports Complex, organizing annual trekking expeditions.',
     achievements: [
-      'Performed in annual cultural fests and national days',
-      'Conducted open workshops for beginners and enthusiasts',
-      'Won inter-university dance contests',
-      'Represented GBU in cultural festivals across campuses'
+      'Organized 5+ Himalayan high-altitude student treks',
+      'Hosted annual campus obstacle adventure race'
     ],
     policies: {
-      codeOfConduct: [
-        'Respect all dance forms and performers',
-        'Maintain discipline during rehearsals and events',
-        'Uphold team spirit and cooperation',
-        'Encourage creativity, inclusivity, and safety in practice'
-      ],
-      eligibility: [
-        'Open to all students of GBU',
-        'No prior dance experience required',
-        'Commitment to practice sessions and performances',
-        'Respect for the club’s values and team culture'
-      ],
-      responsibilities: [
-        'General Secretary: Leads planning and choreography coordination',
-        'Secretary: Manages communication and event execution'
-      ],
-      meetingFrequency: 'Practice sessions twice a week; performance rehearsals as scheduled'
+      codeOfConduct: ['Strict adherence to safety guidelines during outdoor trips'],
+      eligibility: ['Open to all physically fit students'],
+      responsibilities: ['Trip Lead: Safety checks and itinerary planning'],
+      meetingFrequency: 'Monthly outdoor expeditions'
     },
     team: {
-      facultyCoordinator: [
-        {
-          id: 'fc1',
-          name: 'Dr. Vandna Singh',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: ''
-        },
-        {
-          id: 'fc2',
-          name: 'Dr. Deepali Singh',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: ''
-        },
-        {
-          id: 'fc3',
-          name: 'Dr. Deepti Goyal',
-          role: 'Faculty Coordinator',
-          photo: '',
-          
-          department: ''
-        }
-      ],
-      president: null,
-      vicePresident: null,
-      secretary: {
-        id: 's1',
-        name: 'Prashant Singh',
-        role: 'Secretary',
-        photo: '',
-       
-        department: ''
-      },
-      treasurer: null,
-      members: [
-        {
-          id: 'm1',
-          name: 'Shivangi Malik',
-          role: 'General Secretary',
-          photo: '',
-          
-          department: ''
-        }
-      ]
+      facultyCoordinator: { name: 'Dr. Rajneesh Kumar', role: 'Faculty Advisor', department: 'Sports Officer' },
+      president: { name: 'Vikas Singh', role: 'Club Head', department: 'SOE, 4th Year' }
     },
-    events: [],
-    socialMedia: {
-      instagram: '',
-      linkedin: '',
-      youtube: ''
+    events: [
+      { id: 'ac1', title: 'Campus Obstacle Race', date: 'Shauryotsav', description: 'Adventure obstacle course run at Eklavya Complex.' }
+    ]
+  },
+  {
+    id: 'social-service-club',
+    name: 'Social Service & Community Club',
+    tagline: 'Serving Humanity with Empathy',
+    category: 'Social',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800',
+    memberCount: 200,
+    description: 'Dedicated to community outreach, blood donation drives, underprivileged child education, and relief material distribution in local villages.',
+    objectives: [
+      'Conduct free literacy evening classes for worker children',
+      'Organize semester blood donation camps with Rotary & Red Cross'
+    ],
+    history: 'Active in adopting surrounding villages for hygiene, digital literacy, and women empowerment workshops.',
+    achievements: [
+      'Collected 500+ units of blood in annual donation drives',
+      'Teaching 100+ children daily through campus remedial classes'
+    ],
+    policies: {
+      codeOfConduct: ['Empathy, humility, and selfless service'],
+      eligibility: ['Open to all compassionate GBU volunteers'],
+      responsibilities: ['Volunteering Coordinator: Field activity management'],
+      meetingFrequency: 'Weekly evening classes & monthly outreach'
     },
-    reports: [
-      {
-      id: 'r1',
-      title: 'Annual Report 2023-24',
-      year: '2023-24',
-      downloadUrl: 'https://www.gbu.ac.in/Content/pdf/reports/natureclub2023.pdf',
-      summary:
-        'Detailed report of the environmental activities, collaborations, and impact during 2023–24.',
+    team: {
+      facultyCoordinator: { name: 'Dr. Priyadarshini', role: 'Faculty Advisor', department: 'Social Work' },
+      president: { name: 'Neha Rani', role: 'President', department: 'HSS, 3rd Year' }
     },
-  ],
-    joinFormUrl: ''
+    events: [
+      { id: 'ss1', title: 'Mega Blood Donation Camp', date: 'Annual Drive', description: 'Blood donation camp in collaboration with Red Cross.' }
+    ]
+  },
+  {
+    id: 'vox-pop-media',
+    name: 'Vox Pop – Photography & Media Club',
+    tagline: 'The Campus Pulse & Visual Media',
+    category: 'Media',
+    logo: tcclogo,
+    banner: 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800',
+    memberCount: 125,
+    description: 'Vox Pop captures the pulse of GBU through student video interviews, event photojournalism, social media reels, and visual stories.',
+    objectives: [
+      'Create engaging student reels, event highlights, and photo stories',
+      'Conduct photography contests and social media storytelling'
+    ],
+    history: 'Famous for creating viral campus reels, Vox Pop keeps GBU connected across social platforms.',
+    achievements: [
+      'Covered Abhivyanjana & Shauryotsav with live video highlights',
+      'Over 1M+ total views on campus event reels'
+    ],
+    policies: {
+      codeOfConduct: ['Creative accuracy and respect for interviewee privacy'],
+      eligibility: ['Open to all photography & video editing enthusiasts'],
+      responsibilities: ['Media Lead: Content curation & editing'],
+      meetingFrequency: 'Weekly media editing huddles'
+    },
+    team: {
+      facultyCoordinator: { name: 'Dr. Vivek Kumar', role: 'Faculty Advisor', department: 'Mass Comm' },
+      president: { name: 'Sameer Khan', role: 'Lead Editor', department: 'USICT, 3rd Year' }
+    },
+    events: [
+      { id: 'vp1', title: 'Campus Lens Photography Contest', date: 'Semester Event', description: 'Photography competition showcasing campus architecture & life.' }
+    ]
   }
-
 ];

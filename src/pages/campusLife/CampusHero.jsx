@@ -9,15 +9,27 @@ const GBU_HERO_SLIDES = [
     background_image: "/assets/campusimg/WhatsApp_Image_2025-06-25_at_4.28.55_PM.jpeg",
     tagline: "Explore the Majestic 511-Acre Campus",
     title: "Vibrant GBU Campus Life",
-    description: "Step into an eco-friendly green sanctuary blending state-of-the-art academic infrastructure, world-class sports arenas, and a spiritual lifestyle designed for holistic student growth.",
+    description: "We are ready to see you thrive. Be a part of a vibrant community of intellectuals and entrepreneurs endowed with Character, Creativity, Competence, and Commitment.",
     button1_text: "Virtual Tour",
     button1_url: "#campus-tour",
-    button2_text: "Explore Map",
-    button2_url: "https://www.gbu.ac.in/",
+    button2_text: "Life @ GBU",
+    button2_url: "#life-at-gbu",
     icon: Compass
   },
   {
     id: 2,
+    background_image: "https://www.gbu.ac.in/Content/clubs/img/Artboard-1meditationatnight.jpg",
+    tagline: "Character, Creativity, Competence & Commitment",
+    title: "Mahatma Jyotiba Phule Dhyana Kendra",
+    description: "Inspired by stupa architecture, our meditation and retreat centre gives an experience of the power of peace, inner silence, positive values, and stress-free living.",
+    button1_text: "Meditation Center",
+    button1_url: "/campus-life/meditation-center",
+    button2_text: "Shanti Sarowar",
+    button2_url: "#grand-walk",
+    icon: Sparkles
+  },
+  {
+    id: 3,
     background_image: "/assets/campusimg/library.jpg",
     tagline: "A Hub of Intellectual Growth",
     title: "Bodhisattva Central Library",
@@ -29,7 +41,7 @@ const GBU_HERO_SLIDES = [
     icon: BookOpen
   },
   {
-    id: 3,
+    id: 4,
     background_image: "/assets/Hostel_Image.webp",
     tagline: "Your Cozy Home Away From Home",
     title: "Premium Residential Hostels",
@@ -92,18 +104,6 @@ const CampusHero = () => {
         {/* Content Overlay */}
         <div className="relative z-10 h-full flex items-center justify-start px-6 md:px-12 lg:px-24">
           <div className="max-w-4xl text-left">
-            {/* Tagline */}
-            <motion.div
-              key={`tag-${currentSlide}`}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 backdrop-blur-md text-blue-300 text-xs md:text-sm font-semibold tracking-wide uppercase mb-6"
-            >
-
-              <span>{GBU_HERO_SLIDES[currentSlide].tagline}</span>
-            </motion.div>
-
             {/* Title */}
             <motion.h1
               key={`title-${currentSlide}`}

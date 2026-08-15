@@ -67,45 +67,27 @@ const GBU_ECO_IMPACTS = [
 const EcoCampus = () => {
   const [intro] = useState(GBU_ECO_INTRO);
   const [stats] = useState(GBU_ECO_STATS);
-  const [initiatives] = useState(GBU_ECO_INITIATIVES);
   const [impacts] = useState(GBU_ECO_IMPACTS);
 
   return (
     <SearchableWrapper>
-      <section id="eco-campus" className="py-24 bg-gradient-to-b from-green-50/70 to-white relative overflow-hidden font-sans text-left">
+      <section id="eco-campus" className="py-16 bg-gradient-to-b from-green-50/70 to-white relative overflow-hidden font-sans text-left">
         <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
-          
+
           {/* Header */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-green-50 text-green-600 text-xs font-bold uppercase tracking-wider mb-4 border border-green-100"
-            >
-              <Leaf size={13} />
-              <span>Sustainability Initiatives</span>
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
             >
               Eco-Friendly Campus
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-slate-600 text-lg leading-relaxed font-normal"
-            >
-              {intro.description}
-            </motion.p>
           </div>
 
           {/* Environmental Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.id}
@@ -124,66 +106,21 @@ const EcoCampus = () => {
             ))}
           </div>
 
-          {/* Sustainability Initiatives */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
-            {initiatives.map((item) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 grid grid-cols-1 md:grid-cols-12"
-              >
-                <div className="h-56 md:h-auto md:col-span-5 relative">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white">
-                    {React.createElement(item.icon, { size: 18 })}
-                  </div>
-                </div>
-                <div className="p-8 md:col-span-7 flex flex-col justify-between text-left">
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-950 mb-3">{item.title}</h3>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-6">{item.description}</p>
-                  </div>
-                  <div className={`p-4 rounded-xl text-xs font-semibold ${
-                    item.accent === 'amber' ? 'bg-amber-50 text-amber-800' : 'bg-blue-50 text-blue-800'
-                  }`}>
-                    <div className="font-bold text-sm mb-1">{item.impact_value}</div>
-                    <div className="opacity-95 leading-normal">{item.impact_label}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
           {/* Environmental Impact Infographics */}
-          <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-            <h3 className="text-2xl font-bold text-slate-900 mb-10 text-center flex items-center justify-center gap-2">
+          <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 relative overflow-hidden">
+            <h3 className="text-2xl font-extrabold text-slate-900 mb-8 text-center flex items-center justify-center gap-2">
               <span>Campus Green Impact</span>
             </h3>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {impacts.map((impact) => (
                 <div key={impact.id} className="text-center flex flex-col items-center">
-                  <div className="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center mb-4 shadow-md shadow-green-500/10">
-                    {React.createElement(impact.icon, { size: 22 })}
+                  <div className="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-3 shadow-md shadow-emerald-500/15">
+                    {React.createElement(impact.icon, { size: 20 })}
                   </div>
-                  <h4 className="font-bold text-slate-900 mb-2 text-base">{impact.title}</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed max-w-[220px]">{impact.description}</p>
+                  <h4 className="font-extrabold text-slate-900 text-sm sm:text-base">{impact.title}</h4>
                 </div>
               ))}
-            </div>
-
-            <div className="mt-12 text-center flex justify-center">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-50 border border-green-200/50 text-green-700 text-xs font-bold uppercase tracking-wider">
-                <Award size={15} />
-                <span>Green Campus Gold Rating Target</span>
-              </div>
             </div>
           </div>
 

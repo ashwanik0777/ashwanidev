@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="100%" height="100%">
+  <g transform="translate(20, 20)">
+    <circle cx="40" cy="40" r="36" fill="#002D62"/>
+    <path d="M25,25 L55,25 L40,60 Z" fill="#F59E0B"/>
+    <path d="M30,30 L50,30 L40,50 Z" fill="#FFFFFF"/>
+    <text x="90" y="45" font-family="'Arial Black', sans-serif" font-size="32" font-weight="900" fill="#002D62">BHEL</text>
+    <text x="90" y="65" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="1">BHARAT HEAVY ELECTRICALS LTD</text>
+  </g>
+</svg>

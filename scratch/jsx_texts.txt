@@ -1,0 +1,57 @@
+")&&(K=K.replace("
+"u")return;let s,o;if(typeof a!="object"&&(a=[a]),Vi(a))for(s=0,o=a.length;s
+"u"?-w/2+.5:0);if(he
+)":-1
+, or
+. This is a no-op, but you should modify your code so the
+0;for(let U=0;U
+1&&x
+1,R=L[se];if(0
+1-d.longSwipesRatio?n.slideTo(T+j):O!==null&&M
+1;g.length
+1;se
+=-n.maxTranslate()&&!n.params.loop;let T=0,A=n.slidesSizesGrid[0];for(let B=0;B
+=0&&C
+=0&&h.indexOf("chrome")
+=0;S-=1)d[p]-d[S]
+=0?h=parseFloat(h.replace("%",""))/100*n.size:typeof h=="string"&&(h=parseFloat(h));for(let m=0;m
+=1?"onTransitionEnd":"onAnimationEnd"]:d&&h
+=200&&n
+=C||p==="prev"&&E
+=Q&&k
+=U&&G.clientX
+=b,u-=b,ka=1
+=c&&g
+=i.minTranslate()))return;if(!d&&(g
+=k&&G.clientY
+=m.length&&(A=m.length-1);const w=-m[A];if(h.normalizeSlideIndex)for(let G=0;G
+=n[c]&&(o=c);return i.normalizeSlideIndex&&(o
+=n[c]&&s
+=p[B]&&C
+G(-1),children:"
+L||125
+Number(g));i=m
+S?O="next":d
+a&&n instanceof a)(typeof Uint8Array
+ae.page
+c.minTranslate():w
+c.startX&&-i.translate
+component. All component children of
+c||d
+d?h="next":c
+element, never rendered directly. Please wrap your
+i.indexOf(s)
+in a
+inside another
+is only ever to be used as the child of
+m?g=m:s&&a
+may be used only in the context of a
+must be a
+must not be used on the initial render in a
+n.indexOf(c)
+o(ae,$))ue
+o(re,ae)?(L[se]=re,L[ue]=$,se=ue):(L[se]=ae,L[ne]=$,se=ne);else if(ue
+parseInt(h.value,10)-parseInt(m.value,10));for(let h=0;h
+setTimeout(i))(typeof setImmediate=="function",Ht(yl.postMessage)),hS=typeof queueMicrotask
+typeof i.breakpoints[U].slidesPerView
+without a

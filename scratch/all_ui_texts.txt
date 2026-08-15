@@ -1,0 +1,1224 @@
+#263238
+&&Blob)&&F.isSpecCompliantForm(n);if(!F.isFunction(o))throw new TypeError(
+&&Jo(
+&&d.endsWith(
+&&w.endsWith(
+'+ea(l.imageSizes)+'
+'+ea(l.imageSrcSet)+'
+)&&i.endsWith(
+)),Jn(
+));return a.endsWith(
+),Bo(s,
+),c.classList.add(
+),d.classList.add(
+),g3(c,n.hostEl.constructor.nextButtonSvg),c.part.add(
+),g3(d,n.hostEl.constructor.prevButtonSvg),d.part.add(
+),h.classList.add(
+),he(ue,X,ne,
+),m.classList.add(
+),v.createElement(
+),wrongRTL:Qn(d,
+).replace(/%2C/gi,
+).replace(/%2F/g,
+).slice(M.length).join(
+).toLowerCase():
+):e.removeAttribute(l);break;case
+);Uf.setAttribute(
+);Yc.push(
+);c.profileImg&&U.append(
+);return!m.pathname.endsWith(
+)?Hl(l):
++(h.password?unescape(encodeURIComponent(h.password)):
++Np+
++Object.keys(R).join(
++Object.keys(t).join(
++Wt(_):e.removeAttribute(
++Wt(l):
++ea(l.imageSizes)+
++ea(l.imageSrcSet)+
++l.content)&&f.getAttribute(
++l.toString(32)+
++r),e.setAttribute(l,r);break;case
++r),e.setAttributeNS(
++r):e.removeAttribute(l);break;case
++t.charCodeAt(0).toString(16)+
++ue.key).replace(I,
+,112:
+,113:
+,114:
+,115:
+,116:
+,117:
+,118:
+,119:
+,120:
+,121:
+,122:
+,123:
+,12:
+,13:
+,144:
+,145:
+,16:
+,17:
+,18:
+,19:
+,20:
+,224:
+,27:
+,32:
+,33:
+,34:
+,35:
+,36:
+,37:
+,38:
+,39:
+,40:
+,45:
+,46:
+,Apps:
+,Date.now()-864e5,
+,Del:
+,Down:
+,Left:
+,Menu:
+,MozPrintableKey:
+,Right:
+,Scroll:
+,Up:
+,Win:
+,alumniName:
+,cnfPass:
+,e),Ce(
+,enrollmentNo:
+,fatherName:
+,idKey:
+,inputLabel:
+,inputType:
+,marginBottom:
+,nameKey:
+,newPass:
+,phoneNo:
+,reqForward:
+,rollNo:
+,schoolName:
+,searchBoxPlaceholder:
+,strokeLinecap:
+,strokeLinejoin:
+,t),Ce(
+,t),yf(t,r.value,r.defaultValue,r.checked,r.defaultChecked,r.type,r.name,!0),Er(t);break;case
+,v.createElement(
+,viewBox:
+,yearOfPassing:
+./AdminLayout-BzLaibAE.js
+./CheckStatus-BIJhK_G3.js
+./Devs-D4G7_Kis.js
+./ForgetPassword-BtW9CAzN.js
+.Consumer
+.Provider
+/alumni/checkStatus
+/alumni/forgetPassword
+/alumni/forgetPassword/reset/:token
+/alumni/superAdmin
+/alumni/superAdmin/
+/alumni/superAdmin/login
+/alumni/user/changePassword
+/alumni/user/contactUs
+/alumni/user/membershipCard
+/api/approval/activeUsers
+/api/panel/admin/activeUsers
+/assets/AbhishekKumar-SuTrkmMv.webp
+/assets/DineshKumar-B-48aSP3.webp
+/assets/DivyaNangia-BGtBZ51N.webp
+/assets/GBULOGO-DrwzdgB4.webp
+/assets/MohammadZakwanZaheen-WcmChWdW.webp
+/assets/MoumitaDas-6uizoBct.webp
+/assets/PreetyBajwa-iT4jnG1S.webp
+/assets/RituBhardwaj-TW3c_bhq.webp
+/assets/RohitDwivedi-Dc5CHwbx.webp
+/assets/SANYUKTASRIVASTAVA-DPBHkRUR.webp
+/assets/SachinMishra-BVqkXz7R.webp
+/assets/SumitKumarSingh-BP5cAjvw.webp
+/assets/VCimg-OjzmK0ib.webp
+/assets/WarisNawazKhan-CoVgG1X-.webp
+/assets/ajitKumar-rmomzzYb.webp
+/assets/alumniimg1-CvvCmhNn.webp
+/assets/alumniimg3-BGQe8mfu.webp
+/assets/alumniimg4-XBr3SvrY.webp
+/assets/amitJ-D5iUmybv.webp
+/assets/gargiSharma-BiQ0BThR.webp
+/assets/imgNotFound-Cla3IEzK.webp
+/assets/logo-uqqQD3vV.webp
+/assets/signature-DPOLtvGw.webp
+/assets/studentsImg1-B_oSGA_t.webp
+/assets/studentsImg2-DQrXT3Xr.webp
+/assets/studentsImg3-CNaGGk--.webp
+/assets/sunilSharma-Bf0xKxpZ.webp
+/assets/vikramSingh-vGa58pFW.webp
+/devTeam
+0 -960 960 960
+0 0 1024 1024
+0 0 14 16
+0 0 16 16
+0 0 24 24
+0 0 448 512
+0 0 496 512
+0 0 500 500
+0 0 512 512
+0 0 576 512
+0 0 640 512
+1.13.2
+10,000+ Alumni
+100%
+13_0_0
+16 17 21 12 16 7
+185.1 66.6 185.1 86.52 178.66 82.8 185.1 66.6
+185.1 86.52 174.83 92.44 178.66 82.8 185.1 86.52
+19.1.0
+2008-2010
+2009-2012
+2010-2015
+2011-2013
+2011-2016
+2012-2017
+2019-2023
+2025 - Gautam Buddha University.
+7.5.3
+81.88 126.2 81.88 146.11 75.44 142.4 81.88 126.2
+81.88 146.11 71.61 152.03 75.44 142.4 81.88 146.11
+:Ce(
+:Sf(e,r,f);break;case
+:Sr(e,
+:a.startsWith(
+; HttpOnly
+; Partitioned
+; Secure
+;if(F.isDate(x))return x.toISOString();if(F.isBoolean(x))return x.toString();if(!m&&F.isBlob(x))throw new Se(
+?null:l.href)&&f.getAttribute(
+?o.getAttribute(
+?r?e.setProperty(t,
+@@toPrimitive must return a primitive value.
+A history only accepts one active listener
+Abhishek Kumar
+About
+About GBUAA
+Accept
+Accept-Encoding
+Active Users
+Activity
+Admin Login
+Already have an account?
+Alumni
+Alumni
+Alumni Login
+Alumni Name
+Alumni Registration Form
+An Ultimate Destination for Higher Learning
+An index route cannot have child routes.
+Animation
+AnimationEnd
+AnimationIteration
+AnimationStart
+Ansh
+Approved Users
+Are you sure?
+Area
+ArrayBuffer
+ArrowLeft
+ArrowRight
+Association
+AsyncFunction
+Auth error:
+Authorization
+Await
+AxiosError
+AxiosHeaders
+Backspace
+Basic
+Blob
+Branch
+Can not rewrite read-only method '
+Cancel
+CanceledError
+CancelledError
+Cannot
+Cannot add the same private member more than once
+Capture
+Card Information
+Card No
+Card Number
+Celebrate.
+Cell Therapy & Immunotherapy
+Change
+Change Password
+Check Status
+Circular reference detected in
+Collaborate.
+College Details
+College Info
+Comming Soon
+CompositionEvent
+Confirm
+Confirm Password
+Connect.
+Contact
+Contact Us
+Content-Length
+Content-Type
+Context
+Country
+Create Sub-Admin
+Create a Event
+Create account
+DOMContentLoaded
+Daksh
+DataCloneError
+DataRouter
+DataRouterState
+Date
+Date Of Birth
+Deepak
+Degree Picture
+Delete
+Deno
+Description
+Designed & Developed By
+DetermineComponentFrameRoot
+Dinesh Kumar
+Disable
+Distinguished Alumni
+Divya Nangia
+Dr. Ajit Kumar
+Dy. Secretary GBUAA
+E-mail
+Email : gbuaa@gbu.ac.in
+Enable
+Enrollment Number
+Enrollment Number must be a non-negative number.
+Enter
+Enter value...
+Error
+Error handled by React Router default ErrorBoundary:
+Error:
+ErrorBoundary
+Escape
+Event deleted successfully
+Events
+Expected enabled to be a boolean or a callback that returns a boolean
+Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance, Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.
+Failed
+Failed to delete event
+Failed to fetch events
+Failed to fetch school list
+Failed to fetch school list.
+Failed to load profile
+Failed to logout
+Failed to update profile
+Failed to update status
+Father's Name
+Fetchers
+File
+FileList
+Finance
+Forget Password
+Form
+FormData
+ForwardRef
+ForwardRef(
+Founder, CEO & Director @ Synaptic Delver, Singapore NeuroTechnology & NeuroRobotics
+Fragment
+FrameworkContext
+Gallery
+Gautam Buddha University
+Gautam Buddha University (GBU) Greater Noida (U.P.) is a university established by the Uttar Pradesh Gautam Buddha University Act 2002 (UP Act No. 9 of 2002) and came into existence in 2008.
+Gautam Buddha University Alumni Association
+Gautam Buddha University Alumni Association (GBUAA)
+Gautam Budh Nagar
+Github
+Global Impact
+Go Home
+Greater Noida
+HTMLFormElement
+Harsh
+Headers
+Image
+Image size must be less than 2MB
+Insta
+Invalid token
+Join the GBU Alumni Association to network, contribute and inspire future generations.
+Join today. Stay connected for a lifetime.
+KeyT
+Lazy
+Leaders across
+Lifetime Member
+Link
+LinkedIn
+Location
+LoggedIn Successfully!!!
+Login
+Login Error:
+Logo
+Logout
+M0 0h24v24H0z
+M101.58,135.19a1,1,0,0,0-1,.12l-6.06,3.49v-7.69S100.75,134.7,101.58,135.19Z
+M102,338.65v9.08a1.55,1.55,0,0,1,.31,0l8.48,1.42a.92.92,0,0,0,.43,0v-9.07a1.17,1.17,0,0,1-.45,0l-8.48-1.43A.91.91,0,0,0,102,338.65Z
+M12 0a12 12 0 1012 12A12.014 12.014 0 0012 0zm6.927 8.2l-6.845 9.289a1.011 1.011 0 01-1.43.188l-4.888-3.908a1 1 0 111.25-1.562l4.076 3.261 6.227-8.451a1 1 0 111.61 1.183z
+M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z
+M12 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2
+M125.72,383a.67.67,0,0,1,.32-.53l3.19-2.3V372.6a1.36,1.36,0,0,0-.44-.11l-10.67-.67a1.08,1.08,0,0,1-1-1.06v10.15a1.08,1.08,0,0,0,1,1h.14l6.07.38,1.39.1Z
+M132.5,359a15.4,15.4,0,0,0-2.26,3.14,2,2,0,0,1-1.45,1l-3.06.19V352.58a.67.67,0,0,0,.32.52l6.34,4.56A.85.85,0,0,1,132.5,359Z
+M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z
+M144.6,384.32a2.66,2.66,0,0,0-.62.17l-8.11,3.75a2.08,2.08,0,0,1-1,.14v10.13a2.44,2.44,0,0,0,.54,0h0v-.05a1.79,1.79,0,0,0,.49-.08l8.12-3.76a2.49,2.49,0,0,1,.61-.14Z
+M154.48,392.74a1.37,1.37,0,0,1-.15-.38l-1-5.35a1.59,1.59,0,0,0-.16-.41v10.15a1.4,1.4,0,0,1,.16.4l1,5.34a.68.68,0,0,0,.15.26Z
+M161.4,116.84l-7.55-4.35a1.21,1.21,0,0,1-.23-.18,2.31,2.31,0,0,1-.57-1.74V99.11a15.44,15.44,0,0,1,.3-3l7.65,4.41a14.63,14.63,0,0,0-.3,3V115a2.31,2.31,0,0,0,.56,1.72Z
+M169.65,386.61a1.24,1.24,0,0,0-.16.4l-1,5.35a1,1,0,0,1-.15.38v10.13a1,1,0,0,0,.15-.38l1-5.34a.82.82,0,0,1,.16-.37Z
+M171.44,82.27l3.23-1.87V74.15Z
+M183.74,43.15l0,.13a11,11,0,0,0-1.08,2.12l-21,52.94a11.26,11.26,0,0,0-.62,2.17l-7.7-4.44a12.92,12.92,0,0,1,.61-2.15l21-52.94a9.72,9.72,0,0,1,1.16-2.24,0,0,0,0,1,0,0Z
+M185.31,116.8l.13.12-7.55-4.35a1,1,0,0,1-.23-.18,2.33,2.33,0,0,1-.56-1.73v-2.21l7.64-4.42v11A2.28,2.28,0,0,0,185.31,116.8Z
+M188,388.37a2,2,0,0,1-1-.13l-8.11-3.75a2.58,2.58,0,0,0-.61-.17v10.14a2.18,2.18,0,0,1,.61.16l8.11,3.76a1.87,1.87,0,0,0,.76.14H188Z
+M188.91,314.1h0a.6.6,0,0,1-.55-.65c.24-2.65,2.89-4.31,5.08-4.93.65-.18,2.83-.69,3.62.37a.6.6,0,0,1-1,.72c-.11-.15-.95-.32-2.38.09-1.8.52-4,1.84-4.15,3.86A.6.6,0,0,1,188.91,314.1Z
+M196.91,35.71a1.06,1.06,0,0,0-1.06.11l-10.61,6.12a5.16,5.16,0,0,0-1.44,1.21l-7.64-4.42a5.09,5.09,0,0,1,1.43-1.2l10.62-6.13a1,1,0,0,1,1.12-.06C189.4,31.37,196.2,35.3,196.91,35.71Z
+M197.08,352.6v10.66l-3.07-.19a2,2,0,0,1-1.44-1A15.86,15.86,0,0,0,190.3,359a.85.85,0,0,1,.12-1.31l6.34-4.56a.69.69,0,0,0,.32-.5Z
+M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10zM8 13.01l1.41 1.41L11 12.84V17h2v-4.16l1.59 1.59L16 13.01 12.01 9 8 13.01z
+M200.19,287.25a.6.6,0,0,1-.56-.37,6.44,6.44,0,0,0-6.64-3.57.6.6,0,0,1-.72-.46.61.61,0,0,1,.45-.72,7.57,7.57,0,0,1,8,4.3.6.6,0,0,1-.34.78A.57.57,0,0,1,200.19,287.25Z
+M204.68,371.82l-10.67.67a1.36,1.36,0,0,0-.44.11v7.56l3.19,2.3a.67.67,0,0,1,.32.54v-.57l7.6-.48a1.08,1.08,0,0,0,1-1.06l0-11.11a.76.76,0,0,0,0-.21v1.19A1.08,1.08,0,0,1,204.68,371.82Z
+M204.81,75.59a1.1,1.1,0,0,0-1,.12l-6.05,3.49V71.51Z
+M205.64,279.75a.6.6,0,0,1-.57-.4c-.82-2.27-4.35-4.32-6.52-3.79a.6.6,0,1,1-.29-1.17c2.76-.68,6.92,1.71,7.94,4.55a.59.59,0,0,1-.36.77A.51.51,0,0,1,205.64,279.75Z
+M210.62,274.25h0a.6.6,0,0,1-.6-.61,4.73,4.73,0,0,0-1.92-3.46,4.68,4.68,0,0,0-3.62-1.25.6.6,0,0,1-.71-.47.61.61,0,0,1,.47-.71,6.59,6.59,0,0,1,7,5.9A.6.6,0,0,1,210.62,274.25Z
+M213.75,327a.61.61,0,0,1-.54-.34,7.32,7.32,0,0,1,.08-5.75,4.86,4.86,0,0,1,2.6-2.86.6.6,0,1,1,.4,1.13,3.8,3.8,0,0,0-1.89,2.19,6.18,6.18,0,0,0-.1,4.77.6.6,0,0,1-.29.8A.58.58,0,0,1,213.75,327Z
+M220.37,168.12c0-18.57,15-30.57,33.62-30.57s33.61,12,33.61,30.57v20.32S280.91,199,254,199s-33.62-10-33.62-10Z
+M223.26,319.09c-8.44.6-20.64-3.93-26.18-9.25a9,9,0,0,1-2.66-5h-.16c.65,4.08,1.17,8.9,12.84,13.57a38,38,0,0,0,16.31,2.7Z
+M223.47,183.79a13,13,0,0,1-3.1-8.15,2.11,2.11,0,0,0-1.52.58,6.53,6.53,0,0,0,.36,5,10.22,10.22,0,0,0,4.26,4.92A13.31,13.31,0,0,1,223.47,183.79Z
+M225,215.52c-5.68,3.29-9.14,7.36-10.38,11.61,1,3.68,3.94,7.21,8.84,10,12.31,7.11,32.26,7.11,44.57,0s12.3-18.5.2-25.61C254.28,207.45,236.74,208.77,225,215.52Z
+M228.6,312.15c-.35-3.61.13-7.73,1.69-10.25s4.09-4.25,5.28-2.18c.8,1.38-.89,3.49-1.68,6.08a11.69,11.69,0,0,0-.17,4.78Z
+M228.74,183.62a2.19,2.19,0,0,0-1.25-.33,2.1,2.1,0,0,0-.4,1.34,5.62,5.62,0,0,0,2.54,4.4,2.19,2.19,0,0,0,1.25.33,2.1,2.1,0,0,0,.4-1.34A5.62,5.62,0,0,0,228.74,183.62Z
+M228.74,183.62a5.62,5.62,0,0,1,2.54,4.4c0,1.62-1.14,2.28-2.54,1.47a5.6,5.6,0,0,1-2.54-4.4C226.2,183.47,227.33,182.81,228.74,183.62Z
+M229,131.32a1,1,0,0,1-.5-1.87l6.08-3.51a1,1,0,0,1,1,1.74l-6.08,3.51A1,1,0,0,1,229,131.32Z
+M230.59,180.89c2.11,1.64,3.7,5.12,3.7,11.93l1.49-.87v-1A13.81,13.81,0,0,0,230.59,180.89Z
+M231.67,268.64c0-4.52-2.45-9.78-5.9-13.3,2.57,3.22,5,11.43,1.86,15.62s-14.72,1.81-17-5.07A13,13,0,0,0,228,275a10.59,10.59,0,0,0,1.19-.54C230.73,273.44,231.67,271.44,231.67,268.64Z
+M233.09,120.38h-7a1,1,0,0,1,0-2h7a1,1,0,1,1,0,2Z
+M233.89,305.8c.79-2.59,2.48-4.7,1.68-6.08a1.7,1.7,0,0,0-1-.84h0c.68.93-.92,2.67-2.05,4.9a14.09,14.09,0,0,0-1,7.47l2.2-.67A11.69,11.69,0,0,1,233.89,305.8Z
+M235.1,113a1,1,0,0,1-.5-.13l-6.08-3.51a1,1,0,1,1,1-1.74l6.08,3.51a1,1,0,0,1,.37,1.37A1,1,0,0,1,235.1,113Z
+M240.55,107.54a1,1,0,0,1-.87-.5L236.17,101a1,1,0,1,1,1.73-1l3.52,6.08a1,1,0,0,1-.87,1.5Z
+M242.46,333.08a14,14,0,0,0,4.57,2.7c1.31.49,3.6.52,4.83-.79s.38-2.76-.54-3.41a30.56,30.56,0,0,0-5-2.8S242.76,328.78,242.46,333.08Z
+M243.12,315.63a6.45,6.45,0,0,1-6.45.71,7,7,0,0,1-3.84-3.31l-5.44,22.68a12.83,12.83,0,0,0,11.22,1l4.94-20.61C243.41,315.94,243.27,315.78,243.12,315.63Z
+M245.78,129.23a8.11,8.11,0,0,0,2.16.3,8.23,8.23,0,0,0,2.23-.32v-3.07h-4.39Z
+M246.32,304.55l-1.12,4.68s2.86,1.07,2.72,3.07a4.22,4.22,0,0,1-2.23,3,3.5,3.5,0,0,0,.88,4h0c-.46-1.57.54-2.33,2.1-4s.94-4.49-.06-6.26a5.09,5.09,0,0,1-.3-3.77A12.45,12.45,0,0,0,246.32,304.55Z
+M247.09,327.09c3.41,1,7.53-.39,8.08-3.17s-.37-5.08-3.59-7a8.45,8.45,0,0,1-3.91,3.08l.21,1.5A4.83,4.83,0,0,0,247.09,327.09Z
+M247.14,203.87h-3.23v24.52a3.71,3.71,0,0,0,2.19,3.06,7.09,7.09,0,0,0,1,.49V215.89A45.11,45.11,0,0,0,258.89,217V203.87Z
+M247.6,325.38a11.38,11.38,0,0,0,.22-1.3c-1.77,3.57-6.06,8.54-14.57,7.08-8.74-1.5-10.55-12-9.41-14.83a12.44,12.44,0,0,0-1.31,3.43,12.85,12.85,0,1,0,25.07,5.62Z
+M247.6,325.38a12.85,12.85,0,1,1-14-15.6c.13,1.67,2,3.68,4.11,4.44a6.45,6.45,0,0,0,6.45-.72A12.84,12.84,0,0,1,247.6,325.38Z
+M247.62,116.68a12,12,0,0,1,3.59,1.7c.69.47,1.79,1.18,2.58.47s.58-2,.28-2.81a5.18,5.18,0,0,0-2.1-2.45,5.52,5.52,0,0,0-3.87-.71c-.84.15-2.22.58-2.45,1.55S246.72,116.42,247.62,116.68Z
+M247.67,320c4.38-1.77,5.82-5.78,5.14-9.84s-6.49-5.65-6.49-5.65l-1.12,4.68s2.86,1.07,2.72,3.07a4.22,4.22,0,0,1-2.23,3A3.51,3.51,0,0,0,247.67,320Z
+M247.94,123.68c-5.87-1-7.89-6.25-5.3-10.44a8.14,8.14,0,1,0,13.44,6.18C255.73,122,253.15,124.6,247.94,123.68Z
+M248,105.57a1,1,0,0,1-1-1v-7a1,1,0,0,1,2,0v7A1,1,0,0,1,248,105.57Z
+M250.17,144.19v-18h-4.39v18h0a1.11,1.11,0,0,0,.65.9,3.45,3.45,0,0,0,3.1,0A1.12,1.12,0,0,0,250.17,144.19Z
+M251.32,331.58a30.56,30.56,0,0,0-5-2.8,4,4,0,0,0-2.94,1.54c.75-.75,3.26.64,5.31,1.88s3.66,1.94,2.82,3.08a3.17,3.17,0,0,0,.35-.29C253.17,333.57,252.24,332.23,251.32,331.58Z
+M251.49,274.86c0,5.23,4.33,18.09,7.35,21.68,0,0,15.17-.71,21.7-6.69-.21-1.67-6.36-19.16-6.36-19.16C270.17,273.65,258.32,274.87,251.49,274.86Z
+M251.58,317a8.45,8.45,0,0,1-3.91,3.08l.21,1.5h4.17s-1.08-.35-.77-1.06,2.06-.44,2.91.66a3.76,3.76,0,0,1,.22,4.31,3.35,3.35,0,0,0,.76-1.53C255.73,321.14,254.8,318.84,251.58,317Z
+M253,181.92h0a5,5,0,0,1-5-5v-2.31a5,5,0,0,1,5-5h0a5,5,0,0,1,5,5v2.31A5,5,0,0,1,253,181.92Z
+M255.39,107.58a1,1,0,0,1-.5-.13,1,1,0,0,1-.36-1.37L258,100a1,1,0,1,1,1.73,1l-3.51,6.08A1,1,0,0,1,255.39,107.58Z
+M258.89,228.39V203.87h-15v24.52h0a3.71,3.71,0,0,0,2.19,3.06,11.71,11.71,0,0,0,10.6,0A3.71,3.71,0,0,0,258.89,228.39Z
+M260.81,113a1,1,0,0,1-.5-1.87l6.09-3.51a1,1,0,0,1,1,1.73l-6.09,3.52A1,1,0,0,1,260.81,113Z
+M263,283a.43.43,0,0,1-.19,0,.5.5,0,0,1-.47-.3.52.52,0,0,1,.27-.66,2.93,2.93,0,0,0,1.69-3.51l-3.78-13.31,1-.13,3.73,13.17A3.92,3.92,0,0,1,263,283Z
+M265.61,139.24A40,40,0,0,0,254,137.55c-18.57,0-33.62,12-33.62,30.57v20.81s2.75,4.1,11.76,7.06c-1.41-13.51-3.22-30.75,2.16-41.3C240.44,142.64,257.53,136.89,265.61,139.24Z
+M266.86,131.39a1,1,0,0,1-.5-.14l-6.09-3.51a1,1,0,1,1,1-1.73l6.08,3.51a1,1,0,0,1,.37,1.37A1,1,0,0,1,266.86,131.39Z
+M269,281.05a.48.48,0,0,1-.2,0,.51.51,0,0,1-.46-.31.52.52,0,0,1,.27-.66,2.93,2.93,0,0,0,1.69-3.5l-3.55-12.52,1-.24,3.55,12.49A3.93,3.93,0,0,1,269,281.05Z
+M269.81,120.46h-7a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Z
+M273,327.42c-8-.92-11.82-5.75-11.82-5.75s28.06.08,41.5-26a32.38,32.38,0,0,0-17.36-22.56l-37.79,6.72a32.34,32.34,0,1,0,51.15,39C292.22,326.42,281.12,328.37,273,327.42Z
+M274.18,270.69l-3.76-1.7s-13.73,3.21-22,2.44A53.23,53.23,0,0,0,250,283.62a39.64,39.64,0,0,0,4.5,10.82l4.33,2.1Z
+M275.07,279.12a.48.48,0,0,1-.2,0,.5.5,0,0,1-.46-.3.52.52,0,0,1,.27-.66,2.94,2.94,0,0,0,1.7-3.51l-3.53-12.42c.31-.12.63-.24.93-.37l3.56,12.52A3.93,3.93,0,0,1,275.07,279.12Z
+M275.9,320.42a6,6,0,0,0-4.54,9.94h0l38.34,44.37,3.78-3.27c-11.71-13.11-30.71-34.39-35.83-40.22C270.09,322.64,273.17,321.07,275.9,320.42Z
+M277.26,337.77a.63.63,0,0,1-.46-.2,6.61,6.61,0,1,1,10-8.64.6.6,0,1,1-.91.78,5.41,5.41,0,1,0-8.18,7.07.6.6,0,0,1-.06.85A.57.57,0,0,1,277.26,337.77Z
+M278,173.93h0c-2.37.88-3.62-.22-4.07-1.45a13.11,13.11,0,0,1-.31-5,6.48,6.48,0,0,1,3.57-5.38h0a2.84,2.84,0,0,1,4.22,1.64,14.47,14.47,0,0,1,.25,4.49C281.54,170.15,280.35,172.91,278,173.93Z
+M279,259.41c-.77.45-1.58.86-2.4,1.26.88,4.47,2.5,11.42,4.14,15.19,0,0,8-2.42,10.65-7.68a124.51,124.51,0,0,1-4-16.19A24.77,24.77,0,0,1,279,259.41Z
+M280.45,322.5h0a6,6,0,1,0-9.08,7.86h0l38.34,44.37,9.1-7.86Z
+M282.12,272.73a.51.51,0,0,1-.47-.31,93.61,93.61,0,0,1-2.78-10.81.51.51,0,0,1,.41-.58.52.52,0,0,1,.58.42A94.68,94.68,0,0,0,282.58,272a.5.5,0,0,1-.27.65A.46.46,0,0,1,282.12,272.73Z
+M282.12,283.33a4.3,4.3,0,0,0,1.64,2.05,4.31,4.31,0,0,1-.26-1.74l0,.1a7.68,7.68,0,0,1-.24-3A5.45,5.45,0,0,0,282.12,283.33Z
+M283.77,345.31a.6.6,0,0,1-.46-.21,6.61,6.61,0,1,1,10-8.64.6.6,0,1,1-.91.79,5.4,5.4,0,1,0-8.18,7.06.6.6,0,0,1-.06.85A.58.58,0,0,1,283.77,345.31Z
+M284.87,271a.51.51,0,0,1-.47-.31,95.71,95.71,0,0,1-2.78-10.81.5.5,0,0,1,1-.17,93.55,93.55,0,0,0,2.72,10.59.51.51,0,0,1-.27.66A.65.65,0,0,1,284.87,271Z
+M285,280.88a6.22,6.22,0,0,1,.39-1.83,4.67,4.67,0,0,0-.79,2.19A4.64,4.64,0,0,1,285,280.88Z
+M286.28,258.28a.87.87,0,1,1-.87-.87A.87.87,0,0,1,286.28,258.28Z
+M287.19,277.15a7.28,7.28,0,0,1,1.23-.78,6.71,6.71,0,0,1,1.15-1.74,9.22,9.22,0,0,0-1,.34A4.93,4.93,0,0,0,287.19,277.15Z
+M287.51,262.23a.87.87,0,1,1-.86-.87A.86.86,0,0,1,287.51,262.23Z
+M287.6,175.64c0,5-3.28,9.94-9.84,13.73-11.41,6.58-29,7.44-42,2.58l-1.49.87s18.2,10,38.74,1.88c19.17-7.55,18.76-17.76,18.05-20.36a5.77,5.77,0,0,0-3.48-1.72Z
+M287.6,175.64s-1.88,10.18-15.2,15.15-27.78,3.39-36.62,1.16c0,0,18.92,9.23,38.45.37C291.32,184.57,287.6,175.64,287.6,175.64Z
+M287.82,278.23a5.59,5.59,0,0,0-.56.12,9,9,0,0,0-.23,1.39c.23-.07.46-.14.69-.19A4.38,4.38,0,0,1,287.82,278.23Z
+M289.15,279.48l.3.06a4.44,4.44,0,0,1,0-1.37l-.2,0A6.46,6.46,0,0,0,289.15,279.48Z
+M289.25,266.25a.87.87,0,1,1-.87-.87A.87.87,0,0,1,289.25,266.25Z
+M290.28,352.84a.63.63,0,0,1-.46-.2,6.61,6.61,0,1,1,10-8.64.6.6,0,0,1-.91.78,5.41,5.41,0,1,0-8.18,7.07.6.6,0,0,1-.06.85A.57.57,0,0,1,290.28,352.84Z
+M291.78,274.32a11.5,11.5,0,0,0-1.45,1.4c.18,0,.36-.05.53-.08A9.72,9.72,0,0,1,291.78,274.32Z
+M293.06,233c7.58-3.93,16,.16,31.35,8.35l1.56-2.92a89.54,89.54,0,0,0-11-6c-10.83-4.9-14.95-5.45-23.44-2.28Z
+M293.72,285.47a14.8,14.8,0,0,1-1.48-.31,2.89,2.89,0,0,1-.58.67,3.66,3.66,0,0,0,1.44.57A4.86,4.86,0,0,0,293.72,285.47Z
+M294.15,283.61a4.56,4.56,0,0,1-1.52,0,2.44,2.44,0,0,1,0,.27,6.09,6.09,0,0,0,1.46.29A5.07,5.07,0,0,0,294.15,283.61Z
+M295,308.82a6,6,0,0,0,4.89,5.88l63.72,12a6.24,6.24,0,0,0,1.13.1,6,6,0,0,0,5.9-4.9l0-.21Z
+M296.79,360.38a.6.6,0,0,1-.46-.21,6.61,6.61,0,1,1,10-8.64.6.6,0,1,1-.91.79,5.4,5.4,0,1,0-8.18,7.06.6.6,0,0,1-.06.85A.58.58,0,0,1,296.79,360.38Z
+M303.3,367.91a.6.6,0,0,1-.46-.21,6.61,6.61,0,1,1,10-8.64.6.6,0,1,1-.91.79,5.41,5.41,0,1,0-8.18,7.07.6.6,0,0,1-.06.85A.62.62,0,0,1,303.3,367.91Z
+M303.56,232.51a.52.52,0,0,1-.41-.82,5.63,5.63,0,0,0,.87-4.22,5.3,5.3,0,0,0-1.79-3.42.51.51,0,1,1,.59-.83,6.21,6.21,0,0,1,2.21,4.09,6.67,6.67,0,0,1-1.06,5A.51.51,0,0,1,303.56,232.51Z
+M308.67,317l-.11,0c-2.08-.39-3.05-2.92-2.41-6.3.69-3.65,3.09-7,6.32-6.42a.61.61,0,0,1-.22,1.19c-2.44-.46-4.35,2.46-4.92,5.45-.4,2.15-.12,4.6,1.45,4.9a.6.6,0,0,1,.48.7A.62.62,0,0,1,308.67,317Z
+M312,235.55a.52.52,0,0,1-.37-.87,6.06,6.06,0,0,0,1.57-4.58,5,5,0,0,0-1.18-3.27.51.51,0,1,1,.65-.79,5.8,5.8,0,0,1,1.55,4,7.06,7.06,0,0,1-1.86,5.36A.51.51,0,0,1,312,235.55Z
+M313.08,357c-5.55,3.83-2.81,11.88.65,15.73s10.07,7,15.11,3.14c4.63-3.52,1.28-10.89-1.84-14.65C323.74,357.24,317.46,353.94,313.08,357Z
+M319.6,151.82l-11.52,11.72a1.27,1.27,0,0,0,.21,2c.24.15,8,4.59,8,4.59l11.34-13.66Z
+M324.41,241.33c-15.39-8.19-23.77-12.28-31.35-8.35l-3.69-7.12c11.67-6.05,23.05,0,38.81,8.4Z
+M327.61,156.43l-11.52,11.72a1.27,1.27,0,0,0,1.08,2.15l10.44-1.51C328.73,168.79,328.73,156.43,327.61,156.43Z
+M327.61,181.79V136.63a3.16,3.16,0,0,1,1.43-2.48l76.08-43.87c.79-.46,1.43-.09,1.43.82v45.17a3.18,3.18,0,0,1-1.43,2.48L329,182.62C328.25,183.07,327.61,182.7,327.61,181.79Z
+M329,182.62a3.12,3.12,0,0,1-2.87,0L321,179.75a3.1,3.1,0,0,1-1.44-2.46V132.13a3,3,0,0,1,.45-1.46l8,4.55a2.88,2.88,0,0,0-.42,1.41v45.16C327.61,182.62,328.2,183.11,329,182.62Z
+M329.9,321h-.12c-2.07-.39-3-2.93-2.4-6.31.69-3.65,3.08-7,6.32-6.41a.6.6,0,1,1-.22,1.18c-2.46-.47-4.35,2.47-4.92,5.46-.4,2.15-.13,4.6,1.45,4.89a.62.62,0,0,1,.48.71A.61.61,0,0,1,329.9,321Z
+M331.11,371c-.39,2.73-4.57,6.27-11.62.82s-7.21-13.61-4.89-15.61a7,7,0,0,0-1.52.77c-5.55,3.83-2.81,11.88.65,15.73s10.06,7,15.11,3.14A5.8,5.8,0,0,0,331.11,371Z
+M337.52,222c2.45-5,10.23-5.64,16.28,0,9.08,8.47,10.57,16.86,6.74,21.32s-9.68,3.18-14.88-1.5C341.66,238.19,334,229.17,337.52,222Z
+M342.36,217.17a8.77,8.77,0,0,0-4-5.94c-1.21-.95-1.4-1.94,0-2.36-2.16-.19-3.23,1.12-2.82,2.38.55,1.69,4.45,2.19,4.61,7.89a6.05,6.05,0,0,0,2.45.41C342.58,218.84,342.49,218,342.36,217.17Z
+M344.07,382.09c-5.35,5.13-6.79,13-6.79,13a118.86,118.86,0,0,1,8.38-11.59Z
+M345.09,419.86q-.18.61-.3,1.23l20.6-2.62c.16-.41.3-.83.44-1.25Z
+M345.21,426.7,362,424.56c.34-.42.65-.86,1-1.31l-18.09,2.3A11.23,11.23,0,0,0,345.21,426.7Z
+M345.49,230a2.78,2.78,0,0,0,1.48-3.45c-.83-2.41-3.74-3.12-3.74-3.12s-5.39-1.49-9.5,1-4.17,7.7-4.05,9.37a2.35,2.35,0,0,0,4.55.5c.95-2.05.94-4.89,4.37-5.89C341.43,227.57,343.81,230.74,345.49,230Z
+M345.66,218.05c-.2-2.17-1-6.68-4.79-8.46s-5.84,0-5.3,1.66,4.45,2.19,4.61,7.89C340.18,219.14,343.58,220.61,345.66,218.05Z
+M347.28,231.6a4,4,0,0,1,3.64,2c1.92,2.91-.34,4.13-.34,4.13-1.49.18-3.37-.76-6.42.45-3.79,1.5-4.21,4.38-5.1,6.65-1,2.52-4.85,1.15-4.22-2.78s2.25-6.47,4.82-8.13A14.52,14.52,0,0,1,347.28,231.6Z
+M347.86,413.85c-.25.42-.49.85-.72,1.28l19.93-2.54c.09-.41.17-.81.24-1.22Z
+M349.73,264.32c-3.77-18.38-9.91-33.94-18.67-46.29a19.2,19.2,0,0,1-1.64,3.24c7.48,8.72,16.51,30.46,18,46A26.57,26.57,0,0,0,349.73,264.32Z
+M351.12,325H351c-2.08-.39-3-2.93-2.4-6.3.68-3.66,3.08-7,6.32-6.42a.6.6,0,1,1-.23,1.18c-2.45-.46-4.35,2.47-4.91,5.46-.41,2.15-.13,4.6,1.44,4.9a.6.6,0,0,1-.11,1.19Z
+M351.67,407.7q-.39.65-.81,1.29l17.27-2.19c.11-.41.24-.82.39-1.24Z
+M354.54,401.67c-.15.43-.3.84-.45,1.25l16.73-2.13c.24-.42.49-.85.75-1.28Z
+M356.28,395.79c-.12.41-.23.83-.34,1.23l18.74-2.38.85-1.3Z
+M358,389.91c-.13.41-.27.82-.39,1.24l20.9-2.66c.24-.44.46-.86.66-1.27Z
+M360.49,383.93c-.23.42-.44.84-.65,1.27l21-2.67c.11-.42.21-.83.29-1.22Z
+M360.9,318.65c7.78.74,14.1-2.09,14.4-4.6,0,0,1.88-10.48-12-11.6s-14.26,9.05-14.26,9.05C349,313.9,353.11,317.92,360.9,318.65Z
+M364.78,326.84a6.24,6.24,0,0,1-1.13-.1l-63.72-12a6,6,0,1,1,2.24-11.81l63.72,12a6,6,0,0,1-1.11,11.92Z
+M365.08,377.69c-.42.42-.83.87-1.24,1.34l17.62-2.24a10.36,10.36,0,0,0-.15-1.17Z
+M375.3,314.05a9.7,9.7,0,0,0-2.54-7.93c.53,1,2.75,6.1-5.38,8.44-9.06,2.59-17.37-3.1-17.83-5.34h0a8.7,8.7,0,0,0-.5,2.28c0,2.4,4.06,6.42,11.85,7.15S375,316.56,375.3,314.05Z
+M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z
+M401.79,306.74a150.84,150.84,0,0,0-3.21,16.69,61.1,61.1,0,0,1,0-16.69Z
+M406.53,90.84c-.11-.72-.7-1-1.41-.56L329,134.15a2.9,2.9,0,0,0-1,1.07l-8-4.55a2.83,2.83,0,0,1,1-1l76.08-43.88a3.22,3.22,0,0,1,2.87,0l5.13,2.88A3.15,3.15,0,0,1,406.53,90.84Z
+M418,326.65l13.13-7.58c0-.39,0-.78,0-1.16l-12.86,7.43C418.18,325.78,418.09,326.22,418,326.65Z
+M419.66,318.35c-.08.43-.15.86-.23,1.29l12-6.91c.05-.41.11-.83.17-1.25Z
+M420.56,305.41c0,.39,0,.78,0,1.17l14-8.07c.12-.46.25-.92.38-1.38Z
+M420.68,299.14l0,1.17,15.87-9.16c.09-.43.17-.86.25-1.3Z
+M429.06,332.69c.18-.48.34-1,.5-1.45l-13,7.52a6.41,6.41,0,0,0,.3,1Z
+M430.73,325.56c0-.42.1-.83.14-1.24l-14,8.12c-.08.44-.15.87-.21,1.28Z
+M433,304.45l-12.58,7.26c0,.41-.05.81-.07,1.2l12.33-7.12C432.77,305.34,432.88,304.9,433,304.45Z
+M436.42,277.63l-13.87,8c-.14.45-.27.91-.4,1.39l14.58-8.42C436.64,278.27,436.53,277.94,436.42,277.63Z
+M437.3,284.49c0-.39,0-.78,0-1.16l-16.17,9.34c0,.41-.09.81-.13,1.23Z
+M44.54,334.5c0,.45,0,8.82,0,9.06a.4.4,0,0,0,.08.23l3.57,5a1.07,1.07,0,0,0,.61.35V340a1.09,1.09,0,0,1-.64-.36l-3.56-5A.33.33,0,0,1,44.54,334.5Z
+M58.18,176.44l-7.55-4.35a1.33,1.33,0,0,1-.24-.19,2.32,2.32,0,0,1-.56-1.73V158.71a15.36,15.36,0,0,1,.3-3l7.64,4.41a14.64,14.64,0,0,0-.29,3v11.47a2.38,2.38,0,0,0,.55,1.73Z
+M58.29,338.66v9.08a2.08,2.08,0,0,1,.9.27,21.82,21.82,0,0,0,2,1.27s0-2.08,0-2.36a.87.87,0,0,1,.09-.37l2.15-4.26a.76.76,0,0,0-.27-1.07,25.73,25.73,0,0,1-4-2.28A1.76,1.76,0,0,0,58.29,338.66Z
+M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z
+M61.18,347v2.25h0v3.56c0,1.61,0,3.18,0,3.25a.59.59,0,0,0,.46.5l8.95,2.13a1.18,1.18,0,0,0,.61,0V349.6a1.27,1.27,0,0,1-.63,0l-8.95-2.14A.55.55,0,0,1,61.18,347Z
+M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z
+M7.71 8.23l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75L1 11.98l3.75-3.75L1 4.48 2.48 3l3.75 3.75L9.98 3l1.48 1.48-3.75 3.75z
+M71.21,349.6v9.08a1.94,1.94,0,0,0,.82-.48l3.69-3.89a2.47,2.47,0,0,1,1-.56v-9.08a2.34,2.34,0,0,0-1,.57L72,349.12A2,2,0,0,1,71.21,349.6Z
+M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z
+M76.69,344.67v9.08a1.6,1.6,0,0,1,.54-.09,45.64,45.64,0,0,0,5.61,0,2.16,2.16,0,0,1,.83.13v-9.08a2,2,0,0,0-.85-.13,45.48,45.48,0,0,1-5.6,0A1.51,1.51,0,0,0,76.69,344.67Z
+M80.52,102.74l0,.14A10.35,10.35,0,0,0,79.41,105l-21,53a12,12,0,0,0-.62,2.17l-7.7-4.44a13.65,13.65,0,0,1,.61-2.15l21-52.94a9.46,9.46,0,0,1,1.17-2.24,0,0,0,0,1,0,0Z
+M82.08,176.4l.13.11-7.55-4.34a1.24,1.24,0,0,1-.22-.18,2.3,2.3,0,0,1-.57-1.73V168l7.65-4.41v11A2.33,2.33,0,0,0,82.08,176.4Z
+M83.67,344.72v9.08a1.29,1.29,0,0,1,.52.29l4.12,4.33a1.23,1.23,0,0,0,.75.3v-9.08a1.26,1.26,0,0,1-.77-.29L84.17,345A1.2,1.2,0,0,0,83.67,344.72Z
+M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4
+M93.69,95.31a1.1,1.1,0,0,0-1.07.1L82,101.54a4.87,4.87,0,0,0-1.44,1.2l-7.65-4.41a4.93,4.93,0,0,1,1.43-1.2L85,91a1,1,0,0,1,1.12-.07Z
+M97,317.08c.69.32,1.35.66,2,1v-6.68a.93.93,0,0,1-.1.34L96.68,316A.78.78,0,0,0,97,317.08Z
+M99,349.26c.58-.34,1.15-.69,1.68-1.06a3,3,0,0,1,1.31-.47v-9.08a2.86,2.86,0,0,0-1.32.48,25.6,25.6,0,0,1-3.44,2c-.5.25-.78.68-.62,1l2.33,4.61a.49.49,0,0,1,0,.19C99,347.19,99,349.26,99,349.26Z
+MacIntel
+Mechanical Engineer - Radiation Safety Officer - NDT Engineer
+Membership Card
+Memo
+Minified React error #
+Missing enrollment number.
+Module
+Mohammad Zakwan Zaheen
+Moumita Das
+Mr Amit Jha
+Mr Vikram Singh
+Mr. Sunil Sharma
+Ms Gargi Sharma
+Name
+NativeScript
+NavLink
+Navigation
+Network Error
+New Password
+No QueryClient set, use QueryClientProvider to set one
+No data found.
+No mutationFn found
+No token provided
+No token provided.
+Not registered?
+Notable Alumni
+Notifications Alt+T
+Object
+Object iterator must return a key-value pair
+Objects are not valid as a React child (found:
+Old Password
+Our alumni light the world with their knowledge, integrity, and innovation. This portal bridges connections, fosters collaboration, and inspires future generations.
+Overlay content
+Password
+Passwords do not match.
+Personal Data
+Personal Details
+Personal Information
+Phone No : 01202344209
+Phone No.
+Phone Number
+Phone number must be a 10-digit number.
+Please enter a valid GitHub URL.
+Please enter a valid Insta URL.
+Please enter a valid LinkedIn URL.
+Please enter a valid X URL.
+Please enter a valid email address.
+Please enter a valid father's name.
+Please enter a valid name.
+Please fix form errors before submitting.
+Please select a branch.
+Please select a programme.
+Please select a school.
+Please select a title.
+Please select the year of passing.
+Please select your date of birth.
+Please specify a reason to reject.
+Please try again.
+Please upload a degree certificate image.
+Portal
+Post Doctoral Researcher at Polytechnique Montreal II Ph.D. Indian Institute of Technology Jodhpur
+Preety Bajwa
+President GBUAA
+Proceed to Pay
+Profile
+Profile Data
+Profile Pic
+Profile updated successfully
+Profiler
+Programme
+React Router caught the following error during render
+React has blocked a javascript: URL as a security precaution.
+React.Children.only expected to receive a single React element child.
+ReactNative
+ReadableStream
+Reason...
+Reconnect. Inspire. Grow.
+RegExp
+Register
+Register as Alumni
+Registered Successfully!
+Reject
+Remember me
+Request
+Request aborted
+Request failed
+Request failed with status code
+Response
+Retry
+Ritu Bhardwaj
+Rohit Dwivedi
+Roll No.
+Roll Number
+Roll Number is should be in format (123abc234).
+Roll no.
+Route
+RouteError
+SR No.
+Sachin Mishra
+Sanyukta Srivanstava
+Save
+Save
+Saving...
+School
+Search by name or roll no.
+Search by name.
+Search by roll no.
+Search by username.
+Secretary GBUAA
+Secretary, GBUAA
+Select Branch
+Select Programme
+Select School
+Session expired. Login again!
+Set New Password
+Set Password
+Social Media
+Something went wrong
+Something went wrong while starting the payment.
+Something went wrong!
+Spread across
+Start
+Status
+Stay Connected with Your Alma Mater
+StrictMode
+Student png
+Sub Admin Login
+Sub-Admins
+Sumit Kumar Singh
+Suspense
+SuspenseList
+Swiper
+Swiper Loop Warning: The number of slides is not even to slidesPerGroup, loop mode may not function properly. You need to add more slides (or make duplicates, or empty slides)
+SwiperSlide
+SyntaxError
+TextEvent
+The argument must be a React element, but you passed
+There is no suitable adapter to dispatch the request
+Title
+Toastify
+Toastify--animate-icon Toastify__zoom-enter
+Toastify__progress-bar
+Toastify__progress-bar--animated
+Toastify__progress-bar--controlled
+Toastify__progress-bar--rtl
+Toastify__progress-bar--wrp
+Toastify__spinner
+Toastify__toast
+Toastify__toast--close-on-click
+Toastify__toast--rtl
+Toastify__toast--stacked
+Toastify__toast-container
+Toastify__toast-container--rtl
+Toastify__toast-icon
+Token expired
+Transition
+TransitionCancel
+TransitionEnd
+TransitionEvent
+TransitionRun
+TransitionStart
+Treasurer GBUAA
+Txn-Date
+Txn-ID
+TypeError
+URLSearchParams
+Unauthorized: No token provided
+Unidentified
+Unknown error
+Unknown option
+Unsupported protocol
+Upload Degree/Marksheet (max size 2MB)
+User
+User-Agent
+User-Id
+Username
+Uttar Pradesh (INDIA) - 201312
+Venue
+Verify Users
+Version/
+Vice Chancellor
+Vice President GBUAA
+ViewTransition
+Waris Nawaz Khan
+Webkit
+Win32
+Worldwide Network
+Yamuna Expressway,
+Yamuna Expressway, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh-201312
+Year Of Passing
+Year of Passing
+You should call navigate() in a React.useEffect(), not when your component is first rendered.
+_GBUEng_lda45_44
+_GBUHindi_lda45_38
+_GBUText_lda45_50
+_OverlayDiv_sc89z_70
+_VCCard_9wpe2_15
+_VCSignature_9wpe2_77
+_VCimg_9wpe2_85
+_VCwordsContainer_9wpe2_61
+_VCwords_9wpe2_61
+__esModule
+_aboutEvent_1p93z_46
+_aboutEvent_9wpe2_165
+_aboutSectionTitle_1ilyu_36
+_aboutStatSection_1ilyu_24
+_acceptBtn_igrbv_64
+_addressText_4d6ex_45
+_adminHeaderAll_lda45_116
+_adminHeaderChota_lda45_120
+_adminHeaderHeader_lda45_103
+_allowSlideNext
+_allowSlidePrev
+_alumniCard_1ilyu_147
+_alumniContainer_1ilyu_1
+_alumniDP_1ilyu_163
+_associationImage_1ilyu_202
+_associationNameDiv_w0pq7_67
+_associationName_w0pq7_67
+_autoHeight
+_backBtn_igrbv_62
+_backToLoginBtn_418qy_80
+_backToLoginSpan_418qy_79
+_beforeBreakpoint
+_bigArea_137ld_12
+_btnContainer_418qy_54
+_btnsContainer_igrbv_53
+_cancelBtn_1rofe_52
+_centerInsufficientSlides
+_centeredSlides
+_centeredSlidesBounds
+_changeBtnLabel_dycig_40
+_changePassContainer_ogwis_1
+_checkBox_16m1t_45
+_checkLabel_16m1t_48
+_checkStatusBtn_16m1t_66
+_cllgAdd_w0pq7_79
+_cllgName_5c26s_35
+_closeBtn_1x8i6_20
+_connectSection_1ilyu_86
+_containerClasses
+_copyRightDiv_4d6ex_54
+_copyRightText_4d6ex_63
+_createBtn_2edzc_36
+_customNext_1jf0y_13
+_customPrev_1jf0y_12
+_dataBox_dycig_1
+_deleteBtn_ho1e7_72
+_devName_4d6ex_73
+_devTeamDiv_4d6ex_55
+_devTeam_4d6ex_55
+_distinguishedAlumniCards_1ilyu_137
+_distinguishedAlumni_1ilyu_131
+_edgeSwipeDetection
+_edgeSwipeThreshold
+_editBtn_1rofe_26
+_errorBox_w0pq7_152
+_errorInput_9nx4h_76
+_errorText_9nx4h_70
+_eventCard_1p93z_21
+_eventCard_9wpe2_129
+_eventList_9wpe2_121
+_eventName_1p93z_38
+_eventName_9wpe2_146
+_eventTitleContainer_1p93z_12
+_eventTitleContainer_9wpe2_110
+_eventTitle_1p93z_12
+_eventTitle_9wpe2_110
+_extrasInfo_1p93z_58
+_fadeText_ho1e7_54
+_followFinger
+_freeMode
+_freeModeNoMomentumRelease
+_freeModeStaticRelease
+_fullImage_1x8i6_14
+_fullScrn_137ld_26
+_grabCursor
+_headingDiv_2edzc_10
+_hideContainer_lda45_150
+_imageBox_igrbv_22
+_imageInputWrapper_dycig_36
+_imageLoaderOverlay_igrbv_40
+_imageSection_sc89z_17
+_imageWrapper_dycig_26
+_imagesDiv_1ilyu_195
+_imgGallery_1ilyu_192
+_innerBox_w0pq7_105
+_interactionSide_2edzc_59
+_leftCol_w0pq7_27
+_leftSection_1ilyu_160
+_linkBox_vm8mr_1
+_loaderBox_ho1e7_58
+_loaderContainer_qphad_1
+_loginBtn_16m1t_65
+_loginBtn_lda45_94
+_logoBox_4d6ex_27
+_logoImg_lda45_21
+_longSwipes
+_navbarBtnActive_1624e_21
+_navbarBtn_1624e_9
+_navbarBtns_1624e_9
+_nextBtn_igrbv_65
+_noClick_ho1e7_62
+_noData_ho1e7_66
+_noSwiping
+_notableAlumniText_9wpe2_92
+_notableAlumni_9wpe2_89
+_passwordToggle_9nx4h_59
+_passwordWrapper_9nx4h_53
+_profileImage_sc89z_25
+_reactListening
+_registerBtn_1ilyu_106
+_registerBtn_lda45_88
+_rejectBtn_igrbv_63
+_rememberMe_16m1t_39
+_resistanceRatio
+_retryBtn_w0pq7_161
+_revertPng_9wpe2_28
+_rightCol_w0pq7_58
+_rightSection_1ilyu_167
+_saveBtn_1rofe_51
+_shortSwipes
+_signatureBox_w0pq7_133
+_signatureP_w0pq7_142
+_singleBox_dycig_79
+_slideClass
+_slideClasses
+_slideToClickedSlide
+_slidesOffsetAfter
+_slidesOffsetBefore
+_slidesPerGroup
+_slidesPerGroupAuto
+_slidesPerGroupSkip
+_slidesPerView
+_smallArea_137ld_21
+_spaceBetween
+_spinnerContainer_137ld_1
+_statCard_1ilyu_57
+_statsSection_1ilyu_50
+_studentPng_9wpe2_14
+_subBox_dycig_87
+_subBox_w0pq7_110
+_subHeading_1ilyu_121
+_subHeading_w0pq7_123
+_submitButton_418qy_60
+_swipeHandler
+_tableBody_ho1e7_50
+_tableBox_ho1e7_12
+_tableContainer_ho1e7_1
+_tableHead_ho1e7_31
+_taglineText_9wpe2_40
+_textContainer_lda45_26
+_textDiv_lda45_31
+_textSection_sc89z_31
+_threeTiles_418qy_24
+_titleBox_w0pq7_8
+_titleContainer_5c26s_11
+_topBar_1rofe_11
+_topSection_9wpe2_5
+_twoTiles_418qy_30
+_uploadBtn_kf6j7_18
+_uploadBtn_ogwis_24
+_uploadSvgBox_dycig_48
+_userInfoWrapper_lda45_128
+_userInfo_sc89z_37
+_userListBox_igrbv_13
+_validUpto_w0pq7_49
+_virtualUpdated
+_watchOverflow
+_watchSlidesProgress
+accentHeight
+acceptCharset
+activeIndexChange
+adapterName
+addEventListener
+afterInit
+alignmentBaseline
+allowSlideNext
+allowSlidePrev
+allowTouchMove
+altKey
+alumniName
+arabicForm
+arrayBuffer
+assets/CheckStatus-ADoBem52.css
+assets/CheckStatus-BIJhK_G3.js
+autoReverse
+autoplayPause
+autoplayResume
+autoplayStart
+autoplayStop
+autoplayTimeLeft
+baseURL
+baselineShift
+beforeDestroy
+beforeInit
+beforeLoopFix
+beforeResize
+beforeSlideChangeStart
+beforeTransitionStart
+breakpointsBase
+capHeight
+cardNo
+cardsEffect
+changeDirection
+changePassword
+charCode
+checkStatus
+childList
+clipPath
+clipRule
+clipboardData
+cnfPass
+colorInterpolation
+colorInterpolationFilters
+colorProfile
+colorRendering
+confirmationInput
+contactUs
+containerId
+containerModifierClass
+contentEditable
+coverflowEffect
+creativeEffect
+crossOrigin
+cssMode
+ctrlKey
+cubeEffect
+currentColor
+dangerouslySetInnerHTML
+defaultChecked
+defaultValue
+degreeImg
+deltaX
+deltaY
+devTeam
+documentMode
+dominantBaseline
+doubleTap doubleClick
+enableBackground
+encType
+enrollmentNo
+errorElement
+eventsPrefix
+experimental_prefetchInRender feature flag is not enabled
+externalResourcesRequired
+fadeEffect
+fatherName
+fillOpacity
+fillRule
+flipEffect
+floodColor
+floodOpacity
+focusableElements
+fontFamily
+fontSize
+fontSizeAdjust
+fontStretch
+fontStyle
+fontVariant
+fontWeight
+forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported
+forceUpdate
+foreignObject
+forgetPassword
+formAction
+formData
+formEncType
+formMethod
+formTarget
+freepik--Arm--inject-12
+freepik--Floor--inject-12
+freepik--Gears--inject-12
+freepik--Robot--inject-12
+freepik--Shadow--inject-12
+freepik--Shadows--inject-12
+fromEdge
+getAllResponseHeaders
+gitHub
+glyphName
+glyphOrientationHorizontal
+glyphOrientationVertical
+hashNavigation
+horizAdvX
+horizOriginX
+htmlFor
+imageRendering
+initialSlide
+injectStyles
+injectStylesUrls
+innerHTML
+isAxiosError
+isPrototypeOf
+isRestoring
+lazyPreloadPrevNext
+lazyPreloaderClass
+letterSpacing
+lightingColor
+linkedIn
+longSwipesMs
+longSwipesRatio
+loopAddBlankSlides
+loopAdditionalSlides
+loopFix
+loopPreventsSliding
+m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z
+marginBottom
+marginLeft
+marginRight
+markerEnd
+markerMid
+markerStart
+maxBackfaceHiddenSlides
+membershipCard
+metaKey
+movementX
+movementY
+navigationHide
+navigationNext
+navigationPrev
+navigationShow
+newPass
+noSwipingClass
+noSwipingSelector
+normalizeSlideIndex
+observeParents
+observeSlideChildren
+observerAdded
+observerOptionsUpdated
+observerRemoved
+observerResultsUpdated
+observerUpdate
+offlineFirst
+offsetHeight
+offsetWidth
+oldPass
+onAnimationEnd
+onAnimationIteration
+onAnimationStart
+onBeforeInput
+onBlur
+onCompositionEnd
+onCompositionStart
+onCompositionUpdate
+onDoubleClick
+onDoubleClickCapture
+onFocus
+onMouseDown
+onMouseDownCapture
+onMouseEnter
+onMouseLeave
+onMouseMove
+onMouseMoveCapture
+onMouseUp
+onMouseUpCapture
+onPointerEnter
+onPointerLeave
+onScroll
+onScrollEnd
+onSelect
+onTransitionCancel
+onTransitionEnd
+onTransitionRun
+onTransitionStart
+oneWayMovement
+overlinePosition
+overlineThickness
+paintOrder
+passiveListeners
+payment Failed
+paymentUrl
+phoneNo
+pointerEvents
+preserveAlpha
+preventClicks
+preventClicksPropagation
+preventInteractionOnTransition
+profileImg
+re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().
+reachBeginning toEdge
+reachEnd toEdge
+realIndexChange
+removeEventListener
+renderingIntent
+resize observerUpdate
+resize orientationchange observerUpdate
+resizeObserver
+rollNo
+roundLengths
+rowSpan
+runCallbacksOnInit
+schoolName
+scrollBehavior
+scrollLeft
+scrollTop
+selectionStart
+setRequestHeader
+setState
+setTranslate
+setWrapperSize
+shapeRendering
+shiftKey
+simulateTouch
+slideActiveClass
+slideBlankClass
+slideChange
+slideClass
+slideFullyVisibleClass
+slideNextClass
+slidePrevClass
+slideVisibleClass
+sliderFirstMove
+sliderMove
+slidesGridLengthChange
+slidesLengthChange
+slidesUpdated
+snapGridLengthChange
+snapIndexChange
+spellCheck
+srcSet
+statusText
+stopColor
+stopOpacity
+strikethroughPosition
+strikethroughThickness
+strokeDasharray
+strokeDashoffset
+strokeLinecap
+strokeLinejoin
+strokeMiterlimit
+strokeOpacity
+strokeWidth
+sub-Admin
+subAdmin
+super-Admin
+superAdmin
+suppressContentEditableWarning
+suppressHydrationWarning
+swiperElementNodeName
+textAnchor
+textDecoration
+textInput
+textRendering
+toEdge fromEdge lock unlock
+toJSON
+touchAngle
+touchEnd
+touchEventsTarget
+touchMove
+touchMoveOpposite
+touchMoveStopPropagation
+touchRatio
+touchReleaseOnEdges
+touchStart
+touchStartForcePreventDefault
+touchStartPreventDefault
+transformOrigin
+transitionEnd
+transitionStart
+trxId
+uncaughtException
+underlinePosition
+underlineThickness
+unicodeBidi
+unicodeRange
+uniqueNavElements
+unitsPerEm
+updateOnWindowResize
+useEffect CRUD overload is not enabled in this build of React.
+useFormAction must be used inside a RouteContext
+useNavigate
+useRouteError
+useRouteId
+useSubmit
+useViewTransitionState
+userAgent
+userId
+vAlphabetic
+vHanging
+vIdeographic
+vMathematical
+vectorEffect
+vertAdvY
+vertOriginX
+vertOriginY
+virtualTranslate
+vite:preloadError
+wheelDelta
+wheelDeltaX
+wheelDeltaY
+withXSRFToken
+wordSpacing
+wrapperClass
+wrapperEl
+writingMode
+xHeight
+xlinkActuate
+xlinkArcrole
+xlinkRole
+xlinkShow
+xlinkTitle
+xlinkType
+xmlBase
+xmlLang
+xmlSpace
+xmlnsXlink
+yearOfPassing

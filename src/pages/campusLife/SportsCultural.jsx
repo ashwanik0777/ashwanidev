@@ -47,20 +47,6 @@ const GBU_SPORTS_FACILITIES = [
   },
   {
     id: 4,
-    icon: Flame,
-    title: "Olympic-size Swimming Pool",
-    image: "/assets/completegbu.webp",
-    type: "Aquatic Swimming Complex",
-    location: "Adjacent to Eklavya Stadium",
-    capacity: "500 Spectators",
-    access: "Registered students & staff with swimming passes",
-    timings: "6:00 AM - 9:00 AM & 5:00 PM - 8:30 PM (Separate slots for girls and boys)",
-    contact: "Life Guard & Instructor - Ext: 4128",
-    bookingInfo: "Monthly/Semester swimming passes must be obtained from the Finance Office after medical fitness clearance.",
-    description: "An Olympic-standard 50-meter swimming pool featuring 10 lanes, crystal clear temperature-controlled water, state-of-the-art filtration plant, and a separate diving pool with multiple springboards. Experienced lifeguards and swimming coaches are on duty during all operational hours to ensure maximum safety and professional training for students."
-  },
-  {
-    id: 5,
     icon: Activity,
     title: "Decoturf Tennis Arena",
     image: "/assets/sports1.jpg",
@@ -74,7 +60,7 @@ const GBU_SPORTS_FACILITIES = [
     description: "A set of four premium synthetic Decoturf tennis courts, designed to match professional tournament standards. These courts are fully floodlit, allowing students to play late into the evening. Perfect for both beginners learning the game and advanced university players training for inter-varsity meets."
   },
   {
-    id: 6,
+    id: 5,
     icon: Shield,
     title: "Central Gymnasium & Fitness Center",
     image: "/assets/campusimg/Ellavya_Sports_complex.jpg",
@@ -107,20 +93,15 @@ const SportsWellness = () => {
 
   return (
     <SearchableWrapper>
-      <section id="sports-wellness" className="py-24 bg-white font-sans text-left">
+      <section id="sports-wellness" className="py-16 bg-white font-sans text-left">
         <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl">
-          
+
           {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 gap-4">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3 border border-blue-100">
-                <Trophy size={13} />
-                <span>Athletics & Training</span>
-              </div>
               <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">Sports & Fitness Venues</h2>
-              <p className="text-slate-500 text-sm mt-1">Olympic-standard courts and stadiums spread across the GBU campus.</p>
             </div>
-            
+
             {/* Custom slider navigation controls */}
             <div className="flex gap-2">
               <button
@@ -167,7 +148,7 @@ const SportsWellness = () => {
                     <h3 className="font-bold text-lg mt-0.5 leading-tight">{facility.title}</h3>
                   </div>
                 </div>
-                
+
                 <div className="p-6 text-sm text-slate-600 space-y-3">
                   <div className="flex items-center gap-2">
                     <MapPin size={15} className="text-slate-400" />
@@ -181,7 +162,7 @@ const SportsWellness = () => {
                     <Clock size={15} className="text-slate-400" />
                     <span>{facility.timings}</span>
                   </div>
-                  
+
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-blue-600 font-semibold group-hover:translate-x-1 transition-transform">
                     <span>View Scheduling Details</span>
                     <ChevronRight size={16} />
@@ -212,7 +193,7 @@ const SportsWellness = () => {
                   </h2>
                   <p className="text-xs text-slate-500 uppercase font-semibold tracking-wider mt-1">{selectedFacility.type}</p>
                 </div>
-                
+
                 <div className="space-y-6 text-left">
                   <img
                     src={selectedFacility.image}

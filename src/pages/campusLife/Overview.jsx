@@ -1,14 +1,13 @@
 import React from 'react';
 import CampusHero from './CampusHero';
 import CampusStats from './CampusStats';
-import HostelDining from "./HostelDining"
-import StudentTestimonials from './StudentTestimonials';
+import LifeAtCampus from './LifeAtCampus';
+import HostelDining from "./HostelDining";
 import VirtualTour from "./VirtualTour";
 import Header from "./Header";
 import ClubsCouncils from './ClubsCouncils';
 import Library from './Library';
 import SportsCultural from "./SportsCultural";
-import CafesFood from "./CafesFood";
 import EcoCampus from "./EcoCampus";
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
@@ -21,13 +20,11 @@ const Overview = () => {
       <CampusHero />
       <VirtualTour/>
       <CampusStats />
+      <LifeAtCampus />
       <HostelDining/>
-       
       <Library/>
       <SportsCultural/>
-      <CafesFood/>
       <EcoCampus/>
-      <StudentTestimonials />
       </main>
     </div>
     </SearchableWrapper>

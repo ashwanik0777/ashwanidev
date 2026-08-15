@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import homeData from "../../Data/home.json";
-
-const cardVariants = {
-  enter: { opacity: 0, x: 100 },
-  center: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -100 },
-};
+import gbuCampusView from "../../assets/GBU_CAMPUS_VIEW.jpg";
 
 const VisionaryLeadership = () => {
   const [leaders, setLeaders] = useState([]);
-  const [index, setIndex] = useState(0);
 
   const BASE_URL = (import.meta.env.VITE_HOST || "").replace(/\/$/, "");
 
@@ -30,7 +22,6 @@ const VisionaryLeadership = () => {
         return 0;
       });
 
-      // Add dynamic fallback routes for Chancellor and Vice-Chancellor details if URL is null
       const mapped = sorted.map((leader) => {
         let targetUrl = leader.url;
         const desc = (leader.designation || "").toLowerCase();
@@ -43,113 +34,94 @@ const VisionaryLeadership = () => {
             targetUrl = "#";
           }
         }
-        return { ...leader, url: targetUrl };
+
+        // Refine designations for exact presentation matching administrative standards
+        let displayDesignation = leader.designation;
+        if (leader.name?.includes("Yogi")) {
+          displayDesignation = "Hon'ble Chief Minister of Uttar Pradesh & Chancellor, GBU";
+        } else if (leader.name?.includes("Rana")) {
+          displayDesignation = "Vice-Chancellor, Gautam Buddha University";
+        }
+
+        return { ...leader, url: targetUrl, displayDesignation };
       });
 
       setLeaders(mapped);
     }
   }, []);
 
-  useEffect(() => {
-    if (leaders.length === 0) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % leaders.length);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [leaders]);
+  const getPhotoUrl = (photo) => {
+    if (!photo) return gbuCampusView;
+    if (photo.startsWith("http")) return photo;
+    if (photo.startsWith("/")) return photo;
+    return BASE_URL
+      ? `${BASE_URL}/${photo.startsWith("media") ? "" : "media/"}${photo}`
+      : `/${photo}`;
+  };
 
   if (leaders.length === 0) {
-    return (
-      <section className="py-16 text-center text-blue-800">
-        <p>Loading Visionary Leadership...</p>
-      </section>
-    );
+    return null;
   }
 
-  const current = leaders[index];
-  const fullImageUrl = current.photo?.includes("http")
-    ? current.photo
-    : current.photo?.startsWith("/")
-      ? current.photo
-      : BASE_URL
-        ? `${BASE_URL}/${current.photo.startsWith("media") ? "" : "media/"}${current.photo}`
-        : `/${current.photo}`;
-
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-br from-blue-100 via-white to-green-100">
-      <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-800 mb-10 sm:mb-12">
-        Visionary <span className="text-blue-800">Leadership</span>
-      </h2>
+    <section className="w-full bg-[#eaf4f8] py-5 sm:py-8 border-y border-slate-200/70 font-sans relative overflow-hidden">
+      {/* Top Left Accent Ribbon */}
+      <div className="absolute top-0 left-0 h-1.5 w-48 bg-gradient-to-r from-orange-500 via-amber-500 to-transparent z-10" />
 
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            variants={cardVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.8 }}
-            className="w-full bg-gradient-to-br from-white to-blue-50 rounded-3xl shadow-xl border border-blue-200 p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 sm:gap-10"
-          >
-            {/* Interactive Image Link with View Message Hover Overlay */}
-            <Link 
-              to={current.url} 
-              className="group/img block shrink-0 relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 w-60 h-56 sm:w-48 sm:h-64 md:w-[220px] md:h-[300px]"
-            >
-              <img
-                src={fullImageUrl}
-                alt={current.name}
-                className="w-full h-full object-cover rounded-2xl transform transition-transform duration-500 group-hover/img:scale-105"
-              />
-              <div className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="bg-white/95 text-blue-950 px-4 py-1.5 rounded-full text-xs font-bold shadow-md border border-blue-100 transform translate-y-2 group-hover/img:translate-y-0 transition-all duration-300">
-                  View Message
-                </span>
-              </div>
-            </Link>
+      {/* Desktop Only (lg+): Full-height Left Campus Image Banner */}
+      <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 h-full overflow-hidden pointer-events-none">
+        <img
+          src={gbuCampusView}
+          alt="Gautam Buddha University Campus"
+          className="w-full h-full object-cover object-center"
+          style={{
+            WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+            WebkitMaskComposite: "source-in",
+            maskImage: "linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%), linear-gradient(to top, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+            maskComposite: "intersect"
+          }}
+        />
+        {/* Soft edge feathering overlay */}
+        <div className="absolute inset-y-0 right-0 w-2/5 bg-gradient-to-l from-[#eaf4f8] via-[#eaf4f8]/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#eaf4f8] to-transparent" />
+      </div>
 
-            <div className="text-center md:text-left flex-1">
-              {/* Interactive Title Link with Hover Underline Effect */}
-              <Link to={current.url} className="inline-block group/title mb-1 sm:mb-2">
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-blue-900 group-hover/title:text-blue-700 transition-colors duration-300 relative">
-                  {current.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-700 group-hover/title:w-full transition-all duration-300" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-end gap-5 lg:gap-6">
+          
+          {/* Spacer to balance left 50% campus view on desktop */}
+          <div className="hidden lg:block w-1/2 min-h-[220px] pointer-events-none" />
+
+          {/* Right Side (50% Width on Desktop, 100% on Mobile/Tablet): VC & Chancellor Cards */}
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center">
+            {leaders.map((leader) => (
+              <Link
+                key={leader.id || leader.name}
+                to={leader.url}
+                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl py-4 px-4 sm:py-5 sm:px-5 flex flex-col items-center text-center justify-center shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
+              >
+                {/* Leader Avatar Photo */}
+                <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm mb-2.5 shrink-0 bg-slate-50 group-hover:border-orange-300 transition-colors duration-300">
+                  <img
+                    src={getPhotoUrl(leader.photo)}
+                    alt={leader.name}
+                    className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* Leader Name */}
+                <h3 className="font-extrabold text-[#1a2942] text-sm sm:text-base mb-1 group-hover:text-orange-600 transition-colors leading-snug">
+                  {leader.name}
                 </h3>
+
+                {/* Leader Designation */}
+                <p className="text-[11px] sm:text-xs text-gray-600 font-medium leading-tight max-w-[200px]">
+                  {leader.displayDesignation}
+                </p>
               </Link>
-              
-              <p className="text-sm sm:text-base text-gray-600 mb-4 font-semibold tracking-wide">
-                {current.designation}
-              </p>
-              <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-6">
-                {current.message}
-              </p>
+            ))}
+          </div>
 
-              {/* Read Full Message CTA Button */}
-              <div>
-                <Link
-                  to={current.url}
-                  className="group/btn inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-bold rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-100 hover:border-blue-200 shadow-sm hover:shadow transition-all duration-300"
-                >
-                  <span>Read Full Message</span>
-                  <ArrowRight className="w-4 h-4 text-blue-700 transform group-hover/btn:translate-x-1.5 transition-transform duration-300" />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Dots */}
-        <div className="flex justify-center mt-6 gap-3">
-          {leaders.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                i === index ? "bg-blue-600 scale-125" : "bg-gray-400"
-              }`}
-            ></button>
-          ))}
         </div>
       </div>
     </section>
@@ -157,4 +129,11 @@ const VisionaryLeadership = () => {
 };
 
 export default VisionaryLeadership;
+
+
+
+
+
+
+
 

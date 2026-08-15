@@ -1,0 +1,150 @@
+,alumniName:
+,enrollmentNo:
+,phoneNo:
+,schoolName:
+,yearOfPassing:
+./CheckStatus-BIJhK_G3.js
+/alumni/checkStatus
+/alumni/forgetPassword
+/alumni/forgetPassword/reset/:token
+/alumni/superAdmin
+/alumni/superAdmin/
+/alumni/superAdmin/login
+/alumni/user/changePassword
+/alumni/user/contactUs
+/alumni/user/membershipCard
+/assets/AbhishekKumar-SuTrkmMv.webp
+/assets/DineshKumar-B-48aSP3.webp
+/assets/alumniimg1-CvvCmhNn.webp
+/assets/alumniimg3-BGQe8mfu.webp
+/assets/alumniimg4-XBr3SvrY.webp
+10,000+ Alumni
+2025 - Gautam Buddha University.
+Abhishek Kumar
+About GBUAA
+Admin Login
+Alumni
+Alumni Login
+Alumni Name
+Alumni Registration Form
+An Ultimate Destination for Higher Learning
+Card Information
+Card No
+Card Number
+Check Status
+CompositionEvent
+Contact
+Contact Us
+Create a Event
+Degree Picture
+Designed & Developed By
+Dinesh Kumar
+Distinguished Alumni
+Dy. Secretary GBUAA
+Email : gbuaa@gbu.ac.in
+Enrollment Number
+Enrollment Number must be a non-negative number.
+Event deleted successfully
+Events
+Failed to delete event
+Failed to fetch events
+Failed to fetch school list
+Failed to fetch school list.
+Failed to update status
+Gallery
+Gautam Buddha University
+Gautam Buddha University (GBU) Greater Noida (U.P.) is a university established by the Uttar Pradesh Gautam Buddha University Act 2002 (UP Act No. 9 of 2002) and came into existence in 2008.
+Gautam Buddha University Alumni Association
+Gautam Buddha University Alumni Association (GBUAA)
+Join the GBU Alumni Association to network, contribute and inspire future generations.
+Login
+Login Error:
+Membership Card
+Missing enrollment number.
+Not registered?
+Notable Alumni
+Our alumni light the world with their knowledge, integrity, and innovation. This portal bridges connections, fosters collaboration, and inspires future generations.
+Phone No : 01202344209
+Phone No.
+Phone Number
+Phone number must be a 10-digit number.
+Please enter a valid email address.
+Please select a school.
+Please select the year of passing.
+Please upload a degree certificate image.
+President GBUAA
+Register
+Register as Alumni
+Registered Successfully!
+Request failed with status code
+School
+Secretary GBUAA
+Secretary, GBUAA
+Select School
+Session expired. Login again!
+Status
+Sub Admin Login
+TextEvent
+TransitionEvent
+Treasurer GBUAA
+Upload Degree/Marksheet (max size 2MB)
+Vice President GBUAA
+Yamuna Expressway, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh-201312
+Year Of Passing
+Year of Passing
+_VCCard_9wpe2_15
+_aboutEvent_1p93z_46
+_aboutEvent_9wpe2_165
+_addressText_4d6ex_45
+_alumniCard_1ilyu_147
+_alumniContainer_1ilyu_1
+_alumniDP_1ilyu_163
+_backToLoginBtn_418qy_80
+_backToLoginSpan_418qy_79
+_checkStatusBtn_16m1t_66
+_distinguishedAlumniCards_1ilyu_137
+_distinguishedAlumni_1ilyu_131
+_eventCard_1p93z_21
+_eventCard_9wpe2_129
+_eventList_9wpe2_121
+_eventName_1p93z_38
+_eventName_9wpe2_146
+_eventTitleContainer_1p93z_12
+_eventTitleContainer_9wpe2_110
+_eventTitle_1p93z_12
+_eventTitle_9wpe2_110
+_imgGallery_1ilyu_192
+_loginBtn_16m1t_65
+_loginBtn_lda45_94
+_notableAlumniText_9wpe2_92
+_notableAlumni_9wpe2_89
+_registerBtn_1ilyu_106
+_registerBtn_lda45_88
+_statCard_1ilyu_57
+addEventListener
+alumniName
+assets/CheckStatus-ADoBem52.css
+assets/CheckStatus-BIJhK_G3.js
+cardNo
+cardsEffect
+checkStatus
+contactUs
+degreeImg
+enrollmentNo
+eventsPrefix
+loopPreventsSliding
+membershipCard
+phoneNo
+pointerEvents
+preventClicks
+preventClicksPropagation
+preventInteractionOnTransition
+re trying to use event.stopPropagation() in a submit event handler, consider also calling event.preventDefault().
+removeEventListener
+schoolName
+statusText
+superAdmin
+touchEventsTarget
+touchStartForcePreventDefault
+touchStartPreventDefault
+yearOfPassing

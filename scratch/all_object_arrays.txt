@@ -1,0 +1,12 @@
+--- ARRAY 0 ---
+[{heading:"Profile Data",dataItems:k([{label:"Name",name:"alumniName"}]
+
+--- ARRAY 1 ---
+[{label:"Description",name:"description",editable:!0,type:"text"}]
+
+--- ARRAY 2 ---
+[{name:"oldPass",placeholder:"Old Password"}]
+
+--- ARRAY 3 ---
+[{label:"Description",value:a.description||"-"}]
+

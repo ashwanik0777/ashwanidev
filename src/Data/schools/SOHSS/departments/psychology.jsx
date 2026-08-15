@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Psychological First Aid",
             "Community Outreach"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Behavioral Statistics",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Neuropsychology",
             "Hospital Internship"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "Psychodiagnostics",
             "Psychotherapy Practice"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
             }
         ]
     }

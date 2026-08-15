@@ -108,15 +108,15 @@ export const departmentLayoutData = {
             "Transportation & Highways",
             "Surveying & GIS"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj",
+        syllabusUrl: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj"
+                url: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj"
+                url: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview"
             }
         ]
     },
@@ -135,15 +135,15 @@ export const departmentLayoutData = {
             "Foundation Design",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v",
+        syllabusUrl: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
+                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
+                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
             }
         ]
     },
@@ -162,15 +162,15 @@ export const departmentLayoutData = {
             "EIA & Environmental Auditing",
             "Solid Waste Systems"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
+        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
+                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
+                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
             }
         ]
     },
@@ -189,15 +189,15 @@ export const departmentLayoutData = {
             "FEM Structural Modeling",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v",
+        syllabusUrl: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
+                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
+                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
             }
         ]
     },
@@ -216,11 +216,11 @@ export const departmentLayoutData = {
             "Intelligent Transportation (ITS)",
             "Urban Transit"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI",
+        syllabusUrl: "https://drive.google.com/file/d/1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI"
+                url: "https://drive.google.com/file/d/1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI/preview"
             }
         ]
     },
@@ -239,11 +239,11 @@ export const departmentLayoutData = {
             "Safety Engineering",
             "Site Management"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
+        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
+                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
             }
         ]
     },
@@ -262,11 +262,11 @@ export const departmentLayoutData = {
             "Soil Dynamics",
             "Geoenvironmental Barriers"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
+        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
+                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
             }
         ]
     },
@@ -285,11 +285,11 @@ export const departmentLayoutData = {
             "Journal Publications",
             "Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
+        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
+                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
             }
         ]
     }

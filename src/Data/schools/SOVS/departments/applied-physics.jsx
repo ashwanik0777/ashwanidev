@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Wave Optics & Lasers",
             "Modern Physics Labs"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q",
+        syllabusUrl: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q"
+                url: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Computational Physics",
             "Honors Research Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q",
+        syllabusUrl: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q"
+                url: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Photonics & Lasers",
             "Quantum Computing & Info"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89",
+        syllabusUrl: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89"
+                url: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Statistical Physics",
             "Master Thesis Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89",
+        syllabusUrl: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89"
+                url: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview"
             }
         ]
     },
@@ -199,11 +199,11 @@ export const departmentLayoutData = {
             "Peer-Reviewed Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk",
+        syllabusUrl: "https://drive.google.com/file/d/1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk/preview",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk"
+                url: "https://drive.google.com/file/d/1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk/preview"
             }
         ]
     }

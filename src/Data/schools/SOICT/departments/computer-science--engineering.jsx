@@ -114,23 +114,23 @@ export const departmentLayoutData = {
             "DBMS & Cloud Computing",
             "Full-Stack Development"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8",
+        syllabusUrl: "https://drive.google.com/file/d/1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8/preview",
         syllabus: [
             {
                 session: "2026-30",
-                url: "https://drive.google.com/uc?export=download&id=1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8"
+                url: "https://drive.google.com/file/d/1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8/preview"
             },
             {
                 session: "2025-29",
-                url: "https://drive.google.com/uc?export=download&id=1qTaZrZI3xqAK2kUmRuizoe1VTt4FcbXl"
+                url: "https://drive.google.com/file/d/1qTaZrZI3xqAK2kUmRuizoe1VTt4FcbXl/preview"
             },
             {
                 session: "2024-28",
-                url: "https://drive.google.com/uc?export=download&id=1JnhCU6KMOXLh5CkH0nzpaeOArQ-b70T8"
+                url: "https://drive.google.com/file/d/1JnhCU6KMOXLh5CkH0nzpaeOArQ-b70T8/preview"
             },
             {
                 session: "2023-27",
-                url: "https://drive.google.com/uc?export=download&id=1QQ7Ee3r4escqlQecxa95b3IeM6GNis45"
+                url: "https://drive.google.com/file/d/1QQ7Ee3r4escqlQecxa95b3IeM6GNis45/preview"
             }
         ]
     },
@@ -149,23 +149,23 @@ export const departmentLayoutData = {
             "Computer Vision",
             "Reinforcement Learning"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF",
+        syllabusUrl: "https://drive.google.com/file/d/1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF/preview",
         syllabus: [
             {
                 session: "2026-30",
-                url: "https://drive.google.com/uc?export=download&id=1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF"
+                url: "https://drive.google.com/file/d/1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF/preview"
             },
             {
                 session: "2025-29",
-                url: "https://drive.google.com/uc?export=download&id=1qLv-_S8OqvdtiPvbDfaiUAvMVMXvxqoy"
+                url: "https://drive.google.com/file/d/1qLv-_S8OqvdtiPvbDfaiUAvMVMXvxqoy/preview"
             },
             {
                 session: "2024-28",
-                url: "https://drive.google.com/uc?export=download&id=12k9afe6ZphBtEFh1l1up6ivxqug7rtlQ"
+                url: "https://drive.google.com/file/d/12k9afe6ZphBtEFh1l1up6ivxqug7rtlQ/preview"
             },
             {
                 session: "2023-27",
-                url: "https://drive.google.com/uc?export=download&id=1WCbDN7ypzescNZjooD02CsbvTT170jlc"
+                url: "https://drive.google.com/file/d/1WCbDN7ypzescNZjooD02CsbvTT170jlc/preview"
             }
         ]
     },
@@ -184,23 +184,23 @@ export const departmentLayoutData = {
             "Cryptography & PKI",
             "Digital Forensics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A",
+        syllabusUrl: "https://drive.google.com/file/d/1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A/preview",
         syllabus: [
             {
                 session: "2024-28",
-                url: "https://drive.google.com/uc?export=download&id=1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A"
+                url: "https://drive.google.com/file/d/1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A/preview"
             },
             {
                 session: "2023-27",
-                url: "https://drive.google.com/uc?export=download&id=1_Gvlr5JjAmAAggmGWFo5tBeo6uIG2kkS"
+                url: "https://drive.google.com/file/d/1_Gvlr5JjAmAAggmGWFo5tBeo6uIG2kkS/preview"
             },
             {
                 session: "2022-26",
-                url: "https://drive.google.com/uc?export=download&id=1bH_dt7Hi8AGujC2RNJsG6fd_bKYFuBmu"
+                url: "https://drive.google.com/file/d/1bH_dt7Hi8AGujC2RNJsG6fd_bKYFuBmu/preview"
             },
             {
                 session: "June 2023 Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1H9O_5TMytl-1h_ZoWDVBrc1uezI8Iat7"
+                url: "https://drive.google.com/file/d/1H9O_5TMytl-1h_ZoWDVBrc1uezI8Iat7/preview"
             }
         ]
     },
@@ -219,23 +219,23 @@ export const departmentLayoutData = {
             "Data Warehousing",
             "Predictive Analytics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H",
+        syllabusUrl: "https://drive.google.com/file/d/1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H/preview",
         syllabus: [
             {
                 session: "2024-28",
-                url: "https://drive.google.com/uc?export=download&id=1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H"
+                url: "https://drive.google.com/file/d/1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H/preview"
             },
             {
                 session: "2023-27",
-                url: "https://drive.google.com/uc?export=download&id=1gXD0-pRzdGpBuLMknL8OXPM9KtJjm1W2"
+                url: "https://drive.google.com/file/d/1gXD0-pRzdGpBuLMknL8OXPM9KtJjm1W2/preview"
             },
             {
                 session: "2022-26",
-                url: "https://drive.google.com/uc?export=download&id=1lyuCG3VSJy1g2e4fXZYY5Cc2644MPpSw"
+                url: "https://drive.google.com/file/d/1lyuCG3VSJy1g2e4fXZYY5Cc2644MPpSw/preview"
             },
             {
                 session: "June 2023 Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1DeRIzkOE4kT2kUPGy5S3HqYekxvzoO20"
+                url: "https://drive.google.com/file/d/1DeRIzkOE4kT2kUPGy5S3HqYekxvzoO20/preview"
             }
         ]
     },
@@ -254,19 +254,19 @@ export const departmentLayoutData = {
             "MLOps Pipelines",
             "Applied Neural Models"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX",
+        syllabusUrl: "https://drive.google.com/file/d/1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX/preview",
         syllabus: [
             {
                 session: "2024-28",
-                url: "https://drive.google.com/uc?export=download&id=1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX"
+                url: "https://drive.google.com/file/d/1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX/preview"
             },
             {
                 session: "2023-27",
-                url: "https://drive.google.com/uc?export=download&id=120ctPJnITwNiYjC2ybvrxHsysMrPjM8r"
+                url: "https://drive.google.com/file/d/120ctPJnITwNiYjC2ybvrxHsysMrPjM8r/preview"
             },
             {
                 session: "2022-26",
-                url: "https://drive.google.com/uc?export=download&id=1WMnQ_d4Me3qOjdVF-OVLUkDB8VsVJrBo"
+                url: "https://drive.google.com/file/d/1WMnQ_d4Me3qOjdVF-OVLUkDB8VsVJrBo/preview"
             },
             {
                 session: "June 2023 Scheme",
@@ -289,23 +289,23 @@ export const departmentLayoutData = {
             "High Performance Computing",
             "Advanced Electives"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon",
+        syllabusUrl: "https://drive.google.com/file/d/1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon/preview",
         syllabus: [
             {
                 session: "2026-31",
-                url: "https://drive.google.com/uc?export=download&id=1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon"
+                url: "https://drive.google.com/file/d/1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon/preview"
             },
             {
                 session: "2025-30",
-                url: "https://drive.google.com/uc?export=download&id=1rEwc_43p-F9-lMnBXvueXQXwLh_RWd9U"
+                url: "https://drive.google.com/file/d/1rEwc_43p-F9-lMnBXvueXQXwLh_RWd9U/preview"
             },
             {
                 session: "2024-29",
-                url: "https://drive.google.com/uc?export=download&id=1IaEPkoCp-VqkUh3adluWy17q78x1Xt3a"
+                url: "https://drive.google.com/file/d/1IaEPkoCp-VqkUh3adluWy17q78x1Xt3a/preview"
             },
             {
                 session: "2023-28",
-                url: "https://drive.google.com/uc?export=download&id=18CrdsWzKvwdEg7s2ZThf8jNFz302tPcm"
+                url: "https://drive.google.com/file/d/18CrdsWzKvwdEg7s2ZThf8jNFz302tPcm/preview"
             }
         ]
     },
@@ -324,15 +324,15 @@ export const departmentLayoutData = {
             "Software Engineering Architecture",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG",
+        syllabusUrl: "https://drive.google.com/file/d/1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG/preview",
         syllabus: [
             {
                 session: "AI (2024-26)",
-                url: "https://drive.google.com/uc?export=download&id=1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG"
+                url: "https://drive.google.com/file/d/1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG/preview"
             },
             {
                 session: "Data Science (2024-26)",
-                url: "https://drive.google.com/uc?export=download&id=1x3Z1BQH-75B2_n8O0UUnoM0t-dYfc3OY"
+                url: "https://drive.google.com/file/d/1x3Z1BQH-75B2_n8O0UUnoM0t-dYfc3OY/preview"
             },
             {
                 session: "Software Engg (2024-26)",
@@ -340,7 +340,7 @@ export const departmentLayoutData = {
             },
             {
                 session: "Cyber Security Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1hwBSGmjhmTqi91kLCt2rr4Um0OHrxmre"
+                url: "https://drive.google.com/file/d/1hwBSGmjhmTqi91kLCt2rr4Um0OHrxmre/preview"
             }
         ]
     },
@@ -359,15 +359,15 @@ export const departmentLayoutData = {
             "Advanced System Design",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I",
+        syllabusUrl: "https://drive.google.com/file/d/1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I/preview",
         syllabus: [
             {
                 session: "2026-28 Batch",
-                url: "https://drive.google.com/uc?export=download&id=1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I"
+                url: "https://drive.google.com/file/d/1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I/preview"
             },
             {
                 session: "Standard Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1Kb6XZbEpBqAGfAGAIQnZI-40ZSjqcrzF"
+                url: "https://drive.google.com/file/d/1Kb6XZbEpBqAGfAGAIQnZI-40ZSjqcrzF/preview"
             }
         ]
     },
@@ -386,19 +386,19 @@ export const departmentLayoutData = {
             "Data Science Paradigms",
             "Capstone Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY",
+        syllabusUrl: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview",
         syllabus: [
             {
                 session: "2024-26 (AI)",
-                url: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY"
+                url: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview"
             },
             {
                 session: "2021-23 (DS)",
-                url: "https://drive.google.com/uc?export=download&id=1C2rjUcBKXmqIbNLUooV4VS-3HfJVszhk"
+                url: "https://drive.google.com/file/d/1C2rjUcBKXmqIbNLUooV4VS-3HfJVszhk/preview"
             },
             {
                 session: "2020-23",
-                url: "https://drive.google.com/uc?export=download&id=1d6dBp98RmeUvdLFuufdjs4gZSYzSrBea"
+                url: "https://drive.google.com/file/d/1d6dBp98RmeUvdLFuufdjs4gZSYzSrBea/preview"
             }
         ]
     },
@@ -417,11 +417,11 @@ export const departmentLayoutData = {
             "High-End Computing Labs",
             "Thesis Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
+        syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
+                url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
             }
         ]
     }

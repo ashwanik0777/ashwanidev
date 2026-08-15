@@ -108,15 +108,15 @@ export const departmentLayoutData = {
             "Manufacturing Technologies",
             "Fluid Mechanics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Vehicle Dynamics",
             "Quality Control"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ",
+        syllabusUrl: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ"
+                url: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Robotic Cells",
             "Embedded Mechatronics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
             }
         ]
     },
@@ -181,15 +181,15 @@ export const departmentLayoutData = {
             "Additive Manufacturing",
             "Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o",
+        syllabusUrl: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o"
+                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o"
+                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
             }
         ]
     },
@@ -208,11 +208,11 @@ export const departmentLayoutData = {
             "CAD/CAM & FEA",
             "Executive Degree"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
             }
         ]
     },
@@ -231,11 +231,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL",
+        syllabusUrl: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL"
+                url: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview"
             }
         ]
     }

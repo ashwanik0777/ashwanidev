@@ -107,15 +107,15 @@ export const departmentLayoutData = {
             "GIS & Satellite Remote Sensing",
             "Field Research Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1",
+        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
+                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
+                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
             }
         ]
     },
@@ -134,11 +134,11 @@ export const departmentLayoutData = {
             "Mineral Exploration",
             "Geological Field Camps"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1",
+        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
+                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
             }
         ]
     },
@@ -157,15 +157,15 @@ export const departmentLayoutData = {
             "Climate Impact Studies",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG",
+        syllabusUrl: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG"
+                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG"
+                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
             }
         ]
     }

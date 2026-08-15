@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Functional Hindi for Media"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy",
+        syllabusUrl: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy"
+                url: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Classical Sanskrit Drama",
             "Manuscriptology"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz",
+        syllabusUrl: "https://drive.google.com/file/d/1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz"
+                url: "https://drive.google.com/file/d/1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Progressive Literature",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy",
+        syllabusUrl: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy"
+                url: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview"
             }
         ]
     }

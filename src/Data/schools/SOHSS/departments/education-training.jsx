@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Classroom Internship",
             "Curriculum Design"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS",
+        syllabusUrl: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS"
+                url: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Hands-on School Practicum",
             "Teaching Tech Tools"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH",
+        syllabusUrl: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH"
+                url: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sports Biomechanics",
             "Gym & Fitness Training"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK",
+        syllabusUrl: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK"
+                url: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Policy Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH",
+        syllabusUrl: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH"
+                url: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview"
             }
         ]
     }

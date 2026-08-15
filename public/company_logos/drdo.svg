@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" width="100%" height="100%">
+  <g transform="translate(20, 20)">
+    <circle cx="40" cy="40" r="36" fill="#1E293B"/>
+    <path d="M40,12 L48,32 L68,32 L52,44 L58,64 L40,52 L22,64 L28,44 L12,32 L32,32 Z" fill="#F59E0B"/>
+    <text x="90" y="46" font-family="'Arial Black', sans-serif" font-size="34" font-weight="900" fill="#1E293B">DRDO</text>
+    <text x="90" y="66" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#475569" letter-spacing="0.5">DEFENCE R&amp;D ORGANISATION</text>
+  </g>
+</svg>

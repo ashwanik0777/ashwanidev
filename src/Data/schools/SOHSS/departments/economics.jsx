@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Financial Markets",
             "Statistical Computing"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ",
+        syllabusUrl: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ"
+                url: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "International Trade",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo",
+        syllabusUrl: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo"
+                url: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview"
             }
         ]
     }

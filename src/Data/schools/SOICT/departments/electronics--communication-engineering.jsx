@@ -303,11 +303,11 @@ export const departmentLayoutData = {
             "Specialized Labs",
             "Thesis Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
+        syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
+                url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
             }
         ]
     }

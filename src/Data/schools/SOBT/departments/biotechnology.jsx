@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Bio-Management",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk",
+        syllabusUrl: "https://drive.google.com/file/d/194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
+                url: "https://drive.google.com/file/d/194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1k6CVeno1sffftbZVq0h4GP-epbxlNCUR"
+                url: "https://drive.google.com/file/d/1k6CVeno1sffftbZVq0h4GP-epbxlNCUR/preview"
             }
         ]
     },
@@ -139,15 +139,15 @@ export const departmentLayoutData = {
             "Herbal Drug Standardization",
             "Systems Biology"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q",
+        syllabusUrl: "https://drive.google.com/file/d/1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q"
+                url: "https://drive.google.com/file/d/1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q"
+                url: "https://drive.google.com/file/d/1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q/preview"
             }
         ]
     },
@@ -166,15 +166,15 @@ export const departmentLayoutData = {
             "DNA Fingerprinting",
             "Ballistics Analysis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p",
+        syllabusUrl: "https://drive.google.com/file/d/1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
+                url: "https://drive.google.com/file/d/1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
+                url: "https://drive.google.com/file/d/1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p/preview"
             }
         ]
     },
@@ -193,15 +193,15 @@ export const departmentLayoutData = {
             "Industrial Microbiology",
             "Management Modules"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk",
+        syllabusUrl: "https://drive.google.com/file/d/194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
+                url: "https://drive.google.com/file/d/194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
+                url: "https://drive.google.com/file/d/194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk/preview"
             }
         ]
     },
@@ -220,15 +220,15 @@ export const departmentLayoutData = {
             "Enzymology",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3",
+        syllabusUrl: "https://drive.google.com/file/d/1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3"
+                url: "https://drive.google.com/file/d/1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
+                url: "https://drive.google.com/file/d/1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p/preview"
             }
         ]
     },
@@ -247,15 +247,15 @@ export const departmentLayoutData = {
             "Cancer Biology",
             "Pharmacogenomics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
+        syllabusUrl: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
+                url: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
+                url: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview"
             }
         ]
     },
@@ -274,11 +274,11 @@ export const departmentLayoutData = {
             "Molecular Docking",
             "Python for Biology"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=13tLAb-fKH4N4e6ejfj2904ilXmqsojcB",
+        syllabusUrl: "https://drive.google.com/file/d/13tLAb-fKH4N4e6ejfj2904ilXmqsojcB/preview",
         syllabus: [
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=13tLAb-fKH4N4e6ejfj2904ilXmqsojcB"
+                url: "https://drive.google.com/file/d/13tLAb-fKH4N4e6ejfj2904ilXmqsojcB/preview"
             }
         ]
     },
@@ -297,15 +297,15 @@ export const departmentLayoutData = {
             "Virology & Immunology",
             "Environmental Microbiology"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz",
+        syllabusUrl: "https://drive.google.com/file/d/1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz"
+                url: "https://drive.google.com/file/d/1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz"
+                url: "https://drive.google.com/file/d/1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz/preview"
             }
         ]
     },
@@ -324,11 +324,11 @@ export const departmentLayoutData = {
             "Systems Physiology",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
+        syllabusUrl: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
+                url: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview"
             }
         ]
     },
@@ -347,15 +347,15 @@ export const departmentLayoutData = {
             "Metabolic Engineering",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
+        syllabusUrl: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
+                url: "https://drive.google.com/file/d/1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1k6CVeno1sffftbZVq0h4GP-epbxlNCUR"
+                url: "https://drive.google.com/file/d/1k6CVeno1sffftbZVq0h4GP-epbxlNCUR/preview"
             }
         ]
     },
@@ -374,15 +374,15 @@ export const departmentLayoutData = {
             "Immunotechnology",
             "Research Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME",
+        syllabusUrl: "https://drive.google.com/file/d/1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME"
+                url: "https://drive.google.com/file/d/1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1hYSRs9uitrbqwujrxcYoe26Nt6BMLuIJ"
+                url: "https://drive.google.com/file/d/1hYSRs9uitrbqwujrxcYoe26Nt6BMLuIJ/preview"
             }
         ]
     },
@@ -401,11 +401,11 @@ export const departmentLayoutData = {
             "Translational Lab Research",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ",
+        syllabusUrl: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ"
+                url: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview"
             }
         ]
     },
@@ -424,15 +424,15 @@ export const departmentLayoutData = {
             "Instrument Access",
             "Doctoral Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ",
+        syllabusUrl: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ"
+                url: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview"
             },
             {
                 session: "Course Content",
-                url: "https://drive.google.com/uc?export=download&id=1OiAPzecfvLZX4X_8gbPcX4lwlJPjH-1T"
+                url: "https://drive.google.com/file/d/1OiAPzecfvLZX4X_8gbPcX4lwlJPjH-1T/preview"
             }
         ]
     },
@@ -451,11 +451,11 @@ export const departmentLayoutData = {
             "Research Methodology",
             "Thesis Publication"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS",
+        syllabusUrl: "https://drive.google.com/file/d/1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS"
+                url: "https://drive.google.com/file/d/1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS/preview"
             }
         ]
     },
@@ -474,11 +474,11 @@ export const departmentLayoutData = {
             "Genomics Analysis",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG",
+        syllabusUrl: "https://drive.google.com/file/d/1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG"
+                url: "https://drive.google.com/file/d/1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG/preview"
             }
         ]
     },
@@ -497,11 +497,11 @@ export const departmentLayoutData = {
             "Radiation Dosimetry",
             "Clinical Internship"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj",
+        syllabusUrl: "https://drive.google.com/file/d/1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj"
+                url: "https://drive.google.com/file/d/1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj/preview"
             }
         ]
     }

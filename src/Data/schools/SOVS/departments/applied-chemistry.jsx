@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Thermodynamics & Kinetics",
             "Spectroscopic Characterization"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Organometallic Catalysis",
             "Master Research Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ",
+        syllabusUrl: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ"
+                url: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Coatings & Sealants",
             "Industrial Quality Testing"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Indexed Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
             }
         ]
     }

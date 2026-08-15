@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Sociology of Development",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd",
+        syllabusUrl: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd"
+                url: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview"
             }
         ]
     }

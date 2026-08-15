@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Industrial Management",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Smart Grid Technologies",
             "Control Systems"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg",
+        syllabusUrl: "https://drive.google.com/file/d/1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg"
+                url: "https://drive.google.com/file/d/1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg/preview"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Digital Electronics",
             "Network Protocols"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
+        syllabusUrl: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
+                url: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "AI & ML for Grids",
             "Biomedical Instrumentation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
+        syllabusUrl: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
+                url: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview"
             }
         ]
     },
@@ -200,11 +200,11 @@ export const departmentLayoutData = {
             "Autonomous Navigation",
             "Sensors & Actuators"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
+        syllabusUrl: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
+                url: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview"
             }
         ]
     },
@@ -223,11 +223,11 @@ export const departmentLayoutData = {
             "Signal Processing",
             "Solid State Devices"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
+        syllabusUrl: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
+                url: "https://drive.google.com/file/d/1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH/preview"
             }
         ]
     },
@@ -246,11 +246,11 @@ export const departmentLayoutData = {
             "DCS & PLC Automation",
             "Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -269,11 +269,11 @@ export const departmentLayoutData = {
             "Autonomous SLAM",
             "Master Research"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -292,11 +292,11 @@ export const departmentLayoutData = {
             "Grid Stability Analysis",
             "DSP Processors"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -315,11 +315,11 @@ export const departmentLayoutData = {
             "Smart Grid Architecture",
             "Microgrids"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -338,11 +338,11 @@ export const departmentLayoutData = {
             "Power Drives & Control",
             "Executive Certification"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
+        syllabusUrl: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
+                url: "https://drive.google.com/file/d/1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043/preview"
             }
         ]
     },
@@ -361,11 +361,11 @@ export const departmentLayoutData = {
             "High-Voltage Labs",
             "Doctoral Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N",
+        syllabusUrl: "https://drive.google.com/file/d/1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N"
+                url: "https://drive.google.com/file/d/1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N/preview"
             }
         ]
     }

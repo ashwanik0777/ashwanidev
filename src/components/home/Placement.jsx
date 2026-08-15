@@ -4,10 +4,21 @@ import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import homeData from "../../Data/home.json";
 
-// Helper to safely build image URLs
-const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, '');
+// Curated list of top recruiter logos evenly spaced along the semicircle arc
+const RECRUITER_LOGOS = [
+  { id: 1, name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+  { id: 2, name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+  { id: 3, name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+  { id: 4, name: "Meta", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
+  { id: 5, name: "Samsung", logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" },
+  { id: 6, name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" },
+  { id: 7, name: "Adobe", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg" },
+  { id: 8, name: "HCL Tech", logo: "https://upload.wikimedia.org/wikipedia/commons/8/87/HCL_Technologies_logo.svg" },
+];
+
+const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, "");
 const getImageUrl = (path) => {
-  if (!path) return "https://via.placeholder.com/100x100?text=No+Logo";
+  if (!path) return "";
   return path.includes("http")
     ? path
     : path.startsWith("/")
@@ -15,12 +26,12 @@ const getImageUrl = (path) => {
       : `${BASE}/${path.startsWith("media") ? "" : "media/"}${path}`;
 };
 
-const StatItem = ({  end, duration, suffix = "", separator = "", text, start }) => {
+const StatItem = ({ end, duration, suffix = "", separator = "", text, start }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
     <div className="text-center" ref={ref}>
-      <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+      <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
         {inView ? (
           <CountUp end={end} duration={duration} suffix={suffix} separator={separator} start={start ?? 0} />
         ) : (
@@ -28,7 +39,7 @@ const StatItem = ({  end, duration, suffix = "", separator = "", text, start }) 
         )}
         +
       </h3>
-      <p className="text-gray-600 text-sm sm:text-base mt-1">{text}</p>
+      <p className="text-slate-600 text-xs sm:text-sm font-semibold mt-1">{text}</p>
     </div>
   );
 };
@@ -36,18 +47,28 @@ const StatItem = ({  end, duration, suffix = "", separator = "", text, start }) 
 const HiringSection = () => {
   const [companyData, setCompanyData] = useState([]);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const [isMobile, setIsMobile] = useState(false);
   const [time, setTime] = useState(0);
   const animationRef = useRef();
 
   useEffect(() => {
-    const companies = homeData?.sections?.companies_hiring || [];
-    setCompanyData(Array.isArray(companies) ? companies : []);
+    const fromJson = (homeData?.sections?.companies_hiring || [])
+      .filter((c) => c.logo)
+      .map((c, idx) => ({
+        id: `json-${idx}`,
+        name: c.title,
+        logo: getImageUrl(c.logo),
+      }));
+
+    const combined = fromJson.length >= 8 ? fromJson.slice(0, 8) : [...RECRUITER_LOGOS];
+    setCompanyData(combined);
   }, []);
 
   useEffect(() => {
     const updateSize = () => {
       const width = window.innerWidth;
-      setContainerWidth(width > 1280 ? 1200 : width - 40);
+      setIsMobile(width <= 640);
+      setContainerWidth(width > 1280 ? 1200 : Math.max(300, width - 32));
     };
     updateSize();
     window.addEventListener("resize", updateSize);
@@ -56,35 +77,53 @@ const HiringSection = () => {
 
   useEffect(() => {
     const animate = () => {
-      setTime((prev) => prev + 0.0005);
+      setTime((prev) => prev + 0.0004);
       animationRef.current = requestAnimationFrame(animate);
     };
     animationRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationRef.current);
   }, []);
 
-  const radius = containerWidth / 2.2;
-  const first = companyData[0];
+  const radius = isMobile ? Math.min(containerWidth / 2.3, 160) : Math.min(containerWidth / 2.1, 460);
+  const activeLogos = isMobile ? companyData.slice(0, 5) : companyData;
+  const first = homeData?.sections?.companies_hiring?.[0] || {};
 
   return (
-    <>
-    <div className="bg-[#f5f9ff]">
-     <div className="text-center px-4 mt-5">
-        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800 ">{first?.title || "Companies Hiring"}</h2>
-      </div>
-    <section className="bg-[#f5f9ff] py-10 sm:py-16 overflow-hidden">
+    <section className="bg-gradient-to-b from-[#f4f8fc] via-[#edf4fa] to-[#f4f8fc] py-4 sm:py-6 overflow-hidden font-sans border-t border-slate-200/60">
+      
+      {/* Mobile Title (above the arc on small screens) */}
+      {isMobile && (
+        <div className="text-center px-4 mb-4">
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            Companies <span className="text-blue-700">Hiring</span>
+          </h2>
+        </div>
+      )}
 
-      {/* Animated Semicircle */}
+      {/* Semicircle Arc Container */}
       <div
-        className="relative mx-auto mt-32 sm:mt-40"
+        className="relative mx-auto"
         style={{
           width: containerWidth,
-          height: radius / 2.5,
-          marginBottom: `-${radius / 3.5}px`,
+          height: isMobile ? radius + 90 : radius + 35,
+          minHeight: isMobile ? "220px" : "280px",
         }}
       >
-        {companyData.map((company, i) => {
-          const total = companyData.length;
+        {/* Desktop Title Block Placed INSIDE the Semicircle Arc */}
+        {!isMobile && (
+          <div
+            className="absolute left-1/2 transform -translate-x-1/2 text-center z-20 px-4 w-full max-w-lg"
+            style={{ top: `${radius * 0.43}px` }}
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Companies <span className="text-blue-700">Hiring</span>
+            </h2>
+          </div>
+        )}
+
+        {/* Outer Arc Floating Logo Bubbles */}
+        {activeLogos.map((company, i) => {
+          const total = activeLogos.length;
           const offset = (time + i / total) % 1;
           const angle = Math.PI * offset;
           const x = radius * Math.cos(angle);
@@ -92,64 +131,61 @@ const HiringSection = () => {
 
           return (
             <div
-              key={company.id}
-              className="absolute transition-transform duration-75"
+              key={company.id || i}
+              className="absolute transition-transform duration-75 hover:scale-110 z-10"
               style={{
-                left: `${containerWidth / 2 + x - 20}px`,
-                top: `${radius / 1.3 + y - 70}px`,
+                left: `${containerWidth / 2 + x - (isMobile ? 22 : 35)}px`,
+                top: `${radius + y + (isMobile ? 15 : 25)}px`,
               }}
             >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full shadow-md flex items-center justify-center">
+              <div className="w-11 h-11 sm:w-20 sm:h-20 bg-white rounded-full shadow-md sm:shadow-lg border border-slate-200/80 flex items-center justify-center p-1.5 sm:p-3 hover:shadow-2xl hover:border-blue-400 transition-all duration-300">
                 <img
-                  src={getImageUrl(company.logo)}
-                  alt={`Company ${company.id}`}
-                  className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+                  src={company.logo}
+                  alt={company.name}
+                  className="w-7 h-7 sm:w-13 sm:h-13 max-w-[85%] max-h-[85%] object-contain"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://via.placeholder.com/60?text=" + encodeURIComponent(company.name || "Logo");
+                  }}
                 />
               </div>
             </div>
           );
         })}
-      </div>
 
-      {/* Placement Button */}
-      <div className="text-center mt-16 sm:mt-20">
-        <Link to="/placements">
-          <button
-            className="relative bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 group overflow-hidden animate-pulse"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping"></div>
-            <span className="relative z-10 flex items-center gap-2">
-              View Placements
-              <svg
-                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+        {/* View Placements CTA Button */}
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2 text-center z-20 w-full"
+          style={{ top: isMobile ? `${radius + 35}px` : `${radius * 0.72}px` }}
+        >
+          <Link to="/placements">
+            <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2.5 px-6 sm:py-3 sm:px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2 text-xs sm:text-base border border-blue-500">
+              <span>View Placements</span>
+              <svg className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </span>
-            <div className="absolute inset-0 rounded-full opacity-0 group-active:opacity-30 bg-white animate-ping group-active:animate-pulse"></div>
-          </button>
-        </Link>
+            </button>
+          </Link>
+        </div>
+
       </div>
 
-      {/* Stats Section */}
-      <div className="w-[90vw] max-w-4xl mx-auto mt-24 sm:mt-28 bg-white shadow-xl rounded-2xl p-6 sm:p-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center">
+      {/* Placement Stats Bar */}
+      <div className="w-[92vw] max-w-4xl mx-auto mt-4 sm:mt-4 bg-white shadow-xl rounded-2xl p-5 sm:p-7 border border-slate-100 relative z-20">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           <StatItem
-            end={parseInt(first?.Companies_hiring?.replace(/\D/g, "") || 0)}
+            end={parseInt(first?.Companies_hiring?.replace(/\D/g, "") || "300", 10)}
             duration={2}
             text="Companies hiring worldwide"
           />
           <StatItem
-            end={parseInt(first?.alumini_count?.replace(/\D/g, "") || 0)}
+            end={parseInt(first?.alumini_count?.replace(/\D/g, "") || "30000", 10)}
             duration={3}
             separator=","
             text="Successful Alumni worldwide"
           />
           <StatItem
-            end={parseInt(first?.placement_rate?.replace(/\D/g, "") || 0)}
+            end={parseInt(first?.placement_rate?.replace(/\D/g, "") || "90", 10)}
             start={65}
             duration={2.5}
             suffix="%"
@@ -157,9 +193,8 @@ const HiringSection = () => {
           />
         </div>
       </div>
+
     </section>
-    </div>
-    </>
   );
 };
 

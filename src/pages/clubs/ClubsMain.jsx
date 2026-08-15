@@ -15,7 +15,6 @@ import { clubsData } from "../../components/clubs/data/clubsData";
 import HeroBanner from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
-import { listSchools } from "../../services/schoolsService";
 
 const collegeClubs = [
   {
@@ -23,8 +22,8 @@ const collegeClubs = [
     name: "National Service Scheme (NSS)",
     tagline: "Not Me But You",
     category: "University-Level",
-    banner: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800",
-    logo: "https://nss.gov.in/sites/default/files/NSS_Logo.png",
+    banner: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
+    logo: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
     memberCount: "500+",
     description: "The National Service Scheme (NSS) is a Government-sponsored public service program under the Ministry of Youth Affairs & Sports, Govt. of India. It focuses on developing personality through community service.",
     achievements: [
@@ -42,8 +41,8 @@ const collegeClubs = [
     name: "National Cadet Corps (NCC)",
     tagline: "Unity and Discipline",
     category: "University-Level",
-    banner: "https://images.unsplash.com/photo-1621293954908-9071414472f1?w=800",
-    logo: "https://indianarmy.nic.in/ncc_logo.png",
+    banner: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_7BC9F675ckr5_llRggB3_0cSorpQxZfJ4CB0fKnrw7vNg18AjXuuLZXb&s=10",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_7BC9F675ckr5_llRggB3_0cSorpQxZfJ4CB0fKnrw7vNg18AjXuuLZXb&s=10",
     memberCount: "300+",
     description: "The National Cadet Corps is the youth wing of the Indian Armed Forces. It operates as a tri-services organization, comprising the Army, the Navy and the Air Wing, dedicated to grooming disciplined citizens.",
     achievements: [
@@ -64,52 +63,32 @@ const ClubsMain = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    const fetchAllClubs = async () => {
-      setLoading(true);
-      try {
-        const schools = await listSchools();
-        const allDynamicClubs = [];
-        schools.forEach(school => {
-          if (school.content && school.content.clubs && school.content.clubs.length > 0) {
-            school.content.clubs.forEach(c => {
-              allDynamicClubs.push({
-                ...c,
-                schoolCode: school.code,
-                schoolName: school.name
-              });
-            });
-          }
-        });
-        
-        if (allDynamicClubs.length > 0) {
-          setSchoolClubs(allDynamicClubs);
-        } else {
-          setSchoolClubs(clubsData);
-        }
-      } catch (err) {
-        console.error("Failed to load clubs:", err);
-        setSchoolClubs(clubsData);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAllClubs();
+    setSchoolClubs(clubsData);
+    setLoading(false);
   }, []);
 
   const getCategoryColor = (category) => {
     switch (category) {
       case "Technical":
-        return "bg-blue-500 hover:bg-blue-600";
+        return "bg-blue-600 hover:bg-blue-700";
       case "Cultural":
-        return "bg-purple-500 hover:bg-purple-600";
+        return "bg-purple-600 hover:bg-purple-700";
+      case "Literary":
+        return "bg-amber-600 hover:bg-amber-700";
+      case "Environmental":
+        return "bg-emerald-600 hover:bg-emerald-700";
+      case "Media":
+        return "bg-pink-600 hover:bg-pink-700";
+      case "Wellness":
+        return "bg-teal-600 hover:bg-teal-700";
       case "Sports":
-        return "bg-green-500 hover:bg-green-600";
+        return "bg-orange-600 hover:bg-orange-700";
       case "Social":
-        return "bg-orange-500 hover:bg-orange-600";
+        return "bg-rose-600 hover:bg-rose-700";
       case "University-Level":
-        return "bg-gradient-to-r from-red-500 to-orange-500 hover:opacity-90";
+        return "bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90";
       default:
-        return "bg-gray-500 hover:bg-gray-600";
+        return "bg-slate-600 hover:bg-slate-700";
     }
   };
 
@@ -120,8 +99,8 @@ const ClubsMain = () => {
   const statsData = [
     {
       icon: Users,
-      numberText: "15+",
-      title: "Active Clubs",
+      numberText: "13+",
+      title: "Cultural & Tech Clubs",
       iconColor: "#2563eb",
     },
     {
@@ -148,8 +127,8 @@ const ClubsMain = () => {
     <SearchableWrapper>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 pb-20">
         <HeroBanner
-          title="Student Clubs & Life"
-          subtitle="Explore our vibrant campus life. From technical innovations to social service, find your passion and lead the change."
+          title="Student Clubs & Societies"
+          subtitle="Explore Gautam Buddha University's student-led cultural, technical, literary, environmental, wellness, sports, and media societies."
           bgTheme={6}
         />
 
@@ -175,14 +154,14 @@ const ClubsMain = () => {
                     key={club.id}
                     className={`bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col ${club.shadowColor}`}
                   >
-                    <div className="h-60 relative overflow-hidden">
+                    <div className="h-60 relative overflow-hidden bg-slate-900">
                       <img
                         src={club.banner}
                         alt={club.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between">
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+                      <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between z-10">
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${club.accentColor}`}>
                           {club.category}
                         </span>
@@ -196,7 +175,7 @@ const ClubsMain = () => {
                     <div className="p-8 flex-1 flex flex-col justify-between">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <div className={`p-2 rounded-xl bg-gradient-to-br ${club.accentColor} text-white`}>
+                          <div className={`p-2 rounded-xl bg-gradient-to-br ${club.accentColor} text-white shrink-0`}>
                             <IconComponent className="w-5 h-5 text-white" />
                           </div>
                           <h3 className="text-2xl font-bold text-slate-800 leading-tight">
@@ -241,19 +220,19 @@ const ClubsMain = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center gap-2">
                 <Sparkles className="w-8 h-8 text-purple-600" />
-                School-Level Clubs & Societies
+                Clubs & Societies
               </h2>
-              <p className="text-slate-600 mt-2">Active student-run cells helping you develop specialized technical, cultural, and sports skills.</p>
+              <p className="text-slate-600 mt-2">Official student-run clubs under the GBU Cultural Council & Student Activity Board.</p>
               <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
             {/* Filter Bar */}
-            <div className="flex flex-wrap justify-center items-center gap-2 mb-10 bg-white p-2 rounded-2xl border border-slate-100 shadow-sm max-w-2xl mx-auto">
-              {["All", "Technical", "Cultural", "Sports", "Social"].map((cat) => (
+            <div className="flex flex-wrap justify-center items-center gap-2 mb-10 bg-white p-2 rounded-2xl border border-slate-100 shadow-sm max-w-4xl mx-auto">
+              {["All", "Cultural", "Technical", "Literary", "Environmental", "Wellness", "Sports", "Social", "Media"].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
                     selectedCategory === cat
                       ? "bg-slate-900 text-white shadow-md shadow-slate-200"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -305,24 +284,6 @@ const ClubsMain = () => {
                         </p>
                       </div>
 
-                      <div>
-                        <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-50 pt-4 mb-4">
-                          <div className="flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5" />
-                            <span>{club.memberCount || 0} Members</span>
-                          </div>
-                          {club.schoolName && (
-                            <span className="truncate max-w-[120px]">{club.schoolName}</span>
-                          )}
-                        </div>
-
-                        <Link to={`/club/${club.id}${club.schoolCode ? `?school=${club.schoolCode}` : ""}`}>
-                          <button className="w-full py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 hover:text-slate-900 transition-colors flex items-center justify-center gap-1.5 group/btn">
-                            Explore Club
-                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                          </button>
-                        </Link>
-                      </div>
                     </div>
                   </div>
                 ))}

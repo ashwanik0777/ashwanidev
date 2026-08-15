@@ -119,15 +119,15 @@ export const departmentLayoutData = {
             "Object-Oriented Programming",
             "Web Technologies"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5",
+        syllabusUrl: "https://drive.google.com/file/d/1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5/preview",
         syllabus: [
             {
                 session: "2026-29",
-                url: "https://drive.google.com/uc?export=download&id=1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5"
+                url: "https://drive.google.com/file/d/1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5/preview"
             },
             {
                 session: "2025-28",
-                url: "https://drive.google.com/uc?export=download&id=1PyjL213j0X8_uot3RVr5pk3IQImF4Isb"
+                url: "https://drive.google.com/file/d/1PyjL213j0X8_uot3RVr5pk3IQImF4Isb/preview"
             },
             {
                 session: "2024-25",
@@ -162,7 +162,7 @@ export const departmentLayoutData = {
             },
             {
                 session: "2025-29",
-                url: "https://drive.google.com/uc?export=download&id=1RpWCxLdDaua2yh6G8i6wtQoGXqvOxtZ_"
+                url: "https://drive.google.com/file/d/1RpWCxLdDaua2yh6G8i6wtQoGXqvOxtZ_/preview"
             },
             {
                 session: "2023-27",
@@ -235,11 +235,11 @@ export const departmentLayoutData = {
             "High-Performance Computing",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz",
+        syllabusUrl: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview",
         syllabus: [
             {
                 session: "Master Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz"
+                url: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview"
             }
         ]
     },
@@ -258,11 +258,11 @@ export const departmentLayoutData = {
             "Quality Assurance & Testing",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz",
+        syllabusUrl: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview",
         syllabus: [
             {
                 session: "Master Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz"
+                url: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview"
             }
         ]
     },
@@ -281,15 +281,15 @@ export const departmentLayoutData = {
             "Database Platforms",
             "Industry Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V",
+        syllabusUrl: "https://drive.google.com/file/d/1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V/preview",
         syllabus: [
             {
                 session: "2026-28",
-                url: "https://drive.google.com/uc?export=download&id=1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V"
+                url: "https://drive.google.com/file/d/1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V/preview"
             },
             {
                 session: "2025-27",
-                url: "https://drive.google.com/uc?export=download&id=1VX84S1jXR3JEdB97rqa9K-sbwD3OYgjw"
+                url: "https://drive.google.com/file/d/1VX84S1jXR3JEdB97rqa9K-sbwD3OYgjw/preview"
             },
             {
                 session: "2022-23",
@@ -324,11 +324,11 @@ export const departmentLayoutData = {
             },
             {
                 session: "2025-27",
-                url: "https://drive.google.com/uc?export=download&id=1p1a5d_SNyk6_e5zMJpSBrDtjBscmI6kG"
+                url: "https://drive.google.com/file/d/1p1a5d_SNyk6_e5zMJpSBrDtjBscmI6kG/preview"
             },
             {
                 session: "2024-26",
-                url: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY"
+                url: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview"
             },
             {
                 session: "2021-23",
@@ -351,11 +351,11 @@ export const departmentLayoutData = {
             "Research Methodology",
             "Thesis Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
+        syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
+                url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
             }
         ]
     }

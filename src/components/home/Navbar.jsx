@@ -126,7 +126,7 @@ const NAVIGATION_CONFIG = [
     key: "alumni",
     label: "Alumni",
     icon: Users,
-    directPath: "https://alumni.gbu.ac.in/",
+    directPath: "/alumni",
   },
 ];
 
@@ -368,7 +368,7 @@ const Navbar = () => {
   return (
     <SearchableWrapper>
       <nav
-        className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
+        className={`fixed top-8.5 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
           }`}
         role="navigation"
         aria-label="Main navigation"
@@ -380,7 +380,7 @@ const Navbar = () => {
               <img
                 src="/assets/logo.svg"
                 alt="GBU Logo"
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSchoolAnnouncements, refreshSchoolAnnouncements, syncAnnouncementsFromCache } from '../../utils/schoolAnnouncements';
+import homeData from '../../Data/home.json';
 
 export default function CampusGallery() {
   const [galleryData, setGalleryData] = useState([]);
@@ -10,16 +11,16 @@ export default function CampusGallery() {
 
   const getImageUrl = (path) => {
     if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
-    
+
     // Match drive links first
     const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
     const match = path.match(driveRegex);
     if (match && match[1]) {
       return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
     }
-    
+
     if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
-    
+
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
     if (BASE) {
       return `${BASE}${cleanPath}`;
@@ -29,7 +30,7 @@ export default function CampusGallery() {
 
   useEffect(() => {
     let isMounted = true;
-    
+
     const loadGallery = async () => {
       try {
         await refreshSchoolAnnouncements();
@@ -37,18 +38,24 @@ export default function CampusGallery() {
         syncAnnouncementsFromCache();
       }
       if (!isMounted) return;
-      
+
       const mediaItems = getSchoolAnnouncements().mediaGallery || [];
-      // Only show events that have at least one image
-      const normalized = mediaItems
-        .filter(item => item.images && item.images.length > 0)
-        .map(item => ({
+      const normalizedMedia = mediaItems
+        .filter((item) => item.images && item.images.length > 0)
+        .map((item) => ({
           ...item,
           image: getImageUrl(item.images[0]),
-          text: item.title
+          text: item.title,
         }));
-        
-      setGalleryData(normalized);
+
+      const jsonGallery = (homeData?.sections?.campus_gallery || []).map((item) => ({
+        ...item,
+        image: getImageUrl(item.image),
+        text: item.text,
+      }));
+
+      const finalGallery = normalizedMedia.length > 0 ? normalizedMedia : jsonGallery;
+      setGalleryData(finalGallery);
     };
 
     loadGallery();
@@ -114,9 +121,8 @@ export default function CampusGallery() {
               src={currentImage.image}
               alt={currentImage.text}
               onError={handleImageError}
-              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${
-                isTransitioning ? 'scale-110 opacity-80 blur-[2px]' : 'scale-100 opacity-100 blur-0'
-              }`}
+              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${isTransitioning ? 'scale-110 opacity-80 blur-[2px]' : 'scale-100 opacity-100 blur-0'
+                }`}
             />
 
             {/* Caption */}
@@ -132,11 +138,10 @@ export default function CampusGallery() {
                 <button
                   key={index}
                   onClick={() => handleThumbnailClick(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === mainImageIndex
-                      ? 'bg-white scale-125 shadow shadow-white/50'
-                      : 'bg-white/60 hover:bg-white/80 hover:scale-110'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === mainImageIndex
+                    ? 'bg-white scale-125 shadow shadow-white/50'
+                    : 'bg-white/60 hover:bg-white/80 hover:scale-110'
+                    }`}
                 />
               ))}
             </div>
@@ -159,11 +164,10 @@ export default function CampusGallery() {
               <div
                 key={img.id}
                 onClick={() => handleThumbnailClick(index)}
-                className={`cursor-pointer hover:scale-110 transition-all rounded-xl overflow-hidden shadow-md active:scale-95 ${
-                  index === mainImageIndex
-                    ? 'ring-4 ring-blue-500 scale-105 shadow-blue-500/25'
-                    : 'hover:ring-2 hover:ring-blue-300'
-                }`}
+                className={`cursor-pointer hover:scale-110 transition-all rounded-xl overflow-hidden shadow-md active:scale-95 ${index === mainImageIndex
+                  ? 'ring-4 ring-blue-500 scale-105 shadow-blue-500/25'
+                  : 'hover:ring-2 hover:ring-blue-300'
+                  }`}
               >
                 <img
                   src={img.image}

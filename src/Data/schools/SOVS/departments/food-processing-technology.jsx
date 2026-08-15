@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Food Safety (HACCP & FSSAI)",
             "Food Plant Machinery"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Bioprocess Engineering",
             "Master Research Project"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Food Chemistry & Nutrition",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Functional Food Research",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
             }
         ]
     }

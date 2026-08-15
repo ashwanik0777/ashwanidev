@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Creative Writing",
             "Phonetics & Linguistics"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96",
+        syllabusUrl: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96"
+                url: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH",
+        syllabusUrl: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH"
+                url: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sociolinguistics",
             "Language Documentation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl",
+        syllabusUrl: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl"
+                url: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8",
+        syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8"
+                url: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview"
             }
         ]
     }

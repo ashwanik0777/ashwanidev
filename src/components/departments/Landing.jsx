@@ -28,7 +28,7 @@ const Landing = ({ slides = [] }) => {
   return (
     <section
       id="home"
-      className="relative h-[500px] overflow-hidden mt-10 shadow-lg"
+      className="relative h-[40vh] overflow-hidden mt-6 shadow-lg"
     >
       {slides.map((slide, index) => (
         <div
@@ -50,9 +50,9 @@ const Landing = ({ slides = [] }) => {
               <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
                 {slide.title}
               </h1>
-              <p className="text-lg md:text-xl mb-6 text-blue-100 font-light">
+              {/* <p className="text-lg md:text-xl mb-6 text-blue-100 font-light">
                 {slide.subtitle}
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

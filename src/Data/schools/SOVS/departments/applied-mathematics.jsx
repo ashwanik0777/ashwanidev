@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Scientific Computing",
             "Machine Learning Math"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O",
+        syllabusUrl: "https://drive.google.com/file/d/1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O"
+                url: "https://drive.google.com/file/d/1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O/preview"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Differential Equations",
             "Numerical Analysis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD",
+        syllabusUrl: "https://drive.google.com/file/d/1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD"
+                url: "https://drive.google.com/file/d/1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD/preview"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Applied Optimization",
             "Quantitative Finance"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD",
+        syllabusUrl: "https://drive.google.com/file/d/1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD"
+                url: "https://drive.google.com/file/d/1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD/preview"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Operations Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O",
+        syllabusUrl: "https://drive.google.com/file/d/1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O"
+                url: "https://drive.google.com/file/d/1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O/preview"
             }
         ]
     },
@@ -199,11 +199,11 @@ export const departmentLayoutData = {
             "Mathematical Modeling",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g",
+        syllabusUrl: "https://drive.google.com/file/d/1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g"
+                url: "https://drive.google.com/file/d/1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g/preview"
             }
         ]
     }

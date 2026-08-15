@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "International Systems",
             "Public Policy Analysis"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C",
+        syllabusUrl: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C"
+                url: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Foreign Policy Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv",
+        syllabusUrl: "https://drive.google.com/file/d/1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv"
+                url: "https://drive.google.com/file/d/1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv/preview"
             }
         ]
     }

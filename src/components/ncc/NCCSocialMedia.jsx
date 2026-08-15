@@ -35,71 +35,19 @@ const NCCSocialMedia = ({ nccData }) => {
   const socialMedia = nccData?.content?.socialMedia || {};
   const socialHandles = [
     {
-      platform: 'Facebook',
-      handle: '@UniversityNCC',
-      followers: '1.8K',
-      link: socialMedia.facebook || 'https://facebook.com/universityncc',
-      description: 'Updates on training, camps, and achievements',
-      color: 'bg-blue-600',
-      icon: <Facebook className="w-6 h-6 text-white" />
-    },
-    {
-      platform: 'Instagram',
-      handle: '@university_ncc_cadets',
-      followers: '2.3K',
-      link: socialMedia.instagram || 'https://instagram.com/university_ncc_cadets',
-      description: 'Visual stories of cadet life and training',
-      color: 'bg-pink-600',
+      platform: 'Instagram (37 UP BN NCC GBU)',
+      handle: '@up37_ncc_gbu',
+      link: 'https://www.instagram.com/up37_ncc_gbu/',
+      color: 'bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500',
       icon: <Instagram className="w-6 h-6 text-white" />
     },
     {
-      platform: 'YouTube',
-      handle: 'University NCC Wing',
-      followers: '1.2K',
-      link: socialMedia.youtube || 'https://youtube.com/@universityncc',
-      description: 'Training videos and camp documentaries',
-      color: 'bg-red-600',
-      icon: <Youtube className="w-6 h-6 text-white" />
-    },
-    {
-      platform: 'Twitter',
-      handle: '@UniversityNCC',
-      followers: '950',
-      link: socialMedia.twitter || 'https://twitter.com/universityncc',
-      description: 'Real-time updates and announcements',
-      color: 'bg-blue-500',
-      icon: <Twitter className="w-6 h-6 text-white" />
+      platform: 'Instagram (GBU NCC Cell)',
+      handle: '@gbu_ncc',
+      link: 'https://www.instagram.com/gbu_ncc/',
+      color: 'bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600',
+      icon: <Instagram className="w-6 h-6 text-white" />
     }
-  ];
-
-  const nccStatsData = [
-    {
-      icon: Users,
-      number: 6300,
-      numberText: '6,300',
-      title: 'Total Followers',
-      iconColor: '#3b82f6',
-    },
-    {
-      icon: BarChart,
-      number: 18000,
-      numberText: '18,000',
-      title: 'Monthly Reach',
-      iconColor: '#10b981',
-    },
-    {
-      icon: Activity,
-      numberText: '5.8%',
-      title: 'Engagement Rate',
-      iconColor: '#f59e0b',
-    },
-    {
-      icon: Calendar,
-      number: 18,
-      numberText: '18',
-      title: 'Posts This Month',
-      iconColor: '#ef4444',
-    },
   ];
 
   return (
@@ -116,19 +64,15 @@ const NCCSocialMedia = ({ nccData }) => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Social Media Hub</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Official Social Media</h2>
           <p className="text-base sm:text-lg text-gray-600">
-            Stay connected with NCC activities and share our journey of discipline and service
+            Follow official Gautam Buddha University NCC Instagram handles for live updates, event highlights & photos
           </p>
         </motion.div>
 
-        {/* Statistics */}
-        <StatsCard stats={nccStatsData} />
-
         {/* Social Media Handles */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">Connect With Us</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto gap-6">
             {socialHandles.map((handle, index) => (
               <motion.div
                 key={index}
@@ -137,20 +81,21 @@ const NCCSocialMedia = ({ nccData }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="hover:shadow-xl">
-                  <CardContent className="p-6 text-center">
-                    <div className={`w-16 h-16 ${handle.color} rounded-full flex items-center justify-center mb-4 mx-auto`}>
-                      {handle.icon}
+                <Card className="hover:shadow-xl border border-slate-100">
+                  <CardContent className="p-6 text-center flex flex-col items-center justify-between h-full">
+                    <div>
+                      <div className={`w-16 h-16 ${handle.color} rounded-full flex items-center justify-center mb-4 mx-auto shadow-md`}>
+                        {handle.icon}
+                      </div>
+                      <h4 className="text-lg font-bold text-gray-900 mb-1">{handle.platform}</h4>
+                      <p className="text-pink-600 font-semibold text-sm mb-6">{handle.handle}</p>
                     </div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">{handle.platform}</h4>
-                    <p className="text-gray-600 mb-2">{handle.handle}</p>
-                    <div className="text-2xl font-bold text-orange-600 mb-4">{handle.followers}</div>
-                    <p className="text-sm text-gray-600 mb-4">{handle.description}</p>
                     <Button
                       onClick={() => window.open(handle.link, '_blank')}
+                      className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white border-0 shadow-md"
                     >
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Follow
+                      Visit Instagram Profile
                     </Button>
                   </CardContent>
                 </Card>

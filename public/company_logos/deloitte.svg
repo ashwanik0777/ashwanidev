@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" width="100%" height="100%">
+  <g transform="translate(20, 25)">
+    <text x="0" y="50" font-family="'Open Sans', 'Helvetica Neue', sans-serif" font-size="46" font-weight="800" fill="#000000" letter-spacing="-1">Deloitte.</text>
+    <circle cx="168" cy="46" r="6" fill="#86BC25"/>
+  </g>
+</svg>

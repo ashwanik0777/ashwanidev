@@ -47,7 +47,7 @@ const StudentTestimonials = () => {
 
   return (
     <SearchableWrapper>
-      <section className="py-24 bg-slate-50 relative overflow-hidden font-sans text-left border-t border-slate-100">
+      <section className="py-16 bg-slate-50 relative overflow-hidden font-sans text-left border-t border-slate-100">
         {/* Background blobs */}
         <div className="absolute top-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/5 rounded-full filter blur-3xl pointer-events-none" />
@@ -56,31 +56,14 @@ const StudentTestimonials = () => {
           
           {/* Header */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
-            >
-              <MessageSquare size={13} />
-              <span>Student Voices</span>
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
             >
               What Our Students Say
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-slate-600 text-base"
-            >
-              Hear directly from students about their academic journey, hostel experiences, and life inside Gautam Buddha University.
-            </motion.p>
           </div>
 
           {/* Testimonial card slider */}

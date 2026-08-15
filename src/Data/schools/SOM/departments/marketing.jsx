@@ -98,15 +98,15 @@ export const departmentLayoutData = {
             "Cross-Disciplinary Electives",
             "Corporate Summer Internship"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk",
+        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
             }
         ]
     },
@@ -125,15 +125,15 @@ export const departmentLayoutData = {
             "Financial Management",
             "NEP Multidisciplinary Framework"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk",
+        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
             }
         ]
     },
@@ -152,15 +152,15 @@ export const departmentLayoutData = {
             "Corporate Mentorship",
             "Live Consulting Projects"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
             },
             {
                 session: "Course Outline",
-                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
             }
         ]
     },
@@ -179,15 +179,15 @@ export const departmentLayoutData = {
             "C-Suite Leadership Modules",
             "Executive Industry Capstone"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
             },
             {
                 session: "Course Outline",
-                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
             }
         ]
     },
@@ -206,15 +206,15 @@ export const departmentLayoutData = {
             "Data Visualization & Dashboards",
             "FinTech & Marketing Models"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
             },
             {
                 session: "Course Outline",
-                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
             }
         ]
     },
@@ -233,15 +233,15 @@ export const departmentLayoutData = {
             "Peer-Reviewed Journal Publishing",
             "Ph.D. Dissertation Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq",
+        syllabusUrl: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq"
+                url: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview"
             },
             {
                 session: "Course Outline",
-                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
             }
         ]
     }

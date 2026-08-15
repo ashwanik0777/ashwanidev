@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Corporate & Commercial Law",
             "Legal Aid & Clinical Training"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf",
+        syllabusUrl: "https://drive.google.com/file/d/1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf"
+                url: "https://drive.google.com/file/d/1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Advanced Research Methodology",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3",
+        syllabusUrl: "https://drive.google.com/file/d/1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3/preview",
         syllabus: [
             {
                 session: "Course Structure & Syllabus",
-                url: "https://drive.google.com/uc?export=download&id=1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3"
+                url: "https://drive.google.com/file/d/1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Peer-Reviewed Publications",
             "Doctoral Defense"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm",
+        syllabusUrl: "https://drive.google.com/file/d/1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm"
+                url: "https://drive.google.com/file/d/1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm/preview"
             }
         ]
     }

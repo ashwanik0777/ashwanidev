@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Photojournalism",
             "Audio-Video Editing"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2",
+        syllabusUrl: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2"
+                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
             },
             {
                 session: "Course Structure NEP",
-                url: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2"
+                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
             }
         ]
     },
@@ -139,11 +139,11 @@ export const departmentLayoutData = {
             "Documentary Film Making",
             "Media Management"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g",
+        syllabusUrl: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g"
+                url: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview"
             }
         ]
     },
@@ -162,11 +162,11 @@ export const departmentLayoutData = {
             "Broadcast Production",
             "Newsroom Leadership"
         ],
-        syllabusUrl: "https://drive.google.com/uc?export=download&id=14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-",
+        syllabusUrl: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/uc?export=download&id=14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-"
+                url: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview"
             }
         ]
     }

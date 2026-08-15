@@ -60,7 +60,7 @@ export default function ProgramsShowcase({ programs: externalPrograms = [] }) {
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent">
             Our Programs
           </h2>
-          <p className="text-xl text-gray-600">Cutting-edge engineering education</p>
+          {/* <p className="text-xl text-gray-600">Cutting-edge engineering education</p> */}
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-4 rounded-full"></div>
         </div>
 

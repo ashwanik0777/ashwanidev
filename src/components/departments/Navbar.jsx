@@ -339,7 +339,7 @@ const Navbar = () => {
         isScrolled
           ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
           : "bg-white shadow"
-      } px-4 md:px-16 py-3 flex items-center justify-between`}
+      } px-4 md:px-16  flex items-center justify-between`}
       variants={navVariants}
       initial="initial"
       animate="animate"
@@ -353,9 +353,9 @@ const Navbar = () => {
         <motion.img
           src="/assets/logo.svg"
           alt="USICT Logo"
-          className="w-64 h-12 mr-3"
+          className="w-64 h-14 mr-3"
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 0.9 }}
           transition={{ duration: 0.4, delay: 0.1 }}
         />
       </motion.div>

@@ -125,7 +125,7 @@ export const researchAreaData = {
   quickLinks: [
     { title: "Research Projects", desc: "Active and completed projects", href: "/schools/SOM/research-projects", iconName: "BookOpen", color: "text-blue-600" },
     { title: "Research Scholars", desc: "Our PhD community", href: "/schools/SOM/research-scholars", iconName: "Users", color: "text-green-600" },
-    { title: "Patents", desc: "Innovation and IP", href: "https://drive.google.com/uc?export=download&id=1H8BAACetPCdtyqN9woixpD6bSAgx09vx", iconName: "Award", color: "text-purple-600" },
+    { title: "Patents", desc: "Innovation and IP", href: "https://drive.google.com/file/d/1H8BAACetPCdtyqN9woixpD6bSAgx09vx/preview", iconName: "Award", color: "text-purple-600" },
     { title: "Training & Consultancy", desc: "Industry engagement", href: "/schools/SOM/training-consultancy", iconName: "TrendingUp", color: "text-orange-600" },
   ],
 };

@@ -91,7 +91,7 @@ const NAVIGATION_CONFIG = [
   {
     key: "alumni",
     label: "Alumni",
-    directPath: "https://alumni.gbu.ac.in/",
+    directPath: "/alumni",
   },
 ];
 

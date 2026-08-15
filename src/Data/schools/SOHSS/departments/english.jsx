@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Linguistics",
         "Postcolonial Literature",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/english/structure_of-BA_English-NEP.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. English",
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Cultural Studies",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/english/MA-English-CStr.pdf",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/english/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

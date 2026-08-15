@@ -116,7 +116,13 @@ export const departmentLayoutData = {
         "Research Project",
         "Industry Internship",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/biotechnology/CStr_IntBTechMTech-2023onwards.pdf",
+      syllabus: [
+        {
+                session: "2020-21",
+                url: "/schools/biotechnology/Course_Struture_MTech_2020_onwards.pdf"
+        }
+],
     },
     {
       title: "M.Sc Biotechnology (DBT Sponsored)",
@@ -137,7 +143,8 @@ export const departmentLayoutData = {
         "Dissertation Project",
         "Industry Exposure",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/biotechnology/Course_Struture_M.Sc._Biotech.pdf",
+    syllabus: [],
     },
     {
       title: "M.Tech Biotechnology",
@@ -158,6 +165,7 @@ export const departmentLayoutData = {
         "Research Thesis",
         "Industrial Training",
       ],
+      syllabusUrl: "/schools/biotechnology/Course_Struture_MTech_2020_onwards.pdf",
       syllabus: [],
     },
     {
@@ -179,7 +187,13 @@ export const departmentLayoutData = {
         "Patent Filing",
         "Thesis Defense",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
+      syllabus: [
+        {
+                session: "2020-21",
+                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+        }
+],
     },
   ],
   facultyMembers: [

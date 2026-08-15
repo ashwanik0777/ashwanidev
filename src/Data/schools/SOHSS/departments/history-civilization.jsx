@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Archaeology Basics",
         "Heritage Studies",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/history-civilization/History-CStrt.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. History",
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Museum Studies",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/history-civilization/History-CStrt.pdf",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Field Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/history-civilization/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

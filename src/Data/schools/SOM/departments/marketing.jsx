@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Sales & Distribution", "Advertising", "CRM",
         "Marketing Analytics", "International Marketing",
       ],
+      syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
       syllabus: [],
     },
   ],

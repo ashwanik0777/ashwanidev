@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Legal Aid Clinic",
         "Internship with Courts & Firms",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf",
+    syllabus: [],
     },
     {
       title: "LL.M. (1 Year Full-Time)",
@@ -137,7 +138,8 @@ export const departmentLayoutData = {
         "Dissertation",
         "Seminar Presentations",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
+    syllabus: [],
     },
     {
       title: "LL.M. (2 Year Weekend Programme)",
@@ -158,7 +160,8 @@ export const departmentLayoutData = {
         "Labour & Industrial Law",
         "Research Dissertation",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
+    syllabus: [],
     },
     {
       title: "Ph.D. in Law",
@@ -179,6 +182,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf",
       syllabus: [],
     },
   ],

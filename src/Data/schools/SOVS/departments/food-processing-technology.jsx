@@ -110,6 +110,7 @@ export const departmentLayoutData = {
         "In-plant training",
         "B.Tech Project & Seminar",
       ],
+      syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
       syllabus: [],
     },
     {
@@ -148,6 +149,7 @@ export const departmentLayoutData = {
         "Industrial Internship",
         "Dissertation Research",
       ],
+      syllabusUrl: "/schools/food-processing-technology/PhD_FPT_CS_21March24.pdf",
       syllabus: [],
     },
     {

@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Compensation Design", "Industrial Relations", "Leadership",
         "Training & Development", "International HRM",
       ],
+      syllabusUrl: "/schools/human-resource-management/MBA-Course_Structure.docx.pdf",
       syllabus: [],
     },
   ],

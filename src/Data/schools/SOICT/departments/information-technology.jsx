@@ -123,7 +123,21 @@ export const departmentLayoutData = {
         "DevOps & Automation",
         "Capstone Project",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/it/2026_2030_B.Tech._IT_.docx.pdf",
+      syllabus: [
+        {
+                session: "2026-27",
+                url: "/schools/information-technology/2026_2030_B.Tech._IT_.docx.pdf"
+        },
+        {
+                session: "2023-24",
+                url: "/schools/information-technology/B.Tech._IT_2023-27.pdf"
+        },
+        {
+                session: "2021-22",
+                url: "/schools/information-technology/2021_25_B.TECH._IT_2021-25.pdf"
+        }
+],
     },
     {
       title: "M.Tech Information Technology",
@@ -143,6 +157,7 @@ export const departmentLayoutData = {
         "DevOps Practices",
         "Dissertation Project",
       ],
+      syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
       syllabus: [],
     },
     {
@@ -163,6 +178,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Research",
         "Research Funding Support",
       ],
+      syllabusUrl: "/schools/it/PHD.pdf",
       syllabus: [],
     },
   ],

@@ -106,7 +106,8 @@ export const departmentLayoutData = {
         "Comparative Politics", "Public Administration", "Foreign Policy",
         "Research Methods", "Dissertation",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/political-science/DeptBrochure-CStr-PolSci1.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Political Science",
@@ -121,6 +122,7 @@ export const departmentLayoutData = {
         "Research Methodology", "Comparative Politics", "Public Policy",
         "Dissertation", "Seminar Presentations",
       ],
+      syllabusUrl: "/schools/political-science/DeptBrochure-CStr-PolSci1.pdf",
       syllabus: [],
     },
     {
@@ -136,6 +138,7 @@ export const departmentLayoutData = {
         "Diplomacy & Negotiations", "Security Studies", "Global Governance",
         "Area Studies", "Research Thesis",
       ],
+      syllabusUrl: "/schools/political-science/BA_PIR_STr_May2023.pdf",
       syllabus: [],
     },
     {
@@ -151,6 +154,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Field Research",
         "Policy Analysis", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/political-science/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

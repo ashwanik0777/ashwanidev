@@ -109,7 +109,8 @@ export const departmentLayoutData = {
         "Python Programming for Math",
         "Mini Projects",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
+    syllabus: [],
     },
     {
       title: "M.Sc. Applied Mathematics",
@@ -128,6 +129,7 @@ export const departmentLayoutData = {
         "MATLAB & Scientific Computing Lab",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
       syllabus: [],
     },
     {
@@ -146,6 +148,7 @@ export const departmentLayoutData = {
         "Journal Publications",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/applied-mathematics/PhD_Maths.pdf",
       syllabus: [],
     },
   ],

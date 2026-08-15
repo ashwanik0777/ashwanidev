@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Teaching Practice",
         "School Internship",
       ],
+      syllabusUrl: "/schools/education-training/BeD_Prog.pdf",
       syllabus: [],
     },
     {
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "ICT in Education",
         "Action Research",
       ],
+      syllabusUrl: "/schools/education-training/ITEP_CourseStructure.pdf",
       syllabus: [],
     },
     {
@@ -158,7 +160,8 @@ export const departmentLayoutData = {
         "Sports Management",
         "Practical Training",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/education-training/BPES_CStr_May2023.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Education",
@@ -179,6 +182,7 @@ export const departmentLayoutData = {
         "Special Education",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/education-training/CStr-Education-25.pdf",
       syllabus: [],
     },
     {
@@ -200,6 +204,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/education-training/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

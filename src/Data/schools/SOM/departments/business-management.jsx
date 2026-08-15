@@ -113,7 +113,8 @@ export const departmentLayoutData = {
         "Finance", "HRM", "Marketing", "Operations",
         "Strategy", "Business Analytics", "Summer Internship", "Industry Projects",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
+    syllabus: [],
     },
     {
       title: "Dual Degree BBA+MBA (with exit option)",
@@ -127,7 +128,8 @@ export const departmentLayoutData = {
         "Business Fundamentals", "Finance", "Marketing", "HRM",
         "Operations", "Strategy", "Exit after BBA", "Industry Exposure",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
+    syllabus: [],
     },
     {
       title: "B.Com (Honours)",
@@ -141,7 +143,8 @@ export const departmentLayoutData = {
         "Accounting", "Taxation", "Financial Management", "Business Law",
         "Economics", "Corporate Governance", "Auditing", "Business Statistics",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/business-management/BCom-_Syllabus-17Apr25.pdf",
+    syllabus: [],
     },
     {
       title: "MBA (Business Analytics & Data Science)",
@@ -155,7 +158,8 @@ export const departmentLayoutData = {
         "Predictive Analytics", "Data Mining", "AI/ML in Business", "Python",
         "Business Intelligence", "Big Data", "IBM Partnership", "Data Visualization",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/business-management/MBA-Course_Structure.docx.pdf",
+    syllabus: [],
     },
     {
       title: "Ph.D. (Business Management)",
@@ -169,7 +173,8 @@ export const departmentLayoutData = {
         "Independent Research", "Finance Research", "Marketing Research", "HRM Research",
         "Operations Research", "Conference Publications", "UGC-NET/JRF", "Thesis Defense",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/business-management/PhD-CStr-17apr25.pdf",
+    syllabus: [],
     },
   ],
   facultyStats: {

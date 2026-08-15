@@ -110,7 +110,8 @@ export const departmentLayoutData = {
         "ICT in Libraries",
         "Internship Program",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/library-information-science/Cstr-Libsci.pdf",
+    syllabus: [],
     },
     {
       title: "M.Lib.I.Sc. (Master of Library and Information Science)",
@@ -130,7 +131,8 @@ export const departmentLayoutData = {
         "Professional Dissertation",
         "Field Visit & Report",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/library-information-science/Cstr-Libsci.pdf",
+    syllabus: [],
     },
     {
       title: "Ph.D. Library & Information Science",
@@ -149,6 +151,7 @@ export const departmentLayoutData = {
         "Scholarly Communication",
         "Journal Publications",
       ],
+      syllabusUrl: "/schools/library-information-science/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

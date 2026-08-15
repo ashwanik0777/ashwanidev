@@ -106,6 +106,7 @@ export const departmentLayoutData = {
         "Rural Sociology", "Urban Sociology", "Gender Studies",
         "Medical Sociology", "Dissertation",
       ],
+      syllabusUrl: "/schools/sociology/MA-Sociology-Ctr2025.pdf",
       syllabus: [],
     },
     {
@@ -121,6 +122,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Field Research", "Ethnographic Methods",
         "Teaching Assistantship", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/sociology/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

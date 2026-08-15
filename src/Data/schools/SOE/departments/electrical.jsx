@@ -105,7 +105,13 @@ export const departmentLayoutData = {
         "Power Systems", "Electrical Machines", "Control Systems", "Power Electronics",
         "Instrumentation", "Renewable Energy", "EV Technology", "Industry Internship",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+      syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf"
+        }
+],
     },
     {
       title: "Integrated B.Tech–M.Tech/MBA (EE)",
@@ -119,7 +125,8 @@ export const departmentLayoutData = {
         "Power Systems", "Instrumentation & Control", "Power Electronics & Drives",
         "Renewable Energy", "Signal Processing", "MBA Option", "Research Project", "Industry Placement",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+    syllabus: [],
     },
     {
       title: "M.Tech Power Systems / Power Electronics",
@@ -133,6 +140,7 @@ export const departmentLayoutData = {
         "Power System Analysis", "Smart Grid", "FACTS Devices", "Power Converters",
         "Motor Drives", "EV Systems", "MATLAB/Simulink", "Research Thesis",
       ],
+      syllabusUrl: "/schools/electrical/M.Tech.__WP_Electrical_All.pdf",
       syllabus: [],
     },
     {
@@ -148,6 +156,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
         "Patent Filing", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf",
       syllabus: [],
     },
   ],

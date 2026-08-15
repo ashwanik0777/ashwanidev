@@ -106,7 +106,8 @@ export const departmentLayoutData = {
         "Abnormal Psychology", "Cognitive Psychology", "Research Methods",
         "Psychometric Testing", "Research Project",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
+    syllabus: [],
     },
     {
       title: "M.A./M.Sc. Applied Psychology",
@@ -121,6 +122,7 @@ export const departmentLayoutData = {
         "Organizational Psychology", "Psychopathology", "Psychological Assessment",
         "Research Methodology", "Dissertation",
       ],
+      syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
       syllabus: [],
     },
     {
@@ -151,6 +153,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Clinical Supervision", "Teaching Assistantship",
         "Community Outreach", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/psychology/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

@@ -105,7 +105,13 @@ export const departmentLayoutData = {
         "Structural Analysis", "Concrete Technology", "Soil Mechanics", "Surveying",
         "Environmental Engineering", "Transportation", "BIM", "Site Visit",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/civil/Syllabus_CivilEngg_April23.pdf",
+      syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
+        }
+],
     },
     {
       title: "M.Tech Structural Engineering",
@@ -119,7 +125,13 @@ export const departmentLayoutData = {
         "Advanced Structural Analysis", "Earthquake Engineering", "Bridge Design",
         "BIM Technology", "Pre-Stressed Concrete", "FEM", "Research Thesis", "Industry Project",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
+      syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+        }
+],
     },
     {
       title: "M.Tech Environmental Engineering",
@@ -133,6 +145,7 @@ export const departmentLayoutData = {
         "Water Treatment", "Waste Management", "Air Pollution Control", "EIA",
         "Wastewater Engineering", "Solid Waste", "Research Project", "Field Work",
       ],
+      syllabusUrl: "/schools/civil/Mtech_Geotechnical_GeoEnvrtEnggCStr_May2023.pdf",
       syllabus: [],
     },
     {
@@ -148,6 +161,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Teaching Assistantship", "Industry Collaboration",
         "Patent Filing", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/civil/CourseStr_CivilEngg_April23.pdf",
       syllabus: [],
     },
   ],

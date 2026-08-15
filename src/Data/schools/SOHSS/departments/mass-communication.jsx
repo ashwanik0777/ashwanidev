@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Advertising Basics",
         "Internship",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/mass-communication/BAJMC_NEP.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Mass Communication",
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Public Relations",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/mass-communication/MMC.pdf",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Language & Society",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/mass-communication/MA_Linguistics_ProgramStr_May2023.pdf",
       syllabus: [],
     },
     {
@@ -179,6 +182,7 @@ export const departmentLayoutData = {
         "Content Strategy",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/mass-communication/MJMC-CStr.pdf",
       syllabus: [],
     },
     {
@@ -200,6 +204,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/mass-communication/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

@@ -109,7 +109,8 @@ export const departmentLayoutData = {
         "Computational Physics with C++/Python",
         "Modern Physics experiments",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/applied-physics/B.ScH-Physics-CSsyllabus.pdf",
+    syllabus: [],
     },
     {
       title: "M.Sc. Applied Physics",
@@ -128,6 +129,7 @@ export const departmentLayoutData = {
         "Thin Film Fabrication Lab",
         "M.Sc. Research Dissertation",
       ],
+      syllabusUrl: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf",
       syllabus: [],
     },
     {
@@ -146,6 +148,7 @@ export const departmentLayoutData = {
         "Journal Publications",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/applied-physics/Ph.D_Physics_CS_Aug2023.pdf",
       syllabus: [],
     },
   ],

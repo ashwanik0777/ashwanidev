@@ -126,7 +126,21 @@ export const departmentLayoutData = {
         "IoT Applications",
         "Wireless Networks",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/ece/Syllabus_B.Tech(ECE)-2024_onward_.pdf",
+      syllabus: [
+        {
+                session: "2024-25",
+                url: "/schools/electronics--communication-engineering/Syllabus_B.Tech(ECE)-2024_onward_.pdf"
+        },
+        {
+                session: "2021-22",
+                url: "/schools/electronics--communication-engineering/Syllabus_B.Tech(ECE)-January-2021.pdf"
+        },
+        {
+                session: "2018-19",
+                url: "/schools/electronics--communication-engineering/COURSE_STRUCTURE_B.TECH(EC)_2018-2023.pdf"
+        }
+],
     },
     {
       title: "M.Tech Electronics & Communication Engineering",
@@ -147,6 +161,7 @@ export const departmentLayoutData = {
         "Research Methodology",
         "Thesis Project",
       ],
+      syllabusUrl: "/schools/ece/M.Tech._Wireless_Communication_and_Networks_Scheme_and_Syllabi.pdf",
       syllabus: [],
     },
     {
@@ -168,6 +183,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/ece/PHD.pdf",
       syllabus: [],
     },
   ],

@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Translation Studies",
         "Journalism in Hindi",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/indian-languages/CStr-Hindi-March2025.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Hindi",
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Applied Hindi",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/indian-languages/CStr-Hindi-March2025.pdf",
       syllabus: [],
     },
     {
@@ -158,7 +160,8 @@ export const departmentLayoutData = {
         "Epigraphy",
         "Translation",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/indian-languages/BA_Sanskrit_CStr.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Urdu",
@@ -200,6 +203,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/indian-languages/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

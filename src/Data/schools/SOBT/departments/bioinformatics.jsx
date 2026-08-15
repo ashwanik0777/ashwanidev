@@ -115,6 +115,7 @@ export const departmentLayoutData = {
         "Database Design",
         "Research Dissertation",
       ],
+      syllabusUrl: "/schools/bioinformatics/MSc_Bioinformatics_CourseContent.pdf",
       syllabus: [],
     },
     {
@@ -136,6 +137,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/bioinformatics/Course_Structure_PHD_2020_onwards.pdf",
       syllabus: [],
     },
   ],

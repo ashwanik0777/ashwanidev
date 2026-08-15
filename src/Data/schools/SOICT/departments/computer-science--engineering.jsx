@@ -118,7 +118,33 @@ export const departmentLayoutData = {
         "Web Development",
         "Mobile App Development",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
+      syllabus: [
+        {
+                session: "2026-27",
+                url: "/schools/computer-science--engineering/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+        },
+        {
+                session: "2024-25",
+                url: "/schools/computer-science--engineering/BTECH-CSE-2024-28.pdf"
+        },
+        {
+                session: "2023-24",
+                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2023-2027.pdf"
+        },
+        {
+                session: "2022-23",
+                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2022-2026.pdf"
+        },
+        {
+                session: "2021-22",
+                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2021-2025.pdf"
+        },
+        {
+                session: "2020-21",
+                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2020-2024.pdf"
+        }
+],
     },
     {
       title: "M.Tech Computer Science & Engineering",
@@ -139,6 +165,7 @@ export const departmentLayoutData = {
         "Research Methodology",
         "Thesis Project",
       ],
+      syllabusUrl: "/schools/cse/MTech_CSE_Syllabus_WP.pdf",
       syllabus: [],
     },
     {
@@ -160,6 +187,7 @@ export const departmentLayoutData = {
         "Patent Filing",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/cse/PHD.pdf",
       syllabus: [],
     },
   ],

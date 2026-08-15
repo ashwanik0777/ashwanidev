@@ -109,7 +109,8 @@ export const departmentLayoutData = {
         "Polymer Chemistry basics",
         "Laboratory Safety Training",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf",
+    syllabus: [],
     },
     {
       title: "M.Sc. Applied Chemistry",
@@ -128,6 +129,7 @@ export const departmentLayoutData = {
         "Instrumental Analysis Lab",
         "Dissertation Research",
       ],
+      syllabusUrl: "/schools/applied-chemistry/M.Sc_Chemistry_Syllabus_June2023.pdf",
       syllabus: [],
     },
     {

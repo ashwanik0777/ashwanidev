@@ -105,7 +105,13 @@ export const departmentLayoutData = {
         "Machine Design", "Thermodynamics", "Manufacturing Processes", "CAD/CAM",
         "Fluid Mechanics", "Material Science", "Robotics", "Industry Internship",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf",
+      syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf"
+        }
+],
     },
     {
       title: "M.Tech Thermal Engineering",
@@ -119,6 +125,7 @@ export const departmentLayoutData = {
         "Advanced Heat Transfer", "IC Engines", "Renewable Energy", "CFD",
         "Refrigeration & HVAC", "Power Plant Engineering", "Research Thesis", "Lab Work",
       ],
+      syllabusUrl: "/schools/mechanical/M._Tech_Thermal_ME_Syllabus.pdf",
       syllabus: [],
     },
     {
@@ -133,6 +140,7 @@ export const departmentLayoutData = {
         "CNC Programming", "CAD/CAM", "Quality Engineering", "Supply Chain",
         "3D Printing", "Automation", "Research Project", "Industry Training",
       ],
+      syllabusUrl: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf",
       syllabus: [],
     },
     {
@@ -148,6 +156,7 @@ export const departmentLayoutData = {
         "Conference Funding", "Teaching Assistantship", "Patent Filing",
         "Industry Collaboration", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/mechanical/PhD_ME_May2023.pdf",
       syllabus: [],
     },
   ],

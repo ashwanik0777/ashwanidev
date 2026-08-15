@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Clinical Research",
         "Research Dissertation",
       ],
+      syllabusUrl: "/schools/molecular/MSc-MolMed-CStr.pdf",
       syllabus: [],
     },
     {
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Quality Control",
         "Research Project",
       ],
+      syllabusUrl: "/schools/molecular/CStr-MSc-LSM-16apr25.pdf",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/molecular/Course_Structure_PHD_2020_onwards.pdf",
       syllabus: [],
     },
   ],

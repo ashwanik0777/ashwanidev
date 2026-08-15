@@ -116,7 +116,8 @@ export const departmentLayoutData = {
         "Public Finance",
         "International Trade",
       ],
-      syllabus: [],
+      syllabusUrl: "/schools/economics/BA-Eco-CStr.pdf",
+    syllabus: [],
     },
     {
       title: "M.A. Economics",
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Environmental Economics",
         "Dissertation",
       ],
+      syllabusUrl: "/schools/economics/CStr-Eco-Uptd-Mar2025.pdf",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Interdisciplinary Studies",
         "Thesis Defense",
       ],
+      syllabusUrl: "/schools/economics/Structure_-PhD.pdf",
       syllabus: [],
     },
   ],

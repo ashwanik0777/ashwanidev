@@ -105,6 +105,7 @@ export const departmentLayoutData = {
         "Vehicle Design", "IC Engines", "Vehicle Dynamics", "EV Systems",
         "Auto Manufacturing", "Automotive Electronics", "SAE Projects", "Industry Internship",
       ],
+      syllabusUrl: "/schools/automobile/BTech_ME__AutomobileIndustrialEnggCStr_Fac.pdf",
       syllabus: [],
     },
     {
@@ -119,6 +120,7 @@ export const departmentLayoutData = {
         "EV Research", "Alternative Fuels", "Aerodynamics", "Advanced Manufacturing",
         "Publications", "Conference Presentations", "Patent Filing", "Thesis Defense",
       ],
+      syllabusUrl: "/schools/automobile/PhD_ME_May2023.pdf",
       syllabus: [],
     },
   ],

@@ -95,6 +95,7 @@ export const departmentLayoutData = {
         "Financial Modeling", "International Finance", "Tax Planning",
         "Risk Management", "Microfinance",
       ],
+      syllabusUrl: "/schools/finance/MBA-Course_Structure.docx.pdf",
       syllabus: [],
     },
   ],

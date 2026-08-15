@@ -109,6 +109,7 @@ export const departmentLayoutData = {
         "Solid & Hazardous Waste Management",
         "Field Dissertation Project",
       ],
+      syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
       syllabus: [],
     },
     {
@@ -127,6 +128,7 @@ export const departmentLayoutData = {
         "High-impact journal publishing",
         "Thesis Submission & Defense",
       ],
+      syllabusUrl: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf",
       syllabus: [],
     },
   ],

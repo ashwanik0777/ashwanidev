@@ -2,7 +2,7 @@ export const aboutUsData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
   heading: "About SOICT",
-  subheading: "School of Information & Communication Technology — Gautam Buddha University",
+  subheading: "School of Information & Communication Technology",
   mission:
     "To develop globally competitive ICT professionals through quality education, research, and innovation.",
   vision:

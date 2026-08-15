@@ -4,118 +4,28 @@ import {
   Filter,
   Eye,
   Calendar,
-  Image,
+  Image as ImageIcon,
   X,
   Award,
-  Heart,
   Users,
+  Grid,
+  Layers,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
+import { NSS_OFFICIAL_GALLERY } from "./nssGalleryData";
 
 const NSSGallery = ({ nssData }) => {
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedEvent, setSelectedEvent] = useState("all");
-  const [dialogImage, setDialogImage] = useState(null);
+  const [activeModalImage, setActiveModalImage] = useState(null);
+  const [activeModalIndex, setActiveModalIndex] = useState(0);
+  const [currentAlbumImages, setCurrentAlbumImages] = useState([]);
 
-  const defaultGalleryItems = [
-    {
-      id: 1,
-      title: "Mega Blood Donation Camp 2024",
-      category: "Health",
-      event: "Blood Donation Camp",
-      year: "2024",
-      date: "2024-04-19",
-      images: [
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b818913d_WhatsApp%20Image%202024-04-19%20at%201.59.17%20PM%20(1).jpeg",
-          caption: "Volunteers registering blood donors at GBU Health Centre",
-        },
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5215672_WhatsApp%20Image%202024-04-19%20at%201.28.41%20PM%20(1).jpeg",
-          caption: "Medical team conducting pre-donation health checkups",
-        },
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b43cda9a_WhatsApp%20Image%202024-04-19%20at%202.00.34%20PM.jpeg",
-          caption: "GBU student volunteers donating blood",
-        },
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5c4bf7a_WhatsApp%20Image%202024-04-19%20at%204.04.40%20PM.jpeg",
-          caption: "Volunteer team with donor appreciation certificates",
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Cyber Sanskar & Awareness Campaign",
-      category: "Education",
-      event: "Cyber Awareness",
-      year: "2024",
-      date: "2024-03-12",
-      images: [
-        {
-          url: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
-          caption: "NSS GBU Cyber Sanskar workshop launch",
-        },
-        {
-          url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQskMRga2F9mYN9FclMItZ1uhC-XCXkCDM6NuH1ryD_EGqplR1XrarhOZpafQ2V-WPvBs&usqp=CAU",
-          caption: "NSS GBU official emblem badge and volunteers interactive session",
-        },
-      ],
-    },
-    {
-      id: 3,
-      title: "Campus Cleanliness & Tree Plantation Drive",
-      category: "Environment",
-      event: "Environmental Drive",
-      year: "2024",
-      date: "2024-02-05",
-      images: [
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b818913d_WhatsApp%20Image%202024-04-19%20at%201.59.17%20PM%20(1).jpeg",
-          caption: "Volunteers planting saplings across GBU campus green belts",
-        },
-        {
-          url: "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg",
-          caption: "Swachh Bharat Abhiyan cleanliness drive team",
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: "Youth Leadership & Village Outreach Program",
-      category: "Community",
-      event: "Rural Development",
-      year: "2023",
-      date: "2023-11-20",
-      images: [
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b43cda9a_WhatsApp%20Image%202024-04-19%20at%202.00.34%20PM.jpeg",
-          caption: "NSS volunteers interacting with adopted village community members",
-        },
-        {
-          url: "https://nss.gbu.ac.in/uploads/imagesfiles/666c5b5c4bf7a_WhatsApp%20Image%202024-04-19%20at%204.04.40%20PM.jpeg",
-          caption: "Community service recognition ceremony",
-        },
-      ],
-    },
-  ];
-
-  const dbGallery = nssData?.content?.eventGallery || [];
-  const galleryItems = dbGallery.length > 0
-    ? dbGallery.map((g, idx) => ({
-        id: idx + 1,
-        title: g.title || "NSS Event Image",
-        category: "Social",
-        event: g.title || "NSS Event",
-        year: g.eventDate ? g.eventDate.split('-')[0] : "2024",
-        date: g.eventDate || "2024-01-15",
-        images: [
-          { url: g.imageUrl || g.image || "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg", caption: g.title || "Event Photo" }
-        ]
-      }))
-    : defaultGalleryItems;
+  const galleryItems = NSS_OFFICIAL_GALLERY || [];
 
   const filteredItems = galleryItems.filter((item) => {
     const yearMatch = selectedYear === "all" || item.year === selectedYear;
@@ -124,6 +34,8 @@ const NSSGallery = ({ nssData }) => {
     const eventMatch = selectedEvent === "all" || item.event === selectedEvent;
     return yearMatch && categoryMatch && eventMatch;
   });
+
+  const totalPhotosCount = galleryItems.reduce((acc, item) => acc + (item.images?.length || 0), 0);
 
   const getCategoryColor = (category) => {
     const colors = {
@@ -137,15 +49,15 @@ const NSSGallery = ({ nssData }) => {
 
   const galleryStatsData = [
     {
-      icon: Image,
-      numberText: "500+",
+      icon: ImageIcon,
+      numberText: `${totalPhotosCount}+`,
       title: "Photos Captured",
       iconColor: "#2563eb",
     },
     {
-      icon: Calendar,
-      numberText: "50+",
-      title: "Events Documented",
+      icon: Layers,
+      numberText: `${galleryItems.length}`,
+      title: "Event Albums",
       iconColor: "#16a34a",
     },
     {
@@ -161,6 +73,26 @@ const NSSGallery = ({ nssData }) => {
       iconColor: "#f97316",
     },
   ];
+
+  const openModal = (images, index) => {
+    setCurrentAlbumImages(images);
+    setActiveModalIndex(index);
+    setActiveModalImage(images[index]);
+  };
+
+  const handleNextPhoto = () => {
+    if (!currentAlbumImages.length) return;
+    const nextIdx = (activeModalIndex + 1) % currentAlbumImages.length;
+    setActiveModalIndex(nextIdx);
+    setActiveModalImage(currentAlbumImages[nextIdx]);
+  };
+
+  const handlePrevPhoto = () => {
+    if (!currentAlbumImages.length) return;
+    const prevIdx = (activeModalIndex - 1 + currentAlbumImages.length) % currentAlbumImages.length;
+    setActiveModalIndex(prevIdx);
+    setActiveModalImage(currentAlbumImages[prevIdx]);
+  };
 
   return (
     <SearchableWrapper>
@@ -181,7 +113,7 @@ const NSSGallery = ({ nssData }) => {
             NSS GBU Photo Gallery
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
-            Visual highlights capturing moments of selfless community service, tree plantation drives, and student engagement.
+            Authentic photo galleries extracted directly from the official Gautam Buddha University NSS Cell archive.
           </p>
         </motion.div>
 
@@ -199,7 +131,7 @@ const NSSGallery = ({ nssData }) => {
             <div className="flex items-center space-x-2 mr-2">
               <Filter className="h-4 w-4 text-blue-600" />
               <span className="text-sm font-bold text-slate-800">
-                Filter Gallery:
+                Filter Event Albums:
               </span>
             </div>
 
@@ -207,7 +139,7 @@ const NSSGallery = ({ nssData }) => {
               {
                 value: selectedYear,
                 setValue: setSelectedYear,
-                options: ["all", "2024", "2023"],
+                options: ["all", "2026", "2024", "2023"],
                 label: "Year",
                 width: "w-32",
               },
@@ -229,13 +161,17 @@ const NSSGallery = ({ nssData }) => {
                 setValue: setSelectedEvent,
                 options: [
                   "all",
-                  "Blood Donation Camp",
-                  "Cyber Awareness",
+                  "Nasha Mukt Yuva Abhiyan",
                   "Environmental Drive",
-                  "Rural Development",
+                  "Cyber Awareness",
+                  "Blood Donation Camp",
+                  "Yoga & Wellness",
+                  "Rural Camp",
+                  "Distribution Drive",
+                  "Clean-Up Drive",
                 ],
                 label: "Event",
-                width: "w-44",
+                width: "w-52",
               },
             ].map(({ value, setValue, options, label, width }, i) => (
               <div key={i} className={`relative ${width}`}>
@@ -257,7 +193,7 @@ const NSSGallery = ({ nssData }) => {
 
         {/* Gallery Grid */}
         <motion.div
-          className="space-y-8"
+          className="space-y-10"
           initial="hidden"
           animate="visible"
           variants={{
@@ -288,9 +224,11 @@ const NSSGallery = ({ nssData }) => {
                         day: "numeric",
                       })}
                     </span>
+                    <span className="mx-2">•</span>
+                    <span className="text-slate-600 font-normal">{item.description}</span>
                   </p>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 shrink-0">
                   <span
                     className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getCategoryColor(
                       item.category
@@ -305,75 +243,98 @@ const NSSGallery = ({ nssData }) => {
               </div>
 
               <div className="p-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                   {item.images.map((image, index) => (
                     <motion.div
                       key={index}
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.03 }}
                       className="relative group cursor-pointer rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all"
-                      onClick={() => setDialogImage(image)}
+                      onClick={() => openModal(item.images, index)}
                     >
                       <img
                         src={image.url}
-                        alt={image.caption}
-                        className="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105"
+                        alt={image.title || item.title}
+                        className="w-full h-36 object-cover transition-transform duration-300 group-hover:scale-105"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://cdn-prod.mybharats.in/events/68e8e4a314007137094.jpg";
+                        }}
                       />
-                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4 text-white">
-                        <div className="self-end bg-white/20 backdrop-blur-md p-1.5 rounded-full">
-                          <Eye className="h-4 w-4 text-white" />
+                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-2 text-white">
+                        <div className="bg-white/20 backdrop-blur-md p-2 rounded-full">
+                          <Eye className="h-5 w-5 text-white" />
                         </div>
-                        <p className="text-xs font-medium line-clamp-2 leading-relaxed">
-                          {image.caption}
-                        </p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
 
                 <div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500">
-                  <span>{item.images.length} Verified Photos</span>
+                  <span>{item.images.length} High-Resolution Photos</span>
+                  <span className="text-blue-600">Click any photo to view full slider</span>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Image Dialog Modal */}
+        {/* Full Screen Image Modal Carousel */}
         <AnimatePresence>
-          {dialogImage && (
+          {activeModalImage && (
             <div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm"
-              onClick={() => setDialogImage(null)}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md"
+              onClick={() => setActiveModalImage(null)}
             >
               <motion.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-3xl relative border border-slate-100 max-h-[90vh] overflow-y-auto"
+                className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-4xl relative border border-slate-100 max-h-[95vh] flex flex-col justify-between"
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Close Button */}
                 <button
-                  className="absolute top-4 right-4 text-slate-400 hover:text-slate-950 p-2 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
-                  onClick={() => setDialogImage(null)}
+                  className="absolute top-4 right-4 z-10 text-slate-400 hover:text-slate-950 p-2 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
+                  onClick={() => setActiveModalImage(null)}
                   aria-label="Close"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 </button>
 
-                <div className="space-y-4">
-                  <div className="overflow-hidden rounded-2xl border border-slate-100">
-                    <img
-                      src={dialogImage.url}
-                      alt={dialogImage.caption}
-                      className="w-full max-h-[65vh] object-contain bg-slate-900"
-                    />
-                  </div>
-                  <div className="pt-2 text-center sm:text-left">
-                    <p className="text-sm font-semibold text-slate-800 leading-relaxed">
-                      {dialogImage.caption}
-                    </p>
-                  </div>
+                <div className="relative flex items-center justify-center min-h-[50vh] max-h-[70vh] bg-slate-950 rounded-2xl overflow-hidden">
+                  <img
+                    src={activeModalImage.url}
+                    alt={activeModalImage.title}
+                    className="max-h-[70vh] w-auto max-w-full object-contain"
+                  />
+
+                  {/* Slider Prev / Next Controls */}
+                  {currentAlbumImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={handlePrevPhoto}
+                        className="absolute left-4 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-all cursor-pointer"
+                      >
+                        <ChevronLeft size={24} />
+                      </button>
+                      <button
+                        onClick={handleNextPhoto}
+                        className="absolute right-4 w-11 h-11 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-all cursor-pointer"
+                      >
+                        <ChevronRight size={24} />
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                <div className="pt-4 flex items-center justify-between">
+                  <p className="text-sm font-semibold text-slate-800">
+                    {activeModalImage.title || "NSS GBU Official Photo Archive"}
+                  </p>
+                  <span className="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full">
+                    {activeModalIndex + 1} / {currentAlbumImages.length}
+                  </span>
                 </div>
               </motion.div>
             </div>

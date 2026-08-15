@@ -1,0 +1,2229 @@
+[
+  {
+    "_id": "697102e814d89cdb261e1232",
+    "categoryId": "697101939ea269e245ba265a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769012962/events/gallery/zcvmricrnkpuqvpq7xjr.jpg",
+    "createdAt": "2026-01-21T16:46:32.621Z",
+    "type": "photo"
+  },
+  {
+    "_id": "696dabc9123798b9b7b2446b-img-0",
+    "categoryId": "696dabc9123798b9b7b2446b",
+    "description": "Event Highlight",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769012962/events/gallery/zcvmricrnkpuqvpq7xjr.jpg",
+    "createdAt": "2026-01-19T00:00:00.000Z",
+    "type": "event"
+  },
+  {
+    "_id": "696dabc9123798b9b7b2446b-img-1",
+    "categoryId": "696dabc9123798b9b7b2446b",
+    "description": "Event Highlight",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769013643/events/gallery/upxzukh9udctdous90pk.jpg",
+    "createdAt": "2026-01-19T00:00:00.000Z",
+    "type": "event"
+  },
+  {
+    "_id": "696dabc9123798b9b7b2446b-img-2",
+    "categoryId": "696dabc9123798b9b7b2446b",
+    "description": "Event Highlight",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769015189/events/gallery/b5pt9ab7nozpjx8rsvou.jpg",
+    "createdAt": "2026-01-19T00:00:00.000Z",
+    "type": "event"
+  },
+  {
+    "_id": "696dabc9123798b9b7b2446b-img-3",
+    "categoryId": "696dabc9123798b9b7b2446b",
+    "description": "Event Highlight",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769015204/events/gallery/cywzpdckdv60cylvwply.jpg",
+    "createdAt": "2026-01-19T00:00:00.000Z",
+    "type": "event"
+  },
+  {
+    "_id": "696dabc9123798b9b7b2446b-img-4",
+    "categoryId": "696dabc9123798b9b7b2446b",
+    "description": "Event Highlight",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1769015224/events/gallery/ytc4rr89clkiyh5rjmhf.jpg",
+    "createdAt": "2026-01-19T00:00:00.000Z",
+    "type": "event"
+  },
+  {
+    "_id": "6961cb2eced5647e69d212bd",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1768016681/photos/gallery/zyvodtmxxnoupkiqwzgr.jpg",
+    "createdAt": "2026-01-10T03:44:46.506Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961ca05ced5647e69d212bc",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1768016386/photos/gallery/rmijsvigbek33jgphjz8.jpg",
+    "createdAt": "2026-01-10T03:39:49.706Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961c949ced5647e69d212bb",
+    "categoryId": "69608b5cc5a3ef5bb182f58c",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1768016198/photos/gallery/u0rdzmxkmmowzitkpuij.jpg",
+    "createdAt": "2026-01-10T03:36:41.307Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc340",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968664/photos/gallery/lop9jl3niwmdnvu7eok8.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc342",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968676/photos/gallery/vhkcpkgjedhsvmasa2ik.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc34a",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968717/photos/gallery/osoag9ojfe2ah95vo43z.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc345",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968690/photos/gallery/oyc6kv1sg69cngduqqzz.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc34b",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968722/photos/gallery/v7hac3tuvexwiabdcxzf.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc344",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968685/photos/gallery/pv18saf9v7qw7qm65h3h.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc34c",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968727/photos/gallery/w969kxerlsvjfxrfaapl.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc347",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968700/photos/gallery/khxzd2jkad7awtfso5fx.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc34e",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968738/photos/gallery/wkzy5sf3jw6nqz9zh3gc.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc346",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968695/photos/gallery/mfyat5r6yp6wq6sionj3.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc341",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968670/photos/gallery/brdxrm8iic2wpmujlzqh.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc349",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968711/photos/gallery/fuytf4va2ozmm29q4gpr.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc34d",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968732/photos/gallery/vkxl7iy7wtw4zne8ykc4.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc348",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968706/photos/gallery/j0vv2tqggcgfev7ouzzi.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610fe5725bc7dd881bc343",
+    "categoryId": "696109092f968ffc2d079fa6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968681/photos/gallery/y8ba3dbmajzmvujvuxxs.jpg",
+    "createdAt": "2026-01-09T14:25:41.593Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc336",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968592/photos/gallery/hgjhvdicjrh8areap0mj.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33b",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968621/photos/gallery/wgbcbgxteyfvkab1pvf0.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33e",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968636/photos/gallery/wjdybgzr3y2vdyvnxkfy.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc338",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968606/photos/gallery/jant6gpbjn0lfx12kw0y.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc332",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968566/photos/gallery/iqotalvk5kilgy1wwugc.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc335",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968585/photos/gallery/xkgl6vmgj8nrq612uida.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33d",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968632/photos/gallery/zk6dnuloubiceu0zpzoj.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc339",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968610/photos/gallery/s9pdgxqrn0d3wjkoujh9.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc337",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968599/photos/gallery/qdoplkqaimpmt1ckdcnb.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33a",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968615/photos/gallery/jxp9txijpfcgocmfqyii.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc334",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968580/photos/gallery/yh4mvl1xqgesthp2lh6x.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33f",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968642/photos/gallery/pojqelumppyed10aytef.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc33c",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968626/photos/gallery/vgnhppwhw0cd0rc0gkix.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610f85725bc7dd881bc333",
+    "categoryId": "696108f02f968ffc2d079fa5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968573/photos/gallery/ujaukwzjyw7kjvchns9h.jpg",
+    "createdAt": "2026-01-09T14:24:05.104Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db360",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968395/photos/gallery/qakwtzl1jgaasnxkjfpc.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db359",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968355/photos/gallery/z65r1q3xuj0ffx1hez4s.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db363",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968411/photos/gallery/gndtnp5bnhrxzikmv3gh.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35d",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968376/photos/gallery/m43fazpfwsi0mpcxpdwu.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db354",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968323/photos/gallery/thahdlnqgtngmc8gmfrq.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db361",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968399/photos/gallery/fuqvblbhamnjtizp8d8v.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db357",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968343/photos/gallery/fpldniqgtwnlipo0xy3w.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35e",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968382/photos/gallery/njvc26cr1mcjmnczkzo4.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35f",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968389/photos/gallery/go7jha9nwhxgrnfaf82g.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db358",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968349/photos/gallery/icujx3tgt5sjaxrqac1p.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db365",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968420/photos/gallery/neiy5vpwydpviish4ocs.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db366",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968425/photos/gallery/huxozc1ccbnaboj3xt3n.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db355",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968331/photos/gallery/tpd5gzcv400qftk8oqxw.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35c",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968369/photos/gallery/m1i0y089otbr8cn2ppow.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db362",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968405/photos/gallery/g4d5274aqin6yqwkmhte.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35a",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968360/photos/gallery/m0o8jjjkrnahx0chiw4a.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db35b",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968364/photos/gallery/ooycjsza7vczj2qqhl6e.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db364",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968415/photos/gallery/j0qp9kjxmajgg4dwi7hr.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610eac95f571da580db356",
+    "categoryId": "696108db2f968ffc2d079fa4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968337/photos/gallery/lazqkzavuktlv1pepft4.jpg",
+    "createdAt": "2026-01-09T14:20:28.442Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e8",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968210/photos/gallery/nljpqvkeno0lqirxv1af.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333ea",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968228/photos/gallery/vp365sw54e3pokjupxcb.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e7",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968205/photos/gallery/mw2lac7znidoemstu0al.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333ee",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968249/photos/gallery/qufmcbj0qhmkcl3t5vdk.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e9",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968221/photos/gallery/lfgfudyjowjrb38zrrzc.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333eb",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968232/photos/gallery/copolsilwkhtkfu7rdan.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e4",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968185/photos/gallery/pnh0nnafrreafjciao2g.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e3",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968180/photos/gallery/q5g7faufl8q5ppnh2skr.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e2",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968174/photos/gallery/xzmt0ftegwp6m3aow9wg.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333f0",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968263/photos/gallery/iqsayyiwepcjqrzswi6s.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333f1",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968270/photos/gallery/d59p0oznbwrgn46cyfuo.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e5",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968195/photos/gallery/vigx45y0l4mztgd7vi6d.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e1",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968170/photos/gallery/xiourqlag8tgn5ozxzqw.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333ec",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968238/photos/gallery/sb10zt1o59bvswjullve.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333e6",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968200/photos/gallery/nldol0tl2fg1c7kc6dzv.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333f2",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968276/photos/gallery/tjwpftie5ogr8mkmymjr.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333ed",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968244/photos/gallery/lvf3n6lcgs8hss1fjwug.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610e1600cfd3e2479333ef",
+    "categoryId": "696108c32f968ffc2d079fa3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968256/photos/gallery/f1rzoxgsp2fzws4gb43o.jpg",
+    "createdAt": "2026-01-09T14:17:58.841Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333dd",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968128/photos/gallery/da7fmz41cduq083g5ojx.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333da",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968113/photos/gallery/tfzdbo45ysejxgcqlcg9.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333df",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968139/photos/gallery/mdkrudyww6bkxshzqcln.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333dc",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968123/photos/gallery/t8xktn3a8msplandpavi.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333db",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968118/photos/gallery/nzofhxbrrnyji2aukmjk.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333d9",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968108/photos/gallery/olwlbavqdfpb6vwsdfrp.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d8f00cfd3e2479333de",
+    "categoryId": "696108a92f968ffc2d079fa2",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968133/photos/gallery/vvjph83an2lzzlslvlwk.jpg",
+    "createdAt": "2026-01-09T14:15:43.008Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d8",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968084/photos/gallery/ne5zcvlc0scx0lszbmie.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d7",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968076/photos/gallery/qhxjmg4mgotjwgd85ka7.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d1",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968043/photos/gallery/gqias5e5vlxiozm3obqj.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d2",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968048/photos/gallery/fbqmwhjqfury47bqvpwr.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d3",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968053/photos/gallery/vuitax2qin2gqnubf4lz.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d6",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968070/photos/gallery/jknvzwrsf387pusyc7af.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d5",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968063/photos/gallery/nm64ynirnop7juupmoyq.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610d5700cfd3e2479333d4",
+    "categoryId": "696108892f968ffc2d079fa1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767968057/photos/gallery/mqmoynmpjcpixxpwlf9a.jpg",
+    "createdAt": "2026-01-09T14:14:47.518Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072a",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967915/photos/gallery/wy5fpd7wysoy9uztmbwg.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072c",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967927/photos/gallery/l4wjdturnvpxacmq9myh.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b9750730",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967950/photos/gallery/f94v9pybbadjkyziztxh.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072d",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967932/photos/gallery/dslu91glekal9iiooc24.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072e",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967937/photos/gallery/xrpuaynzebhjvqt9ym0q.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072f",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967944/photos/gallery/ogqmated03bq8fmggp3q.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610cd1cbbfc492b975072b",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967921/photos/gallery/d6euujk7dms10jogid2h.jpg",
+    "createdAt": "2026-01-09T14:12:33.339Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750725",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967874/photos/gallery/che46en52lso3smu6zyi.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750729",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967903/photos/gallery/xxc319xmuqgtohxxk1ox.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750721",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967814/photos/gallery/zwxaszywn0gcy9qbrubm.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750724",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967869/photos/gallery/ewjwgv2k5xasgvpx7ocm.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750728",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967895/photos/gallery/rdpvkpnbhhfklnen5aen.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750723",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967831/photos/gallery/u0nhnxjejsiudxeizgdd.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750722",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967825/photos/gallery/yqpzrgddaxujrufwrrgj.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750727",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967889/photos/gallery/sr5hussyni6nsezv2qcv.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610ca1cbbfc492b9750726",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967882/photos/gallery/tjx1iyx6mxuspkppjvrg.jpg",
+    "createdAt": "2026-01-09T14:11:45.827Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610c3dcbbfc492b975071d",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967625/photos/gallery/mjrfjtwadtayrnvzrvak.jpg",
+    "createdAt": "2026-01-09T14:10:05.893Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610c3dcbbfc492b975071f",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967638/photos/gallery/udnlkirvyaulfnnzrce8.jpg",
+    "createdAt": "2026-01-09T14:10:05.893Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610c3dcbbfc492b975071e",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967633/photos/gallery/prvhtt8ck5bvdnazl3ym.jpg",
+    "createdAt": "2026-01-09T14:10:05.893Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610c3dcbbfc492b9750720",
+    "categoryId": "696108712f968ffc2d079fa0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967801/photos/gallery/yebtkwok1hixpet8sm1l.jpg",
+    "createdAt": "2026-01-09T14:10:05.893Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b66cbbfc492b975071b",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967580/photos/gallery/dt0vth3l7gqdvuuyewnl.jpg",
+    "createdAt": "2026-01-09T14:06:30.039Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b66cbbfc492b9750718",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967557/photos/gallery/uuywlljzn5s3zvaqjk6z.jpg",
+    "createdAt": "2026-01-09T14:06:30.039Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b66cbbfc492b9750719",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967565/photos/gallery/oshiywqthmuv3no9cgaq.jpg",
+    "createdAt": "2026-01-09T14:06:30.039Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b66cbbfc492b975071a",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967574/photos/gallery/fjgwis1mlwzuthznpuuj.jpg",
+    "createdAt": "2026-01-09T14:06:30.039Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b66cbbfc492b975071c",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967586/photos/gallery/oeef25yzoangy3cu7mp5.jpg",
+    "createdAt": "2026-01-09T14:06:30.039Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750717",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967543/photos/gallery/jdfwihwaf0wtn2wqjbvg.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750714",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967527/photos/gallery/sdnakbny7599nttkwrt3.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750716",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967536/photos/gallery/znwby612aafm9p5htor9.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750712",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967517/photos/gallery/z1ihnbqpc1apc99al607.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750715",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967531/photos/gallery/xyzwcnr7krj9dslqy3nl.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b3ecbbfc492b9750713",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967523/photos/gallery/mlnbly1g8k5hfbfc0xhz.jpg",
+    "createdAt": "2026-01-09T14:05:50.075Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610b0c75059929fa7fc17f",
+    "categoryId": "696108402f968ffc2d079f9e",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967496/photos/gallery/wdehxo33opdvkmqx09m4.jpg",
+    "createdAt": "2026-01-09T14:05:00.309Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc17e",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967451/photos/gallery/qlmxgshtgvp9vihvoorj.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc17b",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967428/photos/gallery/bbzk35byfv7edecutj5m.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc17a",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967422/photos/gallery/mjailicswnodyqoaxm06.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc179",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967315/photos/gallery/ymghgf50d12p3laxdccc.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc178",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967309/photos/gallery/gzkmya5tcsdbfjx37bv7.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc17c",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967434/photos/gallery/fzjzwlfttwliwcroqoyy.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610adf75059929fa7fc17d",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967439/photos/gallery/fvt0bjfj7jytkd9owu1w.jpg",
+    "createdAt": "2026-01-09T14:04:15.153Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc177",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967299/photos/gallery/cxe6myngb3ek0pw58pxq.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc175",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967287/photos/gallery/b8afuxtf9vokh1wnnsce.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc172",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967271/photos/gallery/qgzgsdhu0mvoun9uwvxl.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc173",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967276/photos/gallery/xtwaoptexguqaagpoxb7.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc176",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967294/photos/gallery/jh6mqre9g8gtbezbvinh.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a4675059929fa7fc174",
+    "categoryId": "696108292f968ffc2d079f9d",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967281/photos/gallery/jgaqljyarvxbfxqb7vnk.jpg",
+    "createdAt": "2026-01-09T14:01:42.872Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a093450f9b9b43bfea9",
+    "categoryId": "696106e8ce5a1281a5fac651",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967229/photos/gallery/hbgtkwdldfpzb6z5btor.jpg",
+    "createdAt": "2026-01-09T14:00:41.437Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a093450f9b9b43bfeaa",
+    "categoryId": "696106e8ce5a1281a5fac651",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967238/photos/gallery/hlhfvqqc0fgtxgbfnaeg.jpg",
+    "createdAt": "2026-01-09T14:00:41.437Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610a093450f9b9b43bfea8",
+    "categoryId": "696106e8ce5a1281a5fac651",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967223/photos/gallery/pyypmv8nosfjnegs66xd.jpg",
+    "createdAt": "2026-01-09T14:00:41.437Z",
+    "type": "photo"
+  },
+  {
+    "_id": "696109ddce5a1281a5fac656",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967186/photos/gallery/xocmkz3pcpoctkbvgu1w.jpg",
+    "createdAt": "2026-01-09T13:59:57.485Z",
+    "type": "photo"
+  },
+  {
+    "_id": "696109ddce5a1281a5fac657",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967194/photos/gallery/jdpgn4lp49ycjwfrcuzb.jpg",
+    "createdAt": "2026-01-09T13:59:57.485Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610998ce5a1281a5fac653",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967077/photos/gallery/p2yzohutsfle54lnexjp.jpg",
+    "createdAt": "2026-01-09T13:58:48.067Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610998ce5a1281a5fac655",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967092/photos/gallery/ewmairsusgi5ah2oxm6b.jpg",
+    "createdAt": "2026-01-09T13:58:48.067Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610998ce5a1281a5fac652",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967071/photos/gallery/kkwqw8uupf9wofvoml4s.jpg",
+    "createdAt": "2026-01-09T13:58:48.067Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610998ce5a1281a5fac654",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967084/photos/gallery/qcjqlym2rih4esxyhili.jpg",
+    "createdAt": "2026-01-09T13:58:48.067Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079fab",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967044/photos/gallery/tuglnoqu7qn1bbkhsmde.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079fa9",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967026/photos/gallery/eexqagjfdsqlceezki5a.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079fa7",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967015/photos/gallery/cpaqvci1pfjqqh9ddved.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079fac",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967050/photos/gallery/or0nmekieuddd4h9vquc.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079faa",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967038/photos/gallery/fotvasn0ooewivgykxkw.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6961094f2f968ffc2d079fa8",
+    "categoryId": "696106cfce5a1281a5fac650",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767967021/photos/gallery/xllr0v1robhrawajak41.jpg",
+    "createdAt": "2026-01-09T13:57:35.354Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64a",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966284/photos/gallery/m3hb58ear3vtktgyq8xt.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64d",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966303/photos/gallery/yl7tbx6ecfjhshc0nynr.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64c",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966298/photos/gallery/hsrt473qweesqi3csqza.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64e",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966310/photos/gallery/dh0znfqhw3drhhgftorv.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64b",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966291/photos/gallery/er8jn6fzjkirqorcxs7e.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610670ce5a1281a5fac64f",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966317/photos/gallery/ww8gw3g0mfiwsglh3b5d.jpg",
+    "createdAt": "2026-01-09T13:45:20.514Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac646",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966243/photos/gallery/fwluizt7bpgwg6ia8gm2.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac649",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966261/photos/gallery/iqmfjwdlkxxey30cceau.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac648",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966256/photos/gallery/xvbx7aznivqyxzqpgsy2.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac647",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966248/photos/gallery/kzirmuqkighsdazmrfdq.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac644",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966229/photos/gallery/refvdmrqfckbj0j7by1x.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69610645ce5a1281a5fac645",
+    "categoryId": "69608c9753b3dee0ae018bcb",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767966235/photos/gallery/jr017gcfhfiaxzyyljd9.jpg",
+    "createdAt": "2026-01-09T13:44:37.398Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960905ec1f731c7d85a2ae9",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936081/photos/gallery/xoinyjknl5purdlq4pi2.jpg",
+    "createdAt": "2026-01-09T05:21:34.535Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960905ec1f731c7d85a2aea",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936090/photos/gallery/g5w7f6legkb6gl3hg6z4.jpg",
+    "createdAt": "2026-01-09T05:21:34.535Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae3",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936022/photos/gallery/dwzvusvgyigpvhaiuvlo.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae8",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936048/photos/gallery/ykxbloxj7e21w2dou7eh.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae5",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936033/photos/gallery/eoqmlmktkj3hybgixtr7.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae4",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936027/photos/gallery/uxgae6hkle0s9x3rlrdx.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae6",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936038/photos/gallery/rjnfvrfvy23z5tqejpn8.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6960903dc1f731c7d85a2ae7",
+    "categoryId": "69608c7a53b3dee0ae018bca",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767936044/photos/gallery/q4ey1edwx5uuhx9cs13g.jpg",
+    "createdAt": "2026-01-09T05:21:01.972Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608ffec1f731c7d85a2ae1",
+    "categoryId": "69608c5d53b3dee0ae018bc9",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935986/photos/gallery/obvrqcmquajwuqf9mee3.jpg",
+    "createdAt": "2026-01-09T05:19:58.460Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608ffec1f731c7d85a2ae2",
+    "categoryId": "69608c5d53b3dee0ae018bc9",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935996/photos/gallery/gpyildmzrehl4xpwaw2n.jpg",
+    "createdAt": "2026-01-09T05:19:58.460Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608ffec1f731c7d85a2ae0",
+    "categoryId": "69608c5d53b3dee0ae018bc9",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935978/photos/gallery/yulwz6g6ntjg0unnestv.jpg",
+    "createdAt": "2026-01-09T05:19:58.460Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608ffec1f731c7d85a2adf",
+    "categoryId": "69608c5d53b3dee0ae018bc9",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935973/photos/gallery/e4ly9eb3cpdio2zi3mqx.jpg",
+    "createdAt": "2026-01-09T05:19:58.460Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f8ac1f731c7d85a2adc",
+    "categoryId": "69608c0f53b3dee0ae018bc7",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935857/photos/gallery/pzvjby7z5wuy5p4awkrl.png",
+    "createdAt": "2026-01-09T05:18:02.648Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f8ac1f731c7d85a2ade",
+    "categoryId": "69608c0f53b3dee0ae018bc7",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935878/photos/gallery/rpw223wmoh3oil2o449i.png",
+    "createdAt": "2026-01-09T05:18:02.648Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f8ac1f731c7d85a2add",
+    "categoryId": "69608c0f53b3dee0ae018bc7",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935870/photos/gallery/gj0j43el1x3fxgn7l6th.png",
+    "createdAt": "2026-01-09T05:18:02.648Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f6ac1f731c7d85a2adb",
+    "categoryId": "69608c0f53b3dee0ae018bc7",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935847/photos/gallery/r47byyu9kr6x5s6ubrl1.png",
+    "createdAt": "2026-01-09T05:17:30.059Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f50c1f731c7d85a2ada",
+    "categoryId": "69608bf653b3dee0ae018bc6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935821/photos/gallery/evqylwr459lbc6mra8ou.png",
+    "createdAt": "2026-01-09T05:17:04.596Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f50c1f731c7d85a2ad9",
+    "categoryId": "69608bf653b3dee0ae018bc6",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935815/photos/gallery/v4pingtmftjoh2ksxgbv.png",
+    "createdAt": "2026-01-09T05:17:04.596Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f29c1f731c7d85a2ad8",
+    "categoryId": "69608bd553b3dee0ae018bc5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935780/photos/gallery/hot534yqkpeyemwd1fee.jpg",
+    "createdAt": "2026-01-09T05:16:25.248Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f29c1f731c7d85a2ad7",
+    "categoryId": "69608bd553b3dee0ae018bc5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935775/photos/gallery/dbm2c0lc6wsy7e5r1hfs.jpg",
+    "createdAt": "2026-01-09T05:16:25.248Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f29c1f731c7d85a2ad6",
+    "categoryId": "69608bd553b3dee0ae018bc5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935770/photos/gallery/gcfus6pjl9kotwzlxezz.jpg",
+    "createdAt": "2026-01-09T05:16:25.248Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608f29c1f731c7d85a2ad5",
+    "categoryId": "69608bd553b3dee0ae018bc5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935764/photos/gallery/d2tyagrkquzfmte4vpwk.jpg",
+    "createdAt": "2026-01-09T05:16:25.248Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608effc1f731c7d85a2ad3",
+    "categoryId": "69608bba53b3dee0ae018bc4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935736/photos/gallery/yqnudduts1tqtutk1zav.jpg",
+    "createdAt": "2026-01-09T05:15:43.314Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608effc1f731c7d85a2ad4",
+    "categoryId": "69608bba53b3dee0ae018bc4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935740/photos/gallery/quphg2uran2pniglcbcg.jpg",
+    "createdAt": "2026-01-09T05:15:43.314Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608effc1f731c7d85a2ad2",
+    "categoryId": "69608bba53b3dee0ae018bc4",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935727/photos/gallery/ey79awbfosyw9hqobvpe.png",
+    "createdAt": "2026-01-09T05:15:43.314Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608ed9c1f731c7d85a2ad1",
+    "categoryId": "69608ba153b3dee0ae018bc3",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935703/photos/gallery/zirlwatdg1phgjlznw9f.png",
+    "createdAt": "2026-01-09T05:15:05.641Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e9b53b3dee0ae018bf2",
+    "categoryId": "69608b5cc5a3ef5bb182f58c",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935635/photos/gallery/mprrusztfnxzgfocrcfx.jpg",
+    "createdAt": "2026-01-09T05:14:03.480Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e9b53b3dee0ae018bf3",
+    "categoryId": "69608b5cc5a3ef5bb182f58c",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935640/photos/gallery/foqifssy012sxgo9oyir.jpg",
+    "createdAt": "2026-01-09T05:14:03.480Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e9b53b3dee0ae018bf1",
+    "categoryId": "69608b5cc5a3ef5bb182f58c",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935630/photos/gallery/d7iaxxoxpwoym7ncudrf.jpg",
+    "createdAt": "2026-01-09T05:14:03.480Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e9b53b3dee0ae018bf0",
+    "categoryId": "69608b5cc5a3ef5bb182f58c",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935624/photos/gallery/iwalojhkoxsfvxgq0u5n.jpg",
+    "createdAt": "2026-01-09T05:14:03.480Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e7353b3dee0ae018bee",
+    "categoryId": "69608b41c5a3ef5bb182f58b",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935586/photos/gallery/pe6oroxq3cvoplyzdkjq.jpg",
+    "createdAt": "2026-01-09T05:13:23.070Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e7353b3dee0ae018bed",
+    "categoryId": "69608b41c5a3ef5bb182f58b",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935581/photos/gallery/gvpz4bmhca1l25zqfiuy.jpg",
+    "createdAt": "2026-01-09T05:13:23.070Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e7353b3dee0ae018bef",
+    "categoryId": "69608b41c5a3ef5bb182f58b",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935593/photos/gallery/jbtxsgqkcjwymnwtv5d3.jpg",
+    "createdAt": "2026-01-09T05:13:23.070Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e7353b3dee0ae018bec",
+    "categoryId": "69608b41c5a3ef5bb182f58b",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935576/photos/gallery/rrlkx4duke7uvvn2mvly.jpg",
+    "createdAt": "2026-01-09T05:13:23.070Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e4153b3dee0ae018beb",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935550/photos/gallery/cdb4u57owft6zpyicenl.jpg",
+    "createdAt": "2026-01-09T05:12:33.315Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018bea",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935539/photos/gallery/r4opvsbn4whcotx5xawk.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018be5",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935505/photos/gallery/qtlrlq3gsawkz5kfxnmj.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018be9",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935531/photos/gallery/qhpjhhycmuephrqqphwr.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018be8",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935522/photos/gallery/o9vcd28hvwg7fxz6b0mn.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018be6",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935511/photos/gallery/iondz829rqbzik9i9f6s.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608e3753b3dee0ae018be7",
+    "categoryId": "69608b1ec5a3ef5bb182f58a",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935516/photos/gallery/gcildst8vjgmn2fs8ufi.jpg",
+    "createdAt": "2026-01-09T05:12:23.562Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608de853b3dee0ae018be4",
+    "categoryId": "69608b04c5a3ef5bb182f589",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935461/photos/gallery/a3vqasge4pndwviyjv3b.jpg",
+    "createdAt": "2026-01-09T05:11:04.212Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608de853b3dee0ae018be3",
+    "categoryId": "69608b04c5a3ef5bb182f589",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935452/photos/gallery/vp0ei1iqen5zho8cknaz.jpg",
+    "createdAt": "2026-01-09T05:11:04.212Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608dc153b3dee0ae018be1",
+    "categoryId": "69608ae9c5a3ef5bb182f588",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935416/photos/gallery/kzcdhvffdqpj4kl3xmj5.jpg",
+    "createdAt": "2026-01-09T05:10:25.262Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608dc153b3dee0ae018be2",
+    "categoryId": "69608ae9c5a3ef5bb182f588",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935422/photos/gallery/aox3lxkaxb7xka49rlmp.jpg",
+    "createdAt": "2026-01-09T05:10:25.262Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608dc153b3dee0ae018bdf",
+    "categoryId": "69608ae9c5a3ef5bb182f588",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935394/photos/gallery/yawsplenvnczj1yyanv6.jpg",
+    "createdAt": "2026-01-09T05:10:25.262Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608dc153b3dee0ae018be0",
+    "categoryId": "69608ae9c5a3ef5bb182f588",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935399/photos/gallery/jp29cvtdtsd2nnqp8dwg.jpg",
+    "createdAt": "2026-01-09T05:10:25.262Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bd9",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935326/photos/gallery/eunmuxyy7jecmyhs2oji.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bda",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935340/photos/gallery/jzhcvlgivrhqjy0ueedl.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bde",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935368/photos/gallery/wuykfrzakczzi6z3auqi.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bdd",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935362/photos/gallery/hhj8nz8omc31vipeyonu.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bdc",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935357/photos/gallery/btvnq4gwaf0ubb2z1nw2.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d8b53b3dee0ae018bdb",
+    "categoryId": "69608a9553b3dee0ae018bc1",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935347/photos/gallery/ecehybt6mkncekcvlnyf.jpg",
+    "createdAt": "2026-01-09T05:09:31.845Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d3e53b3dee0ae018bd8",
+    "categoryId": "69608a6d53b3dee0ae018bc0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935291/photos/gallery/xsiqemcplaikyivlbqz4.jpg",
+    "createdAt": "2026-01-09T05:08:14.284Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d3e53b3dee0ae018bd6",
+    "categoryId": "69608a6d53b3dee0ae018bc0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935277/photos/gallery/xub4fvpzqhcq7bev0ncl.jpg",
+    "createdAt": "2026-01-09T05:08:14.284Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d3e53b3dee0ae018bd5",
+    "categoryId": "69608a6d53b3dee0ae018bc0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935270/photos/gallery/wjkftcl8d7c5nchaxtv1.jpg",
+    "createdAt": "2026-01-09T05:08:14.284Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d3e53b3dee0ae018bd7",
+    "categoryId": "69608a6d53b3dee0ae018bc0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935285/photos/gallery/vgqkwg0ficfnnw8obgal.jpg",
+    "createdAt": "2026-01-09T05:08:14.284Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d3e53b3dee0ae018bd4",
+    "categoryId": "69608a6d53b3dee0ae018bc0",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935264/photos/gallery/epwfntklcqtfjhkx9pcj.jpg",
+    "createdAt": "2026-01-09T05:08:14.284Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d0653b3dee0ae018bd3",
+    "categoryId": "69608a4d53b3dee0ae018bbf",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935235/photos/gallery/xvkggycsjtbpiqauwjgb.jpg",
+    "createdAt": "2026-01-09T05:07:18.092Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d0653b3dee0ae018bd0",
+    "categoryId": "69608a4d53b3dee0ae018bbf",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935220/photos/gallery/hzwoojuwmsipdr8ju8ns.jpg",
+    "createdAt": "2026-01-09T05:07:18.092Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d0653b3dee0ae018bd2",
+    "categoryId": "69608a4d53b3dee0ae018bbf",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935230/photos/gallery/egzkrswpcxziwxlvmfjr.jpg",
+    "createdAt": "2026-01-09T05:07:18.092Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608d0653b3dee0ae018bd1",
+    "categoryId": "69608a4d53b3dee0ae018bbf",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935225/photos/gallery/dudqmzylw24bvpfzjo2k.jpg",
+    "createdAt": "2026-01-09T05:07:18.092Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608cd553b3dee0ae018bcc",
+    "categoryId": "69608a2453b3dee0ae018bbe",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935153/photos/gallery/er1aa7xy2qnyonyjoisn.jpg",
+    "createdAt": "2026-01-09T05:06:29.196Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608cd553b3dee0ae018bce",
+    "categoryId": "69608a2453b3dee0ae018bbe",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935165/photos/gallery/ngszoifkpnlqa2jtaym7.jpg",
+    "createdAt": "2026-01-09T05:06:29.196Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608cd553b3dee0ae018bcf",
+    "categoryId": "69608a2453b3dee0ae018bbe",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935171/photos/gallery/f4qeqopgszsve80miaum.jpg",
+    "createdAt": "2026-01-09T05:06:29.196Z",
+    "type": "photo"
+  },
+  {
+    "_id": "69608cd553b3dee0ae018bcd",
+    "categoryId": "69608a2453b3dee0ae018bbe",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767935160/photos/gallery/o0jvpyxey8azhblrxxek.jpg",
+    "createdAt": "2026-01-09T05:06:29.196Z",
+    "type": "photo"
+  },
+  {
+    "_id": "695fb8efa97579799a4a3453",
+    "categoryId": "695fb788bc01ec5f6af14361",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767880900/photos/gallery/cvqqn6hpchd3udexovda.jpg",
+    "createdAt": "2026-01-08T14:02:23.363Z",
+    "type": "photo"
+  },
+  {
+    "_id": "695fb8efa97579799a4a3455",
+    "categoryId": "695fb788bc01ec5f6af14361",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767880909/photos/gallery/jdlssetrouiricivhyzb.jpg",
+    "createdAt": "2026-01-08T14:02:23.363Z",
+    "type": "photo"
+  },
+  {
+    "_id": "695fb8efa97579799a4a3454",
+    "categoryId": "695fb788bc01ec5f6af14361",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767880904/photos/gallery/gohhmxmppzqlfemdx7aw.jpg",
+    "createdAt": "2026-01-08T14:02:23.363Z",
+    "type": "photo"
+  },
+  {
+    "_id": "695fb8efa97579799a4a3456",
+    "categoryId": "695fb788bc01ec5f6af14361",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767880925/photos/gallery/um7iy04ocnte4yqoxgi5.jpg",
+    "createdAt": "2026-01-08T14:02:23.363Z",
+    "type": "photo"
+  },
+  {
+    "_id": "695fb8efa97579799a4a3457",
+    "categoryId": "695fb788bc01ec5f6af14361",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767880930/photos/gallery/ia4iiwqnoov9xlxpbio1.jpg",
+    "createdAt": "2026-01-08T14:02:23.363Z",
+    "type": "photo"
+  },
+  {
+    "_id": "68825979ea050e8ce96afeab",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1753373049561-hs4.jpg",
+    "createdAt": "2025-07-24T16:04:09.564Z",
+    "type": "photo"
+  },
+  {
+    "_id": "68825972ea050e8ce96afeaa",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1753373042131-hs4.jpg",
+    "createdAt": "2025-07-24T16:04:02.143Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff818e3ed64870c7a956",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337665205-8.jpg",
+    "createdAt": "2025-05-04T05:47:45.206Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff6d8e3ed64870c7a955",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337645722-9.jpg",
+    "createdAt": "2025-05-04T05:47:25.724Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff6c8e3ed64870c7a954",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337644808-3.jpg",
+    "createdAt": "2025-05-04T05:47:24.809Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff618e3ed64870c7a953",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337633938-1.jpg",
+    "createdAt": "2025-05-04T05:47:13.940Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff4d8e3ed64870c7a952",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337613512-4.jpg",
+    "createdAt": "2025-05-04T05:46:53.516Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff4c8e3ed64870c7a951",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337612499-2.jpg",
+    "createdAt": "2025-05-04T05:46:52.500Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff4b8e3ed64870c7a950",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337611526-1.jpg",
+    "createdAt": "2025-05-04T05:46:51.527Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff3e8e3ed64870c7a94f",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337598341-3.jpg",
+    "createdAt": "2025-05-04T05:46:38.342Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff3d8e3ed64870c7a94e",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337597360-2.jpg",
+    "createdAt": "2025-05-04T05:46:37.364Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff298e3ed64870c7a94d",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337577501-4.jpg",
+    "createdAt": "2025-05-04T05:46:17.502Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff288e3ed64870c7a94c",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337576501-2.jpg",
+    "createdAt": "2025-05-04T05:46:16.502Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff038e3ed64870c7a94b",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337539624-7.jpg",
+    "createdAt": "2025-05-04T05:45:39.625Z",
+    "type": "photo"
+  },
+  {
+    "_id": "6816ff028e3ed64870c7a94a",
+    "categoryId": "6807d6472c061d4515877ab5",
+    "title": "",
+    "description": "Photo Gallery",
+    "image": "/uploads/photos/6807d6472c061d4515877ab5/1746337538717-5.jpg",
+    "createdAt": "2025-05-04T05:45:38.718Z",
+    "type": "photo"
+  }
+]

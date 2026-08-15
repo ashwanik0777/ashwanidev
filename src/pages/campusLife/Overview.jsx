@@ -8,7 +8,6 @@ import Header from "./Header";
 import ClubsCouncils from './ClubsCouncils';
 import Library from './Library';
 import SportsCultural from "./SportsCultural";
-import EcoCampus from "./EcoCampus";
 import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const Overview = () => {
@@ -24,7 +23,6 @@ const Overview = () => {
       <HostelDining/>
       <Library/>
       <SportsCultural/>
-      <EcoCampus/>
       </main>
     </div>
     </SearchableWrapper>

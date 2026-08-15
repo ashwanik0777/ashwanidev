@@ -1,60 +1,68 @@
 import React from 'react';
-import { Lightbulb, Search, Calendar, Users, Send, Link2 } from 'lucide-react';
-
 import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
-
-const objectives = [
-  {
-    icon: <Lightbulb className="text-orange-500 w-8 h-8" />,
-    title: 'IPR Awareness',
-    description: 'Promote basic understanding of patents and copyrights among researchers and students.',
-  },
-  {
-    icon: <Search className="text-blue-500 w-8 h-8" />,
-    title: 'Patent Search',
-    description: 'Encourage in-house patent searches and refine research objectives.',
-  },
-  {
-    icon: <Calendar className="text-green-500 w-8 h-8" />,
-    title: 'Workshops & Seminars',
-    description: 'Organize interactive sessions on IP-related topics and trends.',
-  },
-  {
-    icon: <Users className="text-purple-500 w-8 h-8" />,
-    title: 'Innovation Support',
-    description: 'Motivate innovators and guide them through the Incubation Center.',
-  },
-  {
-    icon: <Send className="text-pink-500 w-8 h-8" />,
-    title: 'IP Filing Assistance',
-    description: 'Assist in filing patents with timely approvals and submissions.',
-  },
-  {
-    icon: <Link2 className="text-yellow-500 w-8 h-8" />,
-    title: 'Building Connections',
-    description: 'Bridge the University with Patent Information Centre, CST, UP.',
-  },
-];
 
 const IPRObjectives = () => {
   return (
     <SearchableWrapper>
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 py-10">
-       
-       <h1 className="text-3xl font-bold text-center mb-8">Objectives of IPR Cell</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {objectives.map((obj, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-xl hover:shadow-2xl p-6 transition-transform transform hover:scale-105 cursor-pointer"
-          >
-            <div className="flex items-center mb-4">{obj.icon}</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-800">{obj.title}</h3>
-            <p className="text-gray-600 text-sm">{obj.description}</p>
+      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-10">
+        {/* About Section */}
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+            About
+          </h2>
+          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+
+          <ul className="space-y-4 text-gray-700 text-base leading-relaxed list-disc pl-5">
+            <li className="text-justify">
+              Gautam Buddha University was established in the year 2008 by the Uttar Pradesh Act (9) of 2002. The University is recognized by the University Grants Commission of India under section 2(f) of UGC Act 1956 and approved by UGC under section 12-B. The University had initiated research activities since its inception with the help of qualified faculty members and ambitious students. The University aspires to conduct R&D in diverse areas aiming to cover the full spectrum, from fundamental and theoretical studies, through research of relevance to business and industry with practice-based studies in Science, Engineering, Management, and allied areas.
+            </li>
+            <li className="text-justify">
+              The focus of the University in promoting interdisciplinary research is to bring together experts from a variety of disciplines to identify challenges and deliver practical solutions. University also guides and encourages the faculty members to propose new research projects and ideas to carry out innovative research, apply for externally funded research projects to different national and international funding agencies, and also in helping the researchers in filing the Intellectual Properties (IPs) generated and protecting their rights.
+            </li>
+            <li className="text-justify">
+              Intellectual Property Rights given to the inventor(s) to control the use of his/her new creations or inventions for a limited period of time are vital for the socio-economic prosperity of the nation. These rights help in promoting creativity and inventiveness through dissemination of new knowledge or products and encourage fair competition.
+            </li>
+          </ul>
+        </div>
+
+        {/* Objectives Section */}
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+            Objectives
+          </h2>
+          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+
+          <p className="text-gray-700 text-base leading-relaxed mb-6">
+            Considering the requirement, an IPR Cell has been established at Gautam Buddha University in association with Council of Science and Technology (CST), Uttar Pradesh promoting and disseminating issues related to IPR through following objectives:
+          </p>
+
+          <div className="bg-slate-50 border-l-4 border-amber-500 p-6 rounded-r-xl">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              Training, Awareness & Protection of IPRs
+            </h3>
+            <ul className="space-y-3 text-gray-700 text-base leading-relaxed list-disc pl-5">
+              <li>
+                To create awareness amongst potential researchers of the University (students/faculty members) on basics of IPRs, especially patents & copyrights.
+              </li>
+              <li>
+                To encourage the students & faculty members to carry out patent searches in-house and/or at PIC and to fine-tune their research objectives.
+              </li>
+              <li>
+                To conduct workshops and seminars on IP-related issues and contemporary topics of discussion.
+              </li>
+              <li>
+                To motivate the innovators promoting to generate new ideas and further guiding in alliance with University Incubation Center.
+              </li>
+              <li>
+                To facilitate the filing of IPs through their timely clearance and forwarding to the Patent Office.
+              </li>
+              <li>
+                To bridge between the University and Patent Information Centre, CST, UP.
+              </li>
+            </ul>
           </div>
-        ))}
+        </div>
       </div>
-    </section>
     </SearchableWrapper>
   );
 };

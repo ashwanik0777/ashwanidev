@@ -1,44 +1,44 @@
 import React from 'react';
-
 import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
 
 export default function ContactDetails() {
   return (
     <SearchableWrapper>
-      <section className="py-16 to-white">
-        <div className="max-w-3xl mx-auto px-4 w-full">
+      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+            Contact Details
+          </h2>
+          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
 
-          <h1 className="text-3xl font-bold text-center mb-8 ">Contact Details
+          <div className="max-w-2xl bg-slate-50 border border-gray-200 rounded-xl overflow-hidden shadow-xs">
+            <div className="bg-slate-100 px-5 py-3 border-b border-gray-200">
+              <h3 className="text-xl font-bold text-gray-900">Dr. Shakti Sahi</h3>
+            </div>
 
-          </h1>
-          <div className="flex items-center bg-white shadow-md rounded-xl p-6 border border-gray-100">
-            {/* Image Section */}
-            <img
-              src="https://www.gburif.org/mentors/shakti_sahi_edit.jpg"
-              alt="Dr. Shakti Sahi"
-              className="w-24 h-24 rounded-full object-cover border-4 border-blue-100 mr-6"
-            />
+            <div className="p-6 space-y-3 text-base text-gray-700">
+              <div className="text-lg font-semibold text-blue-700 mb-2">
+                Nodal Officer
+              </div>
 
-            {/* Details Section */}
-            <div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-1">Dr. Shakti Sahi</h3>
-              <p className="text-blue-600 font-medium mb-4">Nodal Officer</p>
-
-              <p className="text-gray-700 mb-2">
-                <span className="font-semibold">Address :</span> IPR Cell, Gautam Buddha University, Greater Noida - 201310
+              <p>
+                <strong>Address : </strong> IPR Cell, Gautam Buddha University, Greater Noida- 201310
               </p>
 
-              <p className="text-gray-700 mb-2">
-                <span className="font-semibold">Email :</span> iprcell@gbu.ac.in
+              <p>
+                <strong>Email : </strong>
+                <a href="mailto:iprcell@gbu.ac.in" className="text-blue-600 hover:underline">
+                  iprcell@gbu.ac.in
+                </a>
               </p>
 
-              <p className="text-gray-700">
-                <span className="font-semibold">Phone No. :</span> -
+              <p>
+                <strong>Phone No. : </strong> -
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </SearchableWrapper>
   );
 }

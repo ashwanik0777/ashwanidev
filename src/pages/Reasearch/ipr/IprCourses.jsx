@@ -1,73 +1,49 @@
 import React from 'react';
-
 import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
-
-const iprCourses = [
-  {
-    school: 'School of Biotechnology',
-    courseName: 'Intellectual Property Rights, Biosafety and Bioethics',
-    credit: '03 Credit',
-    offeredIn: '9th Semester (Integrated B.Tech.-M.Tech.) & 3rd Semester (M.Tech. Biotechnology)',
-    objectives: [
-      'Basic knowledge of IPR and its role in biological research.',
-      'Familiarity with India’s IPR Policy.',
-      'Understanding biosafety and biotech product regulations.',
-      'Awareness of ethical issues in research.'
-    ]
-  },
-  {
-    school: 'School of Vocational Studies and Applied Sciences',
-    courseName: 'Patent Law and IPR Issues',
-    credit: '02 Credit',
-    offeredIn: '3rd Semester (M.Sc. Applied Chemistry)',
-    objectives: [
-      'Understanding IPR dimensions and policy.',
-      'Basic aspects of IP and associated rights.',
-      'Awareness of IP protection and maintenance.',
-      'Familiarity with international treaties and India’s position.'
-    ]
-  },
-  {
-    school: 'School of Vocational Studies and Applied Sciences',
-    courseName: 'Intellectual Property Rights',
-    credit: '02 Credit',
-    offeredIn: 'B.Sc. Physical Sciences',
-    objectives: [
-      'Understanding IPR dimensions and policy.',
-      'Basic aspects of IP and associated rights.',
-      'Awareness of IP protection and maintenance.',
-      'Familiarity with international treaties and India’s position.'
-    ]
-  }
-];
 
 export default function IprCourses() {
   return (
     <SearchableWrapper>
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-10">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+            Intellectual Property Rights, Biosafety and Bioethics
+          </h2>
+          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
 
-          <h1 className="text-3xl font-bold text-center mb-8">IPR Courses Offered</h1>
-          <div className="flex flex-wrap justify-center gap-6">
-            {iprCourses.map((course, index) => (
-              <div key={index} className="w-full md:w-[30%] bg-white shadow-md rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-t-4 border-blue-500">
-                <h2 className="text-lg font-semibold text-purple-700 mb-2">{course.school}</h2>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{course.courseName}</h3>
-                <p className="text-sm text-gray-600 mb-2">{course.credit} | {course.offeredIn}</p>
+          <div className="space-y-6 text-gray-700 text-base leading-relaxed">
+            <p>
+              <strong>A. </strong> School of Biotechnology offers a 03 Credit course on <strong>'Intellectual Property Rights, Biosafety and Bioethics'</strong> in the 9th semester of Integrated B.Tech.-M.Tech. (Biotechnology) and 3rd Semester of M.Tech. (Biotechnology) programs. The objectives of this course are:
+            </p>
 
-                <div>
-                  <h4 className="text-md font-semibold mb-2 text-blue-600">Objectives:</h4>
-                  <ul className="list-disc pl-5 text-gray-700 space-y-1 text-sm">
-                    {course.objectives.map((obj, idx) => (
-                      <li key={idx}>{obj}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                To provide basic knowledge on intellectual property rights and their implications in biological research and product development.
+              </li>
+              <li>
+                To become familiar with India’s IPR Policy.
+              </li>
+              <li>
+                To learn biosafety and risk assessment of products derived from biotechnology and regulation of such products.
+              </li>
+              <li>
+                To become familiar with ethical issues in biological research.
+              </li>
+            </ul>
+
+            <p className="pt-4">
+              <strong>B. </strong> School of Vocational Studies and Applied Sciences offers a 02 Credit course on <strong>'Patent Law and IPR issues'</strong> in the 3rd semester of M.Sc. Applied Chemistry and another 02 Credit course on <strong>'Intellectual Property Rights'</strong> in B.Sc. Physical Sciences. The objectives of these courses are:
+            </p>
+
+            <ul className="list-disc pl-6 space-y-2">
+              <li>To apprise the students about the multifaceted dimensions of IP issues.</li>
+              <li>To introduce them to the basic aspects of Intellectual Property and various rights associated with them.</li>
+              <li>To create an awareness about the maintenance and protection of IP.</li>
+              <li>To give them a knowhow of India’s IP policy and its placement among different international treaties.</li>
+            </ul>
           </div>
         </div>
-      </section>
+      </div>
     </SearchableWrapper>
   );
 }

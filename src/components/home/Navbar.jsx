@@ -380,7 +380,7 @@ const Navbar = () => {
               <img
                 src="/assets/logo.svg"
                 alt="GBU Logo"
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
 

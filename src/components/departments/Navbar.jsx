@@ -353,7 +353,7 @@ const Navbar = () => {
         <motion.img
           src="/assets/logo.svg"
           alt="USICT Logo"
-          className="w-64 h-12 mr-3"
+          className="w-64 h-14 mr-3"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}

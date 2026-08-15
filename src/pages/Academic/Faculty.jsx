@@ -257,11 +257,11 @@ const Faculty = () => {
             />
 
             {/* Statistics */}
-           <StatsCard stats={stats} />
+           {/* <StatsCard stats={stats} /> */}
 
             {/* Search + Filters */}
-            <section className="py-1 w-full bg-gray-50">
-              <div className="container w-full mx-auto">
+            <section className="py-3 w-full bg-gray-50">
+              <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mx-15 space-y-2">
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />

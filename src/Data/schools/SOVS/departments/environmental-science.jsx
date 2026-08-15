@@ -93,45 +93,83 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "M.Sc. Environmental Sciences",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Postgraduate program covering ecology, environmental chemistry, microbiology, pollution monitoring, waste management, EIA, and remote sensing.",
-      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Ecosystem Ecology & Biodiversity",
-        "Environmental Chemistry & Toxicology",
-        "Water & Wastewater Management",
-        "Environmental Impact Assessment (EIA)",
-        "Remote Sensing & GIS in Environment",
-        "Solid & Hazardous Waste Management",
-        "Field Dissertation Project",
-      ],
-      syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
-      syllabus: [],
+        id: "msc-environmental-science",
+        title: "M.Sc. Environmental Science",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Postgraduate modules covering ecology, environmental toxicology, remote sensing/GIS, environmental impact assessment (EIA), and waste management.",
+        image: "https://images.unsplash.com/photo-1500829243541-74b677fecc30?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-teal-700",
+        highlights: [
+            "EIA & Environmental Auditing",
+            "Pollution Control Technologies",
+            "GIS & Satellite Remote Sensing",
+            "Field Research Thesis"
+        ],
+        syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+            }
+        ]
     },
     {
-      title: "Ph.D. Environmental Sciences",
-      duration: "3-5 Years",
-      intake: "3 Students",
-      description:
-        "Doctoral research program in heavy metal geochemistry, environmental biotechnology, climate change adaptation, and GIS modeling.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Independent Environmental Research",
-        "Geochemical Data Modeling",
-        "Research Methodology & Review",
-        "Funded projects from DST/MoEFCC",
-        "High-impact journal publishing",
-        "Thesis Submission & Defense",
-      ],
-      syllabusUrl: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf",
-      syllabus: [],
+        id: "msc-geology",
+        title: "M.Sc. Geology",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "Geological exploration, structural geology, hydrogeology, mineralogy, petrology, stratigraphic analysis, and geophysical prospecting.",
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-stone-700",
+        highlights: [
+            "Structural Geology & Tectonics",
+            "Hydrogeology & Groundwater",
+            "Mineral Exploration",
+            "Geological Field Camps"
+        ],
+        syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+            }
+        ]
     },
-  ],
+    {
+        id: "phd-environmental-sciences",
+        title: "Ph.D. in Environmental Sciences",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "12 Students",
+        description: "Doctoral research focused on climate change mitigation, bioremediation, wastewater treatment, ecotoxicology, and environmental policies.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-700 to-green-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Bioremediation Labs",
+            "Climate Impact Studies",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 3 dedicated faculty members with research expertise in heavy metal geochemistry, biodiversity studies, and environmental biotechnology.",
     stats: [

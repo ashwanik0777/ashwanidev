@@ -93,65 +93,121 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Sc. (Hons.) Mathematics",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "Undergraduate honors program providing a strong base in calculus, algebra, mechanics, differential equations, and computational methods.",
-      image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Calculus",
-        "Linear Algebra & Group Theory",
-        "Numerical Analysis",
-        "Differential Equations",
-        "Operations Research",
-        "Python Programming for Math",
-        "Mini Projects",
-      ],
-      syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
-    syllabus: [],
+        id: "btech-maths-computing",
+        title: "B.Tech. (Maths and Computing)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Blended program uniting advanced discrete mathematics, numerical algorithms, cryptographic foundations, data structures, and scientific computing.",
+        image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Discrete Mathematics & Algorithms",
+            "Cryptographic Methods",
+            "Scientific Computing",
+            "Machine Learning Math"
+        ],
+        syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/applied-mathematics/BTech_MathsComputing.pdf"
+            }
+        ]
     },
     {
-      title: "M.Sc. Applied Mathematics",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Postgraduate program specializing in advanced numerical computation, mathematical modeling, scientific computing, and statistical methods.",
-      image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Mathematical Modeling",
-        "Advanced Numerical Methods",
-        "Fluid Dynamics",
-        "Integral Equations & Calculus of Variations",
-        "Probability & Statistics",
-        "MATLAB & Scientific Computing Lab",
-        "Dissertation",
-      ],
-      syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
-      syllabus: [],
+        id: "bsc-hons-mathematics",
+        title: "B.Sc. (Hons.) Mathematics",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "40 Students",
+        description: "Rigorous training in pure and applied mathematics, covering real analysis, abstract algebra, linear programming, and differential geometry.",
+        image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-cyan-700",
+        highlights: [
+            "Real & Complex Analysis",
+            "Abstract Algebra",
+            "Differential Equations",
+            "Numerical Analysis"
+        ],
+        syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf"
+            }
+        ]
     },
     {
-      title: "Ph.D. Applied Mathematics",
-      duration: "3-5 Years",
-      intake: "5 Students",
-      description:
-        "Doctoral research program in biomathematics, optimization techniques, fluid mechanics, network design, and computational mathematical modeling.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Optimization Theory",
-        "Mathematical Biology",
-        "Research Methodology Course",
-        "Journal Publications",
-        "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/applied-mathematics/PhD_Maths.pdf",
-      syllabus: [],
+        id: "bsc-hons-mes",
+        title: "B.Sc. (Hons.) in Mathematics, Statistics, Economics",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "40 Students",
+        description: "Interdisciplinary triple-major combining mathematical rigor, statistical inference, data modeling, and quantitative economic analysis.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-blue-700",
+        highlights: [
+            "Probability & Mathematical Statistics",
+            "Econometric Modeling",
+            "Applied Optimization",
+            "Quantitative Finance"
+        ],
+        syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf"
+            }
+        ]
     },
-  ],
+    {
+        id: "msc-applied-mathematics",
+        title: "M.Sc. Mathematics",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced post-graduate coursework in functional analysis, fluid dynamics, topology, mathematical modeling, and computational methods.",
+        image: "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-700 to-indigo-800",
+        highlights: [
+            "Functional Analysis & Topology",
+            "Fluid Dynamics",
+            "Operations Research",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/applied-mathematics/BTech_MathsComputing.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-applied-mathematics",
+        title: "Ph.D. (Mathematics)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original innovations in numerical analysis, optimization theory, biomathematics, and cryptography.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-700 to-zinc-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Indexed Publications",
+            "Mathematical Modeling",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/applied-mathematics/PhD_Maths.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/applied-mathematics/PhD_Maths.pdf"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 4 dedicated faculty members specializing in biomathematics, operations research, optimization, and scientific computing.",
     stats: [

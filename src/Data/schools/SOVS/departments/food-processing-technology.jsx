@@ -93,24 +93,93 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-        id: "btech-fpt",
-        title: "B.Tech Food Processing & Technology",
+        id: "btech-food-processing-tech",
+        title: "B.Tech. (Food Processing and Technology)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Food preservation, packaging tech, quality assurance, FSSAI compliance, and dairy/grain engineering.",
-        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-orange-500 to-orange-600",
+        description: "Engineering principles applied to food preservation, dairy processing, thermal & non-thermal preservation, food plant layout, and quality assurance.",
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
         highlights: [
-            "Food Chemistry & Microbiology",
+            "Food Preservation Engineering",
             "Dairy & Beverage Technology",
-            "Food Packaging & Quality",
-            "FSSAI Food Safety Standards"
+            "Food Safety (HACCP & FSSAI)",
+            "Food Plant Machinery"
         ],
         syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
+                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-food-processing-tech",
+        title: "M.Tech. (Food Processing and Technology)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced post-graduate training in food process modeling, novel food packaging, nutraceuticals, advanced rheology, and bioprocess engineering.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-red-700",
+        highlights: [
+            "Novel Food Packaging",
+            "Nutraceutical Formulation",
+            "Bioprocess Engineering",
+            "Master Research Project"
+        ],
+        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "msc-food-science",
+        title: "M.Sc. Food Science",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Study of food chemistry, food microbiology, sensory evaluation techniques, fermentation technologies, and international food regulatory laws.",
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-yellow-700",
+        highlights: [
+            "Food Microbiology & Safety",
+            "Sensory Analysis & Flavour",
+            "Food Chemistry & Nutrition",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-food-processing-tech",
+        title: "Ph.D. in Food Processing and Technology",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original innovations in functional foods, green extraction, food waste valorization, and shelf-life modeling.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-700 to-slate-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Food Engineering Lab",
+            "Functional Food Research",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
                 url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
             }
         ]

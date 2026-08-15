@@ -97,16 +97,27 @@ const nccStatsData = [
   return (
     <SearchableWrapper>
     <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
-      {/* Mission Statement */}
-      <Card className="border-l-4 border-l-orange-600">
-        <CardHeader>
-          <CardTitle className="text-2xl text-orange-600">Our Vision</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-lg leading-relaxed text-gray-700">
-            {visionText}
-          </p>
-        </CardContent>
+      {/* Mission & Vision Statement Card */}
+      <Card className="border-l-4 border-l-orange-600 bg-gradient-to-r from-orange-50/40 via-white to-blue-50/30 shadow-md p-6 sm:p-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex-1">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-orange-600 mb-3">Our Vision</h2>
+            <p className="text-base sm:text-lg leading-relaxed text-slate-700">
+              {visionText}
+            </p>
+          </div>
+          <div className="shrink-0">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+              alt="Official NCC Emblem"
+              className="w-28 h-28 sm:w-32 sm:h-32 object-contain bg-white rounded-2xl p-2 border border-slate-100 shadow-md"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://panducollege.ac.in/images/ncc-new-logo.png";
+              }}
+            />
+          </div>
+        </div>
       </Card>
 
       {/* Unit Information */}

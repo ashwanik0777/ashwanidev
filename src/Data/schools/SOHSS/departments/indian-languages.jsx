@@ -98,115 +98,75 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) Hindi",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "A comprehensive undergraduate program covering classical and modern Hindi literature, literary criticism, creative writing, and Hindi language pedagogy.",
-      image:
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Classical Hindi Literature",
-        "Modern Hindi Fiction",
-        "Hindi Poetry",
-        "Literary Criticism",
-        "Creative Writing",
-        "Hindi Grammar",
-        "Translation Studies",
-        "Journalism in Hindi",
-      ],
-      syllabusUrl: "/schools/indian-languages/CStr-Hindi-March2025.pdf",
-    syllabus: [],
+        id: "ba-ma-hons-hindi",
+        title: "B.A and M.A. Honours (Hindi)",
+        level: "UG/PG",
+        duration: "3-5 Years",
+        intake: "40 Students",
+        description: "Hindi canonical poetry, prose narratives, translation theory, functional Hindi, and modern Hindi literary criticism.",
+        image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Kavya Shastra",
+            "Modern Hindi Fiction",
+            "Translation Studies",
+            "Functional Hindi for Media"
+        ],
+        syllabusUrl: "/schools/sohss/Brochure-Hindi-Mar25.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/Brochure-Hindi-Mar25.pdf"
+            }
+        ]
     },
     {
-      title: "M.A. Hindi",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "An advanced postgraduate program exploring Hindi literary theory, comparative literature, and specialized areas of Hindi studies with research orientation.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
-      highlights: [
-        "Hindi Literary Theory",
-        "Comparative Literature",
-        "Medieval Hindi Literature",
-        "Modern Hindi Drama",
-        "Research Methodology",
-        "Folklore Studies",
-        "Applied Hindi",
-        "Dissertation",
-      ],
-      syllabusUrl: "/schools/indian-languages/CStr-Hindi-March2025.pdf",
-      syllabus: [],
+        id: "ba-hons-sanskrit",
+        title: "B.A Honours Sanskrit",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "30 Students",
+        description: "Classical Sanskrit grammar (Paninian Vyakarana), Vedic hymns, Natyashastra, philosophical texts, and epics.",
+        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "Panini Ashtadhyayi",
+            "Vedic Suktas",
+            "Classical Sanskrit Drama",
+            "Manuscriptology"
+        ],
+        syllabusUrl: "/schools/sohss/BA_Sanskrit_CStr.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/BA_Sanskrit_CStr.pdf"
+            }
+        ]
     },
     {
-      title: "B.A. (Hons.) Sanskrit",
-      duration: "3 Years",
-      intake: "30 Students",
-      description:
-        "An undergraduate program covering classical Sanskrit texts, Vedic literature, Sanskrit grammar, and the rich philosophical and literary traditions of ancient India.",
-      image:
-        "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Vedic Literature",
-        "Sanskrit Grammar",
-        "Classical Sanskrit Poetry",
-        "Sanskrit Drama",
-        "Indian Philosophy",
-        "Manuscript Studies",
-        "Epigraphy",
-        "Translation",
-      ],
-      syllabusUrl: "/schools/indian-languages/BA_Sanskrit_CStr.pdf",
-    syllabus: [],
-    },
-    {
-      title: "M.A. Urdu",
-      duration: "2 Years",
-      intake: "20 Students",
-      description:
-        "A postgraduate program exploring Urdu poetry, prose, literary criticism, and the rich cultural traditions of Urdu language and literature.",
-      image:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Urdu Poetry (Ghazal, Nazm)",
-        "Urdu Prose & Fiction",
-        "Literary Criticism",
-        "Urdu Journalism",
-        "Translation Studies",
-        "Cultural Studies",
-        "Script & Calligraphy",
-        "Dissertation",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Hindi",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "A doctoral program for advanced research in Hindi literature, linguistics, and related interdisciplinary areas under expert faculty supervision.",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-500 to-red-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "National Seminars",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/indian-languages/Structure_-PhD.pdf",
-      syllabus: [],
-    },
-  ],
+        id: "ma-urdu",
+        title: "M.A. (Urdu)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "Classical and modern Urdu poetry (Ghazals, Nazms), Dastan narratives, progressive writers movement, and literary criticism.",
+        image: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-emerald-700",
+        highlights: [
+            "Urdu Ghazal & Nazm",
+            "Dastan & Novel",
+            "Progressive Literature",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/sohss/Brochure-Hindi-Mar25.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/Brochure-Hindi-Mar25.pdf"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Diwakar Garwa",

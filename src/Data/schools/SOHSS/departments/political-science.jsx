@@ -94,70 +94,52 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) Political Science",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "Comprehensive undergraduate program covering Indian politics, comparative politics, international relations, and political theory.",
-      image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Indian Government & Politics", "Political Theory", "International Relations",
-        "Comparative Politics", "Public Administration", "Foreign Policy",
-        "Research Methods", "Dissertation",
-      ],
-      syllabusUrl: "/schools/political-science/DeptBrochure-CStr-PolSci1.pdf",
-    syllabus: [],
+        id: "ba-hons-ma-political-science",
+        title: "B.A. (Hons.) / M.A. Political Science",
+        level: "UG/PG",
+        duration: "3-5 Years",
+        intake: "40 Students",
+        description: "Comprehensive study of political theory, comparative politics, Indian constitution, public policy, and international relations.",
+        image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Political Thought",
+            "Constitutional Framework",
+            "International Systems",
+            "Public Policy Analysis"
+        ],
+        syllabusUrl: "/schools/sohss/brochure-Polsci.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/brochure-Polsci.pdf"
+            }
+        ]
     },
     {
-      title: "M.A. Political Science",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Advanced program in political theory, Indian politics, governance, and research methodology for aspiring political scientists and civil servants.",
-      image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Political Theory", "Indian Political System", "Governance Studies",
-        "Research Methodology", "Comparative Politics", "Public Policy",
-        "Dissertation", "Seminar Presentations",
-      ],
-      syllabusUrl: "/schools/political-science/DeptBrochure-CStr-PolSci1.pdf",
-      syllabus: [],
-    },
-    {
-      title: "M.A. Political Science & International Relations",
-      duration: "2 Years",
-      intake: "25 Students",
-      description:
-        "Specialized program focusing on international relations, foreign policy, diplomacy, and Central Asian studies.",
-      image: "https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "International Relations Theory", "Foreign Policy Analysis", "Central Asian Studies",
-        "Diplomacy & Negotiations", "Security Studies", "Global Governance",
-        "Area Studies", "Research Thesis",
-      ],
-      syllabusUrl: "/schools/political-science/BA_PIR_STr_May2023.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Political Science",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "Doctoral research in Indian politics, international relations, governance, human rights, and non-conventional security.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Journal Publications",
-        "Conference Presentations", "Teaching Assistantship", "Field Research",
-        "Policy Analysis", "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/political-science/Structure_-PhD.pdf",
-      syllabus: [],
-    },
-  ],
+        id: "ma-political-science-ir",
+        title: "M.A. (Political Science and International Relations)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced analysis of global geopolitics, diplomatic strategies, security studies, foreign policies, and conflict resolution.",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-purple-700",
+        highlights: [
+            "Global Geopolitics",
+            "Diplomatic History",
+            "Foreign Policy Analysis",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/sohss/BA_PIR_STr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/BA_PIR_STr_May2023.pdf"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 4+ dedicated faculty members with expertise in Indian politics, international relations, and governance.",
     stats: [

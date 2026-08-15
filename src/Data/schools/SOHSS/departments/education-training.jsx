@@ -98,121 +98,98 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Ed.",
-      duration: "2 Years",
-      intake: "50 Students",
-      description:
-        "A professional teacher education program preparing graduates for teaching in secondary and senior secondary schools with emphasis on pedagogy, classroom management, and educational technology.",
-      image:
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Pedagogy of School Subjects",
-        "Educational Psychology",
-        "Classroom Management",
-        "Educational Technology",
-        "Assessment & Evaluation",
-        "Inclusive Education",
-        "Teaching Practice",
-        "School Internship",
-      ],
-      syllabusUrl: "/schools/education-training/BeD_Prog.pdf",
-      syllabus: [],
+        id: "bed-general",
+        title: "B.Ed. (Bachelors of Education)",
+        level: "UG",
+        duration: "2 Years",
+        intake: "100 Students",
+        description: "NCTE-recognized teacher training program focusing on pedagogical theory, child psychology, classroom management, and school internships.",
+        image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Pedagogical Theory",
+            "Child Psychology",
+            "Classroom Internship",
+            "Curriculum Design"
+        ],
+        syllabusUrl: "/schools/sohss/AmbedkarCentre-HumanRights.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/AmbedkarCentre-HumanRights.pdf"
+            }
+        ]
     },
     {
-      title: "B.Sc B.Ed./B.Com. B.Ed./B.A. B.Ed. ITEP",
-      duration: "4 Years",
-      intake: "50 Students",
-      description:
-        "Integrated Teacher Education Programs aligned with NEP 2020, combining subject expertise with professional teacher preparation in a four-year dual-degree framework.",
-      image:
-        "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Subject Specialization",
-        "Foundation of Education",
-        "Pedagogy & Methods",
-        "Educational Psychology",
-        "School Internship",
-        "Community Engagement",
-        "ICT in Education",
-        "Action Research",
-      ],
-      syllabusUrl: "/schools/education-training/ITEP_CourseStructure.pdf",
-      syllabus: [],
+        id: "itep-integrated-bed",
+        title: "ITEP (B.Sc. B.Ed. / B.Com. B.Ed. / B.A. B.Ed.)",
+        level: "Dual Degree",
+        duration: "4 Years",
+        intake: "50 Students",
+        description: "Integrated Teacher Education Programme under NEP offering dual qualification in disciplinary majors and education pedagogy.",
+        image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-500 to-teal-600",
+        highlights: [
+            "NEP Aligned Dual Degree",
+            "Disciplinary Major + Pedagogy",
+            "Hands-on School Practicum",
+            "Teaching Tech Tools"
+        ],
+        syllabusUrl: "/schools/sohss/ITEP_CourseStructure.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/ITEP_CourseStructure.pdf"
+            }
+        ]
     },
     {
-      title: "BPES (Bachelor of Physical Education & Sports)",
-      duration: "3 Years",
-      intake: "30 Students",
-      description:
-        "A comprehensive undergraduate program in physical education and sports science, preparing students for careers in sports coaching, fitness training, and physical education teaching.",
-      image:
-        "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Sports Science",
-        "Physical Fitness",
-        "Coaching Methods",
-        "Sports Psychology",
-        "Kinesiology",
-        "Health Education",
-        "Sports Management",
-        "Practical Training",
-      ],
-      syllabusUrl: "/schools/education-training/BPES_CStr_May2023.pdf",
-    syllabus: [
-        {
-                session: "2023-24",
-                url: "/schools/education-training/BPES_CStr_May2023.pdf"
-        }
+        id: "bpes-sports-education",
+        title: "Bachelor of Physical Education and Sports (BPES)",
+        level: "UG",
+        duration: "3 Years",
+        intake: "50 Students",
+        description: "Physical education sciences, sports physiology, athletic coaching, biomechanics, tournament administration, and fitness management.",
+        image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-red-500 to-orange-600",
+        highlights: [
+            "Sports Physiology",
+            "Athletic Coaching & Officiating",
+            "Sports Biomechanics",
+            "Gym & Fitness Training"
+        ],
+        syllabusUrl: "/schools/sohss/BPES_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/BPES_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "ma-education",
+        title: "M.A. (Education)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced study of educational philosophy, comparative systems, educational measurement, policy research, and instructional tech.",
+        image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "Educational Philosophy",
+            "Measurement & Evaluation",
+            "Policy Research",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/sohss/CStr-Education-25.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sohss/CStr-Education-25.pdf"
+            }
+        ]
+    }
 ],
-    },
-    {
-      title: "M.A. Education",
-      duration: "2 Years",
-      intake: "25 Students",
-      description:
-        "An advanced postgraduate program exploring educational theory, research methodology, curriculum development, and specialized areas of education studies.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
-      highlights: [
-        "Philosophy of Education",
-        "Educational Research",
-        "Curriculum Development",
-        "Comparative Education",
-        "Educational Administration",
-        "Teacher Education",
-        "Special Education",
-        "Dissertation",
-      ],
-      syllabusUrl: "/schools/education-training/CStr-Education-25.pdf",
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Education",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "A doctoral program for advanced research in education, pedagogy, curriculum studies, and related interdisciplinary areas under expert faculty supervision.",
-      image:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-rose-500 to-rose-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "Policy Research",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/education-training/Structure_-PhD.pdf",
-      syllabus: [],
-    },
-  ],
   facultyMembers: [
     {
       name: "Dr. Rakesh Kr. Srivastava",

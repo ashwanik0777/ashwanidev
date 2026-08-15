@@ -98,94 +98,75 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. LL.B. (Hons.)",
-      duration: "5 Years",
-      intake: "120 Students",
-      description:
-        "A five-year integrated undergraduate program combining Bachelor of Arts with Bachelor of Laws, approved by the Bar Council of India. The program provides a strong foundation in humanities and comprehensive legal training.",
-      image:
-        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-600 to-red-700",
-      highlights: [
-        "Constitutional Law",
-        "Criminal Law & Procedure",
-        "Corporate Law",
-        "International Law",
-        "Human Rights Law",
-        "Moot Court Training",
-        "Legal Aid Clinic",
-        "Internship with Courts & Firms",
-      ],
-      syllabusUrl: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf",
-    syllabus: [],
+        id: "ba-llb-integrated",
+        title: "B.A. LL.B. (Five Year Integrated)",
+        level: "UG (Integrated Law)",
+        duration: "5 Years",
+        intake: "120 Students",
+        description: "BCI-approved comprehensive five-year integrated legal education blending humanities with constitutional law, criminal jurisprudence, corporate law, moot courts, and legal aid clinic practice.",
+        image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-700 to-yellow-800",
+        highlights: [
+            "Constitutional Law & Jurisprudence",
+            "Moot Court & Trial Advocacy",
+            "Corporate & Commercial Law",
+            "Legal Aid & Clinical Training"
+        ],
+        syllabusUrl: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf"
+            }
+        ]
     },
     {
-      title: "LL.M. (1 Year Full-Time)",
-      duration: "1 Year",
-      intake: "40 Students",
-      description:
-        "An intensive one-year postgraduate program in law designed for law graduates seeking advanced specialization in constitutional law, criminal law, corporate law, or international law.",
-      image:
-        "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-700 to-red-800",
-      highlights: [
-        "Advanced Constitutional Law",
-        "Jurisprudence & Legal Theory",
-        "Research Methodology",
-        "Comparative Law",
-        "Intellectual Property Rights",
-        "Cyber Law",
-        "Dissertation",
-        "Seminar Presentations",
-      ],
-      syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
-    syllabus: [],
+        id: "llm-one-year",
+        title: "LL.M. (Master of Laws - One Year)",
+        level: "PG (Postgraduate Law)",
+        duration: "1 Year",
+        intake: "30 Students",
+        description: "Intensive postgraduate research program offering advanced specializations in Corporate & Commercial Law, Constitutional & Administrative Law, and Criminal & Security Law.",
+        image: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-700 to-slate-900",
+        highlights: [
+            "Comparative Constitutional Law",
+            "Corporate & Securities Governance",
+            "Advanced Research Methodology",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
+        syllabus: [
+            {
+                session: "Course Structure & Syllabus",
+                url: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf"
+            }
+        ]
     },
     {
-      title: "LL.M. (2 Year Weekend Programme)",
-      duration: "2 Years",
-      intake: "40 Students",
-      description:
-        "A weekend postgraduate program designed for working legal professionals and advocates who wish to pursue advanced legal studies while continuing their practice.",
-      image:
-        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-rose-600 to-rose-700",
-      highlights: [
-        "Weekend Classes",
-        "Advanced Legal Studies",
-        "Flexible Scheduling",
-        "Practice-Oriented Curriculum",
-        "ADR & Mediation",
-        "Environmental Law",
-        "Labour & Industrial Law",
-        "Research Dissertation",
-      ],
-      syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
-    syllabus: [],
-    },
-    {
-      title: "Ph.D. in Law",
-      duration: "3-5 Years",
-      intake: "15 Students",
-      description:
-        "A doctoral research program for scholars seeking to contribute original research in areas of constitutional law, criminal justice, corporate governance, human rights, and emerging legal challenges.",
-      image:
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-800 to-red-900",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "National & International Seminars",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabusUrl: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf",
-      syllabus: [],
-    },
-  ],
+        id: "phd-law",
+        title: "Ph.D. in Law",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting rigorous, original scholarship in constitutional governance, human rights, intellectual property, cyber law, and judicial reforms.",
+        image: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-zinc-800 to-stone-900",
+        highlights: [
+            "Legal Research Methodology",
+            "Interdisciplinary Legal Studies",
+            "Peer-Reviewed Publications",
+            "Doctoral Defense"
+        ],
+        syllabusUrl: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Santosh Kumar Tiwari",

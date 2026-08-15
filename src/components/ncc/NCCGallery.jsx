@@ -260,10 +260,41 @@ const [dialogImage, setDialogImage] = useState(null);
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">NCC Gallery</h2>
-        <p className="text-lg text-gray-600">
-          Capturing moments of discipline, training, and camaraderie
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">NCC Gallery & Media</h2>
+        <p className="text-lg text-gray-600 mb-6">
+          Capturing moments of discipline, training, camps, and national pride at Gautam Buddha University
         </p>
+
+        {/* Instagram Direct Links Banner */}
+        <div className="flex flex-wrap justify-center items-center gap-4 bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-2xl p-4 sm:p-6 shadow-xl mb-8 max-w-4xl mx-auto">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 rounded-xl shadow-lg">
+              <Camera className="w-6 h-6 text-white" />
+            </div>
+            <div className="text-left">
+              <h4 className="font-extrabold text-base sm:text-lg">Follow Live Instagram Updates</h4>
+              <p className="text-xs text-purple-200">Official photo galleries & event stories from GBU Battalions</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-3.5 ml-auto">
+            <a
+              href="https://www.instagram.com/up37_ncc_gbu/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-md transition-all hover:scale-105"
+            >
+              <span>@up37_ncc_gbu</span>
+            </a>
+            <a
+              href="https://www.instagram.com/gbu_ncc/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-bold px-4 py-2.5 rounded-xl backdrop-blur-sm transition-all"
+            >
+              <span>@gbu_ncc</span>
+            </a>
+          </div>
+        </div>
       </motion.div>
 <StatsCard stats={galleryStatsData}/>
       {/* FILTERS */}

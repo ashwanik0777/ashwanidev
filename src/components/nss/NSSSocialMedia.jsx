@@ -182,13 +182,7 @@ const NSSSocialMedia = ({ nssData }) => {
                       <h4 className="text-xl font-bold text-slate-900 mb-1">
                         {handle.platform}
                       </h4>
-                      <p className="text-xs font-semibold text-blue-600 mb-2">{handle.handle}</p>
-                      <div className="text-2xl font-extrabold text-slate-900 mb-3">
-                        {handle.followers}
-                      </div>
-                      <p className="text-xs text-slate-500 leading-relaxed mb-6">
-                        {handle.description}
-                      </p>
+                      <p className="text-sm font-semibold text-blue-600 mb-6">{handle.handle}</p>
                     </div>
                     <Button
                       className="w-full mt-auto"

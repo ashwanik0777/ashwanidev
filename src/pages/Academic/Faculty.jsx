@@ -101,14 +101,6 @@ const Faculty = () => {
           collaborations_count: 15 // Mock default
         });
 
-        setJoinData({
-          title: 'Join Our Faculty',
-          description: 'We are always looking for passionate educators and researchers to join our academic community. Explore career opportunities and become part of an institution dedicated to excellence.',
-          button1_text: 'View Open Positions',
-          url1: '#',
-          button2_text: 'Learn About Benefits',
-          url2: '#'
-        });
 
         console.log('✅ Fetched all faculty data.');
       } catch (err) {
@@ -212,7 +204,9 @@ const Faculty = () => {
     setSelectedDepartment('All Departments');
     setSelectedExperience('All');
     setSelectedQualification('All');
-    setSelectedSchool('All Schools');
+    if (!isSchoolScoped) {
+      setSelectedSchool('All Schools');
+    }
     setSearchTerm('');
   };
 
@@ -267,7 +261,7 @@ const Faculty = () => {
           <>
             {/* Hero Section */}
             <BannerSection
-              title={isSchoolScoped ? `${schoolScopedName} — Faculty` : (directoryStats?.title || 'Faculty Directory')}
+              title={isSchoolScoped ? `${(shortCode || '').toUpperCase()} — Faculty` : (directoryStats?.title || 'Faculty Directory')}
               bgTheme={3}
             />
 
@@ -275,39 +269,42 @@ const Faculty = () => {
            {/* <StatsCard stats={stats} /> */}
 
             {/* Search + Filters */}
-            <section className="py-3 w-full bg-gray-50">
-              <div className="mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mx-15 space-y-2">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type="text"
-                      placeholder="Search faculty by name, department, specialization, or research area..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 border-solid rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
+            <section className="py-6 w-full bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
+                  {/* Search and Clear All Row */}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                    <div className="relative w-full sm:max-w-lg flex-grow">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                      <input
+                        type="text"
+                        placeholder="Search faculty by name, department, specialization..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                      />
+                    </div>
+                    
+                    {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || selectedQualification !== 'All' || (!isSchoolScoped && selectedSchool !== 'All Schools') || searchTerm) && (
+                      <button
+                        onClick={clearFilters}
+                        className="flex items-center space-x-2 text-red-600 bg-red-50 hover:bg-red-100 px-4 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+                      >
+                        <X className="w-4 h-4" />
+                        <span className="font-medium text-sm">Clear Filters</span>
+                      </button>
+                    )}
                   </div>
 
-                  {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || selectedQualification !== 'All' || selectedSchool !== 'All Schools' || searchTerm) && (
-                    <button
-                      onClick={clearFilters}
-                      className="flex items-center space-x-2 text-red-600 hover:text-red-700 transition-colors"
-                    >
-                      <X className="w-4 h-4" />
-                      <span>Clear All</span>
-                    </button>
-                  )}
-
-                  <div className="bg-white p-6 rounded-lg border border-gray-200 border-solid space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {/* Filter Dropdowns */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                       {!isSchoolScoped && (
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">School</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">School</label>
                         <select
                           value={selectedSchool}
                           onChange={(e) => setSelectedSchool(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         >
                           {schools.map(school => (
                             <option key={school} value={school}>{school}</option>
@@ -316,11 +313,11 @@ const Faculty = () => {
                       </div>
                       )}
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Department</label>
                         <select
                           value={selectedDepartment}
                           onChange={(e) => setSelectedDepartment(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         >
                           {departments.map(dept => (
                             <option key={dept} value={dept}>{dept}</option>
@@ -328,11 +325,11 @@ const Faculty = () => {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Experience</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Experience</label>
                         <select
                           value={selectedExperience}
                           onChange={(e) => setSelectedExperience(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         >
                           {experienceRanges.map(range => (
                             <option key={range} value={range}>{range}</option>
@@ -340,23 +337,24 @@ const Faculty = () => {
                         </select>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Qualification</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1.5">Qualification</label>
                         <select
                           value={selectedQualification}
                           onChange={(e) => setSelectedQualification(e.target.value)}
-                          className="w-full border border-gray-300 border-solid rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                          className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                         >
                           {qualifications.map(qual => (
                             <option key={qual} value={qual}>{qual}</option>
                           ))}
                         </select>
                       </div>
-
-                    </div>
                   </div>
-
-                  <div className="text-sm text-gray-600">
-                    Showing {filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, filteredFaculty.length)} of {filteredFaculty.length} matched (out of {facultyMembers.length} total)
+                  
+                  {/* Results Count */}
+                  <div className="pt-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-600">
+                    <span>
+                      Showing <strong>{filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, filteredFaculty.length)}</strong> of <strong>{filteredFaculty.length}</strong> matched (out of {facultyMembers.length} total)
+                    </span>
                   </div>
                 </div>
               </div>
@@ -491,34 +489,6 @@ const Faculty = () => {
                 )}
               </div>
             </section>
-
-            {/* Call to Action */}
-            {joinData && (
-              <section className="py-16 bg-white">
-                <div className="container mx-auto px-4 text-center">
-                  <h2 className="text-4xl font-bold text-gray-800 mb-6">{joinData.title}</h2>
-                  <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">{joinData.description}</p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                      href={joinData.url1}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors transform hover:scale-105"
-                    >
-                      {joinData.button1_text}
-                    </a>
-                    <a
-                      href={joinData.url2}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-                    >
-                      {joinData.button2_text}
-                    </a>
-                  </div>
-                </div>
-              </section>
-            )}
           </>
         )}
       </SimpleLayout>

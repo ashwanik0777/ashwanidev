@@ -169,6 +169,63 @@ const FacultyDashboard = () => {
     setMessage("");
   };
 
+  /**
+   * Strips empty/blank entries from all arrays inside tabData before saving.
+   * An entry is considered "empty" if every meaningful field in it is blank/falsy.
+   * This prevents ghost rows from being saved when a user adds a new row but
+   * never fills in any data.
+   */
+  const sanitizeTabData = (rawTabData) => {
+    if (!rawTabData || typeof rawTabData !== "object") return {};
+
+    /** Returns true if a value is "empty" (null, undefined, empty string, 0, empty array). */
+    const isEmpty = (v) => {
+      if (v === null || v === undefined || v === "") return true;
+      if (typeof v === "number" && v === 0) return true;
+      if (Array.isArray(v) && v.length === 0) return true;
+      if (typeof v === "string" && !v.trim()) return true;
+      return false;
+    };
+
+    /** Fields to skip when checking if a row is "meaningfully filled". */
+    const metaFields = new Set(["type", "status", "level", "role", "ranking", "quartile"]);
+
+    /** Returns true if an object has at least one real (non-meta) field with content. */
+    const hasContent = (obj) => {
+      if (!obj || typeof obj !== "object") return false;
+      return Object.entries(obj).some(([key, val]) => {
+        if (metaFields.has(key)) return false;
+        if (Array.isArray(val)) return val.some((item) => typeof item === "string" ? item.trim() : !!item);
+        return !isEmpty(val);
+      });
+    };
+
+    const cleaned = {};
+    for (const [sectionKey, sectionVal] of Object.entries(rawTabData)) {
+      if (sectionVal === null || sectionVal === undefined) continue;
+
+      // Primitive values (talksCount, projectsCount, etc.) — keep as-is
+      if (typeof sectionVal !== "object") {
+        cleaned[sectionKey] = sectionVal;
+        continue;
+      }
+
+      // Section is an object with sub-keys that may be arrays
+      const cleanedSection = {};
+      for (const [subKey, subVal] of Object.entries(sectionVal)) {
+        if (Array.isArray(subVal)) {
+          // Filter out entries where ALL meaningful fields are empty
+          cleanedSection[subKey] = subVal.filter((item) => hasContent(item));
+        } else {
+          // Keep scalar/string values (e.g. philosophy, message)
+          cleanedSection[subKey] = subVal;
+        }
+      }
+      cleaned[sectionKey] = cleanedSection;
+    }
+    return cleaned;
+  };
+
   const handleSave = useCallback(async () => {
     setSaving(true);
     setMessage("");
@@ -193,8 +250,10 @@ const FacultyDashboard = () => {
         department: profile.department,
         school: profile.school,
         tags: profile.tags || [],
-        researchAreas: profile.researchAreas || [],
-        tabData: profile.tabData || {},
+        researchAreas: (profile.researchAreas || []).filter(
+          (area) => (area.title && area.title.trim()) || (area.description && area.description.trim())
+        ),
+        tabData: sanitizeTabData(profile.tabData),
       };
 
       const updated = await updateMyFacultyProfile(payload);

@@ -157,7 +157,12 @@ const nccStatsData = [
           <Shield className="w-8 h-8 text-orange-600 animate-pulse" />
           Unit Information
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="bg-gradient-to-br from-amber-50/50 to-white rounded-2xl border border-amber-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Associate NCC Officer (ANO)</div>
+            <div className="text-lg font-extrabold text-slate-900">Lt. Bhawna Joshi</div>
+            <div className="text-xs text-slate-500 font-medium mt-0.5">GBU Officer in Charge</div>
+          </div>
           <div className="bg-gradient-to-br from-orange-50/50 to-white rounded-2xl border border-orange-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="text-xs font-semibold text-orange-600 uppercase tracking-wider mb-1">Affiliated Wing</div>
             <div className="text-xl font-bold text-slate-800">Army</div>

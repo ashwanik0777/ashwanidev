@@ -54,14 +54,14 @@ const Badge = ({ className = "", variant, children, ...props }) => {
 
 const NCCStructure = ({ nccData }) => {
   const defaultAnoDetails = {
-    name: 'Lt. Col. Rajesh Kumar',
+    name: 'Lt. Bhawna Joshi',
     designation: 'Associate NCC Officer (ANO)',
-    email: 'rajesh.kumar@university.edu',
-    phone: '+91-9876543210',
-    image: '/placeholder.svg',
-    serviceRecord: '15 years in Indian Army',
-    qualifications: ['B.Tech', 'M.Tech', 'Military Leadership Course'],
-    awards: ['Vishisht Seva Medal', 'Commendation Card']
+    email: 'bhawna.joshi@gbu.ac.in',
+    phone: '+91-120-234-4000',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png',
+    serviceRecord: 'Associate NCC Officer leading 31 UP Girls Battalion & 37 UP Battalion wings at Gautam Buddha University.',
+    qualifications: ['Ph.D in Physics', 'Officer Training Academy (OTA)', 'Military & Disaster Management Training'],
+    awards: ['University ANO Commendation', 'Outstanding Leadership Award']
   };
 
   const defaultCadetLeaders = [

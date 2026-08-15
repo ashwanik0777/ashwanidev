@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Classroom Internship",
             "Curriculum Design"
         ],
-        syllabusUrl: "/schools/sohss/AmbedkarCentre-HumanRights.pdf",
+        syllabusUrl: "/schools/education-training/AmbedkarCentre-HumanRights.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/AmbedkarCentre-HumanRights.pdf"
+                url: "/schools/education-training/AmbedkarCentre-HumanRights.pdf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Hands-on School Practicum",
             "Teaching Tech Tools"
         ],
-        syllabusUrl: "/schools/sohss/ITEP_CourseStructure.pdf",
+        syllabusUrl: "/schools/education-training/ITEP_CourseStructure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/ITEP_CourseStructure.pdf"
+                url: "/schools/education-training/ITEP_CourseStructure.pdf"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sports Biomechanics",
             "Gym & Fitness Training"
         ],
-        syllabusUrl: "/schools/sohss/BPES_CStr_May2023.pdf",
+        syllabusUrl: "/schools/education-training/BPES_CStr_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/BPES_CStr_May2023.pdf"
+                url: "/schools/education-training/BPES_CStr_May2023.pdf"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Policy Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/sohss/CStr-Education-25.pdf",
+        syllabusUrl: "/schools/education-training/CStr-Education-25.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/CStr-Education-25.pdf"
+                url: "/schools/education-training/CStr-Education-25.pdf"
             }
         ]
     }

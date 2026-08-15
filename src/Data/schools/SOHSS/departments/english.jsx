@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Creative Writing",
             "Phonetics & Linguistics"
         ],
-        syllabusUrl: "/schools/sohss/structure_of-BA_English-NEP.pdf",
+        syllabusUrl: "/schools/english/structure_of-BA_English-NEP.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/structure_of-BA_English-NEP.pdf"
+                url: "/schools/english/structure_of-BA_English-NEP.pdf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/sohss/MA-English-CStr.pdf",
+        syllabusUrl: "/schools/english/MA-English-CStr.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/MA-English-CStr.pdf"
+                url: "/schools/english/MA-English-CStr.pdf"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sociolinguistics",
             "Language Documentation"
         ],
-        syllabusUrl: "/schools/sohss/About_LinguisticsCenter_May2023.pdf",
+        syllabusUrl: "/schools/english/About_LinguisticsCenter_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/About_LinguisticsCenter_May2023.pdf"
+                url: "/schools/english/About_LinguisticsCenter_May2023.pdf"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/sohss/Structure_-PhD.pdf",
+        syllabusUrl: "/schools/sociology/Structure_-PhD.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Structure_-PhD.pdf"
+                url: "/schools/sociology/Structure_-PhD.pdf"
             }
         ]
     }

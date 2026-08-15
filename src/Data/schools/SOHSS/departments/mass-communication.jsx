@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Photojournalism",
             "Audio-Video Editing"
         ],
-        syllabusUrl: "/schools/sohss/BAJMC_NEP.pdf",
+        syllabusUrl: "/schools/mass-communication/BAJMC_NEP.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/BAJMC_NEP.pdf"
+                url: "/schools/mass-communication/BAJMC_NEP.pdf"
             },
             {
                 session: "Course Structure NEP",
-                url: "/schools/sohss/BAJMC_NEP.pdf"
+                url: "/schools/mass-communication/BAJMC_NEP.pdf"
             }
         ]
     },
@@ -139,11 +139,11 @@ export const departmentLayoutData = {
             "Documentary Film Making",
             "Media Management"
         ],
-        syllabusUrl: "/schools/sohss/MMC.pdf",
+        syllabusUrl: "/schools/mass-communication/MMC.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/MMC.pdf"
+                url: "/schools/mass-communication/MMC.pdf"
             }
         ]
     },
@@ -162,11 +162,11 @@ export const departmentLayoutData = {
             "Broadcast Production",
             "Newsroom Leadership"
         ],
-        syllabusUrl: "/schools/sohss/MJMC-CStr.pdf",
+        syllabusUrl: "/schools/mass-communication/MJMC-CStr.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/MJMC-CStr.pdf"
+                url: "/schools/mass-communication/MJMC-CStr.pdf"
             }
         ]
     }

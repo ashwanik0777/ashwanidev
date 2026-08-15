@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Financial Markets",
             "Statistical Computing"
         ],
-        syllabusUrl: "/schools/sohss/BA-Eco-CStr.pdf",
+        syllabusUrl: "/schools/economics/BA-Eco-CStr.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/BA-Eco-CStr.pdf"
+                url: "/schools/economics/BA-Eco-CStr.pdf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "International Trade",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/sohss/CStr-Eco-Uptd-Mar2025.pdf",
+        syllabusUrl: "/schools/economics/CStr-Eco-Uptd-Mar2025.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/CStr-Eco-Uptd-Mar2025.pdf"
+                url: "/schools/economics/CStr-Eco-Uptd-Mar2025.pdf"
             }
         ]
     }

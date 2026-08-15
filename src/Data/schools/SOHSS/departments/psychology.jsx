@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Psychological First Aid",
             "Community Outreach"
         ],
-        syllabusUrl: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Behavioral Statistics",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Neuropsychology",
             "Hospital Internship"
         ],
-        syllabusUrl: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "Psychodiagnostics",
             "Psychotherapy Practice"
         ],
-        syllabusUrl: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
             }
         ]
     }

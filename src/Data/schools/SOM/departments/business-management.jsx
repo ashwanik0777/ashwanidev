@@ -116,15 +116,15 @@ export const departmentLayoutData = {
             "Cross-Disciplinary Electives",
             "Corporate Summer Internship"
         ],
-        syllabusUrl: "/schools/som/B.Com_Hon_20sep2022.pdf",
+        syllabusUrl: "/schools/business-management/B.Com_Hon_20sep2022.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/B.Com_Hon_20sep2022.pdf"
+                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
             },
             {
                 session: "Syllabus",
-                url: "/schools/som/B.Com_Hon_20sep2022.pdf"
+                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
             }
         ]
     },
@@ -143,15 +143,15 @@ export const departmentLayoutData = {
             "Financial Management",
             "NEP Multidisciplinary Framework"
         ],
-        syllabusUrl: "/schools/som/B.Com_Hon_20sep2022.pdf",
+        syllabusUrl: "/schools/business-management/B.Com_Hon_20sep2022.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/B.Com_Hon_20sep2022.pdf"
+                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "/schools/som/B.Com_Hon_20sep2022.pdf"
+                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
             }
         ]
     },
@@ -170,11 +170,11 @@ export const departmentLayoutData = {
             "Corporate Mentorship",
             "Live Consulting Projects"
         ],
-        syllabusUrl: "/schools/som/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/MBA-Course_Structure.docx.pdf"
+                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
             },
             {
                 session: "Course Outline",
@@ -197,11 +197,11 @@ export const departmentLayoutData = {
             "C-Suite Leadership Modules",
             "Executive Industry Capstone"
         ],
-        syllabusUrl: "/schools/som/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/MBA-Course_Structure.docx.pdf"
+                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
             },
             {
                 session: "Course Outline",
@@ -224,11 +224,11 @@ export const departmentLayoutData = {
             "Data Visualization & Dashboards",
             "FinTech & Marketing Models"
         ],
-        syllabusUrl: "/schools/som/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/MBA-Course_Structure.docx.pdf"
+                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
             },
             {
                 session: "Course Outline",

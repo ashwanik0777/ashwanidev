@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Functional Hindi for Media"
         ],
-        syllabusUrl: "/schools/sohss/Brochure-Hindi-Mar25.pdf",
+        syllabusUrl: "/schools/indian-languages/Brochure-Hindi-Mar25.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Brochure-Hindi-Mar25.pdf"
+                url: "/schools/indian-languages/Brochure-Hindi-Mar25.pdf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Classical Sanskrit Drama",
             "Manuscriptology"
         ],
-        syllabusUrl: "/schools/sohss/BA_Sanskrit_CStr.pdf",
+        syllabusUrl: "/schools/indian-languages/BA_Sanskrit_CStr.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/BA_Sanskrit_CStr.pdf"
+                url: "/schools/indian-languages/BA_Sanskrit_CStr.pdf"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Progressive Literature",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/sohss/Brochure-Hindi-Mar25.pdf",
+        syllabusUrl: "/schools/indian-languages/Brochure-Hindi-Mar25.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Brochure-Hindi-Mar25.pdf"
+                url: "/schools/indian-languages/Brochure-Hindi-Mar25.pdf"
             }
         ]
     }

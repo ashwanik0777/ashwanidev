@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "World Civilizations",
             "Archival Research"
         ],
-        syllabusUrl: "/schools/sohss/Dept-History-Profile.pdf",
+        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Dept-History-Profile.pdf"
+                url: "/schools/history-civilization/Dept-History-Profile.pdf"
             }
         ]
     },
@@ -131,15 +131,15 @@ export const departmentLayoutData = {
             "Sanskrit Hermeneutics",
             "Cultural Heritage"
         ],
-        syllabusUrl: "/schools/sohss/Dept-History-Profile.pdf",
+        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Dept-History-Profile.pdf"
+                url: "/schools/history-civilization/Dept-History-Profile.pdf"
             },
             {
                 session: "Detailed Syllabus",
-                url: "/schools/sohss/Dept-History-Profile.pdf"
+                url: "/schools/history-civilization/Dept-History-Profile.pdf"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Refugee & Humanitarian Law",
             "Fieldwork Project"
         ],
-        syllabusUrl: "/schools/sohss/Dept-History-Profile.pdf",
+        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Dept-History-Profile.pdf"
+                url: "/schools/history-civilization/Dept-History-Profile.pdf"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Information Retrieval",
             "Central Library Practicum"
         ],
-        syllabusUrl: "/schools/sohss/Cstr-Libsci.pdf",
+        syllabusUrl: "/schools/library-information-science/Cstr-Libsci.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sohss/Cstr-Libsci.pdf"
+                url: "/schools/library-information-science/Cstr-Libsci.pdf"
             }
         ]
     }

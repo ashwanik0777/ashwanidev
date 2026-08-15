@@ -143,11 +143,11 @@ export const departmentLayoutData = {
             "Abhidhamma Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/sobs/MBS.pdf",
+        syllabusUrl: "/schools/buddhist-philosophy/MBS.pdf",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/sobs/MBS.pdf"
+                url: "/schools/buddhist-philosophy/MBS.pdf"
             }
         ]
     },
@@ -166,11 +166,11 @@ export const departmentLayoutData = {
             "Comparative Buddhist Philosophy",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/sobs/PBS.pdf",
+        syllabusUrl: "/schools/buddhist-philosophy/PBS.pdf",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/sobs/PBS.pdf"
+                url: "/schools/buddhist-philosophy/PBS.pdf"
             }
         ]
     },
@@ -189,11 +189,11 @@ export const departmentLayoutData = {
             "Seminars & Peer Reviews",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/sobs/PBS.pdf",
+        syllabusUrl: "/schools/buddhist-philosophy/PBS.pdf",
         syllabus: [
             {
                 session: "Course Work & Syllabus",
-                url: "/schools/sobs/PBS.pdf"
+                url: "/schools/buddhist-philosophy/PBS.pdf"
             }
         ]
     },
@@ -212,11 +212,11 @@ export const departmentLayoutData = {
             "Textual Analysis",
             "Certificate / PG Diploma"
         ],
-        syllabusUrl: "/schools/sobs/BodhiMeditationCourse.pdf",
+        syllabusUrl: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sobs/BodhiMeditationCourse.pdf"
+                url: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf"
             }
         ]
     },
@@ -235,11 +235,11 @@ export const departmentLayoutData = {
             "Tour Guiding & Management",
             "Field Project"
         ],
-        syllabusUrl: "/schools/sobs/BodhiMeditationCourse.pdf",
+        syllabusUrl: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/sobs/BodhiMeditationCourse.pdf"
+                url: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf"
             }
         ]
     },
@@ -258,11 +258,11 @@ export const departmentLayoutData = {
             "Socially Engaged Buddhism",
             "Mindfulness Practice"
         ],
-        syllabusUrl: "/schools/sobs/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
+        syllabusUrl: "/schools/buddhist-philosophy/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sobs/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf"
+                url: "/schools/buddhist-philosophy/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf"
             }
         ]
     }

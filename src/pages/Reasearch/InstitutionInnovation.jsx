@@ -304,7 +304,7 @@ const InstitutionInnovation = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50/50 pb-20">
+      <div className="min-h-screen bg-slate-50/50 pb-16 sm:pb-20">
         {/* Banner Section */}
         <BannerSection
           title="Institution's Innovation Council (IIC)"
@@ -314,63 +314,63 @@ const InstitutionInnovation = () => {
 
         <StatsCard stats={stats} />
 
-        {/* Tab Navigation */}
-        <div className="sticky top-[4.5rem] md:top-[5.5rem] z-30 bg-white/90 backdrop-blur-md border-b border-gray-200/80 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div className="flex items-center justify-center overflow-x-auto scrollbar-none gap-2 no-scrollbar py-1">
+        {/* Tab Navigation Sticky Bar */}
+        <div className="sticky top-[4.5rem] md:top-[5.5rem] z-30 bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-xs">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2.5">
+            <div className="flex items-center justify-start sm:justify-center overflow-x-auto scrollbar-none gap-1.5 sm:gap-2 no-scrollbar py-0.5 whitespace-nowrap">
               <button
                 onClick={() => setActiveTab('about')}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
                   activeTab === 'about'
                     ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md"
                     : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
-                <Lightbulb className="w-4 h-4" />
+                <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 <span>About & Focus Areas</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('events')}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
                   activeTab === 'events'
                     ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md"
                     : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
-                <Calendar className="w-4 h-4" />
-                <span>Events & Reports Archive ({officialEvents.length})</span>
+                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span>Events Archive ({officialEvents.length})</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('policy')}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
                   activeTab === 'policy'
                     ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md"
                     : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
                 }`}
               >
-                <FileText className="w-4 h-4" />
-                <span>Innovation & Startup Policy</span>
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span>Startup Policy</span>
               </button>
             </div>
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-6 sm:pt-10">
           {/* TAB 1: About & Focus Areas */}
           {activeTab === 'about' && (
-            <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-10">
+            <div className="bg-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-8 sm:space-y-10">
               {/* About IIC */}
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
                   About Institution's Innovation Council (IIC)
                 </h2>
-                <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+                <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-                <div className="space-y-4 text-gray-700 text-base leading-relaxed">
-                  <div className="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 font-semibold text-sm sm:text-base">
+                <div className="space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed">
+                  <div className="p-3.5 sm:p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl text-amber-900 font-semibold text-xs sm:text-base">
                     GBU is a proud registered member of Institution's Innovation Council (IIC) with <strong>Certificate No. 9232</strong> under <strong>IASHE Code: U-0514</strong>.
                   </div>
 
@@ -386,12 +386,12 @@ const InstitutionInnovation = () => {
 
               {/* Major Focus Areas */}
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
                   Major Focus Areas
                 </h2>
-                <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+                <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-                <ul className="list-disc pl-6 space-y-3 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-5 sm:pl-6 space-y-2.5 sm:space-y-3 text-gray-700 text-sm sm:text-base leading-relaxed">
                   {focusAreas.map((area, idx) => (
                     <li key={idx} className="text-justify">
                       <strong>{area.title}: </strong>{area.description}
@@ -402,12 +402,12 @@ const InstitutionInnovation = () => {
 
               {/* Functions of IIC */}
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
                   Functions of IIC
                 </h2>
-                <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+                <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-                <ul className="list-disc pl-6 space-y-3 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-5 sm:pl-6 space-y-2.5 sm:space-y-3 text-gray-700 text-sm sm:text-base leading-relaxed">
                   {functions.map((fn, idx) => (
                     <li key={idx} className="text-justify">
                       {fn}
@@ -420,13 +420,13 @@ const InstitutionInnovation = () => {
 
           {/* TAB 2: Events & Reports Archive */}
           {activeTab === 'events' && (
-            <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-6">
+            <div className="bg-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4 sm:pb-6">
                 <div>
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                  <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
                     Official Events & Activity Reports Archive
                   </h2>
-                  <div className="h-1 w-20 bg-amber-500 rounded-full"></div>
+                  <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full"></div>
                 </div>
 
                 {/* Filter Input */}
@@ -435,15 +435,64 @@ const InstitutionInnovation = () => {
                     type="text"
                     value={searchFilter}
                     onChange={(e) => setSearchFilter(e.target.value)}
-                    placeholder="Filter events by title or keyword..."
+                    placeholder="Filter events..."
                     className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <Search className="w-4 h-4 text-gray-400 absolute left-3 top-2.5" />
                 </div>
               </div>
 
-              {/* Table / List of Events */}
-              <div className="overflow-x-auto">
+              {/* Mobile Card List View (Visible on small screens < 768px) */}
+              <div className="block md:hidden space-y-4">
+                {filteredEvents.map((ev, idx) => (
+                  <div key={idx} className="bg-slate-50 border border-gray-200 rounded-xl p-4 space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">
+                        #{idx + 1} • {ev.date}
+                      </span>
+                      <span className="bg-slate-200 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        {ev.category}
+                      </span>
+                    </div>
+
+                    <h3 className="font-bold text-gray-900 text-sm leading-snug">
+                      {ev.title}
+                    </h3>
+
+                    <p className="text-gray-600 text-xs leading-relaxed">
+                      {ev.description}
+                    </p>
+
+                    <div className="pt-2 flex flex-wrap items-center gap-2">
+                      {ev.pdfReport && (
+                        <a
+                          href={ev.pdfReport}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>PDF Report</span>
+                        </a>
+                      )}
+                      {ev.videoMedia && (
+                        <a
+                          href={ev.videoMedia}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
+                        >
+                          <Video className="w-3.5 h-3.5" />
+                          <span>Watch Video</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop Table View (Visible on medium+ screens >= 768px) */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left border-collapse border border-gray-200">
                   <thead>
                     <tr className="bg-slate-100 border-b border-gray-200 text-gray-800 text-xs sm:text-sm font-bold">
@@ -502,20 +551,20 @@ const InstitutionInnovation = () => {
 
           {/* TAB 3: Innovation & Startup Policy */}
           {activeTab === 'policy' && (
-            <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-8">
+            <div className="bg-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
                   GBU Innovation and Startup Policy
                 </h2>
-                <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+                <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-                <p className="text-gray-700 text-base leading-relaxed mb-6">
+                <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-6 text-justify">
                   Gautam Buddha University has formulated its comprehensive <strong>Innovation & Startup Policy (Approved March 2025)</strong> to guide faculty, students, and research scholars in intellectual property creation, prototype development, incubator support, and technology commercialization.
                 </p>
 
-                <div className="bg-slate-50 border border-gray-200 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="bg-slate-50 border border-gray-200 rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1">
                       Official Policy Document (PDF)
                     </h3>
                     <p className="text-xs text-gray-500">
@@ -527,10 +576,10 @@ const InstitutionInnovation = () => {
                     href="https://www.gbu.ac.in/Content/gbudata/IIC/GBU-Innovation-StartupPolicy-Mar2025.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all shrink-0"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all shrink-0"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download Policy Document (PDF)</span>
+                    <span>Download Policy (PDF)</span>
                   </a>
                 </div>
               </div>

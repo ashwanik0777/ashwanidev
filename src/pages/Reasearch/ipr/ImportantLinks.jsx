@@ -12,23 +12,44 @@ const importantLinks = [
 export default function ImportantLinks() {
   return (
     <SearchableWrapper>
-      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
+      <div className="bg-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-6">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
             Important Links
           </h2>
-          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+          <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-6"></div>
 
-          <div className="overflow-x-auto">
+          {/* Mobile Card List View (< 640px) */}
+          <div className="block sm:hidden space-y-3">
+            {importantLinks.map((item) => (
+              <div key={item.id} className="bg-slate-50 border border-gray-200 rounded-xl p-4 flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-[11px] font-bold text-gray-400">#{item.id}</div>
+                  <div className="text-xs font-bold text-gray-900 leading-snug">{item.title}</div>
+                </div>
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors shrink-0"
+                >
+                  Visit
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop Table View (>= 640px) */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-left border-collapse border border-gray-200">
               <thead>
-                <tr className="bg-slate-100 border-b border-gray-200 text-gray-800 text-sm sm:text-base font-bold">
+                <tr className="bg-slate-100 border-b border-gray-200 text-gray-800 text-sm font-bold">
                   <th className="p-3 border-r border-gray-200 w-16 text-center">Sl.</th>
-                  <th className="p-3 border-r border-gray-200">Discription :</th>
+                  <th className="p-3 border-r border-gray-200">Description</th>
                   <th className="p-3 w-32 text-center">Website Link</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 text-sm sm:text-base text-gray-700">
+              <tbody className="divide-y divide-gray-200 text-sm text-gray-700">
                 {importantLinks.map((item) => (
                   <tr key={item.id} className="hover:bg-slate-50 transition-colors">
                     <td className="p-3 border-r border-gray-200 text-center font-semibold">{item.id}</td>
@@ -38,7 +59,7 @@ export default function ImportantLinks() {
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block bg-sky-500 hover:bg-sky-600 text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded transition-colors shadow-xs"
+                        className="inline-block bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold px-4 py-1.5 rounded transition-colors shadow-xs"
                       >
                         Visit
                       </a>

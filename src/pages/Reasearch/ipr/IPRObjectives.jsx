@@ -4,15 +4,15 @@ import SearchableWrapper from '../../../components/Searchbar/SearchableWrapper';
 const IPRObjectives = () => {
   return (
     <SearchableWrapper>
-      <div className="bg-white rounded-2xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-10">
+      <div className="bg-white rounded-2xl p-4 sm:p-8 lg:p-10 border border-gray-100 shadow-sm space-y-8 sm:space-y-10">
         {/* About Section */}
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
             About
           </h2>
-          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+          <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-          <ul className="space-y-4 text-gray-700 text-base leading-relaxed list-disc pl-5">
+          <ul className="space-y-3 sm:space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed list-disc pl-4 sm:pl-5">
             <li className="text-justify">
               Gautam Buddha University was established in the year 2008 by the Uttar Pradesh Act (9) of 2002. The University is recognized by the University Grants Commission of India under section 2(f) of UGC Act 1956 and approved by UGC under section 12-B. The University had initiated research activities since its inception with the help of qualified faculty members and ambitious students. The University aspires to conduct R&D in diverse areas aiming to cover the full spectrum, from fundamental and theoretical studies, through research of relevance to business and industry with practice-based studies in Science, Engineering, Management, and allied areas.
             </li>
@@ -27,20 +27,20 @@ const IPRObjectives = () => {
 
         {/* Objectives Section */}
         <div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+          <h2 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1">
             Objectives
           </h2>
-          <div className="h-1 w-20 bg-amber-500 rounded-full mb-6"></div>
+          <div className="h-1 w-16 sm:w-20 bg-amber-500 rounded-full mb-4 sm:mb-6"></div>
 
-          <p className="text-gray-700 text-base leading-relaxed mb-6">
+          <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 text-justify">
             Considering the requirement, an IPR Cell has been established at Gautam Buddha University in association with Council of Science and Technology (CST), Uttar Pradesh promoting and disseminating issues related to IPR through following objectives:
           </p>
 
-          <div className="bg-slate-50 border-l-4 border-amber-500 p-6 rounded-r-xl">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">
+          <div className="bg-slate-50 border-l-4 border-amber-500 p-4 sm:p-6 rounded-r-xl">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">
               Training, Awareness & Protection of IPRs
             </h3>
-            <ul className="space-y-3 text-gray-700 text-base leading-relaxed list-disc pl-5">
+            <ul className="space-y-2.5 sm:space-y-3 text-gray-700 text-sm sm:text-base leading-relaxed list-disc pl-4 sm:pl-5">
               <li>
                 To create awareness amongst potential researchers of the University (students/faculty members) on basics of IPRs, especially patents & copyrights.
               </li>

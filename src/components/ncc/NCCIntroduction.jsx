@@ -157,20 +157,25 @@ const nccStatsData = [
           <Shield className="w-8 h-8 text-orange-600 animate-pulse" />
           Unit Information
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-amber-50/50 to-white rounded-2xl border border-amber-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Associate NCC Officer (ANO)</div>
+            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Associate NCC Officer (31 UP Girls Bn)</div>
             <div className="text-lg font-extrabold text-slate-900">Lt. Bhawna Joshi</div>
-            <div className="text-xs text-slate-500 font-medium mt-0.5">GBU Officer in Charge</div>
+            <div className="text-xs text-slate-500 font-medium mt-0.5">ANO / CTO - GBU Girls Wing</div>
+          </div>
+          <div className="bg-gradient-to-br from-blue-50/50 to-white rounded-2xl border border-blue-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Caretaker (37 UP Battalion)</div>
+            <div className="text-lg font-extrabold text-slate-900">Dr. Nitesh Singh Bhati</div>
+            <div className="text-xs text-slate-500 font-medium mt-0.5">CTO - 37 UP BN NCC Ghaziabad</div>
           </div>
           <div className="bg-gradient-to-br from-orange-50/50 to-white rounded-2xl border border-orange-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="text-xs font-semibold text-orange-600 uppercase tracking-wider mb-1">Affiliated Wing</div>
             <div className="text-xl font-bold text-slate-800">Army</div>
           </div>
-          <div className="bg-gradient-to-br from-blue-50/50 to-white rounded-2xl border border-blue-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Unit Code / Battalions</div>
+          <div className="bg-gradient-to-br from-indigo-50/50 to-white rounded-2xl border border-indigo-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">NCC Unit Battalions</div>
             <div className="text-base font-bold text-slate-800 leading-snug">
-              <div>37 UP BN NCC</div>
+              <div>37 UP BN NCC (GZB)</div>
               <div className="text-xs font-medium text-slate-600">31 UP BN (Girl) NCC</div>
             </div>
           </div>

@@ -134,44 +134,53 @@ const NCCStructure = ({ nccData }) => {
     <SearchableWrapper>
       <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
 
-        {/* ANO Section */}
+        {/* ANO & CTO Officers Section */}
         <Card className="overflow-hidden border border-slate-100">
           <CardHeader className="bg-gradient-to-r from-blue-50/50 to-indigo-50/50 border-b border-slate-100">
             <CardTitle className="text-xl sm:text-2xl flex items-center text-slate-850">
               <Shield className="h-6 w-6 mr-2 text-indigo-600" />
-              Associate NCC Officer (ANO)
+              NCC Officers & Caretakers (ANO / CTO)
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
-              <img
-                src={anoDetails.image}
-                alt={anoDetails.name}
-                className="w-32 h-32 rounded-full object-cover border-4 border-orange-200"
-              />
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-xl font-bold text-gray-900">{anoDetails.name}</h3>
-                <p className="text-orange-600 font-semibold mb-4">{anoDetails.designation}</p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-center md:justify-start items-center gap-2">
-                    <Mail className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-700 text-sm">{anoDetails.email}</span>
-                  </div>
-                  <div className="flex justify-center md:justify-start items-center gap-2">
-                    <Phone className="h-4 w-4 text-gray-500" />
-                    <span className="text-gray-700 text-sm">{anoDetails.phone}</span>
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Lt. Bhawna Joshi */}
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                  alt="Lt. Bhawna Joshi"
+                  className="w-24 h-24 rounded-2xl object-contain bg-white p-2 border-2 border-amber-300 shadow-md shrink-0"
+                />
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-extrabold text-slate-900">Lt. Bhawna Joshi</h3>
+                  <p className="text-amber-600 font-semibold text-xs mb-2">Associate NCC Officer (ANO / CTO)</p>
+                  <p className="text-xs text-slate-500 font-medium mb-3">31 UP Girls Battalion NCC, Gautam Buddha University</p>
+                  <div className="space-y-1 text-xs text-slate-600">
+                    <div className="flex items-center justify-center sm:justify-start gap-1.5">
+                      <Mail className="h-3.5 w-3.5 text-slate-400" />
+                      <span>bhawna.joshi@gbu.ac.in</span>
+                    </div>
                   </div>
                 </div>
-                <p className="text-gray-600 text-sm mb-2">{anoDetails.serviceRecord}</p>
-                <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-2">
-                  {anoDetails.qualifications.map((qual, i) => (
-                    <Badge key={i} variant="secondary">{qual}</Badge>
-                  ))}
-                </div>
-                <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                  {anoDetails.awards.map((award, i) => (
-                    <Badge key={i} className="bg-yellow-100 text-yellow-800">{award}</Badge>
-                  ))}
+              </div>
+
+              {/* Dr. Nitesh Singh Bhati */}
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                  alt="Dr. Nitesh Singh Bhati"
+                  className="w-24 h-24 rounded-2xl object-contain bg-white p-2 border-2 border-blue-300 shadow-md shrink-0"
+                />
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-extrabold text-slate-900">Dr. Nitesh Singh Bhati</h3>
+                  <p className="text-blue-600 font-semibold text-xs mb-2">NCC Caretaker Officer (CTO)</p>
+                  <p className="text-xs text-slate-500 font-medium mb-3">37 UP Battalion NCC (Ghaziabad), Gautam Buddha University</p>
+                  <div className="space-y-1 text-xs text-slate-600">
+                    <div className="flex items-center justify-center sm:justify-start gap-1.5">
+                      <Mail className="h-3.5 w-3.5 text-slate-400" />
+                      <span>nitesh.bhati@gbu.ac.in</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

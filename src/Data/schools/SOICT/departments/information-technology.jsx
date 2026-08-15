@@ -110,21 +110,33 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "3 Years",
         intake: "60 Students",
-        description: "Foundational software application development, programming paradigms, web technologies, and database design.",
+        description: "Undergraduate curriculum building strong foundations in programming, database systems, software engineering, and web development.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80",
         gradient: "from-cyan-500 to-blue-600",
         highlights: [
-            "Application Development",
-            "Database Management",
-            "Object-Oriented Programming",
-            "Web Technologies"
+            "Programming Paradigms",
+            "Database Management Systems",
+            "Web Development",
+            "Software Design"
         ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
+        syllabusUrl: "/schools/it/BCA_2026_29.docx.pdf",
         syllabus: [
-            
-            
-            
-            
+            {
+                session: "2026-29",
+                url: "/schools/it/BCA_2026_29.docx.pdf"
+            },
+            {
+                session: "2025-28",
+                url: "/schools/it/BCA_4thBoS_Approved_FirstYear_2025_28.pdf"
+            },
+            {
+                session: "2024-25",
+                url: "/schools/it/BCA_2024-25 Session.pdf"
+            },
+            {
+                session: "2021-24",
+                url: "/schools/it/2021_24_BCA 2021-24.pdf"
+            }
         ]
     },
     {
@@ -133,105 +145,33 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Core IT engineering covering computer networks, cloud infrastructure, full-stack systems, and cybersecurity.",
+        description: "Core information technology program covering computer networks, cloud infrastructure, full-stack systems, and cybersecurity.",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-500 to-blue-600",
         highlights: [
             "Cloud Architecture",
-            "Network Engineering",
-            "Enterprise Systems",
-            "Information Security"
+            "Computer Networks",
+            "Cybersecurity",
+            "Distributed Computing"
         ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
+        syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
         syllabus: [
-            
-            
-            
-            
-        ]
-    },
-    {
-        id: "btech-it-aiml",
-        title: "B.Tech IT (Artificial Intelligence & Machine Learning)",
-        level: "UG",
-        duration: "4 Years",
-        intake: "60 Students",
-        description: "Integrated IT curriculum specializing in predictive algorithms, deep neural models, and intelligent automated systems.",
-        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-purple-500 to-purple-600",
-        highlights: [
-            "Machine Learning Models",
-            "Deep Neural Networks",
-            "Natural Language Processing",
-            "Autonomous Systems"
-        ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
-        syllabus: [
-            
-            
-        ]
-    },
-    {
-        id: "btech-it-dsml",
-        title: "B.Tech IT (Data Science & Machine Learning)",
-        level: "UG",
-        duration: "4 Years",
-        intake: "60 Students",
-        description: "Big data storage frameworks, distributed compute engines, statistical learning, and business analytics pipelines.",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-indigo-500 to-indigo-600",
-        highlights: [
-            "Big Data Analytics",
-            "Distributed Computing",
-            "Predictive Analytics",
-            "Data Mining & Visualization"
-        ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
-        syllabus: [
-            
-            
-        ]
-    },
-    {
-        id: "mtech-it-dsml",
-        title: "M.Tech IT (Data Science & Machine Learning)",
-        level: "PG",
-        duration: "2 Years",
-        intake: "20 Students",
-        description: "Postgraduate specialization in enterprise AI infrastructure, large-scale data engineering, and dissertation research.",
-        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-purple-600 to-indigo-700",
-        highlights: [
-            "Enterprise ML Pipelines",
-            "Advanced Data Engineering",
-            "High Performance Computing",
-            "Master Thesis Research"
-        ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
-        syllabus: [
-            
-            
-        ]
-    },
-    {
-        id: "mtech-ict",
-        title: "M.Tech Information & Communication Technology",
-        level: "PG",
-        duration: "2 Years",
-        intake: "20 Students",
-        description: "Interdisciplinary advanced studies in telecommunication protocols, IoT cloud backends, and networking paradigms.",
-        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-blue-600 to-teal-600",
-        highlights: [
-            "Advanced Networking",
-            "IoT & Sensor Clouds",
-            "Telecommunication Systems",
-            "Dissertation"
-        ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
-        syllabus: [
-            
-            
+            {
+                session: "2026-30",
+                url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
+            },
+            {
+                session: "2025-29",
+                url: "/schools/it/BTech_IT_4thBoS_Approved_FirstYear_2025_29.pdf"
+            },
+            {
+                session: "2023-27",
+                url: "/schools/it/B.Tech. IT 2023-27.pdf"
+            },
+            {
+                session: "2021-25",
+                url: "/schools/it/2021_25_B.TECH. IT 2021-25.pdf"
+            }
         ]
     },
     {
@@ -240,21 +180,33 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "30 Students",
-        description: "Application-focused master's program emphasizing data processing, cloud visualization, and analytics software.",
+        description: "Professional master's specialization focused on data pipelines, business analytics, predictive modeling, and database technologies.",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-cyan-600 to-indigo-600",
+        gradient: "from-indigo-500 to-indigo-600",
         highlights: [
-            "Data Analytics Applications",
-            "Cloud Data Platforms",
-            "Data Warehousing",
-            "Industry Capstone"
+            "Data Mining & Analytics",
+            "Statistical Modeling",
+            "Database Platforms",
+            "Industry Project"
         ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
+        syllabusUrl: "/schools/it/MCA_DS_2026_2028.docx.pdf",
         syllabus: [
-            
-            
-            
-            
+            {
+                session: "2026-28",
+                url: "/schools/it/MCA_DS_2026_2028.docx.pdf"
+            },
+            {
+                session: "2025-27",
+                url: "/schools/it/MCA_DS_2025_2027_IstYear_updated.pdf"
+            },
+            {
+                session: "2022-23",
+                url: "/schools/it/MCA DS 2022-23.pdf"
+            },
+            {
+                session: "2021-23",
+                url: "/schools/it/2021_23_MCA DS 2021-23.pdf"
+            }
         ]
     },
     {
@@ -263,24 +215,57 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "30 Students",
-        description: "Master's curriculum covering applied AI, cognitive computing, automated pipelines, and intelligent application design.",
+        description: "Applied postgraduate curriculum covering neural network design, cognitive computing, automated pipelines, and intelligent software.",
         image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
         gradient: "from-purple-500 to-blue-600",
         highlights: [
-            "Applied AI Development",
-            "Natural Language Interfaces",
-            "Neural Networks",
-            "Enterprise Systems"
+            "Applied AI Systems",
+            "Natural Language Tools",
+            "Neural Architectures",
+            "Intelligent Applications"
         ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
+        syllabusUrl: "/schools/it/MCA_AI 2026_28_4th.docx.docx.pdf",
         syllabus: [
-            
-            
+            {
+                session: "2026-28",
+                url: "/schools/it/MCA_AI 2026_28_4th.docx.docx.pdf"
+            },
+            {
+                session: "2025-27",
+                url: "/schools/it/MCA_AI_4thBoS_Approved_FirstYear_2025_27.pdf"
+            },
             {
                 session: "2024-26",
                 url: "/schools/it/_2024_26_MCA_AI.docx.pdf"
+            },
+            {
+                session: "2021-23",
+                url: "/schools/it/MCA AI 2021-23.pdf"
             }
-      ]
+        ]
+    },
+    {
+        id: "mtech-it-se",
+        title: "M.Tech Software Engineering",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced study of software architecture, requirement engineering, quality metrics, agile workflows, and research dissertation.",
+        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-500 to-teal-700",
+        highlights: [
+            "Software Architecture",
+            "Agile & DevOps Workflows",
+            "Quality Assurance & Testing",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
+            }
+        ]
     },
     {
         id: "phd-it",
@@ -288,7 +273,7 @@ export const departmentLayoutData = {
         level: "Doctoral",
         duration: "3-5 Years",
         intake: "10 Students",
-        description: "Doctoral research program focused on advanced inquiry into cloud infrastructure, network protocols, and distributed AI.",
+        description: "Doctoral research program promoting advanced inquiry into cloud architectures, network protocols, and distributed intelligence.",
         image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
         gradient: "from-emerald-500 to-teal-600",
         highlights: [
@@ -297,9 +282,12 @@ export const departmentLayoutData = {
             "Research Methodology",
             "Thesis Defense"
         ],
-        syllabusUrl: "/schools/it/2021_23_MCA DS 2021-23.pdf",
+        syllabusUrl: "/schools/it/PHD.pdf",
         syllabus: [
-            
+            {
+                session: "Current Scheme",
+                url: "/schools/it/PHD.pdf"
+            }
         ]
     }
 ],

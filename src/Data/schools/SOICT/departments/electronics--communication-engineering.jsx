@@ -113,20 +113,33 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Solid foundation in analog/digital circuits, semiconductor physics, signal processing, and RF communications.",
+        description: "Core program covering semiconductor devices, analog/digital communication, signal processing, RF design, and embedded systems.",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-500 to-blue-600",
         highlights: [
-            "Signal & Systems",
-            "Digital Communication",
-            "Embedded Microcontrollers",
-            "Analog Circuitry"
+            "Signals & Systems",
+            "Digital Signal Processing",
+            "Microcontrollers & Embedded Systems",
+            "RF & Microwave Design"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
         syllabus: [
-            
-            
-            
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
+            },
+            {
+                session: "2024-28 (Structure)",
+                url: "/schools/ece/COURSE STRUCTURE B.TECH(EC).xlsx - EC2024.pdf"
+            },
+            {
+                session: "2024 Onward",
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-2024 onward .pdf"
+            },
+            {
+                session: "2021-25",
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-January-2021.pdf"
+            }
         ]
     },
     {
@@ -144,15 +157,21 @@ export const departmentLayoutData = {
             "Hardware Accelerators",
             "Robotics & Automation"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf",
         syllabus: [
-            
-            
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf"
+            },
+            {
+                session: "2024 Onward",
+                url: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf"
+            }
         ]
     },
     {
         id: "btech-ece-vlsi",
-        title: "B.Tech ECE (VLSI Design)",
+        title: "B.Tech ECE (VLSI Design & Embedded Systems)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
@@ -165,30 +184,16 @@ export const departmentLayoutData = {
             "SoC Verification",
             "Semiconductor Fabrication"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf",
         syllabus: [
-            
-            
-        ]
-    },
-    {
-        id: "int-btech-mtech-ece",
-        title: "Integrated B.Tech-M.Tech ECE",
-        level: "Dual Degree",
-        duration: "5 Years",
-        intake: "30 Students",
-        description: "Five-year dual degree providing seamless continuity from core electronics foundations into advanced master's research.",
-        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-500 to-amber-600",
-        highlights: [
-            "Integrated Curriculum",
-            "Advanced Research Lab",
-            "Wireless Protocols",
-            "Master Thesis"
-        ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
-        syllabus: [
-            
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf"
+            },
+            {
+                session: "2024 Scheme",
+                url: "/schools/ece/Final VLSI Design & Embedded Systems _2024.pdf"
+            }
         ]
     },
     {
@@ -197,18 +202,21 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "20 Students",
-        description: "Advanced study of next-gen cellular networks (5G/6G), MIMO systems, wireless channel modeling, and RF frontend design.",
+        description: "Advanced study of cellular networks (5G/6G), MIMO systems, wireless channel modeling, and RF frontend engineering.",
         image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-600 to-cyan-600",
         highlights: [
-            "5G/6G Cellular Architecture",
+            "5G/6G Cellular Architectures",
             "MIMO Antenna Systems",
             "RF Optimization",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf",
         syllabus: [
-            
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf"
+            }
         ]
     },
     {
@@ -217,7 +225,7 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "20 Students",
-        description: "Advanced postgraduate program covering mixed-signal IC design, nano-scale CMOS architectures, and automated testing.",
+        description: "Postgraduate curriculum covering mixed-signal IC design, nano-scale CMOS architectures, automated testing, and ASIC flows.",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
         gradient: "from-purple-600 to-indigo-700",
         highlights: [
@@ -226,9 +234,12 @@ export const departmentLayoutData = {
             "ASIC Design Flows",
             "Postgraduate Thesis"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf",
         syllabus: [
-            
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf"
+            }
         ]
     },
     {
@@ -237,7 +248,7 @@ export const departmentLayoutData = {
         level: "PG",
         duration: "2 Years",
         intake: "20 Students",
-        description: "Specialized postgraduate program focused on modern train control, interlocking systems, railway telecom, and RAMS safety standards.",
+        description: "Specialized postgraduate program covering modern train control, interlocking systems, railway telecom, and RAMS safety standards.",
         image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=400&q=80",
         gradient: "from-emerald-600 to-teal-700",
         highlights: [
@@ -246,9 +257,12 @@ export const departmentLayoutData = {
             "Train Control & SCADA",
             "Rail Telecommunication"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf",
         syllabus: [
-            
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf"
+            }
         ]
     },
     {
@@ -262,13 +276,16 @@ export const departmentLayoutData = {
         gradient: "from-green-600 to-emerald-700",
         highlights: [
             "Doctoral Research",
-            "Indexed Journal Publications",
-            "Lab Facilities",
+            "Peer-Reviewed Journal Publications",
+            "Specialized Labs",
             "Thesis Defense"
         ],
-        syllabusUrl: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf",
+        syllabusUrl: "/schools/ece/PHD.pdf",
         syllabus: [
-            
+            {
+                session: "Current Scheme",
+                url: "/schools/ece/PHD.pdf"
+            }
         ]
     }
 ],

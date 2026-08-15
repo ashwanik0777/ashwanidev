@@ -105,31 +105,31 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "120 Students",
-        description: "Comprehensive undergraduate program covering fundamental and advanced computing principles with hands-on laboratory experience.",
+        description: "Core computing curriculum encompassing data structures, operating systems, cloud systems, compiler design, and full-stack software development.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-500 to-blue-600",
         highlights: [
             "Data Structures & Algorithms",
             "Operating Systems",
-            "DBMS & Cloud Systems",
+            "DBMS & Cloud Computing",
             "Full-Stack Development"
         ],
         syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
         syllabus: [
             {
-                session: "2026-27",
+                session: "2026-30",
                 url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
             },
             {
-                session: "2025-26",
-                url: "/schools/cse/BTech_CSE_2025-29.pdf"
+                session: "2025-29",
+                url: "/schools/cse/Prog-Str-BTech-CSE-Batch-2025-29.pdf"
             },
             {
-                session: "2024-25",
+                session: "2024-28",
                 url: "/schools/cse/BTECH-CSE-2024-28.pdf"
             },
             {
-                session: "2023-24",
+                session: "2023-27",
                 url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
             }
         ]
@@ -140,32 +140,32 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Focused on modern AI algorithms, computer vision, natural language processing, and deep neural architectures.",
+        description: "Advanced undergraduate track focused on machine intelligence, deep neural networks, natural language processing, and computer vision systems.",
         image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
         gradient: "from-purple-500 to-purple-600",
         highlights: [
-            "Neural Networks & Deep Learning",
+            "Deep Learning & Neural Nets",
             "Natural Language Processing",
             "Computer Vision",
             "Reinforcement Learning"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
+        syllabusUrl: "/schools/cse/Prog-Str-B.Tech-AI-2026-30.pdf",
         syllabus: [
             {
-                session: "2026-27",
-                url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+                session: "2026-30",
+                url: "/schools/cse/Prog-Str-B.Tech-AI-2026-30.pdf"
             },
             {
-                session: "2025-26",
-                url: "/schools/cse/BTech_CSE_2025-29.pdf"
+                session: "2025-29",
+                url: "/schools/cse/Prog-Str-B.Tech-AI-2025-29.pdf"
             },
             {
-                session: "2024-25",
-                url: "/schools/cse/BTECH-CSE-2024-28.pdf"
+                session: "2024-28",
+                url: "/schools/cse/BTECH-CSE-AI-2024-28.pdf"
             },
             {
-                session: "2023-24",
-                url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
+                session: "2023-27",
+                url: "/schools/cse/B.Tech_AI_PS_2023-2027.pdf"
             }
         ]
     },
@@ -175,32 +175,32 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Specialized program in network defense, ethical hacking, digital forensics, and secure coding practices.",
+        description: "Specialized engineering program covering ethical hacking, network defense architectures, cryptography, and digital forensics.",
         image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80",
         gradient: "from-red-500 to-red-600",
         highlights: [
-            "Network Security",
-            "Ethical Hacking & Penetration Testing",
-            "Digital Forensics",
-            "Cryptography"
+            "Ethical Hacking",
+            "Network Defense",
+            "Cryptography & PKI",
+            "Digital Forensics"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
+        syllabusUrl: "/schools/cse/BTECH-CSE-Cyber_Security-2024-28.pdf",
         syllabus: [
             {
-                session: "2026-27",
-                url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+                session: "2024-28",
+                url: "/schools/cse/BTECH-CSE-Cyber_Security-2024-28.pdf"
             },
             {
-                session: "2025-26",
-                url: "/schools/cse/BTech_CSE_2025-29.pdf"
+                session: "2023-27",
+                url: "/schools/cse/BTech-CSE-Cyber-2023-27.pdf"
             },
             {
-                session: "2024-25",
-                url: "/schools/cse/BTECH-CSE-2024-28.pdf"
+                session: "2022-26",
+                url: "/schools/cse/BTech-CSE-Cyber-2022-26.pdf"
             },
             {
-                session: "2023-24",
-                url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
+                session: "June 2023 Scheme",
+                url: "/schools/cse/BTechCSE_CyberSecurity_Syll_June2023.pdf"
             }
         ]
     },
@@ -210,32 +210,67 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Curriculum designed for big data processing, data warehousing, predictive modeling, and business analytics.",
+        description: "Curriculum tailored for big data storage systems, predictive modeling, statistical learning, and distributed processing frameworks.",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
         gradient: "from-indigo-500 to-indigo-600",
         highlights: [
-            "Big Data Architecture",
-            "Statistical Modeling",
-            "Data Visualization",
+            "Big Data Platforms",
+            "Statistical Machine Learning",
+            "Data Warehousing",
             "Predictive Analytics"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
+        syllabusUrl: "/schools/cse/BTECH-CSE-DS-2024-28.pdf",
         syllabus: [
             {
-                session: "2026-27",
-                url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+                session: "2024-28",
+                url: "/schools/cse/BTECH-CSE-DS-2024-28.pdf"
             },
             {
-                session: "2025-26",
-                url: "/schools/cse/BTech_CSE_2025-29.pdf"
+                session: "2023-27",
+                url: "/schools/cse/B.Tech_CSE_DS_2023-2027.pdf"
             },
             {
-                session: "2024-25",
-                url: "/schools/cse/BTECH-CSE-2024-28.pdf"
+                session: "2022-26",
+                url: "/schools/cse/B.Tech_CSE_DS_2022-2026.pdf"
             },
             {
-                session: "2023-24",
-                url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
+                session: "June 2023 Scheme",
+                url: "/schools/cse/B.Tech_CSEDS_Syll_June2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-cse-ml",
+        title: "B.Tech CSE (Machine Learning)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Focused program in machine learning algorithms, pattern recognition, feature optimization, and scalable MLOps pipelines.",
+        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-500 to-emerald-600",
+        highlights: [
+            "Supervised/Unsupervised Learning",
+            "Pattern Recognition",
+            "MLOps Pipelines",
+            "Applied Neural Models"
+        ],
+        syllabusUrl: "/schools/cse/BTECH-CSE-ML-2024-28.pdf",
+        syllabus: [
+            {
+                session: "2024-28",
+                url: "/schools/cse/BTECH-CSE-ML-2024-28.pdf"
+            },
+            {
+                session: "2023-27",
+                url: "/schools/cse/BTech-CSE-ML-2023-27.pdf"
+            },
+            {
+                session: "2022-26",
+                url: "/schools/cse/BTech-CSE-ML-2022-26.pdf"
+            },
+            {
+                session: "June 2023 Scheme",
+                url: "/schools/cse/B Tech_CSE_ML_Syll_June2023.pdf"
             }
         ]
     },
@@ -245,82 +280,125 @@ export const departmentLayoutData = {
         level: "Dual Degree",
         duration: "5 Years",
         intake: "30 Students",
-        description: "Continuous 5-year dual degree combining undergraduate engineering with advanced master's level research thesis.",
+        description: "Seamless 5-year integrated dual degree program combining core undergraduate engineering with master's research dissertation.",
         image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
         gradient: "from-amber-500 to-amber-600",
         highlights: [
             "Integrated Curriculum",
-            "Master's Thesis Research",
-            "High-Performance Computing",
+            "Master's Thesis Project",
+            "High Performance Computing",
             "Advanced Electives"
         ],
-        syllabusUrl: "/schools/cse/INT-BTECH-MTECH-CSE-2024-29.pdf",
+        syllabusUrl: "/schools/cse/Prog-Str-Int-Btech-Mtech-2026-31.pdf",
         syllabus: [
             {
-                session: "2024-25",
+                session: "2026-31",
+                url: "/schools/cse/Prog-Str-Int-Btech-Mtech-2026-31.pdf"
+            },
+            {
+                session: "2025-30",
+                url: "/schools/cse/Prog-Str-Int-Btech-Mtech-2025-30.pdf"
+            },
+            {
+                session: "2024-29",
                 url: "/schools/cse/INT-BTECH-MTECH-CSE-2024-29.pdf"
             },
             {
-                session: "2023-24",
+                session: "2023-28",
                 url: "/schools/cse/INT_B.TECH-MTECH_CSE_2023-2028.pdf"
-            },
-            {
-                session: "2022-23",
-                url: "/schools/cse/INT_B.TECH-MTECH_CSE_2022-2027.pdf"
-            },
-            {
-                session: "2021-22",
-                url: "/schools/cse/INT_B.TECH-MTECH_CSE_2021-2026.pdf"
             }
         ]
     },
     {
-        id: "mca-program",
+        id: "mtech-cse-specializations",
+        title: "M.Tech CSE (AI, Data Science & SE)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "60 Students",
+        description: "Postgraduate programs offering cutting-edge specializations in Artificial Intelligence, Big Data Science, and Software Engineering.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "AI & Robotics",
+            "Big Data Analytics",
+            "Software Engineering Architecture",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/cse/MTech-CSE-AI-2024-26.pdf",
+        syllabus: [
+            {
+                session: "AI (2024-26)",
+                url: "/schools/cse/MTech-CSE-AI-2024-26.pdf"
+            },
+            {
+                session: "Data Science (2024-26)",
+                url: "/schools/cse/MTech-CSE-DS-2024-26.pdf"
+            },
+            {
+                session: "Software Engg (2024-26)",
+                url: "/schools/cse/MTech-CSE-SE 2024-26.pdf"
+            },
+            {
+                session: "Cyber Security Scheme",
+                url: "/schools/cse/MTechCyberSecurity.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-cse-wp",
+        title: "M.Tech CSE (Working Professionals)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Flexible executive master's program designed for industry professionals to upskill in modern software and computing architectures.",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-600 to-slate-800",
+        highlights: [
+            "Executive Schedule",
+            "Applied Industry Projects",
+            "Advanced System Design",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/cse/m.tech-CSE-Working_Prof_2026-28.pdf",
+        syllabus: [
+            {
+                session: "2026-28 Batch",
+                url: "/schools/cse/m.tech-CSE-Working_Prof_2026-28.pdf"
+            },
+            {
+                session: "Standard Scheme",
+                url: "/schools/cse/MTech_CSE_Syllabus_WP.pdf"
+            }
+        ]
+    },
+    {
+        id: "mca-cse",
         title: "Master of Computer Applications (MCA)",
         level: "PG",
         duration: "2 Years",
         intake: "60 Students",
-        description: "Industry-aligned postgraduate degree in modern application development, enterprise frameworks, and data systems.",
-        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
+        description: "Applied postgraduate degree focused on modern software architectures, data processing frameworks, and cloud computing.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
         gradient: "from-cyan-500 to-blue-600",
         highlights: [
-            "Enterprise Application Frameworks",
-            "Cloud Platforms",
-            "Database Management",
+            "Enterprise Application Design",
+            "Applied AI Tools",
+            "Data Science Paradigms",
             "Capstone Project"
         ],
-        syllabusUrl: "/schools/cse/2021_23_MCA_DS_2021-23.pdf",
+        syllabusUrl: "/schools/cse/_2024_26_MCA_AI.docx.pdf",
         syllabus: [
             {
-                session: "2021-22",
+                session: "2024-26 (AI)",
+                url: "/schools/cse/_2024_26_MCA_AI.docx.pdf"
+            },
+            {
+                session: "2021-23 (DS)",
                 url: "/schools/cse/2021_23_MCA_DS_2021-23.pdf"
             },
             {
-                session: "2020-21",
+                session: "2020-23",
                 url: "/schools/cse/MCA_2020-23.pdf"
-            }
-        ]
-    },
-    {
-        id: "mtech-cse",
-        title: "M.Tech Computer Science & Engineering",
-        level: "PG",
-        duration: "2 Years",
-        intake: "60 Students",
-        description: "Advanced postgraduate program with specializations in emerging technologies and research opportunities.",
-        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-purple-500 to-purple-600",
-        highlights: [
-            "Artificial Intelligence",
-            "Advanced Algorithms",
-            "Research Methodology",
-            "Master's Dissertation"
-        ],
-        syllabusUrl: "/schools/cse/MTech_CSE_Syllabus_WP.pdf",
-        syllabus: [
-            {
-                session: "Current Scheme",
-                url: "/schools/cse/MTech_CSE_Syllabus_WP.pdf"
             }
         ]
     },
@@ -330,14 +408,14 @@ export const departmentLayoutData = {
         level: "Doctoral",
         duration: "3-5 Years",
         intake: "15 Students",
-        description: "Doctoral research program promoting original contributions across theoretical and applied computer science.",
+        description: "Doctoral research program promoting original theoretical and applied computer science inquiry and indexed publications.",
         image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
         gradient: "from-green-500 to-green-600",
         highlights: [
             "Independent Research",
-            "Indexed Journal Publications",
-            "Teaching Assistantship",
-            "Doctoral Thesis Defense"
+            "Peer-Reviewed Publications",
+            "High-End Computing Labs",
+            "Thesis Defense"
         ],
         syllabusUrl: "/schools/cse/PHD.pdf",
         syllabus: [

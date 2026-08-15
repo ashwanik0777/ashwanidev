@@ -113,7 +113,7 @@ const NSS = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="bg-white/80 backdrop-blur-sm  sticky top-25 z-10 ">
+          <div className="sticky top-[6.3rem] z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
             <div className="container mx-auto px-4 py-2">
               <TabsList className="py-2">
                 {tabs.map((tab) => {

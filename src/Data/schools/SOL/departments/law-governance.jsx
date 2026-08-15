@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Corporate & Commercial Law",
             "Legal Aid & Clinical Training"
         ],
-        syllabusUrl: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/law-governance/SoLaw_Integrated_5yrBALLB_CStructure_15Dec21.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1bfqAPg98ikQhHWkurx-hCjZuXEgBsurf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Advanced Research Methodology",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3",
         syllabus: [
             {
                 session: "Course Structure & Syllabus",
-                url: "/schools/law-governance/LL.M_One_Year_Programme_Course_Structure.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1lJdLx5Eo6aKwZrNOtf8iJ3zXqth9A2v3"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Peer-Reviewed Publications",
             "Doctoral Defense"
         ],
-        syllabusUrl: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/law-governance/SoLaw_PHD_CourseStructureContent_15Dec2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1uFiC5YS9I-CaaA8lPrBiTu0Skvh2Iknm"
             }
         ]
     }

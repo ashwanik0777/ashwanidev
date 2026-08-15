@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Photojournalism",
             "Audio-Video Editing"
         ],
-        syllabusUrl: "/schools/mass-communication/BAJMC_NEP.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mass-communication/BAJMC_NEP.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2"
             },
             {
                 session: "Course Structure NEP",
-                url: "/schools/mass-communication/BAJMC_NEP.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2"
             }
         ]
     },
@@ -139,11 +139,11 @@ export const departmentLayoutData = {
             "Documentary Film Making",
             "Media Management"
         ],
-        syllabusUrl: "/schools/mass-communication/MMC.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mass-communication/MMC.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g"
             }
         ]
     },
@@ -162,11 +162,11 @@ export const departmentLayoutData = {
             "Broadcast Production",
             "Newsroom Leadership"
         ],
-        syllabusUrl: "/schools/mass-communication/MJMC-CStr.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mass-communication/MJMC-CStr.pdf"
+                url: "https://drive.google.com/uc?export=download&id=14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-"
             }
         ]
     }

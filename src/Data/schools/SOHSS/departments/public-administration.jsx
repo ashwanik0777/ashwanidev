@@ -105,7 +105,7 @@ export const departmentLayoutData = {
         "Administrative Theory", "Public Policy", "Governance", "Administrative Law",
         "E-Governance", "Rural Development", "Research Methods", "Dissertation",
       ],
-      syllabusUrl: "/schools/public-administration/Structure_-PhD.pdf",
+      syllabusUrl: "https://drive.google.com/uc?export=download&id=1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8",
       syllabus: [],
     },
     {

@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Social Policy & Advocacy",
             "NGO Administration"
         ],
-        syllabusUrl: "/schools/social-work/AdmissionsBrochure-Dept-SocialWork.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/social-work/AdmissionsBrochure-Dept-SocialWork.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Medical & Psychiatric Social Work",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/social-work/AdmissionsBrochure-Dept-SocialWork.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/social-work/AdmissionsBrochure-Dept-SocialWork.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb"
             }
         ]
     }

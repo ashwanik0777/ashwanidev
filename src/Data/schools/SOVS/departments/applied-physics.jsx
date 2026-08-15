@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Wave Optics & Lasers",
             "Modern Physics Labs"
         ],
-        syllabusUrl: "/schools/applied-physics/B.ScH-Physics-CSsyllabus.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "/schools/applied-physics/B.ScH-Physics-CSsyllabus.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Computational Physics",
             "Honors Research Project"
         ],
-        syllabusUrl: "/schools/applied-physics/B.ScH-Physics-CSsyllabus.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "/schools/applied-physics/B.ScH-Physics-CSsyllabus.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Photonics & Lasers",
             "Quantum Computing & Info"
         ],
-        syllabusUrl: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Statistical Physics",
             "Master Thesis Project"
         ],
-        syllabusUrl: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1tWVEoifehX7MEQbA6LUksu9Pn925Td89"
             }
         ]
     },
@@ -199,11 +199,11 @@ export const departmentLayoutData = {
             "Peer-Reviewed Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/applied-physics/Ph.D_Physics_CS_Aug2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk",
         syllabus: [
             {
                 session: "Course Structure and Syllabus",
-                url: "/schools/applied-physics/Ph.D_Physics_CS_Aug2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk"
             }
         ]
     }

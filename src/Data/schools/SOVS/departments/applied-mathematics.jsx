@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Scientific Computing",
             "Machine Learning Math"
         ],
-        syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-mathematics/BTech_MathsComputing.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Differential Equations",
             "Numerical Analysis"
         ],
-        syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Applied Optimization",
             "Quantitative Finance"
         ],
-        syllabusUrl: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1jHEMTrUVxCpGH5QOvLhkVGn7xhNC0kwD"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Operations Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/applied-mathematics/BTech_MathsComputing.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-mathematics/BTech_MathsComputing.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1LSQFqkBRfYug1t6his7OnhAJ1lN5uc9O"
             }
         ]
     },
@@ -199,11 +199,11 @@ export const departmentLayoutData = {
             "Mathematical Modeling",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/applied-mathematics/PhD_Maths.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-mathematics/PhD_Maths.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fZo5T6Eic2yMIt_m8bYmZT_MJivruH2g"
             }
         ]
     }

@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "International Systems",
             "Public Policy Analysis"
         ],
-        syllabusUrl: "/schools/political-science/brochure-Polsci.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/political-science/brochure-Polsci.pdf"
+                url: "https://drive.google.com/uc?export=download&id=14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Foreign Policy Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/political-science/BA_PIR_STr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/political-science/BA_PIR_STr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv"
             }
         ]
     }

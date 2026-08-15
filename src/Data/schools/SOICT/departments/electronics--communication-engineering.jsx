@@ -303,11 +303,11 @@ export const departmentLayoutData = {
             "Specialized Labs",
             "Thesis Defense"
         ],
-        syllabusUrl: "/schools/ece/PHD.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "/schools/ece/PHD.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
             }
         ]
     }

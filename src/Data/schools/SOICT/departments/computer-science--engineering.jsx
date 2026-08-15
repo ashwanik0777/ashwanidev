@@ -114,23 +114,23 @@ export const departmentLayoutData = {
             "DBMS & Cloud Computing",
             "Full-Stack Development"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8",
         syllabus: [
             {
                 session: "2026-30",
-                url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8"
             },
             {
                 session: "2025-29",
-                url: "/schools/cse/Prog-Str-BTech-CSE-Batch-2025-29.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1qTaZrZI3xqAK2kUmRuizoe1VTt4FcbXl"
             },
             {
                 session: "2024-28",
-                url: "/schools/cse/BTECH-CSE-2024-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1JnhCU6KMOXLh5CkH0nzpaeOArQ-b70T8"
             },
             {
                 session: "2023-27",
-                url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1QQ7Ee3r4escqlQecxa95b3IeM6GNis45"
             }
         ]
     },
@@ -149,23 +149,23 @@ export const departmentLayoutData = {
             "Computer Vision",
             "Reinforcement Learning"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-B.Tech-AI-2026-30.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF",
         syllabus: [
             {
                 session: "2026-30",
-                url: "/schools/cse/Prog-Str-B.Tech-AI-2026-30.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF"
             },
             {
                 session: "2025-29",
-                url: "/schools/cse/Prog-Str-B.Tech-AI-2025-29.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1qLv-_S8OqvdtiPvbDfaiUAvMVMXvxqoy"
             },
             {
                 session: "2024-28",
-                url: "/schools/cse/BTECH-CSE-AI-2024-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=12k9afe6ZphBtEFh1l1up6ivxqug7rtlQ"
             },
             {
                 session: "2023-27",
-                url: "/schools/cse/B.Tech_AI_PS_2023-2027.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1WCbDN7ypzescNZjooD02CsbvTT170jlc"
             }
         ]
     },
@@ -184,23 +184,23 @@ export const departmentLayoutData = {
             "Cryptography & PKI",
             "Digital Forensics"
         ],
-        syllabusUrl: "/schools/cse/BTECH-CSE-Cyber_Security-2024-28.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A",
         syllabus: [
             {
                 session: "2024-28",
-                url: "/schools/cse/BTECH-CSE-Cyber_Security-2024-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A"
             },
             {
                 session: "2023-27",
-                url: "/schools/cse/BTech-CSE-Cyber-2023-27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1_Gvlr5JjAmAAggmGWFo5tBeo6uIG2kkS"
             },
             {
                 session: "2022-26",
-                url: "/schools/cse/BTech-CSE-Cyber-2022-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1bH_dt7Hi8AGujC2RNJsG6fd_bKYFuBmu"
             },
             {
                 session: "June 2023 Scheme",
-                url: "/schools/cse/BTechCSE_CyberSecurity_Syll_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1H9O_5TMytl-1h_ZoWDVBrc1uezI8Iat7"
             }
         ]
     },
@@ -219,23 +219,23 @@ export const departmentLayoutData = {
             "Data Warehousing",
             "Predictive Analytics"
         ],
-        syllabusUrl: "/schools/cse/BTECH-CSE-DS-2024-28.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H",
         syllabus: [
             {
                 session: "2024-28",
-                url: "/schools/cse/BTECH-CSE-DS-2024-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H"
             },
             {
                 session: "2023-27",
-                url: "/schools/cse/B.Tech_CSE_DS_2023-2027.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1gXD0-pRzdGpBuLMknL8OXPM9KtJjm1W2"
             },
             {
                 session: "2022-26",
-                url: "/schools/cse/B.Tech_CSE_DS_2022-2026.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1lyuCG3VSJy1g2e4fXZYY5Cc2644MPpSw"
             },
             {
                 session: "June 2023 Scheme",
-                url: "/schools/cse/B.Tech_CSEDS_Syll_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1DeRIzkOE4kT2kUPGy5S3HqYekxvzoO20"
             }
         ]
     },
@@ -254,19 +254,19 @@ export const departmentLayoutData = {
             "MLOps Pipelines",
             "Applied Neural Models"
         ],
-        syllabusUrl: "/schools/cse/BTECH-CSE-ML-2024-28.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX",
         syllabus: [
             {
                 session: "2024-28",
-                url: "/schools/cse/BTECH-CSE-ML-2024-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX"
             },
             {
                 session: "2023-27",
-                url: "/schools/cse/BTech-CSE-ML-2023-27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=120ctPJnITwNiYjC2ybvrxHsysMrPjM8r"
             },
             {
                 session: "2022-26",
-                url: "/schools/cse/BTech-CSE-ML-2022-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1WMnQ_d4Me3qOjdVF-OVLUkDB8VsVJrBo"
             },
             {
                 session: "June 2023 Scheme",
@@ -289,23 +289,23 @@ export const departmentLayoutData = {
             "High Performance Computing",
             "Advanced Electives"
         ],
-        syllabusUrl: "/schools/cse/Prog-Str-Int-Btech-Mtech-2026-31.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon",
         syllabus: [
             {
                 session: "2026-31",
-                url: "/schools/cse/Prog-Str-Int-Btech-Mtech-2026-31.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon"
             },
             {
                 session: "2025-30",
-                url: "/schools/cse/Prog-Str-Int-Btech-Mtech-2025-30.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1rEwc_43p-F9-lMnBXvueXQXwLh_RWd9U"
             },
             {
                 session: "2024-29",
-                url: "/schools/cse/INT-BTECH-MTECH-CSE-2024-29.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1IaEPkoCp-VqkUh3adluWy17q78x1Xt3a"
             },
             {
                 session: "2023-28",
-                url: "/schools/cse/INT_B.TECH-MTECH_CSE_2023-2028.pdf"
+                url: "https://drive.google.com/uc?export=download&id=18CrdsWzKvwdEg7s2ZThf8jNFz302tPcm"
             }
         ]
     },
@@ -324,15 +324,15 @@ export const departmentLayoutData = {
             "Software Engineering Architecture",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/cse/MTech-CSE-AI-2024-26.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG",
         syllabus: [
             {
                 session: "AI (2024-26)",
-                url: "/schools/cse/MTech-CSE-AI-2024-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG"
             },
             {
                 session: "Data Science (2024-26)",
-                url: "/schools/cse/MTech-CSE-DS-2024-26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1x3Z1BQH-75B2_n8O0UUnoM0t-dYfc3OY"
             },
             {
                 session: "Software Engg (2024-26)",
@@ -340,7 +340,7 @@ export const departmentLayoutData = {
             },
             {
                 session: "Cyber Security Scheme",
-                url: "/schools/cse/MTechCyberSecurity.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1hwBSGmjhmTqi91kLCt2rr4Um0OHrxmre"
             }
         ]
     },
@@ -359,15 +359,15 @@ export const departmentLayoutData = {
             "Advanced System Design",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/cse/m.tech-CSE-Working_Prof_2026-28.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I",
         syllabus: [
             {
                 session: "2026-28 Batch",
-                url: "/schools/cse/m.tech-CSE-Working_Prof_2026-28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I"
             },
             {
                 session: "Standard Scheme",
-                url: "/schools/cse/MTech_CSE_Syllabus_WP.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Kb6XZbEpBqAGfAGAIQnZI-40ZSjqcrzF"
             }
         ]
     },
@@ -386,19 +386,19 @@ export const departmentLayoutData = {
             "Data Science Paradigms",
             "Capstone Project"
         ],
-        syllabusUrl: "/schools/cse/_2024_26_MCA_AI.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY",
         syllabus: [
             {
                 session: "2024-26 (AI)",
-                url: "/schools/cse/_2024_26_MCA_AI.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY"
             },
             {
                 session: "2021-23 (DS)",
-                url: "/schools/cse/2021_23_MCA_DS_2021-23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1C2rjUcBKXmqIbNLUooV4VS-3HfJVszhk"
             },
             {
                 session: "2020-23",
-                url: "/schools/cse/MCA_2020-23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1d6dBp98RmeUvdLFuufdjs4gZSYzSrBea"
             }
         ]
     },
@@ -417,11 +417,11 @@ export const departmentLayoutData = {
             "High-End Computing Labs",
             "Thesis Defense"
         ],
-        syllabusUrl: "/schools/cse/PHD.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "/schools/cse/PHD.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
             }
         ]
     }

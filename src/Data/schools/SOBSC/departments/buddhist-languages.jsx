@@ -64,15 +64,15 @@ export const departmentLayoutData = {
             "Indian Epistemology",
             "Vipassana Meditation"
         ],
-        syllabusUrl: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO"
             }
         ]
     },
@@ -91,11 +91,11 @@ export const departmentLayoutData = {
             "Abhidhamma Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/buddhist-philosophy/MBS.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/buddhist-philosophy/MBS.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj"
             }
         ]
     },
@@ -114,11 +114,11 @@ export const departmentLayoutData = {
             "Comparative Buddhist Philosophy",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/buddhist-philosophy/PBS.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=11UfejtO7DXdKaygMlvLrT_egeRtpdNfF",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/buddhist-philosophy/PBS.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11UfejtO7DXdKaygMlvLrT_egeRtpdNfF"
             }
         ]
     },
@@ -137,11 +137,11 @@ export const departmentLayoutData = {
             "Seminars & Peer Reviews",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/buddhist-philosophy/PBS.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=11UfejtO7DXdKaygMlvLrT_egeRtpdNfF",
         syllabus: [
             {
                 session: "Course Work & Syllabus",
-                url: "/schools/buddhist-philosophy/PBS.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11UfejtO7DXdKaygMlvLrT_egeRtpdNfF"
             }
         ]
     },
@@ -160,11 +160,11 @@ export const departmentLayoutData = {
             "Textual Analysis",
             "Certificate / PG Diploma"
         ],
-        syllabusUrl: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA"
             }
         ]
     },
@@ -183,11 +183,11 @@ export const departmentLayoutData = {
             "Tour Guiding & Management",
             "Field Project"
         ],
-        syllabusUrl: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/meditation-mindfulness/BodhiMeditationCourse.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA"
             }
         ]
     },
@@ -206,11 +206,11 @@ export const departmentLayoutData = {
             "Socially Engaged Buddhism",
             "Mindfulness Practice"
         ],
-        syllabusUrl: "/schools/buddhist-philosophy/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/buddhist-philosophy/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX"
             }
         ]
     }

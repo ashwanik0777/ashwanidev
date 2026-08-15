@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Thermodynamics & Kinetics",
             "Spectroscopic Characterization"
         ],
-        syllabusUrl: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Organometallic Catalysis",
             "Master Research Project"
         ],
-        syllabusUrl: "/schools/applied-chemistry/M.Sc_Chemistry_Syllabus_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "/schools/applied-chemistry/M.Sc_Chemistry_Syllabus_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Coatings & Sealants",
             "Industrial Quality Testing"
         ],
-        syllabusUrl: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Indexed Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G"
             }
         ]
     }

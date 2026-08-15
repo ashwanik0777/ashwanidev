@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Bio-Management",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
+                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/Course_Content_Integrated_BTech-MTech_ALL_SEMSETRS.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1k6CVeno1sffftbZVq0h4GP-epbxlNCUR"
             }
         ]
     },
@@ -139,15 +139,15 @@ export const departmentLayoutData = {
             "Herbal Drug Standardization",
             "Systems Biology"
         ],
-        syllabusUrl: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/B.Sc-MSc-AyurvedaBiology-CCont-16apr25.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1GtPScFVxbeqxWY-5a-xVJyUXT120gP9q"
             }
         ]
     },
@@ -166,15 +166,15 @@ export const departmentLayoutData = {
             "DNA Fingerprinting",
             "Ballistics Analysis"
         ],
-        syllabusUrl: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
             }
         ]
     },
@@ -193,15 +193,15 @@ export const departmentLayoutData = {
             "Industrial Microbiology",
             "Management Modules"
         ],
-        syllabusUrl: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
+                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/CCnt_Integrated_BTech-MTech_Up_to_Batch_2018.pdf"
+                url: "https://drive.google.com/uc?export=download&id=194Y7hGGUMsA_V5NOgkuHmPr16tW6lDVk"
             }
         ]
     },
@@ -220,15 +220,15 @@ export const departmentLayoutData = {
             "Enzymology",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/BSc_Biotechnology-ProgramStructure2022-26Jan26.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1AgyhxlM9ns9fo_tNOkab-ComTnP99Wu3"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/BSc-ForensicScience-CourseContent.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1eZQJuI7USkIz7ljdXOi6t4IDzWdcvH4p"
             }
         ]
     },
@@ -247,15 +247,15 @@ export const departmentLayoutData = {
             "Cancer Biology",
             "Pharmacogenomics"
         ],
-        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
             }
         ]
     },
@@ -274,11 +274,11 @@ export const departmentLayoutData = {
             "Molecular Docking",
             "Python for Biology"
         ],
-        syllabusUrl: "/schools/biotechnology/MSc_Bioinformatics_CourseContent.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=13tLAb-fKH4N4e6ejfj2904ilXmqsojcB",
         syllabus: [
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/MSc_Bioinformatics_CourseContent.pdf"
+                url: "https://drive.google.com/uc?export=download&id=13tLAb-fKH4N4e6ejfj2904ilXmqsojcB"
             }
         ]
     },
@@ -297,15 +297,15 @@ export const departmentLayoutData = {
             "Virology & Immunology",
             "Environmental Microbiology"
         ],
-        syllabusUrl: "/schools/biotechnology/MSc-Microbiology-CS-2025-27.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/MSc-Microbiology-CS-2025-27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/MSc-Microbiology-CS-2025-27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1WCp8k0DMLWysFHLYma2md4VVUKZ1wpIz"
             }
         ]
     },
@@ -324,11 +324,11 @@ export const departmentLayoutData = {
             "Systems Physiology",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
             }
         ]
     },
@@ -347,15 +347,15 @@ export const departmentLayoutData = {
             "Metabolic Engineering",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Alumni_Testimonials_22July2021.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1TEtmMbaNLVkBpQJUz6mJAX9BcyCiNy6O"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/Course_Content_Integrated_BTech-MTech_ALL_SEMSETRS.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1k6CVeno1sffftbZVq0h4GP-epbxlNCUR"
             }
         ]
     },
@@ -374,15 +374,15 @@ export const departmentLayoutData = {
             "Immunotechnology",
             "Research Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/MSc_Mol._Med._Course_structure.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/MSc_Mol._Med._Course_structure.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1ahZtHXs-DCmTMxb5QeMOK4GiqgSD9fME"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/MSc-Microbial-Biotech-Content.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1hYSRs9uitrbqwujrxcYoe26Nt6BMLuIJ"
             }
         ]
     },
@@ -401,11 +401,11 @@ export const departmentLayoutData = {
             "Translational Lab Research",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+                url: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ"
             }
         ]
     },
@@ -424,15 +424,15 @@ export const departmentLayoutData = {
             "Instrument Access",
             "Doctoral Defense"
         ],
-        syllabusUrl: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+                url: "https://drive.google.com/uc?export=download&id=14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ"
             },
             {
                 session: "Course Content",
-                url: "/schools/biotechnology/PhD__Course_Contents_2020_onwards.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1OiAPzecfvLZX4X_8gbPcX4lwlJPjH-1T"
             }
         ]
     },
@@ -451,11 +451,11 @@ export const departmentLayoutData = {
             "Research Methodology",
             "Thesis Publication"
         ],
-        syllabusUrl: "/schools/biotechnology/SOBT_ResearchTeachingLaboratories.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/SOBT_ResearchTeachingLaboratories.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1m3EdSzbQkRtdhB2ZRlFJJ0UDapE-1nXS"
             }
         ]
     },
@@ -474,11 +474,11 @@ export const departmentLayoutData = {
             "Genomics Analysis",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/MSc-LifeSciences-CS-2025-27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1K7xdrEZejyf0YFUsDzMEnWH0URsXqmIG"
             }
         ]
     },
@@ -497,11 +497,11 @@ export const departmentLayoutData = {
             "Radiation Dosimetry",
             "Clinical Internship"
         ],
-        syllabusUrl: "/schools/biotechnology/Course_Struture_M.Sc._Nuclear_Medicine_Final_25426.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/biotechnology/Course_Struture_M.Sc._Nuclear_Medicine_Final_25426.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1J2v7Gg-zZ1NEBqJEUaEgqqH8i90R_Pjj"
             }
         ]
     }

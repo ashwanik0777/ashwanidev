@@ -119,15 +119,15 @@ export const departmentLayoutData = {
             "Object-Oriented Programming",
             "Web Technologies"
         ],
-        syllabusUrl: "/schools/it/BCA_2026_29.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5",
         syllabus: [
             {
                 session: "2026-29",
-                url: "/schools/it/BCA_2026_29.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5"
             },
             {
                 session: "2025-28",
-                url: "/schools/it/BCA_4thBoS_Approved_FirstYear_2025_28.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1PyjL213j0X8_uot3RVr5pk3IQImF4Isb"
             },
             {
                 session: "2024-25",
@@ -162,7 +162,7 @@ export const departmentLayoutData = {
             },
             {
                 session: "2025-29",
-                url: "/schools/it/BTech_IT_4thBoS_Approved_FirstYear_2025_29.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1RpWCxLdDaua2yh6G8i6wtQoGXqvOxtZ_"
             },
             {
                 session: "2023-27",
@@ -235,11 +235,11 @@ export const departmentLayoutData = {
             "High-Performance Computing",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz",
         syllabus: [
             {
                 session: "Master Scheme",
-                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz"
             }
         ]
     },
@@ -258,11 +258,11 @@ export const departmentLayoutData = {
             "Quality Assurance & Testing",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz",
         syllabus: [
             {
                 session: "Master Scheme",
-                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz"
             }
         ]
     },
@@ -281,15 +281,15 @@ export const departmentLayoutData = {
             "Database Platforms",
             "Industry Project"
         ],
-        syllabusUrl: "/schools/it/MCA_DS_2026_2028.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V",
         syllabus: [
             {
                 session: "2026-28",
-                url: "/schools/it/MCA_DS_2026_2028.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V"
             },
             {
                 session: "2025-27",
-                url: "/schools/it/MCA_DS_2025_2027_IstYear_updated.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1VX84S1jXR3JEdB97rqa9K-sbwD3OYgjw"
             },
             {
                 session: "2022-23",
@@ -324,11 +324,11 @@ export const departmentLayoutData = {
             },
             {
                 session: "2025-27",
-                url: "/schools/it/MCA_AI_4thBoS_Approved_FirstYear_2025_27.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1p1a5d_SNyk6_e5zMJpSBrDtjBscmI6kG"
             },
             {
                 session: "2024-26",
-                url: "/schools/it/_2024_26_MCA_AI.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY"
             },
             {
                 session: "2021-23",
@@ -351,11 +351,11 @@ export const departmentLayoutData = {
             "Research Methodology",
             "Thesis Defense"
         ],
-        syllabusUrl: "/schools/it/PHD.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M",
         syllabus: [
             {
                 session: "Current Scheme",
-                url: "/schools/it/PHD.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M"
             }
         ]
     }

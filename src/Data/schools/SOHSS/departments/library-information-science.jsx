@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "World Civilizations",
             "Archival Research"
         ],
-        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/history-civilization/Dept-History-Profile.pdf"
+                url: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV"
             }
         ]
     },
@@ -131,15 +131,15 @@ export const departmentLayoutData = {
             "Sanskrit Hermeneutics",
             "Cultural Heritage"
         ],
-        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/history-civilization/Dept-History-Profile.pdf"
+                url: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV"
             },
             {
                 session: "Detailed Syllabus",
-                url: "/schools/history-civilization/Dept-History-Profile.pdf"
+                url: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Refugee & Humanitarian Law",
             "Fieldwork Project"
         ],
-        syllabusUrl: "/schools/history-civilization/Dept-History-Profile.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/history-civilization/Dept-History-Profile.pdf"
+                url: "https://drive.google.com/uc?export=download&id=16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Information Retrieval",
             "Central Library Practicum"
         ],
-        syllabusUrl: "/schools/library-information-science/Cstr-Libsci.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/library-information-science/Cstr-Libsci.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y"
             }
         ]
     }

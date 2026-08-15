@@ -98,15 +98,15 @@ export const departmentLayoutData = {
             "Cross-Disciplinary Electives",
             "Corporate Summer Internship"
         ],
-        syllabusUrl: "/schools/business-management/B.Com_Hon_20sep2022.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
             },
             {
                 session: "Syllabus",
-                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
             }
         ]
     },
@@ -125,15 +125,15 @@ export const departmentLayoutData = {
             "Financial Management",
             "NEP Multidisciplinary Framework"
         ],
-        syllabusUrl: "/schools/business-management/B.Com_Hon_20sep2022.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "/schools/business-management/B.Com_Hon_20sep2022.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk"
             }
         ]
     },
@@ -152,15 +152,15 @@ export const departmentLayoutData = {
             "Corporate Mentorship",
             "Live Consulting Projects"
         ],
-        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
             },
             {
                 session: "Course Outline",
-                url: "/schools/som/Course_outline-Business_Intelligence.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
             }
         ]
     },
@@ -179,15 +179,15 @@ export const departmentLayoutData = {
             "C-Suite Leadership Modules",
             "Executive Industry Capstone"
         ],
-        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
             },
             {
                 session: "Course Outline",
-                url: "/schools/som/Course_outline-Business_Intelligence.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
             }
         ]
     },
@@ -206,15 +206,15 @@ export const departmentLayoutData = {
             "Data Visualization & Dashboards",
             "FinTech & Marketing Models"
         ],
-        syllabusUrl: "/schools/marketing/MBA-Course_Structure.docx.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/marketing/MBA-Course_Structure.docx.pdf"
+                url: "https://drive.google.com/uc?export=download&id=13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf"
             },
             {
                 session: "Course Outline",
-                url: "/schools/som/Course_outline-Business_Intelligence.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
             }
         ]
     },
@@ -233,15 +233,15 @@ export const departmentLayoutData = {
             "Peer-Reviewed Journal Publishing",
             "Ph.D. Dissertation Defense"
         ],
-        syllabusUrl: "/schools/som/PhD-CourseOutline-17apr25.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/som/PhD-CourseOutline-17apr25.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq"
             },
             {
                 session: "Course Outline",
-                url: "/schools/som/Course_outline-Business_Intelligence.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e"
             }
         ]
     }

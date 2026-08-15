@@ -107,15 +107,15 @@ export const departmentLayoutData = {
             "GIS & Satellite Remote Sensing",
             "Field Research Thesis"
         ],
-        syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
             },
             {
                 session: "Syllabus",
-                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
             }
         ]
     },
@@ -134,11 +134,11 @@ export const departmentLayoutData = {
             "Mineral Exploration",
             "Geological Field Camps"
         ],
-        syllabusUrl: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/environmental-science/CStr__MScEnvScience_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1"
             }
         ]
     },
@@ -157,15 +157,15 @@ export const departmentLayoutData = {
             "Climate Impact Studies",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG"
             },
             {
                 session: "Syllabus",
-                url: "/schools/environmental-science/Syll_PhD_DES_Specific_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG"
             }
         ]
     }

@@ -108,15 +108,15 @@ export const departmentLayoutData = {
             "Manufacturing Technologies",
             "Fluid Mechanics"
         ],
-        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
             },
             {
                 session: "Syllabus",
-                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Vehicle Dynamics",
             "Quality Control"
         ],
-        syllabusUrl: "/schools/mechanical/BTech_ME__AutomobileIndustrialEnggCStr_Fac.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/BTech_ME__AutomobileIndustrialEnggCStr_Fac.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Robotic Cells",
             "Embedded Mechatronics"
         ],
-        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
             }
         ]
     },
@@ -181,15 +181,15 @@ export const departmentLayoutData = {
             "Additive Manufacturing",
             "Thesis"
         ],
-        syllabusUrl: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o"
             },
             {
                 session: "Syllabus",
-                url: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o"
             }
         ]
     },
@@ -208,11 +208,11 @@ export const departmentLayoutData = {
             "CAD/CAM & FEA",
             "Executive Degree"
         ],
-        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1AvtHXvJl-axg52LdpYXIt05eprE2jz2L"
             }
         ]
     },
@@ -231,11 +231,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/mechanical/PhD_ME_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/mechanical/PhD_ME_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL"
             }
         ]
     }

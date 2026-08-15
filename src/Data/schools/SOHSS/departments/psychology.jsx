@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Psychological First Aid",
             "Community Outreach"
         ],
-        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Behavioral Statistics",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Neuropsychology",
             "Hospital Internship"
         ],
-        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "Psychodiagnostics",
             "Psychotherapy Practice"
         ],
-        syllabusUrl: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/psychology/Psychology_MentalHealth_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg"
             }
         ]
     }

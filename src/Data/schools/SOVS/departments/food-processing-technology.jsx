@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Food Safety (HACCP & FSSAI)",
             "Food Plant Machinery"
         ],
-        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Bioprocess Engineering",
             "Master Research Project"
         ],
-        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Food Chemistry & Nutrition",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
             }
         ]
     },
@@ -176,11 +176,11 @@ export const departmentLayoutData = {
             "Functional Food Research",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/food-processing-technology/B.Tech_FPT_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=112gjTG5GexRx7MyIUyCdPhVEdQZhaI85"
             }
         ]
     }

@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Classroom Internship",
             "Curriculum Design"
         ],
-        syllabusUrl: "/schools/education-training/AmbedkarCentre-HumanRights.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/education-training/AmbedkarCentre-HumanRights.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Hands-on School Practicum",
             "Teaching Tech Tools"
         ],
-        syllabusUrl: "/schools/education-training/ITEP_CourseStructure.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/education-training/ITEP_CourseStructure.pdf"
+                url: "https://drive.google.com/uc?export=download&id=18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sports Biomechanics",
             "Gym & Fitness Training"
         ],
-        syllabusUrl: "/schools/education-training/BPES_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/education-training/BPES_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Policy Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/education-training/CStr-Education-25.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/education-training/CStr-Education-25.pdf"
+                url: "https://drive.google.com/uc?export=download&id=11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH"
             }
         ]
     }

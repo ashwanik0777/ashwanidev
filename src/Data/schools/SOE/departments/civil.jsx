@@ -108,15 +108,15 @@ export const departmentLayoutData = {
             "Transportation & Highways",
             "Surveying & GIS"
         ],
-        syllabusUrl: "/schools/civil/Syllabus_CivilEngg_April23.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj"
             },
             {
                 session: "Syllabus",
-                url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj"
             }
         ]
     },
@@ -135,15 +135,15 @@ export const departmentLayoutData = {
             "Foundation Design",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
             },
             {
                 session: "Syllabus",
-                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
             }
         ]
     },
@@ -162,15 +162,15 @@ export const departmentLayoutData = {
             "EIA & Environmental Auditing",
             "Solid Waste Systems"
         ],
-        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
             },
             {
                 session: "Syllabus",
-                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
             }
         ]
     },
@@ -189,15 +189,15 @@ export const departmentLayoutData = {
             "FEM Structural Modeling",
             "Dissertation"
         ],
-        syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
             },
             {
                 session: "Syllabus",
-                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v"
             }
         ]
     },
@@ -216,11 +216,11 @@ export const departmentLayoutData = {
             "Intelligent Transportation (ITS)",
             "Urban Transit"
         ],
-        syllabusUrl: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI"
             }
         ]
     },
@@ -239,11 +239,11 @@ export const departmentLayoutData = {
             "Safety Engineering",
             "Site Management"
         ],
-        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
             }
         ]
     },
@@ -262,11 +262,11 @@ export const departmentLayoutData = {
             "Soil Dynamics",
             "Geoenvironmental Barriers"
         ],
-        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
             }
         ]
     },
@@ -285,11 +285,11 @@ export const departmentLayoutData = {
             "Journal Publications",
             "Defense"
         ],
-        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI"
             }
         ]
     }

@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Industrial Management",
             "Master Dissertation"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Smart Grid Technologies",
             "Control Systems"
         ],
-        syllabusUrl: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1mQOH218wKU-qLTRU0HSxIqeZAKifnWyg"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Digital Electronics",
             "Network Protocols"
         ],
-        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "AI & ML for Grids",
             "Biomedical Instrumentation"
         ],
-        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
             }
         ]
     },
@@ -200,11 +200,11 @@ export const departmentLayoutData = {
             "Autonomous Navigation",
             "Sensors & Actuators"
         ],
-        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
             }
         ]
     },
@@ -223,11 +223,11 @@ export const departmentLayoutData = {
             "Signal Processing",
             "Solid State Devices"
         ],
-        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1QFKSmasHUWq4P-gA1mPpGRH3Id5BiNyH"
             }
         ]
     },
@@ -246,11 +246,11 @@ export const departmentLayoutData = {
             "DCS & PLC Automation",
             "Thesis"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -269,11 +269,11 @@ export const departmentLayoutData = {
             "Autonomous SLAM",
             "Master Research"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -292,11 +292,11 @@ export const departmentLayoutData = {
             "Grid Stability Analysis",
             "DSP Processors"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -315,11 +315,11 @@ export const departmentLayoutData = {
             "Smart Grid Architecture",
             "Microgrids"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -338,11 +338,11 @@ export const departmentLayoutData = {
             "Power Drives & Control",
             "Executive Certification"
         ],
-        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1Q3VB0XQgZGMnDg00pU62_Q3gMs5Xn043"
             }
         ]
     },
@@ -361,11 +361,11 @@ export const departmentLayoutData = {
             "High-Voltage Labs",
             "Doctoral Defense"
         ],
-        syllabusUrl: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1ixWOBQiBITtVvfO1vTyhmAtAyZIxh4_N"
             }
         ]
     }

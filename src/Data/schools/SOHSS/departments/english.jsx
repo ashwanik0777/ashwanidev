@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Creative Writing",
             "Phonetics & Linguistics"
         ],
-        syllabusUrl: "/schools/english/structure_of-BA_English-NEP.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/english/structure_of-BA_English-NEP.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Master Thesis"
         ],
-        syllabusUrl: "/schools/english/MA-English-CStr.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/english/MA-English-CStr.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sociolinguistics",
             "Language Documentation"
         ],
-        syllabusUrl: "/schools/english/About_LinguisticsCenter_May2023.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/english/About_LinguisticsCenter_May2023.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "/schools/sociology/Structure_-PhD.pdf",
+        syllabusUrl: "https://drive.google.com/uc?export=download&id=1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "/schools/sociology/Structure_-PhD.pdf"
+                url: "https://drive.google.com/uc?export=download&id=1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8"
             }
         ]
     }

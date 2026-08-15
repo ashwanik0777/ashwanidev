@@ -110,14 +110,14 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "3 Years",
         intake: "60 Students",
-        description: "Undergraduate curriculum building strong foundations in programming, database systems, software engineering, and web development.",
+        description: "Foundational software application development, programming paradigms, web technologies, and database design.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80",
         gradient: "from-cyan-500 to-blue-600",
         highlights: [
-            "Programming Paradigms",
-            "Database Management Systems",
-            "Web Development",
-            "Software Design"
+            "Application Development",
+            "Database Management",
+            "Object-Oriented Programming",
+            "Web Technologies"
         ],
         syllabusUrl: "/schools/it/BCA_2026_29.docx.pdf",
         syllabus: [
@@ -145,14 +145,14 @@ export const departmentLayoutData = {
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Core information technology program covering computer networks, cloud infrastructure, full-stack systems, and cybersecurity.",
+        description: "Core IT engineering covering computer networks, cloud infrastructure, full-stack systems, and cybersecurity.",
         image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
         gradient: "from-blue-500 to-blue-600",
         highlights: [
             "Cloud Architecture",
-            "Computer Networks",
-            "Cybersecurity",
-            "Distributed Computing"
+            "Network Engineering",
+            "Enterprise Systems",
+            "Information Security"
         ],
         syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
         syllabus: [
@@ -171,6 +171,98 @@ export const departmentLayoutData = {
             {
                 session: "2021-25",
                 url: "/schools/it/2021_25_B.TECH. IT 2021-25.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-it-aiml",
+        title: "B.Tech IT (AI & Machine Learning)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Specialized undergraduate program focusing on machine learning pipelines, neural architectures, and intelligent systems.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-500 to-purple-600",
+        highlights: [
+            "Machine Learning Models",
+            "Deep Neural Networks",
+            "Natural Language Processing",
+            "Autonomous Systems"
+        ],
+        syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
+        syllabus: [
+            {
+                session: "Current Scheme",
+                url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-it-dsml",
+        title: "B.Tech IT (Data Science & ML)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Big data storage frameworks, distributed compute engines, statistical learning, and predictive business analytics.",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-500 to-indigo-600",
+        highlights: [
+            "Big Data Analytics",
+            "Distributed Computing",
+            "Predictive Analytics",
+            "Data Mining & Visualization"
+        ],
+        syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
+        syllabus: [
+            {
+                session: "Current Scheme",
+                url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-it-dsml",
+        title: "M.Tech IT (Data Science & ML)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced postgraduate program in enterprise AI infrastructure, big data engineering, and dissertation research.",
+        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "Enterprise ML Pipelines",
+            "Advanced Data Engineering",
+            "High-Performance Computing",
+            "Master Thesis"
+        ],
+        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-it-se",
+        title: "M.Tech Software Engineering",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced study of software architecture, requirement engineering, quality metrics, agile workflows, and research dissertation.",
+        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-500 to-teal-700",
+        highlights: [
+            "Software Architecture",
+            "Agile & DevOps Workflows",
+            "Quality Assurance & Testing",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
             }
         ]
     },
@@ -241,29 +333,6 @@ export const departmentLayoutData = {
             {
                 session: "2021-23",
                 url: "/schools/it/MCA AI 2021-23.pdf"
-            }
-        ]
-    },
-    {
-        id: "mtech-it-se",
-        title: "M.Tech Software Engineering",
-        level: "PG",
-        duration: "2 Years",
-        intake: "20 Students",
-        description: "Advanced study of software architecture, requirement engineering, quality metrics, agile workflows, and research dissertation.",
-        image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-teal-500 to-teal-700",
-        highlights: [
-            "Software Architecture",
-            "Agile & DevOps Workflows",
-            "Quality Assurance & Testing",
-            "Dissertation"
-        ],
-        syllabusUrl: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf",
-        syllabus: [
-            {
-                session: "Master Scheme",
-                url: "/schools/it/M.Tech_Syllabus_Software_Engineering.pdf"
             }
         ]
     },

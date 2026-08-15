@@ -1,20 +1,22 @@
- import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper";
 
-const ImageGallery = ({ images, autoPlayInterval = 2000 }) => {
+const ImageGallery = ({ images = [], autoPlayInterval = 4000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
 
   useEffect(() => {
+    if (images.length <= 1 || isHovered) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, autoPlayInterval);
     return () => clearInterval(interval);
-  }, [images.length, autoPlayInterval]);
+  }, [images.length, autoPlayInterval, isHovered]);
 
-  const handleThumbnailClick = (index) => {
-    setCurrentIndex(index);
-  };
+  if (!images || images.length === 0) return null;
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
@@ -24,98 +26,103 @@ const ImageGallery = ({ images, autoPlayInterval = 2000 }) => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
-  const half = Math.ceil(images.length / 2);
-  const rightThumbs = images.slice(0, half - 1);
-  const bottomThumbs = images.slice(half - 1);
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const distance = touchStart - touchEnd;
+    if (distance > 50) {
+      handleNext();
+    } else if (distance < -50) {
+      handlePrev();
+    }
+    setTouchStart(null);
+  };
 
   return (
     <SearchableWrapper>
-    <div className="flex flex-col items-center justify-center p-4 mx-auto">
-      <div className="flex flex-col md:flex-row relative md:mr-[128px]">
-        
-        {/* === Mobile View: Main Image with Arrows === */}
-        <div className="relative block md:hidden">
-          <motion.img
-            key={images[currentIndex]}
-            src={images[currentIndex]}
-            alt="Main"
-            className="w-[100vw] h-[250px] object-cover rounded-xl"
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          />
+      <div 
+        className="w-full max-w-5xl mx-auto flex flex-col gap-4 sm:gap-6"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Main Display Container */}
+        <div 
+          className="relative w-full h-[240px] sm:h-[380px] md:h-[480px] rounded-2xl overflow-hidden bg-slate-950 shadow-xl border border-slate-100 group select-none"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentIndex}
+              src={images[currentIndex]}
+              alt={`Gallery photo ${currentIndex + 1}`}
+              className="w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.02 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+            />
+          </AnimatePresence>
 
-          {/* Left Arrow */}
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-black/20 pointer-events-none" />
+
+          {/* Counter Badge */}
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold text-white z-10">
+            {currentIndex + 1} / {images.length}
+          </div>
+
+          {/* Touch indicator hint for mobile */}
+          <div className="absolute bottom-3 left-4 text-[10px] sm:text-xs font-medium text-white/80 sm:hidden z-10">
+            Swipe left / right to browse
+          </div>
+
+          {/* Previous Arrow */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/60 rounded-full px-3 py-1 font-bold text-lg"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center backdrop-blur-sm transition-all transform hover:scale-110 shadow-lg cursor-pointer z-10"
+            aria-label="Previous photo"
           >
-            ‹
+            <ChevronLeft size={18} className="sm:w-5 sm:h-5" />
           </button>
 
-          {/* Right Arrow */}
+          {/* Next Arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/60 rounded-full px-3 py-1 font-bold text-lg"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-900/70 hover:bg-slate-900 text-white flex items-center justify-center backdrop-blur-sm transition-all transform hover:scale-110 shadow-lg cursor-pointer z-10"
+            aria-label="Next photo"
           >
-            ›
+            <ChevronRight size={18} className="sm:w-5 sm:h-5" />
           </button>
         </div>
 
-        {/* === Desktop View: Main Image + Thumbnails === */}
-        <div className="hidden md:block relative">
-          {/* Right Thumbnails */}
-          <div className="absolute right-[-120px] top-0 flex flex-col space-y-4 max-h-[500px]">
-            {rightThumbs.map((imgSrc, index) => (
-              <motion.img
-                key={`right-${index}`}
-                src={imgSrc}
-                alt={`Thumbnail ${index}`}
-                className={`w-24 h-24 object-cover rounded-lg cursor-pointer border ${
-                  index === currentIndex
-                    ? "border-blue-500"
-                    : "border-transparent"
+        {/* Thumbnail Row Container */}
+        <div className="w-full overflow-x-auto pb-2 scrollbar-none sm:scrollbar-thin sm:scrollbar-thumb-slate-300">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-max px-1">
+            {images.map((imgSrc, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`relative rounded-lg sm:rounded-xl overflow-hidden transition-all duration-300 shrink-0 cursor-pointer ${
+                  idx === currentIndex
+                    ? "ring-2 sm:ring-4 ring-amber-500 scale-105 opacity-100 shadow-md"
+                    : "opacity-60 hover:opacity-100 hover:scale-102"
                 }`}
-                whileHover={{ scale: 1.05 }}
-                onClick={() => handleThumbnailClick(index)}
-              />
-            ))}
-          </div>
-
-          {/* Main Image */}
-          <motion.img
-            key={images[currentIndex]}
-            src={images[currentIndex]}
-            alt="Main"
-            className="w-[900px] h-[400px] object-cover rounded-xl"
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          />
-
-          {/* Bottom Thumbnails */}
-          <div className="absolute -bottom-26 left-0 w-full flex flex-wrap justify-center gap-8">
-            {bottomThumbs.map((imgSrc, index) => {
-              const actualIndex = half - 1  + index;
-              return (
-                <motion.img
-                  key={`bottom-${index}`}
+              >
+                <img
                   src={imgSrc}
-                  alt={`Thumbnail ${index}`}
-                  className={`w-24 h-20 object-cover rounded-lg cursor-pointer border ${
-                    actualIndex === currentIndex
-                      ? "border-blue-500"
-                      : "border-transparent"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  onClick={() => handleThumbnailClick(actualIndex)}
+                  alt={`Thumbnail ${idx + 1}`}
+                  className="w-16 h-12 sm:w-24 sm:h-18 object-cover"
                 />
-              );
-            })}
+              </button>
+            ))}
           </div>
         </div>
       </div>
-    </div>
     </SearchableWrapper>
   );
 };

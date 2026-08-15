@@ -106,20 +106,13 @@ const NCC = () => {
   return (
     <SearchableWrapper>
       <div className="min-h-screen bg-white">
-       <div className="relative">
-                <HeroBanner
-                  title="National Cadet Corps"
-                  subtitle='"Unity and Discipline"'
-                  bgTheme={5}
-                />
-                <div className="absolute top-10 left-14 md:top-24 md:left-48 ">
-                  <img
-                    src="https://panducollege.ac.in/images/ncc-new-logo.png"
-                    alt="NSS Logo"
-                    className="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain pt-3  bg-white/30 backdrop-blur-sm rounded-full shadow-lg"
-                  />
-                </div>
-              </div>
+        <div className="relative">
+          <HeroBanner
+            title="National Cadet Corps"
+            subtitle='"Unity and Discipline" • गौतम बुद्ध विश्वविद्यालय'
+            bgTheme={5}
+          />
+        </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="sticky top-25 z-10 bg-white">

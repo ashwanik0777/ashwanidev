@@ -5,36 +5,36 @@ import SearchableWrapper from '../../components/Searchbar/SearchableWrapper';
 
 const GBU_HOSTELS_DATA = {
   girls: [
-    { name: "Savitri Bai Phule Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
-    { name: "Rani Laxmi Bai Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
-    { name: "Rama Bai Ambedkar Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
-    { name: "Mahamaya Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
-    { name: "Mahadevi Verma Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
-    { name: "Ismat Chughtai Girls Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" }
+    { name: "Savitri Bai Phule Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/sbpgh/site/sliderimg/slider-1-sbpgh.jpeg" },
+    { name: "Rani Laxmi Bai Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/rlbgh/site/sliderimg/slider-1-rlbgh.jpeg" },
+    { name: "Rama Bai Ambedkar Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/rbagh/site/sliderimg/slider-1-rbagh.jpeg" },
+    { name: "Mahamaya Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/mmgh/site/sliderimg/slider-1-mmgh.jpeg" },
+    { name: "Mahadevi Verma Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/mdvgh/site/sliderimg/slider-1-mdvgh.jpeg" },
+    { name: "Ismat Chughtai Girls Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/icgh/site/sliderimg/slider-1-icgh.jpeg" }
   ],
   boys: [
-    { name: "Sant Ravidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
-    { name: "Sant Kabir Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
-    { name: "Birsa Munda Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/completegbu.webp" },
-    { name: "Ram Sharan Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
-    { name: "Shri Narayan Guru Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/about.jpg" },
-    { name: "Tulsidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" },
-    { name: "Guru Ghasi Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostel2.jpg" },
-    { name: "Malik Mohammad Jaysi Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/completegbu.webp" },
-    { name: "Munshi Premchand Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/hostels.jpg" },
-    { name: "Raheem Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/about.jpg" },
-    { name: "Maharshi Valmiki Boys Hostel", capacity: "Single Occupancy Rooms", image: "/assets/Hostel_Image.webp" }
+    { name: "Sant Ravidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/srdbh/site/sliderimg/srdbh-slider-1.jpg" },
+    { name: "Sant Kabir Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/skdbh/site/sliderimg/skdbh-slider-1.jpg" },
+    { name: "Birsa Munda Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/bmbh/site/sliderimg/bmbh-slider-1.jpg" },
+    { name: "Ram Sharan Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/rsdbh/site/sliderimg/rsdbh-slider-1.jpg" },
+    { name: "Shri Narayan Guru Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/sngbh/site/sliderimg/sngbh-slider-1.jpg" },
+    { name: "Tulsidas Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/tdbh/site/sliderimg/slider-2-tdbh.jpg" },
+    { name: "Guru Ghasi Das Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/ggdbh/site/sliderimg/ggdbh-slider-1.jpg" },
+    { name: "Malik Mohammad Jaysi Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/mmjbh/site/sliderimg/mmjbh-slider-1.jpg" },
+    { name: "Munshi Premchand Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/mpcbh/site/sliderimg/mpcbh-slider-1.jpg" },
+    { name: "Raheem Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/rbh/site/sliderimg/slider-3-rbh.jpg" },
+    { name: "Maharshi Valmiki Boys Hostel", capacity: "Single Occupancy Rooms", image: "https://hostels.gbu.ac.in/mvbh/site/sliderimg/slider-1-mvbh.jpg" }
   ],
   married: [
-    { name: "Married Research Scholars Hostel", capacity: "Furnished Family Suites", image: "/assets/completegbu.webp" }
+    { name: "Married Research Scholars Hostel", capacity: "Furnished Family Suites", image: "https://hostels.gbu.ac.in/mrsh/site/sliderimg/mrsh-slider-1.jpg" }
   ],
   dining: {
     description: "Gautam Buddha University operates a highly collaborative dining ecosystem. Centralized hostal kitchens, monitored closely by student-led mess committees, serve fresh, nutritious, and purely vegetarian meals daily. Menus rotate weekly to present seasonal options and cultural variety.",
     timings: [
-      { meal: "Breakfast", time: "7:30 AM - 9:00 AM", menu: "Milk, Sprouts, Bread-butter, Seasonal Paratha/Poha/Idli" },
-      { meal: "Lunch", time: "12:30 PM - 2:00 PM", menu: "Seasonal Green Veg, Dal Tadka, Roti, Plain Rice, Curd & Salad" },
+      { meal: "Breakfast", time: "7:30 AM - 9:30 AM", menu: "Milk, Sprouts, Bread-butter, Seasonal Paratha/Poha/Idli" },
+      { meal: "Lunch", time: "12:00 PM - 2:30 PM", menu: "Seasonal Green Veg, Dal Tadka, Roti, Plain Rice, Curd & Salad" },
       { meal: "Evening Tea", time: "5:00 PM - 6:00 PM", menu: "Tea/Coffee with Quick Snacks (Samosa/Sandwiches/Biscuits)" },
-      { meal: "Dinner", time: "8:00 PM - 9:30 PM", menu: "Paneer/Special Sabzi, Dal Makhani, Pulao, Chapati & Dessert" }
+      { meal: "Dinner", time: "7:30 PM - 9:30 PM", menu: "Paneer/Special Sabzi, Dal Makhani, Pulao, Chapati & Dessert" }
     ],
     features: [
       { title: "Student Mess Committee", desc: "Weekly review of hygiene, raw material supplies, and custom menu additions." },
@@ -52,36 +52,19 @@ const HostelDining = () => {
 
   return (
     <SearchableWrapper>
-      <section id="hostel-life" className="py-24 bg-slate-50 relative overflow-hidden font-sans text-left">
+      <section id="hostel-life" className="py-16 bg-slate-50 relative overflow-hidden font-sans text-left">
         <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
-          
+
           {/* Section Header */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4 border border-blue-100"
-            >
-              <Bed size={13} />
-              <span>Residential Campus</span>
-            </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight"
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight"
             >
               Hostel Accommodation & Dining
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-slate-600 text-lg leading-relaxed font-normal"
-            >
-              Discover our extensive student residential blocks. GBU provides separate, fully-equipped single-occupancy hostels to guarantee quiet study time, privacy, and personal focus.
-            </motion.p>
           </div>
 
           {/* OHMS Notice / External Portal redirect */}
@@ -115,17 +98,15 @@ const HostelDining = () => {
             <div className="bg-slate-200/60 p-1.5 rounded-full flex gap-1 border border-slate-200">
               <button
                 onClick={() => setActiveMainTab('hostels')}
-                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
-                  activeMainTab === 'hostels' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${activeMainTab === 'hostels' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 Student Accommodations
               </button>
               <button
                 onClick={() => setActiveMainTab('dining')}
-                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
-                  activeMainTab === 'dining' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-8 py-3.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${activeMainTab === 'dining' ? 'bg-white text-blue-600 shadow-md' : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 Dining & Mess Info
               </button>
@@ -137,26 +118,23 @@ const HostelDining = () => {
               {/* Category subtabs (boys vs girls vs married) */}
               <div className="flex flex-wrap justify-center gap-4 mb-12">
                 <button
-                  onClick={() => setHostCategory('boys')}
-                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
-                    hostelCategory === 'boys' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                  }`}
+                  onClick={() => setHostelCategory('boys')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${hostelCategory === 'boys' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                    }`}
                 >
                   Boys' Hostels ({GBU_HOSTELS_DATA.boys.length})
                 </button>
                 <button
-                  onClick={() => setHostCategory('girls')}
-                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
-                    hostelCategory === 'girls' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                  }`}
+                  onClick={() => setHostelCategory('girls')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${hostelCategory === 'girls' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                    }`}
                 >
                   Girls' Hostels ({GBU_HOSTELS_DATA.girls.length})
                 </button>
                 <button
-                  onClick={() => setHostCategory('married')}
-                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${
-                    hostelCategory === 'married' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
-                  }`}
+                  onClick={() => setHostelCategory('married')}
+                  className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${hostelCategory === 'married' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                    }`}
                 >
                   Married Accommodation ({GBU_HOSTELS_DATA.married.length})
                 </button>
@@ -172,48 +150,28 @@ const HostelDining = () => {
                     key={idx}
                     layout
                     whileHover={{ y: -4 }}
-                    className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                    className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
                   >
-                    <div>
-                      <div className="h-48 relative overflow-hidden">
-                        <img
-                          src={hostel.image}
-                          alt={hostel.name}
-                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-103 select-none"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
-                        <div className="absolute bottom-4 left-4">
-                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/10">
-                            <Building2 size={10} />
-                            <span>{hostel.capacity}</span>
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <h4 className="font-bold text-lg text-slate-950 leading-tight mb-2">{hostel.name}</h4>
-                        <div className="space-y-2 text-xs text-slate-500 pt-3 border-t border-slate-50">
-                          <div className="flex items-center gap-1.5">
-                            <MapPin size={13} className="text-slate-400" />
-                            <span>GBU Residential Zone</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <UserCheck size={13} className="text-slate-400" />
-                            <span>Biometric Attendance Registry</span>
-                          </div>
-                        </div>
+                    <div className="h-48 relative overflow-hidden">
+                      <img
+                        src={hostel.image}
+                        alt={hostel.name}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-103 select-none"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/assets/Hostel_Image.webp";
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                      <div className="absolute bottom-4 left-4">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/10">
+                          <Building2 size={10} />
+                          <span>{hostel.capacity}</span>
+                        </span>
                       </div>
                     </div>
-                    
-                    <div className="p-6 border-t border-slate-100 bg-slate-50/50">
-                      <a
-                        href="https://hostels.gbu.ac.in/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md hover:shadow-blue-500/10 transition-all flex items-center justify-center gap-1 cursor-pointer"
-                      >
-                        <span>View Now !!</span>
-                        <ArrowUpRight size={13} />
-                      </a>
+                    <div className="p-6">
+                      <h4 className="font-bold text-lg text-slate-950 leading-tight">{hostel.name}</h4>
                     </div>
                   </motion.div>
                 ))}

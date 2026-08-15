@@ -24,12 +24,12 @@ const CardTitle = ({ className = "", children }) => (
 const CardContent = ({ className = "", children }) => (
   <div className={`px-6 pb-6 ${className}`}>{children}</div>
 );
-import { Shield, Target, Users, Award, Star, Flag } from 'lucide-react';
+import { Shield, Target, Users, Award, Star, Flag, ArrowRight, ExternalLink } from 'lucide-react';
 import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
  
 const NCCIntroduction = ({ nccData }) => {
-  const visionText = nccData?.overview || `The National Cadet Corps (NCC) is a youth development movement under the Ministry of Defence, aimed at instilling discipline, leadership, patriotism, and military awareness among students. We uphold the motto "Unity and Discipline" - fostering national integration and building character through military training and social service.`;
+  const visionText = nccData?.overview || `Gautam Buddha University (GBU) in Greater Noida has active National Cadet Corps (NCC) wings for both male and female students, operating under the 31 UP Girls Battalion and 37 UP Battalion NCC (Ghaziabad) to train youth in discipline, leadership, and national service.`;
   const registerUrl = nccData?.content?.email || "#";
   const mainUrl = nccData?.content?.websiteUrl || "#";
 
@@ -97,17 +97,59 @@ const nccStatsData = [
   return (
     <SearchableWrapper>
     <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
-      {/* Mission Statement */}
-      <Card className="border-l-4 border-l-orange-600">
-        <CardHeader>
-          <CardTitle className="text-2xl text-orange-600">Our Vision</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-lg leading-relaxed text-gray-700">
-            {visionText}
-          </p>
-        </CardContent>
-      </Card>
+      {/* Hero Mission Statement Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="bg-gradient-to-br from-blue-950 via-indigo-900 to-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="max-w-3xl">
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-amber-500 text-slate-950 mb-4">
+                OFFICIAL NCC GBU CELL
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-2 leading-tight">
+                National Cadet Corps <span className="text-amber-400">(NCC GBU)</span>
+              </h2>
+              <p className="text-base md:text-lg text-blue-200 font-medium mb-6">
+                राष्ट्रीय कैडेट कोर - गौतम बुद्ध विश्वविद्यालय
+              </p>
+              <p className="text-sm md:text-base text-slate-200 leading-relaxed mb-8">
+                {visionText}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href={registerUrl}
+                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 px-6 py-3 rounded-xl font-bold transition-all shadow-lg hover:scale-105"
+                >
+                  Start Cadet Registration <ArrowRight size={18} />
+                </a>
+                <a
+                  href={mainUrl}
+                  className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 py-3 rounded-xl font-bold backdrop-blur-sm transition-all"
+                >
+                  Cadet Login <ExternalLink size={16} />
+                </a>
+              </div>
+            </div>
+
+            {/* Official NCC Emblem Logo */}
+            <div className="shrink-0 self-center md:self-auto">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                alt="Official NCC Logo"
+                className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain bg-white rounded-full p-2.5 shadow-2xl border-4 border-amber-400/80"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://panducollege.ac.in/images/ncc-new-logo.png";
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Unit Information */}
       <div>
@@ -116,35 +158,68 @@ const nccStatsData = [
           Unit Information
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-orange-50/50 to-white rounded-2xl border border-orange-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-orange-600 uppercase tracking-wider mb-1">Affiliated Wing</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.wing}</div>
+          <div className="bg-gradient-to-br from-amber-50/50 to-white rounded-2xl border border-amber-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Associate NCC Officer (31 UP Girls Bn)</div>
+            <div className="text-lg font-extrabold text-slate-900">Lt. Bhawna Joshi</div>
+            <div className="text-xs text-slate-500 font-medium mt-0.5">ANO / CTO - GBU Girls Wing</div>
           </div>
           <div className="bg-gradient-to-br from-blue-50/50 to-white rounded-2xl border border-blue-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Unit Code</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.nccCode}</div>
+            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Caretaker (37 UP Battalion)</div>
+            <div className="text-lg font-extrabold text-slate-900">Dr. Nitesh Singh Bhati</div>
+            <div className="text-xs text-slate-500 font-medium mt-0.5">CTO - 37 UP BN NCC Ghaziabad</div>
+          </div>
+          <div className="bg-gradient-to-br from-orange-50/50 to-white rounded-2xl border border-orange-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="text-xs font-semibold text-orange-600 uppercase tracking-wider mb-1">Affiliated Wing</div>
+            <div className="text-xl font-bold text-slate-800">Army</div>
           </div>
           <div className="bg-gradient-to-br from-indigo-50/50 to-white rounded-2xl border border-indigo-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Parade Day</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.paradeDay}</div>
+            <div className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">NCC Unit Battalions</div>
+            <div className="text-base font-bold text-slate-800 leading-snug">
+              <div>37 UP BN NCC (GZB)</div>
+              <div className="text-xs font-medium text-slate-600">31 UP BN (Girl) NCC</div>
+            </div>
           </div>
           <div className="bg-gradient-to-br from-emerald-50/50 to-white rounded-2xl border border-emerald-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">Intake Capacity</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.intakeCapacity} Cadets</div>
+            <div className="text-xl font-bold text-slate-800">200 Cadets</div>
           </div>
           <div className="bg-gradient-to-br from-purple-50/50 to-white rounded-2xl border border-purple-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Established</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.establishedYear}</div>
-          </div>
-          <div className="bg-gradient-to-br from-amber-50/50 to-white rounded-2xl border border-amber-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Unit Rating</div>
-            <div className="text-xl font-bold text-slate-800">A Grade</div>
+            <div className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Certificates Offered</div>
+            <div className="text-xl font-bold text-slate-800">B & C</div>
           </div>
         </div>
       </div>
 
-      {/* Statistics */}
-      <StatsCard stats={nccStatsData} />
+      {/* Battalion Structure & Training Camps */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="p-6 border border-slate-100 shadow-md">
+          <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Users className="w-5 h-5 text-amber-500" />
+            <span>Unit Structure & Strength</span>
+          </h3>
+          <ul className="space-y-3 text-sm text-slate-600 leading-relaxed">
+            <li className="flex items-start gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+              <span><strong className="text-slate-900">31 UP Girls Battalion:</strong> Authorized strength of 50 girl cadets.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 shrink-0" />
+              <span><strong className="text-slate-900">37 UP Battalion (Ghaziabad):</strong> Comprises platoons totaling 104 cadets covering both boys and girls.</span>
+            </li>
+          </ul>
+        </Card>
+
+        <Card className="p-6 border border-slate-100 shadow-md">
+          <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Shield className="w-5 h-5 text-blue-600" />
+            <span>Training & Camps</span>
+          </h3>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Cadets regularly participate in Combined Annual Training Camps (CATC), weapon handling drills, social awareness campaigns, and competitive events like the Thal Sainik Competition (TSC).
+          </p>
+        </Card>
+      </div>
+
       {/* Objectives */}
       <div>
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">NCC Objectives</h2>

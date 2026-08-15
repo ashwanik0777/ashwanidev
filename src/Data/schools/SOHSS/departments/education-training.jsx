@@ -161,7 +161,12 @@ export const departmentLayoutData = {
         "Practical Training",
       ],
       syllabusUrl: "/schools/education-training/BPES_CStr_May2023.pdf",
-    syllabus: [],
+    syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/education-training/BPES_CStr_May2023.pdf"
+        }
+],
     },
     {
       title: "M.A. Education",

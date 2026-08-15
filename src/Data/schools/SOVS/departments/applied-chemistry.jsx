@@ -110,7 +110,16 @@ export const departmentLayoutData = {
         "Laboratory Safety Training",
       ],
       syllabusUrl: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf",
-    syllabus: [],
+    syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/applied-chemistry/B.Sc_Hons._Chem_June2023.pdf"
+        },
+        {
+                session: "2022-23",
+                url: "/schools/applied-mathematics/BSC_MES_CStr_May2023.pdf"
+        }
+],
     },
     {
       title: "M.Sc. Applied Chemistry",
@@ -130,7 +139,12 @@ export const departmentLayoutData = {
         "Dissertation Research",
       ],
       syllabusUrl: "/schools/applied-chemistry/M.Sc_Chemistry_Syllabus_June2023.pdf",
-      syllabus: [],
+      syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/applied-chemistry/M.Sc_Chemistry_Syllabus_June2023.pdf"
+        }
+],
     },
     {
       title: "Ph.D. Applied Chemistry",

@@ -127,15 +127,15 @@ export const departmentLayoutData = {
       syllabus: [
         {
                 session: "2026-27",
-                url: "/schools/information-technology/2026_2030_B.Tech._IT_.docx.pdf"
+                url: "/schools/it/2026_2030_B.Tech._IT_.docx.pdf"
         },
         {
                 session: "2023-24",
-                url: "/schools/information-technology/B.Tech._IT_2023-27.pdf"
+                url: "/schools/it/B.Tech._IT_2023-27.pdf"
         },
         {
                 session: "2021-22",
-                url: "/schools/information-technology/2021_25_B.TECH._IT_2021-25.pdf"
+                url: "/schools/it/2021_25_B.TECH._IT_2021-25.pdf"
         }
 ],
     },

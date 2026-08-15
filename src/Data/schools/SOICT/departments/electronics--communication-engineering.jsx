@@ -130,15 +130,15 @@ export const departmentLayoutData = {
       syllabus: [
         {
                 session: "2024-25",
-                url: "/schools/electronics--communication-engineering/Syllabus_B.Tech(ECE)-2024_onward_.pdf"
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-2024_onward_.pdf"
         },
         {
                 session: "2021-22",
-                url: "/schools/electronics--communication-engineering/Syllabus_B.Tech(ECE)-January-2021.pdf"
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-January-2021.pdf"
         },
         {
                 session: "2018-19",
-                url: "/schools/electronics--communication-engineering/COURSE_STRUCTURE_B.TECH(EC)_2018-2023.pdf"
+                url: "/schools/ece/COURSE_STRUCTURE_B.TECH(EC)_2018-2023.pdf"
         }
 ],
     },

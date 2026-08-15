@@ -191,7 +191,7 @@ export const departmentLayoutData = {
       syllabus: [
         {
                 session: "2020-21",
-                url: "/schools/biotechnology/Course_Structure_PHD_2020_onwards.pdf"
+                url: "/schools/bioinformatics/Course_Structure_PHD_2020_onwards.pdf"
         }
 ],
     },

@@ -126,7 +126,12 @@ export const departmentLayoutData = {
         "Renewable Energy", "Signal Processing", "MBA Option", "Research Project", "Industry Placement",
       ],
       syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
-    syllabus: [],
+    syllabus: [
+        {
+                session: "2023-24",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+        }
+],
     },
     {
       title: "M.Tech Power Systems / Power Electronics",

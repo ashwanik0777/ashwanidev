@@ -130,7 +130,12 @@ export const departmentLayoutData = {
         "M.Sc. Research Dissertation",
       ],
       syllabusUrl: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf",
-      syllabus: [],
+      syllabus: [
+        {
+                session: "2024-25",
+                url: "/schools/applied-physics/CBCS-M.Sc.Physics-CS-Syllabus-2024-26.pdf"
+        }
+],
     },
     {
       title: "Ph.D. Applied Physics",

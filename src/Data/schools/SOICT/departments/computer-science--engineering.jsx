@@ -122,27 +122,31 @@ export const departmentLayoutData = {
       syllabus: [
         {
                 session: "2026-27",
-                url: "/schools/computer-science--engineering/Prog-Str-BTechCSE-Batch-2026-30.pdf"
+                url: "/schools/cse/Prog-Str-BTechCSE-Batch-2026-30.pdf"
         },
         {
+      session: "2025-26",
+      url: "/schools/cse/BTech_CSE_2025-29.pdf" 
+    },
+        {
                 session: "2024-25",
-                url: "/schools/computer-science--engineering/BTECH-CSE-2024-28.pdf"
+                url: "/schools/cse/BTECH-CSE-2024-28.pdf"
         },
         {
                 session: "2023-24",
-                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2023-2027.pdf"
+                url: "/schools/cse/B.Tech_CSE_PS_2023-2027.pdf"
         },
         {
                 session: "2022-23",
-                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2022-2026.pdf"
+                url: "/schools/cse/B.Tech_CSE_PS_2022-2026.pdf"
         },
         {
                 session: "2021-22",
-                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2021-2025.pdf"
+                url: "/schools/cse/B.Tech_CSE_PS_2021-2025.pdf"
         },
         {
                 session: "2020-21",
-                url: "/schools/computer-science--engineering/B.Tech_CSE_PS_2020-2024.pdf"
+                url: "/schools/cse/B.Tech_CSE_PS_2020-2024.pdf"
         }
 ],
     },

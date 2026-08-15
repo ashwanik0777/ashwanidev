@@ -37,37 +37,8 @@ const GBU_ECO_INITIATIVES = [
   }
 ];
 
-const GBU_ECO_IMPACTS = [
-  {
-    id: 1,
-    icon: Sun,
-    title: "Renewable Power",
-    description: "Solar energy is fed directly into the campus mini-grid, illuminating hostels, classrooms, and peripheral street lamps."
-  },
-  {
-    id: 2,
-    icon: Droplet,
-    title: "Zero Waste Water",
-    description: "Recycled greywater from the in-house STP is reused to nourish green zones and landscaped parks."
-  },
-  {
-    id: 3,
-    icon: RefreshCw,
-    title: "Solid Waste Composting",
-    description: "Leaves and dry biomass are converted to premium organic manure inside composting units for organic farming."
-  },
-  {
-    id: 4,
-    icon: Trees,
-    title: "Rich Bio-diversity Hub",
-    description: "Home to native flora, migratory birds, peacocks, and various wildlife species thriving in protected dense woodlands."
-  }
-];
-
 const EcoCampus = () => {
-  const [intro] = useState(GBU_ECO_INTRO);
   const [stats] = useState(GBU_ECO_STATS);
-  const [impacts] = useState(GBU_ECO_IMPACTS);
 
   return (
     <SearchableWrapper>
@@ -104,24 +75,6 @@ const EcoCampus = () => {
                 <div className="text-slate-500 text-xs font-semibold uppercase tracking-wider">{stat.title}</div>
               </motion.div>
             ))}
-          </div>
-
-          {/* Environmental Impact Infographics */}
-          <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 relative overflow-hidden">
-            <h3 className="text-2xl font-extrabold text-slate-900 mb-8 text-center flex items-center justify-center gap-2">
-              <span>Campus Green Impact</span>
-            </h3>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {impacts.map((impact) => (
-                <div key={impact.id} className="text-center flex flex-col items-center">
-                  <div className="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-3 shadow-md shadow-emerald-500/15">
-                    {React.createElement(impact.icon, { size: 20 })}
-                  </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm sm:text-base">{impact.title}</h4>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>

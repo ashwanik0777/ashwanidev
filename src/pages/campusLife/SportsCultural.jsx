@@ -133,7 +133,7 @@ const SportsWellness = () => {
                 onClick={() => setSelectedFacility(facility)}
                 className="flex-shrink-0 w-80 md:w-96 snap-start bg-white border border-slate-100 hover:border-blue-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
               >
-                <div className="h-52 relative overflow-hidden">
+                <div className="h-64 md:h-72 relative overflow-hidden">
                   <img
                     src={facility.image}
                     alt={facility.title}
@@ -146,26 +146,6 @@ const SportsWellness = () => {
                   <div className="absolute bottom-4 left-4 right-4 text-white">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-blue-300">{facility.type}</span>
                     <h3 className="font-bold text-lg mt-0.5 leading-tight">{facility.title}</h3>
-                  </div>
-                </div>
-
-                <div className="p-6 text-sm text-slate-600 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <MapPin size={15} className="text-slate-400" />
-                    <span>{facility.location}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Trophy size={15} className="text-slate-400" />
-                    <span>{facility.capacity}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock size={15} className="text-slate-400" />
-                    <span>{facility.timings}</span>
-                  </div>
-
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-blue-600 font-semibold group-hover:translate-x-1 transition-transform">
-                    <span>View Scheduling Details</span>
-                    <ChevronRight size={16} />
                   </div>
                 </div>
               </div>

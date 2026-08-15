@@ -60,11 +60,11 @@ const AboutUs = ({ data }) => {
   };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gray-100">
+    <section className="relative py-8 overflow-hidden bg-gray-100">
       <div className="container mx-auto px-4 relative z-10">
         {/* Heading */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-5"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -84,15 +84,15 @@ const AboutUs = ({ data }) => {
               style={{ willChange: "transform" }}
             />
           </motion.div>
-          {subtitle && (
+          {/* {subtitle && (
             <motion.p
-              className="text-xl text-gray-600 mt-6 font-medium"
+              className="text-xl text-gray-600 font-medium"
               variants={itemVariants}
               style={{ willChange: "transform, opacity" }}
             >
               {subtitle}
             </motion.p>
-          )}
+          )} */}
         </motion.div>
 
         {/* Floating Icons */}

@@ -368,7 +368,7 @@ const Navbar = () => {
   return (
     <SearchableWrapper>
       <nav
-        className={`fixed top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
+        className={`fixed top-8 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
           }`}
         role="navigation"
         aria-label="Main navigation"

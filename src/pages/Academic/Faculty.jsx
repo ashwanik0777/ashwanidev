@@ -69,7 +69,16 @@ const Faculty = () => {
     setCurrentPage(1);
   }, [searchTerm, selectedDepartment, selectedExperience, selectedQualification, selectedSchool]);
 
-  const { id } = useParams();
+  const { id, shortCode } = useParams();
+
+  // When accessed via /schools/:shortCode/faculty, auto-lock the school filter
+  const isSchoolScoped = Boolean(shortCode);
+  const schoolScopedName = isSchoolScoped
+    ? SCHOOL_DIRECTORY.find(
+        (s) => s.code.toLowerCase() === shortCode.toLowerCase() ||
+               s.short?.toLowerCase() === shortCode.toLowerCase()
+      )?.name || shortCode.toUpperCase()
+    : null;
 
   useEffect(() => {
     const fetchAllData = async () => {
@@ -110,7 +119,14 @@ const Faculty = () => {
     fetchAllData();
   }, []);
 
-  const schools = SCHOOL_FILTERS;
+  const schools = isSchoolScoped ? [schoolScopedName] : SCHOOL_FILTERS;
+
+  // When school-scoped, lock the school filter
+  useEffect(() => {
+    if (isSchoolScoped && schoolScopedName) {
+      setSelectedSchool(schoolScopedName);
+    }
+  }, [isSchoolScoped, schoolScopedName]);
 
   const departments = [
     "All Departments",
@@ -251,9 +267,8 @@ const Faculty = () => {
           <>
             {/* Hero Section */}
             <BannerSection
-              title={directoryStats?.title || 'Faculty Directory'}
-              subtitle={directoryStats?.description || 'Meet our faculty who are leaders in their fields.'}
-              bgTheme={3} // Pick your theme number (1–10)
+              title={isSchoolScoped ? `${schoolScopedName} — Faculty` : (directoryStats?.title || 'Faculty Directory')}
+              bgTheme={3}
             />
 
             {/* Statistics */}
@@ -286,6 +301,7 @@ const Faculty = () => {
 
                   <div className="bg-white p-6 rounded-lg border border-gray-200 border-solid space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      {!isSchoolScoped && (
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">School</label>
                         <select
@@ -298,6 +314,7 @@ const Faculty = () => {
                           ))}
                         </select>
                       </div>
+                      )}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
                         <select

@@ -11,10 +11,6 @@ const DepartmentsSection = ({ departments = [] }) => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
             Our Departments
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Three premier departments offering cutting-edge programs in
-            engineering and technology.
-          </p>
           <div className="w-24 h-1 bg-blue-500 mx-auto mt-6 rounded-full" />
         </div>
 

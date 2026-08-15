@@ -365,7 +365,7 @@ export default function AppRouter() {
                   <SchoolDetail />
                 </Suspense>
               } />
-              <Route path="faculty" element={<ICTFaculty />} />
+              <Route path="faculty" element={<Faculty />} />
               <Route path="placement" element={<PlacementDashboard />} />
               <Route path="contact" element={<Contact />} />
               <Route path="about/dean" element={<Dean />} />

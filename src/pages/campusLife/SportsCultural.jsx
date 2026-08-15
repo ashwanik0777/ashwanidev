@@ -63,7 +63,7 @@ const GBU_SPORTS_FACILITIES = [
     id: 5,
     icon: Shield,
     title: "Central Gymnasium & Fitness Center",
-    image: "/assets/campusimg/Ellavya_Sports_complex.jpg",
+    image: "https://hostels.gbu.ac.in/images/student-utilities/gym.jpeg",
     type: "Equipped Gym Complex",
     location: "First Floor, Eklavya Indoor Stadium",
     capacity: "100+ Athletes at a time",

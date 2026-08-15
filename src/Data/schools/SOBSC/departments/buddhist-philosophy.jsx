@@ -102,65 +102,171 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "M.A. Buddhist Studies",
-      duration: "2 Years",
-      intake: "40 Students",
-      description:
-        "A comprehensive postgraduate program covering Buddhist philosophy, ethics, history, languages, and meditation studies with emphasis on primary text engagement.",
-      image:
-        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-yellow-500 to-orange-600",
-      highlights: [
-        "Buddhist Philosophy & Ethics",
-        "Pali & Sanskrit Languages",
-        "Buddhist History & Civilization",
-        "Meditation & Mindfulness Studies",
-        "Buddhist Art & Architecture",
-        "Comparative Religion",
-        "Research Methodology",
-        "Dissertation",
-      ],
-      syllabus: [],
+        id: "ba-hons-buddhist-studies",
+        title: "Bachelor of Arts (Hons.) in Buddhist Studies & Civilization",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "30 Students",
+        description: "Undergraduate curriculum covering Buddhist philosophy, canonical literature, Pali language, ancient Indian history, art, and architecture.",
+        image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Pali Canonical Literature",
+            "Buddhist Art & Architecture",
+            "Indian Epistemology",
+            "Vipassana Meditation"
+        ],
+        syllabusUrl: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf"
+            },
+            {
+                session: "Syllabus (NEP)",
+                url: "/schools/sobs/SOBSC_POCO__24Dec2021.pdf"
+            }
+        ]
     },
     {
-      title: "M.Phil Buddhist Studies",
-      duration: "2 Years",
-      intake: "15 Students",
-      description:
-        "An advanced research-oriented program for scholars seeking deeper engagement with Buddhist philosophical texts and traditions.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-red-600",
-      highlights: [
-        "Advanced Buddhist Philosophy",
-        "Research Methodology",
-        "Textual Criticism",
-        "Comparative Buddhist Traditions",
-        "Seminar Presentations",
-        "Thesis Research",
-      ],
-      syllabus: [],
+        id: "ma-buddhist-studies",
+        title: "M.A. in Buddhist Studies and Civilization",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Postgraduate degree exploring Vinaya Pitaka, Sutta Pitaka, Abhidhamma, Mahayana philosophy, and comparative Buddhist traditions.",
+        image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "Vinaya & Sutta Pitaka",
+            "Mahayana Philosophy",
+            "Abhidhamma Analysis",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/sobs/MBS.pdf",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "/schools/sobs/MBS.pdf"
+            }
+        ]
     },
     {
-      title: "Ph.D. Buddhist Studies",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral program focused on original research in Buddhist philosophy, ethics, languages, history, or applied Buddhist studies.",
-      image:
-        "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-yellow-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "International Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "mphil-buddhist-studies",
+        title: "M.Phil. in Buddhist Studies and Civilization",
+        level: "Doctoral",
+        duration: "1.5-2 Years",
+        intake: "10 Students",
+        description: "Advanced pre-doctoral research program focusing on research methodologies, textual criticism, and specialized Buddhist studies.",
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-yellow-500 to-amber-600",
+        highlights: [
+            "Advanced Research Methodology",
+            "Manuscriptology",
+            "Comparative Buddhist Philosophy",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/sobs/PBS.pdf",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "/schools/sobs/PBS.pdf"
+            }
+        ]
     },
-  ],
+    {
+        id: "phd-buddhist-studies",
+        title: "Ph.D. in Buddhist Studies and Civilization",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original scientific discovery in Buddhist philosophy, archaeology, and historical interactions.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-yellow-700",
+        highlights: [
+            "Original Research",
+            "Doctoral Coursework",
+            "Seminars & Peer Reviews",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/sobs/PBS.pdf",
+        syllabus: [
+            {
+                session: "Course Work & Syllabus",
+                url: "/schools/sobs/PBS.pdf"
+            }
+        ]
+    },
+    {
+        id: "pali-language-literature",
+        title: "Pali Language and Literature (PG Diploma & Certificate)",
+        level: "Diploma",
+        duration: "6 Months - 1 Year",
+        intake: "30 Students",
+        description: "Intensive training in Pali grammar, canonical script translation, canonical poetry, and historical linguistics.",
+        image: "https://images.unsplash.com/photo-1474418397713-6b7f0c1f1d3b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-red-600",
+        highlights: [
+            "Pali Grammar & Composition",
+            "Canonical Translation",
+            "Textual Analysis",
+            "Certificate / PG Diploma"
+        ],
+        syllabusUrl: "/schools/sobs/BodhiMeditationCourse.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sobs/BodhiMeditationCourse.pdf"
+            }
+        ]
+    },
+    {
+        id: "buddhist-tourism-heritage",
+        title: "Post Graduate Diploma in Buddhist Tourism and Heritage",
+        level: "Diploma",
+        duration: "1 Year",
+        intake: "25 Students",
+        description: "Specialized vocational program designed for heritage conservation, Buddhist circuit management, tour interpretation, and site archaeology.",
+        image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-yellow-600 to-amber-700",
+        highlights: [
+            "Buddhist Circuit Heritage",
+            "Archaeological Sites",
+            "Tour Guiding & Management",
+            "Field Project"
+        ],
+        syllabusUrl: "/schools/sobs/BodhiMeditationCourse.pdf",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "/schools/sobs/BodhiMeditationCourse.pdf"
+            }
+        ]
+    },
+    {
+        id: "human-values-buddhist-ethics",
+        title: "Human Values and Buddhist Ethics",
+        level: "Open Elective",
+        duration: "1 Semester",
+        intake: "All University Students",
+        description: "University-wide foundational course covering the Four Noble Truths, Eightfold Path, Panchasila, socially engaged Buddhism, and mindfulness.",
+        image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-500",
+        highlights: [
+            "Four Noble Truths & Eightfold Path",
+            "Panchasila & Ethics",
+            "Socially Engaged Buddhism",
+            "Mindfulness Practice"
+        ],
+        syllabusUrl: "/schools/sobs/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/sobs/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Chintala Venkata Sivasai",

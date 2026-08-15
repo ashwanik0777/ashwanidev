@@ -94,48 +94,148 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-        id: "btech-me",
-        title: "B.Tech Mechanical Engineering",
+        id: "btech-mechanical-engg",
+        title: "B.Tech (Mechanical Engineering)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Thermodynamics, fluid mechanics, CAD/CAM manufacturing, machine design, and automotive engineering.",
+        description: "Comprehensive study of thermodynamics, solid mechanics, fluid machinery, manufacturing processes, and machine design.",
         image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-blue-500 to-blue-600",
+        gradient: "from-amber-500 to-orange-600",
         highlights: [
-            "CAD/CAM & CNC Manufacturing",
-            "Thermal & Fluid Engineering",
-            "Finite Element Machine Design",
-            "Robotics & Automation"
+            "Thermodynamics & Heat Transfer",
+            "Machine Design & CAD",
+            "Manufacturing Technologies",
+            "Fluid Mechanics"
         ],
-        syllabusUrl: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf",
+        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
-                url: "/schools/mechanical/B._Tech_MechEngg_CStr_April2023.pdf"
+                session: "Course Structure",
+                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
             }
         ]
     },
     {
-        id: "mtech-me-thermal",
-        title: "M.Tech Mechanical (Design & Thermal)",
+        id: "btech-me-automobile-minor",
+        title: "B.Tech Mechanical Engineering with minor (Automobile and Industrial Engineering)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "30 Students",
+        description: "Specialized mechanical track in automotive chassis engineering, IC engines, vehicle aerodynamics, and operations research.",
+        image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-red-500 to-orange-600",
+        highlights: [
+            "Automotive Chassis & Engines",
+            "Industrial Operations Research",
+            "Vehicle Dynamics",
+            "Quality Control"
+        ],
+        syllabusUrl: "/schools/mechanical/BTech_ME__AutomobileIndustrialEnggCStr_Fac.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/mechanical/BTech_ME__AutomobileIndustrialEnggCStr_Fac.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-me-mechatronics-minor",
+        title: "B.Tech Mechanical Engineering with minor (Mechatronics and Automation)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "30 Students",
+        description: "Interdisciplinary minor merging microcontrollers, pneumatic/hydraulic actuators, PLC systems, and robotic cells.",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "PLC & Pneumatics",
+            "Sensors & Actuators",
+            "Robotic Cells",
+            "Embedded Mechatronics"
+        ],
+        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-me-streams",
+        title: "M.Tech. (Manufacturing Engg, Design Engg., Thermal Engg.)",
         level: "PG",
         duration: "2 Years",
-        intake: "20 Students",
-        description: "Advanced computational fluid dynamics (CFD), heat transfer modeling, advanced materials, and mechanical vibrations.",
-        image: "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-indigo-500 to-indigo-600",
+        intake: "30 Students",
+        description: "Advanced postgraduate modules in FEA analysis, computational fluid dynamics (CFD), additive manufacturing, and thermal design.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-red-700",
         highlights: [
+            "Finite Element Analysis (FEA)",
             "Computational Fluid Dynamics",
-            "Advanced Heat Exchangers",
-            "Vibration Analysis",
-            "Design Optimization"
+            "Additive Manufacturing",
+            "Thesis"
         ],
         syllabusUrl: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
                 url: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/mechanical/M._Tech_Design_Manufng__ThermalEngg_CStr_April2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-me-working-prof",
+        title: "M.Tech in Mechanical Engineering (Weekend Program for Working Professionals)",
+        level: "PG (Working Exec)",
+        duration: "3 Years",
+        intake: "30 Students",
+        description: "Flexible weekend postgraduate degree providing industrial engineers with advanced design and manufacturing tools.",
+        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-600 to-slate-800",
+        highlights: [
+            "Weekend Timetable",
+            "Applied Industrial Projects",
+            "CAD/CAM & FEA",
+            "Executive Degree"
+        ],
+        syllabusUrl: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/mechanical/B._Tech_MechanicalEngg_Syllabus_April2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-mechanical-engg",
+        title: "Ph.D. (Mechanical Engg.)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original contributions in thermal sciences, nanomaterials, renewable energy, and CAD/CAM.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-amber-700",
+        highlights: [
+            "Doctoral Coursework",
+            "Thermal & Materials Research",
+            "Indexed Journal Publications",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "/schools/mechanical/PhD_ME_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/mechanical/PhD_ME_May2023.pdf"
             }
         ]
     }

@@ -94,71 +94,278 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-        id: "btech-ee",
-        title: "B.Tech Electrical Engineering",
+        id: "int-btech-mtech-ee",
+        title: "Integrated B.Tech. + M.Tech./MBA (Electrical Engineering)",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Integrated dual-degree covering power systems, advanced control, electrical drives, and managerial principles.",
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Power Grid Design",
+            "Electrical Drives & SCADA",
+            "Industrial Management",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-electrical-engg",
+        title: "B.Tech (Electrical Engineering)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Power generation, smart grid distribution, control systems, and renewable energy integration.",
+        description: "Core curriculum in power systems, electrical machines, power electronics, transmission networks, and microcontrollers.",
         image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-500 to-amber-600",
+        gradient: "from-blue-500 to-cyan-600",
         highlights: [
-            "Power Systems & High Voltage",
-            "Electric Drives & Machines",
-            "Smart Grids & Renewables",
-            "Control Automation"
+            "Electrical Machines",
+            "Power Electronics",
+            "Smart Grid Technologies",
+            "Control Systems"
         ],
         syllabusUrl: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
                 url: "/schools/electrical/BTech_4Year_ElectricalEngg_May2023.pdf"
             }
         ]
     },
     {
-        id: "btech-ee-comp",
-        title: "B.Tech Electrical & Computer Engineering",
+        id: "btech-ee-comp-engg",
+        title: "B.Tech. (Electrical and Computer Engineering)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Interdisciplinary blend of electrical hardware systems with computer architecture, networking, and robotics.",
+        description: "Interdisciplinary study combining electrical hardware, embedded architectures, computer networks, and software engineering.",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-indigo-500 to-indigo-600",
+        gradient: "from-indigo-500 to-blue-600",
         highlights: [
+            "Embedded Systems",
             "Computer Architecture",
-            "Embedded Control Systems",
-            "Robotics & Cybernetics",
-            "Power Electronic Hardware"
+            "Digital Electronics",
+            "Network Protocols"
         ],
         syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
                 url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
             }
         ]
     },
     {
-        id: "int-btech-mtech-ee",
-        title: "Integrated B.Tech-M.Tech / MBA (Electrical)",
-        level: "Dual Degree",
-        duration: "5 Years",
-        intake: "30 Students",
-        description: "Comprehensive 5-year integrated program leading to dual engineering or technical management qualification.",
-        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-purple-500 to-purple-600",
+        id: "btech-ee-specializations",
+        title: "B.Tech Electrical Engineering (Specializations in EV, AI/ML, Automation)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Specialized tracks in Industrial Automation, Electric Vehicles (EV), AI & Machine Learning, and Biomedical Engineering.",
+        image: "https://images.unsplash.com/photo-1558441719-8b489c652756?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-cyan-500 to-teal-600",
         highlights: [
-            "Advanced Power Electronics",
-            "Energy Storage Systems",
-            "Techno-Commercial Management",
-            "Industry Master Thesis"
+            "Electric Vehicle Powertrains",
+            "Industrial PLC & SCADA",
+            "AI & ML for Grids",
+            "Biomedical Instrumentation"
+        ],
+        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-robotics-ai",
+        title: "B.Tech. in Robotics and Artificial Intelligence",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Cutting-edge curriculum covering autonomous robotics, computer vision, kinematics, reinforcement learning, and ROS.",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-500 to-indigo-600",
+        highlights: [
+            "Robot Kinematics & ROS",
+            "Computer Vision",
+            "Autonomous Navigation",
+            "Sensors & Actuators"
+        ],
+        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "btech-eee",
+        title: "B.Tech. (Electrical and Electronics Engineering)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Dual focus on heavy electrical transmission systems alongside microelectronics, signal processing, and VLSI.",
+        image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-teal-600",
+        highlights: [
+            "Analog & Digital VLSI",
+            "Power Transmission",
+            "Signal Processing",
+            "Solid State Devices"
+        ],
+        syllabusUrl: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/4yrBTech_Electrical_CompEngg_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ee-inst-ctrl",
+        title: "M.Tech. (Instrumentation and Control)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced industrial instrumentation, adaptive control theory, transducer design, and automated sensor networks.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-cyan-700",
+        highlights: [
+            "Industrial Transducers",
+            "Optimal Control Theory",
+            "DCS & PLC Automation",
+            "Thesis"
         ],
         syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
                 url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ee-ctrl-robotics",
+        title: "M.Tech. (Control and Robotics)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced robotic manipulator design, non-linear control systems, SLAM algorithms, and robotic vision.",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "Non-Linear Control",
+            "Robot Dynamics",
+            "Autonomous SLAM",
+            "Master Research"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ee-specializations",
+        title: "M.Tech in Electrical Engineering (RES, PS, I&C, PED, C&R, ISP)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Specialized postgraduate streams in Renewable Energy, Power Systems, Power Electronics & Drives, and Signal Processing.",
+        image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Renewable Energy Systems",
+            "Power Electronic Converters",
+            "Grid Stability Analysis",
+            "DSP Processors"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ee-power-energy",
+        title: "M.Tech. (Power System and Energy Management)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Focuses on modern energy auditing, deregulation, renewable integration, HVDC transmission, and smart grid security.",
+        image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Energy Auditing & Management",
+            "HVDC Transmission",
+            "Smart Grid Architecture",
+            "Microgrids"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ee-working-prof",
+        title: "M.Tech Electrical Engineering (Weekend Program for Working Professionals)",
+        level: "PG (Working Exec)",
+        duration: "3 Years",
+        intake: "30 Students",
+        description: "Weekend executive postgraduate program designed for industry engineers covering Power Systems, Drives, and Automation.",
+        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-600 to-slate-800",
+        highlights: [
+            "Weekend Delivery Model",
+            "Industry Project Track",
+            "Power Drives & Control",
+            "Executive Certification"
+        ],
+        syllabusUrl: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/IntegratedBTech_MTech_MBA_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-electrical-engg",
+        title: "Ph.D. (Electrical and Electronics Engg.)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original innovations in renewable grids, high-voltage engineering, and smart sensors.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-teal-700",
+        highlights: [
+            "Independent Research",
+            "Journal Publications",
+            "High-Voltage Labs",
+            "Doctoral Defense"
+        ],
+        syllabusUrl: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/electrical/PhD_ElectricalElectronicsEngg_May2023.pdf"
             }
         ]
     }

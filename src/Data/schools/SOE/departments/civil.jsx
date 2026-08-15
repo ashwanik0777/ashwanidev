@@ -94,71 +94,202 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-        id: "btech-civil",
-        title: "B.Tech Civil Engineering",
+        id: "btech-civil-engg",
+        title: "B.Tech (Civil Engineering)",
         level: "UG",
         duration: "4 Years",
         intake: "60 Students",
-        description: "Structural design, concrete technology, geomatics, hydrology, and transportation systems.",
+        description: "Core curriculum in structural mechanics, survey engineering, soil mechanics, environmental engineering, and hydraulics.",
         image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-500 to-amber-600",
+        gradient: "from-emerald-500 to-teal-600",
         highlights: [
-            "Structural Analysis",
+            "Structural Mechanics & Design",
             "Geotechnical Engineering",
-            "Transportation Planning",
-            "Environmental Hydrology"
+            "Transportation & Highways",
+            "Surveying & GIS"
         ],
         syllabusUrl: "/schools/civil/Syllabus_CivilEngg_April23.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
+                url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
+            },
+            {
+                session: "Syllabus",
                 url: "/schools/civil/Syllabus_CivilEngg_April23.pdf"
             }
         ]
     },
     {
-        id: "mtech-civil-struct",
-        title: "M.Tech Structural Engineering",
+        id: "mtech-civil-general",
+        title: "M.Tech. (Civil Engineering)",
         level: "PG",
         duration: "2 Years",
-        intake: "20 Students",
-        description: "Advanced structural mechanics, earthquake-resistant design, bridge engineering, and finite element modeling.",
-        image: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-blue-500 to-blue-600",
+        intake: "30 Students",
+        description: "Advanced study of advanced structural analysis, environmental hydrology, foundation design, and construction planning.",
+        image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-emerald-700",
         highlights: [
-            "Finite Element Analysis",
-            "Seismic Structural Design",
-            "Tall Buildings & Bridges",
-            "Prestressed Concrete"
+            "Advanced Structural Analysis",
+            "Hydrologic Systems",
+            "Foundation Design",
+            "Master Thesis"
         ],
         syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
+                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+            },
+            {
+                session: "Syllabus",
                 url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
             }
         ]
     },
     {
-        id: "mtech-civil-trans",
-        title: "M.Tech Transportation Engineering",
+        id: "mtech-environmental-engg",
+        title: "M.Tech. (Environmental Engineering)",
         level: "PG",
         duration: "2 Years",
         intake: "20 Students",
-        description: "Traffic flow theory, highway geometric design, pavement material design, and urban transit planning.",
-        image: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-emerald-500 to-emerald-600",
+        description: "Focuses on wastewater treatment plant design, air quality modeling, environmental impact assessment (EIA), and solid waste.",
+        image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-teal-700",
+        highlights: [
+            "Wastewater Plant Engineering",
+            "Air Quality Modeling",
+            "EIA & Environmental Auditing",
+            "Solid Waste Systems"
+        ],
+        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-structural-engg",
+        title: "M.Tech. (Structural Engineering)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "Specialized postgraduate program in earthquake-resistant design, prestressed concrete, steel structures, and FEM modeling.",
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Earthquake Resilient Design",
+            "Prestressed Concrete",
+            "FEM Structural Modeling",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+            },
+            {
+                session: "Syllabus",
+                url: "/schools/civil/M.Tech_StructuralEngg_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-transportation-engg",
+        title: "M.Tech. (Transportation Engineering)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced highway geometric design, traffic flow theory, pavement management systems, and urban transit planning.",
+        image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-800",
         highlights: [
             "Pavement Analysis & Design",
-            "Urban Transportation Planning",
             "Traffic Flow Modeling",
-            "Intelligent Transport Systems"
+            "Intelligent Transportation (ITS)",
+            "Urban Transit"
         ],
         syllabusUrl: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf",
         syllabus: [
             {
-                session: "2023-24",
+                session: "Course Structure",
                 url: "/schools/civil/M.Tech_TransportationEngg_CStr_May2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-construction-mgmt",
+        title: "M.Tech. (Construction Management)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Covers project scheduling (Primavera/MS Project), construction economics, contract administration, and BIM workflows.",
+        image: "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Project Scheduling & BIM",
+            "Construction Finance & Contracts",
+            "Safety Engineering",
+            "Site Management"
+        ],
+        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-geotechnical-engg",
+        title: "M.Tech. (Geotechnical and Geoenvironmental Engineering)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced soil dynamics, slope stability, deep foundations, tunneling mechanics, and containment landfill design.",
+        image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-cyan-700",
+        highlights: [
+            "Deep Foundation Engineering",
+            "Slope Stability & Tunneling",
+            "Soil Dynamics",
+            "Geoenvironmental Barriers"
+        ],
+        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-civil-engg",
+        title: "Ph.D. (Civil Engg.)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original innovations in structural dynamics, water resources, GIS, and smart materials.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-teal-700",
+        highlights: [
+            "Doctoral Coursework",
+            "Heavy Structures Lab",
+            "Journal Publications",
+            "Defense"
+        ],
+        syllabusUrl: "/schools/civil/Admission_Flyer_Civil_June2023.pdf",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "/schools/civil/Admission_Flyer_Civil_June2023.pdf"
             }
         ]
     }

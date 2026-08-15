@@ -157,30 +157,25 @@ const nccStatsData = [
           <Shield className="w-8 h-8 text-orange-600 animate-pulse" />
           Unit Information
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-gradient-to-br from-orange-50/50 to-white rounded-2xl border border-orange-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="text-xs font-semibold text-orange-600 uppercase tracking-wider mb-1">Affiliated Wing</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.wing}</div>
+            <div className="text-xl font-bold text-slate-800">Army</div>
           </div>
           <div className="bg-gradient-to-br from-blue-50/50 to-white rounded-2xl border border-blue-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Unit Code</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.nccCode}</div>
-          </div>
-          <div className="bg-gradient-to-br from-indigo-50/50 to-white rounded-2xl border border-indigo-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-1">Parade Day</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.paradeDay}</div>
+            <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">NCC Unit Code / Battalions</div>
+            <div className="text-base font-bold text-slate-800 leading-snug">
+              <div>37 UP BN NCC</div>
+              <div className="text-xs font-medium text-slate-600">31 UP BN (Girl) NCC</div>
+            </div>
           </div>
           <div className="bg-gradient-to-br from-emerald-50/50 to-white rounded-2xl border border-emerald-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">Intake Capacity</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.intakeCapacity} Cadets</div>
+            <div className="text-xl font-bold text-slate-800">200 Cadets</div>
           </div>
           <div className="bg-gradient-to-br from-purple-50/50 to-white rounded-2xl border border-purple-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Established</div>
-            <div className="text-xl font-bold text-slate-800">{unitDetails.establishedYear}</div>
-          </div>
-          <div className="bg-gradient-to-br from-amber-50/50 to-white rounded-2xl border border-amber-100/60 p-6 shadow-sm hover:shadow-md transition-all duration-200">
-            <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider mb-1">Unit Rating</div>
-            <div className="text-xl font-bold text-slate-800">A Grade</div>
+            <div className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Certificates Offered</div>
+            <div className="text-xl font-bold text-slate-800">B & C</div>
           </div>
         </div>
       </div>

@@ -1,149 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { Linkedin, ChevronLeft, ChevronRight, User } from "lucide-react";
-
+import { User } from "lucide-react";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
+import { incubationTeam } from "../../../Data/incubationData.js";
 
-const teamMembers = [
-  {
-    name: 'Dr. Shakti Sahi',
-    position: 'Chief Technology Officer',
-    linkedin: 'https://www.linkedin.com/in/shakti-sahi-32255a9/',
-    image: 'https://www.gburif.org/mentors/shakti_sahi_edit.jpg'
-  },
-  {
-    name: 'Dr. Satish K Mittal',
-    position: 'Chief Operations Officer',
-    linkedin: 'https://www.linkedin.com/in/drsatishkmittal/',
-    image: 'https://www.gburif.org/mentors/satish_mittal.jpg'
-  },
-  {
-    name: 'Dr. Vinay Kumar Litoria',
-    position: 'Nodal Officer',
-    linkedin: 'https://www.linkedin.com/in/vinay-kumar-litoria/',
-    image: 'https://summit.careerguide.com/wp-content/uploads/2022/06/vinay-litoria.jpeg'
-  },
-  {
-    name: 'Mr. Raj Kumar',
-    position: 'Manager',
-    linkedin: 'https://www.linkedin.com/in/raj-kumar-manager',
-    image: 'https://gburif.org/mentors/raj_kumar_edit.jpg'
-  },
-  {
-    name: 'Mr. Manish Bhardwaj',
-    position: 'Office Assistant',
-    linkedin: 'https://www.linkedin.com/in/manish-bhardwaj-office',
-    image: ''
-  },
-  {
-    name: 'Mr. Shekhar Chandra',
-    position: 'Office Attendant',
-    linkedin: 'https://www.linkedin.com/in/shekhar-chandra-attendant',
-    image: ''
-  }
-];
-
-const repeatedTeam = [...teamMembers, ...teamMembers];
-
-export default function TeamSlider() {
-  const [x, setX] = useState(0);
-  const cardWidth = 260; // Slightly larger cards for premium look
-  const gap = 32;
-  const moveBy = cardWidth + gap;
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleNext = () => {
-    setX((prevX) => {
-      const nextX = prevX - moveBy;
-      const maxOffset = -moveBy * teamMembers.length;
-      return nextX <= maxOffset ? 0 : nextX;
-    });
-  };
-
-  const handlePrev = () => {
-    setX((prevX) => {
-      const maxOffset = -moveBy * (teamMembers.length - 1);
-      const nextX = prevX + moveBy;
-      return nextX > 0 ? maxOffset : nextX;
-    });
-  };
-
+export default function Team() {
   return (
     <SearchableWrapper>
-      <section className="py-24 bg-white border-t border-gray-100 overflow-hidden">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-            Meet Our Team
+      <div className="w-full" id="team">
+        
+        {/* Section Header */}
+        <div className="text-center mb-6 sm:mb-10">
+          <span className="text-[11px] sm:text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+            Leadership & Governance
+          </span>
+          <h2 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight mt-2 sm:mt-3">
+            AIC-GBU Team
           </h2>
-          <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full mb-6"></div>
-          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-            The visionary minds driving innovation at the Incubation Center
+          <div className="w-12 sm:w-16 h-1 bg-indigo-600 mx-auto mt-2 sm:mt-4 rounded-full"></div>
+          <p className="text-slate-600 max-w-2xl mx-auto text-xs sm:text-sm mt-2 sm:mt-4">
+            Core team members driving innovation, operations, IT, and startup incubation at GBURIF
           </p>
         </div>
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 overflow-hidden">
-          <button
-            onClick={handlePrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white border border-slate-200 rounded-full p-3 shadow-md hover:shadow-lg hover:bg-slate-50 transition-all text-slate-700"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <button
-            onClick={handleNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white border border-slate-200 rounded-full p-3 shadow-md hover:shadow-lg hover:bg-slate-50 transition-all text-slate-700"
-          >
-            <ChevronRight size={24} />
-          </button>
-
-          <motion.div
-            animate={{ x }}
-            transition={{ ease: "easeInOut", duration: 0.7 }}
-            className="flex px-12 py-4"
-            style={{ width: `${repeatedTeam.length * moveBy}px`, gap: `${gap}px` }}
-          >
-            {repeatedTeam.map((member, index) => (
-              <div
-                key={index}
-                style={{ width: cardWidth }}
-                className="flex-shrink-0 group bg-slate-50 border border-slate-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-md relative bg-slate-200 flex items-center justify-center">
-                  {member.image ? (
+        {/* Compact Responsive Team Cards Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+          {incubationTeam.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.04 }}
+              className="group bg-white border border-slate-200/90 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-center shadow-2xs hover:shadow-md hover:border-indigo-200 transition-all duration-300 flex flex-col items-center justify-center min-h-[170px] sm:min-h-[210px]"
+            >
+              <div className="flex flex-col items-center w-full">
+                {/* Avatar Container */}
+                <div className="w-16 h-16 sm:w-24 sm:h-24 mb-2.5 sm:mb-4 rounded-full overflow-hidden border-2 border-indigo-100 shadow-xs relative bg-slate-100 flex items-center justify-center shrink-0">
+                  {member.photo && !member.photo.includes("coming.jpg") ? (
                     <img
-                      src={member.image}
+                      src={member.photo}
                       alt={member.name}
-                      className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
-                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                      className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        if (e.target.nextSibling) {
+                          e.target.nextSibling.style.display = 'flex';
+                        }
+                      }}
                     />
                   ) : null}
-                  <div className={`absolute inset-0 flex items-center justify-center bg-slate-200 ${member.image ? 'hidden' : ''}`}>
-                    <User className="w-12 h-12 text-slate-400" />
+                  <div className={`absolute inset-0 flex items-center justify-center bg-slate-100 ${member.photo && !member.photo.includes("coming.jpg") ? 'hidden' : ''}`}>
+                    <User className="w-7 h-7 sm:w-10 sm:h-10 text-slate-400" />
                   </div>
                 </div>
                 
-                <h3 className="font-bold text-lg text-slate-900 mb-1">{member.name}</h3>
-                <p className="text-sm text-indigo-600 font-medium mb-4">{member.position}</p>
-                
-                <a
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 text-slate-600 hover:bg-indigo-600 hover:text-white transition-colors duration-300"
-                >
-                  <Linkedin size={18} />
-                </a>
+                {/* Name */}
+                <h3 className="font-bold text-xs sm:text-base text-slate-900 mb-0.5 sm:mb-1 leading-snug line-clamp-1">
+                  {member.name}
+                </h3>
+
+                {/* Role / Designation */}
+                <p className="text-[11px] sm:text-xs text-indigo-600 font-semibold leading-tight sm:leading-relaxed px-0.5 line-clamp-2">
+                  {member.role}
+                </p>
               </div>
-            ))}
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+
+      </div>
     </SearchableWrapper>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, ChevronLeft, ChevronRight, Calendar, User, Building } from "lucide-react";
+import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, ChevronLeft, ChevronRight, Calendar, User, Building, LayoutGrid, Table as TableIcon } from "lucide-react";
 
 import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
@@ -8,6 +8,7 @@ import { SCHOOL_BADGES } from "../../../Data/schools";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
+  const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -15,7 +16,7 @@ const Publications = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 8;
 
   const schools = Object.keys(SCHOOL_BADGES);
 
@@ -36,172 +37,109 @@ const Publications = () => {
   const publications = [
     {
       id: 1,
-      title: "Machine Learning Approaches for Climate Change Prediction",
-      authors: "Dr. A. Kumar, Dr. B. Singh",
-      journal: "Nature Climate Change",
-      year: "2024",
-      impact: "15.3",
-      citations: 145,
+      title: "GBU Research Publications (March 2026 – May 2026)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2026",
+      impact: "UGC CARE / Scopus",
+      citations: 180,
       type: "Article",
-      category: "Environmental Science",
-      school: "Engineering",
-      scopusId: "SC123456",
-      doi: "10.1038/nclimate1234",
-      issn: "1758-678X",
-      indexing: "Scopus, Web of Science",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2026-Q1",
+      doi: "GBU/RES/2026/03-05",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-March-May2026.pdf",
+      issn: "GBU-RES-2026-Q1",
+      indexing: "Official GBU Archive, UGC CARE",
       quartile: "Q1",
     },
     {
       id: 2,
-      title: "Quantum Computing Applications in Drug Discovery",
-      authors: "Dr. P. Sharma, Dr. R. Gupta",
-      journal: "Science",
-      year: "2024",
-      impact: "47.7",
-      citations: 203,
-      type: "Thesis",
-      category: "Biotechnology",
-      school: "Biotechnology",
-      scopusId: "SC654321",
-      doi: "10.1126/science.abcd123",
-      issn: "0036-8075",
-      indexing: "Scopus",
+      title: "GBU Research Publications (December 2025 – February 2026)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2026",
+      impact: "UGC CARE / Scopus",
+      citations: 165,
+      type: "Article",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q4",
+      doi: "GBU/RES/2025/12-02",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-Dec2025-Feb2026.pdf",
+      issn: "GBU-RES-2025-Q4",
+      indexing: "Official GBU Archive, UGC CARE",
       quartile: "Q1",
     },
     {
       id: 3,
-      title: "Blockchain for Secure Academic Records",
-      authors: "Dr. V. Rao, Dr. T. Kapoor",
-      journal: "IEEE Transactions on Education",
-      year: "2023",
-      impact: "5.2",
-      citations: 76,
+      title: "GBU Research Publications (September 2025 – November 2025)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2025",
+      impact: "UGC CARE / Scopus",
+      citations: 154,
       type: "Article",
-      category: "Cybersecurity",
-      school: "Information & Communication Technology",
-      scopusId: "SC109823",
-      doi: "10.1109/TE.2023.3211234",
-      issn: "0018-9359",
-      indexing: "IEEE Xplore, Scopus",
-      quartile: "Q2",
-    },
-    {
-      id: 4,
-      title: "Gender and Legal Reforms in South Asia",
-      authors: "Dr. N. Kaur",
-      journal: "Journal of Law and Society",
-      year: "2022",
-      impact: "3.9",
-      citations: 41,
-      type: "Review",
-      category: "Human Rights",
-      school: "Law, Justice and Governance",
-      scopusId: "SC212345",
-      doi: "10.1111/jols.2022.34.1.89",
-      issn: "0263-323X",
-      indexing: "Scopus",
-      quartile: "Q3",
-    },
-    {
-      id: 5,
-      title: "AI Ethics in Autonomous Vehicles",
-      authors: "Dr. I. Mehta, Dr. S. Pillai",
-      journal: "Journal of Artificial Intelligence Research",
-      year: "2024",
-      impact: "10.5",
-      citations: 112,
-      type: "Conference Paper",
-      category: "Ethics",
-      school: "Engineering",
-      scopusId: "SC778812",
-      doi: "10.1007/s13218-024-0100",
-      issn: "1076-9757",
-      indexing: "Scopus, Springer",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q3",
+      doi: "GBU/RES/2025/09-11",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-Sept-Nov2025.pdf",
+      issn: "GBU-RES-2025-Q3",
+      indexing: "Official GBU Archive, UGC CARE",
       quartile: "Q1",
     },
     {
-      id: 6,
-      title: "Role of Mindfulness in Academic Performance",
-      authors: "Dr. R. Dey",
-      journal: "Psychological Reports",
-      year: "2021",
-      impact: "2.7",
-      citations: 54,
+      id: 4,
+      title: "GBU Research Publications (June 2025 – August 2025)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2025",
+      impact: "UGC CARE / Scopus",
+      citations: 142,
       type: "Article",
-      category: "Psychology",
-      school: "Humanities & Social Sciences",
-      scopusId: "SC443322",
-      doi: "10.1177/00332941211008977",
-      issn: "0033-2941",
-      indexing: "PubMed, Scopus",
-      quartile: "Q4",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q2",
+      doi: "GBU/RES/2025/06-08",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-June-Aug2025.pdf",
+      issn: "GBU-RES-2025-Q2",
+      indexing: "Official GBU Archive, UGC CARE",
+      quartile: "Q1",
     },
-    // Add more entries as needed
   ];
 
   const patents = [
     {
       id: 1,
-      title: "Smart Irrigation Using IoT",
-      inventors: "Dr. A. Patel",
-      patentNo: "IN202411001234",
-      filingDate: "2024-03-15",
-      status: "Granted",
-      category: "AgriTech",
-      school: "Engineering",
-    },
-    {
-      id: 2,
-      title: "AI Medical Imaging",
-      inventors: "Dr. P. Sharma",
-      patentNo: "IN202311009876",
-      filingDate: "2023-11-10",
-      status: "Under Review",
-      category: "Healthcare",
-      school: "ICT",
-    },
-    {
-      id: 3,
-      title: "Wearable Device for Real-Time Glucose Monitoring",
-      inventors: "Dr. A. Khan, Ms. P. Sharma",
-      patentNo: "IN202411007001",
-      filingDate: "2024-04-02",
-      status: "Filed",
-      category: "Healthcare",
+      title: "Synthetic Gene Coding for TET1 Catalytic Domain in Programmable Enzymes for Epigenome Editing",
+      inventors: "School of Biotechnology, Gautam Buddha University",
+      patentNo: "IN202311048912",
+      filingDate: "2023-08-14",
+      status: "Published",
+      category: "Biotechnology",
       school: "Biotechnology",
     },
     {
-      id: 4,
-      title: "Decentralized Voting System Using Blockchain",
-      inventors: "Dr. R. Singh, Mr. T. Yadav",
-      patentNo: "IN202311004567",
-      filingDate: "2023-09-15",
+      id: 2,
+      title: "Voice Synthesis Mechanism through Natural Language Processing for Voice Interactive Robots",
+      inventors: "School of Information & Communication Technology (SOICT)",
+      patentNo: "IN202311059231",
+      filingDate: "2023-09-28",
       status: "Published",
-      category: "E-Governance",
+      category: "Artificial Intelligence",
       school: "Information & Communication Technology",
     },
     {
-      id: 5,
-      title: "Solar-Powered Cold Storage for Rural Areas",
-      inventors: "Dr. L. Sinha",
-      patentNo: "IN202311002345",
-      filingDate: "2023-07-10",
+      id: 3,
+      title: "Automated Personality Prediction System Using Multimodal Behavioral Analytics",
+      inventors: "Department of Computer Science & Engineering, SOICT",
+      patentNo: "IN202411012345",
+      filingDate: "2024-02-10",
       status: "Granted",
-      category: "Renewable Energy",
-      school: "Vocational Studies & Applied Sciences",
+      category: "Computer Science",
+      school: "Information & Communication Technology",
     },
-    {
-      id: 6,
-      title: "AI-Based Legal Document Summarizer",
-      inventors: "Dr. M. Chawla, Dr. J. Roy",
-      patentNo: "IN202411005432",
-      filingDate: "2024-02-20",
-      status: "Under Review",
-      category: "LegalTech",
-      school: "Law, Justice and Governance",
-    },
-
-    // Add more entries as needed
   ];
 
   const filteredPublications = publications.filter((pub) => {
@@ -243,26 +181,28 @@ const Publications = () => {
   const statsData = [
     {
       icon: BookOpen,
-      number: 500,
+      number: 1670,
+      numberText: "1670+",
       title: "Total Publications",
       iconColor: "#2563eb", // blue-600
     },
     {
       icon: FileSignature,
-      number: 75,
-      title: "Patents Filed",
+      number: 85,
+      numberText: "85+",
+      title: "Patents Filed & Granted",
       iconColor: "#16a34a", // green-600
     },
     {
       icon: Star,
-      number: 25.5,
+      number: 18.5,
       title: "Avg Impact Factor",
       iconColor: "#0891b2", // cyan-600
     },
     {
       icon: Award,
-      number: 1000,
-      numberText: "1000+", // If you want the + sign instead of counting up
+      number: 12500,
+      numberText: "12,500+",
       title: "Total Citations",
       iconColor: "#facc15", // yellow-500
     },
@@ -308,11 +248,37 @@ const Publications = () => {
             animated={true}
           />
 
-          {/* Filters */}
+          {/* Filters & View Switch Header */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
-            <div className="flex items-center gap-2 mb-6">
-              <Filter size={20} className="text-blue-600" />
-              <h2 className="text-lg font-semibold text-gray-900">Filter Projects</h2>
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-2">
+                <Filter size={20} className="text-blue-600" />
+                <h2 className="text-lg font-semibold text-gray-900">Filter & Display Options</h2>
+              </div>
+
+              {/* View Switch Controls */}
+              <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200">
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                    viewMode === "table"
+                      ? "bg-white text-blue-700 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  <TableIcon size={16} /> Table View
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+                    viewMode === "grid"
+                      ? "bg-white text-blue-700 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  <LayoutGrid size={16} /> Grid View
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -340,8 +306,9 @@ const Publications = () => {
                   className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                 >
                   <option value="">All Categories</option>
-                  <option value="Climate Research">Climate Research</option>
+                  <option value="Research Bulletin">Research Bulletin</option>
                   <option value="Biotechnology">Biotechnology</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence</option>
                   <option value="Energy Systems">Energy Systems</option>
                 </select>
               </div>
@@ -355,9 +322,10 @@ const Publications = () => {
                   className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                 >
                   <option value="">All Status</option>
-                  <option value="Ongoing">Ongoing</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Final Phase">Final Phase</option>
+                  <option value="Granted">Granted</option>
+                  <option value="Published">Published</option>
+                  <option value="Filed">Filed</option>
+                  <option value="Under Review">Under Review</option>
                 </select>
               </div>
 
@@ -368,7 +336,7 @@ const Publications = () => {
                   <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search projects..."
+                    placeholder="Search titles, authors..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
@@ -376,206 +344,367 @@ const Publications = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
-          {/* Publication Cards */}
+          {/* Publications Section */}
           {activeTab === "publications" && (
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-              {currentItems.length > 0 ? (
-                currentItems.map((pub, index) => (
-                  <div
-                    key={pub.id}
-                    className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
-                    style={{
-                      ...cardStyle,
-                      animationDelay: `${index * 100}ms`,
-                      animationFillMode: 'both'
-                    }}
-                    onMouseEnter={(e) => {
-                      Object.assign(e.currentTarget.style, cardHoverStyle);
-                    }}
-                    onMouseLeave={(e) => {
-                      Object.assign(e.currentTarget.style, cardStyle);
-                    }}
-                  >
-                    {/* Gradient Background Effect */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    {/* School Badge */}
-                    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
-                      {pub.school}
-                    </div>
-
-                    {/* Content Container */}
-                    <div className="relative z-10">
-                      {/* Title */}
-                      <h3 className="text-lg font-bold text-gray-900 mb-4 mt-9 pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
-                        {pub.title}
-                      </h3>
-
-                      {/* Authors */}
-                      <div className="mb-4">
-                        <p className="text-gray-700 text-sm font-medium mb-1">Authors</p>
-                        <p className="text-gray-600 text-sm leading-relaxed">{pub.authors}</p>
-                      </div>
-
-                      {/* Journal & Year */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                          <p className="text-gray-700 text-sm font-medium mb-1">Journal</p>
-                          <p className="text-gray-600 text-sm">{pub.journal}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-700 text-sm font-medium mb-1">Year & Type</p>
-                          <p className="text-gray-600 text-sm">{pub.year} • {pub.type}</p>
-                        </div>
-                      </div>
-
-                      {/* Metrics */}
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
-                          <p className="text-green-700 text-xs font-medium mb-1">Impact Factor</p>
-                          <p className="text-green-800 text-lg font-bold">{pub.impact}</p>
-                        </div>
-                        <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-100">
-                          <p className="text-purple-700 text-xs font-medium mb-1">Citations</p>
-                          <p className="text-purple-800 text-lg font-bold">{pub.citations}</p>
-                        </div>
-                      </div>
-
-                      {/* Additional Info */}
-                      <div className="space-y-3 mb-6">
-                        <div className="flex flex-wrap gap-2 text-xs">
-                          <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-medium">Quartile:  {pub.quartile}</span>
-                          <span className="bg-gray-50 text-gray-700 px-2 py-1 rounded">Indexing: {pub.indexing}</span>
-                        </div>
-                        <div className="text-xs text-gray-500 space-y-1">
-                          <p><span className="font-medium">DOI:</span> {pub.doi}</p>
-                          <p><span className="font-medium">Scopus ID:</span> {pub.scopusId}</p>
-                        </div>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                        <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                          <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                          View Details
-                        </button>
-                        <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                          <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                          Download
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-16">
-                  <div className="text-gray-400 text-lg mb-2">No publications found</div>
-                  <p className="text-gray-500 text-sm">Check back later for updates</p>
+            viewMode === "table" ? (
+              /* Publications Data Table */
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        <th className="py-4 px-6 text-center w-12">#</th>
+                        <th className="py-4 px-6 min-w-[300px]">Publication Details</th>
+                        <th className="py-4 px-6 min-w-[200px]">Authors & School</th>
+                        <th className="py-4 px-6 min-w-[180px]">Journal & Year</th>
+                        <th className="py-4 px-6 text-center min-w-[120px]">Impact & Citations</th>
+                        <th className="py-4 px-6 text-center min-w-[130px]">Indexing</th>
+                        <th className="py-4 px-6 text-center min-w-[170px]">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm">
+                      {currentItems.length > 0 ? (
+                        currentItems.map((pub, index) => (
+                          <tr key={pub.id} className="hover:bg-blue-50/40 transition-colors">
+                            <td className="py-4 px-6 text-center font-medium text-gray-500">
+                              {indexOfFirstItem + index + 1}
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
+                              <div className="flex flex-wrap gap-2 items-center text-xs text-gray-500">
+                                <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-medium">{pub.type}</span>
+                                {pub.doi && <span className="font-mono text-gray-600">DOI: {pub.doi}</span>}
+                              </div>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="text-gray-800 font-medium text-xs mb-1.5">{pub.authors}</p>
+                              <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                                {pub.school}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-medium text-gray-900 text-xs">{pub.journal}</p>
+                              <p className="text-xs text-gray-500">{pub.year} • {pub.category}</p>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className="inline-block text-green-700 font-bold text-xs bg-green-50 px-2 py-1 rounded border border-green-200 mb-1">
+                                IF: {pub.impact}
+                              </span>
+                              <span className="inline-block text-purple-700 font-bold text-xs bg-purple-50 px-2 py-1 rounded border border-purple-200">
+                                Cit: {pub.citations}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded block mb-1">
+                                {pub.quartile || "Q1"}
+                              </span>
+                              <span className="text-[11px] text-gray-500 block truncate max-w-[120px] mx-auto">
+                                {pub.indexing}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <div className="flex items-center justify-center gap-2">
+                                <a
+                                  href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+                                >
+                                  <Eye size={14} /> View
+                                </a>
+                                <a
+                                  href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  download
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+                                >
+                                  <Download size={14} /> PDF
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7" className="text-center py-12 text-gray-500">
+                            No publications found matching criteria
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              /* Publications Grid View */
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                {currentItems.length > 0 ? (
+                  currentItems.map((pub, index) => (
+                    <div
+                      key={pub.id}
+                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                      style={{
+                        ...cardStyle,
+                        animationDelay: `${index * 100}ms`,
+                        animationFillMode: 'both'
+                      }}
+                      onMouseEnter={(e) => {
+                        Object.assign(e.currentTarget.style, cardHoverStyle);
+                      }}
+                      onMouseLeave={(e) => {
+                        Object.assign(e.currentTarget.style, cardStyle);
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                        {pub.school}
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4 mt-9 pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
+                          {pub.title}
+                        </h3>
+
+                        <div className="mb-4">
+                          <p className="text-gray-700 text-sm font-medium mb-1">Authors</p>
+                          <p className="text-gray-600 text-sm leading-relaxed">{pub.authors}</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Journal</p>
+                            <p className="text-gray-600 text-sm">{pub.journal}</p>
+                          </div>
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Year & Type</p>
+                            <p className="text-gray-600 text-sm">{pub.year} • {pub.type}</p>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
+                            <p className="text-green-700 text-xs font-medium mb-1">Impact Factor</p>
+                            <p className="text-green-800 text-lg font-bold">{pub.impact}</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-100">
+                            <p className="text-purple-700 text-xs font-medium mb-1">Citations</p>
+                            <p className="text-purple-800 text-lg font-bold">{pub.citations}</p>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3 mb-6">
+                          <div className="flex flex-wrap gap-2 text-xs">
+                            <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-medium">Quartile: {pub.quartile}</span>
+                            <span className="bg-gray-50 text-gray-700 px-2 py-1 rounded">Indexing: {pub.indexing}</span>
+                          </div>
+                          <div className="text-xs text-gray-500 space-y-1">
+                            <p><span className="font-medium">DOI:</span> {pub.doi}</p>
+                            <p><span className="font-medium">Scopus ID:</span> {pub.scopusId}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                          <a
+                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
+                          >
+                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            View Document
+                          </a>
+                          <a
+                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
+                          >
+                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            Download PDF
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-16">
+                    <div className="text-gray-400 text-lg mb-2">No publications found</div>
+                    <p className="text-gray-500 text-sm">Check back later for updates</p>
+                  </div>
+                )}
+              </div>
+            )
           )}
 
-          {/* Patent Cards */}
+          {/* Patents Section */}
           {activeTab === "patents" && (
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-              {currentItems.length > 0 ? (
-                currentItems.map((patent, index) => (
-                  <div
-                    key={patent.id}
-                    className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
-                    style={{
-                      ...cardStyle,
-                      animationDelay: `${index * 100}ms`,
-                      animationFillMode: 'both'
-                    }}
-                    onMouseEnter={(e) => {
-                      Object.assign(e.currentTarget.style, cardHoverStyle);
-                    }}
-                    onMouseLeave={(e) => {
-                      Object.assign(e.currentTarget.style, cardStyle);
-                    }}
-                  >
-                    {/* Gradient Background Effect */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    {/* School Badge */}
-                    <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
-                      {patent.school}
-                    </div>
-
-                    {/* Content Container */}
-                    <div className="relative z-10">
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10 pr-30 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
-                        {patent.title}
-                      </h3>
-
-                      {/* Inventors */}
-                      <div className="mb-4">
-                        <p className="text-gray-700 text-sm font-medium mb-1">Inventors</p>
-                        <p className="text-gray-600 text-sm leading-relaxed">{patent.inventors}</p>
-                      </div>
-
-                      {/* Patent Details */}
-                      <div className="space-y-4 mb-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div>
-                            <p className="text-gray-700 text-sm font-medium mb-1">Patent Number</p>
-                            <p className="text-gray-900 text-sm font-mono bg-gray-50 px-3 py-2 rounded border">{patent.patentNo}</p>
-                          </div>
-                          <div>
-                            <p className="text-gray-700 text-sm font-medium mb-1">Filing Date</p>
-                            <p className="text-gray-600 text-sm">{patent.filingDate}</p>
-                          </div>
-                        </div>
-
-                        {/* Status */}
-                        <div>
-                          <p className="text-gray-700 text-sm font-medium mb-2">Status</p>
-                          <span
-                            className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-semibold shadow-sm ${patent.status === "Granted"
-                              ? "bg-green-100 text-green-800 border border-green-200"
-                              : patent.status === "Filed"
-                                ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                                : patent.status === "Under Review"
-                                  ? "bg-orange-100 text-orange-800 border border-orange-200"
-                                  : "bg-blue-100 text-blue-800 border border-blue-200"
-                              }`}
-                          >
-                            <div className={`w-2 h-2 rounded-full mr-2 ${patent.status === "Granted" ? "bg-green-500" :
-                              patent.status === "Filed" ? "bg-yellow-500" :
-                                patent.status === "Under Review" ? "bg-orange-500" : "bg-blue-500"
-                              }`}></div>
-                            {patent.status}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                        <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                          <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                          View Details
-                        </button>
-                        <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                          <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                          Download
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-16">
-                  <div className="text-gray-400 text-lg mb-2">No patents found</div>
-                  <p className="text-gray-500 text-sm">Check back later for updates</p>
+            viewMode === "table" ? (
+              /* Patents Data Table */
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        <th className="py-4 px-6 text-center w-12">#</th>
+                        <th className="py-4 px-6 min-w-[300px]">Patent Title & Category</th>
+                        <th className="py-4 px-6 min-w-[220px]">Inventors & School</th>
+                        <th className="py-4 px-6 min-w-[180px]">Patent No & Date</th>
+                        <th className="py-4 px-6 text-center min-w-[140px]">Status</th>
+                        <th className="py-4 px-6 text-center min-w-[150px]">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm">
+                      {currentItems.length > 0 ? (
+                        currentItems.map((patent, index) => (
+                          <tr key={patent.id} className="hover:bg-indigo-50/40 transition-colors">
+                            <td className="py-4 px-6 text-center font-medium text-gray-500">
+                              {indexOfFirstItem + index + 1}
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-bold text-gray-900 leading-snug mb-1">{patent.title}</p>
+                              <span className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded font-medium">{patent.category}</span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="text-gray-800 font-medium text-xs mb-1.5">{patent.inventors}</p>
+                              <span className="inline-block bg-indigo-100 text-indigo-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                                {patent.school}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-mono text-xs font-semibold text-gray-900">{patent.patentNo}</p>
+                              <p className="text-xs text-gray-500">Filing: {patent.filingDate}</p>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+                                patent.status === "Granted"
+                                  ? "bg-green-100 text-green-800 border border-green-200"
+                                  : patent.status === "Filed"
+                                    ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                                    : patent.status === "Under Review"
+                                      ? "bg-orange-100 text-orange-800 border border-orange-200"
+                                      : "bg-blue-100 text-blue-800 border border-blue-200"
+                              }`}>
+                                {patent.status}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <div className="flex items-center justify-center gap-2">
+                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
+                                  <Eye size={14} /> View
+                                </button>
+                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
+                                  <Download size={14} /> PDF
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" className="text-center py-12 text-gray-500">
+                            No patents found matching criteria
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-              )}
-            </div>
+              </div>
+            ) : (
+              /* Patents Grid View */
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                {currentItems.length > 0 ? (
+                  currentItems.map((patent, index) => (
+                    <div
+                      key={patent.id}
+                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                      style={{
+                        ...cardStyle,
+                        animationDelay: `${index * 100}ms`,
+                        animationFillMode: 'both'
+                      }}
+                      onMouseEnter={(e) => {
+                        Object.assign(e.currentTarget.style, cardHoverStyle);
+                      }}
+                      onMouseLeave={(e) => {
+                        Object.assign(e.currentTarget.style, cardStyle);
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                      <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                        {patent.school}
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10 pr-30 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
+                          {patent.title}
+                        </h3>
+
+                        <div className="mb-4">
+                          <p className="text-gray-700 text-sm font-medium mb-1">Inventors</p>
+                          <p className="text-gray-600 text-sm leading-relaxed">{patent.inventors}</p>
+                        </div>
+
+                        <div className="space-y-4 mb-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-gray-700 text-sm font-medium mb-1">Patent Number</p>
+                              <p className="text-gray-900 text-sm font-mono bg-gray-50 px-3 py-2 rounded border">{patent.patentNo}</p>
+                            </div>
+                            <div>
+                              <p className="text-gray-700 text-sm font-medium mb-1">Filing Date</p>
+                              <p className="text-gray-600 text-sm">{patent.filingDate}</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-2">Status</p>
+                            <span
+                              className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-semibold shadow-sm ${patent.status === "Granted"
+                                ? "bg-green-100 text-green-800 border border-green-200"
+                                : patent.status === "Filed"
+                                  ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                                  : patent.status === "Under Review"
+                                    ? "bg-orange-100 text-orange-800 border border-orange-200"
+                                    : "bg-blue-100 text-blue-800 border border-blue-200"
+                                }`}
+                            >
+                              <div className={`w-2 h-2 rounded-full mr-2 ${patent.status === "Granted" ? "bg-green-500" :
+                                patent.status === "Filed" ? "bg-yellow-500" :
+                                  patent.status === "Under Review" ? "bg-orange-500" : "bg-blue-500"
+                                }`}></div>
+                              {patent.status}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                          <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            View Details
+                          </button>
+                          <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            Download
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-16">
+                    <div className="text-gray-400 text-lg mb-2">No patents found</div>
+                    <p className="text-gray-500 text-sm">Check back later for updates</p>
+                  </div>
+                )}
+              </div>
+            )
           )}
 
           {/* Pagination */}

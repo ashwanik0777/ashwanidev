@@ -12,7 +12,6 @@ const Index = () => {
       <>
         <BannerSection
           title="Research & Innovation at GBU"
-          subtitle="Driving groundbreaking research and fostering innovation across multiple disciplines. Explore our research excellence, cutting-edge laboratories, and startup ecosystem."
           bgTheme={4} // Pick a theme index from 1-10
         />
 

@@ -52,7 +52,7 @@ const NAVIGATION_CONFIG = [
     items: [
       { slug: "research-centers", label: "Center of Excellence and Labs" },
       { slug: "publications-patents", label: "Publications, Patents and Projects" },
-      { slug: "incubation", label: "GBU Incubation Cell" },
+      { slug: "incubation", label: "GBU Incubation Centre" },
       { slug: "institution-innovation", label: "Institution and Innovation" },
       { slug: "ipr-cell", label: "IPR Cell" },
     ],
@@ -112,35 +112,29 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     setResults([]);
     setSelectedIndex(-1);
     
-    // Close mobile menu when search is opened
     if (isMobile && onClose) {
       onClose();
     }
   };
 
-  // Enhanced search function that includes in-page content
   const searchInPageContent = (searchQuery) => {
     const lowerQuery = searchQuery.toLowerCase();
     const contentMatches = [];
     
-    // Find all elements with data-search attribute
     const searchableElements = document.querySelectorAll('[data-search="true"]');
     
     searchableElements.forEach((element, index) => {
       const textContent = element.textContent || element.innerText;
       
       if (textContent && textContent.toLowerCase().includes(lowerQuery)) {
-        // Get a meaningful excerpt around the match
         const excerpt = getExcerptAroundMatch(textContent, lowerQuery);
         
-        // Generate a unique ID for the element if it doesn't have one
         let elementId = element.id;
         if (!elementId) {
           elementId = `search-result-${index}`;
           element.id = elementId;
         }
         
-        // Get the heading or context for this content
         const heading = findNearestHeading(element);
         
         contentMatches.push({
@@ -158,7 +152,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     return contentMatches;
   };
 
-  // Helper function to get text excerpt around the match
   const getExcerptAroundMatch = (text, query) => {
     const index = text.toLowerCase().indexOf(query.toLowerCase());
     const start = Math.max(0, index - 30);
@@ -171,7 +164,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     return excerpt;
   };
 
-  // Helper function to find the nearest heading element
   const findNearestHeading = (element) => {
     const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
     let current = element;
@@ -202,12 +194,10 @@ const Searchbar = ({ isMobile = false, onClose }) => {
 
     setIsLoading(true);
 
-    // Simulate search delay for better UX
     setTimeout(() => {
       const lowerQuery = value.toLowerCase();
       const matches = [];
 
-      // Search navigation routes
       NAVIGATION_CONFIG.forEach((menu) => {
         const base = menu.baseRoute || menu.directPath || "#";
 
@@ -236,13 +226,8 @@ const Searchbar = ({ isMobile = false, onClose }) => {
         }
       });
 
-      // Search in-page content
       const contentMatches = searchInPageContent(value);
-      
-      // Combine results, prioritizing navigation matches
       const combinedResults = [...matches, ...contentMatches];
-      
-      // Limit results to prevent overwhelming the UI
       const limitedResults = combinedResults.slice(0, 15);
       
       setResults(limitedResults);
@@ -280,7 +265,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
 
   const handleResultClick = (item) => {
     if (item.type === "content") {
-      // Scroll to the content element
       const element = document.getElementById(item.elementId);
       if (element) {
         element.scrollIntoView({ 
@@ -288,14 +272,12 @@ const Searchbar = ({ isMobile = false, onClose }) => {
           block: 'center' 
         });
         
-        // Add highlight effect
         element.classList.add('search-highlight');
         setTimeout(() => {
           element.classList.remove('search-highlight');
         }, 3000);
       }
     } else if (item.type === "nav") {
-      console.log(`Navigating to: ${item.path}`);
       if (item.path.startsWith("http")) {
         window.open(item.path, "_blank", "noopener,noreferrer");
       } else {
@@ -309,7 +291,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     setSelectedIndex(-1);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -324,14 +305,12 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Focus input when opened
   useEffect(() => {
     if (open && inputRef.current) {
       inputRef.current.focus();
     }
   }, [open]);
 
-  // Keyboard navigation
   useEffect(() => {
     const handleGlobalKeyDown = (e) => {
       if (e.key === '/' && (e.metaKey || e.ctrlKey)) {
@@ -348,7 +327,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     };
   }, [open, selectedIndex, results]);
 
-  // Add CSS for search highlight effect
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -377,7 +355,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
     return acc;
   }, {});
 
-  // Mobile Search Button (for mobile navbar)
   if (isMobile && !open) {
     return (
       <button
@@ -393,7 +370,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
 
   return (
     <div className={`relative ${isMobile ? 'w-full -top-80' : 'ml-4'}`} ref={containerRef}>
-      {/* Search Toggle Button - Desktop */}
       {!isMobile && (
         <button
           onClick={handleToggle}
@@ -418,10 +394,8 @@ const Searchbar = ({ isMobile = false, onClose }) => {
             )}
           </div>
           
-          {/* Animated ripple effect */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-pulse"></div>
           
-          {/* Floating particles effect */}
           {!open && (
             <div className="absolute inset-0 overflow-hidden rounded-full">
               <div className="absolute w-1 h-1 bg-blue-400 rounded-full animate-ping opacity-30" style={{top: '20%', left: '30%'}}></div>
@@ -431,10 +405,8 @@ const Searchbar = ({ isMobile = false, onClose }) => {
         </button>
       )}
 
-      {/* Search Dropdown */}
       {open && (
         <>
-          {/* Backdrop */}
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={handleToggle}></div>
           
           <div className={`
@@ -448,7 +420,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
               : 'right-0 mt-3 w-[20rem] sm:w-[24rem] md:w-[28rem] lg:w-[32rem] xl:w-[36rem]'
             }
           `}>
-            {/* Header */}
             <div className="flex items-center px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100/50 bg-gradient-to-r from-gray-50/50 to-white/50 rounded-t-3xl">
               <div className="relative flex-1 flex items-center">
                 <div className="relative">
@@ -480,7 +451,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
               </button>
             </div>
 
-            {/* Results */}
             <div className="max-h-72 sm:max-h-80 md:max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {!query && (
                 <div className="px-4 sm:px-6 py-8 sm:py-12 text-center">
@@ -584,7 +554,6 @@ const Searchbar = ({ isMobile = false, onClose }) => {
               ))}
             </div>
 
-            {/* Footer */}
             {results.length > 0 && (
               <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-100/50 bg-gradient-to-r from-gray-50/50 to-white/50 rounded-b-3xl">
                 <div className="flex items-center justify-between">

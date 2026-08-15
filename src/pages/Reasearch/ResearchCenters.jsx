@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { BookOpen, Users, DollarSign, Award } from "lucide-react";
+import { BookOpen, Users, DollarSign, Award, ExternalLink, ArrowRight } from "lucide-react";
 
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
@@ -35,25 +36,28 @@ const ResearchCenters = () => {
   const statsData = [
     {
       icon: BookOpen,
-      number: 20,
-      title: "Research Centers",
+      number: 3,
+      numberText: "3",
+      title: "Centers of Excellence",
       iconColor: "#2563eb", // blue-600
     },
     {
       icon: Users,
-      number: 150,
+      number: 24,
+      numberText: "24+",
       title: "Research Faculty",
       iconColor: "#16a34a", // green-600
     },
     {
       icon: DollarSign,
-      numberText: "₹50Cr+",
-      title: "Research Funding",
+      numberText: "₹8.5Cr+",
+      title: "Research Grants",
       iconColor: "#0891b2", // cyan-600
     },
     {
       icon: Award,
-      number: 300,
+      number: 15,
+      numberText: "15+",
       title: "Active Projects",
       iconColor: "#eab308", // yellow-500
     },
@@ -66,7 +70,6 @@ const ResearchCenters = () => {
         {/* Hero Section */}
         <BannerSection
           title="Center of Excellence & Laboratories"
-          subtitle="World-class research facilities driving innovation across disciplines"
           bgTheme={2}
         />
 
@@ -203,20 +206,24 @@ const ResearchCenters = () => {
                     </div>
                   </div>
 
-                  <div className="mt-auto flex gap-3">
-                    <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded-md w-full hover:bg-blue-700">
-                      Visit Lab
-                    </button>
-                    <button className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-md w-full hover:bg-blue-50">
-                      Contact
-                    </button>
+                  <div className="mt-auto pt-4 border-t border-gray-100">
+                    <a
+                      href={center.portalLink || "https://gburif.org/coe.php"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
+                    >
+                      Visit CoE Portal <ExternalLink size={14} />
+                    </a>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500 col-span-2">
-                No research centers found matching your criteria.
-              </p>
+              <div className="col-span-2 text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-100">
+                <BookOpen className="w-16 h-16 text-blue-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">No Research Centers Found</h3>
+                <p className="text-gray-500 text-sm">Official laboratory and research center profiles will appear here when added.</p>
+              </div>
             )}
           </div>
         </div>

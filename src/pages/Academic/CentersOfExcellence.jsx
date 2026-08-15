@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Shield,
   Brain,
@@ -6,6 +7,7 @@ import {
   Users,
   Award,
   BookOpen,
+  ArrowRight,
 } from 'lucide-react';
 
 import BannerSection from "../../components/HeroBanner.jsx";
@@ -22,77 +24,51 @@ const iconMap = {
   'robotics': Zap,
 };
 
-// Static high-fidelity data representing GBU's actual Centers of Excellence
+// Data for Centers of Excellence sourced from GBURIF (https://gburif.org/coe.php)
 const GBU_COE_HERO = {
   title: "Centers of Excellence (CoE)",
-  description: "Our specialized Centers of Excellence drive advanced research, technology development, and societal impact through interdisciplinary collaboration, industry partnerships, and state-of-the-art facilities.",
+  description: "Specialized state-of-the-art research laboratories established under Gautam Buddha University Research & Innovation Foundation (GBURIF) and AIC-GBU, driving advanced research in Drone Technologies, Renewable Energy, and Artificial Intelligence.",
   bgTheme: 6,
-  coe_count: 6,
-  ResearchAndstudents: 250,
+  coe_count: 3,
+  ResearchAndstudents: 220,
   projects_count: 15,
-  memberrs_count: 30
+  memberrs_count: 24
 };
 
 const GBU_COE_LIST = [
   {
     id: 1,
     title: "drone technology",
-    card_title: "Center of Excellence in Drone Technology (CEDT)",
-    card_desc: "A DGCA-certified training and research facility featuring advanced drone design, assembly, maintenance, and flight testing laboratories. The center specializes in UAV research and professional drone pilot training programs, including customized training for the Indian Armed Forces.",
-    faculty_count: 6,
-    student_count: 45,
-    project_count: 4,
-    director: "Dr. Vimlesh Kumar"
+    card_title: "Center of Excellence in Drone Technologies (CEDT)",
+    card_desc: "A DGCA-certified training and research facility featuring advanced drone design, assembly, maintenance, and flight testing laboratories. The center specializes in UAV research, autonomous flight algorithms, and professional drone pilot training.",
+    faculty_count: 8,
+    student_count: 75,
+    project_count: 6,
+    director: "Dr. Vimlesh Kumar",
+    link: "https://gburif.org/coe.php"
   },
   {
     id: 2,
-    title: "cyber security",
-    card_title: "Center of Excellence in Cyber & Information Security (CoE-CISA)",
-    card_desc: "Inaugurated to bridge the gap between industry requirements and academic research, this center focuses on digital forensics, ethical hacking, secure coding, cryptography, and the design of next-generation security applications.",
-    faculty_count: 5,
-    student_count: 55,
-    project_count: 3,
-    director: "Dr. Sandeep Kumar"
+    title: "renewable energy",
+    card_title: "Center of Excellence in Renewable Energy & Advanced Manufacturing (REAM)",
+    card_desc: "Dedicated to the future of energy and sustainable transportation, focusing on solar-wind microgrids, EV battery management systems, fast-charging technologies, thermal protection materials, and additive manufacturing.",
+    faculty_count: 7,
+    student_count: 60,
+    project_count: 5,
+    director: "Dr. Anurag Singh Bhagat",
+    link: "https://gburif.org/coe.php"
   },
   {
     id: 3,
     title: "artificial intelligence",
-    card_title: "Center of Excellence in Artificial Intelligence (CoE-AI)",
-    card_desc: "Focuses on developing cutting-edge AI, machine learning, and deep learning solutions. The center collaborates with global industry leaders like Microsoft, Samsung, and HCL, fostering interdisciplinary research in computer vision, NLP, and predictive systems.",
-    faculty_count: 6,
-    student_count: 60,
-    project_count: 3,
-    director: "Dr. Vidushi Sharma"
-  },
-  {
-    id: 4,
-    title: "data science",
-    card_title: "Center of Excellence in Data Science (CoE-DS)",
-    card_desc: "Equipped with high-performance computing clusters, this center drives research in big data analytics, business intelligence, data mining, and predictive modeling, helping solve complex data challenges for healthcare, finance, and logistics.",
-    faculty_count: 4,
-    student_count: 40,
-    project_count: 2,
-    director: "Dr. Rajesh Mishra"
-  },
-  {
-    id: 5,
-    title: "robotics",
-    card_title: "Center of Excellence in Robotics & Automation",
-    card_desc: "A hands-on laboratory for design, kinematic analysis, autonomous navigation, and industrial automation. Students build physical robot prototypes, work on sensory integrations, and research humanoid and swarm robotics systems.",
-    faculty_count: 5,
-    student_count: 35,
-    project_count: 2,
-    director: "Prof. Sanjay Kumar Sharma"
-  },
-  {
-    id: 6,
-    title: "cyber security", // Maps to Shield for alternative mobility
-    card_title: "Center for Rapid & Alternative Energy Mobility (RAEM)",
-    card_desc: "Dedicated to the future of transportation, focusing on electric vehicles (EV), battery management systems, fast-charging technologies, rail engineering, and hybrid alternative fuels to support sustainable green mobility.",
-    faculty_count: 4,
-    student_count: 15,
-    project_count: 1,
-    director: "Dr. Anurag Singh Bhagat"
+    card_title: "Center of Excellence in Artificial Intelligence & Robotics (CoE-AI)",
+    card_desc: "Focuses on developing cutting-edge AI, machine learning, and deep learning solutions. The center collaborates with industry leaders, fostering research in computer vision, NLP voice-interactive humanoid robots, and predictive systems.",
+    faculty_count: 9,
+    student_count: 85,
+    project_count: 7,
+    director: "Dr. Vidushi Sharma",
+    link: "https://gburif.org/coe.php",
+    image: "/coe_ai_robotics.png"
   }
 ];
 
@@ -175,142 +151,160 @@ const CentersOfExcellence = () => {
 
   return (
     <SearchableWrapper>
-    <>
-      {/* Hero Section */}
-      <BannerSection
-        title={heroData.title}
-        subtitle={heroData.description}
-        bgTheme={heroData.bgTheme || 6}
-      />
+      <>
+        {/* Hero Section */}
+        <BannerSection
+          title={heroData.title}
+          subtitle={heroData.description}
+          bgTheme={heroData.bgTheme || 6}
+        />
 
-      {/* Statistics */}
-      <StatsCard stats={stats} />
+        {/* Statistics */}
+        <StatsCard stats={stats} />
 
-      {/* Centers Grid */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">Centers of Excellence</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our centers drive excellence in research, technology, and societal impact through interdisciplinary collaboration and innovation.
-            </p>
-          </div>
+        {/* Centers Grid */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">Centers of Excellence</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Our centers drive excellence in research, technology, and societal impact through interdisciplinary collaboration and innovation.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {centers.map((center) => {
-              const IconComponent =
-                iconMap[(center.title || "").toLowerCase()] || Shield;
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+              {centers.map((center) => {
+                const IconComponent =
+                  iconMap[(center.title || "").toLowerCase()] || Shield;
 
-              return (
-                <div
-                  key={center.id}
-                  className="bg-white rounded-3xl shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group animate-fade-in"
-                >
-                  <div className="h-52 relative bg-gradient-to-br from-gray-600 to-gray-800 overflow-hidden flex items-center justify-center">
-                    <IconComponent className="w-16 h-16 text-white z-10" />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-3">
-                      {center.card_title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                      {center.card_desc}
-                    </p>
-
-                    <div className="grid grid-cols-3 gap-4 text-center mb-4">
-                      <div>
-                        <div className="text-lg font-bold text-blue-600">
-                          {center.faculty_count}
-                        </div>
-                        <div className="text-xs text-gray-500">Faculty</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold text-green-600">
-                          {center.student_count}
-                        </div>
-                        <div className="text-xs text-gray-500">Students</div>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold text-purple-600">
-                          {center.project_count}
-                        </div>
-                        <div className="text-xs text-gray-500">Projects</div>
-                      </div>
+                return (
+                  <div
+                    key={center.id}
+                    className="bg-white rounded-3xl shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group animate-fade-in"
+                  >
+                    <div className="h-52 relative bg-gradient-to-br from-slate-800 to-gray-900 overflow-hidden flex items-center justify-center">
+                      {center.image ? (
+                        <img
+                          src={center.image}
+                          alt={center.card_title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <IconComponent className="w-16 h-16 text-white z-10" />
+                      )}
                     </div>
 
-                    <p className="text-sm text-gray-600">
-                      <span className="font-semibold">Director:</span>{' '}
-                      {center.director || 'N/A'}
-                    </p>
+                    <div className="p-6">
+                      <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                        {center.card_title}
+                      </h3>
+                      <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                        {center.card_desc}
+                      </p>
+
+                      <div className="grid grid-cols-3 gap-4 text-center mb-4">
+                        <div>
+                          <div className="text-lg font-bold text-blue-600">
+                            {center.faculty_count}
+                          </div>
+                          <div className="text-xs text-gray-500">Faculty</div>
+                        </div>
+                        <div>
+                          <div className="text-lg font-bold text-green-600">
+                            {center.student_count}
+                          </div>
+                          <div className="text-xs text-gray-500">Students</div>
+                        </div>
+                        <div>
+                          <div className="text-lg font-bold text-purple-600">
+                            {center.project_count}
+                          </div>
+                          <div className="text-xs text-gray-500">Projects</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-3 border-t border-gray-100 mt-3">
+                        <p className="text-xs text-gray-600">
+                          <span className="font-semibold">Director:</span>{' '}
+                          {center.director || 'N/A'}
+                        </p>
+                        <a
+                          href={center.id === 1 || (center.card_title || "").includes("Drone") ? "https://cedtgbu.wixsite.com/home" : (center.link || "https://gburif.org/coe.php")}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
+                        >
+                          CoE Portal <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Gallery of Excellence
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Explore moments of innovation, collaboration, and brilliance captured from across our Centers of Excellence.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {galleryImages.map((img, idx) => (
+                <div
+                  key={idx}
+                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow"
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-3 text-sm backdrop-blur-sm">
+                    {img.caption}
                   </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Gallery */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Gallery of Excellence
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Explore moments of innovation, collaboration, and brilliance captured from across our Centers of Excellence.
+        {/* CTA */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">{ctaData.title}</h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              {ctaData.description}
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {galleryImages.map((img, idx) => (
-              <div
-                key={idx}
-                className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={ctaData.url1}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors transform hover:scale-105"
               >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-3 text-sm backdrop-blur-sm">
-                  {img.caption}
-                </div>
-              </div>
-            ))}
+                {ctaData.button1_text}
+              </a>
+              <a
+                href={ctaData.url2}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-purple-600 border-solid text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
+              >
+                {ctaData.button2_text}
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">{ctaData.title}</h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            {ctaData.description}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={ctaData.url1}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors transform hover:scale-105"
-            >
-              {ctaData.button1_text}
-            </a>
-            <a
-              href={ctaData.url2}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-purple-600 border-solid text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
-            >
-              {ctaData.button2_text}
-            </a>
-          </div>
-        </div>
-      </section>
-    </>
+        </section>
+      </>
     </SearchableWrapper>
   );
 };

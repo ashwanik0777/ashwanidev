@@ -29,7 +29,7 @@ import StatsCard from "../StatsCard";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
  
 const NCCIntroduction = ({ nccData }) => {
-  const visionText = nccData?.overview || `The National Cadet Corps (NCC) is a youth development movement under the Ministry of Defence, aimed at instilling discipline, leadership, patriotism, and military awareness among students. We uphold the motto "Unity and Discipline" - fostering national integration and building character through military training and social service.`;
+  const visionText = nccData?.overview || `Gautam Buddha University (GBU) in Greater Noida has active National Cadet Corps (NCC) wings for both male and female students, operating under the 31 UP Girls Battalion and 37 UP Battalion NCC (Ghaziabad) to train youth in discipline, leadership, and national service.`;
   const registerUrl = nccData?.content?.email || "#";
   const mainUrl = nccData?.content?.websiteUrl || "#";
 
@@ -180,8 +180,36 @@ const nccStatsData = [
         </div>
       </div>
 
-      {/* Statistics */}
-      <StatsCard stats={nccStatsData} />
+      {/* Battalion Structure & Training Camps */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="p-6 border border-slate-100 shadow-md">
+          <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Users className="w-5 h-5 text-amber-500" />
+            <span>Unit Structure & Strength</span>
+          </h3>
+          <ul className="space-y-3 text-sm text-slate-600 leading-relaxed">
+            <li className="flex items-start gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+              <span><strong className="text-slate-900">31 UP Girls Battalion:</strong> Authorized strength of 50 girl cadets.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-600 mt-1.5 shrink-0" />
+              <span><strong className="text-slate-900">37 UP Battalion (Ghaziabad):</strong> Comprises platoons totaling 104 cadets covering both boys and girls.</span>
+            </li>
+          </ul>
+        </Card>
+
+        <Card className="p-6 border border-slate-100 shadow-md">
+          <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <Shield className="w-5 h-5 text-blue-600" />
+            <span>Training & Camps</span>
+          </h3>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            Cadets regularly participate in Combined Annual Training Camps (CATC), weapon handling drills, social awareness campaigns, and competitive events like the Thal Sainik Competition (TSC).
+          </p>
+        </Card>
+      </div>
+
       {/* Objectives */}
       <div>
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">NCC Objectives</h2>

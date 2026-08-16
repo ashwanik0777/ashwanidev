@@ -18,8 +18,22 @@ const Navbar = () => {
   
   const school = resolveSchool(shortCode);
   const activeSchool = school?.code || shortCode || "SOICT";
+  const hoverTimeoutRef = useRef(null);
+
+  const handleMouseEnter = (menuKey) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    setOpenMenu(menuKey);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      setOpenMenu(null);
+    }, 120);
+  };
 
   const toggleMenu = (menuKey) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setOpenMenu((prev) => (prev === menuKey ? null : menuKey));
   };
 
@@ -35,13 +49,17 @@ const Navbar = () => {
       ref?.contains(event.target)
     );
     if (!isClickInsideAnyMenu) {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
       setOpenMenu(null);
     }
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -422,6 +440,8 @@ const Navbar = () => {
             key={key}
             className="relative"
             ref={(el) => (menuRefs.current[key] = el)}
+            onMouseEnter={() => handleMouseEnter(key)}
+            onMouseLeave={handleMouseLeave}
             aria-haspopup="true"
             aria-expanded={openMenu === key}
             whileHover={{ y: -2 }}

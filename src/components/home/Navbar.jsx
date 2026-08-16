@@ -50,6 +50,7 @@ const NAVIGATION_CONFIG = [
       { slug: "schools", label: "Schools & Departments" },
       { slug: "faculty", label: "Faculty Directory" },
       { slug: "academic-calendar", label: "Academic Calendar & Regulations" },
+      { slug: "list-of-holidays", label: "List of Holidays" },
       { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
       { slug: "centers-of-excellence", label: "Centers of Excellence" },
       { slug: "international-collaboration", label: "International Collaboration" },

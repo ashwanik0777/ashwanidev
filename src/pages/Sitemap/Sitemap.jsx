@@ -108,6 +108,7 @@ const sitemapAbout = [
     children: [
       { title: "Academic Schools & Faculties", path: "/academics/schools" },
       { title: "Academic Calendar", path: "/academics/academic-calendar" },
+      { title: "List of Holidays", path: "/academics/list-of-holidays" },
       { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework" },
       { title: "Centers of Excellence", path: "/academics/centers-of-excellence" },
       { title: "Faculty Directory", path: "/academics/faculty" },

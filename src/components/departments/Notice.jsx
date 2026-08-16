@@ -130,9 +130,10 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-blue-900 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             Notices and Events
           </h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         {/* Main Grid */}

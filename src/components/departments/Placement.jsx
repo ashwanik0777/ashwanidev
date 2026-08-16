@@ -7,15 +7,15 @@ const PlacementsSection = ({data}) => {
   const { title, subTitle, heroImage, placementStats } = data;
 
   return (
-    <section id="placements" className="py-20 bg-gray-100">
+    <section id="placements" className="py-10 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             {title}
           </h2>
-          <p className="text-xl text-gray-600">{subTitle}</p>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-6 rounded-full" />
+          {/* <p className="text-xl text-gray-600">{subTitle}</p> */}
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         {/* Stats */}

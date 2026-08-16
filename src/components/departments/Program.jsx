@@ -17,12 +17,10 @@ const Badge = ({ children, className = '', variant = 'default', ...props }) => {
       {children}
     </span>
   );
-};
+};  
 
-// Program Showcase Component
 export default function ProgramsShowcase({ programs: externalPrograms = [] }) {
   const fallbackPrograms = [ 
-    // your whole programs array here — same as you wrote above
     {
       name: 'B.Tech. Computer Science & Engineering',
       code: 'CSE',
@@ -57,11 +55,11 @@ export default function ProgramsShowcase({ programs: externalPrograms = [] }) {
     <section className="py-16 bg-gradient-to-br from-indigo-50 to-cyan-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             Our Programs
           </h2>
           {/* <p className="text-xl text-gray-600">Cutting-edge engineering education</p> */}
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto mt-4 rounded-full"></div>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         <div className="shadow-2xl border-0 bg-white/90 backdrop-blur-sm relative overflow-hidden rounded-xl">

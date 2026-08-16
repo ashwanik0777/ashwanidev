@@ -148,10 +148,10 @@ export default function FacultyResponsiveSlider({
   return (
     <section className="py-10 bg-white overflow-hidden relative">
       <div className="text-center mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-blue-700">
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           {title}
-          <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </h2>
+        <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         {/* {subTitle && (
           <p className="text-gray-600 text-sm mt-1">{subTitle}</p>
         )} */}

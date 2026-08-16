@@ -40,21 +40,12 @@ const RecruitersShowcase = ({recruitersData=[]}) => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-800 mb-4">Our Recruiters</h2>
-          <p className="text-xl text-gray-600">Industry leaders who trust our talent</p>
-          <div className="w-24 h-1 bg-gradient-to-r from-college-blue to-college-gold mx-auto mt-4 rounded-full"></div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">Our Recruiters</h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         {/* Showcase Container */}
         <div className="rounded-xl shadow-2xl border-0 bg-white backdrop-blur-sm relative overflow-hidden">
-          {/* Header */}
-          <div className="bg-white border-b border-gray-100 p-4 text-center">
-            <h3 className="text-blue-800 flex items-center justify-center font-bold text-lg">
-              <div className="w-2 h-8 bg-blue-500 rounded-full mr-3"></div>
-              Industry Partners
-            </h3>
-          </div>
-
           {/* Grid */}
           <div className="p-8">
             <div className="relative">

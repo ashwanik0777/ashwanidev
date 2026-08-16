@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
   GraduationCap,
@@ -147,12 +148,29 @@ const useScrollDetection = () => {
 const useDropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const menuRefs = useRef(new Map());
+  const timeoutRef = useRef(null);
+
+  const handleMouseEnter = (menuKey) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(menuKey);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+    }, 120);
+  };
 
   const toggleMenu = (menuKey) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setActiveMenu(prev => prev === menuKey ? null : menuKey);
   };
 
-  const closeMenu = () => setActiveMenu(null);
+  const closeMenu = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(null);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -165,11 +183,16 @@ const useDropdownMenu = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   return {
     activeMenu,
+    handleMouseEnter,
+    handleMouseLeave,
     toggleMenu,
     closeMenu,
     menuRefs,
@@ -227,7 +250,13 @@ const DropdownMenuItem = ({ item, baseRoute, onClick }) => {
 };
 
 const DropdownMenu = ({ items, baseRoute, onItemClick }) => (
-  <div className="absolute left-0 top-full mt-1 w-64 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
+  <motion.div
+    initial={{ opacity: 0, y: 5 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 5 }}
+    transition={{ duration: 0.15, ease: "easeOut" }}
+    className="absolute left-0 top-full mt-1 w-64 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100"
+  >
     {items.map((item, index) => (
       <DropdownMenuItem
         key={`${item.slug}-${index}`}
@@ -236,10 +265,10 @@ const DropdownMenu = ({ items, baseRoute, onItemClick }) => (
         onClick={onItemClick}
       />
     ))}
-  </div>
+  </motion.div>
 );
 
-const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => {
+const DesktopMenuItem = ({ menu, isActive, onMouseEnter, onMouseLeave, onToggle, menuRef, onMenuClose }) => {
   if (menu.directPath) {
     const isExternal = menu.directPath.startsWith("http");
     return (
@@ -268,7 +297,13 @@ const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => 
   }
 
   return (
-    <li className="relative" ref={menuRef} aria-haspopup="true">
+    <li
+      className="relative"
+      ref={menuRef}
+      onMouseEnter={() => onMouseEnter(menu.key)}
+      onMouseLeave={onMouseLeave}
+      aria-haspopup="true"
+    >
       <button
         onClick={() => onToggle(menu.key)}
         className="flex items-center gap-1 hover:text-blue-600 text-gray-700 px-3 py-2 text-sm font-medium transition-colors"
@@ -279,13 +314,15 @@ const DesktopMenuItem = ({ menu, isActive, onToggle, menuRef, onMenuClose }) => 
         {isActive ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
 
-      {isActive && (
-        <DropdownMenu
-          items={menu.items}
-          baseRoute={menu.baseRoute}
-          onItemClick={onMenuClose}
-        />
-      )}
+      <AnimatePresence>
+        {isActive && (
+          <DropdownMenu
+            items={menu.items}
+            baseRoute={menu.baseRoute}
+            onItemClick={onMenuClose}
+          />
+        )}
+      </AnimatePresence>
     </li>
   );
 };
@@ -351,7 +388,7 @@ const MobileMenuItem = ({ menu, isExpanded, onToggle, onSubmenuToggle }) => {
 // Main Navbar Component
 const Navbar = () => {
   const isScrolled = useScrollDetection();
-  const { activeMenu, toggleMenu, closeMenu, menuRefs } = useDropdownMenu();
+  const { activeMenu, handleMouseEnter, handleMouseLeave, toggleMenu, closeMenu, menuRefs } = useDropdownMenu();
   const { isOpen: isMobileOpen, toggle: toggleMobile, close: closeMobile, expandedSubmenus, toggleSubmenu } = useMobileMenu();
 
   // Memoize navigation items to prevent unnecessary re-renders
@@ -392,6 +429,8 @@ const Navbar = () => {
                     key={menu.key}
                     menu={menu}
                     isActive={activeMenu === menu.key}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                     onToggle={toggleMenu}
                     menuRef={(ref) => setMenuRef(menu.key, ref)}
                     onMenuClose={closeMenu}

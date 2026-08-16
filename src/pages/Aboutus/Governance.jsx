@@ -301,7 +301,7 @@ const UniversityGovernance = () => {
   const itemsPerPage = 10;
 
   const dataMap = {
-    executive: data.academic,
+    executive: data.executive,
     boardOfManagement: data.boardOfManagement,
     boardOfGovernors: data.boardOfGovernors,
   };

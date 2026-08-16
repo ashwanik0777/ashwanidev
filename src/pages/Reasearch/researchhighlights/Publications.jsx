@@ -232,7 +232,7 @@ const Publications = () => {
 
         </div>
 
-        <div className="px-30 pb-10">
+        <div className="px-4 sm:px-8 lg:px-16 pb-10">
           {/* Tabs */}
           <ButtonGroup
             buttons={tabButtons}

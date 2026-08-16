@@ -33,7 +33,7 @@ const ContactBanner = () => {
       <div className="min-h-screen bg-[#F8FAFC] selection:bg-blue-200 font-inter">
         
         {/* Custom Premium Hero Section */}
-        <div className="relative pt-32 pb-20 overflow-hidden">
+        <div className="relative pt-20 sm:pt-32 pb-10 sm:pb-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/40 via-[#F8FAFC] to-purple-100/40"></div>
             <motion.div 
@@ -48,12 +48,12 @@ const ContactBanner = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 max-w-7xl relative z-10 text-center">
+          <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10 text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-sm font-medium text-slate-600 mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-xs sm:text-sm font-medium text-slate-600 mb-6 sm:mb-8"
             >
               <Globe2 className="w-4 h-4 text-blue-500" />
               We are always here to help you
@@ -63,7 +63,7 @@ const ContactBanner = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6 font-outfit"
+              className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4 sm:mb-6 font-outfit"
             >
               Let's stay <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">connected.</span>
             </motion.h1>
@@ -72,7 +72,7 @@ const ContactBanner = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-slate-600 font-inter leading-relaxed max-w-3xl mx-auto"
+              className="text-base sm:text-lg md:text-xl text-slate-600 font-inter leading-relaxed max-w-3xl mx-auto"
             >
               Reach out to Gautam Buddha University. Whether you have questions about admissions, campus life, or academics, our administration is ready to provide the answers you need.
             </motion.p>
@@ -80,21 +80,21 @@ const ContactBanner = () => {
         </div>
 
         {/* Highly Organized Contact Information Section */}
-        <div className="container mx-auto px-6 max-w-7xl relative z-20 pb-20">
-          <div className="grid lg:grid-cols-3 gap-8">
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-20 pb-12 sm:pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             
             {/* Campus Address Card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
                 <MapPin className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4 font-outfit">Visit Campus</h3>
-              <div className="space-y-2 text-slate-600 font-medium">
+              <div className="space-y-2 text-slate-600 font-medium text-sm sm:text-base">
                 {CONTACT_INFO.address.lines.map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
@@ -107,18 +107,18 @@ const ContactBanner = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6">
                 <Phone className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4 font-outfit">Contact Support</h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {CONTACT_INFO.communication.map((item, i) => (
-                  <div key={i} className="flex items-center justify-between group">
-                    <span className="text-slate-500 text-sm">{item.label}</span>
-                    <a href={item.link} className="text-slate-800 font-semibold hover:text-blue-600 transition-colors flex items-center gap-2">
-                      {item.type === 'phone' ? <Phone className="w-3 h-3 text-slate-400 group-hover:text-blue-500" /> : <Mail className="w-3 h-3 text-slate-400 group-hover:text-blue-500" />}
+                  <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 group">
+                    <span className="text-slate-500 text-xs sm:text-sm font-medium">{item.label}</span>
+                    <a href={item.link} className="text-slate-800 text-xs sm:text-sm font-semibold hover:text-blue-600 transition-colors flex items-center gap-2 break-all">
+                      {item.type === 'phone' ? <Phone className="w-3 h-3 text-slate-400 group-hover:text-blue-500 shrink-0" /> : <Mail className="w-3 h-3 text-slate-400 group-hover:text-blue-500 shrink-0" />}
                       {item.value}
                     </a>
                   </div>

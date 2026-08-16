@@ -113,16 +113,16 @@ export default function QuickLinks() {
 
   const normalizedQuickLinks = quickAccessItems.length
     ? quickAccessItems.map((item) => {
-        const theme = getIconAndColor(item.title);
-        return {
-          title: item.title || "Quick Link",
-          iconName: theme.iconName,
-          color: theme.color,
-          iconColor: theme.iconColor,
-          link: item.url || "/",
-          external: /^https?:\/\//i.test(item.url || ""),
-        };
-      })
+      const theme = getIconAndColor(item.title);
+      return {
+        title: item.title || "Quick Link",
+        iconName: theme.iconName,
+        color: theme.color,
+        iconColor: theme.iconColor,
+        link: item.url || "/",
+        external: /^https?:\/\//i.test(item.url || ""),
+      };
+    })
     : defaultQuickLinks;
 
   return (
@@ -140,7 +140,7 @@ export default function QuickLinks() {
           {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/60 mb-3">
             <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Essential Links</span>
           </div> */}
-          
+
           <h2
             id="quick-access-heading"
             className="text-3xl sm:text-4xl font-bold text-center text-blue-800"
@@ -148,16 +148,16 @@ export default function QuickLinks() {
             Quick Access
           </h2>
           {/* <div className="w-12 h-1 bg-gradient-to-r from-blue-500 to-emerald-500 mx-auto mt-4 rounded-full" /> */}
-        
+
         </div>
 
         {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
           {normalizedQuickLinks.map((item, idx) => {
             const Card = (
               <div className={cn(
-                "group relative bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-slate-100 hover:border-slate-200/80 shadow-sm hover:shadow-lg",
-                "hover:-translate-y-1 focus:-translate-y-1 focus:outline-none transition-all duration-300 ease-out flex items-center gap-4 overflow-hidden"
+                "group relative bg-white/90 backdrop-blur-sm rounded-xl p-2.5 sm:p-4 border border-slate-100 hover:border-slate-200/80 shadow-sm hover:shadow-lg",
+                "hover:-translate-y-0.5 focus:-translate-y-0.5 focus:outline-none transition-all duration-300 ease-out flex items-center gap-2 sm:gap-4 overflow-hidden"
               )}>
                 {/* Hover spotlight background effect */}
                 <div className={cn(
@@ -166,22 +166,22 @@ export default function QuickLinks() {
                 )} />
 
                 {/* Icon Container */}
-                <div className="relative p-2.5 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm overflow-hidden">
+                <div className="relative p-1.5 sm:p-2.5 bg-slate-50 border border-slate-100 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm overflow-hidden">
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style={{ backgroundColor: item.iconColor }} />
-                  <IconComponent name={item.iconName} className="h-5 w-5 relative z-10" style={{ color: item.iconColor }} />
+                  <IconComponent name={item.iconName} className="h-4 w-4 sm:h-5 sm:w-5 relative z-10" style={{ color: item.iconColor }} />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm sm:text-base font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300 flex-grow leading-tight">
+                <h3 className="text-xs sm:text-base font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-300 flex-grow leading-tight truncate">
                   {item.title}
                 </h3>
-                
+
                 {/* Redirect Icon */}
                 <div className="text-slate-400 group-hover:text-blue-600 transition-colors duration-300 shrink-0">
                   {item.external ? (
-                    <ExternalLink className="w-4 h-4 transform group-hover:scale-110 transition-transform duration-300" />
+                    <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:scale-110 transition-transform duration-300" />
                   ) : (
-                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                   )}
                 </div>
               </div>

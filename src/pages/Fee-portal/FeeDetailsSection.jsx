@@ -144,17 +144,17 @@ const FeeDetailsSection = () => {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="academic" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-6">
+          <TabsList className="flex overflow-x-auto w-full gap-2 pb-2 mb-6 no-scrollbar">
             {feeCategories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="flex items-center gap-1 text-xs sm:text-sm"
+                  className="flex items-center gap-1.5 text-xs sm:text-sm whitespace-nowrap px-3.5 py-2 shrink-0 rounded-xl"
                 >
-                  <IconComponent className="w-4 h-4" />
-                  <span className="hidden sm:inline">{category.label}</span>
+                  <IconComponent className="w-4 h-4 shrink-0" />
+                  <span>{category.label}</span>
                 </TabsTrigger>
               );
             })}

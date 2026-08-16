@@ -1,9 +1,27 @@
 @import "tailwindcss";
 
 /* Base styles */
-body {
+html, body {
+  max-width: 100vw;
   overflow-x: hidden;
 }
+
+/* Touch horizontal scrolling & responsive utilities */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.table-responsive-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+}
+
 
 /* Navbar styles */
 .navbar-fixed {

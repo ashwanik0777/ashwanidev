@@ -232,7 +232,7 @@ const ButtonGroup = ({
     }, []);
 
     return (
-        <div className="Container mx-auto px-16 py-8 space-y-8">
+        <div className="w-full mx-auto px-2 sm:px-6 md:px-8 py-4 sm:py-8 space-y-6 overflow-x-auto no-scrollbar">
         <div className={containerClasses } role="group">
             {buttons.map((btn, index) => {
                 const isActive = allowMultiple

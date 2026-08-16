@@ -25,7 +25,7 @@ const CampusStats = () => {
   return (
     <SearchableWrapper>
       <div className="py-12 bg-slate-50 relative overflow-hidden font-sans border-y border-slate-100">
-        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl">
           <div className="text-center mb-12">
             <h3 className="text-3xl font-extrabold text-slate-900 flex items-center justify-center gap-2 tracking-tight">
               <span>Campus Life Statistics</span>

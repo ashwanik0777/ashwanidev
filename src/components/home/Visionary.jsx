@@ -88,7 +88,7 @@ const VisionaryLeadership = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-end gap-5 lg:gap-6">
-          
+
           {/* Spacer to balance left 50% campus view on desktop */}
           <div className="hidden lg:block w-1/2 min-h-[220px] pointer-events-none" />
 

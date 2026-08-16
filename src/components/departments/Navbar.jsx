@@ -353,17 +353,17 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-9 left-0 w-full z-30 transition-all duration-300 ${
+      className={`fixed top-8.5 sm:top-9 left-0 w-full z-30 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
           : "bg-white shadow"
-      } px-4 md:px-16  flex items-center justify-between`}
+      } px-4 sm:px-8 md:px-16 flex items-center justify-between`}
       variants={navVariants}
       initial="initial"
       animate="animate"
     >
       <motion.div
-        className="flex items-center space-x-3 cursor-pointer"
+        className="flex items-center space-x-3 cursor-pointer shrink-0"
         onClick={() => (window.location.href = "/")}
         variants={logoVariants}
         whileHover="hover"
@@ -371,7 +371,7 @@ const Navbar = () => {
         <motion.img
           src="/assets/logo.svg"
           alt="USICT Logo"
-          className="w-64 h-14 mr-3"
+          className="w-40 sm:w-56 md:w-64 h-10 sm:h-14 object-contain mr-2"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 0.9 }}
           transition={{ duration: 0.4, delay: 0.1 }}

@@ -169,9 +169,9 @@ const FundedProjects = () => {
         </div>
 
         <StatsCard stats={statsData} />
-        <div className="px-30 pb-10">
+        <div className="px-4 sm:px-8 lg:px-16 pb-10">
           {/* Filters Section */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-8 mb-8">
             <div className="flex items-center gap-2 mb-6">
               <Filter size={20} className="text-blue-600" />
               <h2 className="text-lg font-semibold text-gray-900">Filter Projects</h2>
@@ -254,7 +254,7 @@ const FundedProjects = () => {
               paginatedProjects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="group bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden relative"
+                  className="group bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-5 sm:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden relative"
                   style={{
                     animationDelay: `${index * 100}ms`,
                     animationFillMode: 'both'
@@ -264,14 +264,14 @@ const FundedProjects = () => {
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   {/* School Badge */}
-                  <div className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                  <div className="inline-block sm:absolute sm:top-3 sm:right-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300 mb-3 sm:mb-0">
                     {project.school}
                   </div>
 
                   {/* Content */}
                   <div className="relative z-10">
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 mt-5 pr-30 leading-tight group-hover:text-blue-700 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mt-5 lg:pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
                       {project.title}
                     </h3>
 

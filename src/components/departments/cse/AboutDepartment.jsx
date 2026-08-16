@@ -20,9 +20,9 @@ const AboutDepartment = ({
             {heading}
           </h2>
           <div className="h-1 w-24 bg-blue-600 mx-auto mb-6 rounded-full"></div>
-          <p className="text-lg md:text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          {/* <p className="text-lg md:text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
             {subheading}
-          </p>
+          </p> */}
 
           <StatsCard stats={stats} />
         </motion.div>

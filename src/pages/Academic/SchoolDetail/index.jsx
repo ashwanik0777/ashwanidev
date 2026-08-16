@@ -7,7 +7,7 @@ import AboutSection from "../../../components/departments/AboutIct";
 import SchoolStats from "../../../components/departments/SchoolStats";
 import LeadershipCard from "../../../components/departments/Dean";
 import DepartmentsSection from "../../../components/departments/Deptcard";
-import ProgramsShowcase from "../../../components/departments/Program";
+// import ProgramsShowcase from "../../../components/departments/Program";
 import FacultyCarousel from "../../../components/departments/faculty_rotating.jsx";
 import NoticeEvents from "../../../components/departments/Notice.jsx";
 import PlacementsSection from "../../../components/departments/Placement.jsx";
@@ -24,7 +24,6 @@ const componentsMap = {
   SchoolStats,
   LeadershipCard,
   DepartmentsSection,
-  ProgramsShowcase,
   FacultyCarousel,
   NoticeEvents,
   ClubsAchievements,

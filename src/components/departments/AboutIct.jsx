@@ -73,16 +73,12 @@ const AboutUs = ({ data }) => {
         >
           <motion.div className="relative inline-block">
             <h2
-              className="text-5xl md:text-6xl font-bold text-blue-600 mb-4"
+              className="text-3xl sm:text-4xl font-bold text-blue-800"
               style={{ willChange: "transform, opacity" }}
             >
               {heading}
             </h2>
-            <motion.div
-              className="absolute -bottom-2 left-0 h-1 bg-blue-500 rounded-full origin-left"
-              variants={highlightVariants}
-              style={{ willChange: "transform" }}
-            />
+            <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
           </motion.div>
           {/* {subtitle && (
             <motion.p

@@ -40,22 +40,14 @@ const fallbackImage = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4 text-blue-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             Recent Placements
           </h2>
-          <p className="text-xl text-gray-600">Our students securing positions at top companie</p>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         {/* Card */}
         <div className="rounded-xl shadow-2xl border-0 bg-white backdrop-blur-sm relative overflow-hidden">
-          <div className="bg-white border-b border-gray-200 p-4 text-center">
-            <h3 className="flex justify-center items-center text-blue-800 text-lg font-bold">
-              <div className="w-2 h-8 bg-blue-500 rounded-full mr-3" />
-              {data.sectionTitle}
-            </h3>
-          </div>
-
           <div className="p-8">
             <div className="relative">
               <div className="grid md:grid-cols-2 gap-8">

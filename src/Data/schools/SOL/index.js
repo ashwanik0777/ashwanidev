@@ -111,35 +111,4 @@ export const courseApplications = [
 ];
 
 export const schoolBadge = { bg: "bg-red-200", text: "text-red-800" };
-export const researchCenters = [
-  {
-    id: 201,
-    name: "Centre for Constitutional Law & Governance",
-    shortName: "Constitutional Law Centre",
-    description:
-      "Advanced research in constitutional law, human rights, governance, and public policy with specialized library and judgment archive.",
-    image:
-      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=500&h=300&fit=crop",
-    location: "Academic Block E",
-    head: "Dr. Krishna Kant Dwivedi",
-    established: "2015",
-    facilities: ["Constitutional Law Library", "Governance Research Lab", "Seminar Hall"],
-    researchAreas: ["Constitutional Law", "Human Rights", "Governance"],
-    school: admissionsLabel,
-  },
-  {
-    id: 202,
-    name: "Centre for Cyber Law & Digital Rights",
-    shortName: "Cyber Law Centre",
-    description:
-      "Dedicated centre for cyber law research, data protection studies, and digital rights advocacy with forensics lab.",
-    image:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&h=300&fit=crop",
-    location: "Academic Block E",
-    head: "Dr. Akshay Kumar Singh",
-    established: "2020",
-    facilities: ["Digital Forensics Lab", "Cyber Law Library", "Legal-Tech Innovation Room"],
-    researchAreas: ["Cyber Law", "Data Protection", "Digital Rights"],
-    school: admissionsLabel,
-  },
-];
+export const researchCenters = [];

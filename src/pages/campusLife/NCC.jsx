@@ -115,26 +115,25 @@ const NCC = () => {
         </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="sticky top-25 z-10 bg-white">
-          <TabsList className="py-2 px-2 sm:px-4">
-            <div className="flex overflow-x-auto scrollbar-hide gap-1 sm:gap-2 min-w-full sm:justify-center">
+        <div className="sticky top-[6.3rem] z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+          <TabsList className="py-2.5 px-2 sm:px-4">
+            <div className="flex overflow-x-auto scrollbar-hide gap-1.5 sm:gap-2 min-w-full sm:justify-center">
             {tabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
               <TabsTrigger 
                 key={tab.value} 
                 value={tab.value}
-                className="flex-shrink-0 min-w-fit px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm"
+                className="flex-shrink-0 min-w-fit px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold"
               >
-                <IconComponent size={14} className="mr-1 sm:mr-2" />
-                <span className="hidden xs:inline sm:inline">{tab.label}</span>
-                <span className="xs:hidden sm:hidden">{tab.label.slice(0, 3)}</span>
+                <IconComponent size={15} className="mr-1.5 sm:mr-2" />
+                <span>{tab.label}</span>
               </TabsTrigger>
               );
             })}
             </div>
           </TabsList>
-          </div>
+        </div>
 
           <div className="py-4 sm:py-8 px-2 sm:px-4">
           <TabsContent value="overview">

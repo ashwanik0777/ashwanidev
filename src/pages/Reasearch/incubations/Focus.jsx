@@ -1,74 +1,78 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Target, Lightbulb } from "lucide-react";
+import { CheckCircle2, Cpu } from "lucide-react";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
+import { incubationExactData } from "../../../Data/incubationData.js";
 
 const Focus = () => {
-  const cards = [
-    {
-      image: "https://www.gburif.org/Screenshot%202024-06-11%20at%204.14.25%E2%80%AFAM.png",
-      title: "Focus Areas",
-      icon: <Target className="w-8 h-8 text-indigo-600" />,
-      description: "The functional areas are not limited to IoT, AI, Robotics, Microsystems, Data Analytics, High Frequency Applications, Integrated Circuits, PCB based Solutions, Sensor Network, Neural Computing, IT/ITES, Telecom, Mobile VAS, Gaming and Animation, Reliability, Internet/Web, Media and Entertainment.",
-    },
-    {
-      image: "https://www.gburif.org/noida-08november2010-gautam-htphoto-university-noida-greater_a63589a4-2b9a-11e8-8732-87a46da2a8cc.jpg",
-      title: "Objective",
-      icon: <Lightbulb className="w-8 h-8 text-indigo-600" />,
-      description: "To provide mentors for skill up ideas. Example can be an AI based Electromagnetic Shielding device problem. One mentor from Electronics Circuits, One from HF Electronics, one from Mechanical and one from Computer Science knowledge tank will be potential mentors.",
-    },
-  ];
-
   return (
     <SearchableWrapper>
-      <section className="bg-slate-50 py-20 px-4 sm:px-10 md:px-20 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-              Focus & Objective
-            </h2>
-            <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full"></div>
+      <div className="w-full" id="objectives">
+        
+        {/* Objectives Header */}
+        <div className="text-center mb-6 sm:mb-10">
+          <span className="text-[11px] sm:text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+            Vision & Strategy
+          </span>
+          <h2 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight mt-2 sm:mt-3">
+            Incubation Centre Objectives
+          </h2>
+          <div className="w-12 sm:w-16 h-1 bg-indigo-600 mx-auto mt-2 sm:mt-4 rounded-full"></div>
+        </div>
+
+        {/* Objectives List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
+          {incubationExactData.objectives.map((obj, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-indigo-200 transition-all flex items-start gap-3 sm:gap-4"
+            >
+              <div className="p-2 bg-indigo-50 rounded-lg sm:rounded-xl text-indigo-600 shrink-0 mt-0.5">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <p className="text-slate-700 text-xs sm:text-base leading-relaxed font-medium">
+                {obj}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Initial Focus Areas Section */}
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 border border-slate-200/80 shadow-2xs" id="focus-areas">
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[11px] sm:text-xs font-bold mb-2 border border-indigo-100">
+              <Cpu className="w-3.5 h-3.5 text-indigo-600" />
+              Multidisciplinary Domains
+            </div>
+            <h3 className="text-lg sm:text-2xl font-bold text-slate-900">
+              Initial Focus Areas
+            </h3>
+            <p className="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto mt-1 sm:mt-2 leading-relaxed">
+              The functional areas for technological and product-based startup incubation include, but are not limited to:
+            </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-10">
-            {cards.map((card, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                className="group bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300"
+
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+            {incubationExactData.focusAreas.map((area, idx) => (
+              <motion.span
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.2, delay: idx * 0.015 }}
+                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-50 hover:bg-indigo-600 hover:text-white text-slate-700 font-semibold text-xs sm:text-sm rounded-xl border border-slate-200/80 hover:border-indigo-600 shadow-2xs transition-all duration-200 cursor-default"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={card.image} 
-                    alt={card.title} 
-                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800'; }}
-                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" 
-                  />
-                  <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all duration-300"></div>
-                </div>
-                
-                <div className="p-8 relative">
-                  <div className="absolute -top-10 right-8 bg-white p-4 rounded-2xl shadow-lg border border-slate-50">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 pr-16">{card.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">
-                    {card.description}
-                  </p>
-                </div>
-              </motion.div>
+                {area}
+              </motion.span>
             ))}
           </div>
         </div>
-      </section>
+
+      </div>
     </SearchableWrapper>
   );
 };

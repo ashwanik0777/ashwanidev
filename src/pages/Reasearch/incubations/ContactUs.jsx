@@ -1,106 +1,115 @@
 import React from "react";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Instagram,
-  Youtube,
-} from "lucide-react";
-
+import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper";
 
 const ContactUs = () => {
-
   return (
     <SearchableWrapper>
-      <section className="bg-slate-50 py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+      <section className="bg-slate-50/50 py-6 sm:py-10 px-2 sm:px-6 border-t border-slate-200/60" id="contact">
+        <div className="max-w-2xl mx-auto w-full">
+          
+          {/* Header */}
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               Contact Us
             </h2>
-            <div className="w-16 h-1 bg-indigo-600 mx-auto mt-4 rounded-full mb-6"></div>
-            <p className="text-slate-600 max-w-2xl mx-auto text-lg">
-              Get in touch with the Incubation Center for any queries or support
-            </p>
+            <div className="h-1 w-12 sm:w-16 bg-amber-500 mt-1.5 sm:mt-2"></div>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col md:flex-row border border-slate-100">
-          {/* Contact Info */}
-          <div className="w-full md:w-1/2 p-8">
+          {/* Compact Contact Card */}
+          <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-slate-200/90 shadow-2xs">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 sm:mb-5">
+              Incubation Center
+            </h3>
 
-
-            <div className="space-y-4 text-gray-700 text-lg">
-              <div className="flex items-start gap-3">
-                <MapPin className="text-blue-600 mt-1" />
-                <p>GBU Campus, Greater Noida – 201312, UP, India</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Phone className="text-blue-600 mt-1" />
-                <p>0120-2346170 / 4275</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Mail className="text-blue-600 mt-1" />
+            <div className="space-y-3.5 sm:space-y-4 text-slate-700 text-xs sm:text-base mb-6 sm:mb-8">
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:incubator@gbu.ac.in"  >
+                  <span className="font-semibold text-slate-900">E-mail: </span>
+                  <a href="mailto:incubator@gbu.ac.in" className="text-indigo-600 hover:underline break-all sm:break-normal">
                     incubator@gbu.ac.in
                   </a>
-                  <br />
-                  <a href="mailto:gburif@gbu.ac.in"  >
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-slate-900">E-mail: </span>
+                  <a href="mailto:gburif@gbu.ac.in" className="text-indigo-600 hover:underline break-all sm:break-normal">
                     gburif@gbu.ac.in
                   </a>
                 </div>
               </div>
+
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-slate-900">Phone: </span>
+                  <span>+91-0120-2344209/6170/4275</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 shrink-0 mt-0.5" />
+                <div>
+                  <span>GBU Campus, Gr Noida-201312, UP, India</span>
+                </div>
+              </div>
             </div>
 
-            {/* Social Media */}
-            <div className="mt-6">
-              <h3 className="text-xl font-medium text-gray-800 mb-2">Follow us</h3>
-              <div className="flex gap-4">
-                <a href="#" aria-label="LinkedIn" className="text-blue-700 hover:scale-110 transition">
-                  <Linkedin className="w-6 h-6" />
+            {/* Social Media Links */}
+            <div className="pt-4 sm:pt-6 border-t border-slate-100">
+              <h4 className="font-bold text-slate-900 text-xs sm:text-sm mb-3">
+                Important Links of Social Media platforms:
+              </h4>
+
+              <div className="flex gap-2.5 sm:gap-3 items-center">
+                <a
+                  href="https://www.facebook.com/profile.php?id=61550062356818"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs"
+                >
+                  <Facebook className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" aria-label="Twitter" className="text-sky-500 hover:scale-110 transition">
-                  <Twitter className="w-6 h-6" />
+
+                <a
+                  href="https://twitter.com/GBU_Incubation"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center transition-colors shadow-2xs"
+                >
+                  <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" aria-label="Facebook" className="text-blue-600 hover:scale-110 transition">
-                  <Facebook className="w-6 h-6" />
+
+                <a
+                  href="https://instagram.com/gbu_incubation_centre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-pink-600 hover:text-white flex items-center justify-center transition-colors shadow-2xs"
+                >
+                  <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
-                <a href="#" aria-label="Instagram" className="text-pink-500 hover:scale-110 transition">
-                  <Instagram className="w-6 h-6" />
-                </a>
-                <a href="#" aria-label="YouTube" className="text-red-600 hover:scale-110 transition">
-                  <Youtube className="w-6 h-6" />
+
+                <a
+                  href="https://www.linkedin.com/company/gbu-incubation-centre"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-blue-700 hover:text-white flex items-center justify-center transition-colors shadow-2xs"
+                >
+                  <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
               </div>
             </div>
 
-            <div className="mt-10">
-              <a
-                href="mailto:incubator@gbu.ac.in"
-                className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-indigo-700 shadow-md hover:shadow-lg transition-all"
-              >
-                Get in Touch
-              </a>
-            </div>
           </div>
 
-          {/* Google Map */}
-          <div className="w-full md:w-1/2 h-80 md:h-auto">
-            <iframe
-              title="Google Map - GBU"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2808.450765827336!2d77.52362523413468!3d28.4210116512394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cc0f9b557da4f%3A0x1fd3e901505650e!2sBodhisattva%20Dr.%20B.R.%20Ambedkar%20Central%20Library!5e0!3m2!1sen!2sin!4v1751395008080!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              allowFullScreen=""
-              loading="lazy"
-              className="border-0"
-            ></iframe>
-          </div>
-        </div>
         </div>
       </section>
     </SearchableWrapper>

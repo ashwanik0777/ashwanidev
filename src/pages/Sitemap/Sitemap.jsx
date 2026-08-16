@@ -134,7 +134,7 @@ const sitemapAbout = [
     children: [
       { title: "Research Centers", path: "/research/research-centers" },
       { title: "Publications & Patents", path: "/research/publications-patents" },
-      { title: "Incubation Center & Startups", path: "/research/incubation" },
+      { title: "GBU Incubation Centre", path: "/research/incubation" },
       { title: "Institution Innovation Council", path: "/research/institution-innovation" },
       { title: "IPR Cell", path: "/research/ipr-cell" }
     ],

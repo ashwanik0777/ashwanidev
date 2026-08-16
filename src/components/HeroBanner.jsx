@@ -76,11 +76,11 @@ const bgThemes = {
 };
 
 
-const BannerSection = ({ title, bgTheme = 1 }) => {
+const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
   const theme = bgThemes[bgTheme] || bgThemes[1];
 
   return (
-    <section className={clsx("relative min-h-[15vh] flex items-center justify-center overflow-hidden", theme.sectionBg)}>
+    <section className={clsx("relative min-h-[15vh] flex items-center justify-center overflow-hidden py-8", theme.sectionBg)}>
       {/* Animated Background Circles */}
       <div className="absolute inset-0">
         {theme.circles.map((circle, idx) => (
@@ -94,6 +94,11 @@ const BannerSection = ({ title, bgTheme = 1 }) => {
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
             {title}
           </h1>
+          {subtitle && (
+            <p className="mt-2 text-sm sm:text-base md:text-lg font-medium text-gray-600">
+              {subtitle}
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -102,6 +107,7 @@ const BannerSection = ({ title, bgTheme = 1 }) => {
 
 BannerSection.propTypes = {
   title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
   bgTheme: PropTypes.number,
 };
 

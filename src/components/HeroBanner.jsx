@@ -94,11 +94,11 @@ const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
             {title}
           </h1>
-          {subtitle && (
+          {/* {subtitle && (
             <p className="mt-2 text-sm sm:text-base md:text-lg font-medium text-gray-600">
               {subtitle}
             </p>
-          )}
+          )} */}
         </div>
       </div>
     </section>

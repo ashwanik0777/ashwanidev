@@ -186,9 +186,9 @@ const Programs = ({
               {heading}
             </h2>
             <div className="h-0.5 w-16 bg-blue-700 mx-auto mb-4 rounded-full"></div>
-            <p className="text-base text-slate-600 max-w-2xl mx-auto">
+            {/* <p className="text-base text-slate-600 max-w-2xl mx-auto">
               {subheading}
-            </p>
+            </p> */}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

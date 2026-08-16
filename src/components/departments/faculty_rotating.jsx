@@ -152,9 +152,9 @@ export default function FacultyResponsiveSlider({
           {title}
           <div className="w-16 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </h2>
-        {subTitle && (
+        {/* {subTitle && (
           <p className="text-gray-600 text-sm mt-1">{subTitle}</p>
-        )}
+        )} */}
       </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-4">

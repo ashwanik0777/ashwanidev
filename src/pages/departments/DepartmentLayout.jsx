@@ -43,9 +43,9 @@ const DepartmentLayout = ({
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
           Research Areas
         </h2>
-        <p className="text-xl text-blue-600 text-center  max-w-3xl mx-auto">
+        {/* <p className="text-xl text-blue-600 text-center  max-w-3xl mx-auto">
           Explore our diverse research areas that push the boundaries of technology and innovation.
-        </p>
+        </p> */}
       </div>
 
       <StatsCard

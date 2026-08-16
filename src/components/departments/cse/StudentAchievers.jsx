@@ -46,9 +46,9 @@ const StudentAchievers = ({
               <h2 className="text-4xl font-bold text-foreground mb-4">
                 {achieversHeading}
               </h2>
-              <p className="text-xl text-muted-foreground">
+              {/* <p className="text-xl text-muted-foreground">
                 {achieversSubheading}
-              </p>
+              </p> */}
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -109,9 +109,9 @@ const StudentAchievers = ({
               <h2 className="text-4xl font-bold text-foreground mb-4">
                 {achievementsHeading}
               </h2>
-              <p className="text-xl text-muted-foreground text-blue-600">
+              {/* <p className="text-xl text-muted-foreground text-blue-600">
                 {achievementsSubheading}
-              </p>
+              </p> */}
             </div>
 
       <StatsCard

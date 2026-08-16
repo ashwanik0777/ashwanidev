@@ -1,4 +1,4 @@
-import { GraduationCap, Clock, Download, ChevronDown } from "lucide-react";
+﻿import { GraduationCap, Clock, Download, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 /**
@@ -27,8 +27,15 @@ const generateSessions = (count) => {
 
 const ProgramCard = ({ program }) => {
   const years = parseDurationYears(program.duration);
-  const sessions = generateSessions(years);
-  const [selectedSession, setSelectedSession] = useState(sessions[0]);
+  const fallbackSessions = generateSessions(years);
+
+  // Use actual sessions defined in syllabus data, fallback to generated sessions if empty
+  const availableSessions =
+    program.syllabus && program.syllabus.length > 0
+      ? program.syllabus.map((s) => s.session)
+      : fallbackSessions;
+
+  const [selectedSession, setSelectedSession] = useState(availableSessions[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Find syllabus URL for selected session
@@ -91,7 +98,7 @@ const ProgramCard = ({ program }) => {
                   onClick={() => setDropdownOpen(false)}
                 />
                 <div className="absolute z-50 bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden">
-                  {sessions.map((session) => (
+                  {availableSessions.map((session) => (
                     <button
                       key={session}
                       onClick={() => {

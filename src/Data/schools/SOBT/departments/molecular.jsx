@@ -116,6 +116,7 @@ export const departmentLayoutData = {
         "Clinical Research",
         "Research Dissertation",
       ],
+      syllabusUrl: "https://drive.google.com/file/d/1rwFl8A40JqHjTmxvMus3PJ0e_sabS-aC/preview",
       syllabus: [],
     },
     {
@@ -137,6 +138,7 @@ export const departmentLayoutData = {
         "Quality Control",
         "Research Project",
       ],
+      syllabusUrl: "https://drive.google.com/file/d/17hLso0pXo2YDf0pYdXiQyK7VgaVYrV9W/preview",
       syllabus: [],
     },
     {
@@ -158,6 +160,7 @@ export const departmentLayoutData = {
         "Teaching Assistantship",
         "Thesis Defense",
       ],
+      syllabusUrl: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview",
       syllabus: [],
     },
   ],

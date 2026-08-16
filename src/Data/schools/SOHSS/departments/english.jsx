@@ -98,69 +98,98 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) English",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "A comprehensive undergraduate program covering British, American, Indian, and world literatures with emphasis on literary criticism, creative writing, and communicative English.",
-      image:
-        "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-rose-500 to-rose-600",
-      highlights: [
-        "British Literature",
-        "American Literature",
-        "Indian Writing in English",
-        "Literary Criticism",
-        "Creative Writing",
-        "Communicative English",
-        "Linguistics",
-        "Postcolonial Literature",
-      ],
-      syllabus: [],
+        id: "ba-english",
+        title: "B.A. (English)",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "60 Students",
+        description: "British, American, and Indian English literature, literary criticism, phonetics, creative writing, and communicative rhetoric.",
+        image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-500 to-indigo-600",
+        highlights: [
+            "British & World Literature",
+            "Literary Theory & Criticism",
+            "Creative Writing",
+            "Phonetics & Linguistics"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview"
+            }
+        ]
     },
     {
-      title: "M.A. English",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "An advanced postgraduate program exploring literary theory, comparative literature, and specialized areas of English studies with research orientation.",
-      image:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
-      highlights: [
-        "Literary Theory",
-        "Comparative Literature",
-        "Postcolonial Studies",
-        "Translation Studies",
-        "Research Methodology",
-        "Gender & Literature",
-        "Cultural Studies",
-        "Dissertation",
-      ],
-      syllabus: [],
+        id: "ma-english",
+        title: "M.A. (English)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Postcolonial studies, gender and literature, European classical literature, semiotics, critical theory, and master dissertation.",
+        image: "https://images.unsplash.com/photo-1474932430478-367dbb6832c1?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-purple-700",
+        highlights: [
+            "Postcolonial Theories",
+            "Critical & Cultural Theory",
+            "Translation Studies",
+            "Master Thesis"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. English",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "A doctoral program for advanced research in English literature, linguistics, and related interdisciplinary areas under expert faculty supervision.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "International Exposure",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "ma-linguistics",
+        title: "M.A. Linguistics",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Morphology, syntax, acoustic phonetics, sociolinguistics, computational language processing, and language acquisition.",
+        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-500 to-indigo-600",
+        highlights: [
+            "Syntactic Structures",
+            "Phonology & Phonetics",
+            "Sociolinguistics",
+            "Language Documentation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "phd-english",
+        title: "Ph.D. English",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original scholarship in literary theory, comparative literature, and cultural studies.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-700 to-slate-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Seminars & Peer Reviews",
+            "Indexed Journal Publications",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Sumitra Huidrom",

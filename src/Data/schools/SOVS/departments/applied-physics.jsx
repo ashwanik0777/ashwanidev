@@ -93,62 +93,121 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Sc. (Hons.) Physics",
-      duration: "3 Years",
-      intake: "40 Students",
-      description:
-        "Undergraduate honors program in physics covering mechanics, thermodynamics, electromagnetism, wave optics, and modern physics with lab experimentation.",
-      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
-      highlights: [
-        "Classical Mechanics & Electrodynamics",
-        "Wave Optics & Laser Physics",
-        "Quantum Mechanics basics",
-        "Analog & Digital Electronics Lab",
-        "Thermal Physics",
-        "Computational Physics with C++/Python",
-        "Modern Physics experiments",
-      ],
-      syllabus: [],
+        id: "bsc-physical-sciences",
+        title: "B.Sc. Physical Sciences",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "50 Students",
+        description: "Foundational undergraduate curriculum spanning classical mechanics, electromagnetism, wave optics, modern physics, and experimental laboratory methods.",
+        image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "Classical & Quantum Mechanics",
+            "Electromagnetic Theory",
+            "Wave Optics & Lasers",
+            "Modern Physics Labs"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview",
+        syllabus: [
+            {
+                session: "Course Structure and Syllabus",
+                url: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview"
+            }
+        ]
     },
     {
-      title: "M.Sc. Applied Physics",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Postgraduate program focusing on solid state devices, materials science, thin film technology, semiconductor physics, and nanotechnology.",
-      image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Condensed Matter Physics",
-        "Thin Film & Vacuum Technology",
-        "Nanostructured Materials & Nanoelectronics",
-        "Laser Spectroscopy & Fiber Optics",
-        "Material Characterization Lab",
-        "Thin Film Fabrication Lab",
-        "M.Sc. Research Dissertation",
-      ],
-      syllabus: [],
+        id: "bsc-hons-physics-research",
+        title: "B.Sc. (Hons.) Physics / with Research",
+        level: "UG",
+        duration: "4 Years",
+        intake: "40 Students",
+        description: "NEP-aligned honors physics degree emphasizing solid state physics, nuclear physics, quantum mechanics, and dedicated undergraduate research.",
+        image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-blue-700",
+        highlights: [
+            "Solid State Physics",
+            "Nuclear & Particle Physics",
+            "Computational Physics",
+            "Honors Research Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview",
+        syllabus: [
+            {
+                session: "Course Structure and Syllabus",
+                url: "https://drive.google.com/file/d/1j1BCmZe04ibF3aB6J7Tb2-ZkzBuqIJ0Q/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. Applied Physics",
-      duration: "3-5 Years",
-      intake: "4 Students",
-      description:
-        "Doctoral research in thin-film solar cells, gas sensors, polymer nanocomposites, energy storage devices, and nanostructures.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-500 to-red-600",
-      highlights: [
-        "Independent Solid State Research",
-        "Advanced Characterization Studies",
-        "Research Methodology & Review",
-        "Thin Film Solar Cell Fabrication",
-        "Journal Publications",
-        "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "msc-physics-specializations",
+        title: "M.Sc. Physics (Astrophysics, Energy Studies, Photonics, Quantum)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Advanced post-graduate degree offering cutting-edge specializations in Astrophysics, Solar & Renewable Energy Studies, Photonics, and Quantum Information.",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-cyan-600 to-blue-700",
+        highlights: [
+            "Astrophysics & Cosmology",
+            "Energy Studies & Solar Cells",
+            "Photonics & Lasers",
+            "Quantum Computing & Info"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "msc-physics-batch",
+        title: "M.Sc. Physics (Batch 2024-26)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "CBCS curriculum covering electrodynamics, statistical mechanics, advanced quantum mechanics, materials characterization, and master thesis.",
+        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-teal-700",
+        highlights: [
+            "Advanced Quantum Mechanics",
+            "Electrodynamics",
+            "Statistical Physics",
+            "Master Thesis Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview",
+        syllabus: [
+            {
+                session: "Course Structure and Syllabus",
+                url: "https://drive.google.com/file/d/1tWVEoifehX7MEQbA6LUksu9Pn925Td89/preview"
+            }
+        ]
+    },
+    {
+        id: "phd-applied-physics",
+        title: "Ph.D. (Physics)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting innovations in condensed matter physics, plasma diagnostics, thin films, nanomaterials, and optoelectronics.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-700 to-slate-900",
+        highlights: [
+            "Condensed Matter Lab",
+            "Thin Film Deposition",
+            "Peer-Reviewed Publications",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk/preview",
+        syllabus: [
+            {
+                session: "Course Structure and Syllabus",
+                url: "https://drive.google.com/file/d/1byH_FnKZo8W_ldQFaqgUkRtO-y0iWmdk/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 4 dedicated faculty members with research expertise in thin films, solar energy materials, sensor devices, and condensed matter physics.",
     stats: [

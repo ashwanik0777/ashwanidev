@@ -93,82 +93,98 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech. Food Processing & Technology",
-      duration: "4 Years",
-      intake: "60 Students",
-      description:
-        "Four-year engineering degree covering food physics, chemical analysis, unit operations, dairy engineering, and regulatory standards.",
-      image: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-50 to-orange-100",
-      highlights: [
-        "Food Biochemistry & Nutrition",
-        "Food Engineering Unit Operations",
-        "Food Microbiology & Fermentation",
-        "Beverage & Bakery Technology",
-        "Dairy & Meat Processing Technology",
-        "Quality Control & HACCP",
-        "In-plant training",
-        "B.Tech Project & Seminar",
-      ],
-      syllabus: [],
+        id: "btech-food-processing-tech",
+        title: "B.Tech. (Food Processing and Technology)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Engineering principles applied to food preservation, dairy processing, thermal & non-thermal preservation, food plant layout, and quality assurance.",
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Food Preservation Engineering",
+            "Dairy & Beverage Technology",
+            "Food Safety (HACCP & FSSAI)",
+            "Food Plant Machinery"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
+            }
+        ]
     },
     {
-      title: "B.Voc. Food Processing",
-      duration: "3 Years",
-      intake: "50 Students",
-      description:
-        "Skill-based undergraduate program aligned with NSQF guidelines, focused on food preservation, processing line operations, and packaging.",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-yellow-50 to-yellow-100",
-      highlights: [
-        "NSQF level certifications",
-        "Food preservation techniques",
-        "Grain & Pulses milling",
-        "Packaging operations",
-        "Entrepreneurship modules",
-        "Multiple exit options (Diploma/B.Voc)",
-        "Industrial project training",
-      ],
-      syllabus: [],
+        id: "mtech-food-processing-tech",
+        title: "M.Tech. (Food Processing and Technology)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced post-graduate training in food process modeling, novel food packaging, nutraceuticals, advanced rheology, and bioprocess engineering.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-red-700",
+        highlights: [
+            "Novel Food Packaging",
+            "Nutraceutical Formulation",
+            "Bioprocess Engineering",
+            "Master Research Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
+            }
+        ]
     },
     {
-      title: "M.Tech. Food Processing & Technology",
-      duration: "2 Years",
-      intake: "18 Students",
-      description:
-        "Advanced postgraduate program specializing in food safety audit, novel product formulation, process optimization, and industrial automation.",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-red-50 to-red-100",
-      highlights: [
-        "Advanced Food Engineering",
-        "Novel Food Processing Technologies",
-        "Bioprocess Engineering",
-        "Food safety standards & auditing",
-        "Advanced Food Packaging",
-        "Industrial Internship",
-        "Dissertation Research",
-      ],
-      syllabus: [],
+        id: "msc-food-science",
+        title: "M.Sc. Food Science",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Study of food chemistry, food microbiology, sensory evaluation techniques, fermentation technologies, and international food regulatory laws.",
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-yellow-700",
+        highlights: [
+            "Food Microbiology & Safety",
+            "Sensory Analysis & Flavour",
+            "Food Chemistry & Nutrition",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. Food Processing & Technology",
-      duration: "3-5 Years",
-      intake: "4 Students",
-      description:
-        "Doctoral research in functional foods, value-added products, packaging innovations, and waste valorization.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Independent Research",
-        "Functional Compound Extraction",
-        "Research Methodology",
-        "Lab automation studies",
-        "High impact publication",
-        "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "phd-food-processing-tech",
+        title: "Ph.D. in Food Processing and Technology",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original innovations in functional foods, green extraction, food waste valorization, and shelf-life modeling.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-700 to-slate-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Food Engineering Lab",
+            "Functional Food Research",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/112gjTG5GexRx7MyIUyCdPhVEdQZhaI85/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 6 dedicated faculty members with research expertise in food engineering, preservation, bio-active compounds, and dairy technology.",
     stats: [

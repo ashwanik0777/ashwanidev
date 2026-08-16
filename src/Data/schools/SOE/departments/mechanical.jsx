@@ -94,63 +94,152 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Tech Mechanical Engineering",
-      duration: "4 Years",
-      intake: "60 Students",
-      description:
-        "Comprehensive undergraduate program covering design, manufacturing, thermal engineering, and industrial automation with industry internships.",
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Machine Design", "Thermodynamics", "Manufacturing Processes", "CAD/CAM",
-        "Fluid Mechanics", "Material Science", "Robotics", "Industry Internship",
-      ],
-      syllabus: [],
+        id: "btech-mechanical-engg",
+        title: "B.Tech (Mechanical Engineering)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Comprehensive study of thermodynamics, solid mechanics, fluid machinery, manufacturing processes, and machine design.",
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Thermodynamics & Heat Transfer",
+            "Machine Design & CAD",
+            "Manufacturing Technologies",
+            "Fluid Mechanics"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+            },
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+            }
+        ]
     },
     {
-      title: "M.Tech Thermal Engineering",
-      duration: "2 Years",
-      intake: "15 Students",
-      description:
-        "Specialization in heat transfer, combustion, refrigeration, and renewable energy systems with research orientation.",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Heat Transfer", "IC Engines", "Renewable Energy", "CFD",
-        "Refrigeration & HVAC", "Power Plant Engineering", "Research Thesis", "Lab Work",
-      ],
-      syllabus: [],
+        id: "btech-me-automobile-minor",
+        title: "B.Tech Mechanical Engineering with minor (Automobile and Industrial Engineering)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "30 Students",
+        description: "Specialized mechanical track in automotive chassis engineering, IC engines, vehicle aerodynamics, and operations research.",
+        image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-red-500 to-orange-600",
+        highlights: [
+            "Automotive Chassis & Engines",
+            "Industrial Operations Research",
+            "Vehicle Dynamics",
+            "Quality Control"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview"
+            }
+        ]
     },
     {
-      title: "M.Tech Production & Industrial Engineering",
-      duration: "2 Years",
-      intake: "15 Students",
-      description:
-        "Focus on advanced manufacturing, CNC, CAD/CAM, quality engineering, and supply chain management.",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlights: [
-        "CNC Programming", "CAD/CAM", "Quality Engineering", "Supply Chain",
-        "3D Printing", "Automation", "Research Project", "Industry Training",
-      ],
-      syllabus: [],
+        id: "btech-me-mechatronics-minor",
+        title: "B.Tech Mechanical Engineering with minor (Mechatronics and Automation)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "30 Students",
+        description: "Interdisciplinary minor merging microcontrollers, pneumatic/hydraulic actuators, PLC systems, and robotic cells.",
+        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "PLC & Pneumatics",
+            "Sensors & Actuators",
+            "Robotic Cells",
+            "Embedded Mechatronics"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. in Mechanical Engineering",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral research in thermal engineering, materials science, manufacturing, tribology, and renewable energy.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Publications",
-        "Conference Funding", "Teaching Assistantship", "Patent Filing",
-        "Industry Collaboration", "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "mtech-me-streams",
+        title: "M.Tech. (Manufacturing Engg, Design Engg., Thermal Engg.)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced postgraduate modules in FEA analysis, computational fluid dynamics (CFD), additive manufacturing, and thermal design.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-red-700",
+        highlights: [
+            "Finite Element Analysis (FEA)",
+            "Computational Fluid Dynamics",
+            "Additive Manufacturing",
+            "Thesis"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
+            },
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "mtech-me-working-prof",
+        title: "M.Tech in Mechanical Engineering (Weekend Program for Working Professionals)",
+        level: "PG (Working Exec)",
+        duration: "3 Years",
+        intake: "30 Students",
+        description: "Flexible weekend postgraduate degree providing industrial engineers with advanced design and manufacturing tools.",
+        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-600 to-slate-800",
+        highlights: [
+            "Weekend Timetable",
+            "Applied Industrial Projects",
+            "CAD/CAM & FEA",
+            "Executive Degree"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+            }
+        ]
+    },
+    {
+        id: "phd-mechanical-engg",
+        title: "Ph.D. (Mechanical Engg.)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original contributions in thermal sciences, nanomaterials, renewable energy, and CAD/CAM.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-amber-700",
+        highlights: [
+            "Doctoral Coursework",
+            "Thermal & Materials Research",
+            "Indexed Journal Publications",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 9+ experienced faculty members with expertise in thermal, manufacturing, and design engineering.",
     stats: [

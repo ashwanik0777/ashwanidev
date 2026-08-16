@@ -102,76 +102,168 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "MBA (Full-Time)",
-      duration: "2 Years (4 Semesters)",
-      intake: "120 Students",
-      description:
-        "Flagship MBA program with specializations in Finance, HRM, Marketing, Operations, Strategy, and Business Analytics. Includes summer internships from 2nd semester.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Finance", "HRM", "Marketing", "Operations",
-        "Strategy", "Business Analytics", "Summer Internship", "Industry Projects",
-      ],
-      syllabus: [],
+        id: "dual-degree-bba-mba",
+        title: "Dual Degree BBA + MBA (with Exit Option)",
+        level: "UG/PG Integrated",
+        duration: "4-5 Years",
+        intake: "60 Students",
+        description: "Integrated 5-year business administration degree providing foundational managerial acumen with exit option at BBA (Hons.) and advanced MBA specializations in Finance, Marketing, HR, and Operations.",
+        image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Dual Degree Integration",
+            "BBA Exit Option",
+            "Cross-Disciplinary Electives",
+            "Corporate Summer Internship"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+            },
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+            }
+        ]
     },
     {
-      title: "Dual Degree BBA+MBA (with exit option)",
-      duration: "5 Years",
-      intake: "60 Students",
-      description:
-        "Integrated dual degree program building strong foundations in business management. Students have the option to exit after BBA.",
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Business Fundamentals", "Finance", "Marketing", "HRM",
-        "Operations", "Strategy", "Exit after BBA", "Industry Exposure",
-      ],
-      syllabus: [],
+        id: "bcom-honours",
+        title: "B.Com. (Honours)",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "60 Students",
+        description: "Comprehensive financial accounting, corporate taxation, auditing standards, banking laws, business analytics, and cost management under the National Education Policy (NEP).",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        highlights: [
+            "Corporate Accounting & Tax",
+            "Auditing & Assurance",
+            "Financial Management",
+            "NEP Multidisciplinary Framework"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+            },
+            {
+                session: "Syllabus (NEP)",
+                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+            }
+        ]
     },
     {
-      title: "B.Com (Honours)",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "Undergraduate commerce program with a strong base in accounting, taxation, financial management, and business economics.",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Accounting", "Taxation", "Financial Management", "Business Law",
-        "Economics", "Corporate Governance", "Auditing", "Business Statistics",
-      ],
-      syllabus: [],
+        id: "master-business-administration",
+        title: "MBA (Master of Business Administration)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "120 Students",
+        description: "Flagship postgraduate management program offering dual specializations in Finance, Marketing, Human Resource Management, Operations & Supply Chain, and Information Technology.",
+        image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Dual Specializations",
+            "Harvard Case Methodology",
+            "Corporate Mentorship",
+            "Live Consulting Projects"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+            },
+            {
+                session: "Course Outline",
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+            }
+        ]
     },
     {
-      title: "MBA (Business Analytics & Data Science)",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Analytics-focused MBA in association with IBM. Covers predictive analytics, data mining, AI/ML applications, and Python programming for business.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
-      highlights: [
-        "Predictive Analytics", "Data Mining", "AI/ML in Business", "Python",
-        "Business Intelligence", "Big Data", "IBM Partnership", "Data Visualization",
-      ],
-      syllabus: [],
+        id: "mba-executive",
+        title: "MBA (Executive)",
+        level: "PG (Executive)",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Intensive weekend executive management program tailored for working professionals, corporate executives, and entrepreneurs focusing on strategic leadership and global business transformation.",
+        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-slate-700 to-zinc-900",
+        highlights: [
+            "Weekend Delivery Format",
+            "Strategic Decision Making",
+            "C-Suite Leadership Modules",
+            "Executive Industry Capstone"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+            },
+            {
+                session: "Course Outline",
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. (Business Management)",
-      duration: "3-5 Years",
-      intake: "15 Students",
-      description:
-        "Doctoral research program across all functional areas of management including Finance, Marketing, HRM, Operations, and Strategy.",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Independent Research", "Finance Research", "Marketing Research", "HRM Research",
-        "Operations Research", "Conference Publications", "UGC-NET/JRF", "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "mba-business-analytics",
+        title: "MBA (Business Analytics & Data Science)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Techno-managerial curriculum integrating predictive modeling, machine learning for business, big data visualization (Tableau/PowerBI), quantitative marketing, and fintech analytics.",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-purple-700",
+        highlights: [
+            "Predictive & Prescriptive Analytics",
+            "Python & R for Decision Science",
+            "Data Visualization & Dashboards",
+            "FinTech & Marketing Models"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+            },
+            {
+                session: "Course Outline",
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "phd-business-management",
+        title: "Ph.D. in Business Management",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Rigorous doctoral research program cultivating original scholarship in organizational behavior, corporate governance, strategic finance, consumer psychology, and supply chain dynamics.",
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-700 to-slate-900",
+        highlights: [
+            "Advanced Research Methodologies",
+            "Quantitative & Qualitative Analysis",
+            "Peer-Reviewed Journal Publishing",
+            "Ph.D. Dissertation Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview"
+            },
+            {
+                session: "Course Outline",
+                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our 17+ faculty members bring rich academic expertise and industry experience across Finance, HRM, Marketing, Operations, Strategy, and Analytics.",
     stats: [

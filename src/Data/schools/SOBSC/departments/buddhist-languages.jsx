@@ -49,9 +49,172 @@ export const departmentLayoutData = {
     missionPoints: ["Rigorous training in Pali & Sanskrit", "Critical textual scholarship", "Digital tools for language learning", "International collaboration", "Academic career preparation"],
   },
   programsData: [
-    { title: "M.A. Buddhist Studies (Language Focus)", duration: "2 Years", intake: "20 Students", description: "Specialized focus on Pali and Sanskrit language training.", image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80", gradient: "from-orange-500 to-yellow-600", highlights: ["Pali Grammar", "Sanskrit for Buddhist Studies", "Canonical Literature", "Translation Methods"], syllabus: [] },
-    { title: "Ph.D. Buddhist Languages", duration: "3-5 Years", intake: "5 Students", description: "Original research in Buddhist philology and textual criticism.", image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80", gradient: "from-amber-500 to-orange-600", highlights: ["Textual Criticism", "Comparative Philology", "Digital Text Analysis", "Thesis Defense"], syllabus: [] },
-  ],
+    {
+        id: "ba-hons-buddhist-studies",
+        title: "Bachelor of Arts (Hons.) in Buddhist Studies & Civilization",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "30 Students",
+        description: "Undergraduate curriculum covering Buddhist philosophy, canonical literature, Pali language, ancient Indian history, art, and architecture.",
+        image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Pali Canonical Literature",
+            "Buddhist Art & Architecture",
+            "Indian Epistemology",
+            "Vipassana Meditation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
+            },
+            {
+                session: "Syllabus (NEP)",
+                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
+            }
+        ]
+    },
+    {
+        id: "ma-buddhist-studies",
+        title: "M.A. in Buddhist Studies and Civilization",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Postgraduate degree exploring Vinaya Pitaka, Sutta Pitaka, Abhidhamma, Mahayana philosophy, and comparative Buddhist traditions.",
+        image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-amber-600",
+        highlights: [
+            "Vinaya & Sutta Pitaka",
+            "Mahayana Philosophy",
+            "Abhidhamma Analysis",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview"
+            }
+        ]
+    },
+    {
+        id: "mphil-buddhist-studies",
+        title: "M.Phil. in Buddhist Studies and Civilization",
+        level: "Doctoral",
+        duration: "1.5-2 Years",
+        intake: "10 Students",
+        description: "Advanced pre-doctoral research program focusing on research methodologies, textual criticism, and specialized Buddhist studies.",
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-yellow-500 to-amber-600",
+        highlights: [
+            "Advanced Research Methodology",
+            "Manuscriptology",
+            "Comparative Buddhist Philosophy",
+            "Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
+            }
+        ]
+    },
+    {
+        id: "phd-buddhist-studies",
+        title: "Ph.D. in Buddhist Studies and Civilization",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting original scientific discovery in Buddhist philosophy, archaeology, and historical interactions.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-yellow-700",
+        highlights: [
+            "Original Research",
+            "Doctoral Coursework",
+            "Seminars & Peer Reviews",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabus: [
+            {
+                session: "Course Work & Syllabus",
+                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
+            }
+        ]
+    },
+    {
+        id: "pali-language-literature",
+        title: "Pali Language and Literature (PG Diploma & Certificate)",
+        level: "Diploma",
+        duration: "6 Months - 1 Year",
+        intake: "30 Students",
+        description: "Intensive training in Pali grammar, canonical script translation, canonical poetry, and historical linguistics.",
+        image: "https://images.unsplash.com/photo-1474418397713-6b7f0c1f1d3b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-red-600",
+        highlights: [
+            "Pali Grammar & Composition",
+            "Canonical Translation",
+            "Textual Analysis",
+            "Certificate / PG Diploma"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
+            }
+        ]
+    },
+    {
+        id: "buddhist-tourism-heritage",
+        title: "Post Graduate Diploma in Buddhist Tourism and Heritage",
+        level: "Diploma",
+        duration: "1 Year",
+        intake: "25 Students",
+        description: "Specialized vocational program designed for heritage conservation, Buddhist circuit management, tour interpretation, and site archaeology.",
+        image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-yellow-600 to-amber-700",
+        highlights: [
+            "Buddhist Circuit Heritage",
+            "Archaeological Sites",
+            "Tour Guiding & Management",
+            "Field Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
+            }
+        ]
+    },
+    {
+        id: "human-values-buddhist-ethics",
+        title: "Human Values and Buddhist Ethics",
+        level: "Open Elective",
+        duration: "1 Semester",
+        intake: "All University Students",
+        description: "University-wide foundational course covering the Four Noble Truths, Eightfold Path, Panchasila, socially engaged Buddhism, and mindfulness.",
+        image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-500",
+        highlights: [
+            "Four Noble Truths & Eightfold Path",
+            "Panchasila & Ethics",
+            "Socially Engaged Buddhism",
+            "Mindfulness Practice"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     { name: "Dr. Manish T. Meshram", position: "Assistant Professor", specialization: "Pali Language, Buddhist Canon", email: "manish.meshram@gbu.ac.in", achievements: "Ph.D.; Pali canonical literature expert", image: "https://faculty.gbu.ac.in/uploads/photos/661d144021f36_Passport%20photo.jpg", color: "from-orange-500 to-yellow-600", extraIcon: Award },
     { name: "Dr. Gyanaditya Shakya", position: "Assistant Professor", specialization: "Sanskrit Buddhist Literature, Mahāyāna Studies", email: "gyanaditya@gbu.ac.in", achievements: "Ph.D.; Mahāyāna sūtra literature research", image: "https://ui-avatars.com/api/?name=Gyanaditya+Shakya&size=300&background=F59E0B&color=fff", color: "from-yellow-500 to-amber-600" },

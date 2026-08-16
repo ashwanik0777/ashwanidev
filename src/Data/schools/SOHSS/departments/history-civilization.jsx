@@ -98,69 +98,102 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) History",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "A comprehensive undergraduate program covering ancient, medieval, and modern Indian history alongside world history, with emphasis on critical analysis, source evaluation, and historical methodology.",
-      image:
-        "https://images.unsplash.com/photo-1604580864964-0462f5d5b1a8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
-      highlights: [
-        "Ancient India",
-        "Medieval India",
-        "Modern India",
-        "World History",
-        "Indian Art & Architecture",
-        "Historical Methods",
-        "Archaeology Basics",
-        "Heritage Studies",
-      ],
-      syllabus: [],
+        id: "ba-ma-history",
+        title: "B.A. and M.A. (History)",
+        level: "UG/PG",
+        duration: "3-5 Years",
+        intake: "40 Students",
+        description: "Ancient, medieval, and modern Indian history, world civilizations, historiography, epigraphy, and archival studies.",
+        image: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Indian Historiography",
+            "Epigraphy & Numismatics",
+            "World Civilizations",
+            "Archival Research"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
     {
-      title: "M.A. History",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "An advanced postgraduate program exploring specialized areas of Indian and world history with emphasis on historiography, research methodology, and archival studies.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Historiography",
-        "Archival Studies",
-        "Cultural History",
-        "Economic History",
-        "Political History",
-        "Research Methodology",
-        "Museum Studies",
-        "Dissertation",
-      ],
-      syllabus: [],
+        id: "ma-hindu-studies",
+        title: "M.A. in Hindu Studies",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Systematic exploration of Vedic literature, Darshana systems, Upanishadic thought, Sanskrit source texts, and cultural traditions.",
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-yellow-600",
+        highlights: [
+            "Vedic & Upanishadic Texts",
+            "Six Darshanas",
+            "Sanskrit Hermeneutics",
+            "Cultural Heritage"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            },
+            {
+                session: "Detailed Syllabus",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. History",
-      duration: "3-5 Years",
-      intake: "6 Students",
-      description:
-        "A doctoral program for advanced research in Indian and world history, archaeology, and cultural studies under expert faculty supervision.",
-      image:
-        "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-rose-500 to-rose-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "Archival Research",
-        "Field Studies",
-        "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "ma-human-rights",
+        title: "M.A. in Human Rights",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "International human rights jurisprudence, constitutional safeguards, refugee laws, humanitarian interventions, and civil liberties.",
+        image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-slate-700",
+        highlights: [
+            "Human Rights Jurisprudence",
+            "UN Human Rights System",
+            "Refugee & Humanitarian Law",
+            "Fieldwork Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "mlibisc-library-science",
+        title: "M.Lib.I.Sc. (Master of Library and Information Science)",
+        level: "PG",
+        duration: "1-2 Years",
+        intake: "30 Students",
+        description: "Digital library architectures, metadata standards, information retrieval systems, research metrics, and database indexing.",
+        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-teal-700",
+        highlights: [
+            "Digital Library Software",
+            "Knowledge Organization (DDC/UDC)",
+            "Information Retrieval",
+            "Central Library Practicum"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Rakesh Kumar Srivastava",

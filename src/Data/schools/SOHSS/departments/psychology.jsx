@@ -94,66 +94,98 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A./B.Sc. (Hons.) Applied Psychology with Research",
-      duration: "3-4 Years",
-      intake: "40 Students",
-      description:
-        "Comprehensive undergraduate program in applied psychology with integrated research training, covering clinical, developmental, and social psychology.",
-      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-violet-500 to-violet-600",
-      highlights: [
-        "General Psychology", "Developmental Psychology", "Social Psychology",
-        "Abnormal Psychology", "Cognitive Psychology", "Research Methods",
-        "Psychometric Testing", "Research Project",
-      ],
-      syllabus: [],
+        id: "psychology-mental-health",
+        title: "Psychology & Mental Health",
+        level: "Diploma / Certificate",
+        duration: "1 Year",
+        intake: "30 Students",
+        description: "Applied foundations of mental well-being, stress coping mechanisms, psychological first aid, and community counselling.",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-500 to-cyan-600",
+        highlights: [
+            "Mental Health Foundations",
+            "Stress Management",
+            "Psychological First Aid",
+            "Community Outreach"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+            }
+        ]
     },
     {
-      title: "M.A./M.Sc. Applied Psychology",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Advanced program in applied psychology covering clinical assessment, counseling, industrial-organizational psychology, and research methodology.",
-      image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-pink-500 to-pink-600",
-      highlights: [
-        "Clinical Psychology", "Counseling Psychology", "Health Psychology",
-        "Organizational Psychology", "Psychopathology", "Psychological Assessment",
-        "Research Methodology", "Dissertation",
-      ],
-      syllabus: [],
+        id: "ba-bsc-applied-psychology-research",
+        title: "B.A. / B.Sc. (Hons.) with Research in Applied Psychology",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "NEP-aligned undergraduate degree with research focus in cognitive neuroscience, behavioral statistics, and developmental psychology.",
+        image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-cyan-600 to-blue-600",
+        highlights: [
+            "Cognitive Neuroscience",
+            "Psychometric Testing",
+            "Behavioral Statistics",
+            "Undergraduate Thesis"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+            }
+        ]
     },
     {
-      title: "M.Phil. Clinical Psychology",
-      duration: "2 Years",
-      intake: "12 Students",
-      description:
-        "RCI-recognized professional program providing intensive clinical training in psychological assessment, psychotherapy, and rehabilitation.",
-      image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Clinical Assessment", "Psychotherapy", "Neuropsychology",
-        "Child & Adolescent Psychology", "Rehabilitation Psychology", "Clinical Practicum",
-        "OPD Training", "Research Dissertation",
-      ],
-      syllabus: [],
+        id: "ma-msc-applied-psychology",
+        title: "M.A. / M.Sc. (Applied Psychology)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Postgraduate specialization in clinical assessment, organizational behavior, neuropsychology, and therapeutic interventions.",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-indigo-700",
+        highlights: [
+            "Clinical Assessment",
+            "Organizational Behavior",
+            "Neuropsychology",
+            "Hospital Internship"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. Psychology",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral research in clinical, health, neuropsychology, organizational, and counseling psychology with emphasis on original contributions.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Journal Publications",
-        "Conference Presentations", "Clinical Supervision", "Teaching Assistantship",
-        "Community Outreach", "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "mphil-clinical-psychology",
+        title: "M. Phil. (Clinical Psychology)",
+        level: "M.Phil / Pre-Doc",
+        duration: "2 Years",
+        intake: "12 Students",
+        description: "RCI-recognized professional clinical psychology training with supervised clinical postings, psychodiagnostics, and psychotherapy.",
+        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-pink-700",
+        highlights: [
+            "RCI Recognized Track",
+            "Supervised Clinical Postings",
+            "Psychodiagnostics",
+            "Psychotherapy Practice"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 11+ highly qualified faculty members with expertise across all major domains of psychology.",
     stats: [

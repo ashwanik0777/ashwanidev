@@ -93,62 +93,98 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Sc. (Hons.) Chemistry",
-      duration: "3 Years",
-      intake: "40 Students",
-      description:
-        "Undergraduate honors program in chemistry covering organic, inorganic, physical, analytical, and industrial chemistry with extensive lab practice.",
-      image: "https://images.unsplash.com/photo-1532187863486-abf9d39d66e8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Organic Synthesis",
-        "Inorganic & Coordination Chemistry",
-        "Physical Chemistry & Thermodynamics",
-        "Analytical Chemistry Methods",
-        "Industrial Chemistry Lab",
-        "Polymer Chemistry basics",
-        "Laboratory Safety Training",
-      ],
-      syllabus: [],
+        id: "bsc-hons-chemistry",
+        title: "B.Sc. (Hons.) in Chemistry",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "40 Students",
+        description: "Comprehensive study of organic reaction mechanisms, inorganic coordination compounds, physical thermodynamics, and spectroscopic methods.",
+        image: "https://images.unsplash.com/photo-1603555501671-8f96b3fce8e4?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        highlights: [
+            "Organic Synthesis",
+            "Coordination Chemistry",
+            "Thermodynamics & Kinetics",
+            "Spectroscopic Characterization"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+            }
+        ]
     },
     {
-      title: "M.Sc. Applied Chemistry",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Postgraduate program specializing in materials chemistry, green synthesis, polymer chemistry, separation techniques, and instrumental analysis.",
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Advanced Polymer Chemistry",
-        "Green Chemistry & Catalysis",
-        "Spectroscopic Identification Methods",
-        "Electrochemistry & Corrosion",
-        "Environmental Chemistry",
-        "Instrumental Analysis Lab",
-        "Dissertation Research",
-      ],
-      syllabus: [],
+        id: "msc-applied-chemistry",
+        title: "M.Sc. Chemistry",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Postgraduate curriculum in advanced organic synthesis, supramolecular chemistry, polymer chemistry, organometallics, and instrumentation.",
+        image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-cyan-700",
+        highlights: [
+            "Supramolecular Chemistry",
+            "Polymer & Materials Science",
+            "Organometallic Catalysis",
+            "Master Research Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview",
+        syllabus: [
+            {
+                session: "Syllabus",
+                url: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. Applied Chemistry",
-      duration: "3-5 Years",
-      intake: "4 Students",
-      description:
-        "Doctoral research in polymeric materials, waste remediation, coordination chemistry, natural products, and green synthesis technologies.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Independent Materials Research",
-        "Advanced Catalysis Research",
-        "Research Methodology & Ethics",
-        "CSIR/UGC Project fellowships",
-        "Scientific Writing & Patents",
-        "Thesis Submission & Defense",
-      ],
-      syllabus: [],
+        id: "pg-diploma-polyurethane",
+        title: "Post Graduate Diploma in Polyurethane Technology",
+        level: "PG Diploma",
+        duration: "1 Year",
+        intake: "25 Students",
+        description: "Industry-aligned vocational diploma covering polyurethane synthesis, polymer foam processing, coatings, adhesives, and testing standards.",
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Polymer Synthesis",
+            "Foam Formulation & Moulding",
+            "Coatings & Sealants",
+            "Industrial Quality Testing"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "phd-applied-chemistry",
+        title: "Ph.D. (Chemistry)",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "15 Students",
+        description: "Doctoral research program promoting discoveries in medicinal chemistry, green catalysis, electrochemistry, and functional nanomaterials.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-700 to-slate-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Green Catalysis Labs",
+            "Indexed Publications",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 5 dedicated faculty members specializing in polymer technology, inorganic synthesis, environmental chemistry, and green technologies.",
     stats: [

@@ -94,64 +94,102 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.Lib.I.Sc. (Bachelor of Library and Information Science)",
-      duration: "1 Year",
-      intake: "30 Students",
-      description:
-        "Undergraduate professional program introducing students to library administration, cataloging, classification, and basic information technology applications.",
-      image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Library & Society",
-        "Library Classification (Theory & Practice)",
-        "Library Cataloging (Theory & Practice)",
-        "Information Sources & Services",
-        "Library Management",
-        "ICT in Libraries",
-        "Internship Program",
-      ],
-      syllabus: [],
+        id: "ba-ma-history",
+        title: "B.A. and M.A. (History)",
+        level: "UG/PG",
+        duration: "3-5 Years",
+        intake: "40 Students",
+        description: "Ancient, medieval, and modern Indian history, world civilizations, historiography, epigraphy, and archival studies.",
+        image: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-orange-700",
+        highlights: [
+            "Indian Historiography",
+            "Epigraphy & Numismatics",
+            "World Civilizations",
+            "Archival Research"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
     {
-      title: "M.Lib.I.Sc. (Master of Library and Information Science)",
-      duration: "1 Year",
-      intake: "25 Students",
-      description:
-        "Postgraduate professional program focusing on digital library development, information systems management, indexing, and research methodology.",
-      image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Information Retrieval Systems",
-        "Digital Library & E-Resource Management",
-        "Research Methods",
-        "Information Technology Application",
-        "Indexing Systems",
-        "Academic Library System",
-        "Professional Dissertation",
-        "Field Visit & Report",
-      ],
-      syllabus: [],
+        id: "ma-hindu-studies",
+        title: "M.A. in Hindu Studies",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Systematic exploration of Vedic literature, Darshana systems, Upanishadic thought, Sanskrit source texts, and cultural traditions.",
+        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-500 to-yellow-600",
+        highlights: [
+            "Vedic & Upanishadic Texts",
+            "Six Darshanas",
+            "Sanskrit Hermeneutics",
+            "Cultural Heritage"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            },
+            {
+                session: "Detailed Syllabus",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
     {
-      title: "Ph.D. Library & Information Science",
-      duration: "3-5 Years",
-      intake: "4 Students",
-      description:
-        "Doctoral research program in digital preservation, user studies, bibliometrics, information behavior, and open-access initiatives.",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Advanced Research Methods",
-        "Literature Review & Seminar",
-        "Thesis Development",
-        "Bibliometric Analysis",
-        "Information Science Theory",
-        "Scholarly Communication",
-        "Journal Publications",
-      ],
-      syllabus: [],
+        id: "ma-human-rights",
+        title: "M.A. in Human Rights",
+        level: "PG",
+        duration: "2 Years",
+        intake: "25 Students",
+        description: "International human rights jurisprudence, constitutional safeguards, refugee laws, humanitarian interventions, and civil liberties.",
+        image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-slate-700",
+        highlights: [
+            "Human Rights Jurisprudence",
+            "UN Human Rights System",
+            "Refugee & Humanitarian Law",
+            "Fieldwork Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+            }
+        ]
     },
-  ],
+    {
+        id: "mlibisc-library-science",
+        title: "M.Lib.I.Sc. (Master of Library and Information Science)",
+        level: "PG",
+        duration: "1-2 Years",
+        intake: "30 Students",
+        description: "Digital library architectures, metadata standards, information retrieval systems, research metrics, and database indexing.",
+        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-600 to-teal-700",
+        highlights: [
+            "Digital Library Software",
+            "Knowledge Organization (DDC/UDC)",
+            "Information Retrieval",
+            "Central Library Practicum"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has dedicated faculty members with expertise in information retrieval, library automation, and digital archiving.",
     stats: [

@@ -98,111 +98,79 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) Journalism & Mass Communication",
-      duration: "3 Years",
-      intake: "40 Students",
-      description:
-        "A comprehensive undergraduate program covering print, broadcast, and digital journalism with practical training in media production, reporting, and content creation.",
-      image:
-        "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-500 to-blue-600",
-      highlights: [
-        "Print Journalism",
-        "Broadcast Journalism",
-        "Digital Media",
-        "Media Ethics",
-        "Reporting & Editing",
-        "Photography",
-        "Advertising Basics",
-        "Internship",
-      ],
-      syllabus: [],
+        id: "ba-hons-jmc",
+        title: "B.A. (Hons.) in Journalism & Mass Communication",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "60 Students",
+        description: "Hands-on training in print journalism, TV news broadcasting, digital content production, media ethics, and photography.",
+        image: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-red-500 to-pink-600",
+        highlights: [
+            "Broadcast News Studio",
+            "Digital Media Production",
+            "Photojournalism",
+            "Audio-Video Editing"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+            },
+            {
+                session: "Course Structure NEP",
+                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+            }
+        ]
     },
     {
-      title: "M.A. Mass Communication",
-      duration: "2 Years",
-      intake: "25 Students",
-      description:
-        "An advanced postgraduate program exploring media theory, communication research, digital media strategies, and specialized areas of mass communication.",
-      image:
-        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-violet-500 to-violet-600",
-      highlights: [
-        "Communication Theory",
-        "Media Research",
-        "Digital Communication",
-        "Film Studies",
-        "Development Communication",
-        "Media Management",
-        "Public Relations",
-        "Dissertation",
-      ],
-      syllabus: [],
+        id: "ma-mass-communication",
+        title: "M.A. (Mass Communication)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Advanced media research, advertising, public relations, cinema studies, corporate communications, and documentary production.",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-pink-600 to-rose-700",
+        highlights: [
+            "Media Research Methods",
+            "PR & Corporate Communications",
+            "Documentary Film Making",
+            "Media Management"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview"
+            }
+        ]
     },
     {
-      title: "M.A. Linguistics",
-      duration: "2 Years",
-      intake: "20 Students",
-      description:
-        "A postgraduate program exploring language structure, sociolinguistics, psycholinguistics, and applied linguistics with interdisciplinary perspectives.",
-      image:
-        "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Phonetics & Phonology",
-        "Syntax & Semantics",
-        "Sociolinguistics",
-        "Psycholinguistics",
-        "Applied Linguistics",
-        "Computational Linguistics",
-        "Language & Society",
-        "Dissertation",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "M.A. Journalism & Mass Communication",
-      duration: "2 Years",
-      intake: "25 Students",
-      description:
-        "An advanced postgraduate program with focus on professional journalism practice, investigative reporting, and media production across platforms.",
-      image:
-        "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-cyan-600",
-      highlights: [
-        "Investigative Journalism",
-        "Broadcast Production",
-        "New Media Technologies",
-        "Media Law & Ethics",
-        "Political Communication",
-        "Corporate Communication",
-        "Content Strategy",
-        "Dissertation",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Mass Communication",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "A doctoral program for advanced research in mass communication, media studies, and related interdisciplinary areas under expert faculty supervision.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "Media Industry Research",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "ma-journalism-mass-comm",
+        title: "MA in Journalism & Mass Communication",
+        level: "PG",
+        duration: "2 Years",
+        intake: "40 Students",
+        description: "Professional training in investigative journalism, data journalism, newsroom management, and multi-platform publishing.",
+        image: "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-rose-600 to-red-700",
+        highlights: [
+            "Investigative Reporting",
+            "Data Journalism",
+            "Broadcast Production",
+            "Newsroom Leadership"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Prof. Bandana Pandey",

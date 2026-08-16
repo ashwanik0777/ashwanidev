@@ -94,51 +94,52 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "BSW (Bachelor of Social Work)",
-      duration: "3 Years",
-      intake: "40 Students",
-      description:
-        "Undergraduate professional program in social work with fieldwork training in community development, child welfare, and counseling.",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-rose-500 to-rose-600",
-      highlights: [
-        "Introduction to Social Work", "Community Organization", "Social Case Work",
-        "Social Group Work", "Rural Development", "Fieldwork Practicum",
-        "Human Rights", "Research Methods",
-      ],
-      syllabus: [],
+        id: "bsw-social-work",
+        title: "Bachelors in Social Work (BSW)",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "40 Students",
+        description: "Foundations of community development, rural camp fieldwork, child welfare, NGO management, and social advocacy.",
+        image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-500 to-emerald-600",
+        highlights: [
+            "Community Fieldwork",
+            "Rural Exposure Camp",
+            "Social Policy & Advocacy",
+            "NGO Administration"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview"
+            }
+        ]
     },
     {
-      title: "MSW (Master of Social Work)",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Advanced professional program with specializations in community development, family & child welfare, and human resource management.",
-      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Advanced Social Work Practice", "Social Policy", "Gender Studies",
-        "Disability Studies", "Counseling Skills", "CSR Management",
-        "Concurrent Fieldwork", "Block Placement",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Social Work",
-      duration: "3-5 Years",
-      intake: "6 Students",
-      description:
-        "Doctoral research in community development, social policy, child welfare, gender studies, and disability studies.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Journal Publications",
-        "Conference Presentations", "Community-Based Research", "Field Studies",
-        "Teaching Assistantship", "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "msw-social-work",
+        title: "MSW (Master in Social Work)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Specialized clinical social work, human resource management in development sector, CSR project planning, and mental health social work.",
+        image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        highlights: [
+            "Concurrent Fieldwork",
+            "CSR Project Formulation",
+            "Medical & Psychiatric Social Work",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 3+ dedicated faculty members with expertise in community development, social policy, and professional social work practice.",
     stats: [

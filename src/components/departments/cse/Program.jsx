@@ -35,7 +35,7 @@ const ProgramCard = ({ program }) => {
   const syllabusEntry = (program.syllabus || []).find(
     (s) => s.session === selectedSession
   );
-  const syllabusUrl = syllabusEntry?.url || "";
+  const syllabusUrl = syllabusEntry?.url || program.syllabusUrl || "";
 
   const handleDownload = () => {
     if (syllabusUrl) {

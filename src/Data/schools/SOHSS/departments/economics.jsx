@@ -98,69 +98,52 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "B.A. (Hons.) Economics",
-      duration: "3 Years",
-      intake: "60 Students",
-      description:
-        "A comprehensive undergraduate program covering microeconomics, macroeconomics, econometrics, Indian economy, and development economics with quantitative skills training.",
-      image:
-        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-sky-500 to-sky-600",
-      highlights: [
-        "Microeconomics",
-        "Macroeconomics",
-        "Econometrics",
-        "Indian Economy",
-        "Development Economics",
-        "Mathematical Economics",
-        "Public Finance",
-        "International Trade",
-      ],
-      syllabus: [],
+        id: "ba-hons-economics",
+        title: "B.A. (Hons.) Economics",
+        level: "UG",
+        duration: "3-4 Years",
+        intake: "60 Students",
+        description: "Core microeconomics, macroeconomics, mathematical methods, econometrics, public finance, and development economics.",
+        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        highlights: [
+            "Econometric Analysis",
+            "Macroeconomic Policy",
+            "Financial Markets",
+            "Statistical Computing"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview"
+            }
+        ]
     },
     {
-      title: "M.A. Economics",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "An advanced postgraduate program exploring economic theory, advanced econometrics, and specialized areas of economics with strong research orientation.",
-      image:
-        "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Advanced Microeconomics",
-        "Advanced Macroeconomics",
-        "Advanced Econometrics",
-        "Development Planning",
-        "Financial Economics",
-        "Research Methodology",
-        "Environmental Economics",
-        "Dissertation",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Economics",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "A doctoral program for advanced research in economics covering development, policy, finance, trade, and interdisciplinary economic studies.",
-      image:
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-orange-600",
-      highlights: [
-        "Independent Research",
-        "Advanced Coursework",
-        "Conference Presentations",
-        "Journal Publications",
-        "Teaching Assistantship",
-        "Policy Research",
-        "Interdisciplinary Studies",
-        "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "ba-hons-ma-economics",
+        title: "B.A. (Hons.) and M.A. (Economics)",
+        level: "Dual / Integrated",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Integrated program offering continuous progression from core economic fundamentals to advanced econometrics and international trade.",
+        image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-teal-600 to-green-700",
+        highlights: [
+            "Advanced Microeconomics",
+            "Time Series Econometrics",
+            "International Trade",
+            "Master Thesis"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Roopali Srivastava",

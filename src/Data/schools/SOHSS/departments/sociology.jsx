@@ -94,36 +94,29 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-      title: "M.A. Sociology",
-      duration: "2 Years",
-      intake: "30 Students",
-      description:
-        "Comprehensive master's program covering sociological theory, research methodology, social stratification, development sociology, and gender studies.",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-sky-500 to-sky-600",
-      highlights: [
-        "Sociological Theory", "Research Methodology", "Social Stratification",
-        "Rural Sociology", "Urban Sociology", "Gender Studies",
-        "Medical Sociology", "Dissertation",
-      ],
-      syllabus: [],
-    },
-    {
-      title: "Ph.D. Sociology",
-      duration: "3-5 Years",
-      intake: "8 Students",
-      description:
-        "Doctoral research in social processes, social inclusion, health & society, development sociology, gender studies, and rural sociology.",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
-      highlights: [
-        "Independent Research", "Advanced Coursework", "Journal Publications",
-        "Conference Presentations", "Field Research", "Ethnographic Methods",
-        "Teaching Assistantship", "Thesis Defense",
-      ],
-      syllabus: [],
-    },
-  ],
+        id: "ma-sociology",
+        title: "M.A. (Sociology)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Sociological theorists, methodology of social research, sociology of Indian society, gender, caste, and globalization studies.",
+        image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "Classical Sociological Theories",
+            "Qualitative Research Methods",
+            "Sociology of Development",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview"
+            }
+        ]
+    }
+],
   facultyStats: {
     text: "Our department has 2+ faculty members including the Dean of the school, with expertise in social processes, development sociology, and health studies.",
     stats: [

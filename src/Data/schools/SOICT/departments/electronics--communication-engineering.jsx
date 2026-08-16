@@ -42,8 +42,8 @@ export const departmentLayoutData = {
         bg: "bg-gradient-to-br from-green-500 to-green-600",
         title: "Signal Processing",
         description: "Advanced signal processing, VLSI design, and IoT integration.",
-      },
-    ],
+      }
+      ],
   },
   hodProps: {
     title: "From the Desk of HOD, ECE",
@@ -57,8 +57,8 @@ export const departmentLayoutData = {
       "Thank you for visiting us. If you require any information, or wish to get in touch, please feel free to reach me via email.",
       "Dr. Vidushi Sharma",
       "Head, Department of Electronics and Communication Engineering",
-      "Email: vidushi@gbu.ac.in Phone: 0120-2346080 (Ext.6080)",
-    ],
+      "Email: vidushi@gbu.ac.in Phone: 0120-2346080 (Ext.6080)"
+      ],
     contact: {
       name: "Dr. Vidushi Sharma",
       designation: "Head of Department - ECE",
@@ -74,8 +74,8 @@ export const departmentLayoutData = {
       { icon: Users, label: "Students", value: "700+" },
       { icon: BookOpen, label: "Faculty", value: "40+" },
       { icon: Award, label: "Research Projects", value: "100+" },
-      { icon: Lightbulb, label: "Patents Filed", value: "20+" },
-    ],
+      { icon: Lightbulb, label: "Patents Filed", value: "20+" }
+      ],
     highlights: [
       {
         title: "Quality Education",
@@ -94,8 +94,8 @@ export const departmentLayoutData = {
         description:
           "Partnerships with ISRO, DRDO, Intel, Texas Instruments, and other leading companies for research and student internships.",
         dotColor: "#10b981",
-      },
-    ],
+      }
+      ],
     vision:
       "To be a leader in providing world-class education and research in electronics and communication technologies for sustainable development.",
     missionPoints: [
@@ -103,74 +103,215 @@ export const departmentLayoutData = {
       "Promote cutting-edge research in emerging fields.",
       "Encourage innovation and product development.",
       "Strengthen industry-academia collaboration.",
-      "Contribute to technological advancement for societal benefit.",
-    ],
+      "Contribute to technological advancement for societal benefit."
+      ],
   },
   programsData: [
     {
-      title: "B.Tech Electronics & Communication Engineering",
-      duration: "4 Years",
-      intake: "100 Students",
-      description:
-        "A rigorous undergraduate program covering core areas of electronics and modern communication technologies.",
-      image:
-        "https://images.unsplash.com/photo-1684430598623-e04d754cec59?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8JTIyQW5hbG9nJTIwJTI2JTIwRGlnaXRhbCUyMEVsZWN0cm9uaWNzJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyTWljcm9wcm9jZXNzb3JzJTIwJTI2JTIwTWljcm9jb250cm9sbGVycyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkNvbW11bmljYXRpb24lMjBTeXN0ZW1zJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyVkxTSSUyMERlc2lnbiUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMkVtYmVkZGVkJTIwU3lzdGVtcyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlNpZ25hbCUyMFByb2Nlc3NpbmclMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJb1QlMjBBcHBsaWNhdGlvbnMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJXaXJlbGVzcyUyME5ldHdvcmtzJTIyJTJDfGVufDB8fDB8fHww",
-      gradient: "from-pink-500 to-pink-600",
-      highlights: [
-        "Analog & Digital Electronics",
-        "Microprocessors & Microcontrollers",
-        "Communication Systems",
-        "VLSI Design",
-        "Embedded Systems",
-        "Signal Processing",
-        "IoT Applications",
-        "Wireless Networks",
-      ],
-      syllabus: [],
+        id: "btech-ece",
+        title: "B.Tech Electronics & Communication Engineering",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Core program covering semiconductor devices, analog/digital communication, signal processing, RF design, and embedded systems.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-500 to-blue-600",
+        highlights: [
+            "Signals & Systems",
+            "Digital Signal Processing",
+            "Microcontrollers & Embedded Systems",
+            "RF & Microwave Design"
+        ],
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
+        syllabus: [
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
+            },
+            {
+                session: "2024-28 (Structure)",
+                url: "/schools/ece/COURSE STRUCTURE B.TECH(EC).xlsx - EC2024.pdf"
+            },
+            {
+                session: "2024 Onward",
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-2024 onward .pdf"
+            },
+            {
+                session: "2021-25",
+                url: "/schools/ece/Syllabus_B.Tech(ECE)-January-2021.pdf"
+            }
+        ]
     },
     {
-      title: "M.Tech Electronics & Communication Engineering",
-      duration: "2 Years",
-      intake: "40 Students",
-      description:
-        "Advanced postgraduate program focusing on research and specialization in communication, VLSI, and embedded systems.",
-      image:
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-yellow-500 to-yellow-600",
-      highlights: [
-        "Advanced Communication",
-        "VLSI Technology",
-        "Embedded System Design",
-        "Wireless & Mobile Networks",
-        "Antenna & Microwave Engineering",
-        "Digital Signal Processing",
-        "Research Methodology",
-        "Thesis Project",
-      ],
-      syllabus: [],
+        id: "btech-ece-aiml",
+        title: "B.Tech ECE (AI & Machine Learning)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Interdisciplinary degree merging hardware edge computing, IoT sensor architectures, and machine learning accelerators.",
+        image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-500 to-purple-600",
+        highlights: [
+            "Edge AI & TinyML",
+            "Embedded Neural Networks",
+            "Hardware Accelerators",
+            "Robotics & Automation"
+        ],
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf",
+        syllabus: [
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf"
+            },
+            {
+                session: "2024 Onward",
+                url: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf"
+            }
+        ]
     },
     {
-      title: "PhD Electronics & Communication",
-      duration: "3-5 Years",
-      intake: "10 Students",
-      description:
-        "Doctoral program focused on pioneering research in electronics, communication systems, and allied technologies.",
-      image:
-        "https://images.unsplash.com/photo-1628582453226-a0027de09af1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fCUyMkluZGVwZW5kZW50JTIwUmVzZWFyY2glMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbnRlcmRpc2NpcGxpbmFyeSUyMFByb2plY3RzJTIyJTJDJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIyUGFwZXIlMjBQdWJsaWNhdGlvbnMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbnRlcm5hdGlvbmFsJTIwQ29uZmVyZW5jZXMlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjJJbmR1c3RyeSUyMFJlc2VhcmNoJTIwQ29sbGFib3JhdGlvbiUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlBhdGVudCUyMEZpbGluZyUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlRlYWNoaW5nJTIwQXNzaXN0YW50c2hpcCUyMiUyQyUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMlRoZXNpcyUyMERlZmVuc2UlMjIlMkMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlNUQlMkN8ZW58MHx8MHx8fDA%3D",
-      gradient: "from-green-500 to-green-600",
-      highlights: [
-        "Independent Research",
-        "Interdisciplinary Projects",
-        "Paper Publications",
-        "International Conferences",
-        "Industry Research Collaboration",
-        "Patent Filing",
-        "Teaching Assistantship",
-        "Thesis Defense",
-      ],
-      syllabus: [],
+        id: "btech-ece-vlsi",
+        title: "B.Tech ECE (VLSI Design & Embedded Systems)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Dedicated specialization covering semiconductor physics, FPGA design, CMOS digital integrated circuits, and SoC verification.",
+        image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-indigo-500 to-indigo-600",
+        highlights: [
+            "CMOS Circuit Design",
+            "Verilog/VHDL & FPGA",
+            "SoC Verification",
+            "Semiconductor Fabrication"
+        ],
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf",
+        syllabus: [
+            {
+                session: "2026-30",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf"
+            },
+            {
+                session: "2024 Scheme",
+                url: "/schools/ece/Final VLSI Design & Embedded Systems _2024.pdf"
+            }
+        ]
     },
-  ],
+    {
+        id: "int-btech-mtech-ece",
+        title: "Integrated B.Tech.-M.Tech. (ECE)",
+        level: "Dual Degree",
+        duration: "5 Years",
+        intake: "30 Students",
+        description: "Comprehensive 5-year integrated dual degree providing seamless progression into advanced telecommunication systems and VLSI research.",
+        image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-amber-600",
+        highlights: [
+            "Integrated Dual Degree",
+            "Wireless Communication Lab",
+            "VLSI Research",
+            "Master Thesis"
+        ],
+        syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
+        syllabus: [
+            {
+                session: "Current Scheme",
+                url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ece-wireless",
+        title: "M.Tech ECE (Wireless Communication & Networks)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Advanced study of cellular networks (5G/6G), MIMO systems, wireless channel modeling, and RF frontend engineering.",
+        image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-blue-600 to-cyan-600",
+        highlights: [
+            "5G/6G Cellular Architectures",
+            "MIMO Antenna Systems",
+            "RF Optimization",
+            "Dissertation"
+        ],
+        syllabusUrl: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ece-vlsi",
+        title: "M.Tech ECE (VLSI Design)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Postgraduate curriculum covering mixed-signal IC design, nano-scale CMOS architectures, automated testing, and ASIC flows.",
+        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-purple-600 to-indigo-700",
+        highlights: [
+            "Mixed-Signal VLSI",
+            "Nano-Scale CMOS",
+            "ASIC Design Flows",
+            "Postgraduate Thesis"
+        ],
+        syllabusUrl: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf"
+            }
+        ]
+    },
+    {
+        id: "mtech-ece-railway",
+        title: "M.Tech ECE (Railway Signaling, Telecom & RAMS)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "20 Students",
+        description: "Specialized postgraduate program covering modern train control, interlocking systems, railway telecom, and RAMS safety standards.",
+        image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-emerald-600 to-teal-700",
+        highlights: [
+            "Railway Interlocking Systems",
+            "RAMS Safety Standards",
+            "Train Control & SCADA",
+            "Rail Telecommunication"
+        ],
+        syllabusUrl: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf",
+        syllabus: [
+            {
+                session: "Master Scheme",
+                url: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf"
+            }
+        ]
+    },
+    {
+        id: "phd-ece",
+        title: "Ph.D. in Electronics & Communication",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original scientific contributions in communications, microelectronics, and signal processing.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-green-600 to-emerald-700",
+        highlights: [
+            "Doctoral Research",
+            "Peer-Reviewed Journal Publications",
+            "Specialized Labs",
+            "Thesis Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
+        syllabus: [
+            {
+                session: "Current Scheme",
+                url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
+            }
+        ]
+    }
+],
   facultyMembers: [
     {
       name: "Dr. Mangal Das",
@@ -212,8 +353,8 @@ export const departmentLayoutData = {
       achievements: "B.E. (Electronics Engineering), M. Tech. & Ph.D. (IIT Kharagpur)",
       image: "https://faculty.gbu.ac.in/uploads/photos/67c341c729a98_rajesh%20photo.jpg",
       color: "from-orange-500 to-orange-600",
-    },
-  ],
+    }
+      ],
   facultyStats: {
     text: "Our department boasts 40+ dedicated faculty members contributing to diverse domains of ECE.",
     stats: [
@@ -246,8 +387,8 @@ export const departmentLayoutData = {
         label: "Avg Experience",
         bg: "bg-orange-50",
         color: "bg-orange-600",
-      },
-    ],
+      }
+      ],
   },
   researchAreas: [
     {
@@ -289,14 +430,14 @@ export const departmentLayoutData = {
       projects: ["Smart Antennas", "Microwave Circuits", "Optical Sensors"],
       image: "https://source.unsplash.com/400x300/?fiber-optic,microwave,antenna",
       gradient: "from-indigo-500 to-blue-500",
-    },
-  ],
+    }
+      ],
   researchStats: [
     { value: "60+", label: "Research Projects", bg: "bg-pink-500/20" },
     { value: "₹8Cr+", label: "Research Funding", bg: "bg-yellow-500/20" },
     { value: "200+", label: "Publications", bg: "bg-green-500/20" },
-    { value: "12+", label: "Patents Filed", bg: "bg-purple-500/20" },
-  ],
+    { value: "12+", label: "Patents Filed", bg: "bg-purple-500/20" }
+      ],
   topAchievers: [
     {
       name: "Rohan Agarwal",
@@ -322,8 +463,8 @@ export const departmentLayoutData = {
       image:
         "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       skills: ["IoT", "Arduino", "Python", "Wireless Networks"],
-    },
-  ],
+    }
+      ],
   achievements: [
     {
       title: "IEEE Student Chapter",
@@ -348,6 +489,6 @@ export const departmentLayoutData = {
       description: "95% placements in core ECE companies & PSUs",
       icon: GraduationCap,
       color: "text-purple-600",
-    },
-  ],
+    }
+      ],
 };

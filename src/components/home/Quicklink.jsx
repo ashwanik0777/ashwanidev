@@ -80,6 +80,15 @@ const defaultQuickLinks = [
     iconColor: "#f43f5e",
     link: "/campus-life/sports-fitness",
   },
+  {
+    title: "Hostels",
+    desc: "Discover our campus living and hostel accommodations",
+    iconName: "school",
+    color: "from-teal-500 to-emerald-500",
+    iconColor: "#14b8a6",
+    link: "https://hostels.gbu.ac.in/",
+    external: true,
+  },
 ];
 
 export default function QuickLinks() {
@@ -108,6 +117,9 @@ export default function QuickLinks() {
     if (t.includes("placement") || t.includes("recruit") || t.includes("career") || t.includes("job")) {
       return { iconName: "briefcase", color: "from-violet-500 to-purple-500", iconColor: "#8b5cf6" };
     }
+    if (t.includes("hostel") || t.includes("accommodation")) {
+      return { iconName: "school", color: "from-teal-500 to-emerald-500", iconColor: "#14b8a6" };
+    }
     return { iconName: "link", color: "from-slate-500 to-slate-600", iconColor: "#64748b" };
   };
 
@@ -134,7 +146,7 @@ export default function QuickLinks() {
       {/* Subtle decorative background glow */}
       <div className="absolute top-0 right-1/4 w-80 h-80 bg-blue-50 rounded-full blur-[100px] opacity-40 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="mx-auto px-10 relative z-10">
         {/* Header section */}
         <div className="text-center mb-10 flex flex-col items-center">
           {/* <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/60 mb-3">
@@ -152,7 +164,7 @@ export default function QuickLinks() {
         </div>
 
         {/* Responsive Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-4 lg:gap-6 max-w-7xl mx-auto">
           {normalizedQuickLinks.map((item, idx) => {
             const Card = (
               <div className={cn(

@@ -229,13 +229,13 @@ const Navbar = () => {
     // Default SOICT items
     return [
       { label: "Dean's Message", href: routes.about.dean },
-      { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
-      { label: "USICT Cyber Security Lab", href: routes.about.cyber },
-      { label: "USICT COEIRAEM", href: routes.about.coeiraem },
-      { label: "USICT Board of Studies", href: routes.about.board },
-      { label: "USICT Staff Members", href: routes.about.staff },
-      { label: "USICT Laboratories", href: routes.about.labs },
-      { label: "USICT Activities", href: routes.about.activities },
+      { label: "SoICT COEIDrone Technologies", href: routes.about.coeidrone },
+      { label: "SoICT Cyber Security Lab", href: routes.about.cyber },
+      { label: "SoICT COEIRAEM", href: routes.about.coeiraem },
+      { label: "SoICT Board of Studies", href: routes.about.board },
+      { label: "SoICT Staff Members", href: routes.about.staff },
+      { label: "SoICT Laboratories", href: routes.about.labs },
+      { label: "SoICT Activities", href: routes.about.activities },
     ];
   };
 
@@ -353,7 +353,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-8.5 sm:top-9 left-0 w-full z-30 transition-all duration-300 ${
+      className={`fixed top-8.5 sm:top-9 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
           : "bg-white shadow"

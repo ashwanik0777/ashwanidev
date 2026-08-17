@@ -42,7 +42,7 @@ export const sectionsConfig = [
         ],
         cards: [
           {
-            title: "VISION | USICT",
+            title: "VISION | SoICT",
             icon: <Target size={28} />,
             bgGradient: "from-blue-500 to-purple-600",
             content: (
@@ -60,7 +60,7 @@ export const sectionsConfig = [
             ),
           },
           {
-            title: "MISSION | USICT",
+            title: "MISSION | SoICT",
             icon: <Trophy size={28} />,
             bgGradient: "from-purple-500 to-pink-600",
             content: (

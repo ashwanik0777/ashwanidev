@@ -161,7 +161,7 @@ const PlacementDashboard = () => {
         />
 
         {/* Top Horizontal Sticky Header Sub-Navigation Menu */}
-        <div className="sticky top-[64px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-2 sm:py-3">
+        <div className="sticky top-[64px] z-20 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-2 sm:py-3">
           <div className="container mx-auto px-3 sm:px-6 max-w-7xl">
             <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 sm:py-1">
               {menuItems.map((item) => {

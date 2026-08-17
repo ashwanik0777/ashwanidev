@@ -1,5 +1,7 @@
 import React from 'react';
 import { Mail, Phone, Download, ExternalLink, MapPin } from 'lucide-react';
+import { resolveFacultyImage } from '../../utils/imageUtils';
+
 
 // Reusable Card component
 const Card = ({ className = '', children, ...props }) => (
@@ -41,30 +43,8 @@ const Button = ({ className = '', variant = 'solid', children, ...props }) => {
 };
 
 const FacultyHeader = ({ faculty }) => {
-  const getImageUrl = (url, image) => {
-    if (!url) {
-      if (image) return `${import.meta.env.VITE_HOST}/media/${image}`;
-      return "https://ui-avatars.com/api/?name=" + encodeURIComponent(faculty?.name || 'Faculty') + "&background=0D8ABC&color=fff&size=150";
-    }
+  const profileImage = resolveFacultyImage(faculty?.image_url, faculty?.image, faculty?.name, faculty?.email);
 
-    // Resolve Google Drive URLs
-    let resolvedUrl = url;
-    if (typeof url === 'string') {
-      const matchFile = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-      if (matchFile && matchFile[1]) {
-        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
-      } else {
-        const matchOpen = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-        if (matchOpen && matchOpen[1] && url.includes('drive.google.com')) {
-          resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
-        }
-      }
-    }
-
-    if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
-    return `${import.meta.env.VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
-  };
-  const profileImage = getImageUrl(faculty?.image_url, faculty?.image);
 
   return (
     <Card className="p-8 my-8 shadow-lg mx-auto w-5/6 hover:shadow-xl transition-shadow duration-300">

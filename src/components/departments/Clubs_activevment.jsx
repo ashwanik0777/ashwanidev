@@ -108,14 +108,20 @@ const ClubsAchievements = ({ schoolCode, clubs: defaultClubs = [] }) => {
     );
   }
 
-  const displayClubs = [
-    ...clubs.map(club => ({
+  // Only show school-specific clubs (filter out university-level NSS/NCC)
+  const displayClubs = clubs
+    .filter(club => {
+      const name = (club.name || "").toLowerCase();
+      return !name.includes("nss") && !name.includes("ncc") &&
+             !name.includes("national service scheme") && !name.includes("national cadet corps");
+    })
+    .map(club => ({
       ...club,
       id: club.id || club.name?.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-    })),
-    nssCard,
-    nccCard
-  ];
+    }));
+
+  // If no school-specific clubs, hide the entire section
+  if (displayClubs.length === 0) return null;
 
   return (
     <section className="py-10 bg-gray-100">

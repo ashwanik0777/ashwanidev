@@ -34,14 +34,14 @@ const RTI = () => {
           bgTheme={9}
         />
 
-        <main className="container mx-auto px-4 py-16 max-w-6xl space-y-24">
+        <main className="container mx-auto px-4 py-8 sm:py-16 max-w-6xl space-y-12 sm:space-y-20">
           {/* About RTI */}
           <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-white rounded-xl shadow-lg p-10 border-l-4 border-blue-600"
+            className="bg-white rounded-xl shadow-lg p-5 sm:p-10 border-l-4 border-blue-600"
           >
             <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-6 flex items-center">
               <FileText className="mr-3" size={36} />
@@ -242,124 +242,126 @@ const RTI = () => {
             </div>
           </motion.section>
 
-                   {/* Important Notes */}
-          {/* <motion.section
+          {/* Important Notes */}
+          <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="bg-gray-50 border border-gray-200 p-10 rounded-xl shadow-lg space-y-6">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
+            <div className="bg-gray-50 border border-gray-200 p-5 sm:p-10 rounded-xl shadow-lg space-y-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-gray-900">
                 Important Notes
               </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <ul className="space-y-4 text-gray-800">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <ul className="space-y-4 text-gray-800 text-sm sm:text-base">
                   <li className="flex items-start">
-                    <span className="w-3 h-3 bg-blue-600 rounded-full mr-4 mt-2"></span>
+                    <span className="w-3 h-3 bg-blue-600 rounded-full mr-4 mt-1.5 shrink-0"></span>
                     Information shall be provided within 30 days of receipt of application.
                   </li>
                   <li className="flex items-start">
-                    <span className="w-3 h-3 bg-green-600 rounded-full mr-4 mt-2"></span>
+                    <span className="w-3 h-3 bg-green-600 rounded-full mr-4 mt-1.5 shrink-0"></span>
                     Information concerning life and liberty shall be provided within 48 hours.
                   </li>
                 </ul>
-                <ul className="space-y-4 text-gray-800">
+                <ul className="space-y-4 text-gray-800 text-sm sm:text-base">
                   <li className="flex items-start">
-                    <span className="w-3 h-3 bg-orange-500 rounded-full mr-4 mt-2"></span>
+                    <span className="w-3 h-3 bg-orange-500 rounded-full mr-4 mt-1.5 shrink-0"></span>
                     If information is held by another authority, the application shall be transferred within 5 days.
                   </li>
                   <li className="flex items-start">
-                    <span className="w-3 h-3 bg-blue-600 rounded-full mr-4 mt-2"></span>
+                    <span className="w-3 h-3 bg-blue-600 rounded-full mr-4 mt-1.5 shrink-0"></span>
                     No fee shall be charged from Below Poverty Line (BPL) applicants.
                   </li>
                 </ul>
               </div>
             </div>
-          </motion.section> */}
+          </motion.section>
 
           {/* Downloadable Forms */}
-          {/* <motion.section
+          <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-xl shadow-lg p-10 space-y-10">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
+            <div className="bg-white rounded-xl shadow-lg p-5 sm:p-10 space-y-8 sm:space-y-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-gray-900">
                 Downloadable Forms
               </h2>
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 {[
-                  { name: "RTI Application Form", color: "blue" },
-                  { name: "First Appeal Form", color: "green" },
-                  { name: "RTI Guidelines", color: "orange" },
+                  { name: "RTI Application Form", color: "blue", bg: "bg-blue-50", border: "border-blue-200", btn: "bg-blue-600 hover:bg-blue-700", text: "text-blue-700", iconBg: "bg-blue-600" },
+                  { name: "First Appeal Form", color: "green", bg: "bg-emerald-50", border: "border-emerald-200", btn: "bg-emerald-600 hover:bg-emerald-700", text: "text-emerald-700", iconBg: "bg-emerald-600" },
+                  { name: "RTI Guidelines", color: "orange", bg: "bg-amber-50", border: "border-amber-200", btn: "bg-amber-600 hover:bg-amber-700", text: "text-amber-700", iconBg: "bg-amber-600" },
                 ].map((form, idx) => (
                   <motion.div
                     whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
                     key={idx}
-                    className={`bg-${form.color}-50 p-6 rounded-lg text-center border border-${form.color}-200`}
+                    className={`${form.bg} p-6 rounded-2xl text-center border ${form.border} flex flex-col justify-between`}
                   >
-                    <div className={`w-16 h-16 bg-${form.color}-500 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                      <Download className="text-white" size={28} />
+                    <div>
+                      <div className={`w-14 h-14 ${form.iconBg} rounded-full flex items-center justify-center mx-auto mb-4 shadow-md`}>
+                        <Download className="text-white" size={24} />
+                      </div>
+                      <h3 className={`font-bold text-base sm:text-lg mb-4 ${form.text}`}>
+                        {form.name}
+                      </h3>
                     </div>
-                    <h3 className={`font-bold mb-4 text-${form.color}-700`}>
-                      {form.name}
-                    </h3>
                     <button
                       onClick={() => handleDownload(form.name)}
-                      className={`bg-${form.color}-500 text-white px-6 py-3 rounded-lg hover:bg-${form.color}-600 transition flex items-center mx-auto`}
+                      className={`${form.btn} text-white px-5 py-2.5 rounded-xl font-semibold transition flex items-center justify-center mx-auto text-sm shadow-sm`}
                     >
-                      <Download size={18} className="mr-2" />
+                      <Download size={16} className="mr-2" />
                       Download
                     </button>
                   </motion.div>
                 ))}
               </div>
             </div>
-          </motion.section> */}
+          </motion.section>
 
           {/* Contact Information */}
-          {/* <motion.section
+          <motion.section
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-xl shadow-lg p-10 space-y-10">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-center text-gray-900">
+            <div className="bg-white rounded-xl shadow-lg p-5 sm:p-10 space-y-8 sm:space-y-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-gray-900">
                 Contact Information
               </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-blue-50 p-6 rounded-lg border border-gray-200">
-                  <h3 className="text-xl font-bold mb-4 text-blue-700">University Address</h3>
-                  <address className="not-italic text-gray-800 leading-relaxed">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <div className="bg-blue-50/80 p-6 rounded-2xl border border-blue-100">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 text-blue-700">University Address</h3>
+                  <address className="not-italic text-gray-800 text-sm sm:text-base leading-relaxed">
                     Gautam Buddha University<br />
                     Greater Noida, Gautam Buddha Nagar<br />
                     Uttar Pradesh - 201312<br />
                     India
                   </address>
                 </div>
-                <div className="bg-green-50 p-6 rounded-lg border border-gray-200">
-                  <h3 className="text-xl font-bold mb-4 text-green-700">General Contact</h3>
-                  <div className="space-y-4 text-gray-800">
-                    <p className="flex items-center">
-                      <Phone size={18} className="mr-3 text-blue-500" />
-                      <strong>Phone:</strong>&nbsp;0120-2344200
+                <div className="bg-emerald-50/80 p-6 rounded-2xl border border-emerald-100">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 text-emerald-700">General Contact</h3>
+                  <div className="space-y-3 text-gray-800 text-sm sm:text-base">
+                    <p className="flex items-center gap-3">
+                      <Phone size={18} className="text-blue-600 shrink-0" />
+                      <strong>Phone:</strong>&nbsp;<a href="tel:01202344200" className="hover:underline">0120-2344200</a>
                     </p>
-                    <p className="flex items-center">
-                      <Mail size={18} className="mr-3 text-green-500" />
-                      <strong>Email:</strong>&nbsp;info@gbu.ac.in
+                    <p className="flex items-center gap-3">
+                      <Mail size={18} className="text-emerald-600 shrink-0" />
+                      <strong>Email:</strong>&nbsp;<a href="mailto:info@gbu.ac.in" className="hover:underline break-all">info@gbu.ac.in</a>
                     </p>
-                    <p className="flex items-center">
-                      <FileText size={18} className="mr-3 text-orange-500" />
-                      <strong>Website:</strong>&nbsp;www.gbu.ac.in
+                    <p className="flex items-center gap-3">
+                      <FileText size={18} className="text-amber-600 shrink-0" />
+                      <strong>Website:</strong>&nbsp;<a href="https://www.gbu.ac.in" target="_blank" rel="noopener noreferrer" className="hover:underline">www.gbu.ac.in</a>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.section> */}
+          </motion.section>
         </main>
       </div>
     </SearchableWrapper>

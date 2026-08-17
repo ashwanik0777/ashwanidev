@@ -82,7 +82,7 @@ export default function WelcomePage() {
       </div>
 
       {/* Main welcome section */}
-      <div className="relative h-[80vh] w-full flex flex-col justify-center overflow-hidden">
+      <div className="relative min-h-[480px] h-[65vh] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -106,43 +106,60 @@ export default function WelcomePage() {
           />
         )}
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        {/* Light overlay for maximum video visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/10 z-10" />
 
-        {/* Content - Improved mobile responsiveness with animated entrance */}
-        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-10 pb-16 sm:pb-24">
-          <div className="max-w-5xl mx-auto lg:mx-0">
-            {/* Title with Typing Effect */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-center sm:text-left capitalize leading-tight select-none whitespace-pre-line">
-              {typedTitle}
-              {!isTitleDone && (
-                <span className="inline-block w-[3px] h-[0.9em] bg-blue-400 ml-1 animate-blink align-middle" />
+        {/* Content - Clean typography without glassmorphism */}
+        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-8 sm:pb-20 pt-16 sm:pt-24">
+          <div className="max-w-5xl mx-auto sm:mx-0">
+
+            {/* Title with Typing Effect & White/GBU Theme */}
+            <h1 className="mb-3 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              {typedTitle.includes("\n") ? (
+                <>
+                  <span className="block text-lg sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-1">
+                    {typedTitle.split("\n")[0]}
+                  </span>
+                  <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
+                    {typedTitle.split("\n")[1]}
+                    {!isTitleDone && (
+                      <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
+                    )}
+                  </span>
+                </>
+              ) : (
+                <span className="block text-xl sm:text-3xl font-semibold text-white tracking-widest uppercase">
+                  {typedTitle}
+                  {!isTitleDone && (
+                    <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
+                  )}
+                </span>
               )}
             </h1>
 
-            {/* Description Fades In after Title types */}
+            {/* Tagline Description */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl mx-auto sm:mx-0 leading-relaxed font-medium"
+              className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white drop-shadow-md"
             >
               {bannerData.content}
             </motion.p>
 
-            {/* Buttons Cascade In after Description */}
+            {/* CTA Buttons - Compact horizontal row on mobile viewports */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-              className="flex flex-col sm:flex-row justify-center sm:justify-start gap-2 sm:gap-4"
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+              className="flex flex-row items-center justify-center sm:justify-start gap-2.5 sm:gap-4 flex-wrap"
             >
               {bannerData.button1_text && bannerData.button1_url && (
                 <a
                   href={bannerData.button1_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-green-400 text-green-600 bg-green-200 hover:bg-green-300 hover:text-green-700 hover:border-green-500 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 transition-all duration-300 text-center text-xs sm:text-sm md:text-base"
+                  className="border-2 border-green-400 text-green-700 bg-green-200/90 hover:bg-green-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button1_text}
                 </a>
@@ -152,7 +169,7 @@ export default function WelcomePage() {
                   href={bannerData.button2_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-blue-400 text-blue-600 bg-blue-200 hover:bg-blue-300 hover:text-blue-700 hover:border-blue-500 font-semibold py-2.5 px-5 sm:py-3 sm:px-6 rounded-xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300 text-center text-xs sm:text-sm md:text-base"
+                  className="border-2 border-blue-400 text-blue-700 bg-blue-200/90 hover:bg-blue-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button2_text}
                 </a>

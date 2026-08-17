@@ -175,7 +175,7 @@ const Conferences = ({ conferenceData, heading, subheading }) => {
         bgTheme={9}
       />
 
-      <div className="relative px-4 py-16 md:px-8 lg:px-12 xl:px-16 mx-25">
+      <div className="relative px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 max-w-7xl mx-auto">
         {/* Conference Grid */}
         <motion.div
           className="grid lg:grid-cols-2 gap-8 lg:gap-12"

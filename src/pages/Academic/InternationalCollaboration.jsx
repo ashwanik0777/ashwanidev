@@ -211,10 +211,10 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-20 bg-gray-100 px-6"
+          className="py-12 sm:py-20 bg-gray-100 px-4 sm:px-6"
         >
-          <h2 className="text-center text-4xl font-extrabold mb-12 text-gray-800">Our Global Partners</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-20">
+          <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-8 sm:mb-12 text-gray-800">Our Global Partners</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {partners.map((p, i) => {
               const isExpanded = expanded[p.id] || false;
               const shortDesc = p.card_desc?.slice(0, 60) || '';
@@ -274,31 +274,31 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-20 bg-white px-6"
+          className="py-12 sm:py-20 bg-white px-4 sm:px-6"
         >
-          <h2 className="text-center text-4xl font-extrabold mb-4">{programs[0]?.title}</h2>
-          <p className="text-center text-gray-800 mb-12 max-w-2xl mx-auto">{programs[0]?.description}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-25">
+          <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-4">{programs[0]?.title}</h2>
+          <p className="text-center text-gray-800 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">{programs[0]?.description}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {programs.map((p, i) => (
               <motion.div
                 key={p.id}
                 className="relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 duration-500 group"
                 variants={fadeUp}
               >
-                <div className="h-125 w-full overflow-hidden bg-slate-900">
+                <div className="h-96 sm:h-125 w-full overflow-hidden bg-slate-900">
                   <img
                     src={programImages[i % programImages.length]}
                     alt={p.card_title}
                     className="w-full h-full object-cover object-center group-hover:scale-110 transition duration-700"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-0 p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div className="absolute bottom-0 p-5 sm:p-6 text-white">
                   <h3 className="text-lg font-bold mb-1">{p.card_title}</h3>
-                  <p className="text-sm mb-1">{p.card_desc}</p>
-                  <p className="text-sm mb-1">Duration: {p.duration}</p>
-                  <p className="text-sm mb-2">Participants: {p.participants}</p>
-                  <ul className="text-sm list-disc pl-4 opacity-80">
+                  <p className="text-xs sm:text-sm mb-1">{p.card_desc}</p>
+                  <p className="text-xs sm:text-sm mb-1">Duration: {p.duration}</p>
+                  <p className="text-xs sm:text-sm mb-2">Participants: {p.participants}</p>
+                  <ul className="text-xs sm:text-sm list-disc pl-4 opacity-80">
                     {p.benefits && p.benefits.split('\r\n').map((b, index) => <li key={index}>{b}</li>)}
                   </ul>
                 </div>
@@ -313,11 +313,11 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-20 bg-gray-100 px-25"
+          className="py-12 sm:py-20 bg-gray-100 px-4 sm:px-6"
         >
-          <h2 className="text-center text-4xl font-extrabold mb-4">{opportunities[0]?.title}</h2>
-          <p className="text-center text-gray-700 mb-12 max-w-2xl mx-auto">{opportunities[0]?.description}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-4">{opportunities[0]?.title}</h2>
+          <p className="text-center text-gray-700 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">{opportunities[0]?.description}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {opportunities.map((o, i) => (
               <motion.div
                 key={o.id}

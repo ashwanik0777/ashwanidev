@@ -50,6 +50,7 @@ const NAVIGATION_CONFIG = [
       { slug: "schools", label: "Schools & Departments" },
       { slug: "faculty", label: "Faculty Directory" },
       { slug: "academic-calendar", label: "Academic Calendar & Regulations" },
+      { slug: "list-of-holidays", label: "List of Holidays" },
       { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
       { slug: "centers-of-excellence", label: "Centers of Excellence" },
       { slug: "international-collaboration", label: "International Collaboration" },
@@ -405,19 +406,19 @@ const Navbar = () => {
   return (
     <SearchableWrapper>
       <nav
-        className={`fixed top-8.5 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
+        className={`fixed top-[34px] sm:top-9 left-0 w-full z-40 bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : "shadow"
           }`}
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="px-4 md:px-">
-          <div className="flex justify-between items-center h-16">
+        <div className="px-4 sm:px-6 xl:px-12">
+          <div className="flex justify-between items-center h-14 sm:h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center" aria-label="GBU Home">
+            <Link to="/" className="flex items-center shrink-0" aria-label="GBU Home">
               <img
                 src="/assets/logo.svg"
                 alt="GBU Logo"
-                className="h-14 w-auto"
+                className="h-10 sm:h-12 xl:h-14 w-auto max-w-[200px] sm:max-w-none"
               />
             </Link>
 
@@ -444,7 +445,7 @@ const Navbar = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={toggleMobile}
-              className="xl:hidden p-2 text-gray-700 transition-colors"
+              className="xl:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
               aria-label={isMobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMobileOpen}
             >
@@ -454,8 +455,8 @@ const Navbar = () => {
 
           {/* Mobile Navigation */}
           {isMobileOpen && (
-            <div className="xl:hidden border-t border-gray-200">
-              <div className="py-2">
+            <div className="xl:hidden border-t border-gray-200 max-h-[calc(85vh-4rem)] overflow-y-auto shadow-inner bg-white">
+              <div className="py-3 px-1 space-y-1">
                 {navigationItems.map((menu) => (
                   <MobileMenuItem
                     key={menu.key}
@@ -466,7 +467,9 @@ const Navbar = () => {
                   />
                 ))}
                 {/* Mobile SearchBar */}
-                <SearchBar isMobile />
+                <div className="pt-2 px-2">
+                  <SearchBar isMobile />
+                </div>
               </div>
             </div>
           )}

@@ -84,6 +84,7 @@ const NationalAcademicDepository = React.lazy(() =>
   import("../pages/Academic/NationalAcademicDepository.jsx")
 );
 const Schools = React.lazy(() => import("../pages/Academic/Schools.jsx"));
+const ListOfHolidays = React.lazy(() => import("../pages/Academic/ListOfHolidays.jsx"));
 
 const Disclosures = lazy(() => import("../pages/Aboutus/Disclosures.jsx"));
 const History = lazy(() => import("../pages/Aboutus/History.jsx"));
@@ -332,6 +333,18 @@ export default function AppRouter() {
           <Route
             path="/page/academicCalendar"
             element={<AcademicCalendar />}
+          />
+          <Route
+            path="/academics/list-of-holidays"
+            element={<ListOfHolidays />}
+          />
+          <Route
+            path="/academics/holidays"
+            element={<ListOfHolidays />}
+          />
+          <Route
+            path="/page/holidays"
+            element={<ListOfHolidays />}
           />
           <Route path="/academics/cbcs-framework" element={<CBCSFramework />} />
           <Route

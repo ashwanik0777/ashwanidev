@@ -83,7 +83,7 @@ export default function CampusLifeSection() {
   };
 
   return (
-    <div className="px-6 md:px-20 py-14 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-20 py-8 sm:py-14 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header Section */}
       <div className="text-center mb-8">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-800">

@@ -108,6 +108,7 @@ const sitemapAbout = [
     children: [
       { title: "Academic Schools & Faculties", path: "/academics/schools" },
       { title: "Academic Calendar", path: "/academics/academic-calendar" },
+      { title: "List of Holidays", path: "/academics/list-of-holidays" },
       { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework" },
       { title: "Centers of Excellence", path: "/academics/centers-of-excellence" },
       { title: "Faculty Directory", path: "/academics/faculty" },
@@ -268,10 +269,10 @@ const Sitemap = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="container mx-auto px-6 py-14 max-w-7xl relative z-10"
+          className="container mx-auto px-4 sm:px-6 py-8 sm:py-14 max-w-7xl relative z-10"
         >
           {/* Search Input */}
-          <div className="max-w-md mx-auto mb-16">
+          <div className="max-w-md mx-auto mb-10 sm:mb-16">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
               <Input
@@ -279,13 +280,13 @@ const Sitemap = () => {
                 placeholder="Search pages, portals, policies..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 pr-4 py-4 w-full border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 rounded-2xl shadow-sm transition-all duration-300"
+                className="pl-12 pr-4 py-3.5 sm:py-4 w-full border-2 border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 rounded-2xl shadow-sm transition-all duration-300"
               />
             </div>
           </div>
 
           {/* Grid of Sitemap Cards */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {filteredData.map((section) => (
               <Card key={section.title} className="group overflow-hidden">
                 <CardHeader className="border-b border-slate-100 pb-4">

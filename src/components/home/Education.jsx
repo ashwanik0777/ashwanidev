@@ -97,7 +97,7 @@ export default function ExcellenceSection() {
 
   return (
     <div className="relative bg-gray-50 overflow-hidden">
-      <div className="relative z-10 px-6 md:px-20 py-2 mb-4">
+      <div className="relative z-10 px-4 sm:px-8 md:px-16 lg:px-20 py-2 mb-4">
         {/* Header */}
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-blue-800">
@@ -107,13 +107,13 @@ export default function ExcellenceSection() {
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-2 border border-gray-200 shadow-lg">
-            <div className="flex flex-wrap gap-2">
+          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-1.5 sm:p-2 border border-gray-200 shadow-lg max-w-full overflow-x-auto no-scrollbar">
+            <div className="flex flex-nowrap sm:flex-wrap gap-1.5 sm:gap-2">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-6 py-3 font-semibold text-sm rounded-xl transform hover:scale-105 transition-transform duration-100 ${activeTab === tab
+                  className={`px-3.5 sm:px-6 py-2 sm:py-3 font-semibold text-xs sm:text-sm whitespace-nowrap rounded-xl transform hover:scale-105 transition-transform duration-100 ${activeTab === tab
                       ? 'bg-gradient-to-r from-purple-500 to-cyan-500 text-white shadow-lg shadow-purple-500/25'
                       : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
                     }`}

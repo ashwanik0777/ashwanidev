@@ -132,7 +132,7 @@ const CafesFood = () => {
   return (
     <SearchableWrapper>
       <section id="cafes-food" className="py-16 bg-white relative overflow-hidden font-sans text-left">
-        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl relative z-10">
           
           {/* Header */}
           <div className="text-center mb-14 max-w-3xl mx-auto">

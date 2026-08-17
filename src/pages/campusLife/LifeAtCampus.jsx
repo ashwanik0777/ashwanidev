@@ -143,7 +143,7 @@ const LifeAtCampus = () => {
         {/* Decorative ambient background glows */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
 
-        <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl relative z-10">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl relative z-10">
           
 
 

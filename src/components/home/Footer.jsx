@@ -12,11 +12,11 @@ import {
 const Footer = () => {
   return (
     <footer
-      className="bg-[#0e1626] text-white px-6 md:px-20 py-10"
+      className="bg-[#0e1626] text-white px-4 sm:px-8 md:px-16 lg:px-20 py-8 sm:py-12"
       role="contentinfo"
       aria-label="Footer"
     >
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         {/* Logo and About */}
         <div>
           <div className="flex items-center gap-3 mb-2">

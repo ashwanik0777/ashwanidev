@@ -242,7 +242,7 @@ const HostelDetailed = () => {
         subtitle="Explore our hostels with modern amenities and comfortable living."
         bgTheme={1}
       />
-      <div className="container mt-10 mx-auto px-4 md:px-8 lg:px-30">
+      <div className="container mt-6 sm:mt-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl pb-12">
         {/* === Category Cards === */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8">
           {categories.map((cat) => (

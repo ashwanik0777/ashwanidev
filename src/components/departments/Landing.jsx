@@ -28,7 +28,7 @@ const Landing = ({ slides = [] }) => {
   return (
     <section
       id="home"
-      className="relative h-[40vh] overflow-hidden mt-6 shadow-lg"
+      className="relative h-[40vh] overflow-hidden shadow-lg"
     >
       {slides.map((slide, index) => (
         <div

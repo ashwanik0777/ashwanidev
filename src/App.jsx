@@ -52,7 +52,7 @@ function App() {
               ) : (
                 <Navbar />
               ))}
-            <div className={shouldHideChrome ? "pt-0" : isICTPage ? "pt-20 sm:pt-24 xl:pt-24" : "pt-[5.5rem] sm:pt-24 xl:pt-[6.1rem]"}>
+            <div className={shouldHideChrome ? "pt-0" : isICTPage ? "pt-9 sm:pt-14 xl:pt-14" : "pt-[5.5rem] sm:pt-24 xl:pt-[6.1rem]"}>
               <AppRouter />
             </div>
             {!shouldHideChrome && <Footer />}

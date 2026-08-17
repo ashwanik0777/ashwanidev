@@ -118,15 +118,10 @@ const sitemapAbout = [
   },
   {
     title: "Admissions",
-    path: "/admissions/admission-process",
+    path: "https://gbuadm.samarth.edu.in/",
     icon: UserCheck,
-    children: [
-      { title: "Admission Process & Details", path: "/admissions/admission-process" },
-      { title: "Courses Offered (UG | PG | PhD)", path: "/admissions/courses-offered" },
-      { title: "Eligibility & Reservation Rules", path: "/admissions/eligibility-reservation" },
-      { title: "Fee Structure & Prospectus", path: "/admissions/fee-structure-prospectus" },
-      { title: "International Admissions", path: "/admissions/international-admissions" }
-    ],
+    isExternal: true,
+    children: [],
   },
   {
     title: "Research",

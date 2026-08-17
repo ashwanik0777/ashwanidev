@@ -465,11 +465,11 @@ const allYears = collectYears(mockNotices);
       layout
       className={viewMode === "list" ? "w-full" : ""}
     >
-      <Card className="h-full group overflow-hidden relative">
+      <Card className="h-full group overflow-hidden relative flex flex-col">
         <CardHeader
-          className={`${viewMode === "list" ? "flex flex-row items-center gap-6" : ""}`}
+          className={viewMode === "list" ? "flex flex-row items-center gap-6 h-full" : "flex flex-col h-full"}
         >
-          <div className={`${viewMode === "list" ? "flex-1" : ""}`}>
+          <div className={viewMode === "list" ? "flex-1" : "flex-grow flex flex-col"}>
             <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
               <div className="flex flex-wrap items-center gap-3">
                 <Badge variant={getTypeColor(notice.type)}>{notice.type}</Badge>
@@ -483,7 +483,7 @@ const allYears = collectYears(mockNotices);
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
+              {/* <div className="flex flex-wrap items-center gap-2">
                 {notice.isNew && (
                   <Badge variant="event" className="animate-pulse">
                     <Star size={10} className="mr-1" />
@@ -496,7 +496,7 @@ const allYears = collectYears(mockNotices);
                     HIGH
                   </Badge>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <CardTitle className="text-lg font-bold mb-3 group-hover:text-blue-600 transition-colors duration-300">
@@ -515,7 +515,7 @@ const allYears = collectYears(mockNotices);
           </div>
 
           <div
-            className={`flex gap-3 ${viewMode === "list" ? "flex-col shrink-0" : "flex-wrap"}`}
+            className={viewMode === "list" ? "flex flex-col shrink-0 gap-3" : "flex flex-row gap-2 mt-auto pt-4 border-t border-gray-100 justify-between items-center overflow-hidden"}
           >
             {notice.pdfUrl && (
               <Button
@@ -523,13 +523,14 @@ const allYears = collectYears(mockNotices);
                 variant="outline"
                 icon={<Download size={14} />}
                 onClick={() => window.open(notice.pdfUrl, "_blank")}
+                className="whitespace-nowrap px-2 sm:px-3"
               >
                 Download
               </Button>
             )}
 
             <Link to={`/announcements/notices/${notice.id}`}>
-              <Button size="sm" icon={<FileText size={14} />}>
+              <Button size="sm" icon={<FileText size={14} />} className="whitespace-nowrap px-2 sm:px-3">
                 Read More
               </Button>
             </Link>
@@ -538,7 +539,7 @@ const allYears = collectYears(mockNotices);
               size="sm"
               variant="ghost"
               icon={<Share2 size={14} />}
-              className="hover:bg-blue-50 hover:text-blue-600"
+              className="hover:bg-blue-50 hover:text-blue-600 whitespace-nowrap px-2 sm:px-3"
             >
               Share
             </Button>

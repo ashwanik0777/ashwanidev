@@ -1,104 +1,140 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// ✅ Dynamic Recruiters Data (can be moved to JSON or fetched from API)
+const fallbackLogo = "https://ui-avatars.com/api/?name=Company&background=e2e8f0&color=475569&size=120&bold=true";
 
-const fallbackLogo = "https://upload.wikimedia.org/wikipedia/commons/9/99/User_icon.png";
+const RecruitersShowcase = ({ recruitersData = [] }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const trackRef = useRef(null);
 
-const RecruitersShowcase = ({recruitersData=[]}) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [recruiters, setRecruiters] = useState([]);
+  const itemsPerView = 4;
+  const totalItems = recruitersData.length;
+  const maxIndex = Math.max(0, totalItems - itemsPerView);
 
-  const itemsPerSlide = 8;
-  const totalSlides = Math.ceil(recruiters.length / itemsPerSlide);
+  const goTo = useCallback((idx) => {
+    if (isAnimating) return;
+    const clamped = Math.max(0, Math.min(idx, maxIndex));
+    setIsAnimating(true);
+    setCurrentIndex(clamped);
+    setTimeout(() => setIsAnimating(false), 500);
+  }, [isAnimating, maxIndex]);
 
+  const next = useCallback(() => {
+    if (currentIndex >= maxIndex) {
+      goTo(0);
+    } else {
+      goTo(currentIndex + itemsPerView);
+    }
+  }, [currentIndex, maxIndex, goTo]);
+
+  const prev = useCallback(() => {
+    if (currentIndex <= 0) {
+      goTo(maxIndex);
+    } else {
+      goTo(currentIndex - itemsPerView);
+    }
+  }, [currentIndex, maxIndex, goTo]);
+
+  // Auto-play
   useEffect(() => {
-    // Simulate fetch
-    setRecruiters(recruitersData);
-
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 3000);
+    if (totalItems <= itemsPerView) return;
+    const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
-  }, [totalSlides]);
+  }, [next, totalItems]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
+  if (!recruitersData.length) return null;
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
-
-  const getCurrentRecruiters = () => {
-    const startIndex = currentSlide * itemsPerSlide;
-    return recruiters.slice(startIndex, startIndex + itemsPerSlide);
-  };
+  const totalDots = Math.ceil(totalItems / itemsPerView);
+  const activeDot = Math.min(Math.floor(currentIndex / itemsPerView), totalDots - 1);
 
   return (
-    <section className="py-16 bg-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 bg-gray-100">
+      <div className="min-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">Our Recruiters</h2>
           <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
-        {/* Showcase Container */}
-        <div className="rounded-xl shadow-2xl border-0 bg-white backdrop-blur-sm relative overflow-hidden">
-          {/* Grid */}
-          <div className="p-8">
-            <div className="relative">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                {getCurrentRecruiters().map((company, index) => (
+        {/* Carousel Container */}
+        <div className="relative flex items-center gap-3 sm:gap-5">
+          {/* Prev Button — Outside */}
+          {totalItems > itemsPerView && (
+            <button
+              onClick={prev}
+              className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border border-gray-200 flex items-center justify-center text-blue-800 hover:bg-blue-50 transition-all duration-300 hover:scale-110 active:scale-95"
+              aria-label="Previous recruiters"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          )}
+
+          {/* Track */}
+          <div className="flex-1 overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-100">
+            <div className="p-5 sm:p-8">
+              <div
+                ref={trackRef}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(-${totalItems > 0 ? (currentIndex / totalItems) * 100 : 0}%)`,
+                  width: `${(totalItems / itemsPerView) * 100}%`,
+                }}
+              >
+                {recruitersData.map((company, index) => (
                   <div
                     key={index}
-                    className="text-center p-4 bg-white rounded-xl border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300 group"
+                    className="px-2 sm:px-3"
+                    style={{ width: `${100 / totalItems}%` }}
                   >
-                    <img
-                      src={company.logo}
-                      alt={company.name}
-                      onError={(e) => (e.target.src = fallbackLogo)}
-                      className="w-full h-16 object-contain rounded-lg mb-3 group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <span className="text-sm font-semibold text-gray-700 group-hover:text-college-blue transition-colors duration-300">
-                      {company.name}
-                    </span>
+                    <div className="flex flex-col items-center justify-center p-4 sm:p-6 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-lg hover:border-blue-100 transition-all duration-300 group h-full">
+                      <div className="w-full h-14 sm:h-20 flex items-center justify-center mb-3 sm:mb-4">
+                        <img
+                          src={company.logo}
+                          alt={company.name}
+                          onError={(e) => (e.target.src = fallbackLogo)}
+                          className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-gray-700 group-hover:text-blue-700 transition-colors duration-300 text-center line-clamp-2">
+                        {company.name}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
-
-              {/* Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white/80 hover:bg-white shadow-lg rounded-full p-2"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white/80 hover:bg-white shadow-lg rounded-full p-2"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
-
-            {/* Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? "bg-college-blue shadow-lg scale-125"
-                      : "bg-gray-300 hover:bg-gray-400"
-                  }`}
-                  onClick={() => setCurrentSlide(index)}
-                />
-              ))}
             </div>
           </div>
+
+          {/* Next Button — Outside */}
+          {totalItems > itemsPerView && (
+            <button
+              onClick={next}
+              className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg hover:shadow-xl border border-gray-200 flex items-center justify-center text-blue-800 hover:bg-blue-50 transition-all duration-300 hover:scale-110 active:scale-95"
+              aria-label="Next recruiters"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          )}
         </div>
+
+        {/* Dots */}
+        {totalDots > 1 && (
+          <div className="flex justify-center mt-6 gap-2">
+            {Array.from({ length: totalDots }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i * itemsPerView)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === activeDot
+                    ? "w-8 bg-blue-600 shadow-md"
+                    : "w-2 bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to page ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

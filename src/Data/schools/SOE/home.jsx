@@ -19,89 +19,54 @@ export const sectionsConfig = [
     },
   },
 
-  {
+{
     componentName: "AboutSection",
     enabled: true,
     position: 2,
     props: {
       data: {
         heading: "About Us",
-        subtitle: "School of Engineering",
-
         floatingIcons: [
-          {
-            icon: <Code size={40} />,
-            color: "text-blue-400",
-            style: "top-20 left-10",
-          },
-          {
-            icon: <Lightbulb size={35} />,
-            color: "text-purple-400",
-            style: "top-32 right-20",
-          },
-          {
-            icon: <Rocket size={45} />,
-            color: "text-indigo-400",
-            style: "bottom-20 left-1/4",
-          },
+          { icon: <Code size={40} />, color: "text-blue-400", style: "top-20 left-10" },
+          { icon: <Lightbulb size={35} />, color: "text-indigo-400", style: "top-32 right-20" },
+          { icon: <Rocket size={45} />, color: "text-cyan-400", style: "bottom-20 left-1/4" },
         ],
-
         cards: [
           {
-            title: "Our Mission",
+            title: "VISION | SOE",
             icon: <Target size={28} />,
-            bgGradient: "from-blue-500 to-purple-600",
+            bgGradient: "from-blue-600 to-indigo-700",
             content: (
               <>
-                In accordance with the Vision of the University, School of
-                Engineering has been conceptualized and established with an
-                objective to work out and develop a dependable model for growth,
-                consistency and significant breakthrough in cutting edge
-                technology and innovation. The rapid diffusion of core
-                engineering fields like Civil Engineering, Electrical
-                Engineering and Mechanical Engineering has the potential of
-                bringing improvement in productivity and efficiency in almost
-                every aspects of our life and consequently turning out to be a
-                key driver of our economic growth. We are committed to prepare
-                technology leaders for tomorrow with our innovative curriculum
-                and meticulous pedagogy for training. The programmes offered are
-                unique in their right and fall in line with international
-                practices. Our efforts travel beyond classrooms and encompass
-                trends and practices through our research and modular training
-                at par with some of the best institutions of national and
-                international repute. We encourage our graduates to opt for
-                courses from different streams which shall not restrict them to
-                one area but open new avenues in their field of interest.
-                Faculty members are encouraged to use innovative tools in their
-                teaching. We ensure that our graduate students possess necessary
-                skills like Creativity, Innovation, Critical Thinking, Problem
-                Solving and Collaboration.
+                The{" "}
+                <span className="font-semibold text-blue-600">
+                  School of Engineering (SOE)
+                </span>{" "}
+                is conceptualized to develop a dependable model for sustainable growth, consistency, and breakthroughs in{" "}
+                <span className="font-semibold text-indigo-600">
+                  cutting-edge technology and innovation
+                </span>
+                . By advancing core disciplines including Civil, Electrical, Mechanical Engineering, and Architecture, the school aims to drive productivity, industrial efficiency, and economic progress.
               </>
             ),
-            highlight: ["N / A"],
           },
-
           {
-            title: "Our Commitment",
+            title: "MISSION | SOE",
             icon: <Trophy size={28} />,
-            bgGradient: "from-purple-500 to-pink-600",
+            bgGradient: "from-indigo-600 to-cyan-600",
             content: (
               <>
-                The School offers innovative and interdisciplinary programmes,
-                complemented by experiential learning in real world situation
-                that allow our students to combine classroom learning and their
-                exposure to the industry to understand current trends in their
-                field of interest and expertise. We offer five years Integrated
-                Dual-degree Programmes (B.Tech. + M. Tech./ B.Tech. + MBA) in
-                the following branches:
+                To prepare tomorrow's{" "}
+                <span className="font-semibold text-indigo-600">
+                  technology leaders and innovators
+                </span>{" "}
+                through rigorous curricula, meticulous pedagogy, and hands-on experiential learning. We foster{" "}
+                <span className="font-semibold text-blue-600">
+                  interdisciplinary research and industry exposure
+                </span>{" "}
+                benchmarked against premier global institutions, delivering 5-year integrated dual-degree programs and cutting-edge technical training.
               </>
             ),
-            bullets: [
-              "Civil Engineering",
-              "Mechanical Engineering",
-              "Electrical Engineering",
-              "Architecture & Regional Planning",
-            ],
           },
         ],
       },

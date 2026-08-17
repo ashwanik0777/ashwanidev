@@ -126,19 +126,29 @@ const Footer = () => {
           <ul className="space-y-2 text-gray-300 text-sm">
             {[
               { name: "About GBU", path: "/about-us/About GBU" },
-              { name: "Admissions", path: "/admissions/admission-process" },
-              { name: "Academic Programs", path: "/admissions/courses-offered" },
+              { name: "Admissions", path: "https://gbuadm.samarth.edu.in/", isExternal: true },
               { name: "Research", path: "/research/research-centers" },
               { name: "Campus Life", path: "/campus-life/hero" },
               { name: "Placements", path: "/placements" },
             ].map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.path}
-                  className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
-                >
-                  {link.name}
-                </Link>
+                {link.isExternal ? (
+                  <a
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className="hover:text-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded transition-colors duration-300"
+                  >
+                    {link.name}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

@@ -43,57 +43,42 @@ export const sectionsConfig = [
           { icon: <Lightbulb size={35} />, color: "text-purple-400", style: "top-32 right-20" },
           { icon: <Rocket size={45} />, color: "text-indigo-400", style: "bottom-20 left-1/4" },
         ],
-        cards: [
+       cards: [
           {
-            title: "Our Mission",
+            title: "VISION | USICT",
             icon: <Target size={28} />,
             bgGradient: "from-blue-500 to-purple-600",
             content: (
               <>
-                The{" "}
+                To impart quality education for producing{" "}
                 <span className="font-semibold text-blue-600">
-                  School of Information and Communication Technology (SOICT/USICT)
+                  world-class technocrats and entrepreneurs
                 </span>{" "}
-                is a premier institution committed to nurturing future-ready technocrats,
-                innovators, and entrepreneurs in the dynamic field of{" "}
+                with the latest knowledge, sound ethics and innovative ideas in{" "}
                 <span className="font-semibold text-purple-600">
                   ICT (Information and Communication Technology)
-                </span>
-                .
-              </>
-            ),
-            highlight: (
-              <>
-                Guided by our vision of{" "}
-                <span className="font-semibold text-indigo-600">
-                  excellence and ethics
-                </span>
-                , we empower students with cutting-edge knowledge, hands-on experience, and a
-                strong value system to thrive in the global digital economy.
+                </span>{" "}
+                to meet industrial needs and societal expectations.
               </>
             ),
           },
           {
-            title: "Our Commitment",
+            title: "MISSION | USICT",
             icon: <Trophy size={28} />,
             bgGradient: "from-purple-500 to-pink-600",
             content: (
               <>
-                At SOICT, we don't just teach technology—we inspire{" "}
-                <span className="font-semibold text-purple-600">future pioneers</span>. Through{" "}
+                To impart{" "}
+                <span className="font-semibold text-purple-600">
+                  world class value based technical education
+                </span>{" "}
+                in all aspects of ICT through state of the art infrastructure and innovative approach to produce{" "}
                 <span className="font-semibold text-indigo-600">
-                  interdisciplinary research, hackathons, and mentorship
-                </span>
-                , we foster a culture of curiosity and excellence.
+                  ethical, motivated and skilled professionals
+                </span>{" "}
+                through theoretical knowledge and practical applications.
               </>
             ),
-            bullets: [
-              <span className="font-semibold text-gray-800">
-                Skilled, motivated, and ethically grounded professionals
-              </span>,
-              "Ready to tackle global challenges",
-              "Transform the ICT landscape",
-            ],
           },
         ],
       },
@@ -116,7 +101,7 @@ export const sectionsConfig = [
       ],
     },
   },
-  {
+ {
     componentName: "LeadershipCard",
     enabled: true,
     position: 4,
@@ -124,7 +109,8 @@ export const sectionsConfig = [
       name: deansMessageData.deanName,
       title: deansMessageData.designation,
       image: deansMessageData.image,
-      description: deansMessageData.shortMessage || deansMessageData.message,
+      shortMessage: deansMessageData.shortMessage,
+      description: deansMessageData.message || deansMessageData.fullMessage || deansMessageData.shortMessage,
     },
   },
 

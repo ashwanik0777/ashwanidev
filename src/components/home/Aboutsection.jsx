@@ -104,7 +104,7 @@ export default function AboutSection() {
   return (
     <SearchableWrapper>
       <section className="bg-white py-6 sm:py-8 md:py-12 overflow-hidden border-b border-slate-100">
-        <div className="mx-auto px-5 sm:px-10">
+        <div className="mx-auto px-7 sm:px-14">
           <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12">
 
             {/* Left Content (Text + Stats) */}

@@ -34,12 +34,11 @@ const EventGallery = ({
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-center"
         >
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-purple-800 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
               {title}
             </h2>
-            <p className="text-lg text-gray-600">{subtitle}</p>
-            <div className="w-20 sm:w-24 h-1 bg-purple-500 mx-auto mt-2 rounded-full"></div>
+            <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
           </div>
         </motion.div>
 

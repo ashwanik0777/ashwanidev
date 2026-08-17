@@ -27,9 +27,10 @@ export default function DroneCourseCard({
         viewport={{ once: true }}
         className="text-center py-16"
       >
-        <h2 className="text-4xl font-bold text-blue-800 mb-4">{sectionTitle}</h2>
-        <p className="text-lg text-gray-600">{sectionSubtitle}</p>
-        <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
+        <div className="text-center py-16 mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{sectionTitle}</h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        </div>
       </motion.div>
 
       {/* Card */}

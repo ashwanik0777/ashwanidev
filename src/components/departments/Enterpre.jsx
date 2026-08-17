@@ -35,7 +35,10 @@ const entrepreneurs = [
 const OurEntrepreneurs = () => {
   return (
     <div className="bg-white py-12 px-4 text-center">
-      <h2 className="text-3xl font-semibold mb-10">Our Entrepreneurs</h2>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">Our Entrepreneurs</h2>
+        <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {entrepreneurs.map((person, index) => (
           <div

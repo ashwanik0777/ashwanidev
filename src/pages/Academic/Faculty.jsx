@@ -11,6 +11,7 @@ import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx"
 import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data/schools";
 
 import { resolveFacultyImage, getFacultyInitials } from '../../utils/imageUtils';
+import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
 
 
 const Faculty = () => {

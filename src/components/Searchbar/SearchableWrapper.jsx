@@ -111,7 +111,7 @@ const addDataSearch = (element, depth = 0) => {
     addDataSearch(child, depth + 1)
   );
 
-  const shouldAdd = hasMeaningfulText(element);
+  const shouldAdd = hasMeaningfulText(element) && element.type !== React.Fragment;
 
   const newProps = shouldAdd
     ? { ...element.props, "data-search": "true" }

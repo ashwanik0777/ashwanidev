@@ -30,14 +30,11 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-college-navy mb-6 bg-gradient-to-r from-college-navy to-college-blue bg-clip-text text-transparent">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             About Our Institute
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Established with a vision to provide world-class engineering education,
-            Stellar Institute of Technology has been at the forefront of innovation and excellence.
-          </p>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">

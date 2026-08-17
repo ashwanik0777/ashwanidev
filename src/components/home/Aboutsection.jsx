@@ -81,7 +81,7 @@ const StatItem = ({ label, rawValue, icon: Icon, color }) => {
 
 export default function AboutSection() {
   const aboutData = homeData?.sections?.about?.[0] || null;
-  const { stats } = useUniversityStats();
+  const stats = useUniversityStats();
 
   if (!aboutData) return <div className="text-center py-10">Loading...</div>;
 
@@ -96,15 +96,15 @@ export default function AboutSection() {
   // Stat definitions
   const statItems = [
     { label: "Students", rawValue: stats?.students || "6500+", icon: Users, color: { bg: "bg-blue-500", text: "text-white" } },
-    { label: "Faculty", rawValue: stats?.faculty || "300+", icon: BookMarked, color: { bg: "bg-emerald-500", text: "text-white" } },
-    { label: "Acres Campus", rawValue: "511", icon: Compass, color: { bg: "bg-orange-500", text: "text-white" } },
+    { label: "Faculty", rawValue: stats?.faculty_members || "300+", icon: BookMarked, color: { bg: "bg-emerald-500", text: "text-white" } },
+    { label: "Acres Campus", rawValue: stats?.acres_campus || "511", icon: Compass, color: { bg: "bg-orange-500", text: "text-white" } },
     { label: "Programs", rawValue: stats?.programs || "120+", icon: School, color: { bg: "bg-purple-500", text: "text-white" } },
   ];
 
   return (
     <SearchableWrapper>
       <section className="bg-white py-6 sm:py-8 md:py-12 overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="mx-auto px-7 sm:px-14">
           <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12">
 
             {/* Left Content (Text + Stats) */}

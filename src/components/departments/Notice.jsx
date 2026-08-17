@@ -66,6 +66,124 @@ const resolveEventImage = (event) => {
   return raw ? parseImageUrl(raw) : "";
 };
 
+/* ─── Gallery Slider (matches home page "Ongoing Events" design) ─── */
+const EventGallerySlider = ({ events = [] }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [transitioning, setTransitioning] = useState(false);
+
+  useEffect(() => {
+    if (events.length <= 1) return;
+    const timer = setInterval(() => {
+      setTransitioning(true);
+      setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % events.length);
+        setTransitioning(false);
+      }, 150);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [events.length]);
+
+  const goTo = (idx) => {
+    if (transitioning || idx === activeIndex) return;
+    setTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex(idx);
+      setTransitioning(false);
+    }, 150);
+  };
+
+  const current = events[activeIndex];
+  const imgSrc = resolveEventImage(current) || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80"; // Dummy event image
+
+  return (
+    <div className="flex flex-col flex-1 min-h-0">
+      {/* Main Image */}
+      <Link
+        to={`/announcements/event-calendar/${current.id}`}
+        className="relative w-full flex-1 min-h-0 rounded-xl overflow-hidden shadow-md group block bg-gray-100"
+      >
+        <img
+          src={imgSrc}
+          alt={current.title}
+          className={`w-full h-full object-cover transition-all duration-700 ease-in-out ${
+            transitioning ? "scale-110 opacity-80 blur-[2px]" : "scale-100 opacity-100 blur-0"
+          }`}
+          onError={(e) => {
+            e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80";
+          }}
+        />
+
+        {/* Caption overlay */}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 py-3 pt-12">
+          <h4 className="font-semibold text-white text-sm sm:text-base leading-snug line-clamp-2 drop-shadow-lg">
+            {current.title}
+          </h4>
+          {current.date && (
+            <p className="text-xs text-blue-200 mt-1 font-medium">{current.date}</p>
+          )}
+        </div>
+
+        {/* Dot indicators */}
+        {events.length > 1 && (
+          <div className="absolute bottom-3 right-3 flex gap-1.5 z-10" onClick={(e) => e.preventDefault()}>
+            {events.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); goTo(i); }}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "bg-white scale-125 shadow shadow-white/50"
+                    : "bg-white/50 hover:bg-white/80"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </Link>
+
+      {/* Thumbnail strip */}
+      {events.length > 1 && (
+        <div className="mt-3 overflow-x-auto flex gap-2 pb-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+          <style>{`.evt-thumbs::-webkit-scrollbar{display:none}`}</style>
+          {events.map((evt, i) => {
+            const thumbSrc = resolveEventImage(evt);
+            return (
+              <div
+                key={evt.id || i}
+                onClick={() => goTo(i)}
+                className={`cursor-pointer flex-shrink-0 rounded-lg overflow-hidden transition-all duration-300 ${
+                  i === activeIndex
+                    ? "ring-2 ring-blue-500 scale-105 shadow-md"
+                    : "opacity-70 hover:opacity-100 hover:ring-1 hover:ring-blue-300"
+                }`}
+              >
+                <img
+                  src={thumbSrc || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80"}
+                  alt={evt.title}
+                  className="w-20 h-14 sm:w-24 sm:h-16 object-cover"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80";
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Progress bar */}
+      {events.length > 1 && (
+        <div className="mt-2 w-full bg-gray-100 rounded-full h-1 overflow-hidden">
+          <div
+            className="h-full bg-blue-500 rounded-full transition-all duration-500 ease-linear"
+            style={{ width: `${((activeIndex + 1) / events.length) * 100}%` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallbackEvents = [] }) => {
   const scrollRef = useRef(null);
   const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements());
@@ -137,10 +255,10 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
         </div>
 
         {/* Main Grid */}
-        <div className="grid lg:grid-cols-10 gap-10">
+        <div className="grid lg:grid-cols-12 gap-10">
           {/* Notice Board */}
-          <div className="lg:col-span-3">
-            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-6 h-[37.5rem] flex flex-col">
+          <div className="lg:col-span-4">
+            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-6 h-[37.5rem] flex flex-col relative pb-16">
               <div className="text-blue-800 text-lg font-bold flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Calendar size={20} />
@@ -154,7 +272,6 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
                 ref={scrollRef}
                 className="space-y-4 flex-grow overflow-y-auto pr-2 scrollbar-hide"
                 style={{
-                  maxHeight: "calc(100% - 50px)",
                   scrollbarWidth: "none", // Firefox
                   msOverflowStyle: "none", // IE 10+
                 }}
@@ -180,62 +297,40 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
                 ) : null}
               </div>
 
+              {/* View More Button */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-white rounded-b-xl flex justify-center">
+                <Link
+                  to="/announcements/notices"
+                  className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 group"
+                >
+                  View All Notices
+                  <svg
+                    className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
           {/* Event Gallery */}
-          <div className="lg:col-span-7">
-            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-6 h-[37.5rem]">
-              <h3 className="text-blue-800 text-lg font-bold mb-4">
+          <div className="lg:col-span-8">
+            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-4 sm:p-6 h-[37.5rem] flex flex-col">
+              <h3 className="text-blue-800 text-lg font-bold mb-3">
                 Event Gallery
               </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 overflow-y-auto h-[calc(100%-30px)] pr-2 custom-scrollbar">
-                {visibleEvents.map((event, index) => {
-                  const imgSrc = resolveEventImage(event);
-                  return (
-                    <Link
-                      key={index}
-                      to={`/announcements/event-calendar/${event.id}`}
-                      className="group cursor-pointer block"
-                    >
-                      <div className="relative overflow-hidden rounded-xl bg-gray-200 h-48 shadow-md group-hover:shadow-xl transition-shadow duration-300">
-                        {imgSrc ? (
-                          <img
-                            src={imgSrc}
-                            alt={event.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            loading="lazy"
-                            onError={(e) => {
-                              e.target.style.display = "none";
-                              e.target.nextElementSibling && (e.target.nextElementSibling.style.display = "flex");
-                            }}
-                          />
-                        ) : null}
-                        {/* Fallback when no image */}
-                        <div
-                          className={`absolute inset-0 items-center justify-center bg-gradient-to-br from-blue-600 to-blue-800 ${imgSrc ? 'hidden' : 'flex'}`}
-                        >
-                          <Calendar size={40} className="text-white/50" />
-                        </div>
-                        {/* Overlay gradient with title */}
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-10">
-                          <h4 className="font-semibold text-white text-sm leading-snug line-clamp-2">
-                            {event.title}
-                          </h4>
-                          {event.date && (
-                            <p className="text-xs text-blue-200 mt-1 font-medium">
-                              {event.date}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
-                {visibleEvents.length === 0 ? (
-                  <p className="text-sm text-gray-500 col-span-full">No events available.</p>
-                ) : null}
-              </div>
+
+              {visibleEvents.length > 0 ? (
+                <EventGallerySlider events={visibleEvents} />
+              ) : (
+                <div className="flex-1 flex items-center justify-center text-sm text-gray-500">
+                  No events available.
+                </div>
+              )}
             </div>
           </div>
         </div>

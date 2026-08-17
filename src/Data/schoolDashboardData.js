@@ -29,13 +29,13 @@ export const DEFAULT_SCHOOL_DASHBOARD_DATA = {
         label: "About Us",
         subTabs: [
           "Dean's Message",
-          "USICT COEIDrone Technologies",
-          "USICT Cyber Security Lab",
-          "USICT COEIRAEM",
-          "USICT Board of Studies",
-          "USICT Staff Members",
-          "USICT Laboratories",
-          "USICT Activities"
+          "SoICT COEIDrone Technologies",
+          "SoICT Cyber Security Lab",
+          "SoICT COEIRAEM",
+          "SoICT Board of Studies",
+          "SoICT Staff Members",
+          "SoICT Laboratories",
+          "SoICT Activities"
         ]
       },
       {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
+import { deansMessageData } from "./about/deans-message";
 
 const lawBanner =
   "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1soljg.jpg";
@@ -28,74 +29,52 @@ export const sectionsConfig = [
     position: 1,
     props: { slides: lawSlides },
   },
-  {
+{
     componentName: "AboutSection",
     enabled: true,
     position: 2,
     props: {
       data: {
         heading: "About Us",
-        subtitle: "School of Law, Justice and Governance",
         floatingIcons: [
-          {
-            icon: <Code size={40} />,
-            color: "text-blue-400",
-            style: "top-20 left-10",
-          },
-          {
-            icon: <Lightbulb size={35} />,
-            color: "text-purple-400",
-            style: "top-32 right-20",
-          },
-          {
-            icon: <Rocket size={45} />,
-            color: "text-indigo-400",
-            style: "bottom-20 left-1/4",
-          },
+          { icon: <Code size={40} />, color: "text-blue-400", style: "top-20 left-10" },
+          { icon: <Lightbulb size={35} />, color: "text-indigo-400", style: "top-32 right-20" },
+          { icon: <Rocket size={45} />, color: "text-cyan-400", style: "bottom-20 left-1/4" },
         ],
         cards: [
           {
-            title: "Our Mission",
+            title: "VISION | SOE",
             icon: <Target size={28} />,
-            bgGradient: "from-blue-500 to-purple-600",
+            bgGradient: "from-blue-600 to-indigo-700",
             content: (
               <>
-                The{" "}
+                In accordance with the Vision of the University, the{" "}
                 <span className="font-semibold text-blue-600">
-                  School of Law, Justice and Governance
+                  School of Engineering (SOE)
                 </span>{" "}
-                advances teaching, learning and research in law, justice and
-                governance at Gautam Buddha University.
-              </>
-            ),
-            highlight: (
-              <>
-                The curriculum blends{" "}
+                has been conceptualized and established with an objective to work out and develop a dependable model for growth, consistency, and significant breakthrough in cutting-edge technology and innovation.
+                <br /><br />
+                The rapid diffusion of core engineering fields like{" "}
                 <span className="font-semibold text-indigo-600">
-                  BCI subjects
+                  Civil Engineering, Electrical Engineering, and Mechanical Engineering
                 </span>{" "}
-                with interdisciplinary study and practical training through moot
-                court, legal aid and internships.
+                has the potential of bringing improvement in productivity and efficiency in almost every aspect of our life and consequently turning out to be a key driver of our economic growth.
               </>
             ),
           },
           {
-            title: "Our Commitment",
+            title: "MISSION | SOE",
             icon: <Trophy size={28} />,
-            bgGradient: "from-purple-500 to-pink-600",
+            bgGradient: "from-indigo-600 to-cyan-600",
             content: (
               <>
-                The school offers the five-year integrated BA LLB, LLM (one year
-                and two year weekend) and PhD in Law.
+                We are committed to prepare technology leaders for tomorrow with our innovative curriculum and meticulous pedagogy for training. The programmes offered are unique in their right and fall in line with international practices.
+                <br /><br />
+                Our efforts travel beyond classrooms and encompass trends and practices through our research and modular training at par with some of the best institutions of national and international repute.
+                <br /><br />
+                The School offers innovative and interdisciplinary programmes, complemented by experiential learning in real-world situations that allow our students to combine classroom learning and their exposure to the industry to understand current trends in their field of interest and expertise. We offer five-year Integrated Dual-degree Programmes (B.Tech. + M.Tech. / B.Tech. + MBA) in Civil Engineering, Mechanical Engineering, Electrical Engineering, and Architecture & Regional Planning.
               </>
             ),
-            bullets: [
-              "BA LLB started in July 2012",
-              "PhD in Law started in 2016",
-              "LLM started in 2017",
-              "LLM One Year started in 2019",
-              "LLM Two Year Weekend Programme started in 2023",
-            ],
           },
         ],
       },
@@ -117,17 +96,17 @@ export const sectionsConfig = [
       ],
     },
   },
-  {
+{
     componentName: "LeadershipCard",
     enabled: true,
     position: 4,
     props: {
-      name: "Dr. Krishna Kant Dwivedi",
-      title: "Dean (I/C) - School of Law, Justice and Governance",
-      image:
-        "https://www.gbu.ac.in/Content/gbudata/Employee/img/KKDwivedi1.jpg",
-      description:
-        "The school blends BCI-prescribed compulsory subjects with interdisciplinary options and professional skill development for advocacy, judicial services and allied legal careers.",
+      name: deansMessageData.deanName,
+      title: deansMessageData.designation,
+      image: deansMessageData.image,
+      shortMessage: deansMessageData.shortMessage,
+      description: deansMessageData.message,
+      message: deansMessageData.message,
     },
   },
   {

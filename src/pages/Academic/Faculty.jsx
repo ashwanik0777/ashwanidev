@@ -10,41 +10,8 @@ import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data/schools";
 
-const VITE_HOST = import.meta.env.VITE_HOST;
-import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
+import { resolveFacultyImage, getFacultyInitials } from '../../utils/imageUtils';
 
-const getInitials = (name) => {
-  if (!name) return 'F';
-  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
-  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
-  if (parts.length === 0) return 'F';
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-};
-
-const getImageUrl = (url, image, name) => {
-  if (!url) {
-    if (image) return `${VITE_HOST}/media/${image}`;
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
-  }
-
-  // Resolve Google Drive URLs
-  let resolvedUrl = url;
-  if (typeof url === 'string') {
-    const matchFile = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (matchFile && matchFile[1]) {
-      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
-    } else {
-      const matchOpen = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-      if (matchOpen && matchOpen[1] && url.includes('drive.google.com')) {
-        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
-      }
-    }
-  }
-
-  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
-  return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
-};
 
 const Faculty = () => {
   const [facultyMembers, setFacultyMembers] = useState([]);
@@ -383,10 +350,10 @@ const Faculty = () => {
                           {/* Photo + Name row */}
                           <div className="flex items-start gap-4 mb-4">
                             <img
-                              src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
+                              src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)}
                               alt={faculty.name}
                               className="w-20 h-20 rounded-full object-cover border-3 border-blue-100 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0"
-                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
+                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
                             />
                             <div className="min-w-0">
                               <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">{faculty.name}</h3>

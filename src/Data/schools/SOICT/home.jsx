@@ -1,8 +1,6 @@
-
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 import { deansMessageData } from "./about/deans-message";
-
 
 const ictSlides = [
   {
@@ -37,13 +35,12 @@ export const sectionsConfig = [
     props: {
       data: {
         heading: "About Us",
-        subtitle: "School of Information and Communication Technology",
         floatingIcons: [
           { icon: <Code size={40} />, color: "text-blue-400", style: "top-20 left-10" },
           { icon: <Lightbulb size={35} />, color: "text-purple-400", style: "top-32 right-20" },
           { icon: <Rocket size={45} />, color: "text-indigo-400", style: "bottom-20 left-1/4" },
         ],
-       cards: [
+        cards: [
           {
             title: "VISION | USICT",
             icon: <Target size={28} />,
@@ -54,7 +51,7 @@ export const sectionsConfig = [
                 <span className="font-semibold text-blue-600">
                   world-class technocrats and entrepreneurs
                 </span>{" "}
-                with the latest knowledge, sound ethics and innovative ideas in{" "}
+                with the latest knowledge, sound ethics, and innovative ideas in{" "}
                 <span className="font-semibold text-purple-600">
                   ICT (Information and Communication Technology)
                 </span>{" "}
@@ -70,11 +67,11 @@ export const sectionsConfig = [
               <>
                 To impart{" "}
                 <span className="font-semibold text-purple-600">
-                  world class value based technical education
+                  world-class value-based technical education
                 </span>{" "}
-                in all aspects of ICT through state of the art infrastructure and innovative approach to produce{" "}
+                in all aspects of ICT through state-of-the-art infrastructure and innovative approaches to produce{" "}
                 <span className="font-semibold text-indigo-600">
-                  ethical, motivated and skilled professionals
+                  ethical, motivated, and skilled professionals
                 </span>{" "}
                 through theoretical knowledge and practical applications.
               </>
@@ -101,16 +98,17 @@ export const sectionsConfig = [
       ],
     },
   },
- {
+
+  {
     componentName: "LeadershipCard",
     enabled: true,
     position: 4,
     props: {
-      name: deansMessageData.deanName,
-      title: deansMessageData.designation,
-      image: deansMessageData.image,
-      shortMessage: deansMessageData.shortMessage,
-      description: deansMessageData.message || deansMessageData.fullMessage || deansMessageData.shortMessage,
+      name: deansMessageData?.deanName || "Dr. Arpit Bhardwaj",
+      title: deansMessageData?.designation || "Dean (I/C) - School of ICT, GBU",
+      image: deansMessageData?.image || "https://faculty.gbu.ac.in/uploads/photos/6735c61d170ee_WhatsApp%20Image%202024-11-14%20at%203.12.33%20PM.jpeg",
+      shortMessage: deansMessageData?.shortMessage || "The School of Information and Communication Technology is committed to academic excellence, innovation, and industry-ready learning.",
+      description: deansMessageData?.fullMessage || deansMessageData?.message || deansMessageData?.shortMessage,
     },
   },
 
@@ -189,7 +187,6 @@ export const sectionsConfig = [
           gradient: "from-blue-500 to-blue-700",
           link: "/schools/SOICT/departments/ece",
         },
-
       ],
     },
   },
@@ -199,104 +196,133 @@ export const sectionsConfig = [
     enabled: true,
     position: 6,
     props: {
+      categories: ["All", "UG", "PG", "Ph.D"],
       programs: [
         {
-          name: 'B.Tech. Computer Science & Engineering',
-          code: 'CSE',
-          duration: '4 Years',
-          specializations: ['AI & Robotics', 'Data Science', 'Cyber Security', 'Software Engineering'],
-          image: 'https://images.unsplash.com/photo-1662638600476-d563fffbb072?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8J0RhdGElMjBTY2llbmNlJyUyQyUyMCdDeWJlciUyMFNlY3VyaXR5JyUyQyUyMCdTb2Z0d2FyZSUyMEVuZ2luZWVyaW5nJ3xlbnwwfHwwfHx8MA%3D%3D',
+          name: "B.Tech. Computer Science & Engineering",
+          code: "CSE",
+          level: "UG",
+          duration: "4 Years",
+          specializations: ["AI & Robotics", "Data Science", "Cyber Security", "Software Engineering"],
+          image:
+            "https://images.unsplash.com/photo-1662638600476-d563fffbb072?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8J0RhdGElMjBTY2llbmNlJyUyQyUyMCdDeWJlciUyMFNlY3VyaXR5JyUyQyUyMCdTb2Z0d2FyZSUyMEVuZ2luZWVyaW5nJ3xlbnwwfHwwfHx8MA%3D%3D",
           description:
-            'UG program in CSE with specializations in AI & Robotics, Data Science, Cyber Security and Software Engineering.',
+            "UG program in CSE with specializations in AI & Robotics, Data Science, Cyber Security and Software Engineering.",
         },
         {
-          name: 'Integrated B.Tech.–M.Tech. (CSE)',
-          code: 'CSE–Dual',
-          duration: '5 Years',
-          specializations: ['AI & Robotics', 'Data Science', 'Software Engineering'],
-          image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&h=400',
+          name: "Integrated B.Tech.–M.Tech. (CSE)",
+          code: "CSE–Dual",
+          level: "UG",
+          duration: "5 Years",
+          specializations: ["AI & Robotics", "Data Science", "Software Engineering"],
+          image:
+            "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&h=400",
           description:
-            '5‑year integrated CSE dual‑degree granting B.Tech + M.Tech in AI, Data Science or Software Engineering.',
+            "5‑year integrated CSE dual‑degree granting B.Tech + M.Tech in AI, Data Science or Software Engineering.",
         },
         {
-          name: 'M.Tech. CSE',
-          code: 'M.Tech CSE',
-          duration: '2 Years',
-          specializations: ['AI & Robotics', 'Data Science', 'Software Engineering'],
-          image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&h=400',
+          name: "M.Tech. CSE",
+          code: "M.Tech CSE",
+          level: "PG",
+          duration: "2 Years",
+          specializations: ["AI & Robotics", "Data Science", "Software Engineering"],
+          image:
+            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&h=400",
           description:
-            'Postgraduate program in CSE offering specializations in AI & Robotics, Data Science, Software Engineering.',
+            "Postgraduate program in CSE offering specializations in AI & Robotics, Data Science, Software Engineering.",
         },
         {
-          name: 'Ph.D. CSE',
-          code: 'Ph.D CSE',
-          duration: 'Varies',
-          specializations: ['Computer Science & Engineering Research'],
-          image: 'https://plus.unsplash.com/premium_photo-1716396586363-4b942672c2ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fENvbXB1dGVyJTIwU2NpZW5jZSUyMCUyNiUyMEVuZ2luZWVyaW5nJTIwUmVzZWFyY2h8ZW58MHx8MHx8fDA%3D',
-          description: 'Doctoral research in CSE across AI, ML, Cybersecurity, IoT and related areas.',
-        },
-        {
-          name: 'B.Tech. Information Technology',
-          code: 'IT',
-          duration: '4 Years',
-          specializations: ['AI & ML', 'Data Science & ML'],
-          image: 'https://images.unsplash.com/photo-1687603917313-ccae1a289a9d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fCdBSSUyMCUyNiUyME1MJyUyQyUyMCdEYXRhJTIwU2NpZW5jZSUyMCUyNiUyME1MJydzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJ3xlbnwwfHwwfHx8MA%3D%3D',
-          description: 'UG IT program with specializations in AI & ML, Data Science & Machine Learning.',
-        },
-        {
-          name: 'M.Tech. IT / ICT',
-          code: 'M.Tech IT',
-          duration: '2 Years',
-          specializations: ['Data Science & ML'],
-          image: 'https://images.unsplash.com/photo-1653564142033-ab3532091515?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RGF0YSUyMFNjaWVuY2UlMjAlMjYlMjBNTCd8ZW58MHx8MHx8fDA%3D',
-          description: 'Postgraduate ICT/IT program focused on Data Science and Machine Learning.',
-        },
-        {
-          name: 'Ph.D. ICT/IT',
-          code: 'Ph.D IT',
-          duration: 'Varies',
-          specializations: ['Information & Communication Technology Research'],
-          image: 'https://plus.unsplash.com/premium_photo-1742926583033-56159b3cbf1c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8SW5mb3JtYXRpb24lMjAlMjYlMjBDb21tdW5pY2F0aW9uJTIwVGVjaG5vbG9neSUyMFJlc2VhcmNoJTIwY2xhc3Nyb29tfGVufDB8fDB8fHww',
-          description: 'Doctoral research in Information & Communication Technology.',
-        },
-        {
-          name: 'B.Tech. Electronics & Communication Engineering',
-          code: 'ECE',
-          duration: '4 Years',
-          specializations: ['AI & ML', 'VLSI & Embedded Systems', 'Wireless Comm & Networks'],
-          image: 'https://images.unsplash.com/photo-1744640326166-433469d102f2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fCdBSSUyMCUyNiUyMFJvYm90aWNzJyUyQyUyMCdEYXRhJTIwU2NpZW5jZSclMkMlMjAnQ3liZXIlMjBTZWN1cml0eSclMkMlMjAnU29mdHdhcmUlMjBFbmdpbmVlcmluZyd8ZW58MHx8MHx8fDA%3D',
+          name: "Ph.D. CSE",
+          code: "Ph.D CSE",
+          level: "Ph.D",
+          duration: "Varies",
+          specializations: ["Computer Science & Engineering Research"],
+          image:
+            "https://plus.unsplash.com/premium_photo-1716396586363-4b942672c2ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fENvbXB1dGVyJTIwU2NpZW5jZSUyMCUyNiUyMEVuZ2luZWVyaW5nJTIwUmVzZWFyY2h8ZW58MHx8MHx8fDA%3D",
           description:
-            'UG ECE program with focus areas in AI/ML, VLSI & Embedded, Wireless Communication & Networks.',
+            "Doctoral research in CSE across AI, ML, Cybersecurity, IoT and related areas.",
         },
         {
-          name: 'Integrated B.Tech.–M.Tech. (ECE)',
-          code: 'ECE–Dual',
-          duration: '5 Years',
-          specializations: ['Wireless Networks', 'VLSI & Embedded Systems'],
-          image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&h=400',
+          name: "B.Tech. Information Technology",
+          code: "IT",
+          level: "UG",
+          duration: "4 Years",
+          specializations: ["AI & ML", "Data Science & ML"],
+          image:
+            "https://images.unsplash.com/photo-1687603917313-ccae1a289a9d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fCdBSSUyMCUyNiUyME1MJyUyQyUyMCdEYXRhJTIwU2NpZW5jZSUyMCUyNiUyME1MJydzb2Z0d2FyZSUyMGVuZ2luZWVyaW5nJ3xlbnwwfHwwfHx8MA%3D%3D",
           description:
-            '5‑year integrated ECE dual‑degree programs in Wireless Communication, VLSI & Embedded Systems.',
+            "UG IT program with specializations in AI & ML, Data Science & Machine Learning.",
         },
         {
-          name: 'M.Tech. ECE',
-          code: 'M.Tech ECE',
-          duration: '2 Years',
-          specializations: ['Wireless Comm & Networks', 'VLSI Design', 'Railway Signalling & RAMS'],
-          image: 'https://images.unsplash.com/photo-1664526936810-ec0856d31b92?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8V2lyZWxlc3MlMjBDb21tJTIwJTI2JTIwTmV0d29ya3MnJTJDJTIwJ1ZMU0klMjBEZXNpZ24nJTIwbGFifGVufDB8fDB8fHww',
+          name: "M.Tech. IT / ICT",
+          code: "M.Tech IT",
+          level: "PG",
+          duration: "2 Years",
+          specializations: ["Data Science & ML"],
+          image:
+            "https://images.unsplash.com/photo-1653564142033-ab3532091515?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RGF0YSUyMFNjaWVuY2UlMjAlMjYlMjBNTCd8ZW58MHx8MHx8fDA%3D",
           description:
-            'Postgraduate ECE specializing in Wireless Networks, VLSI Design, Railway Signalling & RAMS.',
+            "Postgraduate ICT/IT program focused on Data Science and Machine Learning.",
         },
         {
-          name: 'Ph.D. ECE',
-          code: 'Ph.D ECE',
-          duration: 'Varies',
-          specializations: ['Electronics & Communication Engineering Research'],
-          image: 'https://plus.unsplash.com/premium_photo-1726880460027-fab1b079b37a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8J0VsZWN0cm9uaWNzJTIwJTI2JTIwQ29tbXVuaWNhdGlvbiUyMEVuZ2luZWVyaW5nJTIwUmVzZWFyY2gnfGVufDB8fDB8fHww',
-          description: 'Doctoral research in ECE areas including signal processing, VLSI, comm networks.',
+          name: "Ph.D. ICT/IT",
+          code: "Ph.D IT",
+          level: "Ph.D",
+          duration: "Varies",
+          specializations: ["Information & Communication Technology Research"],
+          image:
+            "https://plus.unsplash.com/premium_photo-1742926583033-56159b3cbf1c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8SW5mb3JtYXRpb24lMjAlMjYlMjBDb21tdW5pY2F0aW9uJTIwVGVjaG5vbG9neSUyMFJlc2VhcmNoJTIwY2xhc3Nyb29tfGVufDB8fDB8fHww",
+          description:
+            "Doctoral research in Information & Communication Technology.",
         },
-      ]
+        {
+          name: "B.Tech. Electronics & Communication Engineering",
+          code: "ECE",
+          level: "UG",
+          duration: "4 Years",
+          specializations: ["AI & ML", "VLSI & Embedded Systems", "Wireless Comm & Networks"],
+          image:
+            "https://images.unsplash.com/photo-1744640326166-433469d102f2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fCdBSSUyMCUyNiUyMFJvYm90aWNzJyUyQyUyMCdEYXRhJTIwU2NpZW5jZSclMkMlMjAnQ3liZXIlMjBTZWN1cml0eSclMkMlMjAnU29mdHdhcmUlMjBFbmdpbmVlcmluZyd8ZW58MHx8MHx8fDA%3D",
+          description:
+            "UG ECE program with focus areas in AI/ML, VLSI & Embedded, Wireless Communication & Networks.",
+        },
+        {
+          name: "Integrated B.Tech.–M.Tech. (ECE)",
+          code: "ECE–Dual",
+          level: "UG",
+          duration: "5 Years",
+          specializations: ["Wireless Networks", "VLSI & Embedded Systems"],
+          image:
+            "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&h=400",
+          description:
+            "5‑year integrated ECE dual‑degree programs in Wireless Communication, VLSI & Embedded Systems.",
+        },
+        {
+          name: "M.Tech. ECE",
+          code: "M.Tech ECE",
+          level: "PG",
+          duration: "2 Years",
+          specializations: ["Wireless Comm & Networks", "VLSI Design", "Railway Signalling & RAMS"],
+          image:
+            "https://images.unsplash.com/photo-1664526936810-ec0856d31b92?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8V2lyZWxlc3MlMjBDb21tJTIwJTI2JTIwTmV0d29ya3MnJTJDJTIwJ1ZMU0klMjBEZXNpZ24nJTIwbGFifGVufDB8fDB8fHww",
+          description:
+            "Postgraduate ECE specializing in Wireless Networks, VLSI Design, Railway Signalling & RAMS.",
+        },
+        {
+          name: "Ph.D. ECE",
+          code: "Ph.D ECE",
+          level: "Ph.D",
+          duration: "Varies",
+          specializations: ["Electronics & Communication Engineering Research"],
+          image:
+            "https://plus.unsplash.com/premium_photo-1726880460027-fab1b079b37a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8J0VsZWN0cm9uaWNzJTIwJTI2JTIwQ29tbXVuaWNhdGlvbiUyMEVuZ2luZWVyaW5nJTIwUmVzZWFyY2gnfGVufDB8fDB8fHww",
+          description:
+            "Doctoral research in ECE areas including signal processing, VLSI, comm networks.",
+        },
+      ],
     },
   },
+
   {
     componentName: "FacultyCarousel",
     enabled: true,
@@ -320,7 +346,7 @@ export const sectionsConfig = [
         {
           name: "Dr. Aarti Gautam Dinker",
           title: "Assistant Professor – CSE",
-          image: " https://faculty.gbu.ac.in/uploads/photos/6605300c5c849_aarti.jpg",
+          image: "https://faculty.gbu.ac.in/uploads/photos/6605300c5c849_aarti.jpg",
         },
         {
           name: "Dr. Anika",
@@ -390,10 +416,10 @@ export const sectionsConfig = [
           title: "Assistant Professor – IT",
           image: "https://faculty.gbu.ac.in/uploads/photos/67c1a9f10e9e1_profile_pic_ManeetSingh.jpg",
         },
-
       ],
     },
   },
+
   {
     componentName: "NoticeEvents",
     enabled: true,
@@ -406,7 +432,7 @@ export const sectionsConfig = [
           type: "Important",
         },
         {
-          title: "Notice for Aadhaar e‑kyc through UPDESCO",
+          title: "Notice for e‑kyc through UPDESCO",
           date: "2025-06-03",
           type: "Administrative",
         },
@@ -455,56 +481,57 @@ export const sectionsConfig = [
           date: "2025-05-06",
           type: "Important",
         },
-        {
-          title: "Student Council Elections Schedule",
-          date: "2025-05-06",
-          type: "Important",
-        },
-
       ],
       events: [
         {
           title: "Online National Article Writing Competition (GST)",
           date: "2025-06-30",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK2NnCSPRdgMAEkEafMhZojs0fdgEv6hFY0A&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK2NnCSPRdgMAEkEafMhZojs0fdgEv6hFY0A&s",
           description: "Organized by School of Law, extended submission date.",
         },
         {
           title: "Six‑Day Residential Vipassana Program",
           date: "2025-06-09",
-          image: "https://data.gbu.ac.in/Events/1714148988_FIVE%20DAY%20VIPASSANA%20COURSE%20FEB2024_page-0001.jpg",
+          image:
+            "https://data.gbu.ac.in/Events/1714148988_FIVE%20DAY%20VIPASSANA%20COURSE%20FEB2024_page-0001.jpg",
           description: "Well‑being retreat by School of Buddhist Studies.",
         },
         {
           title: "World Environment Day Report",
           date: "2025-06-05",
-          image: "https://images.timesnownews.com/thumb/msid-151788925,thumbsize-1151391,width-1280,height-720,resizemode-75/151788925.jpg",
+          image:
+            "https://images.timesnownews.com/thumb/msid-151788925,thumbsize-1151391,width-1280,height-720,resizemode-75/151788925.jpg",
           description: "Activities report by Department of Environmental Science.",
         },
         {
           title: "SOBSC Vesak Day Celebrations",
           date: "2025-05-03",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCwXCDOopXvx7WxXSEcJJJ86SzCi_HjeITTQ&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCwXCDOopXvx7WxXSEcJJJ86SzCi_HjeITTQ&s",
           description: "Celebration at School of Buddhist Studies & Civilization.",
         },
         {
           title: "ICSSR‑Sponsored AI Research Methodology Course",
           date: "2024-12-03",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvQud5sjoe92WQkeO2ddUOccbSRysoFo6K5GvgRZzSeMy1a2DsromFso3Hp7ctE8W-e94&usqp=CAU",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvQud5sjoe92WQkeO2ddUOccbSRysoFo6K5GvgRZzSeMy1a2DsromFso3Hp7ctE8W-e94&usqp=CAU",
           description: "10‑day course on integrating AI in research, sponsored by ICSSR.",
         },
         {
           title: "Digital India Talk Show",
           date: "2024-11-20",
-          image: "https://negd.gov.in/wp-content/uploads/2025/01/gatishakti.jpeg",
-          description: "Awareness session on e‑governance chaired by VC Prof. R.K. Sinha.",
+          image:
+            "https://negd.gov.in/wp-content/uploads/2025/01/gatishakti.jpeg",
+          description: "Awareness session on e‑governance chaired by VC Prof. R.K. Sinha.",
         },
       ],
       initialNoticeCount: 5,
       sectionTitle: "Notices & Events",
-      sectionSubtitle: "Stay updated with all updates"
+      sectionSubtitle: "Stay updated with all updates",
     },
   },
+
   {
     componentName: "ClubsAchievements",
     enabled: true,
@@ -513,128 +540,148 @@ export const sectionsConfig = [
       clubs: [
         {
           name: "Techno Cultural Club",
-          description: "Runs coding contests, hackathons, robotics, quizzes, poster-making & cultural events.",
+          description:
+            "Runs coding contests, hackathons, robotics, quizzes, poster-making & cultural events.",
           members: 150,
           category: "Technical & Cultural",
           facultyAdvisor: "Dr. Vimlesh Kumar Ray",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_dlCh4LMQ-987UX_Ssas6havujpWSVCmIGw&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_dlCh4LMQ-987UX_Ssas6havujpWSVCmIGw&s",
           socialLinks: {
             instagram: "https://instagram.com/technoculture_gbu",
             linkedin: "https://linkedin.com/company/techno-club-gbu",
-            email: "techno.ict.gbu@gmail.com"
-          }
+            email: "techno.ict.gbu@gmail.com",
+          },
         },
         {
           name: "GDSC – Google Developer Student Club",
-          description: "Peer-run community for workshops in Web Dev, Cloud, ML under GDSC umbrella.",
+          description:
+            "Peer-run community for workshops in Web Dev, Cloud, ML under GDSC umbrella.",
           members: 500,
           category: "Technical",
           facultyAdvisor: "Dr. Rajesh Mishra",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQxT9G3gSxNZESl4NJH1NzcPq0kBF1XNyHcA&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQxT9G3gSxNZESl4NJH1NzcPq0kBF1XNyHcA&s",
           socialLinks: {
             instagram: "https://instagram.com/gdsc_gbu",
             linkedin: "https://linkedin.com/company/gdsc-gautam-buddha-university",
-            email: "gdsc@gbu.ac.in"
-          }
+            email: "gdsc@gbu.ac.in",
+          },
         },
         {
           name: "IEEE Student Branch",
-          description: "Professional branch organizing tech talks, paper contests & networking.",
+          description:
+            "Professional branch organizing tech talks, paper contests & networking.",
           members: 60,
           category: "Professional",
           facultyAdvisor: "Dr. Vikram Singh",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQxT9G3gSxNZESl4NJH1NzcPq0kBF1XNyHcA&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQxT9G3gSxNZESl4NJH1NzcPq0kBF1XNyHcA&s",
           socialLinks: {
             linkedin: "https://linkedin.com/company/ieeestudentbranch",
             twitter: "https://twitter.com/ieeestudents",
-            email: "ieee@gbu.ac.in"
-          }
+            email: "ieee@gbu.ac.in",
+          },
         },
         {
           name: "Programming / CodeChef Chapter",
-          description: "Competitive coding community hosting Code Matrix, Learn to Code & hackathons.",
+          description:
+            "Competitive coding community hosting Code Matrix, Learn to Code & hackathons.",
           members: 200,
           category: "Technical",
           facultyAdvisor: "Dr. Anurag Singh Baghel",
-          image: "https://repository-images.githubusercontent.com/389157855/a2869f47-24d9-4e16-a6cc-b944855dc5f7",
+          image:
+            "https://repository-images.githubusercontent.com/389157855/a2869f47-24d9-4e16-a6cc-b944855dc5f7",
           socialLinks: {
             instagram: "https://instagram.com/codechef_gbu",
-            email: "codechef@gbu.ac.in"
-          }
+            email: "codechef@gbu.ac.in",
+          },
         },
         {
           name: "Robotics Club",
-          description: "Builds autonomous systems & competes in national robotics events.",
+          description:
+            "Builds autonomous systems & competes in national robotics events.",
           members: 45,
           category: "Technical",
           facultyAdvisor: "Dr. Vimlesh Kumar Ray",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_dlCh4LMQ-987UX_Ssas6havujpWSVCmIGw&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_dlCh4LMQ-987UX_Ssas6havujpWSVCmIGw&s",
           socialLinks: {
             twitter: "https://twitter.com/robiotics_gbu",
-            email: "robotics@gbu.ac.in"
-          }
+            email: "robotics@gbu.ac.in",
+          },
         },
         {
           name: "Dhrishtikon – Debate Society",
-          description: "Promotes free discussion, public speaking & debate competitions.",
+          description:
+            "Promotes free discussion, public speaking & debate competitions.",
           members: 80,
           category: "Cultural",
           facultyAdvisor: "Dr. Manjari Suman",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQiaFXt6eK5fEvem3rwrqMkO-O3ERZm0rV9g&s",
+          image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQiaFXt6eK5fEvem3rwrqMkO-O3ERZm0rV9g&s",
           socialLinks: {
             linkedin: "https://linkedin.com/company/drishtikon-gbu",
-            email: "drishtikon@gbu.ac.in"
-          }
+            email: "drishtikon@gbu.ac.in",
+          },
         },
         {
           name: "Cultural Council",
-          description: "Oversees Drama, Dance, Music, Painting, Photography, Literature, Adventure clubs.",
+          description:
+            "Oversees Drama, Dance, Music, Painting, Photography, Literature, Adventure clubs.",
           members: 300,
           category: "Cultural",
           facultyAdvisor: "Dr. Anand Pratap Singh",
-          image: "https://www.palmbeachculture.com/wp/wp-content/uploads/2025/06/Art-Calls-32.jpg",
+          image:
+            "https://www.palmbeachculture.com/wp/wp-content/uploads/2025/06/Art-Calls-32.jpg",
           socialLinks: {
             facebook: "https://facebook.com/abhivyanjana",
             instagram: "https://instagram.com/abhivyanjana_gbu",
-            email: "cultural@gbu.ac.in"
-          }
+            email: "cultural@gbu.ac.in",
+          },
         },
         {
           name: "Adventure Club",
-          description: "Organizes trekking, camping and outdoor adventure activities.",
+          description:
+            "Organizes trekking, camping and outdoor adventure activities.",
           members: 60,
           category: "Adventure",
           facultyAdvisor: "Dr. Sunita Gupta",
-          image: "https://i.pinimg.com/736x/2a/9b/fd/2a9bfd335b50e86e48ad59b4b28aa5b5.jpg",
+          image:
+            "https://i.pinimg.com/736x/2a/9b/fd/2a9bfd335b50e86e48ad59b4b28aa5b5.jpg",
           socialLinks: {
-            email: "adventure@gbu.ac.in"
-          }
+            email: "adventure@gbu.ac.in",
+          },
         },
         {
           name: "Photography Club",
-          description: "Encourages campus photography exhibitions & workshops.",
+          description:
+            "Encourages campus photography exhibitions & workshops.",
           members: 50,
           category: "Creative",
           facultyAdvisor: "Dr. Vidushi Sharma",
-          image: "https://image-static.collegedunia.com/public/reviewPhotos/899143/unnamed.jpg",
+          image:
+            "https://image-static.collegedunia.com/public/reviewPhotos/899143/unnamed.jpg",
           socialLinks: {
             instagram: "https://instagram.com/photoclub_gbu",
-            email: "photography@gbu.ac.in"
-          }
+            email: "photography@gbu.ac.in",
+          },
         },
         {
           name: "Art & Painting Club",
-          description: "Hosts workshops & exhibitions to nurture visual arts on campus.",
+          description:
+            "Hosts workshops & exhibitions to nurture visual arts on campus.",
           members: 40,
           category: "Creative",
           facultyAdvisor: "Dr. Anand Pratap Singh",
-          image: "https://images.squarespace-cdn.com/content/v1/604e4790cbfeea1a501ac957/1664284358990-4TBHSR3TPHO2A3M8O79V/teen+photo.jpeg",
+          image:
+            "https://images.squarespace-cdn.com/content/v1/604e4790cbfeea1a501ac957/1664284358990-4TBHSR3TPHO2A3M8O79V/teen+photo.jpeg",
           socialLinks: {
-            email: "art@gbu.ac.in"
-          }
-        }
+            email: "art@gbu.ac.in",
+          },
+        },
       ],
-    }
+    },
   },
 
   {
@@ -655,12 +702,12 @@ export const sectionsConfig = [
           },
           {
             label: "Highest Package",
-            value: "₹51 LPA",
+            value: "₹51 LPA",
             color: "bg-blue-500",
           },
           {
             label: "Average Package",
-            value: "₹6 LPA",
+            value: "₹6 LPA",
             color: "bg-purple-500",
           },
           {
@@ -672,6 +719,7 @@ export const sectionsConfig = [
       },
     },
   },
+
   {
     componentName: "RecentPlacements",
     enabled: true,
@@ -692,7 +740,8 @@ export const sectionsConfig = [
             company: "BlackRock",
             package: "₹16 LPA",
             department: "B.Tech IT",
-            photo: "https://media.istockphoto.com/id/485372249/photo/beautiful-university-student-smiling-outside-the-building.webp?a=1&b=1&s=612x612&w=0&k=20&c=LdrapmwsCdcEwRi7G_S5CMaeFQn4L27Yypsi476OfSQ=",
+            photo:
+              "https://media.istockphoto.com/id/485372249/photo/beautiful-university-student-smiling-outside-the-building.webp?a=1&b=1&s=612x612&w=0&k=20&c=LdrapmwsCdcEwRi7G_S5CMaeFQn4L27Yypsi476OfSQ=",
           },
           {
             name: "Amit Kumar",
@@ -706,7 +755,8 @@ export const sectionsConfig = [
             company: "HDFC Bank",
             package: "₹7.5 LPA",
             department: "MBA Finance",
-            photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80?w=200&h=200&fit=crop&crop=face",
+            photo:
+              "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80?w=200&h=200&fit=crop&crop=face",
           },
           {
             name: "Aditya Patel",
@@ -720,101 +770,56 @@ export const sectionsConfig = [
             company: "HCL Technologies",
             package: "₹7.8 LPA",
             department: "MCA",
-            photo: "https://media.istockphoto.com/id/1362063465/photo/female-teen-student-with-a-backpack-and-books-smiling-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=wozjDZd9SxxOG6xGIu5Z1ncjPgeZmU_yvnVQMzqaEe8=",
+            photo:
+              "https://media.istockphoto.com/id/1362063465/photo/female-teen-student-with-a-backpack-and-books-smiling-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=wozjDZd9SxxOG6xGIu5Z1ncjPgeZmU_yvnVQMzqaEe8=",
           },
           {
             name: "Mohammed Siddiqui",
             company: "Wipro",
             package: "₹6.8 LPA",
             department: "B.Tech CSE",
-            photo: "https://media.istockphoto.com/id/1995982413/photo/happy-black-male-student-with-glasses-and-backpack-on-yellow-background.jpg?s=612x612&w=0&k=20&c=zw5dSM_D91excDPc8QjBOcUE00U0yDpGFRpbNl-9VWM=",
+            photo:
+              "https://media.istockphoto.com/id/1995982413/photo/happy-black-male-student-with-glasses-and-backpack-on-yellow-background.jpg?s=612x612&w=0&k=20&c=zw5dSM_D91excDPc8QjBOcUE00U0yDpGFRpbNl-9VWM=",
           },
           {
             name: "Ananya Reddy",
             company: "OYO",
             package: "₹9.5 LPA",
             department: "MBA Marketing",
-            photo: "https://media.istockphoto.com/id/1272815911/photo/young-indian-female-university-student-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=gIZZVJ3_oo9pxN0TtTaBCk7G8xBHO6vZWy9cJVt8jWA=",
-          }
+            photo:
+              "https://media.istockphoto.com/id/1272815911/photo/young-indian-female-university-student-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=gIZZVJ3_oo9pxN0TtTaBCk7G8xBHO6vZWy9cJVt8jWA=",
+          },
         ],
       },
     },
   },
+
   {
     componentName: "RecruitersShowcase",
     enabled: true,
     position: 12,
     props: {
       recruitersData: [
-        {
-          name: "Samsung",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png",
-        },
-        {
-          name: "TCS",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png",
-        },
-        {
-          name: "Adobe",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png",
-        },
-        {
-          name: "Tech Mahindra",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png",
-        },
-        { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
-        {
-          name: "Metro",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png",
-        },
-        {
-          name: "HCL",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png",
-        },
-        {
-          name: "Byjus",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png",
-        },
-        {
-          name: "Nagrro",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png",
-        },
-        {
-          name: "Apple",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png",
-        },
-        { name: "Byju's", logo: "https://logo.clearbit.com/byjus.com" },
-        {
-          name: "White Hat Junior",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png",
-        },
-        {
-          name: "Hexaware",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png",
-        },
-        {
-          name: "Blinkit",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png",
-        },
-        {
-          name: "Toppr",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png",
-        },
-        {
-          name: "Wipro",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png",
-        },
-        {
-          name: "Scaler",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png",
-        },
-        {
-          name: "Chegg",
-          logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png",
-        },
+        { name: "Samsung", logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png" },
+        { name: "TCS", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png" },
+        { name: "Adobe", logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png" },
+        { name: "Tech Mahindra", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png" },
+        { name: "Metro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png" },
+        { name: "HCL", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png" },
+        { name: "Byjus", logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png" },
+        { name: "Nagrro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png" },
+        { name: "Apple", logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png" },
+        { name: "White Hat Junior", logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png" },
+        { name: "Hexaware", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png" },
+        { name: "Blinkit", logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png" },
+        { name: "Toppr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png" },
+        { name: "Wipro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png" },
+        { name: "Scaler", logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png" },
+        { name: "Chegg", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png" },
       ],
     },
   },
+
   {
     componentName: "StudentStartup",
     enabled: true,
@@ -825,12 +830,10 @@ export const sectionsConfig = [
           {
             name: "KOYAL FM",
             founder: "GBU Incubation Team",
-            description:
-              "Campus-based community radio initiative by students",
+            description: "Campus-based community radio initiative by students",
             funding: "University Supported",
             status: "Incubated",
-            image:
-              "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop",
+            image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop",
             year: "2020",
           },
         ],
@@ -841,6 +844,7 @@ export const sectionsConfig = [
       },
     },
   },
+
   {
     componentName: "StudentAchievements",
     enabled: true,
@@ -853,8 +857,7 @@ export const sectionsConfig = [
           year: "2024",
           student: "USICT Students",
           department: "CSE/IT/ECE",
-          image:
-            "https://i.ytimg.com/vi/znMbKz6ZPno/maxresdefault.jpg?w=400&h=250&fit=crop",
+          image: "https://i.ytimg.com/vi/znMbKz6ZPno/maxresdefault.jpg?w=400&h=250&fit=crop",
           description:
             "GBU hosted the internal SIH 2024 with 224 participants from USICT solving real-world challenges.",
         },

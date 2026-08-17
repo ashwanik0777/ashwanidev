@@ -422,7 +422,7 @@ export default function AppRouter() {
 
 
           {/* Admissions Routes */}
-          <Route
+          {/* <Route
             path="/admissions/admission-process"
             element={<AdmissionProcess />}
           />
@@ -441,7 +441,7 @@ export default function AppRouter() {
           <Route
             path="/admissions/international-admissions"
             element={<InternationalAdmissions />}
-          />
+          /> */}
 
           <Route
             path="/research/research-centers"

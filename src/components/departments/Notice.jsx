@@ -300,7 +300,7 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
               {/* View More Button */}
               <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-white rounded-b-xl flex justify-center">
                 <Link
-                  to="/announcements/notices"
+                  to={`/schools/${schoolCode}/about/activities`}
                   className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 group"
                 >
                   View All Notices

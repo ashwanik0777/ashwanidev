@@ -37,14 +37,7 @@ const NAVIGATION_CONFIG = [
   {
     key: "admissions",
     label: "Admissions",
-    baseRoute: "/admissions",
-    items: [
-      { slug: "admission-process", label: "Admission Process" },
-      { slug: "courses-offered", label: "Courses Offered (UG | PG | PhD)" },
-      { slug: "eligibility-reservation", label: "Eligibility & Reservation" },
-      { slug: "fee-structure-prospectus", label: "Fee Structure & Prospectus" },
-      { slug: "international-admissions", label: "International Admissions" },
-    ],
+    directPath: "https://gbuadm.samarth.edu.in/",
   },
   {
     key: "research",

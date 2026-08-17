@@ -6,23 +6,7 @@ import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { matchDepartmentId } from "../../Data/schoolsMeta";
 
-const VITE_HOST = import.meta.env.VITE_HOST;
-
-const getInitials = (name) => {
-  if (!name) return 'F';
-  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
-  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
-  if (parts.length === 0) return 'F';
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-};
-
-const getImageUrl = (url, image, name) => {
-  if (url && (url.startsWith("http") || url.startsWith("data:"))) return url;
-  if (url) return `${VITE_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
-  if (image) return `${VITE_HOST}/media/${image}`;
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
-};
+import { resolveFacultyImage } from "../../utils/imageUtils";
 
 export default function FacultyResponsiveSlider({
   title = "Faculty",
@@ -120,10 +104,11 @@ export default function FacultyResponsiveSlider({
           .map((member) => ({
             name: member?.name || member?.fullName || "Faculty Member",
             title: member?.designation || member?.title || "Faculty",
-            image: getImageUrl(
-              member?.imageUrl || member?.profileImageUrl,
+            image: resolveFacultyImage(
+              member?.imageUrl || member?.profileImageUrl || member?.image_url,
               member?.image,
-              member?.name || member?.fullName
+              member?.name || member?.fullName,
+              member?.email
             ),
           }))
           .filter((member) => member.name && member.title);

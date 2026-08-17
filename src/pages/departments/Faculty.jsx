@@ -7,37 +7,8 @@ import apiClient from "../../services/apiClient";
 import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
+import { resolveFacultyImage } from "../../utils/imageUtils";
 
-const getInitials = (name) => {
-  if (!name) return 'F';
-  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
-  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
-  if (parts.length === 0) return 'F';
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-};
-
-const resolveFacultyImage = (url, image, name) => {
-  const target = url || image;
-  if (!target) return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
-
-  let resolvedUrl = target;
-  if (typeof target === 'string') {
-    const matchFile = target.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-    if (matchFile && matchFile[1]) {
-      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
-    } else {
-      const matchOpen = target.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-      if (matchOpen && matchOpen[1] && target.includes('drive.google.com')) {
-        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
-      }
-    }
-  }
-
-  const host = import.meta.env.VITE_HOST || "";
-  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
-  return `${host}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
-};
 
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -277,7 +248,7 @@ const Faculty = () => {
                       <div className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <img
-                             src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)}
+                             src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)}
                              alt={faculty.name}
                              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
                            />
@@ -345,7 +316,7 @@ const Faculty = () => {
                   <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="p-6">
                       <div className="flex flex-col items-center text-center">
-                        <img src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <img src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                         <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                       </div>

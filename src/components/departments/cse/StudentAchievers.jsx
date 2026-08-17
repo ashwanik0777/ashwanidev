@@ -43,12 +43,10 @@ const StudentAchievers = ({
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
                 {achieversHeading}
               </h2>
-              {/* <p className="text-xl text-muted-foreground">
-                {achieversSubheading}
-              </p> */}
+              <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -105,14 +103,12 @@ const StudentAchievers = ({
       </section>
 
       {/* Achievements */}
-       <div className="text-center mt-8">
-              <h2 className="text-4xl font-bold text-foreground mb-4">
-                {achievementsHeading}
-              </h2>
-              {/* <p className="text-xl text-muted-foreground text-blue-600">
-                {achievementsSubheading}
-              </p> */}
-            </div>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
+          {achievementsHeading}
+        </h2>
+        <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+      </div>
 
       <StatsCard
         stats={achievements.map((achievement) => ({

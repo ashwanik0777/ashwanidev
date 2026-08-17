@@ -218,12 +218,12 @@ const Programs = ({
     <section id="programs" className="py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-6">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2.5">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
               {heading}
             </h2>
-            <div className="h-1 w-12 bg-blue-600 mx-auto mb-6 rounded-full"></div>
+            <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+          </div>
 
             {/* Medium Fully-Rounded Pills with Transparent Background & Soft Glow */}
             {availableTabs.length > 1 && (

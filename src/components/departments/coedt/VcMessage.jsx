@@ -13,12 +13,11 @@ const VcMessage = () => {
   return (
     <section className="py-12 sm:py-16 bg-gradient-to-br from-blue-50 to-purple-50">
       
-      <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-800 mb-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
              Vice Chancellor's Message
           </h2>
-          
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6">

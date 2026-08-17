@@ -31,7 +31,10 @@ const CenterOfExcellence = () => {
 
  return (
   <div className="relative h-[500px] overflow-hidden bg-white text-center flex flex-col items-center justify-start pt-5">
-    <h2 className="text-3xl font-semibold mb-4">Center of Excellence</h2>
+    <div className="text-center mb-12 relative z-40 w-full bg-white pb-4">
+      <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">Center of Excellence</h2>
+      <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+    </div>
 
     <div className="relative w-full flex justify-center items-center">
       <div className="relative w-full max-w-5xl h-[300px]">

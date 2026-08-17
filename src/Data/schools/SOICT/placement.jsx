@@ -1,8 +1,59 @@
+import img1 from "../../../assets/ICT/Placement/1.jpg";
+import img2 from "../../../assets/ICT/Placement/2.jpg";
+import img3 from "../../../assets/ICT/Placement/3.jpg";
+import img4 from "../../../assets/ICT/Placement/4.jpg";
+import img5 from "../../../assets/ICT/Placement/5.jpg";
+import img6 from "../../../assets/ICT/Placement/6.jpg";
+import img7 from "../../../assets/ICT/Placement/7.jpg";
+import img8 from "../../../assets/ICT/Placement/8.jpg";
+import img9 from "../../../assets/ICT/Placement/9.jpg";
+import img10 from "../../../assets/ICT/Placement/10.jpg";
+import img11 from "../../../assets/ICT/Placement/11.jpg";
+import img12 from "../../../assets/ICT/Placement/12.jpg";
+import img13 from "../../../assets/ICT/Placement/13.jpg";
+import img14 from "../../../assets/ICT/Placement/14.jpg";
+import img15 from "../../../assets/ICT/Placement/15.jpg";
+import img16 from "../../../assets/ICT/Placement/16.jpg";
+import img17 from "../../../assets/ICT/Placement/17.jpg";
+import img18 from "../../../assets/ICT/Placement/18.jpg";
+import img19 from "../../../assets/ICT/Placement/19.jpg";
+import img20 from "../../../assets/ICT/Placement/20.jpg";
+import img21 from "../../../assets/ICT/Placement/21.jpg";
+import img22 from "../../../assets/ICT/Placement/22.jpg";
+import img23 from "../../../assets/ICT/Placement/23.jpg";
+import img24 from "../../../assets/ICT/Placement/24.jpg";
+import img27 from "../../../assets/ICT/Placement/27.jpg";
+import img28 from "../../../assets/ICT/Placement/28.jpg";
+import img29 from "../../../assets/ICT/Placement/29.jpg";
+import img30 from "../../../assets/ICT/Placement/30.jpg";
+import img31 from "../../../assets/ICT/Placement/31.jpg";
+import img32 from "../../../assets/ICT/Placement/32.jpg";
+import img33 from "../../../assets/ICT/Placement/33.jpg";
+import img34 from "../../../assets/ICT/Placement/34.jpg";
+import img35 from "../../../assets/ICT/Placement/35.jpg";
+
+import logoSamsung from "../../../assets/ICT/Placement/logo/samsung.webp";
+import logoTcs from "../../../assets/ICT/Placement/logo/tcs.webp";
+import logoAdobe from "../../../assets/ICT/Placement/logo/adobe.webp";
+import logoTechMahindra from "../../../assets/ICT/Placement/logo/tech.webp";
+import logoMetro from "../../../assets/ICT/Placement/logo/metro.webp";
+import logoHcl from "../../../assets/ICT/Placement/logo/hcl.webp";
+import logoByjus from "../../../assets/ICT/Placement/logo/byjus.webp";
+import logoNagarro from "../../../assets/ICT/Placement/logo/nagrro.webp";
+import logoApple from "../../../assets/ICT/Placement/logo/apple.webp";
+import logoWhiteHat from "../../../assets/ICT/Placement/logo/white.webp";
+import logoHexaware from "../../../assets/ICT/Placement/logo/hexaware.webp";
+import logoBlinkit from "../../../assets/ICT/Placement/logo/blink-it-logo.webp";
+import logoToppr from "../../../assets/ICT/Placement/logo/Toppr_logo.webp";
+import logoWipro from "../../../assets/ICT/Placement/logo/wipro.webp";
+import logoScaler from "../../../assets/ICT/Placement/logo/scaler.webp";
+import logoChegg from "../../../assets/ICT/Placement/logo/Chegg-Logo.webp";
+
 export const placementData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
   hero: {
-    title: "USICT Placement Cell",
+    title: "SoICT Placement Cell",
     subtitle: "The Placement Cell connects students with employers for internships and jobs.",
     bgTheme: 1,
   },
@@ -13,67 +64,52 @@ There are plenty of infrastructure and specialized faculties available in ICT im
 We are very young and a way towards becoming a renowned academic excellence centre in future. We are confident that this bunch of professional talents, who are going to complete our studies from our School, will be of great value and a big asset to any organization they join. We recommend the current batch for your consideration.
 
 The corporate relationship center (CRC) involves students strategically and guides them for obtaining appropriate placement. The departmental placement committee which comprises of student representatives supervised by faculty coordinators works in collaboration with the university CRC. The CRC methodically plans their year round schedule and works throughout the year to ensure that both, the students as well as the associated companies, get to meet their requirements with ease.`,
-  vcMessage: {
-    name: "Prof. Rana Pratap Singh",
-    title: "Vice Chancellor",
-    image: "https://www.gbu.ac.in/USICT/media/img/vc.png",
-    googleScholar: "https://scholar.google.com/citations?hl=en&user=ef7Y-6YAAAAJ",
-    linkedIn: "https://www.linkedin.com/in/rana-p-singh-320453214/?originalSubdomain=in",
-    message:
-      "Education in its truest sense is our foremost mission. At Gautam Buddha University, dreamers become thinkers, achievers, solvers, pioneers, and influencers. We are devoted in assisting our students to endure imperishable intellectual, societal and individual transformation. There is phenomenal potential in our students. We stimulate their vision and empower them to actualize their vigor, by infusing experiential, experimental and inter-disciplinary learning in a research environment.\n\nGautam Buddha University cordially invites you to participate in the Campus Recruitment Program 2023-24, which will provide graduating students with an opportunity to demonstrate their worth and contribute to your organisation. We're excited to give recruiters a positive experience and take a step ahead in developing our relationship with the industry.",
-  },
+  vcMessage: null,
   whyGbu: `GBU produces responsible citizens who not only are skillful and well mannered, but also are vibrant and strong willed. The students of GBU have a strong sense of responsibility toward the nation and the family. This rare sense of appreciation and veneration for their belongingness makes them very different from the rest of the lot. Corporate partners have often appreciated the low attrition rates of the students of GBU. Because of this quality of sheer perseverance toward a cause or a vision or a mission, GBU students have created a reputable name in the corporate arena.`,
   recruiterFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSduUv1ABymG823prkIupnd5pMkos0jO4dFQGhJS7KUIFuMd1Q/viewform?embedded=true",
-  galleryOverviewText: `The Placement Gallery at Gautam Buddha University is a testament to the remarkable achievements and successes of our students. This vibrant and dynamic space showcases a plethora of proud moments, highlighting the diverse range of companies that have recruited our talented graduates. From leading multinational corporations to innovative startups, the gallery captures the essence of our students' journey from academia to the professional world. It serves not only as a source of inspiration for current students but also as a reflection of the university's commitment to excellence in education and career development.
-
-The Placement Gallery stands as a beacon of the opportunities and bright futures that await our students, celebrating their hard work, dedication, and the exceptional education they receive at Gautam Buddha University.`,
+  galleryOverviewText: null,
   galleryImages: [
-    "https://www.gbu.ac.in/USICT/media/img/gallary/29.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/30.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/31.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/32.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/33.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/34.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/35.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/1.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/2.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/3.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/4.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/5.jpg",
-    "https://www.gbu.ac.in/USICT/media/img/gallary/6.jpg",
+    img1, img2, img3, img4, img5, img6, img7, img8, img9, img10,
+    img11, img12, img13, img14, img15, img16, img17, img18, img19, img20,
+    img21, img22, img23, img24, img27, img28, img29, img30, img31, img32,
+    img33, img34, img35
   ],
   placementPolicy: {
-    registrationRules: `All the students who wish to take the facility of Placement Cell for acquiring jobs have to make prior registration, strictly with the deadline given to each pass-out batch. Students have to complete their full information, submitting resumes following the given format set by the Placement Cell. Students having no job offer, and completed all formalities as above, can sit in the campus drive of the company, as per the eligibility criteria set by the company.`,
+    generalRules: [
+      "All the students who wish to take the facility of Placement Cell for acquiring jobs have to make prior registration, strictly with the deadline given to each pass-out batch.",
+      "Students have to complete their full information, submitting resumes following the given format set by the Placement Cell.",
+      "Students having no job offer, and completed all formalities as above, can sit in the campus drive of the company, as per the eligibility criteria set by the company.",
+      "Prior notices are given (on dedicated noticeboards, personal messages, and emails). The student has to sit in the particular company campus drive. This is the sole responsibility of the student to be aware of such drives happening.",
+      "Shortlisting students of a particular company is the pure jurisdiction of the company visiting. Therefore, no inquiry will be entertained on companies' shortlisting process.",
+      "There are always deadlines for consent giving and other processes for the different companies visiting. No application would be considered beyond the deadline.",
+      "If a student applies for a particular campus drive and done all the formalities but does not attend any round set by the company for their recruitment process, he/she will be debarred for further campus drives in the future.",
+      "Any indisciplinary activities, if found so in the recruitment process, will turn into debarring the student from the placement process for the whole semester.",
+      "Misconduct/Copying during the written test/online test will forfeit the candidature for the complete placement session.",
+    ],
     offersPolicy: `If a student gets two placement offers, he/she will be required to choose between the two offers within ten days of receiving the results in writing; otherwise, necessary disciplinary action will be taken against them, including cancellation of both offers.`,
     informationResponsibility: `Any information given to the placement cell is the sole responsibility of the student. If cross-verified and any discrepancy found, the student will be debarred from the whole placement session, and necessary disciplinary action will be taken against them.`,
     noToleranceRules: [
       "Directly approaching company officials without a proper channel.",
-      "Intimating the company that he/she doesn't want to join during the interview process.",
-      "Showing negatively about the company or university.",
+      "Intimating the company that he/she doesn't want to join the company during the interview process.",
+      "Showing negatively about company/university.",
       "Laying down conditions to join the company beyond the offer intimated.",
-      "Posting company-related information via social media or any other platform is strictly prohibited.",
+      "Posting company-related information via social media or any other platform is prohibited.",
     ],
-    secondPlacementPolicy: `A student placed with a lower salary package can apply for a second company offering more than the first one. This decision is subject to change based on market situation. A student placed in an 'Exclusive' company/PSU cannot apply for a second job.`,
+    secondPlacementPolicy: [
+      "A student placed with a salary package lower can apply for a second company offering more than the first one. This decision is subject to change and always decided for every year seeing the job situation in the market.",
+      "A student placed in an 'Exclusive' company/PSU cannot apply for a second job.",
+    ],
     offCampusOffers: `All off-campus offers must be communicated to the placement cell within 24 hours.`,
+    facultyDiscretion: `In all exceptional cases, the faculty Coordinator Placement Cell, with proper intimation to University CRC, uses his/her discretionary power.`,
     codeOfConduct: {
-      attire: "For Summers - formal shirt and formal trousers/skirt; for Winters - shirt and trouser/skirt with blazer and tie. Standard leather shoes are mandatory.",
-      documents: "Students must bring rough sheets, pen, college ID cards, and any required documents.",
+      intro: "All students sitting for the placement process have to follow in toto the attire code.",
+      attire: "For Summers- formal shirt and formal trousers/skirt, and Winters- shirt and trouser/skirt with blazer and tie. The proper standard leather shoe has to be worn.",
+      documents: "Students have to bring rough sheets, pen, and college ID cards, or any other document asked for in the interview process.",
       gadgets: "Use of handheld devices and electronic gadgets is strictly prohibited during the recruitment process.",
     },
   },
-  placementStats: {
-    totalStudents: 530,
-    placedStudents: 320,
-    highestPackage: 45,
-    placementRate: 92,
-  },
-  noticeBoard: [
-    { title: "Polycab Pre Placement Talk will be held on 2nd February, 2025", date: "2nd Feb 2025" },
-    { title: "Open Walk-In Drive by Cloud Analogy on 1st February 2025", date: "1st Feb 2025" },
-    { title: "Campus Recruitment Drive - Addverb Technologies on 28th January, 2025", date: "28th Jan 2025" },
-    { title: "Interview of Astrea IT Services is scheduled on 23rd January, 2025", date: "23rd Jan 2025" },
-    { title: "Online Interview of shortlisted students by Great Developers on 21st January, 2025", date: "21st Jan 2025" },
-  ],
+  placementStats: null,
+  noticeBoard: [],
   placementGuidelines: [
     "The placement coordinators send invitations along with a placement form to organizations to participate in the campus placements.",
     "Placement form can be sent either by post or email to the placement coordinator.",
@@ -84,51 +120,47 @@ The Placement Gallery stands as a beacon of the opportunities and bright futures
     "Organizations come to campus on the allotted date(s) and conduct tests and/or interviews as per their recruitment process.",
     "The organization is expected to furnish the list of selected students preferably on the day of campus visit.",
   ],
-  btechPrograms: [
-    { name: "IT (63 Students)", students: 63, color: "#FF6384" },
-    { name: "ECE (24 Students)", students: 24, color: "#36A2EB" },
-    { name: "CSE Core (57 Students)", students: 57, color: "#FFCE56" },
-    { name: "AI (23 Students)", students: 23, color: "#4BC0C0" },
-    { name: "ML (6 Students)", students: 6, color: "#9966FF" },
-    { name: "CSE DS (6 Students)", students: 6, color: "#FF9F40" },
-    { name: "Cyber Security (5 Students)", students: 5, color: "#FFCD56" },
-    { name: "Self Finance (48 Students)", students: 48, color: "#D2691E" },
+  ourObjective: `Our objective is to achieve not just 100% placements for students but also to take care of the placement as per requirements of every student. Placement coordinators and staff work day in and day out to realize this objective. The Corporate Relation Cell with placement coordinators organizes various workshops and conducts programs that help in developing our students' skills so that they can meet the industries' expectations in their life.`,
+  btechPrograms: [],
+  otherPrograms: [],
+  growth: [],
+  sectorDistribution: [],
+  pastPlacements: [
+    { year: "2023", details: "Campus Placement 2023", link: "https://drive.google.com/file/d/156d2XF5nG6thHaDehx3AltmGfJtHal8J/view?usp=drive_web" },
+    { year: "2022", details: "Campus Placement 2022", link: "https://drive.google.com/file/d/19N__CX8SM4HaEc5Sh76rXxSPei1VLowG/view?usp=drive_web" },
+    { year: "2021", details: "Campus Placement 2021", link: "https://drive.google.com/file/d/1n9lxVCkgG_Tmfrv-tbRehxz9Qkzscrsc/view?usp=drive_web" },
+    { year: "2020", details: "Campus Placement 2020", link: "https://drive.google.com/file/d/1R0ATMcSjhIHiFcw-AvpuPT_Gs_IHkm1l/view?usp=drive_web" },
+    { year: "2019", details: "Campus Placement 2019", link: "https://drive.google.com/file/d/1mts0taMfFwMpW7CIzkO-H4bFt4nRq56X/view?usp=drive_web" },
+    { year: "2018", details: "Campus Placement 2018", link: "https://drive.google.com/file/d/1ah_expsky4-XYxKspaaCmj9GhtwKa3o7/view?usp=drive_web" },
+    { year: "2016-17", details: "Placement 2016-17", link: "https://drive.google.com/file/d/1ymwPOtQe2A1PhDjWB_kpfPwrs4VpbMDr/view?usp=drive_web" },
+    { year: "2016", details: "Placement 2016", link: "https://drive.google.com/file/d/1RonER2E-NuaCZY3oCq8eEqWKLtL1vbLn/view?usp=drive_web" },
+    { year: "2015", details: "Placement 2015", link: "https://drive.google.com/file/d/1s-Qg5sFA-_BfNqTw9ixlsD_XNcmePDRc/view?usp=drive_web" },
+    { year: "2014", details: "Placement 2014", link: "https://drive.google.com/file/d/10Wa8DgRf4gSQ-DtLPI9RsPn50sGpru3F/view?usp=drive_web" },
+    { year: "2013", details: "Placement 2013", link: "https://drive.google.com/file/d/17k7PjKx_vV0VlkNjPXR7l_hax-Cuo0gz/view?usp=drive_web" },
+    { year: "2012", details: "Placement 2012", link: "https://drive.google.com/file/d/1CBU5GPl2FzqFulrIoBwXAllZzlircZq2/view?usp=drive_web" },
+    { year: "2011", details: "Placement 2011", link: "https://drive.google.com/file/d/1_RZ5ZKAMwdz9brzk1HsmzSCGifM33tYE/view?usp=drive_web" },
+    { year: "2010", details: "Placement 2010", link: "https://drive.google.com/file/d/1c-Zcr0qThUdTi34coOppXb3HR1BsNeqV/view?usp=drive_web" },
   ],
-  otherPrograms: [
-    { name: "B.C.A", enrollment: 54, color: "rgba(255, 99, 132, 1)" },
-    { name: "M.C.A DS", enrollment: 50, color: "rgba(54, 162, 235, 1)" },
-    { name: "M.C.A AI", enrollment: 40, color: "rgba(255, 206, 86, 1)" },
-    { name: "M. Tech VLSI Design", enrollment: 20, color: "rgba(75, 192, 192, 1)" },
-    { name: "M. Tech CSE DS", enrollment: 30, color: "rgba(153, 102, 255, 1)" },
-    { name: "M. Tech CSE AI", enrollment: 20, color: "rgba(255, 159, 64, 1)" },
-    { name: "Int B. Tech+ M. Tech", enrollment: 84, color: "rgba(255, 99, 132, 1)" },
-  ],
+  pastPlacementsFolder: "https://drive.google.com/drive/folders/1zIGWziwEoGtc4xlplhXx0PQOrsqfc46w",
   recruitersData: [
-    { name: "Samsung", logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png" },
-    { name: "TCS", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png" },
-    { name: "Adobe", logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png" },
-    { name: "Tech Mahindra", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png" },
-    { name: "Metro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png" },
-    { name: "HCL", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png" },
-    { name: "Byju's", logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png" },
-    { name: "Nagarro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png" },
-    { name: "Apple", logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png" },
-    { name: "WhiteHat Jr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png" },
-    { name: "Hexaware", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png" },
-    { name: "Blinkit", logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png" },
-    { name: "Toppr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png" },
-    { name: "Wipro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png" },
-    { name: "Scaler", logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png" },
-    { name: "Chegg", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png" },
+    { name: "Samsung", logo: logoSamsung },
+    { name: "TCS", logo: logoTcs },
+    { name: "Adobe", logo: logoAdobe },
+    { name: "Tech Mahindra", logo: logoTechMahindra },
+    { name: "Metro", logo: logoMetro },
+    { name: "HCL", logo: logoHcl },
+    { name: "Byju's", logo: logoByjus },
+    { name: "Nagarro", logo: logoNagarro },
+    { name: "Apple", logo: logoApple },
+    { name: "WhiteHat Jr", logo: logoWhiteHat },
+    { name: "Hexaware", logo: logoHexaware },
+    { name: "Blinkit", logo: logoBlinkit },
+    { name: "Toppr", logo: logoToppr },
+    { name: "Wipro", logo: logoWipro },
+    { name: "Scaler", logo: logoScaler },
+    { name: "Chegg", logo: logoChegg },
   ],
-  achievers: [
-    { name: "Ankit Sharma", company: "Microsoft", package: "45 LPA", program: "B.Tech CSE" },
-    { name: "Priya Singh", company: "Amazon", package: "42 LPA", program: "B.Tech IT" },
-    { name: "Rohit Kumar", company: "Google", package: "40 LPA", program: "B.Tech AI" },
-    { name: "Sneha Patel", company: "Adobe", package: "38 LPA", program: "B.Tech CSE" },
-    { name: "Arjun Verma", company: "Goldman Sachs", package: "35 LPA", program: "B.Tech IT" },
-    { name: "Kavya Gupta", company: "Flipkart", package: "32 LPA", program: "B.Tech ML" },
-  ],
+  achievers: [],
   placementRules: [
     "Prior registration required within deadline on the CRC portal.",
     "Complete resume submission mandatory with verified academic credentials.",
@@ -137,37 +169,17 @@ The Placement Gallery stands as a beacon of the opportunities and bright futures
     "Off-campus offers must be reported to the placement cell within 24 hours.",
     "Formal business attire code is strictly enforced for all interviews.",
   ],
-  missionObjective: {
-    aboutTitle: "About USICT Corporate Relation Cell",
-    aboutText:
-      "Information and Communication Technology is one of the most fascinating fields for understanding and practicing. The students of ICT are nurtured in such a way they can be well recruitable or become researchers after completion of their degree from our School. We are confident that this bunch of professional talents will be of great value and a big asset to any organization they join.",
-    objectiveTitle: "Our Objective",
-    objectiveText:
-      "Our objective is to achieve not just 100% placements for students but also to take care of the placement as per requirements of every student. Placement coordinators and staff work day in and day out to realize this objective. The Corporate Relation Cell with placement coordinators organizes various workshops and conducts programs that help in developing our students' skills so that they can meet the industries' expectations in their life.",
-  },
+  missionObjective: null,
   brochure: {
-    title: "USoICT Placement Brochure 2025-26",
+    title: "SoICT Placement Brochure 2025-26",
     year: "2025-26",
-    link: "https://www.gbu.ac.in/USICT/placement/USoICT-Placement%20Brochure%202025-26.pdf",
+    link: "https://drive.google.com/file/d/1U4bV1CahJZ4NCY-9IE5h6OowawP-8hpb/view?usp=sharing",
   },
   report: {
     title: "Placement Report",
     year: "2024-25",
-    link: "https://www.gbu.ac.in/USICT/placement/USoICT-Placement%20Brochure%202025-26.pdf",
+    link: "https://drive.google.com/file/d/1U4bV1CahJZ4NCY-9IE5h6OowawP-8hpb/view?usp=sharing",
   },
-  growth: [
-    { year: "2020", rate: "75%" },
-    { year: "2021", rate: "82%" },
-    { year: "2022", rate: "88%" },
-    { year: "2023", rate: "90%" },
-    { year: "2024", rate: "92%" },
-  ],
-  sectorDistribution: [
-    { sector: "IT & Software Services", percentage: "45%", color: "bg-blue-500" },
-    { sector: "Core Electronics & Hardware", percentage: "25%", color: "bg-emerald-500" },
-    { sector: "Consulting, FinTech & EdTech", percentage: "20%", color: "bg-purple-500" },
-    { sector: "Research & PSUs", percentage: "10%", color: "bg-amber-500" },
-  ],
   departmentPlacement: [
     { dept: "Computer Science & Engineering", rate: "95%", color: "bg-emerald-500" },
     { dept: "Information Technology", rate: "92%", color: "bg-blue-500" },
@@ -181,7 +193,7 @@ The Placement Gallery stands as a beacon of the opportunities and bright futures
   ],
   ugPgStats: { ug: "89%", pg: "96%" },
   domesticInternational: { domestic: "85%", international: "15%" },
-  reportDownloadLabel: "Download USICT Placement Report",
+  reportDownloadLabel: "Download SoICT Placement Report",
   coordinators: [
     {
       name: "Dr. Vinay Litoria",
@@ -191,7 +203,7 @@ The Placement Gallery stands as a beacon of the opportunities and bright futures
     },
     {
       name: "Dr. Raju Pal",
-      role: "Placement In-charge USICT, GBU",
+      role: "Placement In-charge SoICT, GBU",
       email: "placement.usict@gbu.ac.in",
       image: "https://www.gbu.ac.in/USICT/media/img/profile/2.jpeg",
     },
@@ -199,7 +211,7 @@ The Placement Gallery stands as a beacon of the opportunities and bright futures
   contactInfo: {
     people: [
       { name: "Dr. Vinay Litoria", role: "Director, Corporate Relation Cell (CRC)", image: "https://www.gbu.ac.in/USICT/media/img/profile/1.jpeg" },
-      { name: "Dr. Raju Pal", role: "Placement In-charge, USICT", image: "https://www.gbu.ac.in/USICT/media/img/profile/2.jpeg" },
+      { name: "Dr. Raju Pal", role: "Placement In-charge, SoICT", image: "https://www.gbu.ac.in/USICT/media/img/profile/2.jpeg" },
     ],
     emails: ["crc@gbu.ac.in", "placement.usict@gbu.ac.in"],
   },

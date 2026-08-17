@@ -35,7 +35,6 @@ const VisionaryLeadership = () => {
           }
         }
 
-        // Refine designations for exact presentation matching administrative standards
         let displayDesignation = leader.designation;
         if (leader.name?.includes("Yogi")) {
           displayDesignation = "Hon'ble Chief Minister of Uttar Pradesh & Chancellor, GBU";
@@ -64,7 +63,7 @@ const VisionaryLeadership = () => {
   }
 
   return (
-    <section className="w-full bg-[#eaf4f8] py-5 sm:py-8 border-y border-slate-200/70 font-sans relative overflow-hidden">
+    <section className="w-full bg-[#eaf4f8] py-1 sm:py-2 border-y border-slate-200/70 font-sans relative overflow-hidden">
       {/* Top Left Accent Ribbon */}
       <div className="absolute top-0 left-0 h-1.5 w-48 bg-gradient-to-r from-orange-500 via-amber-500 to-transparent z-10" />
 
@@ -101,7 +100,7 @@ const VisionaryLeadership = () => {
                 className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl py-4 px-4 sm:py-5 sm:px-5 flex flex-col items-center text-center justify-center shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
               >
                 {/* Leader Avatar Photo */}
-                <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm mb-2.5 shrink-0 bg-slate-50 group-hover:border-orange-300 transition-colors duration-300">
+                <div className="relative w-20 h-20 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm mb-2.5 shrink-0 bg-slate-50 group-hover:border-orange-300 transition-colors duration-300">
                   <img
                     src={getPhotoUrl(leader.photo)}
                     alt={leader.name}

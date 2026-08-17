@@ -38,17 +38,10 @@ const PartnersCarousel = ({
     <section className="py-16 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold text-blue-800 mb-4">{sectionTitle}</h2>
-          <p className="text-lg text-gray-600">{sectionSubtitle}</p>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full" />
-        </motion.div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{sectionTitle}</h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        </div>
 
         {/* Carousel */}
         <motion.div

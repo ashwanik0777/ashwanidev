@@ -9,6 +9,11 @@ import {
   Zap,
   Shield,
   Database,
+  Search,
+  ChevronDown,
+  ChevronUp,
+  User,
+  X
 } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
@@ -22,6 +27,101 @@ const iconMap = {
   Zap,
   Shield,
   Database,
+};
+
+const FacultyResearchCard = ({ item }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const maxLength = 260;
+  const isLongText = item.profile && item.profile.length > maxLength;
+
+  // Split research areas by comma or semicolon
+  const researchAreasList = item.researchArea
+    ? item.researchArea.split(/[,;]/).map((a) => a.trim()).filter(Boolean)
+    : [];
+
+  // Generate initials for avatar
+  const initials = item.name
+    .replace(/^Dr\.\s*|Prof\.\s*/i, "")
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full">
+      <div>
+        {/* Header: Avatar, Name & Designation */}
+        <div className="flex items-start gap-3.5 mb-4">
+          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+            {initials || <User className="w-5 h-5" />}
+          </div>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-lg font-bold text-slate-900 font-outfit leading-snug">
+              {item.name}
+            </h3>
+            {item.designation && (
+              <span className="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full inline-block mt-1">
+                {item.designation}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Research Area Badges */}
+        {researchAreasList.length > 0 && (
+          <div className="mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-blue-600 inline" />
+              Research Areas
+            </h4>
+            <div className="flex flex-wrap gap-1.5">
+              {researchAreasList.map((area, aIdx) => (
+                <span
+                  key={aIdx}
+                  className="text-xs bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700 px-2.5 py-1 rounded-md font-medium border border-slate-200/80 transition-colors"
+                >
+                  {area}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Research Profile Text */}
+        {item.profile && (
+          <div className="mt-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+              Research Profile
+            </h4>
+            <div className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+              {isLongText && !isExpanded
+                ? `${item.profile.slice(0, maxLength)}...`
+                : item.profile}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Read More / Show Less Toggle Button */}
+      {isLongText && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="mt-4 text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition-colors self-start"
+        >
+          {isExpanded ? (
+            <>
+              Show Less <ChevronUp className="w-3.5 h-3.5" />
+            </>
+          ) : (
+            <>
+              Read Full Profile <ChevronDown className="w-3.5 h-3.5" />
+            </>
+          )}
+        </button>
+      )}
+    </div>
+  );
 };
 
 const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyProfiles = [] }) => {
@@ -53,85 +153,73 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
 
       {/* Faculty Research Profiles Section */}
       {facultyProfiles && facultyProfiles.length > 0 && (
-        <section className="py-12 px-4 bg-slate-50">
+        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+            {/* Header & Filter Controls */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
               <div>
-                <h2 className="text-3xl font-bold text-slate-900 font-outfit">
+                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
                   Faculty Research Areas & Profiles
                 </h2>
-                <p className="text-slate-600 text-sm mt-1">
-                  Explore research expertise, ongoing investigations, and scientific contributions of our faculty.
+                <p className="text-slate-600 text-sm mt-1.5 max-w-2xl">
+                  Explore academic expertise, research domains, publications, and scientific achievements of our faculty members.
                 </p>
               </div>
-              <div className="w-full md:w-80">
+
+              {/* Search Bar */}
+              <div className="relative w-full md:w-80 shrink-0">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Search faculty or research area..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  className="w-full pl-10 pr-9 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm shadow-sm"
                 />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Results Count Banner */}
+            <div className="flex items-center justify-between mb-6 text-xs text-slate-500 font-medium">
+              <span>
+                Showing <strong className="text-slate-800">{filteredFaculty.length}</strong> of{" "}
+                <strong className="text-slate-800">{facultyProfiles.length}</strong> Faculty Members
+              </span>
+              {searchTerm && (
+                <span>
+                  Filtering by: <em className="text-blue-600 font-semibold">"{searchTerm}"</em>
+                </span>
+              )}
+            </div>
+
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
               {filteredFaculty.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-2 mb-3">
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-900 font-outfit">
-                          {item.name}
-                        </h3>
-                        {item.designation && (
-                          <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full inline-block mt-1">
-                            {item.designation}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {item.researchArea && (
-                      <div className="mb-4">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5 flex items-center gap-1.5">
-                          <BookOpen className="w-3.5 h-3.5 text-blue-600 inline" />
-                          Research Area
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {item.researchArea.split(",").map((area, aIdx) => (
-                            <span
-                              key={aIdx}
-                              className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium"
-                            >
-                              {area.trim()}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {item.profile && (
-                      <div className="mt-3">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
-                          Research Profile
-                        </h4>
-                        <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
-                          {item.profile}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <FacultyResearchCard key={idx} item={item} />
               ))}
             </div>
 
             {filteredFaculty.length === 0 && (
-              <div className="text-center py-12 text-slate-500">
-                No faculty profiles found matching "{searchTerm}".
+              <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
+                <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+                <h3 className="text-base font-bold text-slate-800">No Faculty Profiles Found</h3>
+                <p className="text-sm text-slate-500 mt-1">
+                  No profiles matched your query "{searchTerm}". Try searching for another keyword.
+                </p>
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Clear Search Filter
+                </button>
               </div>
             )}
           </div>

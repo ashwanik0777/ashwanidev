@@ -203,33 +203,15 @@ const Publications = () => {
   return (
     <SearchableWrapper>
       <div>
-        <div className="bg-gradient-to-b from-white to-blue-50">
-          <div className="text-center mt-15">
+        <div className="bg-gradient-to-b from-white to-blue-50 py-6">
+          <div className="text-center">
             <h1 className="text-4xl font-semibold text-black/70">
-              Publications & Patents
+              Research Publications
             </h1>
           </div>
-
-          <StatsCard stats={statsData} />
-
         </div>
 
-        <div className="px-4 sm:px-8 lg:px-16 pb-10">
-          {/* Tabs */}
-          <ButtonGroup
-            buttons={tabButtons}
-            onClick={(btnId) => {
-              setActiveTab(btnId);
-              setCurrentPage(1);
-            }}
-            activeButton={activeTab}
-            size="lg"
-            fullWidth={true}
-            rounded="lg"
-            theme="primary"
-            animated={true}
-          />
-
+        <div className="px-4 sm:px-8 lg:px-16 pt-6 pb-10">
           {/* Filters & View Switch Header */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-8 mb-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
@@ -263,7 +245,7 @@ const Publications = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Bulletin Selection Filter */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
@@ -296,22 +278,6 @@ const Publications = () => {
                   {schools.map((s, i) => (
                     <option key={i} value={s}>{s}</option>
                   ))}
-                </select>
-              </div>
-
-              {/* Status Filter */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Status</label>
-                <select
-                  value={selectedStatus}
-                  onChange={(e) => setSelectedStatus(e.target.value)}
-                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
-                >
-                  <option value="">All Status</option>
-                  <option value="Granted">Granted</option>
-                  <option value="Published">Published</option>
-                  <option value="Filed">Filed</option>
-                  <option value="Under Review">Under Review</option>
                 </select>
               </div>
 

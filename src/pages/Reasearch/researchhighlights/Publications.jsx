@@ -310,38 +310,55 @@ const Publications = () => {
   );
 
   const filteredPublications = publications.filter((pub) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedBulletin || pub.bulletinTitle === selectedBulletin) &&
       (!selectedSchool || pub.school === selectedSchool) &&
       (!selectedCategory || pub.category === selectedCategory) &&
       (!selectedYear || pub.year === selectedYear) &&
       (!selectedType || pub.type === selectedType) &&
-      (!searchTerm ||
-        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.authors.toLowerCase().includes(searchTerm.toLowerCase()))
+      (!term ||
+        pub.title?.toLowerCase().includes(term) ||
+        pub.authors?.toLowerCase().includes(term) ||
+        pub.journal?.toLowerCase().includes(term) ||
+        pub.school?.toLowerCase().includes(term) ||
+        pub.category?.toLowerCase().includes(term) ||
+        pub.year?.toString().includes(term) ||
+        pub.type?.toLowerCase().includes(term))
     );
   });
 
   const filteredPatents = patents.filter((p) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedSchool || p.school === selectedSchool) &&
       (!selectedStatus || p.status === selectedStatus) &&
-      (!searchTerm ||
-        p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.inventors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.patentNo.toLowerCase().includes(searchTerm.toLowerCase()))
+      (!term ||
+        p.title?.toLowerCase().includes(term) ||
+        p.inventors?.toLowerCase().includes(term) ||
+        p.patentNo?.toLowerCase().includes(term) ||
+        p.school?.toLowerCase().includes(term) ||
+        p.status?.toLowerCase().includes(term) ||
+        p.type?.toLowerCase().includes(term) ||
+        p.year?.toString().includes(term) ||
+        p.description?.toLowerCase().includes(term))
     );
   });
 
   const filteredBooks = books.filter((b) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedSchool || b.school === selectedSchool) &&
       (!selectedType || b.type.toLowerCase() === selectedType.toLowerCase()) &&
-      (!searchTerm ||
-        b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.publisher.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (b.isbn && b.isbn.toLowerCase().includes(searchTerm.toLowerCase())))
+      (!term ||
+        b.title?.toLowerCase().includes(term) ||
+        b.authors?.toLowerCase().includes(term) ||
+        b.publisher?.toLowerCase().includes(term) ||
+        b.isbn?.toLowerCase().includes(term) ||
+        b.type?.toLowerCase().includes(term) ||
+        b.school?.toLowerCase().includes(term) ||
+        b.year?.toString().includes(term) ||
+        b.description?.toLowerCase().includes(term))
     );
   });
 
@@ -525,7 +542,10 @@ const Publications = () => {
                 <label className="text-sm font-medium text-gray-700">School</label>
                 <select
                   value={selectedSchool}
-                  onChange={(e) => setSelectedSchool(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedSchool(e.target.value);
+                    setCurrentPage(1);
+                  }}
                   className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                 >
                   <option value="">All Schools</option>
@@ -542,9 +562,12 @@ const Publications = () => {
                   <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search titles, authors..."
+                    placeholder="Search titles, authors, publishers, ISBN, patent numbers..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setCurrentPage(1);
+                    }}
                     className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                   />
                 </div>

@@ -422,25 +422,44 @@ const Publications = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Bulletin Selection Filter */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
-                <select
-                  value={selectedBulletin}
-                  onChange={(e) => {
-                    setSelectedBulletin(e.target.value);
-                    setCurrentPage(1);
-                  }}
-                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-blue-900"
-                >
-                  <option value="">All 5 Official Bulletins</option>
-                  {officialBulletins.map((b) => (
-                    <option key={b.id} value={b.title}>
-                      {b.period} ({b.paperCount} Papers)
-                    </option>
-                  ))}
-                </select>
-              </div>
+              {/* Context Aware Filter: Bulletin for Publications, Status for Patents */}
+              {activeTab === "publications" ? (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
+                  <select
+                    value={selectedBulletin}
+                    onChange={(e) => {
+                      setSelectedBulletin(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-blue-900"
+                  >
+                    <option value="">All 5 Official Bulletins</option>
+                    {officialBulletins.map((b) => (
+                      <option key={b.id} value={b.title}>
+                        {b.period} ({b.paperCount} Papers)
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Patent Status</label>
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => {
+                      setSelectedStatus(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-indigo-900"
+                  >
+                    <option value="">All Patent Statuses</option>
+                    <option value="Granted">Granted</option>
+                    <option value="Published">Published</option>
+                    <option value="Filed">Filed</option>
+                  </select>
+                </div>
+              )}
 
               {/* School Filter */}
               <div className="space-y-2">

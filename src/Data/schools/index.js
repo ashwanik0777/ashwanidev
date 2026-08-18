@@ -83,7 +83,7 @@ export const RESEARCH_CENTERS = [
     facilities: ["UAV Flight Arena", "DGCA Flight Simulator", "Drone Assembly & Maintenance Lab", "Payload Testing Unit"],
     researchAreas: ["Drone Technologies", "Autonomous Navigation", "Aerial Intelligence"],
     image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
-    portalLink: "https://cedtgbu.wixsite.com/home"
+    portalLink: "/schools/SOICT/departments/coedt"
   },
   {
     id: 2,

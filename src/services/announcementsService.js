@@ -65,13 +65,13 @@ const normalizeNotice = (item) => ({
   title: String(item?.title || "Notice").trim(),
   content: String(item?.content || item?.summary || "").trim(),
   date: pickDate(item, DATE_KEYS),
-  // The notices endpoint exposes the notice type as `category`.
   type: String(item?.type || item?.category || "General").trim(),
   priority: String(item?.priority || "medium").trim(),
   views: Number(item?.views || 0),
   isNew: Boolean(item?.isNew ?? item?.is_new),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
   schoolName: getSchoolLabel(item),
+  level: String(item?.level || "").trim(),
 });
 
 const normalizeNews = (item) => ({
@@ -79,7 +79,6 @@ const normalizeNews = (item) => ({
   title: String(item?.title || "News").trim(),
   date: pickDate(item, DATE_KEYS),
   publishedAt: pickDate(item, DATE_KEYS),
-  // The news endpoint exposes the short summary as `summary`.
   excerpt: String(item?.excerpt || item?.summary || "").trim(),
   content: String(item?.content || "").trim(),
   author: String(item?.author || "School Office").trim(),
@@ -94,6 +93,9 @@ const normalizeNews = (item) => ({
   featured: Boolean(item?.featured ?? item?.isFeatured),
   status: String(item?.status || "published").trim(),
   schoolName: getSchoolLabel(item),
+  level: String(item?.level || "").trim(),
+  link: String(item?.link || "").trim(),
+  pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
 });
 
 const normalizeEvent = (item) => {
@@ -132,20 +134,20 @@ const normalizeEvent = (item) => {
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),
     schoolName: getSchoolLabel(item),
+    level: String(item?.level || "").trim(),
   };
 };
 
 const normalizeNewsletter = (item, index) => ({
   id: item?.id ?? `newsletter-${index + 1}`,
   title: String(item?.title || "Newsletter").trim(),
-  issueNumber: String(item?.issueNumber || item?.issue_number || "").trim(),
   date: pickDate(item, DATE_KEYS),
   coverImage: String(item?.coverImage || item?.coverImageUrl || item?.cover_image_url || "").trim(),
-  excerpt: String(item?.excerpt || "").trim(),
-  pdfLink: String(item?.pdfLink || item?.pdfUrl || item?.pdf_url || "").trim(),
-  views: Number(item?.views || 0),
-  category: String(item?.category || "School Update").trim(),
+  description: String(item?.description || item?.excerpt || "").trim(),
+  englishPdfLink: String(item?.englishPdfLink || item?.pdfLink || "").trim(),
+  hindiPdfLink: String(item?.hindiPdfLink || "").trim(),
   schoolName: getSchoolLabel(item),
+  level: String(item?.level || "").trim(),
 });
 
 const normalizeMedia = (item, index) => {
@@ -159,6 +161,7 @@ const normalizeMedia = (item, index) => {
     images,
     coverImage: images[0] || "",
     schoolName: getSchoolLabel(item),
+    level: String(item?.level || "").trim(),
   };
 };
 

@@ -67,8 +67,8 @@ export const LEVEL_FIELD = {
   label: "Announcement Level",
   type: "select",
   options: [
-    { value: "school", label: "School only — visible on your school's pages" },
-    { value: "college", label: "College / University-wide — needs admin approval" },
+    { value: "school", label: "School & University — visible on your school's page and global page" },
+    { value: "college", label: "University-wide Only — visible only on global page" },
   ],
   required: true,
 
@@ -95,7 +95,6 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "department", label: "Department" },
     { key: "tags", label: "Tags (comma separated)", placeholder: "research, ai, students" },
     { key: "image", label: "Cover Image URL", placeholder: "https://…/news.jpg" },
-    { key: "imageLink", label: "Image Click Link" },
     { key: "pdfUrl", label: "PDF URL" },
     { key: "link", label: "External Link" },
     { key: "featured", label: "Featured News", type: "boolean" },
@@ -130,13 +129,11 @@ export const ANNOUNCEMENT_FIELDS = {
 
   newsletters: [
     { key: "title", label: "Newsletter Title", required: true },
-    { key: "issueNumber", label: "Issue Number", placeholder: "Vol 2, Issue 3" },
     { key: "date", label: "Published Date", type: "date", required: true },
-    { key: "category", label: "Category", type: "select", options: ["School Update", "University Update", "Research", "Alumni", "Other"], required: true },
-    { key: "coverImage", label: "Cover Image URL" },
-    { key: "pdfLink", label: "PDF Link", required: true },
-    { key: "views", label: "Views Count", type: "number" },
-    { key: "excerpt", label: "Excerpt", type: "textarea", required: true },
+    { key: "coverImage", label: "Cover Image URL (Portrait)", required: true },
+    { key: "description", label: "Description", type: "textarea", required: true },
+    { key: "englishPdfLink", label: "English PDF Link", required: true },
+    { key: "hindiPdfLink", label: "Hindi PDF Link", required: true },
   ],
 
   gallery: [
@@ -192,8 +189,6 @@ export const ANNOUNCEMENT_COLUMNS = {
   newsletters: [
     { key: "title", label: "Title" },
     { key: "date", label: "Date" },
-    { key: "issueNumber", label: "Issue" },
-    { key: "category", label: "Category" },
   ],
   gallery: [
     { key: "title", label: "Event Title" },

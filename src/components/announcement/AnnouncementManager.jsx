@@ -117,14 +117,14 @@ const AnnouncementManager = ({
       // university-wide tab passes no code and sees everything.
       let data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
       
-      // Filter logic: `events` shows upcoming/ongoing, `gallery` shows past events
+      // Filter logic: `events` shows ALL events (past and upcoming), `gallery` shows past events
       if (kind === "events" || kind === "gallery") {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         data = data.filter((item) => {
           const eventDate = new Date(item.endsAt || item.startsAt || item.date);
           const isPast = eventDate < today;
-          return kind === "gallery" ? isPast : !isPast;
+          return kind === "gallery" ? isPast : true;
         });
       }
 

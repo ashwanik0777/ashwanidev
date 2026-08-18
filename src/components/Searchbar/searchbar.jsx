@@ -28,7 +28,6 @@ const NAVIGATION_CONFIG = [
       { slug: "academic-calendar", label: "Academic Calendar & Regulations" },
       { slug: "list-of-holidays", label: "List of Holidays" },
       { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
-      { slug: "international-collaboration", label: "International Collaboration" },
       { slug: "national-academic-depository", label: "National Academic Depository (NAD)" },
       { slug: "annual-reports", label: "Annual Reports" },
     ],

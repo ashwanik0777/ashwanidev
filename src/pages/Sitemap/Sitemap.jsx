@@ -111,7 +111,6 @@ const sitemapAbout = [
       { title: "List of Holidays", path: "/academics/list-of-holidays" },
       { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework" },
       { title: "Faculty Directory", path: "/academics/faculty" },
-      { title: "International Collaboration", path: "/academics/international-collaboration" },
       { title: "Annual Reports", path: "/academics/annual-reports" }
     ],
   },

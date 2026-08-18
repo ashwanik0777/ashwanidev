@@ -2,9 +2,9 @@ export const patentsData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
   hero: {
-    title: "PATENTS & INNOVATIONS | USICT",
+    title: "Patents & Innovations | SOICT",
     subtitle:
-      "Explore the patents filed, published, and granted to faculty members and researchers of USICT.",
+      "Explore the patents filed, published, and granted to faculty members and researchers of SOICT.",
   },
   stats: [],
   patentsList: [

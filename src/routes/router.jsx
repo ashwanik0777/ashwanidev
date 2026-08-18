@@ -140,6 +140,7 @@ const ResearchScholars = lazy(() =>
 );
 const TrainingConsultancy = lazy(() => import("../pages/departments/Training"));
 const Patents = lazy(() => import("../pages/departments/Patent"));
+const Books = lazy(() => import("../pages/departments/Books"));
 const BoardOfStudies = lazy(() => import("../pages/departments/BoardOfStudy"));
 import SchoolsLayout from "../components/departments/SchoolsLayout.jsx";
 import Dean from "../components/departments/Dean.jsx";
@@ -391,6 +392,7 @@ export default function AppRouter() {
               <Route path="research-scholars" element={<ResearchScholars />} />
               <Route path="training-consultancy" element={<TrainingConsultancy />} />
               <Route path="patents" element={<Patents />} />
+              <Route path="books" element={<Books />} />
               <Route path="departments/coe-bioinformatics" element={<CoeBioinformatics />} />
               <Route path="departments/molecular-biology-lab" element={<MolecularBiologyLab />} />
               <Route path="departments/research-cell" element={<ResearchCellPage />} />
@@ -447,6 +449,7 @@ export default function AppRouter() {
             path="/research/research-centers"
             element={<ResearchCenters />}
           />
+          <Route path="/research/publications" element={<Index />} />
           <Route path="/research/publications-patents" element={<Index />} />
           <Route path="/research/incubation" element={<Incubation />} />
           <Route path="/research/institution-innovation" element={<InstitutionInnovation />} />

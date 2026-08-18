@@ -129,7 +129,7 @@ const sitemapAbout = [
     icon: BookOpen,
     children: [
       { title: "Research Centers", path: "/research/research-centers" },
-      { title: "Research Publications", path: "/research/publications-patents" },
+      { title: "Publications", path: "/research/publications" },
       { title: "GBU Incubation Centre", path: "/research/incubation" },
       { title: "Institution Innovation Council", path: "/research/institution-innovation" },
       { title: "IPR Cell", path: "/research/ipr-cell" }

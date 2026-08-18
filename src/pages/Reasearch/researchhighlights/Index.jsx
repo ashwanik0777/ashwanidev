@@ -9,7 +9,7 @@ const Index = () => {
     <SearchableWrapper>
       <>
         <BannerSection
-          title="Research Publications"
+          title="Publications"
           bgTheme={4}
         />
 

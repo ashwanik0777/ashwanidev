@@ -22,7 +22,9 @@ const DepartmentLayout = ({
     <div className="min-h-screen bg-background">
       <BannerSection {...heroProps} />
       <HodMessage {...hodProps} />
-      <AboutDepartment {...aboutProps} />
+      {departmentId?.toLowerCase() !== "cse" && aboutProps && (
+        <AboutDepartment {...aboutProps} />
+      )}
       <Programs
         heading="Academic Programs"
         subheading="Choose from our diverse range of programs designed to meet your academic and career goals."
@@ -39,22 +41,23 @@ const DepartmentLayout = ({
         bottomStats={facultyStats}
       />
 
-      <div className="mt-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
-          Research Areas
-        </h2>
-        {/* <p className="text-xl text-blue-600 text-center  max-w-3xl mx-auto">
-          Explore our diverse research areas that push the boundaries of technology and innovation.
-        </p> */}
-      </div>
+      {departmentId?.toLowerCase() !== "cse" && researchStats && researchStats.length > 0 && (
+        <>
+          <div className="mt-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
+              Research Areas
+            </h2>
+          </div>
 
-      <StatsCard
-        stats={researchStats.map((stat) => ({
-          numberText: stat.numberText,
-          title: stat.subtitle,
-          subtitle: stat.subtitle,
-        }))}
-      />
+          <StatsCard
+            stats={researchStats.map((stat) => ({
+              numberText: stat.numberText,
+              title: stat.subtitle,
+              subtitle: stat.subtitle,
+            }))}
+          />
+        </>
+      )}
 
       <StudentAchievers
         topAchievers={topAchievers}

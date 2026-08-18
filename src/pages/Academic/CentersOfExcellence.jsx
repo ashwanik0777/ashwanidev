@@ -11,6 +11,8 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
+import droneImage from "../../assets/Drone.png";
+import raemImage from "../../assets/Raem.png";
 import BannerSection from "../../components/HeroBanner.jsx";
 import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
@@ -30,7 +32,7 @@ const GBU_COE_HERO = {
   title: "Centers of Excellence (CoE)",
   description: "Specialized state-of-the-art research laboratories established under Gautam Buddha University Research & Innovation Foundation (GBURIF) and AIC-GBU, driving advanced research in Drone Technologies, Renewable Energy, and Artificial Intelligence.",
   bgTheme: 6,
-  coe_count: 3,
+  coe_count: 2,
   ResearchAndstudents: 220,
   projects_count: 15,
   memberrs_count: 24
@@ -46,7 +48,8 @@ const GBU_COE_LIST = [
     student_count: 75,
     project_count: 6,
     director: "Dr. Vimlesh Kumar",
-    link: "https://gburif.org/coe.php"
+    link: "/schools/SOICT/departments/coedt",
+    image: droneImage
   },
   {
     id: 2,
@@ -57,7 +60,8 @@ const GBU_COE_LIST = [
     student_count: 60,
     project_count: 5,
     director: "Dr. Anurag Singh Bhagat",
-    link: "https://gburif.org/coe.php"
+    link: "/schools/SOICT/departments/raem",
+    image: raemImage
   },
   {
     id: 3,
@@ -69,7 +73,8 @@ const GBU_COE_LIST = [
     project_count: 7,
     director: "Dr. Vidushi Sharma",
     link: "https://gburif.org/coe.php",
-    image: "/coe_ai_robotics.png"
+    image: "/coe_ai_robotics.png",
+    hidden: true
   }
 ];
 
@@ -173,8 +178,8 @@ const CentersOfExcellence = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-              {centers.map((center) => {
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-5xl mx-auto">
+              {centers.filter((c) => !c.hidden).map((center) => {
                 const IconComponent =
                   iconMap[(center.title || "").toLowerCase()] || Shield;
 
@@ -224,14 +229,10 @@ const CentersOfExcellence = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-gray-100 mt-3">
-                        <p className="text-xs text-gray-600">
-                          <span className="font-semibold">Director:</span>{' '}
-                          {center.director || 'N/A'}
-                        </p>
-                        {center.id === 1 || (center.card_title || "").includes("Drone") ? (
+                      <div className="flex items-center justify-end pt-3 border-t border-gray-100 mt-3">
+                        {(center.link || "").startsWith("/") || center.id === 1 ? (
                           <Link
-                            to="/schools/SOICT/departments/coedt"
+                            to={center.id === 1 ? "/schools/SOICT/departments/coedt" : center.link}
                             className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
                           >
                             CoE Portal <ArrowRight size={12} />

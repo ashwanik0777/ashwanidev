@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Clock, ChevronDown, FileText } from "lucide-react";
 
 /**
@@ -215,7 +215,7 @@ const Programs = ({
   }
 
   return (
-    <section id="programs" className="py-12 bg-white">
+    <section id="programs" className="py-8 sm:py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -225,9 +225,9 @@ const Programs = ({
             </h2>
             <div className="h-1 w-12 bg-blue-600 mx-auto mb-6 rounded-full"></div>
 
-            {/* Medium Fully-Rounded Pills with Transparent Background & Soft Glow */}
+            {/* Medium Fully-Rounded Pills with Single-Line Horizontal Layout */}
             {availableTabs.length > 1 && (
-              <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
+              <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 scrollbar-none max-w-full px-1">
                 {availableTabs.map((tab) => {
                   const isActive = activeFilter === tab.id;
                   return (
@@ -235,7 +235,7 @@ const Programs = ({
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveFilter(tab.id)}
-                      className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 whitespace-nowrap ${
                         isActive
                           ? "bg-blue-600 text-white border border-blue-600 shadow-sm shadow-blue-500/20"
                           : "bg-transparent border border-slate-300/80 text-slate-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-[0_0_10px_rgba(59,130,246,0.15)]"

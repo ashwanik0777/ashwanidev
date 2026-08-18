@@ -1,67 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
-import { BookOpen, Users, DollarSign, Award, ExternalLink, ArrowRight } from "lucide-react";
+import { BookOpen, ExternalLink, ArrowRight } from "lucide-react";
 
 import BannerSection from "../../components/HeroBanner.jsx";
-import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import { RESEARCH_CENTERS, SCHOOL_BADGES } from "../../Data/schools";
 
 const ResearchCenters = () => {
-  const centers = RESEARCH_CENTERS;
-
-  const schools = Object.keys(SCHOOL_BADGES);
-
-  const [selectedSchool, setSelectedSchool] = useState("all");
-  const [selectedTechnology, setSelectedTechnology] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const technologies = [
-    ...new Set(centers.flatMap((center) => center.researchAreas)),
-  ];
-
-  const filteredCenters = centers.filter((center) => {
-    const matchesSchool =
-      selectedSchool === "all" || center.school === selectedSchool;
-    const matchesTechnology =
-      selectedTechnology === "all" ||
-      center.researchAreas.includes(selectedTechnology);
-    const matchesSearch = center.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    return matchesSchool && matchesTechnology && matchesSearch;
-  });
-
-  const statsData = [
-    {
-      icon: BookOpen,
-      number: 3,
-      numberText: "3",
-      title: "Centers of Excellence",
-      iconColor: "#2563eb", // blue-600
-    },
-    {
-      icon: Users,
-      number: 24,
-      numberText: "24+",
-      title: "Research Faculty",
-      iconColor: "#16a34a", // green-600
-    },
-    {
-      icon: DollarSign,
-      numberText: "₹8.5Cr+",
-      title: "Research Grants",
-      iconColor: "#0891b2", // cyan-600
-    },
-    {
-      icon: Award,
-      number: 15,
-      numberText: "15+",
-      title: "Active Projects",
-      iconColor: "#eab308", // yellow-500
-    },
-  ];
+  const centers = RESEARCH_CENTERS.filter((c) => !c.hidden);
 
 
   return (
@@ -73,59 +19,11 @@ const ResearchCenters = () => {
           bgTheme={2}
         />
 
-        {/* Stats */}
-        <StatsCard stats={statsData} />
-        {/* Filters */}
-        <div className="max-w-6xl mx-auto mt-6 md:mt-10 px-4">
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 items-stretch sm:items-center">
-            {/* School Filter */}
-            <div className="flex flex-col w-full sm:w-auto">
-              <select
-                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                value={selectedSchool}
-                onChange={(e) => setSelectedSchool(e.target.value)}
-              >
-                <option value="all">All Schools</option>
-                {schools.map((school, idx) => (
-                  <option key={idx} value={school}>
-                    {school}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Technology Filter */}
-            <div className="flex flex-col w-full sm:w-auto">
-              <select
-                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                value={selectedTechnology}
-                onChange={(e) => setSelectedTechnology(e.target.value)}
-              >
-                <option value="all">All Technologies</option>
-                {technologies.map((tech, idx) => (
-                  <option key={idx} value={tech}>
-                    {tech}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Search Bar */}
-            <div className="flex flex-col flex-grow min-w-[200px] w-full sm:w-auto">
-              <input
-                type="text"
-                placeholder="Search by name..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2.5 text-sm border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              />
-            </div>
-          </div>
-
-          {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {filteredCenters.length > 0 ? (
-              filteredCenters.map((center) => (
+        {/* Cards */}
+        <div className="max-w-6xl mx-auto mt-8 md:mt-12 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {centers.length > 0 ? (
+              centers.map((center) => (
                 <div
                   key={center.id}
                   className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-6 flex flex-col"
@@ -158,18 +56,7 @@ const ResearchCenters = () => {
                     {center.description}
                   </p>
 
-                  <div className="text-sm text-gray-700 mb-4 space-y-1">
-                    <p>
-                      <span className="font-semibold text-blue-600">Head:</span>{" "}
-                      {center.head}
-                    </p>
-                    <p>
-                      <span className="font-semibold text-blue-600">
-                        Location:
-                      </span>{" "}
-                      {center.location}
-                    </p>
-                  </div>
+
 
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-blue-600 mb-1">

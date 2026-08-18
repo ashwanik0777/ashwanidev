@@ -497,222 +497,203 @@ const EventDetail = () => {
       ? event.images.split(',').map(s => s.trim()).filter(Boolean)
       : [];
 
-  // Cover image: try coverImageUrl, then image, then first gallery image
-  const coverImage = event.coverImageUrl || event.image || eventImages[0] || '';
+  const flyerImage = event.flyerUrl || event.coverImageUrl || event.image || eventImages[0] || '';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      <div className="container mx-auto px-2 md:px-8 pt-2 pb-10">
-        <div className="mb-4">
+    <div className="min-h-screen bg-gray-50/50 pb-20">
+      <div className="container mx-auto px-4 md:px-8 pt-8">
+        <div className="mb-8">
           <Link to="/announcements/event-calendar">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-100">
               <ArrowLeft size={16} className="mr-2" />
               Back to Events
             </Button>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2">
-            <div className="relative rounded-3xl h-[22rem] overflow-hidden mb-10 shadow-2xl border border-blue-100 bg-blue-900">
-              {coverImage && (
-                <div className="absolute inset-0">
-                  <img
-                    src={parseImageUrl(coverImage)}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          {/* Left Column: Portrait Flyer */}
+          <div className="lg:col-span-5 xl:col-span-4">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] bg-gray-900 border border-gray-200">
+              {flyerImage ? (
+                <img
+                  src={parseImageUrl(flyerImage)}
+                  alt={event.title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-500">
+                  <Calendar size={64} className="opacity-50" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
-              <div className="relative p-10 md:p-16 text-white">
-                <div className="flex flex-wrap gap-3 mb-6">
-                  <Badge className={`${getTypeColor(event.type)} shadow-lg`}>
-                    {event.type}
-                  </Badge>
-                  <Badge className={`${getModeColor(event.mode)} shadow-lg`}>
-                    {event.mode}
-                  </Badge>
-                  {!event.isUpcoming && (
-                    <Badge
-                      variant="outline"
-                      className="text-white border-white/70 border-solid border-[1.5px]"
-                    >
-                      Completed
-                    </Badge>
-                  )}
+              {event.isUpcoming && (
+                <div className="absolute top-4 right-4">
+                  <span className="bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
+                    UPCOMING
+                  </span>
                 </div>
-                <h1 className={`font-extrabold mb-4 drop-shadow-lg line-clamp-2 ${
-                  event.title.length > 60 ? 'text-2xl md:text-3xl' : event.title.length > 35 ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'
-                }`}>
-                  {event.title}
-                </h1>
-                <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-blue-100">
-                  {event.schoolName}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-base">
-                  <div className="flex items-center">
-                    <Calendar size={20} className="mr-3" />
-                    <div>
-                      <div>
-                        {format(new Date(event.startsAt), "MMMM dd, yyyy")}
-                      </div>
-                      {event.endDate && (
-                        <div>
-                          to {format(new Date(event.endsAt), "MMM dd, yyyy")}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <MapPin size={20} className="mr-3" />
-                    <div>{event.location}</div>
-                  </div>
-                  <div className="flex items-center">
-                    <Users size={20} className="mr-3" />
-                    <div>{event.organizer}</div>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
-
-            <Tabs defaultValue="overview" className="space-y-8 ">
-              <TabsList className={`grid w-full ${eventImages.length > 0 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                {eventImages.length > 0 && (
-                  <TabsTrigger value="gallery">Gallery</TabsTrigger>
-                )}
-              </TabsList>
-
-              <TabsContent value="overview" className="h-full">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>About This Event</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
-                      {event.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {eventImages.length > 0 && (
-                <TabsContent value="gallery">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Event Gallery</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {eventImages.map((image, index) => (
-                          <div
-                            key={index}
-                            className="aspect-video h-[300px] overflow-hidden rounded-xl shadow-lg group relative"
-                          >
-                            <img
-                              src={parseImageUrl(image)}
-                              alt={`${event.title} - Image ${index + 1}`}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              onError={(e) => { e.target.style.display = 'none'; }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              )}
-            </Tabs>
           </div>
 
-          <div className="space-y-6">
-            <div className="sticky top-24 space-y-6">
-              {/* Event Info Card */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Event Details</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Calendar size={18} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs text-gray-500 uppercase font-semibold">Date</p>
-                      <p className="text-sm font-medium text-gray-800">
-                        {event.startsAt ? new Date(event.startsAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'TBA'}
-                      </p>
-                      {event.time && <p className="text-xs text-gray-500 mt-0.5">{event.time}</p>}
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin size={18} className="text-red-500 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs text-gray-500 uppercase font-semibold">Venue</p>
-                      <p className="text-sm font-medium text-gray-800">{event.venue || event.location}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Users size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-xs text-gray-500 uppercase font-semibold">Organizer</p>
-                      <p className="text-sm font-medium text-gray-800">{event.organizer}</p>
-                    </div>
-                  </div>
-                  {event.mode && (
-                    <div className="pt-2 border-t">
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700">{event.mode}</span>
-                      {event.price && event.price !== 'Free' && (
-                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">{event.price}</span>
-                      )}
-                      {event.price === 'Free' && (
-                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">Free Entry</span>
-                      )}
-                    </div>
+          {/* Right Column: Information & Buttons */}
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+            <div className="mb-6 flex flex-wrap gap-2">
+              <Badge className={`${getTypeColor(event.type)} shadow-sm`}>{event.type}</Badge>
+              {event.mode && <Badge className={`${getModeColor(event.mode)} shadow-sm`}>{event.mode}</Badge>}
+              {!event.isUpcoming && (
+                <Badge variant="solid" className="bg-gray-600 text-white shadow-sm">
+                  Completed
+                </Badge>
+              )}
+            </div>
+
+            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+              {event.title}
+            </h1>
+            <p className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-8">
+              {event.schoolName}
+            </p>
+
+            {/* Quick Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                  <Calendar size={24} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Date & Time</p>
+                  <p className="font-semibold text-gray-900 mt-1">
+                    {event.startsAt ? format(new Date(event.startsAt), "MMMM dd, yyyy") : 'TBA'}
+                  </p>
+                  {(event.time || event.endsAt) && (
+                    <p className="text-sm text-gray-600 mt-0.5">
+                      {event.time ? event.time : (event.endsAt ? `Until ${format(new Date(event.endsAt), "MMM dd")}` : '')}
+                    </p>
                   )}
-                </CardContent>
-              </Card>
-
-              {/* Actions */}
-              <div className="flex flex-col gap-3">
-                {event.isUpcoming && event.registrationUrl && (
-                  <Button size="lg" className="w-full" asChild>
-                    <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={18} className="mr-2" />
-                      Register Now
-                    </a>
-                  </Button>
-                )}
-
-                {event.brochureUrl && (
-                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
-                    <a href={event.brochureUrl} target="_blank" rel="noopener noreferrer">
-                      <Download size={18} className="mr-2 text-blue-600" />
-                      Download Brochure
-                    </a>
-                  </Button>
-                )}
-
-                {event.flyerUrl && (
-                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
-                    <a href={event.flyerUrl} target="_blank" rel="noopener noreferrer">
-                      <Download size={18} className="mr-2 text-blue-600" />
-                      Download Flyer
-                    </a>
-                  </Button>
-                )}
-
-                <Button size="md" variant="outline" className="w-full" onClick={addToGoogleCalendar}>
-                  <CalendarPlus size={18} className="mr-2" />
-                  Add to Calendar
-                </Button>
-
-                <SocialShare url={window.location.href} title={event.title} className="w-full" />
+                </div>
               </div>
+
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-red-50 text-red-600 rounded-xl">
+                  <MapPin size={24} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Venue</p>
+                  <p className="font-semibold text-gray-900 mt-1">{event.venue || event.location}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-green-50 text-green-600 rounded-xl">
+                  <Users size={24} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Organizer</p>
+                  <p className="font-semibold text-gray-900 mt-1">{event.organizer}</p>
+                </div>
+              </div>
+
+              {event.price && (
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                    <span className="font-bold text-lg leading-none">₹</span>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Fee</p>
+                    <p className="font-semibold text-gray-900 mt-1">{event.price === 'Free' ? 'Free Entry' : event.price}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Description */}
+            <div className="mb-10 flex-1">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">About This Event</h3>
+              <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+                {event.description}
+              </p>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-auto">
+              <Button 
+                size="lg" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg" 
+                asChild
+                disabled={!event.isUpcoming || !event.registrationUrl}
+              >
+                {event.isUpcoming && event.registrationUrl ? (
+                  <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink size={18} className="mr-2" />
+                    Register Now
+                  </a>
+                ) : (
+                  <span>
+                    <ExternalLink size={18} className="mr-2" />
+                    Register Now
+                  </span>
+                )}
+              </Button>
+
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="w-full border-gray-300 hover:bg-gray-50" 
+                asChild
+                disabled={!event.flyerUrl && !event.brochureUrl}
+              >
+                {(event.flyerUrl || event.brochureUrl) ? (
+                  <a href={event.flyerUrl || event.brochureUrl} target="_blank" rel="noopener noreferrer">
+                    <Download size={18} className="mr-2 text-gray-600" />
+                    Download Flyer
+                  </a>
+                ) : (
+                  <span>
+                    <Download size={18} className="mr-2 text-gray-400" />
+                    Download Flyer
+                  </span>
+                )}
+              </Button>
+
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="w-full border-gray-300 hover:bg-gray-50" 
+                onClick={addToGoogleCalendar}
+              >
+                <CalendarPlus size={18} className="mr-2 text-gray-600" />
+                Add to Calendar
+              </Button>
+
+              <SocialShare url={window.location.href} title={event.title} className="w-full h-full" />
             </div>
           </div>
         </div>
+
+        {/* Gallery Section (Only for Past Events) */}
+        {!event.isUpcoming && eventImages.length > 0 && (
+          <div className="mt-20">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Event Gallery</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {eventImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="aspect-video overflow-hidden rounded-xl shadow-md group relative bg-gray-100"
+                >
+                  <img
+                    src={parseImageUrl(image)}
+                    alt={`${event.title} - Image ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

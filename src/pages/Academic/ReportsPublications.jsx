@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, ExternalLink, Calendar, Search } from 'lucide-react';
+import { FileText, ExternalLink, Search } from 'lucide-react';
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -93,11 +93,6 @@ const ReportsPublications = () => {
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <FileText className="w-6 h-6" />
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600 mb-2">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>Academic Period: {report.period}</span>
                   </div>
 
                   <h3 className="text-lg font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">

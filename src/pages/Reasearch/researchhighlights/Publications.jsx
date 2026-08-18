@@ -763,168 +763,143 @@ const Publications = () => {
 
           {/* Patents Section */}
           {activeTab === "patents" && (
-            viewMode === "table" ? (
-              /* Patents Data Table */
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        <th className="py-4 px-6 text-center w-12">#</th>
-                        <th className="py-4 px-6 min-w-[300px]">Patent Title & Category</th>
-                        <th className="py-4 px-6 min-w-[220px]">Inventors & School</th>
-                        <th className="py-4 px-6 min-w-[180px]">Patent No & Date</th>
-                        <th className="py-4 px-6 text-center min-w-[140px]">Status</th>
-                        <th className="py-4 px-6 text-center min-w-[150px]">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-100 text-sm">
-                      {currentItems.length > 0 ? (
-                        currentItems.map((patent, index) => (
-                          <tr key={patent.id} className="hover:bg-indigo-50/40 transition-colors">
-                            <td className="py-4 px-6 text-center font-medium text-gray-500">
-                              {indexOfFirstItem + index + 1}
-                            </td>
-                            <td className="py-4 px-6">
-                              <p className="font-bold text-gray-900 leading-snug mb-1">{patent.title}</p>
-                              <span className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded font-medium">{patent.category}</span>
-                            </td>
-                            <td className="py-4 px-6">
-                              <p className="text-gray-800 font-medium text-xs mb-1.5">{patent.inventors}</p>
-                              <span className="inline-block bg-indigo-100 text-indigo-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-                                {patent.school}
-                              </span>
-                            </td>
-                            <td className="py-4 px-6">
-                              <p className="font-mono text-xs font-semibold text-gray-900">{patent.patentNo}</p>
-                              <p className="text-xs text-gray-500">Filing: {patent.filingDate}</p>
-                            </td>
-                            <td className="py-4 px-6 text-center">
-                              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                                patent.status === "Granted"
-                                  ? "bg-green-100 text-green-800 border border-green-200"
-                                  : patent.status === "Filed"
-                                    ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                                    : patent.status === "Under Review"
-                                      ? "bg-orange-100 text-orange-800 border border-orange-200"
-                                      : "bg-blue-100 text-blue-800 border border-blue-200"
-                              }`}>
-                                {patent.status}
-                              </span>
-                            </td>
-                            <td className="py-4 px-6 text-center">
-                              <div className="flex items-center justify-center gap-2">
-                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
-                                  <Eye size={14} /> View
-                                </button>
-                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
-                                  <Download size={14} /> PDF
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))
-                      ) : (
-                        <tr>
-                          <td colSpan="6" className="text-center py-12 text-gray-500">
-                            No patents found matching criteria
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
+            <div>
+              {/* Patents Sub-Filter Pills Bar */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={() => {
+                      setSelectedStatus("");
+                      setCurrentPage(1);
+                    }}
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                      !selectedStatus
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
+                    }`}
+                  >
+                    All Patents ({patents.length})
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedStatus("Granted");
+                      setCurrentPage(1);
+                    }}
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                      selectedStatus === "Granted"
+                        ? "bg-emerald-600 text-white shadow-sm"
+                        : "bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
+                    }`}
+                  >
+                    Patent Granted ({patents.filter((p) => p.status === "Granted").length})
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedStatus("Published");
+                      setCurrentPage(1);
+                    }}
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                      selectedStatus === "Published"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "bg-white text-blue-700 hover:bg-blue-50 border border-blue-200"
+                    }`}
+                  >
+                    Patent Published ({patents.filter((p) => p.status === "Published").length})
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedStatus("Filed");
+                      setCurrentPage(1);
+                    }}
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                      selectedStatus === "Filed"
+                        ? "bg-sky-600 text-white shadow-sm"
+                        : "bg-white text-sky-700 hover:bg-sky-50 border border-sky-200"
+                    }`}
+                  >
+                    Patent Filed ({patents.filter((p) => p.status === "Filed").length})
+                  </button>
+                </div>
+                <div className="text-xs text-gray-500 font-medium">
+                  Showing {filteredPatents.length} of {patents.length} Patents
                 </div>
               </div>
-            ) : (
-              /* Patents Grid View */
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+              {/* Patent Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentItems.length > 0 ? (
-                  currentItems.map((patent, index) => (
-                    <div
-                      key={patent.id}
-                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
-                      style={{
-                        ...cardStyle,
-                        animationDelay: `${index * 100}ms`,
-                        animationFillMode: 'both'
-                      }}
-                      onMouseEnter={(e) => {
-                        Object.assign(e.currentTarget.style, cardHoverStyle);
-                      }}
-                      onMouseLeave={(e) => {
-                        Object.assign(e.currentTarget.style, cardStyle);
-                      }}
-                    >
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                      <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
-                        {patent.school}
-                      </div>
-
-                      <div className="relative z-10">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10 pr-30 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
-                          {patent.title}
-                        </h3>
-
-                        <div className="mb-4">
-                          <p className="text-gray-700 text-sm font-medium mb-1">Inventors</p>
-                          <p className="text-gray-600 text-sm leading-relaxed">{patent.inventors}</p>
-                        </div>
-
-                        <div className="space-y-4 mb-6">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-gray-700 text-sm font-medium mb-1">Patent Number</p>
-                              <p className="text-gray-900 text-sm font-mono bg-gray-50 px-3 py-2 rounded border">{patent.patentNo}</p>
-                            </div>
-                            <div>
-                              <p className="text-gray-700 text-sm font-medium mb-1">Filing Date</p>
-                              <p className="text-gray-600 text-sm">{patent.filingDate}</p>
-                            </div>
-                          </div>
-
-                          <div>
-                            <p className="text-gray-700 text-sm font-medium mb-2">Status</p>
+                  currentItems.map((patent) => {
+                    const isGranted = patent.status === "Granted";
+                    const isPublished = patent.status === "Published";
+                    return (
+                      <div
+                        key={patent.id}
+                        className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <div>
+                          {/* Header Badge & Date */}
+                          <div className="flex items-center justify-between mb-3">
                             <span
-                              className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-semibold shadow-sm ${patent.status === "Granted"
-                                ? "bg-green-100 text-green-800 border border-green-200"
-                                : patent.status === "Filed"
-                                  ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
-                                  : patent.status === "Under Review"
-                                    ? "bg-orange-100 text-orange-800 border border-orange-200"
-                                    : "bg-blue-100 text-blue-800 border border-blue-200"
-                                }`}
+                              className={`text-xs font-bold px-3 py-1 rounded-full ${
+                                isGranted
+                                  ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                                  : isPublished
+                                  ? "bg-blue-100 text-blue-800 border border-blue-200"
+                                  : "bg-sky-100 text-sky-800 border border-sky-200"
+                              }`}
                             >
-                              <div className={`w-2 h-2 rounded-full mr-2 ${patent.status === "Granted" ? "bg-green-500" :
-                                patent.status === "Filed" ? "bg-yellow-500" :
-                                  patent.status === "Under Review" ? "bg-orange-500" : "bg-blue-500"
-                                }`}></div>
-                              {patent.status}
+                              Patent {patent.status}
+                            </span>
+                            <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                              <Calendar size={13} className="text-gray-400" />
+                              {patent.year}
                             </span>
                           </div>
+
+                          {/* Title */}
+                          <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 font-sans">
+                            {patent.title}
+                          </h3>
+
+                          {/* Description */}
+                          <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                            {patent.description}
+                          </p>
                         </div>
 
-                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                          <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                            View Details
-                          </button>
-                          <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
-                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                            Download
-                          </button>
+                        <div>
+                          {/* Specs Table */}
+                          <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-400 font-medium">Patent / App No:</span>
+                              <span className="font-semibold text-gray-900 font-mono">{patent.patentNo}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-400 font-medium">Type / Office:</span>
+                              <span className="font-semibold text-gray-900">{patent.type}</span>
+                            </div>
+                          </div>
+
+                          {/* Inventors */}
+                          <div className="text-xs">
+                            <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
+                              INVENTORS
+                            </p>
+                            <p className="font-semibold text-gray-800 leading-snug">
+                              {patent.inventors}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
-                  <div className="col-span-full text-center py-16">
-                    <div className="text-gray-400 text-lg mb-2">No patents found</div>
-                    <p className="text-gray-500 text-sm">Check back later for updates</p>
+                  <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                    No patents found matching selected criteria
                   </div>
                 )}
               </div>
-            )
+            </div>
           )}
 
           {/* Pagination */}

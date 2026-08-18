@@ -113,7 +113,7 @@ const sitemapAbout = [
       { title: "Centers of Excellence", path: "/academics/centers-of-excellence" },
       { title: "Faculty Directory", path: "/academics/faculty" },
       { title: "International Collaboration", path: "/academics/international-collaboration" },
-      { title: "Reports & Publications", path: "/academics/reports-publications" }
+      { title: "Annual Reports", path: "/academics/annual-reports" }
     ],
   },
   {

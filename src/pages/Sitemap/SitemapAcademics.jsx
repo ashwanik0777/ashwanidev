@@ -12,7 +12,7 @@ const ACADEMIC_LINKS = [
   { title: "Faculty Directory", path: "/academics/faculty", icon: Users, desc: "Directory of distinguished faculty members across disciplines." },
   { title: "International Collaboration", path: "/academics/international-collaboration", icon: Globe, desc: "Global MoUs, student exchanges, and joint research programs." },
   { title: "National Academic Depository (NAD)", path: "/academics/national-academic-depository", icon: FileText, desc: "Digital repository for academic degrees and certificates." },
-  { title: "Reports & Publications", path: "/academics/reports-publications", icon: FileText, desc: "Annual academic reports, research journals, and publications." },
+  { title: "Annual Reports", path: "/academics/annual-reports", icon: FileText, desc: "Annual academic reports, institutional quality audits, and publications." },
 ];
 
 const SitemapAcademics = () => {

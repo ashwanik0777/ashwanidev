@@ -55,7 +55,7 @@ const NAVIGATION_CONFIG = [
       { slug: "centers-of-excellence", label: "Centers of Excellence" },
       { slug: "international-collaboration", label: "International Collaboration" },
       { slug: "national-academic-depository", label: "National Academic Depository (NAD)" },
-      { slug: "reports-publications", label: "Reports & Publications" },
+      { slug: "annual-reports", label: "Annual Reports" },
     ],
   },
   {

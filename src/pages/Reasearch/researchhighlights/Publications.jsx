@@ -5,6 +5,7 @@ import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../../../components/TabsData.jsx';
 import { allResearchPublications } from "../../../Data/researchPublicationsData.js";
+import { booksData as soictBooksData } from "../../../Data/schools/SOICT/research/books.jsx";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
@@ -276,83 +277,18 @@ const Publications = () => {
   ];
 
   const books = [
-    {
-      id: 1,
-      title: "Software Engineering: Principles and Practices",
-      authors: "Dr. Pradeep Tomar",
-      publisher: "CRC Press / Taylor & Francis",
-      year: "2021",
-      isbn: "978-0367468125",
-      type: "Authored Book",
+    ...(soictBooksData?.booksList || []).map((b) => ({
+      id: b.id,
+      title: b.title,
+      authors: b.authors || b.faculty,
+      publisher: b.publisher,
+      year: b.year,
+      isbn: b.isbn || "N/A",
+      type: b.type || "Book Chapter",
       school: "School of Information & Communication Technology",
-      description: "Comprehensive textbook covering software engineering methodologies, software reusability, component-based development, and agile practices."
-    },
-    {
-      id: 2,
-      title: "Internet of Things and Machine Learning in Agriculture",
-      authors: "Dr. Arun Solanki",
-      publisher: "Springer Nature",
-      year: "2021",
-      isbn: "978-9811585807",
-      type: "Edited Book",
-      school: "School of Information & Communication Technology",
-      description: "Explores the integration of IoT sensors, machine learning models, and computer vision algorithms in precision agriculture and smart farming."
-    },
-    {
-      id: 3,
-      title: "Deep Learning for Medical Image Analysis and Diagnostic Systems",
-      authors: "Dr. Arpit Bhardwaj",
-      publisher: "Elsevier Academic Press",
-      year: "2022",
-      isbn: "978-0128243459",
-      type: "Edited Book",
-      school: "School of Information & Communication Technology",
-      description: "Covers state-of-the-art deep convolutional networks, transformer architectures, and AI diagnostic systems for healthcare applications."
-    },
-    {
-      id: 4,
-      title: "Thermal Energy Harvesting and Phase Change Technologies",
-      authors: "Dr. Vidushi Sharma",
-      publisher: "Taylor & Francis Group",
-      year: "2020",
-      isbn: "978-0367355913",
-      type: "Authored Book",
-      school: "School of Information & Communication Technology",
-      description: "Discusses thermal energy harvesting dynamics, forced convection, and phase change material properties for micro-power devices."
-    },
-    {
-      id: 5,
-      title: "Targeted Epigenome Editing & Genome Engineering",
-      authors: "Dr. Vikram Nain, Dr. Pradeep Tomar",
-      publisher: "Academic Press",
-      year: "2022",
-      isbn: "978-0323912345",
-      type: "Book Chapter",
-      school: "School of Biotechnology",
-      description: "Focuses on programmable nucleases, TALENs, FokI domains, and CRISPR-Cas epigenome editing constructs for synthetic biology."
-    },
-    {
-      id: 6,
-      title: "Advances in Smart Grid and Alternative Energy Mobility",
-      authors: "Prof. Ravindra Kumar Sinha",
-      publisher: "IEEE Wiley Press",
-      year: "2023",
-      isbn: "978-1119876543",
-      type: "Edited Book",
-      school: "School of Engineering",
-      description: "Presents latest developments in electric vehicle powertrains, smart grid integration, RF energy harvesting, and sustainable mobility."
-    },
-    {
-      id: 7,
-      title: "Buddhist Philosophy and Applied Ethics in Modern Society",
-      authors: "School of Buddhist Studies Faculty",
-      publisher: "Motilal Banarsidass Publishers",
-      year: "2021",
-      isbn: "978-8120834567",
-      type: "Authored Book",
-      school: "School of Buddhist Studies & Civilization",
-      description: "In-depth textual and philosophical examination of Abhidharma literature, mindfulness practices, and applied Buddhist ethics."
-    }
+      description: b.description || `Published by ${b.publisher} (${b.year}). Authors: ${b.authors || b.faculty}.`,
+      link: b.link,
+    })),
   ];
 
   const filteredPublications = publications.filter((pub) => {
@@ -382,10 +318,12 @@ const Publications = () => {
   const filteredBooks = books.filter((b) => {
     return (
       (!selectedSchool || b.school === selectedSchool) &&
+      (!selectedType || b.type.toLowerCase() === selectedType.toLowerCase()) &&
       (!searchTerm ||
         b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         b.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.publisher.toLowerCase().includes(searchTerm.toLowerCase()))
+        b.publisher.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (b.isbn && b.isbn.toLowerCase().includes(searchTerm.toLowerCase())))
     );
   });
 
@@ -395,15 +333,15 @@ const Publications = () => {
     activeTab === "publications"
       ? filteredPublications.slice(indexOfFirstItem, indexOfLastItem)
       : activeTab === "patents"
-      ? filteredPatents.slice(indexOfFirstItem, indexOfLastItem)
-      : filteredBooks.slice(indexOfFirstItem, indexOfLastItem);
+        ? filteredPatents.slice(indexOfFirstItem, indexOfLastItem)
+        : filteredBooks.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages =
     activeTab === "publications"
       ? Math.ceil(filteredPublications.length / itemsPerPage)
       : activeTab === "patents"
-      ? Math.ceil(filteredPatents.length / itemsPerPage)
-      : Math.ceil(filteredBooks.length / itemsPerPage);
+        ? Math.ceil(filteredPatents.length / itemsPerPage)
+        : Math.ceil(filteredBooks.length / itemsPerPage);
 
   const tabButtons = [
     { id: "publications", label: "Research Publications" },
@@ -488,21 +426,19 @@ const Publications = () => {
               <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200 w-full sm:w-auto justify-center">
                 <button
                   onClick={() => setViewMode("table")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
-                    viewMode === "table"
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${viewMode === "table"
                       ? "bg-white text-blue-700 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   <TableIcon size={16} /> Table View
                 </button>
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
-                    viewMode === "grid"
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${viewMode === "grid"
                       ? "bg-white text-blue-700 shadow-sm"
                       : "text-gray-600 hover:text-gray-900"
-                  }`}
+                    }`}
                 >
                   <LayoutGrid size={16} /> Grid View
                 </button>
@@ -510,7 +446,7 @@ const Publications = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Context Aware Filter: Bulletin for Publications, Status for Patents */}
+              {/* Context Aware Filter: Bulletin for Publications, Status for Patents, Type for Books */}
               {activeTab === "publications" ? (
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
@@ -530,7 +466,7 @@ const Publications = () => {
                     ))}
                   </select>
                 </div>
-              ) : (
+              ) : activeTab === "patents" ? (
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">Patent Status</label>
                   <select
@@ -545,6 +481,23 @@ const Publications = () => {
                     <option value="Granted">Granted</option>
                     <option value="Published">Published</option>
                     <option value="Filed">Filed</option>
+                  </select>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700">Book Type</label>
+                  <select
+                    value={selectedType}
+                    onChange={(e) => {
+                      setSelectedType(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-purple-900"
+                  >
+                    <option value="">All Book Types</option>
+                    <option value="Edited Book">Edited Book</option>
+                    <option value="Book Chapter">Book Chapter</option>
+                    <option value="Authored Book">Authored Book</option>
                   </select>
                 </div>
               )}
@@ -608,11 +561,10 @@ const Publications = () => {
                   return (
                     <div
                       key={b.id}
-                      className={`p-5 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between ${
-                        isSelected
+                      className={`p-5 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between ${isSelected
                           ? "bg-blue-50/90 border-blue-500 ring-2 ring-blue-300 shadow-md"
                           : "bg-white border-gray-200 hover:border-blue-300 hover:shadow-lg"
-                      }`}
+                        }`}
                     >
                       <div>
                         <div className="flex items-center justify-between mb-3">
@@ -635,11 +587,10 @@ const Publications = () => {
                             setSelectedBulletin(isSelected ? "" : b.title);
                             setCurrentPage(1);
                           }}
-                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
-                            isSelected
+                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${isSelected
                               ? "bg-blue-600 text-white shadow-sm"
                               : "bg-slate-900 hover:bg-blue-700 text-white shadow-sm"
-                          }`}
+                            }`}
                         >
                           <Eye size={14} />
                           {isSelected ? "Viewing Extracted Papers" : `Explore ${b.paperCount} Papers →`}
@@ -860,11 +811,10 @@ const Publications = () => {
                       setSelectedStatus("");
                       setCurrentPage(1);
                     }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                      !selectedStatus
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${!selectedStatus
                         ? "bg-blue-600 text-white shadow-sm"
                         : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
-                    }`}
+                      }`}
                   >
                     All Patents ({patents.length})
                   </button>
@@ -873,11 +823,10 @@ const Publications = () => {
                       setSelectedStatus("Granted");
                       setCurrentPage(1);
                     }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                      selectedStatus === "Granted"
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Granted"
                         ? "bg-emerald-600 text-white shadow-sm"
                         : "bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
-                    }`}
+                      }`}
                   >
                     Patent Granted ({patents.filter((p) => p.status === "Granted").length})
                   </button>
@@ -886,11 +835,10 @@ const Publications = () => {
                       setSelectedStatus("Published");
                       setCurrentPage(1);
                     }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                      selectedStatus === "Published"
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Published"
                         ? "bg-blue-600 text-white shadow-sm"
                         : "bg-white text-blue-700 hover:bg-blue-50 border border-blue-200"
-                    }`}
+                      }`}
                   >
                     Patent Published ({patents.filter((p) => p.status === "Published").length})
                   </button>
@@ -899,11 +847,10 @@ const Publications = () => {
                       setSelectedStatus("Filed");
                       setCurrentPage(1);
                     }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
-                      selectedStatus === "Filed"
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Filed"
                         ? "bg-sky-600 text-white shadow-sm"
                         : "bg-white text-sky-700 hover:bg-sky-50 border border-sky-200"
-                    }`}
+                      }`}
                   >
                     Patent Filed ({patents.filter((p) => p.status === "Filed").length})
                   </button>
@@ -928,13 +875,12 @@ const Publications = () => {
                           {/* Header Badge & Date */}
                           <div className="flex items-center justify-between mb-3">
                             <span
-                              className={`text-xs font-bold px-3 py-1 rounded-full ${
-                                isGranted
+                              className={`text-xs font-bold px-3 py-1 rounded-full ${isGranted
                                   ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
                                   : isPublished
-                                  ? "bg-blue-100 text-blue-800 border border-blue-200"
-                                  : "bg-sky-100 text-sky-800 border border-sky-200"
-                              }`}
+                                    ? "bg-blue-100 text-blue-800 border border-blue-200"
+                                    : "bg-sky-100 text-sky-800 border border-sky-200"
+                                }`}
                             >
                               Patent {patent.status}
                             </span>
@@ -1057,6 +1003,19 @@ const Publications = () => {
                             {book.school}
                           </p>
                         </div>
+
+                        {book.link && (
+                          <div className="mt-3 pt-3 border-t border-gray-100">
+                            <a
+                              href={book.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg transition-colors border border-purple-200"
+                            >
+                              <Eye size={13} /> View Publisher / DOI Link
+                            </a>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))

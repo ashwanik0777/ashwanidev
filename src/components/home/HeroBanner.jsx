@@ -82,7 +82,7 @@ export default function WelcomePage() {
       </div>
 
       {/* Main welcome section */}
-      <div className="relative min-h-[360px] h-[52vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-black">
+      <div className="relative min-h-[340px] h-[50vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-slate-900">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -90,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.15] origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.5] sm:scale-[1.25] origin-center"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -101,7 +101,7 @@ export default function WelcomePage() {
           <img
             src={videoSrc}
             alt="Banner"
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.15] origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.5] sm:scale-[1.25] origin-center"
             loading="eager"
           />
         )}

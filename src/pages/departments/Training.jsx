@@ -80,24 +80,74 @@ const SuccessCard = ({ from, iconColor, quote, client, fields, details }) => {
 };
 
 // ✅ Main TrainingConsultancy Page with Props
-const TrainingConsultancy = ({ hero, stats, trainingPrograms, technicalConsultancy, businessConsultancy, successStories }) => {
+const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technicalConsultancy, businessConsultancy, successStories, schoolCode }) => {
   return (
-    <div className="min-h-screen">
-     
-     <BannerSection
+    <div className="min-h-screen bg-slate-50/50">
+      <BannerSection
         title={hero.title}
         subtitle={hero.subtitle}
         bgTheme={9}
       />
 
       {/* Stats */}
-     <StatsCard
-        stats={stats.map((item) => ({
-          icon: item.Icon,
-          numberText: item.number,
-          subtitle: item.label
-        }))}
-      />
+      {stats && stats.length > 0 && (
+        <StatsCard
+          stats={stats.map((item) => ({
+            icon: item.Icon,
+            numberText: item.number,
+            subtitle: item.label
+          }))}
+        />
+      )}
+
+      {/* Overview Section */}
+      {overview && (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          {overview.lead && (
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-8 md:p-10 rounded-2xl shadow-lg mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold font-outfit mb-4">
+                Empowering Corporates & Engineers
+              </h2>
+              <p className="text-blue-100 text-base md:text-lg leading-relaxed font-normal">
+                {overview.lead}
+              </p>
+            </div>
+          )}
+
+          {overview.highlights && overview.highlights.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              {overview.highlights.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-xl font-bold text-slate-900 font-outfit mb-3 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-blue-600 shrink-0" />
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {overview.callToAction && (
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-8 text-center max-w-4xl mx-auto shadow-sm">
+              <p className="text-slate-800 text-base md:text-lg font-medium mb-4">
+                {overview.callToAction.text}
+              </p>
+              <a
+                href={overview.callToAction.link || (schoolCode ? `/schools/${schoolCode}/research-area` : "/schools/SOICT/research-area")}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm transition-colors shadow-md hover:shadow-lg"
+              >
+                {overview.callToAction.buttonText || "Explore Faculty Research Profiles →"}
+              </a>
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Training Programs */}
       {trainingPrograms && trainingPrograms.length > 0 && (
@@ -150,7 +200,7 @@ export default function TrainingConsultancyPage() {
         // Fallback: use inline SOICT defaults
         setTcData({
           hero: {
-            title: "Professional Excellence Through Training",
+            title: "TRAINING AND CONSULTANCY",
             subtitle: "Comprehensive training programs and consultancy services to bridge the gap between academia and industry.",
           },
           stats: [
@@ -193,10 +243,12 @@ export default function TrainingConsultancyPage() {
     <TrainingConsultancy
       hero={tcData.hero}
       stats={tcData.stats}
+      overview={tcData.overview}
       trainingPrograms={resolvedPrograms}
       technicalConsultancy={tcData.technicalConsultancy}
       businessConsultancy={tcData.businessConsultancy}
       successStories={tcData.successStories}
+      schoolCode={(shortCode || "SOICT").toUpperCase()}
     />
   );
 }

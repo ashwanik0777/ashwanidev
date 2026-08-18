@@ -85,7 +85,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: true,
+    enabled: false,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -680,6 +680,60 @@ export const sectionsConfig = [
           socialLinks: {
             email: "art@gbu.ac.in",
           },
+        },
+      ],
+    },
+  },
+  {
+    componentName: "StudentAchievers",
+    enabled: true,
+    position: 9.5,
+    props: {
+      achieversHeading: "Top Student Achievers",
+      achieversSubheading: "Students making us proud globally",
+      topAchievers: [
+        {
+          name: "Aarushi Sangal",
+          rollNo: "235UAI001",
+          year: "B.Tech CSE (AI) | Pre-Final Year",
+          achievement:
+            "Second Position & ₹3,00,000 Cash Prize at FinShield Hackathon 2025, IIT Hyderabad",
+          image: "/assets/students/Aarushi Sangal.png",
+          skills: ["Artificial Intelligence", "Computer Science", "Hackathons"],
+        },
+        {
+          name: "Mayank Prabhakar",
+          rollNo: "255UCS033",
+          year: "B.Tech CSE | 2nd Year",
+          achievement:
+            "Selected as Google Gemini Student Ambassador, representing Gautam Buddha University to drive AI awareness, learning, and student engagement.",
+          image: "/assets/students/Mayank Prabhakar.png",
+          skills: ["Artificial Intelligence", "Community Building", "Technology", "Leadership"],
+        },
+        {
+          name: "Krishna Kumar Jha",
+          rollNo: "225UCD007",
+          year: "B.Tech CSE",
+          achievement:
+            "Selected as an AI/ML Intern at DGIS, Indian Army, Ministry of Defence, gaining valuable experience in Artificial Intelligence and Machine Learning.",
+          image: "/assets/students/Krishna.png",
+          skills: ["Artificial Intelligence", "Machine Learning", "Technical Skills"],
+        },
+        {
+          name: "Prachi Saroj",
+          year: "B.Tech Artificial Intelligence",
+          achievement:
+            "Placed at Physics Wallah (PW) through campus placement, marking a significant career achievement.",
+          image: "/assets/students/Prachi Saroj.png",
+          skills: ["Artificial Intelligence", "Placement", "Physics Wallah"],
+        },
+        {
+          name: "Ananya Pandey",
+          year: "B.Tech CSE",
+          achievement:
+            "Placed at Pratinidhi.ai as a Software Engineer with a package of ₹12 LPA.",
+          image: "/assets/students/ananaya.png",
+          skills: ["Software Engineering", "Placement", "Pratinidhi.ai", "₹12 LPA"],
         },
       ],
     },

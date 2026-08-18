@@ -5,7 +5,7 @@ export const researchAreaData = {
   subheading:
     "Explore the research focus areas of School of Engineering.",
   hero: {
-    title: "Research Excellence at SOE",
+    title: "Research Area and Profile",
     subtitle:
       "Our research ecosystem spans cutting-edge domains in mechanical, civil, electrical, and automobile engineering, fostering innovation that addresses real-world challenges in infrastructure, energy, manufacturing, and transportation.",
   },

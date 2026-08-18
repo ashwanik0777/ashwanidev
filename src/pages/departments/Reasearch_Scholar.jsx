@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, CheckCircle } from "lucide-react";
+import { Calendar, CheckCircle, Search, X, Users, Clock, BookOpen } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
+
+const iconMap = {
+  Users,
+  CheckCircle,
+  Clock,
+  BookOpen,
+};
 
 // Hero Section
 const HeroSection = ({ title, subtitle }) => (
@@ -18,14 +25,191 @@ const HeroSection = ({ title, subtitle }) => (
 const StatsSection = ({ stats = [] }) => (
   <StatsCard
     stats={stats.map((item) => ({
-      icon: item.icon,
-      number: item.count,
+      icon: iconMap[item.icon] || Users,
+      numberText: item.count || item.number,
       subtitle: item.label,
     }))}  
   />
 );
 
-// Featured Scholars
+// Directory Section for Year-wise Scholars
+const ScholarDirectorySection = ({ byYear = [] }) => {
+  const [selectedYear, setSelectedYear] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const allYears = ["All", ...byYear.map((b) => b.year)];
+
+  // Flatten scholars with year attribute
+  const flattened = byYear.flatMap((group) =>
+    group.scholars.map((s) => ({ ...s, year: group.year }))
+  );
+
+  const filtered = flattened.filter((s) => {
+    const matchYear = selectedYear === "All" || s.year === selectedYear;
+    const matchStatus =
+      selectedStatus === "All" ||
+      s.status.toLowerCase() === selectedStatus.toLowerCase();
+    const term = searchTerm.toLowerCase();
+    const matchSearch =
+      s.name.toLowerCase().includes(term) ||
+      (s.thesis && s.thesis.toLowerCase().includes(term)) ||
+      (s.supervisor && s.supervisor.toLowerCase().includes(term));
+    return matchYear && matchStatus && matchSearch;
+  });
+
+  return (
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
+              Ph.D. Scholars Directory
+            </h2>
+            <p className="text-slate-600 text-sm mt-1">
+              Browse Ph.D. scholars by admission year, research title, supervisor, and status.
+            </p>
+          </div>
+
+          <div className="w-full md:w-80 relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search scholar, thesis, supervisor..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-9 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div className="flex flex-wrap gap-2">
+            {allYears.map((y) => (
+              <button
+                key={y}
+                onClick={() => setSelectedYear(y)}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                  selectedYear === y
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                }`}
+              >
+                {y === "All" ? "All Batches" : `Batch ${y}`}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-500 font-medium">Status:</span>
+            {["All", "Pursuing", "Awarded"].map((st) => (
+              <button
+                key={st}
+                onClick={() => setSelectedStatus(st)}
+                className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${
+                  selectedStatus === st
+                    ? "bg-slate-900 text-white"
+                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                }`}
+              >
+                {st}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-xs text-slate-500 font-medium mb-4">
+          Showing <strong className="text-slate-800">{filtered.length}</strong> Ph.D. Scholars
+        </div>
+
+        {/* Scholars Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+          {filtered.map((s, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all flex flex-col justify-between h-full"
+            >
+              <div>
+                <div className="flex items-start justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                      {s.name}
+                    </h3>
+                    <span className="text-xs text-slate-500 font-medium">
+                      Batch {s.year}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-xs font-semibold px-2.5 py-0.5 rounded-full shrink-0 ${
+                      s.status === "Awarded"
+                        ? "bg-amber-50 text-amber-700 border border-amber-200"
+                        : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                    }`}
+                  >
+                    {s.status}
+                  </span>
+                </div>
+
+                <div className="mt-3 space-y-2.5 text-sm">
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                      Thesis Title
+                    </h4>
+                    <p className="text-slate-700 font-medium leading-snug mt-0.5">
+                      {s.thesis || "Thesis title pending/under registration"}
+                    </p>
+                  </div>
+
+                  {s.supervisor && (
+                    <div className="pt-2.5 border-t border-slate-100">
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        Supervisor
+                      </h4>
+                      <p className="text-slate-800 font-semibold text-xs mt-0.5">
+                        {s.supervisor}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
+            <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-slate-800">No Scholars Found</h3>
+            <p className="text-sm text-slate-500 mt-1">
+              No Ph.D. scholars matched your current search filters.
+            </p>
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedYear("All");
+                setSelectedStatus("All");
+              }}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+// Featured Scholars (Legacy fallback if needed)
 const FeaturedScholars = ({ scholars = [] }) => (
   <section className="py-16 px-4 bg-white">
     <div className="max-w-7xl mx-auto">
@@ -92,192 +276,6 @@ const FeaturedScholars = ({ scholars = [] }) => (
   </section>
 );
 
-// Research Areas Distribution
-const DistributionSection = ({ departments = [], fellowships = [] }) => (
-  <section className="py-16 px-4 bg-gray-50">
-    <div className="max-w-7xl mx-auto">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-gray-900 mb-12 text-center"
-      >
-        Research Areas Distribution
-      </motion.h2>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Department-wise Scholar Distribution
-          </h3>
-          <div className="space-y-4">
-            {departments.map((d, i) => (
-              <div
-                key={i}
-                className={`flex items-center justify-between p-4 ${d.bg} rounded-lg`}
-              >
-                <div>
-                  <h4 className="font-semibold text-gray-900">{d.name}</h4>
-                  <p className="text-sm text-gray-600">{d.desc}</p>
-                </div>
-                <div className="text-right">
-                  <span className={`text-2xl font-bold ${d.color}`}>
-                    {d.count}
-                  </span>
-                  <p className="text-xs text-gray-500">Scholars</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Funding & Fellowship Status
-          </h3>
-          <div className="space-y-4">
-            {fellowships.map((f, i) => (
-              <div
-                key={i}
-                className={`border-l-4 ${f.border} pl-4`}
-              >
-                <h4 className="font-semibold text-gray-900">{f.name}</h4>
-                <p className="text-sm text-gray-600">{f.detail}</p>
-                <p className="text-xs text-gray-500">{f.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-// Achievements
-const AchievementsSection = ({ achievements = [] }) => (
-  <section className="py-16 px-4 bg-white">
-    <div className="max-w-7xl mx-auto">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-gray-900 mb-12 text-center"
-      >
-        Recent Achievements
-      </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {achievements.map((a, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 + i * 0.2 }}
-            className={`bg-gradient-to-br ${a.bg} p-6 rounded-xl`}
-          >
-            <a.icon className={`h-12 w-12 ${a.color} mb-4`} />
-            <h3 className="text-xl font-bold text-gray-900 mb-3">{a.title}</h3>
-            <p className="text-sm text-gray-600 mb-4">{a.desc}</p>
-            <p className="text-xs text-gray-500">{a.date}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-// Application Process
-const ApplicationProcess = ({ timeline = [], fee = {} }) => (
-  <section className="py-16 px-4 bg-gray-50">
-    <div className="max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-        Join Our Research Community
-      </h2>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Ph.D. Admission Requirements
-          </h3>
-          <ul className="space-y-4">
-            {[
-              {
-                title: "Educational Qualification",
-                desc:
-                  "M.Tech/M.E./M.S. in relevant field with minimum 60% marks",
-              },
-              {
-                title: "Entrance Test",
-                desc: "GATE/NET qualified or TechVision Research Aptitude Test",
-              },
-              {
-                title: "Research Proposal",
-                desc: "2-3 page research proposal in chosen area",
-              },
-              {
-                title: "Interview",
-                desc: "Technical interview with potential supervisors",
-              },
-            ].map((r, i) => (
-              <li key={i} className="flex items-start">
-                <CheckCircle className="h-6 w-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" />
-                <div>
-                  <strong className="text-gray-900">{r.title}:</strong>
-                  <p className="text-sm text-gray-600">{r.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="bg-white p-8 rounded-xl shadow-lg">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Application Timeline
-          </h3>
-          <div className="space-y-4">
-            {timeline.map((t, i) => (
-              <div key={i} className="flex items-center">
-                <Calendar className={`h-6 w-6 ${t.color} mr-3`} />
-                <div>
-                  <strong className="text-gray-900">{t.title}:</strong>
-                  <p className="text-sm text-gray-600">{t.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>Application Fee:</strong> {fee.application}
-            </p>
-            <p className="text-sm text-gray-600">
-              <strong>Annual Fee:</strong> {fee.annual}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-// Contact
-const ContactSection = ({ contacts = [] }) => (
-  <section className="py-16 px-4 text-gray-900 bg-white">
-    <div className="max-w-7xl mx-auto text-center">
-      <h2 className="text-3xl font-bold mb-8">
-        Connect with Our Research Community
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {contacts.map((c, i) => (
-          <div key={i} className="shadow-2xl p-5 rounded-2xl border-gray-300 border-[1px] border-solid">
-            <c.icon className={`h-12 w-12 ${c.color} mx-auto mb-4`} />
-            <h3 className="text-xl font-semibold mb-2">{c.title}</h3>
-            <p >{c.email}</p>
-            <p >{c.phone}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
 // Main Parent
 export default function ResearchScholars() {
   const { shortCode } = useParams();
@@ -319,27 +317,24 @@ export default function ResearchScholars() {
   const {
     hero,
     stats,
+    byYear,
     scholars,
-    departments,
-    fellowships,
-    achievements,
-    timeline,
-    fee,
-    contacts,
   } = researchScholarsData;
 
   return (
     <div className="min-h-screen">
       <HeroSection
-        title={hero.title}
-        subtitle={hero.subtitle}
+        title={hero?.title || "RESEARCH SCHOLARS | USICT"}
+        subtitle={hero?.subtitle || "Ph.D. Scholars Community"}
       />
-      <StatsSection stats={stats} />
-      <FeaturedScholars scholars={scholars} />
-      <DistributionSection departments={departments} fellowships={fellowships} />
-      <AchievementsSection achievements={achievements} />
-      <ApplicationProcess timeline={timeline} fee={fee} />
-      <ContactSection contacts={contacts} />
+
+      {byYear && byYear.length > 0 && (
+        <ScholarDirectorySection byYear={byYear} />
+      )}
+
+      {!byYear && scholars && scholars.length > 0 && (
+        <FeaturedScholars scholars={scholars} />
+      )}
     </div>
   );
 }

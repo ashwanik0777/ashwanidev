@@ -9,7 +9,7 @@ export const researchAreaData = {
   subheading:
     "Explore the research focus areas of the School of Management at Gautam Buddha University.",
   hero: {
-    title: "Research Area and Profile",
+    title: "Research Excellence at SOM",
     subtitle:
       "Our research ecosystem spans cutting-edge domains in management, finance, business analytics, and entrepreneurship, fostering innovation that addresses real-world business challenges.",
   },

@@ -5,7 +5,7 @@ export const researchAreaData = {
   subheading:
     "Explore the research focus areas of School of Biotechnology.",
   hero: {
-    title: "Research Area and Profile",
+    title: "Research Excellence at SOBT",
     subtitle:
       "Our research ecosystem spans cutting-edge domains in biotechnology and life sciences, fostering innovation that addresses global challenges in healthcare, agriculture, and environmental sustainability.",
   },

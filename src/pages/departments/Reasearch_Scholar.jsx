@@ -324,10 +324,9 @@ export default function ResearchScholars() {
   return (
     <div className="min-h-screen">
       <HeroSection
-        title={hero?.title || "RESEARCH SCHOLARS"}
+        title={hero?.title || "RESEARCH SCHOLARS | USICT"}
         subtitle={hero?.subtitle || "Ph.D. Scholars Community"}
       />
-      {stats && stats.length > 0 && <StatsSection stats={stats} />}
 
       {byYear && byYear.length > 0 && (
         <ScholarDirectorySection byYear={byYear} />

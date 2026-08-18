@@ -3,15 +3,8 @@ export const researchScholarsData = {
   schoolName: "School of Information & Communication Technology",
   hero: {
     title: "RESEARCH SCHOLARS | USICT",
-    subtitle:
-      "Explore the Ph.D. scholars community, thesis titles, research status, and faculty supervisors at USICT.",
+    subtitle: "Comprehensive list of Ph.D. Research Scholars at USICT, Gautam Buddha University",
   },
-  stats: [
-    { icon: "Users", count: "90+", label: "Ph.D. Scholars" },
-    { icon: "CheckCircle", count: "55+", label: "Ph.D. Degrees Awarded" },
-    { icon: "Clock", count: "35+", label: "Currently Pursuing" },
-    { icon: "BookOpen", count: "100%", label: "Research Excellence" },
-  ],
   byYear: [
     {
       year: "2023-24",
@@ -190,7 +183,7 @@ export const researchScholarsData = {
         {
           name: "Vinod Kumar",
           status: "Pursuing",
-          thesis: "—",
+          thesis: "",
           supervisor: "Dr. Anurag Singh Baghel",
         },
         {
@@ -627,8 +620,37 @@ export const researchScholarsData = {
         {
           name: "Vinay Kumar Singh",
           status: "Awarded",
-          thesis: "—",
-          supervisor: "Dr. Anurag Singh Baghel",
+          thesis: "Energy Efficient Routing for Wireless Sensor Networks",
+          supervisor: "Dr. Vidushi Sharma",
+        },
+      ],
+    },
+    {
+      year: "2009",
+      scholars: [
+        {
+          name: "Arun Solanki",
+          status: "Awarded",
+          thesis: "Design and Development of Domain Specific Knowledge-Based Expert System",
+          supervisor: "Dr. Ela Kumar",
+        },
+        {
+          name: "Mohd. Ashraf Saifi",
+          status: "Awarded",
+          thesis: "Reliability Evaluation and Topological Design of Communication Network",
+          supervisor: "Dr. Rajesh Mishra",
+        },
+        {
+          name: "Sandeep Singh Rana",
+          status: "Awarded",
+          thesis: "Performance Evaluation of Intelligent Algorithms for Data Mining",
+          supervisor: "Prof. Sanjay Kumar Jasola and Dr. Ela Kumar",
+        },
+        {
+          name: "Sandhya Tarar",
+          status: "Awarded",
+          thesis: "Analysis and Design of Algorithms to Improve the Performance of Fingerprint Identification System",
+          supervisor: "Dr. Ela Kumar",
         },
       ],
     },

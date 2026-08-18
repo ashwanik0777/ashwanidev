@@ -91,16 +91,16 @@ const VisionaryLeadership = () => {
           {/* Spacer to balance left 50% campus view on desktop */}
           <div className="hidden lg:block w-1/2 min-h-[220px] pointer-events-none" />
 
-          {/* Right Side (50% Width on Desktop, 100% on Mobile/Tablet): VC & Chancellor Cards */}
-          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 items-center">
+          {/* Right Side (50% Width on Desktop, 100% on Mobile/Tablet): VC & Chancellor Cards in RMNLU Profile Style */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-3.5 sm:gap-4 justify-center">
             {leaders.map((leader) => (
               <Link
                 key={leader.id || leader.name}
                 to={leader.url}
-                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl py-4 px-4 sm:py-5 sm:px-5 flex flex-col items-center text-center justify-center shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
+                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 flex flex-row items-center gap-3.5 sm:gap-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
               >
-                {/* Leader Avatar Photo */}
-                <div className="relative w-20 h-20 sm:w-40 sm:h-40 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm mb-2.5 shrink-0 bg-slate-50 group-hover:border-orange-300 transition-colors duration-300">
+                {/* Leader Avatar Photo (Circular RMNLU Frame) */}
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300">
                   <img
                     src={getPhotoUrl(leader.photo)}
                     alt={leader.name}
@@ -108,15 +108,15 @@ const VisionaryLeadership = () => {
                   />
                 </div>
 
-                {/* Leader Name */}
-                <h3 className="font-extrabold text-[#1a2942] text-sm sm:text-base mb-1 group-hover:text-orange-600 transition-colors leading-snug">
-                  {leader.name}
-                </h3>
-
-                {/* Leader Designation */}
-                <p className="text-[11px] sm:text-xs text-gray-600 font-medium leading-tight max-w-[200px]">
-                  {leader.displayDesignation}
-                </p>
+                {/* Leader Details (Right Aligned Text Block) */}
+                <div className="flex flex-col text-left justify-center min-w-0 flex-1">
+                  <h3 className="font-extrabold text-[#1a2942] text-sm sm:text-base group-hover:text-orange-600 transition-colors leading-snug">
+                    {leader.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-snug mt-0.5">
+                    {leader.displayDesignation}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

@@ -3,7 +3,7 @@ import HodMessage from "../../components/departments/cse/Hod";
 import AboutDepartment from "../../components/departments/cse/AboutDepartment";
 import Programs from "../../components/departments/cse/Program";
 import FacultyCarousel from "../../components/departments/faculty_rotating";
-import StatsCard from "../../components/StatsCard";
+import ResearchSection from "../../components/departments/ResearchSection";
 import StudentAchievers from "../../components/departments/cse/StudentAchievers";
 
 const DepartmentLayout = ({
@@ -14,6 +14,8 @@ const DepartmentLayout = ({
   schoolCode,
   departmentId,
   facultyStats,
+  facultyMembers,
+  researchAreas,
   researchStats,
   topAchievers,
   achievements,
@@ -22,9 +24,7 @@ const DepartmentLayout = ({
     <div className="min-h-screen bg-background">
       <BannerSection {...heroProps} />
       <HodMessage {...hodProps} />
-      {departmentId?.toLowerCase() !== "cse" && aboutProps && (
-        <AboutDepartment {...aboutProps} />
-      )}
+      {aboutProps && <AboutDepartment {...aboutProps} />}
       <Programs
         heading="Academic Programs"
         subheading="Choose from our diverse range of programs designed to meet your academic and career goals."
@@ -35,40 +35,35 @@ const DepartmentLayout = ({
         subTitle="Experienced educators and researchers dedicated to student success"
         schoolCode={schoolCode}
         departmentId={departmentId}
+        facultyList={facultyMembers}
         navigateTo={schoolCode ? `/schools/${schoolCode}/faculty` : "/academics/faculty"}
         autoSlideInterval={5000}
         visibleCards={3}
         bottomStats={facultyStats}
       />
 
-      {departmentId?.toLowerCase() !== "cse" && researchStats && researchStats.length > 0 && (
-        <>
-          <div className="mt-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
-              Research Areas
-            </h2>
-          </div>
-
-          <StatsCard
-            stats={researchStats.map((stat) => ({
-              numberText: stat.numberText,
-              title: stat.subtitle,
-              subtitle: stat.subtitle,
-            }))}
-          />
-        </>
+      {((researchAreas && researchAreas.length > 0) || (researchStats && researchStats.length > 0)) && (
+        <ResearchSection
+          title="Research & Innovation"
+          subtitle="Pioneering technology research and real-world domain solutions."
+          researchAreas={researchAreas}
+          researchStats={researchStats}
+        />
       )}
 
-      <StudentAchievers
-        topAchievers={topAchievers}
-        achievements={achievements}
-        achieversHeading="Top Student Achievers"
-        achieversSubheading="Students making us proud globally"
-        achievementsHeading="Key Achievements"
-        achievementsSubheading="Excellence and recognition"
-      />
+      {((topAchievers && topAchievers.length > 0) || (achievements && achievements.length > 0)) && (
+        <StudentAchievers
+          topAchievers={topAchievers}
+          achievements={achievements}
+          achieversHeading="Top Student Achievers"
+          achieversSubheading="Students making us proud globally"
+          achievementsHeading="Key Achievements"
+          achievementsSubheading="Excellence and recognition"
+        />
+      )}
     </div>
   );
 };
 
 export default DepartmentLayout;
+

@@ -179,23 +179,32 @@ const StudentAchievers = ({
   achievementsHeading = "Our Achievements",
   achievementsSubheading = "Recognition and excellence in education",
 }) => {
+  if (
+    (!topAchievers || topAchievers.length === 0) &&
+    (!achievements || achievements.length === 0)
+  ) {
+    return null;
+  }
+
   return (
     <>
       {/* Top Achievers */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-                {achieversHeading}
-              </h2>
-              <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-            </div>
+      {topAchievers && topAchievers.length > 0 && (
+        <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50 overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
+                  {achieversHeading}
+                </h2>
+                <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+              </div>
 
-            <AchieversSlider topAchievers={topAchievers} />
+              <AchieversSlider topAchievers={topAchievers} />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 };

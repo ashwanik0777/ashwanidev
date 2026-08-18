@@ -53,46 +53,7 @@ export const departmentLayoutData = {
       phone: "0120-2346080 (Ext.6080)",
     },
   },
-  aboutProps: {
-    heading: "About the Department",
-    subheading:
-      "Established in 1995, our department has been at the forefront of computer science education and research for over two decades.",
-    stats: [
-      { icon: Users, numberText: "800+", title: "Students", subtitle: "Enrolled" },
-      { icon: BookOpen, numberText: "45+", title: "Faculty", subtitle: "Members" },
-      { icon: Award, numberText: "120+", title: "Research Projects", subtitle: "Completed" },
-      { icon: Lightbulb, numberText: "25+", title: "Patents Filed", subtitle: "Innovations" }
-    ],
-    highlights: [
-      {
-        title: "Excellence in Education",
-        description:
-          "Our department offers comprehensive undergraduate and postgraduate programs designed to meet the evolving needs of the technology industry. We emphasize both theoretical foundations and practical applications, ensuring our graduates are industry-ready.",
-        dotColor: "#3b82f6",
-      },
-      {
-        title: "Research & Innovation",
-        description:
-          "We are actively engaged in cutting-edge research in artificial intelligence, machine learning, cybersecurity, software engineering, and data science. Our faculty and students regularly publish in top-tier conferences and journals.",
-        dotColor: "#06b6d4",
-      },
-      {
-        title: "Industry Partnerships",
-        description:
-          "Strong collaborations with leading technology companies provide our students with internship opportunities, industry projects, and placement assistance. We maintain partnerships with Google, Microsoft, Amazon, TCS, Infosys, and many more.",
-        dotColor: "#6366f1",
-      }
-    ],
-    vision:
-      "To be a globally recognized center of excellence in computer science education, research, and innovation that contributes to societal development.",
-    missionPoints: [
-      "Provide quality education in computer science and engineering",
-      "Conduct cutting-edge research in emerging technologies",
-      "Foster innovation and entrepreneurship among students",
-      "Collaborate with industry and academic institutions globally",
-      "Contribute to societal development through technology solutions"
-    ],
-  },
+  aboutProps: null,
   programsData: [
     {
       id: "btech-cse",
@@ -503,12 +464,7 @@ export const departmentLayoutData = {
       }
     ],
   },
-  researchStats: [
-    { numberText: "80+", subtitle: "Research Projects" },
-    { numberText: "₹10Cr+", subtitle: "Research Funding" },
-    { numberText: "250+", subtitle: "Publications" },
-    { numberText: "15+", subtitle: "Patents Filed" }
-  ],
+  researchStats: [],
   topAchievers: [
     {
       name: "Aarushi Sangal",

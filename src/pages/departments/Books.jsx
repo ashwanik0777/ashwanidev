@@ -89,15 +89,40 @@ const BookCard = ({ book }) => {
           )}
         </div>
 
-        {/* Authors */}
-        {book.authors && (
-          <div className="pt-3 border-t border-slate-100">
-            <span className="text-slate-500 font-bold uppercase tracking-wider block mb-1 text-[11px]">
-              Authors / Editors
-            </span>
-            <p className="text-slate-800 font-medium leading-relaxed text-xs">
-              {book.authors}
-            </p>
+        {/* Authors & Faculty */}
+        <div className="pt-3 border-t border-slate-100 space-y-2">
+          {book.faculty && (
+            <div className="text-xs">
+              <span className="text-slate-400 font-bold uppercase tracking-wider block text-[10px]">
+                SOICT Faculty Member
+              </span>
+              <span className="font-semibold text-blue-900">{book.faculty}</span>
+            </div>
+          )}
+          {book.authors && (
+            <div className="text-xs">
+              <span className="text-slate-400 font-bold uppercase tracking-wider block text-[10px]">
+                Authors / Contributors
+              </span>
+              <p className="text-slate-700 font-medium leading-relaxed">
+                {book.authors}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* External Link / DOI Button */}
+        {book.link && (
+          <div className="mt-4 pt-3 border-t border-slate-100">
+            <a
+              href={book.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold rounded-lg transition-colors border border-blue-200"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              View Publisher / DOI Link
+            </a>
           </div>
         )}
       </div>
@@ -151,7 +176,11 @@ export default function Books() {
 
   const { hero, stats = [], booksList = [] } = booksData;
 
-  const categories = ["All", "Authored Book", "Edited Book", "Book Chapter"];
+  // Extract unique categories dynamically
+  const uniqueTypes = Array.from(
+    new Set(booksList.map((b) => b.type).filter(Boolean))
+  );
+  const categories = ["All", ...uniqueTypes];
 
   const filteredBooks = booksList.filter((b) => {
     const matchCategory =
@@ -159,9 +188,10 @@ export default function Books() {
     const term = searchTerm.toLowerCase();
     const matchSearch =
       b.title.toLowerCase().includes(term) ||
+      (b.faculty && b.faculty.toLowerCase().includes(term)) ||
       (b.authors && b.authors.toLowerCase().includes(term)) ||
       (b.publisher && b.publisher.toLowerCase().includes(term)) ||
-      (b.description && b.description.toLowerCase().includes(term));
+      (b.isbn && b.isbn.toLowerCase().includes(term));
     return matchCategory && matchSearch;
   });
 

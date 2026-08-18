@@ -511,9 +511,9 @@ const EventDetail = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
           {/* Left Column: Portrait Flyer */}
-          <div className="lg:col-span-5 xl:col-span-4">
+          <div className="lg:col-span-6 xl:col-span-5">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] bg-gray-900 border border-gray-200">
               {flyerImage ? (
                 <img
@@ -538,7 +538,7 @@ const EventDetail = () => {
           </div>
 
           {/* Right Column: Information & Buttons */}
-          <div className="lg:col-span-7 xl:col-span-8 flex flex-col">
+          <div className="lg:col-span-6 xl:col-span-7 flex flex-col">
             <div className="mb-6 flex flex-wrap gap-2">
               <Badge className={`${getTypeColor(event.type)} shadow-sm`}>{event.type}</Badge>
               {event.mode && <Badge className={`${getModeColor(event.mode)} shadow-sm`}>{event.mode}</Badge>}
@@ -608,19 +608,11 @@ const EventDetail = () => {
               )}
             </div>
 
-            {/* Description */}
-            <div className="mb-10 flex-1">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">About This Event</h3>
-              <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
-                {event.description}
-              </p>
-            </div>
-
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mt-auto">
               <Button 
                 size="lg" 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg py-4" 
                 asChild
                 disabled={!event.isUpcoming || !event.registrationUrl}
               >
@@ -640,7 +632,7 @@ const EventDetail = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50" 
+                className="w-full border-gray-300 hover:bg-gray-50 py-4" 
                 asChild
                 disabled={!event.flyerUrl && !event.brochureUrl}
               >
@@ -660,7 +652,7 @@ const EventDetail = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50" 
+                className="w-full border-gray-300 hover:bg-gray-50 py-4" 
                 onClick={addToGoogleCalendar}
               >
                 <CalendarPlus size={18} className="mr-2 text-gray-600" />
@@ -670,6 +662,14 @@ const EventDetail = () => {
               <SocialShare url={window.location.href} title={event.title} className="w-full h-full" />
             </div>
           </div>
+        </div>
+
+        {/* Full-width Description */}
+        <div className="mb-16 max-w-4xl">
+          <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">About This Event</h3>
+          <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+            {event.description}
+          </p>
         </div>
 
         {/* Gallery Section (Only for Past Events) */}

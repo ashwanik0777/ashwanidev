@@ -83,10 +83,10 @@ export default function CampusLifeSection() {
   };
 
   return (
-    <div className="px-4 sm:px-8 md:px-16 lg:px-20 py-8 sm:py-14 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="px-4 sm:px-8 md:px-16 lg:px-20 py-4 sm:py-10 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header Section */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-blue-800">
+      <div className="text-center mb-4 sm:mb-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 text-blue-800">
           Campus Life at GBU
         </h2>
       </div>

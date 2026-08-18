@@ -72,7 +72,7 @@ const VisionaryLeadership = () => {
         <img
           src={gbuCampusView}
           alt="Gautam Buddha University Campus"
-          className="w-full h-full object-cover object-center opacity-10 filter contrast-105"
+          className="w-full h-full object-cover object-center opacity-70 filter contrast-105"
         />
       </div>
 

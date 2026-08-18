@@ -95,8 +95,8 @@ export default function CampusGallery() {
   const currentImage = galleryData[mainImageIndex];
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <div className="w-full py-6 sm:py-10 lg:py-16 mx-auto px-3 sm:px-6 lg:px-8">
+    <div className="w-full bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="w-full py-4 sm:py-8 lg:py-12 mx-auto px-3 sm:px-6 lg:px-8">
         <style>{`
           .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -107,8 +107,8 @@ export default function CampusGallery() {
           }
         `}</style>
 
-        <div className="text-center mb-2 sm:mb-5 lg:mb-8">
-          <h2 className="text-3xl h-14 md:text-4xl md:h-15 font-bold text-blue-800 mb-4">
+        <div className="text-center mb-2 sm:mb-5 lg:mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-800 mb-2 sm:mb-3">
             Ongoing Events
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full"></div>
@@ -158,8 +158,8 @@ export default function CampusGallery() {
         )}
 
         {/* Thumbnails */}
-        <div className="w-full overflow-x-auto no-scrollbar pb-4">
-          <div className="flex justify-center gap-4 min-w-max px-2">
+        <div className="w-full overflow-x-auto no-scrollbar pb-2 sm:pb-4">
+          <div className="flex justify-center gap-3 sm:gap-4 min-w-max px-2">
             {galleryData.map((img, index) => (
               <div
                 key={img.id}
@@ -173,7 +173,7 @@ export default function CampusGallery() {
                   src={img.image}
                   alt={img.text}
                   onError={handleImageError}
-                  className="w-24 h-16 sm:w-28 sm:h-20 object-cover"
+                  className="w-20 h-14 sm:w-28 sm:h-20 object-cover"
                 />
               </div>
             ))}
@@ -182,9 +182,9 @@ export default function CampusGallery() {
 
         {/* Counter */}
         {galleryData.length > 0 && (
-          <div className="flex justify-center mt-6 mb-8">
-            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 border-solid rounded-full px-6 py-3 shadow-md">
-              <span className="text-sm font-medium text-gray-700">
+          <div className="flex justify-center mt-3 sm:mt-4 mb-4 sm:mb-6">
+            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 border-solid rounded-full px-5 py-2 shadow-md">
+              <span className="text-xs sm:text-sm font-medium text-gray-700">
                 <span className="font-bold text-blue-600">{mainImageIndex + 1}</span> of{' '}
                 <span className="font-bold">{galleryData.length}</span>
               </span>
@@ -199,12 +199,12 @@ export default function CampusGallery() {
               href={currentImage.button1_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-10 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl hover:from-blue-700 hover:to-blue-900 transition-all text-lg font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 border border-blue-500/30"
+              className="group relative px-8 py-2.5 sm:px-10 sm:py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl hover:from-blue-700 hover:to-blue-900 transition-all text-sm sm:text-base md:text-lg font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 border border-blue-500/30"
             >
               <span className="relative z-10 flex items-center">
                 {currentImage.button1_text}
                 <svg
-                  className="ml-3 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                  className="ml-2.5 w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -218,7 +218,7 @@ export default function CampusGallery() {
         )}
 
         {/* Progress Bar */}
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-4 sm:mt-6">
           <div className="w-full max-w-md bg-gray-200/50 rounded-full h-1 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-linear"

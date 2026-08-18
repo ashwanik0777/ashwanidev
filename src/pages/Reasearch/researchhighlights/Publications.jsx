@@ -1210,29 +1210,52 @@ const Publications = () => {
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-2 mt-6 overflow-x-auto py-2">
+          {totalPages > 1 && (activeTab !== "publications" || selectedBulletin) && (
+            <div className="flex justify-center items-center space-x-1.5 mt-8 py-4">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1 bg-gray-200 rounded"
+                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 Previous
               </button>
-              {Array.from({ length: totalPages }, (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentPage(i + 1)}
-                  className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-blue-700 text-white" : "bg-gray-200"
-                    }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+              {(() => {
+                const pages = [];
+                const delta = 2;
+                const left = Math.max(2, currentPage - delta);
+                const right = Math.min(totalPages - 1, currentPage + delta);
+
+                pages.push(1);
+                if (left > 2) pages.push("...");
+                for (let i = left; i <= right; i++) {
+                  pages.push(i);
+                }
+                if (right < totalPages - 1) pages.push("...");
+                if (totalPages > 1) pages.push(totalPages);
+
+                return pages.map((item, idx) =>
+                  item === "..." ? (
+                    <span key={`ellipsis-${idx}`} className="px-2 py-1 text-xs text-gray-400 font-bold">
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={item}
+                      onClick={() => setCurrentPage(item)}
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${currentPage === item
+                          ? "bg-blue-600 text-white shadow-sm"
+                          : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                        }`}
+                    >
+                      {item}
+                    </button>
+                  )
+                );
+              })()}
               <button
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-3 py-1 bg-gray-200 rounded"
+                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 Next
               </button>

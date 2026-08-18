@@ -82,7 +82,7 @@ export default function WelcomePage() {
       </div>
 
       {/* Main welcome section */}
-      <div className="relative min-h-[360px] h-[52vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-gray-900">
+      <div className="relative min-h-[360px] h-[52vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-black">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -90,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.3] -translate-y-6 sm:-translate-y-12 origin-center"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -101,37 +101,37 @@ export default function WelcomePage() {
           <img
             src={videoSrc}
             alt="Banner"
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.3] -translate-y-6 sm:-translate-y-12 origin-center"
             loading="eager"
           />
         )}
 
-        {/* Gradient Overlay for high readability & seamless transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-950/40 via-black/40 to-black/75 z-10" />
+        {/* Overlay for optimal video readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/15 z-10" />
 
-        {/* Content */}
-        <div className="relative z-20 text-white w-full px-4 sm:px-8 lg:px-16 py-6 sm:py-20 flex flex-col justify-center">
-          <div className="max-w-4xl mx-auto sm:mx-0">
+        {/* Content - Original design */}
+        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-4 sm:pb-20 pt-6 sm:pt-24">
+          <div className="max-w-5xl mx-auto sm:mx-0">
 
             {/* Title with Typing Effect */}
-            <h1 className="mb-2 sm:mb-4 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            <h1 className="mb-2 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {typedTitle.includes("\n") ? (
                 <>
-                  <span className="block text-sm sm:text-2xl md:text-3xl font-bold text-sky-200 tracking-widest uppercase mb-1">
+                  <span className="block text-xs sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-1">
                     {typedTitle.split("\n")[0]}
                   </span>
-                  <span className="block text-2xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                  <span className="block text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
                     {typedTitle.split("\n")[1]}
                     {!isTitleDone && (
-                      <span className="inline-block w-[3px] sm:w-[4px] h-[0.8em] bg-sky-400 ml-1.5 animate-blink align-baseline" />
+                      <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
                     )}
                   </span>
                 </>
               ) : (
-                <span className="block text-lg sm:text-3xl font-bold text-white tracking-widest uppercase">
+                <span className="block text-base sm:text-3xl font-semibold text-white tracking-widest uppercase">
                   {typedTitle}
                   {!isTitleDone && (
-                    <span className="inline-block w-[3px] sm:w-[4px] h-[0.8em] bg-sky-400 ml-1.5 animate-blink align-baseline" />
+                    <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
                   )}
                 </span>
               )}
@@ -142,7 +142,7 @@ export default function WelcomePage() {
               initial={{ opacity: 0, y: 15 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-xs sm:text-base md:text-lg mb-4 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white/95 drop-shadow-md"
+              className="text-xs sm:text-lg md:text-xl mb-3 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white drop-shadow-md"
             >
               {bannerData.content}
             </motion.p>
@@ -152,14 +152,14 @@ export default function WelcomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="flex flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4"
+              className="flex flex-row items-center justify-center sm:justify-start gap-2.5 sm:gap-4 flex-wrap"
             >
               {bannerData.button1_text && bannerData.button1_url && (
                 <a
                   href={bannerData.button1_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-full shadow-lg hover:shadow-xl focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
+                  className="border-2 border-green-400 text-green-700 bg-green-200/90 hover:bg-green-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button1_text}
                 </a>
@@ -169,7 +169,7 @@ export default function WelcomePage() {
                   href={bannerData.button2_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-600/90 hover:bg-blue-600 text-white backdrop-blur-sm border border-white/20 font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-full shadow-lg hover:shadow-xl focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
+                  className="border-2 border-blue-400 text-blue-700 bg-blue-200/90 hover:bg-blue-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button2_text}
                 </a>
@@ -260,38 +260,6 @@ export default function WelcomePage() {
             object-position: center center;
             width: 100% !important;
             height: 100% !important;
-          }
-        }
-          
-          /* Ensure container doesn't exceed viewport */
-          .relative {
-            max-height: 100vh;
-          }
-        }
-        
-        /* Extra wide screens */
-        @media (min-width: 1920px) {
-          .video-responsive {
-            object-fit: cover;
-            object-position: center center;
-          }
-        }
-        
-        /* Handle very wide aspect ratios */
-        @media (min-aspect-ratio: 16/9) {
-          .video-responsive {
-            object-fit: cover;
-            width: 100vw !important;
-            height: 100vh !important;
-          }
-        }
-        
-        /* Handle very tall aspect ratios */
-        @media (max-aspect-ratio: 9/16) {
-          .video-responsive {
-            object-fit: cover;
-            width: 100vw !important;
-            height: 100vh !important;
           }
         }
         

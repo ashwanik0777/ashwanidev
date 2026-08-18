@@ -37,9 +37,11 @@ const CoursesOffered = ({
   description = "The Centre for Rapid and Alternative Energy Mobility (RAEM) offers intensive Certificate, Diploma, and Degree programs for professionals in RAMS, PHM, and Maintenance Engineering.",
   courses = []
 }) => {
+  if (!courses || courses.length === 0) return null;
+
   return (
-    <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-4">
+    <section className="py-8 sm:py-12 bg-gradient-to-br from-gray-50 to-blue-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -47,11 +49,13 @@ const CoursesOffered = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="text-center mb-10"
           >
-           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{title}</h2>
-            <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-          </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">{title}</h2>
+            <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
+            {description && (
+              <p className="text-sm text-gray-500 mt-2 font-medium max-w-2xl mx-auto">{description}</p>
+            )}
           </motion.div>
 
           {/* Cards Grid */}
@@ -103,10 +107,12 @@ const CoursesOffered = ({
                       <BadgeCheck className="h-4 w-4 text-muted-foreground" />
                       <span>{course.eligibility}</span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <BookOpen className="h-4 w-4 text-muted-foreground" />
-                      <span className="font-semibold">{course.fee}</span>
-                    </div>
+                    {course.fee && (
+                      <div className="flex items-center space-x-2">
+                        <BookOpen className="h-4 w-4 text-muted-foreground" />
+                        <span className="font-semibold">{course.fee}</span>
+                      </div>
+                    )}
                   </div>
 
                   <div>

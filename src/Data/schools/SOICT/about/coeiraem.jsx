@@ -1,4 +1,5 @@
 import RaemImage from "../../../../assets/Raem.png";
+import RaemWorkshopImage from "../../../../assets/raem_workshop.jpg";
 import fnarea1 from "../../../../assets/fnarea1.png";
 import fnarea2 from "../../../../assets/fnarea2.png";
 import fnarea3 from "../../../../assets/fnarea3.png";
@@ -38,7 +39,7 @@ export const coeRaemData = {
         text: "We are committed to empowering the next generation of engineers, technologists, and innovators through industry-driven education, advanced R&D infrastructure, and meaningful partnerships with Indian Railways, NMRC, and DMRC.",
       },
     ],
-    photos: [RaemImage],
+    photos: [RaemImage, RaemWorkshopImage],
   },
   functionalAreas: [
     {
@@ -75,74 +76,73 @@ export const coeRaemData = {
   ],
   courses: [
     {
-      title: "Reliability Availability Maintainability & Safety (RAMS)",
-      duration: "3 Months / 6 Months / 2 Years",
+      title: "Maintenance Engineering (ME)",
+      duration: "3 Months (Cert.) / 6 Months (Diploma)",
       description:
-        "Learn theoretical concepts, methodologies, models, and tools for function preservation and failure prevention across asset life cycles.",
+        "Establishes operational foundations, lifecycles, LCC, CM/PM/CBM/RCM/TPM strategies, smart sensor monitoring, NDT testing, IIoT, and CMMS integration.",
       eligibility:
-        "B.Tech/B.E with 2 years experience / Diploma holders with 3 years work experience.",
-      fee: "₹50,000 – ₹4,00,000",
+        "B.Tech/B.E with 2 yrs experience OR Engineering Diploma with 3 yrs work experience.",
       highlights: [
-        "Function Preservation",
-        "Failure Prevention",
-        "Reliability Modelling",
-        "System Safety",
-        "RAMS Tools",
-        "Lifecycle Management",
+        "Modern Maintenance & Reliability Concepts",
+        "CM, PM, CBM, RCM, and TPM Strategies",
+        "Destructive & NDT State Monitoring (Ultrasonic, Radiographic, Eddy Current)",
+        "Smart & Wireless Sensors for IIoT & AI/ML",
+        "LCC & Life Cycle Costing Methodologies",
+        "CMMS Software & Railway/Wind Industrial Case Studies",
       ],
-      gradient: "from-blue-500 to-blue-600",
+      gradient: "from-blue-600 to-indigo-600",
       bgImage:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhVIlJrs7nn3dc8dqjjmkDMV4uco-oPkYtwg&s",
+        "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "Fundamentals", url: "https://example.com/rams-fundamentals.pdf" },
-        { label: "Advanced", url: "https://example.com/rams-advanced.pdf" },
+        { label: "Maintenance Fundamental", url: "https://drive.google.com/file/d/1g9g9Vfpg-mFCcqvVz_up48KN9yThTKAp/view?usp=drive_web" },
+        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
       ],
     },
     {
       title: "Prognostics & Health Management (PHM)",
-      duration: "3 Months / 6 Months",
+      duration: "3 Months (Basic) / 6 Months (Advanced)",
       description:
-        "Develop tools and methods for assessing and managing the remaining useful life (RUL) of assets aligned with business objectives.",
+        "Predictive and data-driven paradigms using physics-of-failure modeling, Kalman/Particle filtering, ML/Deep Learning (CNN, LSTM), digital twins, and RUL estimation.",
       eligibility:
-        "B.Tech/B.E with 2 years experience / Diploma holders with 3 years work experience.",
-      fee: "₹45,000 – ₹90,000",
+        "B.Tech/B.E with 2 yrs experience OR Engineering Diploma with 3 yrs work experience.",
       highlights: [
-        "RUL Prediction",
-        "Condition Monitoring",
-        "Failure Forecasting",
-        "Data Analytics",
-        "Health Assessment",
-        "Decision Support",
+        "PHM Pipeline Mapped to ISO 13374 Standard",
+        "Edge vs. Cloud IoT Data Acquisition & Cleansing",
+        "Physics-of-Failure & Filtering (Kalman & Particle Filters)",
+        "Machine Learning (CNN, LSTM, PCA, Auto-Encoders)",
+        "RUL (Remaining Useful Life) & Hazard Rate Estimation",
+        "Digital Twins, Cybersecurity & Aerospace/Railway Labs",
       ],
-      gradient: "from-purple-500 to-purple-600",
+      gradient: "from-purple-600 to-indigo-600",
       bgImage:
-        "https://eda.europa.eu/images/default-source/images/battage-cropped?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "Basic", url: "https://example.com/phm-basic.pdf" },
-        { label: "Advanced", url: "https://example.com/phm-advanced.pdf" },
+        { label: "PHM Basic", url: "https://drive.google.com/file/d/1NR_KYgVojPetRq0ArkT5f5JEpdaucGcN/view?usp=drive_web" },
+        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
       ],
     },
     {
-      title: "Maintenance Engineering (ME)",
-      duration: "3 Months / 6 Months",
+      title: "Reliability, Availability, Maintainability & Safety (RAMS)",
+      duration: "3 Months / 6 Months / 2 Years (M.Tech)",
       description:
-        "Gain foundational knowledge of maintenance engineering for industrial assets and infrastructure, covering life cycle perspectives.",
+        "Advanced mathematical & probabilistic backbone focusing on multi-state system models, stress-strength interference, testing (ALT/HALT/HASS), FTA, and industry SIL standards.",
       eligibility:
-        "B.Tech/B.E with 2 years experience / Diploma holders with 3 years work experience.",
-      fee: "₹45,000 – ₹90,000",
+        "B.Tech/B.E/M.S. with 2 yrs experience OR Diploma with 3 yrs work experience.",
       highlights: [
-        "Maintenance Planning",
-        "Preventive Maintenance",
-        "Asset Management",
-        "Reliability Improvement",
-        "Lifecycle Costing",
-        "Industrial Application",
+        "Advanced System Reliability & Standby Modeling",
+        "Stress-Strength Interference & Failure Physics",
+        "Maintainability & Availability Markov Models",
+        "Fault Tree Analysis (FTA) & Birnbaum Algorithms",
+        "Accelerated Life Testing (ALT, HALT & HASS)",
+        "Global RAMS Standards (MIL, IEC, CENELEC, SIL)",
       ],
-      gradient: "from-green-500 to-green-600",
+      gradient: "from-emerald-600 to-teal-600",
       bgImage:
-        "https://www.aviationjobsearch.com/storage/AJS/uploads/hub/advices/QnNoMqGb8rk4SV01DyNOOSZXATjxnQ8voaBk5Y5T.png?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "Fundamentals", url: "https://example.com/maintenance-fundamentals.pdf" },
+        { label: "RAMS Advanced", url: "https://drive.google.com/file/d/1TivVp4qHz1M574ccZKlfAlK-YdZCWbwx/view?usp=drive_web" },
+        { label: "RAMS Fundamental", url: "https://drive.google.com/file/d/1U6Nnze6J1lJs4phPoqwbeV731XZoBpqx/view?usp=drive_web" },
+        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
       ],
     },
   ],

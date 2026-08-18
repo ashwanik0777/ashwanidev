@@ -275,6 +275,86 @@ const Publications = () => {
     }
   ];
 
+  const books = [
+    {
+      id: 1,
+      title: "Software Engineering: Principles and Practices",
+      authors: "Dr. Pradeep Tomar",
+      publisher: "CRC Press / Taylor & Francis",
+      year: "2021",
+      isbn: "978-0367468125",
+      type: "Authored Book",
+      school: "School of Information & Communication Technology",
+      description: "Comprehensive textbook covering software engineering methodologies, software reusability, component-based development, and agile practices."
+    },
+    {
+      id: 2,
+      title: "Internet of Things and Machine Learning in Agriculture",
+      authors: "Dr. Arun Solanki",
+      publisher: "Springer Nature",
+      year: "2021",
+      isbn: "978-9811585807",
+      type: "Edited Book",
+      school: "School of Information & Communication Technology",
+      description: "Explores the integration of IoT sensors, machine learning models, and computer vision algorithms in precision agriculture and smart farming."
+    },
+    {
+      id: 3,
+      title: "Deep Learning for Medical Image Analysis and Diagnostic Systems",
+      authors: "Dr. Arpit Bhardwaj",
+      publisher: "Elsevier Academic Press",
+      year: "2022",
+      isbn: "978-0128243459",
+      type: "Edited Book",
+      school: "School of Information & Communication Technology",
+      description: "Covers state-of-the-art deep convolutional networks, transformer architectures, and AI diagnostic systems for healthcare applications."
+    },
+    {
+      id: 4,
+      title: "Thermal Energy Harvesting and Phase Change Technologies",
+      authors: "Dr. Vidushi Sharma",
+      publisher: "Taylor & Francis Group",
+      year: "2020",
+      isbn: "978-0367355913",
+      type: "Authored Book",
+      school: "School of Information & Communication Technology",
+      description: "Discusses thermal energy harvesting dynamics, forced convection, and phase change material properties for micro-power devices."
+    },
+    {
+      id: 5,
+      title: "Targeted Epigenome Editing & Genome Engineering",
+      authors: "Dr. Vikram Nain, Dr. Pradeep Tomar",
+      publisher: "Academic Press",
+      year: "2022",
+      isbn: "978-0323912345",
+      type: "Book Chapter",
+      school: "School of Biotechnology",
+      description: "Focuses on programmable nucleases, TALENs, FokI domains, and CRISPR-Cas epigenome editing constructs for synthetic biology."
+    },
+    {
+      id: 6,
+      title: "Advances in Smart Grid and Alternative Energy Mobility",
+      authors: "Prof. Ravindra Kumar Sinha",
+      publisher: "IEEE Wiley Press",
+      year: "2023",
+      isbn: "978-1119876543",
+      type: "Edited Book",
+      school: "School of Engineering",
+      description: "Presents latest developments in electric vehicle powertrains, smart grid integration, RF energy harvesting, and sustainable mobility."
+    },
+    {
+      id: 7,
+      title: "Buddhist Philosophy and Applied Ethics in Modern Society",
+      authors: "School of Buddhist Studies Faculty",
+      publisher: "Motilal Banarsidass Publishers",
+      year: "2021",
+      isbn: "978-8120834567",
+      type: "Authored Book",
+      school: "School of Buddhist Studies & Civilization",
+      description: "In-depth textual and philosophical examination of Abhidharma literature, mindfulness practices, and applied Buddhist ethics."
+    }
+  ];
+
   const filteredPublications = publications.filter((pub) => {
     return (
       (!selectedBulletin || pub.bulletinTitle === selectedBulletin) &&
@@ -299,21 +379,36 @@ const Publications = () => {
     );
   });
 
+  const filteredBooks = books.filter((b) => {
+    return (
+      (!selectedSchool || b.school === selectedSchool) &&
+      (!searchTerm ||
+        b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        b.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        b.publisher.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  });
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems =
     activeTab === "publications"
       ? filteredPublications.slice(indexOfFirstItem, indexOfLastItem)
-      : filteredPatents.slice(indexOfFirstItem, indexOfLastItem);
+      : activeTab === "patents"
+      ? filteredPatents.slice(indexOfFirstItem, indexOfLastItem)
+      : filteredBooks.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages =
     activeTab === "publications"
       ? Math.ceil(filteredPublications.length / itemsPerPage)
-      : Math.ceil(filteredPatents.length / itemsPerPage);
+      : activeTab === "patents"
+      ? Math.ceil(filteredPatents.length / itemsPerPage)
+      : Math.ceil(filteredBooks.length / itemsPerPage);
 
   const tabButtons = [
     { id: "publications", label: "Research Publications" },
     { id: "patents", label: "Patents" },
+    { id: "books", label: "Books" },
   ];
 
   const statsData = [
@@ -359,21 +454,14 @@ const Publications = () => {
   return (
     <SearchableWrapper>
       <div>
-        <div className="bg-gradient-to-b from-white to-blue-50 py-6">
-          <div className="text-center">
-            <h1 className="text-4xl font-semibold text-black/70">
-              Research Publications
-            </h1>
-          </div>
-        </div>
-
         <div className="px-4 sm:px-8 lg:px-16 pt-6 pb-10">
-          {/* Main Navigation Tabs */}
+          {/* Main Navigation Tabs (3 Options) */}
           <div className="mb-6">
             <ButtonGroup
               buttons={[
                 { id: "publications", label: "Research Publications" },
                 { id: "patents", label: "Patents" },
+                { id: "books", label: "Books" },
               ]}
               onClick={(btnId) => {
                 setActiveTab(btnId);
@@ -902,8 +990,87 @@ const Publications = () => {
             </div>
           )}
 
+          {/* Books Section */}
+          {activeTab === "books" && (
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h4 className="font-bold text-gray-900 text-base">
+                  Published Books & Edited Volumes ({filteredBooks.length})
+                </h4>
+                <div className="text-xs text-gray-500 font-medium">
+                  Showing {filteredBooks.length} Books
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentItems.length > 0 ? (
+                  currentItems.map((book) => (
+                    <div
+                      key={book.id}
+                      className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                    >
+                      <div>
+                        {/* Type Badge & Year */}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
+                            {book.type}
+                          </span>
+                          <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                            <Calendar size={13} className="text-gray-400" />
+                            {book.year}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
+                          {book.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                          {book.description}
+                        </p>
+                      </div>
+
+                      <div>
+                        {/* Publisher & ISBN */}
+                        <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-gray-400 font-medium">Publisher:</span>
+                            <span className="font-semibold text-gray-900">{book.publisher}</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-gray-400 font-medium">ISBN:</span>
+                            <span className="font-mono text-gray-900">{book.isbn}</span>
+                          </div>
+                        </div>
+
+                        {/* Authors & School */}
+                        <div className="text-xs space-y-1">
+                          <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider">
+                            AUTHORS / EDITORS
+                          </p>
+                          <p className="font-semibold text-gray-800 leading-snug">
+                            {book.authors}
+                          </p>
+                          <p className="text-blue-600 text-[11px] font-medium pt-1">
+                            {book.school}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                    No books found matching criteria
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Pagination */}
-          {totalPages > 1 && (activeTab === "patents" || selectedBulletin) && (
+          {totalPages > 1 && (activeTab === "patents" || activeTab === "books" || selectedBulletin) && (
             <div className="flex justify-center items-center space-x-2 mt-6 overflow-x-auto py-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}

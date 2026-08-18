@@ -447,6 +447,7 @@ export default function AppRouter() {
             path="/research/research-centers"
             element={<ResearchCenters />}
           />
+          <Route path="/research/publications" element={<Index />} />
           <Route path="/research/publications-patents" element={<Index />} />
           <Route path="/research/incubation" element={<Incubation />} />
           <Route path="/research/institution-innovation" element={<InstitutionInnovation />} />

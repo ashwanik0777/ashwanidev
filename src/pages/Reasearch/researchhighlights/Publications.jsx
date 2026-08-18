@@ -9,6 +9,7 @@ import { allResearchPublications } from "../../../Data/researchPublicationsData.
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
   const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'
+  const [selectedBulletin, setSelectedBulletin] = useState("");
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -17,6 +18,54 @@ const Publications = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  const officialBulletins = [
+    {
+      id: "b1",
+      title: "GBU Research Publications (March 2026 – May 2026)",
+      period: "March 2026 – May 2026",
+      year: "2026",
+      pdfUrl: "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+      publisher: "Planning & Research Division, Gautam Buddha University",
+      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("March 2026")).length,
+    },
+    {
+      id: "b2",
+      title: "GBU Research Publications (December 2025 – February 2026)",
+      period: "December 2025 – February 2026",
+      year: "2026",
+      pdfUrl: "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+      publisher: "Planning & Research Division, Gautam Buddha University",
+      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("December 2025")).length,
+    },
+    {
+      id: "b3",
+      title: "GBU Research Publications (September 2025 – November 2025)",
+      period: "September 2025 – November 2025",
+      year: "2025",
+      pdfUrl: "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+      publisher: "Planning & Research Division, Gautam Buddha University",
+      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("September 2025")).length,
+    },
+    {
+      id: "b4",
+      title: "GBU Research Publications (June 2025 – August 2025)",
+      period: "June 2025 – August 2025",
+      year: "2025",
+      pdfUrl: "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+      publisher: "Planning & Research Division, Gautam Buddha University",
+      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("June 2025")).length,
+    },
+    {
+      id: "b5",
+      title: "GBU Research Publications (January 2025 – May 2025)",
+      period: "January 2025 – May 2025",
+      year: "2025",
+      pdfUrl: "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+      publisher: "Planning & Research Division, Gautam Buddha University",
+      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("January 2025")).length,
+    },
+  ];
 
   const schools = [
     "School of Information & Communication Technology",
@@ -76,6 +125,7 @@ const Publications = () => {
 
   const filteredPublications = publications.filter((pub) => {
     return (
+      (!selectedBulletin || pub.bulletinTitle === selectedBulletin) &&
       (!selectedSchool || pub.school === selectedSchool) &&
       (!selectedCategory || pub.category === selectedCategory) &&
       (!selectedYear || pub.year === selectedYear) &&
@@ -214,6 +264,26 @@ const Publications = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Bulletin Selection Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
+                <select
+                  value={selectedBulletin}
+                  onChange={(e) => {
+                    setSelectedBulletin(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-blue-900"
+                >
+                  <option value="">All 5 Official Bulletins</option>
+                  {officialBulletins.map((b) => (
+                    <option key={b.id} value={b.title}>
+                      {b.period} ({b.paperCount} Papers)
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {/* School Filter */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">School</label>
@@ -226,22 +296,6 @@ const Publications = () => {
                   {schools.map((s, i) => (
                     <option key={i} value={s}>{s}</option>
                   ))}
-                </select>
-              </div>
-
-              {/* Category Filter */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Category</label>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
-                >
-                  <option value="">All Categories</option>
-                  <option value="Research Bulletin">Research Bulletin</option>
-                  <option value="Biotechnology">Biotechnology</option>
-                  <option value="Artificial Intelligence">Artificial Intelligence</option>
-                  <option value="Energy Systems">Energy Systems</option>
                 </select>
               </div>
 
@@ -277,6 +331,86 @@ const Publications = () => {
               </div>
             </div>
           </div>
+
+          {/* 5 Official Bulletins Cards Grid */}
+          {activeTab === "publications" && (
+            <div className="mb-10">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <BookOpen className="text-blue-600" size={20} />
+                  Official GBU Research Publications Bulletins
+                </h3>
+                {selectedBulletin && (
+                  <button
+                    onClick={() => {
+                      setSelectedBulletin("");
+                      setCurrentPage(1);
+                    }}
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-all"
+                  >
+                    ✕ Show All Bulletins
+                  </button>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {officialBulletins.map((b) => {
+                  const isSelected = selectedBulletin === b.title;
+                  return (
+                    <div
+                      key={b.id}
+                      className={`p-5 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between ${
+                        isSelected
+                          ? "bg-blue-50/90 border-blue-500 ring-2 ring-blue-300 shadow-md"
+                          : "bg-white border-gray-200 hover:border-blue-300 hover:shadow-lg"
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                            {b.year} Bulletin
+                          </span>
+                          <span className="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-slate-200">
+                            {b.paperCount} Extracted Papers
+                          </span>
+                        </div>
+                        <h4 className="font-bold text-gray-900 text-base leading-snug mb-2">
+                          {b.title}
+                        </h4>
+                        <p className="text-xs text-gray-500 mb-4">{b.publisher}</p>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                        <button
+                          onClick={() => {
+                            setSelectedBulletin(isSelected ? "" : b.title);
+                            setCurrentPage(1);
+                          }}
+                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${
+                            isSelected
+                              ? "bg-blue-600 text-white shadow-sm"
+                              : "bg-slate-900 hover:bg-blue-700 text-white shadow-sm"
+                          }`}
+                        >
+                          <Eye size={14} />
+                          {isSelected ? "Selected (Viewing Papers)" : `Explore ${b.paperCount} Papers →`}
+                        </button>
+                        <a
+                          href={b.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-1 shadow-sm"
+                          title="Download Official Bulletin PDF"
+                        >
+                          <Download size={14} /> PDF
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Publications Section */}
           {activeTab === "publications" && (

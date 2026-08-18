@@ -92,15 +92,15 @@ const VisionaryLeadership = () => {
           <div className="hidden lg:block w-1/2 min-h-[220px] pointer-events-none" />
 
           {/* Right Side (50% Width on Desktop, 100% on Mobile/Tablet): VC & Chancellor Cards in RMNLU Style */}
-          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-col gap-4 items-center justify-center">
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center justify-center">
             {leaders.map((leader) => (
               <Link
                 key={leader.id || leader.name}
                 to={leader.url}
-                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-4 sm:p-5 flex flex-col lg:flex-row items-center text-center lg:text-left gap-3.5 sm:gap-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
+                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 lg:p-5 flex flex-row lg:flex-col items-center text-left lg:text-center gap-3.5 sm:gap-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
               >
                 {/* Leader Avatar Photo (Circular RMNLU Frame) */}
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 lg:w-20 lg:h-20 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300 mx-auto lg:mx-0">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300 lg:mx-auto lg:mb-1">
                   <img
                     src={getPhotoUrl(leader.photo)}
                     alt={leader.name}
@@ -109,11 +109,11 @@ const VisionaryLeadership = () => {
                 </div>
 
                 {/* Leader Details Block */}
-                <div className="flex flex-col items-center lg:items-start text-center lg:text-left justify-center min-w-0 flex-1">
+                <div className="flex flex-col items-start lg:items-center text-left lg:text-center justify-center min-w-0 flex-1">
                   <h3 className="font-extrabold text-[#1a2942] text-sm sm:text-base group-hover:text-orange-600 transition-colors leading-snug">
                     {leader.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-snug mt-1 max-w-[280px] lg:max-w-none">
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-snug mt-0.5 lg:mt-1 max-w-[280px] lg:max-w-none">
                     {leader.displayDesignation}
                   </p>
                 </div>

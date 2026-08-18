@@ -17,7 +17,7 @@ import ButtonGroup from "../../components/TabsData.jsx";
 
 // Static high-fidelity data representing GBU's actual Reports & Publications
 const GBU_REPORTS_HERO = {
-  title: "Reports & Publications",
+  title: "Annual Reports",
   description: "Explore Gautam Buddha University's official publications, institutional quality audits, national rankings, and financial transparency statements.",
   sub_title: "Institutional Quality & Academic Excellence",
   sub_description: "We maintain the highest standards of transparency, academic rigor, and quality assurance in all our operations.",

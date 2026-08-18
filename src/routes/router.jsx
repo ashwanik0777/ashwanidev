@@ -360,6 +360,10 @@ export default function AppRouter() {
           />
 
           <Route
+            path="/academics/annual-reports"
+            element={<ReportsPublications />}
+          />
+          <Route
             path="/academics/reports-publications"
             element={<ReportsPublications />}
           />

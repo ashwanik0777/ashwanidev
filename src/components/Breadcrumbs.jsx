@@ -7,7 +7,8 @@ const pathNameMap = {
   'vision-mission': 'Vision & Mission',
   'chancellor-message': 'Chancellor Message',
   'faculty-directory': 'Faculty Directory',
-  'reports-publications': 'Reports & Publications',
+  'annual-reports': 'Annual Reports',
+  'reports-publications': 'Annual Reports',
   // Add more as needed...
 };
 

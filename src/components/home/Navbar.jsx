@@ -71,7 +71,7 @@ const NAVIGATION_CONFIG = [
     baseRoute: "/research",
     items: [
       { slug: "research-centers", label: "Center of Excellence and Labs" },
-      { slug: "publications-patents", label: "Publications, Patents and Projects" },
+      { slug: "publications-patents", label: "Research Publications" },
       { slug: "incubation", label: "GBU Incubation Centre" },
       { slug: "institution-innovation", label: "Institution and Innovation" },
       { slug: "ipr-cell", label: "IPR Cell" },

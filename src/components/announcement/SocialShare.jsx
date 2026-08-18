@@ -82,7 +82,7 @@ const PopoverContent = ({ children, className = "" }) => {
 };
 
 // ✅ SocialShare Component
-const SocialShare = ({ url, title }) => {
+const SocialShare = ({ url, title, className = "" }) => {
   const shareUrls = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
@@ -122,39 +122,41 @@ const SocialShare = ({ url, title }) => {
   ];
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline" size="sm">
-          <span className="flex items-center gap-2">
-            <Share2 size={16} />
-            Share
-          </span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div className="flex gap-2">
-          {icons.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={item.name}
-              className={`
-                w-8 h-8 flex items-center justify-center rounded-full text-white 
-                transition-all duration-300 ${item.bg} ${item.shadow}
-                hover:text-black
-              `}
-            >
-              {React.cloneElement(item.icon, {
-                size: 16,
-                className: "transition-colors duration-300"
-              })}
-            </a>
-          ))}
-        </div>
-      </PopoverContent>
-    </Popover>
+    <div className={className}>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline" className="w-full h-full min-h-[44px] sm:min-h-0 flex items-center justify-center border-gray-300 hover:bg-gray-50 rounded-lg">
+            <span className="flex items-center gap-2">
+              <Share2 size={18} className="text-gray-600" />
+              Share
+            </span>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="flex gap-2 p-1">
+            {icons.map((item, idx) => (
+              <a
+                key={idx}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={item.name}
+                className={`
+                  w-10 h-10 flex items-center justify-center rounded-full text-white 
+                  transition-all duration-300 ${item.bg} ${item.shadow}
+                  hover:-translate-y-1
+                `}
+              >
+                {React.cloneElement(item.icon, {
+                  size: 18,
+                  className: "transition-colors duration-300"
+                })}
+              </a>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 };
 

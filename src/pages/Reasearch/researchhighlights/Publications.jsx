@@ -312,9 +312,9 @@ const Publications = () => {
                       setSelectedBulletin("");
                       setCurrentPage(1);
                     }}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition-all"
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3.5 py-2 rounded-xl border border-blue-200 transition-all flex items-center gap-1.5 shadow-sm"
                   >
-                    ✕ Show All Bulletins
+                    ← Back to All 5 Bulletins
                   </button>
                 )}
               </div>
@@ -359,7 +359,7 @@ const Publications = () => {
                           }`}
                         >
                           <Eye size={14} />
-                          {isSelected ? "Selected (Viewing Papers)" : `Explore ${b.paperCount} Papers →`}
+                          {isSelected ? "Viewing Extracted Papers" : `Explore ${b.paperCount} Papers →`}
                         </button>
                         <a
                           href={b.pdfUrl}
@@ -378,250 +378,192 @@ const Publications = () => {
             </div>
           )}
 
-          {/* Publications Section */}
-          {activeTab === "publications" && (
-            viewMode === "table" ? (
-              /* Publications Data View: Mobile Cards (md:hidden) & Desktop Table (hidden md:block) */
-              <div className="mb-8">
-                {/* Mobile Cards (Visible on Small Screens) */}
-                <div className="block md:hidden space-y-4">
+          {/* Extracted Publications List (Rendered ONLY when a bulletin is selected) */}
+          {activeTab === "publications" && selectedBulletin && (
+            <div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-blue-50 border border-blue-200 p-4 rounded-2xl mb-6">
+                <div>
+                  <h4 className="font-bold text-blue-900 text-sm sm:text-base">
+                    Showing {filteredPublications.length} Extracted Research Papers
+                  </h4>
+                  <p className="text-xs text-blue-700 mt-0.5">{selectedBulletin}</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setSelectedBulletin("");
+                    setCurrentPage(1);
+                  }}
+                  className="text-xs font-semibold bg-white text-blue-700 hover:bg-blue-100 px-3.5 py-2 rounded-xl border border-blue-200 transition-all flex items-center gap-1 shadow-sm"
+                >
+                  ← Back to Bulletins
+                </button>
+              </div>
+
+              {viewMode === "table" ? (
+                /* Publications Data View: Mobile Cards (md:hidden) & Desktop Table (hidden md:block) */
+                <div className="mb-8">
+                  {/* Mobile Cards (Visible on Small Screens) */}
+                  <div className="block md:hidden space-y-4">
+                    {currentItems.length > 0 ? (
+                      currentItems.map((pub, index) => (
+                        <div
+                          key={pub.id}
+                          className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between"
+                        >
+                          <div>
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <span className="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-md border border-slate-200">
+                                #{indexOfFirstItem + index + 1}
+                              </span>
+                              <span className="bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full truncate max-w-[200px]">
+                                {pub.school}
+                              </span>
+                            </div>
+
+                            <h4 className="font-bold text-gray-900 text-base leading-snug mb-2 break-words">
+                              {pub.title}
+                            </h4>
+
+                            {pub.doi && (
+                              <div className="mb-3 text-xs text-blue-600 font-mono break-all bg-blue-50/60 p-2 rounded-lg border border-blue-100">
+                                <span className="font-sans font-semibold text-slate-500 mr-1">DOI:</span>
+                                {pub.doi}
+                              </div>
+                            )}
+
+                            <div className="space-y-1.5 text-xs text-gray-700 mb-4">
+                              <p>
+                                <strong className="text-gray-900">Authors:</strong> {pub.authors}
+                              </p>
+                              <p>
+                                <strong className="text-gray-900">Journal:</strong> {pub.journal || "GBU Research Publication"}
+                              </p>
+                              <p className="text-gray-500">
+                                {pub.year && `Year: ${pub.year}`}
+                                {pub.volume && ` • Vol: ${pub.volume}`}
+                                {pub.issue && ` • Issue: ${pub.issue}`}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-gray-100">
+                            <a
+                              href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            >
+                              <Download size={14} /> View Bulletin PDF
+                            </a>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="bg-white rounded-2xl p-8 text-center text-gray-500 border border-gray-200">
+                        No publications found matching criteria
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Desktop Table (Hidden on Mobile, Visible on md+) */}
+                  <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            <th className="py-4 px-6 text-center w-12">#</th>
+                            <th className="py-4 px-6 min-w-[320px]">Publication Details</th>
+                            <th className="py-4 px-6 min-w-[220px]">Authors & School</th>
+                            <th className="py-4 px-6 min-w-[220px]">Journal & Details</th>
+                            <th className="py-4 px-6 min-w-[200px]">Bulletin Batch</th>
+                            <th className="py-4 px-6 text-center min-w-[130px]">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-100 text-sm">
+                          {currentItems.length > 0 ? (
+                            currentItems.map((pub, index) => (
+                              <tr key={pub.id} className="hover:bg-blue-50/40 transition-colors">
+                                <td className="py-4 px-6 text-center font-medium text-gray-500">
+                                  {indexOfFirstItem + index + 1}
+                                </td>
+                                <td className="py-4 px-6">
+                                  <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
+                                  {pub.doi && (
+                                    <div className="flex items-center text-xs text-gray-500 gap-1 mt-1">
+                                      <span className="font-semibold text-slate-400">DOI:</span>
+                                      <span className="font-mono text-blue-600 break-all max-w-[240px]">{pub.doi}</span>
+                                    </div>
+                                  )}
+                                </td>
+                                <td className="py-4 px-6">
+                                  <p className="text-gray-800 font-medium text-xs mb-1.5 leading-relaxed">{pub.authors}</p>
+                                  <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                                    {pub.school}
+                                  </span>
+                                </td>
+                                <td className="py-4 px-6">
+                                  <p className="font-semibold text-gray-900 text-xs leading-snug">{pub.journal || "GBU Research Publication"}</p>
+                                  <p className="text-xs text-gray-500 mt-0.5">
+                                    {pub.year && `Year: ${pub.year}`}
+                                    {pub.volume && ` • Vol: ${pub.volume}`}
+                                    {pub.issue && ` • Issue: ${pub.issue}`}
+                                  </p>
+                                </td>
+                                <td className="py-4 px-6">
+                                  <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200">
+                                    {pub.bulletinTitle}
+                                  </span>
+                                </td>
+                                <td className="py-4 px-6 text-center">
+                                  <div className="flex items-center justify-center">
+                                    <a
+                                      href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all shadow-sm"
+                                    >
+                                      <Download size={14} /> PDF
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="7" className="text-center py-12 text-gray-500">
+                                No publications found matching criteria
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Publications Grid View */
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                   {currentItems.length > 0 ? (
                     currentItems.map((pub, index) => (
                       <div
                         key={pub.id}
-                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between"
+                        className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
                       >
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-md border border-slate-200">
-                              #{indexOfFirstItem + index + 1}
-                            </span>
-                            <span className="bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full truncate max-w-[200px]">
-                              {pub.school}
-                            </span>
-                          </div>
-
-                          <h4 className="font-bold text-gray-900 text-base leading-snug mb-2 break-words">
-                            {pub.title}
-                          </h4>
-
-                          {pub.doi && (
-                            <div className="mb-3 text-xs text-blue-600 font-mono break-all bg-blue-50/60 p-2 rounded-lg border border-blue-100">
-                              <span className="font-sans font-semibold text-slate-500 mr-1">DOI:</span>
-                              {pub.doi}
-                            </div>
-                          )}
-
-                          <div className="space-y-1.5 text-xs text-gray-700 mb-4">
-                            <p>
-                              <strong className="text-gray-900">Authors:</strong> {pub.authors}
-                            </p>
-                            <p>
-                              <strong className="text-gray-900">Journal:</strong> {pub.journal || "GBU Research Publication"}
-                            </p>
-                            <p className="text-gray-500">
-                              {pub.year && `Year: ${pub.year}`}
-                              {pub.volume && ` • Vol: ${pub.volume}`}
-                              {pub.issue && ` • Issue: ${pub.issue}`}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="pt-3 border-t border-gray-100">
-                          <a
-                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
-                          >
-                            <Download size={14} /> View Bulletin PDF
-                          </a>
-                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">
+                          {pub.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm mb-2">{pub.authors}</p>
+                        <p className="text-gray-500 text-xs">{pub.journal} • {pub.year}</p>
                       </div>
                     ))
                   ) : (
-                    <div className="bg-white rounded-2xl p-8 text-center text-gray-500 border border-gray-200">
-                      No publications found matching criteria
+                    <div className="col-span-full text-center py-16 text-gray-500">
+                      No publications found
                     </div>
                   )}
                 </div>
-
-                {/* Desktop Table (Hidden on Mobile, Visible on md+) */}
-                <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          <th className="py-4 px-6 text-center w-12">#</th>
-                          <th className="py-4 px-6 min-w-[320px]">Publication Details</th>
-                          <th className="py-4 px-6 min-w-[220px]">Authors & School</th>
-                          <th className="py-4 px-6 min-w-[220px]">Journal & Details</th>
-                          <th className="py-4 px-6 min-w-[200px]">Bulletin Batch</th>
-                          <th className="py-4 px-6 text-center min-w-[130px]">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100 text-sm">
-                        {currentItems.length > 0 ? (
-                          currentItems.map((pub, index) => (
-                            <tr key={pub.id} className="hover:bg-blue-50/40 transition-colors">
-                              <td className="py-4 px-6 text-center font-medium text-gray-500">
-                                {indexOfFirstItem + index + 1}
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
-                                {pub.doi && (
-                                  <div className="flex items-center text-xs text-gray-500 gap-1 mt-1">
-                                    <span className="font-semibold text-slate-400">DOI:</span>
-                                    <span className="font-mono text-blue-600 break-all max-w-[240px]">{pub.doi}</span>
-                                  </div>
-                                )}
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="text-gray-800 font-medium text-xs mb-1.5 leading-relaxed">{pub.authors}</p>
-                                <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-                                  {pub.school}
-                                </span>
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="font-semibold text-gray-900 text-xs leading-snug">{pub.journal || "GBU Research Publication"}</p>
-                                <p className="text-xs text-gray-500 mt-0.5">
-                                  {pub.year && `Year: ${pub.year}`}
-                                  {pub.volume && ` • Vol: ${pub.volume}`}
-                                  {pub.issue && ` • Issue: ${pub.issue}`}
-                                </p>
-                              </td>
-                              <td className="py-4 px-6">
-                                <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200">
-                                  {pub.bulletinTitle}
-                                </span>
-                              </td>
-                              <td className="py-4 px-6 text-center">
-                                <div className="flex items-center justify-center">
-                                  <a
-                                    href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all shadow-sm"
-                                  >
-                                    <Download size={14} /> PDF
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="7" className="text-center py-12 text-gray-500">
-                              No publications found matching criteria
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* Publications Grid View */
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                {currentItems.length > 0 ? (
-                  currentItems.map((pub, index) => (
-                    <div
-                      key={pub.id}
-                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
-                      style={{
-                        ...cardStyle,
-                        animationDelay: `${index * 100}ms`,
-                        animationFillMode: 'both'
-                      }}
-                      onMouseEnter={(e) => {
-                        Object.assign(e.currentTarget.style, cardHoverStyle);
-                      }}
-                      onMouseLeave={(e) => {
-                        Object.assign(e.currentTarget.style, cardStyle);
-                      }}
-                    >
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                      <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
-                        {pub.school}
-                      </div>
-
-                      <div className="relative z-10">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 mt-9 pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
-                          {pub.title}
-                        </h3>
-
-                        <div className="mb-4">
-                          <p className="text-gray-700 text-sm font-medium mb-1">Authors</p>
-                          <p className="text-gray-600 text-sm leading-relaxed">{pub.authors}</p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                          <div>
-                            <p className="text-gray-700 text-sm font-medium mb-1">Journal</p>
-                            <p className="text-gray-600 text-sm">{pub.journal}</p>
-                          </div>
-                          <div>
-                            <p className="text-gray-700 text-sm font-medium mb-1">Year & Type</p>
-                            <p className="text-gray-600 text-sm">{pub.year} • {pub.type}</p>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
-                            <p className="text-green-700 text-xs font-medium mb-1">Impact Factor</p>
-                            <p className="text-green-800 text-lg font-bold">{pub.impact}</p>
-                          </div>
-                          <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-100">
-                            <p className="text-purple-700 text-xs font-medium mb-1">Citations</p>
-                            <p className="text-purple-800 text-lg font-bold">{pub.citations}</p>
-                          </div>
-                        </div>
-
-                        <div className="space-y-3 mb-6">
-                          <div className="flex flex-wrap gap-2 text-xs">
-                            <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-medium">Quartile: {pub.quartile}</span>
-                            <span className="bg-gray-50 text-gray-700 px-2 py-1 rounded">Indexing: {pub.indexing}</span>
-                          </div>
-                          <div className="text-xs text-gray-500 space-y-1">
-                            <p><span className="font-medium">DOI:</span> {pub.doi}</p>
-                            <p><span className="font-medium">Scopus ID:</span> {pub.scopusId}</p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
-                          <a
-                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
-                          >
-                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                            View Document
-                          </a>
-                          <a
-                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            download
-                            className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
-                          >
-                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
-                            Download PDF
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-16">
-                    <div className="text-gray-400 text-lg mb-2">No publications found</div>
-                    <p className="text-gray-500 text-sm">Check back later for updates</p>
-                  </div>
-                )}
-              </div>
-            )
+              )}
+            </div>
           )}
 
           {/* Patents Section */}

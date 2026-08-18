@@ -41,10 +41,10 @@ export default function CampusGallery() {
 
       const mediaItems = getSchoolAnnouncements().mediaGallery || [];
       const normalizedMedia = mediaItems
-        .filter((item) => item.images && item.images.length > 0)
+        .filter((item) => item.coverImage || (item.images && item.images.length > 0) || item.coverImageUrl)
         .map((item) => ({
           ...item,
-          image: getImageUrl(item.images[0]),
+          image: getImageUrl(item.coverImage || item.images?.[0] || item.coverImageUrl),
           text: item.title,
         }));
 

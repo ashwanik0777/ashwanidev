@@ -121,6 +121,7 @@ const normalizeEvent = (item) => {
     coverImageUrl: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
     image: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
     images: toList(item?.gallery || item?.images),
+    coverImage: String(item?.coverImage || item?.cover_image || "").trim() || toList(item?.gallery || item?.images)[0] || "",
     attendees: Number(item?.attendees || 0),
     price: String(item?.price || "Free").trim(),
     organizer: String(item?.organizer || "GBU").trim(),
@@ -187,9 +188,8 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
   const newsletters = newslettersRes.status === "fulfilled"
     ? toArray(unwrapData(newslettersRes.value)).map(normalizeNewsletter)
     : [];
-  const mediaGallery = mediaRes.status === "fulfilled"
-    ? toArray(unwrapData(mediaRes.value)).map(normalizeMedia)
-    : [];
+
+  const pastEvents = events.filter((e) => !e.isUpcoming);
 
   return {
     schoolName: "GBU",
@@ -197,8 +197,8 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
     news,
     events,
     newsletters,
-    mediaGallery,
-    eventGallery: mediaGallery,
+    mediaGallery: pastEvents,
+    eventGallery: pastEvents,
   };
 };
 

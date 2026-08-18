@@ -68,6 +68,10 @@ const formatCell = (item, key) => {
 
 /** Arrays arrive from the API but the textarea inputs work in plain text. */
 const toFormValue = (field, value) => {
+  if (field.type === "image-list") {
+    const list = Array.isArray(value) ? value : (typeof value === "string" && value ? value.split(/[\n,]+/).map(s => s.trim()).filter(Boolean) : []);
+    return list.length ? list : [""];
+  }
   if (field.type === "textarea" && Array.isArray(value)) return value.join("\n");
   if (field.key === "tags" && Array.isArray(value)) return value.join(", ");
   if (field.type === "date") return String(value || "").slice(0, 10);
@@ -95,6 +99,9 @@ const AnnouncementManager = ({
   const [editor, setEditor] = useState(null); // { id, form } — null when closed
   const [deletingId, setDeletingId] = useState(null);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+
   const notify = useCallback(
     (text, isError = false) => {
       setError(isError ? text : "");
@@ -108,7 +115,19 @@ const AnnouncementManager = ({
     try {
       // An admin viewing one school sees only that school's items; the
       // university-wide tab passes no code and sees everything.
-      const data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
+      let data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
+      
+      // Filter logic: `events` shows upcoming/ongoing, `gallery` shows past events
+      if (kind === "events" || kind === "gallery") {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        data = data.filter((item) => {
+          const eventDate = new Date(item.endsAt || item.startsAt || item.date);
+          const isPast = eventDate < today;
+          return kind === "gallery" ? isPast : !isPast;
+        });
+      }
+
       setItems(data);
       setError("");
     } catch (err) {
@@ -134,6 +153,17 @@ const AnnouncementManager = ({
     );
   }, [items, search]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
+
+  const paginatedItems = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return visibleItems.slice(start, start + itemsPerPage);
+  }, [visibleItems, currentPage]);
+
+  const totalPages = Math.max(1, Math.ceil(visibleItems.length / itemsPerPage));
+
   const openCreate = () => {
     // Managing a specific school defaults to that school's own pages; the
     // university-wide tab defaults to college level.
@@ -144,7 +174,7 @@ const AnnouncementManager = ({
   const openEdit = (item) => {
     const form = { level: item.level || LEVELS.SCHOOL };
     for (const field of fields) form[field.key] = toFormValue(field, item[field.key]);
-    setEditor({ id: item.id, form });
+    setEditor({ id: item.id, form, originalItem: item });
   };
 
   const setField = (key, value) => {
@@ -165,7 +195,7 @@ const AnnouncementManager = ({
 
     setSaving(true);
     try {
-      const payload = { ...editor.form };
+      const payload = { ...(editor.originalItem || {}), ...editor.form };
       // A school account is always pinned to its own school server-side, but
       // send it so an admin can file an item on a school's behalf.
       if (schoolCode) payload.schoolCode = schoolCode;
@@ -227,13 +257,15 @@ const AnnouncementManager = ({
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
           </button>
-          <button
-            type="button"
-            onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800"
-          >
-            <Plus className="h-3.5 w-3.5" /> Add New
-          </button>
+          {kind !== "gallery" && (
+            <button
+              type="button"
+              onClick={openCreate}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
+            >
+              <Plus className="h-4 w-4" /> Add New
+            </button>
+          )}
         </div>
       </div>
 
@@ -257,8 +289,8 @@ const AnnouncementManager = ({
               {columns.map((column) => (
                 <th key={column.key} className="px-4 py-3">{column.label}</th>
               ))}
-              <th className="px-4 py-3">Level</th>
-              <th className="px-4 py-3">Status</th>
+              {kind === "notices" && <th className="px-4 py-3">Level</th>}
+              {kind === "notices" && <th className="px-4 py-3">Status</th>}
               {isAdmin && <th className="px-4 py-3">School</th>}
               <th className="px-4 py-3 text-right">Actions</th>
             </tr>
@@ -277,7 +309,7 @@ const AnnouncementManager = ({
                 </td>
               </tr>
             ) : (
-              visibleItems.map((item) => (
+              paginatedItems.map((item) => (
                 <tr key={item.id} className="transition-colors hover:bg-slate-50/80">
                   {columns.map((column, index) => (
                     <td key={column.key} className="max-w-xs truncate px-4 py-3">
@@ -288,12 +320,16 @@ const AnnouncementManager = ({
                       )}
                     </td>
                   ))}
-                  <td className="px-4 py-3">
-                    <span className="rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold uppercase text-indigo-700">
-                      {item.level === LEVELS.COLLEGE ? "College" : "School"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3"><StatusBadge status={item.approvalStatus} /></td>
+                  {kind === "notices" && (
+                    <td className="px-4 py-3">
+                      <span className="rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold uppercase text-indigo-700">
+                        {item.level === LEVELS.COLLEGE ? "College" : "School"}
+                      </span>
+                    </td>
+                  )}
+                  {kind === "notices" && (
+                    <td className="px-4 py-3"><StatusBadge status={item.approvalStatus} /></td>
+                  )}
                   {isAdmin && (
                     <td className="px-4 py-3 text-xs text-slate-600">{item.schoolCode || "GBU"}</td>
                   )}
@@ -322,6 +358,54 @@ const AnnouncementManager = ({
             )}
           </tbody>
         </table>
+        
+        {/* Pagination UI */}
+        <div className="flex flex-col gap-3 border-t border-slate-200 bg-slate-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+            <div>
+              Total: <span className="font-semibold text-slate-900">{visibleItems.length}</span>
+            </div>
+            <div className="flex items-center gap-2 border-l border-slate-300 pl-4">
+              <label htmlFor="itemsPerPage" className="text-slate-600">Rows per page:</label>
+              <select
+                id="itemsPerPage"
+                value={itemsPerPage === Number.MAX_SAFE_INTEGER ? "all" : itemsPerPage}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setItemsPerPage(val === "all" ? Number.MAX_SAFE_INTEGER : Number(val));
+                  setCurrentPage(1);
+                }}
+                className="rounded border border-slate-300 bg-white px-2 py-1 text-sm text-slate-700 focus:border-slate-500 focus:outline-none"
+              >
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value="all">All</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              disabled={loading || currentPage <= 1}
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              className="rounded-md border border-slate-300 bg-white px-2 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Previous
+            </button>
+            <span className="text-sm text-slate-700">
+              Page {currentPage} / {totalPages}
+            </span>
+            <button
+              type="button"
+              disabled={loading || currentPage >= totalPages}
+              onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+              className="rounded-md border border-slate-300 bg-white px-2 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Next
+            </button>
+          </div>
+        </div>
       </div>
 
       {editor && (
@@ -386,7 +470,75 @@ const AnnouncementManager = ({
                     {field.required && <span className="text-rose-600"> *</span>}
                   </span>
 
-                  {field.type === "textarea" ? (
+                  {field.type === "image-list" ? (
+                    <div className="space-y-2">
+                      {(editor.form[field.key] || [""]).map((url, i, arr) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <span className="text-xs font-semibold text-slate-500 w-16 shrink-0">Image {i + 1}</span>
+                          <input
+                            className={inputClass}
+                            type="text"
+                            value={url}
+                            placeholder="https://..."
+                            onChange={(e) => {
+                              const newArr = [...arr];
+                              newArr[i] = e.target.value;
+                              setField(field.key, newArr);
+                            }}
+                          />
+                          {arr.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newArr = arr.filter((_, idx) => idx !== i);
+                                setField(field.key, newArr);
+                                if (field.key === "images" && editor.form.coverImage === url) {
+                                  setField("coverImage", newArr[0] || "");
+                                }
+                              }}
+                              className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      {(editor.form[field.key] || [""]).length < 6 && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setField(field.key, [...(editor.form[field.key] || [""]), ""]);
+                          }}
+                          className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 mt-1"
+                        >
+                          <Plus className="w-3.5 h-3.5" /> Add another image
+                        </button>
+                      )}
+                    </div>
+                  ) : field.type === "cover-selector" ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
+                      {(() => {
+                        const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
+                        if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
+                        return images.map((url, i) => (
+                          <label key={i} className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer ${editor.form[field.key] === url || (!editor.form[field.key] && i === 0) ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
+                            <input
+                              type="radio"
+                              name={field.key}
+                              value={url}
+                              checked={editor.form[field.key] === url || (!editor.form[field.key] && i === 0)}
+                              onChange={(e) => setField(field.key, e.target.value)}
+                              className="hidden"
+                            />
+                            <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
+                              {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                            </div>
+                            <span className="text-xs font-medium text-slate-700 truncate">Image {editor.form.images.indexOf(url) + 1}</span>
+                          </label>
+                        ));
+                      })()}
+                    </div>
+                  ) : field.type === "textarea" ? (
                     <textarea
                       className={`${inputClass} min-h-[90px]`}
                       value={editor.form[field.key] ?? ""}

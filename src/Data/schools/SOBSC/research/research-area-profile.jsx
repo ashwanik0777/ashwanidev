@@ -7,7 +7,7 @@ export const researchAreaData = {
   heading: "Research Areas — SOBSC",
   subheading: "Explore the research focus areas of the School of Buddhist Studies & Civilization.",
   hero: {
-    title: "Research Excellence at SOBSC",
+    title: "Research Area and Profile",
     subtitle: "Our research spans Buddhist philosophy, textual studies, meditation science, archaeological heritage, and applied Buddhist ethics — fostering scholarship that bridges ancient wisdom and contemporary challenges.",
   },
   stats: [

@@ -24,7 +24,18 @@ const iconMap = {
   Database,
 };
 
-const ResearchArea = ({ hero, stats, domains, funding, collaborations }) => {
+const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyProfiles = [] }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredFaculty = facultyProfiles.filter((f) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      f.name.toLowerCase().includes(term) ||
+      (f.researchArea && f.researchArea.toLowerCase().includes(term)) ||
+      (f.profile && f.profile.toLowerCase().includes(term))
+    );
+  });
+
   return (
     <>
       <BannerSection title={hero.title} subtitle={hero.subtitle} bgTheme={1} />
@@ -38,6 +49,93 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations }) => {
             subtitle: item.label,
           }))}
         />
+      )}
+
+      {/* Faculty Research Profiles Section */}
+      {facultyProfiles && facultyProfiles.length > 0 && (
+        <section className="py-12 px-4 bg-slate-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-3xl font-bold text-slate-900 font-outfit">
+                  Faculty Research Areas & Profiles
+                </h2>
+                <p className="text-slate-600 text-sm mt-1">
+                  Explore research expertise, ongoing investigations, and scientific contributions of our faculty.
+                </p>
+              </div>
+              <div className="w-full md:w-80">
+                <input
+                  type="text"
+                  placeholder="Search faculty or research area..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredFaculty.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900 font-outfit">
+                          {item.name}
+                        </h3>
+                        {item.designation && (
+                          <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full inline-block mt-1">
+                            {item.designation}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {item.researchArea && (
+                      <div className="mb-4">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5 flex items-center gap-1.5">
+                          <BookOpen className="w-3.5 h-3.5 text-blue-600 inline" />
+                          Research Area
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {item.researchArea.split(",").map((area, aIdx) => (
+                            <span
+                              key={aIdx}
+                              className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium"
+                            >
+                              {area.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {item.profile && (
+                      <div className="mt-3">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                          Research Profile
+                        </h4>
+                        <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-line">
+                          {item.profile}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {filteredFaculty.length === 0 && (
+              <div className="text-center py-12 text-slate-500">
+                No faculty profiles found matching "{searchTerm}".
+              </div>
+            )}
+          </div>
+        </section>
       )}
 
       {domains && domains.length > 0 && (
@@ -202,6 +300,7 @@ export default function ResearchPage() {
       domains={domains}
       funding={researchAreaData.funding || []}
       collaborations={researchAreaData.collaborations || []}
+      facultyProfiles={researchAreaData.facultyProfiles || []}
     />
   );
 }

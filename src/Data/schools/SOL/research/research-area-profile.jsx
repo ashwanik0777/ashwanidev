@@ -5,7 +5,7 @@ export const researchAreaData = {
   subheading:
     "Explore the interdisciplinary research focus areas of the School of Law, Justice & Governance at Gautam Buddha University.",
   hero: {
-    title: "Research Excellence at SOL",
+    title: "Research Area and Profile",
     subtitle:
       "Our research ecosystem encompasses critical domains in constitutional jurisprudence, criminal justice, cyber law, and corporate governance — fostering scholarship that strengthens the rule of law and advances justice in contemporary India.",
   },

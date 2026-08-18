@@ -5,7 +5,7 @@ export const researchAreaData = {
   subheading:
     "Explore the research focus areas of School of Information & Communication Technology.",
   hero: {
-    title: "Research Excellence at SOICT",
+    title: "Research Area and Profile",
     subtitle:
       "Our research ecosystem spans cutting-edge domains in engineering and technology, fostering innovation that addresses global challenges and shapes the future of technology.",
   },

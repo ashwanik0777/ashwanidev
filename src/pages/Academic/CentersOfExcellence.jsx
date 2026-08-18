@@ -53,9 +53,9 @@ const GBU_COE_LIST = [
   },
   {
     id: 2,
-    title: "renewable energy",
-    card_title: "Center of Excellence in Renewable Energy & Advanced Manufacturing (REAM)",
-    card_desc: "Dedicated to the future of energy and sustainable transportation, focusing on solar-wind microgrids, EV battery management systems, fast-charging technologies, thermal protection materials, and additive manufacturing.",
+    title: "alternative energy mobility",
+    card_title: "Center for Rapid and Alternative Energy Mobility (CRAEM)",
+    card_desc: "Dedicated to the future of rapid & alternative energy mobility and sustainable transportation, focusing on solar-wind microgrids, EV battery management systems, fast-charging technologies, thermal protection materials, and additive manufacturing.",
     faculty_count: 7,
     student_count: 60,
     project_count: 5,

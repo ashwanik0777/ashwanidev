@@ -6,7 +6,7 @@ const cards = [
     imageUrl: 'https://imgs.search.brave.com/FVgaOTp3izysJHmmg4hKcypN6Wvp-rJyy_eM5egem6k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTUx/NjI3NzA5NC9waG90/by95b3VuZy1mZW1h/bGUtdGVhY2hlci1n/aXZpbmctYS1kYXRh/LXNjaWVuY2UtcHJl/c2VudGF0aW9uLWlu/LWEtZGFyay1hdWRp/dG9yaXVtLXdpdGgt/cHJvamVjdGluZy5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/Tmd5VzIzVk9hcFNM/eWxsSUp3Sm5vcnla/RXlNMUpNZnoxbWdU/S0JKb0NwWT0',
   },
   {
-    title: 'REAM',
+    title: 'CRAEM',
     imageUrl: 'https://imgs.search.brave.com/Sv1nDl9IuVEACie0cYLNatsV_c7vTv8zxhOtwKe7dbY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTMy/MjUxNzI5NS9waG90/by9jeWJlci1zZWN1/cml0eS1pdC1lbmdp/bmVlci13b3JraW5n/LW9uLXByb3RlY3Rp/bmctbmV0d29yay1h/Z2FpbnN0LWN5YmVy/YXR0YWNrLWZyb20t/aGFja2Vycy1vbi5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/aHRSMGIxS08yVUZT/X1IxRldpSk9zUGZJ/d2YzeEJ0S1hkN0ZY/YjRLUzBMcz0',
   },
   {

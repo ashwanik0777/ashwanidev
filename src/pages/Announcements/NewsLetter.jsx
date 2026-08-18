@@ -81,11 +81,10 @@ const Badge = ({ children, variant = "default", className = "" }) => {
 };
 
 
-const NewsLetter = () => {
+const NewsLetter = ({ schoolCode }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [mockNewsletters, setMockNewsletters] = useState(() => getSchoolAnnouncements().newsletters);
+  const [mockNewsletters, setMockNewsletters] = useState(() => getSchoolAnnouncements(schoolCode).newsletters);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedYear, setSelectedYear] = useState("all");
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 6;
@@ -96,96 +95,57 @@ const NewsLetter = () => {
     const loadNewsletters = async () => {
       setLoading(true);
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }
-
-      if (!isMounted) return;
-      setMockNewsletters(getSchoolAnnouncements().newsletters);
-      setLoading(false);
+      
+      if (isMounted) {
+        setMockNewsletters(getSchoolAnnouncements(schoolCode).newsletters || []);
+        setLoading(false);
+      }
     };
 
     loadNewsletters();
-    window.addEventListener("storage", loadNewsletters);
-    window.addEventListener("focus", loadNewsletters);
-    window.addEventListener("announcements-data-updated", loadNewsletters);
+    return () => { isMounted = false; };
+  }, [schoolCode]);
 
-    return () => {
-      isMounted = false;
-      window.removeEventListener("storage", loadNewsletters);
-      window.removeEventListener("focus", loadNewsletters);
-      window.removeEventListener("announcements-data-updated", loadNewsletters);
-    };
-  }, []);
-
-  const allCategories = useMemo(
-    () => Array.from(new Set(mockNewsletters.map((n) => n.category))).filter(Boolean),
-    [mockNewsletters],
-  );
+  // Derive unique years for the filter
   const allYears = useMemo(
-    // Undated newsletters are skipped rather than producing a "NaN" year option.
-    () => collectYears(mockNewsletters),
-    [mockNewsletters],
+    () => collectYears(mockNewsletters, 'date'),
+    [mockNewsletters]
   );
 
+  // Apply filters and search
   const filteredNewsletters = useMemo(() => {
-    return mockNewsletters.filter((newsletter) => {
-      const query = searchQuery.toLowerCase();
+    return mockNewsletters.filter((item) => {
+      const yearStr = getAnnouncementYear(item.date);
       const matchesSearch =
-        !searchQuery ||
-        newsletter.title.toLowerCase().includes(query) ||
-        newsletter.excerpt.toLowerCase().includes(query) ||
-        newsletter.category.toLowerCase().includes(query);
+        item.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description?.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesYear = selectedYear === "all" || yearStr === selectedYear;
 
-      const matchesCategory =
-        selectedCategory === "all" || newsletter.category === selectedCategory;
-      const matchesYear =
-        selectedYear === "all" ||
-        getAnnouncementYear(newsletter.date) === selectedYear;
-
-      return matchesSearch && matchesCategory && matchesYear;
+      return matchesSearch && matchesYear;
     });
-  }, [mockNewsletters, searchQuery, selectedCategory, selectedYear]);
+  }, [mockNewsletters, searchQuery, selectedYear]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, selectedCategory, selectedYear]);
+  }, [searchQuery, selectedYear]);
 
-  // Safe calculations (prevents crashes when array is empty)
+  // Safe calculations
   const totalPages = Math.ceil(filteredNewsletters.length / itemsPerPage) || 1;
   const currentNewsletters = filteredNewsletters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   const latestId = mockNewsletters.length > 0 ? mockNewsletters[0].id : null;
 
   // Dynamic values for StatsCard
-  const uniqueCategoriesCount = new Set(mockNewsletters.map(n => n.category)).size || 0;
-  const latestYear =
-    getAnnouncementYear(mockNewsletters[0]?.date) || String(new Date().getFullYear());
-  const totalViews = mockNewsletters.reduce((sum, n) => sum + Number(n.views || 0), 0);
-
-  const getCategoryColor = (category) => {
-    const colors = {
-      Events: 'bg-purple-50 text-purple-700 border-purple-200',
-      Academic: 'bg-blue-50 text-blue-700 border-blue-200',
-      Research: 'bg-green-50 text-green-700 border-green-200',
-      Sports: 'bg-orange-50 text-orange-700 border-orange-200',
-      Business: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-      Technology: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-      Culture: 'bg-pink-50 text-pink-700 border-pink-200',
-      Environment: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      Alumni: 'bg-teal-50 text-teal-700 border-teal-200',
-      Career: 'bg-violet-50 text-violet-700 border-violet-200',
-      Arts: 'bg-rose-50 text-rose-700 border-rose-200',
-      'Student Life': 'bg-amber-50 text-amber-700 border-amber-200'
-    };
-    return colors[category] || 'bg-gray-50 text-gray-700 border-gray-200';
-  };
+  const latestYear = getAnnouncementYear(mockNewsletters[0]?.date) || String(new Date().getFullYear());
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50/50">
       <BannerSection
         title="Newsletter"
-        subtitle="Stay updated with the latest campus highlights"
+        subtitle="Stay updated with the latest campus highlights and newsletters"
         bgTheme={3}
       />
 
@@ -194,8 +154,6 @@ const NewsLetter = () => {
         <StatsCard
           stats={[
             { number: mockNewsletters.length, title: "Total Issues", icon: FileText, iconColor: "#4F46E5" },
-            { number: uniqueCategoriesCount, title: "Categories", icon: Calendar, iconColor: "#10B981" },
-            { number: totalViews, title: "Total Views", icon: Eye, iconColor: "#465797" },
             { number: latestYear, title: "Latest Year", icon: Calendar, iconColor: "#EF4444" }
           ]}
         />
@@ -209,20 +167,18 @@ const NewsLetter = () => {
 
         <UnifiedAnnouncementFilter
           onSearch={setSearchQuery}
-          categories={allCategories}
-          selectedCategories={selectedCategory !== "all" ? [selectedCategory] : []}
-          onCategoryToggle={(category) =>
-            setSelectedCategory(selectedCategory === category ? "all" : category)
-          }
-          onTypeChange={setSelectedCategory}
-          selectedType={selectedCategory}
+          categories={[]} // no longer filtering by category
+          selectedCategories={[]}
+          onCategoryToggle={() => {}}
+          onTypeChange={() => {}}
+          selectedType={"all"}
           years={allYears}
           selectedYear={selectedYear}
           onYearChange={setSelectedYear}
           showDate={false}
           showViewMode={false}
           totalResults={filteredNewsletters.length}
-          searchPlaceholder="Search newsletters by title, excerpt, or category..."
+          searchPlaceholder="Search newsletters by title or description..."
         />
 
         {/* Loading State or Newsletter Grid */}
@@ -250,7 +206,7 @@ const NewsLetter = () => {
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.1 } },
               }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12"
             >
               {currentNewsletters.map((newsletter) => (
                 <motion.div
@@ -260,7 +216,7 @@ const NewsLetter = () => {
                     visible: { opacity: 1, y: 0 },
                   }}
                 >
-                  <Card className="h-full flex flex-col relative group">
+                  <Card className="h-full flex flex-col relative group hover:border-indigo-200">
                     {/* New Badge */}
                     {newsletter.id === latestId && (
                       <Badge variant="new" className="absolute top-3 right-3 z-10">
@@ -268,82 +224,61 @@ const NewsLetter = () => {
                       </Badge>
                     )}
 
-                    {/* Cover Image */}
-                    <div className="relative h-48 overflow-hidden">
+                    {/* Cover Image (Portrait Ratio) */}
+                    <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
                       <img
                         src={parseImageUrl(newsletter.coverImage)}
                         alt={newsletter.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           e.target.src = 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=600&q=80';
                         }}
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
 
                     {/* Card Header */}
-                    <CardHeader>
-                      <div className="flex items-center justify-between mb-3">
-                        <Badge className={getCategoryColor(newsletter.category)}>
-                          {newsletter.category}
-                        </Badge>
-                        <span className="text-xs text-gray-500 font-medium">
-                          {newsletter.issueNumber}
-                        </span>
-                      </div>
-
-                      <CardTitle className="group-hover:text-blue-600 transition-colors">
-                        {newsletter.title}
-                      </CardTitle>
-
-                      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600">
+                    <CardHeader className="flex-1 flex flex-col">
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-600">
                         {newsletter.schoolName}
                       </p>
 
-                      {/* Meta Information */}
-                      <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
-                        <div className="flex items-center gap-1">
-                          <Calendar size={12} />
-                          <span>{newsletter.date ? format(new Date(newsletter.date), 'MMM dd, yyyy') : 'Unknown'}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Eye size={12} />
-                          <span>{newsletter.views}</span>
-                        </div>
+                      <CardTitle className="group-hover:text-indigo-600 transition-colors mb-2 line-clamp-2 text-xl">
+                        {newsletter.title}
+                      </CardTitle>
+
+                      <div className="flex items-center gap-2 text-xs text-gray-500 mb-4 font-medium">
+                        <Calendar size={14} className="text-indigo-400" />
+                        <span>{newsletter.date ? format(new Date(newsletter.date), 'MMMM dd, yyyy') : 'Date TBA'}</span>
                       </div>
 
-                      <CardDescription>
-                        {newsletter.excerpt}
+                      <CardDescription className="mb-4 text-gray-600 leading-relaxed text-sm flex-1">
+                        {newsletter.description}
                       </CardDescription>
                     </CardHeader>
 
                     {/* Card Content - Actions */}
-                    <CardContent className="mt-auto">
-                      <div className="flex gap-2">
+                    <CardContent>
+                      <div className="grid grid-cols-2 gap-2 pt-4 border-t border-gray-100">
                         <Button
                           size="sm"
-                          onClick={() => newsletter.pdfLink && window.open(newsletter.pdfLink, "_blank")}
-                          disabled={!newsletter.pdfLink}
-                          className="flex-1"
+                          variant="outline"
+                          onClick={() => newsletter.englishPdfLink && window.open(newsletter.englishPdfLink, "_blank")}
+                          disabled={!newsletter.englishPdfLink}
+                          className="flex items-center justify-center gap-1.5 w-full border-gray-200 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200"
                         >
-                          <FileText size={14} className="mr-1.5" />
-                          {newsletter.pdfLink ? "Read" : "No Link"}
+                          <Download size={14} />
+                          English
                         </Button>
                         <Button
                           size="sm"
                           variant="outline"
-                          onClick={() => newsletter.pdfLink && window.open(newsletter.pdfLink, "_blank")}
-                          disabled={!newsletter.pdfLink}
+                          onClick={() => newsletter.hindiPdfLink && window.open(newsletter.hindiPdfLink, "_blank")}
+                          disabled={!newsletter.hindiPdfLink}
+                          className="flex items-center justify-center gap-1.5 w-full border-gray-200 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200"
                         >
-                          <Download size={14} className="mr-1.5" />
-                          PDF
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="px-3"
-                        >
-                          <Share2 size={14} />
+                          <Download size={14} />
+                          Hindi
                         </Button>
                       </div>
                     </CardContent>

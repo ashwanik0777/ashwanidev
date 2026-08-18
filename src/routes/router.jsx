@@ -391,6 +391,7 @@ export default function AppRouter() {
               <Route path="research-scholars" element={<ResearchScholars />} />
               <Route path="training-consultancy" element={<TrainingConsultancy />} />
               <Route path="patents" element={<Patents />} />
+              <Route path="books" element={<Index />} />
               <Route path="departments/coe-bioinformatics" element={<CoeBioinformatics />} />
               <Route path="departments/molecular-biology-lab" element={<MolecularBiologyLab />} />
               <Route path="departments/research-cell" element={<ResearchCellPage />} />

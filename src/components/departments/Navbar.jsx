@@ -138,6 +138,7 @@ const Navbar = () => {
       scholars: `/schools/${activeSchool}/research-scholars`,
       projects: `/schools/${activeSchool}/research-projects`,
       patents: `/schools/${activeSchool}/patents`,
+      books: `/schools/${activeSchool}/books`,
     },
     contact: `/schools/${activeSchool}/contact`,
   };
@@ -277,6 +278,7 @@ const Navbar = () => {
         { label: "Research Scholars", href: routes.research.scholars },
         { label: "Research Projects", href: routes.research.projects },
         { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
       ],
     },
   ];

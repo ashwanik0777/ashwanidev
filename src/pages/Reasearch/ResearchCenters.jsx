@@ -96,7 +96,7 @@ const ResearchCenters = () => {
                         to={center.portalLink}
                         className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
                       >
-                        Visit CoE Portal <ArrowRight size={14} />
+                        Visit {center.shortName ? center.shortName.split(" ")[0] : "CoE"} Portal <ArrowRight size={14} />
                       </Link>
                     ) : (
                       <a
@@ -105,7 +105,7 @@ const ResearchCenters = () => {
                         rel="noopener noreferrer"
                         className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
                       >
-                        Visit CoE Portal <ExternalLink size={14} />
+                        Visit {center.shortName ? center.shortName.split(" ")[0] : "CoE"} Portal <ExternalLink size={14} />
                       </a>
                     )}
                   </div>

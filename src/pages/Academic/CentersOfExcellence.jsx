@@ -235,7 +235,7 @@ const CentersOfExcellence = () => {
                             to={center.id === 1 ? "/schools/SOICT/departments/coedt" : center.link}
                             className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
                           >
-                            CoE Portal <ArrowRight size={12} />
+                            {center.id === 1 ? "CEDT Portal" : center.id === 2 ? "CRAEM Portal" : "CoE Portal"} <ArrowRight size={12} />
                           </Link>
                         ) : (
                           <a
@@ -244,7 +244,7 @@ const CentersOfExcellence = () => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
                           >
-                            CoE Portal <ExternalLink size={12} />
+                            {center.id === 1 ? "CEDT Portal" : center.id === 2 ? "CRAEM Portal" : "CoE Portal"} <ExternalLink size={12} />
                           </a>
                         )}
                       </div>

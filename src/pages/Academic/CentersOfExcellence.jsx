@@ -8,6 +8,7 @@ import {
   Award,
   BookOpen,
   ArrowRight,
+  ExternalLink,
 } from 'lucide-react';
 
 import BannerSection from "../../components/HeroBanner.jsx";

@@ -4,7 +4,7 @@ import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, Ch
 import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../../../components/TabsData.jsx';
-import { SCHOOL_BADGES } from "../../../Data/schools";
+import { allResearchPublications } from "../../../Data/researchPublicationsData.js";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
@@ -16,9 +16,17 @@ const Publications = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
 
-  const schools = Object.keys(SCHOOL_BADGES);
+  const schools = [
+    "School of Information & Communication Technology",
+    "School of Biotechnology",
+    "School of Engineering",
+    "School of Basic Sciences",
+    "School of Management",
+    "School of Humanities & Social Sciences",
+    "Planning & Research Division",
+  ];
 
   const types = [
     "Article",
@@ -28,104 +36,10 @@ const Publications = () => {
     "Review",
     "Book",
     "Book Review",
-    "Letter",
-    "News Clippings",
-    "Editorial",
   ];
   const statuses = ["Granted", "Filed", "Under Review", "Published"];
 
-  const publications = [
-    {
-      id: 1,
-      title: "GBU Research Publications (March 2026 – May 2026)",
-      authors: "Planning & Research Division, Gautam Buddha University",
-      journal: "Official Quarterly Research Bulletin",
-      year: "2026",
-      impact: "UGC CARE / Scopus",
-      citations: 180,
-      type: "Article",
-      category: "Research Bulletin",
-      school: "Planning & Research Division",
-      scopusId: "GBU-RES-2026-Q1",
-      doi: "GBU/RES/2026/03-05",
-      pdfUrl: "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
-      issn: "GBU-RES-2026-Q1",
-      indexing: "Official GBU Archive, UGC CARE",
-      quartile: "Q1",
-    },
-    {
-      id: 2,
-      title: "GBU Research Publications (December 2025 – February 2026)",
-      authors: "Planning & Research Division, Gautam Buddha University",
-      journal: "Official Quarterly Research Bulletin",
-      year: "2026",
-      impact: "UGC CARE / Scopus",
-      citations: 165,
-      type: "Article",
-      category: "Research Bulletin",
-      school: "Planning & Research Division",
-      scopusId: "GBU-RES-2025-Q4",
-      doi: "GBU/RES/2025/12-02",
-      pdfUrl: "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
-      issn: "GBU-RES-2025-Q4",
-      indexing: "Official GBU Archive, UGC CARE",
-      quartile: "Q1",
-    },
-    {
-      id: 3,
-      title: "GBU Research Publications (September 2025 – November 2025)",
-      authors: "Planning & Research Division, Gautam Buddha University",
-      journal: "Official Quarterly Research Bulletin",
-      year: "2025",
-      impact: "UGC CARE / Scopus",
-      citations: 154,
-      type: "Article",
-      category: "Research Bulletin",
-      school: "Planning & Research Division",
-      scopusId: "GBU-RES-2025-Q3",
-      doi: "GBU/RES/2025/09-11",
-      pdfUrl: "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
-      issn: "GBU-RES-2025-Q3",
-      indexing: "Official GBU Archive, UGC CARE",
-      quartile: "Q1",
-    },
-    {
-      id: 4,
-      title: "GBU Research Publications (June 2025 – August 2025)",
-      authors: "Planning & Research Division, Gautam Buddha University",
-      journal: "Official Quarterly Research Bulletin",
-      year: "2025",
-      impact: "UGC CARE / Scopus",
-      citations: 142,
-      type: "Article",
-      category: "Research Bulletin",
-      school: "Planning & Research Division",
-      scopusId: "GBU-RES-2025-Q2",
-      doi: "GBU/RES/2025/06-08",
-      pdfUrl: "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
-      issn: "GBU-RES-2025-Q2",
-      indexing: "Official GBU Archive, UGC CARE",
-      quartile: "Q1",
-    },
-    {
-      id: 5,
-      title: "GBU Research Publications (January 2025 – May 2025)",
-      authors: "Planning & Research Division, Gautam Buddha University",
-      journal: "Official Quarterly Research Bulletin",
-      year: "2025",
-      impact: "UGC CARE / Scopus",
-      citations: 130,
-      type: "Article",
-      category: "Research Bulletin",
-      school: "Planning & Research Division",
-      scopusId: "GBU-RES-2025-Q1",
-      doi: "GBU/RES/2025/01-05",
-      pdfUrl: "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
-      issn: "GBU-RES-2025-Q1",
-      indexing: "Official GBU Archive, UGC CARE",
-      quartile: "Q1",
-    },
-  ];
+  const publications = allResearchPublications;
 
   const patents = [
     {
@@ -199,8 +113,8 @@ const Publications = () => {
   const statsData = [
     {
       icon: BookOpen,
-      number: 1670,
-      numberText: "1670+",
+      number: allResearchPublications.length,
+      numberText: `${allResearchPublications.length}+`,
       title: "Total Publications",
       iconColor: "#2563eb", // blue-600
     },
@@ -374,12 +288,11 @@ const Publications = () => {
                     <thead>
                       <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         <th className="py-4 px-6 text-center w-12">#</th>
-                        <th className="py-4 px-6 min-w-[300px]">Publication Details</th>
-                        <th className="py-4 px-6 min-w-[200px]">Authors & School</th>
-                        <th className="py-4 px-6 min-w-[180px]">Journal & Year</th>
-                        <th className="py-4 px-6 text-center min-w-[120px]">Impact & Citations</th>
-                        <th className="py-4 px-6 text-center min-w-[130px]">Indexing</th>
-                        <th className="py-4 px-6 text-center min-w-[170px]">Actions</th>
+                        <th className="py-4 px-6 min-w-[320px]">Publication Details</th>
+                        <th className="py-4 px-6 min-w-[220px]">Authors & School</th>
+                        <th className="py-4 px-6 min-w-[220px]">Journal & Details</th>
+                        <th className="py-4 px-6 min-w-[200px]">Bulletin Batch</th>
+                        <th className="py-4 px-6 text-center min-w-[150px]">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100 text-sm">
@@ -391,35 +304,30 @@ const Publications = () => {
                             </td>
                             <td className="py-4 px-6">
                               <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
-                              <div className="flex flex-wrap gap-2 items-center text-xs text-gray-500">
-                                <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-medium">{pub.type}</span>
-                                {pub.doi && <span className="font-mono text-gray-600">DOI: {pub.doi}</span>}
-                              </div>
+                              {pub.doi && (
+                                <div className="flex items-center text-xs text-gray-500 gap-1 mt-1">
+                                  <span className="font-semibold text-slate-400">DOI:</span>
+                                  <span className="font-mono text-blue-600 truncate max-w-[240px]">{pub.doi}</span>
+                                </div>
+                              )}
                             </td>
                             <td className="py-4 px-6">
-                              <p className="text-gray-800 font-medium text-xs mb-1.5">{pub.authors}</p>
+                              <p className="text-gray-800 font-medium text-xs mb-1.5 leading-relaxed">{pub.authors}</p>
                               <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
                                 {pub.school}
                               </span>
                             </td>
                             <td className="py-4 px-6">
-                              <p className="font-medium text-gray-900 text-xs">{pub.journal}</p>
-                              <p className="text-xs text-gray-500">{pub.year} • {pub.category}</p>
+                              <p className="font-semibold text-gray-900 text-xs leading-snug">{pub.journal || "GBU Research Publication"}</p>
+                              <p className="text-xs text-gray-500 mt-0.5">
+                                {pub.year && `Year: ${pub.year}`}
+                                {pub.volume && ` • Vol: ${pub.volume}`}
+                                {pub.issue && ` • Issue: ${pub.issue}`}
+                              </p>
                             </td>
-                            <td className="py-4 px-6 text-center">
-                              <span className="inline-block text-green-700 font-bold text-xs bg-green-50 px-2 py-1 rounded border border-green-200 mb-1">
-                                IF: {pub.impact}
-                              </span>
-                              <span className="inline-block text-purple-700 font-bold text-xs bg-purple-50 px-2 py-1 rounded border border-purple-200">
-                                Cit: {pub.citations}
-                              </span>
-                            </td>
-                            <td className="py-4 px-6 text-center">
-                              <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded block mb-1">
-                                {pub.quartile || "Q1"}
-                              </span>
-                              <span className="text-[11px] text-gray-500 block truncate max-w-[120px] mx-auto">
-                                {pub.indexing}
+                            <td className="py-4 px-6">
+                              <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200">
+                                {pub.bulletinTitle}
                               </span>
                             </td>
                             <td className="py-4 px-6 text-center">

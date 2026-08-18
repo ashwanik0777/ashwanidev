@@ -25,7 +25,7 @@ const Publications = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
 
   const officialBulletins = [
     {
@@ -310,38 +310,55 @@ const Publications = () => {
   );
 
   const filteredPublications = publications.filter((pub) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedBulletin || pub.bulletinTitle === selectedBulletin) &&
       (!selectedSchool || pub.school === selectedSchool) &&
       (!selectedCategory || pub.category === selectedCategory) &&
       (!selectedYear || pub.year === selectedYear) &&
       (!selectedType || pub.type === selectedType) &&
-      (!searchTerm ||
-        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.authors.toLowerCase().includes(searchTerm.toLowerCase()))
+      (!term ||
+        pub.title?.toLowerCase().includes(term) ||
+        pub.authors?.toLowerCase().includes(term) ||
+        pub.journal?.toLowerCase().includes(term) ||
+        pub.school?.toLowerCase().includes(term) ||
+        pub.category?.toLowerCase().includes(term) ||
+        pub.year?.toString().includes(term) ||
+        pub.type?.toLowerCase().includes(term))
     );
   });
 
   const filteredPatents = patents.filter((p) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedSchool || p.school === selectedSchool) &&
       (!selectedStatus || p.status === selectedStatus) &&
-      (!searchTerm ||
-        p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.inventors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.patentNo.toLowerCase().includes(searchTerm.toLowerCase()))
+      (!term ||
+        p.title?.toLowerCase().includes(term) ||
+        p.inventors?.toLowerCase().includes(term) ||
+        p.patentNo?.toLowerCase().includes(term) ||
+        p.school?.toLowerCase().includes(term) ||
+        p.status?.toLowerCase().includes(term) ||
+        p.type?.toLowerCase().includes(term) ||
+        p.year?.toString().includes(term) ||
+        p.description?.toLowerCase().includes(term))
     );
   });
 
   const filteredBooks = books.filter((b) => {
+    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedSchool || b.school === selectedSchool) &&
       (!selectedType || b.type.toLowerCase() === selectedType.toLowerCase()) &&
-      (!searchTerm ||
-        b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.publisher.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (b.isbn && b.isbn.toLowerCase().includes(searchTerm.toLowerCase())))
+      (!term ||
+        b.title?.toLowerCase().includes(term) ||
+        b.authors?.toLowerCase().includes(term) ||
+        b.publisher?.toLowerCase().includes(term) ||
+        b.isbn?.toLowerCase().includes(term) ||
+        b.type?.toLowerCase().includes(term) ||
+        b.school?.toLowerCase().includes(term) ||
+        b.year?.toString().includes(term) ||
+        b.description?.toLowerCase().includes(term))
     );
   });
 
@@ -525,7 +542,10 @@ const Publications = () => {
                 <label className="text-sm font-medium text-gray-700">School</label>
                 <select
                   value={selectedSchool}
-                  onChange={(e) => setSelectedSchool(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedSchool(e.target.value);
+                    setCurrentPage(1);
+                  }}
                   className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                 >
                   <option value="">All Schools</option>
@@ -542,9 +562,12 @@ const Publications = () => {
                   <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search titles, authors..."
+                    placeholder="Search titles, authors, publishers, ISBN, patent numbers..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setCurrentPage(1);
+                    }}
                     className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                   />
                 </div>
@@ -878,79 +901,144 @@ const Publications = () => {
                 </div>
               </div>
 
-              {/* Patent Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentItems.length > 0 ? (
-                  currentItems.map((patent) => {
-                    const isGranted = patent.status === "Granted";
-                    const isPublished = patent.status === "Published";
-                    return (
-                      <div
-                        key={patent.id}
-                        className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                      >
-                        <div>
-                          {/* Header Badge & Date */}
-                          <div className="flex items-center justify-between mb-3">
-                            <span
-                              className={`text-xs font-bold px-3 py-1 rounded-full ${isGranted
-                                  ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                                  : isPublished
-                                    ? "bg-blue-100 text-blue-800 border border-blue-200"
-                                    : "bg-sky-100 text-sky-800 border border-sky-200"
-                                }`}
-                            >
-                              Patent {patent.status}
-                            </span>
-                            <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
-                              <Calendar size={13} className="text-gray-400" />
-                              {patent.year}
-                            </span>
-                          </div>
-
-                          {/* Title */}
-                          <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 font-sans">
-                            {patent.title}
-                          </h3>
-
-                          {/* Description */}
-                          <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                            {patent.description}
-                          </p>
-                        </div>
-
-                        <div>
-                          {/* Specs Table */}
-                          <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400 font-medium">Patent / App No:</span>
-                              <span className="font-semibold text-gray-900 font-mono">{patent.patentNo}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400 font-medium">Type / Office:</span>
-                              <span className="font-semibold text-gray-900">{patent.type}</span>
-                            </div>
-                          </div>
-
-                          {/* Inventors */}
-                          <div className="text-xs">
-                            <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                              INVENTORS
-                            </p>
-                            <p className="font-semibold text-gray-800 leading-snug">
-                              {patent.inventors}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
-                    No patents found matching selected criteria
+              {/* Patents List (Table View or Grid View) */}
+              {viewMode === "table" ? (
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">
+                          <th className="py-3.5 px-4 text-center w-12">#</th>
+                          <th className="py-3.5 px-4">Status</th>
+                          <th className="py-3.5 px-6">Patent Title</th>
+                          <th className="py-3.5 px-4">App / Patent No</th>
+                          <th className="py-3.5 px-4">Type / Office</th>
+                          <th className="py-3.5 px-4">Year</th>
+                          <th className="py-3.5 px-6">Inventors</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100 text-xs text-gray-700 font-medium">
+                        {currentItems.length > 0 ? (
+                          currentItems.map((patent, idx) => (
+                            <tr key={patent.id} className="hover:bg-blue-50/50 transition-colors">
+                              <td className="py-3.5 px-4 text-center font-bold text-gray-400">
+                                {indexOfFirstItem + idx + 1}
+                              </td>
+                              <td className="py-3.5 px-4 whitespace-nowrap">
+                                <span
+                                  className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${patent.status === "Granted"
+                                      ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                                      : patent.status === "Published"
+                                        ? "bg-blue-100 text-blue-800 border border-blue-200"
+                                        : "bg-sky-100 text-sky-800 border border-sky-200"
+                                    }`}
+                                >
+                                  {patent.status}
+                                </span>
+                              </td>
+                              <td className="py-3.5 px-6 font-bold text-gray-900">
+                                {patent.title}
+                              </td>
+                              <td className="py-3.5 px-4 font-mono font-semibold text-gray-800">
+                                {patent.patentNo}
+                              </td>
+                              <td className="py-3.5 px-4 text-gray-600">
+                                {patent.type}
+                              </td>
+                              <td className="py-3.5 px-4 font-bold text-gray-900">
+                                {patent.year}
+                              </td>
+                              <td className="py-3.5 px-6 text-gray-800">
+                                {patent.inventors}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={7} className="text-center py-12 text-gray-500">
+                              No patents found matching selected criteria
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
                   </div>
-                )}
-              </div>
+                </div>
+              ) : (
+                /* Patent Cards Grid */
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentItems.length > 0 ? (
+                    currentItems.map((patent) => {
+                      const isGranted = patent.status === "Granted";
+                      const isPublished = patent.status === "Published";
+                      return (
+                        <div
+                          key={patent.id}
+                          className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                        >
+                          <div>
+                            {/* Header Badge & Date */}
+                            <div className="flex items-center justify-between mb-3">
+                              <span
+                                className={`text-xs font-bold px-3 py-1 rounded-full ${isGranted
+                                    ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                                    : isPublished
+                                      ? "bg-blue-100 text-blue-800 border border-blue-200"
+                                      : "bg-sky-100 text-sky-800 border border-sky-200"
+                                  }`}
+                              >
+                                Patent {patent.status}
+                              </span>
+                              <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                                <Calendar size={13} className="text-gray-400" />
+                                {patent.year}
+                              </span>
+                            </div>
+
+                            {/* Title */}
+                            <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 font-sans">
+                              {patent.title}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                              {patent.description}
+                            </p>
+                          </div>
+
+                          <div>
+                            {/* Specs Table */}
+                            <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-400 font-medium">Patent / App No:</span>
+                                <span className="font-semibold text-gray-900 font-mono">{patent.patentNo}</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-400 font-medium">Type / Office:</span>
+                                <span className="font-semibold text-gray-900">{patent.type}</span>
+                              </div>
+                            </div>
+
+                            {/* Inventors */}
+                            <div className="text-xs">
+                              <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
+                                INVENTORS
+                              </p>
+                              <p className="font-semibold text-gray-800 leading-snug">
+                                {patent.inventors}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                      No patents found matching selected criteria
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -966,88 +1054,163 @@ const Publications = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentItems.length > 0 ? (
-                  currentItems.map((book) => (
-                    <div
-                      key={book.id}
-                      className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                    >
-                      <div>
-                        {/* Type Badge & Year */}
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
-                            {book.type}
-                          </span>
-                          <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
-                            <Calendar size={13} className="text-gray-400" />
-                            {book.year}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
-                          {book.title}
-                        </h3>
-
-                        {/* Description */}
-                        <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                          {book.description}
-                        </p>
-                      </div>
-
-                      <div>
-                        {/* Publisher & ISBN */}
-                        <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400 font-medium">Publisher:</span>
-                            <span className="font-semibold text-gray-900">{book.publisher}</span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400 font-medium">ISBN:</span>
-                            <span className="font-mono text-gray-900">{book.isbn}</span>
-                          </div>
-                        </div>
-
-                        {/* Authors & School */}
-                        <div className="text-xs space-y-1">
-                          <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider">
-                            AUTHORS / EDITORS
-                          </p>
-                          <p className="font-semibold text-gray-800 leading-snug">
-                            {book.authors}
-                          </p>
-                          <p className="text-blue-600 text-[11px] font-medium pt-1">
-                            {book.school}
-                          </p>
-                        </div>
-
-                        {book.link && (
-                          <div className="mt-3 pt-3 border-t border-gray-100">
-                            <a
-                              href={book.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg transition-colors border border-purple-200"
-                            >
-                              <Eye size={13} /> View Publisher / DOI Link
-                            </a>
-                          </div>
+              {/* Books List (Table View or Grid View) */}
+              {viewMode === "table" ? (
+                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">
+                          <th className="py-3.5 px-4 text-center w-12">#</th>
+                          <th className="py-3.5 px-4">Book Type</th>
+                          <th className="py-3.5 px-6">Book / Chapter Title</th>
+                          <th className="py-3.5 px-4">Publisher</th>
+                          <th className="py-3.5 px-4">ISBN</th>
+                          <th className="py-3.5 px-4">Year</th>
+                          <th className="py-3.5 px-6">Authors / Editors</th>
+                          <th className="py-3.5 px-4 text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100 text-xs text-gray-700 font-medium">
+                        {currentItems.length > 0 ? (
+                          currentItems.map((book, idx) => (
+                            <tr key={book.id} className="hover:bg-purple-50/50 transition-colors">
+                              <td className="py-3.5 px-4 text-center font-bold text-gray-400">
+                                {indexOfFirstItem + idx + 1}
+                              </td>
+                              <td className="py-3.5 px-4 whitespace-nowrap">
+                                <span className="bg-purple-100 text-purple-800 text-[11px] font-bold px-2.5 py-1 rounded-full border border-purple-200">
+                                  {book.type}
+                                </span>
+                              </td>
+                              <td className="py-3.5 px-6 font-bold text-gray-900">
+                                {book.title}
+                              </td>
+                              <td className="py-3.5 px-4 font-semibold text-gray-800">
+                                {book.publisher}
+                              </td>
+                              <td className="py-3.5 px-4 font-mono text-gray-600">
+                                {book.isbn}
+                              </td>
+                              <td className="py-3.5 px-4 font-bold text-gray-900">
+                                {book.year}
+                              </td>
+                              <td className="py-3.5 px-6 text-gray-800">
+                                <div>{book.authors}</div>
+                                <div className="text-[10px] text-blue-600 font-semibold">{book.school}</div>
+                              </td>
+                              <td className="py-3.5 px-4 text-center">
+                                {book.link ? (
+                                  <a
+                                    href={book.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg border border-purple-200 transition-colors"
+                                  >
+                                    <Eye size={12} /> Link
+                                  </a>
+                                ) : (
+                                  <span className="text-gray-300 text-xs">-</span>
+                                )}
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={8} className="text-center py-12 text-gray-500">
+                              No books found matching criteria
+                            </td>
+                          </tr>
                         )}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
-                    No books found matching criteria
+                      </tbody>
+                    </table>
                   </div>
-                )}
-              </div>
+                </div>
+              ) : (
+                /* Books Cards Grid */
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentItems.length > 0 ? (
+                    currentItems.map((book) => (
+                      <div
+                        key={book.id}
+                        className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                      >
+                        <div>
+                          {/* Type Badge & Year */}
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
+                              {book.type}
+                            </span>
+                            <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
+                              <Calendar size={13} className="text-gray-400" />
+                              {book.year}
+                            </span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
+                            {book.title}
+                          </h3>
+
+                          {/* Description */}
+                          <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                            {book.description}
+                          </p>
+                        </div>
+
+                        <div>
+                          {/* Publisher & ISBN */}
+                          <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-400 font-medium">Publisher:</span>
+                              <span className="font-semibold text-gray-900">{book.publisher}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-400 font-medium">ISBN:</span>
+                              <span className="font-mono text-gray-900">{book.isbn}</span>
+                            </div>
+                          </div>
+
+                          {/* Authors & School */}
+                          <div className="text-xs space-y-1">
+                            <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider">
+                              AUTHORS / EDITORS
+                            </p>
+                            <p className="font-semibold text-gray-800 leading-snug">
+                              {book.authors}
+                            </p>
+                            <p className="text-blue-600 text-[11px] font-medium pt-1">
+                              {book.school}
+                            </p>
+                          </div>
+
+                          {book.link && (
+                            <div className="mt-3 pt-3 border-t border-gray-100">
+                              <a
+                                href={book.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg transition-colors border border-purple-200"
+                              >
+                                <Eye size={13} /> View Publisher / DOI Link
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                      No books found matching criteria
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && (activeTab === "patents" || activeTab === "books" || selectedBulletin) && (
+          {totalPages > 1 && (
             <div className="flex justify-center items-center space-x-2 mt-6 overflow-x-auto py-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}

@@ -66,9 +66,6 @@ const AcademicCalendar = React.lazy(() =>
 const CBCSFramework = React.lazy(() =>
   import("../pages/Academic/CBCSFramework.jsx")
 );
-const CentersOfExcellence = React.lazy(() =>
-  import("../pages/Academic/CentersOfExcellence.jsx")
-);
 const Faculty = React.lazy(() => import("../pages/Academic/Faculty.jsx"));
 const FacultyDetail = React.lazy(() =>
   import("../pages/Academic/FacultyDetail.jsx")
@@ -348,10 +345,6 @@ export default function AppRouter() {
             element={<ListOfHolidays />}
           />
           <Route path="/academics/cbcs-framework" element={<CBCSFramework />} />
-          <Route
-            path="/academics/centers-of-excellence"
-            element={<CentersOfExcellence />}
-          />
           <Route path="/academics/faculty" element={<Faculty />} />
           <Route path="/academics/faculty/:id" element={<FacultyDetail />} />
           <Route

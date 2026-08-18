@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BookOpen, Target, CheckCircle, GraduationCap, Star } from 'lucide-react';
 
 import BannerSection from "../../components/HeroBanner.jsx";
-import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
 // Static high-fidelity data representing GBU's actual Choice Based Credit System (CBCS)
@@ -139,34 +138,6 @@ const CBCSFramework = () => {
   const [benefits, setBenefits] = useState(GBU_CBCS_BENEFITS);
   const [explore, setExplore] = useState(GBU_CBCS_EXPLORE);
 
-  const stats = [
-    {
-      title: "Credit Points per Semester",
-      icon: GraduationCap,
-      iconColor: "#2563eb",
-      number: heroData.credits_coount || 0,
-    },
-    {
-      numberText: heroData.elective_courses || 0,
-      title: "Elective Courses",
-      icon: BookOpen,
-      iconColor: "#16a34a",
-      number: heroData.elective_courses || 0,
-    },
-    {
-      numberText: heroData.grading_scale,
-      title: "Point Grading Scale",
-      icon: Star,
-      iconColor: "#7c3aed",
-    },
-    {
-      numberText: `${heroData.flexebility}`,
-      title: "Choice Flexibility",
-      icon: Target,
-      iconColor: "#ea580c",
-      number: heroData.flexebility,
-    },
-  ];
 
   return (
     <SearchableWrapper>
@@ -178,8 +149,7 @@ const CBCSFramework = () => {
           bgTheme={heroData.bgTheme || 7}
         />
 
-        {/* Statistics */}
-        <StatsCard stats={stats} />
+
 
         {/* What is CBCS */}
         <section className="py-16 bg-white">

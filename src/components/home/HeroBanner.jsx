@@ -82,7 +82,7 @@ export default function WelcomePage() {
       </div>
 
       {/* Main welcome section */}
-      <div className="relative min-h-[480px] h-[65vh] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden">
+      <div className="relative min-h-[340px] h-[48vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -90,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-24 xl:-mt-21"
+            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-12 sm:-mt-24 xl:-mt-21"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -107,31 +107,31 @@ export default function WelcomePage() {
         )}
 
         {/* Light overlay for maximum video visibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/10 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/15 z-10" />
 
         {/* Content - Clean typography without glassmorphism */}
-        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-8 sm:pb-20 pt-16 sm:pt-24">
+        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-4 sm:pb-20 pt-6 sm:pt-24">
           <div className="max-w-5xl mx-auto sm:mx-0">
 
             {/* Title with Typing Effect & White/GBU Theme */}
-            <h1 className="mb-3 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+            <h1 className="mb-2 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {typedTitle.includes("\n") ? (
                 <>
-                  <span className="block text-lg sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-1">
+                  <span className="block text-xs sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-0.5">
                     {typedTitle.split("\n")[0]}
                   </span>
-                  <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
+                  <span className="block text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
                     {typedTitle.split("\n")[1]}
                     {!isTitleDone && (
-                      <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
+                      <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.8em] bg-blue-400 ml-1 sm:ml-1.5 animate-blink align-baseline" />
                     )}
                   </span>
                 </>
               ) : (
-                <span className="block text-xl sm:text-3xl font-semibold text-white tracking-widest uppercase">
+                <span className="block text-base sm:text-3xl font-semibold text-white tracking-widest uppercase">
                   {typedTitle}
                   {!isTitleDone && (
-                    <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
+                    <span className="inline-block w-[3px] sm:w-[3.5px] h-[0.8em] bg-blue-400 ml-1 sm:ml-1.5 animate-blink align-baseline" />
                   )}
                 </span>
               )}
@@ -142,7 +142,7 @@ export default function WelcomePage() {
               initial={{ opacity: 0, y: 15 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white drop-shadow-md"
+              className="text-xs sm:text-lg md:text-xl mb-3 sm:mb-8 text-center sm:text-left max-w-2xl leading-snug sm:leading-relaxed font-medium text-white/95 drop-shadow-md line-clamp-3 sm:line-clamp-none"
             >
               {bannerData.content}
             </motion.p>
@@ -152,14 +152,14 @@ export default function WelcomePage() {
               initial={{ opacity: 0, y: 20 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              className="flex flex-row items-center justify-center sm:justify-start gap-2.5 sm:gap-4 flex-wrap"
+              className="flex flex-row items-center justify-center sm:justify-start gap-2 sm:gap-4 flex-wrap"
             >
               {bannerData.button1_text && bannerData.button1_url && (
                 <a
                   href={bannerData.button1_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-green-400 text-green-700 bg-green-200/90 hover:bg-green-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
+                  className="border-2 border-green-400 text-green-700 bg-green-200/90 hover:bg-green-300 font-semibold py-1.5 px-3 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-[11px] sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button1_text}
                 </a>
@@ -169,7 +169,7 @@ export default function WelcomePage() {
                   href={bannerData.button2_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-blue-400 text-blue-700 bg-blue-200/90 hover:bg-blue-300 font-semibold py-1.5 px-3.5 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-xs sm:text-sm md:text-base whitespace-nowrap"
+                  className="border-2 border-blue-400 text-blue-700 bg-blue-200/90 hover:bg-blue-300 font-semibold py-1.5 px-3 sm:py-3 sm:px-6 rounded-xl shadow-md focus:outline-none transition-all duration-300 text-center text-[11px] sm:text-sm md:text-base whitespace-nowrap"
                 >
                   {bannerData.button2_text}
                 </a>
@@ -208,7 +208,7 @@ export default function WelcomePage() {
             object-fit: cover;
             object-position: center top;
             width: 100vw !important;
-            height: 100vh !important;
+            height: 100% !important;
           }
           
           @keyframes scrollText {
@@ -227,7 +227,7 @@ export default function WelcomePage() {
             object-fit: cover;
             object-position: center center;
             width: 100vw !important;
-            height: 100vh !important;
+            height: 100% !important;
           }
         }
         

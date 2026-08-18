@@ -90,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.3] -translate-y-6 sm:-translate-y-12 origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.15] origin-center"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -101,7 +101,7 @@ export default function WelcomePage() {
           <img
             src={videoSrc}
             alt="Banner"
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.3] -translate-y-6 sm:-translate-y-12 origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.15] origin-center"
             loading="eager"
           />
         )}

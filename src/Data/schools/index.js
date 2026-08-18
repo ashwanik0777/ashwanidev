@@ -91,7 +91,7 @@ export const RESEARCH_CENTERS = [
     id: 2,
     name: "Center for Rapid and Alternative Energy Mobility (CRAEM)",
     shortName: "CRAEM - GBURIF",
-    school: "School of Engineering",
+    school: "School of Information & Communication Technology",
     established: 2021,
     head: "Dr. Anurag Singh Bhagat",
     location: "GBURIF Research Block",

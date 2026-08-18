@@ -208,6 +208,18 @@ const SchoolActivitiesAnnouncements = () => {
   const [data, setData] = useState({ notices: [], events: [] });
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("notices");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 12;
+
+  // Strict local filter for school code
+  const filterBySchool = (items, targetSchool) => {
+    if (!targetSchool || targetSchool === "GLOBAL") return items;
+    return items.filter(item => {
+      const school = String(item.schoolName || item.department || "").toUpperCase();
+      // Only return items where the school explicitly matches or contains the school code
+      return school.includes(targetSchool) || school === targetSchool;
+    });
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -218,8 +230,8 @@ const SchoolActivitiesAnnouncements = () => {
         const latest = await refreshSchoolAnnouncements(schoolCode);
         if (isMounted) {
           setData({ 
-            notices: latest.notices || [], 
-            events: latest.events || [] 
+            notices: filterBySchool(latest.notices || [], schoolCode), 
+            events: filterBySchool(latest.events || [], schoolCode) 
           });
           setLoading(false);
         }
@@ -228,8 +240,8 @@ const SchoolActivitiesAnnouncements = () => {
           syncAnnouncementsFromCache();
           const cached = getSchoolAnnouncements(schoolCode);
           setData({ 
-            notices: cached.notices || [], 
-            events: cached.events || [] 
+            notices: filterBySchool(cached.notices || [], schoolCode), 
+            events: filterBySchool(cached.events || [], schoolCode) 
           });
           setLoading(false);
         }
@@ -246,95 +258,137 @@ const SchoolActivitiesAnnouncements = () => {
     { id: "events", label: "Events & Activities", icon: Calendar }
   ];
 
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    setCurrentPage(1); // Reset pagination on tab switch
+  };
+
   const currentData = activeTab === "notices" ? data.notices : data.events;
+  const totalPages = Math.ceil(currentData.length / ITEMS_PER_PAGE);
+  const paginatedData = currentData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
-      {/* Background decorations */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="min-h-screen bg-gray-50/50 relative overflow-hidden">
+      {/* Background decorations - changed from fixed to absolute so it doesn't overlap footer */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50/50 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-50/50 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3" />
       </div>
 
-      <BannerSection
-        title={`${schoolCode} Updates`}
-        subtitle="Stay updated with the latest notices, circulars, events, and activities."
-        bgTheme={9}
-      />
+      <div className="relative z-10">
+        <BannerSection
+          title={`${schoolCode} Updates`}
+          subtitle="Stay updated with the latest notices, circulars, events, and activities."
+          bgTheme={9}
+        />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Custom Tab Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white/80 backdrop-blur-md p-1.5 rounded-2xl shadow-sm border border-gray-100">
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.id;
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                    isActive 
-                      ? "text-indigo-700" 
-                      : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTabBg"
-                      className="absolute inset-0 bg-indigo-50 rounded-xl"
-                      initial={false}
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Icon className={`w-4 h-4 ${isActive ? "text-indigo-600" : ""}`} />
-                    {tab.label}
-                    <span className={`ml-1.5 px-2 py-0.5 rounded-full text-xs ${
-                      isActive ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-500"
-                    }`}>
-                      {tab.id === "notices" ? data.notices.length : data.events.length}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Custom Tab Navigation */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex bg-white/80 backdrop-blur-md p-1.5 rounded-2xl shadow-sm border border-gray-100">
+              {tabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => handleTabChange(tab.id)}
+                    className={`relative flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                      isActive 
+                        ? "text-indigo-700" 
+                        : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTabBg"
+                        className="absolute inset-0 bg-indigo-50 rounded-xl"
+                        initial={false}
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      <Icon className={`w-4 h-4 ${isActive ? "text-indigo-600" : ""}`} />
+                      {tab.label}
+                      <span className={`ml-1.5 px-2 py-0.5 rounded-full text-xs ${
+                        isActive ? "bg-indigo-100 text-indigo-700" : "bg-gray-100 text-gray-500"
+                      }`}>
+                        {tab.id === "notices" ? data.notices.length : data.events.length}
+                      </span>
                     </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="min-h-[400px]">
-          {loading ? (
-            <div className="flex flex-col justify-center items-center h-64 space-y-4">
-              <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-              <p className="text-gray-500 font-medium">Loading updates...</p>
+                  </button>
+                );
+              })}
             </div>
-          ) : currentData.length === 0 ? (
-            <EmptyState type={activeTab} />
-          ) : (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className={
-                  activeTab === "notices"
-                    ? "grid gap-4 md:grid-cols-2" // Notices layout
-                    : "grid gap-8 md:grid-cols-2 lg:grid-cols-3" // Events layout
-                }
-              >
-                {currentData.map((item, index) => 
-                  activeTab === "notices" ? (
-                    <NoticeCard key={item.id || index} notice={item} index={index} />
-                  ) : (
-                    <EventCard key={item.id || index} event={item} index={index} />
-                  )
+          </div>
+
+          {/* Content Area */}
+          <div className="min-h-[400px]">
+            {loading ? (
+              <div className="flex flex-col justify-center items-center h-64 space-y-4">
+                <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+                <p className="text-gray-500 font-medium">Loading updates...</p>
+              </div>
+            ) : currentData.length === 0 ? (
+              <EmptyState type={activeTab} />
+            ) : (
+              <>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab + currentPage}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                  >
+                    {paginatedData.map((item, index) => 
+                      activeTab === "notices" ? (
+                        <NoticeCard key={item.id || index} notice={item} index={index} />
+                      ) : (
+                        <EventCard key={item.id || index} event={item} index={index} />
+                      )
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center mt-12 gap-2">
+                    <button
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Previous
+                    </button>
+                    <div className="flex items-center gap-1 px-4">
+                      {Array.from({ length: totalPages }).map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentPage(i + 1)}
+                          className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                            currentPage === i + 1 
+                              ? "bg-indigo-600 text-white" 
+                              : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                      className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Next
+                    </button>
+                  </div>
                 )}
-              </motion.div>
-            </AnimatePresence>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

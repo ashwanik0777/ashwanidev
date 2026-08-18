@@ -733,8 +733,8 @@ const Publications = () => {
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center mt-8 space-x-2">
+          {totalPages > 1 && selectedBulletin && (
+            <div className="flex justify-center items-center space-x-2 mt-6 overflow-x-auto py-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}

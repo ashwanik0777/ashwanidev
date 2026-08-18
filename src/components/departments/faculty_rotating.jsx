@@ -26,11 +26,8 @@ export default function FacultyResponsiveSlider({
   const navigate = useNavigate();
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
-  const effectiveFacultyList = schoolCode
-    ? dynamicFaculty
-    : dynamicFaculty.length > 0
-      ? dynamicFaculty
-      : facultyList;
+  const effectiveFacultyList =
+    dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
 
   const moveBy = cardWidth + gap;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 import { deansMessageData } from "./about/deans-message";
+import { placementData } from "./placement";
 
 const ictSlides = [
   {
@@ -686,7 +687,7 @@ export const sectionsConfig = [
 
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {
@@ -722,7 +723,7 @@ export const sectionsConfig = [
 
   {
     componentName: "RecentPlacements",
-    enabled: true,
+    enabled: false,
     position: 11,
     props: {
       data: {
@@ -799,24 +800,7 @@ export const sectionsConfig = [
     enabled: true,
     position: 12,
     props: {
-      recruitersData: [
-        { name: "Samsung", logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png" },
-        { name: "TCS", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png" },
-        { name: "Adobe", logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png" },
-        { name: "Tech Mahindra", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png" },
-        { name: "Metro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png" },
-        { name: "HCL", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png" },
-        { name: "Byjus", logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png" },
-        { name: "Nagrro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png" },
-        { name: "Apple", logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png" },
-        { name: "White Hat Junior", logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png" },
-        { name: "Hexaware", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png" },
-        { name: "Blinkit", logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png" },
-        { name: "Toppr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png" },
-        { name: "Wipro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png" },
-        { name: "Scaler", logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png" },
-        { name: "Chegg", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png" },
-      ],
+      recruitersData: placementData?.recruitersData || [],
     },
   },
 

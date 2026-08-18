@@ -427,23 +427,14 @@ const Publications = () => {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
+                        <div className="pt-3 border-t border-gray-100">
                           <a
                             href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
                           >
-                            <Eye size={14} /> View
-                          </a>
-                          <a
-                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            download
-                            className="flex-1 py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
-                          >
-                            <Download size={14} /> Download PDF
+                            <Download size={14} /> View Bulletin PDF
                           </a>
                         </div>
                       </div>
@@ -466,7 +457,7 @@ const Publications = () => {
                           <th className="py-4 px-6 min-w-[220px]">Authors & School</th>
                           <th className="py-4 px-6 min-w-[220px]">Journal & Details</th>
                           <th className="py-4 px-6 min-w-[200px]">Bulletin Batch</th>
-                          <th className="py-4 px-6 text-center min-w-[150px]">Actions</th>
+                          <th className="py-4 px-6 text-center min-w-[130px]">Actions</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-100 text-sm">
@@ -505,21 +496,12 @@ const Publications = () => {
                                 </span>
                               </td>
                               <td className="py-4 px-6 text-center">
-                                <div className="flex items-center justify-center gap-2">
+                                <div className="flex items-center justify-center">
                                   <a
                                     href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
-                                  >
-                                    <Eye size={14} /> View
-                                  </a>
-                                  <a
-                                    href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    download
-                                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all shadow-sm"
                                   >
                                     <Download size={14} /> PDF
                                   </a>

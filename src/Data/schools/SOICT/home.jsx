@@ -687,7 +687,7 @@ export const sectionsConfig = [
 
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {

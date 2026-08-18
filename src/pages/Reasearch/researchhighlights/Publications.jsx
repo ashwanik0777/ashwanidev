@@ -93,34 +93,186 @@ const Publications = () => {
   const patents = [
     {
       id: 1,
-      title: "Synthetic Gene Coding for TET1 Catalytic Domain in Programmable Enzymes for Epigenome Editing",
-      inventors: "School of Biotechnology, Gautam Buddha University",
-      patentNo: "IN202311048912",
-      filingDate: "2023-08-14",
-      status: "Published",
-      category: "Biotechnology",
-      school: "Biotechnology",
+      title: "Edge Preserving Image Smoothing Benchmark System with Deep Convolutional Neural Network",
+      status: "Granted",
+      year: "2020",
+      type: "Australian Patent",
+      patentNo: "2020102385",
+      inventors: "Jaware T. H., Nayyar A., Solanki, A., Dembrani M. B., Mahapatra B., jhansi N. Z.",
+      description: "Edge Preserving Image Smoothing Benchmark System with Deep Convolutional Neural Network is invented in which image smoothing is performed by retaining the edge of an image with Deep Convolutional Neural Network by the state of art filters.",
+      school: "School of Information & Communication Technology",
+      category: "Granted",
+      filingDate: "2020"
     },
     {
       id: 2,
-      title: "Voice Synthesis Mechanism through Natural Language Processing for Voice Interactive Robots",
-      inventors: "School of Information & Communication Technology (SOICT)",
-      patentNo: "IN202311059231",
-      filingDate: "2023-09-28",
-      status: "Published",
-      category: "Artificial Intelligence",
-      school: "Information & Communication Technology",
+      title: "Techniques and Architectures for Providing and Operating an Application-Aware Database Environment",
+      status: "Granted",
+      year: "2020",
+      type: "United States Patent (USPTO)",
+      patentNo: "8956P286 (1883US1)",
+      inventors: "Sharma, V.",
+      description: "Novel techniques and software/hardware architectures for establishing and managing application-aware database environments with high operational efficiency.",
+      school: "School of Information & Communication Technology",
+      category: "Granted",
+      filingDate: "2020"
     },
     {
       id: 3,
-      title: "Automated Personality Prediction System Using Multimodal Behavioral Analytics",
-      inventors: "Department of Computer Science & Engineering, SOICT",
-      patentNo: "IN202411012345",
-      filingDate: "2024-02-10",
+      title: "A Technique for Traffic Prediction and Congestion Control in IOT Networks using Machine Learning",
       status: "Granted",
-      category: "Computer Science",
-      school: "Information & Communication Technology",
+      year: "2020",
+      type: "Australian Patent",
+      patentNo: "Australian Patent",
+      inventors: "Sharma, S.",
+      description: "Machine learning-driven traffic forecasting and congestion mitigation algorithms optimized for Internet of Things (IoT) wireless sensor networks.",
+      school: "School of Information & Communication Technology",
+      category: "Granted",
+      filingDate: "2020"
     },
+    {
+      id: 4,
+      title: "Voice Synthesis Mechanism through Natural Language Processing for Voice Interactive Robots",
+      status: "Published",
+      year: "2020",
+      type: "Indian Patent",
+      patentNo: "Indian Patent",
+      inventors: "Sharma, S.",
+      description: "A natural language processing framework enabling real-time voice synthesis and interactive dialogue for autonomous robotic systems.",
+      school: "School of Information & Communication Technology",
+      category: "Published",
+      filingDate: "2020"
+    },
+    {
+      id: 5,
+      title: "IoT based Plant Detection using Support Vector Machine Algorithm",
+      status: "Published",
+      year: "2020",
+      type: "Indian Patent",
+      patentNo: "Indian Patent",
+      inventors: "Sharma, S.",
+      description: "An IoT-enabled agricultural classification system applying Support Vector Machine (SVM) algorithms for automated plant detection and health monitoring.",
+      school: "School of Information & Communication Technology",
+      category: "Published",
+      filingDate: "2020"
+    },
+    {
+      id: 6,
+      title: "A Novel Intelligent Force Convection and Utilization of Phase Change Property of the Materials for Thermal Energy Harvesting",
+      status: "Published",
+      year: "2020",
+      type: "Indian Patent App",
+      patentNo: "201811048341",
+      inventors: "Sharma, V. and Verma, G.",
+      description: "Thermal energy harvesting technology leveraging forced convection dynamics and phase change materials for sustainable power conversion.",
+      school: "School of Information & Communication Technology",
+      category: "Published",
+      filingDate: "2020"
+    },
+    {
+      id: 7,
+      title: "A Novel Dynamic Array of RF Energy Harvesters With Hybrid Storage for Wireless Sensor Network",
+      status: "Published",
+      year: "2020",
+      type: "Indian Patent App",
+      patentNo: "201811048340",
+      inventors: "Sharma, V. and Verma, G.",
+      description: "Dynamic RF energy harvesting array featuring hybrid energy storage architectures designed for battery-less wireless sensor nodes.",
+      school: "School of Information & Communication Technology",
+      category: "Published",
+      filingDate: "2020"
+    },
+    {
+      id: 8,
+      title: "Automated Personality Prediction",
+      status: "Filed",
+      year: "2021",
+      type: "Patent Journal Office, INDIA",
+      patentNo: "202111001636 A",
+      inventors: "Acharya, D.; Bhardwaj, H.; Sakalle, A.; Goel, S.; Biswas, K. K.; Tomar, P. and Bhardwaj, A.",
+      description: "Automated personality classification system utilising computational intelligence algorithms and physiological sensor data analysis.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2021"
+    },
+    {
+      id: 9,
+      title: "Diode Bridge",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "336950-001",
+      inventors: "Nayyar, A.; Rameshwer, R.; Shukla, P. K.; Krishnamurthi, R. and Tomar, P.",
+      description: "Novel semiconductor diode bridge design for micro-power conversion circuit applications.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    },
+    {
+      id: 10,
+      title: "Synthetic Gene Coding for Foki Nuclease Domain in Programmable Nucleases for Genome Editing",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "202011039103",
+      inventors: "Nain, V; Suman and Tomar, P.",
+      description: "Genetically engineered FokI nuclease domain sequence optimized for targeted genome editing enzymes.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    },
+    {
+      id: 11,
+      title: "Synthetic Gene Coding for VP64 Transcription Activation Domain in Programmable Transcription Factors",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "202011039104",
+      inventors: "Nain, V; Suman and Tomar, P.",
+      description: "Synthetic gene construct encoding VP64 transcriptional activation domain for synthetic biology tools.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    },
+    {
+      id: 12,
+      title: "Synthetic Gene Coding for NF-Κb P65 Activation Domain Transcription Activation Domain in Programmable Transcription Factors",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "202011039105",
+      inventors: "Nain, V; Suman and Tomar, P.",
+      description: "Synthetic NF-κB p65 gene domain engineered for robust programmable transcription factor activation.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    },
+    {
+      id: 13,
+      title: "Synthetic Gene Coding for Krab Transcription Repression Domain in Programmable Transcription Repressors",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "202011039106",
+      inventors: "Nain, V; Suman and Tomar, P.",
+      description: "Optimized KRAB transcription repressor domain sequence for epigenome gene silencing applications.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    },
+    {
+      id: 14,
+      title: "Synthetic Gene Coding for TET1 Catalytic Domain in Programmable Enzymes for Epigenome Editing",
+      status: "Filed",
+      year: "2020",
+      type: "Indian Patent Application",
+      patentNo: "202011039107",
+      inventors: "Nain, V; Suman and Tomar, P.",
+      description: "Engineered TET1 catalytic domain sequence designed for targeted DNA demethylation and epigenome editing.",
+      school: "School of Information & Communication Technology",
+      category: "Filed",
+      filingDate: "2020"
+    }
   ];
 
   const filteredPublications = publications.filter((pub) => {
@@ -139,7 +291,11 @@ const Publications = () => {
   const filteredPatents = patents.filter((p) => {
     return (
       (!selectedSchool || p.school === selectedSchool) &&
-      (!selectedStatus || p.status === selectedStatus)
+      (!selectedStatus || p.status === selectedStatus) &&
+      (!searchTerm ||
+        p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.inventors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.patentNo.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
 
@@ -753,7 +909,7 @@ const Publications = () => {
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && selectedBulletin && (
+          {totalPages > 1 && (activeTab === "patents" || selectedBulletin) && (
             <div className="flex justify-center items-center space-x-2 mt-6 overflow-x-auto py-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}

@@ -610,69 +610,69 @@ const EventDetail = () => {
                 </div>
               )}
             </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mt-auto">
-              <Button 
-                size="md" 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
-                asChild
-                disabled={!event.isUpcoming || !event.registrationUrl}
-              >
-                {event.isUpcoming && event.registrationUrl ? (
-                  <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={18} className="mr-2" />
-                    Register Now
-                  </a>
-                ) : (
-                  <span>
-                    <ExternalLink size={18} className="mr-2" />
-                    Register Now
-                  </span>
-                )}
-              </Button>
-
-              <Button 
-                size="md" 
-                variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50" 
-                asChild
-                disabled={!event.flyerUrl && !event.brochureUrl}
-              >
-                {(event.flyerUrl || event.brochureUrl) ? (
-                  <a href={event.flyerUrl || event.brochureUrl} target="_blank" rel="noopener noreferrer">
-                    <Download size={18} className="mr-2 text-gray-600" />
-                    Download Flyer
-                  </a>
-                ) : (
-                  <span>
-                    <Download size={18} className="mr-2 text-gray-400" />
-                    Download Flyer
-                  </span>
-                )}
-              </Button>
-
-              <Button 
-                size="md" 
-                variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50" 
-                onClick={addToGoogleCalendar}
-              >
-                <CalendarPlus size={18} className="mr-2 text-gray-600" />
-                Add to Calendar
-              </Button>
-
-              <SocialShare url={window.location.href} title={event.title} className="w-full h-full" />
-            </div>
           </div>
         </div>
 
-        {/* Full-width Description */}
+        {/* Full-width Description & Actions */}
         <div className="mb-16 max-w-7xl">
           <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">About This Event</h3>
-          <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+          <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-10">
             {event.description}
           </p>
+
+          {/* Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl">
+            <Button 
+              size="md" 
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
+              asChild
+              disabled={!event.isUpcoming || !event.registrationUrl}
+            >
+              {event.isUpcoming && event.registrationUrl ? (
+                <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink size={18} className="mr-2" />
+                  Register Now
+                </a>
+              ) : (
+                <span>
+                  <ExternalLink size={18} className="mr-2" />
+                  Register Now
+                </span>
+              )}
+            </Button>
+
+            <Button 
+              size="md" 
+              variant="outline" 
+              className="w-full border-gray-300 hover:bg-gray-50" 
+              asChild
+              disabled={!event.flyerUrl && !event.brochureUrl}
+            >
+              {(event.flyerUrl || event.brochureUrl) ? (
+                <a href={event.flyerUrl || event.brochureUrl} target="_blank" rel="noopener noreferrer">
+                  <Download size={18} className="mr-2 text-gray-600" />
+                  Download Flyer
+                </a>
+              ) : (
+                <span>
+                  <Download size={18} className="mr-2 text-gray-400" />
+                  Download Flyer
+                </span>
+              )}
+            </Button>
+
+            <Button 
+              size="md" 
+              variant="outline" 
+              className="w-full border-gray-300 hover:bg-gray-50" 
+              onClick={addToGoogleCalendar}
+            >
+              <CalendarPlus size={18} className="mr-2 text-gray-600" />
+              Add to Calendar
+            </Button>
+
+            <SocialShare url={window.location.href} title={event.title} className="w-full" />
+          </div>
         </div>
 
         {/* Gallery Section (Only for Past Events) */}

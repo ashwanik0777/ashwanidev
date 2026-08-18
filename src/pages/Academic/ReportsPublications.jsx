@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FileText, ExternalLink, Search } from 'lucide-react';
+import React from 'react';
+import { FileText, ExternalLink } from 'lucide-react';
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -43,13 +43,6 @@ const ANNUAL_REPORTS_LIST = [
 ];
 
 const ReportsPublications = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredReports = ANNUAL_REPORTS_LIST.filter(report =>
-    report.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    report.period.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   return (
     <SearchableWrapper>
       <div className="min-h-screen bg-slate-50 font-sans pb-16">
@@ -61,31 +54,9 @@ const ReportsPublications = () => {
         />
 
         <div className="container mx-auto px-4 max-w-6xl pt-10">
-          {/* Header & Search */}
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-              <h2 className="text-2xl font-black text-slate-900">Official Annual Reports Archive</h2>
-              <p className="text-sm font-medium text-slate-500 mt-1">
-                Access and download official university annual reports from 2014 onwards.
-              </p>
-            </div>
-
-            {/* Search Input */}
-            <div className="relative w-full md:w-72">
-              <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search year or title..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-blue-600 transition-all"
-              />
-            </div>
-          </div>
-
           {/* Reports Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredReports.map((report) => (
+            {ANNUAL_REPORTS_LIST.map((report) => (
               <div
                 key={report.id}
                 className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group"
@@ -112,12 +83,6 @@ const ReportsPublications = () => {
               </div>
             ))}
           </div>
-
-          {filteredReports.length === 0 && (
-            <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 text-slate-500">
-              No reports found matching "{searchTerm}"
-            </div>
-          )}
         </div>
       </div>
     </SearchableWrapper>

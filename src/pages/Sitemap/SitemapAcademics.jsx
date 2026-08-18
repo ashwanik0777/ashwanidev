@@ -8,7 +8,6 @@ const ACADEMIC_LINKS = [
   { title: "Academic Calendar & Regulations", path: "/academics/academic-calendar", icon: Calendar, desc: "Session schedules, exam dates, and academic timelines." },
   { title: "List of Holidays", path: "/academics/list-of-holidays", icon: CalendarRange, desc: "Official university gazetted holidays, restricted days, and vacation breaks." },
   { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework", icon: BookOpen, desc: "Choice Based Credit System and 10-point grading scheme." },
-  { title: "Centers of Excellence", path: "/academics/centers-of-excellence", icon: Award, desc: "Specialized interdisciplinary research and innovation centers." },
   { title: "Faculty Directory", path: "/academics/faculty", icon: Users, desc: "Directory of distinguished faculty members across disciplines." },
   { title: "International Collaboration", path: "/academics/international-collaboration", icon: Globe, desc: "Global MoUs, student exchanges, and joint research programs." },
   { title: "National Academic Depository (NAD)", path: "/academics/national-academic-depository", icon: FileText, desc: "Digital repository for academic degrees and certificates." },

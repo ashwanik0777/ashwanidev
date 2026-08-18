@@ -120,7 +120,6 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "price", label: "Price / Registration Fee", placeholder: "Free" },
     { key: "year", label: "Year", placeholder: "2026" },
     { key: "tags", label: "Tags (comma separated)" },
-    { key: "coverImageUrl", label: "Cover Image URL" },
     { key: "registrationUrl", label: "Registration Link" },
     { key: "brochureUrl", label: "Brochure PDF URL", placeholder: "https://.../brochure.pdf" },
     { key: "flyerUrl", label: "Flyer Image URL", placeholder: "https://.../flyer.jpg" },

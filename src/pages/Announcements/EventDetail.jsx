@@ -8,6 +8,7 @@ import {
   ExternalLink,
   CalendarPlus,
   Download,
+  X,
 } from "lucide-react";
 import Header from "../../components/announcement/Header";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -424,6 +425,7 @@ const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -497,7 +499,7 @@ const EventDetail = () => {
       ? event.images.split(',').map(s => s.trim()).filter(Boolean)
       : [];
 
-  const flyerImage = event.flyerUrl || event.coverImageUrl || event.image || eventImages[0] || '';
+  const flyerImage = event.flyerUrl || '';
 
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20">
@@ -512,23 +514,24 @@ const EventDetail = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
-          {/* Left Column: Portrait Flyer */}
+          {/* Left Column: Flyer */}
           <div className="lg:col-span-6 xl:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] bg-gray-900 border border-gray-200">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] bg-gray-100 border border-gray-200 flex items-center justify-center">
               {flyerImage ? (
                 <img
                   src={parseImageUrl(flyerImage)}
                   alt={event.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-500">
-                  <Calendar size={64} className="opacity-50" />
+                <div className="flex flex-col items-center justify-center text-gray-400 p-6 text-center">
+                  <Calendar size={64} className="opacity-50 mb-4" />
+                  <p className="text-sm">Flyer not available</p>
                 </div>
               )}
               {event.isUpcoming && (
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 right-4 z-10">
                   <span className="bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
                     UPCOMING
                   </span>
@@ -611,8 +614,8 @@ const EventDetail = () => {
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 mt-auto">
               <Button 
-                size="lg" 
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg py-4" 
+                size="md" 
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
                 asChild
                 disabled={!event.isUpcoming || !event.registrationUrl}
               >
@@ -630,9 +633,9 @@ const EventDetail = () => {
               </Button>
 
               <Button 
-                size="lg" 
+                size="md" 
                 variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50 py-4" 
+                className="w-full border-gray-300 hover:bg-gray-50" 
                 asChild
                 disabled={!event.flyerUrl && !event.brochureUrl}
               >
@@ -650,9 +653,9 @@ const EventDetail = () => {
               </Button>
 
               <Button 
-                size="lg" 
+                size="md" 
                 variant="outline" 
-                className="w-full border-gray-300 hover:bg-gray-50 py-4" 
+                className="w-full border-gray-300 hover:bg-gray-50" 
                 onClick={addToGoogleCalendar}
               >
                 <CalendarPlus size={18} className="mr-2 text-gray-600" />
@@ -665,7 +668,7 @@ const EventDetail = () => {
         </div>
 
         {/* Full-width Description */}
-        <div className="mb-16 max-w-4xl">
+        <div className="mb-16 max-w-7xl">
           <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">About This Event</h3>
           <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
             {event.description}
@@ -680,7 +683,8 @@ const EventDetail = () => {
               {eventImages.map((image, index) => (
                 <div
                   key={index}
-                  className="aspect-video overflow-hidden rounded-xl shadow-md group relative bg-gray-100"
+                  className="aspect-video overflow-hidden rounded-xl shadow-md group relative bg-gray-100 cursor-pointer"
+                  onClick={() => setSelectedImage(image)}
                 >
                   <img
                     src={parseImageUrl(image)}
@@ -695,6 +699,27 @@ const EventDetail = () => {
           </div>
         )}
       </div>
+
+      {/* Lightbox for Gallery */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white hover:text-gray-300 bg-black/50 p-2 rounded-full transition-colors"
+            onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+          >
+            <X size={28} />
+          </button>
+          <img 
+            src={parseImageUrl(selectedImage)} 
+            alt="Gallery preview" 
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };

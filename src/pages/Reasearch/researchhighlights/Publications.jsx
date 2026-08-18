@@ -6,6 +6,13 @@ import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.j
 import ButtonGroup from '../../../components/TabsData.jsx';
 import { allResearchPublications } from "../../../Data/researchPublicationsData.js";
 import { booksData as soictBooksData } from "../../../Data/schools/SOICT/research/books.jsx";
+import { booksData as sobtBooksData } from "../../../Data/schools/SOBT/research/books.jsx";
+import { booksData as soeBooksData } from "../../../Data/schools/SOE/research/books.jsx";
+import { booksData as solBooksData } from "../../../Data/schools/SOL/research/books.jsx";
+import { booksData as somBooksData } from "../../../Data/schools/SOM/research/books.jsx";
+import { booksData as sohssBooksData } from "../../../Data/schools/SOHSS/research/books.jsx";
+import { booksData as sobscBooksData } from "../../../Data/schools/SOBSC/research/books.jsx";
+import { booksData as sovsBooksData } from "../../../Data/schools/SOVS/research/books.jsx";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
@@ -276,8 +283,19 @@ const Publications = () => {
     }
   ];
 
-  const books = [
-    ...(soictBooksData?.booksList || []).map((b) => ({
+  const allSchoolBooksData = [
+    soictBooksData,
+    sobtBooksData,
+    soeBooksData,
+    solBooksData,
+    somBooksData,
+    sohssBooksData,
+    sobscBooksData,
+    sovsBooksData,
+  ];
+
+  const books = allSchoolBooksData.flatMap((schoolData) =>
+    (schoolData?.booksList || []).map((b) => ({
       id: b.id,
       title: b.title,
       authors: b.authors || b.faculty,
@@ -285,11 +303,11 @@ const Publications = () => {
       year: b.year,
       isbn: b.isbn || "N/A",
       type: b.type || "Book Chapter",
-      school: "School of Information & Communication Technology",
+      school: b.school || schoolData?.schoolName || "Gautam Buddha University",
       description: b.description || `Published by ${b.publisher} (${b.year}). Authors: ${b.authors || b.faculty}.`,
       link: b.link,
-    })),
-  ];
+    }))
+  );
 
   const filteredPublications = publications.filter((pub) => {
     return (

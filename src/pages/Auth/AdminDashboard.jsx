@@ -7522,9 +7522,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="flex w-full flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
+    <div className="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 p-2 md:p-4">
+      <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
+        <aside className="lg:h-full lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Admin Navigation</h2>
 
@@ -7668,7 +7668,7 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto lg:pr-4 lg:pb-8">
           {activeTab === "overview" && (
             <section className="space-y-6">
               <section className={cardClass}>

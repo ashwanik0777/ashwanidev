@@ -182,7 +182,6 @@ export const ANNOUNCEMENT_COLUMNS = {
     { key: "title", label: "Title" },
     { key: "date", label: "Date" },
     { key: "type", label: "Type" },
-    { key: "priority", label: "Priority" },
   ],
   news: [
     { key: "title", label: "Title" },
@@ -193,7 +192,6 @@ export const ANNOUNCEMENT_COLUMNS = {
   events: [
     { key: "title", label: "Title" },
     { key: "startsAt", label: "Date" },
-    { key: "type", label: "Type" },
     { key: "venue", label: "Venue" },
   ],
   newsletters: [

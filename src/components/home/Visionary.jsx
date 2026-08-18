@@ -67,8 +67,18 @@ const VisionaryLeadership = () => {
       {/* Top Left Accent Ribbon */}
       <div className="absolute top-0 left-0 h-1.5 w-48 bg-gradient-to-r from-orange-500 via-amber-500 to-transparent z-10" />
 
+      {/* Mobile Background Image (Visible on screens < lg) */}
+      <div className="block lg:hidden absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <img
+          src={gbuCampusView}
+          alt="Gautam Buddha University Campus"
+          className="w-full h-full object-cover object-center opacity-40 filter contrast-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#eaf4f8]/60 via-[#eaf4f8]/75 to-[#eaf4f8]/85" />
+      </div>
+
       {/* Desktop Only (lg+): Full-height Left Campus Image Banner */}
-      <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 h-full overflow-hidden pointer-events-none">
+      <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 h-full overflow-hidden pointer-events-none z-0">
         <img
           src={gbuCampusView}
           alt="Gautam Buddha University Campus"
@@ -85,7 +95,7 @@ const VisionaryLeadership = () => {
         <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#eaf4f8] to-transparent" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-3 sm:py-4">
         <div className="flex flex-col lg:flex-row items-center justify-end gap-5 lg:gap-6">
 
           {/* Spacer to balance left 50% campus view on desktop */}
@@ -97,7 +107,7 @@ const VisionaryLeadership = () => {
               <Link
                 key={leader.id || leader.name}
                 to={leader.url}
-                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 flex flex-row items-center gap-3.5 sm:gap-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
+                className="w-full bg-white/95 backdrop-blur-md border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 flex flex-row items-center gap-3.5 sm:gap-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
               >
                 {/* Leader Avatar Photo (Circular RMNLU Frame) */}
                 <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300">

@@ -18,22 +18,9 @@ const Coedt = () => {
         subtitle={coeDroneData.hero.subtitle}
         bgTheme={coeDroneData.hero.bgTheme}
 />
-      <AboutSection
-        sectionTitle="About Us"
-        visionTitle={coeDroneData.about.visionTitle}
-        visionDescription={coeDroneData.about.visionDescription}
-        missionTitle={coeDroneData.about.missionTitle}
-        missionPoints={coeDroneData.about.missionPoints}
-        storyTitle={coeDroneData.about.storyTitle}
-        storyText={coeDroneData.about.storyText}
-        whatWeDoTitle={coeDroneData.about.whatWeDoTitle}
-        whatWeDoText={coeDroneData.about.whatWeDoText}
-        commitmentTitle={coeDroneData.about.commitmentTitle}
-        commitmentText={coeDroneData.about.commitmentText}
-        photos={coeDroneData.about.photos}
-      />
+      <AboutSection />
 
-      <Mentors sectionTitle="Meet Our Mentors" mentors={coeDroneData.mentors} />
+      {/* <Mentors sectionTitle="Meet Our Mentors" mentors={coeDroneData.mentors} /> */}
 
       <PartnersCarousel
         sectionTitle="Our Collaborators"
@@ -60,6 +47,7 @@ const Coedt = () => {
         startDate={coeDroneData.course.startDate}
         venue={coeDroneData.course.venue}
         highlights={coeDroneData.course.highlights}
+        modeDetails={coeDroneData.course.modeDetails}
         syllabusLink={coeDroneData.course.syllabusLink}
       />
 

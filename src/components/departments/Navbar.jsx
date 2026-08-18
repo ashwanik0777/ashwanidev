@@ -229,13 +229,13 @@ const Navbar = () => {
     // Default SOICT items
     return [
       { label: "Dean's Message", href: routes.about.dean },
-      { label: "SoICT COEIDrone Technologies", href: routes.about.coeidrone },
-      { label: "SoICT Cyber Security Lab", href: routes.about.cyber },
-      { label: "SoICT COEIRAEM", href: routes.about.coeiraem },
-      { label: "SoICT Board of Studies", href: routes.about.board },
-      { label: "SoICT Staff Members", href: routes.about.staff },
-      { label: "SoICT Laboratories", href: routes.about.labs },
-      { label: "SoICT Activities", href: routes.about.activities },
+      { label: "COE Drone Technologies (CEDT)", href: routes.about.coeidrone },
+      { label: "Cyber Security Lab", href: routes.about.cyber },
+      { label: "COE RAEM", href: routes.about.coeiraem },
+      { label: "Board of Studies", href: routes.about.board },
+      { label: "Staff Members", href: routes.about.staff },
+      { label: "Laboratories", href: routes.about.labs },
+      { label: "Activities", href: routes.about.activities },
     ];
   };
 
@@ -468,7 +468,7 @@ const Navbar = () => {
             <AnimatePresence>
               {openMenu === key && (
                 <motion.ul
-                  className="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-lg shadow-xl rounded-xl border border-gray-200 p-2 z-50"
+                  className="absolute top-full left-0 mt-2 min-w-[260px] max-w-sm w-auto bg-white/95 backdrop-blur-lg shadow-xl rounded-xl border border-gray-200 p-2 z-50 whitespace-nowrap"
                   variants={dropdownVariants}
                   initial="hidden"
                   animate="visible"

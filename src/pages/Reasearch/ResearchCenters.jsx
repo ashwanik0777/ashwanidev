@@ -204,14 +204,23 @@ const ResearchCenters = () => {
                   </div>
 
                   <div className="mt-auto pt-4 border-t border-gray-100">
-                    <a
-                      href={center.portalLink || "https://gburif.org/coe.php"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
-                    >
-                      Visit CoE Portal <ExternalLink size={14} />
-                    </a>
+                    {(center.portalLink || "").startsWith("/") ? (
+                      <Link
+                        to={center.portalLink}
+                        className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
+                      >
+                        Visit CoE Portal <ArrowRight size={14} />
+                      </Link>
+                    ) : (
+                      <a
+                        href={center.portalLink || "https://gburif.org/coe.php"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-lg w-full text-center hover:bg-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm"
+                      >
+                        Visit CoE Portal <ExternalLink size={14} />
+                      </a>
+                    )}
                   </div>
                 </div>
               ))

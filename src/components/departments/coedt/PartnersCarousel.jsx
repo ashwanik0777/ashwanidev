@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // ✅ Reusable Badge
 const Badge = ({ className = "", children }) => (
@@ -17,6 +17,7 @@ const PartnersCarousel = ({
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    if (!partners.length) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % partners.length);
     }, interval);
@@ -34,61 +35,60 @@ const PartnersCarousel = ({
     }
   };
 
+  const partner = partners[currentSlide];
+
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 sm:py-12 bg-gray-50/70 w-full">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{sectionTitle}</h2>
-          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        <div className="text-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">{sectionTitle}</h2>
+          <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
+          {sectionSubtitle && (
+            <p className="text-sm text-gray-500 mt-2 font-medium">{sectionSubtitle}</p>
+          )}
         </div>
 
-        {/* Carousel */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative shadow-xl border-gray-300 border-[1px] border-solid bg-white/90 backdrop-blur-sm rounded-xl overflow-hidden"
-        >
-          <div className="relative h-80 md:h-72">
-            {partners.map((partner, index) => (
+        {/* Dynamic Card Container */}
+        {partner && (
+          <div className="relative shadow-xl border border-gray-200 bg-white rounded-2xl overflow-hidden">
+            <AnimatePresence mode="wait">
               <motion.div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                }`}
+                key={currentSlide}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="flex flex-col md:flex-row items-center"
               >
-                <div className="grid md:grid-cols-2 h-full">
-                  {/* Text */}
-                  <div className="p-6 flex flex-col justify-center bg-gradient-to-br from-white to-blue-50">
-                    <div className="mb-3">
-                      <Badge className={getTypeColor(partner.type)}>{partner.type}</Badge>
-                      {partner.year && (
-                        <Badge className="ml-2 bg-gray-100 text-gray-800">
-                          Since {partner.year}
-                        </Badge>
-                      )}
-                    </div>
-                    <h3 className="text-2xl font-bold text-blue-900 mb-2">{partner.name}</h3>
-                    <p className="text-gray-700">{partner.description}</p>
+                {/* Text Details */}
+                <div className="p-6 sm:p-8 flex flex-col justify-center bg-gradient-to-br from-white via-blue-50/30 to-white md:w-7/12 w-full">
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <Badge className={getTypeColor(partner.type)}>{partner.type}</Badge>
+                    {partner.year && (
+                      <Badge className="bg-gray-100 text-gray-800 border border-gray-200">
+                        Since {partner.year}
+                      </Badge>
+                    )}
                   </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-blue-950 mb-2">{partner.name}</h3>
+                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{partner.description}</p>
+                </div>
 
-                  {/* Image */}
-                  <div className="relative flex items-center justify-center p-6">
-                    <div className="w-60 h-40 md:w-72 md:h-44 flex items-center justify-center bg-white rounded-lg border border-gray-200 border-solid">
-                      <img
-                        src={partner.image}
-                        alt={partner.name}
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    </div>
+                {/* Logo Image */}
+                <div className="flex items-center justify-center p-6 md:w-5/12 w-full bg-gray-50/60 border-t md:border-t-0 md:border-l border-gray-100">
+                  <div className="w-48 h-24 sm:w-56 sm:h-28 flex items-center justify-center bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+                    <img
+                      src={partner.image}
+                      alt={partner.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
                   </div>
                 </div>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
-        </motion.div>
+        )}
 
         {/* Indicators */}
         <div className="flex justify-center mt-6 space-x-2">
@@ -96,10 +96,11 @@ const PartnersCarousel = ({
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              aria-label={`Go to slide ${index + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === currentSlide
-                  ? "bg-blue-600 shadow-lg scale-125"
-                  : "bg-gray-300 hover:bg-gray-400"
+                  ? "w-8 bg-blue-600 shadow-md"
+                  : "w-2.5 bg-gray-300 hover:bg-gray-400"
               }`}
             />
           ))}

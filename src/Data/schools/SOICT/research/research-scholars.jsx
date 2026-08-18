@@ -2,7 +2,7 @@ export const researchScholarsData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
   hero: {
-    title: "RESEARCH SCHOLARS | SOICT",
+    title: "Research Scholars | SOICT",
     subtitle: "Comprehensive list of Ph.D. Research Scholars at SOICT, Gautam Buddha University",
   },
   byYear: [

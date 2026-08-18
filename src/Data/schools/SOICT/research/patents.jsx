@@ -6,12 +6,7 @@ export const patentsData = {
     subtitle:
       "Explore the patents filed, published, and granted to faculty members and researchers of USICT.",
   },
-  stats: [
-    { icon: "Award", number: 7, subtitle: "Patents Filed" },
-    { icon: "FileText", number: 4, subtitle: "Patents Published" },
-    { icon: "CheckCircle", number: 3, subtitle: "Patents Granted" },
-    { icon: "TrendingUp", number: 14, subtitle: "Total Innovations" },
-  ],
+  stats: [],
   patentsList: [
     // GRANTED PATENTS
     {

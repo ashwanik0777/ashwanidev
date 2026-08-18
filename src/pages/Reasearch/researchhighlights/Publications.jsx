@@ -212,6 +212,26 @@ const Publications = () => {
         </div>
 
         <div className="px-4 sm:px-8 lg:px-16 pt-6 pb-10">
+          {/* Main Navigation Tabs */}
+          <div className="mb-6">
+            <ButtonGroup
+              buttons={[
+                { id: "publications", label: "Research Publications" },
+                { id: "patents", label: "Patents" },
+              ]}
+              onClick={(btnId) => {
+                setActiveTab(btnId);
+                setCurrentPage(1);
+              }}
+              activeButton={activeTab}
+              size="lg"
+              fullWidth={true}
+              rounded="lg"
+              theme="primary"
+              animated={true}
+            />
+          </div>
+
           {/* Filters & View Switch Header */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-8 mb-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">

@@ -2,7 +2,7 @@ export const researchProjectsData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
   hero: {
-    title: "RESEARCH PROJECTS | USICT",
+    title: "Research Projects | SOICT",
     description:
       "Ongoing sponsored research initiatives and projects at the School of Information & Communication Technology.",
   },

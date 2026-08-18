@@ -122,8 +122,6 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "year", label: "Year", placeholder: "2026" },
     { key: "tags", label: "Tags (comma separated)" },
     { key: "coverImageUrl", label: "Cover Image URL" },
-    { key: "imageLink", label: "Image Click Link" },
-    { key: "images", label: "Gallery Images (comma separated URLs)", type: "textarea" },
     { key: "registrationUrl", label: "Registration Link" },
     { key: "brochureUrl", label: "Brochure PDF URL", placeholder: "https://.../brochure.pdf" },
     { key: "flyerUrl", label: "Flyer Image URL", placeholder: "https://.../flyer.jpg" },
@@ -142,11 +140,8 @@ export const ANNOUNCEMENT_FIELDS = {
   ],
 
   gallery: [
-    { key: "title", label: "Album Title", required: true },
-    { key: "category", label: "Category", type: "select", options: GALLERY_CATEGORIES, required: true },
-    { key: "year", label: "Year", placeholder: "2026", required: true },
-    { key: "date", label: "Album Date", type: "date", required: true },
-    { key: "images", label: "Image URLs (one per line, or comma separated)", type: "textarea", required: true },
+    { key: "images", label: "Gallery Image URLs", type: "image-list" },
+    { key: "coverImage", label: "Homepage Cover Image", type: "cover-selector" },
   ],
 };
 
@@ -201,9 +196,8 @@ export const ANNOUNCEMENT_COLUMNS = {
     { key: "category", label: "Category" },
   ],
   gallery: [
-    { key: "title", label: "Album" },
-    { key: "date", label: "Date" },
-    { key: "category", label: "Category" },
-    { key: "year", label: "Year" },
+    { key: "title", label: "Event Title" },
+    { key: "startsAt", label: "Date" },
+    { key: "venue", label: "Venue" },
   ],
 };

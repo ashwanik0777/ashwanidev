@@ -150,7 +150,7 @@ export default function TrainingConsultancyPage() {
         // Fallback: use inline SOICT defaults
         setTcData({
           hero: {
-            title: "Professional Excellence Through Training",
+            title: "TRAINING AND CONSULTANCY",
             subtitle: "Comprehensive training programs and consultancy services to bridge the gap between academia and industry.",
           },
           stats: [

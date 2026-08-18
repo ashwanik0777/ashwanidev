@@ -10,8 +10,36 @@
     <div id="root"></div>
 
     <script type="module" src="/src/main.jsx"></script>
-    <!-- <script src="//code.tidio.co/seyssxhtoakcgq53mpvqgerjgh1dhp0a.js" async></script> -->
     <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
-    <script src="https://files.bpcontent.cloud/2025/05/24/07/20250524072802-L7N1OH7P.js" defer></script>
+    <script defer>
+      window.addEventListener('load', function() {
+        if (window.botpress) {
+          window.botpress.init({
+            "botId": "c7f7a2b3-4ecc-40d1-bae3-9a4eaef84dc8",
+            "configuration": {
+              "version": "v1",
+              "botName": "GBU Mitra",
+              "botAvatar": "/assets/chatbot.jpeg",
+              "fabImage": "/assets/chatbot.jpeg",
+              "website": {},
+              "email": {},
+              "phone": {},
+              "termsOfService": {},
+              "privacyPolicy": {},
+              "color": "#57b6ff",
+              "variant": "soft",
+              "headerVariant": "solid",
+              "themeMode": "light",
+              "fontFamily": "inter",
+              "radius": 2,
+              "feedbackEnabled": false,
+              "footer": "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+              "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/06/26/20/20250626200848-EOII1GPP.css"
+            },
+            "clientId": "5f8a300c-c5f4-44ed-a032-cf8b6eb10e28"
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -4636,9 +4636,9 @@ const AdminDashboard = () => {
       }
     };
 
-    const handleUpdateInCharge = async (facilityId, email, name) => {
+    const handleUpdateInCharge = async (facilityId, email, name, phone) => {
       try {
-        await updateFacilityInCharge(facilityId, { email, name });
+        await updateFacilityInCharge(facilityId, { email, name, phone });
         setMessage("In-charge updated successfully.");
         setBookingReloadToken((t) => t + 1);
       } catch (err) {
@@ -4732,12 +4732,11 @@ const AdminDashboard = () => {
                 <>
                   <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
                     <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                      <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                      <thead className="bg-slate-50 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                         <tr>
-                          <th className="px-4 py-3">Token</th>
-                          <th className="px-4 py-3">Applicant</th>
-                          <th className="px-4 py-3">Facility</th>
-                          <th className="px-4 py-3">Date</th>
+                          <th className="px-4 py-3">Token & Info</th>
+                          <th className="px-4 py-3">User Details</th>
+                          <th className="px-4 py-3">Dates & Time</th>
                           <th className="px-4 py-3">Status</th>
                           <th className="px-4 py-3 text-right">Actions</th>
                         </tr>
@@ -4745,28 +4744,37 @@ const AdminDashboard = () => {
                       <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
                         {bookingRequests.map((req) => (
                           <tr key={req.id} className="hover:bg-slate-50/80 transition-colors">
-                            <td className="px-4 py-3 text-xs font-mono font-bold text-slate-900">{req.token_number || "—"}</td>
                             <td className="px-4 py-3">
-                              <p className="font-bold text-slate-900 text-xs">{req.applicant_name}</p>
-                              <p className="text-[11px] text-slate-400">{req.applicant_email}</p>
+                              <div className="font-bold text-slate-900 font-mono text-xs mb-1">{req.token}</div>
+                              <div className="text-[11px] text-slate-500 max-w-[150px] truncate" title={req.facility_name}>{req.facility_name}</div>
                             </td>
-                            <td className="px-4 py-3 text-xs">{req.facility_name || req.facility_id}</td>
-                            <td className="px-4 py-3 text-xs">{req.requested_date}</td>
+                            <td className="px-4 py-3">
+                              <div className="font-bold text-slate-900 text-xs">{req.user_name}</div>
+                              <div className="text-[11px] text-slate-500">{req.user_email}</div>
+                              <div className="text-[11px] text-slate-500">{req.user_phone_primary}</div>
+                            </td>
+                            <td className="px-4 py-3">
+                              <div className="text-xs">{new Date(req.start_time).toLocaleDateString()}</div>
+                              <div className="text-[10px] text-slate-500">
+                                {new Date(req.start_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} -
+                                {new Date(req.end_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                              </div>
+                            </td>
                             <td className="px-4 py-3">{statusBadge(req.status)}</td>
                             <td className="px-4 py-3 text-right">
                               {req.status === "pending" && (
-                                <div className="flex items-center justify-end gap-1.5">
+                                <div className="flex justify-end gap-2">
                                   <button
                                     type="button"
                                     onClick={() => handleApprove(req.id)}
-                                    className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 hover:bg-emerald-100 transition"
+                                    className="rounded-lg bg-emerald-600 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-emerald-700 transition"
                                   >
                                     Approve
                                   </button>
                                   <button
                                     type="button"
                                     onClick={() => handleReject(req.id)}
-                                    className="rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 transition"
+                                    className="rounded-lg bg-rose-600 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-rose-700 transition"
                                   >
                                     Reject
                                   </button>
@@ -4816,6 +4824,7 @@ const AdminDashboard = () => {
                       <th className="px-4 py-3">Facility</th>
                       <th className="px-4 py-3">In-Charge Name</th>
                       <th className="px-4 py-3">In-Charge Email</th>
+                      <th className="px-4 py-3">Phone</th>
                       <th className="px-4 py-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -4828,7 +4837,7 @@ const AdminDashboard = () => {
                           <td className="px-4 py-3">
                             <input
                               type="text"
-                              defaultValue={ic.in_charge_name || ""}
+                              defaultValue={ic.name || ""}
                               id={`ic-name-${facility.id}`}
                               className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-44"
                               placeholder="Name"
@@ -4837,10 +4846,19 @@ const AdminDashboard = () => {
                           <td className="px-4 py-3">
                             <input
                               type="email"
-                              defaultValue={ic.in_charge_email || ""}
+                              defaultValue={ic.email || ""}
                               id={`ic-email-${facility.id}`}
                               className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-52"
                               placeholder="email@gbu.ac.in"
+                            />
+                          </td>
+                          <td className="px-4 py-3">
+                            <input
+                              type="text"
+                              defaultValue={ic.phone || ""}
+                              id={`ic-phone-${facility.id}`}
+                              className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-32"
+                              placeholder="Phone"
                             />
                           </td>
                           <td className="px-4 py-3 text-right">
@@ -4849,7 +4867,8 @@ const AdminDashboard = () => {
                               onClick={() => {
                                 const name = document.getElementById(`ic-name-${facility.id}`)?.value || "";
                                 const email = document.getElementById(`ic-email-${facility.id}`)?.value || "";
-                                handleUpdateInCharge(facility.id, email, name);
+                                const phone = document.getElementById(`ic-phone-${facility.id}`)?.value || "";
+                                handleUpdateInCharge(facility.id, email, name, phone);
                               }}
                               className="rounded-lg bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 transition"
                             >

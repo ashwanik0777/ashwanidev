@@ -21,7 +21,7 @@ const FacilityBookingPage = () => {
 
   const facility = facilities.find((f) => f.id === facilityId);
 
-  const [selectedDate, setSelectedDate] = useState(undefined);
+  const [dateRange, setDateRange] = useState({ start: null, end: null });
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookedDates, setBookedDates] = useState([]);
   const [pendingDates, setPendingDates] = useState([]);
@@ -99,11 +99,36 @@ const FacilityBookingPage = () => {
     );
   }
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-    if (date) {
-      setShowBookingForm(true);
-    }
+    const handleDateSelect = (date) => {
+    setDateRange(prev => {
+      if (!prev.start || (prev.start && prev.end)) {
+        return { start: date, end: null };
+      }
+      if (date < prev.start) {
+        return { start: date, end: null };
+      }
+      let current = new Date(prev.start);
+      const end = new Date(date);
+      let isValid = true;
+      while (current <= end) {
+        const dateStr = format(current, "yyyy-MM-dd");
+        if (bookedDates.includes(dateStr) || pendingDates.includes(dateStr)) {
+          isValid = false;
+          break;
+        }
+        current.setDate(current.getDate() + 1);
+      }
+      if (!isValid) {
+        toast({
+          title: "Invalid Range",
+          description: "Selection includes dates that are already booked or pending.",
+          variant: "destructive"
+        });
+        return { start: date, end: null };
+      }
+      return { ...prev, end: date };
+    });
+    setShowBookingForm(true);
   };
 
   const handleBookingSubmit = async (bookingData) => {
@@ -115,8 +140,9 @@ const FacilityBookingPage = () => {
         description: `Your application token is ${response.data.token}.`,
       });
       // Clear selected date
-      setSelectedDate(undefined);
+      setDateRange({ start: null, end: null });
     } catch (error) {
+      console.error("Booking Submit Error:", error);
       toast({
         title: "Submission Failed",
         description: error.response?.data?.message || "Something went wrong. Please try again.",
@@ -126,7 +152,7 @@ const FacilityBookingPage = () => {
   };
 
   const handleBookingCancel = () => {
-    setSelectedDate(undefined);
+    setDateRange({ start: null, end: null });
   };
 
   return (
@@ -272,35 +298,90 @@ const FacilityBookingPage = () => {
                     <div className="bg-stone-50 border border-stone-200 rounded-2xl p-5 space-y-4">
                       <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400">Rent Rates Chart</h3>
                       <div className="space-y-2 text-sm text-stone-600">
-                        {facility.rentRate.peak && (
-                          <div className="flex justify-between items-center py-1">
-                            <span>Standard / Peak Day:</span>
-                            <span className="font-bold text-stone-900">₹{facility.rentRate.peak.toLocaleString()}</span>
+                        {facility.rentRate.winter && facility.rentRate.summer ? (
+                          <div className="space-y-3">
+                            <div>
+                              <span className="font-bold text-stone-900 text-xs">Winter Season</span>
+                              <div className="flex justify-between items-center py-1 text-xs">
+                                <span>Half Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.winter.halfDay?.toLocaleString() || '-'}</span>
+                              </div>
+                              <div className="flex justify-between items-center py-1 text-xs border-t border-stone-100/70">
+                                <span>Full Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.winter.fullDay?.toLocaleString() || '-'}</span>
+                              </div>
+                            </div>
+                            <div>
+                              <span className="font-bold text-stone-900 text-xs">Summer Season</span>
+                              <div className="flex justify-between items-center py-1 text-xs">
+                                <span>Half Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.summer.halfDay?.toLocaleString() || '-'}</span>
+                              </div>
+                              <div className="flex justify-between items-center py-1 text-xs border-t border-stone-100/70">
+                                <span>Full Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.summer.fullDay?.toLocaleString() || '-'}</span>
+                              </div>
+                            </div>
+                            {facility.rentRate.outsider && (
+                              <div className="pt-2 border-t border-stone-200">
+                                <span className="font-bold text-stone-900 text-xs">Outsider / Standard</span>
+                                <div className="flex justify-between items-center py-1 text-xs">
+                                  <span>Half Day:</span>
+                                  <span className="font-bold text-stone-900">₹{facility.rentRate.outsider.halfDay?.toLocaleString() || '-'}</span>
+                                </div>
+                                <div className="flex justify-between items-center py-1 text-xs border-t border-stone-100/70">
+                                  <span>Full Day:</span>
+                                  <span className="font-bold text-stone-900">₹{facility.rentRate.outsider.fullDay?.toLocaleString() || '-'}</span>
+                                </div>
+                              </div>
+                            )}
+                            {facility.rentRate.employee && (
+                              <div className="pt-2 border-t border-stone-200">
+                                <span className="font-bold text-stone-900 text-xs">GBU Employee</span>
+                                <div className="flex justify-between items-center py-1 text-xs">
+                                  <span>Half Day:</span>
+                                  <span className="font-bold text-purple-600">₹{facility.rentRate.employee.halfDay?.toLocaleString() || '-'}</span>
+                                </div>
+                                <div className="flex justify-between items-center py-1 text-xs border-t border-stone-100/70">
+                                  <span>Full Day:</span>
+                                  <span className="font-bold text-purple-600">₹{facility.rentRate.employee.fullDay?.toLocaleString() || '-'}</span>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                        )}
-                        {facility.rentRate.offPeak && (
-                          <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
-                            <span>Off-Peak Day:</span>
-                            <span className="font-bold text-stone-900">₹{facility.rentRate.offPeak.toLocaleString()}</span>
-                          </div>
-                        )}
-                        {facility.rentRate.student && (
-                          <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
-                            <span>GBU Student:</span>
-                            <span className="font-semibold text-emerald-600">₹{facility.rentRate.student.toLocaleString()}</span>
-                          </div>
-                        )}
-                        {facility.rentRate.employee && (
-                          <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
-                            <span>GBU Employee:</span>
-                            <span className="font-semibold text-purple-600">₹{facility.rentRate.employee.toLocaleString()}</span>
-                          </div>
-                        )}
-                        {facility.rentRate.outsider && (
-                          <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
-                            <span>Outsider:</span>
-                            <span className="font-semibold text-stone-900">₹{facility.rentRate.outsider.toLocaleString()}</span>
-                          </div>
+                        ) : (
+                          <>
+                            {facility.rentRate.peak && (
+                              <div className="flex justify-between items-center py-1">
+                                <span>Standard / Peak Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.peak.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {facility.rentRate.offPeak && (
+                              <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
+                                <span>Off-Peak Day:</span>
+                                <span className="font-bold text-stone-900">₹{facility.rentRate.offPeak.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {facility.rentRate.student && (
+                              <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
+                                <span>GBU Student:</span>
+                                <span className="font-semibold text-emerald-600">₹{facility.rentRate.student.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {facility.rentRate.employee && (
+                              <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
+                                <span>GBU Employee:</span>
+                                <span className="font-semibold text-purple-600">₹{facility.rentRate.employee.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {facility.rentRate.outsider && (
+                              <div className="flex justify-between items-center py-1 border-t border-stone-100/70">
+                                <span>Outsider:</span>
+                                <span className="font-semibold text-stone-900">₹{facility.rentRate.outsider.toLocaleString()}</span>
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
                     </div>
@@ -349,7 +430,7 @@ const FacilityBookingPage = () => {
                 <div className="space-y-4">
                   <h3 className="text-lg font-bold text-stone-950 px-1">Check Space Availability</h3>
                   <BookingCalendar
-                    selectedDate={selectedDate}
+                    dateRange={dateRange}
                     onDateSelect={handleDateSelect}
                     bookedDates={bookedDates}
                     pendingDates={pendingDates}
@@ -357,12 +438,12 @@ const FacilityBookingPage = () => {
                 </div>
 
                 <div className="space-y-4">
-                  {selectedDate ? (
+                  {dateRange.start ? (
                     <>
                       <h3 className="text-lg font-bold text-stone-950 px-1">Fill Application Details</h3>
                       <BookingForm
                         facility={facility}
-                        selectedDate={selectedDate}
+                        dateRange={dateRange}
                         onSubmit={handleBookingSubmit}
                         onCancel={handleBookingCancel}
                       />

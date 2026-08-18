@@ -74,7 +74,7 @@ const FacilityCard = ({ facility, userRole = "outsider" }) => {
     }
   };
 
-  const mainImage = facility.images && facility.images.length > 0 ? facility.images[0] : "/assets/logo1.png";
+  const mainImage = facility.images && facility.images.length > 0 ? facility.images[0] : "/assets/booking/logo1.png";
 
   return (
     <Card>

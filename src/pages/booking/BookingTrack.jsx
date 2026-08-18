@@ -165,7 +165,7 @@ const BookingTrack = () => {
             {booking.status === "approved" && (
               <div className="p-4 bg-emerald-50/40 border border-emerald-100 text-emerald-800 rounded-2xl">
                 <p className="text-xs leading-relaxed font-semibold">
-                  🎉 Your booking request is approved. Please coordinate with the manager below for security clearance, fee submission, and keys.
+                  Your booking request is approved. Please coordinate with the manager below for security clearance, fee submission, and keys.
                 </p>
               </div>
             )}

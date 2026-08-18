@@ -229,14 +229,23 @@ const CentersOfExcellence = () => {
                           <span className="font-semibold">Director:</span>{' '}
                           {center.director || 'N/A'}
                         </p>
-                        <a
-                          href={center.id === 1 || (center.card_title || "").includes("Drone") ? "https://cedtgbu.wixsite.com/home" : (center.link || "https://gburif.org/coe.php")}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
-                        >
-                          CoE Portal <ExternalLink size={12} />
-                        </a>
+                        {center.id === 1 || (center.card_title || "").includes("Drone") ? (
+                          <Link
+                            to="/schools/SOICT/departments/coedt"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
+                          >
+                            CoE Portal <ArrowRight size={12} />
+                          </Link>
+                        ) : (
+                          <a
+                            href={center.link || "https://gburif.org/coe.php"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-purple-600 hover:text-purple-700 hover:bg-purple-50 px-2.5 py-1.5 rounded-lg transition-all"
+                          >
+                            CoE Portal <ExternalLink size={12} />
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>

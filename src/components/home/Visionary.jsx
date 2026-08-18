@@ -67,6 +67,15 @@ const VisionaryLeadership = () => {
       {/* Top Left Accent Ribbon */}
       <div className="absolute top-0 left-0 h-1.5 w-48 bg-gradient-to-r from-orange-500 via-amber-500 to-transparent z-10" />
 
+      {/* Mobile Campus View Background Image (Visible < lg with 10% opacity) */}
+      <div className="block lg:hidden absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <img
+          src={gbuCampusView}
+          alt="Gautam Buddha University Campus"
+          className="w-full h-full object-cover object-center opacity-10 filter contrast-105"
+        />
+      </div>
+
       {/* Desktop Only (lg+): Full-height Left Campus Image Banner */}
       <div className="hidden lg:block absolute inset-y-0 left-0 w-1/2 h-full overflow-hidden pointer-events-none z-0">
         <img

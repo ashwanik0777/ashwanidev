@@ -79,7 +79,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: true,
+    enabled: false,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -530,7 +530,7 @@ export const sectionsConfig = [
 
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {
@@ -566,7 +566,7 @@ export const sectionsConfig = [
 
   {
     componentName: "RecentPlacements",
-    enabled: true,
+    enabled: false,
     position: 11,
     props: {
       data: {

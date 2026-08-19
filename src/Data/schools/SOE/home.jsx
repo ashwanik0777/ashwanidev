@@ -958,7 +958,7 @@ As an academic community, the school is committed to the belief that expanding o
 
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {
@@ -995,7 +995,7 @@ As an academic community, the school is committed to the belief that expanding o
 
   {
     componentName: "RecentPlacements",
-    enabled: true,
+    enabled: false,
     position: 11,
     props: {
       data: {

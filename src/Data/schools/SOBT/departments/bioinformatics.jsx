@@ -42,11 +42,9 @@ export const departmentLayoutData = {
     name: "Dr. Deepali Singh",
     designation: "Assistant Professor & Coordinator",
     messageParagraphs: [
-      "Greetings!",
       "Welcome to the Department of Bioinformatics and Computational Biology at the School of Biotechnology, Gautam Buddha University! In the era of big data and genomics, bioinformatics has emerged as one of the most critical disciplines bridging biology, computer science, and statistics.",
       "Our department equips students with the computational tools and analytical skills needed to extract meaningful insights from vast biological datasets. We focus on hands-on training in genome sequencing analysis, protein structure prediction, molecular simulation, and AI-driven drug design.",
       "Our faculty members are actively involved in research collaborations with leading national and international institutions. We encourage our students to participate in conferences, publish their findings, and engage with the broader scientific community.",
-      "We look forward to shaping the future of data-driven biology with our students. Please reach out if you have any questions.",
     ],
     contact: {
       name: "Dr. Deepali Singh",

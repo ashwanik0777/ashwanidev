@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Building, Calendar, ShieldCheck, FileCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Building, Calendar, ShieldCheck, FileCheck, Quote } from "lucide-react";
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from "../../components/TabsData.jsx";
@@ -167,24 +167,26 @@ const Registrar = () => {
             </div>
 
             {/* Right Card: Message */}
-            <div className="w-full lg:w-2/2">
-              <div className="text-6xl text-blue-400 font-serif leading-none h-4 -mb-2">“</div>
-              <div className="space-y-6 text-gray-700 leading-relaxed text-justify px-2">
-                <p className="text-lg font-medium text-gray-800">
+            <div className="w-full lg:w-2/3 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
+              <Quote className="w-8 h-8 text-blue-500/30 mb-3" />
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p className="text-base sm:text-lg font-medium text-gray-900">
                   Welcome to Gautam Buddha University. As the administrative heart of the university, the Registrar's Office is committed to ensuring operational excellence, administrative efficiency, and student-centric support.
                 </p>
-                <p>
+                <p className="text-sm sm:text-base text-gray-600">
                   We strive to maintain the highest standards of governance, legal compliance, and statutory integrity, aligning our processes to support GBU's vision of becoming a global hub of learning and research. Our office handles a wide spectrum of responsibilities, including academic administration, student registration, examinations, recruitment, and statutory governance.
                 </p>
-                <p>
+                <p className="text-sm sm:text-base text-gray-600">
                   We are dedicated to providing a transparent, responsive, and digitised administrative ecosystem that enables our students, faculty, and stakeholders to focus on what matters most: academic growth and intellectual pursuits. I welcome all students, parents, scholars, and collaborators to engage with our administration.
                 </p>
               </div>
-              <div className="text-6xl text-blue-400 font-serif leading-none h-4 text-right -mt-4">”</div>
               
-              <div className="mt-8 text-right">
-                <p className="text-xl font-bold text-gray-900">Prof. Chander Kumar Singh</p>
-                <p className="text-sm font-semibold text-blue-600 mt-0.5">Registrar, Gautam Buddha University</p>
+              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                <Quote className="w-6 h-6 text-blue-500/20 rotate-180" />
+                <div className="text-right">
+                  <p className="text-lg font-bold text-gray-900">Prof. Chander Kumar Singh</p>
+                  <p className="text-sm font-semibold text-blue-600">Registrar, Gautam Buddha University</p>
+                </div>
               </div>
             </div>
           </div>

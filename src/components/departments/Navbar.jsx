@@ -168,7 +168,7 @@ const Navbar = () => {
         { label: "SOE Engineering Design Lab", href: `/schools/${activeSchool}/departments/engineering-design-lab` },
         { label: "SOE Innovation & Research Cell", href: `/schools/${activeSchool}/departments/innovation-research-cell` },
         { label: "SOE Board of Studies", href: routes.about.board },
-        { label: "SOE Staff Members", href: routes.about.staff },
+        // { label: "SOE Staff Members", href: routes.about.staff },
         { label: "SOE Laboratories", href: routes.about.labs },
         { label: "SOE Activities", href: routes.about.activities },
       ];

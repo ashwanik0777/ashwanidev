@@ -123,7 +123,7 @@ const normalizeEvent = (item) => {
     coverImageUrl: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
     image: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
     images: toList(item?.gallery || item?.images),
-    coverImage: String(item?.coverImage || item?.cover_image || "").trim() || toList(item?.gallery || item?.images)[0] || "",
+    coverImage: String(item?.coverImageUrl || item?.coverImage || item?.cover_image || "").trim() || toList(item?.gallery || item?.images)[0] || "",
     attendees: Number(item?.attendees || 0),
     price: String(item?.price || "Free").trim(),
     organizer: String(item?.organizer || "GBU").trim(),

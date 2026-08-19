@@ -127,19 +127,50 @@ const ResearchPublications = ({ publications = [] }) => {
 
       <div className="space-y-4">
         {filtered.map((pub, idx) => {
-          const text = typeof pub === "string" ? pub : pub.citation;
+          const isObj = typeof pub === "object" && pub !== null;
+          const text = isObj ? pub.citation || `${pub.authors} (${pub.year}). ${pub.title}. ${pub.journal}${pub.volume ? `, ${pub.volume}` : ""}.` : pub;
           return (
             <div
               key={idx}
               className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition-all flex items-start gap-4"
             >
-              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-blue-100">
-                {idx + 1}
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-blue-100 font-mono">
+                {pub.sno || idx + 1}
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed font-sans">
-                  {text}
-                </p>
+              <div className="min-w-0 flex-1 space-y-1.5">
+                {isObj && (pub.category || pub.department || pub.year) && (
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    {pub.category && (
+                      <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200">
+                        {pub.category}
+                      </span>
+                    )}
+                    {pub.year && (
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                        {pub.year}
+                      </span>
+                    )}
+                    {pub.department && (
+                      <span className="text-[11px] font-semibold text-purple-700 ml-auto">
+                        {pub.department}
+                      </span>
+                    )}
+                  </div>
+                )}
+                {isObj && pub.title ? (
+                  <>
+                    <h4 className="text-sm sm:text-base font-bold text-slate-900 leading-snug font-outfit">
+                      {pub.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed font-sans">
+                      <strong className="text-slate-800 font-semibold">{pub.authors}</strong> ({pub.year}). <span className="italic text-slate-700">{pub.journal}</span>{pub.volume ? `, ${pub.volume}` : ""}.
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed font-sans">
+                    {text}
+                  </p>
+                )}
               </div>
             </div>
           );

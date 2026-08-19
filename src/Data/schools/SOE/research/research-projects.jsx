@@ -7,7 +7,8 @@ export const researchProjectsData = {
       "Peer-reviewed research publications, journal articles, and conference proceedings by faculty of School of Engineering, Gautam Buddha University.",
   },
   stats: [],
-  ongoingProjects: [
+  ongoingProjects: [],
+  publications: [
     {
       sno: 1,
       authors: "Abhishek Singh, Shobha Ram and Alok Verma",
@@ -216,7 +217,7 @@ export const researchProjectsData = {
       journal: "Proceedings of 2015 International Conference on Disaster Management in Civil Engineering (ICDMCE 2015) Phuket",
       volume: "Paper ID U1015302, ISBN 978-93-84422-40-0",
       department: "Civil Engineering",
-      category: "National / International Proceedings",
+      category: "International Proceedings",
     },
     {
       sno: 22,

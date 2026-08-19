@@ -63,40 +63,51 @@ const Faculty = () => {
   const getDesignationPriority = (designation) => {
     const desc = (designation || "").toLowerCase();
     
-    // 1. Dean / Professor and Dean
-    if (desc.includes("dean")) return 1;
+    const isDean = desc.includes("dean");
+    const isAssociate = desc.includes("associate");
+    const isAssistant = desc.includes("assistant");
+    const isVisiting = desc.includes("visiting") || desc.includes("recognising") || desc.includes("recognizing") || desc.includes("recognised");
+    const isAdjunct = desc.includes("adjunct");
+    const isProf = desc.includes("prof");
+    const isHod = desc.includes("hod") || desc.includes("head");
+
+    // 1. Professor and Dean
+    if (isDean && !isAssociate && !isAssistant) return 1;
     
-    // 3. Recognizing / Visiting Professor
-    if (desc.includes("visiting") || desc.includes("recognising") || desc.includes("recognizing") || desc.includes("recognised")) return 3;
+    // 3. Associate Professor and Dean
+    if (isDean && isAssociate) return 3;
     
-    // 4. Adjunct Professor
-    if (desc.includes("adjunct")) return 4;
+    // 4. Assistant Professor and Dean(I/C)
+    if (isDean && isAssistant) return 4;
+
+    // 5. Recognizing / Visiting Professors
+    if (isVisiting) return 5;
     
-    // 5. Associate Professor
-    if (desc.includes("associate") && desc.includes("prof")) return 5;
+    // 6. Adjunct Professors
+    if (isAdjunct) return 6;
+
+    // 7. Associate Professor
+    if (isAssociate) return 7;
     
-    // 6. Assistant Professor
-    if (desc.includes("assistant") && desc.includes("prof")) return 6;
+    // 8. Assistant Professor and HoD
+    if (isAssistant && isHod) return 8;
     
-    // 2. Plain Professor (Catch-all for 'professor' after other modifiers are checked)
-    if (desc.includes("prof")) return 2;
-    
-    // 7. OCFD
-    if (desc.includes("ocfd")) return 7;
-    
-    // 8. Other Faculty
-    if (desc.includes("faculty")) return 8;
-    
-    return 9;
+    // 9. Assistant Professor
+    if (isAssistant) return 9;
+
+    // 2. Professor (plain professor, not associate/assistant/dean)
+    if (isProf) return 2;
+
+    return 10;
   };
 
   const sortFaculty = (a, b) => {
     const pA = getDesignationPriority(a.designation || a.title);
     const pB = getDesignationPriority(b.designation || b.title);
     if (pA !== pB) return pA - pB;
-    const expA = parseInt(a.experience_years || a.experience) || 0;
-    const expB = parseInt(b.experience_years || b.experience) || 0;
-    return expB - expA;
+    
+    // Sort alphabetically by name within the same category
+    return (a.name || "").localeCompare(b.name || "");
   };
 
   const departments = [
@@ -109,6 +120,8 @@ const Faculty = () => {
   ];
 
   const filteredFaculty = facultyData.filter(faculty => {
+    const desc = (faculty.designation || faculty.title || "").toLowerCase();
+    if (desc.includes("ocfd")) return false;
     const searchString = searchTerm.toLowerCase();
     const matchesSearch =
       (faculty.name || '').toLowerCase().includes(searchString) ||

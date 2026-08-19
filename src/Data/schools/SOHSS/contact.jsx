@@ -30,11 +30,7 @@ export const contactData = {
 			},
 		],
 	},
-	officeHours: [
-		{ day: "Monday - Friday", time: "9:30 AM - 5:30 PM" },
-		{ day: "Saturday", time: "9:30 AM - 1:00 PM" },
-		{ day: "Sunday", time: "Closed" },
-	],
+	officeHours: [],
 	departments: [],
 	directoryTable: {
 		title: "Directory | SOHSS",
@@ -48,36 +44,5 @@ export const contactData = {
 			{ name: "Head of the Department of English & Modern European Languages", phone: "0120-2344430", ext: "4430" },
 		],
 	},
-	coeContacts: [
-		{
-			name: "Corporate Relations Cell (CRC)",
-			department: "Gautam Buddha University",
-			address: "Yamuna Expressway, Greater Noida, Gautam Budh Nagar, PIN - 201312",
-			email: "crc@gbu.ac.in",
-			phone: "0120-2344209",
-			socials: {
-				linkedin: "#",
-				twitter: "#",
-				instagram: "#",
-				youtube: "#",
-			},
-			color: "from-purple-500 to-indigo-500",
-			textColor: "text-purple-600",
-		},
-		{
-			name: "Admission Cell",
-			department: "Gautam Buddha University",
-			address: "Yamuna Expressway, Greater Noida, Gautam Budh Nagar, PIN - 201312",
-			email: "admissions@gbu.ac.in",
-			phone: "0120-2344234",
-			socials: {
-				linkedin: "#",
-				twitter: "#",
-				instagram: "#",
-				youtube: "#",
-			},
-			color: "from-pink-500 to-rose-500",
-			textColor: "text-pink-500",
-		},
-	],
+	coeContacts: [],
 };

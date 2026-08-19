@@ -16,7 +16,7 @@ const Registrar = () => {
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            Dr. Vishwas Tripathi serves as the Registrar of Gautam Buddha University. He is responsible for the overall administrative affairs, statutory compliance, and institutional governance of the university.
+            Prof. Chander Kumar Singh serves as the Registrar of Gautam Buddha University. He is responsible for the overall administrative affairs, statutory compliance, and institutional governance of the university.
           </p>
           <p className="text-gray-700 leading-relaxed">
             With years of experience in higher education administration, academic planning, and institutional leadership, he leads the administrative team to ensure smooth functioning of the academic sessions, university governance boards, and student support services.
@@ -140,14 +140,14 @@ const Registrar = () => {
               <div className="bg-gradient-to-b from-blue-50/70 to-white p-6 rounded-3xl shadow-sm border border-blue-100">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-200 mb-6 shadow-md relative">
                   <img
-                    src="https://ui-avatars.com/api/?name=Vishwas+Tripathi&background=1e3a8a&color=fff&size=300"
-                    alt="Dr. Vishwas Tripathi"
-                    className="w-full h-full object-cover"
+                    src="/assets/Faculty/Prof. Chander Kumar Singh.jpeg"
+                    alt="Prof. Chander Kumar Singh"
+                    className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
                 </div>
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900">Dr. Vishwas Tripathi</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Prof. Chander Kumar Singh</h3>
                   <p className="text-sm font-semibold text-blue-600 mt-1">Registrar</p>
                   <p className="text-xs text-gray-500 mt-0.5">Gautam Buddha University</p>
                 </div>
@@ -183,7 +183,7 @@ const Registrar = () => {
               <div className="text-6xl text-blue-400 font-serif leading-none h-4 text-right -mt-4">”</div>
               
               <div className="mt-8 text-right">
-                <p className="text-xl font-bold text-gray-900">Dr. Vishwas Tripathi</p>
+                <p className="text-xl font-bold text-gray-900">Prof. Chander Kumar Singh</p>
                 <p className="text-sm font-semibold text-blue-600 mt-0.5">Registrar, Gautam Buddha University</p>
               </div>
             </div>

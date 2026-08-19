@@ -1,5 +1,4 @@
-import React from "react";
-import { Mail, Phone, Building } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const contactData = {
   schoolCode: "SOVS",
@@ -11,19 +10,19 @@ export const contactData = {
       {
         title: "Admission Office",
         content: "Gautam Buddha University\nYamuna Expressway, Greater Noida\nGautam Budh Nagar, Uttar Pradesh - 201312",
-        gradient: "from-blue-500 to-indigo-600",
-        icon: <Building className="h-8 w-8 text-white" />,
+        gradient: "bg-gradient-to-br from-blue-500 to-indigo-600",
+        icon: <MapPin className="h-8 w-8 text-white" />,
       },
       {
         title: "Phone No.",
         content: "0120-2344234\n0120-2344247",
-        gradient: "from-teal-500 to-emerald-600",
+        gradient: "bg-gradient-to-br from-teal-500 to-emerald-600",
         icon: <Phone className="h-8 w-8 text-white" />,
       },
       {
         title: "Email",
         content: "admissions@gbu.ac.in",
-        gradient: "from-purple-500 to-pink-600",
+        gradient: "bg-gradient-to-br from-purple-500 to-pink-600",
         icon: <Mail className="h-8 w-8 text-white" />,
       },
     ],

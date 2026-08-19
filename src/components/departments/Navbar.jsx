@@ -212,9 +212,6 @@ const Navbar = () => {
     if (schoolCode === "SOHSS") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "SOHSS Board of Studies", href: routes.about.board },
-        { label: "SOHSS Staff Members", href: routes.about.staff },
-        { label: "SOHSS Activities", href: routes.about.activities },
       ];
     }
 

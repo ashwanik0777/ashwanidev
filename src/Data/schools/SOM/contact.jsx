@@ -22,5 +22,23 @@ export const contactData = {
     ],
   },
   departments: [],
+  directory: [
+    { name: "Prof. Shweta Anand", phone: "0120-2346142", ext: "6142" },
+    { name: "Dr. Indu Uprety", phone: "0120-2346178", ext: "6178" },
+    { name: "Admission Office", phone: "0120-2344234", ext: "4234" },
+    { name: "Academic Office", phone: "0120-2346144", ext: "6144" },
+    { name: "Dr. Dinesh Kr. Sharma", phone: "0120-2346154", ext: "6154" },
+    { name: "Dr. Lovy Sarikwal", phone: "0120-2346155", ext: "6155" },
+    { name: "Dr. Rakesh Srivastava", phone: "0120-2346159", ext: "6159" },
+    { name: "Dr. Varsha Dixit", phone: "0120-2346158", ext: "6158" },
+    { name: "Dr. Subhojit Banerjee", phone: "0120-2346162", ext: "6162" },
+    { name: "Dr. Satish Mittal", phone: "0120-2346170", ext: "6170" },
+    { name: "Dr. Ajay Kansal", phone: "0120-2346168", ext: "6168" },
+    { name: "Dr. Naveen Kumar", phone: "0120-2346160", ext: "6160" },
+    { name: "Dr. Ombir Singh", phone: "0120-2346161", ext: "6161" },
+    { name: "Dr. Kavita Singh", phone: "0120-2346164", ext: "6163" },
+    { name: "Dr. Samar Raqshin", phone: "0120-2346165", ext: "6165" },
+    { name: "Dr. Monika Bhati", phone: "0120-2346166", ext: "6166" },
+  ],
 };
 

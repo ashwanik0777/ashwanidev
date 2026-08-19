@@ -1,0 +1,758 @@
+[
+  {
+    "id": "",
+    "facultyName": "Aakansha",
+    "filename": "Aakansha.jpg",
+    "path": "/assets/Faculty/Aakansha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Aakriti",
+    "filename": "Aakriti.jpg",
+    "path": "/assets/Faculty/Aakriti.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Aamiraliamu",
+    "filename": "Aamiraliamu.jpg",
+    "path": "/assets/Faculty/Aamiraliamu.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Aarti",
+    "filename": "Aarti.jpg",
+    "path": "/assets/Faculty/Aarti.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Abhinav",
+    "filename": "Abhinav.jpg",
+    "path": "/assets/Faculty/Abhinav.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Abhishekk",
+    "filename": "Abhishekk.jpg",
+    "path": "/assets/Faculty/Abhishekk.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Adarsh",
+    "filename": "Adarsh.jpg",
+    "path": "/assets/Faculty/Adarsh.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Aditiraz",
+    "filename": "Aditiraz.jpg",
+    "path": "/assets/Faculty/Aditiraz.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Afsana Siddiqui",
+    "filename": "Afsana Siddiqui.jpg",
+    "path": "/assets/Faculty/Afsana Siddiqui.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Amita Arora",
+    "filename": "Amita Arora.jpg",
+    "path": "/assets/Faculty/Amita Arora.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Amitarajan",
+    "filename": "Amitarajan.jpg",
+    "path": "/assets/Faculty/Amitarajan.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Amitujlayan",
+    "filename": "Amitujlayan.jpg",
+    "path": "/assets/Faculty/Amitujlayan.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Anant",
+    "filename": "Anant.jpg",
+    "path": "/assets/Faculty/Anant.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Anitak",
+    "filename": "Anitak.jpg",
+    "path": "/assets/Faculty/Anitak.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Anjuli Ratnam",
+    "filename": "Anjuli Ratnam.jpg",
+    "path": "/assets/Faculty/Anjuli Ratnam.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ao",
+    "filename": "Ao.jpg",
+    "path": "/assets/Faculty/Ao.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Aparnaict",
+    "filename": "Aparnaict.jpg",
+    "path": "/assets/Faculty/Aparnaict.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Archvansh",
+    "filename": "Archvansh.jpg",
+    "path": "/assets/Faculty/Archvansh.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Arvind Shukla",
+    "filename": "Arvind Shukla.jpg",
+    "path": "/assets/Faculty/Arvind Shukla.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Arvinds",
+    "filename": "Arvinds.png",
+    "path": "/assets/Faculty/Arvinds.png"
+  },
+  {
+    "id": "",
+    "facultyName": "Ashish Gbu",
+    "filename": "Ashish Gbu.jpg",
+    "path": "/assets/Faculty/Ashish Gbu.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ashishkumar Mourya",
+    "filename": "Ashishkumar Mourya.jpg",
+    "path": "/assets/Faculty/Ashishkumar Mourya.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Azmijnu",
+    "filename": "Azmijnu.jpg",
+    "path": "/assets/Faculty/Azmijnu.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Bandana",
+    "filename": "Bandana.jpg",
+    "path": "/assets/Faculty/Bandana.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Bhumiya",
+    "filename": "Bhumiya.jpg",
+    "path": "/assets/Faculty/Bhumiya.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Chandicharan",
+    "filename": "Chandicharan.jpg",
+    "path": "/assets/Faculty/Chandicharan.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Cvishwakarma",
+    "filename": "Cvishwakarma.jpg",
+    "path": "/assets/Faculty/Cvishwakarma.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "D",
+    "filename": "D.jpg",
+    "path": "/assets/Faculty/D.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Danishece",
+    "filename": "Danishece.jpg",
+    "path": "/assets/Faculty/Danishece.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Deputy Registrar",
+    "filename": "Deputy Registrar.jpg",
+    "path": "/assets/Faculty/Deputy Registrar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Devmanish",
+    "filename": "Devmanish.jpg",
+    "path": "/assets/Faculty/Devmanish.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Dhama Digvijay",
+    "filename": "Dhama Digvijay.jpg",
+    "path": "/assets/Faculty/Dhama Digvijay.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Difydoyil",
+    "filename": "Difydoyil.jpg",
+    "path": "/assets/Faculty/Difydoyil.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Env Prachi",
+    "filename": "Env Prachi.jpg",
+    "path": "/assets/Faculty/Env Prachi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Fahed",
+    "filename": "Fahed.jpg",
+    "path": "/assets/Faculty/Fahed.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Fo",
+    "filename": "Fo.jpg",
+    "path": "/assets/Faculty/Fo.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Gillprashant",
+    "filename": "Gillprashant.jpg",
+    "path": "/assets/Faculty/Gillprashant.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Gopal",
+    "filename": "Gopal.jpg",
+    "path": "/assets/Faculty/Gopal.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Gulfisha",
+    "filename": "Gulfisha.jpg",
+    "path": "/assets/Faculty/Gulfisha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Gunjangarg",
+    "filename": "Gunjangarg.jpg",
+    "path": "/assets/Faculty/Gunjangarg.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Harishfet",
+    "filename": "Harishfet.jpg",
+    "path": "/assets/Faculty/Harishfet.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Huidromsumitra",
+    "filename": "Huidromsumitra.jpg",
+    "path": "/assets/Faculty/Huidromsumitra.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Imteyazqamar",
+    "filename": "Imteyazqamar.jpg",
+    "path": "/assets/Faculty/Imteyazqamar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "J Muyal",
+    "filename": "J Muyal.jpg",
+    "path": "/assets/Faculty/J Muyal.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Jitendra Ahirwar",
+    "filename": "Jitendra Ahirwar.jpg",
+    "path": "/assets/Faculty/Jitendra Ahirwar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Jitendra",
+    "filename": "Jitendra.jpg",
+    "path": "/assets/Faculty/Jitendra.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "K K Dwivedi",
+    "filename": "K K Dwivedi.jpg",
+    "path": "/assets/Faculty/K K Dwivedi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kaju Gupta",
+    "filename": "Kaju Gupta.jpg",
+    "path": "/assets/Faculty/Kaju Gupta.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Katiyarsumit",
+    "filename": "Katiyarsumit.jpg",
+    "path": "/assets/Faculty/Katiyarsumit.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kaushikneeraj",
+    "filename": "Kaushikneeraj.jpg",
+    "path": "/assets/Faculty/Kaushikneeraj.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kaushikpakhi",
+    "filename": "Kaushikpakhi.jpg",
+    "path": "/assets/Faculty/Kaushikpakhi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Khyati Shri",
+    "filename": "Khyati Shri.jpg",
+    "path": "/assets/Faculty/Khyati Shri.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kiranlatahisar",
+    "filename": "Kiranlatahisar.jpg",
+    "path": "/assets/Faculty/Kiranlatahisar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kk Dwivedi 2",
+    "filename": "Kk Dwivedi 2.jpg",
+    "path": "/assets/Faculty/Kk Dwivedi 2.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Kk Dwivedi",
+    "filename": "Kk Dwivedi.jpg",
+    "path": "/assets/Faculty/Kk Dwivedi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Krishankant",
+    "filename": "Krishankant.jpg",
+    "path": "/assets/Faculty/Krishankant.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ksinha",
+    "filename": "Ksinha.jpg",
+    "path": "/assets/Faculty/Ksinha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Lalit Lohani",
+    "filename": "Lalit Lohani.jpg",
+    "path": "/assets/Faculty/Lalit Lohani.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mahajan",
+    "filename": "Mahajan.jpg",
+    "path": "/assets/Faculty/Mahajan.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mahdzia",
+    "filename": "Mahdzia.jpg",
+    "path": "/assets/Faculty/Mahdzia.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mamtavvv",
+    "filename": "Mamtavvv.jpg",
+    "path": "/assets/Faculty/Mamtavvv.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Maninisyali",
+    "filename": "Maninisyali.jpg",
+    "path": "/assets/Faculty/Maninisyali.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Manisha",
+    "filename": "Manisha.jpg",
+    "path": "/assets/Faculty/Manisha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Manjari Gangwar",
+    "filename": "Manjari Gangwar.jpg",
+    "path": "/assets/Faculty/Manjari Gangwar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mayora Varshney",
+    "filename": "Mayora Varshney.jpg",
+    "path": "/assets/Faculty/Mayora Varshney.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mmtkhokhar",
+    "filename": "Mmtkhokhar.jpg",
+    "path": "/assets/Faculty/Mmtkhokhar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Mohitlaw",
+    "filename": "Mohitlaw.jpg",
+    "path": "/assets/Faculty/Mohitlaw.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Namitakathpalece",
+    "filename": "Namitakathpalece.jpg",
+    "path": "/assets/Faculty/Namitakathpalece.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Nazimkhan All",
+    "filename": "Nazimkhan All.jpg",
+    "path": "/assets/Faculty/Nazimkhan All.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Nidhig",
+    "filename": "Nidhig.jpg",
+    "path": "/assets/Faculty/Nidhig.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Niranjan Melkania",
+    "filename": "Niranjan Melkania.jpg",
+    "path": "/assets/Faculty/Niranjan Melkania.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Odahiya",
+    "filename": "Odahiya.jpg",
+    "path": "/assets/Faculty/Odahiya.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Panchananrajat",
+    "filename": "Panchananrajat.jpg",
+    "path": "/assets/Faculty/Panchananrajat.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Pn",
+    "filename": "Pn.jpg",
+    "path": "/assets/Faculty/Pn.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Pooja Gupta",
+    "filename": "Pooja Gupta.jpg",
+    "path": "/assets/Faculty/Pooja Gupta.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Poojathareja",
+    "filename": "Poojathareja.jpg",
+    "path": "/assets/Faculty/Poojathareja.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Praveen Me",
+    "filename": "Praveen Me.jpg",
+    "path": "/assets/Faculty/Praveen Me.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Priyank Jain",
+    "filename": "Priyank Jain.jpg",
+    "path": "/assets/Faculty/Priyank Jain.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Priyankag",
+    "filename": "Priyankag.jpg",
+    "path": "/assets/Faculty/Priyankag.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Prof. Rajeev Varshney",
+    "filename": "Prof. Rajeev Varshney.jpg",
+    "path": "/assets/Faculty/Prof. Rajeev Varshney.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rai Amit Au",
+    "filename": "Rai Amit Au.jpg",
+    "path": "/assets/Faculty/Rai Amit Au.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rajashree A",
+    "filename": "Rajashree A.jpg",
+    "path": "/assets/Faculty/Rajashree A.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rajeev Varshney",
+    "filename": "Rajeev Varshney.jpg",
+    "path": "/assets/Faculty/Rajeev Varshney.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rajput Akanksha",
+    "filename": "Rajput Akanksha.jpg",
+    "path": "/assets/Faculty/Rajput Akanksha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Raunakahmad",
+    "filename": "Raunakahmad.jpg",
+    "path": "/assets/Faculty/Raunakahmad.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ravi Bharti",
+    "filename": "Ravi Bharti.jpg",
+    "path": "/assets/Faculty/Ravi Bharti.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ravienbbd",
+    "filename": "Ravienbbd.jpg",
+    "path": "/assets/Faculty/Ravienbbd.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Registrar Vishwas Tripathi",
+    "filename": "Registrar Vishwas Tripathi.jpg",
+    "path": "/assets/Faculty/Registrar Vishwas Tripathi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Registrar",
+    "filename": "Registrar.jpeg",
+    "path": "/assets/Faculty/Registrar.jpeg"
+  },
+  {
+    "id": "",
+    "facultyName": "Renus",
+    "filename": "Renus.jpg",
+    "path": "/assets/Faculty/Renus.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rngnisha",
+    "filename": "Rngnisha.jpg",
+    "path": "/assets/Faculty/Rngnisha.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Rpuria",
+    "filename": "Rpuria.jpg",
+    "path": "/assets/Faculty/Rpuria.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ruchika",
+    "filename": "Ruchika.jpg",
+    "path": "/assets/Faculty/Ruchika.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ruchipcy",
+    "filename": "Ruchipcy.jpg",
+    "path": "/assets/Faculty/Ruchipcy.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Saangi",
+    "filename": "Saangi.jpg",
+    "path": "/assets/Faculty/Saangi.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sahuaman",
+    "filename": "Sahuaman.jpg",
+    "path": "/assets/Faculty/Sahuaman.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sandhya Tarar",
+    "filename": "Sandhya Tarar.jpg",
+    "path": "/assets/Faculty/Sandhya Tarar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sandhya",
+    "filename": "Sandhya.jpg",
+    "path": "/assets/Faculty/Sandhya.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Satpalhss",
+    "filename": "Satpalhss.jpg",
+    "path": "/assets/Faculty/Satpalhss.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Seema Dwivedi",
+    "filename": "Seema Dwivedi.JPG",
+    "path": "/assets/Faculty/Seema Dwivedi.JPG"
+  },
+  {
+    "id": "",
+    "facultyName": "Seema",
+    "filename": "Seema.jpg",
+    "path": "/assets/Faculty/Seema.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Shradha Ssp",
+    "filename": "Shradha Ssp.jpg",
+    "path": "/assets/Faculty/Shradha Ssp.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Shweta Anand",
+    "filename": "Shweta Anand.jpg",
+    "path": "/assets/Faculty/Shweta Anand.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Shweta Anand",
+    "filename": "Shweta Anand.png",
+    "path": "/assets/Faculty/Shweta Anand.png"
+  },
+  {
+    "id": "",
+    "facultyName": "Sky",
+    "filename": "Sky.jpg",
+    "path": "/assets/Faculty/Sky.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sneha Gautam",
+    "filename": "Sneha Gautam.jpg",
+    "path": "/assets/Faculty/Sneha Gautam.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Snehalko",
+    "filename": "Snehalko.jpg",
+    "path": "/assets/Faculty/Snehalko.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sonu Kr Tunwar",
+    "filename": "Sonu Kr Tunwar.jpg",
+    "path": "/assets/Faculty/Sonu Kr Tunwar.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Ss Rajput",
+    "filename": "Ss Rajput.jpg",
+    "path": "/assets/Faculty/Ss Rajput.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sudhisht",
+    "filename": "Sudhisht.jpg",
+    "path": "/assets/Faculty/Sudhisht.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Suryakant Shukla",
+    "filename": "Suryakant Shukla.jpg",
+    "path": "/assets/Faculty/Suryakant Shukla.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Sw Choudhary",
+    "filename": "Sw Choudhary.jpg",
+    "path": "/assets/Faculty/Sw Choudhary.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Swatimihir",
+    "filename": "Swatimihir.jpg",
+    "path": "/assets/Faculty/Swatimihir.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Udit Pandit",
+    "filename": "Udit Pandit.jpg",
+    "path": "/assets/Faculty/Udit Pandit.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Urvashieecoer",
+    "filename": "Urvashieecoer.jpg",
+    "path": "/assets/Faculty/Urvashieecoer.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Venu Sangal",
+    "filename": "Venu Sangal.jpg",
+    "path": "/assets/Faculty/Venu Sangal.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vijay",
+    "filename": "Vijay.jpg",
+    "path": "/assets/Faculty/Vijay.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vikash Patel Vns",
+    "filename": "Vikash Patel Vns.jpg",
+    "path": "/assets/Faculty/Vikash Patel Vns.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vishwas",
+    "filename": "Vishwas.jpg",
+    "path": "/assets/Faculty/Vishwas.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vivekchem",
+    "filename": "Vivekchem.jpg",
+    "path": "/assets/Faculty/Vivekchem.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vivekm",
+    "filename": "Vivekm.jpg",
+    "path": "/assets/Faculty/Vivekm.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vivekm",
+    "filename": "Vivekm.png",
+    "path": "/assets/Faculty/Vivekm.png"
+  },
+  {
+    "id": "",
+    "facultyName": "Vk Shanwal",
+    "filename": "Vk Shanwal.jpg",
+    "path": "/assets/Faculty/Vk Shanwal.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vpcivil",
+    "filename": "Vpcivil.jpg",
+    "path": "/assets/Faculty/Vpcivil.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Vyakhaya",
+    "filename": "Vyakhaya.jpg",
+    "path": "/assets/Faculty/Vyakhaya.jpg"
+  },
+  {
+    "id": "",
+    "facultyName": "Yskicdhekwari",
+    "filename": "Yskicdhekwari.jpg",
+    "path": "/assets/Faculty/Yskicdhekwari.jpg"
+  }
+]

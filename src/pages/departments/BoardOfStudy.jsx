@@ -31,12 +31,37 @@ const BoardOfStudies = ({ departments }) => {
 
   return (
     <div className="min-h-screen bg-gray-50/50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto space-y-10">
+        {/* Optional Dean / Chairperson Hero Card */}
+        {boardofstudiesData?.dean && (
+          <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white">
+            <div className="space-y-2 text-center md:text-left">
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                School Leadership
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold font-outfit text-white">
+                {boardofstudiesData.dean.name}
+              </h2>
+              <p className="text-blue-200 font-semibold text-sm sm:text-base">
+                {boardofstudiesData.dean.designation} — {boardofstudiesData.dean.department}
+              </p>
+              <p className="text-slate-300 text-xs sm:text-sm">
+                {boardofstudiesData.dean.university}
+              </p>
+            </div>
+            {boardofstudiesData.dean.role && (
+              <div className="px-5 py-2.5 rounded-xl bg-blue-600/30 border border-blue-400/40 text-blue-200 font-bold text-sm text-center shrink-0">
+                {boardofstudiesData.dean.role}
+              </div>
+            )}
+          </div>
+        )}
+
         <div className={containerStyle}>
           {departments.map((dept, deptIndex) => (
             <div
               key={deptIndex}
-              className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full"
             >
               <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 p-6 relative overflow-hidden text-center">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16" />
@@ -46,8 +71,8 @@ const BoardOfStudies = ({ departments }) => {
                 </h2>
               </div>
 
-              <div className="p-5 sm:p-6 space-y-4">
-                {dept.members.map((member, memberIndex) => (
+              <div className="p-5 sm:p-6 space-y-4 flex-1">
+                {dept.members && dept.members.map((member, memberIndex) => (
                   <div
                     key={memberIndex}
                     className="bg-gray-50/80 hover:bg-blue-50/50 rounded-xl p-4 sm:p-5 border border-gray-100 transition-colors"
@@ -91,6 +116,42 @@ const BoardOfStudies = ({ departments }) => {
                     )}
                   </div>
                 ))}
+
+                {/* External Experts Section */}
+                {dept.experts && dept.experts.length > 0 && (
+                  <div className="pt-4 border-t border-slate-200">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600 mb-3 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                      External BoS Experts History ({dept.experts.length})
+                    </h4>
+                    <div className="overflow-x-auto rounded-lg border border-slate-200">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                          <tr>
+                            <th className="py-2 px-3">Date</th>
+                            <th className="py-2 px-3">BoS Expert Name</th>
+                            <th className="py-2 px-3">Institution / Org</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 text-slate-800">
+                          {dept.experts.map((exp, expIdx) => (
+                            <tr key={expIdx} className="hover:bg-blue-50/40">
+                              <td className="py-2 px-3 font-semibold text-blue-700 whitespace-nowrap">
+                                {exp.date}
+                              </td>
+                              <td className="py-2 px-3 font-medium text-slate-900">
+                                {exp.name}
+                              </td>
+                              <td className="py-2 px-3 text-slate-600">
+                                {exp.organization}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}

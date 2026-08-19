@@ -192,7 +192,7 @@ const Registrar = () => {
           </div>
 
           {/* Details Section */}
-          <div className="mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+          <div className="mt-12 sm:mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-8">
             <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Know the Registrar's Office</h2>
 
             {/* Tabs */}

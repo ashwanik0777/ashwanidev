@@ -109,11 +109,11 @@ const ButtonGroup = ({
     };
 
     const containerClasses = `
-    ${orientation === "vertical" ? "inline-flex flex-col" : "inline-flex flex-row"}
-    ${orientation === "vertical" ? "w-full" : "flex-wrap"}
+    ${orientation === "vertical" ? "inline-flex flex-col" : "inline-flex flex-row max-w-full overflow-x-auto no-scrollbar"}
+    ${orientation === "vertical" ? "w-full" : "flex-nowrap sm:flex-wrap"}
     ${gap ? "gap-2" : ""}
     ${!gap ? roundedClasses[rounded] : ""}
-    ${!gap ? "overflow-hidden border" : ""}
+    ${!gap ? "border" : ""}
     ${!gap ? themeConfig.container : ""}
     ${animated ? "transition-all duration-300 ease-in-out" : ""}
     ${fullWidth ? "w-full" : ""}
@@ -130,14 +130,14 @@ const ButtonGroup = ({
         const isPressed = pressedButton === btn.id;
 
         return `
-      relative flex items-center justify-center gap-2 border overflow-hidden
+      relative flex items-center justify-center gap-1.5 sm:gap-2 border shrink-0
       ${SIZE_CLASSES[size] || SIZE_CLASSES["md"]}
       ${gap ? roundedClasses[rounded] : ""}
       ${!gap && orientation === "horizontal" ? (isFirst ? "rounded-l-" + rounded : isLast ? "rounded-r-" + rounded : "") : ""}
       ${!gap && orientation === "vertical" ? (isFirst ? "rounded-t-" + rounded : isLast ? "rounded-b-" + rounded : "") : ""}
       ${!gap && orientation === "horizontal" && !isFirst ? "border-l-0" : ""}
       ${!gap && orientation === "vertical" && !isFirst ? "border-t-0" : ""}
-      ${fullWidth ? "flex-1" : ""}
+      ${fullWidth ? "flex-auto sm:flex-1 min-w-max sm:min-w-0" : ""}
       ${orientation === "vertical" ? "w-full" : ""}
       ${animated ? "transition-all duration-300 ease-in-out transform" : ""}
       ${animated && isHovered ? "scale-[1.02] -translate-y-0.5" : ""}

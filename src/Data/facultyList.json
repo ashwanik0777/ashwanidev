@@ -105,7 +105,7 @@
     "department": "Computer Science & Engineering",
     "school": "SOICT",
     "email": "anika@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0022.jpeg"
   },
   {
     "id": "SOE-F0028",
@@ -222,7 +222,7 @@
     "department": "Information Technology",
     "school": "SOICT",
     "email": "maneet.singh@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0025.jpg"
   },
   {
     "id": "SOHSS-F0010",
@@ -303,7 +303,7 @@
     "department": "Computer Science & Engineering",
     "school": "SOICT",
     "email": "nsbhati@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0020.jpeg"
   },
   {
     "id": "SOVS-F0020",
@@ -492,7 +492,7 @@
     "department": "Computer Science & Engineering",
     "school": "SOICT",
     "email": "shiraz.khurana@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0021.jpeg"
   },
   {
     "id": "SOVS-F0025",
@@ -690,7 +690,7 @@
     "department": "Electronics & Communication Engineering",
     "school": "SOICT",
     "email": "mangal.das@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0006.jpeg"
   },
   {
     "id": "SOICT-F0018",
@@ -699,7 +699,7 @@
     "department": "Computer Science & Engineering",
     "school": "SOICT",
     "email": "kartikeya@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0018.jpg"
   },
   {
     "id": "SOE-F0034",
@@ -832,7 +832,8 @@
   },
   {
     "id": "SOICT-F0002",
-    "name": "Raju Pal"
+    "name": "Raju Pal",
+    "image_url": "/assets/Faculty/SOICT-F0002.png"
   },
   {
     "id": "SOL-F0016",
@@ -1309,7 +1310,7 @@
     "department": "Information Technology",
     "school": "SOICT",
     "email": "neeta@gbu.ac.in",
-    "image_url": "/assets/Faculty/SOICT-F0007.jpg"
+    "image_url": "/assets/Faculty/SOICT-F0007.png"
   },
   {
     "id": "SOM-F0009",
@@ -1471,7 +1472,7 @@
     "department": "Computer Science & Engineering",
     "school": "SOICT",
     "email": "rakesh.k@gbu.ac.in",
-    "image_url": "/assets/Faculty/Rakesh.jpg"
+    "image_url": "/assets/Faculty/SOICT-F0023.jpg"
   },
   {
     "id": "SOHSS-F0023",
@@ -1732,7 +1733,7 @@
     "department": "Electronics & Communication Engineering",
     "school": "SOICT",
     "email": "vivek.chaudhary@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/SOICT-F0026.jpg"
   },
   {
     "id": "SOHSS-F0004",

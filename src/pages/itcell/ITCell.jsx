@@ -118,17 +118,17 @@ const ITCell = () => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header Section */}
-      <div className="relative bg-slate-900 text-white py-12 sm:py-16 md:py-20 px-4">
+      <div className="relative bg-slate-900 text-white py-8 sm:py-12 md:py-14 px-4">
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
           >
             IT Cell
           </motion.h1>
-          <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 opacity-90">
+          <p className="text-base sm:text-lg md:text-xl mb-3 sm:mb-4 opacity-90">
             Building practical automation for Smart GBU
           </p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
@@ -140,14 +140,14 @@ const ITCell = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12 md:py-16">
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8 md:py-10">
         {/* Vision & Mission */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16"
+          className="grid md:grid-cols-2 gap-6 mb-8 sm:mb-10"
         >
           <Card className="bg-blue-50 border-purple-200">
             <CardHeader>
@@ -179,7 +179,7 @@ const ITCell = () => {
         </motion.div>
 
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Card className="mb-12 bg-indigo-50 border-indigo-200">
+          <Card className="mb-8 sm:mb-10 bg-indigo-50 border-indigo-200">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-2">
                 {itcellDescription.title}
@@ -205,9 +205,9 @@ const ITCell = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-12 sm:mb-16"
+          className="mb-8 sm:mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 text-gray-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800">
             Responsibilities of the Committee
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -250,7 +250,7 @@ const ITCell = () => {
         </motion.div>
 
 
-        <section className="mb-8">
+        <section className="mb-8 sm:mb-10">
           <div className="mb-4 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind IT Cell</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-600">

@@ -163,11 +163,11 @@ const RoadmapTimeline = () => {
   };
 
   return (
-    <div className="my-20 relative px-4 md:px-0">
-      <h2 className="text-4xl font-extrabold text-center mb-3 text-slate-800 tracking-tight">
+    <div className="my-8 sm:my-12 relative px-4 md:px-0">
+      <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-2 text-slate-800 tracking-tight">
         IT Cell Progress Timeline
       </h2>
-      <p className="text-center text-slate-500 mb-16 text-lg max-w-xl mx-auto">
+      <p className="text-center text-slate-500 mb-8 text-sm sm:text-base max-w-xl mx-auto">
         Development Roadmap & Platform Modernization Phases (2025 – 2026)
       </p>
 
@@ -175,7 +175,7 @@ const RoadmapTimeline = () => {
         {/* Timeline track */}
         <div className="absolute left-8 top-2 bottom-2 w-0.5 bg-gradient-to-b from-emerald-400 via-blue-400 to-purple-500 hidden md:block"></div>
 
-        <div className="space-y-12 relative">
+        <div className="space-y-6 sm:space-y-8 relative">
           {timelineData.map((item, index) => (
             <motion.div
               key={index}

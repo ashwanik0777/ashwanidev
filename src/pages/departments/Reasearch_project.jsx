@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Award, DollarSign, Users, CheckCircle, Building } from "lucide-react";
+import { Award, DollarSign, Users, CheckCircle, Building, Search, X, BookOpen } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import StatsCard from "../../components/StatsCard";
 
@@ -78,6 +78,77 @@ const OngoingProjects = ({ projects = [] }) => (
   </section>
 );
 
+const ResearchPublications = ({ publications = [] }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filtered = publications.filter((pub) => {
+    const term = searchTerm.toLowerCase();
+    return typeof pub === "string"
+      ? pub.toLowerCase().includes(term)
+      : (pub.citation && pub.citation.toLowerCase().includes(term));
+  });
+
+  return (
+    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
+            Research Publications
+          </h2>
+          <p className="text-slate-600 text-sm mt-1">
+            Browse peer-reviewed journal publications and scientific contributions.
+          </p>
+        </div>
+
+        <div className="w-full md:w-80 relative">
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            placeholder="Search publication, author, journal..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-9 py-2.5 rounded-lg border border-slate-300 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="text-xs text-slate-500 font-medium mb-4">
+        Showing <strong className="text-slate-800">{filtered.length}</strong> of{" "}
+        <strong className="text-slate-800">{publications.length}</strong> Publications
+      </div>
+
+      <div className="space-y-4">
+        {filtered.map((pub, idx) => {
+          const text = typeof pub === "string" ? pub : pub.citation;
+          return (
+            <div
+              key={idx}
+              className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition-all flex items-start gap-4"
+            >
+              <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-blue-100">
+                {idx + 1}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed font-sans">
+                  {text}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
 const ResearchProjects = () => {
   const { shortCode } = useParams();
   const [researchProjectsData, setResearchProjectsData] = useState(null);
@@ -123,6 +194,7 @@ const ResearchProjects = () => {
     hero,
     stats,
     ongoingProjects,
+    publications,
   } = researchProjectsData;
 
   return (
@@ -144,6 +216,10 @@ const ResearchProjects = () => {
 
       {ongoingProjects && ongoingProjects.length > 0 && (
         <OngoingProjects projects={ongoingProjects} />
+      )}
+
+      {publications && publications.length > 0 && (
+        <ResearchPublications publications={publications} />
       )}
     </div>
   );

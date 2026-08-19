@@ -46,7 +46,7 @@ const socialLinks = [
   },
   {
     name: "Mail",
-    href: "http://mail.gbu.ac.in/",
+    href: "mailto:info@gbu.ac.in",
     icon: Mail,
     color: "#6366f1",
     darkColor: "#4338ca",
@@ -66,11 +66,10 @@ export default function SocialSidebar() {
 
   return (
     <div
-      className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out ${
-        visible
+      className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out ${visible
           ? "opacity-100 translate-x-0"
           : "opacity-0 -translate-x-full pointer-events-none"
-      }`}
+        }`}
     >
       <div className="flex flex-col rounded-r-xl overflow-hidden shadow-[3px_0_18px_rgba(0,0,0,0.1)] bg-white/95 backdrop-blur-sm">
         {socialLinks.map((item) => {

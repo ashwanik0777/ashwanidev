@@ -66,7 +66,7 @@ export default function SocialSidebar() {
 
   return (
     <div
-      className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out hidden md:block ${
+      className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out ${
         visible
           ? "opacity-100 translate-x-0"
           : "opacity-0 -translate-x-full pointer-events-none"
@@ -82,7 +82,7 @@ export default function SocialSidebar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={item.name}
-              className="group relative flex items-center justify-center w-10 h-10 transition-all duration-300 overflow-hidden"
+              className="group relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 transition-all duration-300 overflow-hidden"
             >
               {/* Hover fill */}
               <div
@@ -92,7 +92,7 @@ export default function SocialSidebar() {
 
               {/* Icon: brand color by default, white on hover */}
               <Icon
-                className="relative z-10 w-4 h-4 transition-all duration-300 group-hover:scale-110"
+                className="relative z-10 w-3.5 h-3.5 md:w-4 md:h-4 transition-all duration-300 group-hover:scale-110"
                 strokeWidth={2}
               />
 

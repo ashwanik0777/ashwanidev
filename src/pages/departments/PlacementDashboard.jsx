@@ -206,7 +206,7 @@ const PlacementDashboard = () => {
                 >
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit border-b border-slate-100 pb-3 flex items-center gap-2">
                     <Info className="w-6 h-6 text-purple-600" />
-                    Placement Overview | SoICT
+                    Placement Overview | {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()}
                   </h2>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium space-y-4 whitespace-pre-line">
                     {overviewText}

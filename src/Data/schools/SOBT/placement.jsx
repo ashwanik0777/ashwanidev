@@ -6,146 +6,43 @@ export const placementData = {
     subtitle: "Connecting biotechnology talent with industry opportunities.",
     bgTheme: 1,
   },
-  placementStats: {
-    totalStudents: 180,
-    placedStudents: 120,
-    highestPackage: 8,
-    placementRate: 67,
-  },
-  btechPrograms: [
-    { name: "M.Sc Biotech", students: 30, color: "#2ECC71" },
-    { name: "M.Tech Biotech", students: 25, color: "#3498DB" },
-    { name: "Int. B.Tech-M.Tech", students: 20, color: "#9B59B6" },
-    { name: "M.Sc Bioinformatics", students: 15, color: "#E74C3C" },
-    { name: "M.Sc Mol. Medicine", students: 12, color: "#F39C12" },
-    { name: "B.Sc Biotech", students: 18, color: "#1ABC9C" },
-  ],
+  placementStats: null,
+  overviewText: `The School of Biotechnology is committed to ensuring excellent career opportunities for its students by offering a well-structured curriculum that encourages higher education, research, and industry readiness. The curriculum is designed to provide students with the knowledge and skills required to excel in the biotechnology sector and related industries.
+
+Upon completing their postgraduate studies, students at the School of Biotechnology pursue diverse career paths, including higher education (Ph.D. programs), research projects, and industry roles. Based on available data:
+
+• Many students have been placed in prestigious organizations across India, such as Biocon, Daiichi Sankyo India, Zydus Cadila, Panacea, Johnson & Johnson, Zyme Pharmaceuticals, Alere Medical, Genetix Asia, Patanjali, Wrig Nanosystems, IDS Infotech, and Bioglobe Research Solutions.
+
+• Several students have enrolled in Ph.D. programs at renowned Indian universities and research institutes, including IIT Delhi, IIT Guwahati, NIPGR, IARI (PUSA), TERI, NIFTEM, DRDO, NSIT, Pant Nagar University, and Nirma University.
+
+• A few students have secured Ph.D. opportunities abroad, at esteemed institutions such as University of Texas Rio Grande Valley (USA), Silantes GmbH Munich (Germany), Temple University (USA), Chungnam National University (South Korea), Max Planck Institute of Chemical Ecology (Germany), Newcastle University (Australia), and Louisiana State University (USA).
+
+• Some students have joined sponsored research projects as research fellows in various Indian institutes, while others have taken up faculty positions in academic institutions.
+
+The School of Biotechnology takes pride in its students' successful career trajectories and continues to provide a strong foundation for their academic and professional growth.`,
   recruitersData: [
-    { name: "Biocon", logo: "https://logo.clearbit.com/biocon.com" },
-    { name: "Cipla", logo: "https://logo.clearbit.com/cipla.com" },
-    { name: "Sun Pharma", logo: "https://logo.clearbit.com/sunpharma.com" },
-    { name: "Dr. Reddy's", logo: "https://logo.clearbit.com/drreddys.com" },
-    { name: "Lupin", logo: "https://logo.clearbit.com/lupin.com" },
-    { name: "Zydus", logo: "https://logo.clearbit.com/zyduslifesciences.com" },
-    { name: "Panacea Biotec", logo: "https://logo.clearbit.com/panaceabiotec.com" },
-    { name: "Syngene", logo: "https://logo.clearbit.com/syngeneintl.com" },
-    { name: "Serum Institute", logo: "https://logo.clearbit.com/seruminstitute.com" },
-    { name: "Dabur", logo: "https://logo.clearbit.com/dabur.com" },
-    { name: "CSIR Labs", logo: "https://logo.clearbit.com/csir.res.in" },
-    { name: "Amul", logo: "https://logo.clearbit.com/amul.com" },
+    { name: "Biocon", logo: "/assets/companies/Biocon.jpeg" },
+    { name: "Daiichi Sankyo India", logo: "/assets/companies/Daiichi Sankyo India.png" },
+    { name: "Zydus Cadila", logo: "/assets/companies/Zydus Cadila.png" },
+    { name: "Panacea", logo: "/assets/companies/Panacea.png" },
+    { name: "Johnson & Johnson", logo: "/assets/companies/Johnson & Johnson.png" },
+    { name: "Alere Medical", logo: "/assets/companies/Alere Medical.png" },
+    { name: "Genetix Asia", logo: "/assets/companies/Genetix Asia.png" },
+    { name: "Patanjali", logo: "/assets/companies/Patanjali.png" },
+    { name: "IDS Infotech", logo: "/assets/companies/IDS Infotech.png" },
+    { name: "Bioglobe Research Solutions", logo: "/assets/companies/Bioglobe Research Solutions.jpg" },
   ],
-  otherPrograms: [
-    { name: "M.Sc Biotechnology", enrollment: 30 },
-    { name: "M.Tech Biotechnology", enrollment: 25 },
-    { name: "Int. B.Tech-M.Tech", enrollment: 40 },
-    { name: "M.Sc Bioinformatics", enrollment: 20 },
-    { name: "M.Sc Molecular Medicine", enrollment: 15 },
-    { name: "B.Sc Biotechnology (Hons.)", enrollment: 60 },
-    { name: "Ph.D Biotechnology", enrollment: 35 },
-  ],
-  placementStatistics: {
-    totalStudents: 180,
-    placedStudents: 120,
-    averagePackage: "4.5 LPA",
-    highestPackage: "8 LPA",
-    topRecruiters: [
-      "Biocon",
-      "Cipla",
-      "Sun Pharma",
-      "Dr. Reddy's",
-      "Serum Institute",
-      "Syngene",
-      "Panacea Biotec",
-      "CSIR Labs",
-    ],
-  },
-  achievers: [
-    { name: "Ankit Verma", company: "Biocon", package: "6.5 LPA", program: "M.Sc Biotechnology" },
-    { name: "Sneha Sharma", company: "Serum Institute", package: "6.2 LPA", program: "M.Tech Biotechnology" },
-    { name: "Rohit Kumar", company: "Dr. Reddy's", package: "5.8 LPA", program: "Int. B.Tech Biotech" },
-    { name: "Pooja Singh", company: "Sun Pharma", package: "6.5 LPA", program: "M.Sc Molecular Medicine" },
-    { name: "Aman Gupta", company: "Lupin", package: "5.2 LPA", program: "M.Sc Microbial Biotech" },
-    { name: "Kavya Reddy", company: "Syngene", package: "6.8 LPA", program: "M.Sc Bioinformatics" },
-  ],
-  placementRules: [
-    "Prior registration required within deadline",
-    "Complete resume submission mandatory",
-    "Attendance in all recruitment rounds compulsory",
-    "No tolerance for misconduct during process",
-    "Off-campus offers must be reported within 24 hours",
-    "Formal attire code strictly enforced",
-  ],
-  missionObjective: {
-    aboutTitle: "About SOBT",
-    aboutText:
-      "The School of Biotechnology is one of the most dynamic schools at Gautam Buddha University. Our students are trained through rigorous academic coursework combined with extensive laboratory and research experience, making them well-prepared for careers in the pharmaceutical, healthcare, agricultural, and environmental sectors. We are confident that our graduates bring exceptional value to any organization they join.",
-    objectiveTitle: "Our Objective",
-    objectiveText:
-      "Our objective is to bridge the gap between academic learning and industry requirements. The placement cell, in coordination with the Corporate Relation Cell, organizes workshops, industry visits, and skill development programs that enhance our students' employability in the biotechnology and pharmaceutical industries.",
-  },
-  insideItems: [
-    {
-      title: "Program-wise Placement Records",
-      description: "Detailed statistics for all programs",
-      accent: "from-green-400 to-green-600",
-      iconName: "BarChart2",
-    },
-    {
-      title: "Alumni Success Stories",
-      description: "Inspiring journeys of our graduates",
-      accent: "from-blue-400 to-blue-600",
-      iconName: "Users",
-    },
-    {
-      title: "Industry Testimonials",
-      description: "What companies say about our students",
-      accent: "from-emerald-400 to-teal-600",
-      iconName: "Briefcase",
-    },
-    {
-      title: "Training & Support Programs",
-      description: "Comprehensive career development initiatives",
-      accent: "from-purple-400 to-purple-600",
-      iconName: "Target",
-    },
-  ],
-  brochure: {
-    title: "Placement Brochure",
-    year: "2024-25",
-    link: "https://www.gbu.ac.in/Content/admissions/brochures/Final_GBU_Brochure_2022.pdf",
-  },
-  report: {
-    title: "Placement Report",
-    year: "2024-25",
-    link: "https://www.gbu.ac.in/Content/admissions/brochures/Final_GBU_Brochure_2022.pdf",
-  },
-  growth: [
-    { year: "2020", rate: "55%" },
-    { year: "2021", rate: "60%" },
-    { year: "2022", rate: "65%" },
-    { year: "2023", rate: "70%" },
-    { year: "2024", rate: "75%" },
-  ],
-  sectorDistribution: [
-    { sector: "Pharma & Healthcare", percentage: "40%", color: "bg-green-500" },
-    { sector: "Research & Academia", percentage: "25%", color: "bg-blue-500" },
-    { sector: "Agri-Biotech & Food Tech", percentage: "20%", color: "bg-purple-500" },
-    { sector: "Environmental & Others", percentage: "15%", color: "bg-orange-500" },
-  ],
-  departmentPlacement: [
-    { dept: "Biotechnology", rate: "72%", color: "bg-green-500" },
-    { dept: "Bioinformatics", rate: "68%", color: "bg-blue-500" },
-    { dept: "Molecular Medicine", rate: "65%", color: "bg-purple-500" },
-    { dept: "Microbial Biotech", rate: "60%", color: "bg-orange-500" },
-  ],
-  packageDistribution: [
-    { range: "₹6L+ Packages", percentage: "20%", color: "bg-green-500" },
-    { range: "₹4-6L Packages", percentage: "45%", color: "bg-blue-500" },
-    { range: "₹2-4L Packages", percentage: "35%", color: "bg-orange-500" },
-  ],
-  ugPgStats: { ug: "60%", pg: "75%" },
-  domesticInternational: { domestic: "92%", international: "8%" },
-  reportDownloadLabel: "Download Full Placement Report (2024)",
+  btechPrograms: [],
+  otherPrograms: [],
+  growth: [],
+  sectorDistribution: [],
+  departmentPlacement: [],
+  packageDistribution: [],
+  achievers: [],
+  placementRules: [],
+  missionObjective: null,
+  brochure: null,
+  report: null,
   contactInfo: {
     people: [
       { name: "Dr. Vinay Litoria", role: "Director, Corporate Relation Cell" },

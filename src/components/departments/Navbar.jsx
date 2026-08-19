@@ -195,6 +195,7 @@ const Navbar = () => {
         { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
         { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
         { label: "BCI Approved Letter", href: `/schools/${activeSchool}/departments/bci-approved-letters` },
+        { label: "School Library", href: `/schools/${activeSchool}/departments/school-library` },
         { label: "SLJG Board of Studies", href: routes.about.board },
       ];
     }

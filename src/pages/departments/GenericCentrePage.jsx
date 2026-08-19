@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.libraryData ||
           module.racData ||
           module.bciApprovedLettersData ||
           module.legalAidData ||
@@ -67,7 +68,120 @@ const GenericCentrePage = () => {
 
   return (
     <div>
-      {data.customLayout === "racCommittee" ? (
+      {data.customLayout === "schoolLibrary" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+            
+            {/* Overview & Features */}
+            {data.overviewSection && (
+              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
+                <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                      School of Law, Justice & Governance
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit">
+                      {data.overviewSection.title}
+                    </h2>
+                  </div>
+                </div>
+
+                <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">
+                  {data.overviewSection.description}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {data.overviewSection.features.map((feat, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                          {feat.badge}
+                        </span>
+                        <CheckCircle className="w-5 h-5 text-purple-600" />
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                        {feat.title}
+                      </h3>
+                      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
+                        {feat.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Library Timings */}
+            {data.timingsSection && (
+              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit text-center">
+                  {data.timingsSection.title}
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {data.timingsSection.timings.map((t, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-2xl bg-purple-50/60 border border-purple-200 text-center space-y-1"
+                    >
+                      <div className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                        {t.day}
+                      </div>
+                      <div className="text-slate-900 font-extrabold text-sm sm:text-base mt-1">
+                        {t.time}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Contact & Desk */}
+            {data.contact && (
+              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-4 max-w-3xl mx-auto text-center">
+                <h2 className="text-xl font-bold text-slate-900 font-outfit">
+                  {data.contact.title}
+                </h2>
+                {data.contact.office && (
+                  <p className="text-slate-600 text-xs sm:text-sm font-medium">
+                    📍 {data.contact.office}
+                  </p>
+                )}
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-600">
+                  {data.contact.email && (
+                    <div>
+                      <span className="font-semibold text-slate-400">Email: </span>
+                      <a href={`mailto:${data.contact.email}`} className="text-purple-700 font-bold hover:underline">
+                        {data.contact.email}
+                      </a>
+                    </div>
+                  )}
+                  {data.contact.phone && (
+                    <div>
+                      <span className="font-semibold text-slate-400">Phone: </span>
+                      <span className="font-bold text-slate-900">{data.contact.phone}</span>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+          </div>
+        </div>
+      ) : data.customLayout === "racCommittee" ? (
+
         <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
           <BannerSection
             title={data.hero.title}

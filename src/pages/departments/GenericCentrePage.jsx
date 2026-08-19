@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Scale, Award, BookOpen, Users, CheckCircle, Mail, Gavel, Landmark, ShieldCheck } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import AboutSection from "../../components/departments/coedt/AboutCEDT";
 import FacilitiesSwiper from "../../components/departments/coedt/FacilitiesSwiper";
@@ -29,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.mootCourtData ||
           module.centreBuddhistStudiesData ||
           module.paliSanskritStudiesData ||
           module.heritageArchaeologyData ||
@@ -62,13 +64,205 @@ const GenericCentrePage = () => {
 
   return (
     <div>
-      {data.hero && (
-        <BannerSection
-          title={data.hero.title}
-          subtitle={data.hero.subtitle}
-          bgTheme={data.hero.bgTheme || 5}
-        />
-      )}
+      {data.customLayout === "mootCourt" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+            
+            {/* Overview & BCI Mandate */}
+            {data.overviewSection && (
+              <section className="space-y-8">
+                <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+                  <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                      <Landmark className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                        School of Law, Justice & Governance
+                      </span>
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit">
+                        {data.overviewSection.title}
+                      </h2>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+                    {data.overviewSection.paragraphs.map((p, idx) => (
+                      <p key={idx}>{p}</p>
+                    ))}
+                  </div>
+
+                  {data.overviewSection.bciBadge && (
+                    <div className="p-6 rounded-2xl bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-purple-800/40">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 shrink-0">
+                          <ShieldCheck className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <div className="text-amber-400 text-xs font-bold uppercase tracking-wider">
+                            {data.overviewSection.bciBadge}
+                          </div>
+                          <div className="text-sm sm:text-base font-semibold text-purple-100 mt-0.5">
+                            {data.overviewSection.bciText}
+                          </div>
+                        </div>
+                      </div>
+                      <span className="px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold shrink-0">
+                        Mandatory Subject & 3 Evaluated Rounds / Year
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {/* Moot Court Society */}
+            {data.societySection && (
+              <section className="space-y-8">
+                <div className="text-center max-w-3xl mx-auto space-y-2">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit tracking-tight">
+                    {data.societySection.title}
+                  </h2>
+                  <p className="text-slate-500 text-sm sm:text-base font-medium">
+                    {data.societySection.subtitle}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                  {data.societySection.cards.map((card, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                    >
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-700">
+                            {card.icon === "Users" && <Users className="w-6 h-6" />}
+                            {card.icon === "Award" && <Award className="w-6 h-6" />}
+                            {card.icon === "BookOpen" && <BookOpen className="w-6 h-6" />}
+                            {card.icon === "Scale" && <Gavel className="w-6 h-6" />}
+                          </div>
+                          <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200">
+                            {card.badge}
+                          </span>
+                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-outfit">
+                          {card.title}
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                          {card.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* National Competition & Dignitaries */}
+            {data.nationalCompetitionSection && (
+              <section className="space-y-8">
+                <div className="bg-gradient-to-r from-slate-950 via-purple-950 to-indigo-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-purple-900/50 space-y-8">
+                  <div className="text-center max-w-3xl mx-auto space-y-2">
+                    <span className="px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold uppercase tracking-wider">
+                      Flagship National Event
+                    </span>
+                    <h2 className="text-2xl sm:text-4xl font-extrabold font-outfit text-white tracking-tight mt-2">
+                      {data.nationalCompetitionSection.title}
+                    </h2>
+                    <p className="text-purple-200/90 text-sm sm:text-base font-normal">
+                      {data.nationalCompetitionSection.subtitle}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {data.nationalCompetitionSection.dignitaries.map((d, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 hover:border-amber-400/50 transition-all duration-300 space-y-2"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded border border-amber-400/30">
+                            {d.badge}
+                          </span>
+                          <Landmark className="w-4 h-4 text-purple-300" />
+                        </div>
+                        <div className="font-bold text-white text-base font-outfit">
+                          {d.name}
+                        </div>
+                        <div className="text-xs text-purple-200/80 font-medium">
+                          {d.role}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {data.nationalCompetitionSection.extraNote && (
+                    <div className="text-center pt-4 border-t border-white/10 text-xs sm:text-sm text-purple-200/90 font-medium italic">
+                      ✨ {data.nationalCompetitionSection.extraNote}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {/* Contact & Faculty Coordinators */}
+            {data.contact && (
+              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6 max-w-4xl mx-auto">
+                <div className="text-center space-y-1">
+                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit">
+                    {data.contact.title}
+                  </h2>
+                  <p className="text-slate-500 text-xs sm:text-sm font-medium">
+                    Faculty Coordinators & Official Communication Desk
+                  </p>
+                </div>
+
+                {data.contact.coordinators && (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                    {data.contact.coordinators.map((c, i) => (
+                      <div key={i} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 text-center space-y-1">
+                        <div className="font-bold text-slate-900 text-sm sm:text-base">{c.name}</div>
+                        <div className="text-xs text-purple-700 font-semibold">{c.designation}</div>
+                        {c.role && (
+                          <span className="inline-block px-2.5 py-0.5 mt-1 rounded bg-purple-50 text-purple-700 border border-purple-200 text-[10px] font-bold">
+                            {c.role}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {data.contact.email && (
+                  <div className="text-center pt-4 border-t border-slate-100 flex items-center justify-center gap-2">
+                    <Mail className="w-4 h-4 text-purple-700" />
+                    <span className="text-xs font-semibold uppercase text-slate-400">Official Email: </span>
+                    <a href={`mailto:${data.contact.email}`} className="text-purple-700 font-bold hover:underline text-sm">
+                      {data.contact.email}
+                    </a>
+                  </div>
+                )}
+              </section>
+            )}
+
+          </div>
+        </div>
+      ) : (
+        <div>
+          {data.hero && (
+            <BannerSection
+              title={data.hero.title}
+              subtitle={data.hero.subtitle}
+              bgTheme={data.hero.bgTheme || 5}
+            />
+          )}
 
       {data.about && (
         <AboutSection
@@ -163,6 +357,8 @@ const GenericCentrePage = () => {
             )}
           </div>
         </section>
+      )}
+        </div>
       )}
     </div>
   );

@@ -34,5 +34,10 @@ export const placementData = {
     website: "www.gbu.ac.in",
     websiteUrl: "https://www.gbu.ac.in",
   },
+  brochures: [
+    { title: "PLACEMENT-LAW-2026.pdf", label: "Placement Brochure 2026", year: "2026", url: "https://drive.google.com/open?id=1atH1b5MEmNQW56hypImemBHzjeV-kIJS" },
+    { title: "SoLaw_PlacementBrochure_May2025.pdf", label: "Placement Brochure May 2025", year: "May 2025", url: "https://drive.google.com/open?id=1u8ZQZzOUiWkhtTywaG51o5rURsm7eGcm" },
+    { title: "SoLaw_PlacementBrochure_May2023.pdf", label: "Placement Brochure May 2023", year: "May 2023", url: "https://drive.google.com/open?id=1ZpJuGiqaAXRK7zzQFBYWZpgSbYyOATl6" },
+  ],
 };
 

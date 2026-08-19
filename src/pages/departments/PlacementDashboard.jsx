@@ -81,7 +81,7 @@ const PlacementDashboard = () => {
   }
 
   if (placementData?.isSimpleView) {
-    const { hero, overview, committee, corporateRelations } = placementData;
+    const { hero, overview, committee, corporateRelations, brochures } = placementData;
     return (
       <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
         <BannerSection
@@ -168,6 +168,56 @@ const PlacementDashboard = () => {
                   )}
                 </div>
               )}
+            </section>
+          )}
+
+          {/* Placement Brochures */}
+          {brochures && brochures.length > 0 && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    Official Documents
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Placement Brochures & Reports
+                  </h2>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 w-fit">
+                  Downloads
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {brochures.map((b, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-200 flex flex-col justify-between space-y-4"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-purple-700">
+                        <FileText className="w-5 h-5 shrink-0" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-100 px-2 py-0.5 rounded border border-purple-200">
+                          {b.year}
+                        </span>
+                      </div>
+                      <div className="text-slate-900 font-bold text-sm font-outfit">
+                        {b.label || b.title}
+                      </div>
+                    </div>
+
+                    <a
+                      href={b.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-150 flex items-center justify-center gap-2"
+                    >
+                      <span>View File</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                ))}
+              </div>
             </section>
           )}
 

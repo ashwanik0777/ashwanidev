@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.racData ||
           module.bciApprovedLettersData ||
           module.legalAidData ||
           module.mootCourtData ||
@@ -66,7 +67,79 @@ const GenericCentrePage = () => {
 
   return (
     <div>
-      {data.customLayout === "bciLetters" ? (
+      {data.customLayout === "racCommittee" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+            {data.committeeSection && (
+              <section className="space-y-8">
+                <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
+                  <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                      <Landmark className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                        Academic Research Governance
+                      </span>
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit">
+                        {data.committeeSection.title}
+                      </h2>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+                    {data.committeeSection.subtitle}
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {data.committeeSection.members.map((member, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 flex flex-col justify-between space-y-3"
+                      >
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                              {member.badge}
+                            </span>
+                            <span className="w-7 h-7 rounded-full bg-purple-100 text-purple-700 text-xs font-bold flex items-center justify-center">
+                              #{member.sNo}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-slate-900 font-outfit leading-snug">
+                            {member.name}
+                          </h3>
+                          <p className="text-xs text-purple-700 font-semibold">
+                            {member.designation}
+                          </p>
+                          <p className="text-xs text-slate-600 font-medium">
+                            {member.university}
+                          </p>
+                        </div>
+
+                        {member.role && (
+                          <div className="pt-3 border-t border-slate-200/60">
+                            <span className="inline-block px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 font-bold text-xs">
+                              Role: {member.role}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+      ) : data.customLayout === "bciLetters" ? (
+
         <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
           <BannerSection
             title={data.hero.title}

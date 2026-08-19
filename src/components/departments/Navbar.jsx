@@ -288,7 +288,7 @@ const Navbar = () => {
       label: "About Us",
       items: getAboutItems(),
     },
-    {
+    currentSchoolCode !== "SOBSC" && {
       key: "departments",
       label: "Departments & Academic Programs",
       items: departmentItems.length
@@ -313,7 +313,7 @@ const Navbar = () => {
       label: "Research",
       items: getResearchItems(),
     },
-  ];
+  ].filter(Boolean);
 
   const navVariants = {
     initial: { y: -50, opacity: 0 },

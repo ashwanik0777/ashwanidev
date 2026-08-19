@@ -255,6 +255,8 @@ const Navbar = () => {
       return [
         { label: "Corporate Resource Center (CRC)", href: `/schools/${activeSchool}/departments/corporate-resource-center` },
         { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
+        { label: "Training and Consultancy", href: `/schools/${activeSchool}/departments/training-consultancy` },
+        { label: "MDP Calendar", href: "https://drive.google.com/file/d/1L9GL0Yw9WRi6eYIuDp_zBN4Fp3lJh-fF/view?usp=sharing" },
       ];
     }
 
@@ -520,13 +522,25 @@ const Navbar = () => {
                 >
                   {items.map((item, idx) => (
                     <motion.li key={idx} variants={itemVariants}>
-                      <Link
-                        to={item.href}
-                        className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
-                        onClick={() => setOpenMenu(null)}
-                      >
-                        {item.label}
-                      </Link>
+                      {item.href.startsWith("http") ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
+                          onClick={() => setOpenMenu(null)}
+                        >
+                          {item.label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.href}
+                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
+                          onClick={() => setOpenMenu(null)}
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </motion.li>
                   ))}
                 </motion.ul>
@@ -629,16 +643,31 @@ const Navbar = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.05 }}
                           >
-                            <Link
-                              to={item.href}
-                              className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
-                              onClick={() => {
-                                setIsMobileMenuOpen(false);
-                                setMobileOpenMenus({});
-                              }}
-                            >
-                              {item.label}
-                            </Link>
+                            {item.href.startsWith("http") ? (
+                              <a
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setMobileOpenMenus({});
+                                }}
+                              >
+                                {item.label}
+                              </a>
+                            ) : (
+                              <Link
+                                to={item.href}
+                                className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
+                                onClick={() => {
+                                  setIsMobileMenuOpen(false);
+                                  setMobileOpenMenus({});
+                                }}
+                              >
+                                {item.label}
+                              </Link>
+                            )}
                           </motion.li>
                         ))}
                       </motion.ul>

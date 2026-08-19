@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.trainingConsultancyData ||
           module.researchDevData ||
           module.crcData ||
           module.guestSpeakersData ||
@@ -414,6 +415,60 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "trainingConsultancy" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    School of Management
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    {data.sectionTitle || "International Collaboration"}
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                  Global Partnerships
+                </span>
+              </div>
+
+              <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-100/90 leading-relaxed text-slate-700 text-sm sm:text-base">
+                <p>{data.paragraph}</p>
+              </div>
+
+              {data.mouPartners && data.mouPartners.length > 0 && (
+                <div className="pt-4 border-t border-slate-100 space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                    Key Global MOUs & International University Partners
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {data.mouPartners.map((item, idx) => (
+                      <div key={idx} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between hover:border-purple-300 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">{item.flag}</span>
+                          <div>
+                            <h4 className="text-sm font-extrabold text-slate-900 font-outfit">{item.name}</h4>
+                            <span className="text-xs font-medium text-slate-500">{item.country}</span>
+                          </div>
+                        </div>
+                        <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold ${item.badge === "MOU Signed" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-amber-50 text-amber-700 border border-amber-200"}`}>
+                          {item.badge}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
           </div>
         </div>
       ) : data.customLayout === "researchDevelopment" ? (

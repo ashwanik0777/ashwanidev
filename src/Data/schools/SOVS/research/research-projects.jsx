@@ -8,12 +8,7 @@ export const researchProjectsData = {
     description:
       "Peer-reviewed research articles, books, international patents, and conference proceedings contributed by faculty members of the School of Vocational Studies & Applied Sciences.",
   },
-  stats: [
-    { icon: Award, value: "15+", label: "Research Books & Chapters", color: "text-teal-600" },
-    { icon: DollarSign, value: "US Patent", label: "US Patent Filed (No. 61/909,864)", color: "text-green-600" },
-    { icon: Users, value: "International", label: "Global Collaborations (UK, USA)", color: "text-blue-600" },
-    { icon: CheckCircle, value: "50+", label: "Refereed Publications", color: "text-orange-600" },
-  ],
+  stats: [],
   publications: [
     // PROF. ANURADHA MISHRA — Books
     {

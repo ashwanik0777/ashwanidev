@@ -192,11 +192,28 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
     ? toArray(unwrapData(newslettersRes.value)).map(normalizeNewsletter)
     : [];
 
-  const mediaGallery = mediaRes.status === "fulfilled"
+  let mediaGallery = mediaRes.status === "fulfilled"
     ? toArray(unwrapData(mediaRes.value)).map(normalizeMedia)
     : [];
 
   const pastEvents = events.filter((e) => !e.isUpcoming);
+
+  // Merge: past events with gallery images into mediaGallery
+  const eventGalleryItems = events
+    .filter((e) => e.status !== "upcoming" && e.images && e.images.length > 0)
+    .map((e) => ({
+      id: `event-${e.id}`,
+      title: e.title,
+      category: e.type || "Events",
+      year: e.year,
+      date: e.date,
+      images: e.images,
+      coverImage: e.coverImage || e.images[0] || "",
+      schoolName: e.schoolName,
+      level: e.level,
+    }));
+
+  mediaGallery = [...eventGalleryItems, ...mediaGallery];
 
   return {
     schoolName: "GBU",

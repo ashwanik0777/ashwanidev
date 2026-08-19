@@ -442,8 +442,8 @@ const EventDetail = () => {
           </div>
         </div>
 
-        {/* Gallery Section (Only for Past Events) */}
-        {!event.isUpcoming && eventImages.length > 0 && (
+        {/* Gallery Section */}
+        {event.status !== "upcoming" && eventImages.length > 0 && (
           <div className="mt-20">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Event Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

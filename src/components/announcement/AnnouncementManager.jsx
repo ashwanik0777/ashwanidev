@@ -467,7 +467,11 @@ const AnnouncementManager = ({
                 </div>
               )}
 
-              {fields.map((field) => (
+              {fields.map((field) => {
+                if (field.hiddenWhenUpcoming && editor.form.status === "upcoming") {
+                  return null;
+                }
+                return (
                 <label key={field.key} className="block">
                   <span className="mb-1 block text-sm font-medium text-slate-700">
                     {field.label}
@@ -585,7 +589,8 @@ const AnnouncementManager = ({
                     />
                   )}
                 </label>
-              ))}
+                );
+              })}
             </div>
 
             <div className="mt-4 flex gap-2 border-t border-slate-100 pt-4">

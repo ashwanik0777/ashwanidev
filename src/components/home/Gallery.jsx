@@ -42,9 +42,14 @@ export default function CampusGallery() {
       const MAX_SLIDES = 12;
       const allEvents = getSchoolAnnouncements().events || [];
       
-      // Only keep events that have at least one usable image
-      const validEvents = allEvents.filter(
-        (item) => item.image || item.flyerUrl || item.coverImage || (item.images && item.images.length > 0)
+      // Filter out upcoming events (only keep ongoing or completed)
+      const pastOrOngoingEvents = allEvents.filter(
+        e => e.status !== "upcoming"
+      );
+
+      // Only keep events that have at least one gallery image
+      const validEvents = pastOrOngoingEvents.filter(
+        (item) => item.images && item.images.length > 0
       );
 
       // Phase 1: one cover image per event (up to 12)
@@ -52,7 +57,7 @@ export default function CampusGallery() {
       const extrasPool = [];
 
       for (const item of validEvents) {
-        const cover = item.image || item.flyerUrl || item.coverImage || item.images?.[0];
+        const cover = item.coverImage || item.images?.[0];
         if (!cover) continue;
 
         if (slides.length < MAX_SLIDES) {

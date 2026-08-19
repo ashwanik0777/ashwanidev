@@ -37,7 +37,7 @@ export default function CampusGallery() {
       const extrasPool = [];
 
       for (const item of validEvents) {
-        const cover = item.coverImage || item.images?.[0];
+        const cover = item.coverImage || item.images?.[item.images.length - 1];
         if (!cover) continue;
 
         if (slides.length < MAX_SLIDES) {
@@ -50,8 +50,8 @@ export default function CampusGallery() {
           });
         }
 
-        // Collect remaining images from this event for potential fill
-        const otherImages = (item.images || []).filter((img) => img && img !== cover);
+        // Collect remaining images from this event for potential fill (latest first)
+        const otherImages = (item.images || []).filter((img) => img && img !== cover).reverse();
         for (const img of otherImages) {
           extrasPool.push({
             id: `${item.id}-extra-${extrasPool.length}`,

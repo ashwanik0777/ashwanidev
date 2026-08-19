@@ -28,20 +28,14 @@ export default function ResearchGrants() {
           setGrantsData(null);
         }
       } else {
-        // Fallback to SOBT if available
-        const fallbackKey = Object.keys(modules).find((path) =>
-          path.toLowerCase().includes("/schools/sobt/research/research-grants.jsx")
-        );
-        if (fallbackKey) {
-          try {
-            const mod = await modules[fallbackKey]();
-            setGrantsData(mod.researchGrantsData);
-          } catch {
-            setGrantsData(null);
-          }
-        } else {
-          setGrantsData(null);
-        }
+        setGrantsData({
+          schoolCode: code.toUpperCase(),
+          hero: {
+            title: `RESEARCH GRANTS — ${code.toUpperCase()}`,
+            subtitle: "Extramural research grants and funded projects",
+          },
+          grantsList: [],
+        });
       }
       setLoading(false);
     };

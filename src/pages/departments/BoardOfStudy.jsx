@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BannerSection from "../../components/HeroBanner";
 
-const BoardOfStudies = ({ departments }) => {
+const BoardOfStudies = ({ departments, dean }) => {
   const getRoleBadge = (role) => {
     switch (role) {
       case "Dean":
@@ -33,25 +33,25 @@ const BoardOfStudies = ({ departments }) => {
     <div className="min-h-screen bg-gray-50/50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Optional Dean / Chairperson Hero Card */}
-        {boardofstudiesData?.dean && (
+        {dean && (
           <div className="bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white">
             <div className="space-y-2 text-center md:text-left">
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-400/30">
                 School Leadership
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold font-outfit text-white">
-                {boardofstudiesData.dean.name}
+                {dean.name}
               </h2>
               <p className="text-blue-200 font-semibold text-sm sm:text-base">
-                {boardofstudiesData.dean.designation} — {boardofstudiesData.dean.department}
+                {dean.designation} — {dean.department}
               </p>
               <p className="text-slate-300 text-xs sm:text-sm">
-                {boardofstudiesData.dean.university}
+                {dean.university}
               </p>
             </div>
-            {boardofstudiesData.dean.role && (
+            {dean.role && (
               <div className="px-5 py-2.5 rounded-xl bg-blue-600/30 border border-blue-400/40 text-blue-200 font-bold text-sm text-center shrink-0">
-                {boardofstudiesData.dean.role}
+                {dean.role}
               </div>
             )}
           </div>
@@ -205,7 +205,10 @@ export default function BoardOfStudyPage() {
         subtitle={boardofstudiesData.subheading}
         bgTheme={10}
       />
-      <BoardOfStudies departments={boardofstudiesData.departments} />
+      <BoardOfStudies
+        departments={boardofstudiesData.departments}
+        dean={boardofstudiesData.dean}
+      />
     </>
   );
 }

@@ -854,7 +854,7 @@ const NewsGridCard = ({ news }) => {
         <div className="flex items-center justify-between">
           <Link to={`/announcements/news-notifications/${news.id}`}>
             <Button size="sm" className="flex items-center gap-2">
-              Read More
+              Details
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -995,7 +995,7 @@ const NewsListCard = ({ news }) => {
 
               <div className="flex items-center gap-2">
                 <Link to={`/announcements/news-notifications/${news.id}`}>
-                  <Button size="sm">Read More</Button>
+                  <Button size="sm">Details</Button>
                 </Link>
               </div>
             </div>
@@ -1027,7 +1027,7 @@ const NewsNotifications = ({ schoolCode }) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedPriorities, setSelectedPriorities] = useState([]);
   const [viewMode, setViewMode] = useState("grid");
-  const [mockNews, setMockNews] = useState(() => getSchoolAnnouncements().news);
+  const [mockNews, setMockNews] = useState(() => getSchoolAnnouncements(schoolCode).news);
 
   useEffect(() => {
     let isMounted = true;
@@ -1040,7 +1040,7 @@ const NewsNotifications = ({ schoolCode }) => {
       }
 
       if (isMounted) {
-        setMockNews(getSchoolAnnouncements().news);
+        setMockNews(getSchoolAnnouncements(schoolCode).news);
       }
     };
 
@@ -1055,7 +1055,7 @@ const NewsNotifications = ({ schoolCode }) => {
       window.removeEventListener("focus", loadNews);
       window.removeEventListener("announcements-data-updated", loadNews);
     };
-  }, []);
+  }, [schoolCode]);
   // Extract unique values
   const allTags = Array.from(new Set(mockNews.flatMap((news) => news.tags)));
   const allCategories = Array.from(
@@ -1252,36 +1252,6 @@ const NewsNotifications = ({ schoolCode }) => {
             totalResults={filteredAndSortedNews.length}
           />
         </motion.div>
-
-        {/* Featured News Section */}
-        {currentPage === 1 &&
-          filteredAndSortedNews.some((news) => news.featured) && (
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-12"
-            >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <svg
-                  className="w-6 h-6 text-yellow-500 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                Featured Stories
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {filteredAndSortedNews
-                  .filter((news) => news.featured)
-                  .slice(0, 2)
-                  .map((news) => (
-                    <NewsGridCard key={news.id} news={news} />
-                  ))}
-              </div>
-            </motion.section>
-          )}
 
         {/* News Grid/List */}
         <motion.section

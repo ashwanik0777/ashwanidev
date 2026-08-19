@@ -59,6 +59,7 @@ const Button = ({ children, onClick, variant = 'default', size = 'md', className
     outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50',
     ghost: 'bg-transparent text-gray-600 hover:bg-gray-100',
     glass: 'bg-white/20 backdrop-blur text-white hover:bg-white/30 border border-white/20',
+    'glass-dark': 'bg-black/50 backdrop-blur text-white hover:bg-black/70 border border-white/10',
   };
   const sizes = {
     sm: 'h-8 px-3 text-sm',
@@ -575,7 +576,7 @@ const getImageUrl = (path) => {
 };
 
 // === Main Component ===
-const MediaGallery = () => {
+const MediaGallery = ({ schoolCode }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedYear, setSelectedYear] = useState('all');
@@ -584,7 +585,7 @@ const MediaGallery = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [selectedMediaItem, setSelectedMediaItem] = useState(null);
   const [viewMode, setViewMode] = useState('grid');
-   const [mockMedia, setMockMedia] = useState(() => getSchoolAnnouncements().mediaGallery);
+   const [mockMedia, setMockMedia] = useState(() => getSchoolAnnouncements(schoolCode).mediaGallery);
    const [loading, setLoading] = useState(false);
   useEffect(() => {
     let isMounted = true;
@@ -592,13 +593,13 @@ const MediaGallery = () => {
     const loadMedia = async () => {
       setLoading(true);
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }
 
       if (!isMounted) return;
-      setMockMedia(getSchoolAnnouncements().mediaGallery);
+      setMockMedia(getSchoolAnnouncements(schoolCode).mediaGallery);
       setLoading(false);
     };
 
@@ -613,7 +614,7 @@ const MediaGallery = () => {
       window.removeEventListener("focus", loadMedia);
       window.removeEventListener("announcements-data-updated", loadMedia);
     };
-  }, []);
+  }, [schoolCode]);
   const allCategories = Array.from(new Set(mockMedia.map(item => item.category)));
   const allYears = Array.from(new Set(mockMedia.map(item => item.year)));
 
@@ -819,9 +820,9 @@ const MediaGallery = () => {
                     
                     {/* Close Button */}
                     <Button 
-                      variant="glass" 
+                      variant="glass-dark" 
                       size="icon" 
-                      className="absolute top-4 right-4" 
+                      className="absolute top-4 right-4 z-10" 
                       onClick={() => setSelectedImageIndex(null)}
                     >
                       <X size={24} />
@@ -831,17 +832,17 @@ const MediaGallery = () => {
                     {selectedMediaItem.images.length > 1 && (
                       <>
                         <Button 
-                          variant="glass" 
+                          variant="glass-dark" 
                           size="icon" 
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2" 
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10" 
                           onClick={() => navigateImage('prev')}
                         >
                           <ChevronLeft size={24} />
                         </Button>
                         <Button 
-                          variant="glass" 
+                          variant="glass-dark" 
                           size="icon" 
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2" 
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10" 
                           onClick={() => navigateImage('next')}
                         >
                           <ChevronRight size={24} />

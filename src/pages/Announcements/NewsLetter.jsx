@@ -121,8 +121,7 @@ const NewsLetter = ({ schoolCode }) => {
     return mockNewsletters.filter((item) => {
       const yearStr = getAnnouncementYear(item.date);
       const matchesSearch =
-        item.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description?.toLowerCase().includes(searchQuery.toLowerCase());
+        item.title?.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesYear = selectedYear === "all" || yearStr === selectedYear;
 
       return matchesSearch && matchesYear;
@@ -178,7 +177,7 @@ const NewsLetter = ({ schoolCode }) => {
           showDate={false}
           showViewMode={false}
           totalResults={filteredNewsletters.length}
-          searchPlaceholder="Search newsletters by title or description..."
+          searchPlaceholder="Search newsletters by title..."
         />
 
         {/* Loading State or Newsletter Grid */}
@@ -239,22 +238,14 @@ const NewsLetter = ({ schoolCode }) => {
 
                     {/* Card Header */}
                     <CardHeader className="flex-1 flex flex-col">
-                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-600">
-                        {newsletter.schoolName}
-                      </p>
-
                       <CardTitle className="group-hover:text-indigo-600 transition-colors mb-2 line-clamp-2 text-xl">
                         {newsletter.title}
                       </CardTitle>
 
-                      <div className="flex items-center gap-2 text-xs text-gray-500 mb-4 font-medium">
+                      <div className="flex items-center gap-2 text-xs text-gray-500 mb-4 font-medium flex-1">
                         <Calendar size={14} className="text-indigo-400" />
                         <span>{newsletter.date ? format(new Date(newsletter.date), 'MMMM dd, yyyy') : 'Date TBA'}</span>
                       </div>
-
-                      <CardDescription className="mb-4 text-gray-600 leading-relaxed text-sm flex-1">
-                        {newsletter.description}
-                      </CardDescription>
                     </CardHeader>
 
                     {/* Card Content - Actions */}

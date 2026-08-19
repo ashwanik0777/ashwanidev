@@ -9,6 +9,9 @@ import {
   CalendarPlus,
   Download,
   X,
+  ChevronLeft,
+  ChevronRight,
+  Image as ImageIcon
 } from "lucide-react";
 import Header from "../../components/announcement/Header";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -425,7 +428,25 @@ const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const isExternalGalleryLink = (url) => {
+    if (!url) return false;
+    return url.includes('photos.app.goo.gl') || 
+           url.includes('photos.google.com') || 
+           url.includes('drive.google.com/drive/folders') ||
+           url.includes('drive.google.com/open?id=') && url.includes('folder');
+  };
+
+  const handleNextImage = (e, total) => {
+    e.stopPropagation();
+    setSelectedIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
+  };
+
+  const handlePrevImage = (e, total) => {
+    e.stopPropagation();
+    setSelectedIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -516,7 +537,7 @@ const EventDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
           {/* Left Column: Flyer */}
           <div className="lg:col-span-6 xl:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] bg-gray-100 border border-gray-200 flex items-center justify-center">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5.5] bg-gray-100 border border-gray-200 flex items-center justify-center">
               {flyerImage ? (
                 <img
                   src={parseImageUrl(flyerImage)}
@@ -684,15 +705,30 @@ const EventDetail = () => {
                 <div
                   key={index}
                   className="aspect-video overflow-hidden rounded-xl shadow-md group relative bg-gray-100 cursor-pointer"
-                  onClick={() => setSelectedImage(image)}
+                  onClick={() => {
+                    if (isExternalGalleryLink(image)) {
+                      window.open(image, "_blank");
+                    } else {
+                      setSelectedIndex(index);
+                    }
+                  }}
                 >
-                  <img
-                    src={parseImageUrl(image)}
-                    alt={`${event.title} - Image ${index + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {isExternalGalleryLink(image) ? (
+                    <div className="w-full h-full flex flex-col items-center justify-center text-blue-600 bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300">
+                      <ImageIcon size={48} className="opacity-80 mb-2" />
+                      <span className="font-semibold px-4 text-center">View Gallery Album</span>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        src={parseImageUrl(image)}
+                        alt={`${event.title} - Image ${index + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </>
+                  )}
                 </div>
               ))}
             </div>
@@ -701,23 +737,54 @@ const EventDetail = () => {
       </div>
 
       {/* Lightbox for Gallery */}
-      {selectedImage && (
+      {selectedIndex !== null && eventImages[selectedIndex] && (
         <div 
           className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedIndex(null)}
         >
           <button 
-            className="absolute top-6 right-6 text-white hover:text-gray-300 bg-black/50 p-2 rounded-full transition-colors"
-            onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
+            className="absolute top-6 right-6 text-white hover:text-gray-300 bg-black/50 p-2 rounded-full transition-colors z-50"
+            onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
           >
             <X size={28} />
           </button>
-          <img 
-            src={parseImageUrl(selectedImage)} 
-            alt="Gallery preview" 
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
+          
+          {eventImages.length > 1 && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 p-3 rounded-full transition-colors z-50"
+              onClick={(e) => handlePrevImage(e, eventImages.length)}
+            >
+              <ChevronLeft size={36} />
+            </button>
+          )}
+
+          <div className="relative max-w-full max-h-[90vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            {isExternalGalleryLink(eventImages[selectedIndex]) ? (
+              <div className="bg-white rounded-xl p-8 flex flex-col items-center max-w-sm text-center">
+                <ImageIcon size={64} className="text-blue-500 mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">External Gallery Album</h3>
+                <p className="text-gray-600 mb-6">This item is a link to an external gallery (Google Photos or Drive).</p>
+                <Button onClick={() => window.open(eventImages[selectedIndex], "_blank")}>
+                  Open in New Tab
+                </Button>
+              </div>
+            ) : (
+              <img 
+                src={parseImageUrl(eventImages[selectedIndex])} 
+                alt="Gallery preview" 
+                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+              />
+            )}
+          </div>
+
+          {eventImages.length > 1 && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 p-3 rounded-full transition-colors z-50"
+              onClick={(e) => handleNextImage(e, eventImages.length)}
+            >
+              <ChevronRight size={36} />
+            </button>
+          )}
         </div>
       )}
     </div>

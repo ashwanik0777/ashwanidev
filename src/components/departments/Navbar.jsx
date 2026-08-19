@@ -251,6 +251,12 @@ const Navbar = () => {
       ];
     }
 
+    if (schoolCode === "SOM") {
+      return [
+        { label: "Corporate Resource Center (CRC)", href: `/schools/${activeSchool}/departments/corporate-resource-center` },
+      ];
+    }
+
     if (schoolCode === "SOBSC") {
       return [
         { label: "Research Area and Profile", href: routes.research.profile },

@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.crcData ||
           module.guestSpeakersData ||
           module.areaChairpersonsData ||
           module.libraryData ||
@@ -412,6 +413,58 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "corporateResourceCenter" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    School of Management
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Corporate Resource Center (CRC)
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                  Industry & Academia Interface
+                </span>
+              </div>
+
+              <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+                {data.paragraphs.map((para, idx) => (
+                  <p key={idx} className="bg-slate-50/70 p-5 rounded-2xl border border-slate-100/80">
+                    {para}
+                  </p>
+                ))}
+              </div>
+
+              {data.keyObjectives && data.keyObjectives.length > 0 && (
+                <div className="pt-4 border-t border-slate-100 space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                    Key Objectives & Role of CRC
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {data.keyObjectives.map((obj, idx) => (
+                      <div key={idx} className="flex items-start gap-3 p-4 rounded-xl bg-purple-50/40 border border-purple-100">
+                        <div className="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                          ✓
+                        </div>
+                        <span className="text-sm font-semibold text-slate-800">{obj}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
           </div>
         </div>
       ) : data.customLayout === "guestSpeakers" ? (

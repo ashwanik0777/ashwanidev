@@ -418,6 +418,7 @@ export default function AppRouter() {
               <Route path="departments/school-library" element={<GenericCentrePage />} />
               <Route path="departments/area-chairpersons" element={<GenericCentrePage />} />
               <Route path="departments/guest-speakers" element={<GenericCentrePage />} />
+              <Route path="departments/corporate-resource-center" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />

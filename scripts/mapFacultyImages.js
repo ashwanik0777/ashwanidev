@@ -15,6 +15,10 @@ function cleanString(str) {
     .replace(/\s+/g, ' ');
 }
 
+function getTokens(str) {
+  return cleanString(str).split(' ').filter(t => t.length >= 2);
+}
+
 function runMapping() {
   if (!fs.existsSync(facultyDir)) {
     console.error(`Faculty image directory not found at ${facultyDir}`);
@@ -40,9 +44,16 @@ function runMapping() {
 
   const idMap = new Map();
   const cleanNameMap = new Map();
+  const tokenMap = [];
+
   facultyList.forEach(fac => {
     if (fac.id) idMap.set(fac.id.toUpperCase(), fac);
-    if (fac.name) cleanNameMap.set(cleanString(fac.name), fac);
+    if (fac.name) {
+      const cn = cleanString(fac.name);
+      if (cn) cleanNameMap.set(cn, fac);
+      const tokens = getTokens(fac.name);
+      if (tokens.length > 0) tokenMap.push({ fac, cn, tokens });
+    }
   });
 
   const pathsList = [];
@@ -52,13 +63,13 @@ function runMapping() {
 
     const relPath = `/assets/Faculty/${filename}`;
 
-    // 0. Try extracting Faculty ID (e.g., SOICT-F0001, SOE-F0024)
+    // 0. Extract Faculty ID
     const idMatch = filename.match(/^([A-Z]{2,6}-F\d{4})/i);
     if (idMatch) {
       byFacultyId[idMatch[1].toUpperCase()] = relPath;
     }
 
-    // 1. Try extracting email
+    // 1. Extract email
     const emailMatch = filename.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/i);
     if (emailMatch) {
       const fullEmail = emailMatch[1].toLowerCase();
@@ -83,10 +94,35 @@ function runMapping() {
       matchedFac = idMap.get(idMatch[1].toUpperCase());
     } else if (cleanNameMap.has(cleaned)) {
       matchedFac = cleanNameMap.get(cleaned);
+    } else {
+      // Token fuzzy match fallback
+      const baseTokens = getTokens(nameWithoutExt);
+      if (baseTokens.length >= 1) {
+        let maxScore = 0;
+        let bestCandidate = null;
+
+        tokenMap.forEach(({ fac, tokens }) => {
+          let matchCount = 0;
+          baseTokens.forEach(bt => {
+            if (tokens.includes(bt)) matchCount += 1;
+            else if (tokens.some(t => t.includes(bt) || bt.includes(t))) matchCount += 0.6;
+          });
+
+          const score = matchCount / Math.max(baseTokens.length, tokens.length);
+          if (score > maxScore && score >= 0.5) {
+            maxScore = score;
+            bestCandidate = fac;
+          }
+        });
+
+        if (bestCandidate) {
+          matchedFac = bestCandidate;
+        }
+      }
     }
 
     pathsList.push({
-      id: matchedFac ? matchedFac.id : "",
+      id: matchedFac ? matchedFac.id : (idMatch ? idMatch[1].toUpperCase() : ""),
       facultyName: matchedFac ? matchedFac.name : nameWithoutExt,
       filename: filename,
       path: relPath
@@ -113,9 +149,7 @@ function runMapping() {
   console.log(`✅ Successfully generated faculty image registry at ${outputFile}`);
   console.log(`✅ Successfully generated faculty image paths list at ${pathsOutputFile}`);
   console.log(`   - Mapped by Faculty ID: ${Object.keys(byFacultyId).length}`);
-  console.log(`   - Mapped by Email: ${Object.keys(byEmail).length}`);
-  console.log(`   - Mapped by Username: ${Object.keys(byUsername).length}`);
-  console.log(`   - Mapped by Name: ${Object.keys(byCleanName).length}`);
+  console.log(`   - Total image paths with IDs: ${pathsList.filter(p => p.id !== "").length}/${pathsList.length}`);
 }
 
 runMapping();

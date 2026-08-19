@@ -62,11 +62,32 @@ const Faculty = () => {
 
   const getDesignationPriority = (designation) => {
     const desc = (designation || "").toLowerCase();
-    if (desc.includes("assistant professor")) return 3;
-    if (desc.includes("associate professor")) return 2;
-    if (desc.includes("professor")) return 1;
-    if (desc.includes("faculty")) return 4;
-    return 5;
+    
+    // 1. Dean / Professor and Dean
+    if (desc.includes("dean")) return 1;
+    
+    // 3. Recognizing / Visiting Professor
+    if (desc.includes("visiting") || desc.includes("recognising") || desc.includes("recognizing") || desc.includes("recognised")) return 3;
+    
+    // 4. Adjunct Professor
+    if (desc.includes("adjunct")) return 4;
+    
+    // 5. Associate Professor
+    if (desc.includes("associate") && desc.includes("prof")) return 5;
+    
+    // 6. Assistant Professor
+    if (desc.includes("assistant") && desc.includes("prof")) return 6;
+    
+    // 2. Plain Professor (Catch-all for 'professor' after other modifiers are checked)
+    if (desc.includes("prof")) return 2;
+    
+    // 7. OCFD
+    if (desc.includes("ocfd")) return 7;
+    
+    // 8. Other Faculty
+    if (desc.includes("faculty")) return 8;
+    
+    return 9;
   };
 
   const sortFaculty = (a, b) => {

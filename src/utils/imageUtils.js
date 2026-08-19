@@ -2,7 +2,6 @@
  * Shared utility for parsing image URLs from various sources.
  * Handles: Google Drive, Google Photos, normal URLs, and relative paths.
  */
-import facultyImageRegistry from '../Data/facultyImageRegistry.json';
 
 const VITE_HOST = typeof import.meta !== 'undefined' ? (import.meta.env?.VITE_HOST || '') : '';
 const BASE_URL = VITE_HOST ? (VITE_HOST.endsWith('/') ? VITE_HOST.slice(0, -1) : VITE_HOST) : '';
@@ -126,48 +125,6 @@ export const resolveFacultyImage = (url, image, name, email, id) => {
   if (target) {
     const parsed = parseImageUrl(target);
     if (parsed) return parsed;
-  }
-
-  // Check mapped images by Faculty ID
-  if (id && typeof id === 'string') {
-    const upperId = id.trim().toUpperCase();
-    if (facultyImageRegistry.byFacultyId && facultyImageRegistry.byFacultyId[upperId]) {
-      return parseImageUrl(facultyImageRegistry.byFacultyId[upperId]);
-    }
-  }
-
-  // Check mapped images by Email
-  if (email && typeof email === 'string') {
-    const cleanEmail = email.trim().toLowerCase();
-    if (facultyImageRegistry.byEmail && facultyImageRegistry.byEmail[cleanEmail]) {
-      return parseImageUrl(facultyImageRegistry.byEmail[cleanEmail]);
-    }
-    const username = cleanEmail.split('@')[0];
-    if (username && facultyImageRegistry.byUsername && facultyImageRegistry.byUsername[username]) {
-      return parseImageUrl(facultyImageRegistry.byUsername[username]);
-    }
-  }
-
-  // Check mapped images by Name
-  if (name && typeof name === 'string') {
-    const cleanName = name
-      .toLowerCase()
-      .replace(/dr\.|dr|prof\.|prof|mr\.|mr|ms\.|ms|shri|smt\.|smt/gi, '')
-      .replace(/[^a-z0-9]/g, ' ')
-      .trim()
-      .replace(/\s+/g, ' ');
-
-    if (cleanName && facultyImageRegistry.byCleanName && facultyImageRegistry.byCleanName[cleanName]) {
-      return parseImageUrl(facultyImageRegistry.byCleanName[cleanName]);
-    }
-
-    if (cleanName && facultyImageRegistry.byCleanName) {
-      for (const [regName, regPath] of Object.entries(facultyImageRegistry.byCleanName)) {
-        if (cleanName.includes(regName) || regName.includes(cleanName)) {
-          return parseImageUrl(regPath);
-        }
-      }
-    }
   }
 
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;

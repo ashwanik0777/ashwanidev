@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import homeData from "../../Data/home.json";
+import { fetchTickerNotices } from "../../services/tickerNoticesService";
 
 export default function WelcomePage() {
   const bannerData = homeData?.sections?.banner?.[0] || null;
@@ -19,9 +21,22 @@ export default function WelcomePage() {
 
   const [typedTitle, setTypedTitle] = useState("");
   const [isTitleDone, setIsTitleDone] = useState(false);
+  const [tickerNotices, setTickerNotices] = useState([]);
 
   const rawTitle = bannerData?.title || "Welcome to Gautam Buddha University";
   const fullTitle = rawTitle.replace(/Welcome to /i, "Welcome to\n");
+
+  useEffect(() => {
+    fetchTickerNotices()
+      .then((notices) => {
+        if (notices && notices.length > 0) {
+          setTickerNotices(notices);
+        }
+      })
+      .catch(() => {
+        // Fallback — keep empty, hardcoded fallback renders below
+      });
+  }, []);
 
   useEffect(() => {
     if (!bannerData) return;
@@ -52,9 +67,17 @@ export default function WelcomePage() {
 
   const videoSrc = resolveAssetUrl(bannerData.video);
 
+  // No hardcoded fallback — all notices come from the database
+  const notices = tickerNotices;
+
+  // Calculate animation duration based on total text length
+  const totalTextLength = notices.reduce((acc, n) => acc + n.text.length, 0);
+  const scrollDuration = Math.max(15, totalTextLength * 0.12);
+
   return (
     <>
-      {/* Scrolling Ticker - Placed on top right after header */}
+      {/* Scrolling Ticker - Only shown when there are active notices */}
+      {notices.length > 0 && (
       <div
         role="region"
         aria-label="Latest announcements"
@@ -64,22 +87,35 @@ export default function WelcomePage() {
         <div
           className="inline-flex items-center absolute whitespace-nowrap animate-scroll text-sm sm:text-base px-4"
           style={{
-            animation: "scrollText 15s linear infinite",
+            animation: `scrollText ${scrollDuration}s linear infinite`,
             zIndex: 0,
           }}
         >
-          <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider mr-3">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-            </span>
-            NEW
-          </span>
-          <span className="font-medium tracking-wide">
-            ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
-          </span>
+          {notices.map((notice, index) => (
+            <React.Fragment key={notice.id || index}>
+              {index > 0 && (
+                <span className="mx-4 text-blue-300/70 text-lg select-none">│</span>
+              )}
+              <Link
+                to={notice.link || "#"}
+                className="inline-flex items-center gap-2 hover:text-yellow-200 transition-colors duration-200 cursor-pointer"
+              >
+                <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                  </span>
+                  NEW
+                </span>
+                <span className="font-medium tracking-wide">
+                  {notice.text}
+                </span>
+              </Link>
+            </React.Fragment>
+          ))}
         </div>
       </div>
+      )}
 
       {/* Main welcome section */}
       <div className="relative min-h-[340px] h-[50vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-slate-900">

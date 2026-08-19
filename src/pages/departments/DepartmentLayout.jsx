@@ -24,9 +24,9 @@ const DepartmentLayout = ({
   hideAchievers,
 }) => {
   const currentSchool = (schoolCode || "").toUpperCase();
-  const shouldHideAbout = hideAbout || currentSchool === "SOM" || currentSchool === "SOHSS";
-  const shouldHideResearch = hideResearch || currentSchool === "SOM" || currentSchool === "SOHSS";
-  const shouldHideAchievers = hideAchievers || currentSchool === "SOM" || currentSchool === "SOHSS";
+  const shouldHideAbout = hideAbout || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+  const shouldHideResearch = hideResearch || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+  const shouldHideAchievers = hideAchievers || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
 
   return (
     <div className="min-h-screen bg-background">

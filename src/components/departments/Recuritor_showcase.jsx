@@ -11,7 +11,7 @@ const RecruitersShowcase = ({ recruitersData = [] }) => {
   const displayRecruiters = [...recruitersData, ...recruitersData];
 
   return (
-    <section className="py-12 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
+    <section className="py-8 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
       <style>{`
         @keyframes softMarquee {
           0% { transform: translateX(0%); }
@@ -29,7 +29,7 @@ const RecruitersShowcase = ({ recruitersData = [] }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">
             Our Recruiters
           </h2>

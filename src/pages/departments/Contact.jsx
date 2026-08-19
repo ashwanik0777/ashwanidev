@@ -43,10 +43,10 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
               </h2>
             </div>
 
-            <div className="max-w-4xl mx-auto">
+            <div className={`mx-auto ${generalInfo.cards.length > 1 ? 'grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl' : 'max-w-4xl space-y-4 sm:space-y-6'}`}>
               {generalInfo.cards.map((info, idx) => (
                 <ContactCard key={idx}>
-                  <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                  <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 flex flex-col justify-between h-full">
                     <div className="flex items-center gap-3 sm:gap-4 border-b border-slate-100 pb-4">
                       <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center shadow-md shadow-purple-500/10 text-white shrink-0">
                         <Building className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -56,14 +56,14 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
                           {info.title}
                         </h3>
                         <p className="text-xs sm:text-sm font-medium text-slate-500 truncate">
-                          {generalInfo?.subheading || "SoICT, Gautam Buddha University"}
+                          {generalInfo?.subheading || "School of Biotechnology"}
                         </p>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                    <div className="space-y-4 text-sm">
                       {/* Address */}
-                      <div className="space-y-1.5 md:col-span-1">
+                      <div className="space-y-1.5">
                         <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-slate-400 uppercase">
                           <MapPin className="w-3.5 h-3.5 text-purple-600 shrink-0" /> Address
                         </div>
@@ -207,7 +207,7 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className={`grid gap-4 sm:gap-6 ${departments.length === 1 ? 'max-w-xl mx-auto grid-cols-1' : departments.length === 2 ? 'max-w-3xl mx-auto grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3'}`}>
               {departments.map((dept, index) => (
                 <ContactCard key={index} className="flex flex-col justify-between">
                   <div className="p-4 sm:p-6 space-y-4">

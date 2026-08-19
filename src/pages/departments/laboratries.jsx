@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { UserCheck, Wrench, FlaskConical } from "lucide-react";
+import { UserCheck, Wrench, Download, FlaskConical } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 
 const LaboratoryCard = ({ lab, index }) => {
@@ -18,29 +18,40 @@ const LaboratoryCard = ({ lab, index }) => {
           <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
             #{lab.sno || index + 1}
           </div>
+          {lab.category && (
+            <span className="text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium border border-emerald-200">
+              {lab.category}
+            </span>
+          )}
         </div>
 
-        <h3 className="text-lg font-bold text-gray-900 leading-snug mb-5 group-hover:text-blue-700 transition-colors">
+        <h3 className="text-lg font-bold text-gray-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors">
           {lab.name}
         </h3>
 
-        <div className="space-y-2.5 pt-2 border-t border-gray-100 text-sm">
-          <div className="flex items-center gap-2.5 text-gray-700">
-            <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
-            <div>
-              <span className="text-xs text-gray-400 block font-medium">Faculty In-Charge</span>
-              <span className="font-semibold text-gray-800">{lab.faculty}</span>
-            </div>
-          </div>
+        {(lab.faculty || lab.support) && (
+          <div className="space-y-2.5 pt-3 border-t border-gray-100 text-sm mt-auto">
+            {lab.faculty && (
+              <div className="flex items-center gap-2.5 text-gray-700">
+                <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
+                <div>
+                  <span className="text-xs text-gray-400 block font-medium">Faculty In-Charge</span>
+                  <span className="font-semibold text-gray-800">{lab.faculty}</span>
+                </div>
+              </div>
+            )}
 
-          <div className="flex items-center gap-2.5 text-gray-700 pt-1">
-            <Wrench className="w-4 h-4 text-indigo-600 shrink-0" />
-            <div>
-              <span className="text-xs text-gray-400 block font-medium">Technical Support</span>
-              <span className="font-semibold text-gray-800">{lab.support}</span>
-            </div>
+            {lab.support && (
+              <div className="flex items-center gap-2.5 text-gray-700 pt-1">
+                <Wrench className="w-4 h-4 text-indigo-600 shrink-0" />
+                <div>
+                  <span className="text-xs text-gray-400 block font-medium">Technical Support</span>
+                  <span className="font-semibold text-gray-800">{lab.support}</span>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        )}
       </div>
     </motion.div>
   );
@@ -96,6 +107,20 @@ export default function Laboratories() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        {laboratoriesData.pdfUrl && (
+          <div className="flex justify-end mb-8">
+            <a
+              href={laboratoriesData.pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+            >
+              <Download className="w-4 h-4" />
+              Download Full Laboratory List & Facilities (PDF)
+            </a>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {labs.map((lab, index) => (
             <LaboratoryCard key={lab.name} lab={lab} index={index} />

@@ -208,7 +208,7 @@ const aboutData = {
       icon: "BookOpen",
       title: "Registrar",
       subtitle: "Administrative Affairs",
-      link: "/registrar"
+      link: "#"
     }
   ]
   ,
@@ -269,19 +269,19 @@ const aboutData = {
       title: "Central Library",
       icon: "Library",
       summary: "Digital collections & research facilities",
-      link: "#"
+      link: "/campus-life/library"
     },
     {
       title: "Modern Auditoriums",
       icon: "Mic",
       summary: "Advanced audio-visual systems",
-      link: "#"
+      link: "/booking"
     },
     {
       title: "Smart Classrooms",
       icon: "Monitor",
       summary: "Technology-enabled learning spaces",
-      link: "#"
+      link: "/academic/schools"
     },
     {
       title: "Research Labs",
@@ -293,13 +293,13 @@ const aboutData = {
       title: "Computer Centers",
       icon: "Cpu",
       summary: "High-speed connectivity",
-      link: "#"
+      link: "/it-cell"
     },
     {
       title: "Conference Halls",
       icon: "Building",
       summary: "Professional meeting spaces",
-      link: "#"
+      link: "/booking"
     }
   ],
 

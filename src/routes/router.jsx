@@ -34,6 +34,7 @@ import NSS from "../pages/campusLife/NSS.jsx";
 import NCC from "../pages/campusLife/NCC.jsx";
 import MeditationCenter from "../pages/campusLife/MeditationCenter.jsx";
 import Overview from "../pages/campusLife/Overview.jsx";
+import Library from "../pages/campusLife/Library.jsx";
 import ClubDetail from "../pages/clubs/ClubDetail.jsx";
 
 import FacultyPortalDashboard from "../pages/Auth/FacultyDashboard.jsx";
@@ -458,6 +459,7 @@ export default function AppRouter() {
           />
 
           <Route path="/campus-life/hero" element={<Overview />} />
+          <Route path="/campus-life/library" element={<Library />} />
           <Route
             path="/campus-life/sports-fitness"
             element={<SportsCultural />}

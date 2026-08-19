@@ -89,12 +89,12 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* PDF Download Button */}
       {pdfUrl && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex justify-end">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 flex justify-end">
           <a
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-700 to-indigo-800 hover:from-purple-800 hover:to-indigo-900 text-white font-bold text-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
+            className="inline-flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-purple-700 to-indigo-800 hover:from-purple-800 hover:to-indigo-900 text-white font-semibold text-sm rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <Download className="w-5 h-5" />
             Download Complete Training & Workshop Details (PDF)
@@ -115,45 +115,52 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Overview Section */}
       {overview && (
-        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {overview.lead && (
-            <div className="bg-gradient-to-r from-amber-900 via-orange-950 to-yellow-950 text-white p-8 md:p-10 rounded-2xl shadow-lg mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold font-outfit mb-4">
+            <div className="bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white p-8 md:p-10 rounded-2xl shadow-xl border border-purple-900/50 mb-10">
+              <div className="inline-block px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+                School of Buddhist Studies & Civilization
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold font-outfit text-white mb-4">
                 Overview & Leadership
               </h2>
-              <p className="text-amber-100 text-base md:text-lg leading-relaxed font-normal">
+              <p className="text-purple-100/90 text-base md:text-lg leading-relaxed font-normal">
                 {overview.lead}
               </p>
             </div>
           )}
 
           {overview.highlights && overview.highlights.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10">
               {overview.highlights.map((item, idx) => (
                 <div
                   key={idx}
-                  className="bg-white p-8 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                 >
-                  <h3 className="text-xl font-bold text-slate-900 font-outfit mb-3 flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-amber-600 shrink-0" />
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 font-outfit mb-3 flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-5 h-5 text-purple-700" />
+                      </div>
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed font-medium">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           )}
 
           {overview.callToAction && (
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center max-w-4xl mx-auto shadow-sm">
+            <div className="bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 border border-purple-200/80 rounded-2xl p-8 text-center max-w-4xl mx-auto shadow-sm">
               <p className="text-slate-800 text-base md:text-lg font-medium mb-4">
                 {overview.callToAction.text}
               </p>
               <a
                 href={overview.callToAction.link || (schoolCode ? `/schools/${schoolCode}/research-area` : "/schools/SOICT/research-area")}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg text-sm transition-colors shadow-md hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white font-semibold rounded-xl text-sm transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 {overview.callToAction.buttonText || "Explore Faculty Research Profiles →"}
               </a>
@@ -164,9 +171,16 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Training Programs */}
       {trainingPrograms && trainingPrograms.length > 0 && (
-        <section className="py-16 px-4 bg-white max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Training Programs & Courses</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
+              Training Programs & Courses
+            </h2>
+            <p className="text-slate-500 text-sm mt-2 font-medium">
+              Structured meditation courses, weekly stress management, and intensive residential retreats
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {trainingPrograms.map((tp, i) => <ProgramCard key={i} {...tp} />)}
           </div>
         </section>
@@ -174,33 +188,33 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Short-Term Workshops & Symposia Table */}
       {workshopsList && workshopsList.length > 0 && (
-        <section className="py-16 px-4 bg-slate-50 max-w-7xl mx-auto">
+        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-slate-900 font-outfit">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
               Short-Term Workshops & Symposia (2014 – Present)
             </h2>
-            <p className="text-slate-600 text-sm mt-2 font-medium">
-              Chrono-list of workshops, national conventions, and international symposia conducted at Mahatma Jyotiba Phule Dhyan Kendra, GBU
+            <p className="text-slate-500 text-sm mt-2 font-medium">
+              Chronological record of workshops, national conventions, and international symposia conducted at Mahatma Jyotiba Phule Dhyan Kendra, GBU
             </p>
           </div>
-          <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                <thead className="bg-amber-100/80 text-amber-900 font-bold uppercase tracking-wider text-[11px] border-b border-amber-200">
+                <thead className="bg-gradient-to-r from-slate-900 via-purple-950 to-indigo-950 text-white font-bold uppercase tracking-wider text-[11px]">
                   <tr>
-                    <th className="py-3.5 px-4 text-center">S.No.</th>
-                    <th className="py-3.5 px-4">Date</th>
-                    <th className="py-3.5 px-4">Workshop / Program Title</th>
-                    <th className="py-3.5 px-4">Organized By</th>
+                    <th className="py-4 px-5 text-center w-16">S.No.</th>
+                    <th className="py-4 px-5 w-48">Date</th>
+                    <th className="py-4 px-5">Workshop / Program Title</th>
+                    <th className="py-4 px-5 w-64">Organized By</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200/80 font-medium">
                   {workshopsList.map((ws, idx) => (
-                    <tr key={idx} className="hover:bg-amber-50/50 transition-colors">
-                      <td className="py-3 px-4 text-center font-semibold text-slate-500">{idx + 1}</td>
-                      <td className="py-3 px-4 font-bold text-amber-800 whitespace-nowrap">{ws.date}</td>
-                      <td className="py-3 px-4 font-bold text-slate-900">{ws.title}</td>
-                      <td className="py-3 px-4 text-slate-600 font-medium">{ws.organizer}</td>
+                    <tr key={idx} className="hover:bg-purple-50/50 transition-colors">
+                      <td className="py-3.5 px-5 text-center font-semibold text-slate-400">{idx + 1}</td>
+                      <td className="py-3.5 px-5 font-bold text-purple-800 whitespace-nowrap">{ws.date}</td>
+                      <td className="py-3.5 px-5 font-bold text-slate-900">{ws.title}</td>
+                      <td className="py-3.5 px-5 text-slate-600 font-medium">{ws.organizer}</td>
                     </tr>
                   ))}
                 </tbody>

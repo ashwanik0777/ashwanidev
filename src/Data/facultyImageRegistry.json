@@ -180,11 +180,21 @@
     "diwakar": "/assets/Faculty/Diwakar.jpg",
     "dn tiwari": "/assets/Faculty/Dn Tiwari.jpeg",
     "akash kumar": "/assets/Faculty/Dr. Akash Kumar.jpg",
+    "akshay kumar singh": "/assets/Faculty/Dr. Akshay Kumar Singh.jpg",
+    "anant pratap singh": "/assets/Faculty/Dr. Anant Pratap Singh.jpg",
+    "anu malik": "/assets/Faculty/Dr. Anu Malik.jpeg",
+    "krishna kant dwivedi": "/assets/Faculty/Dr. Krishna Kant Dwivedi.jpg",
+    "manish tarachand meshram": "/assets/Faculty/Dr. Manish Tarachand Meshram.jpg",
+    "poonam verma": "/assets/Faculty/Dr. Poonam Verma.jpeg",
     "prafullakumar b tailor": "/assets/Faculty/Dr. Prafullakumar B. Tailor.jpeg",
+    "prakash chand dilare": "/assets/Faculty/Dr. Prakash Chand Dilare.jpg",
     "pramod r yadav": "/assets/Faculty/Dr. Pramod R. Yadav.jpg",
     "rakesh kumar": "/assets/Faculty/Dr. Rakesh Kumar.jpeg",
+    "satish chandra": "/assets/Faculty/Dr. Satish Chandra.jpg",
     "shalini rai": "/assets/Faculty/Dr. Shalini Rai.jpg",
     "shivani ghildiyal": "/assets/Faculty/Dr. Shivani Ghildiyal.png",
+    "vikram singh yadav": "/assets/Faculty/Dr. Vikram Singh Yadav.jpg",
+    "vikrant nain": "/assets/Faculty/Dr. Vikrant Nain.jpg",
     "vinit kumar": "/assets/Faculty/Dr. Vinit Kumar.png",
     "env prachi": "/assets/Faculty/Env Prachi.jpg",
     "fahed": "/assets/Faculty/Fahed.jpg",
@@ -267,6 +277,7 @@
     "sudhir kumar shukla": "/assets/Faculty/Prof. Dr. Sudhir Kumar Shukla.jpg",
     "madhav govind": "/assets/Faculty/Prof. Madhav Govind.jpg",
     "rajeev varshney": "/assets/Faculty/Rajeev Varshney.jpg",
+    "rajiv kumar rai": "/assets/Faculty/Prof. Rajiv Kumar Rai.jpg",
     "s dhanalakshmi": "/assets/Faculty/Prof. S Dhanalakshmi.png",
     "s p singh": "/assets/Faculty/Prof. S.P. Singh.jpg",
     "sanjay kumar sharma": "/assets/Faculty/Sanjay Kumar Sharma.jpg",
@@ -482,6 +493,6 @@
     "yadav namrata": "/assets/Faculty/Yadav Namrata.jpg",
     "yskicdhekwari": "/assets/Faculty/Yskicdhekwari.jpg"
   },
-  "totalFilesScanned": 374,
-  "updatedAt": "2026-08-19T12:30:35.673Z"
+  "totalFilesScanned": 385,
+  "updatedAt": "2026-08-19T12:50:52.647Z"
 }

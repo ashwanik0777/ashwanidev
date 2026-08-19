@@ -330,10 +330,52 @@
     "path": "/assets/Faculty/Dr. Akash Kumar.jpg"
   },
   {
+    "id": "SOL-F0001",
+    "facultyName": "Dr. Akshay Kumar Singh",
+    "filename": "Dr. Akshay Kumar Singh.jpg",
+    "path": "/assets/Faculty/Dr. Akshay Kumar Singh.jpg"
+  },
+  {
+    "id": "SOE-F0011",
+    "facultyName": "Dr. Anant Pratap Singh",
+    "filename": "Dr. Anant Pratap Singh.jpg",
+    "path": "/assets/Faculty/Dr. Anant Pratap Singh.jpg"
+  },
+  {
+    "id": "SOHSS-F0024",
+    "facultyName": "Dr. Anu Malik",
+    "filename": "Dr. Anu Malik.jpeg",
+    "path": "/assets/Faculty/Dr. Anu Malik.jpeg"
+  },
+  {
+    "id": "SOL-F0008",
+    "facultyName": "Dr. Krishna Kant Dwivedi",
+    "filename": "Dr. Krishna Kant Dwivedi.jpg",
+    "path": "/assets/Faculty/Dr. Krishna Kant Dwivedi.jpg"
+  },
+  {
+    "id": "SOBSC-F0006",
+    "facultyName": "Dr. Manish Tarachand Meshram",
+    "filename": "Dr. Manish Tarachand Meshram.jpg",
+    "path": "/assets/Faculty/Dr. Manish Tarachand Meshram.jpg"
+  },
+  {
+    "id": "SOL-F0011",
+    "facultyName": "Dr. Poonam Verma",
+    "filename": "Dr. Poonam Verma.jpeg",
+    "path": "/assets/Faculty/Dr. Poonam Verma.jpeg"
+  },
+  {
     "id": "SOBT-F0027",
     "facultyName": "Dr. Prafullakumar B. Tailor",
     "filename": "Dr. Prafullakumar B. Tailor.jpeg",
     "path": "/assets/Faculty/Dr. Prafullakumar B. Tailor.jpeg"
+  },
+  {
+    "id": "SOL-F0004",
+    "facultyName": "Dr. Prakash Chand Dilare",
+    "filename": "Dr. Prakash Chand Dilare.jpg",
+    "path": "/assets/Faculty/Dr. Prakash Chand Dilare.jpg"
   },
   {
     "id": "SOBT-F0023",
@@ -348,6 +390,12 @@
     "path": "/assets/Faculty/Dr. Rakesh Kumar.jpeg"
   },
   {
+    "id": "SOL-F0009",
+    "facultyName": "Dr. Satish Chandra",
+    "filename": "Dr. Satish Chandra.jpg",
+    "path": "/assets/Faculty/Dr. Satish Chandra.jpg"
+  },
+  {
     "id": "SOBT-F0025",
     "facultyName": "Dr. Shalini Rai",
     "filename": "Dr. Shalini Rai.jpg",
@@ -358,6 +406,18 @@
     "facultyName": "Dr. Shivani Ghildiyal",
     "filename": "Dr. Shivani Ghildiyal.png",
     "path": "/assets/Faculty/Dr. Shivani Ghildiyal.png"
+  },
+  {
+    "id": "SOBSC-F0007",
+    "facultyName": "Dr. Vikram Singh Yadav",
+    "filename": "Dr. Vikram Singh Yadav.jpg",
+    "path": "/assets/Faculty/Dr. Vikram Singh Yadav.jpg"
+  },
+  {
+    "id": "SOBT-F0005",
+    "facultyName": "Dr. Vikrant Nain",
+    "filename": "Dr. Vikrant Nain.jpg",
+    "path": "/assets/Faculty/Dr. Vikrant Nain.jpg"
   },
   {
     "id": "SOVS-F0035",
@@ -868,6 +928,12 @@
     "facultyName": "Prof. Rajeev Varshney",
     "filename": "Prof. Rajeev Varshney.jpg",
     "path": "/assets/Faculty/Prof. Rajeev Varshney.jpg"
+  },
+  {
+    "id": "SOBT-F0028",
+    "facultyName": "Prof. Rajiv Kumar Rai",
+    "filename": "Prof. Rajiv Kumar Rai.jpg",
+    "path": "/assets/Faculty/Prof. Rajiv Kumar Rai.jpg"
   },
   {
     "id": "SOBT-F0029",

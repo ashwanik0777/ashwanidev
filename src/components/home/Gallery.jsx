@@ -39,14 +39,46 @@ export default function CampusGallery() {
       }
       if (!isMounted) return;
 
+      const MAX_SLIDES = 12;
       const mediaItems = getSchoolAnnouncements().mediaGallery || [];
-      const normalizedMedia = mediaItems
-        .filter((item) => item.coverImage || (item.images && item.images.length > 0) || item.coverImageUrl)
-        .map((item) => ({
-          ...item,
-          image: getImageUrl(item.coverImage || item.images?.[0] || item.coverImageUrl),
-          text: item.title,
-        }));
+
+      // Only keep events that have at least one usable image
+      const validEvents = mediaItems.filter(
+        (item) => item.coverImage || (item.images && item.images.length > 0),
+      );
+
+      // Phase 1: one cover image per event (top events first, up to 12)
+      const slides = [];
+      const extrasPool = []; // extra images from events with multiple photos
+
+      for (const item of validEvents) {
+        const cover = item.coverImage || item.images?.[0];
+        if (!cover) continue;
+
+        if (slides.length < MAX_SLIDES) {
+          slides.push({
+            id: item.id,
+            image: getImageUrl(cover),
+            text: item.title,
+          });
+        }
+
+        // Collect remaining images from this event for potential fill
+        const otherImages = (item.images || []).filter((img) => img && img !== cover);
+        for (const img of otherImages) {
+          extrasPool.push({
+            id: `${item.id}-extra-${extrasPool.length}`,
+            image: getImageUrl(img),
+            text: item.title,
+          });
+        }
+      }
+
+      // Phase 2: if we have fewer than 12, fill from extras
+      for (const extra of extrasPool) {
+        if (slides.length >= MAX_SLIDES) break;
+        slides.push(extra);
+      }
 
       const jsonGallery = (homeData?.sections?.campus_gallery || []).map((item) => ({
         ...item,
@@ -54,7 +86,7 @@ export default function CampusGallery() {
         text: item.text,
       }));
 
-      const finalGallery = normalizedMedia.length > 0 ? normalizedMedia : jsonGallery;
+      const finalGallery = slides.length > 0 ? slides : jsonGallery;
       setGalleryData(finalGallery);
     };
 

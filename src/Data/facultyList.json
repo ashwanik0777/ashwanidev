@@ -348,7 +348,7 @@
     "department": "Biotechnology",
     "school": "SOBT",
     "email": "tailorp@nii.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Dr. Prafullakumar B. Tailor.jpeg"
   },
   {
     "id": "SOBT-F0023",
@@ -357,7 +357,7 @@
     "department": "Biotechnology",
     "school": "SOBT",
     "email": "drpramod88@gmail.com",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Dr. Pramod R. Yadav.jpg"
   },
   {
     "id": "SOHSS-F0030",
@@ -465,7 +465,7 @@
     "department": "Biotechnology",
     "school": "SOBT",
     "email": "vd.raishalini@gmail.com",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Dr. Shalini Rai.jpg"
   },
   {
     "id": "SOVS-F0026",
@@ -510,7 +510,7 @@
     "department": "Biotechnology",
     "school": "SOBT",
     "email": "drshivanighildiyal@gmail.com",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Dr. Shivani Ghildiyal.png"
   },
   {
     "id": "SOM-F0017",
@@ -654,7 +654,7 @@
     "department": "Applied Chemistry",
     "school": "SOVS",
     "email": "vkumary@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Dr. Vinit Kumar.png"
   },
   {
     "id": "SOHSS-F0029",
@@ -672,7 +672,7 @@
     "department": "Law, Justice & Governance",
     "school": "SOL",
     "email": "ravi-shankar@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Hon'ble Mr. Justice Ravi Shankar Jha.png"
   },
   {
     "id": "SOL-F0014",
@@ -681,7 +681,7 @@
     "department": "Law, Justice & Governance",
     "school": "SOL",
     "email": "pradeep-kumar-srivastava@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Hon'ble. Mr. Justice Pradeep Kumar.jpg"
   },
   {
     "id": "SOICT-F0006",
@@ -771,7 +771,7 @@
     "department": "Law, Justice & Governance",
     "school": "SOL",
     "email": "lakshminath@gbu.ac.in",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Prof. A. Lakshminath.png"
   },
   {
     "id": "SOBT-F0026",
@@ -780,11 +780,12 @@
     "department": "Biotechnology",
     "school": "SOBT",
     "email": "binaypandalab@gmail.com",
-    "image_url": ""
+    "image_url": "/assets/Faculty/Prof. B.R. Panda.jpg"
   },
   {
     "id": "SOVS-F0034",
-    "name": "Prof. Chander Kumar Singh"
+    "name": "Prof. Chander Kumar Singh",
+    "image_url": "/assets/Faculty/Prof. Chander Kumar Singh.jpeg"
   },
   {
     "id": "SOE-F0014",
@@ -792,7 +793,8 @@
   },
   {
     "id": "SOBT-F0013",
-    "name": "Prof. Dr. Sudhir Kumar Shukla"
+    "name": "Prof. Dr. Sudhir Kumar Shukla",
+    "image_url": "/assets/Faculty/Prof. Dr. Sudhir Kumar Shukla.jpg"
   },
   {
     "id": "SOE-F0015",
@@ -800,19 +802,23 @@
   },
   {
     "id": "SOHSS-F0037",
-    "name": "Prof. Madhav Govind"
+    "name": "Prof. Madhav Govind",
+    "image_url": "/assets/Faculty/Prof. Madhav Govind.jpg"
   },
   {
     "id": "SOBT-F0028",
-    "name": "Prof. Rajiv Kumar Rai"
+    "name": "Prof. Rajiv Kumar Rai",
+    "image_url": "/assets/Faculty/Prof. Rajeev Varshney.jpg"
   },
   {
     "id": "SOBT-F0029",
-    "name": "Prof. S Dhanalakshmi"
+    "name": "Prof. S Dhanalakshmi",
+    "image_url": "/assets/Faculty/Prof. S Dhanalakshmi.png"
   },
   {
     "id": "SOE-F0013",
-    "name": "Prof. S.P. Singh"
+    "name": "Prof. S.P. Singh",
+    "image_url": "/assets/Faculty/Prof. S.P. Singh.jpg"
   },
   {
     "id": "SOL-F0017",
@@ -820,15 +826,18 @@
   },
   {
     "id": "SOVS-F0033",
-    "name": "Prof. Saumitra Mukherjee"
+    "name": "Prof. Saumitra Mukherjee",
+    "image_url": "/assets/Faculty/Prof. Saumitra Mukherjee.jpg"
   },
   {
     "id": "SOL-F0015",
-    "name": "Prof. Uday Shankar"
+    "name": "Prof. Uday Shankar",
+    "image_url": "/assets/Faculty/Prof. Uday Shankar.jpg"
   },
   {
     "id": "SOBT-F0022",
-    "name": "Prof. Umesh Chand Singh Yadav"
+    "name": "Prof. Umesh Chand Singh Yadav",
+    "image_url": "/assets/Faculty/Prof. Umesh Chand Singh Yadav.jpeg"
   },
   {
     "id": "SOICT-F0002",
@@ -837,7 +846,8 @@
   },
   {
     "id": "SOL-F0016",
-    "name": "Sh. R. B. Sharma"
+    "name": "Sh. R. B. Sharma",
+    "image_url": "/assets/Faculty/Sh. R. B. Sharma.jpg"
   },
   {
     "id": "SOE-F0020",

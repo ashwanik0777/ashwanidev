@@ -1,0 +1,74 @@
+[
+  {
+    "id": "SOL-F0011",
+    "facultyName": "Dr. Poonam Verma",
+    "filename": "Dr. Poonam Verma.jpeg",
+    "path": "/assets/Faculty/Dr. Poonam Verma.jpeg"
+  },
+  {
+    "id": "SOL-F0004",
+    "facultyName": "Dr. Prakash Chand Dilare",
+    "filename": "Dr. Prakash Chand Dilare.jpg",
+    "path": "/assets/Faculty/Dr. Prakash Chand Dilare.jpg"
+  },
+  {
+    "id": "SOL-F0001",
+    "facultyName": "Dr. Akshay Kumar Singh",
+    "filename": "Dr. Akshay Kumar Singh.jpg",
+    "path": "/assets/Faculty/Dr. Akshay Kumar Singh.jpg"
+  },
+  {
+    "id": "SOL-F0008",
+    "facultyName": "Dr. Krishna Kant Dwivedi",
+    "filename": "SOL-F0008.jpg",
+    "path": "/assets/Faculty/SOL-F0008.jpg"
+  },
+  {
+    "id": "SOL-F0009",
+    "facultyName": "Dr. Satish Chandra",
+    "filename": "Dr. Satish Chandra.jpg",
+    "path": "/assets/Faculty/Dr. Satish Chandra.jpg"
+  },
+  {
+    "id": "SOBSC-F0007",
+    "facultyName": "Dr. Vikram Singh Yadav",
+    "filename": "Dr. Vikram Singh Yadav.jpg",
+    "path": "/assets/Faculty/Dr. Vikram Singh Yadav.jpg"
+  },
+  {
+    "id": "SOBSC-F0006",
+    "facultyName": "Dr. Manish Tarachand Meshram",
+    "filename": "Dr. Manish Tarachand Meshram.jpg",
+    "path": "/assets/Faculty/Dr. Manish Tarachand Meshram.jpg"
+  },
+  {
+    "id": "SOBT-F0005",
+    "facultyName": "Dr. Vikrant Nain",
+    "filename": "SOBT-F0005.jpg",
+    "path": "/assets/Faculty/SOBT-F0005.jpg"
+  },
+  {
+    "id": "SOBT-F0028",
+    "facultyName": "Prof. Rajiv Kumar Rai",
+    "filename": "Prof. Rajiv Kumar Rai.jpg",
+    "path": "/assets/Faculty/Prof. Rajiv Kumar Rai.jpg"
+  },
+  {
+    "id": "SOE-F0011",
+    "facultyName": "Dr. Anant Pratap Singh",
+    "filename": "Dr. Anant Pratap Singh.jpg",
+    "path": "/assets/Faculty/Dr. Anant Pratap Singh.jpg"
+  },
+  {
+    "id": "SOICT-F0004",
+    "facultyName": "Dr. Rakesh Kumar",
+    "filename": "SOICT-F0004.jpg",
+    "path": "/assets/Faculty/SOICT-F0004.jpg"
+  },
+  {
+    "id": "SOICT-F0024",
+    "facultyName": "Dr. Akash Kumar",
+    "filename": "SOICT-F0024.jpg",
+    "path": "/assets/Faculty/SOICT-F0024.jpg"
+  }
+]

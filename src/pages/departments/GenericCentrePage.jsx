@@ -67,8 +67,7 @@ const GenericCentrePage = () => {
   }
 
   return (
-    <div>
-      {data.customLayout === "schoolLibrary" ? (
+    <div>      {data.customLayout === "schoolLibrary" ? (
         <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
           <BannerSection
             title={data.hero.title}
@@ -76,107 +75,340 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
             
-            {/* Overview & Features */}
-            {data.overviewSection && (
-              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
-                    <BookOpen className="w-6 h-6" />
+            {/* Library Collection Holdings - Stats Grid */}
+            {data.collectionStats && (
+              <section className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 font-bold shrink-0">
+                    <BookOpen className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                      School of Law, Justice & Governance
+                      Holdings & Inventory
                     </span>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit">
-                      {data.overviewSection.title}
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit">
+                      Library Collection Summary
                     </h2>
                   </div>
                 </div>
 
-                <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">
-                  {data.overviewSection.description}
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {data.overviewSection.features.map((feat, idx) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                  {data.collectionStats.map((stat, idx) => (
                     <div
                       key={idx}
-                      className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 space-y-3"
+                      className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm space-y-2 text-center hover:border-purple-300 transition-colors"
                     >
-                      <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
-                          {feat.badge}
-                        </span>
-                        <CheckCircle className="w-5 h-5 text-purple-600" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200 inline-block">
+                        {stat.badge}
+                      </span>
+                      <div className="text-2xl sm:text-3xl font-black text-slate-900 font-outfit">
+                        {stat.count}
                       </div>
-                      <h3 className="text-lg font-bold text-slate-900 font-outfit">
-                        {feat.title}
-                      </h3>
-                      <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
-                        {feat.desc}
-                      </p>
+                      <div className="text-xs font-semibold text-slate-600">
+                        {stat.label}
+                      </div>
                     </div>
                   ))}
                 </div>
               </section>
             )}
 
-            {/* Library Timings */}
-            {data.timingsSection && (
+            {/* Opening Hours & Issue-Return Rules */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              
+              {/* Opening Hours */}
+              {data.openingHours && (
+                <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-5">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-outfit flex items-center gap-2">
+                      <span>⏰</span> Opening Hours
+                    </h2>
+                    <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200">
+                      Schedule
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs sm:text-sm">
+                      <thead>
+                        <tr className="bg-slate-50 text-slate-700 uppercase font-bold border-b border-slate-200">
+                          <th className="py-3 px-4">Days</th>
+                          <th className="py-3 px-4">Timing (Open & Close)</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+                        {data.openingHours.map((h, i) => (
+                          <tr key={i} className="hover:bg-purple-50/30">
+                            <td className="py-3 px-4 font-semibold text-slate-900">{h.day}</td>
+                            <td className="py-3 px-4 text-purple-800 font-bold">{h.time}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
+
+              {/* Borrowing Rules */}
+              {data.issueReturnRules && (
+                <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-5">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <h2 className="text-lg sm:text-xl font-bold text-slate-900 font-outfit flex items-center gap-2">
+                      <span>📖</span> Issue & Return Rules
+                    </h2>
+                    <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200">
+                      Entitlement
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs sm:text-sm">
+                      <thead>
+                        <tr className="bg-slate-50 text-slate-700 uppercase font-bold border-b border-slate-200">
+                          <th className="py-3 px-4">Category</th>
+                          <th className="py-3 px-4 text-center">No. of Books</th>
+                          <th className="py-3 px-4 text-right">Duration</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+                        {data.issueReturnRules.map((rule, i) => (
+                          <tr key={i} className="hover:bg-purple-50/30">
+                            <td className="py-3 px-4 font-semibold text-slate-900">{rule.category}</td>
+                            <td className="py-3 px-4 text-center font-bold text-purple-700">{rule.limit}</td>
+                            <td className="py-3 px-4 text-right text-slate-700">{rule.duration}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {data.overdueFine && (
+                    <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-medium flex items-center gap-2">
+                      <span>⚠️</span>
+                      <span>{data.overdueFine}</span>
+                    </div>
+                  )}
+                </section>
+              )}
+            </div>
+
+            {/* Subscribed E-Journals & Databases */}
+            {data.subscribedDatabases && (
               <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit text-center">
-                  {data.timingsSection.title}
-                </h2>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                      Digital Subscriptions
+                    </span>
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                      Subscribed E-Journals & Databases
+                    </h2>
+                  </div>
+                  <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200 shrink-0">
+                    24/7 Campus Access
+                  </span>
+                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {data.timingsSection.timings.map((t, idx) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {data.subscribedDatabases.map((db, idx) => (
                     <div
                       key={idx}
-                      className="p-5 rounded-2xl bg-purple-50/60 border border-purple-200 text-center space-y-1"
+                      className="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 flex flex-col justify-between space-y-4"
                     >
-                      <div className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                        {t.day}
+                      <div className="space-y-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                          {db.type}
+                        </span>
+                        <h3 className="text-base font-bold text-slate-900 font-outfit">
+                          {db.name}
+                        </h3>
                       </div>
-                      <div className="text-slate-900 font-extrabold text-sm sm:text-base mt-1">
-                        {t.time}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
 
-            {/* Contact & Desk */}
-            {data.contact && (
-              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-4 max-w-3xl mx-auto text-center">
-                <h2 className="text-xl font-bold text-slate-900 font-outfit">
-                  {data.contact.title}
-                </h2>
-                {data.contact.office && (
-                  <p className="text-slate-600 text-xs sm:text-sm font-medium">
-                    📍 {data.contact.office}
-                  </p>
-                )}
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs sm:text-sm font-medium text-slate-600">
-                  {data.contact.email && (
-                    <div>
-                      <span className="font-semibold text-slate-400">Email: </span>
-                      <a href={`mailto:${data.contact.email}`} className="text-purple-700 font-bold hover:underline">
-                        {data.contact.email}
+                      <a
+                        href={db.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-2 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-200 flex items-center justify-center gap-2"
+                      >
+                        <span>Access Portal</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     </div>
-                  )}
-                  {data.contact.phone && (
-                    <div>
-                      <span className="font-semibold text-slate-400">Phone: </span>
-                      <span className="font-bold text-slate-900">{data.contact.phone}</span>
-                    </div>
-                  )}
+                  ))}
                 </div>
               </section>
             )}
+
+            {/* Print Journals, Magazines & Newspapers */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              
+              {/* Reports & Print Journals */}
+              {data.printJournals && (
+                <section className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="font-bold text-slate-900 text-base font-outfit">
+                        Reports & Print Journals
+                      </h3>
+                      <span className="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
+                        {data.printJournals.length} Titles
+                      </span>
+                    </div>
+
+                    <ul className="space-y-2 text-xs font-medium text-slate-700">
+                      {data.printJournals.map((j, i) => (
+                        <li key={i} className="flex items-center gap-2 py-1 border-b border-slate-100 last:border-0">
+                          <span className="w-1.5 h-1.5 rounded-full bg-purple-600 shrink-0" />
+                          <span>{j}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+              )}
+
+              {/* Magazines */}
+              {data.magazines && (
+                <section className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="font-bold text-slate-900 text-base font-outfit">
+                        Magazines
+                      </h3>
+                      <span className="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
+                        {data.magazines.length} Subscribed
+                      </span>
+                    </div>
+
+                    <ul className="space-y-2 text-xs font-medium text-slate-700">
+                      {data.magazines.map((m, i) => (
+                        <li key={i} className="flex items-center justify-between py-1 border-b border-slate-100 last:border-0">
+                          <span className="font-semibold text-slate-900">{m.name}</span>
+                          <span className="text-[11px] text-slate-500">{m.frequency}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+              )}
+
+              {/* Newspapers */}
+              {data.newspapers && (
+                <section className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="font-bold text-slate-900 text-base font-outfit">
+                        Daily Newspapers
+                      </h3>
+                      <span className="text-xs font-bold text-purple-700 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
+                        {data.newspapers.length} Dailies
+                      </span>
+                    </div>
+
+                    <ul className="space-y-2.5 text-xs font-medium text-slate-700">
+                      {data.newspapers.map((n, i) => (
+                        <li key={i} className="flex items-center gap-2 py-1.5 border-b border-slate-100 last:border-0">
+                          <span className="text-base">📰</span>
+                          <span className="font-semibold text-slate-900">{n}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+              )}
+
+            </div>
+
+            {/* Open Access E-Resources (41 Legal Portals Table) */}
+            {data.openAccessResources && (
+              <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                      Public Legal Knowledge Repositories
+                    </span>
+                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                      Open Access E-Resources (41 Portals)
+                    </h2>
+                  </div>
+                  <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                    Free & Public Access
+                  </span>
+                </div>
+
+                <div className="overflow-x-auto max-h-[500px] overflow-y-auto border border-slate-200 rounded-2xl">
+                  <table className="w-full text-left text-xs sm:text-sm">
+                    <thead className="sticky top-0 bg-slate-100 text-slate-700 uppercase font-bold border-b border-slate-200 z-10">
+                      <tr>
+                        <th className="py-3.5 px-4 w-16 text-center">S.No.</th>
+                        <th className="py-3.5 px-4">E-Resource Title / Portal Name</th>
+                        <th className="py-3.5 px-4 text-right">Direct Link</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+                      {data.openAccessResources.map((item) => (
+                        <tr key={item.sNo} className="hover:bg-purple-50/30 transition-colors">
+                          <td className="py-3 px-4 text-center font-bold text-slate-500">#{item.sNo}</td>
+                          <td className="py-3 px-4 font-semibold text-slate-900">{item.title}</td>
+                          <td className="py-3 px-4 text-right">
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-100 hover:bg-purple-700 hover:text-white text-purple-700 font-bold text-xs transition-all duration-150"
+                            >
+                              <span>Visit</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
+
+            {/* Facilities & General Code of Conduct */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+              
+              {/* Facilities */}
+              {data.facilitiesServices && (
+                <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 font-outfit border-b border-slate-100 pb-3">
+                    Library Facilities & Services
+                  </h3>
+                  <ul className="space-y-2.5 text-xs sm:text-sm font-medium text-slate-700">
+                    {data.facilitiesServices.map((fac, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{fac}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {/* General Rules */}
+              {data.generalRules && (
+                <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 font-outfit border-b border-slate-100 pb-3">
+                    General Rules & Code of Conduct
+                  </h3>
+                  <ul className="space-y-2.5 text-xs sm:text-sm font-medium text-slate-700">
+                    {data.generalRules.map((rule, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-600 shrink-0 mt-2" />
+                        <span>{rule}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+            </div>
 
           </div>
         </div>

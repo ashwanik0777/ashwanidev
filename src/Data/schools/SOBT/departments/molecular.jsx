@@ -42,12 +42,10 @@ export const departmentLayoutData = {
     name: "Dr. Shalini Rai",
     designation: "Assistant Professor & Coordinator",
     messageParagraphs: [
-      "Greetings!",
       "Welcome to the Department of Molecular Medicine & Microbial Biotechnology at the School of Biotechnology, Gautam Buddha University! Our department represents the convergence of modern molecular biology with medical sciences and microbial applications.",
       "We focus on understanding the molecular basis of diseases, developing diagnostic tools, and exploring microbial resources for industrial and environmental applications. Our programs are designed to train students in cutting-edge techniques of molecular biology, immunology, and microbial biotechnology.",
       "Our faculty members are actively engaged in research on cancer biology, infectious diseases, drug discovery, environmental microbiology, and bioremediation. We maintain collaborations with leading research institutions and industry partners.",
       "We encourage our students to engage in hands-on research from their early academic years. Our graduates have successfully joined pharmaceutical companies, research laboratories, and academic institutions worldwide.",
-      "We look forward to welcoming motivated students who are passionate about making a difference in healthcare and biotechnology.",
     ],
     contact: {
       name: "Dr. Shalini Rai",

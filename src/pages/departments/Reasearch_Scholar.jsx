@@ -94,24 +94,27 @@ const ScholarDirectorySection = ({ byYear = [] }) => {
         {/* Filters */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap gap-2">
-            {allYears.map((y) => (
-              <button
-                key={y}
-                onClick={() => setSelectedYear(y)}
-                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
-                  selectedYear === y
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
-                }`}
-              >
-                {y === "All" ? "All Batches" : `Batch ${y}`}
-              </button>
-            ))}
+            {allYears.map((y) => {
+              const label = y === "All" ? "All Sessions" : y.replace(/^Batch\s*/i, "").replace(/^Academic Session\s*/i, "");
+              return (
+                <button
+                  key={y}
+                  onClick={() => setSelectedYear(y)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                    selectedYear === y
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-2">
             <span className="text-xs text-slate-500 font-medium">Status:</span>
-            {["All", "Pursuing", "Awarded"].map((st) => (
+            {["All", "Ongoing", "Completed", "Thesis Submitted"].map((st) => (
               <button
                 key={st}
                 onClick={() => setSelectedStatus(st)}

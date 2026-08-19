@@ -42,7 +42,7 @@ const Footer = () => {
       aria-label="Social media links"
     >
        <a
-    href="http://mail.gbu.ac.in/"
+    href="mailto:info@gbu.ac.in"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Email"

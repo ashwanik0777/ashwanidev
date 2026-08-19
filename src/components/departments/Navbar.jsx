@@ -204,6 +204,7 @@ const Navbar = () => {
       return [
         { label: "Dean's Message", href: routes.about.dean },
         { label: "Area Chairpersons", href: `/schools/${activeSchool}/departments/area-chairpersons` },
+        { label: "Guest Speakers", href: `/schools/${activeSchool}/departments/guest-speakers` },
         { label: "SOM Board of Studies", href: routes.about.board },
       ];
     }

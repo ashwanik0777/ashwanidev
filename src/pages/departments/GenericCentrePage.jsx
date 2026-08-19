@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.guestSpeakersData ||
           module.areaChairpersonsData ||
           module.libraryData ||
           module.racData ||
@@ -411,6 +412,55 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "guestSpeakers" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    Corporate & Industry Exposure
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Eminent Guest Speakers & Corporate Leaders
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                  {data.speakers.length} Corporate Dignitaries
+                </span>
+              </div>
+
+              <div className="overflow-x-auto border border-slate-200 rounded-2xl">
+                <table className="w-full text-left text-xs sm:text-sm">
+                  <thead className="bg-slate-100 text-slate-700 uppercase font-bold border-b border-slate-200">
+                    <tr>
+                      <th className="py-3.5 px-4 w-16 text-center">S.No.</th>
+                      <th className="py-3.5 px-4 font-bold text-slate-900">Person Name</th>
+                      <th className="py-3.5 px-4">Designation</th>
+                      <th className="py-3.5 px-4 text-purple-900 font-bold">Company / Organization</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+                    {data.speakers.map((item) => (
+                      <tr key={item.sNo} className="hover:bg-purple-50/30 transition-colors">
+                        <td className="py-3.5 px-4 text-center font-bold text-slate-400">#{item.sNo}</td>
+                        <td className="py-3.5 px-4 font-extrabold text-slate-900 font-outfit">{item.name}</td>
+                        <td className="py-3.5 px-4 font-semibold text-slate-700">{item.designation}</td>
+                        <td className="py-3.5 px-4 font-bold text-purple-700">{item.company}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
           </div>
         </div>
       ) : data.customLayout === "areaChairpersons" ? (

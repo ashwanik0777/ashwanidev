@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.sovsGuestSpeakersData ||
           module.academicCollaborationData ||
           module.sohssCoeData ||
           module.trainingConsultancyData ||
@@ -417,6 +418,95 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "sovsGuestSpeakers" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                  {data.schoolName || "School of Vocational Studies & Applied Sciences"}
+                </span>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                  Guest Speakers & Keynote Talks Archive
+                </h2>
+              </div>
+              <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                {data.lectures.length} Events & Series
+              </span>
+            </div>
+
+            <div className="space-y-6">
+              {data.lectures.map((lec) => (
+                <div key={lec.id} className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm space-y-5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div className="space-y-1">
+                      <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-purple-100 text-purple-800 border border-purple-200">
+                        {lec.category}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 font-outfit mt-2">
+                        {lec.title}
+                      </h3>
+                    </div>
+                    {lec.date && (
+                      <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold shrink-0">
+                        🗓️ {lec.date}
+                      </span>
+                    )}
+                  </div>
+
+                  {lec.speaker && (
+                    <div className="p-4 rounded-2xl bg-purple-50/40 border border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div>
+                        <h4 className="text-sm font-extrabold text-slate-900 font-outfit">{lec.speaker}</h4>
+                        <p className="text-xs text-slate-600 font-medium">{lec.designation}</p>
+                      </div>
+                      {lec.date && <span className="text-xs font-bold text-purple-700 shrink-0">{lec.date}</span>}
+                    </div>
+                  )}
+
+                  {lec.talks && lec.talks.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                      {lec.talks.map((talk, idx) => (
+                        <div key={idx} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-3">
+                          <h4 className="text-sm font-bold text-slate-900 font-outfit">{talk.title}</h4>
+                          <div className="space-y-0.5">
+                            <p className="text-xs font-extrabold text-purple-700">{talk.speaker}</p>
+                            <p className="text-[11px] font-medium text-slate-500">{talk.designation}</p>
+                            <span className="inline-block text-[10px] font-bold text-slate-400 mt-1">{talk.date}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {lec.speakers && lec.speakers.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                      {lec.speakers.map((spk, idx) => (
+                        <div key={idx} className="p-4 rounded-2xl bg-purple-50/30 border border-purple-100 space-y-1">
+                          <h4 className="text-sm font-bold text-slate-900 font-outfit">{spk.name}</h4>
+                          <p className="text-xs text-slate-600 font-medium">{spk.designation}</p>
+                          <p className="text-xs font-semibold text-purple-700 pt-1">Topic: {spk.topic}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {lec.description && (
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                      {lec.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ) : data.customLayout === "academicCollaboration" ? (

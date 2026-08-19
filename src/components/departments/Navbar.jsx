@@ -220,6 +220,8 @@ const Navbar = () => {
     if (schoolCode === "SOVS") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
+        { label: "Guest Speakers", href: `/schools/${activeSchool}/departments/guest-speakers` },
+        { label: "Academic Collaboration", href: `/schools/${activeSchool}/departments/academic-collaboration` },
         { label: "SOVS Board of Studies", href: routes.about.board },
         { label: "SOVS Staff Members", href: routes.about.staff },
         { label: "SOVS Laboratories", href: routes.about.labs },

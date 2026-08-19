@@ -37,7 +37,7 @@ export default function CampusGallery() {
       const extrasPool = [];
 
       for (const item of validEvents) {
-        const cover = item.coverImage || item.images?.[0];
+        const cover = item.coverImage || item.images?.[item.images.length - 1];
         if (!cover) continue;
 
         if (slides.length < MAX_SLIDES) {
@@ -50,8 +50,8 @@ export default function CampusGallery() {
           });
         }
 
-        // Collect remaining images from this event for potential fill
-        const otherImages = (item.images || []).filter((img) => img && img !== cover);
+        // Collect remaining images from this event for potential fill (latest first)
+        const otherImages = (item.images || []).filter((img) => img && img !== cover).reverse();
         for (const img of otherImages) {
           extrasPool.push({
             id: `${item.id}-extra-${extrasPool.length}`,
@@ -156,14 +156,14 @@ export default function CampusGallery() {
             />
 
             {/* Caption */}
-            <div className="absolute w-full bottom-4 left-1/2 transform -translate-x-1/2 bg-black/30 backdrop-blur-md px-4 py-2 rounded-xl max-w-[90%] border border-white/20 border-solid">
-              <h3 className="text-white text-base md:text-lg font-semibold text-center drop-shadow-lg whitespace-normal break-words">
+            <div className="absolute w-[95%] sm:w-auto bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-black/40 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl max-w-[95%] sm:max-w-[90%] border border-white/20 border-solid">
+              <h3 className="text-white text-xs sm:text-sm md:text-lg font-semibold text-center drop-shadow-lg whitespace-normal break-words leading-snug">
                 {currentImage.text}
               </h3>
             </div>
 
             {/* Dots */}
-            <div className="absolute bottom-4 right-4 flex gap-2">
+            <div className="absolute bottom-4 right-4 hidden sm:flex gap-2">
               {galleryData.map((_, index) => (
                 <button
                   key={index}

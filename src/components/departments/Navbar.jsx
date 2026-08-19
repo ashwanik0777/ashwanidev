@@ -247,7 +247,7 @@ const Navbar = () => {
   const getResearchItems = () => {
     const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
 
-    if (schoolCode === "SOBT" || schoolCode === "SOE") {
+    if (schoolCode === "SOBT" || schoolCode === "SOE" || schoolCode === "SOBSC") {
       return [
         { label: "Research Area and Profile", href: routes.research.profile },
         // { label: "Training and Consultancy", href: routes.research.consultancy },

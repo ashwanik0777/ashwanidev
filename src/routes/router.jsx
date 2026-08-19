@@ -422,6 +422,7 @@ export default function AppRouter() {
               <Route path="departments/research-development" element={<GenericCentrePage />} />
               <Route path="departments/training-consultancy" element={<GenericCentrePage />} />
               <Route path="departments/centres-of-excellence" element={<GenericCentrePage />} />
+              <Route path="departments/academic-collaboration" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />

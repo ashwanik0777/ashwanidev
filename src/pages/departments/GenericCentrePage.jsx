@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.academicCollaborationData ||
           module.sohssCoeData ||
           module.trainingConsultancyData ||
           module.researchDevData ||
@@ -416,6 +417,92 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "academicCollaboration" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            {/* MoU Info Card */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    {data.schoolName || "School of Humanities & Social Sciences"}
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    {data.mouInfo.title}
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 shrink-0">
+                  Signed: {data.mouInfo.signedDate}
+                </span>
+              </div>
+
+              <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-100/90 text-slate-700 text-sm sm:text-base leading-relaxed">
+                <p>{data.mouInfo.description}</p>
+              </div>
+            </section>
+
+            {/* Professional Development Awards (PDAs) Card */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="space-y-2 border-b border-slate-100 pb-4">
+                <h3 className="text-xl font-extrabold text-slate-900 font-outfit">
+                  {data.pdaInfo.title}
+                </h3>
+                <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                  {data.pdaInfo.description}
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-purple-700">
+                  Key Features of SOHSS-SQA PDAs
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {data.pdaInfo.features.map((feat, idx) => (
+                    <div key={idx} className="p-3.5 rounded-xl bg-purple-50/40 border border-purple-100 flex items-start gap-2.5">
+                      <div className="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                        ✓
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-800">{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* Areas of Mutual Interest Grid */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="space-y-1 border-b border-slate-100 pb-4">
+                <h3 className="text-xl font-extrabold text-slate-900 font-outfit">
+                  Major Areas of Mutual Interest (SQA & GBU)
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                  Continuing Professional Development (CPD) modules and professional training focus areas
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                {data.mutualInterestAreas.map((area, idx) => (
+                  <div key={idx} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3 hover:border-purple-300 transition-colors">
+                    <span className="w-7 h-7 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 text-white font-bold text-xs flex items-center justify-center shrink-0">
+                      {idx + 1}
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-800 font-outfit">{area}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 border-t border-slate-100 text-xs sm:text-sm text-slate-600 font-medium leading-relaxed bg-amber-50/50 p-4 rounded-2xl border border-amber-200/60">
+                📌 {data.futureScope}
+              </div>
+            </section>
           </div>
         </div>
       ) : data.customLayout === "sohssCentresOfExcellence" ? (

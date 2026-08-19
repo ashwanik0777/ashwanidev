@@ -213,6 +213,7 @@ const Navbar = () => {
       return [
         { label: "Dean's Message", href: routes.about.dean },
         { label: "Center Of Excellence", href: `/schools/${activeSchool}/departments/centres-of-excellence` },
+        { label: "Academic Collaboration", href: `/schools/${activeSchool}/departments/academic-collaboration` },
       ];
     }
 

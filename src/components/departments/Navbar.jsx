@@ -203,9 +203,8 @@ const Navbar = () => {
     if (schoolCode === "SOM") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
+        { label: "Area Chairpersons", href: `/schools/${activeSchool}/departments/area-chairpersons` },
         { label: "SOM Board of Studies", href: routes.about.board },
-        { label: "SOM Staff Members", href: routes.about.staff },
-        { label: "SOM Activities", href: routes.about.activities },
       ];
     }
 

@@ -410,12 +410,13 @@ export default function AppRouter() {
               <Route path="departments/pali-sanskrit-studies" element={<GenericCentrePage />} />
               <Route path="departments/heritage-archaeology" element={<GenericCentrePage />} />
               <Route path="departments/meditation-mindfulness-centre" element={<GenericCentrePage />} />
-              {/* SOL Centre Pages */}
+              {/* Centre / Facility Pages */}
               <Route path="departments/moot-court-cell" element={<GenericCentrePage />} />
               <Route path="departments/legal-aid-clinic" element={<GenericCentrePage />} />
               <Route path="departments/bci-approved-letters" element={<GenericCentrePage />} />
               <Route path="departments/research-advisory-committee" element={<GenericCentrePage />} />
               <Route path="departments/school-library" element={<GenericCentrePage />} />
+              <Route path="departments/area-chairpersons" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />

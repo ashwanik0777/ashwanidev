@@ -21,19 +21,6 @@ export const contactData = {
       },
     ],
   },
-  departments: [
-    {
-      name: "Admission Office",
-      phone: "0120-2344234/47",
-      email: "admissions@gbu.ac.in",
-      color: "from-blue-600 to-indigo-700",
-    },
-    {
-      name: "Programme Office (MBA Information)",
-      phone: "0120-2346144",
-      email: "",
-      color: "from-indigo-700 to-purple-800",
-    },
-  ],
+  departments: [],
 };
 

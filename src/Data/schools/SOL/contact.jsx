@@ -21,19 +21,6 @@ export const contactData = {
       },
     ],
   },
-  departments: [
-    {
-      name: "Admission Office",
-      phone: "0120-2344234/47",
-      email: "admissions@gbu.ac.in",
-      color: "from-purple-700 to-indigo-800",
-    },
-    {
-      name: "School of Law, Justice & Governance",
-      phone: "0120-2347002",
-      email: "gbulawschool@gmail.com",
-      color: "from-purple-800 to-slate-900",
-    },
-  ],
+  departments: [],
 };
 

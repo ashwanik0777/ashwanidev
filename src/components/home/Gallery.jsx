@@ -34,25 +34,25 @@ export default function CampusGallery() {
     const loadGallery = async () => {
       try {
         await refreshSchoolAnnouncements();
-      } catch {
+      } catch (err) {
         syncAnnouncementsFromCache();
       }
       if (!isMounted) return;
 
       const MAX_SLIDES = 12;
-      const mediaItems = getSchoolAnnouncements().mediaGallery || [];
-
+      const allEvents = getSchoolAnnouncements().events || [];
+      
       // Only keep events that have at least one usable image
-      const validEvents = mediaItems.filter(
-        (item) => item.coverImage || (item.images && item.images.length > 0),
+      const validEvents = allEvents.filter(
+        (item) => item.image || item.flyerUrl || item.coverImage || (item.images && item.images.length > 0)
       );
 
-      // Phase 1: one cover image per event (top events first, up to 12)
+      // Phase 1: one cover image per event (up to 12)
       const slides = [];
-      const extrasPool = []; // extra images from events with multiple photos
+      const extrasPool = [];
 
       for (const item of validEvents) {
-        const cover = item.coverImage || item.images?.[0];
+        const cover = item.image || item.flyerUrl || item.coverImage || item.images?.[0];
         if (!cover) continue;
 
         if (slides.length < MAX_SLIDES) {
@@ -60,6 +60,8 @@ export default function CampusGallery() {
             id: item.id,
             image: getImageUrl(cover),
             text: item.title,
+            button1_url: `/announcements/event-calendar/${item.id}`,
+            button1_text: "View Details"
           });
         }
 
@@ -70,6 +72,8 @@ export default function CampusGallery() {
             id: `${item.id}-extra-${extrasPool.length}`,
             image: getImageUrl(img),
             text: item.title,
+            button1_url: `/announcements/event-calendar/${item.id}`,
+            button1_text: "View Details"
           });
         }
       }
@@ -85,6 +89,15 @@ export default function CampusGallery() {
         image: getImageUrl(item.image),
         text: item.text,
       }));
+
+      // Phase 3: if STILL fewer than 12, pad with jsonGallery
+      for (const fallback of jsonGallery) {
+        if (slides.length >= MAX_SLIDES) break;
+        // avoid duplicates if same image
+        if (!slides.some(s => s.image === fallback.image)) {
+           slides.push(fallback);
+        }
+      }
 
       const finalGallery = slides.length > 0 ? slides : jsonGallery;
       setGalleryData(finalGallery);

@@ -123,6 +123,8 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "registrationUrl", label: "Registration Link" },
     { key: "brochureUrl", label: "Brochure PDF URL", placeholder: "https://.../brochure.pdf" },
     { key: "flyerUrl", label: "Flyer Image URL", placeholder: "https://.../flyer.jpg" },
+    { key: "images", label: "Event Images", type: "image-list" },
+    { key: "coverImageUrl", label: "Homepage Cover Image", type: "cover-selector" },
     { key: "description", label: "Description", type: "textarea", required: true },
   ],
 

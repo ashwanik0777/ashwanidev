@@ -205,26 +205,48 @@ const ITCell = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-12 sm:mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 text-gray-800">
             Responsibilities of the Committee
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {responsibilities.map((resp, index) => (
-              <Card key={index} className="hover:border-blue-200 transition-colors duration-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 sm:gap-3 leading-tight">
-                    <resp.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">{resp.title}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{resp.description}</p>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {responsibilities.slice(0, 6).map((resp, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl border border-slate-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <resp.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+                    {resp.title}
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                    {resp.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
+
+          {/* Featured 7th Responsibility Card */}
+          {responsibilities[6] && (
+            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center gap-5 group">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                {React.createElement(responsibilities[6].icon, { className: "w-6 h-6" })}
+              </div>
+              <div className="flex-1 space-y-1">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {responsibilities[6].title}
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {responsibilities[6].description}
+                </p>
+              </div>
+            </div>
+          )}
         </motion.div>
 
 

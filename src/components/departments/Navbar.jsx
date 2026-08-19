@@ -267,6 +267,17 @@ const Navbar = () => {
       ];
     }
 
+    if (schoolCode === "SOVS") {
+      return [
+        // { label: "Research Area and Profile", href: routes.research.profile },
+        // { label: "Training and Consultancy", href: routes.research.consultancy },
+        // { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Projects", href: routes.research.projects },
+        // { label: "Patents", href: routes.research.patents },
+        // { label: "Books", href: routes.research.books },
+      ];
+    }
+
     if (schoolCode === "SOBSC") {
       return [
         { label: "Research Area and Profile", href: routes.research.profile },

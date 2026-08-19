@@ -142,6 +142,9 @@ const TrainingConsultancy = lazy(() => import("../pages/departments/Training"));
 const Patents = lazy(() => import("../pages/departments/Patent"));
 const Books = lazy(() => import("../pages/departments/Books"));
 const BoardOfStudies = lazy(() => import("../pages/departments/BoardOfStudy"));
+const SchoolAchievements = lazy(() =>
+  import("../pages/departments/SchoolAchievements")
+);
 import SchoolsLayout from "../components/departments/SchoolsLayout.jsx";
 import Dean from "../components/departments/Dean.jsx";
 import Conferences from "../pages/departments/Usict_activities.jsx";
@@ -387,6 +390,8 @@ export default function AppRouter() {
               <Route path="about/staff" element={<StaffMembers />} />
               <Route path="about/labs" element={<LaboratoryCards />} />
               <Route path="about/activities" element={<Conferences />} />
+              <Route path="about/achievements" element={<SchoolAchievements />} />
+              <Route path="achievements" element={<SchoolAchievements />} />
               <Route path="research-area" element={<ResearchArea />} />
               <Route path="research-projects" element={<ResearchProjects />} />
               <Route path="research-grants" element={<ResearchGrants />} />

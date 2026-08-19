@@ -56,46 +56,7 @@ export const departmentLayoutData = {
       phone: "0120-234-9901",
     },
   },
-  aboutProps: {
-    heading: "About the Department",
-    subheading:
-      "Established in 2008, our department has been at the forefront of biotechnology education and research.",
-    stats: [
-      { icon: Users, numberText: "300+", title: "Students", subtitle: "Enrolled" },
-      { icon: BookOpen, numberText: "15+", title: "Faculty", subtitle: "Members" },
-      { icon: Award, numberText: "25+", title: "Research Projects", subtitle: "Completed" },
-      { icon: Lightbulb, numberText: "8+", title: "Patents Filed", subtitle: "Innovations" },
-    ],
-    highlights: [
-      {
-        title: "Excellence in Education",
-        description:
-          "Our department offers comprehensive undergraduate and postgraduate programs designed to meet the evolving needs of the biotechnology industry. We emphasize both theoretical foundations and practical laboratory skills.",
-        dotColor: "#22c55e",
-      },
-      {
-        title: "Research & Innovation",
-        description:
-          "We are actively engaged in cutting-edge research in genetic engineering, molecular medicine, bioinformatics, and environmental biotechnology. Our faculty and students regularly publish in top-tier journals.",
-        dotColor: "#06b6d4",
-      },
-      {
-        title: "Industry Partnerships",
-        description:
-          "Strong collaborations with leading pharma and biotech companies provide our students with internship opportunities, industry projects, and placement assistance. We maintain partnerships with Biocon, Cipla, Serum Institute, and more.",
-        dotColor: "#6366f1",
-      },
-    ],
-    vision:
-      "To be a globally recognized center of excellence in biotechnology education, research, and innovation contributing to healthcare and sustainable development.",
-    missionPoints: [
-      "Provide quality education in biotechnology and allied fields",
-      "Conduct cutting-edge research in emerging areas of life sciences",
-      "Foster innovation and entrepreneurship among students",
-      "Collaborate with industry and academic institutions globally",
-      "Contribute to societal development through biotechnological solutions",
-    ],
-  },
+  aboutProps: null,
   programsData: [
     {
         id: "int-btech-mtech-biotech",
@@ -581,59 +542,7 @@ export const departmentLayoutData = {
       },
     ],
   },
-  researchStats: [
-    { numberText: "25+", subtitle: "Research Projects" },
-    { numberText: "₹5Cr+", subtitle: "Research Funding" },
-    { numberText: "200+", subtitle: "Publications" },
-    { numberText: "8+", subtitle: "Patents Filed" },
-  ],
-  topAchievers: [
-    {
-      name: "Sneha Sharma",
-      year: "M.Tech Biotech 2024",
-      achievement: "Placed at Serum Institute, Published 3 research papers",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      skills: ["Molecular Biology", "Genomics", "Cell Culture", "Data Analysis"],
-    },
-    {
-      name: "Rohit Kumar",
-      year: "Int. B.Tech Biotech 2024",
-      achievement: "DBT Fellowship, Interned at ICGEB New Delhi",
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
-      skills: ["Genetic Engineering", "PCR", "Bioinformatics", "Lab Techniques"],
-    },
-    {
-      name: "Kavya Reddy",
-      year: "M.Sc Bioinformatics 2024",
-      achievement: "Best Poster Award at National Conference, Placed at Syngene",
-      image: "https://randomuser.me/api/portraits/women/72.jpg",
-      skills: ["Computational Biology", "Python", "NGS Analysis", "Drug Design"],
-    },
-  ],
-  achievements: [
-    {
-      title: "DBT Star Program",
-      description: "Department recognized under DBT Star College Scheme",
-      icon: Award,
-      color: "text-green-600",
-    },
-    {
-      title: "Research Publications",
-      description: "200+ papers in top-tier life science journals",
-      icon: BookOpen,
-      color: "text-emerald-600",
-    },
-    {
-      title: "Industry Collaborations",
-      description: "MoUs with Biocon, ICGEB, NBRI for research & training",
-      icon: Lightbulb,
-      color: "text-teal-600",
-    },
-    {
-      title: "Placement Record",
-      description: "70%+ placements in pharma & biotech companies",
-      icon: GraduationCap,
-      color: "text-blue-600",
-    },
-  ],
+  researchStats: null,
+  topAchievers: null,
+  achievements: null,
 };

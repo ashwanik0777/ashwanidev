@@ -128,6 +128,21 @@ export const resolveFacultyImage = (url, image, name, email, id) => {
     if (parsed) return parsed;
   }
 
+  // Fallback to mapped local faculty photo assets for specific IT Cell committee members when database image URL is missing
+  const nameLower = String(name || "").toLowerCase();
+  if (nameLower.includes("arti gautam") || nameLower.includes("aarti")) {
+    return "/assets/Faculty/Aarti.jpg";
+  }
+  if (nameLower.includes("rakesh kumar")) {
+    return "/assets/Faculty/Dr. Rakesh Kumar.jpeg";
+  }
+  if (nameLower.includes("gaurav kumar")) {
+    return "https://nss.onlinegbu.com/images/GauravKumar.png";
+  }
+  if (nameLower.includes("pallavi upadhyay") || nameLower.includes("pallavi upadhyaya")) {
+    return "/assets/Faculty/Pallavi.jpeg";
+  }
+
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
 };
 

@@ -52,46 +52,7 @@ export const departmentLayoutData = {
       phone: "0120-234-9913",
     },
   },
-  aboutProps: {
-    heading: "About the Department",
-    subheading:
-      "The Department of Electrical Engineering offers cutting-edge programs in power, electronics, control, and renewable energy.",
-    stats: [
-      { icon: Users, numberText: "300+", title: "Students", subtitle: "Enrolled" },
-      { icon: BookOpen, numberText: "16+", title: "Faculty", subtitle: "Members" },
-      { icon: Award, numberText: "10+", title: "Research Projects", subtitle: "Completed" },
-      { icon: Lightbulb, numberText: "2+", title: "Patents Filed", subtitle: "Innovations" },
-    ],
-    highlights: [
-      {
-        title: "Diverse Programs",
-        description:
-          "B.Tech with 5+ specialization tracks, integrated dual-degree, M.Tech in 3 specializations, and Ph.D — covering the full spectrum of electrical engineering.",
-        dotColor: "#3b82f6",
-      },
-      {
-        title: "Research Impact",
-        description:
-          "Funded research in EV battery management, smart grid, solar PV integration, and power electronics with DST-SERB and MNRE support.",
-        dotColor: "#8b5cf6",
-      },
-      {
-        title: "Industry Excellence",
-        description:
-          "Collaborations with Siemens, ABB, Schneider Electric, NTPC, and BHEL for labs, internships, and recruitment.",
-        dotColor: "#06b6d4",
-      },
-    ],
-    vision:
-      "To be a premier electrical engineering department driving innovation in power systems, renewable energy, and smart technology.",
-    missionPoints: [
-      "Provide quality education in electrical and electronics engineering",
-      "Conduct cutting-edge research in power, control, and renewable energy",
-      "Foster industry partnerships for experiential learning",
-      "Develop skilled professionals for the energy and technology sector",
-      "Promote entrepreneurship and innovation in electrical engineering",
-    ],
-  },
+  aboutProps: null,
   programsData: [
     {
         id: "int-btech-mtech-ee",
@@ -379,52 +340,8 @@ export const departmentLayoutData = {
       { icon: GraduationCap, custom: "Exp", numberText: "12+", subtitle: "Avg Experience", bg: "bg-indigo-50", color: "text-indigo-600" },
     ],
   },
-  researchStats: [
-    { numberText: "10+", subtitle: "Research Projects" },
-    { numberText: "₹1.5Cr+", subtitle: "Research Funding" },
-    { numberText: "60+", subtitle: "Publications" },
-    { numberText: "2+", subtitle: "Patents Filed" },
-  ],
-  topAchievers: [
-    {
-      name: "Amit Verma",
-      year: "B.Tech EE 2024",
-      achievement: "Placed at Siemens with 18 LPA package",
-      image: "https://randomuser.me/api/portraits/men/62.jpg",
-      skills: ["Power Systems", "MATLAB", "PLC", "Smart Grid"],
-    },
-    {
-      name: "Neha Gupta",
-      year: "M.Tech Power Systems 2024",
-      achievement: "Placed at NTPC, published 4 IEEE papers",
-      image: "https://randomuser.me/api/portraits/women/45.jpg",
-      skills: ["Power Analysis", "Renewable Energy", "SCADA", "Research"],
-    },
-  ],
-  achievements: [
-    {
-      title: "DST-SERB Grant",
-      description: "Funded project on AI-based EV battery management system",
-      icon: Award,
-      color: "text-blue-600",
-    },
-    {
-      title: "MNRE Research",
-      description: "Smart grid integration of solar PV with battery storage",
-      icon: BookOpen,
-      color: "text-purple-600",
-    },
-    {
-      title: "IEEE Chapter",
-      description: "Active IEEE student chapter organizing national events",
-      icon: Lightbulb,
-      color: "text-cyan-600",
-    },
-    {
-      title: "Industry Partnerships",
-      description: "MoU with Siemens for smart grid lab equipment and training",
-      icon: GraduationCap,
-      color: "text-indigo-600",
-    },
-  ],
+  aboutProps: null,
+  researchStats: null,
+  topAchievers: null,
+  achievements: null,
 };

@@ -52,46 +52,7 @@ export const departmentLayoutData = {
       phone: "0120-234-9911",
     },
   },
-  aboutProps: {
-    heading: "About the Department",
-    subheading:
-      "Established in 2010, the Department of Mechanical Engineering combines theoretical excellence with practical skill development.",
-    stats: [
-      { icon: Users, numberText: "250+", title: "Students", subtitle: "Enrolled" },
-      { icon: BookOpen, numberText: "9+", title: "Faculty", subtitle: "Members" },
-      { icon: Award, numberText: "12+", title: "Research Projects", subtitle: "Completed" },
-      { icon: Lightbulb, numberText: "3+", title: "Patents Filed", subtitle: "Innovations" },
-    ],
-    highlights: [
-      {
-        title: "Industry-Ready Curriculum",
-        description:
-          "Our programs include SolidWorks, ANSYS, CATIA, MATLAB training along with workshop practice, ensuring graduates are immediately productive in industry.",
-        dotColor: "#3b82f6",
-      },
-      {
-        title: "Research & Innovation",
-        description:
-          "Active research in renewable energy, thermal systems, nanofluids, additive manufacturing, and tribology with DST-SERB and AICTE funded projects.",
-        dotColor: "#06b6d4",
-      },
-      {
-        title: "Industry Partnerships",
-        description:
-          "Strong collaborations with Tata Motors, L&T, Maruti Suzuki for internships, industry projects, and campus placements.",
-        dotColor: "#6366f1",
-      },
-    ],
-    vision:
-      "To be a center of excellence in mechanical engineering education, research, and innovation contributing to sustainable industrial development.",
-    missionPoints: [
-      "Provide quality education in mechanical engineering and allied fields",
-      "Conduct impactful research in thermal, manufacturing, and materials engineering",
-      "Foster industry-academia partnerships for experiential learning",
-      "Develop engineers with creativity, critical thinking, and ethical values",
-      "Contribute to sustainable engineering solutions for society",
-    ],
-  },
+  aboutProps: null,
   programsData: [
     {
         id: "btech-mechanical-engg",
@@ -249,52 +210,7 @@ export const departmentLayoutData = {
       { icon: GraduationCap, custom: "Exp", numberText: "10+", subtitle: "Avg Experience", bg: "bg-purple-50", color: "text-purple-600" },
     ],
   },
-  researchStats: [
-    { numberText: "12+", subtitle: "Research Projects" },
-    { numberText: "₹2Cr+", subtitle: "Research Funding" },
-    { numberText: "80+", subtitle: "Publications" },
-    { numberText: "3+", subtitle: "Patents Filed" },
-  ],
-  topAchievers: [
-    {
-      name: "Rohit Kumar",
-      year: "B.Tech ME 2024",
-      achievement: "Placed at Tata Motors, SAE BAJA team captain",
-      image: "https://randomuser.me/api/portraits/men/55.jpg",
-      skills: ["SolidWorks", "ANSYS", "Manufacturing", "Team Leadership"],
-    },
-    {
-      name: "Priya Singh",
-      year: "M.Tech Thermal 2024",
-      achievement: "Published 3 SCI papers, DST-INSPIRE fellowship",
-      image: "https://randomuser.me/api/portraits/women/60.jpg",
-      skills: ["CFD", "Heat Transfer", "MATLAB", "Research"],
-    },
-  ],
-  achievements: [
-    {
-      title: "SAE BAJA India",
-      description: "Top 20 national ranking in SAE BAJA India 2024",
-      icon: Award,
-      color: "text-blue-600",
-    },
-    {
-      title: "DST-FIST Lab",
-      description: "Advanced material testing lab funded by DST-FIST programme",
-      icon: BookOpen,
-      color: "text-indigo-600",
-    },
-    {
-      title: "Industry MoU",
-      description: "MoU with Tata Motors for joint research and internships",
-      icon: Lightbulb,
-      color: "text-cyan-600",
-    },
-    {
-      title: "Placement Record",
-      description: "80%+ placements in core mechanical & automotive companies",
-      icon: GraduationCap,
-      color: "text-purple-600",
-    },
-  ],
+  researchStats: null,
+  topAchievers: null,
+  achievements: null,
 };

@@ -135,10 +135,16 @@ const ResearchProjects = lazy(() =>
 const ResearchScholars = lazy(() =>
   import("../pages/departments/Reasearch_Scholar")
 );
+const ResearchGrants = lazy(() =>
+  import("../pages/departments/Research_grants")
+);
 const TrainingConsultancy = lazy(() => import("../pages/departments/Training"));
 const Patents = lazy(() => import("../pages/departments/Patent"));
 const Books = lazy(() => import("../pages/departments/Books"));
 const BoardOfStudies = lazy(() => import("../pages/departments/BoardOfStudy"));
+const SchoolAchievements = lazy(() =>
+  import("../pages/departments/SchoolAchievements")
+);
 import SchoolsLayout from "../components/departments/SchoolsLayout.jsx";
 import Dean from "../components/departments/Dean.jsx";
 import Conferences from "../pages/departments/Usict_activities.jsx";
@@ -384,8 +390,11 @@ export default function AppRouter() {
               <Route path="about/staff" element={<StaffMembers />} />
               <Route path="about/labs" element={<LaboratoryCards />} />
               <Route path="about/activities" element={<Conferences />} />
+              <Route path="about/achievements" element={<SchoolAchievements />} />
+              <Route path="achievements" element={<SchoolAchievements />} />
               <Route path="research-area" element={<ResearchArea />} />
               <Route path="research-projects" element={<ResearchProjects />} />
+              <Route path="research-grants" element={<ResearchGrants />} />
               <Route path="research-scholars" element={<ResearchScholars />} />
               <Route path="training-consultancy" element={<TrainingConsultancy />} />
               <Route path="patents" element={<Patents />} />
@@ -401,9 +410,19 @@ export default function AppRouter() {
               <Route path="departments/pali-sanskrit-studies" element={<GenericCentrePage />} />
               <Route path="departments/heritage-archaeology" element={<GenericCentrePage />} />
               <Route path="departments/meditation-mindfulness-centre" element={<GenericCentrePage />} />
-              {/* SOL Centre Pages */}
+              {/* Centre / Facility Pages */}
               <Route path="departments/moot-court-cell" element={<GenericCentrePage />} />
               <Route path="departments/legal-aid-clinic" element={<GenericCentrePage />} />
+              <Route path="departments/bci-approved-letters" element={<GenericCentrePage />} />
+              <Route path="departments/research-advisory-committee" element={<GenericCentrePage />} />
+              <Route path="departments/school-library" element={<GenericCentrePage />} />
+              <Route path="departments/area-chairpersons" element={<GenericCentrePage />} />
+              <Route path="departments/guest-speakers" element={<GenericCentrePage />} />
+              <Route path="departments/corporate-resource-center" element={<GenericCentrePage />} />
+              <Route path="departments/research-development" element={<GenericCentrePage />} />
+              <Route path="departments/training-consultancy" element={<GenericCentrePage />} />
+              <Route path="departments/centres-of-excellence" element={<GenericCentrePage />} />
+              <Route path="departments/academic-collaboration" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />

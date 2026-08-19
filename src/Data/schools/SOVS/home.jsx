@@ -116,7 +116,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: true,
+    enabled: false,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -151,15 +151,33 @@ export const sectionsConfig = [
     props: {
       departments: [
         {
-          name: "Department of Applied Mathematics",
-          code: "AM",
+          name: "Department of Food Processing and Technology",
+          code: "FPT",
+          description:
+            "Food science, processing technologies, product development, and safety standards for industry readiness.",
+          courses: [
+            "B.Tech. Food Processing and Technology",
+            "M.Tech. Food Processing and Technology",
+            "M.Sc. Food Science",
+            "Ph.D. in Food Processing and Technology",
+          ],
+          faculty: 8,
+          labs: 5,
+          image:
+            "https://images.unsplash.com/photo-1581092160612-33d00a8b99c1?w=600&h=400&fit=crop",
+          gradient: "from-blue-600 to-blue-800",
+          link: "/schools/SOVS/departments/food-processing-technology",
+        },
+        {
+          name: "Department of Mathematics",
+          code: "MATH",
           description:
             "Modeling, simulation, computation, and analytical methods for science and engineering challenges.",
           courses: [
             "B.Tech. (Maths and Computing)",
             "B.Sc (Hons.) Mathematics",
             "B.Sc (Hons.) in Mathematics, Statistics, Economics",
-            "M.Sc. Mathematics (Since 2018)",
+            "M.Sc. Mathematics",
             "Ph.D. (Mathematics)",
           ],
           faculty: 8,
@@ -170,33 +188,14 @@ export const sectionsConfig = [
           link: "/schools/SOVS/departments/applied-mathematics",
         },
         {
-          name: "Department of Applied Chemistry",
-          code: "AC",
-          description:
-            "Chemical sciences, green chemistry, polymer science, and materials research with strong lab exposure.",
-          courses: [
-            "B.Sc (Hons.) in Chemistry",
-            "M.Sc. Chemistry",
-            "Ph.D. (Chemistry)",
-            "Post Graduate Diploma in Polyurethane Technology",
-            "Course Structure",
-          ],
-          faculty: 10,
-          labs: 4,
-          image:
-            "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=400&fit=crop",
-          gradient: "from-blue-600 to-blue-800",
-          link: "/schools/SOVS/departments/applied-chemistry",
-        },
-        {
-          name: "Department of Applied Physics",
-          code: "AP",
+          name: "Department of Physics",
+          code: "PHYS",
           description:
             "Photonics, nanomaterials, optoelectronics, and experimental physics with strong research focus.",
           courses: [
             "B.Sc. Physical Sciences",
-            "B.Sc. Hons Physics/ B.Sc. Hons Physics with research",
-            "M.Sc. Physics (Batch 2024-26)",
+            "B.Sc. Hons Physics / B.Sc. Hons Physics with research",
+            "M.Sc. Physics",
             "Ph.D. (Physics)",
           ],
           faculty: 9,
@@ -207,16 +206,33 @@ export const sectionsConfig = [
           link: "/schools/SOVS/departments/applied-physics",
         },
         {
-          name: "Department of Environmental Sciences",
-          code: "ES",
+          name: "Department of Chemistry",
+          code: "CHEM",
+          description:
+            "Chemical sciences, green chemistry, polymer science, and materials research with strong lab exposure.",
+          courses: [
+            "B.Sc (Hons.) in Chemistry",
+            "M.Sc. Chemistry",
+            "Ph.D. (Chemistry)",
+            "PG Diploma in Polyurethane Technology",
+          ],
+          faculty: 10,
+          labs: 4,
+          image:
+            "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=400&fit=crop",
+          gradient: "from-blue-600 to-blue-800",
+          link: "/schools/SOVS/departments/applied-chemistry",
+        },
+        {
+          name: "Department of Environmental Science",
+          code: "EVS",
           description:
             "Environmental science education and research with emphasis on sustainability, assessment, and remediation.",
           courses: [
             "B.Sc. (Hons.) in Environmental Science",
             "M.Sc. Environmental Science",
-            "Ph.D. in Enviornmental Sciences",
-            "Post Graduate Diploma in Environmental Management",
-            "Post Graduate Diploma in Environmental Law and Policy",
+            "Ph.D. in Environmental Sciences",
+            "PG Diploma in Environmental Management",
           ],
           faculty: 8,
           labs: 2,
@@ -226,23 +242,20 @@ export const sectionsConfig = [
           link: "/schools/SOVS/departments/environmental-science",
         },
         {
-          name: "Department of Food Processing and Technology",
-          code: "FPT",
+          name: "Department of Vocational Studies",
+          code: "VOC",
           description:
-            "Food science, processing technologies, product development, and safety standards for industry readiness.",
+            "Vocational programmes, technical skill development, and industry-oriented hands-on learning.",
           courses: [
-            "B.Tech. Food Processing and Technology",
-            "M.Tech. Food Processing and Technoloy",
-            "M.Sc. Food Science",
-            "Ph.D. in Food Processing and Technology",
-            "M.Sc. Geology",
+            "B.Voc. Programmes",
+            "Skill Development Certifications",
           ],
-          faculty: 8,
-          labs: 5,
+          faculty: 5,
+          labs: 2,
           image:
-            "https://images.unsplash.com/photo-1581092160612-33d00a8b99c1?w=600&h=400&fit=crop",
-          gradient: "from-blue-600 to-blue-800",
-          link: "/schools/SOVS/departments/food-processing-technology",
+            "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop",
+          gradient: "from-purple-500 to-indigo-600",
+          link: "/schools/SOVS/departments/vocational-studies",
         },
       ],
     },
@@ -884,7 +897,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {
@@ -919,7 +932,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecentPlacements",
-    enabled: true,
+    enabled: false,
     position: 11,
     props: {
       data: {
@@ -979,7 +992,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecruitersShowcase",
-    enabled: true,
+    enabled: false,
     position: 12,
     props: {
       recruitersData: [

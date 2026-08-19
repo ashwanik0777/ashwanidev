@@ -80,6 +80,205 @@ const PlacementDashboard = () => {
     );
   }
 
+  if (placementData?.isSimpleView) {
+    const { hero, overview, committee, corporateRelations, brochures } = placementData;
+    return (
+      <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+        <BannerSection
+          title={hero?.title || "Placement & Internship Cell | SOLJG"}
+          subtitle={hero?.subtitle || "School of Law, Justice & Governance"}
+          bgTheme={hero?.bgTheme || 9}
+        />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10 sm:space-y-12">
+          
+          {/* Overview */}
+          {overview && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-4">
+              <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit">
+                  {overview.title}
+                </h2>
+              </div>
+              <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">
+                {overview.text}
+              </p>
+            </section>
+          )}
+
+          {/* Committee */}
+          {committee && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit flex items-center gap-2">
+                  <span>👥</span> {committee.title}
+                </h2>
+                <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 w-fit">
+                  Placement and Internship Cell (PIC)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {committee.members.map((member, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/30 transition-all duration-200 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-700 font-bold flex items-center justify-center text-xs shrink-0">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <div className="text-slate-900 font-bold text-sm sm:text-base font-outfit">
+                        {member.name}
+                      </div>
+                      <div className="text-xs font-semibold text-purple-700">
+                        {member.role}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Committee Contact Box */}
+              {committee.contact && (
+                <div className="p-5 rounded-2xl bg-purple-50/60 border border-purple-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="space-y-1 text-center sm:text-left">
+                    <div className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                      Cell Contact Details
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-slate-700">
+                      Email: <a href={`mailto:${committee.contact.email}`} className="text-purple-700 font-bold hover:underline">{committee.contact.email}</a>
+                      <span className="mx-2">•</span>
+                      Phone: <span className="font-bold text-slate-900">{committee.contact.phone}</span>
+                    </div>
+                  </div>
+                  {committee.contact.linkedin && (
+                    <a
+                      href={committee.contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-200 flex items-center gap-1.5 shrink-0"
+                    >
+                      <span>LinkedIn Profile</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* Placement Brochures */}
+          {brochures && brochures.length > 0 && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    Official Documents
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Placement Brochures & Reports
+                  </h2>
+                </div>
+                <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 w-fit">
+                  Downloads
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {brochures.map((b, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-200 flex flex-col justify-between space-y-4"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-purple-700">
+                        <FileText className="w-5 h-5 shrink-0" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-purple-100 px-2 py-0.5 rounded border border-purple-200">
+                          {b.year}
+                        </span>
+                      </div>
+                      <div className="text-slate-900 font-bold text-sm font-outfit">
+                        {b.label || b.title}
+                      </div>
+                    </div>
+
+                    <a
+                      href={b.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-150 flex items-center justify-center gap-2"
+                    >
+                      <span>View File</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Director Corporate Relations */}
+          {corporateRelations && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="border-b border-slate-100 pb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                  Central Corporate Relations Cell (CRC)
+                </span>
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                  {corporateRelations.title}
+                </h2>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                <div className="text-lg font-bold text-slate-900 font-outfit">
+                  {corporateRelations.director}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Phone Numbers</div>
+                    {corporateRelations.phones.map((p, i) => (
+                      <div key={i} className="font-bold text-slate-800">{p}</div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Email Addresses</div>
+                    {corporateRelations.emails.map((e, i) => (
+                      <div key={i}>
+                        <a href={`mailto:${e}`} className="font-bold text-purple-700 hover:underline">{e}</a>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Official Website</div>
+                    <div>
+                      <a
+                        href={corporateRelations.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-purple-700 hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>{corporateRelations.website}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+        </div>
+      </div>
+    );
+  }
+
   const {
     hero = {},
     placementStats = {},
@@ -143,11 +342,11 @@ const PlacementDashboard = () => {
   const menuItems = [
     { id: "all", label: "All Sections", icon: LayoutGrid },
     { id: "overview", label: "Overview", icon: Info },
-    { id: "brochure", label: "Placement brochure", icon: BookOpen },
-    { id: "recruiter", label: "For Recruiter", icon: Briefcase },
-    { id: "records", label: "Placement Records", icon: BarChart2 },
-    { id: "rules", label: "Placement Rules", icon: AlertTriangle },
-    { id: "gallery", label: "Placement Gallery", icon: ImageIcon },
+    ...(brochure && brochure.link ? [{ id: "brochure", label: "Placement brochure", icon: BookOpen }] : []),
+    ...(ourObjective || whyGbu || (placementGuidelines && placementGuidelines.length > 0) || recruiterFormUrl || (coordinators && coordinators.length > 0) ? [{ id: "recruiter", label: "For Recruiter", icon: Briefcase }] : []),
+    ...((btechPrograms && btechPrograms.length > 0) || (otherPrograms && otherPrograms.length > 0) || (growth && growth.length > 0) || (sectorDistribution && sectorDistribution.length > 0) || (pastPlacements && pastPlacements.length > 0) ? [{ id: "records", label: "Placement Records", icon: BarChart2 }] : []),
+    ...((placementRules && placementRules.length > 0) || placementPolicy?.generalRules?.length || placementPolicy?.registrationRules ? [{ id: "rules", label: "Placement Rules", icon: AlertTriangle }] : []),
+    ...(galleryOverviewText || (galleryImages && galleryImages.length > 0) || (achievers && achievers.length > 0) || (recruitersData && recruitersData.length > 0) ? [{ id: "gallery", label: "Placement Gallery", icon: ImageIcon }] : []),
   ];
 
   return (
@@ -155,8 +354,8 @@ const PlacementDashboard = () => {
       <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
         {/* Header Hero */}
         <BannerSection
-          title={hero.title || "SoICT Placement Cell"}
-          subtitle={hero.subtitle || "School of Information and Communication Technology"}
+          title={hero.title || `${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Cell`}
+          subtitle={hero.subtitle || placementData?.schoolName || "Gautam Buddha University"}
           bgTheme={hero.bgTheme || 3}
         />
 
@@ -206,7 +405,7 @@ const PlacementDashboard = () => {
                 >
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit border-b border-slate-100 pb-3 flex items-center gap-2">
                     <Info className="w-6 h-6 text-purple-600" />
-                    Placement Overview | SoICT
+                    Placement Overview | {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()}
                   </h2>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium space-y-4 whitespace-pre-line">
                     {overviewText}
@@ -264,7 +463,7 @@ const PlacementDashboard = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-purple-50/50 p-5 rounded-xl border border-purple-100/60 space-y-2">
                       <h3 className="text-base font-bold text-purple-900">
-                        {missionObjective.aboutTitle || "About USICT CRC"}
+                        {missionObjective.aboutTitle || `About ${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Cell`}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                         {missionObjective.aboutText}
@@ -294,7 +493,7 @@ const PlacementDashboard = () => {
                       <AlertTriangle className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold font-outfit text-slate-900">SoICT Notice Board & Drive Alerts</h3>
+                      <h3 className="text-lg font-bold font-outfit text-slate-900">{placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Notice Board & Drive Alerts</h3>
                       <p className="text-xs text-slate-500">Latest announcements from Corporate Relation Cell</p>
                     </div>
                   </div>
@@ -317,7 +516,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT BROCHURE SECTION */}
-          {(activeTab === "all" || activeTab === "brochure") && (
+          {(activeTab === "all" || activeTab === "brochure") && brochure && brochure.link && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -336,7 +535,7 @@ const PlacementDashboard = () => {
                   <div className="w-full h-[450px] sm:h-[700px] md:h-[850px] lg:h-[950px] rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
                     <iframe
                       src={brochure.link.includes("drive.google.com") ? brochure.link.replace(/\/view(\?.*)?$/, "/preview") : brochure.link}
-                      title="SoICT Placement Brochure PDF"
+                      title={`${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Brochure PDF`}
                       className="w-full h-full border-0"
                     />
                   </div>
@@ -347,7 +546,7 @@ const PlacementDashboard = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-gradient-to-r from-purple-800 to-indigo-800 text-white font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm shadow-md hover:from-purple-900 hover:to-indigo-900 transition-all text-center leading-snug"
                     >
-                      <FileText className="w-4 h-4 shrink-0" /> View / Download SoICT Placement Brochure (2025-26) PDF
+                      <FileText className="w-4 h-4 shrink-0" /> View / Download {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Brochure PDF
                     </a>
                   </div>
                 </div>
@@ -356,7 +555,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* FOR RECRUITERS SECTION */}
-          {(activeTab === "all" || activeTab === "recruiter") && (
+          {(activeTab === "all" || activeTab === "recruiter") && (ourObjective || whyGbu || (placementGuidelines && placementGuidelines.length > 0) || recruiterFormUrl || (coordinators && coordinators.length > 0)) && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -417,7 +616,7 @@ const PlacementDashboard = () => {
                       Corporate Recruiter Interest Form
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                      Interested in hiring from SoICT Gautam Buddha University? Submit your campus recruitment request online.
+                      Interested in hiring from {placementData?.schoolName || (shortCode || "SOICT").toUpperCase()} Gautam Buddha University? Submit your campus recruitment request online.
                     </p>
                   </div>
                   <a
@@ -688,7 +887,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT RULES SECTION */}
-          {(activeTab === "all" || activeTab === "rules") && (
+          {(activeTab === "all" || activeTab === "rules") && (placementRules?.length > 0 || placementPolicy?.generalRules?.length > 0 || placementPolicy?.registrationRules) && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -697,10 +896,10 @@ const PlacementDashboard = () => {
               <div className="text-center max-w-2xl mx-auto space-y-2">
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit flex items-center justify-center gap-2">
                   <ShieldAlert className="w-6 h-6 text-amber-500" />
-                  SoICT Placement Policy & Rules
+                  {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Policy & Rules
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  Mandatory guidelines and regulations for all participating SoICT students
+                  Mandatory guidelines and regulations for all participating {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} students
                 </p>
               </div>
 
@@ -831,7 +1030,7 @@ const PlacementDashboard = () => {
                 {placementPolicy?.codeOfConduct && (
                   <div className="bg-purple-50/50 p-4 sm:p-5 rounded-xl border border-purple-100 space-y-3">
                     <h3 className="text-sm font-bold text-purple-900 flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-purple-600" /> SoICT Code of Conduct in Campus Drives
+                      <CheckCircle className="w-4 h-4 text-purple-600" /> {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Code of Conduct in Campus Drives
                     </h3>
                     {placementPolicy.codeOfConduct.intro && (
                       <p className="text-xs text-purple-800 font-medium">
@@ -850,7 +1049,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT GALLERY SECTION */}
-          {(activeTab === "all" || activeTab === "gallery") && (
+          {(activeTab === "all" || activeTab === "gallery") && (galleryOverviewText || (galleryImages && galleryImages.length > 0) || (achievers && achievers.length > 0) || (recruitersData && recruitersData.length > 0)) && (
             <div className="space-y-8">
               {/* Gallery Overview */}
               {galleryOverviewText && (
@@ -861,7 +1060,7 @@ const PlacementDashboard = () => {
                 >
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit flex items-center gap-2">
                     <ImageIcon className="w-6 h-6 text-purple-600" />
-                    Gallery Overview | SoICT
+                    Gallery Overview | {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()}
                   </h2>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium whitespace-pre-line">
                     {galleryOverviewText}

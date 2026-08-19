@@ -19,12 +19,20 @@ const DepartmentLayout = ({
   researchStats,
   topAchievers,
   achievements,
+  hideAbout,
+  hideResearch,
+  hideAchievers,
 }) => {
+  const currentSchool = (schoolCode || "").toUpperCase();
+  const shouldHideAbout = hideAbout || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+  const shouldHideResearch = hideResearch || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+  const shouldHideAchievers = hideAchievers || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+
   return (
     <div className="min-h-screen bg-background">
       <BannerSection {...heroProps} />
       <HodMessage {...hodProps} />
-      {aboutProps && <AboutDepartment {...aboutProps} />}
+      {aboutProps && !shouldHideAbout && <AboutDepartment {...aboutProps} />}
       <Programs
         heading="Academic Programs"
         subheading="Choose from our diverse range of programs designed to meet your academic and career goals."
@@ -42,7 +50,7 @@ const DepartmentLayout = ({
         bottomStats={facultyStats}
       />
 
-      {((researchAreas && researchAreas.length > 0) || (researchStats && researchStats.length > 0)) && (
+      {!shouldHideResearch && ((researchAreas && researchAreas.length > 0) || (researchStats && researchStats.length > 0)) && (
         <ResearchSection
           title="Research & Innovation"
           subtitle="Pioneering technology research and real-world domain solutions."
@@ -51,7 +59,7 @@ const DepartmentLayout = ({
         />
       )}
 
-      {((topAchievers && topAchievers.length > 0) || (achievements && achievements.length > 0)) && (
+      {!shouldHideAchievers && ((topAchievers && topAchievers.length > 0) || (achievements && achievements.length > 0)) && (
         <StudentAchievers
           topAchievers={topAchievers}
           achievements={achievements}

@@ -124,7 +124,7 @@ const FacultyResearchCard = ({ item }) => {
   );
 };
 
-const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyProfiles = [] }) => {
+const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyProfiles = [], sectionTitle }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredFaculty = facultyProfiles.filter((f) => {
@@ -159,7 +159,7 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
-                  Faculty Research Areas & Profiles
+                  {sectionTitle || "Faculty Research Areas & Profiles"}
                 </h2>
                 <p className="text-slate-600 text-sm mt-1.5 max-w-2xl">
                   Explore academic expertise, research domains, publications, and scientific achievements of our faculty members.
@@ -389,6 +389,7 @@ export default function ResearchPage() {
       funding={researchAreaData.funding || []}
       collaborations={researchAreaData.collaborations || []}
       facultyProfiles={researchAreaData.facultyProfiles || []}
+      sectionTitle={researchAreaData.sectionTitle || researchAreaData.heading}
     />
   );
 }

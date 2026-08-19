@@ -128,7 +128,7 @@ export default function FacultyResponsiveSlider({
   }, [schoolCode, schoolMeta.name, departmentId]);
 
   return (
-    <section className="py-10 bg-white overflow-hidden relative">
+    <section className="py-8 bg-white overflow-hidden relative">
       <div className="text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           {title}

@@ -150,7 +150,7 @@ const Navbar = () => {
     if (schoolCode === "SOBT") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
+        // { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
         { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
         { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
         { label: "SOBT Board of Studies", href: routes.about.board },

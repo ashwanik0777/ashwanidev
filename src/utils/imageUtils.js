@@ -97,11 +97,12 @@ export const parseImageUrl = (path, width = 1000) => {
  * 
  * @param {string} path - The image URL or path
  * @param {string} [placeholder] - Custom placeholder URL
+ * @param {number} [width=1000] - Desired width for Google Drive thumbnails
  * @returns {string} - A directly usable image URL
  */
-export const getImageUrl = (path, placeholder = 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found') => {
+export const getImageUrl = (path, placeholder = 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found', width = 1000) => {
   if (!path) return placeholder;
-  const parsed = parseImageUrl(path);
+  const parsed = parseImageUrl(path, width);
   return parsed || placeholder;
 };
 

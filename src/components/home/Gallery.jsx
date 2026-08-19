@@ -63,7 +63,7 @@ export default function CampusGallery() {
         if (slides.length < MAX_SLIDES) {
           slides.push({
             id: item.id,
-            image: getImageUrl(cover),
+            image: getImageUrl(cover, undefined, 2500),
             text: item.title,
             button1_url: `/announcements/event-calendar/${item.id}`,
             button1_text: "View Details"
@@ -75,7 +75,7 @@ export default function CampusGallery() {
         for (const img of otherImages) {
           extrasPool.push({
             id: `${item.id}-extra-${extrasPool.length}`,
-            image: getImageUrl(img),
+            image: getImageUrl(img, undefined, 2500),
             text: item.title,
             button1_url: `/announcements/event-calendar/${item.id}`,
             button1_text: "View Details"
@@ -91,7 +91,7 @@ export default function CampusGallery() {
 
       const jsonGallery = (homeData?.sections?.campus_gallery || []).map((item) => ({
         ...item,
-        image: getImageUrl(item.image),
+        image: getImageUrl(item.image, undefined, 2500),
         text: item.text,
       }));
 
@@ -171,7 +171,7 @@ export default function CampusGallery() {
               src={currentImage.image}
               alt={currentImage.text}
               onError={handleImageError}
-              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${isTransitioning ? 'scale-110 opacity-80 blur-[2px]' : 'scale-100 opacity-100 blur-0'
+              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${isTransitioning ? 'scale-105 opacity-80' : 'scale-100 opacity-100'
                 }`}
             />
 

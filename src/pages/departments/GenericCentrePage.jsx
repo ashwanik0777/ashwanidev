@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.sohssCoeData ||
           module.trainingConsultancyData ||
           module.researchDevData ||
           module.crcData ||
@@ -415,6 +416,82 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "sohssCentresOfExcellence" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+            {/* Overview Card */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    {data.schoolName || "School of Humanities & Social Sciences"}
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Knowledge Centres & Research Hubs
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                  {data.centres.length} Centres of Excellence
+                </span>
+              </div>
+
+              <div className="bg-slate-50/80 p-6 rounded-2xl border border-slate-100/90 text-slate-700 text-sm sm:text-base leading-relaxed">
+                <p>{data.overview}</p>
+              </div>
+            </section>
+
+            {/* Centres Grid */}
+            <section className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {data.centres.map((centre) => (
+                  <div
+                    key={centre.id}
+                    className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6 group"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className={`px-3.5 py-1 rounded-full text-xs font-extrabold text-white bg-gradient-to-r ${centre.gradient}`}>
+                          {centre.badge}
+                        </span>
+                        <span className="text-xs font-semibold text-slate-400">
+                          {centre.established}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-extrabold text-slate-900 font-outfit group-hover:text-purple-700 transition-colors">
+                        {centre.name}
+                      </h3>
+
+                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                        {centre.description}
+                      </p>
+
+                      <div className="pt-2 space-y-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                          Key Focus & Activities
+                        </span>
+                        <div className="grid grid-cols-1 gap-2">
+                          {centre.highlights.map((hl, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                              <div className="w-1.5 h-1.5 rounded-full bg-purple-600 shrink-0" />
+                              <span>{hl}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       ) : data.customLayout === "trainingConsultancy" ? (

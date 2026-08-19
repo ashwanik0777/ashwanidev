@@ -212,6 +212,7 @@ const Navbar = () => {
     if (schoolCode === "SOHSS") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
+        { label: "Center Of Excellence", href: `/schools/${activeSchool}/departments/centres-of-excellence` },
       ];
     }
 

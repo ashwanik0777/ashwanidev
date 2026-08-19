@@ -22,7 +22,7 @@ const ContactCard = ({ children, className = "" }) => (
 );
 
 // Contact Page Content Component
-const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directory }) => {
+const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directoryTable }) => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
       {/* Hero Section */}
@@ -349,6 +349,37 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
           </section>
         )}
 
+        {/* Directory Table Section */}
+        {directoryTable && directoryTable.rows && directoryTable.rows.length > 0 && (
+          <section className="space-y-4 sm:space-y-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
+                {directoryTable.title || "Directory"}
+              </h2>
+            </div>
+            <ContactCard className="overflow-x-auto p-4 sm:p-6">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-100/70 text-slate-700 font-bold">
+                    <th className="p-3 rounded-l-lg">Name</th>
+                    <th className="p-3">Phone No.</th>
+                    <th className="p-3 rounded-r-lg">Ext. No.</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {directoryTable.rows.map((row, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="p-3 font-semibold text-slate-800">{row.name}</td>
+                      <td className="p-3 text-slate-600 font-medium">{row.phone}</td>
+                      <td className="p-3 text-purple-700 font-bold">{row.ext || "-"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </ContactCard>
+          </section>
+        )}
+
         {/* COE Contacts Section (If provided) */}
         {data && data.length > 0 && (
           <section className="space-y-4">
@@ -427,7 +458,7 @@ const ContactPage = () => {
       officeHours={contactData.officeHours}
       generalInfo={contactData.generalInfo}
       deanInfo={contactData.deanInfo}
-      directory={contactData.directory}
+      directoryTable={contactData.directoryTable || contactData.directory}
     />
   );
 };

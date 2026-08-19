@@ -1,8 +1,7 @@
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 
-const somBanner =
-  "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&h=400&fit=crop";
+const somBanner = "/assets/SCHOOL/SOM.png";
 
 const somSlides = [
   {

@@ -99,9 +99,9 @@ export const sectionsConfig = [
     enabled: true,
     position: 4,
     props: {
-      name: deansMessageData?.deanName || "Prof. Karam Tej Sarao",
+      name: deansMessageData?.deanName || "Prof. Rajeev Varshney",
       title: deansMessageData?.designation || "Dean, School of Buddhist Studies and Civilization",
-      image: deansMessageData?.image || "https://ui-avatars.com/api/?name=Karam+Tej+Sarao&size=300&background=F59E0B&color=fff",
+      image: deansMessageData?.image || "/assets/Faculty/Prof. Rajeev Varshney.jpg",
       shortMessage: deansMessageData?.shortMessage,
       description: deansMessageData?.message || deansMessageData?.fullMessage || deansMessageData?.shortMessage,
       message: deansMessageData?.message || deansMessageData?.fullMessage,

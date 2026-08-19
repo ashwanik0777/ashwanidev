@@ -13,14 +13,13 @@ import CoursesOffered from "../pages/Admission/CoursesOffered.jsx";
 import EligibilityReservation from "../pages/Admission/EligibilityReservation.jsx";
 import FeeStructure from "../pages/Admission/FeeStructure.jsx";
 import InternationalAdmissions from "../pages/Admission/InternationalAdmissions.jsx";
-import NewsDetail from "../pages/Announcements/NewsDetail.jsx";
 import NewsNotifications from "../pages/Announcements/NewsNotifications.jsx";
 import EventsPage from "../pages/Announcements/EventsPage.jsx";
 import NewsLetter from "../pages/Announcements/NewsLetter.jsx";
 import EventDetail from "../pages/Announcements/EventDetail.jsx";
 import MediaGallery from "../pages/Announcements/MediaGallery.jsx";
 import Notice from "../pages/Announcements/Notice.jsx";
-import NoticeDetail from "../pages/Announcements/NoticeDetail.jsx";
+import NewsDetail from "../pages/Announcements/NewsDetail.jsx";
 
 
 
@@ -483,10 +482,6 @@ export default function AppRouter() {
             element={<NewsNotifications />}
           />
           <Route
-            path="/announcements/news-notifications/:id"
-            element={<NewsDetail />}
-          />
-          <Route
             path="/announcements/event-calendar"
             element={<EventsPage />}
           />
@@ -494,8 +489,11 @@ export default function AppRouter() {
             path="/announcements/event-calendar/:id"
             element={<EventDetail />}
           />
+          <Route
+            path="/announcements/news-notifications/:id"
+            element={<NewsDetail />}
+          />
           <Route path="/announcements/notices" element={<Notice />} />
-          <Route path="/announcements/notices/:id" element={<NoticeDetail />} />
           <Route
             path="/announcements/media-gallery"
             element={<MediaGallery />}

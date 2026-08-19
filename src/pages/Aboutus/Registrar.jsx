@@ -200,7 +200,7 @@ const Registrar = () => {
               buttons={tabButtons}
               onClick={setActiveTab}
               activeButton={activeTab}
-              size="lg"
+              size="md"
               fullWidth={true}
               rounded="2xl"
               animated={true}

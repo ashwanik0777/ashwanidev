@@ -73,18 +73,21 @@ const Faculty = () => {
 
     // 1. Professor and Dean
     if (isDean && !isAssociate && !isAssistant) return 1;
-    
-    // 3. Associate Professor and Dean
-    if (isDean && isAssociate) return 3;
-    
-    // 4. Assistant Professor and Dean(I/C)
-    if (isDean && isAssistant) return 4;
 
-    // 5. Recognizing / Visiting Professors
-    if (isVisiting) return 5;
+    // 2. Professor (plain professor, not associate/assistant/dean)
+    if (isProf && !isAssociate && !isAssistant && !isVisiting && !isAdjunct && !isDean) return 2;
+
+    // 3. Recognizing / Visiting Professors
+    if (isVisiting) return 3;
     
-    // 6. Adjunct Professors
-    if (isAdjunct) return 6;
+    // 4. Adjunct Professors
+    if (isAdjunct) return 4;
+    
+    // 5. Associate Professor and Dean
+    if (isDean && isAssociate) return 5;
+    
+    // 6. Assistant Professor and Dean(I/C)
+    if (isDean && isAssistant) return 6;
 
     // 7. Associate Professor
     if (isAssociate) return 7;
@@ -94,9 +97,6 @@ const Faculty = () => {
     
     // 9. Assistant Professor
     if (isAssistant) return 9;
-
-    // 2. Professor (plain professor, not associate/assistant/dean)
-    if (isProf) return 2;
 
     return 10;
   };

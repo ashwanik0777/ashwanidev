@@ -19,6 +19,7 @@ const normalizePagination = (payload) => {
 };
 
 const normalizeFaculty = (item) => ({
+  ...item,
   id: String(item?.id || ""),
   name: String(item?.name || "").trim(),
   designation: String(item?.designation || "").trim(),
@@ -32,6 +33,7 @@ const normalizeFaculty = (item) => ({
 });
 
 const toPayload = (faculty) => ({
+  ...faculty,
   id: String(faculty?.id || "").trim(),
   name: String(faculty?.name || "").trim(),
   designation: String(faculty?.designation || "").trim(),

@@ -87,10 +87,10 @@ const fadeIn = {
 const sitemapAbout = [
   {
     title: "About Us",
-    path: "/about-us/About GBU",
+    path: "/about-us/about-gbu",
     icon: Home,
     children: [
-      { title: "About GBU Overview", path: "/about-us/About GBU" },
+      { title: "About GBU Overview", path: "/about-us/about-gbu" },
       { title: "University History", path: "/aboutUs/GBUHistory" },
       { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
       { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },

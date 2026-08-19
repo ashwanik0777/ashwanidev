@@ -406,6 +406,7 @@ const ContactPage = () => {
       officeHours={contactData.officeHours}
       generalInfo={contactData.generalInfo}
       deanInfo={contactData.deanInfo}
+      directory={contactData.directory}
     />
   );
 };

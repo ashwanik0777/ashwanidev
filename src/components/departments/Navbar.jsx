@@ -137,6 +137,7 @@ const Navbar = () => {
       consultancy: `/schools/${activeSchool}/training-consultancy`,
       scholars: `/schools/${activeSchool}/research-scholars`,
       projects: `/schools/${activeSchool}/research-projects`,
+      grants: `/schools/${activeSchool}/research-grants`,
       patents: `/schools/${activeSchool}/patents`,
       books: `/schools/${activeSchool}/books`,
     },
@@ -250,6 +251,7 @@ const Navbar = () => {
         // { label: "Training and Consultancy", href: routes.research.consultancy },
         { label: "Research Scholars", href: routes.research.scholars },
         { label: "Research Publications", href: routes.research.projects },
+        { label: "Research Grants", href: routes.research.grants },
         { label: "Patents", href: routes.research.patents },
         { label: "Books", href: routes.research.books },
       ];

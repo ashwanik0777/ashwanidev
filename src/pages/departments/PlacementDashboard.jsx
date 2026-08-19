@@ -80,6 +80,155 @@ const PlacementDashboard = () => {
     );
   }
 
+  if (placementData?.isSimpleView) {
+    const { hero, overview, committee, corporateRelations } = placementData;
+    return (
+      <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+        <BannerSection
+          title={hero?.title || "Placement & Internship Cell | SOLJG"}
+          subtitle={hero?.subtitle || "School of Law, Justice & Governance"}
+          bgTheme={hero?.bgTheme || 9}
+        />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10 sm:space-y-12">
+          
+          {/* Overview */}
+          {overview && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-4">
+              <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit">
+                  {overview.title}
+                </h2>
+              </div>
+              <p className="text-slate-700 text-base sm:text-lg leading-relaxed font-medium">
+                {overview.text}
+              </p>
+            </section>
+          )}
+
+          {/* Committee */}
+          {committee && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit flex items-center gap-2">
+                  <span>👥</span> {committee.title}
+                </h2>
+                <span className="px-3 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 w-fit">
+                  Placement and Internship Cell (PIC)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {committee.members.map((member, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/30 transition-all duration-200 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-700 font-bold flex items-center justify-center text-xs shrink-0">
+                      {idx + 1}
+                    </div>
+                    <div>
+                      <div className="text-slate-900 font-bold text-sm sm:text-base font-outfit">
+                        {member.name}
+                      </div>
+                      <div className="text-xs font-semibold text-purple-700">
+                        {member.role}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Committee Contact Box */}
+              {committee.contact && (
+                <div className="p-5 rounded-2xl bg-purple-50/60 border border-purple-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="space-y-1 text-center sm:text-left">
+                    <div className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                      Cell Contact Details
+                    </div>
+                    <div className="text-xs sm:text-sm font-medium text-slate-700">
+                      Email: <a href={`mailto:${committee.contact.email}`} className="text-purple-700 font-bold hover:underline">{committee.contact.email}</a>
+                      <span className="mx-2">•</span>
+                      Phone: <span className="font-bold text-slate-900">{committee.contact.phone}</span>
+                    </div>
+                  </div>
+                  {committee.contact.linkedin && (
+                    <a
+                      href={committee.contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-2 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-200 flex items-center gap-1.5 shrink-0"
+                    >
+                      <span>LinkedIn Profile</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* Director Corporate Relations */}
+          {corporateRelations && (
+            <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="border-b border-slate-100 pb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                  Central Corporate Relations Cell (CRC)
+                </span>
+                <h2 className="text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                  {corporateRelations.title}
+                </h2>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                <div className="text-lg font-bold text-slate-900 font-outfit">
+                  {corporateRelations.director}
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Phone Numbers</div>
+                    {corporateRelations.phones.map((p, i) => (
+                      <div key={i} className="font-bold text-slate-800">{p}</div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Email Addresses</div>
+                    {corporateRelations.emails.map((e, i) => (
+                      <div key={i}>
+                        <a href={`mailto:${e}`} className="font-bold text-purple-700 hover:underline">{e}</a>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="text-slate-400 font-semibold uppercase text-[10px]">Official Website</div>
+                    <div>
+                      <a
+                        href={corporateRelations.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold text-purple-700 hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>{corporateRelations.website}</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+        </div>
+      </div>
+    );
+  }
+
   const {
     hero = {},
     placementStats = {},

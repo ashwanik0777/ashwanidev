@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Search, X, Award, DollarSign, Calendar, CheckCircle } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 
+const modules = import.meta.glob("../../Data/schools/*/research/research-grants.jsx");
+
 export default function ResearchGrants() {
   const { shortCode } = useParams();
   const [grantsData, setGrantsData] = useState(null);
@@ -13,15 +15,31 @@ export default function ResearchGrants() {
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-      try {
-        const schoolCode = (shortCode || "SOICT").toUpperCase();
-        const module = await import(`../../Data/schools/${schoolCode}/research/research-grants.jsx`);
-        setGrantsData(module.researchGrantsData);
-      } catch {
+      const code = (shortCode || "SOBT").toLowerCase();
+      const pathKey = Object.keys(modules).find((path) =>
+        path.toLowerCase().includes(`/schools/${code}/research/research-grants.jsx`)
+      );
+
+      if (pathKey) {
         try {
-          const fallback = await import("../../Data/schools/SOICT/research/research-grants.jsx");
-          setGrantsData(fallback.researchGrantsData);
+          const mod = await modules[pathKey]();
+          setGrantsData(mod.researchGrantsData);
         } catch {
+          setGrantsData(null);
+        }
+      } else {
+        // Fallback to SOBT if available
+        const fallbackKey = Object.keys(modules).find((path) =>
+          path.toLowerCase().includes("/schools/sobt/research/research-grants.jsx")
+        );
+        if (fallbackKey) {
+          try {
+            const mod = await modules[fallbackKey]();
+            setGrantsData(mod.researchGrantsData);
+          } catch {
+            setGrantsData(null);
+          }
+        } else {
           setGrantsData(null);
         }
       }

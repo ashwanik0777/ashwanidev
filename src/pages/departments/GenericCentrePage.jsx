@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.researchDevData ||
           module.crcData ||
           module.guestSpeakersData ||
           module.areaChairpersonsData ||
@@ -413,6 +414,92 @@ const GenericCentrePage = () => {
 
             </div>
 
+          </div>
+        </div>
+      ) : data.customLayout === "researchDevelopment" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+            {/* Overview Section */}
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                    School of Management
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
+                    Research and Publications
+                  </h2>
+                </div>
+                <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200 shrink-0">
+                  Doctoral & Interdisciplinary Research
+                </span>
+              </div>
+
+              <div className="space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+                {data.paragraphs.map((para, idx) => (
+                  <p key={idx} className="bg-slate-50/70 p-5 rounded-2xl border border-slate-100/80">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </section>
+
+            {/* Research Scholars & PhD Reports Section */}
+            {data.phdDocuments && data.phdDocuments.length > 0 && (
+              <section className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900 font-outfit">
+                      Research & Development | Doctoral Records
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-500 font-medium">
+                      Official lists of Ph.D. scholars awarded & currently pursuing research in SOM
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {data.phdDocuments.map((doc) => (
+                    <div
+                      key={doc.sNo}
+                      className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6 group"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className={`px-3 py-1 rounded-full text-xs font-extrabold text-white bg-gradient-to-r ${doc.gradient}`}>
+                            {doc.badge}
+                          </span>
+                          <span className="text-xs font-bold text-slate-400">Document #{doc.sNo}</span>
+                        </div>
+                        <h4 className="text-lg font-extrabold text-slate-900 font-outfit group-hover:text-purple-700 transition-colors">
+                          {doc.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                          {doc.description}
+                        </p>
+                      </div>
+
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`w-full py-3 px-4 rounded-2xl text-white font-bold text-xs sm:text-sm bg-gradient-to-r ${doc.gradient} flex items-center justify-center gap-2 shadow-md hover:opacity-95 transition-opacity text-center`}
+                      >
+                        <FileText className="w-4 h-4" />
+                        View / Download Document
+                        <ExternalLink className="w-4 h-4 ml-1" />
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         </div>
       ) : data.customLayout === "corporateResourceCenter" ? (

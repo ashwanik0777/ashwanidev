@@ -254,6 +254,7 @@ const Navbar = () => {
     if (schoolCode === "SOM") {
       return [
         { label: "Corporate Resource Center (CRC)", href: `/schools/${activeSchool}/departments/corporate-resource-center` },
+        { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
       ];
     }
 

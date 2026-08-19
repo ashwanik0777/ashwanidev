@@ -131,59 +131,113 @@ const ScholarDirectorySection = ({ byYear = [] }) => {
           Showing <strong className="text-slate-800">{filtered.length}</strong> Ph.D. Scholars
         </div>
 
-        {/* Scholars Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {filtered.map((s, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all flex flex-col justify-between h-full"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-2 mb-3">
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900 font-outfit">
-                      {s.name}
-                    </h3>
-                    <span className="text-xs text-slate-500 font-medium">
-                      Batch {s.year}
+        {/* Scholars View: Render Table if s.sno is present, else Card Grid */}
+        {filtered.some((s) => s.sno !== undefined) ? (
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                  <tr>
+                    <th className="py-3.5 px-4 w-16 text-center">S.No.</th>
+                    <th className="py-3.5 px-4">Name of Student</th>
+                    <th className="py-3.5 px-4">Thesis Supervisor</th>
+                    <th className="py-3.5 px-4 text-center">Year of Registration</th>
+                    <th className="py-3.5 px-4 text-center">FT / WP</th>
+                    <th className="py-3.5 px-4 text-center">Current Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200/80 font-medium">
+                  {filtered.map((s, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3 px-4 text-center font-bold text-slate-500">{s.sno || idx + 1}</td>
+                      <td className="py-3 px-4 font-bold text-slate-900">{s.name}</td>
+                      <td className="py-3 px-4 text-slate-700">{s.supervisor || "—"}</td>
+                      <td className="py-3 px-4 text-center font-semibold text-slate-600">{s.regYear || s.year || "—"}</td>
+                      <td className="py-3 px-4 text-center">
+                        <span
+                          className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                            s.mode === "WP"
+                              ? "bg-purple-100 text-purple-800 border border-purple-200"
+                              : "bg-blue-100 text-blue-800 border border-blue-200"
+                          }`}
+                        >
+                          {s.mode || "FT"}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-center">
+                        <span
+                          className={`inline-block px-3 py-0.5 rounded-full text-xs font-semibold capitalize ${
+                            (s.status || "").toLowerCase() === "completed"
+                              ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                              : (s.status || "").toLowerCase().includes("thesis")
+                              ? "bg-amber-100 text-amber-800 border border-amber-200"
+                              : "bg-slate-100 text-slate-700 border border-slate-200"
+                          }`}
+                        >
+                          {s.status || "ongoing"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          /* Legacy Scholars Cards Grid */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {filtered.map((s, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-all flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                        {s.name}
+                      </h3>
+                      <span className="text-xs text-slate-500 font-medium">
+                        Batch {s.year}
+                      </span>
+                    </div>
+                    <span
+                      className={`text-xs font-semibold px-2.5 py-0.5 rounded-full shrink-0 ${
+                        s.status === "Awarded"
+                          ? "bg-amber-50 text-amber-700 border border-amber-200"
+                          : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                      }`}
+                    >
+                      {s.status}
                     </span>
                   </div>
-                  <span
-                    className={`text-xs font-semibold px-2.5 py-0.5 rounded-full shrink-0 ${
-                      s.status === "Awarded"
-                        ? "bg-amber-50 text-amber-700 border border-amber-200"
-                        : "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                    }`}
-                  >
-                    {s.status}
-                  </span>
-                </div>
 
-                <div className="mt-3 space-y-2.5 text-sm">
-                  <div>
-                    <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Thesis Title
-                    </h4>
-                    <p className="text-slate-700 font-medium leading-snug mt-0.5">
-                      {s.thesis || "Thesis title pending/under registration"}
-                    </p>
-                  </div>
-
-                  {s.supervisor && (
-                    <div className="pt-2.5 border-t border-slate-100">
+                  <div className="mt-3 space-y-2.5 text-sm">
+                    <div>
                       <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                        Supervisor
+                        Thesis Title
                       </h4>
-                      <p className="text-slate-800 font-semibold text-xs mt-0.5">
-                        {s.supervisor}
+                      <p className="text-slate-700 font-medium leading-snug mt-0.5">
+                        {s.thesis || "Thesis title pending/under registration"}
                       </p>
                     </div>
-                  )}
+
+                    {s.supervisor && (
+                      <div className="pt-2.5 border-t border-slate-100">
+                        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                          Supervisor
+                        </h4>
+                        <p className="text-slate-800 font-semibold text-xs mt-0.5">
+                          {s.supervisor}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {filtered.length === 0 && (
           <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">

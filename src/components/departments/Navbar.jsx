@@ -112,6 +112,8 @@ const Navbar = () => {
     };
   }, [activeSchool]);
 
+  const currentSchoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+
   const routes = {
     home: `/schools/${activeSchool}`,
     faculty: `/schools/${activeSchool}/faculty`,
@@ -137,6 +139,7 @@ const Navbar = () => {
       consultancy: `/schools/${activeSchool}/training-consultancy`,
       scholars: `/schools/${activeSchool}/research-scholars`,
       projects: `/schools/${activeSchool}/research-projects`,
+      grants: `/schools/${activeSchool}/research-grants`,
       patents: `/schools/${activeSchool}/patents`,
       books: `/schools/${activeSchool}/books`,
     },
@@ -151,8 +154,8 @@ const Navbar = () => {
       return [
         { label: "Dean's Message", href: routes.about.dean },
         // { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
-        { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
-        { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
+        // { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
+        // { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
         { label: "SOBT Board of Studies", href: routes.about.board },
         { label: "SOBT Staff Members", href: routes.about.staff },
         { label: "SOBT Laboratories", href: routes.about.labs },
@@ -163,11 +166,11 @@ const Navbar = () => {
     if (schoolCode === "SOE") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "SOE Advanced Computing Center", href: `/schools/${activeSchool}/departments/advanced-computing-center` },
-        { label: "SOE Engineering Design Lab", href: `/schools/${activeSchool}/departments/engineering-design-lab` },
-        { label: "SOE Innovation & Research Cell", href: `/schools/${activeSchool}/departments/innovation-research-cell` },
+        // { label: "SOE Advanced Computing Center", href: `/schools/${activeSchool}/departments/advanced-computing-center` },
+        // { label: "SOE Engineering Design Lab", href: `/schools/${activeSchool}/departments/engineering-design-lab` },
+        // { label: "SOE Innovation & Research Cell", href: `/schools/${activeSchool}/departments/innovation-research-cell` },
         { label: "SOE Board of Studies", href: routes.about.board },
-        { label: "SOE Staff Members", href: routes.about.staff },
+        // { label: "SOE Staff Members", href: routes.about.staff },
         { label: "SOE Laboratories", href: routes.about.labs },
         { label: "SOE Activities", href: routes.about.activities },
       ];
@@ -176,12 +179,12 @@ const Navbar = () => {
     if (schoolCode === "SOBSC") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "SBSC Centre for Buddhist Studies", href: `/schools/${activeSchool}/departments/centre-buddhist-studies` },
-        { label: "SBSC Pali & Sanskrit Studies Cell", href: `/schools/${activeSchool}/departments/pali-sanskrit-studies` },
-        { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
-        { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
+        // { label: "SBSC Centre for Buddhist Studies", href: `/schools/${activeSchool}/departments/centre-buddhist-studies` },
+        // { label: "SBSC Pali & Sanskrit Studies Cell", href: `/schools/${activeSchool}/departments/pali-sanskrit-studies` },
+        // { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
+        // { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
         { label: "SBSC Board of Studies", href: routes.about.board },
-        { label: "SBSC Staff Members", href: routes.about.staff },
+        // { label: "SBSC Staff Members", href: routes.about.staff },
         { label: "SBSC Activities", href: routes.about.activities },
       ];
     }
@@ -191,6 +194,7 @@ const Navbar = () => {
         { label: "Dean's Message", href: routes.about.dean },
         { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
         { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
+        { label: "BCI Approved Letter", href: `/schools/${activeSchool}/departments/bci-approved-letters` },
         { label: "SLJG Centre for Constitutional Law & Governance", href: `/schools/${activeSchool}/departments/constitutional-governance` },
         { label: "SLJG Centre for Cyber Law & Digital Rights", href: `/schools/${activeSchool}/departments/cyber-law-centre` },
         { label: "SLJG Board of Studies", href: routes.about.board },
@@ -240,6 +244,44 @@ const Navbar = () => {
     ];
   };
 
+  // Build Research dropdown items based on the active school
+  const getResearchItems = () => {
+    const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+
+    if (schoolCode === "SOBSC") {
+      return [
+        { label: "Research Area and Profile", href: routes.research.profile },
+        { label: "Training and Consultancy", href: routes.research.consultancy },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Publications", href: routes.research.projects },
+        { label: "Research Grants", href: routes.research.grants },
+        { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
+      ];
+    }
+
+    if (schoolCode === "SOBT" || schoolCode === "SOE") {
+      return [
+        { label: "Research Area and Profile", href: routes.research.profile },
+        // { label: "Training and Consultancy", href: routes.research.consultancy },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Publications", href: routes.research.projects },
+        { label: "Research Grants", href: routes.research.grants },
+        { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
+      ];
+    }
+
+    return [
+      { label: "Research Area and Profile", href: routes.research.profile },
+      { label: "Training and Consultancy", href: routes.research.consultancy },
+      { label: "Research Scholars", href: routes.research.scholars },
+      { label: "Research Projects", href: routes.research.projects },
+      { label: "Patents", href: routes.research.patents },
+      { label: "Books", href: routes.research.books },
+    ];
+  };
+
   const dropdownMenus = [
     {
       key: "about",
@@ -269,17 +311,7 @@ const Navbar = () => {
     {
       key: "research",
       label: "Research",
-      items: [
-        { label: "Research Area and Profile", href: routes.research.profile },
-        {
-          label: "Training and Consultancy",
-          href: routes.research.consultancy,
-        },
-        { label: "Research Scholars", href: routes.research.scholars },
-        { label: "Research Projects", href: routes.research.projects },
-        { label: "Patents", href: routes.research.patents },
-        { label: "Books", href: routes.research.books },
-      ],
+      items: getResearchItems(),
     },
   ];
 
@@ -492,14 +524,16 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.li>
         ))}
-        <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-          <Link
-            to={routes.placement}
-            className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Placement
-          </Link>
-        </motion.li>
+        {currentSchoolCode !== "SOE" && currentSchoolCode !== "SOBSC" && (
+          <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+            <Link
+              to={routes.placement}
+              className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
+            >
+              Placement
+            </Link>
+          </motion.li>
+        )}
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link
             to={routes.contact}

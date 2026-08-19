@@ -143,11 +143,11 @@ const PlacementDashboard = () => {
   const menuItems = [
     { id: "all", label: "All Sections", icon: LayoutGrid },
     { id: "overview", label: "Overview", icon: Info },
-    { id: "brochure", label: "Placement brochure", icon: BookOpen },
-    { id: "recruiter", label: "For Recruiter", icon: Briefcase },
-    { id: "records", label: "Placement Records", icon: BarChart2 },
-    { id: "rules", label: "Placement Rules", icon: AlertTriangle },
-    { id: "gallery", label: "Placement Gallery", icon: ImageIcon },
+    ...(brochure && brochure.link ? [{ id: "brochure", label: "Placement brochure", icon: BookOpen }] : []),
+    ...(ourObjective || whyGbu || (placementGuidelines && placementGuidelines.length > 0) || recruiterFormUrl || (coordinators && coordinators.length > 0) ? [{ id: "recruiter", label: "For Recruiter", icon: Briefcase }] : []),
+    ...((btechPrograms && btechPrograms.length > 0) || (otherPrograms && otherPrograms.length > 0) || (growth && growth.length > 0) || (sectorDistribution && sectorDistribution.length > 0) || (pastPlacements && pastPlacements.length > 0) ? [{ id: "records", label: "Placement Records", icon: BarChart2 }] : []),
+    ...((placementRules && placementRules.length > 0) || placementPolicy?.generalRules?.length || placementPolicy?.registrationRules ? [{ id: "rules", label: "Placement Rules", icon: AlertTriangle }] : []),
+    ...(galleryOverviewText || (galleryImages && galleryImages.length > 0) || (achievers && achievers.length > 0) || (recruitersData && recruitersData.length > 0) ? [{ id: "gallery", label: "Placement Gallery", icon: ImageIcon }] : []),
   ];
 
   return (
@@ -155,8 +155,8 @@ const PlacementDashboard = () => {
       <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
         {/* Header Hero */}
         <BannerSection
-          title={hero.title || "SoICT Placement Cell"}
-          subtitle={hero.subtitle || "School of Information and Communication Technology"}
+          title={hero.title || `${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Cell`}
+          subtitle={hero.subtitle || placementData?.schoolName || "Gautam Buddha University"}
           bgTheme={hero.bgTheme || 3}
         />
 
@@ -206,7 +206,7 @@ const PlacementDashboard = () => {
                 >
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit border-b border-slate-100 pb-3 flex items-center gap-2">
                     <Info className="w-6 h-6 text-purple-600" />
-                    Placement Overview | SoICT
+                    Placement Overview | {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()}
                   </h2>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium space-y-4 whitespace-pre-line">
                     {overviewText}
@@ -264,7 +264,7 @@ const PlacementDashboard = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="bg-purple-50/50 p-5 rounded-xl border border-purple-100/60 space-y-2">
                       <h3 className="text-base font-bold text-purple-900">
-                        {missionObjective.aboutTitle || "About USICT CRC"}
+                        {missionObjective.aboutTitle || `About ${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Cell`}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                         {missionObjective.aboutText}
@@ -294,7 +294,7 @@ const PlacementDashboard = () => {
                       <AlertTriangle className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold font-outfit text-slate-900">SoICT Notice Board & Drive Alerts</h3>
+                      <h3 className="text-lg font-bold font-outfit text-slate-900">{placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Notice Board & Drive Alerts</h3>
                       <p className="text-xs text-slate-500">Latest announcements from Corporate Relation Cell</p>
                     </div>
                   </div>
@@ -317,7 +317,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT BROCHURE SECTION */}
-          {(activeTab === "all" || activeTab === "brochure") && (
+          {(activeTab === "all" || activeTab === "brochure") && brochure && brochure.link && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -336,7 +336,7 @@ const PlacementDashboard = () => {
                   <div className="w-full h-[450px] sm:h-[700px] md:h-[850px] lg:h-[950px] rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-slate-100">
                     <iframe
                       src={brochure.link.includes("drive.google.com") ? brochure.link.replace(/\/view(\?.*)?$/, "/preview") : brochure.link}
-                      title="SoICT Placement Brochure PDF"
+                      title={`${placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Brochure PDF`}
                       className="w-full h-full border-0"
                     />
                   </div>
@@ -347,7 +347,7 @@ const PlacementDashboard = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-gradient-to-r from-purple-800 to-indigo-800 text-white font-bold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm shadow-md hover:from-purple-900 hover:to-indigo-900 transition-all text-center leading-snug"
                     >
-                      <FileText className="w-4 h-4 shrink-0" /> View / Download SoICT Placement Brochure (2025-26) PDF
+                      <FileText className="w-4 h-4 shrink-0" /> View / Download {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Brochure PDF
                     </a>
                   </div>
                 </div>
@@ -356,7 +356,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* FOR RECRUITERS SECTION */}
-          {(activeTab === "all" || activeTab === "recruiter") && (
+          {(activeTab === "all" || activeTab === "recruiter") && (ourObjective || whyGbu || (placementGuidelines && placementGuidelines.length > 0) || recruiterFormUrl || (coordinators && coordinators.length > 0)) && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -417,7 +417,7 @@ const PlacementDashboard = () => {
                       Corporate Recruiter Interest Form
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                      Interested in hiring from SoICT Gautam Buddha University? Submit your campus recruitment request online.
+                      Interested in hiring from {placementData?.schoolName || (shortCode || "SOICT").toUpperCase()} Gautam Buddha University? Submit your campus recruitment request online.
                     </p>
                   </div>
                   <a
@@ -688,7 +688,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT RULES SECTION */}
-          {(activeTab === "all" || activeTab === "rules") && (
+          {(activeTab === "all" || activeTab === "rules") && (placementRules?.length > 0 || placementPolicy?.generalRules?.length > 0 || placementPolicy?.registrationRules) && (
             <motion.section
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -697,10 +697,10 @@ const PlacementDashboard = () => {
               <div className="text-center max-w-2xl mx-auto space-y-2">
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit flex items-center justify-center gap-2">
                   <ShieldAlert className="w-6 h-6 text-amber-500" />
-                  SoICT Placement Policy & Rules
+                  {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Placement Policy & Rules
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  Mandatory guidelines and regulations for all participating SoICT students
+                  Mandatory guidelines and regulations for all participating {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} students
                 </p>
               </div>
 
@@ -831,7 +831,7 @@ const PlacementDashboard = () => {
                 {placementPolicy?.codeOfConduct && (
                   <div className="bg-purple-50/50 p-4 sm:p-5 rounded-xl border border-purple-100 space-y-3">
                     <h3 className="text-sm font-bold text-purple-900 flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-purple-600" /> SoICT Code of Conduct in Campus Drives
+                      <CheckCircle className="w-4 h-4 text-purple-600" /> {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()} Code of Conduct in Campus Drives
                     </h3>
                     {placementPolicy.codeOfConduct.intro && (
                       <p className="text-xs text-purple-800 font-medium">
@@ -850,7 +850,7 @@ const PlacementDashboard = () => {
           )}
 
           {/* PLACEMENT GALLERY SECTION */}
-          {(activeTab === "all" || activeTab === "gallery") && (
+          {(activeTab === "all" || activeTab === "gallery") && (galleryOverviewText || (galleryImages && galleryImages.length > 0) || (achievers && achievers.length > 0) || (recruitersData && recruitersData.length > 0)) && (
             <div className="space-y-8">
               {/* Gallery Overview */}
               {galleryOverviewText && (
@@ -861,7 +861,7 @@ const PlacementDashboard = () => {
                 >
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-outfit flex items-center gap-2">
                     <ImageIcon className="w-6 h-6 text-purple-600" />
-                    Gallery Overview | SoICT
+                    Gallery Overview | {placementData?.schoolCode || (shortCode || "SOICT").toUpperCase()}
                   </h2>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium whitespace-pre-line">
                     {galleryOverviewText}

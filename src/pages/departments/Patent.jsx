@@ -250,12 +250,58 @@ export default function Patents() {
           </div>
         </div>
 
-        {/* Grid of Patents */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {filteredPatents.map((patent) => (
-            <PatentCard key={patent.id} patent={patent} />
-          ))}
-        </div>
+        {/* Patents View: Render Table if patent.sno exists, else Card Grid */}
+        {filteredPatents.some((p) => p.sno !== undefined) ? (
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                  <tr>
+                    <th className="py-3.5 px-4 w-16 text-center">Sl. No.</th>
+                    <th className="py-3.5 px-4 text-center w-28">Status</th>
+                    <th className="py-3.5 px-4">Inventor/s Name</th>
+                    <th className="py-3.5 px-4">Title of the Patent</th>
+                    <th className="py-3.5 px-4">Applicant/s Name</th>
+                    <th className="py-3.5 px-4 text-center w-28">Filed Date</th>
+                    <th className="py-3.5 px-4 text-center w-36">Published / Granted Date</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200/80 font-medium">
+                  {filteredPatents.map((p, idx) => (
+                    <tr key={p.id || idx} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3 px-4 text-center font-bold text-slate-500">{p.sno || idx + 1}</td>
+                      <td className="py-3 px-4 text-center">
+                        <span
+                          className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                            p.status?.toLowerCase() === "granted"
+                              ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                              : p.status?.toLowerCase() === "published"
+                              ? "bg-blue-100 text-blue-800 border border-blue-200"
+                              : "bg-purple-100 text-purple-800 border border-purple-200"
+                          }`}
+                        >
+                          {p.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 font-semibold text-slate-800">{p.inventors || "—"}</td>
+                      <td className="py-3 px-4 font-bold text-slate-900 leading-snug">{p.title}</td>
+                      <td className="py-3 px-4 text-slate-700">{p.applicant || "—"}</td>
+                      <td className="py-3 px-4 text-center font-semibold text-slate-600">{p.filedDate || "—"}</td>
+                      <td className="py-3 px-4 text-center font-semibold text-slate-600">{p.publishedDate || "—"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          /* Grid of Patents Fallback */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            {filteredPatents.map((patent) => (
+              <PatentCard key={patent.id} patent={patent} />
+            ))}
+          </div>
+        )}
 
         {filteredPatents.length === 0 && (
           <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">

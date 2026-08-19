@@ -29,6 +29,12 @@ const LaboratoryCard = ({ lab, index }) => {
           {lab.name}
         </h3>
 
+        {lab.description && (
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+            {lab.description}
+          </p>
+        )}
+
         {(lab.faculty || lab.support) && (
           <div className="space-y-2.5 pt-3 border-t border-gray-100 text-sm mt-auto">
             {lab.faculty && (

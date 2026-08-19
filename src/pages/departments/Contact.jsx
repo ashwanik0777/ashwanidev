@@ -22,7 +22,7 @@ const ContactCard = ({ children, className = "" }) => (
 );
 
 // Contact Page Content Component
-const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
+const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directory }) => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
       {/* Hero Section */}
@@ -109,6 +109,63 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
                   </div>
                 </ContactCard>
               ))}
+            </div>
+          </section>
+        )}
+
+        {/* Directory Section */}
+        {directory && directory.length > 0 && (
+          <section className="space-y-6 max-w-5xl mx-auto">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
+                Faculty & Staff Directory
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+                Direct contact details, room numbers, and extensions
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                  <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                    <tr>
+                      <th className="py-3.5 px-4 text-center">S.No.</th>
+                      <th className="py-3.5 px-4">Name</th>
+                      <th className="py-3.5 px-4">Designation</th>
+                      <th className="py-3.5 px-4 text-center">Room No.</th>
+                      <th className="py-3.5 px-4 text-center">Landline</th>
+                      <th className="py-3.5 px-4 text-center">Mobile No.</th>
+                      <th className="py-3.5 px-4">Email ID</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200/80 font-medium">
+                    {directory.map((item, idx) => (
+                      <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-3 px-4 text-center font-semibold text-slate-500">{item.sno || idx + 1}</td>
+                        <td className="py-3 px-4 font-bold text-slate-900">{item.name || "—"}</td>
+                        <td className="py-3 px-4 text-slate-700 font-medium">{item.designation || "—"}</td>
+                        <td className="py-3 px-4 text-center font-mono text-slate-700">{item.roomNo || item.room || "—"}</td>
+                        <td className="py-3 px-4 text-center font-mono text-slate-700">{item.landline || item.ext || "—"}</td>
+                        <td className="py-3 px-4 text-center font-semibold text-purple-700">
+                          {item.mobile || item.phone ? (
+                            <a href={`tel:${(item.mobile || item.phone).toString().replace(/\s+/g, '')}`} className="hover:underline">
+                              {item.mobile || item.phone}
+                            </a>
+                          ) : "—"}
+                        </td>
+                        <td className="py-3 px-4 text-purple-700">
+                          {item.email ? (
+                            <a href={`mailto:${item.email}`} className="hover:underline">
+                              {item.email}
+                            </a>
+                          ) : "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
         )}
@@ -361,6 +418,7 @@ const ContactPage = () => {
       officeHours={contactData.officeHours}
       generalInfo={contactData.generalInfo}
       deanInfo={contactData.deanInfo}
+      directory={contactData.directory}
     />
   );
 };

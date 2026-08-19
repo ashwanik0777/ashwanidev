@@ -8,6 +8,9 @@ export const legalAidData = {
     subtitle: "Equal Justice & Free Legal Aid under Article 39A of the Constitution of India in collaboration with District Legal Services Authority (DLSA).",
     bgTheme: 9,
   },
+  bookletUrl: "https://docs.google.com/presentation/d/1OISAsYccvhiKYRtL133q2Dc536-WBl3a/edit?usp=sharing&ouid=104470967123455199658&rtpof=true&sd=true",
+  bookletTitle: "Legal Aid Booklet (Presentation & Reference Document)",
+
   overviewSection: {
     title: "Overview & Constitutional Mandate",
     description: "The School of Law, Justice & Governance has established the Legal Aid Centre (LAC) in collaboration with District Legal Services Authority (DLSA) as an integral part of the B.A. LL.B. course curriculum.",

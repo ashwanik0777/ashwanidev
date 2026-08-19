@@ -75,8 +75,40 @@ const GenericCentrePage = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
             
+            {/* Legal Aid Booklet Download Card */}
+            {data.bookletUrl && (
+              <div className="p-6 rounded-3xl bg-gradient-to-r from-purple-50 via-white to-purple-50 border border-purple-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl shrink-0 font-bold">
+                    📖
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                      Official Document
+                    </span>
+                    <h3 className="text-base sm:text-lg font-bold text-slate-900 font-outfit mt-1">
+                      {data.bookletTitle || "Legal Aid Booklet"}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                      Click to view and download the official Legal Aid Booklet presentation reference file.
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={data.bookletUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 shrink-0 self-stretch sm:self-auto justify-center"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Download Legal Aid Booklet</span>
+                </a>
+              </div>
+            )}
+
             {/* Overview & Objectives */}
             {data.overviewSection && (
+
               <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
                 <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
                   <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">

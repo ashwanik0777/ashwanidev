@@ -184,7 +184,7 @@ const Navbar = () => {
         // { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
         // { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
         { label: "SBSC Board of Studies", href: routes.about.board },
-        { label: "SBSC Staff Members", href: routes.about.staff },
+        // { label: "SBSC Staff Members", href: routes.about.staff },
         { label: "SBSC Activities", href: routes.about.activities },
       ];
     }

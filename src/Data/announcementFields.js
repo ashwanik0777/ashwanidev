@@ -130,7 +130,6 @@ export const ANNOUNCEMENT_FIELDS = {
     { key: "title", label: "Newsletter Title", required: true },
     { key: "date", label: "Published Date", type: "date", required: true },
     { key: "coverImage", label: "Cover Image URL (Portrait)", required: true },
-    { key: "description", label: "Description", type: "textarea", required: true },
     { key: "englishPdfLink", label: "English PDF Link", required: true },
     { key: "hindiPdfLink", label: "Hindi PDF Link", required: true },
   ],

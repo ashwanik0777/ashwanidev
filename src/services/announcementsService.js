@@ -144,8 +144,8 @@ const normalizeNewsletter = (item, index) => ({
   date: pickDate(item, DATE_KEYS),
   coverImage: String(item?.coverImage || item?.coverImageUrl || item?.cover_image_url || "").trim(),
   description: String(item?.description || item?.excerpt || "").trim(),
-  englishPdfLink: String(item?.englishPdfLink || item?.pdfLink || "").trim(),
-  hindiPdfLink: String(item?.hindiPdfLink || "").trim(),
+  englishPdfLink: String(item?.englishPdfLink || item?.english_pdf_url || item?.pdfLink || item?.pdfUrl || "").trim(),
+  hindiPdfLink: String(item?.hindiPdfLink || item?.hindi_pdf_url || "").trim(),
   schoolName: getSchoolLabel(item),
   level: String(item?.level || "").trim(),
 });

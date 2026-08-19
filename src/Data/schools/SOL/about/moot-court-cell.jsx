@@ -1,43 +1,36 @@
 export const mootCourtData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
-  heading: "SLJG Moot Court Cell",
+  heading: "Moot Court | SOLJG",
   hero: {
-    title: "Moot Court Cell",
-    subtitle: "Developing advocacy skills, legal reasoning, and courtroom expertise through simulated court proceedings and national competitions",
+    title: "Moot Court | SOLJG",
+    subtitle: "Oral proceedings, advocacy training, and courtroom simulation under Bar Council of India standards.",
     bgTheme: 9,
   },
   about: {
-    visionTitle: "Our Vision",
-    visionDescription: [
-      "To develop outstanding advocates with exceptional skills in legal argumentation, courtroom demeanor, and persuasive advocacy.",
-      "The Moot Court Cell aims to provide every law student with practical courtroom experience, preparing them for successful careers in litigation, judiciary, and legal practice.",
-    ],
-    missionTitle: "Our Mission",
-    missionPoints: [
-      "Organize intra-school and national moot court competitions regularly",
-      "Train students in memorial drafting, oral argumentation, and court procedures",
-      "Host the prestigious P.N. Mathur Memorial National Moot Court Competition annually",
-      "Facilitate participation of students in external moot court competitions across India",
-      "Develop research and analytical skills through complex legal problem-solving",
-    ],
-    storyTitle: "Our Story",
-    storyText: "The Moot Court Cell was established alongside the School of Law to provide students with practical courtroom experience. Over the years, our students have participated in and won accolades at various national and international moot court competitions, establishing GBU as a competitive force in the moot court circuit.",
-    whatWeDoTitle: "What We Do",
-    whatWeDoText: "The Cell organizes the annual P.N. Mathur Memorial National Moot Court Competition, conducts regular intra-school moot court sessions, provides training in memorial writing and oral advocacy, and prepares teams for participation in external competitions including the Jessup International Moot Court and various national-level events.",
-    commitmentTitle: "Our Commitment",
-    commitmentText: "We are committed to ensuring every law student at GBU develops strong advocacy skills and gains practical courtroom experience before graduation.",
-    photos: ["https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800"],
+    storyTitle: "Overview",
+    storyText: `Moot Court basically means a replica of a real court where legal proceedings and trials take place and thus it is also known as a Mock Court. Moot Court is a form of an oral proceeding similar to that of a court proceeding, practiced mainly in institutions and universities where the law as a subject is taught to see how efficient a student is in fighting an argument based on law. It aims to provide a platform for students to inculcate and enhance advocacy skills.
+
+The school has established Moot Court as a part of course curriculum in accordance with requirement of Bar Council of India. BCI requires that every student has to do at least three moot courts in a year. The moot court work will be on assigned problems and it will be evaluated with marks. “Moot Court” has been added as a subject to the curriculum of the students so that they get prepared and groomed in a proper manner as a lawyer before they complete their degree.`,
+    whatWeDoTitle: "Moot Court Society",
+    whatWeDoText: `Moot Court Society at the School of Law, Justice and Governance is faculty and student-run organization dedicated for providing practical experience to law students in legal advocacy, research, writing and oral argumentation. The goal of the society is to foster critical thinking, legal analysis, and teamwork in the students by the means of simulated legal proceedings in a mock court setting.
+
+The society hosts numerous competitions and events where teams argue on hypothetical cases before a panel of judges, majorly consisting of legal professionals, faculty members, or alumni. These cases are based on contemporary legal issues or the latest judgements and requires students to analyze legal statutes, precedents, and arguments from both sides of the case.
+
+In preparation for these regular competitions, students work closely with their teammates and coaches to conduct extensive legal research, draft written briefs, and practice oral arguments.
+
+Workshops, seminars, and other educational events are also organized to support students overall development and growth of legal skills and knowledge.`,
+    commitmentTitle: "National Moot Court Competition",
+    commitmentText: `The School conducted National Moot Court Competition which was graced by Attorney General of India, Ld. R Venkataramani, Hon'ble Mr. Justice Bhushan Ramkrishna Gavai, Judge, Supreme Court of India. Hon'ble Mr. Justice Sanjeev Khanna, Judge, Supreme Court of India. Hon'ble Mr. Justice Jasmeet Singh, Judge, Delhi High Court, Hon'ble Mr. Justice Amit Bansal, Judge, Delhi High Court, Hon’ble Mr. Justice Manoj Kumar Ohri, Judge, Delhi High Court and Senior Advocates (Designate) of the Supreme Court and High Courts.`,
   },
-  facilities: [
-    { title: "Moot Court Hall", description: "A purpose-built courtroom with judge's bench, counsel tables, witness box, and gallery seating for 100+ spectators. Equipped with audio-visual recording for performance review.", image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800" },
-    { title: "Memorial Drafting Lab", description: "Dedicated computer lab with legal databases (SCC Online, Manupatra, LexisNexis) for memorial research and drafting.", image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800" },
-    { title: "Practice Chambers", description: "Small group rooms for teams to practice oral arguments, receive faculty feedback, and prepare for competitions.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" },
-  ],
-  keyActivities: [
-    { title: "P.N. Mathur Memorial National Moot Court Competition", description: "Annual flagship national competition attracting 30+ law schools from across India. Features problems from constitutional, criminal, and international law.", date: "March each year" },
-    { title: "Intra-School Moot Court Rounds", description: "Monthly practice sessions and semester-end moot court assessments for all B.A. LL.B. students as part of clinical legal education.", date: "Monthly" },
-    { title: "Memorial Writing Workshop", description: "Intensive workshops on legal research methodology, memorial structure, citation formats, and persuasive legal writing.", date: "August & January" },
-    { title: "External Competition Preparation", description: "Dedicated training camps for students selected to represent GBU at national moot court competitions.", date: "Throughout the year" },
-  ],
+  contact: {
+    title: "Contact & Coordinators",
+    coordinators: [
+      { name: "Dr. Mamta Sharma", designation: "Assistant Professor of Law" },
+      { name: "Dr. Rama Sharma", designation: "Assistant Professor of Law" },
+      { name: "Mr. Gaurav Yadav", designation: "Research Scholar" },
+    ],
+    email: "mcs@gbu.ac.in",
+  },
 };
+

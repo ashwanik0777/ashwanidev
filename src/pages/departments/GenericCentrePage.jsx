@@ -130,6 +130,40 @@ const GenericCentrePage = () => {
           </div>
         </section>
       )}
+
+      {/* Contact & Faculty Coordinators Section */}
+      {data.contact && (
+        <section className="py-12 px-6 bg-slate-50 border-t border-slate-200">
+          <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md border border-slate-200">
+            <h2 className="text-2xl font-bold text-slate-900 mb-6 font-outfit text-center">
+              {data.contact.title || "Contact & Faculty Coordinators"}
+            </h2>
+            {data.contact.coordinators && data.contact.coordinators.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                  Faculty Coordinators
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {data.contact.coordinators.map((c, i) => (
+                    <div key={i} className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <div className="font-bold text-slate-900 text-sm">{c.name}</div>
+                      <div className="text-xs text-purple-700 font-medium mt-0.5">{c.role || c.designation}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {data.contact.email && (
+              <div className="text-center pt-4 border-t border-slate-100">
+                <span className="text-xs font-semibold uppercase text-slate-400">Email: </span>
+                <a href={`mailto:${data.contact.email}`} className="text-purple-700 font-bold hover:underline text-sm">
+                  {data.contact.email}
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

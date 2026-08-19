@@ -82,10 +82,24 @@ const ResearchPublications = ({ publications = [] }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filtered = publications.filter((pub) => {
+    if (!searchTerm.trim()) return true;
     const term = searchTerm.toLowerCase();
-    return typeof pub === "string"
-      ? pub.toLowerCase().includes(term)
-      : (pub.citation && pub.citation.toLowerCase().includes(term));
+    if (typeof pub === "string") {
+      return pub.toLowerCase().includes(term);
+    }
+    const textToSearch = [
+      pub.citation,
+      pub.title,
+      pub.authors,
+      pub.journal,
+      pub.year,
+      pub.category,
+      pub.department,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return textToSearch.includes(term);
   });
 
   return (

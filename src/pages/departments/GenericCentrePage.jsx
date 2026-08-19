@@ -99,21 +99,21 @@ const GenericCentrePage = () => {
                   </div>
 
                   {data.overviewSection.bciBadge && (
-                    <div className="p-6 rounded-2xl bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-purple-800/40">
+                    <div className="p-6 rounded-2xl bg-purple-50/80 border border-purple-200/90 text-slate-900 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-300 shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center text-purple-700 shrink-0">
                           <ShieldCheck className="w-6 h-6" />
                         </div>
                         <div>
-                          <div className="text-amber-400 text-xs font-bold uppercase tracking-wider">
+                          <div className="text-purple-800 text-xs font-bold uppercase tracking-wider">
                             {data.overviewSection.bciBadge}
                           </div>
-                          <div className="text-sm sm:text-base font-semibold text-purple-100 mt-0.5">
+                          <div className="text-sm sm:text-base font-semibold text-slate-800 mt-0.5">
                             {data.overviewSection.bciText}
                           </div>
                         </div>
                       </div>
-                      <span className="px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold shrink-0">
+                      <span className="px-4 py-1.5 rounded-full bg-white text-purple-800 border border-purple-200 text-xs font-bold shrink-0 shadow-xs">
                         Mandatory Subject & 3 Evaluated Rounds / Year
                       </span>
                     </div>
@@ -168,15 +168,15 @@ const GenericCentrePage = () => {
             {/* National Competition & Dignitaries */}
             {data.nationalCompetitionSection && (
               <section className="space-y-8">
-                <div className="bg-gradient-to-r from-slate-950 via-purple-950 to-indigo-950 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-purple-900/50 space-y-8">
+                <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
                   <div className="text-center max-w-3xl mx-auto space-y-2">
-                    <span className="px-3.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-bold uppercase tracking-wider">
+                    <span className="px-3.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 text-xs font-bold uppercase tracking-wider">
                       Flagship National Event
                     </span>
-                    <h2 className="text-2xl sm:text-4xl font-extrabold font-outfit text-white tracking-tight mt-2">
+                    <h2 className="text-2xl sm:text-3xl font-extrabold font-outfit text-slate-900 tracking-tight mt-2">
                       {data.nationalCompetitionSection.title}
                     </h2>
-                    <p className="text-purple-200/90 text-sm sm:text-base font-normal">
+                    <p className="text-slate-500 text-sm sm:text-base font-medium">
                       {data.nationalCompetitionSection.subtitle}
                     </p>
                   </div>
@@ -185,18 +185,18 @@ const GenericCentrePage = () => {
                     {data.nationalCompetitionSection.dignitaries.map((d, idx) => (
                       <div
                         key={idx}
-                        className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/10 hover:border-amber-400/50 transition-all duration-300 space-y-2"
+                        className="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 space-y-2"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300 bg-amber-500/20 px-2.5 py-0.5 rounded border border-amber-400/30">
+                          <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
                             {d.badge}
                           </span>
-                          <Landmark className="w-4 h-4 text-purple-300" />
+                          <Landmark className="w-4 h-4 text-purple-600" />
                         </div>
-                        <div className="font-bold text-white text-base font-outfit">
+                        <div className="font-bold text-slate-900 text-base font-outfit">
                           {d.name}
                         </div>
-                        <div className="text-xs text-purple-200/80 font-medium">
+                        <div className="text-xs text-slate-600 font-medium">
                           {d.role}
                         </div>
                       </div>
@@ -204,7 +204,7 @@ const GenericCentrePage = () => {
                   </div>
 
                   {data.nationalCompetitionSection.extraNote && (
-                    <div className="text-center pt-4 border-t border-white/10 text-xs sm:text-sm text-purple-200/90 font-medium italic">
+                    <div className="text-center pt-4 border-t border-slate-100 text-xs sm:text-sm text-slate-500 font-medium italic">
                       ✨ {data.nationalCompetitionSection.extraNote}
                     </div>
                   )}

@@ -116,7 +116,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: true,
+    enabled: false,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",

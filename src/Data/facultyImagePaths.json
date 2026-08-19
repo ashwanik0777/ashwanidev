@@ -654,12 +654,6 @@
     "path": "/assets/Faculty/Neeta.jpg"
   },
   {
-    "id": "SOICT-F0007",
-    "facultyName": "Dr. Neeta Singh",
-    "filename": "Neeta.png",
-    "path": "/assets/Faculty/Neeta.png"
-  },
-  {
     "id": "SOM-F0009",
     "facultyName": "Dr. Neeti Rana",
     "filename": "Neeti.jpg",
@@ -808,12 +802,6 @@
     "facultyName": "Rajeev Varshney",
     "filename": "Rajeev Varshney.jpg",
     "path": "/assets/Faculty/Rajeev Varshney.jpg"
-  },
-  {
-    "id": "SOICT-F0010",
-    "facultyName": "Dr. Rajesh Mishra",
-    "filename": "Rajesh Mishra 2.jpg",
-    "path": "/assets/Faculty/Rajesh Mishra 2.jpg"
   },
   {
     "id": "SOE-F0023",
@@ -970,12 +958,6 @@
     "facultyName": "Dr. Dinesh Kumar Sharma",
     "filename": "Sanjay Kumar Sharma.jpg",
     "path": "/assets/Faculty/Sanjay Kumar Sharma.jpg"
-  },
-  {
-    "id": "SOBT-F0016",
-    "facultyName": "Dr. Eti Sharma",
-    "filename": "Sanjay Sharma.jpg",
-    "path": "/assets/Faculty/Sanjay Sharma.jpg"
   },
   {
     "id": "SOE-F0001",
@@ -1314,6 +1296,12 @@
     "path": "/assets/Faculty/SOE-F0023.jpg"
   },
   {
+    "id": "SOE-F0024",
+    "facultyName": "Ar. Alok Verma",
+    "filename": "SOE-F0024 - Ar. Alok Verma.png",
+    "path": "/assets/Faculty/SOE-F0024 - Ar. Alok Verma.png"
+  },
+  {
     "id": "SOE-F0026",
     "facultyName": "Mr. Vikas Kumar",
     "filename": "SOE-F0026.jpg",
@@ -1436,8 +1424,26 @@
   {
     "id": "SOICT-F0001",
     "facultyName": "Dr Gaurav Kumar",
+    "filename": "SOICT-F0001.jpeg",
+    "path": "/assets/Faculty/SOICT-F0001.jpeg"
+  },
+  {
+    "id": "SOICT-F0001",
+    "facultyName": "Dr Gaurav Kumar",
     "filename": "SOICT-F0001.jpg",
     "path": "/assets/Faculty/SOICT-F0001.jpg"
+  },
+  {
+    "id": "SOICT-F0002",
+    "facultyName": "Raju Pal",
+    "filename": "SOICT-F0002.png",
+    "path": "/assets/Faculty/SOICT-F0002.png"
+  },
+  {
+    "id": "SOICT-F0003",
+    "facultyName": "Dr. Aarti Gautam Dinker",
+    "filename": "SOICT-F0003.jpeg",
+    "path": "/assets/Faculty/SOICT-F0003.jpeg"
   },
   {
     "id": "SOICT-F0003",
@@ -1448,14 +1454,38 @@
   {
     "id": "SOICT-F0004",
     "facultyName": "Dr. Rakesh Kumar",
+    "filename": "SOICT-F0004.jpeg",
+    "path": "/assets/Faculty/SOICT-F0004.jpeg"
+  },
+  {
+    "id": "SOICT-F0004",
+    "facultyName": "Dr. Rakesh Kumar",
     "filename": "SOICT-F0004.jpg",
     "path": "/assets/Faculty/SOICT-F0004.jpg"
+  },
+  {
+    "id": "SOICT-F0006",
+    "facultyName": "Mangal Das",
+    "filename": "SOICT-F0006.jpeg",
+    "path": "/assets/Faculty/SOICT-F0006.jpeg"
   },
   {
     "id": "SOICT-F0007",
     "facultyName": "Dr. Neeta Singh",
     "filename": "SOICT-F0007.jpg",
     "path": "/assets/Faculty/SOICT-F0007.jpg"
+  },
+  {
+    "id": "SOICT-F0007",
+    "facultyName": "Dr. Neeta Singh",
+    "filename": "SOICT-F0007.png",
+    "path": "/assets/Faculty/SOICT-F0007.png"
+  },
+  {
+    "id": "SOICT-F0008",
+    "facultyName": "Dr. Pradeep Tomar",
+    "filename": "SOICT-F0008.jpeg",
+    "path": "/assets/Faculty/SOICT-F0008.jpeg"
   },
   {
     "id": "SOICT-F0008",
@@ -1472,8 +1502,20 @@
   {
     "id": "SOICT-F0010",
     "facultyName": "Dr. Rajesh Mishra",
+    "filename": "SOICT-F0010.jpeg",
+    "path": "/assets/Faculty/SOICT-F0010.jpeg"
+  },
+  {
+    "id": "SOICT-F0010",
+    "facultyName": "Dr. Rajesh Mishra",
     "filename": "SOICT-F0010.jpg",
     "path": "/assets/Faculty/SOICT-F0010.jpg"
+  },
+  {
+    "id": "SOICT-F0011",
+    "facultyName": "Dr. Vidushi Sharma",
+    "filename": "SOICT-F0011.jpeg",
+    "path": "/assets/Faculty/SOICT-F0011.jpeg"
   },
   {
     "id": "SOICT-F0011",
@@ -1484,8 +1526,20 @@
   {
     "id": "SOICT-F0012",
     "facultyName": "Dr. Navaid Zafar Rizvi",
+    "filename": "SOICT-F0012.jpeg",
+    "path": "/assets/Faculty/SOICT-F0012.jpeg"
+  },
+  {
+    "id": "SOICT-F0012",
+    "facultyName": "Dr. Navaid Zafar Rizvi",
     "filename": "SOICT-F0012.jpg",
     "path": "/assets/Faculty/SOICT-F0012.jpg"
+  },
+  {
+    "id": "SOICT-F0013",
+    "facultyName": "Dr. Anurag Singh Baghel",
+    "filename": "SOICT-F0013.jpeg",
+    "path": "/assets/Faculty/SOICT-F0013.jpeg"
   },
   {
     "id": "SOICT-F0013",
@@ -1496,8 +1550,20 @@
   {
     "id": "SOICT-F0014",
     "facultyName": "Dr. Priyanka Goyal",
+    "filename": "SOICT-F0014.jpeg",
+    "path": "/assets/Faculty/SOICT-F0014.jpeg"
+  },
+  {
+    "id": "SOICT-F0014",
+    "facultyName": "Dr. Priyanka Goyal",
     "filename": "SOICT-F0014.jpg",
     "path": "/assets/Faculty/SOICT-F0014.jpg"
+  },
+  {
+    "id": "SOICT-F0015",
+    "facultyName": "SOICT-F0015",
+    "filename": "SOICT-F0015.jpg",
+    "path": "/assets/Faculty/SOICT-F0015.jpg"
   },
   {
     "id": "SOICT-F0016",
@@ -1512,16 +1578,64 @@
     "path": "/assets/Faculty/SOICT-F0017.png"
   },
   {
+    "id": "SOICT-F0018",
+    "facultyName": "Mr. Kartikeya Tiwari",
+    "filename": "SOICT-F0018.jpg",
+    "path": "/assets/Faculty/SOICT-F0018.jpg"
+  },
+  {
     "id": "SOICT-F0019",
     "facultyName": "Dr. Arpit Bhardwaj",
     "filename": "SOICT-F0019.jpg",
     "path": "/assets/Faculty/SOICT-F0019.jpg"
   },
   {
+    "id": "SOICT-F0020",
+    "facultyName": "Dr. Nitesh Singh Bhati",
+    "filename": "SOICT-F0020.jpeg",
+    "path": "/assets/Faculty/SOICT-F0020.jpeg"
+  },
+  {
+    "id": "SOICT-F0021",
+    "facultyName": "Dr. Shiraz Khurana",
+    "filename": "SOICT-F0021.jpeg",
+    "path": "/assets/Faculty/SOICT-F0021.jpeg"
+  },
+  {
+    "id": "SOICT-F0022",
+    "facultyName": "Dr. Anika",
+    "filename": "SOICT-F0022.jpeg",
+    "path": "/assets/Faculty/SOICT-F0022.jpeg"
+  },
+  {
+    "id": "SOICT-F0023",
+    "facultyName": "Dr. Rakesh Kumar",
+    "filename": "SOICT-F0023.jpg",
+    "path": "/assets/Faculty/SOICT-F0023.jpg"
+  },
+  {
     "id": "SOICT-F0024",
     "facultyName": "Dr. Akash Kumar",
     "filename": "SOICT-F0024.jpg",
     "path": "/assets/Faculty/SOICT-F0024.jpg"
+  },
+  {
+    "id": "SOICT-F0025",
+    "facultyName": "Dr. Maneet Singh",
+    "filename": "SOICT-F0025.jpeg",
+    "path": "/assets/Faculty/SOICT-F0025.jpeg"
+  },
+  {
+    "id": "SOICT-F0025",
+    "facultyName": "Dr. Maneet Singh",
+    "filename": "SOICT-F0025.jpg",
+    "path": "/assets/Faculty/SOICT-F0025.jpg"
+  },
+  {
+    "id": "SOICT-F0026",
+    "facultyName": "Dr. Vivek Chaudhary",
+    "filename": "SOICT-F0026.jpg",
+    "path": "/assets/Faculty/SOICT-F0026.jpg"
   },
   {
     "id": "SOL-F0002",
@@ -1906,12 +2020,6 @@
     "facultyName": "Dr. Vikrant Nain",
     "filename": "Vikrant.jpg",
     "path": "/assets/Faculty/Vikrant.jpg"
-  },
-  {
-    "id": "",
-    "facultyName": "Vimlesh",
-    "filename": "Vimlesh.jpg",
-    "path": "/assets/Faculty/Vimlesh.jpg"
   },
   {
     "id": "SOM-F0009",

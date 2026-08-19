@@ -1,0 +1,57 @@
+export const racData = {
+  schoolCode: "SOL",
+  schoolName: "School of Law, Justice & Governance",
+  heading: "Research Advisory Committee (RAC) | SOLJG",
+  customLayout: "racCommittee",
+  hero: {
+    title: "Research Advisory Committee (RAC)",
+    subtitle: "Research oversight, Ph.D. guidance, and legal academic evaluation committee for School of Law, Justice & Governance.",
+    bgTheme: 9,
+  },
+  committeeSection: {
+    title: "Research Advisory Committee (RAC)",
+    subtitle: "Guiding legal research, Ph.D. scholars, and academic innovation at Gautam Buddha University.",
+    members: [
+      {
+        sNo: 1,
+        name: "Dean, School of Law, Justice & Governance",
+        designation: "Dean, SOLJG",
+        university: "Gautam Buddha University",
+        role: "Chairperson / Ex-Officio",
+        badge: "Leadership",
+      },
+      {
+        sNo: 2,
+        name: "Supervisor(s)",
+        designation: "Research Supervisor(s)",
+        university: "School of Law, Justice & Governance, GBU",
+        role: "Member(s)",
+        badge: "Internal Member",
+      },
+      {
+        sNo: 3,
+        name: "Head of the Department",
+        designation: "HoD, Law & Governance",
+        university: "School of Law, Justice & Governance, GBU",
+        role: "Member / Ex-Officio",
+        badge: "Department Head",
+      },
+      {
+        sNo: 4,
+        name: "Prof. Anurag Deep",
+        designation: "Professor of Law",
+        university: "Indian Law Institute, New Delhi",
+        role: "External Expert",
+        badge: "External Expert",
+      },
+      {
+        sNo: 5,
+        name: "Prof. Ashutosh Kumar Mishra",
+        designation: "Dean Academics",
+        university: "Dr. B.R. Ambedkar National Law University, Sonipat (Haryana)",
+        role: "External Expert",
+        badge: "External Expert",
+      },
+    ],
+  },
+};

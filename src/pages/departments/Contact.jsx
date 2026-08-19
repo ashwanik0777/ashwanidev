@@ -22,7 +22,7 @@ const ContactCard = ({ children, className = "" }) => (
 );
 
 // Contact Page Content Component
-const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directory }) => {
+const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directoryTable }) => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
       {/* Hero Section */}
@@ -114,61 +114,70 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
         )}
 
         {/* Directory Section */}
-        {directory && directory.length > 0 && (
-          <section className="space-y-6 max-w-5xl mx-auto">
-            <div className="text-center max-w-2xl mx-auto">
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
-                Faculty & Staff Directory
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
-                Direct contact details, room numbers, and extensions
-              </p>
-            </div>
+        {directory && directory.length > 0 && (() => {
+          const hasDesignation = directory.some((d) => d.designation);
+          const hasRoom = directory.some((d) => d.roomNo || d.room);
+          const hasEmail = directory.some((d) => d.email);
+          const hasExt = directory.some((d) => d.ext || d.landline);
 
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                  <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
-                    <tr>
-                      <th className="py-3.5 px-4 text-center">S.No.</th>
-                      <th className="py-3.5 px-4">Name</th>
-                      <th className="py-3.5 px-4">Designation</th>
-                      <th className="py-3.5 px-4 text-center">Room No.</th>
-                      <th className="py-3.5 px-4 text-center">Landline</th>
-                      <th className="py-3.5 px-4 text-center">Mobile No.</th>
-                      <th className="py-3.5 px-4">Email ID</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-200/80 font-medium">
-                    {directory.map((item, idx) => (
-                      <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
-                        <td className="py-3 px-4 text-center font-semibold text-slate-500">{item.sno || idx + 1}</td>
-                        <td className="py-3 px-4 font-bold text-slate-900">{item.name || "—"}</td>
-                        <td className="py-3 px-4 text-slate-700 font-medium">{item.designation || "—"}</td>
-                        <td className="py-3 px-4 text-center font-mono text-slate-700">{item.roomNo || item.room || "—"}</td>
-                        <td className="py-3 px-4 text-center font-mono text-slate-700">{item.landline || item.ext || "—"}</td>
-                        <td className="py-3 px-4 text-center font-semibold text-purple-700">
-                          {item.mobile || item.phone ? (
-                            <a href={`tel:${(item.mobile || item.phone).toString().replace(/\s+/g, '')}`} className="hover:underline">
-                              {item.mobile || item.phone}
-                            </a>
-                          ) : "—"}
-                        </td>
-                        <td className="py-3 px-4 text-purple-700">
-                          {item.email ? (
-                            <a href={`mailto:${item.email}`} className="hover:underline">
-                              {item.email}
-                            </a>
-                          ) : "—"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+          return (
+            <section className="space-y-6 max-w-5xl mx-auto">
+              <div className="text-center max-w-2xl mx-auto">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
+                  Directory | SOM
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+                  Faculty and administrative direct phone numbers and extensions
+                </p>
               </div>
-            </div>
-          </section>
-        )}
+
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                      <tr>
+                        <th className="py-3.5 px-4 text-center w-16">S.No.</th>
+                        <th className="py-3.5 px-4">Name</th>
+                        {hasDesignation && <th className="py-3.5 px-4">Designation</th>}
+                        {hasRoom && <th className="py-3.5 px-4 text-center">Room No.</th>}
+                        <th className="py-3.5 px-4 text-center">Phone No.</th>
+                        {hasExt && <th className="py-3.5 px-4 text-center">Ext. No.</th>}
+                        {hasEmail && <th className="py-3.5 px-4">Email ID</th>}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-200/80 font-medium">
+                      {directory.map((item, idx) => (
+                        <tr key={idx} className="hover:bg-purple-50/30 transition-colors">
+                          <td className="py-3 px-4 text-center font-bold text-slate-400">#{item.sno || idx + 1}</td>
+                          <td className="py-3 px-4 font-bold text-slate-900 font-outfit">{item.name || "—"}</td>
+                          {hasDesignation && <td className="py-3 px-4 text-slate-700 font-medium">{item.designation || "—"}</td>}
+                          {hasRoom && <td className="py-3 px-4 text-center font-mono text-slate-700">{item.roomNo || item.room || "—"}</td>}
+                          <td className="py-3 px-4 text-center font-bold text-purple-700">
+                            {item.phone || item.mobile ? (
+                              <a href={`tel:${(item.phone || item.mobile).toString().replace(/\s+/g, '')}`} className="hover:underline">
+                                {item.phone || item.mobile}
+                              </a>
+                            ) : "—"}
+                          </td>
+                          {hasExt && <td className="py-3 px-4 text-center font-mono text-slate-700 font-semibold">{item.ext || item.landline || "—"}</td>}
+                          {hasEmail && (
+                            <td className="py-3 px-4 text-purple-700">
+                              {item.email ? (
+                                <a href={`mailto:${item.email}`} className="hover:underline">
+                                  {item.email}
+                                </a>
+                              ) : "—"}
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Dean Section */}
         {deanInfo && (
@@ -340,6 +349,37 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
           </section>
         )}
 
+        {/* Directory Table Section */}
+        {directoryTable && directoryTable.rows && directoryTable.rows.length > 0 && (
+          <section className="space-y-4 sm:space-y-6">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
+                {directoryTable.title || "Directory"}
+              </h2>
+            </div>
+            <ContactCard className="overflow-x-auto p-4 sm:p-6">
+              <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-200 bg-slate-100/70 text-slate-700 font-bold">
+                    <th className="p-3 rounded-l-lg">Name</th>
+                    <th className="p-3">Phone No.</th>
+                    <th className="p-3 rounded-r-lg">Ext. No.</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {directoryTable.rows.map((row, idx) => (
+                    <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="p-3 font-semibold text-slate-800">{row.name}</td>
+                      <td className="p-3 text-slate-600 font-medium">{row.phone}</td>
+                      <td className="p-3 text-purple-700 font-bold">{row.ext || "-"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </ContactCard>
+          </section>
+        )}
+
         {/* COE Contacts Section (If provided) */}
         {data && data.length > 0 && (
           <section className="space-y-4">
@@ -418,7 +458,7 @@ const ContactPage = () => {
       officeHours={contactData.officeHours}
       generalInfo={contactData.generalInfo}
       deanInfo={contactData.deanInfo}
-      directory={contactData.directory}
+      directoryTable={contactData.directoryTable || contactData.directory}
     />
   );
 };

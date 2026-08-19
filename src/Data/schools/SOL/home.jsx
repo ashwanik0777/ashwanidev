@@ -494,7 +494,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecruitersShowcase",
-    enabled: true,
+    enabled: false,
     position: 12,
     props: {
       recruitersData: [

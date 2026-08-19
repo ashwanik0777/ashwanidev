@@ -5,52 +5,48 @@
 export const laboratoriesData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Laboratories — SOVS",
-  subheading: "Explore our research and teaching laboratory facilities in applied sciences and food technology.",
+  heading: "Laboratories | SOVSAS",
+  subheading: "State-of-the-art teaching and research laboratory facilities across Chemistry, Physics, Mathematics, Food Science, and Environmental Science.",
   laboratories: [
-    {
-      name: "Applied Physics Laboratory",
-      faculty: "Dr. Ashish Kumar",
-      support: "Mr. Satendra Singh",
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
-      category: "Physics",
-    },
-    {
-      name: "Materials Science & Thin Film Research Laboratory",
-      faculty: "Dr. Vivek Kumar Shukla",
-      support: "Mr. Satendra Singh",
-      image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=800&q=80",
-      isNew: true,
-      category: "Physics",
-    },
-    {
-      name: "Applied Chemistry Laboratory",
-      faculty: "Dr. Jaya Maitra",
-      support: "Mr. Raj Kumar",
-      image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80",
-      category: "Chemistry",
-    },
-    {
-      name: "Environmental Science Research Lab",
-      faculty: "Dr. Bhaswati Banerjee",
-      support: "Mr. Sandeep Kumar",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80",
-      category: "Environmental Science",
-    },
-    {
-      name: "Food Processing & Engineering Lab",
-      faculty: "Dr. Mohd. Tashfeen Ashraf",
-      support: "Mrs. Reena Sharma",
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80",
-      isNew: true,
-      category: "Food Technology",
-    },
-    {
-      name: "Food Safety & Quality Testing Lab",
-      faculty: "Dr. Vinita Sharma",
-      support: "Mrs. Reena Sharma",
-      image: "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=800&q=80",
-      category: "Food Technology",
-    },
+    // Chemistry Laboratory
+    { sno: 1, name: "Undergraduate Laboratory", category: "Chemistry Laboratory" },
+    { sno: 2, name: "Post-graduation laboratory I", category: "Chemistry Laboratory" },
+    { sno: 3, name: "Post-graduation laboratory II", category: "Chemistry Laboratory" },
+    { sno: 4, name: "Advanced Chemistry Laboratory", category: "Chemistry Laboratory" },
+
+    // Physics Laboratory
+    { sno: 5, name: "Applied Physics Laboratory I", category: "Physics Laboratory" },
+    { sno: 6, name: "Applied Physics Laboratory II", category: "Physics Laboratory" },
+    { sno: 7, name: "Applied Physics Laboratory III", category: "Physics Laboratory" },
+
+    // Mathematics Laboratory
+    { sno: 8, name: "Mathematics Laboratory I", category: "Mathematics Laboratory" },
+    { sno: 9, name: "Mathematics Laboratory II", category: "Mathematics Laboratory" },
+
+    // Food Science Laboratory
+    { sno: 10, name: "Food Processing and Technology Laboratory", category: "Food Science Laboratory" },
+    { sno: 11, name: "Advanced Food Analysis Laboratory", category: "Food Science Laboratory" },
+    { sno: 12, name: "Cereals Pulses and Oilseeds Laboratory", category: "Food Science Laboratory" },
+    { sno: 13, name: "Food Microbiology Laboratory", category: "Food Science Laboratory" },
+    { sno: 14, name: "Dairy Technology Laboratory", category: "Food Science Laboratory" },
+
+    // Environmental Science Laboratory
+    { sno: 15, name: "Environmental Laboratory I", category: "Environmental Science Laboratory" },
+    { sno: 16, name: "Environmental Laboratory II", category: "Environmental Science Laboratory" },
+
+    // Applied Chemistry Laboratory
+    { sno: 17, name: "Post Graduate Laboratory I", category: "Applied Chemistry Laboratory" },
+    { sno: 18, name: "Post Graduate Laboratory II", category: "Applied Chemistry Laboratory" },
+    { sno: 19, name: "Post Graduate Laboratory III", category: "Applied Chemistry Laboratory" },
+    { sno: 20, name: "Under Graduate Laboratory I", category: "Applied Chemistry Laboratory" },
+    { sno: 21, name: "Under Graduate Laboratory II", category: "Applied Chemistry Laboratory" },
+
+    // Applied Physics Laboratory
+    { sno: 22, name: "Post Graduate Laboratory I", category: "Applied Physics Laboratory" },
+    { sno: 23, name: "Post Graduate Laboratory II", category: "Applied Physics Laboratory" },
+    { sno: 24, name: "Post Graduate Laboratory III", category: "Applied Physics Laboratory" },
+    { sno: 25, name: "Under Graduate Laboratory I", category: "Applied Physics Laboratory" },
+    { sno: 26, name: "Under Graduate Laboratory II", category: "Applied Physics Laboratory" },
+    { sno: 27, name: "Under Graduate Laboratory III", category: "Applied Physics Laboratory" },
   ],
 };

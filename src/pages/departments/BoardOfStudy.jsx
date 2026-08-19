@@ -5,10 +5,14 @@ import BannerSection from "../../components/HeroBanner";
 const BoardOfStudies = ({ departments }) => {
   const getRoleBadge = (role) => {
     switch (role) {
+      case "Dean":
       case "Chairperson":
         return "bg-blue-100 text-blue-900 border border-blue-300";
+      case "Head of the Department":
       case "HoD":
         return "bg-emerald-100 text-emerald-900 border border-emerald-300";
+      case "Internal Member":
+        return "bg-teal-100 text-teal-900 border border-teal-300";
       case "External Expert":
       case "External Member":
         return "bg-purple-100 text-purple-900 border border-purple-300";

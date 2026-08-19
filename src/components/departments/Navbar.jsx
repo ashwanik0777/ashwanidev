@@ -247,7 +247,19 @@ const Navbar = () => {
   const getResearchItems = () => {
     const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
 
-    if (schoolCode === "SOBT" || schoolCode === "SOE" || schoolCode === "SOBSC") {
+    if (schoolCode === "SOBSC") {
+      return [
+        { label: "Research Area and Profile", href: routes.research.profile },
+        { label: "Training and Consultancy", href: routes.research.consultancy },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Publications", href: routes.research.projects },
+        { label: "Research Grants", href: routes.research.grants },
+        { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
+      ];
+    }
+
+    if (schoolCode === "SOBT" || schoolCode === "SOE") {
       return [
         { label: "Research Area and Profile", href: routes.research.profile },
         // { label: "Training and Consultancy", href: routes.research.consultancy },

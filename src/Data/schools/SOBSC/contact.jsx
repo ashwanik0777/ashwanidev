@@ -27,11 +27,7 @@ export const contactData = {
       },
     ],
   },
-  officeHours: [
-    { day: "Monday - Friday", time: "9:00 AM - 5:00 PM" },
-    { day: "Saturday", time: "9:00 AM - 1:00 PM" },
-    { day: "Sunday", time: "Closed" },
-  ],
+  officeHours: null,
   departments: [
     {
       name: "Buddhist Philosophy & Ethics",
@@ -61,28 +57,7 @@ export const contactData = {
       color: "from-amber-500 to-yellow-600",
     },
   ],
-  coeContacts: [
-    {
-      name: "Centre for Buddhist Studies",
-      department: "School of Buddhist Studies & Civilization, GBU",
-      address: "Greater Noida, Gautam Buddh Nagar, PIN - 201312",
-      email: "centre.buddhist@gbu.ac.in",
-      phone: "0120-234-9901",
-      socials: { linkedin: "#", twitter: "#", instagram: "#", youtube: "#" },
-      color: "from-yellow-500 to-orange-600",
-      textColor: "text-yellow-600",
-    },
-    {
-      name: "Meditation & Mindfulness Centre",
-      department: "School of Buddhist Studies & Civilization, GBU",
-      address: "Greater Noida, Gautam Buddh Nagar, PIN - 201312",
-      email: "meditation.centre@gbu.ac.in",
-      phone: "0120-234-9906",
-      socials: { linkedin: "#", twitter: "#", instagram: "#", youtube: "#" },
-      color: "from-orange-500 to-amber-600",
-      textColor: "text-orange-600",
-    },
-  ],
+  coeContacts: null,
   directory: [
     {
       sno: 1,

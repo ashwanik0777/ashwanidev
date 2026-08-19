@@ -186,7 +186,7 @@ const EventGallerySlider = ({ events = [] }) => {
 
 const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallbackEvents = [] }) => {
   const scrollRef = useRef(null);
-  const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements());
+  const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements(schoolCode));
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
   // Auto-scroll effect
@@ -223,7 +223,7 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
       }
 
       if (mounted) {
-        setAnnouncements(getSchoolAnnouncements());
+        setAnnouncements(getSchoolAnnouncements(schoolCode));
       }
     };
 
@@ -236,7 +236,7 @@ const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallb
       window.removeEventListener("announcements-data-updated", loadAnnouncements);
       window.removeEventListener("focus", loadAnnouncements);
     };
-  }, []);
+  }, [schoolCode]);
 
   const notices = filterBySchool(announcements.notices || [], schoolMeta);
   const events = filterBySchool(announcements.events || [], schoolMeta);

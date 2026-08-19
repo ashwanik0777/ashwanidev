@@ -284,18 +284,20 @@ const AnnouncementManager = ({
 
       <div className="overflow-x-auto rounded-xl border border-slate-200">
         <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-          <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <thead className="bg-slate-100/60 text-left text-xs font-semibold uppercase tracking-wider text-slate-600">
             <tr>
               {columns.map((column) => (
-                <th key={column.key} className="px-4 py-3">{column.label}</th>
+                <th key={column.key} className="px-4 py-3 border-b border-slate-200">
+                  {column.label}
+                </th>
               ))}
-              {kind === "notices" && <th className="px-4 py-3">Level</th>}
-              {kind === "notices" && <th className="px-4 py-3">Status</th>}
-              {isAdmin && <th className="px-4 py-3">School</th>}
-              <th className="px-4 py-3 text-right">Actions</th>
+              {kind === "notices" && <th className="px-4 py-3 border-b border-slate-200">Level</th>}
+              {kind === "notices" && <th className="px-4 py-3 border-b border-slate-200">Status</th>}
+              {isAdmin && kind !== "newsletters" && <th className="px-4 py-3 border-b border-slate-200">School</th>}
+              <th className="px-4 py-3 border-b border-slate-200 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-slate-700">
+          <tbody className="divide-y divide-slate-100">
             {loading ? (
               <tr>
                 <td colSpan={columns.length + 4} className="px-4 py-8 text-center text-slate-500">
@@ -330,7 +332,7 @@ const AnnouncementManager = ({
                   {kind === "notices" && (
                     <td className="px-4 py-3"><StatusBadge status={item.approvalStatus} /></td>
                   )}
-                  {isAdmin && (
+                  {isAdmin && kind !== "newsletters" && (
                     <td className="px-4 py-3 text-xs text-slate-600">{item.schoolCode || "GBU"}</td>
                   )}
                   <td className="px-4 py-3 text-right">
@@ -433,21 +435,23 @@ const AnnouncementManager = ({
             </div>
 
             <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-              <label className="block">
-                <span className="mb-1 block text-sm font-medium text-slate-700">
-                  {LEVEL_FIELD.label} <span className="text-rose-600">*</span>
-                </span>
-                <select
-                  className={inputClass}
-                  value={editor.form.level}
-                  onChange={(event) => setField("level", event.target.value)}
-                >
-                  {LEVEL_FIELD.options.map((option) => (
-                    <option key={option.value} value={option.value}>{option.label}</option>
-                  ))}
-                </select>
-                <span className="mt-1 block text-xs text-slate-500">{LEVEL_FIELD.help}</span>
-              </label>
+              {kind !== "newsletters" && (
+                <label className="block">
+                  <span className="mb-1 block text-sm font-medium text-slate-700">
+                    {LEVEL_FIELD.label} <span className="text-rose-600">*</span>
+                  </span>
+                  <select
+                    className={inputClass}
+                    value={editor.form.level}
+                    onChange={(event) => setField("level", event.target.value)}
+                  >
+                    {LEVEL_FIELD.options.map((option) => (
+                      <option key={option.value} value={option.value}>{option.label}</option>
+                    ))}
+                  </select>
+                  <span className="mt-1 block text-xs text-slate-500">{LEVEL_FIELD.help}</span>
+                </label>
+              )}
 
               {willNeedApproval && (
                 <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">

@@ -511,7 +511,7 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.li>
         ))}
-        {currentSchoolCode !== "SOE" && (
+        {currentSchoolCode !== "SOE" && currentSchoolCode !== "SOBSC" && (
           <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
             <Link
               to={routes.placement}

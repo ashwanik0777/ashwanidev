@@ -260,6 +260,13 @@ const Navbar = () => {
       ];
     }
 
+    if (schoolCode === "SOHSS") {
+      return [
+        { label: "Training and Consultancy", href: `/schools/${activeSchool}/departments/training-consultancy` },
+        { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
+      ];
+    }
+
     if (schoolCode === "SOBSC") {
       return [
         { label: "Research Area and Profile", href: routes.research.profile },

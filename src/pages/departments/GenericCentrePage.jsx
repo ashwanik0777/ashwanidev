@@ -445,6 +445,24 @@ const GenericCentrePage = () => {
                 <p>{data.paragraph}</p>
               </div>
 
+              {data.consultancyDetails && data.consultancyDetails.length > 0 && (
+                <div className="pt-4 border-t border-slate-100 space-y-4">
+                  <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                    Consultancy Summary & Key Project Details
+                  </h3>
+                  <div className="space-y-3">
+                    {data.consultancyDetails.map((item, idx) => (
+                      <div key={idx} className="p-4 rounded-xl bg-purple-50/40 border border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span className="text-xs font-extrabold uppercase tracking-wider text-purple-800 font-outfit shrink-0 sm:w-48">
+                          {item.label}
+                        </span>
+                        <span className="text-sm font-semibold text-slate-800">{item.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {data.mouPartners && data.mouPartners.length > 0 && (
                 <div className="pt-4 border-t border-slate-100 space-y-4">
                   <h3 className="text-lg font-bold text-slate-900 font-outfit">

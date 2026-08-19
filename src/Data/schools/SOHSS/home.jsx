@@ -25,8 +25,8 @@ export const sectionsConfig = [
     position: 2,
     props: {
       data: {
-        heading: "About Us",
-        subtitle: "School of Humanities and Social Sciences",
+        heading: "About Us & Departments",
+        subtitle: "School of Humanities and Social Sciences | Gautam Buddha University",
 
         floatingIcons: [
           {
@@ -48,47 +48,29 @@ export const sectionsConfig = [
 
         cards: [
           {
-            title: "Our Mission",
+            title: "School Overview",
             icon: <Target size={28} />,
             bgGradient: "from-blue-500 to-purple-600",
             content: (
               <>
-                The School of Humanities and Social Sciences started in
-                2009-2010, plays the pivotal role of providing the students with
-                an environment that is conducive for developing an understanding
-                of contemporary society and its pertaining vibrant issues
-                through inter-relationship of society, science, language,
-                literature, social work, technology, management and media. The
-                school has a unique and distinctive role of hosting creative
-                educational academic programmes that focus on creating holistic
-                understanding of complexities of life in social context with
-                emphasis on Indian cultural values and Buddhist ethics.
+                The School of Humanities and Social Sciences started in 2009-2010, plays the pivotal role of providing the students with an environment that is conducive for developing an understanding of contemporary society and its pertaining vibrant issues through inter-relationship of society, science, language, literature, social work, technology, management and media. The school has a unique and distinctive role of hosting creative educational academic programmes that focus on creating holistic understanding of complexities of life in social context with emphasis on Indian cultural values and Buddhist ethics. The Humanities section consists of three core departments while Social Sciences has eight major core departments.
               </>
             ),
             highlight: ["Est. 2009–2010"],
           },
 
           {
-            title: "Our Commitment",
+            title: "Academic Divisions",
             icon: <Trophy size={28} />,
             bgGradient: "from-purple-500 to-pink-600",
             content: (
               <>
-                The school chooses its mission to propagate learning and
-                appreciating as well as preserving Buddhist Ethics and Values.
-                Academic programmes, designed in line with the best universities
-                around the world, combine the best practices of pedagogy and
-                classroom teaching, complemented by practical training and
-                experiential learning. The Humanities section consists of three
-                core departments while Social Sciences has eight major core
-                departments.
+                Humanities foster an interface between real life situations and science & technology, stimulating aesthetic values through literature and languages. Social Sciences impart advanced education and training across core disciplines, offering M.A., MSW, B.Ed. (Accredited by NCTE), and Ph.D. programmes with profound stress on service to society.
               </>
             ),
             bullets: [
-              "Department of English and Modern European Languages",
-              "Department of Indian Languages and Literature",
-              "Department of Mass Communication and Media Studies",
-              "Eight Social Sciences Departments",
+              "1. Humanities: English & European Languages, Indian Languages (Hindi, Urdu, Sanskrit), Mass Communication & Media Studies",
+              "2. Social Sciences: Economics, Education & Training (NCTE Accredited B.Ed.), History, Political Science, Psychology & Mental Health, Public Administration, Social Work, Sociology, Library Science",
             ],
           },
         ],

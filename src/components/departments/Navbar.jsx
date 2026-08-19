@@ -240,6 +240,31 @@ const Navbar = () => {
     ];
   };
 
+  // Build Research dropdown items based on the active school
+  const getResearchItems = () => {
+    const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+
+    if (schoolCode === "SOBT") {
+      return [
+        { label: "Research Area and Profile", href: routes.research.profile },
+        // { label: "Training and Consultancy", href: routes.research.consultancy },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Projects", href: routes.research.projects },
+        { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
+      ];
+    }
+
+    return [
+      { label: "Research Area and Profile", href: routes.research.profile },
+      { label: "Training and Consultancy", href: routes.research.consultancy },
+      { label: "Research Scholars", href: routes.research.scholars },
+      { label: "Research Projects", href: routes.research.projects },
+      { label: "Patents", href: routes.research.patents },
+      { label: "Books", href: routes.research.books },
+    ];
+  };
+
   const dropdownMenus = [
     {
       key: "about",
@@ -269,17 +294,7 @@ const Navbar = () => {
     {
       key: "research",
       label: "Research",
-      items: [
-        { label: "Research Area and Profile", href: routes.research.profile },
-        {
-          label: "Training and Consultancy",
-          href: routes.research.consultancy,
-        },
-        { label: "Research Scholars", href: routes.research.scholars },
-        { label: "Research Projects", href: routes.research.projects },
-        { label: "Patents", href: routes.research.patents },
-        { label: "Books", href: routes.research.books },
-      ],
+      items: getResearchItems(),
     },
   ];
 

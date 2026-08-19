@@ -112,6 +112,8 @@ const Navbar = () => {
     };
   }, [activeSchool]);
 
+  const currentSchoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+
   const routes = {
     home: `/schools/${activeSchool}`,
     faculty: `/schools/${activeSchool}/faculty`,
@@ -509,14 +511,16 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.li>
         ))}
-        <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-          <Link
-            to={routes.placement}
-            className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Placement
-          </Link>
-        </motion.li>
+        {currentSchoolCode !== "SOE" && (
+          <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+            <Link
+              to={routes.placement}
+              className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
+            >
+              Placement
+            </Link>
+          </motion.li>
+        )}
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link
             to={routes.contact}

@@ -60,46 +60,7 @@ export const departmentLayoutData = {
       phone: "0120-234-9902",
     },
   },
-  aboutProps: {
-    heading: "About the Department",
-    subheading:
-      "Established in 2011, our department provides comprehensive education in Buddhist philosophy, ethics, and their contemporary applications.",
-    stats: [
-      { icon: Users, numberText: "130+", title: "Students", subtitle: "Enrolled" },
-      { icon: BookOpen, numberText: "11+", title: "Faculty", subtitle: "Members" },
-      { icon: Award, numberText: "50+", title: "Research Papers", subtitle: "Published" },
-      { icon: Globe, numberText: "10+", title: "Countries", subtitle: "Represented" },
-    ],
-    highlights: [
-      {
-        title: "Global Academic Community",
-        description:
-          "With more than 90% international students from over 10 countries, our department offers a truly global perspective on Buddhist studies. Students from Myanmar, Thailand, Sri Lanka, Vietnam, Korea, Japan, and other nations bring diverse Buddhist traditions to the classroom.",
-        dotColor: "#F59E0B",
-      },
-      {
-        title: "Research Excellence",
-        description:
-          "Our faculty members are distinguished scholars who have published extensively in peer-reviewed journals and authored books on Buddhist philosophy, ethics, comparative religion, and textual studies. Research areas span from Abhidharma analysis to applied Buddhist ethics.",
-        dotColor: "#EF4444",
-      },
-      {
-        title: "Practical Integration",
-        description:
-          "We integrate theoretical study with practical engagement through regular Vipassana meditation retreats, field visits to Buddhist heritage sites, and participation in international Buddhist conferences and cultural exchanges.",
-        dotColor: "#8B5CF6",
-      },
-    ],
-    vision:
-      "To be a globally recognized department of Buddhist philosophy that produces scholars, researchers, and thought leaders who contribute to peace, harmony, and ethical living.",
-    missionPoints: [
-      "Provide rigorous academic training in Buddhist philosophy and ethics",
-      "Foster critical thinking and scholarly research in Buddhist studies",
-      "Promote interfaith dialogue and comparative philosophical study",
-      "Apply Buddhist ethical principles to contemporary global challenges",
-      "Build international academic networks for Buddhist scholarship",
-    ],
-  },
+  aboutProps: null,
   programsData: [
     {
         id: "ba-hons-buddhist-studies",
@@ -341,65 +302,9 @@ export const departmentLayoutData = {
       },
     ],
   },
-  researchStats: [
-    { numberText: "25+", subtitle: "Research Projects" },
-    { numberText: "₹2Cr+", subtitle: "Research Funding" },
-    { numberText: "100+", subtitle: "Publications" },
-    { numberText: "10+", subtitle: "Countries Represented" },
-  ],
-  topAchievers: [
-    {
-      name: "Ven. Ashin Nyanissara",
-      year: "M.A. Buddhist Studies 2023",
-      achievement:
-        "Selected for Ph.D. at Nalanda University, Published paper in Journal of Buddhist Ethics",
-      image:
-        "https://images.unsplash.com/photo-1644904105846-095e45fca990?w=600&auto=format&fit=crop",
-      skills: ["Buddhist Philosophy", "Pali Language", "Meditation", "Academic Writing"],
-    },
-    {
-      name: "Tenzin Dorjee",
-      year: "Ph.D. Buddhist Studies 2024",
-      achievement: "UGC-NET/JRF Qualified, International research fellowship in Japan",
-      image:
-        "https://images.unsplash.com/photo-1646415753793-dcfda1dfeee3?w=600&auto=format&fit=crop",
-      skills: ["Tibetan Buddhism", "Sanskrit", "Comparative Philosophy", "Research"],
-    },
-    {
-      name: "Nguyen Thi Mai",
-      year: "M.A. Buddhist Studies 2024",
-      achievement: "Scholarship at International Buddhist College, Thailand",
-      image:
-        "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80",
-      skills: ["Vietnamese Buddhism", "Meditation", "Buddhist Literature", "Translation"],
-    },
-  ],
-  achievements: [
-    {
-      title: "International Student Body",
-      description: "90%+ international students from 10+ countries",
-      icon: Globe,
-      color: "text-yellow-600",
-    },
-    {
-      title: "Research Publications",
-      description: "100+ papers in peer-reviewed journals and conferences",
-      icon: BookOpen,
-      color: "text-orange-600",
-    },
-    {
-      title: "Vipassana Programs",
-      description: "Regular residential meditation retreats for students and public",
-      icon: Heart,
-      color: "text-red-600",
-    },
-    {
-      title: "Academic Fellowships",
-      description: "Students awarded UGC-NET, JRF, and international fellowships",
-      icon: GraduationCap,
-      color: "text-amber-600",
-    },
-  ],
+  researchStats: null,
+  topAchievers: null,
+  achievements: null,
 };
 
 export const departmentData = {

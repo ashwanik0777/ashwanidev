@@ -195,6 +195,7 @@ const Navbar = () => {
         { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
         { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
         { label: "BCI Approved Letter", href: `/schools/${activeSchool}/departments/bci-approved-letters` },
+        { label: "Research Advisory Committee (RAC)", href: `/schools/${activeSchool}/departments/research-advisory-committee` },
         { label: "SLJG Centre for Constitutional Law & Governance", href: `/schools/${activeSchool}/departments/constitutional-governance` },
         { label: "SLJG Centre for Cyber Law & Digital Rights", href: `/schools/${activeSchool}/departments/cyber-law-centre` },
         { label: "SLJG Board of Studies", href: routes.about.board },
@@ -247,6 +248,18 @@ const Navbar = () => {
   // Build Research dropdown items based on the active school
   const getResearchItems = () => {
     const schoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
+
+    if (schoolCode === "SOL") {
+      return [
+        { label: "Research Advisory Committee (RAC)", href: `/schools/${activeSchool}/departments/research-advisory-committee` },
+        { label: "Research Area and Profile", href: routes.research.profile },
+        { label: "Training and Consultancy", href: routes.research.consultancy },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Projects", href: routes.research.projects },
+        { label: "Patents", href: routes.research.patents },
+        { label: "Books", href: routes.research.books },
+      ];
+    }
 
     if (schoolCode === "SOBSC") {
       return [

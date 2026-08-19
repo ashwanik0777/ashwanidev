@@ -43,36 +43,26 @@ export const sectionsConfig = [
         ],
         cards: [
           {
-            title: "VISION | SOE",
+            title: "VISION | SOL",
             icon: <Target size={28} />,
             bgGradient: "from-blue-600 to-indigo-700",
             content: (
               <>
                 In accordance with the Vision of the University, the{" "}
                 <span className="font-semibold text-blue-600">
-                  School of Engineering (SOE)
+                  School of Law, Justice and Governance (SOL)
                 </span>{" "}
-                has been conceptualized and established with an objective to work out and develop a dependable model for growth, consistency, and significant breakthrough in cutting-edge technology and innovation.
-                <br /><br />
-                The rapid diffusion of core engineering fields like{" "}
-                <span className="font-semibold text-indigo-600">
-                  Civil Engineering, Electrical Engineering, and Mechanical Engineering
-                </span>{" "}
-                has the potential of bringing improvement in productivity and efficiency in almost every aspect of our life and consequently turning out to be a key driver of our economic growth.
+                has been conceptualized and established with an objective to work out and develop a dependable model for growth, consistency, and significant breakthrough in legal education and research.
               </>
             ),
           },
           {
-            title: "MISSION | SOE",
+            title: "MISSION | SOL",
             icon: <Trophy size={28} />,
             bgGradient: "from-indigo-600 to-cyan-600",
             content: (
               <>
-                We are committed to prepare technology leaders for tomorrow with our innovative curriculum and meticulous pedagogy for training. The programmes offered are unique in their right and fall in line with international practices.
-                <br /><br />
-                Our efforts travel beyond classrooms and encompass trends and practices through our research and modular training at par with some of the best institutions of national and international repute.
-                <br /><br />
-                The School offers innovative and interdisciplinary programmes, complemented by experiential learning in real-world situations that allow our students to combine classroom learning and their exposure to the industry to understand current trends in their field of interest and expertise. We offer five-year Integrated Dual-degree Programmes (B.Tech. + M.Tech. / B.Tech. + MBA) in Civil Engineering, Mechanical Engineering, Electrical Engineering, and Architecture & Regional Planning.
+                We are committed to prepare legal leaders for tomorrow with our innovative curriculum and meticulous legal pedagogy.
               </>
             ),
           },
@@ -82,7 +72,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "SchoolStats",
-    enabled: true,
+    enabled: false,
     position: 3,
     props: {
       title: "Academic highlights",
@@ -96,7 +86,7 @@ export const sectionsConfig = [
       ],
     },
   },
-{
+  {
     componentName: "LeadershipCard",
     enabled: true,
     position: 4,
@@ -430,7 +420,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "PlacementsSection",
-    enabled: true,
+    enabled: false,
     position: 10,
     props: {
       data: {
@@ -464,7 +454,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecentPlacements",
-    enabled: true,
+    enabled: false,
     position: 11,
     props: {
       data: {

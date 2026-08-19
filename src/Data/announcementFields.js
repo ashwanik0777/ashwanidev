@@ -138,7 +138,7 @@ export const ANNOUNCEMENT_FIELDS = {
 
   gallery: [
     { key: "images", label: "Gallery Image URLs", type: "image-list" },
-    { key: "coverImage", label: "Homepage Cover Image", type: "cover-selector" },
+    { key: "coverImageUrl", label: "Homepage Cover Image", type: "cover-selector" },
   ],
 };
 

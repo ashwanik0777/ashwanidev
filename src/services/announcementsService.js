@@ -159,7 +159,7 @@ const normalizeMedia = (item, index) => {
     year: String(item?.year || ""),
     date: pickDate(item, DATE_KEYS),
     images,
-    coverImage: String(item?.coverImage || item?.coverImageUrl || [...images].pop() || "").trim(),
+    coverImage: String(item?.coverImage || item?.cover_image || item?.coverImageUrl || [...images].pop() || "").trim(),
     schoolName: getSchoolLabel(item),
     level: String(item?.level || "").trim(),
   };

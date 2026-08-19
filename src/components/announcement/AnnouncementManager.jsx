@@ -500,8 +500,9 @@ const AnnouncementManager = ({
                               onClick={() => {
                                 const newArr = arr.filter((_, idx) => idx !== i);
                                 setField(field.key, newArr);
-                                if (field.key === "images" && editor.form.coverImage === url) {
-                                  setField("coverImage", newArr[0] || "");
+                                if (field.key === "images") {
+                                  if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
+                                  if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
                                 }
                               }}
                               className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50"

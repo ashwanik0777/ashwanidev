@@ -194,6 +194,7 @@ const Navbar = () => {
         { label: "Dean's Message", href: routes.about.dean },
         { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
         { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
+        { label: "BCI Approved Letter", href: `/schools/${activeSchool}/departments/bci-approved-letters` },
         { label: "SLJG Centre for Constitutional Law & Governance", href: `/schools/${activeSchool}/departments/constitutional-governance` },
         { label: "SLJG Centre for Cyber Law & Digital Rights", href: `/schools/${activeSchool}/departments/cyber-law-centre` },
         { label: "SLJG Board of Studies", href: routes.about.board },

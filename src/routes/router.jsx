@@ -413,6 +413,7 @@ export default function AppRouter() {
               {/* SOL Centre Pages */}
               <Route path="departments/moot-court-cell" element={<GenericCentrePage />} />
               <Route path="departments/legal-aid-clinic" element={<GenericCentrePage />} />
+              <Route path="departments/bci-approved-letters" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />

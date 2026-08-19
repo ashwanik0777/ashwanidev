@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Scale, Award, BookOpen, Users, CheckCircle, Mail, Gavel, Landmark, ShieldCheck, Phone, MapPin } from "lucide-react";
+import { Scale, Award, BookOpen, Users, CheckCircle, Mail, Gavel, Landmark, ShieldCheck, Phone, MapPin, FileText, Download, ExternalLink } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 import AboutSection from "../../components/departments/coedt/AboutCEDT";
 import FacilitiesSwiper from "../../components/departments/coedt/FacilitiesSwiper";
@@ -30,6 +30,7 @@ const GenericCentrePage = () => {
         const module = await import(`../../Data/schools/${schoolCode}/about/${fileName}.jsx`);
         // Try multiple export name patterns
         const exportData =
+          module.bciApprovedLettersData ||
           module.legalAidData ||
           module.mootCourtData ||
           module.centreBuddhistStudiesData ||
@@ -65,7 +66,76 @@ const GenericCentrePage = () => {
 
   return (
     <div>
-      {data.customLayout === "legalAid" ? (
+      {data.customLayout === "bciLetters" ? (
+        <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
+          <BannerSection
+            title={data.hero.title}
+            subtitle={data.hero.subtitle}
+            bgTheme={data.hero.bgTheme || 9}
+          />
+
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+            {data.lettersSection && (
+              <section className="space-y-8">
+                <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
+                  <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-700 shrink-0">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
+                        Bar Council of India Recognition
+                      </span>
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-outfit">
+                        {data.lettersSection.title}
+                      </h2>
+                    </div>
+                  </div>
+
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+                    {data.lettersSection.subtitle}
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {data.lettersSection.letters.map((letter, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 hover:border-purple-300 hover:bg-purple-50/40 transition-all duration-300 flex flex-col justify-between space-y-4"
+                      >
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2.5 py-0.5 rounded border border-purple-200">
+                              {letter.badge}
+                            </span>
+                            <span className="text-xl">📄</span>
+                          </div>
+                          <h3 className="text-lg font-bold text-slate-900 font-outfit">
+                            {letter.title}
+                          </h3>
+                          <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                            {letter.description}
+                          </p>
+                        </div>
+
+                        <a
+                          href={letter.fileUrl || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2.5 px-4 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs shadow-xs transition-all duration-200 flex items-center justify-center gap-2"
+                        >
+                          <FileText className="w-4 h-4" />
+                          <span>View {letter.year} Letter</span>
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+      ) : data.customLayout === "legalAid" ? (
+
         <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
           <BannerSection
             title={data.hero.title}

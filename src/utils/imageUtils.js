@@ -121,11 +121,19 @@ export const getFacultyInitials = (name) => {
 /**
  * Resolve faculty image URL with fallback to local mapped assets or ui-avatars.com.
  */
-export const resolveFacultyImage = (url, image, name, email) => {
+export const resolveFacultyImage = (url, image, name, email, id) => {
   const target = url || image;
   if (target) {
     const parsed = parseImageUrl(target);
     if (parsed) return parsed;
+  }
+
+  // Check mapped images by Faculty ID
+  if (id && typeof id === 'string') {
+    const upperId = id.trim().toUpperCase();
+    if (facultyImageRegistry.byFacultyId && facultyImageRegistry.byFacultyId[upperId]) {
+      return parseImageUrl(facultyImageRegistry.byFacultyId[upperId]);
+    }
   }
 
   // Check mapped images by Email

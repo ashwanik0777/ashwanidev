@@ -18,7 +18,7 @@ export const contactInfo = {
   phone: "+91-120-234-9901",
   email: "sobsc.office@gbu.ac.in",
   website: "https://www.gbu.ac.in/SOBSC/",
-  dean: "Prof. Karam Tej Sarao",
+  dean: "Prof. Rajeev Varshney",
 };
 
 // About page data

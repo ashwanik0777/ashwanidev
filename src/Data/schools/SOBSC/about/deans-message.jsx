@@ -5,9 +5,9 @@
 export const deansMessageData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  deanName: "Prof. Karam Tej Sarao",
+  deanName: "Prof. Rajeev Varshney",
   designation: "Dean, School of Buddhist Studies & Civilization",
-  image: "https://ui-avatars.com/api/?name=Karam+Tej+Sarao&size=300&background=F59E0B&color=fff",
+  image: "/assets/Faculty/Prof. Rajeev Varshney.jpg",
   shortMessage:
     "The School of Buddhist Studies & Civilization welcomes all students and academia. Set up with a vision to produce erudite scholars and distinguished research in Buddhism, we adopt interdisciplinary and scientific approaches to serve humanity.",
   message:

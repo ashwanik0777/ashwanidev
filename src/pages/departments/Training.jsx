@@ -115,16 +115,16 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Overview Section */}
       {overview && (
-        <section className="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {overview.lead && (
-            <div className="bg-gradient-to-r from-purple-950 via-indigo-950 to-slate-950 text-white p-8 md:p-10 rounded-2xl shadow-xl border border-purple-900/50 mb-10">
-              <div className="inline-block px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+            <div className="bg-white border border-slate-200/90 p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm mb-8">
+              <div className="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">
                 School of Buddhist Studies & Civilization
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold font-outfit text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl font-bold font-outfit text-slate-900 mb-4">
                 Overview & Leadership
               </h2>
-              <p className="text-purple-100/90 text-base md:text-lg leading-relaxed font-normal">
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal">
                 {overview.lead}
               </p>
             </div>

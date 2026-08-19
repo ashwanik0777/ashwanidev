@@ -6,12 +6,7 @@ export const trainingConsultancyData = {
     title: "TRAINING AND CONSULTANCY",
     subtitle: "Mindfulness and Vipassana Meditation Programs for Stress Reduction, Mental Health & Holistic Wellness — Mahatma Jyotiba Phule Dhyan Kendra, GBU.",
   },
-  stats: [
-    { number: "3,500+", label: "Students Benefited", color: "text-amber-600" },
-    { number: "25+", label: "Workshops & Symposia", color: "text-orange-600" },
-    { number: "2013", label: "Ongoing Since", color: "text-yellow-600" },
-    { number: "100%", label: "Expert Guided", color: "text-red-600" },
-  ],
+  stats: [],
   overview: {
     lead: "Mahatma Jyotiba Phule Dhyan Kendra at Gautam Buddha University (GBU) offers structured training programs and workshops in Mindfulness and Vipassana Meditation. Designed and coordinated by Dr. Manish Meshram (Assistant Professor, SoBSC, GBU), these programs serve beginners to intermediate meditators through both online and offline (in-house) formats.",
     highlights: [

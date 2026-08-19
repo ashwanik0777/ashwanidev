@@ -139,11 +139,8 @@ const ClubsMain = () => {
           <div className="mb-20">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center gap-2">
-                <Shield className="w-8 h-8 text-blue-600" />
                 University-Level Organizations
               </h2>
-              <p className="text-slate-600 mt-2">Elite national programs building leadership, discipline, and community service values.</p>
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -217,13 +214,10 @@ const ClubsMain = () => {
 
           {/* School Level Clubs & Societies */}
           <div>
-            <div className="text-center mb-12">
+            <div className="text-center mb-4">
               <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center gap-2">
-                <Sparkles className="w-8 h-8 text-purple-600" />
                 Clubs & Societies
               </h2>
-              <p className="text-slate-600 mt-2">Official student-run clubs under the GBU Cultural Council & Student Activity Board.</p>
-              <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mt-4 rounded-full"></div>
             </div>
 
             {/* Filter Bar */}

@@ -159,7 +159,7 @@ const normalizeMedia = (item, index) => {
     year: String(item?.year || ""),
     date: pickDate(item, DATE_KEYS),
     images,
-    coverImage: images[0] || "",
+    coverImage: String(item?.coverImage || item?.coverImageUrl || images[0] || "").trim(),
     schoolName: getSchoolLabel(item),
     level: String(item?.level || "").trim(),
   };
@@ -192,6 +192,10 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
     ? toArray(unwrapData(newslettersRes.value)).map(normalizeNewsletter)
     : [];
 
+  const mediaGallery = mediaRes.status === "fulfilled"
+    ? toArray(unwrapData(mediaRes.value)).map(normalizeMedia)
+    : [];
+
   const pastEvents = events.filter((e) => !e.isUpcoming);
 
   return {
@@ -200,7 +204,7 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
     news,
     events,
     newsletters,
-    mediaGallery: pastEvents,
+    mediaGallery,
     eventGallery: pastEvents,
   };
 };

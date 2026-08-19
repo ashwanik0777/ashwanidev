@@ -1,7 +1,6 @@
 import React from "react";
 import { Mail, CircleCheck, Clock } from "lucide-react";
 import TeamSection from "../../components/itcell/TeamSection";
-import DevelopmentGlimpses from "../../components/itcell/DevelopmentGlimpses";
 import ApplicationForm from "../../components/itcell/ApplicationForm";
 import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
 import { motion } from "framer-motion";
@@ -228,7 +227,6 @@ const ITCell = () => {
           </div>
         </motion.div>
 
-        <DevelopmentGlimpses />
 
         <section className="mb-8">
           <div className="mb-4 text-center">

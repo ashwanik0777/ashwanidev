@@ -291,7 +291,7 @@ const Navbar = () => {
       label: "About Us",
       items: getAboutItems(),
     },
-    currentSchoolCode !== "SOBSC" && {
+    currentSchoolCode !== "SOBSC" && currentSchoolCode !== "SOL" && {
       key: "departments",
       label: "Departments & Academic Programs",
       items: departmentItems.length

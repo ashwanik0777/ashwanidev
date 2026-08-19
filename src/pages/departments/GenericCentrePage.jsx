@@ -430,7 +430,7 @@ const GenericCentrePage = () => {
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                    School of Management
+                    {data.schoolName || "Gautam Buddha University"}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
                     {data.sectionTitle || "International Collaboration"}
@@ -503,7 +503,7 @@ const GenericCentrePage = () => {
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                    School of Management
+                    {data.schoolName || "Gautam Buddha University"}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
                     Research and Publications
@@ -588,7 +588,7 @@ const GenericCentrePage = () => {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                    School of Management
+                    {data.schoolName || "Gautam Buddha University"}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
                     Corporate Resource Center (CRC)
@@ -689,7 +689,7 @@ const GenericCentrePage = () => {
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
-                    School of Management
+                    {data.schoolName || "Gautam Buddha University"}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-outfit mt-0.5">
                     Functional Academic Area Leadership

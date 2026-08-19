@@ -22,7 +22,7 @@ const ContactCard = ({ children, className = "" }) => (
 );
 
 // Contact Page Content Component
-const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
+const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directory }) => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
       {/* Hero Section */}
@@ -109,6 +109,51 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo }) => {
                   </div>
                 </ContactCard>
               ))}
+            </div>
+          </section>
+        )}
+
+        {/* Directory Section */}
+        {directory && directory.length > 0 && (
+          <section className="space-y-6 max-w-4xl mx-auto">
+            <div className="text-center max-w-2xl mx-auto">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
+                Faculty & Staff Directory
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+                Direct contact phone numbers and extension details
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs sm:text-sm border-collapse">
+                  <thead className="bg-slate-100 text-slate-700 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
+                    <tr>
+                      <th className="py-3.5 px-6">Name</th>
+                      <th className="py-3.5 px-6 text-center">Phone No.</th>
+                      <th className="py-3.5 px-6 text-center">Ext. No.</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200/80 font-medium">
+                    {directory.map((item, idx) => (
+                      <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-3 px-6 font-bold text-slate-900">{item.name}</td>
+                        <td className="py-3 px-6 text-center font-semibold text-purple-700">
+                          <a href={`tel:${item.phone.replace(/\s+/g, '')}`} className="hover:underline">
+                            {item.phone}
+                          </a>
+                        </td>
+                        <td className="py-3 px-6 text-center font-bold text-slate-700">
+                          <span className="inline-block px-2.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-xs font-mono">
+                            {item.ext}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
         )}

@@ -42,21 +42,21 @@ const TeamCard = ({ member }) => {
           </div>
         </div>
 
-        <div className="mb-4 space-y-1">
+        <div className=" space-y-1">
           {member.department && (
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{member.department}</p>
           )}
           {member.designation && (
             <p className="text-sm text-slate-600">{member.designation}</p>
           )}
-          <span
+          {/* <span
             className={cn(
               "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold mt-1",
               isStudent ? "bg-emerald-100 text-emerald-700" : "bg-indigo-100 text-indigo-700",
             )}
           >
             {isStudent ? "Student Team" : "Faculty Team"}
-          </span>
+          </span> */}
         </div>
 
         {isStudent && member.bio ? (

@@ -72,12 +72,12 @@ export const visionMission = {
   vision: {
     title: "Our Vision",
     icon: Target,
-    content: "To digitally transform GBU by automating key processes, improving transparency, and enhancing user experience through scalable, secure, and smart solutions."
+    content: "To digitally transform GBU by automating key processes, improving transparency, and enhancing user experience through scalable, secure, and smart solutions. We aim to establish GBU as a pioneer in digital campus innovation and tech-driven academic governance."
   },
   mission: {
     title: "Our Mission",
     icon: Rocket,
-    content: "To create an emotionally intelligent, AI-powered, and sustainable smart campus."
+    content: "To create an emotionally intelligent, AI-powered, and sustainable smart campus. We develop student-centric digital portals, streamline administrative workflows, and empower the university community through modern software engineering."
   }
 };
 

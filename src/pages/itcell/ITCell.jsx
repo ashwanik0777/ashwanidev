@@ -214,41 +214,27 @@ const ITCell = () => {
             {responsibilities.slice(0, 6).map((resp, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-slate-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-slate-100 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex items-center gap-3.5"
               >
-                <div>
-                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                    <resp.icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
-                    {resp.title}
-                  </h3>
-                  {resp.description && (
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal mt-2">
-                      {resp.description}
-                    </p>
-                  )}
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                  <resp.icon className="w-5 h-5" />
                 </div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  {resp.title}
+                </h3>
               </div>
             ))}
           </div>
 
           {/* Featured 7th Responsibility Card */}
           {responsibilities[6] && (
-            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center gap-5 group">
-              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
-                {React.createElement(responsibilities[6].icon, { className: "w-6 h-6" })}
+            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                {React.createElement(responsibilities[6].icon, { className: "w-5 h-5" })}
               </div>
-              <div className="flex-1 space-y-1">
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  {responsibilities[6].title}
-                </h3>
-                {responsibilities[6].description && (
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    {responsibilities[6].description}
-                  </p>
-                )}
-              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                {responsibilities[6].title}
+              </h3>
             </div>
           )}
         </motion.div>

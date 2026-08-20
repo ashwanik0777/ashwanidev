@@ -1,5 +1,5 @@
-import { 
-  Target, 
+import {
+  Target,
   Rocket,
   CheckCircle,
   ShieldCheck,
@@ -93,3 +93,22 @@ export const itcellDescription = {
   subtitle: "The IT Cell is GBU's dedicated innovation hub focused on transforming the university experience through cutting-edge technology and human-centered design.",
   quote: "We are not just building tools, we are transforming how a university works, lives, and evolves."
 };
+
+export const additionalStudentMembers = [
+  {
+    id: "mayank-prabhakar",
+    name: "Mayank Prabhakar",
+    role: "Web Developer",
+    designation: "Intern & Trainer, Digital Automation Cell",
+    department: "B.Tech CSE",
+    image: "/assets/students/Mayank Prabhakar.png",
+    email: "",
+    linkedin: "",
+    portfolio: "",
+    bio: "Core contributor to the GBU Smart Campus initiative, working on university web platforms and digital solutions. Involved in feature development, AI-assisted implementation, testing, optimization, and deployment of web-based systems.",
+    skills: ["HTML/CSS", "React", "Node.js", "MySQL", "PHP"],
+    teamType: "student",
+    sortOrder: 1,
+    isActive: true,
+  },
+];

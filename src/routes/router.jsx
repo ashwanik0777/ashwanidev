@@ -206,6 +206,10 @@ export default function AppRouter() {
           <Route path="/comingSoon" element={<ComingSoon />} />
           <Route path="/" element={<Home />} />
           <Route path="/about-us/About GBU" element={<AboutGbu />} />
+          <Route path="/about-us/About%20Gbu" element={<AboutGbu />} />
+          <Route path="/about-us/About%20GBU" element={<AboutGbu />} />
+          <Route path="/about-us/about-gbu" element={<AboutGbu />} />
+          <Route path="/about-us/about" element={<AboutGbu />} />
           <Route path="/about-us/act" element={<Act />} />
           <Route path="/about-us/act-statute-ordinance" element={<Act />} />
           <Route path="/about/act" element={<Act />} />

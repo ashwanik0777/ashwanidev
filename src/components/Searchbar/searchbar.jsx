@@ -8,7 +8,7 @@ const NAVIGATION_CONFIG = [
     label: "About Us",
     baseRoute: "/about-us",
     items: [
-      { slug: "About Gbu", label: "About GBU" },
+      { slug: "about-gbu", label: "About GBU" },
       { slug: "chancellor-message", label: "Chancellor Message" },
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
       { slug: "strategic-perspective", label: "GBU: A Strategic Perspective" },

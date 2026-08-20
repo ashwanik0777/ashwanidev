@@ -1,7 +1,6 @@
 import React from "react";
 import { Mail, CircleCheck, Clock } from "lucide-react";
 import TeamSection from "../../components/itcell/TeamSection";
-import DevelopmentGlimpses from "../../components/itcell/DevelopmentGlimpses";
 import ApplicationForm from "../../components/itcell/ApplicationForm";
 import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
 import { motion } from "framer-motion";
@@ -119,17 +118,17 @@ const ITCell = () => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header Section */}
-      <div className="relative bg-slate-900 text-white py-12 sm:py-16 md:py-20 px-4">
+      <div className="relative bg-slate-900 text-white py-8 sm:py-12 md:py-14 px-4">
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
           >
             IT Cell
           </motion.h1>
-          <p className="text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 opacity-90">
+          <p className="text-base sm:text-lg md:text-xl mb-3 sm:mb-4 opacity-90">
             Building practical automation for Smart GBU
           </p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
@@ -141,14 +140,14 @@ const ITCell = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12 md:py-16">
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8 md:py-10">
         {/* Vision & Mission */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16"
+          className="grid md:grid-cols-2 gap-6 mb-8 sm:mb-10"
         >
           <Card className="bg-blue-50 border-purple-200">
             <CardHeader>
@@ -180,7 +179,7 @@ const ITCell = () => {
         </motion.div>
 
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Card className="mb-12 bg-indigo-50 border-indigo-200">
+          <Card className="mb-8 sm:mb-10 bg-indigo-50 border-indigo-200">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-2">
                 {itcellDescription.title}
@@ -206,31 +205,52 @@ const ITCell = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-8 sm:mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-10 text-gray-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800">
             Responsibilities of the Committee
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {responsibilities.map((resp, index) => (
-              <Card key={index} className="hover:border-blue-200 transition-colors duration-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 sm:gap-3 leading-tight">
-                    <resp.icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">{resp.title}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{resp.description}</p>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {responsibilities.slice(0, 6).map((resp, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl border border-slate-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <resp.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+                    {resp.title}
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                    {resp.description}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
+
+          {/* Featured 7th Responsibility Card */}
+          {responsibilities[6] && (
+            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center gap-5 group">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                {React.createElement(responsibilities[6].icon, { className: "w-6 h-6" })}
+              </div>
+              <div className="flex-1 space-y-1">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  {responsibilities[6].title}
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                  {responsibilities[6].description}
+                </p>
+              </div>
+            </div>
+          )}
         </motion.div>
 
-        <DevelopmentGlimpses />
 
-        <section className="mb-8">
+        <section className="mb-8 sm:mb-10">
           <div className="mb-4 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind IT Cell</h2>
             <p className="mt-2 text-sm sm:text-base text-gray-600">

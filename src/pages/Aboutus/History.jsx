@@ -144,7 +144,7 @@ export default function AboutUsPage() {
     <StatsCard
       stats={[
         { numberText: universityStats.acres_campus, subtitle: "Acres of Green Campus", icon: TreePine, iconColor: "#16a34a" },
-        { numberText: "17+", subtitle: "Years of Academic Excellence", icon: Calendar, iconColor: "#4f46e5" },
+        { numberText: "18+", subtitle: "Years of Academic Excellence", icon: Calendar, iconColor: "#4f46e5" },
         { numberText: "B+", subtitle: "NAAC Accreditation", icon: Medal, iconColor: "#eab308" },
         { numberText: "4+", subtitle: "Statutory Approvals", icon: Shield, iconColor: "#a855f7" }
       ]}

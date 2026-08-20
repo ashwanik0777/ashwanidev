@@ -220,12 +220,14 @@ const ITCell = () => {
                   <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                     <resp.icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                     {resp.title}
                   </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-                    {resp.description}
-                  </p>
+                  {resp.description && (
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal mt-2">
+                      {resp.description}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
@@ -241,9 +243,11 @@ const ITCell = () => {
                 <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   {responsibilities[6].title}
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {responsibilities[6].description}
-                </p>
+                {responsibilities[6].description && (
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                    {responsibilities[6].description}
+                  </p>
+                )}
               </div>
             </div>
           )}

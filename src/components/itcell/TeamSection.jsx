@@ -6,8 +6,9 @@ import { resolveFacultyImage } from "../../utils/imageUtils";
 
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
-const TeamCard = ({ member, isStudent = false }) => {
+const TeamCard = ({ member }) => {
   const displayImage = resolveFacultyImage(member.image, member.image, member.name, member.email);
+  const isStudent = member.isStudent ?? (member.teamType === "student");
 
   return (
     <motion.article
@@ -42,11 +43,15 @@ const TeamCard = ({ member, isStudent = false }) => {
         </div>
 
         <div className="mb-4 space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{member.department}</p>
-          <p className="text-sm text-slate-600">{member.designation}</p>
+          {member.department && (
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{member.department}</p>
+          )}
+          {member.designation && (
+            <p className="text-sm text-slate-600">{member.designation}</p>
+          )}
           <span
             className={cn(
-              "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold",
+              "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold mt-1",
               isStudent ? "bg-emerald-100 text-emerald-700" : "bg-indigo-100 text-indigo-700",
             )}
           >
@@ -71,7 +76,7 @@ const TeamCard = ({ member, isStudent = false }) => {
         ) : null}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 mt-auto">
+      <div className="flex flex-wrap items-center gap-2 mt-auto pt-2">
         {member.email ? (
           <a
             href={`mailto:${member.email}`}
@@ -106,7 +111,7 @@ const TeamCard = ({ member, isStudent = false }) => {
 };
 
 const TeamSection = () => {
-  const [activeTab, setActiveTab] = useState("faculty");
+  const [activeTab, setActiveTab] = useState("all");
   const [query, setQuery] = useState("");
   const [teamData, setTeamData] = useState({ faculty: [], student: [] });
   const [loading, setLoading] = useState(true);
@@ -128,20 +133,27 @@ const TeamSection = () => {
     fetchTeam();
   }, []);
 
-  const currentMembers = activeTab === "faculty" ? teamData.faculty : teamData.student;
+  const combinedMembers = useMemo(() => {
+    const facultyWithFlag = teamData.faculty.map((m) => ({ ...m, isStudent: false }));
+    const studentWithFlag = teamData.student.map((m) => ({ ...m, isStudent: true }));
+
+    if (activeTab === "faculty") return facultyWithFlag;
+    if (activeTab === "students") return studentWithFlag;
+    return [...facultyWithFlag, ...studentWithFlag];
+  }, [teamData, activeTab]);
 
   const filteredMembers = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    if (!normalized) return currentMembers;
+    if (!normalized) return combinedMembers;
 
-    return currentMembers.filter((member) =>
-      [member.name, member.role, member.department, member.designation]
+    return combinedMembers.filter((member) =>
+      [member.name, member.role, member.department, member.designation, member.bio]
         .filter(Boolean)
         .join(" ")
         .toLowerCase()
         .includes(normalized),
     );
-  }, [currentMembers, query]);
+  }, [combinedMembers, query]);
 
   const leadership = teamData.faculty.length > 0 ? teamData.faculty[0] : null;
 
@@ -191,6 +203,21 @@ const TeamSection = () => {
             <button
               type="button"
               onClick={() => {
+                setActiveTab("all");
+                setQuery("");
+              }}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-semibold transition",
+                activeTab === "all"
+                  ? "bg-slate-900 text-white"
+                  : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+              )}
+            >
+              All Team ({teamData.faculty.length + teamData.student.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => {
                 setActiveTab("faculty");
                 setQuery("");
               }}
@@ -201,7 +228,7 @@ const TeamSection = () => {
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200",
               )}
             >
-              Faculty Team
+              Faculty Team ({teamData.faculty.length})
             </button>
             <button
               type="button"
@@ -216,7 +243,7 @@ const TeamSection = () => {
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200",
               )}
             >
-              Student Team
+              Student Team ({teamData.student.length})
             </button>
           </div>
 
@@ -242,9 +269,9 @@ const TeamSection = () => {
         </div>
 
         {filteredMembers.length ? (
-          <div className={cn("grid gap-4", activeTab === "faculty" ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3")}>
-            {filteredMembers.map((member) => (
-              <TeamCard key={`${member.name}-${member.role}`} member={member} isStudent={activeTab === "students"} />
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {filteredMembers.map((member, idx) => (
+              <TeamCard key={`${member.name}-${member.role}-${idx}`} member={member} />
             ))}
           </div>
         ) : (

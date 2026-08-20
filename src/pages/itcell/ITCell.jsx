@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, CircleCheck, Clock } from "lucide-react";
+import { Mail, CircleCheck, Clock, Sparkles, Quote } from "lucide-react";
 import TeamSection from "../../components/itcell/TeamSection";
 import ApplicationForm from "../../components/itcell/ApplicationForm";
 import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
@@ -149,53 +149,64 @@ const ITCell = () => {
           viewport={{ once: true }}
           className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-5 sm:mb-6"
         >
-          <Card className="bg-blue-50 border-purple-200">
-            <CardHeader className="p-4 sm:p-5 pb-2">
-              <CardTitle className="text-blue-800 flex items-center gap-2 sm:gap-3">
-                <visionMission.vision.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* Vision Card */}
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50/90 via-indigo-50/40 to-white border border-blue-200/80 p-5 sm:p-6 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col justify-between group">
+            <div className="absolute -right-8 -top-8 w-28 h-28 bg-blue-400/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all pointer-events-none" />
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 mb-3.5 group-hover:scale-105 transition-transform">
+                <visionMission.vision.icon className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
                 {visionMission.vision.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-5 pt-0">
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 {visionMission.vision.content}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader className="p-4 sm:p-5 pb-2">
-              <CardTitle className="text-emerald-800 flex items-center gap-2 sm:gap-3">
-                <visionMission.mission.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* Mission Card */}
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50/90 via-teal-50/40 to-white border border-emerald-200/80 p-5 sm:p-6 shadow-sm hover:shadow-xl hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group">
+            <div className="absolute -right-8 -top-8 w-28 h-28 bg-emerald-400/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
+            <div>
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-600 text-white flex items-center justify-center shadow-md shadow-emerald-500/20 mb-3.5 group-hover:scale-105 transition-transform">
+                <visionMission.mission.icon className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
                 {visionMission.mission.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-5 pt-0">
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 {visionMission.mission.content}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </motion.div>
 
+        {/* What is IT Cell Feature Card */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Card className="mb-5 sm:mb-6 bg-indigo-50 border-indigo-200">
-            <CardHeader className="text-center p-4 sm:p-5 pb-2">
-              <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-1.5">
-                {itcellDescription.title}
-              </CardTitle>
-              <CardDescription className="text-sm sm:text-base text-gray-700 max-w-3xl mx-auto">
-                {itcellDescription.subtitle}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-5 pt-1 pb-4">
-              <div className="text-center">
-                <blockquote className="text-base sm:text-lg italic text-indigo-700 font-medium">
-                  "{itcellDescription.quote}"
-                </blockquote>
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-6 sm:p-8 text-white shadow-xl border border-slate-700/50 mb-5 sm:mb-6">
+            <div className="absolute -right-16 -bottom-16 w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -left-16 -top-16 w-64 h-64 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-blue-400" /> Innovation Hub
               </div>
-            </CardContent>
-          </Card>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+                {itcellDescription.title}
+              </h2>
+              <p className="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed mb-5">
+                {itcellDescription.subtitle}
+              </p>
+
+              <div className="relative bg-white/5 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/10 flex items-start gap-3.5">
+                <Quote className="text-blue-400 w-5 h-5 shrink-0 mt-0.5" />
+                <p className="text-sm sm:text-base italic font-medium text-blue-100 leading-relaxed">
+                  "{itcellDescription.quote}"
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <RoadmapTimeline />

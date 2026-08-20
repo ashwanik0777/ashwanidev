@@ -1,13 +1,14 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Mail, Linkedin, Search, Users, GraduationCap, Star, Globe, User, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Users, GraduationCap, Globe, User, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { listItcellMembers } from "../../services/itcellService";
 import { resolveFacultyImage } from "../../utils/imageUtils";
 
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
-const TeamCard = ({ member, isStudent = false }) => {
+const TeamCard = ({ member }) => {
   const displayImage = resolveFacultyImage(member.image, member.image, member.name, member.email);
+  const isStudent = member.isStudent ?? (member.teamType === "student");
 
   return (
     <motion.article
@@ -42,11 +43,15 @@ const TeamCard = ({ member, isStudent = false }) => {
         </div>
 
         <div className="mb-4 space-y-1">
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{member.department}</p>
-          <p className="text-sm text-slate-600">{member.designation}</p>
+          {member.department && (
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{member.department}</p>
+          )}
+          {member.designation && (
+            <p className="text-sm text-slate-600">{member.designation}</p>
+          )}
           <span
             className={cn(
-              "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold",
+              "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold mt-1",
               isStudent ? "bg-emerald-100 text-emerald-700" : "bg-indigo-100 text-indigo-700",
             )}
           >
@@ -71,7 +76,7 @@ const TeamCard = ({ member, isStudent = false }) => {
         ) : null}
       </div>
 
-      <div className="flex flex-wrap items-center gap-2 mt-auto">
+      <div className="flex flex-wrap items-center gap-2 mt-auto pt-2">
         {member.email ? (
           <a
             href={`mailto:${member.email}`}
@@ -106,8 +111,6 @@ const TeamCard = ({ member, isStudent = false }) => {
 };
 
 const TeamSection = () => {
-  const [activeTab, setActiveTab] = useState("faculty");
-  const [query, setQuery] = useState("");
   const [teamData, setTeamData] = useState({ faculty: [], student: [] });
   const [loading, setLoading] = useState(true);
 
@@ -128,20 +131,12 @@ const TeamSection = () => {
     fetchTeam();
   }, []);
 
-  const currentMembers = activeTab === "faculty" ? teamData.faculty : teamData.student;
+  const combinedMembers = useMemo(() => {
+    const facultyWithFlag = teamData.faculty.map((m) => ({ ...m, isStudent: false }));
+    const studentWithFlag = teamData.student.map((m) => ({ ...m, isStudent: true }));
 
-  const filteredMembers = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) return currentMembers;
-
-    return currentMembers.filter((member) =>
-      [member.name, member.role, member.department, member.designation]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase()
-        .includes(normalized),
-    );
-  }, [currentMembers, query]);
+    return [...facultyWithFlag, ...studentWithFlag];
+  }, [teamData]);
 
   const leadership = teamData.faculty.length > 0 ? teamData.faculty[0] : null;
 
@@ -185,74 +180,17 @@ const TeamSection = () => {
         </div>
       )}
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setActiveTab("faculty");
-                setQuery("");
-              }}
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-semibold transition",
-                activeTab === "faculty"
-                  ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200",
-              )}
-            >
-              Faculty Team
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveTab("students");
-                setQuery("");
-              }}
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-semibold transition",
-                activeTab === "students"
-                  ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200",
-              )}
-            >
-              Student Team
-            </button>
-          </div>
-
-          <div className="relative min-w-[240px] flex-1 md:max-w-xs">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search name, role, department..."
-              className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
-            />
-          </div>
+      {combinedMembers.length ? (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {combinedMembers.map((member, idx) => (
+            <TeamCard key={`${member.name}-${member.role}-${idx}`} member={member} />
+          ))}
         </div>
-
-        <div className="mb-4 flex items-center justify-between">
-          <p className="text-sm font-medium text-slate-600">
-            {filteredMembers.length} result{filteredMembers.length === 1 ? "" : "s"}
-          </p>
-          <span className="inline-flex items-center gap-1 text-xs font-semibold text-slate-500">
-            <Star className="h-3.5 w-3.5" /> Team-first collaborative culture
-          </span>
+      ) : (
+        <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+          No team members found.
         </div>
-
-        {filteredMembers.length ? (
-          <div className={cn("grid gap-4", activeTab === "faculty" ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3")}>
-            {filteredMembers.map((member) => (
-              <TeamCard key={`${member.name}-${member.role}`} member={member} isStudent={activeTab === "students"} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
-            No team member found for this search.
-          </div>
-        )}
-      </div>
+      )}
     </section>
   );
 };

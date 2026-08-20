@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, CircleCheck, Clock } from "lucide-react";
+import { Mail, CircleCheck, Clock, Sparkles, Quote } from "lucide-react";
 import TeamSection from "../../components/itcell/TeamSection";
 import ApplicationForm from "../../components/itcell/ApplicationForm";
 import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
@@ -118,17 +118,17 @@ const ITCell = () => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header Section */}
-      <div className="relative bg-slate-900 text-white py-8 sm:py-12 md:py-14 px-4">
+      <div className="relative bg-slate-900 text-white py-6 sm:py-8 md:py-10 px-4">
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3"
           >
             IT Cell
           </motion.h1>
-          <p className="text-base sm:text-lg md:text-xl mb-3 sm:mb-4 opacity-90">
+          <p className="text-base sm:text-lg md:text-xl mb-3 opacity-90">
             Building practical automation for Smart GBU
           </p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
@@ -140,62 +140,63 @@ const ITCell = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8 md:py-10">
+      <div className="max-w-6xl mx-auto px-4 py-5 sm:py-6">
         {/* Vision & Mission */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 mb-8 sm:mb-10"
+          className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-5 sm:mb-6"
         >
-          <Card className="bg-blue-50 border-purple-200">
-            <CardHeader>
-              <CardTitle className="text-blue-800 flex items-center gap-2 sm:gap-3">
-                <visionMission.vision.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* Vision Card */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3">
+                <visionMission.vision.icon className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
                 {visionMission.vision.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 {visionMission.vision.content}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          <Card className="bg-purple-50 border-purple-200">
-            <CardHeader>
-              <CardTitle className="text-emerald-800 flex items-center gap-2 sm:gap-3">
-                <visionMission.mission.icon className="w-5 h-5 sm:w-6 sm:h-6" />
+          {/* Mission Card */}
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
+                <visionMission.mission.icon className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">
                 {visionMission.mission.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 {visionMission.mission.content}
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </motion.div>
 
+        {/* What is IT Cell Feature Card */}
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Card className="mb-8 sm:mb-10 bg-indigo-50 border-indigo-200">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-2">
-                {itcellDescription.title}
-              </CardTitle>
-              <CardDescription className="text-base text-gray-700 max-w-3xl mx-auto">
-                {itcellDescription.subtitle}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center mb-6">
-                <blockquote className="text-lg italic text-indigo-700 font-medium">
-                  "{itcellDescription.quote}"
-                </blockquote>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 mb-5 sm:mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+              {itcellDescription.title}
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base max-w-3xl leading-relaxed mb-4">
+              {itcellDescription.subtitle}
+            </p>
+
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-start gap-3">
+              <Quote className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+              <p className="text-sm sm:text-base italic font-medium text-slate-700 leading-relaxed">
+                "{itcellDescription.quote}"
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         <RoadmapTimeline />
@@ -205,57 +206,44 @@ const ITCell = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-8 sm:mb-10"
+          className="mb-5 sm:mb-6"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-5 text-gray-800">
             Responsibilities of the Committee
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {responsibilities.slice(0, 6).map((resp, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-slate-100 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-slate-100 p-4 sm:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex items-center gap-3.5"
               >
-                <div>
-                  <div className="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
-                    <resp.icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors leading-snug">
-                    {resp.title}
-                  </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-                    {resp.description}
-                  </p>
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                  <resp.icon className="w-5 h-5" />
                 </div>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  {resp.title}
+                </h3>
               </div>
             ))}
           </div>
 
           {/* Featured 7th Responsibility Card */}
           {responsibilities[6] && (
-            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row items-start sm:items-center gap-5 group">
-              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
-                {React.createElement(responsibilities[6].icon, { className: "w-6 h-6" })}
+            <div className="mt-4 sm:mt-5 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group">
+              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+                {React.createElement(responsibilities[6].icon, { className: "w-5 h-5" })}
               </div>
-              <div className="flex-1 space-y-1">
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  {responsibilities[6].title}
-                </h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                  {responsibilities[6].description}
-                </p>
-              </div>
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                {responsibilities[6].title}
+              </h3>
             </div>
           )}
         </motion.div>
 
 
-        <section className="mb-8 sm:mb-10">
+        <section className="mb-5 sm:mb-6">
           <div className="mb-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind IT Cell</h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-600">
-              Faculty mentors and student builders driving real campus transformation.
-            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">People Behind IT Cell</h2>
           </div>
           <TeamSection />
         </section>

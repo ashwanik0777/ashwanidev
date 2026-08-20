@@ -118,17 +118,17 @@ const ITCell = () => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header Section */}
-      <div className="relative bg-slate-900 text-white py-8 sm:py-12 md:py-14 px-4">
+      <div className="relative bg-slate-900 text-white py-6 sm:py-8 md:py-10 px-4">
         <div className="relative max-w-6xl mx-auto text-center">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3"
           >
             IT Cell
           </motion.h1>
-          <p className="text-base sm:text-lg md:text-xl mb-3 sm:mb-4 opacity-90">
+          <p className="text-base sm:text-lg md:text-xl mb-3 opacity-90">
             Building practical automation for Smart GBU
           </p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3 text-xs sm:text-sm">
@@ -140,23 +140,23 @@ const ITCell = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8 md:py-10">
+      <div className="max-w-6xl mx-auto px-4 py-5 sm:py-6">
         {/* Vision & Mission */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-6 mb-8 sm:mb-10"
+          className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-5 sm:mb-6"
         >
           <Card className="bg-blue-50 border-purple-200">
-            <CardHeader>
+            <CardHeader className="p-4 sm:p-5 pb-2">
               <CardTitle className="text-blue-800 flex items-center gap-2 sm:gap-3">
                 <visionMission.vision.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 {visionMission.vision.title}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 sm:p-5 pt-0">
               <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                 {visionMission.vision.content}
               </p>
@@ -164,13 +164,13 @@ const ITCell = () => {
           </Card>
 
           <Card className="bg-purple-50 border-purple-200">
-            <CardHeader>
+            <CardHeader className="p-4 sm:p-5 pb-2">
               <CardTitle className="text-emerald-800 flex items-center gap-2 sm:gap-3">
                 <visionMission.mission.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 {visionMission.mission.title}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 sm:p-5 pt-0">
               <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
                 {visionMission.mission.content}
               </p>
@@ -179,18 +179,18 @@ const ITCell = () => {
         </motion.div>
 
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <Card className="mb-8 sm:mb-10 bg-indigo-50 border-indigo-200">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-2">
+          <Card className="mb-5 sm:mb-6 bg-indigo-50 border-indigo-200">
+            <CardHeader className="text-center p-4 sm:p-5 pb-2">
+              <CardTitle className="text-2xl sm:text-3xl text-indigo-800 mb-1.5">
                 {itcellDescription.title}
               </CardTitle>
-              <CardDescription className="text-base text-gray-700 max-w-3xl mx-auto">
+              <CardDescription className="text-sm sm:text-base text-gray-700 max-w-3xl mx-auto">
                 {itcellDescription.subtitle}
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="text-center mb-6">
-                <blockquote className="text-lg italic text-indigo-700 font-medium">
+            <CardContent className="p-4 sm:p-5 pt-1 pb-4">
+              <div className="text-center">
+                <blockquote className="text-base sm:text-lg italic text-indigo-700 font-medium">
                   "{itcellDescription.quote}"
                 </blockquote>
               </div>
@@ -205,16 +205,16 @@ const ITCell = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-8 sm:mb-10"
+          className="mb-5 sm:mb-6"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-5 text-gray-800">
             Responsibilities of the Committee
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {responsibilities.slice(0, 6).map((resp, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl border border-slate-100 p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex items-center gap-3.5"
+                className="bg-white rounded-2xl border border-slate-100 p-4 sm:p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 group flex items-center gap-3.5"
               >
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
                   <resp.icon className="w-5 h-5" />
@@ -228,7 +228,7 @@ const ITCell = () => {
 
           {/* Featured 7th Responsibility Card */}
           {responsibilities[6] && (
-            <div className="mt-6 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-5 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group">
+            <div className="mt-4 sm:mt-5 bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 rounded-2xl border border-blue-100/80 p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3.5 group">
               <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
                 {React.createElement(responsibilities[6].icon, { className: "w-5 h-5" })}
               </div>
@@ -240,10 +240,10 @@ const ITCell = () => {
         </motion.div>
 
 
-        <section className="mb-8 sm:mb-10">
-          <div className="mb-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">People Behind IT Cell</h2>
-            <p className="mt-2 text-sm sm:text-base text-gray-600">
+        <section className="mb-5 sm:mb-6">
+          <div className="mb-3 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">People Behind IT Cell</h2>
+            <p className="mt-1 text-sm text-gray-600">
               Faculty mentors and student builders driving real campus transformation.
             </p>
           </div>

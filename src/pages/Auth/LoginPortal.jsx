@@ -32,7 +32,7 @@ const ROLE_OPTIONS = [
   {
     id: "faculty",
     title: "Faculty Login",
-    subtitle: "Faculty and teaching staff",
+    subtitle: "Faculty staff",
     icon: GraduationCap
   },
   /* Student Login — disabled until semester registration ships.
@@ -163,16 +163,16 @@ const LoginPortal = () => {
       <div className="relative z-10 flex items-center justify-center px-4 py-8 sm:px-6">
         <div className="w-full max-w-6xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl lg:grid lg:grid-cols-[1.05fr_1fr]">
 
-          {/* Left Panel — Branding (dark accent panel) */}
-          <section className="relative border-b border-slate-200 bg-[#0e1626] p-8 text-white lg:border-b-0 lg:border-r lg:p-12">
+          {/* Left Panel — Branding (light gradient panel) */}
+          <section className="relative border-b border-slate-200 bg-gradient-to-br from-sky-50 via-white to-sky-100 p-8 text-slate-900 lg:border-b-0 lg:border-r lg:p-12">
             <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true">
-              <div className="h-full w-full bg-[radial-gradient(circle,#ffffff_1px,transparent_1px)] bg-[length:20px_20px]" />
+              <div className="h-full w-full bg-[radial-gradient(circle,#0f172a_1.5px,transparent_1.5px)] bg-[length:24px_24px]" />
             </div>
 
             <div className="relative z-10 flex h-full flex-col justify-between gap-10">
               <div>
                 <div className="mb-8 flex items-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-600/40 bg-slate-800/80 shadow-lg">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-md">
                     <img
                       src="/assets/logo1.png"
                       alt="GBU Logo"
@@ -180,44 +180,44 @@ const LoginPortal = () => {
                     />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-sky-400 tracking-wide">
+                    <p className="text-sm font-semibold text-slate-900 tracking-wide">
                       Gautam Buddha University
                     </p>
-                    <p className="text-xs text-slate-400 mt-0.5">Greater Noida, Uttar Pradesh</p>
+                    <p className="text-xs text-slate-500 mt-0.5">Greater Noida, Uttar Pradesh</p>
                   </div>
                 </div>
 
-                <h1 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem] tracking-tight">
+                <h1 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem] tracking-tight text-slate-900">
                   Unified Access
                   <br />
-                  <span className="bg-gradient-to-r from-sky-400 to-blue-400 bg-clip-text text-transparent">
+                  <span className="text-sky-600">
                     Portal
                   </span>
                 </h1>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-slate-400">
+                <p className="mt-5 max-w-md text-base leading-relaxed text-slate-600">
                   Secure login portal for Faculty, School Administration, and Super Admin accounts.
                 </p>
               </div>
 
               {/* Security Card */}
-              <div className="space-y-4 rounded-xl border border-slate-700/60 bg-slate-800/50 p-5">
+              <div className="space-y-4 rounded-xl border border-slate-200 bg-white/60 p-5 backdrop-blur-md shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-500/10">
-                    <ShieldCheck className="h-5 w-5 text-sky-400" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sky-100">
+                    <ShieldCheck className="h-5 w-5 text-sky-600" />
                   </div>
-                  <span className="text-sm font-semibold text-slate-200">Security Notice</span>
+                  <span className="text-sm font-semibold text-slate-900">Security Notice</span>
                 </div>
-                <ul className="space-y-2.5 text-sm text-slate-400">
+                <ul className="space-y-2.5 text-sm text-slate-600">
                   <li className="flex items-start gap-2">
-                    <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
+                    <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500" />
                     Use your official university credentials.
                   </li>
                   <li className="flex items-start gap-2">
-                    <Fingerprint className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
+                    <Fingerprint className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500" />
                     Do not share your password with anyone.
                   </li>
                   <li className="flex items-start gap-2">
-                    <KeyRound className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
+                    <KeyRound className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sky-500" />
                     Contact system admin for account recovery.
                   </li>
                 </ul>
@@ -258,9 +258,9 @@ const LoginPortal = () => {
                         <p className="text-xs font-bold leading-tight">{item.title.replace(" Login", "")}</p>
                         <p className={`mt-0.5 text-[11px] leading-snug ${isActive ? "text-sky-500" : "text-slate-400"}`}>{item.subtitle}</p>
                       </div>
-                      {isActive && (
+                      {/* {isActive && (
                         <div className="absolute -top-px left-1/2 h-0.5 w-8 -translate-x-1/2 rounded-full bg-sky-500" />
-                      )}
+                      )} */}
                     </button>
                   );
                 })}
@@ -368,7 +368,7 @@ const LoginPortal = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-[#0e1626] px-4 py-3.5 font-semibold text-white shadow-lg shadow-slate-900/10 transition-all hover:bg-[#162035] hover:shadow-slate-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-4 py-3.5 font-semibold text-white shadow-lg shadow-sky-500/30 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
                   {loading
                     ? (requiresOtp ? "Verifying..." : "Signing in...")
@@ -384,13 +384,6 @@ const LoginPortal = () => {
                   onClick={() => navigate("/login/forgot-password")}
                 >
                   Forgot password?
-                </button>
-                <button
-                  type="button"
-                  className="font-semibold text-sky-600 hover:text-sky-700 transition"
-                  onClick={() => navigate("/faculty-register")}
-                >
-                  Faculty Register →
                 </button>
               </div>
             </div>

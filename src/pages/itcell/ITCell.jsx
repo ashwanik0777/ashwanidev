@@ -208,7 +208,7 @@ const ITCell = () => {
           viewport={{ once: true }}
           className="mb-5 sm:mb-6"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-5 text-gray-800">
+          <h2 className="text-2xl sm:text-3xl font-normal text-center mb-4 sm:mb-5 text-gray-800">
             Responsibilities of the Committee
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -252,7 +252,7 @@ const ITCell = () => {
           <div className="grid gap-6 md:grid-cols-[1.2fr_auto] md:items-center">
             <div>
               <h3 className="text-2xl font-bold text-slate-900">Join IT Cell Team</h3>
-              <p className="mt-2 text-sm text-slate-600 max-w-2xl">
+              <p className="mt-2 text-sm text-slate-600 ">
                 If you are passionate about web development, AI systems, product design, or automation, apply to contribute to real university systems.
               </p>
               <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-slate-700">

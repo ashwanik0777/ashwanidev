@@ -131,14 +131,13 @@ const TeamSection = () => {
     fetchTeam();
   }, []);
 
-  const combinedMembers = useMemo(() => {
-    const facultyWithFlag = teamData.faculty.map((m) => ({ ...m, isStudent: false }));
-    const studentWithFlag = teamData.student.map((m) => ({ ...m, isStudent: true }));
-
-    return [...facultyWithFlag, ...studentWithFlag];
+  const facultyMembers = useMemo(() => {
+    return teamData.faculty.map((m) => ({ ...m, isStudent: false }));
   }, [teamData]);
 
-  const leadership = teamData.faculty.length > 0 ? teamData.faculty[0] : null;
+  const studentMembers = useMemo(() => {
+    return teamData.student.map((m) => ({ ...m, isStudent: true }));
+  }, [teamData]);
 
   if (loading) {
     return (
@@ -152,45 +151,44 @@ const TeamSection = () => {
   }
 
   return (
-    <section className="space-y-6">
-      {leadership && (
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Leadership Spotlight</p>
-              <h3 className="mt-1 text-2xl font-bold text-slate-900">{leadership.name}</h3>
-              <p className="text-sm font-medium text-blue-700">{leadership.role}</p>
-              <p className="mt-2 text-sm text-slate-600">
-                Strategic guidance for high-impact digital transformation initiatives across the university.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Core Team Snapshot</p>
-              <div className="mt-2 flex gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700">
-                  <Users className="h-3.5 w-3.5" /> {teamData.faculty.length} Faculty
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                  <GraduationCap className="h-3.5 w-3.5" /> {teamData.student.length} Students
-                </span>
-              </div>
-            </div>
+    <section className="space-y-10">
+      {/* Faculty Team Section */}
+      <div>
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 sm:mb-6 flex items-center gap-2">
+          <Users className="h-6 w-6 text-indigo-600" />
+          Faculty Team
+        </h3>
+        {facultyMembers.length ? (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {facultyMembers.map((member, idx) => (
+              <TeamCard key={`faculty-${idx}`} member={member} />
+            ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+            No faculty members found.
+          </div>
+        )}
+      </div>
 
-      {combinedMembers.length ? (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {combinedMembers.map((member, idx) => (
-            <TeamCard key={`${member.name}-${member.role}-${idx}`} member={member} />
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
-          No team members found.
-        </div>
-      )}
+      {/* Student Team Section */}
+      <div>
+        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 sm:mb-6 flex items-center gap-2">
+          <GraduationCap className="h-6 w-6 text-emerald-600" />
+          Student Team
+        </h3>
+        {studentMembers.length ? (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+            {studentMembers.map((member, idx) => (
+              <TeamCard key={`student-${idx}`} member={member} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+            No student members found.
+          </div>
+        )}
+      </div>
     </section>
   );
 };

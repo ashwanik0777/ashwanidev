@@ -97,31 +97,31 @@ const RoadmapTimeline = () => {
     {
       dateRange: "1 June 2026 – 20 July 2026",
       milestone: "Phase 3: Dynamic Schools & Content Integration",
-      status: "in-progress",
+      status: "completed",
       description:
-        "Currently implementing dynamic content management systems for all university schools. Populating academic data, integrating the automated Faculty Registration system, and refining overall UI aesthetics.",
-      icon: <RefreshCw className="w-6 h-6 text-blue-600 animate-spin-slow" />,
+        "Implemented dynamic content management systems for all university schools. Populated academic data, integrated the automated Faculty Registration system, and refined overall UI aesthetics.",
+      icon: <RefreshCw className="w-6 h-6 text-emerald-600" />,
     },
     {
       dateRange: "20 July 2026 – 30 July 2026",
       milestone: "Phase 4: Rigorous Testing & Debugging",
-      status: "planned",
+      status: "completed",
       description:
-        "Exhaustive validation of all dashboard panels. Performing full-stack API endpoint integration testing, cross-browser compatibility audits, and responsive layout debugging.",
-      icon: <Bug className="w-6 h-6 text-indigo-600" />,
+        "Exhaustive validation of all dashboard panels. Performed full-stack API endpoint integration testing, cross-browser compatibility audits, and responsive layout debugging.",
+      icon: <Bug className="w-6 h-6 text-emerald-600" />,
     },
     {
       dateRange: "1 August 2026 – 20 August 2026",
       milestone: "Phase 5: Content Optimization & Final Tuning",
-      status: "upcoming",
+      status: "completed",
       description:
-        "Executing final features updates based on feedback. Performing data entry, adding/removing custom modules, refining SEO tags, and completing the deployment checklist.",
-      icon: <Wrench className="w-6 h-6 text-orange-600" />,
+        "Executed final features updates based on feedback. Performed data entry, adding/removing custom modules, refined SEO tags, and completed the deployment checklist.",
+      icon: <Wrench className="w-6 h-6 text-emerald-600" />,
     },
     {
       dateRange: "23 August 2026",
       milestone: "Phase 6: Official Production Launch",
-      status: "future",
+      status: "in-progress",
       description:
         "Deploying the fully modernized GBU Smart Portal to the live university servers. Officially launching the platform for all students, faculty, and administration.",
       icon: <Rocket className="w-6 h-6 text-purple-600" />,

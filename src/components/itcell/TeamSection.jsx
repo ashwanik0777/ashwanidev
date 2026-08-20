@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Mail, Linkedin, Search, Users, GraduationCap, Star, Globe, User, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Users, GraduationCap, Globe, User, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { listItcellMembers } from "../../services/itcellService";
 import { resolveFacultyImage } from "../../utils/imageUtils";
@@ -111,7 +111,6 @@ const TeamCard = ({ member }) => {
 };
 
 const TeamSection = () => {
-  const [query, setQuery] = useState("");
   const [teamData, setTeamData] = useState({ faculty: [], student: [] });
   const [loading, setLoading] = useState(true);
 
@@ -138,19 +137,6 @@ const TeamSection = () => {
 
     return [...facultyWithFlag, ...studentWithFlag];
   }, [teamData]);
-
-  const filteredMembers = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) return combinedMembers;
-
-    return combinedMembers.filter((member) =>
-      [member.name, member.role, member.department, member.designation, member.bio]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase()
-        .includes(normalized),
-    );
-  }, [combinedMembers, query]);
 
   const leadership = teamData.faculty.length > 0 ? teamData.faculty[0] : null;
 
@@ -194,36 +180,17 @@ const TeamSection = () => {
         </div>
       )}
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm font-medium text-slate-600">
-            {filteredMembers.length} result{filteredMembers.length === 1 ? "" : "s"}
-          </p>
-
-          <div className="relative min-w-[240px] flex-1 md:max-w-xs">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search name, role, department..."
-              className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
-            />
-          </div>
+      {combinedMembers.length ? (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {combinedMembers.map((member, idx) => (
+            <TeamCard key={`${member.name}-${member.role}-${idx}`} member={member} />
+          ))}
         </div>
-
-        {filteredMembers.length ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {filteredMembers.map((member, idx) => (
-              <TeamCard key={`${member.name}-${member.role}-${idx}`} member={member} />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
-            No team member found for this search.
-          </div>
-        )}
-      </div>
+      ) : (
+        <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+          No team members found.
+        </div>
+      )}
     </section>
   );
 };

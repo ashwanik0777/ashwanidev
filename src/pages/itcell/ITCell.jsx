@@ -241,11 +241,8 @@ const ITCell = () => {
 
 
         <section className="mb-5 sm:mb-6">
-          <div className="mb-3 text-center">
+          <div className="mb-4 text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">People Behind IT Cell</h2>
-            <p className="mt-1 text-sm text-gray-600">
-              Faculty mentors and student builders driving real campus transformation.
-            </p>
           </div>
           <TeamSection />
         </section>

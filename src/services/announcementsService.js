@@ -120,16 +120,30 @@ const normalizeEvent = (item) => {
     type: String(item?.type || "General").trim(),
     mode: String(item?.mode || "Offline").trim(),
     description: String(item?.description || "").trim(),
-    coverImageUrl: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
-    image: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
-    images: toList(item?.gallery || item?.images),
-    coverImage: String(item?.coverImageUrl || item?.coverImage || item?.cover_image || "").trim() || [...toList(item?.gallery || item?.images)].pop() || "",
+    ...(() => {
+      const explicitCover = String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim();
+      const flyer = String(item?.flyer_url || item?.flyerUrl || "").trim();
+      const imagesArr = toList(item?.gallery || item?.images);
+      const evStatus = String(item?.status || "upcoming").trim();
+      
+      const resolvedCover = evStatus === "upcoming"
+        ? (flyer || explicitCover || [...imagesArr].pop() || "")
+        : (explicitCover || [...imagesArr].pop() || flyer || "");
+
+      return {
+        status: evStatus,
+        coverImageUrl: resolvedCover,
+        image: resolvedCover,
+        coverImage: resolvedCover,
+        images: imagesArr,
+        flyerUrl: flyer,
+      };
+    })(),
     attendees: Number(item?.attendees || 0),
     price: String(item?.price || "Free").trim(),
     organizer: String(item?.organizer || "GBU").trim(),
     registrationUrl: String(item?.registration_url || item?.registrationUrl || "").trim(),
     brochureUrl: String(item?.brochure_url || item?.brochureUrl || "").trim(),
-    flyerUrl: String(item?.flyer_url || item?.flyerUrl || "").trim(),
     isUpcoming: eventStart ? eventStart >= today : false,
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),

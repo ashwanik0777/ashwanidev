@@ -13,7 +13,7 @@ export const crcInfo = {
     phone: "+91-120-2344 209",
     generalPhone: "0120-2344200",
     email: "vinay.litoria@gbu.ac.in",
-    image: "https://www.gbu.ac.in/content/placement/Vinay_kumar.jpeg"
+    image: "/assets/Faculty/Vinay_kumar_litoria.jpeg"
   },
   guidelinesPdf: "https://www.gbu.ac.in/content/placement/The%20Placement%20Guidelines%20for%20the%20year%202019.pdf",
   forms: {

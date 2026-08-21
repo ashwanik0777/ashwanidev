@@ -41,7 +41,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
     }}
     transition={{ type: "spring", stiffness: 200, damping: 20 }}
     className={cn(
-      "relative rounded-xl bg-white border border-slate-150 p-8 md:p-10 shadow-xl transition-all duration-300",
+      "relative rounded-xl bg-white border border-slate-100 p-8 md:p-10 shadow-xl transition-all duration-300",
       className
     )}
     {...props}
@@ -167,9 +167,6 @@ const RoadmapTimeline = () => {
       <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-2 text-slate-800 tracking-tight">
         IT Cell Progress Timeline
       </h2>
-      <p className="text-center text-slate-500 mb-8 text-sm sm:text-base max-w-xl mx-auto">
-        Development Roadmap & Platform Modernization Phases (2025 – 2026)
-      </p>
 
       <div className="relative max-w-4xl mx-auto">
         {/* Timeline track */}

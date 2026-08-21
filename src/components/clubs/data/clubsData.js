@@ -146,7 +146,7 @@ export const clubsData = [
     tagline: 'Brushing Dreams onto Canvas',
     category: 'Cultural',
     logo: tcclogo,
-    banner: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800',
+    banner: 'https://content.jdmagicbox.com/comp/jabalpur/u8/9999px761.x761.191120000131.a8u8/catalogue/chitrakala-fine-arts-academy-wright-town-jabalpur-painting-classes-xp1zmlta47.jpg',
     memberCount: 160,
     description: 'Chitrakala is GBU’s fine arts and painting society encouraging sketching, oil & acrylic painting, rangoli, wall murals, poster design, and digital art exhibitions.',
     objectives: [

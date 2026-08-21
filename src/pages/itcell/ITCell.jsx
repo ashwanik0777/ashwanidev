@@ -119,7 +119,7 @@ const ITCell = () => {
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header Section */}
       <div className="relative bg-slate-900 text-white py-6 sm:py-8 md:py-10 px-4">
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-7xl mx-auto text-center">
           <motion.h1
             variants={fadeUp}
             initial="hidden"
@@ -140,7 +140,7 @@ const ITCell = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-5 sm:py-6">
+      <div className="max-w-7xl mx-auto px-4 py-5 sm:py-6">
         {/* Vision & Mission */}
         <motion.div
           variants={fadeUp}
@@ -208,7 +208,7 @@ const ITCell = () => {
           viewport={{ once: true }}
           className="mb-5 sm:mb-6"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-5 text-gray-800">
+          <h2 className="text-center mb-4 sm:mb-5 text-2xl sm:text-3xl font-bold text-gray-800">
             Responsibilities of the Committee
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -220,7 +220,7 @@ const ITCell = () => {
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
                   <resp.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                <h3 className="text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                   {resp.title}
                 </h3>
               </div>
@@ -233,7 +233,7 @@ const ITCell = () => {
               <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
                 {React.createElement(responsibilities[6].icon, { className: "w-5 h-5" })}
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+              <h3 className="text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                 {responsibilities[6].title}
               </h3>
             </div>
@@ -252,7 +252,7 @@ const ITCell = () => {
           <div className="grid gap-6 md:grid-cols-[1.2fr_auto] md:items-center">
             <div>
               <h3 className="text-2xl font-bold text-slate-900">Join IT Cell Team</h3>
-              <p className="mt-2 text-sm text-slate-600 max-w-2xl">
+              <p className="mt-2 text-sm text-slate-600 ">
                 If you are passionate about web development, AI systems, product design, or automation, apply to contribute to real university systems.
               </p>
               <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-slate-700">

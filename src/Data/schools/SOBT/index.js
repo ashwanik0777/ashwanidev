@@ -33,8 +33,7 @@ export const departmentPages = [
 
 export const researchPages = [
   { id: "research-area", name: "Research Areas", path: "research-area" },
-  { id: "research-projects", name: "Research Publications", path: "research-projects" },
-  { id: "research-grants", name: "Research Grants", path: "research-grants" },
+  { id: "research-projects", name: "Research Projects", path: "research-projects" },
   { id: "research-scholars", name: "Research Scholars", path: "research-scholars" },
 ];
 

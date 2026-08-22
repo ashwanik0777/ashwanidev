@@ -162,10 +162,10 @@ export default function AboutSection() {
                 <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white to-transparent pointer-events-none" />
                 <div className="absolute inset-x-0 bottom-0 h-32 md:h-48 bg-gradient-to-t from-white to-transparent pointer-events-none" />
 
-                {/* Floating Badge (Original 18+ Years) */}
+                {/* Floating Badge (Original 17+ Years) */}
                 <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white/50 text-center flex flex-col items-center justify-center">
                   <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-600 leading-none mb-1">
-                    18+
+                    17+
                   </div>
                   <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                     Years of<br />Excellence

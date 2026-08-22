@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Photojournalism",
             "Audio-Video Editing"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1DNR1dC1M78pScETROLW7nnyX81Wzes6X/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+                url: "https://drive.google.com/file/d/1DNR1dC1M78pScETROLW7nnyX81Wzes6X/preview"
             },
             {
                 session: "Course Structure NEP",
-                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+                url: "https://drive.google.com/file/d/1DNR1dC1M78pScETROLW7nnyX81Wzes6X/preview"
             }
         ]
     },
@@ -139,11 +139,11 @@ export const departmentLayoutData = {
             "Documentary Film Making",
             "Media Management"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1_YbQvsjJTqeqXDiWePnWz8Q1pLbCSwcp/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview"
+                url: "https://drive.google.com/file/d/1_YbQvsjJTqeqXDiWePnWz8Q1pLbCSwcp/preview"
             }
         ]
     },
@@ -162,11 +162,11 @@ export const departmentLayoutData = {
             "Broadcast Production",
             "Newsroom Leadership"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1TeKCK1sTwjdqbQNu1j-sgnG42EdCpGN8/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview"
+                url: "https://drive.google.com/file/d/1TeKCK1sTwjdqbQNu1j-sgnG42EdCpGN8/preview"
             }
         ]
     }

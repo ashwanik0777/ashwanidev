@@ -1,44 +1,81 @@
-import { Phone, Building2 } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const contactData = {
-  schoolCode: "SOM",
-  schoolName: "School of Management",
-  generalInfo: {
-    heading: "Contact Us",
-    subheading: "Get in touch with the School of Management or Admission Office.",
-    cards: [
-      {
-        title: "Admission Office",
-        content: "For Admissions related information contact us at:\nPhone No.: 0120-2344234/47\nEmail: admissions@gbu.ac.in",
-        gradient: "bg-gradient-to-br from-blue-600 to-indigo-700",
-        icon: <Phone className="h-8 w-8 text-white" />,
-      },
-      {
-        title: "Programme Office",
-        content: "For more information about MBA programme contact us at:\nPhone No.: 0120-2346144",
-        gradient: "bg-gradient-to-br from-indigo-700 to-purple-800",
-        icon: <Building2 className="h-8 w-8 text-white" />,
-      },
-    ],
-  },
-  departments: [],
-  directory: [
-    { name: "Prof. Shweta Anand", phone: "0120-2346142", ext: "6142" },
-    { name: "Dr. Indu Uprety", phone: "0120-2346178", ext: "6178" },
-    { name: "Admission Office", phone: "0120-2344234", ext: "4234" },
-    { name: "Academic Office", phone: "0120-2346144", ext: "6144" },
-    { name: "Dr. Dinesh Kr. Sharma", phone: "0120-2346154", ext: "6154" },
-    { name: "Dr. Lovy Sarikwal", phone: "0120-2346155", ext: "6155" },
-    { name: "Dr. Rakesh Srivastava", phone: "0120-2346159", ext: "6159" },
-    { name: "Dr. Varsha Dixit", phone: "0120-2346158", ext: "6158" },
-    { name: "Dr. Subhojit Banerjee", phone: "0120-2346162", ext: "6162" },
-    { name: "Dr. Satish Mittal", phone: "0120-2346170", ext: "6170" },
-    { name: "Dr. Ajay Kansal", phone: "0120-2346168", ext: "6168" },
-    { name: "Dr. Naveen Kumar", phone: "0120-2346160", ext: "6160" },
-    { name: "Dr. Ombir Singh", phone: "0120-2346161", ext: "6161" },
-    { name: "Dr. Kavita Singh", phone: "0120-2346164", ext: "6163" },
-    { name: "Dr. Samar Raqshin", phone: "0120-2346165", ext: "6165" },
-    { name: "Dr. Monika Bhati", phone: "0120-2346166", ext: "6166" },
-  ],
+	schoolCode: "SOM",
+	schoolName: "School of Management",
+	generalInfo: {
+		heading: "Contact Us",
+		subheading: "Get in touch with the School of Management.",
+		cards: [
+			{
+				title: "Address",
+				content:
+					"School of Management\nGautam Buddha University\nYamuna Expressway, Greater Noida\nGautam Budh Nagar, Uttar Pradesh\nPIN: 201312",
+				gradient: "bg-gradient-to-br from-blue-500 to-blue-600",
+				icon: <MapPin className="h-8 w-8 text-white" />,
+			},
+			{
+				title: "Phone",
+				content:
+					"SOM Office: 0120-2346144\nUniversity: 0120-2344200\nAdmissions: 0120-2344234\nCRC: 0120-2344209",
+				gradient: "bg-gradient-to-br from-green-500 to-green-600",
+				icon: <Phone className="h-8 w-8 text-white" />,
+			},
+			{
+				title: "Email",
+				content:
+					"SOM Office: som@gbu.ac.in\nAdmissions: admissions@gbu.ac.in\nCRC: crc@gbu.ac.in\nDean: neeti@gbu.ac.in",
+				gradient: "bg-gradient-to-br from-purple-500 to-purple-600",
+				icon: <Mail className="h-8 w-8 text-white" />,
+			},
+		],
+	},
+	officeHours: [
+		{ day: "Monday - Friday", time: "9:30 AM - 5:30 PM" },
+		{ day: "Saturday", time: "9:30 AM - 1:00 PM" },
+		{ day: "Sunday", time: "Closed" },
+	],
+	departments: [
+		{
+			name: "Department of Business Management",
+			hod: "Dr. Varsha Dixit",
+			phone: "0120-2346144",
+			email: "som@gbu.ac.in",
+			hodEmail: "varsha.dixit@gbu.ac.in",
+			office: "Academic Block F, GBU Campus",
+			color: "from-blue-500 to-blue-600",
+		},
+	],
+	coeContacts: [
+		{
+			name: "Corporate Resource Center (CRC)",
+			department: "School of Management, Gautam Buddha University",
+			address: "Yamuna Expressway, Greater Noida, Gautam Budh Nagar, PIN - 201312",
+			email: "crc@gbu.ac.in",
+			phone: "0120-2344209",
+			socials: {
+				linkedin: "#",
+				twitter: "#",
+				instagram: "#",
+				youtube: "#",
+			},
+			color: "from-purple-500 to-indigo-500",
+			textColor: "text-purple-600",
+		},
+		{
+			name: "Admission Cell",
+			department: "School of Management, Gautam Buddha University",
+			address: "Yamuna Expressway, Greater Noida, Gautam Budh Nagar, PIN - 201312",
+			email: "admissions@gbu.ac.in",
+			phone: "0120-2344234",
+			socials: {
+				linkedin: "#",
+				twitter: "#",
+				instagram: "#",
+				youtube: "#",
+			},
+			color: "from-blue-500 to-green-500",
+			textColor: "text-blue-500",
+		},
+	],
 };
-

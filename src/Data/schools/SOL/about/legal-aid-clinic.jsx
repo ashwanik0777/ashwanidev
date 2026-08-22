@@ -1,98 +1,43 @@
 export const legalAidData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
-  heading: "Legal Aid | SOLJG",
-  customLayout: "legalAid",
+  heading: "SLJG Legal Aid Clinic",
   hero: {
-    title: "Legal Aid | SOLJG",
-    subtitle: "Equal Justice & Free Legal Aid under Article 39A of the Constitution of India in collaboration with District Legal Services Authority (DLSA).",
+    title: "Legal Aid Clinic",
+    subtitle: "Providing free legal services to the community while training future lawyers in clinical legal practice and social justice",
     bgTheme: 9,
   },
-  bookletUrl: "https://docs.google.com/presentation/d/1OISAsYccvhiKYRtL133q2Dc536-WBl3a/edit?usp=sharing&ouid=104470967123455199658&rtpof=true&sd=true",
-  bookletTitle: "Legal Aid Booklet (Presentation & Reference Document)",
-
-  overviewSection: {
-    title: "Overview & Constitutional Mandate",
-    description: "The School of Law, Justice & Governance has established the Legal Aid Centre (LAC) in collaboration with District Legal Services Authority (DLSA) as an integral part of the B.A. LL.B. course curriculum.",
-    objectives: [
-      {
-        title: "Article 39A Mandate",
-        desc: "Fulfilling the constitutional directive to provide equal justice and free legal aid to poor and weaker sections of society.",
-        icon: "ShieldCheck",
-      },
-      {
-        title: "Legal Services Authorities Act, 1987",
-        desc: "Providing free and competent legal services to eligible weaker sections under Section 2(1)(c) of the Act.",
-        icon: "BookOpen",
-      },
-      {
-        title: "Advocates Act, 1961",
-        desc: "Fulfilling the statutory obligation under Section 9A for the constitution of active legal aid committees.",
-        icon: "Scale",
-      },
-      {
-        title: "Bar Council of India Rules",
-        desc: "Upholding every advocate's duty to render free legal assistance to indigent persons (Rule Part VI, Section VI).",
-        icon: "Users",
-      },
-      {
-        title: "Landmark SC Precedent (Hussainara Khatoon Case)",
-        desc: "Implementing Supreme Court ruling {(1980) 1 SCC 98} recognizing free legal service as a fundamental right under Article 21 & Article 39A.",
-        icon: "Award",
-      },
+  about: {
+    visionTitle: "Our Vision",
+    visionDescription: [
+      "To bridge the gap between legal education and access to justice by providing free legal services to marginalized communities.",
+      "The Legal Aid Clinic envisions creating socially responsible lawyers who understand the justice needs of vulnerable populations.",
     ],
-  },
-  infrastructureSection: {
-    title: "Infrastructure & Major Achievements",
-    subtitle: "Active community engagement, litigation-free village adoption, and state recognition",
-    cards: [
-      {
-        title: "Para Legal Volunteers (PLVs)",
-        desc: "25 Registered PLVs and 50+ Non-Registered PLVs actively conducting outreach and assistance.",
-        badge: "Human Resources",
-      },
-      {
-        title: "Adopted Litigation-Free Village",
-        desc: "Signed MoU with Village Pradhan, Jaganpur (Tehsil Dankaur, Gautam Buddh Nagar) to develop a litigation-free community.",
-        badge: "MoU & Adoption",
-      },
-      {
-        title: "₹1,00,000 SLSA Infrastructure Grant",
-        desc: "Only Legal Aid Centre in NCR granted ₹1,00,000 by State Legal Services Authority for infrastructural development and smooth functioning.",
-        badge: "SLSA NCR Honor",
-      },
-      {
-        title: "50+ Community Outreach Programmes",
-        desc: "Organized over 50 legal awareness camps, mediation drives, and DLSA student conciliation internships between 2012 and 2023.",
-        badge: "Track Record",
-      },
+    missionTitle: "Our Mission",
+    missionPoints: [
+      "Provide free legal aid to women, children, senior citizens, and economically disadvantaged groups",
+      "Conduct legal awareness camps in villages and urban slums around Greater Noida",
+      "Collaborate with District Legal Services Authority (DLSA) and State Legal Services Authority (SLSA)",
+      "Train students in client counseling, case documentation, and legal aid procedures",
+      "Promote alternative dispute resolution and mediation for community conflicts",
     ],
-    facilitiesText: "Separate LAC Office on Ground Floor equipped with laptops, desktops, high-speed printers, and consultation seating.",
+    storyTitle: "Our Story",
+    storyText: "The Legal Aid Clinic was established in accordance with Bar Council of India rules and the Legal Services Authorities Act, 1987. The Clinic has served thousands of beneficiaries through legal awareness programmes, free consultations, and assistance with government welfare schemes.",
+    whatWeDoTitle: "What We Do",
+    whatWeDoText: "The Clinic organizes regular legal awareness camps in Dadri, Greater Noida, and surrounding villages. Students work with faculty members and voluntary advocates to provide free legal consultations, assist with government applications, and conduct workshops on domestic violence laws, consumer protection, RTI, and labour rights.",
+    commitmentTitle: "Our Commitment",
+    commitmentText: "We are committed to ensuring access to justice for all and developing a culture of pro bono legal service among law students.",
+    photos: ["https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800"],
   },
-  entitlementSection: {
-    title: "Who is Entitled to Free Legal Services?",
-    subtitle: "Eligible categories under Section 12 of the Legal Services Authorities Act, 1987",
-    categories: [
-      "Member of a Scheduled Caste (SC) or Scheduled Tribe (ST)",
-      "Victim of trafficking in human beings or begar (Article 23 of Constitution)",
-      "Women or Children",
-      "Mentally ill or otherwise disabled person",
-      "Victim of undeserved want (mass disaster, ethnic violence, flood, drought, earthquake, or industrial disaster)",
-      "Industrial workman",
-      "Person in custody (protective home, juvenile home, psychiatric hospital)",
-      "Person with annual income less than prescribed state limit (UP State ceiling: ₹3,00,000/- p.a.; Supreme Court cases: < ₹5,00,000/- p.a.)",
-    ],
-    incomeCeilingBadge: "UP State Income Ceiling Limit: ₹3,00,000 / Year",
-  },
-  contact: {
-    title: "Address & Contact Details",
-    office: "Ground Floor, School of Law, Justice & Governance, Gautam Buddha University",
-    coordinators: [
-      { name: "Dr. Santosh Kumar Tiwari", designation: "Coordinator", role: "Faculty Coordinator" },
-      { name: "Dr. Poonam Verma", designation: "Co-Coordinator", role: "Faculty Co-Coordinator" },
-    ],
-    email: "legalaid@gbu.ac.in",
-    phoneNumbers: ["+91-120-2347014", "+91-9452106147"],
-  },
+  facilities: [
+    { title: "Client Consultation Room", description: "Private consultation rooms for confidential client meetings, equipped with legal reference materials and documentation tools.", image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800" },
+    { title: "Legal Awareness Resource Centre", description: "Repository of simplified legal guides, pamphlets in Hindi and English on common legal issues, and audio-visual materials for community education.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" },
+    { title: "ADR & Mediation Room", description: "Dedicated space for mediation sessions and alternative dispute resolution proceedings conducted under faculty supervision.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" },
+  ],
+  keyActivities: [
+    { title: "Weekly Legal Aid Camp", description: "Free legal consultation sessions at the campus Legal Aid Clinic every Saturday, open to community members.", date: "Every Saturday" },
+    { title: "Village Legal Awareness Programme", description: "Monthly outreach camps in Dadri, Badalpur, and Greater Noida villages providing legal literacy on family law, land disputes, and government schemes.", date: "Monthly" },
+    { title: "National Legal Services Day", description: "Special programme on November 9th with free legal aid camp, legal essay competition, and awareness rally.", date: "November 9th each year" },
+    { title: "Women's Rights Workshop", description: "Quarterly workshops on women's legal rights covering DV Act, POCSO, workplace harassment prevention, and maternity benefits.", date: "Quarterly" },
+  ],
 };
-

@@ -112,8 +112,6 @@ const Navbar = () => {
     };
   }, [activeSchool]);
 
-  const currentSchoolCode = (school?.code || activeSchool || "SOICT").toUpperCase();
-
   const routes = {
     home: `/schools/${activeSchool}`,
     faculty: `/schools/${activeSchool}/faculty`,
@@ -139,9 +137,7 @@ const Navbar = () => {
       consultancy: `/schools/${activeSchool}/training-consultancy`,
       scholars: `/schools/${activeSchool}/research-scholars`,
       projects: `/schools/${activeSchool}/research-projects`,
-      grants: `/schools/${activeSchool}/research-grants`,
       patents: `/schools/${activeSchool}/patents`,
-      books: `/schools/${activeSchool}/books`,
     },
     contact: `/schools/${activeSchool}/contact`,
   };
@@ -153,9 +149,9 @@ const Navbar = () => {
     if (schoolCode === "SOBT") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        // { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
-        // { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
-        // { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
+        { label: "SOBT COE Bioinformatics", href: `/schools/${activeSchool}/departments/coe-bioinformatics` },
+        { label: "SOBT Molecular Biology Lab", href: `/schools/${activeSchool}/departments/molecular-biology-lab` },
+        { label: "SOBT Research Cell", href: `/schools/${activeSchool}/departments/research-cell` },
         { label: "SOBT Board of Studies", href: routes.about.board },
         { label: "SOBT Staff Members", href: routes.about.staff },
         { label: "SOBT Laboratories", href: routes.about.labs },
@@ -166,11 +162,11 @@ const Navbar = () => {
     if (schoolCode === "SOE") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        // { label: "SOE Advanced Computing Center", href: `/schools/${activeSchool}/departments/advanced-computing-center` },
-        // { label: "SOE Engineering Design Lab", href: `/schools/${activeSchool}/departments/engineering-design-lab` },
-        // { label: "SOE Innovation & Research Cell", href: `/schools/${activeSchool}/departments/innovation-research-cell` },
+        { label: "SOE Advanced Computing Center", href: `/schools/${activeSchool}/departments/advanced-computing-center` },
+        { label: "SOE Engineering Design Lab", href: `/schools/${activeSchool}/departments/engineering-design-lab` },
+        { label: "SOE Innovation & Research Cell", href: `/schools/${activeSchool}/departments/innovation-research-cell` },
         { label: "SOE Board of Studies", href: routes.about.board },
-        // { label: "SOE Staff Members", href: routes.about.staff },
+        { label: "SOE Staff Members", href: routes.about.staff },
         { label: "SOE Laboratories", href: routes.about.labs },
         { label: "SOE Activities", href: routes.about.activities },
       ];
@@ -179,12 +175,12 @@ const Navbar = () => {
     if (schoolCode === "SOBSC") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        // { label: "SBSC Centre for Buddhist Studies", href: `/schools/${activeSchool}/departments/centre-buddhist-studies` },
-        // { label: "SBSC Pali & Sanskrit Studies Cell", href: `/schools/${activeSchool}/departments/pali-sanskrit-studies` },
-        // { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
-        // { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
+        { label: "SBSC Centre for Buddhist Studies", href: `/schools/${activeSchool}/departments/centre-buddhist-studies` },
+        { label: "SBSC Pali & Sanskrit Studies Cell", href: `/schools/${activeSchool}/departments/pali-sanskrit-studies` },
+        { label: "SBSC Buddhist Heritage & Archaeology Unit", href: `/schools/${activeSchool}/departments/heritage-archaeology` },
+        { label: "SBSC Meditation & Mindfulness Centre", href: `/schools/${activeSchool}/departments/meditation-mindfulness-centre` },
         { label: "SBSC Board of Studies", href: routes.about.board },
-        // { label: "SBSC Staff Members", href: routes.about.staff },
+        { label: "SBSC Staff Members", href: routes.about.staff },
         { label: "SBSC Activities", href: routes.about.activities },
       ];
     }
@@ -194,35 +190,37 @@ const Navbar = () => {
         { label: "Dean's Message", href: routes.about.dean },
         { label: "SLJG Moot Court Cell", href: `/schools/${activeSchool}/departments/moot-court-cell` },
         { label: "SLJG Legal Aid Clinic", href: `/schools/${activeSchool}/departments/legal-aid-clinic` },
-        { label: "BCI Approved Letter", href: `/schools/${activeSchool}/departments/bci-approved-letters` },
-        { label: "School Library", href: `/schools/${activeSchool}/departments/school-library` },
+        { label: "SLJG Centre for Constitutional Law & Governance", href: `/schools/${activeSchool}/departments/constitutional-governance` },
+        { label: "SLJG Centre for Cyber Law & Digital Rights", href: `/schools/${activeSchool}/departments/cyber-law-centre` },
         { label: "SLJG Board of Studies", href: routes.about.board },
+        { label: "SLJG Staff Members", href: routes.about.staff },
+        { label: "SLJG Activities", href: routes.about.activities },
       ];
     }
     
     if (schoolCode === "SOM") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "Area Chairpersons", href: `/schools/${activeSchool}/departments/area-chairpersons` },
-        { label: "Guest Speakers", href: `/schools/${activeSchool}/departments/guest-speakers` },
         { label: "SOM Board of Studies", href: routes.about.board },
+        { label: "SOM Staff Members", href: routes.about.staff },
+        { label: "SOM Activities", href: routes.about.activities },
       ];
     }
 
     if (schoolCode === "SOHSS") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "Center Of Excellence", href: `/schools/${activeSchool}/departments/centres-of-excellence` },
-        { label: "Academic Collaboration", href: `/schools/${activeSchool}/departments/academic-collaboration` },
+        { label: "SOHSS Board of Studies", href: routes.about.board },
+        { label: "SOHSS Staff Members", href: routes.about.staff },
+        { label: "SOHSS Activities", href: routes.about.activities },
       ];
     }
 
     if (schoolCode === "SOVS") {
       return [
         { label: "Dean's Message", href: routes.about.dean },
-        { label: "Guest Speakers", href: `/schools/${activeSchool}/departments/guest-speakers` },
-        { label: "Academic Collaboration", href: `/schools/${activeSchool}/departments/academic-collaboration` },
         { label: "SOVS Board of Studies", href: routes.about.board },
+        { label: "SOVS Staff Members", href: routes.about.staff },
         { label: "SOVS Laboratories", href: routes.about.labs },
         { label: "SOVS Activities", href: routes.about.activities },
       ];
@@ -231,84 +229,13 @@ const Navbar = () => {
     // Default SOICT items
     return [
       { label: "Dean's Message", href: routes.about.dean },
-      { label: "COE Drone Technologies (CEDT)", href: routes.about.coeidrone },
-      { label: "Cyber Security Lab", href: routes.about.cyber },
-      { label: "COE RAEM", href: routes.about.coeiraem },
-      { label: "Board of Studies", href: routes.about.board },
-      { label: "Staff Members", href: routes.about.staff },
-      { label: "Laboratories", href: routes.about.labs },
-      { label: "Activities", href: routes.about.activities },
-    ];
-  };
-
-  // Build Research dropdown items based on the active school
-  const getResearchItems = () => {
-    const schoolCode = (school?.code || shortCode || activeSchool || "SOICT").toUpperCase();
-
-    if (schoolCode === "SOL") {
-      return [
-        { label: "Research Advisory Committee (RAC)", href: `/schools/${activeSchool}/departments/research-advisory-committee` },
-      ];
-    }
-
-    if (schoolCode === "SOM") {
-      return [
-        { label: "Corporate Resource Center (CRC)", href: `/schools/${activeSchool}/departments/corporate-resource-center` },
-        { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
-        { label: "Training and Consultancy", href: `/schools/${activeSchool}/departments/training-consultancy` },
-        { label: "MDP Calendar", href: "https://drive.google.com/file/d/1L9GL0Yw9WRi6eYIuDp_zBN4Fp3lJh-fF/view?usp=sharing" },
-      ];
-    }
-
-    if (schoolCode === "SOHSS") {
-      return [
-        { label: "Training and Consultancy", href: `/schools/${activeSchool}/departments/training-consultancy` },
-        { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
-      ];
-    }
-
-    if (schoolCode === "SOVS") {
-      return [
-        // { label: "Research Area and Profile", href: routes.research.profile },
-        // { label: "Training and Consultancy", href: routes.research.consultancy },
-        // { label: "Research Scholars", href: routes.research.scholars },
-        { label: "Research Projects", href: routes.research.projects },
-        // { label: "Patents", href: routes.research.patents },
-        // { label: "Books", href: routes.research.books },
-      ];
-    }
-
-    if (schoolCode === "SOBSC") {
-      return [
-        { label: "Research Area and Profile", href: routes.research.profile },
-        { label: "Training and Consultancy", href: routes.research.consultancy },
-        { label: "Research Scholars", href: routes.research.scholars },
-        { label: "Research Publications", href: routes.research.projects },
-        { label: "Research Grants", href: routes.research.grants },
-        { label: "Patents", href: routes.research.patents },
-        { label: "Books", href: routes.research.books },
-      ];
-    }
-
-    if (schoolCode === "SOBT" || schoolCode === "SOE") {
-      return [
-        { label: "Research Area and Profile", href: routes.research.profile },
-        // { label: "Training and Consultancy", href: routes.research.consultancy },
-        { label: "Research Scholars", href: routes.research.scholars },
-        { label: "Research Publications", href: routes.research.projects },
-        { label: "Research Grants", href: routes.research.grants },
-        { label: "Patents", href: routes.research.patents },
-        { label: "Books", href: routes.research.books },
-      ];
-    }
-
-    return [
-      { label: "Research Area and Profile", href: routes.research.profile },
-      { label: "Training and Consultancy", href: routes.research.consultancy },
-      { label: "Research Scholars", href: routes.research.scholars },
-      { label: "Research Projects", href: routes.research.projects },
-      { label: "Patents", href: routes.research.patents },
-      { label: "Books", href: routes.research.books },
+      { label: "USICT COEIDrone Technologies", href: routes.about.coeidrone },
+      { label: "USICT Cyber Security Lab", href: routes.about.cyber },
+      { label: "USICT COEIRAEM", href: routes.about.coeiraem },
+      { label: "USICT Board of Studies", href: routes.about.board },
+      { label: "USICT Staff Members", href: routes.about.staff },
+      { label: "USICT Laboratories", href: routes.about.labs },
+      { label: "USICT Activities", href: routes.about.activities },
     ];
   };
 
@@ -318,7 +245,7 @@ const Navbar = () => {
       label: "About Us",
       items: getAboutItems(),
     },
-    currentSchoolCode !== "SOBSC" && currentSchoolCode !== "SOL" && {
+    {
       key: "departments",
       label: "Departments & Academic Programs",
       items: departmentItems.length
@@ -341,9 +268,18 @@ const Navbar = () => {
     {
       key: "research",
       label: "Research",
-      items: getResearchItems(),
+      items: [
+        { label: "Research Area and Profile", href: routes.research.profile },
+        {
+          label: "Training and Consultancy",
+          href: routes.research.consultancy,
+        },
+        { label: "Research Scholars", href: routes.research.scholars },
+        { label: "Research Projects", href: routes.research.projects },
+        { label: "Patents", href: routes.research.patents },
+      ],
     },
-  ].filter(Boolean);
+  ];
 
   const navVariants = {
     initial: { y: -50, opacity: 0 },
@@ -417,7 +353,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-8.5 sm:top-9 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-8.5 sm:top-9 left-0 w-full z-30 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100"
           : "bg-white shadow"
@@ -532,7 +468,7 @@ const Navbar = () => {
             <AnimatePresence>
               {openMenu === key && (
                 <motion.ul
-                  className="absolute top-full left-0 mt-2 min-w-[260px] max-w-sm w-auto bg-white/95 backdrop-blur-lg shadow-xl rounded-xl border border-gray-200 p-2 z-50 whitespace-nowrap"
+                  className="absolute top-full left-0 mt-2 w-72 bg-white/95 backdrop-blur-lg shadow-xl rounded-xl border border-gray-200 p-2 z-50"
                   variants={dropdownVariants}
                   initial="hidden"
                   animate="visible"
@@ -540,25 +476,13 @@ const Navbar = () => {
                 >
                   {items.map((item, idx) => (
                     <motion.li key={idx} variants={itemVariants}>
-                      {item.href.startsWith("http") ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
-                          onClick={() => setOpenMenu(null)}
-                        >
-                          {item.label}
-                        </a>
-                      ) : (
-                        <Link
-                          to={item.href}
-                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
-                          onClick={() => setOpenMenu(null)}
-                        >
-                          {item.label}
-                        </Link>
-                      )}
+                      <Link
+                        to={item.href}
+                        className="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-lg transition-all duration-200 transform hover:translate-x-1"
+                        onClick={() => setOpenMenu(null)}
+                      >
+                        {item.label}
+                      </Link>
                     </motion.li>
                   ))}
                 </motion.ul>
@@ -566,16 +490,14 @@ const Navbar = () => {
             </AnimatePresence>
           </motion.li>
         ))}
-        {currentSchoolCode !== "SOE" && currentSchoolCode !== "SOBSC" && currentSchoolCode !== "SOM" && currentSchoolCode !== "SOHSS" && currentSchoolCode !== "SOVS" && (
-          <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
-            <Link
-              to={routes.placement}
-              className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
-            >
-              Placement
-            </Link>
-          </motion.li>
-        )}
+        <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
+          <Link
+            to={routes.placement}
+            className="hover:text-purple-700 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-purple-700 after:transition-all after:duration-300 hover:after:w-full"
+          >
+            Placement
+          </Link>
+        </motion.li>
         <motion.li whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
           <Link
             to={routes.contact}
@@ -661,31 +583,16 @@ const Navbar = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.05 }}
                           >
-                            {item.href.startsWith("http") ? (
-                              <a
-                                href={item.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false);
-                                  setMobileOpenMenus({});
-                                }}
-                              >
-                                {item.label}
-                              </a>
-                            ) : (
-                              <Link
-                                to={item.href}
-                                className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false);
-                                  setMobileOpenMenus({});
-                                }}
-                              >
-                                {item.label}
-                              </Link>
-                            )}
+                            <Link
+                              to={item.href}
+                              className="block py-2 px-3 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-all duration-200"
+                              onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setMobileOpenMenus({});
+                              }}
+                            >
+                              {item.label}
+                            </Link>
                           </motion.li>
                         ))}
                       </motion.ul>

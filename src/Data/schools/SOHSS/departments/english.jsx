@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Creative Writing",
             "Phonetics & Linguistics"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1VgI85NJK_f84r3brsKGcDxQfFEb-Z_0N/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview"
+                url: "https://drive.google.com/file/d/1VgI85NJK_f84r3brsKGcDxQfFEb-Z_0N/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview",
+        syllabusUrl: "https://drive.google.com/file/d/13WwZwiLfrMWj1D3G5cZClMT6mOVPlA2M/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview"
+                url: "https://drive.google.com/file/d/13WwZwiLfrMWj1D3G5cZClMT6mOVPlA2M/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sociolinguistics",
             "Language Documentation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1I40DUkVAsrRdc7Uz07VdixrDnDUK4I6x/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview"
+                url: "https://drive.google.com/file/d/1I40DUkVAsrRdc7Uz07VdixrDnDUK4I6x/preview"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1nEsrcvLTZNOjoiQBt96Es1v-bet2jSJH/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview"
+                url: "https://drive.google.com/file/d/1nEsrcvLTZNOjoiQBt96Es1v-bet2jSJH/preview"
             }
         ]
     }

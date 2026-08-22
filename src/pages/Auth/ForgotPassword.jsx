@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, KeyRound, Mail, Lock } from "lucide-react";
 import {
   requestForgotPasswordOtp,
   verifyForgotPasswordOtp,
@@ -75,137 +74,95 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden px-4 py-10 flex flex-col items-center justify-center">
-      {/* Subtle background decoration to match login */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-sky-100/60 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-blue-100/50 blur-3xl" />
-      </div>
-
-      {/* Back Button */}
-      <div className="w-full max-w-lg mb-4 relative z-10">
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 shadow-sm transition-all hover:border-slate-300 hover:text-slate-900 hover:shadow"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Login
-        </Link>
-      </div>
-
-      <div className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-8 sm:p-10 shadow-xl relative z-10">
-        <div className="mb-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sky-100 text-sky-600 mb-5">
-            <KeyRound className="h-6 w-6" />
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Forgot Password</h1>
-          <p className="mt-2 text-sm text-slate-500">
-            {step === 1
-              ? "Enter your registered email address to receive an OTP for password reset."
-              : "Enter the OTP sent to your email and your new password."}
-          </p>
-        </div>
+    <div className="min-h-screen bg-stone-100 px-4 py-10">
+      <div className="mx-auto max-w-lg rounded-3xl border border-stone-300 bg-white p-8 shadow-xl">
+        <h1 className="text-2xl font-bold text-stone-900">Forgot Password</h1>
+        <p className="mt-2 text-sm text-stone-600">
+          Email OTP verification is required before password reset.
+        </p>
 
         {step === 1 ? (
-          <form onSubmit={handleSendOtp} className="space-y-5">
+          <form onSubmit={handleSendOtp} className="mt-6 space-y-4">
             <div>
-              <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
+              <label htmlFor="email" className="mb-1 block text-sm font-medium text-stone-700">
                 Registered Email
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <Mail className="h-5 w-5" />
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white pl-11 pr-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
-                  placeholder="name@gbu.ac.in"
-                />
-              </div>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none focus:border-stone-900"
+                placeholder="name@gbu.ac.in"
+              />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-4 py-3.5 font-semibold text-white shadow-lg shadow-sky-500/30 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="w-full rounded-xl bg-stone-900 px-4 py-3 font-semibold text-white hover:bg-stone-800 disabled:opacity-60"
             >
               {loading ? "Sending OTP..." : "Send OTP"}
             </button>
           </form>
         ) : (
-          <form onSubmit={handleResetPassword} className="space-y-5">
+          <form onSubmit={handleResetPassword} className="mt-6 space-y-4">
             <div>
-              <label htmlFor="otp" className="mb-1.5 block text-sm font-medium text-slate-700">
-                Enter OTP
+              <label htmlFor="otp" className="mb-1 block text-sm font-medium text-stone-700">
+                OTP
               </label>
               <input
                 id="otp"
                 type="text"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 text-center tracking-widest font-mono text-lg"
-                placeholder="000000"
-                maxLength={6}
+                className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none focus:border-stone-900"
+                placeholder="Enter 6-digit OTP"
               />
             </div>
             <div>
-              <label htmlFor="newPassword" className="mb-1.5 block text-sm font-medium text-slate-700">
+              <label htmlFor="newPassword" className="mb-1 block text-sm font-medium text-stone-700">
                 New Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <Lock className="h-5 w-5" />
-                </div>
-                <input
-                  id="newPassword"
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white pl-11 pr-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
-                  placeholder="Create new password"
-                />
-              </div>
+              <input
+                id="newPassword"
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none focus:border-stone-900"
+                placeholder="Enter strong password"
+              />
             </div>
             <div>
-              <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-slate-700">
-                Confirm New Password
+              <label htmlFor="confirmPassword" className="mb-1 block text-sm font-medium text-stone-700">
+                Confirm Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                  <Lock className="h-5 w-5" />
-                </div>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-white pl-11 pr-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
-                  placeholder="Re-enter password"
-                />
-              </div>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full rounded-xl border border-stone-300 px-4 py-3 outline-none focus:border-stone-900"
+                placeholder="Re-enter password"
+              />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-4 py-3.5 font-semibold text-white shadow-lg shadow-sky-500/30 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/40 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="w-full rounded-xl bg-stone-900 px-4 py-3 font-semibold text-white hover:bg-stone-800 disabled:opacity-60"
             >
               {loading ? "Resetting..." : "Verify OTP & Reset Password"}
             </button>
           </form>
         )}
 
-        {error ? (
-          <p className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-sm font-medium text-red-700 text-center">
-            {error}
-          </p>
-        ) : null}
-        {message ? (
-          <p className="mt-5 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2.5 text-sm font-medium text-sky-700 text-center">
-            {message}
-          </p>
-        ) : null}
+        {error ? <p className="mt-4 text-sm font-medium text-red-700">{error}</p> : null}
+        {message ? <p className="mt-4 text-sm font-medium text-emerald-700">{message}</p> : null}
+
+        <div className="mt-6 text-sm text-stone-600">
+          <Link to="/login" className="font-semibold text-stone-900 hover:underline">
+            Back to login
+          </Link>
+        </div>
       </div>
     </div>
   );

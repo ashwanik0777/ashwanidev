@@ -1,141 +1,231 @@
-import { Utensils, ShieldCheck, Activity } from "lucide-react";
+import { Utensils, ShieldCheck, Activity, Users, BookOpen, Award, Lightbulb, GraduationCap } from "lucide-react";
 
 export const departmentLayoutData = {
   schoolCode: "SOVS",
   departmentId: "food-processing-technology",
   heroProps: {
-    title: "Department of Food Processing and Technology",
-    highlight: "From Farm to Fork: Innovating Food for a Safer and Sustainable Tomorrow.",
+    title: "Department of Food Processing & Technology",
+    highlight: "Food Processing",
     subtitle:
-      "Advancing education, research, and innovation in food science, food processing, and value addition to agricultural products at Gautam Buddha University.",
-    primaryButton: { label: "Explore Programmes" },
-    secondaryButton: { label: "Department Labs" },
+      "Engineering food safety, quality, and preservation — Leading academic training and research in food engineering, packaging, and bio-processing since 2012.",
+    primaryButton: { label: "Explore Programs" },
+    secondaryButton: { label: "Research Areas" },
     backgroundImage:
       "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=1920&q=80",
     features: [
       {
         icon: Utensils,
-        bg: "bg-gradient-to-br from-orange-500 to-amber-600",
-        subtitle: "Food Science & Processing",
-        description: "Innovative processing technologies, food preservation, and value addition to agricultural products",
+        bg: "bg-gradient-to-br from-orange-500 to-orange-600",
+        subtitle: "Food Engineering",
+        description: "Food preservation engineering, process modeling, and machinery",
       },
       {
         icon: ShieldCheck,
-        bg: "bg-gradient-to-br from-emerald-500 to-teal-600",
+        bg: "bg-gradient-to-br from-yellow-500 to-yellow-600",
         subtitle: "Quality & Safety",
-        description: "Food safety protocols, analytical evaluation, FSSAI compliance, and microbial quality control",
+        description: "Food analysis, FSSAI regulations, and microbial quality control",
       },
       {
         icon: Activity,
-        bg: "bg-gradient-to-br from-purple-500 to-indigo-600",
-        subtitle: "Research & Innovation",
-        description: "Hands-on laboratory training, industry-focused research, and product development",
+        bg: "bg-gradient-to-br from-red-500 to-red-600",
+        subtitle: "Functional Foods",
+        description: "Bio-active compound extraction, nutraceuticals, and novel products",
       },
     ],
   },
   hodProps: {
-    title: "HoD's Message",
-    image: "https://faculty.gbu.ac.in/../uploads/photos/67c69ca1267bf_Nitin Pic.jpeg",
-    name: "Dr. Nitin Sonkar",
+    title: "From the Desk of HOD, Food Processing & Technology",
+    image: "https://faculty.gbu.ac.in/uploads/photos/comingsoonimg.jpg",
+    name: "Dr. Mohd. Tashfeen Ashraf",
     designation: "Head of Department",
     messageParagraphs: [
-      "The Department of Food Processing and Technology is dedicated to delivering high-quality education and practical expertise in food technology. The department offers undergraduate, postgraduate, and doctoral programmes. Our goal is to equip students with a comprehensive understanding of various aspects of food technology, transforming them into world-class scientists and entrepreneurs who can make meaningful contributions to the food industry, scientific community and society. The department emphasises both theoretical knowledge and practical training through laboratory work, projects and industry exposure. Our faculty members are committed to supporting students’ academic growth and career development.",
-      "I wish success to our students in their studies and future careers and invite our future students to join the department for a successful and impactful career in the field of food technology.",
+      "Greetings!",
+      "Welcome to the Department of Food Processing & Technology at the School of Vocational Studies & Applied Sciences, Gautam Buddha University. Food technology is a highly progressive field that ensures food security, quality, and nutrition from farm to fork.",
+      "We offer B.Tech., M.Tech., B.Voc., and Ph.D. programs. The curriculum is interdisciplinary, covering food chemistry, microbiology, food packaging, thermal processing, dairy technology, and regulatory guidelines like FSSAI standards.",
+      "Our students gain hands-on training in our pilot plant and testing laboratories, which feature modern instrumentation like HPLC, spray dryers, and texture analyzers. We place a strong emphasis on industrial internships to make students industry-ready.",
+      "Explore our academic options and join us in shaping the future of food engineering.",
     ],
     contact: {
-      name: "Dr. Nitin Sonkar",
+      name: "Dr. Mohd. Tashfeen Ashraf",
       designation: "Head of Department - Food Processing & Technology",
-      email: "nitin.sonkar@gbu.ac.in",
-      phone: "0120-2344341",
+      email: "ashraf@gbu.ac.in",
+      phone: "0120-234-4200",
     },
   },
   aboutProps: {
     heading: "About the Department",
     subheading:
-      "“From Farm to Fork: Innovating Food for a Safer and Sustainable Tomorrow.”",
-    description:
-      "The Department of Food Processing and Technology at Gautam Buddha University was established under the School of Vocational Studies and Applied Sciences (SoVSAS) with the objective of advancing education, research and innovation in food science, food processing, and value addition to agricultural products. Since its establishment, the department has consistently focused on preparing competent professionals and researchers who can address emerging issues related to food quality, safety, nutrition, and sustainability. The department is strengthened by a team of qualified and committed faculty members specializing in various domains of food technology.\n\nThe department is equipped with modern laboratories and advanced processing facilities that provide an enabling environment for academic learning, research activities, product development, and industry-focused training. The available infrastructure supports hands-on experience, analytical evaluation, and innovative work across multiple areas of food technology.\n\nA variety of academic programmes are offered to provide students with a strong blend of theoretical understanding and practical expertise. These include B.Tech. in Food Technology, M.Tech. in Food Technology, M.Sc. in Food Science and Technology, and Ph.D. in Food Technology. The B.Tech. programme lays the groundwork in food processing, engineering concepts, and food safety, while the M.Sc. and M.Tech. programmes focus on advanced studies, research, and technological applications. The Ph.D. programme is designed to develop research scholars capable of contributing to academia, research institutions, and the food industry.\n\nBeyond academics, the department conducts seminars, workshops, industrial visits, and training sessions to enhance students’ skills and professional development. Students are actively encouraged to engage in research projects, internships, and collaborations with industry and research organizations, providing them with valuable practical exposure.\n\nWith its interdisciplinary outlook, robust academic structure and emphasis on innovation and sustainability, the department continues to grow as a vibrant hub for education, research and technological progress in the field of food processing.",
+      "The Department of Food Processing & Technology trains students in advanced food engineering, preservation, quality analysis, packaging, and entrepreneurship in the food sector.",
+    stats: [
+      { icon: Users, numberText: "150+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "6+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "4+", title: "Research Projects", subtitle: "Completed" },
+      { icon: Lightbulb, numberText: "35+", title: "Publications", subtitle: "Research Papers" },
+    ],
+    highlights: [
+      {
+        title: "Pilot Plant Training",
+        description:
+          "Practical exposure in processing machinery including spray dryers, food dehydrators, packaging lines, and homogenizers.",
+        dotColor: "#f97316",
+      },
+      {
+        title: "Industrial Internships",
+        description:
+          "Mandatory 6-week industrial training in leading food companies like Nestle, Mother Dairy, Coca-Cola, and Haldirams.",
+        dotColor: "#eab308",
+      },
+      {
+        title: "FSSAI Standards Focus",
+        description:
+          "Curriculum covers food safety audit practices, HACCP principles, and FSSAI licensing and labeling regulations.",
+        dotColor: "#ef4444",
+      },
+    ],
     vision:
-      "To be a vibrant hub for education, research, and technological progress in food processing, producing competent professionals and entrepreneurs for a safer, sustainable tomorrow.",
+      "To be a premier center for food engineering education and research, fostering novel food products and safety standards for the processing industry.",
     missionPoints: [
-      "Deliver high-quality education and practical expertise in food science, processing, and safety",
-      "Conduct cutting-edge research on food quality, nutrition, shelf-life extension, and green processing",
-      "Provide state-of-the-art laboratory and pilot plant infrastructure for experiential learning",
-      "Foster strong industry collaborations, internships, and entrepreneurial ventures in food tech",
+      "Provide high-quality technical education in food processing and bio-processing",
+      "Perform research on food safety, functional foods, packaging, and shelf life extension",
+      "Train students in processing machinery operation and quality control protocols",
+      "Encourage entrepreneurship and food startup initiatives among students",
     ],
   },
   programsData: [
     {
-      id: "btech-fpt",
-      title: "B.Tech. (Food Processing and Technology)",
-      level: "Undergraduate",
-      duration: "4 Years (8 Semesters)",
-      intake: "30 Seats",
-      description:
-        "Lays foundational concepts in food processing, engineering principles, food preservation, thermal technology, and food safety standards.",
-      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-orange-500 to-amber-600",
-      highlights: [
-        "30 Student Intake",
-        "4 Years (8 Semesters)",
-        "Food Engineering & Preservation",
-        "FSSAI Quality & Safety Standards",
-      ],
-      syllabus: [],
+        id: "btech-food-processing-tech",
+        title: "B.Tech. (Food Processing and Technology)",
+        level: "UG",
+        duration: "4 Years",
+        intake: "60 Students",
+        description: "Engineering principles applied to food preservation, dairy processing, thermal & non-thermal preservation, food plant layout, and quality assurance.",
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-500 to-orange-600",
+        highlights: [
+            "Food Preservation Engineering",
+            "Dairy & Beverage Technology",
+            "Food Safety (HACCP & FSSAI)",
+            "Food Plant Machinery"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1COEW9fVRZFBePL6XXjyQSk-t7tYD5Zu9/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1COEW9fVRZFBePL6XXjyQSk-t7tYD5Zu9/preview"
+            }
+        ]
     },
     {
-      id: "mtech-fpt",
-      title: "M.Tech. (Food Processing and Technology)",
-      level: "Postgraduate",
-      duration: "2 Years (4 Semesters)",
-      intake: "15 Seats",
-      description:
-        "Advanced post-graduate program emphasizing food process modeling, novel packaging, bioprocess engineering, and technological applications.",
-      image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-600 to-orange-700",
-      highlights: [
-        "15 Student Intake",
-        "2 Years (4 Semesters)",
-        "Advanced Process Engineering",
-        "Master Research Thesis",
-      ],
-      syllabus: [],
+        id: "mtech-food-processing-tech",
+        title: "M.Tech. (Food Processing and Technology)",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Advanced post-graduate training in food process modeling, novel food packaging, nutraceuticals, advanced rheology, and bioprocess engineering.",
+        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-600 to-red-700",
+        highlights: [
+            "Novel Food Packaging",
+            "Nutraceutical Formulation",
+            "Bioprocess Engineering",
+            "Master Research Project"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/17pSzZK89I95Dj8jywI4p_6TNKSLEYFgi/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/17pSzZK89I95Dj8jywI4p_6TNKSLEYFgi/preview"
+            }
+        ]
     },
     {
-      id: "msc-fst",
-      title: "M.Sc. (Food Science & Technology)",
-      level: "Postgraduate",
-      duration: "2 Years (4 Semesters)",
-      intake: "20 Seats",
-      description:
-        "Focuses on food chemistry, food microbiology, sensory evaluation, analytical testing, and novel product formulation.",
-      image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-600 to-teal-700",
-      highlights: [
-        "20 Student Intake",
-        "2 Years (4 Semesters)",
-        "Food Chemistry & Microbiology",
-        "Laboratory Testing & Research",
-      ],
-      syllabus: [],
+        id: "msc-food-science",
+        title: "M.Sc. Food Science",
+        level: "PG",
+        duration: "2 Years",
+        intake: "30 Students",
+        description: "Study of food chemistry, food microbiology, sensory evaluation techniques, fermentation technologies, and international food regulatory laws.",
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-amber-600 to-yellow-700",
+        highlights: [
+            "Food Microbiology & Safety",
+            "Sensory Analysis & Flavour",
+            "Food Chemistry & Nutrition",
+            "Master Dissertation"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1IkcM6bUiR_EyT2vwVmqRmDz17hhqPFjv/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1IkcM6bUiR_EyT2vwVmqRmDz17hhqPFjv/preview"
+            }
+        ]
     },
     {
-      id: "phd-fpt",
-      title: "Ph.D. (Food Processing and Technology)",
-      level: "Doctoral",
-      duration: "As per UGC / University Norms",
-      intake: "As per UGC / University Norms",
-      description:
-        "Doctoral research program developing independent research scholars capable of contributing to academia, research institutions, and global food industries.",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-600 to-indigo-700",
-      highlights: [
-        "UGC & University Norms Intake",
-        "Doctoral Coursework & Research",
-        "Advanced Product Development",
-        "Ph.D. Dissertation Defense",
-      ],
-      syllabus: [],
+        id: "phd-food-processing-tech",
+        title: "Ph.D. in Food Processing and Technology",
+        level: "Doctoral",
+        duration: "3-5 Years",
+        intake: "10 Students",
+        description: "Doctoral research program promoting original innovations in functional foods, green extraction, food waste valorization, and shelf-life modeling.",
+        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
+        gradient: "from-orange-700 to-slate-900",
+        highlights: [
+            "Doctoral Coursework",
+            "Food Engineering Lab",
+            "Functional Food Research",
+            "Ph.D. Defense"
+        ],
+        syllabusUrl: "https://drive.google.com/file/d/1yuriuqAEfIuHqQs_TTdgmQe0HOJ4daBH/preview",
+        syllabus: [
+            {
+                session: "Course Structure",
+                url: "https://drive.google.com/file/d/1yuriuqAEfIuHqQs_TTdgmQe0HOJ4daBH/preview"
+            }
+        ]
+    }
+],
+  facultyStats: {
+    text: "Our department has 6 dedicated faculty members with research expertise in food engineering, preservation, bio-active compounds, and dairy technology.",
+    stats: [
+      { icon: BookOpen, numberText: "35+", subtitle: "Research Papers", bg: "bg-orange-50", color: "text-orange-600" },
+      { icon: Award, numberText: "2+", subtitle: "Completed Projects", bg: "bg-yellow-50", color: "text-yellow-600" },
+      { icon: GraduationCap, custom: "PhD", numberText: "100%", subtitle: "PhD Faculty", bg: "bg-red-50", color: "text-red-600" },
+      { icon: GraduationCap, custom: "Exp", numberText: "10+", subtitle: "Avg Experience", bg: "bg-rose-50", color: "text-rose-600" },
+    ],
+  },
+  researchStats: [
+    { numberText: "2+", subtitle: "Research Projects" },
+    { numberText: "₹12L+", subtitle: "Research Funding" },
+    { numberText: "35+", subtitle: "Publications" },
+    { numberText: "4+", subtitle: "PhDs Awarded" },
+  ],
+  topAchievers: [
+    {
+      name: "Akash Singhal",
+      year: "B.Tech 2023",
+      achievement: "Placed as Quality Control Officer at Mother Dairy, Delhi",
+      image: "https://randomuser.me/api/portraits/men/55.jpg",
+      skills: ["Quality Audit", "FSSAI standards", "Dairy Tech"],
+    },
+    {
+      name: "Sneha Goel",
+      year: "M.Tech 2024",
+      achievement: "Secured CSIR Senior Research Fellowship (SRF) for PhD studies",
+      image: "https://randomuser.me/api/portraits/women/56.jpg",
+      skills: ["Functional Foods", "HPLC Analysis", "Process engineering"],
+    },
+  ],
+  achievements: [
+    {
+      title: "FSSAI Sponsored Training Program",
+      year: "2024",
+      description: "Conducted a successful food safety training program for 100+ local food business operators.",
+    },
+    {
+      title: "Product Launch at University Expo",
+      year: "2023",
+      description: "Students successfully formulated and launched a novel high-protein millet-based beverage at the GBU Tech Expo.",
     },
   ],
 };

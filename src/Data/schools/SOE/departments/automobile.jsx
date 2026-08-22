@@ -52,7 +52,46 @@ export const departmentLayoutData = {
       phone: "0120-234-9914",
     },
   },
-  aboutProps: null,
+  aboutProps: {
+    heading: "About the Department",
+    subheading:
+      "The Department of Automobile Engineering prepares engineers for the rapidly evolving automotive and mobility industry.",
+    stats: [
+      { icon: Users, numberText: "100+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "3+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "4+", title: "Research Projects", subtitle: "Completed" },
+      { icon: Lightbulb, numberText: "1+", title: "Patents Filed", subtitle: "Innovations" },
+    ],
+    highlights: [
+      {
+        title: "Hands-on Learning",
+        description:
+          "Students participate in SAE BAJA, Formula Student, and Go-Kart competitions, designing and fabricating actual vehicles.",
+        dotColor: "#f97316",
+      },
+      {
+        title: "EV Focus",
+        description:
+          "Strong emphasis on electric vehicle technology, battery systems, regenerative braking, and autonomous driving concepts.",
+        dotColor: "#ef4444",
+      },
+      {
+        title: "Industry Connect",
+        description:
+          "Partnerships with Maruti Suzuki, Tata Motors, Hero MotoCorp, Ashok Leyland, and ARAI for internships and placements.",
+        dotColor: "#eab308",
+      },
+    ],
+    vision:
+      "To be a premier automobile engineering department driving innovation in mobility, EV technology, and sustainable transportation.",
+    missionPoints: [
+      "Provide quality education in automotive design and manufacturing",
+      "Focus on emerging technologies like EVs, autonomous driving, and connected vehicles",
+      "Encourage hands-on vehicle building through SAE and Formula Student teams",
+      "Build strong industry partnerships for experiential learning",
+      "Develop engineers ready for the future of mobility",
+    ],
+  },
   programsData: [
     {
         id: "btech-mechanical-engg",
@@ -69,15 +108,15 @@ export const departmentLayoutData = {
             "Manufacturing Technologies",
             "Fluid Mechanics"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1FuqTY06RlPhnkDluVPV4Om18KB_RkTdR/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+                url: "https://drive.google.com/file/d/1FuqTY06RlPhnkDluVPV4Om18KB_RkTdR/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+                url: "https://drive.google.com/file/d/1BmalpXCsc0w-Nd4M3zkKrnniUMxd82-w/preview"
             }
         ]
     },
@@ -96,11 +135,11 @@ export const departmentLayoutData = {
             "Vehicle Dynamics",
             "Quality Control"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1hJ4CdUiXC-BmcI9n2P2SUQdM9pwrh2JJ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview"
+                url: "https://drive.google.com/file/d/1hJ4CdUiXC-BmcI9n2P2SUQdM9pwrh2JJ/preview"
             }
         ]
     },
@@ -119,11 +158,11 @@ export const departmentLayoutData = {
             "Robotic Cells",
             "Embedded Mechatronics"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1tkBob4jrjGLcN7YnjCPdXwv4fgPoowRd/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+                url: "https://drive.google.com/file/d/1tkBob4jrjGLcN7YnjCPdXwv4fgPoowRd/preview"
             }
         ]
     },
@@ -142,15 +181,15 @@ export const departmentLayoutData = {
             "Additive Manufacturing",
             "Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1U_CoqOESctKW2SjmgBEGLfQYSkXx5TTd/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
+                url: "https://drive.google.com/file/d/1U_CoqOESctKW2SjmgBEGLfQYSkXx5TTd/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
+                url: "https://drive.google.com/file/d/1PJbq2QJhD1Eht2ogg0YzWvFYBeUpnHNp/preview"
             }
         ]
     },
@@ -169,11 +208,11 @@ export const departmentLayoutData = {
             "CAD/CAM & FEA",
             "Executive Degree"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1guccGayLGzdhbR-hL4WccGeXw0cBsGsB/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
+                url: "https://drive.google.com/file/d/1guccGayLGzdhbR-hL4WccGeXw0cBsGsB/preview"
             }
         ]
     },
@@ -192,11 +231,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1KzAyzBp1UulDSt87Q0tBDAEKxCSsHPSA/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview"
+                url: "https://drive.google.com/file/d/1KzAyzBp1UulDSt87Q0tBDAEKxCSsHPSA/preview"
             }
         ]
     }
@@ -210,7 +249,52 @@ export const departmentLayoutData = {
       { icon: GraduationCap, custom: "Exp", numberText: "8+", subtitle: "Avg Experience", bg: "bg-yellow-50", color: "text-yellow-600" },
     ],
   },
-  researchStats: null,
-  topAchievers: null,
-  achievements: null,
+  researchStats: [
+    { numberText: "4+", subtitle: "Research Projects" },
+    { numberText: "₹50L+", subtitle: "Research Funding" },
+    { numberText: "25+", subtitle: "Publications" },
+    { numberText: "1+", subtitle: "Patents Filed" },
+  ],
+  topAchievers: [
+    {
+      name: "Rahul Sharma",
+      year: "B.Tech Auto 2024",
+      achievement: "Placed at Tata Motors, SAE BAJA team lead",
+      image: "https://randomuser.me/api/portraits/men/40.jpg",
+      skills: ["Vehicle Design", "CATIA", "Engine Tuning", "Team Leadership"],
+    },
+    {
+      name: "Ankita Verma",
+      year: "B.Tech Auto 2024",
+      achievement: "Placed at Maruti Suzuki, Go-Kart team member",
+      image: "https://randomuser.me/api/portraits/women/35.jpg",
+      skills: ["Vehicle Dynamics", "SolidWorks", "Manufacturing", "EV Systems"],
+    },
+  ],
+  achievements: [
+    {
+      title: "SAE BAJA India",
+      description: "Top 20 national ranking in SAE BAJA India competition",
+      icon: Award,
+      color: "text-orange-600",
+    },
+    {
+      title: "Formula Student",
+      description: "Designed and built a formula car for FSI competition",
+      icon: BookOpen,
+      color: "text-red-600",
+    },
+    {
+      title: "Industry Visits",
+      description: "Regular plant visits to Maruti Suzuki and Hero MotoCorp facilities",
+      icon: Lightbulb,
+      color: "text-amber-600",
+    },
+    {
+      title: "ARAI Collaboration",
+      description: "Research partnership with Automotive Research Association of India",
+      icon: GraduationCap,
+      color: "text-yellow-600",
+    },
+  ],
 };

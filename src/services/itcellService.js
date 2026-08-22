@@ -1,5 +1,4 @@
 import apiClient from "./apiClient";
-import { additionalStudentMembers } from "../pages/itcell/itcellData";
 
 const unwrap = (response) => {
   const payload = response?.data;
@@ -19,11 +18,7 @@ const normalizeItcellMember = (item) => ({
   linkedin: String(item?.linkedin || "").trim(),
   portfolio: String(item?.portfolio || "").trim(),
   bio: String(item?.bio || "").trim(),
-  skills: Array.isArray(item?.skills)
-    ? item.skills
-    : typeof item?.skills === "string"
-      ? item.skills.split(",").map((s) => s.trim()).filter(Boolean)
-      : [],
+  skills: Array.isArray(item?.skills) ? item.skills : [],
   teamType: String(item?.teamType || "student").trim(),
   sortOrder: Number(item?.sortOrder ?? 0),
   isActive: Boolean(item?.isActive ?? true),
@@ -47,26 +42,12 @@ const toRequestPayload = (member) => ({
 });
 
 export const listItcellMembers = async () => {
-  try {
-    const response = await apiClient.get("/itcell/team");
-    const payload = unwrap(response);
-    let faculty = Array.isArray(payload?.faculty) ? payload.faculty.map(normalizeItcellMember) : [];
-    let student = Array.isArray(payload?.student) ? payload.student.map(normalizeItcellMember) : [];
-
-    (additionalStudentMembers || []).forEach((extra) => {
-      const norm = normalizeItcellMember(extra);
-      if (!student.some((s) => s.name.toLowerCase() === norm.name.toLowerCase())) {
-        student.push(norm);
-      }
-    });
-
-    const all = [...faculty, ...student];
-    return { faculty, student, all };
-  } catch (error) {
-    console.warn("Using local student data due to network warning:", error);
-    const student = (additionalStudentMembers || []).map(normalizeItcellMember);
-    return { faculty: [], student, all: student };
-  }
+  const response = await apiClient.get("/itcell/team");
+  const payload = unwrap(response);
+  const faculty = Array.isArray(payload?.faculty) ? payload.faculty.map(normalizeItcellMember) : [];
+  const student = Array.isArray(payload?.student) ? payload.student.map(normalizeItcellMember) : [];
+  const all = Array.isArray(payload?.all) ? payload.all.map(normalizeItcellMember) : [];
+  return { faculty, student, all };
 };
 
 export const createItcellMember = async (member) => {

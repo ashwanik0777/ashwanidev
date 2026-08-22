@@ -10,8 +10,7 @@ import {
   MapPin,
   ShieldCheck,
   CalendarDays,
-  X,
-  Download
+  X
 } from "lucide-react";
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
@@ -1319,17 +1318,11 @@ const ListOfHolidays = () => {
             </div>
           )}
 
-          {/* DOWNLOAD HOLIDAY LIST BUTTON */}
-          <div className="flex justify-center sm:justify-start mb-6">
-            <a
-              href="https://drive.google.com/file/d/1HybU2q30VtmToiYTP1UGkXeJJtwYrYWl/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm sm:text-base rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              <Download className="w-5 h-5" />
-              <span>Download Official Holiday List PDF</span>
-            </a>
+          {/* CLEAN BOTTOM FOOTER BAR */}
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-4 sm:p-5 text-center sm:text-left mb-6">
+            <div className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+              <span className="font-bold text-slate-900">Issuing Authority:</span> Prof. Chandra Kumar Singh (Officiating Registrar) • <span className="font-bold text-slate-900">Order No.:</span> <span className="font-mono text-blue-700 font-bold">GBU-029/Admn/Exec.Admn/43/2026-2670</span> • <span className="font-bold text-slate-900">Issued On:</span> January 07, 2026
+            </div>
           </div>
         </div>
       </div>

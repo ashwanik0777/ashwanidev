@@ -11,37 +11,39 @@ export default function FacilitiesSwiper({
   facilities = [],
 }) {
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-10"
+        className="text-center mb-12"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">{sectionTitle}</h2>
-        <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{sectionTitle}</h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        </div>
       </motion.div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-8">
-        {/* Navigation Arrows (visible sm+) */}
-        <button className="swiper-button-prev-custom hidden sm:flex absolute -left-3 lg:-left-5 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full p-2.5 shadow-md hover:bg-blue-50 text-blue-600 transition-colors">
+      <div className="relative max-w-7xl mx-auto px-4">
+        {/* Navigation Arrows */}
+        <button className="swiper-button-prev-custom absolute -left-6 top-1/2 transform -translate-y-1/2 z-10 bg-white border border-gray-300 border-solid rounded-full p-2 shadow hover:bg-gray-100">
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-blue-500"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
             viewBox="0 0 24 24"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <button className="swiper-button-next-custom hidden sm:flex absolute -right-3 lg:-right-5 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full p-2.5 shadow-md hover:bg-blue-50 text-blue-600 transition-colors">
+        <button className="swiper-button-next-custom absolute -right-6 top-1/2 transform -translate-y-1/2 z-10 bg-white border border-gray-300 border-solid rounded-full p-2 shadow hover:bg-gray-100">
           <svg
-            className="w-5 h-5"
+            className="w-5 h-5 text-blue-500"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2.5}
+            strokeWidth={2}
             viewBox="0 0 24 24"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -68,24 +70,22 @@ export default function FacilitiesSwiper({
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="pb-14"
+            className="pb-10"
           >
             {facilities.map((facility, index) => (
-              <SwiperSlide key={index} className="h-auto">
-                <div className="min-h-[400px] sm:min-h-[420px] h-full flex flex-col bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
-                  <div className="h-44 sm:h-48 w-full bg-gray-100 overflow-hidden flex-shrink-0">
-                    <img
-                      src={facility.image}
-                      alt={facility.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="font-bold text-lg text-blue-900 mb-2 leading-snug">
+              <SwiperSlide key={index}>
+                <div className="h-[370px] flex flex-col bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-gray-300">
+                  <img
+                    src={facility.image}
+                    alt={facility.title}
+                    className="h-48 w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="p-5">
+                    <h3 className="font-semibold text-lg text-gray-800">
                       {facility.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    <p className="text-sm text-gray-600 mt-2 overflow-hidden text-ellipsis max-h-[120px]">
                       {facility.description}
                     </p>
                   </div>

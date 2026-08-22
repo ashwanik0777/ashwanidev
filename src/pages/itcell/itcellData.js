@@ -1,5 +1,5 @@
-import {
-  Target,
+import { 
+  Target, 
   Rocket,
   CheckCircle,
   ShieldCheck,
@@ -13,30 +13,37 @@ import {
 export const responsibilities = [
   {
     title: "Website Assessment & Improvement",
+    description: "To assess the existing University website and identify areas for improvement in terms of design, functionality, performance, accessibility, and security.",
     icon: Search,
   },
   {
     title: "Modern Development & Specifications",
+    description: "To prepare detailed requirements and specifications for the development of a modern, responsive, interactive, and user-centric website.",
     icon: FileText,
   },
   {
     title: "Compliance & Standards",
+    description: "To ensure compliance with applicable Government of India guidelines, web accessibility standards, cybersecurity norms, and industry best practices.",
     icon: CheckCircle,
   },
   {
     title: "Advanced Website Security",
+    description: "To recommend, implement, and oversee advanced website security measures, including SSL/TLS encryption, secure authentication, protection against cyber threats (SQLi, XSS, CSRF, malware), data backup, disaster recovery, and periodic security audits.",
     icon: ShieldCheck,
   },
   {
     title: "Performance Monitoring",
+    description: "To monitor website performance, availability, uptime, scalability, and security on a regular basis and recommend corrective measures wherever necessary.",
     icon: Activity,
   },
   {
     title: "Seamless Integration",
+    description: "To ensure seamless integration of the website with institutional services, online applications, notifications, ERP systems, and other digital platforms of the University if required.",
     icon: Globe,
   },
   {
     title: "Reporting & Updates",
+    description: "To submit periodic progress reports, recommendations, and implementation status reports to the Competent Authority. (Note: This order supersedes all previous orders issued in this reference).",
     icon: MonitorCheck,
   }
 ];
@@ -72,12 +79,12 @@ export const visionMission = {
   vision: {
     title: "Our Vision",
     icon: Target,
-    content: "To digitally transform GBU by automating key processes, improving transparency, and enhancing user experience through scalable, secure, and smart solutions. We aim to establish GBU as a pioneer in digital campus innovation and tech-driven academic governance."
+    content: "To digitally transform GBU by automating key processes, improving transparency, and enhancing user experience through scalable, secure, and smart solutions."
   },
   mission: {
     title: "Our Mission",
     icon: Rocket,
-    content: "To create an emotionally intelligent, AI-powered, and sustainable smart campus. We develop student-centric digital portals, streamline administrative workflows, and empower the university community through modern software engineering."
+    content: "To create an emotionally intelligent, AI-powered, and sustainable smart campus."
   }
 };
 
@@ -86,22 +93,3 @@ export const itcellDescription = {
   subtitle: "The IT Cell is GBU's dedicated innovation hub focused on transforming the university experience through cutting-edge technology and human-centered design.",
   quote: "We are not just building tools, we are transforming how a university works, lives, and evolves."
 };
-
-export const additionalStudentMembers = [
-  {
-    id: "mayank-prabhakar",
-    name: "Mayank Prabhakar",
-    role: "Web Developer",
-    designation: "Intern & Trainer, Digital Automation Cell",
-    department: "B.Tech CSE",
-    image: "/assets/students/Mayank Prabhakar.png",
-    email: "255ucs033@gbu.ac.in",
-    linkedin: "https://www.linkedin.com/in/i-mayank-prabhakar-/",
-    portfolio: "https://mayank-prabhakar.me/",
-    bio: "Core contributor to the GBU Smart Campus initiative, working on university web platforms and digital solutions. Involved in feature development, AI-assisted implementation, testing, optimization, and deployment of web-based systems.",
-    skills: ["HTML/CSS", "React", "Node.js", "MySQL", "PHP"],
-    teamType: "student",
-    sortOrder: 1,
-    isActive: true,
-  },
-];

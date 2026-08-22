@@ -55,11 +55,11 @@ const PricingTable = ({
   const getRoleBasedPrice = () => {
     switch (userRole) {
       case "employee":
-        return rentRate.employee?.fullDay || rentRate.employee || rentRate.summer?.fullDay || rentRate.peak;
+        return rentRate.employee || rentRate.peak;
       case "student":
-        return rentRate.student?.fullDay || rentRate.student || rentRate.winter?.fullDay || rentRate.offPeak;
+        return rentRate.student || rentRate.offPeak;
       default:
-        return rentRate.outsider?.fullDay || rentRate.outsider || rentRate.summer?.fullDay || rentRate.peak;
+        return rentRate.outsider || rentRate.peak;
     }
   };
 
@@ -70,65 +70,40 @@ const PricingTable = ({
       </CardHeader>
 
       <CardContent className="space-y-5">
-        {rentRate.winter && rentRate.summer ? (
-          <div className="space-y-4 text-sm">
-            <div>
-              <p className="text-gray-500 font-bold mb-1">Winter Season</p>
-              <div className="flex justify-between">
-                <span>Half Day (4 hrs): <span className="font-bold text-blue-700">₹{rentRate.winter.halfDay?.toLocaleString() || '-'}</span></span>
-                <span>Full Day (8 hrs): <span className="font-bold text-blue-700">₹{rentRate.winter.fullDay?.toLocaleString() || '-'}</span></span>
-              </div>
-            </div>
-            <div className="border-t border-gray-100 pt-2">
-              <p className="text-gray-500 font-bold mb-1">Summer Season</p>
-              <div className="flex justify-between">
-                <span>Half Day (4 hrs): <span className="font-bold text-orange-600">₹{rentRate.summer.halfDay?.toLocaleString() || '-'}</span></span>
-                <span>Full Day (8 hrs): <span className="font-bold text-orange-600">₹{rentRate.summer.fullDay?.toLocaleString() || '-'}</span></span>
-              </div>
-            </div>
+        <div className="grid grid-cols-2 gap-6 text-sm">
+          <div>
+            <p className="text-gray-500 font-medium mb-1">Peak Season</p>
+            <p className="text-lg font-bold text-blue-700">
+              ₹{rentRate.peak.toLocaleString()}
+            </p>
           </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-2 gap-6 text-sm">
-              {rentRate.peak && (
-                <div>
-                  <p className="text-gray-500 font-medium mb-1">Peak Season</p>
-                  <p className="text-lg font-bold text-blue-700">
-                    ₹{rentRate.peak.toLocaleString()}
-                  </p>
-                </div>
-              )}
-              {rentRate.offPeak && (
-                <div>
-                  <p className="text-gray-500 font-medium mb-1">Off-Peak</p>
-                  <p className="text-lg font-bold text-green-600">
-                    ₹{rentRate.offPeak.toLocaleString()}
-                  </p>
-                </div>
-              )}
-            </div>
+          <div>
+            <p className="text-gray-500 font-medium mb-1">Off-Peak</p>
+            <p className="text-lg font-bold text-green-600">
+              ₹{rentRate.offPeak.toLocaleString()}
+            </p>
+          </div>
+        </div>
 
-            {(rentRate.halfDay || rentRate.fullDay) && (
-              <div className="grid grid-cols-2 gap-6 text-sm border-t border-gray-100 pt-4">
-                {rentRate.halfDay && (
-                  <div>
-                    <p className="text-gray-500 font-medium mb-1">Half Day</p>
-                    <p className="text-lg font-bold text-purple-600">
-                      ₹{rentRate.halfDay.toLocaleString()}
-                    </p>
-                  </div>
-                )}
-                {rentRate.fullDay && (
-                  <div>
-                    <p className="text-gray-500 font-medium mb-1">Full Day</p>
-                    <p className="text-lg font-bold text-indigo-600">
-                      ₹{rentRate.fullDay.toLocaleString()}
-                    </p>
-                  </div>
-                )}
+        {(rentRate.halfDay || rentRate.fullDay) && (
+          <div className="grid grid-cols-2 gap-6 text-sm border-t border-gray-100 pt-4">
+            {rentRate.halfDay && (
+              <div>
+                <p className="text-gray-500 font-medium mb-1">Half Day</p>
+                <p className="text-lg font-bold text-purple-600">
+                  ₹{rentRate.halfDay.toLocaleString()}
+                </p>
               </div>
             )}
-          </>
+            {rentRate.fullDay && (
+              <div>
+                <p className="text-gray-500 font-medium mb-1">Full Day</p>
+                <p className="text-lg font-bold text-indigo-600">
+                  ₹{rentRate.fullDay.toLocaleString()}
+                </p>
+              </div>
+            )}
+          </div>
         )}
 
         <div className="space-y-4 border-t border-gray-100 pt-4">
@@ -137,7 +112,7 @@ const PricingTable = ({
               Rate ({userRole}):
             </span>
             <span className="text-xl font-bold text-red-600">
-              ₹{getRoleBasedPrice()?.toLocaleString()}
+              ₹{getRoleBasedPrice().toLocaleString()}
             </span>
           </div>
 

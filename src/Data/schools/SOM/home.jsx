@@ -1,7 +1,8 @@
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 
-const somBanner = "/assets/SCHOOL/SOM.png";
+const somBanner =
+  "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?w=600&h=400&fit=crop";
 
 const somSlides = [
   {
@@ -116,7 +117,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: false,
+    enabled: true,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -545,7 +546,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "PlacementsSection",
-    enabled: false,
+    enabled: true,
     position: 10,
     props: {
       data: {
@@ -580,7 +581,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecentPlacements",
-    enabled: false,
+    enabled: true,
     position: 11,
     props: {
       data: {
@@ -640,7 +641,7 @@ export const sectionsConfig = [
   },
   {
     componentName: "RecruitersShowcase",
-    enabled: false,
+    enabled: true,
     position: 12,
     props: {
       recruitersData: [

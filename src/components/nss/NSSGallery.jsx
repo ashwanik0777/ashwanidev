@@ -112,9 +112,9 @@ const NSSGallery = ({ nssData }) => {
           <h2 className="text-3xl font-extrabold text-slate-900 mb-3">
             NSS GBU Photo Gallery
           </h2>
-          {/* <p className="text-base text-slate-600 leading-relaxed">
+          <p className="text-base text-slate-600 leading-relaxed">
             Authentic photo galleries extracted directly from the official Gautam Buddha University NSS Cell archive.
-          </p> */}
+          </p>
         </motion.div>
 
         {/* Gallery Statistics */}

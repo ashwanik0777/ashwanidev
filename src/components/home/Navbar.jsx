@@ -26,7 +26,7 @@ const NAVIGATION_CONFIG = [
     icon: User,
     baseRoute: "/about-us",
     items: [
-      { slug: "about-gbu", label: "About GBU" },
+      { slug: "About Gbu", label: "About GBU" },
       { slug: "chancellor-message", label: "Chancellor Message" },
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
       { slug: "strategic-perspective", label: "GBU: A Strategic Perspective" },
@@ -52,8 +52,10 @@ const NAVIGATION_CONFIG = [
       { slug: "academic-calendar", label: "Academic Calendar & Regulations" },
       { slug: "list-of-holidays", label: "List of Holidays" },
       { slug: "cbcs-framework", label: "CBCS Curriculum Framework" },
+      { slug: "centers-of-excellence", label: "Centers of Excellence" },
+      { slug: "international-collaboration", label: "International Collaboration" },
       { slug: "national-academic-depository", label: "National Academic Depository (NAD)" },
-      { slug: "annual-reports", label: "Annual Reports" },
+      { slug: "reports-publications", label: "Reports & Publications" },
     ],
   },
   {
@@ -69,7 +71,7 @@ const NAVIGATION_CONFIG = [
     baseRoute: "/research",
     items: [
       { slug: "research-centers", label: "Center of Excellence and Labs" },
-      { slug: "publications", label: "Publications" },
+      { slug: "publications-patents", label: "Publications, Patents and Projects" },
       { slug: "incubation", label: "GBU Incubation Centre" },
       { slug: "institution-innovation", label: "Institution and Innovation" },
       { slug: "ipr-cell", label: "IPR Cell" },

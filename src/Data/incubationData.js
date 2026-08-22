@@ -65,7 +65,7 @@ export const incubationTeam = [
   {
     name: "Dr. Vinay Kumar Litoria",
     role: "Nodal Officer & Chief Marketing Officer",
-    photo: "/assets/Faculty/Vinay_kumar_litoria.jpeg"
+    photo: "https://www.gburif.org/mentors/vinay_litroria.jpg"
   },
   {
     name: "Dr. Raju Pal",

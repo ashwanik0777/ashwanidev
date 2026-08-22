@@ -1,6 +1,8 @@
 import React from "react";
 
-import Publications from "./Publications";
+import Publications from "./Publications"
+import FundedProjects from "./FundedProjects";
+
 import BannerSection from "../../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -9,11 +11,13 @@ const Index = () => {
     <SearchableWrapper>
       <>
         <BannerSection
-          title="Publications"
-          bgTheme={4}
+          title="Research & Innovation at GBU"
+          bgTheme={4} // Pick a theme index from 1-10
         />
 
         <Publications />
+
+        <FundedProjects />
       </>
     </SearchableWrapper>
   );

@@ -1,5 +1,3 @@
-import droneImage from "../../assets/Drone.png";
-import raemImage from "../../assets/Raem.png";
 import * as SOICT from "./SOICT";
 import * as SOBT from "./SOBT";
 import * as SOE from "./SOE";
@@ -84,22 +82,22 @@ export const RESEARCH_CENTERS = [
     description: "DGCA-certified drone pilot training and UAV research facility. Specializes in drone flight testing, autonomous aerial navigation, agricultural payload integration, and tactical UAV defense systems.",
     facilities: ["UAV Flight Arena", "DGCA Flight Simulator", "Drone Assembly & Maintenance Lab", "Payload Testing Unit"],
     researchAreas: ["Drone Technologies", "Autonomous Navigation", "Aerial Intelligence"],
-    image: droneImage,
-    portalLink: "/schools/SOICT/departments/coedt"
+    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
+    portalLink: "https://cedtgbu.wixsite.com/home"
   },
   {
     id: 2,
-    name: "Center for Rapid and Alternative Energy Mobility (CRAEM)",
-    shortName: "CRAEM - GBURIF",
-    school: "School of Information & Communication Technology",
+    name: "Center of Excellence in Renewable Energy & Advanced Manufacturing (REAM)",
+    shortName: "REAM - GBURIF",
+    school: "School of Engineering",
     established: 2021,
     head: "Dr. Anurag Singh Bhagat",
     location: "GBURIF Research Block",
-    description: "Advanced research center dedicated to rapid & alternative energy mobility, EV drivetrain benchmarking, battery management systems, thermal protection coating materials, microgrids, and additive manufacturing.",
+    description: "Advanced research center dedicated to solar-wind microgrid integration, thermal protection coating materials, EV drivetrain benchmarking, battery management systems, and additive manufacturing.",
     facilities: ["Microgrid Controller Bench", "EV Battery Management System Lab", "3D Additive Printer", "Thermal Coating Station"],
-    researchAreas: ["Alternative Energy Mobility", "EV Infrastructure", "Advanced Manufacturing"],
-    image: raemImage,
-    portalLink: "/schools/SOICT/departments/raem"
+    researchAreas: ["Renewable Energy", "EV Infrastructure", "Advanced Manufacturing"],
+    image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+    portalLink: "https://gburif.org/coe.php"
   },
   {
     id: 3,
@@ -113,8 +111,7 @@ export const RESEARCH_CENTERS = [
     facilities: ["NVIDIA GPU HPC Cluster", "Humanoid Robotics Rig", "Computer Vision Workstations", "Edge AI Bench"],
     researchAreas: ["Artificial Intelligence", "Robotics", "Deep Learning"],
     image: "/coe_ai_robotics.png",
-    portalLink: "https://gburif.org/coe.php",
-    hidden: true
+    portalLink: "https://gburif.org/coe.php"
   }
 ];
 

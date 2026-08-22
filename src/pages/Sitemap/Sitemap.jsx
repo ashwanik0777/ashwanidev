@@ -87,10 +87,10 @@ const fadeIn = {
 const sitemapAbout = [
   {
     title: "About Us",
-    path: "/about-us/about-gbu",
+    path: "/about-us/About GBU",
     icon: Home,
     children: [
-      { title: "About GBU Overview", path: "/about-us/about-gbu" },
+      { title: "About GBU Overview", path: "/about-us/About GBU" },
       { title: "University History", path: "/aboutUs/GBUHistory" },
       { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
       { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },
@@ -110,8 +110,10 @@ const sitemapAbout = [
       { title: "Academic Calendar", path: "/academics/academic-calendar" },
       { title: "List of Holidays", path: "/academics/list-of-holidays" },
       { title: "CBCS Curriculum Framework", path: "/academics/cbcs-framework" },
+      { title: "Centers of Excellence", path: "/academics/centers-of-excellence" },
       { title: "Faculty Directory", path: "/academics/faculty" },
-      { title: "Annual Reports", path: "/academics/annual-reports" }
+      { title: "International Collaboration", path: "/academics/international-collaboration" },
+      { title: "Reports & Publications", path: "/academics/reports-publications" }
     ],
   },
   {
@@ -127,7 +129,7 @@ const sitemapAbout = [
     icon: BookOpen,
     children: [
       { title: "Research Centers", path: "/research/research-centers" },
-      { title: "Publications", path: "/research/publications" },
+      { title: "Publications & Patents", path: "/research/publications-patents" },
       { title: "GBU Incubation Centre", path: "/research/incubation" },
       { title: "Institution Innovation Council", path: "/research/institution-innovation" },
       { title: "IPR Cell", path: "/research/ipr-cell" }

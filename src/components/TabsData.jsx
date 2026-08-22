@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 const SIZE_CLASSES = {
     xs: "px-2 py-1 text-xs font-medium",
-    sm: "px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium",
-    md: "px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium",
-    lg: "px-3 sm:px-6 py-2 sm:py-3 text-xs sm:text-base font-medium",
-    xl: "px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-medium",
+    sm: "px-3 py-1.5 text-sm font-medium",
+    md: "px-4 py-2 text-sm font-medium",
+    lg: "px-6 py-3 text-base font-medium",
+    xl: "px-8 py-4 text-lg font-medium",
 };
 
 const THEME_VARIANTS = {
@@ -109,11 +109,11 @@ const ButtonGroup = ({
     };
 
     const containerClasses = `
-    ${orientation === "vertical" ? "inline-flex flex-col" : "inline-flex flex-row max-w-full overflow-x-auto no-scrollbar"}
-    ${orientation === "vertical" ? "w-full" : "flex-nowrap sm:flex-wrap"}
+    ${orientation === "vertical" ? "inline-flex flex-col" : "inline-flex flex-row"}
+    ${orientation === "vertical" ? "w-full" : "flex-wrap"}
     ${gap ? "gap-2" : ""}
     ${!gap ? roundedClasses[rounded] : ""}
-    ${!gap ? "border" : ""}
+    ${!gap ? "overflow-hidden border" : ""}
     ${!gap ? themeConfig.container : ""}
     ${animated ? "transition-all duration-300 ease-in-out" : ""}
     ${fullWidth ? "w-full" : ""}
@@ -130,14 +130,14 @@ const ButtonGroup = ({
         const isPressed = pressedButton === btn.id;
 
         return `
-      relative flex items-center justify-center gap-1.5 sm:gap-2 border shrink-0
+      relative flex items-center justify-center gap-2 border overflow-hidden
       ${SIZE_CLASSES[size] || SIZE_CLASSES["md"]}
       ${gap ? roundedClasses[rounded] : ""}
       ${!gap && orientation === "horizontal" ? (isFirst ? "rounded-l-" + rounded : isLast ? "rounded-r-" + rounded : "") : ""}
       ${!gap && orientation === "vertical" ? (isFirst ? "rounded-t-" + rounded : isLast ? "rounded-b-" + rounded : "") : ""}
       ${!gap && orientation === "horizontal" && !isFirst ? "border-l-0" : ""}
       ${!gap && orientation === "vertical" && !isFirst ? "border-t-0" : ""}
-      ${fullWidth ? "flex-auto sm:flex-1 min-w-max sm:min-w-0" : ""}
+      ${fullWidth ? "flex-1" : ""}
       ${orientation === "vertical" ? "w-full" : ""}
       ${animated ? "transition-all duration-300 ease-in-out transform" : ""}
       ${animated && isHovered ? "scale-[1.02] -translate-y-0.5" : ""}
@@ -279,7 +279,7 @@ const ButtonGroup = ({
               ${animated ? "transition-all duration-300 ease-in-out" : ""}
               ${isActive ? "font-bold tracking-wide" : "font-medium"}
               ${isHovered ? "tracking-wide" : ""}
-              whitespace-nowrap shrink-0 sm:truncate
+              truncate
             `}>
                             {btn.label}
                         </span>

@@ -107,15 +107,15 @@ export const departmentLayoutData = {
             "GIS & Satellite Remote Sensing",
             "Field Research Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
+        syllabusUrl: "https://drive.google.com/file/d/126-Q7n67EGNTdeY7HxbTN4qkCeoYLBWi/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                url: "https://drive.google.com/file/d/126-Q7n67EGNTdeY7HxbTN4qkCeoYLBWi/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                url: "https://drive.google.com/file/d/1oRbJsgzEJwSniVAO948V4GOljUxosVgF/preview"
             }
         ]
     },
@@ -134,11 +134,11 @@ export const departmentLayoutData = {
             "Mineral Exploration",
             "Geological Field Camps"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
+        syllabusUrl: "https://drive.google.com/file/d/13hTIyAm1QP7BSaVo4Cq1OAmxQKiCNFoL/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                url: "https://drive.google.com/file/d/13hTIyAm1QP7BSaVo4Cq1OAmxQKiCNFoL/preview"
             }
         ]
     },
@@ -157,15 +157,15 @@ export const departmentLayoutData = {
             "Climate Impact Studies",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1uAOeFL33gPrW_rJi2HFekiSJPCTV5mJZ/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
+                url: "https://drive.google.com/file/d/1uAOeFL33gPrW_rJi2HFekiSJPCTV5mJZ/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
+                url: "https://drive.google.com/file/d/1khzRwsXEBdD-EB_V2G94HiNZgZs3bHdA/preview"
             }
         ]
     }

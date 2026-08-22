@@ -42,7 +42,7 @@ const Footer = () => {
       aria-label="Social media links"
     >
        <a
-    href="mailto:info@gbu.ac.in"
+    href="http://mail.gbu.ac.in/"
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Email"
@@ -125,7 +125,7 @@ const Footer = () => {
           <h3 className="font-semibold text-lg mb-3">Quick Links</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
             {[
-              { name: "About GBU", path: "/about-us/about-gbu" },
+              { name: "About GBU", path: "/about-us/About GBU" },
               { name: "Admissions", path: "https://gbuadm.samarth.edu.in/", isExternal: true },
               { name: "Research", path: "/research/research-centers" },
               { name: "Campus Life", path: "/campus-life/hero" },

@@ -18,7 +18,7 @@ const HodMessage = ({
     : messageParagraphs.slice(0, visibleCount);
 
   return (
-    <section className="py-10 sm:py-14 bg-white relative overflow-hidden">
+    <section className="py-20 bg-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 relative z-10">

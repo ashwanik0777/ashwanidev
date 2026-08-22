@@ -79,7 +79,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: false,
+    enabled: true,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -99,9 +99,9 @@ export const sectionsConfig = [
     enabled: true,
     position: 4,
     props: {
-      name: deansMessageData?.deanName || "Prof. Rajeev Varshney",
+      name: deansMessageData?.deanName || "Prof. Karam Tej Sarao",
       title: deansMessageData?.designation || "Dean, School of Buddhist Studies and Civilization",
-      image: deansMessageData?.image || "/assets/Faculty/Prof. Rajeev Varshney.jpg",
+      image: deansMessageData?.image || "https://ui-avatars.com/api/?name=Karam+Tej+Sarao&size=300&background=F59E0B&color=fff",
       shortMessage: deansMessageData?.shortMessage,
       description: deansMessageData?.message || deansMessageData?.fullMessage || deansMessageData?.shortMessage,
       message: deansMessageData?.message || deansMessageData?.fullMessage,
@@ -530,7 +530,7 @@ export const sectionsConfig = [
 
   {
     componentName: "PlacementsSection",
-    enabled: false,
+    enabled: true,
     position: 10,
     props: {
       data: {
@@ -566,7 +566,7 @@ export const sectionsConfig = [
 
   {
     componentName: "RecentPlacements",
-    enabled: false,
+    enabled: true,
     position: 11,
     props: {
       data: {
@@ -646,7 +646,7 @@ export const sectionsConfig = [
 
   {
     componentName: "RecruitersShowcase",
-    enabled: false,
+    enabled: true,
     position: 12,
     props: {
       recruitersData: [

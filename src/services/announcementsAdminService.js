@@ -46,27 +46,23 @@ export const LEVELS = { COLLEGE: "college", SCHOOL: "school" };
 const unwrap = (response) => response?.data?.data ?? null;
 
 export const listAnnouncements = async (kind, params = {}) => {
-  const backendKind = kind === "gallery" ? "events" : kind;
-  const response = await adminApi.get(`/admin/announcements/${backendKind}`, { params });
+  const response = await adminApi.get(`/admin/announcements/${kind}`, { params });
   const data = unwrap(response);
   return Array.isArray(data) ? data : [];
 };
 
 export const createAnnouncement = async (kind, payload) => {
-  const backendKind = kind === "gallery" ? "events" : kind;
-  const response = await adminApi.post(`/admin/announcements/${backendKind}`, payload);
+  const response = await adminApi.post(`/admin/announcements/${kind}`, payload);
   return { item: unwrap(response), message: response?.data?.message || "" };
 };
 
 export const updateAnnouncement = async (kind, id, payload) => {
-  const backendKind = kind === "gallery" ? "events" : kind;
-  const response = await adminApi.put(`/admin/announcements/${backendKind}/${id}`, payload);
+  const response = await adminApi.put(`/admin/announcements/${kind}/${id}`, payload);
   return { item: unwrap(response), message: response?.data?.message || "" };
 };
 
 export const deleteAnnouncement = async (kind, id) => {
-  const backendKind = kind === "gallery" ? "events" : kind;
-  const response = await adminApi.delete(`/admin/announcements/${backendKind}/${id}`);
+  const response = await adminApi.delete(`/admin/announcements/${kind}/${id}`);
   return response?.data?.message || "";
 };
 

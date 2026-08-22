@@ -15,9 +15,10 @@ const Raem = () => {
         bgTheme={coeRaemData.hero.bgTheme}
       />
       <AboutRAEM
+        visionText={coeRaemData.about.visionText}
+        missionPoints={coeRaemData.about.missionPoints}
         sections={coeRaemData.about.sections}
-        photos={coeRaemData.about.photos}
-      />
+        photos={coeRaemData.about.photos} />
       <FunctionalAreasSwiper
         title="Key Functional Areas"
         functionalAreas={coeRaemData.functionalAreas}

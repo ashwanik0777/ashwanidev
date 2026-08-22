@@ -31,10 +31,7 @@ const BookingMain = () => {
       const max = maxRaw.includes('+') ? Infinity : parseInt(maxRaw);
       const minPrice = parseInt(min);
       filtered = filtered.filter(facility => {
-        let price = filters.season === 'peak' ? facility.rentRate.peak : facility.rentRate.offPeak;
-        if (!price && facility.rentRate.summer && facility.rentRate.winter) {
-          price = filters.season === 'peak' ? facility.rentRate.summer.fullDay : facility.rentRate.winter.fullDay;
-        }
+        const price = filters.season === 'peak' ? facility.rentRate.peak : facility.rentRate.offPeak;
         return price >= minPrice && (max === Infinity ? true : price <= max);
       });
     }
@@ -50,13 +47,13 @@ const BookingMain = () => {
     <div className="min-h-screen bg-stone-50 pb-24">
       <HeroBanner />
 
-      <main className="container mx-auto px-4 py-5">
-        {/* <UserRoleSelector
+      <main className="container mx-auto px-4 py-12">
+        <UserRoleSelector
           selectedRole={userRole}
           onRoleChange={setUserRole}
-        /> */}
+        />
 
-        <section className="mb-12 mt-6">
+        <section className="mb-12 mx-15 sm:mx-5 mt-6">
           <h2 className="text-3xl font-bold text-stone-900 mb-8 text-center">
             Available Facilities
           </h2>
@@ -69,7 +66,7 @@ const BookingMain = () => {
             if (auditoriums.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-12 mx-10">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Auditorium Facilities
                 </h3>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import homeData from "../../Data/home.json";
-import { fetchTickerNotices } from "../../services/tickerNoticesService";
 
 export default function WelcomePage() {
   const bannerData = homeData?.sections?.banner?.[0] || null;
@@ -21,31 +19,18 @@ export default function WelcomePage() {
 
   const [typedTitle, setTypedTitle] = useState("");
   const [isTitleDone, setIsTitleDone] = useState(false);
-  const [tickerNotices, setTickerNotices] = useState([]);
 
   const rawTitle = bannerData?.title || "Welcome to Gautam Buddha University";
   const fullTitle = rawTitle.replace(/Welcome to /i, "Welcome to\n");
 
   useEffect(() => {
-    fetchTickerNotices()
-      .then((notices) => {
-        if (notices && notices.length > 0) {
-          setTickerNotices(notices);
-        }
-      })
-      .catch(() => {
-        // Fallback — keep empty, hardcoded fallback renders below
-      });
-  }, []);
-
-  useEffect(() => {
     if (!bannerData) return;
-
+    
     // Initial short delay to let the background load and capture attention
     const startTimeout = setTimeout(() => {
       let currentIndex = 0;
       let currentText = "";
-
+      
       const typingInterval = setInterval(() => {
         if (currentIndex < fullTitle.length) {
           currentText += fullTitle[currentIndex];
@@ -56,7 +41,7 @@ export default function WelcomePage() {
           setIsTitleDone(true);
         }
       }, 50); // Nice, deliberate, and smooth character typing speed (50ms)
-
+      
       return () => clearInterval(typingInterval);
     }, 400);
 
@@ -67,17 +52,9 @@ export default function WelcomePage() {
 
   const videoSrc = resolveAssetUrl(bannerData.video);
 
-  // No hardcoded fallback — all notices come from the database
-  const notices = tickerNotices;
-
-  // Calculate animation duration based on total text length
-  const totalTextLength = notices.reduce((acc, n) => acc + n.text.length, 0);
-  const scrollDuration = Math.max(15, totalTextLength * 0.12);
-
   return (
     <>
-      {/* Scrolling Ticker - Only shown when there are active notices */}
-      {notices.length > 0 && (
+      {/* Scrolling Ticker - Placed on top right after header */}
       <div
         role="region"
         aria-label="Latest announcements"
@@ -87,38 +64,25 @@ export default function WelcomePage() {
         <div
           className="inline-flex items-center absolute whitespace-nowrap animate-scroll text-sm sm:text-base px-4"
           style={{
-            animation: `scrollText ${scrollDuration}s linear infinite`,
+            animation: "scrollText 15s linear infinite",
             zIndex: 0,
           }}
         >
-          {notices.map((notice, index) => (
-            <React.Fragment key={notice.id || index}>
-              {index > 0 && (
-                <span className="mx-4 text-blue-300/70 text-lg select-none">│</span>
-              )}
-              <Link
-                to={notice.link || "#"}
-                className="inline-flex items-center gap-2 hover:text-yellow-200 transition-colors duration-200 cursor-pointer"
-              >
-                <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                  </span>
-                  NEW
-                </span>
-                <span className="font-medium tracking-wide">
-                  {notice.text}
-                </span>
-              </Link>
-            </React.Fragment>
-          ))}
+          <span className="flex items-center gap-1.5 bg-gradient-to-r from-red-600 to-rose-500 text-white text-[10px] sm:text-xs font-bold uppercase px-2.5 py-0.5 rounded-full shadow-[0_2px_10px_rgba(225,29,72,0.4)] border border-red-400/50 tracking-wider mr-3">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+            </span>
+            NEW
+          </span>
+          <span className="font-medium tracking-wide">
+            ADMISSION OPEN 2026-27/Fifth Phase : Counseling-cum-admission scheduled on 4th August 2026
+          </span>
         </div>
       </div>
-      )}
 
       {/* Main welcome section */}
-      <div className="relative min-h-[340px] h-[50vh] sm:min-h-[480px] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden bg-slate-900">
+      <div className="relative min-h-[480px] h-[65vh] sm:h-[80vh] w-full flex flex-col justify-center overflow-hidden">
         {/* Background video or image */}
         {bannerData.video?.endsWith(".mp4") ? (
           <video
@@ -126,7 +90,7 @@ export default function WelcomePage() {
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.5] sm:scale-[1.25] origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive -mt-24 xl:-mt-21"
             poster={bannerData.poster_image}
             preload="metadata"
           >
@@ -137,26 +101,26 @@ export default function WelcomePage() {
           <img
             src={videoSrc}
             alt="Banner"
-            className="absolute inset-0 w-full h-full z-0 video-responsive object-cover scale-[1.5] sm:scale-[1.25] origin-center"
+            className="absolute inset-0 w-full h-full z-0 video-responsive"
             loading="eager"
           />
         )}
 
-        {/* Overlay for optimal video readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/15 z-10" />
+        {/* Light overlay for maximum video visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/10 z-10" />
 
-        {/* Content - Original design */}
-        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-4 sm:pb-20 pt-6 sm:pt-24">
+        {/* Content - Clean typography without glassmorphism */}
+        <div className="relative z-20 text-white w-full px-4 sm:px-6 lg:px-12 pb-8 sm:pb-20 pt-16 sm:pt-24">
           <div className="max-w-5xl mx-auto sm:mx-0">
 
-            {/* Title with Typing Effect */}
-            <h1 className="mb-2 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+            {/* Title with Typing Effect & White/GBU Theme */}
+            <h1 className="mb-3 sm:mb-5 text-center sm:text-left select-none leading-tight filter drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
               {typedTitle.includes("\n") ? (
                 <>
-                  <span className="block text-xs sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-1">
+                  <span className="block text-lg sm:text-2xl md:text-3xl font-semibold text-white tracking-widest uppercase mb-1">
                     {typedTitle.split("\n")[0]}
                   </span>
-                  <span className="block text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
+                  <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-white via-blue-50 to-sky-200 bg-clip-text text-transparent tracking-tight leading-tight">
                     {typedTitle.split("\n")[1]}
                     {!isTitleDone && (
                       <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
@@ -164,7 +128,7 @@ export default function WelcomePage() {
                   </span>
                 </>
               ) : (
-                <span className="block text-base sm:text-3xl font-semibold text-white tracking-widest uppercase">
+                <span className="block text-xl sm:text-3xl font-semibold text-white tracking-widest uppercase">
                   {typedTitle}
                   {!isTitleDone && (
                     <span className="inline-block w-[3.5px] h-[0.8em] bg-blue-400 ml-1.5 animate-blink align-baseline" />
@@ -178,12 +142,12 @@ export default function WelcomePage() {
               initial={{ opacity: 0, y: 15 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-              className="text-xs sm:text-lg md:text-xl mb-3 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white drop-shadow-md"
+              className="text-sm sm:text-lg md:text-xl mb-6 sm:mb-8 text-center sm:text-left max-w-2xl leading-relaxed font-medium text-white drop-shadow-md"
             >
               {bannerData.content}
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Compact horizontal row on mobile viewports */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isTitleDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -220,8 +184,6 @@ export default function WelcomePage() {
         .video-responsive {
           object-fit: cover;
           object-position: center center;
-          width: 100% !important;
-          height: 100% !important;
         }
 
         @keyframes blink {
@@ -244,9 +206,9 @@ export default function WelcomePage() {
         @media (max-width: 640px) and (orientation: portrait) {
           .video-responsive {
             object-fit: cover;
-            object-position: center center;
-            width: 100% !important;
-            height: 100% !important;
+            object-position: center top;
+            width: 100vw !important;
+            height: 100vh !important;
           }
           
           @keyframes scrollText {
@@ -264,8 +226,8 @@ export default function WelcomePage() {
           .video-responsive {
             object-fit: cover;
             object-position: center center;
-            width: 100% !important;
-            height: 100% !important;
+            width: 100vw !important;
+            height: 100vh !important;
           }
         }
         
@@ -273,9 +235,9 @@ export default function WelcomePage() {
         @media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
           .video-responsive {
             object-fit: cover;
-            object-position: center center;
-            width: 100% !important;
-            height: 100% !important;
+            object-position: center top;
+            width: 100vw !important;
+            height: 100vh !important;
           }
         }
         
@@ -284,18 +246,49 @@ export default function WelcomePage() {
           .video-responsive {
             object-fit: cover;
             object-position: center center;
-            width: 100% !important;
-            height: 100% !important;
+            width: 100vw !important;
+            height: 100vh !important;
           }
         }
         
-        /* Desktop/Laptop (≥1025px) */
+        /* Desktop/Laptop (≥1025px) - Fit without scroll */
         @media (min-width: 1025px) {
           .video-responsive {
             object-fit: cover;
             object-position: center center;
-            width: 100% !important;
-            height: 100% !important;
+            width: 100vw !important;
+            height: 100vh !important;
+          }
+          
+          /* Ensure container doesn't exceed viewport */
+          .relative {
+            max-height: 100vh;
+          }
+        }
+        
+        /* Extra wide screens */
+        @media (min-width: 1920px) {
+          .video-responsive {
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+        
+        /* Handle very wide aspect ratios */
+        @media (min-aspect-ratio: 16/9) {
+          .video-responsive {
+            object-fit: cover;
+            width: 100vw !important;
+            height: 100vh !important;
+          }
+        }
+        
+        /* Handle very tall aspect ratios */
+        @media (max-aspect-ratio: 9/16) {
+          .video-responsive {
+            object-fit: cover;
+            width: 100vw !important;
+            height: 100vh !important;
           }
         }
         

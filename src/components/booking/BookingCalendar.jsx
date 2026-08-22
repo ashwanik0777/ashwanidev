@@ -4,7 +4,7 @@ import { format, isBefore, startOfDay, addMonths, subMonths } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BookingCalendar = ({
-  dateRange,
+  selectedDate,
   onDateSelect,
   bookedDates = [],
   pendingDates = [],
@@ -87,17 +87,7 @@ const BookingCalendar = ({
     const isBooked = isDateBooked(dayDate);
     const isPending = isDatePending(dayDate);
     const isPast = isBefore(startOfDay(dayDate), today);
-    let isSelected = false;
-    let isInRange = false;
-    if (dateRange && dateRange.start) {
-      const startStr = format(dateRange.start, "yyyy-MM-dd");
-      const endStr = dateRange.end ? format(dateRange.end, "yyyy-MM-dd") : null;
-      if (dateStr === startStr || dateStr === endStr) {
-        isSelected = true;
-      } else if (endStr && dateStr > startStr && dateStr < endStr) {
-        isInRange = true;
-      }
-    }
+    const isSelected = selectedDate && format(selectedDate, "yyyy-MM-dd") === dateStr;
     const isToday = format(new Date(), "yyyy-MM-dd") === dateStr;
 
     if (isPast) {
@@ -105,10 +95,7 @@ const BookingCalendar = ({
     }
 
     if (isSelected) {
-      return "bg-stone-950 text-white font-black shadow-lg shadow-stone-950/20 border-none scale-95 ring-2 ring-stone-950/15 z-10 relative";
-    }
-    if (isInRange) {
-      return "bg-stone-200 text-stone-900 font-bold border-none";
+      return "bg-stone-950 text-white font-black shadow-lg shadow-stone-950/20 border-none scale-95 ring-2 ring-stone-950/15";
     }
 
     if (isBooked) {
@@ -234,7 +221,7 @@ const BookingCalendar = ({
 
       {/* Selected Indicator Panel */}
       <AnimatePresence mode="wait">
-        {dateRange?.start ? (
+        {selectedDate ? (
           <motion.div
             key="selected-panel"
             initial={{ opacity: 0, y: 15 }}
@@ -245,13 +232,11 @@ const BookingCalendar = ({
           >
             <div className="flex items-center gap-3">
               <div className="h-11 w-11 rounded-xl bg-white text-stone-950 flex items-center justify-center font-extrabold text-base shadow-sm">
-                {format(dateRange.start, "d")}{dateRange.end && `-${format(dateRange.end, "d")}`}
+                {format(selectedDate, "d")}
               </div>
               <div>
                 <span className="block text-[9px] uppercase font-bold text-stone-400 tracking-wider">Date Confirmed</span>
-                <span className="text-sm font-bold text-white">
-                  {format(dateRange.start, "MMM dd")} {dateRange.end ? `- ${format(dateRange.end, "MMM dd, yyyy")}` : format(dateRange.start, ", yyyy")}
-                </span>
+                <span className="text-sm font-bold text-white">{format(selectedDate, "EEEE, MMM dd, yyyy")}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-xl border border-emerald-500/20 text-xs font-bold">

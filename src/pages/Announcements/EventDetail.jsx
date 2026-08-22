@@ -8,10 +8,6 @@ import {
   ExternalLink,
   CalendarPlus,
   Download,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Image as ImageIcon
 } from "lucide-react";
 import Header from "../../components/announcement/Header";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -144,6 +140,260 @@ const TabsContent = ({ value, children, className = "" }) => {
   return <div className={className}>{children}</div>;
 };
 
+// --- MOCK DATA ---
+// const mockEvents = [
+//   {
+//     id: 1,
+//     title: "GBU Tech Symposium 2024",
+//     description:
+//       "A state-level symposium with talks and presentations on cutting-edge technologies by students and industry experts.",
+//     date: "2024-07-10T09:00:00Z",
+//     endDate: "2024-07-10T17:00:00Z",
+//     venue: "Main Auditorium, GBU Campus",
+//     organizer: "School of Engineering, GBU",
+//     type: "Seminar",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/gbu-tech-symposium-2024",
+//     images: [
+//       "https://www.ux4g.gov.in/assets/img/awareness-workshop/gbu-19-11-24/900x18.webp",
+//     ],
+//   },
+//   {
+//     id: 2,
+//     title: "Annual Science & Innovation Fair",
+//     description:
+//       "Students present their innovative science projects and working models to guests and faculty.",
+//     date: "2023-12-15T10:00:00Z",
+//     endDate: "2023-12-15T16:00:00Z",
+//     venue: "Exhibition Hall, GBU Campus",
+//     organizer: "School of Science, GBU",
+//     type: "Fair",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://images.openai.com/thumbnails/url/NS93cXicu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw4KLjQzjIp3CzfKiM92zQnISzINLC8oqkpKMss0LI80zDcqMM_Mcs5w9IuwqAy19E6KSHYyD3JJSY0qcVQrBgAavCnC",
+//     ],
+//   },
+//   {
+//     id: 3,
+//     title: "Mathematics Research Workshop",
+//     description:
+//       "An intensive workshop on modern mathematics and its applications in research and industry.",
+//     date: "2024-08-05T09:30:00Z",
+//     endDate: "2024-08-05T15:30:00Z",
+//     venue: "Lecture Hall 3, Academic Block, GBU",
+//     organizer: "Department of Mathematics, GBU",
+//     type: "Workshop",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/mathematics-research-workshop-gbu",
+//     images: [
+//       "https://www.ux4g.gov.in/assets/img/awareness-workshop/gbu-19-11-24/900x17.webp",
+//     ],
+//   },
+//   {
+//     id: 4,
+//     title: "Abhivyakti: Cultural Fest",
+//     description:
+//       "GBU’s flagship cultural festival showcasing dance, drama, music, and literary competitions.",
+//     date: "2023-11-20T17:00:00Z",
+//     endDate: "2023-11-20T22:00:00Z",
+//     venue: "Open Air Theatre, GBU",
+//     organizer: "Cultural Committee, GBU",
+//     type: "Festival",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://www.indianarrative.com/wp-content/uploads/2024/12/India-Nepal-Cultural-Festival-01-1024x683.jpeg",
+//     ],
+//   },
+//   {
+//     id: 5,
+//     title: "AI & Robotics Guest Lecture",
+//     description:
+//       "A guest lecture on Artificial Intelligence, Robotics, and future technology trends.",
+//     date: "2024-09-01T11:00:00Z",
+//     endDate: "2024-09-01T13:00:00Z",
+//     venue: "Seminar Hall B, GBU",
+//     organizer: "School of ICT, GBU",
+//     type: "Lecture",
+//     mode: "Hybrid",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/ai-robotics-guest-lecture-gbu",
+//     images: ["https://gburif.org/images/intro-carousel/dsf8939-b-copy.jpg"],
+//   },
+//   {
+//     id: 6,
+//     title: "GBU Annual Sports Meet",
+//     description:
+//       "Annual inter-departmental sports meet with athletics, football, cricket, and indoor games.",
+//     date: "2023-10-10T08:00:00Z",
+//     endDate: "2023-10-10T18:00:00Z",
+//     venue: "Sports Ground, GBU",
+//     organizer: "Sports Council, GBU",
+//     type: "Sports",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: ["https://www.gbu.ac.in/Content/img/sports/banner2.jpg"],
+//   },
+//   {
+//     id: 7,
+//     title: "National Research Paper Presentation",
+//     description:
+//       "Students and scholars present research papers on various disciplines at national level.",
+//     date: "2024-07-25T14:00:00Z",
+//     endDate: "2024-07-25T17:00:00Z",
+//     venue: "Conference Room 1, GBU",
+//     organizer: "Research Cell, GBU",
+//     type: "Presentation",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/national-research-presentation-gbu",
+//     images: ["https://www.ic3ecsbhi.com/Events/Picture1.jpg"],
+//   },
+//   {
+//     id: 8,
+//     title: "GBU Alumni Meet 2023",
+//     description:
+//       "GBU alumni reconnect and share industry insights with current students.",
+//     date: "2023-09-05T18:00:00Z",
+//     endDate: "2023-09-05T21:00:00Z",
+//     venue: "Banquet Hall, GBU",
+//     organizer: "Alumni Association, GBU",
+//     type: "Meet",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://images.openai.com/thumbnails/url/iYaDH3icu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw42KHCJMDJ3DMnKCyuPzLdMCw9xKa_yiMgyKHNLssirqDAsTzQzzQhNdfJOTbLQ9c72cjfJSC2pSCwPKFcrBgAWxioa",
+//     ],
+//   },
+//   {
+//     id: 9,
+//     title: "NSS Blood Donation Camp",
+//     description:
+//       "Organized by NSS volunteers to collect blood for local hospitals and awareness drive.",
+//     date: "2024-07-05T09:00:00Z",
+//     endDate: "2024-07-05T15:00:00Z",
+//     venue: "Medical Centre, GBU",
+//     organizer: "NSS Unit, GBU",
+//     type: "Social Service",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/nss-blood-donation-gbu",
+//     images: [
+//       "https://nss.gbu.ac.in/uploads/eventsfiles/photos/66ffb64b39157_WhatsApp%20Image%202024-04-19%20at%201.59.17%20PM.jpeg",
+//     ],
+//   },
+//   {
+//     id: 10,
+//     title: "International Yoga Day",
+//     description:
+//       "Mass yoga session for students and staff promoting healthy living and mindfulness.",
+//     date: "2023-06-21T06:00:00Z",
+//     endDate: "2023-06-21T08:00:00Z",
+//     venue: "Sports Complex Lawn, GBU",
+//     organizer: "Wellness Club, GBU",
+//     type: "Wellness",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://images.openai.com/thumbnails/url/-F4ohXicu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw6yNHIy1zUsTgtKys-qMC0v9g41dorK8M8qSM7KDixODy8NdfTNzi9OLK6IKvc0cjKuiM8pLjVwz_RMcVQrBgAhZyqH",
+//     ],
+//   },
+//   {
+//     id: 11,
+//     title: "Guest Lecture: Industry 5.0",
+//     description:
+//       "A talk by industry leaders on Industry 5.0, smart factories, and the future of work.",
+//     date: "2024-07-18T11:00:00Z",
+//     endDate: "2024-07-18T13:00:00Z",
+//     venue: "Seminar Hall A, GBU",
+//     organizer: "School of Management, GBU",
+//     type: "Lecture",
+//     mode: "Hybrid",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/guest-lecture-industry5-gbu",
+//     images: [
+//       "https://www.ux4g.gov.in/assets/img/awareness-workshop/gbu-19-11-24/900x14.webp",
+//     ],
+//   },
+//   {
+//     id: 12,
+//     title: "Coding Club Hackathon",
+//     description:
+//       "24-hour coding marathon for students to build tech solutions and win exciting prizes.",
+//     date: "2023-10-30T09:00:00Z",
+//     endDate: "2023-10-30T09:00:00Z",
+//     venue: "Innovation Lab, GBU",
+//     organizer: "Coding Club, GBU",
+//     type: "Competition",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://raw.githubusercontent.com/K4R7IK/Glitch-Poster/master/poster/ctf.png",
+//     ],
+//   },
+//   {
+//     id: 13,
+//     title: "GBU Startup Pitch Day",
+//     description:
+//       "Students pitch their startup ideas to investors and mentors to get funding and incubation support.",
+//     date: "2024-08-20T10:00:00Z",
+//     endDate: "2024-08-20T16:00:00Z",
+//     venue: "Innovation Centre, GBU",
+//     organizer: "Incubation Cell, GBU",
+//     type: "Competition",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/gbu-startup-pitch-day",
+//     images: [
+//       "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic9.jpg",
+//     ],
+//   },
+//   {
+//     id: 14,
+//     title: "GBU Photography Exhibition",
+//     description:
+//       "Photography club exhibition displaying student works on campus life and nature.",
+//     date: "2023-09-25T10:00:00Z",
+//     endDate: "2023-09-25T17:00:00Z",
+//     venue: "Art Gallery, GBU",
+//     organizer: "Photography Club, GBU",
+//     type: "Exhibition",
+//     mode: "Offline",
+//     isUpcoming: false,
+//     registrationUrl: "",
+//     images: [
+//       "https://image-static.collegedunia.com/public/college_data/images/campusimage/1421489668197469_122196337857221_100002005655347_147553_4172796_n.jpg",
+//     ],
+//   },
+//   {
+//     id: 15,
+//     title: "Environmental Awareness Drive",
+//     description:
+//       "Tree plantation and cleanliness drive by students under the GBU Eco Club.",
+//     date: "2024-09-10T08:00:00Z",
+//     endDate: "2024-09-10T12:00:00Z",
+//     venue: "GBU Campus",
+//     organizer: "Eco Club, GBU",
+//     type: "Social Service",
+//     mode: "Offline",
+//     isUpcoming: true,
+//     registrationUrl: "https://forms.gle/environmental-awareness-drive-gbu",
+//     images: [
+//       "https://www.gniotgroup.edu.in/lifegniotimg/1633936837-244588932_4383100388473842_7973588752178033120_n.jpg",
+//     ],
+//   },
+// ];
+
+// --- UTILS ---
 function format(date, formatStr) {
   const d = typeof date === "string" ? new Date(date) : date;
   const pad = (n) => n.toString().padStart(2, "0");
@@ -174,25 +424,6 @@ const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(null);
-
-  const isExternalGalleryLink = (url) => {
-    if (!url) return false;
-    return url.includes('photos.app.goo.gl') || 
-           url.includes('photos.google.com') || 
-           url.includes('drive.google.com/drive/folders') ||
-           url.includes('drive.google.com/open?id=') && url.includes('folder');
-  };
-
-  const handleNextImage = (e, total) => {
-    e.stopPropagation();
-    setSelectedIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
-  };
-
-  const handlePrevImage = (e, total) => {
-    e.stopPropagation();
-    setSelectedIndex((prev) => (prev === 0 ? total - 1 : prev - 1));
-  };
 
   useEffect(() => {
     let isMounted = true;
@@ -266,273 +497,223 @@ const EventDetail = () => {
       ? event.images.split(',').map(s => s.trim()).filter(Boolean)
       : [];
 
-  const flyerImage = event.flyerUrl || '';
+  // Cover image: try coverImageUrl, then image, then first gallery image
+  const coverImage = event.coverImageUrl || event.image || eventImages[0] || '';
 
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-20">
-      <div className="container mx-auto px-4 md:px-8 pt-8">
-        <div className="mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="container mx-auto px-2 md:px-8 pt-2 pb-10">
+        <div className="mb-4">
           <Link to="/announcements/event-calendar">
-            <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-100">
+            <Button variant="outline" size="sm">
               <ArrowLeft size={16} className="mr-2" />
               Back to Events
             </Button>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
-          {/* Left Column: Flyer */}
-          <div className="lg:col-span-6 xl:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5.5] bg-gray-100 border border-gray-200 flex items-center justify-center">
-              {flyerImage ? (
-                <img
-                  src={parseImageUrl(flyerImage)}
-                  alt={event.title}
-                  className="w-full h-full object-contain"
-                  onError={(e) => { e.target.style.display = 'none'; }}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center text-gray-400 p-6 text-center">
-                  <Calendar size={64} className="opacity-50 mb-4" />
-                  <p className="text-sm">Flyer not available</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="lg:col-span-2">
+            <div className="relative rounded-3xl h-[22rem] overflow-hidden mb-10 shadow-2xl border border-blue-100 bg-blue-900">
+              {coverImage && (
+                <div className="absolute inset-0">
+                  <img
+                    src={parseImageUrl(coverImage)}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
                 </div>
               )}
-              {event.isUpcoming && (
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse">
-                    UPCOMING
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Right Column: Information & Buttons */}
-          <div className="lg:col-span-6 xl:col-span-7 flex flex-col">
-            <div className="mb-6 flex flex-wrap gap-2">
-              <Badge className={`${getTypeColor(event.type)} shadow-sm`}>{event.type}</Badge>
-              {event.mode && <Badge className={`${getModeColor(event.mode)} shadow-sm`}>{event.mode}</Badge>}
-              {!event.isUpcoming && (
-                <Badge variant="solid" className="bg-gray-600 text-white shadow-sm">
-                  Completed
-                </Badge>
-              )}
-            </div>
-
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-              {event.title}
-            </h1>
-            <p className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-8">
-              {event.schoolName}
-            </p>
-
-            {/* Quick Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                  <Calendar size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Date & Time</p>
-                  <p className="font-semibold text-gray-900 mt-1">
-                    {event.startsAt ? format(new Date(event.startsAt), "MMMM dd, yyyy") : 'TBA'}
-                  </p>
-                  {(event.time || event.endsAt) && (
-                    <p className="text-sm text-gray-600 mt-0.5">
-                      {event.time ? event.time : (event.endsAt ? `Until ${format(new Date(event.endsAt), "MMM dd")}` : '')}
-                    </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+              <div className="relative p-10 md:p-16 text-white">
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <Badge className={`${getTypeColor(event.type)} shadow-lg`}>
+                    {event.type}
+                  </Badge>
+                  <Badge className={`${getModeColor(event.mode)} shadow-lg`}>
+                    {event.mode}
+                  </Badge>
+                  {!event.isUpcoming && (
+                    <Badge
+                      variant="outline"
+                      className="text-white border-white/70 border-solid border-[1.5px]"
+                    >
+                      Completed
+                    </Badge>
                   )}
                 </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-red-50 text-red-600 rounded-xl">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Venue</p>
-                  <p className="font-semibold text-gray-900 mt-1">{event.venue || event.location}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-green-50 text-green-600 rounded-xl">
-                  <Users size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Organizer</p>
-                  <p className="font-semibold text-gray-900 mt-1">{event.organizer}</p>
-                </div>
-              </div>
-
-              {event.price && (
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-purple-50 text-purple-600 rounded-xl">
-                    <span className="font-bold text-lg leading-none">₹</span>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Fee</p>
-                    <p className="font-semibold text-gray-900 mt-1">{event.price === 'Free' ? 'Free Entry' : event.price}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Full-width Description & Actions */}
-        <div className="mb-16 max-w-7xl">
-          <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">About This Event</h3>
-          <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-10">
-            {event.description}
-          </p>
-
-          {/* Action Buttons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl">
-            <Button 
-              size="md" 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
-              asChild
-              disabled={!event.isUpcoming || !event.registrationUrl}
-            >
-              {event.isUpcoming && event.registrationUrl ? (
-                <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink size={18} className="mr-2" />
-                  Register Now
-                </a>
-              ) : (
-                <span>
-                  <ExternalLink size={18} className="mr-2" />
-                  Register Now
-                </span>
-              )}
-            </Button>
-
-            <Button 
-              size="md" 
-              variant="outline" 
-              className="w-full border-gray-300 hover:bg-gray-50" 
-              asChild
-              disabled={!event.flyerUrl && !event.brochureUrl}
-            >
-              {(event.flyerUrl || event.brochureUrl) ? (
-                <a href={event.flyerUrl || event.brochureUrl} target="_blank" rel="noopener noreferrer">
-                  <Download size={18} className="mr-2 text-gray-600" />
-                  Download Flyer
-                </a>
-              ) : (
-                <span>
-                  <Download size={18} className="mr-2 text-gray-400" />
-                  Download Flyer
-                </span>
-              )}
-            </Button>
-
-            <Button 
-              size="md" 
-              variant="outline" 
-              className="w-full border-gray-300 hover:bg-gray-50" 
-              onClick={addToGoogleCalendar}
-            >
-              <CalendarPlus size={18} className="mr-2 text-gray-600" />
-              Add to Calendar
-            </Button>
-
-            <SocialShare url={window.location.href} title={event.title} className="w-full" />
-          </div>
-        </div>
-
-        {/* Gallery Section */}
-        {event.status !== "upcoming" && eventImages.length > 0 && (
-          <div className="mt-20">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Event Gallery</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {eventImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="aspect-video overflow-hidden rounded-xl shadow-md group relative bg-gray-100 cursor-pointer"
-                  onClick={() => {
-                    if (isExternalGalleryLink(image)) {
-                      window.open(image, "_blank");
-                    } else {
-                      setSelectedIndex(index);
-                    }
-                  }}
-                >
-                  {isExternalGalleryLink(image) ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center text-blue-600 bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300">
-                      <ImageIcon size={48} className="opacity-80 mb-2" />
-                      <span className="font-semibold px-4 text-center">View Gallery Album</span>
+                <h1 className={`font-extrabold mb-4 drop-shadow-lg line-clamp-2 ${
+                  event.title.length > 60 ? 'text-2xl md:text-3xl' : event.title.length > 35 ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'
+                }`}>
+                  {event.title}
+                </h1>
+                <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-blue-100">
+                  {event.schoolName}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-base">
+                  <div className="flex items-center">
+                    <Calendar size={20} className="mr-3" />
+                    <div>
+                      <div>
+                        {format(new Date(event.startsAt), "MMMM dd, yyyy")}
+                      </div>
+                      {event.endDate && (
+                        <div>
+                          to {format(new Date(event.endsAt), "MMM dd, yyyy")}
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <>
-                      <img
-                        src={parseImageUrl(image)}
-                        alt={`${event.title} - Image ${index + 1}`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </>
-                  )}
+                  </div>
+                  <div className="flex items-center">
+                    <MapPin size={20} className="mr-3" />
+                    <div>{event.location}</div>
+                  </div>
+                  <div className="flex items-center">
+                    <Users size={20} className="mr-3" />
+                    <div>{event.organizer}</div>
+                  </div>
                 </div>
-              ))}
+              </div>
+            </div>
+
+            <Tabs defaultValue="overview" className="space-y-8 ">
+              <TabsList className={`grid w-full ${eventImages.length > 0 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                {eventImages.length > 0 && (
+                  <TabsTrigger value="gallery">Gallery</TabsTrigger>
+                )}
+              </TabsList>
+
+              <TabsContent value="overview" className="h-full">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>About This Event</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line">
+                      {event.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {eventImages.length > 0 && (
+                <TabsContent value="gallery">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Event Gallery</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {eventImages.map((image, index) => (
+                          <div
+                            key={index}
+                            className="aspect-video h-[300px] overflow-hidden rounded-xl shadow-lg group relative"
+                          >
+                            <img
+                              src={parseImageUrl(image)}
+                              alt={`${event.title} - Image ${index + 1}`}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              onError={(e) => { e.target.style.display = 'none'; }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              )}
+            </Tabs>
+          </div>
+
+          <div className="space-y-6">
+            <div className="sticky top-24 space-y-6">
+              {/* Event Info Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Event Details</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Calendar size={18} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Date</p>
+                      <p className="text-sm font-medium text-gray-800">
+                        {event.startsAt ? new Date(event.startsAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'TBA'}
+                      </p>
+                      {event.time && <p className="text-xs text-gray-500 mt-0.5">{event.time}</p>}
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin size={18} className="text-red-500 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Venue</p>
+                      <p className="text-sm font-medium text-gray-800">{event.venue || event.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Users size={18} className="text-green-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase font-semibold">Organizer</p>
+                      <p className="text-sm font-medium text-gray-800">{event.organizer}</p>
+                    </div>
+                  </div>
+                  {event.mode && (
+                    <div className="pt-2 border-t">
+                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700">{event.mode}</span>
+                      {event.price && event.price !== 'Free' && (
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">{event.price}</span>
+                      )}
+                      {event.price === 'Free' && (
+                        <span className="text-xs font-semibold px-3 py-1 rounded-full bg-green-50 text-green-700 ml-2">Free Entry</span>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Actions */}
+              <div className="flex flex-col gap-3">
+                {event.isUpcoming && event.registrationUrl && (
+                  <Button size="lg" className="w-full" asChild>
+                    <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink size={18} className="mr-2" />
+                      Register Now
+                    </a>
+                  </Button>
+                )}
+
+                {event.brochureUrl && (
+                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
+                    <a href={event.brochureUrl} target="_blank" rel="noopener noreferrer">
+                      <Download size={18} className="mr-2 text-blue-600" />
+                      Download Brochure
+                    </a>
+                  </Button>
+                )}
+
+                {event.flyerUrl && (
+                  <Button size="md" variant="outline" className="w-full border-blue-200 hover:bg-blue-50" asChild>
+                    <a href={event.flyerUrl} target="_blank" rel="noopener noreferrer">
+                      <Download size={18} className="mr-2 text-blue-600" />
+                      Download Flyer
+                    </a>
+                  </Button>
+                )}
+
+                <Button size="md" variant="outline" className="w-full" onClick={addToGoogleCalendar}>
+                  <CalendarPlus size={18} className="mr-2" />
+                  Add to Calendar
+                </Button>
+
+                <SocialShare url={window.location.href} title={event.title} className="w-full" />
+              </div>
             </div>
           </div>
-        )}
-      </div>
-
-      {/* Lightbox for Gallery */}
-      {selectedIndex !== null && eventImages[selectedIndex] && (
-        <div 
-          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
-          onClick={() => setSelectedIndex(null)}
-        >
-          <button 
-            className="absolute top-6 right-6 text-white hover:text-gray-300 bg-black/50 p-2 rounded-full transition-colors z-50"
-            onClick={(e) => { e.stopPropagation(); setSelectedIndex(null); }}
-          >
-            <X size={28} />
-          </button>
-          
-          {eventImages.length > 1 && (
-            <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 p-3 rounded-full transition-colors z-50"
-              onClick={(e) => handlePrevImage(e, eventImages.length)}
-            >
-              <ChevronLeft size={36} />
-            </button>
-          )}
-
-          <div className="relative max-w-full max-h-[90vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            {isExternalGalleryLink(eventImages[selectedIndex]) ? (
-              <div className="bg-white rounded-xl p-8 flex flex-col items-center max-w-sm text-center">
-                <ImageIcon size={64} className="text-blue-500 mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">External Gallery Album</h3>
-                <p className="text-gray-600 mb-6">This item is a link to an external gallery (Google Photos or Drive).</p>
-                <Button onClick={() => window.open(eventImages[selectedIndex], "_blank")}>
-                  Open in New Tab
-                </Button>
-              </div>
-            ) : (
-              <img 
-                src={parseImageUrl(eventImages[selectedIndex])} 
-                alt="Gallery preview" 
-                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-              />
-            )}
-          </div>
-
-          {eventImages.length > 1 && (
-            <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 bg-black/50 p-3 rounded-full transition-colors z-50"
-              onClick={(e) => handleNextImage(e, eventImages.length)}
-            >
-              <ChevronRight size={36} />
-            </button>
-          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

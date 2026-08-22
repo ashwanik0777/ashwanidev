@@ -41,7 +41,7 @@ const Card = React.forwardRef(({ className, ...props }, ref) => (
     }}
     transition={{ type: "spring", stiffness: 200, damping: 20 }}
     className={cn(
-      "relative rounded-xl bg-white border border-slate-100 p-8 md:p-10 shadow-xl transition-all duration-300",
+      "relative rounded-xl bg-white border border-slate-150 p-8 md:p-10 shadow-xl transition-all duration-300",
       className
     )}
     {...props}
@@ -97,31 +97,31 @@ const RoadmapTimeline = () => {
     {
       dateRange: "1 June 2026 – 20 July 2026",
       milestone: "Phase 3: Dynamic Schools & Content Integration",
-      status: "completed",
+      status: "in-progress",
       description:
-        "Implemented dynamic content management systems for all university schools. Populated academic data, integrated the automated Faculty Registration system, and refined overall UI aesthetics.",
-      icon: <RefreshCw className="w-6 h-6 text-emerald-600" />,
+        "Currently implementing dynamic content management systems for all university schools. Populating academic data, integrating the automated Faculty Registration system, and refining overall UI aesthetics.",
+      icon: <RefreshCw className="w-6 h-6 text-blue-600 animate-spin-slow" />,
     },
     {
       dateRange: "20 July 2026 – 30 July 2026",
       milestone: "Phase 4: Rigorous Testing & Debugging",
-      status: "completed",
+      status: "planned",
       description:
-        "Exhaustive validation of all dashboard panels. Performed full-stack API endpoint integration testing, cross-browser compatibility audits, and responsive layout debugging.",
-      icon: <Bug className="w-6 h-6 text-emerald-600" />,
+        "Exhaustive validation of all dashboard panels. Performing full-stack API endpoint integration testing, cross-browser compatibility audits, and responsive layout debugging.",
+      icon: <Bug className="w-6 h-6 text-indigo-600" />,
     },
     {
       dateRange: "1 August 2026 – 20 August 2026",
       milestone: "Phase 5: Content Optimization & Final Tuning",
-      status: "completed",
+      status: "upcoming",
       description:
-        "Executed final features updates based on feedback. Performed data entry, adding/removing custom modules, refined SEO tags, and completed the deployment checklist.",
-      icon: <Wrench className="w-6 h-6 text-emerald-600" />,
+        "Executing final features updates based on feedback. Performing data entry, adding/removing custom modules, refining SEO tags, and completing the deployment checklist.",
+      icon: <Wrench className="w-6 h-6 text-orange-600" />,
     },
     {
       dateRange: "23 August 2026",
       milestone: "Phase 6: Official Production Launch",
-      status: "in-progress",
+      status: "future",
       description:
         "Deploying the fully modernized GBU Smart Portal to the live university servers. Officially launching the platform for all students, faculty, and administration.",
       icon: <Rocket className="w-6 h-6 text-purple-600" />,
@@ -163,16 +163,19 @@ const RoadmapTimeline = () => {
   };
 
   return (
-    <div className="my-8 sm:my-12 relative px-4 md:px-0">
-      <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-2 text-slate-800 tracking-tight">
+    <div className="my-20 relative px-4 md:px-0">
+      <h2 className="text-4xl font-extrabold text-center mb-3 text-slate-800 tracking-tight">
         IT Cell Progress Timeline
       </h2>
+      <p className="text-center text-slate-500 mb-16 text-lg max-w-xl mx-auto">
+        Development Roadmap & Platform Modernization Phases (2025 – 2026)
+      </p>
 
       <div className="relative max-w-4xl mx-auto">
         {/* Timeline track */}
         <div className="absolute left-8 top-2 bottom-2 w-0.5 bg-gradient-to-b from-emerald-400 via-blue-400 to-purple-500 hidden md:block"></div>
 
-        <div className="space-y-6 sm:space-y-8 relative">
+        <div className="space-y-12 relative">
           {timelineData.map((item, index) => (
             <motion.div
               key={index}

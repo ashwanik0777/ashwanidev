@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Psychological First Aid",
             "Community Outreach"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "https://drive.google.com/file/d/106YadFHMdm93pf5VnGChgGRV3BcXRUuX/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "https://drive.google.com/file/d/106YadFHMdm93pf5VnGChgGRV3BcXRUuX/preview"
             }
         ]
     },
@@ -131,11 +131,11 @@ export const departmentLayoutData = {
             "Behavioral Statistics",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "https://drive.google.com/file/d/15jvbG5aqNUyvR7UujQOx84EX5lbuSEEN/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "https://drive.google.com/file/d/15jvbG5aqNUyvR7UujQOx84EX5lbuSEEN/preview"
             }
         ]
     },
@@ -154,11 +154,11 @@ export const departmentLayoutData = {
             "Neuropsychology",
             "Hospital Internship"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "https://drive.google.com/file/d/14NE3m3SynuKELCA7KQnc1qwwQ8k8LdZn/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "https://drive.google.com/file/d/14NE3m3SynuKELCA7KQnc1qwwQ8k8LdZn/preview"
             }
         ]
     },
@@ -177,11 +177,11 @@ export const departmentLayoutData = {
             "Psychodiagnostics",
             "Psychotherapy Practice"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1qfZu8aB-zNS-T-s9WeIk7k_auh6d0v5f/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "https://drive.google.com/file/d/1qfZu8aB-zNS-T-s9WeIk7k_auh6d0v5f/preview"
             }
         ]
     }

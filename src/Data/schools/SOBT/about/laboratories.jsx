@@ -1,78 +1,95 @@
 /**
- * SOBT — Laboratories & Facilities
+ * SOBT — Laboratories
  * School of Biotechnology
  */
 export const laboratoriesData = {
   schoolCode: "SOBT",
   schoolName: "School of Biotechnology",
-  heading: "Laboratories & Facilities — SOBT",
-  subheading: "State-of-the-art research laboratories, teaching labs, and specialized infrastructure.",
-  pdfUrl: "https://drive.google.com/file/d/1HdfoljdTapAfg3aDfPJceC7IASwb30pI/view?usp=sharing",
+  heading: "Laboratories — SOBT",
+  subheading: "Explore our cutting-edge biotechnology and bioinformatics labs.",
   laboratories: [
     {
-      sno: 1,
-      name: "Plant Tissue Culture Lab",
-      category: "Plant Biotechnology",
+      name: "Molecular Biology & Genetic Engineering Lab",
+      faculty: "Dr. Bhupendra Chaudhary",
+      support: "Mr. Ravi Kumar",
+      image:
+        "https://images.unsplash.com/photo-1581093588401-22a67f8b6d9b?auto=format&fit=crop&w=800&q=80",
+      isNew: true,
+      category: "Molecular Biology",
     },
     {
-      sno: 2,
-      name: "Molecular Medicine Lab",
-      category: "Molecular Biology & Medicine",
+      name: "Microbiology Lab",
+      faculty: "Dr. Barkha Singhal",
+      support: "Mrs. Priya Sharma",
+      image:
+        "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80",
+      category: "Microbiology",
     },
     {
-      sno: 3,
-      name: "Central Instrumentation Facility",
-      category: "Analytical Instrumentation",
+      name: "Biochemistry Lab",
+      faculty: "Dr. Rekha Puria",
+      support: "Mr. Suresh Yadav",
+      image:
+        "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80",
+      category: "Biochemistry",
     },
     {
-      sno: 4,
-      name: "Microscopy Lab",
-      category: "Imaging & Microscopy",
+      name: "Cell & Tissue Culture Lab",
+      faculty: "Dr. Bhaswati Banerjee",
+      support: "Mrs. Kavita Devi",
+      image:
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+      isNew: true,
+      category: "Cell Biology",
     },
     {
-      sno: 5,
-      name: "Microbial Biotechnology & Immunology Lab",
-      category: "Microbiology & Immunology",
+      name: "Bioinformatics & Computational Biology Lab",
+      faculty: "Dr. Deepali Singh",
+      support: "Mr. Ankit Verma",
+      image:
+        "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+      category: "Bioinformatics",
     },
     {
-      sno: 6,
-      name: "Genomics & Molecular Diagnostic Lab",
-      category: "Genomics & Diagnostics",
+      name: "Plant Biotechnology Lab",
+      faculty: "Dr. Gunjan Garg",
+      support: "Mr. Ravi Kumar",
+      image:
+        "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=80",
+      category: "Plant Science",
     },
     {
-      sno: 7,
-      name: "Bioprocess & Fermentation Lab",
-      category: "Bioprocess Engineering",
+      name: "Immunology & Molecular Medicine Lab",
+      faculty: "Dr. Shalini Rai",
+      support: "Mrs. Priya Sharma",
+      image:
+        "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=800&q=80",
+      category: "Immunology",
     },
     {
-      sno: 8,
-      name: "Teaching Labs (4 Nos., including Teaching Lab 2)",
-      category: "Academic & Training Labs",
+      name: "Proteomics & Structural Biology Lab",
+      faculty: "Prof. Rajeev Varshney",
+      support: "Mr. Mohit Singh",
+      image:
+        "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+      isNew: true,
+      category: "Proteomics",
     },
     {
-      sno: 9,
-      name: "BSL-2 Lab",
-      category: "Biosafety Facility",
+      name: "Instrumentation Lab",
+      faculty: "Dr. Rekha Puria",
+      support: "Mr. Suresh Yadav",
+      image:
+        "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80",
+      category: "Instrumentation",
     },
     {
-      sno: 10,
-      name: "Washing & Autoclaving Room",
-      category: "Support Facility",
-    },
-    {
-      sno: 11,
-      name: "Bioinformatics & Drug Design Labs",
-      category: "Computational Biology",
-    },
-    {
-      sno: 12,
-      name: "Refrigerator Room",
-      category: "Cold Storage Facility",
-    },
-    {
-      sno: 13,
-      name: "Plant Green House Facility (3 Nos.)",
-      category: "Plant Research Facility",
+      name: "Fermentation Technology Lab",
+      faculty: "Dr. Barkha Singhal",
+      support: "Mrs. Kavita Devi",
+      image:
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      category: "Fermentation",
     },
   ],
 };

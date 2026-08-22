@@ -35,7 +35,7 @@ const NationalAcademicDepository = () => {
 
         {/* About Section - Official Details */}
         <section id="about-nad" className="py-16 bg-white">
-          <div className="container mx-auto px-4 max-w-7xl">
+          <div className="container mx-auto px-4 max-w-5xl">
             <div className="mb-10">
               <span className="bg-amber-100 text-amber-900 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                 Official Information

@@ -105,7 +105,7 @@ export const departmentLayoutData = {
         "Administrative Theory", "Public Policy", "Governance", "Administrative Law",
         "E-Governance", "Rural Development", "Research Methods", "Dissertation",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
+      syllabusUrl: "https://drive.google.com/file/d/132qnJdehhm8VuMa_sCzkkp_6v62ghy2m/preview",
       syllabus: [],
     },
     {

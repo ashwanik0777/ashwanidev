@@ -5,38 +5,87 @@ import { Lightbulb, Award, Check } from "lucide-react";
 const AboutRAEM = ({
   title = "About",
   highlight = "RAEM",
+  visionTitle = "Our Vision",
+  visionIcon = Lightbulb,
+  visionText = [],
+  missionTitle = "Our Mission",
+  missionIcon = Award,
+  missionPoints = [],
   sections = [],
   photos = [],
 }) => {
   return (
-    <section className="py-8 sm:py-12 bg-white">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">
-          {title} <span className="text-blue-600">{highlight}</span>
+    <section className="py-20 bg-white">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
+          {title} {highlight}
         </h2>
-        <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
+        <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 space-y-12">
+        {/* VISION & MISSION CARDS */}
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Vision */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-white p-8 rounded-xl border-gray-300 border-[1px] border-solid hover:shadow-lg transition"
+          >
+            <div className="flex items-center mb-6">
+              <visionIcon className="w-8 h-8 text-blue-600 mr-3" />
+              <h3 className="text-2xl font-bold text-gray-900">{visionTitle}</h3>
+            </div>
+            {visionText.map((text, idx) => (
+              <p
+                key={idx}
+                className={`text-gray-700 text-lg ${
+                  idx > 0 ? "mt-4" : ""
+                } leading-relaxed`}
+              >
+                {text}
+              </p>
+            ))}
+          </motion.div>
+
+          {/* Mission */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white p-8 rounded-xl border-gray-300 border-[1px] border-solid hover:shadow-lg transition"
+          >
+            <div className="flex items-center mb-6">
+              <missionIcon className="w-8 h-8 text-green-600 mr-3" />
+              <h3 className="text-2xl font-bold text-gray-900">{missionTitle}</h3>
+            </div>
+            <ul className="space-y-3 text-gray-700 text-lg">
+              {missionPoints.map((point, idx) => (
+                <li key={idx} className="flex items-start">
+                  <Check className="text-green-600 w-5 h-5 mr-2 mt-1" />
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+
         {/* TEXT SECTIONS + IMAGES */}
-        <div className="grid lg:grid-cols-2 gap-10 items-stretch">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* LEFT TEXT SECTIONS */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="space-y-6 flex flex-col justify-center"
+            className="space-y-10"
           >
             {sections.map(({ heading, text }, idx) => (
-              <div
-                key={idx}
-                className="bg-gray-50/60 p-6 sm:p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
-              >
-                <h3 className="text-xl sm:text-2xl font-bold text-blue-950 mb-2 sm:mb-3">
+              <div key={idx}>
+                <h3 className="text-2xl font-bold text-foreground">
                   {heading}
                 </h3>
-                <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+                <p className="text-muted-foreground leading-relaxed">
                   {text}
                 </p>
               </div>
@@ -45,18 +94,17 @@ const AboutRAEM = ({
 
           {/* RIGHT IMAGES */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex flex-col gap-5 items-center justify-center w-full"
+            className="grid grid-cols-1 gap-6"
           >
             {photos.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`About Section ${idx + 1}`}
-                className="rounded-2xl shadow-lg border border-gray-100 max-h-[350px] w-full object-cover hover:shadow-xl transition-shadow"
+                className="rounded-lg shadow-lg border h-110 border-gray-200 border-solid w-full"
               />
             ))}
           </motion.div>

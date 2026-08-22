@@ -52,7 +52,46 @@ export const departmentLayoutData = {
       phone: "0120-234-9912",
     },
   },
-  aboutProps: null,
+  aboutProps: {
+    heading: "About the Department",
+    subheading:
+      "The Department of Civil Engineering prepares engineers for infrastructure development, urban planning, and sustainable construction.",
+    stats: [
+      { icon: Users, numberText: "200+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "13+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "8+", title: "Research Projects", subtitle: "Completed" },
+      { icon: Lightbulb, numberText: "2+", title: "Patents Filed", subtitle: "Innovations" },
+    ],
+    highlights: [
+      {
+        title: "Comprehensive Programs",
+        description:
+          "B.Tech, M.Tech in 5 specializations, and Ph.D programs covering all major civil engineering domains with field visits and industry internships.",
+        dotColor: "#3b82f6",
+      },
+      {
+        title: "Research Excellence",
+        description:
+          "Active research in earthquake engineering, smart structures, green building, BIM, and environmental conservation with DST and HUDCO funding.",
+        dotColor: "#06b6d4",
+      },
+      {
+        title: "Industry Connect",
+        description:
+          "Strong relationships with L&T Construction, NHAI, CPWD, and state PWD departments for placements, internships, and live projects.",
+        dotColor: "#6366f1",
+      },
+    ],
+    vision:
+      "To be a leading center of excellence in civil engineering education, research, and sustainable infrastructure development.",
+    missionPoints: [
+      "Provide quality education in civil engineering and allied fields",
+      "Conduct impactful research in structural, environmental, and geotechnical engineering",
+      "Foster sustainable construction practices and green building technologies",
+      "Build strong industry-academia partnerships for student development",
+      "Contribute to national infrastructure development through skilled engineers",
+    ],
+  },
   programsData: [
     {
         id: "btech-civil-engg",
@@ -69,15 +108,15 @@ export const departmentLayoutData = {
             "Transportation & Highways",
             "Surveying & GIS"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview",
+        syllabusUrl: "https://drive.google.com/file/d/118F0-e2HTY1HPQ3xjmQkWx6wvZxdEDc2/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview"
+                url: "https://drive.google.com/file/d/118F0-e2HTY1HPQ3xjmQkWx6wvZxdEDc2/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1w9JFOjXlgh7tUemeCkHMs4GdH7ffltvj/preview"
+                url: "https://drive.google.com/file/d/1Eqfnl-vRUf4BbEFU00fKJvte1OlcHzc2/preview"
             }
         ]
     },
@@ -96,15 +135,15 @@ export const departmentLayoutData = {
             "Foundation Design",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1A7FerR5Zo3BPO9FV0xpfdBR8poRmFkE2/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
+                url: "https://drive.google.com/file/d/1A7FerR5Zo3BPO9FV0xpfdBR8poRmFkE2/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
+                url: "https://drive.google.com/file/d/1LfNkjEaWgn_CP1fi_bCHPLCy-wwb5s0C/preview"
             }
         ]
     },
@@ -123,15 +162,15 @@ export const departmentLayoutData = {
             "EIA & Environmental Auditing",
             "Solid Waste Systems"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1-dvdBTpX12FyAr27rrHv0c5qIBcPOjt7/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
+                url: "https://drive.google.com/file/d/1-dvdBTpX12FyAr27rrHv0c5qIBcPOjt7/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
+                url: "https://drive.google.com/file/d/15IOOW-0VTibAu8tBP7-ZRdJs7lZSfH-2/preview"
             }
         ]
     },
@@ -150,15 +189,15 @@ export const departmentLayoutData = {
             "FEM Structural Modeling",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview",
+        syllabusUrl: "https://drive.google.com/file/d/13pjPcaO4qasu1YBoz9Lnlf0XD4saOHr1/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
+                url: "https://drive.google.com/file/d/13pjPcaO4qasu1YBoz9Lnlf0XD4saOHr1/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1fG3-xe3hVly3MRg4_1f_-hcYijWpi79v/preview"
+                url: "https://drive.google.com/file/d/13pjPcaO4qasu1YBoz9Lnlf0XD4saOHr1/preview"
             }
         ]
     },
@@ -177,11 +216,11 @@ export const departmentLayoutData = {
             "Intelligent Transportation (ITS)",
             "Urban Transit"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1UU_OiuIun-c56cHqUuZ5Hl1b5KzKcGCh/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1Vkc8CMaQQIVvoYM0F75sL4Mu_g7P_cOI/preview"
+                url: "https://drive.google.com/file/d/1UU_OiuIun-c56cHqUuZ5Hl1b5KzKcGCh/preview"
             }
         ]
     },
@@ -200,11 +239,11 @@ export const departmentLayoutData = {
             "Safety Engineering",
             "Site Management"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1ei44n7OQJeeYz1b4WqtjC5BhHxrtA2f-/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
+                url: "https://drive.google.com/file/d/1ei44n7OQJeeYz1b4WqtjC5BhHxrtA2f-/preview"
             }
         ]
     },
@@ -223,11 +262,11 @@ export const departmentLayoutData = {
             "Soil Dynamics",
             "Geoenvironmental Barriers"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1myvKRmnobf4RGVp6ljApSwMNlsZotc6B/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1dA6bQVyU_7OE7-ZpxI8kajyAuMFKJVEI/preview"
+                url: "https://drive.google.com/file/d/1myvKRmnobf4RGVp6ljApSwMNlsZotc6B/preview"
             }
         ]
     },
@@ -264,7 +303,52 @@ export const departmentLayoutData = {
       { icon: GraduationCap, custom: "Exp", numberText: "10+", subtitle: "Avg Experience", bg: "bg-purple-50", color: "text-purple-600" },
     ],
   },
-  researchStats: null,
-  topAchievers: null,
-  achievements: null,
+  researchStats: [
+    { numberText: "8+", subtitle: "Research Projects" },
+    { numberText: "₹1Cr+", subtitle: "Research Funding" },
+    { numberText: "50+", subtitle: "Publications" },
+    { numberText: "2+", subtitle: "Patents Filed" },
+  ],
+  topAchievers: [
+    {
+      name: "Priya Singh",
+      year: "B.Tech CE 2024",
+      achievement: "Placed at L&T Construction, GATE qualified",
+      image: "https://randomuser.me/api/portraits/women/60.jpg",
+      skills: ["Structural Design", "STAAD Pro", "AutoCAD", "Project Management"],
+    },
+    {
+      name: "Arun Pratap",
+      year: "M.Tech Structural 2024",
+      achievement: "Published 3 papers, placed at NHAI",
+      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      skills: ["Earthquake Engineering", "FEM", "BIM", "Research"],
+    },
+  ],
+  achievements: [
+    {
+      title: "HUDCO Research Grant",
+      description: "Funded research on earthquake-resistant low-cost housing",
+      icon: Award,
+      color: "text-blue-600",
+    },
+    {
+      title: "ASCE Student Chapter",
+      description: "Active chapter organizing national bridge design competitions",
+      icon: BookOpen,
+      color: "text-indigo-600",
+    },
+    {
+      title: "Industry MoU",
+      description: "MoU with L&T Construction for internships and joint research",
+      icon: Lightbulb,
+      color: "text-cyan-600",
+    },
+    {
+      title: "Government Placements",
+      description: "Students placed at NHAI, CPWD, and state PWD departments",
+      icon: GraduationCap,
+      color: "text-purple-600",
+    },
+  ],
 };

@@ -13,13 +13,14 @@ import CoursesOffered from "../pages/Admission/CoursesOffered.jsx";
 import EligibilityReservation from "../pages/Admission/EligibilityReservation.jsx";
 import FeeStructure from "../pages/Admission/FeeStructure.jsx";
 import InternationalAdmissions from "../pages/Admission/InternationalAdmissions.jsx";
+import NewsDetail from "../pages/Announcements/NewsDetail.jsx";
 import NewsNotifications from "../pages/Announcements/NewsNotifications.jsx";
 import EventsPage from "../pages/Announcements/EventsPage.jsx";
 import NewsLetter from "../pages/Announcements/NewsLetter.jsx";
 import EventDetail from "../pages/Announcements/EventDetail.jsx";
 import MediaGallery from "../pages/Announcements/MediaGallery.jsx";
 import Notice from "../pages/Announcements/Notice.jsx";
-import NewsDetail from "../pages/Announcements/NewsDetail.jsx";
+import NoticeDetail from "../pages/Announcements/NoticeDetail.jsx";
 
 
 
@@ -34,7 +35,6 @@ import NSS from "../pages/campusLife/NSS.jsx";
 import NCC from "../pages/campusLife/NCC.jsx";
 import MeditationCenter from "../pages/campusLife/MeditationCenter.jsx";
 import Overview from "../pages/campusLife/Overview.jsx";
-import Library from "../pages/campusLife/Library.jsx";
 import ClubDetail from "../pages/clubs/ClubDetail.jsx";
 
 import FacultyPortalDashboard from "../pages/Auth/FacultyDashboard.jsx";
@@ -65,6 +65,9 @@ const AcademicCalendar = React.lazy(() =>
 );
 const CBCSFramework = React.lazy(() =>
   import("../pages/Academic/CBCSFramework.jsx")
+);
+const CentersOfExcellence = React.lazy(() =>
+  import("../pages/Academic/CentersOfExcellence.jsx")
 );
 const Faculty = React.lazy(() => import("../pages/Academic/Faculty.jsx"));
 const FacultyDetail = React.lazy(() =>
@@ -135,16 +138,9 @@ const ResearchProjects = lazy(() =>
 const ResearchScholars = lazy(() =>
   import("../pages/departments/Reasearch_Scholar")
 );
-const ResearchGrants = lazy(() =>
-  import("../pages/departments/Research_grants")
-);
 const TrainingConsultancy = lazy(() => import("../pages/departments/Training"));
 const Patents = lazy(() => import("../pages/departments/Patent"));
-const Books = lazy(() => import("../pages/departments/Books"));
 const BoardOfStudies = lazy(() => import("../pages/departments/BoardOfStudy"));
-const SchoolAchievements = lazy(() =>
-  import("../pages/departments/SchoolAchievements")
-);
 import SchoolsLayout from "../components/departments/SchoolsLayout.jsx";
 import Dean from "../components/departments/Dean.jsx";
 import Conferences from "../pages/departments/Usict_activities.jsx";
@@ -206,10 +202,6 @@ export default function AppRouter() {
           <Route path="/comingSoon" element={<ComingSoon />} />
           <Route path="/" element={<Home />} />
           <Route path="/about-us/About GBU" element={<AboutGbu />} />
-          <Route path="/about-us/About%20Gbu" element={<AboutGbu />} />
-          <Route path="/about-us/About%20GBU" element={<AboutGbu />} />
-          <Route path="/about-us/about-gbu" element={<AboutGbu />} />
-          <Route path="/about-us/about" element={<AboutGbu />} />
           <Route path="/about-us/act" element={<Act />} />
           <Route path="/about-us/act-statute-ordinance" element={<Act />} />
           <Route path="/about/act" element={<Act />} />
@@ -355,6 +347,10 @@ export default function AppRouter() {
             element={<ListOfHolidays />}
           />
           <Route path="/academics/cbcs-framework" element={<CBCSFramework />} />
+          <Route
+            path="/academics/centers-of-excellence"
+            element={<CentersOfExcellence />}
+          />
           <Route path="/academics/faculty" element={<Faculty />} />
           <Route path="/academics/faculty/:id" element={<FacultyDetail />} />
           <Route
@@ -362,10 +358,6 @@ export default function AppRouter() {
             element={<InternationalCollaboration />}
           />
 
-          <Route
-            path="/academics/annual-reports"
-            element={<ReportsPublications />}
-          />
           <Route
             path="/academics/reports-publications"
             element={<ReportsPublications />}
@@ -394,15 +386,11 @@ export default function AppRouter() {
               <Route path="about/staff" element={<StaffMembers />} />
               <Route path="about/labs" element={<LaboratoryCards />} />
               <Route path="about/activities" element={<Conferences />} />
-              <Route path="about/achievements" element={<SchoolAchievements />} />
-              <Route path="achievements" element={<SchoolAchievements />} />
               <Route path="research-area" element={<ResearchArea />} />
               <Route path="research-projects" element={<ResearchProjects />} />
-              <Route path="research-grants" element={<ResearchGrants />} />
               <Route path="research-scholars" element={<ResearchScholars />} />
               <Route path="training-consultancy" element={<TrainingConsultancy />} />
               <Route path="patents" element={<Patents />} />
-              <Route path="books" element={<Books />} />
               <Route path="departments/coe-bioinformatics" element={<CoeBioinformatics />} />
               <Route path="departments/molecular-biology-lab" element={<MolecularBiologyLab />} />
               <Route path="departments/research-cell" element={<ResearchCellPage />} />
@@ -414,19 +402,9 @@ export default function AppRouter() {
               <Route path="departments/pali-sanskrit-studies" element={<GenericCentrePage />} />
               <Route path="departments/heritage-archaeology" element={<GenericCentrePage />} />
               <Route path="departments/meditation-mindfulness-centre" element={<GenericCentrePage />} />
-              {/* Centre / Facility Pages */}
+              {/* SOL Centre Pages */}
               <Route path="departments/moot-court-cell" element={<GenericCentrePage />} />
               <Route path="departments/legal-aid-clinic" element={<GenericCentrePage />} />
-              <Route path="departments/bci-approved-letters" element={<GenericCentrePage />} />
-              <Route path="departments/research-advisory-committee" element={<GenericCentrePage />} />
-              <Route path="departments/school-library" element={<GenericCentrePage />} />
-              <Route path="departments/area-chairpersons" element={<GenericCentrePage />} />
-              <Route path="departments/guest-speakers" element={<GenericCentrePage />} />
-              <Route path="departments/corporate-resource-center" element={<GenericCentrePage />} />
-              <Route path="departments/research-development" element={<GenericCentrePage />} />
-              <Route path="departments/training-consultancy" element={<GenericCentrePage />} />
-              <Route path="departments/centres-of-excellence" element={<GenericCentrePage />} />
-              <Route path="departments/academic-collaboration" element={<GenericCentrePage />} />
               <Route path="departments/constitutional-governance" element={<GenericCentrePage />} />
               <Route path="departments/cyber-law-centre" element={<GenericCentrePage />} />
               <Route path="departments/:deptId" element={<GenericDepartment />} />
@@ -469,7 +447,6 @@ export default function AppRouter() {
             path="/research/research-centers"
             element={<ResearchCenters />}
           />
-          <Route path="/research/publications" element={<Index />} />
           <Route path="/research/publications-patents" element={<Index />} />
           <Route path="/research/incubation" element={<Incubation />} />
           <Route path="/research/institution-innovation" element={<InstitutionInnovation />} />
@@ -482,7 +459,6 @@ export default function AppRouter() {
           />
 
           <Route path="/campus-life/hero" element={<Overview />} />
-          <Route path="/campus-life/library" element={<Library />} />
           <Route
             path="/campus-life/sports-fitness"
             element={<SportsCultural />}
@@ -507,6 +483,10 @@ export default function AppRouter() {
             element={<NewsNotifications />}
           />
           <Route
+            path="/announcements/news-notifications/:id"
+            element={<NewsDetail />}
+          />
+          <Route
             path="/announcements/event-calendar"
             element={<EventsPage />}
           />
@@ -514,11 +494,8 @@ export default function AppRouter() {
             path="/announcements/event-calendar/:id"
             element={<EventDetail />}
           />
-          <Route
-            path="/announcements/news-notifications/:id"
-            element={<NewsDetail />}
-          />
           <Route path="/announcements/notices" element={<Notice />} />
+          <Route path="/announcements/notices/:id" element={<NoticeDetail />} />
           <Route
             path="/announcements/media-gallery"
             element={<MediaGallery />}

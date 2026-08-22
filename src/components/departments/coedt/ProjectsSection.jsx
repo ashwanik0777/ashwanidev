@@ -21,7 +21,7 @@ const ProjectsSection = ({
   projects = [],
 }) => {
   return (
-    <section className="py-8 sm:py-12 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <motion.div
@@ -29,14 +29,13 @@ const ProjectsSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">{title}</h2>
-          <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
-          {subtitle && (
-            <p className="text-sm text-gray-500 mt-2 font-medium">{subtitle}</p>
-          )}
-        </motion.div>
+        className="text-center mb-12"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">{title}</h2>
+          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
+        </div>
+      </motion.div>
 
         {/* Grid */}
         <motion.div

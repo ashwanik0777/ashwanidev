@@ -29,21 +29,21 @@ const CounterValue = ({ end, isInView }) => {
 };
 
 const Counter = ({ value, label, suffix = "", isInView }) => (
-  <div className="flex flex-col items-center px-2 py-1 text-center">
+  <div className="flex flex-col items-center px-8 py-2">
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-2xl sm:text-3xl font-extrabold text-blue-600 tracking-tight"
+      className="text-3xl font-bold text-blue-600"
     >
       <CounterValue end={value} isInView={isInView} />
-      <span className="text-blue-600 ml-0.5">{suffix}</span>
+      <span className="text-blue-600">{suffix}</span>
     </motion.div>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="text-xs sm:text-sm text-gray-600 font-semibold mt-1"
+      className="text-sm text-gray-600 font-medium mt-1"
     >
       {label}
     </motion.div>
@@ -55,8 +55,8 @@ const SchoolStats = ({ title, stats }) => {
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-10 bg-white" ref={containerRef}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10" ref={containerRef}>
+      <div className="container mx-auto">
         {title && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -64,32 +64,29 @@ const SchoolStats = ({ title, stats }) => {
             transition={{ duration: 0.6 }}
             className="text-center mb-8"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 tracking-tight">
-              {title}
-            </h2>
-            <div className="w-16 sm:w-20 h-1 bg-blue-600 mx-auto mt-2 rounded-full" />
+            <h3 className="text-xl font-medium text-gray-800">{title}</h3>
           </motion.div>
         )}
 
         {stats && stats.length > 0 ? (
           <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-5"
+            className="flex justify-center items-center flex-wrap gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center p-3.5 sm:p-5 rounded-2xl bg-gradient-to-b from-blue-50/60 to-gray-50 border border-blue-100/80 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300"
-              >
+              <React.Fragment key={index}>
                 <Counter
                   value={stat.value || 0}
                   label={stat.label || "No label"}
                   suffix={stat.suffix || ""}
                   isInView={isInView}
                 />
-              </div>
+                {index < stats.length - 1 && (
+                  <div className="h-12 w-px bg-gray-200" />
+                )}
+              </React.Fragment>
             ))}
           </motion.div>
         ) : (

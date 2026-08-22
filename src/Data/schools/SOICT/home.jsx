@@ -1,7 +1,6 @@
 import React from "react";
 import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 import { deansMessageData } from "./about/deans-message";
-import { placementData } from "./placement";
 
 const ictSlides = [
   {
@@ -43,7 +42,7 @@ export const sectionsConfig = [
         ],
         cards: [
           {
-            title: "VISION | SoICT",
+            title: "VISION | USICT",
             icon: <Target size={28} />,
             bgGradient: "from-blue-500 to-purple-600",
             content: (
@@ -61,7 +60,7 @@ export const sectionsConfig = [
             ),
           },
           {
-            title: "MISSION | SoICT",
+            title: "MISSION | USICT",
             icon: <Trophy size={28} />,
             bgGradient: "from-purple-500 to-pink-600",
             content: (
@@ -85,7 +84,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: false,
+    enabled: true,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -684,64 +683,10 @@ export const sectionsConfig = [
       ],
     },
   },
-  {
-    componentName: "StudentAchievers",
-    enabled: true,
-    position: 9.5,
-    props: {
-      achieversHeading: "Top Student Achievers",
-      achieversSubheading: "Students making us proud globally",
-      topAchievers: [
-        {
-          name: "Aarushi Sangal",
-          rollNo: "235UAI001",
-          year: "B.Tech CSE (AI) | Pre-Final Year",
-          achievement:
-            "Second Position & ₹3,00,000 Cash Prize at FinShield Hackathon 2025, IIT Hyderabad",
-          image: "/assets/students/Aarushi Sangal.png",
-          skills: ["Artificial Intelligence", "Computer Science", "Hackathons"],
-        },
-        {
-          name: "Mayank Prabhakar",
-          rollNo: "255UCS033",
-          year: "B.Tech CSE | 2nd Year",
-          achievement:
-            "Selected as Google Gemini Student Ambassador, representing Gautam Buddha University to drive AI awareness, learning, and student engagement.",
-          image: "/assets/students/Mayank Prabhakar.png",
-          skills: ["Artificial Intelligence", "Community Building", "Technology", "Leadership"],
-        },
-        {
-          name: "Krishna Kumar Jha",
-          rollNo: "225UCD007",
-          year: "B.Tech CSE",
-          achievement:
-            "Selected as an AI/ML Intern at DGIS, Indian Army, Ministry of Defence, gaining valuable experience in Artificial Intelligence and Machine Learning.",
-          image: "/assets/students/Krishna.png",
-          skills: ["Artificial Intelligence", "Machine Learning", "Technical Skills"],
-        },
-        {
-          name: "Prachi Saroj",
-          year: "B.Tech Artificial Intelligence",
-          achievement:
-            "Placed at Physics Wallah (PW) through campus placement, marking a significant career achievement.",
-          image: "/assets/students/Prachi Saroj.png",
-          skills: ["Artificial Intelligence", "Placement", "Physics Wallah"],
-        },
-        {
-          name: "Ananya Pandey",
-          year: "B.Tech CSE",
-          achievement:
-            "Placed at Pratinidhi.ai as a Software Engineer with a package of ₹12 LPA.",
-          image: "/assets/students/ananaya.png",
-          skills: ["Software Engineering", "Placement", "Pratinidhi.ai", "₹12 LPA"],
-        },
-      ],
-    },
-  },
 
   {
     componentName: "PlacementsSection",
-    enabled: false,
+    enabled: true,
     position: 10,
     props: {
       data: {
@@ -777,7 +722,7 @@ export const sectionsConfig = [
 
   {
     componentName: "RecentPlacements",
-    enabled: false,
+    enabled: true,
     position: 11,
     props: {
       data: {
@@ -854,7 +799,24 @@ export const sectionsConfig = [
     enabled: true,
     position: 12,
     props: {
-      recruitersData: placementData?.recruitersData || [],
+      recruitersData: [
+        { name: "Samsung", logo: "https://www.gbu.ac.in/USICT/media/img/recute/samsung.png" },
+        { name: "TCS", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tcs.png" },
+        { name: "Adobe", logo: "https://www.gbu.ac.in/USICT/media/img/recute/adobe.png" },
+        { name: "Tech Mahindra", logo: "https://www.gbu.ac.in/USICT/media/img/recute/tech.png" },
+        { name: "Metro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/metro.png" },
+        { name: "HCL", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hcl.png" },
+        { name: "Byjus", logo: "https://www.gbu.ac.in/USICT/media/img/recute/byjus.png" },
+        { name: "Nagrro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/nagrro.png" },
+        { name: "Apple", logo: "https://www.gbu.ac.in/USICT/media/img/recute/apple.png" },
+        { name: "White Hat Junior", logo: "https://www.gbu.ac.in/USICT/media/img/recute/white.png" },
+        { name: "Hexaware", logo: "https://www.gbu.ac.in/USICT/media/img/recute/hexaware.png" },
+        { name: "Blinkit", logo: "https://www.gbu.ac.in/USICT/media/img/recute/blink-it-logo.png" },
+        { name: "Toppr", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Toppr_logo.png" },
+        { name: "Wipro", logo: "https://www.gbu.ac.in/USICT/media/img/recute/wipro.png" },
+        { name: "Scaler", logo: "https://www.gbu.ac.in/USICT/media/img/recute/scaler.png" },
+        { name: "Chegg", logo: "https://www.gbu.ac.in/USICT/media/img/recute/Chegg-Logo.png" },
+      ],
     },
   },
 

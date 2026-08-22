@@ -4,20 +4,11 @@ import { Eye, Download, Filter, BookOpen, FileSignature, Star, Award, Search, Ch
 import StatsCard from "../../../components/StatsCard.jsx";
 import SearchableWrapper from "../../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from '../../../components/TabsData.jsx';
-import { allResearchPublications } from "../../../Data/researchPublicationsData.js";
-import { booksData as soictBooksData } from "../../../Data/schools/SOICT/research/books.jsx";
-import { booksData as sobtBooksData } from "../../../Data/schools/SOBT/research/books.jsx";
-import { booksData as soeBooksData } from "../../../Data/schools/SOE/research/books.jsx";
-import { booksData as solBooksData } from "../../../Data/schools/SOL/research/books.jsx";
-import { booksData as somBooksData } from "../../../Data/schools/SOM/research/books.jsx";
-import { booksData as sohssBooksData } from "../../../Data/schools/SOHSS/research/books.jsx";
-import { booksData as sobscBooksData } from "../../../Data/schools/SOBSC/research/books.jsx";
-import { booksData as sovsBooksData } from "../../../Data/schools/SOVS/research/books.jsx";
+import { SCHOOL_BADGES } from "../../../Data/schools";
 
 const Publications = () => {
   const [activeTab, setActiveTab] = useState("publications");
   const [viewMode, setViewMode] = useState("table"); // 'table' or 'grid'
-  const [selectedBulletin, setSelectedBulletin] = useState("");
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
@@ -25,65 +16,9 @@ const Publications = () => {
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 8;
 
-  const officialBulletins = [
-    {
-      id: "b1",
-      title: "GBU Research Publications (March 2026 – May 2026)",
-      period: "March 2026 – May 2026",
-      year: "2026",
-      pdfUrl: "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
-      publisher: "Planning & Research Division, Gautam Buddha University",
-      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("March 2026")).length,
-    },
-    {
-      id: "b2",
-      title: "GBU Research Publications (December 2025 – February 2026)",
-      period: "December 2025 – February 2026",
-      year: "2026",
-      pdfUrl: "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
-      publisher: "Planning & Research Division, Gautam Buddha University",
-      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("December 2025")).length,
-    },
-    {
-      id: "b3",
-      title: "GBU Research Publications (September 2025 – November 2025)",
-      period: "September 2025 – November 2025",
-      year: "2025",
-      pdfUrl: "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
-      publisher: "Planning & Research Division, Gautam Buddha University",
-      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("September 2025")).length,
-    },
-    {
-      id: "b4",
-      title: "GBU Research Publications (June 2025 – August 2025)",
-      period: "June 2025 – August 2025",
-      year: "2025",
-      pdfUrl: "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
-      publisher: "Planning & Research Division, Gautam Buddha University",
-      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("June 2025")).length,
-    },
-    {
-      id: "b5",
-      title: "GBU Research Publications (January 2025 – May 2025)",
-      period: "January 2025 – May 2025",
-      year: "2025",
-      pdfUrl: "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
-      publisher: "Planning & Research Division, Gautam Buddha University",
-      paperCount: allResearchPublications.filter(p => p.bulletinTitle.includes("January 2025")).length,
-    },
-  ];
-
-  const schools = [
-    "School of Information & Communication Technology",
-    "School of Biotechnology",
-    "School of Engineering",
-    "School of Basic Sciences",
-    "School of Management",
-    "School of Humanities & Social Sciences",
-    "Planning & Research Division",
-  ];
+  const schools = Object.keys(SCHOOL_BADGES);
 
   const types = [
     "Article",
@@ -93,272 +28,136 @@ const Publications = () => {
     "Review",
     "Book",
     "Book Review",
+    "Letter",
+    "News Clippings",
+    "Editorial",
   ];
   const statuses = ["Granted", "Filed", "Under Review", "Published"];
 
-  const publications = allResearchPublications;
+  const publications = [
+    {
+      id: 1,
+      title: "GBU Research Publications (March 2026 – May 2026)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2026",
+      impact: "UGC CARE / Scopus",
+      citations: 180,
+      type: "Article",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2026-Q1",
+      doi: "GBU/RES/2026/03-05",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-March-May2026.pdf",
+      issn: "GBU-RES-2026-Q1",
+      indexing: "Official GBU Archive, UGC CARE",
+      quartile: "Q1",
+    },
+    {
+      id: 2,
+      title: "GBU Research Publications (December 2025 – February 2026)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2026",
+      impact: "UGC CARE / Scopus",
+      citations: 165,
+      type: "Article",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q4",
+      doi: "GBU/RES/2025/12-02",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-Dec2025-Feb2026.pdf",
+      issn: "GBU-RES-2025-Q4",
+      indexing: "Official GBU Archive, UGC CARE",
+      quartile: "Q1",
+    },
+    {
+      id: 3,
+      title: "GBU Research Publications (September 2025 – November 2025)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2025",
+      impact: "UGC CARE / Scopus",
+      citations: 154,
+      type: "Article",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q3",
+      doi: "GBU/RES/2025/09-11",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-Sept-Nov2025.pdf",
+      issn: "GBU-RES-2025-Q3",
+      indexing: "Official GBU Archive, UGC CARE",
+      quartile: "Q1",
+    },
+    {
+      id: 4,
+      title: "GBU Research Publications (June 2025 – August 2025)",
+      authors: "Planning & Research Division, Gautam Buddha University",
+      journal: "Official Quarterly Research Bulletin",
+      year: "2025",
+      impact: "UGC CARE / Scopus",
+      citations: 142,
+      type: "Article",
+      category: "Research Bulletin",
+      school: "Planning & Research Division",
+      scopusId: "GBU-RES-2025-Q2",
+      doi: "GBU/RES/2025/06-08",
+      pdfUrl: "https://www.gbu.ac.in/Content/gbudata/Publications/Research-Publications-June-Aug2025.pdf",
+      issn: "GBU-RES-2025-Q2",
+      indexing: "Official GBU Archive, UGC CARE",
+      quartile: "Q1",
+    },
+  ];
 
   const patents = [
     {
       id: 1,
-      title: "Edge Preserving Image Smoothing Benchmark System with Deep Convolutional Neural Network",
-      status: "Granted",
-      year: "2020",
-      type: "Australian Patent",
-      patentNo: "2020102385",
-      inventors: "Jaware T. H., Nayyar A., Solanki, A., Dembrani M. B., Mahapatra B., jhansi N. Z.",
-      description: "Edge Preserving Image Smoothing Benchmark System with Deep Convolutional Neural Network is invented in which image smoothing is performed by retaining the edge of an image with Deep Convolutional Neural Network by the state of art filters.",
-      school: "School of Information & Communication Technology",
-      category: "Granted",
-      filingDate: "2020"
+      title: "Synthetic Gene Coding for TET1 Catalytic Domain in Programmable Enzymes for Epigenome Editing",
+      inventors: "School of Biotechnology, Gautam Buddha University",
+      patentNo: "IN202311048912",
+      filingDate: "2023-08-14",
+      status: "Published",
+      category: "Biotechnology",
+      school: "Biotechnology",
     },
     {
       id: 2,
-      title: "Techniques and Architectures for Providing and Operating an Application-Aware Database Environment",
-      status: "Granted",
-      year: "2020",
-      type: "United States Patent (USPTO)",
-      patentNo: "8956P286 (1883US1)",
-      inventors: "Sharma, V.",
-      description: "Novel techniques and software/hardware architectures for establishing and managing application-aware database environments with high operational efficiency.",
-      school: "School of Information & Communication Technology",
-      category: "Granted",
-      filingDate: "2020"
+      title: "Voice Synthesis Mechanism through Natural Language Processing for Voice Interactive Robots",
+      inventors: "School of Information & Communication Technology (SOICT)",
+      patentNo: "IN202311059231",
+      filingDate: "2023-09-28",
+      status: "Published",
+      category: "Artificial Intelligence",
+      school: "Information & Communication Technology",
     },
     {
       id: 3,
-      title: "A Technique for Traffic Prediction and Congestion Control in IOT Networks using Machine Learning",
+      title: "Automated Personality Prediction System Using Multimodal Behavioral Analytics",
+      inventors: "Department of Computer Science & Engineering, SOICT",
+      patentNo: "IN202411012345",
+      filingDate: "2024-02-10",
       status: "Granted",
-      year: "2020",
-      type: "Australian Patent",
-      patentNo: "Australian Patent",
-      inventors: "Sharma, S.",
-      description: "Machine learning-driven traffic forecasting and congestion mitigation algorithms optimized for Internet of Things (IoT) wireless sensor networks.",
-      school: "School of Information & Communication Technology",
-      category: "Granted",
-      filingDate: "2020"
+      category: "Computer Science",
+      school: "Information & Communication Technology",
     },
-    {
-      id: 4,
-      title: "Voice Synthesis Mechanism through Natural Language Processing for Voice Interactive Robots",
-      status: "Published",
-      year: "2020",
-      type: "Indian Patent",
-      patentNo: "Indian Patent",
-      inventors: "Sharma, S.",
-      description: "A natural language processing framework enabling real-time voice synthesis and interactive dialogue for autonomous robotic systems.",
-      school: "School of Information & Communication Technology",
-      category: "Published",
-      filingDate: "2020"
-    },
-    {
-      id: 5,
-      title: "IoT based Plant Detection using Support Vector Machine Algorithm",
-      status: "Published",
-      year: "2020",
-      type: "Indian Patent",
-      patentNo: "Indian Patent",
-      inventors: "Sharma, S.",
-      description: "An IoT-enabled agricultural classification system applying Support Vector Machine (SVM) algorithms for automated plant detection and health monitoring.",
-      school: "School of Information & Communication Technology",
-      category: "Published",
-      filingDate: "2020"
-    },
-    {
-      id: 6,
-      title: "A Novel Intelligent Force Convection and Utilization of Phase Change Property of the Materials for Thermal Energy Harvesting",
-      status: "Published",
-      year: "2020",
-      type: "Indian Patent App",
-      patentNo: "201811048341",
-      inventors: "Sharma, V. and Verma, G.",
-      description: "Thermal energy harvesting technology leveraging forced convection dynamics and phase change materials for sustainable power conversion.",
-      school: "School of Information & Communication Technology",
-      category: "Published",
-      filingDate: "2020"
-    },
-    {
-      id: 7,
-      title: "A Novel Dynamic Array of RF Energy Harvesters With Hybrid Storage for Wireless Sensor Network",
-      status: "Published",
-      year: "2020",
-      type: "Indian Patent App",
-      patentNo: "201811048340",
-      inventors: "Sharma, V. and Verma, G.",
-      description: "Dynamic RF energy harvesting array featuring hybrid energy storage architectures designed for battery-less wireless sensor nodes.",
-      school: "School of Information & Communication Technology",
-      category: "Published",
-      filingDate: "2020"
-    },
-    {
-      id: 8,
-      title: "Automated Personality Prediction",
-      status: "Filed",
-      year: "2021",
-      type: "Patent Journal Office, INDIA",
-      patentNo: "202111001636 A",
-      inventors: "Acharya, D.; Bhardwaj, H.; Sakalle, A.; Goel, S.; Biswas, K. K.; Tomar, P. and Bhardwaj, A.",
-      description: "Automated personality classification system utilising computational intelligence algorithms and physiological sensor data analysis.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2021"
-    },
-    {
-      id: 9,
-      title: "Diode Bridge",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "336950-001",
-      inventors: "Nayyar, A.; Rameshwer, R.; Shukla, P. K.; Krishnamurthi, R. and Tomar, P.",
-      description: "Novel semiconductor diode bridge design for micro-power conversion circuit applications.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    },
-    {
-      id: 10,
-      title: "Synthetic Gene Coding for Foki Nuclease Domain in Programmable Nucleases for Genome Editing",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "202011039103",
-      inventors: "Nain, V; Suman and Tomar, P.",
-      description: "Genetically engineered FokI nuclease domain sequence optimized for targeted genome editing enzymes.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    },
-    {
-      id: 11,
-      title: "Synthetic Gene Coding for VP64 Transcription Activation Domain in Programmable Transcription Factors",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "202011039104",
-      inventors: "Nain, V; Suman and Tomar, P.",
-      description: "Synthetic gene construct encoding VP64 transcriptional activation domain for synthetic biology tools.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    },
-    {
-      id: 12,
-      title: "Synthetic Gene Coding for NF-Κb P65 Activation Domain Transcription Activation Domain in Programmable Transcription Factors",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "202011039105",
-      inventors: "Nain, V; Suman and Tomar, P.",
-      description: "Synthetic NF-κB p65 gene domain engineered for robust programmable transcription factor activation.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    },
-    {
-      id: 13,
-      title: "Synthetic Gene Coding for Krab Transcription Repression Domain in Programmable Transcription Repressors",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "202011039106",
-      inventors: "Nain, V; Suman and Tomar, P.",
-      description: "Optimized KRAB transcription repressor domain sequence for epigenome gene silencing applications.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    },
-    {
-      id: 14,
-      title: "Synthetic Gene Coding for TET1 Catalytic Domain in Programmable Enzymes for Epigenome Editing",
-      status: "Filed",
-      year: "2020",
-      type: "Indian Patent Application",
-      patentNo: "202011039107",
-      inventors: "Nain, V; Suman and Tomar, P.",
-      description: "Engineered TET1 catalytic domain sequence designed for targeted DNA demethylation and epigenome editing.",
-      school: "School of Information & Communication Technology",
-      category: "Filed",
-      filingDate: "2020"
-    }
   ];
-
-  const allSchoolBooksData = [
-    soictBooksData,
-    sobtBooksData,
-    soeBooksData,
-    solBooksData,
-    somBooksData,
-    sohssBooksData,
-    sobscBooksData,
-    sovsBooksData,
-  ];
-
-  const books = allSchoolBooksData.flatMap((schoolData) =>
-    (schoolData?.booksList || []).map((b) => ({
-      id: b.id,
-      title: b.title,
-      authors: b.authors || b.faculty,
-      publisher: b.publisher,
-      year: b.year,
-      isbn: b.isbn || "N/A",
-      type: b.type || "Book Chapter",
-      school: b.school || schoolData?.schoolName || "Gautam Buddha University",
-      description: b.description || `Published by ${b.publisher} (${b.year}). Authors: ${b.authors || b.faculty}.`,
-      link: b.link,
-    }))
-  );
 
   const filteredPublications = publications.filter((pub) => {
-    const term = searchTerm.toLowerCase().trim();
     return (
-      (!selectedBulletin || pub.bulletinTitle === selectedBulletin) &&
       (!selectedSchool || pub.school === selectedSchool) &&
       (!selectedCategory || pub.category === selectedCategory) &&
       (!selectedYear || pub.year === selectedYear) &&
       (!selectedType || pub.type === selectedType) &&
-      (!term ||
-        pub.title?.toLowerCase().includes(term) ||
-        pub.authors?.toLowerCase().includes(term) ||
-        pub.journal?.toLowerCase().includes(term) ||
-        pub.school?.toLowerCase().includes(term) ||
-        pub.category?.toLowerCase().includes(term) ||
-        pub.year?.toString().includes(term) ||
-        pub.type?.toLowerCase().includes(term))
+      (!searchTerm ||
+        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        pub.authors.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   });
 
   const filteredPatents = patents.filter((p) => {
-    const term = searchTerm.toLowerCase().trim();
     return (
       (!selectedSchool || p.school === selectedSchool) &&
-      (!selectedStatus || p.status === selectedStatus) &&
-      (!term ||
-        p.title?.toLowerCase().includes(term) ||
-        p.inventors?.toLowerCase().includes(term) ||
-        p.patentNo?.toLowerCase().includes(term) ||
-        p.school?.toLowerCase().includes(term) ||
-        p.status?.toLowerCase().includes(term) ||
-        p.type?.toLowerCase().includes(term) ||
-        p.year?.toString().includes(term) ||
-        p.description?.toLowerCase().includes(term))
-    );
-  });
-
-  const filteredBooks = books.filter((b) => {
-    const term = searchTerm.toLowerCase().trim();
-    return (
-      (!selectedSchool || b.school === selectedSchool) &&
-      (!selectedType || b.type.toLowerCase() === selectedType.toLowerCase()) &&
-      (!term ||
-        b.title?.toLowerCase().includes(term) ||
-        b.authors?.toLowerCase().includes(term) ||
-        b.publisher?.toLowerCase().includes(term) ||
-        b.isbn?.toLowerCase().includes(term) ||
-        b.type?.toLowerCase().includes(term) ||
-        b.school?.toLowerCase().includes(term) ||
-        b.year?.toString().includes(term) ||
-        b.description?.toLowerCase().includes(term))
+      (!selectedStatus || p.status === selectedStatus)
     );
   });
 
@@ -367,28 +166,23 @@ const Publications = () => {
   const currentItems =
     activeTab === "publications"
       ? filteredPublications.slice(indexOfFirstItem, indexOfLastItem)
-      : activeTab === "patents"
-        ? filteredPatents.slice(indexOfFirstItem, indexOfLastItem)
-        : filteredBooks.slice(indexOfFirstItem, indexOfLastItem);
+      : filteredPatents.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages =
     activeTab === "publications"
       ? Math.ceil(filteredPublications.length / itemsPerPage)
-      : activeTab === "patents"
-        ? Math.ceil(filteredPatents.length / itemsPerPage)
-        : Math.ceil(filteredBooks.length / itemsPerPage);
+      : Math.ceil(filteredPatents.length / itemsPerPage);
 
   const tabButtons = [
     { id: "publications", label: "Research Publications" },
     { id: "patents", label: "Patents" },
-    { id: "books", label: "Books" },
   ];
 
   const statsData = [
     {
       icon: BookOpen,
-      number: allResearchPublications.length,
-      numberText: `${allResearchPublications.length}+`,
+      number: 1670,
+      numberText: "1670+",
       title: "Total Publications",
       iconColor: "#2563eb", // blue-600
     },
@@ -427,27 +221,32 @@ const Publications = () => {
   return (
     <SearchableWrapper>
       <div>
-        <div className="px-4 sm:px-8 lg:px-16 pt-6 pb-10">
-          {/* Main Navigation Tabs (3 Options) */}
-          <div className="mb-6">
-            <ButtonGroup
-              buttons={[
-                { id: "publications", label: "Research Publications" },
-                { id: "patents", label: "Patents" },
-                { id: "books", label: "Books" },
-              ]}
-              onClick={(btnId) => {
-                setActiveTab(btnId);
-                setCurrentPage(1);
-              }}
-              activeButton={activeTab}
-              size="lg"
-              fullWidth={true}
-              rounded="lg"
-              theme="primary"
-              animated={true}
-            />
+        <div className="bg-gradient-to-b from-white to-blue-50">
+          <div className="text-center mt-15">
+            <h1 className="text-4xl font-semibold text-black/70">
+              Publications & Patents
+            </h1>
           </div>
+
+          <StatsCard stats={statsData} />
+
+        </div>
+
+        <div className="px-4 sm:px-8 lg:px-16 pb-10">
+          {/* Tabs */}
+          <ButtonGroup
+            buttons={tabButtons}
+            onClick={(btnId) => {
+              setActiveTab(btnId);
+              setCurrentPage(1);
+            }}
+            activeButton={activeTab}
+            size="lg"
+            fullWidth={true}
+            rounded="lg"
+            theme="primary"
+            animated={true}
+          />
 
           {/* Filters & View Switch Header */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-8 mb-8">
@@ -457,103 +256,76 @@ const Publications = () => {
                 <h2 className="text-base sm:text-lg font-semibold text-gray-900">Filter & Display Options</h2>
               </div>
 
-              {/* View Switch Controls (Available for Patents & Books) */}
-              {activeTab !== "publications" && (
-                <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200 w-full sm:w-auto justify-center">
-                  <button
-                    onClick={() => setViewMode("table")}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${viewMode === "table"
-                        ? "bg-white text-blue-700 shadow-sm"
-                        : "text-gray-600 hover:text-gray-900"
-                      }`}
-                  >
-                    <TableIcon size={16} /> Table View
-                  </button>
-                  <button
-                    onClick={() => setViewMode("grid")}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${viewMode === "grid"
-                        ? "bg-white text-blue-700 shadow-sm"
-                        : "text-gray-600 hover:text-gray-900"
-                      }`}
-                  >
-                    <LayoutGrid size={16} /> Grid View
-                  </button>
-                </div>
-              )}
+              {/* View Switch Controls */}
+              <div className="flex items-center bg-gray-100 p-1.5 rounded-xl border border-gray-200 w-full sm:w-auto justify-center">
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
+                    viewMode === "table"
+                      ? "bg-white text-blue-700 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  <TableIcon size={16} /> Table View
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex-1 sm:flex-none justify-center ${
+                    viewMode === "grid"
+                      ? "bg-white text-blue-700 shadow-sm"
+                      : "text-gray-600 hover:text-gray-900"
+                  }`}
+                >
+                  <LayoutGrid size={16} /> Grid View
+                </button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Context Aware Filter: Bulletin for Publications, Status for Patents, Type for Books */}
-              {activeTab === "publications" ? (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Official Bulletin</label>
-                  <select
-                    value={selectedBulletin}
-                    onChange={(e) => {
-                      setSelectedBulletin(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-blue-900"
-                  >
-                    <option value="">All 5 Official Bulletins</option>
-                    {officialBulletins.map((b) => (
-                      <option key={b.id} value={b.title}>
-                        {b.period} ({b.paperCount} Papers)
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              ) : activeTab === "patents" ? (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Patent Status</label>
-                  <select
-                    value={selectedStatus}
-                    onChange={(e) => {
-                      setSelectedStatus(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-indigo-900"
-                  >
-                    <option value="">All Patent Statuses</option>
-                    <option value="Granted">Granted</option>
-                    <option value="Published">Published</option>
-                    <option value="Filed">Filed</option>
-                  </select>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Book Type</label>
-                  <select
-                    value={selectedType}
-                    onChange={(e) => {
-                      setSelectedType(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300 font-medium text-purple-900"
-                  >
-                    <option value="">All Book Types</option>
-                    <option value="Edited Book">Edited Book</option>
-                    <option value="Book Chapter">Book Chapter</option>
-                    <option value="Authored Book">Authored Book</option>
-                  </select>
-                </div>
-              )}
-
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* School Filter */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">School</label>
                 <select
                   value={selectedSchool}
-                  onChange={(e) => {
-                    setSelectedSchool(e.target.value);
-                    setCurrentPage(1);
-                  }}
+                  onChange={(e) => setSelectedSchool(e.target.value)}
                   className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                 >
                   <option value="">All Schools</option>
                   {schools.map((s, i) => (
                     <option key={i} value={s}>{s}</option>
                   ))}
+                </select>
+              </div>
+
+              {/* Category Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Category</label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Research Bulletin">Research Bulletin</option>
+                  <option value="Biotechnology">Biotechnology</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence</option>
+                  <option value="Energy Systems">Energy Systems</option>
+                </select>
+              </div>
+
+              {/* Status Filter */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">Status</label>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="w-full px-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
+                >
+                  <option value="">All Status</option>
+                  <option value="Granted">Granted</option>
+                  <option value="Published">Published</option>
+                  <option value="Filed">Filed</option>
+                  <option value="Under Review">Under Review</option>
                 </select>
               </div>
 
@@ -564,12 +336,9 @@ const Publications = () => {
                   <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search titles, authors, publishers, ISBN, patent numbers..."
+                    placeholder="Search titles, authors..."
                     value={searchTerm}
-                    onChange={(e) => {
-                      setSearchTerm(e.target.value);
-                      setCurrentPage(1);
-                    }}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 text-sm border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white hover:border-gray-300"
                   />
                 </div>
@@ -577,663 +346,391 @@ const Publications = () => {
             </div>
           </div>
 
-          {/* 5 Official Bulletins Cards Grid */}
+          {/* Publications Section */}
           {activeTab === "publications" && (
-            <div className="mb-10">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                  <BookOpen className="text-blue-600" size={20} />
-                  Official GBU Research Publications Bulletins
-                </h3>
-                {selectedBulletin && (
-                  <button
-                    onClick={() => {
-                      setSelectedBulletin("");
-                      setCurrentPage(1);
-                    }}
-                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3.5 py-2 rounded-xl border border-blue-200 transition-all flex items-center gap-1.5 shadow-sm"
-                  >
-                    ← Back to All 5 Bulletins
-                  </button>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {officialBulletins.map((b) => {
-                  const isSelected = selectedBulletin === b.title;
-                  return (
-                    <div
-                      key={b.id}
-                      className={`p-5 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between ${isSelected
-                          ? "bg-blue-50/90 border-blue-500 ring-2 ring-blue-300 shadow-md"
-                          : "bg-white border-gray-200 hover:border-blue-300 hover:shadow-lg"
-                        }`}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">
-                            {b.year} Bulletin
-                          </span>
-                          <span className="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-slate-200">
-                            {b.paperCount} Extracted Papers
-                          </span>
-                        </div>
-                        <h4 className="font-bold text-gray-900 text-base leading-snug mb-2">
-                          {b.title}
-                        </h4>
-                        <p className="text-xs text-gray-500 mb-4">{b.publisher}</p>
-                      </div>
-
-                      <div className="flex items-center gap-2 pt-3 border-t border-gray-100">
-                        <button
-                          onClick={() => {
-                            setSelectedBulletin(isSelected ? "" : b.title);
-                            setCurrentPage(1);
-                          }}
-                          className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 ${isSelected
-                              ? "bg-blue-600 text-white shadow-sm"
-                              : "bg-slate-900 hover:bg-blue-700 text-white shadow-sm"
-                            }`}
-                        >
-                          <Eye size={14} />
-                          {isSelected ? "Viewing Extracted Papers" : `Explore ${b.paperCount} Papers →`}
-                        </button>
-                        <a
-                          href={b.pdfUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-1 shadow-sm"
-                          title="Download Official Bulletin PDF"
-                        >
-                          <Download size={14} /> PDF
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* Extracted Publications List (Rendered ONLY when a bulletin is selected) */}
-          {activeTab === "publications" && selectedBulletin && (
-            <div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-blue-50 border border-blue-200 p-4 rounded-2xl mb-6">
-                <div>
-                  <h4 className="font-bold text-blue-900 text-sm sm:text-base">
-                    Showing {filteredPublications.length} Extracted Research Papers
-                  </h4>
-                  <p className="text-xs text-blue-700 mt-0.5">{selectedBulletin}</p>
+            viewMode === "table" ? (
+              /* Publications Data Table */
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        <th className="py-4 px-6 text-center w-12">#</th>
+                        <th className="py-4 px-6 min-w-[300px]">Publication Details</th>
+                        <th className="py-4 px-6 min-w-[200px]">Authors & School</th>
+                        <th className="py-4 px-6 min-w-[180px]">Journal & Year</th>
+                        <th className="py-4 px-6 text-center min-w-[120px]">Impact & Citations</th>
+                        <th className="py-4 px-6 text-center min-w-[130px]">Indexing</th>
+                        <th className="py-4 px-6 text-center min-w-[170px]">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm">
+                      {currentItems.length > 0 ? (
+                        currentItems.map((pub, index) => (
+                          <tr key={pub.id} className="hover:bg-blue-50/40 transition-colors">
+                            <td className="py-4 px-6 text-center font-medium text-gray-500">
+                              {indexOfFirstItem + index + 1}
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
+                              <div className="flex flex-wrap gap-2 items-center text-xs text-gray-500">
+                                <span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-medium">{pub.type}</span>
+                                {pub.doi && <span className="font-mono text-gray-600">DOI: {pub.doi}</span>}
+                              </div>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="text-gray-800 font-medium text-xs mb-1.5">{pub.authors}</p>
+                              <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                                {pub.school}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-medium text-gray-900 text-xs">{pub.journal}</p>
+                              <p className="text-xs text-gray-500">{pub.year} • {pub.category}</p>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className="inline-block text-green-700 font-bold text-xs bg-green-50 px-2 py-1 rounded border border-green-200 mb-1">
+                                IF: {pub.impact}
+                              </span>
+                              <span className="inline-block text-purple-700 font-bold text-xs bg-purple-50 px-2 py-1 rounded border border-purple-200">
+                                Cit: {pub.citations}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2 py-0.5 rounded block mb-1">
+                                {pub.quartile || "Q1"}
+                              </span>
+                              <span className="text-[11px] text-gray-500 block truncate max-w-[120px] mx-auto">
+                                {pub.indexing}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <div className="flex items-center justify-center gap-2">
+                                <a
+                                  href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+                                >
+                                  <Eye size={14} /> View
+                                </a>
+                                <a
+                                  href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  download
+                                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm"
+                                >
+                                  <Download size={14} /> PDF
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7" className="text-center py-12 text-gray-500">
+                            No publications found matching criteria
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-                <button
-                  onClick={() => {
-                    setSelectedBulletin("");
-                    setCurrentPage(1);
-                  }}
-                  className="text-xs font-semibold bg-white text-blue-700 hover:bg-blue-100 px-3.5 py-2 rounded-xl border border-blue-200 transition-all flex items-center gap-1 shadow-sm"
-                >
-                  ← Back to Bulletins
-                </button>
               </div>
+            ) : (
+              /* Publications Grid View */
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                {currentItems.length > 0 ? (
+                  currentItems.map((pub, index) => (
+                    <div
+                      key={pub.id}
+                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                      style={{
+                        ...cardStyle,
+                        animationDelay: `${index * 100}ms`,
+                        animationFillMode: 'both'
+                      }}
+                      onMouseEnter={(e) => {
+                        Object.assign(e.currentTarget.style, cardHoverStyle);
+                      }}
+                      onMouseLeave={(e) => {
+                        Object.assign(e.currentTarget.style, cardStyle);
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-              {/* Publications Table View (Always Table View for Research Publications) */}
-              <div className="mb-8">
-                {/* Mobile Cards (Visible on Small Screens) */}
-                <div className="block md:hidden space-y-4">
-                  {currentItems.length > 0 ? (
-                    currentItems.map((pub, index) => (
-                      <div
-                        key={pub.id}
-                        className="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col justify-between"
-                      >
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-md border border-slate-200">
-                              #{indexOfFirstItem + index + 1}
-                            </span>
-                            <span className="bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full truncate max-w-[200px]">
-                              {pub.school}
-                            </span>
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                        {pub.school}
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4 mt-9 pr-20 leading-tight group-hover:text-blue-700 transition-colors duration-300">
+                          {pub.title}
+                        </h3>
+
+                        <div className="mb-4">
+                          <p className="text-gray-700 text-sm font-medium mb-1">Authors</p>
+                          <p className="text-gray-600 text-sm leading-relaxed">{pub.authors}</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Journal</p>
+                            <p className="text-gray-600 text-sm">{pub.journal}</p>
                           </div>
-
-                          <h4 className="font-bold text-gray-900 text-base leading-snug mb-2 break-words">
-                            {pub.title}
-                          </h4>
-
-                          {pub.doi && (
-                            <div className="mb-3 text-xs text-blue-600 font-mono break-all bg-blue-50/60 p-2 rounded-lg border border-blue-100">
-                              <span className="font-sans font-semibold text-slate-500 mr-1">DOI:</span>
-                              {pub.doi}
-                            </div>
-                          )}
-
-                          <div className="space-y-1.5 text-xs text-gray-700 mb-4">
-                            <p>
-                              <strong className="text-gray-900">Authors:</strong> {pub.authors}
-                            </p>
-                            <p>
-                              <strong className="text-gray-900">Journal:</strong> {pub.journal || "GBU Research Publication"}
-                            </p>
-                            <p className="text-gray-500">
-                              {pub.year && `Year: ${pub.year}`}
-                              {pub.volume && ` • Vol: ${pub.volume}`}
-                              {pub.issue && ` • Issue: ${pub.issue}`}
-                            </p>
+                          <div>
+                            <p className="text-gray-700 text-sm font-medium mb-1">Year & Type</p>
+                            <p className="text-gray-600 text-sm">{pub.year} • {pub.type}</p>
                           </div>
                         </div>
 
-                        <div className="pt-3 border-t border-gray-100">
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 border border-green-100">
+                            <p className="text-green-700 text-xs font-medium mb-1">Impact Factor</p>
+                            <p className="text-green-800 text-lg font-bold">{pub.impact}</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg p-3 border border-purple-100">
+                            <p className="text-purple-700 text-xs font-medium mb-1">Citations</p>
+                            <p className="text-purple-800 text-lg font-bold">{pub.citations}</p>
+                          </div>
+                        </div>
+
+                        <div className="space-y-3 mb-6">
+                          <div className="flex flex-wrap gap-2 text-xs">
+                            <span className="bg-blue-50 text-blue-700 px-2 py-1 rounded font-medium">Quartile: {pub.quartile}</span>
+                            <span className="bg-gray-50 text-gray-700 px-2 py-1 rounded">Indexing: {pub.indexing}</span>
+                          </div>
+                          <div className="text-xs text-gray-500 space-y-1">
+                            <p><span className="font-medium">DOI:</span> {pub.doi}</p>
+                            <p><span className="font-medium">Scopus ID:</span> {pub.scopusId}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
                           <a
                             href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
                           >
-                            <Download size={14} /> View Bulletin PDF
+                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            View Document
+                          </a>
+                          <a
+                            href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                            className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn"
+                          >
+                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            Download PDF
                           </a>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="bg-white rounded-2xl p-8 text-center text-gray-500 border border-gray-200">
-                      No publications found matching criteria
                     </div>
-                  )}
-                </div>
-
-                {/* Desktop Table (Hidden on Mobile, Visible on md+) */}
-                <div className="hidden md:block bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          <th className="py-4 px-6 text-center w-12">#</th>
-                          <th className="py-4 px-6 min-w-[320px]">Publication Details</th>
-                          <th className="py-4 px-6 min-w-[220px]">Authors & School</th>
-                          <th className="py-4 px-6 min-w-[220px]">Journal & Details</th>
-                          <th className="py-4 px-6 min-w-[200px]">Bulletin Batch</th>
-                          <th className="py-4 px-6 text-center min-w-[130px]">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100 text-sm">
-                        {currentItems.length > 0 ? (
-                          currentItems.map((pub, index) => (
-                            <tr key={pub.id} className="hover:bg-blue-50/40 transition-colors">
-                              <td className="py-4 px-6 text-center font-medium text-gray-500">
-                                {indexOfFirstItem + index + 1}
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="font-bold text-gray-900 leading-snug mb-1">{pub.title}</p>
-                                {pub.doi && (
-                                  <div className="flex items-center text-xs text-gray-500 gap-1 mt-1">
-                                    <span className="font-semibold text-slate-400">DOI:</span>
-                                    <span className="font-mono text-blue-600 break-all max-w-[240px]">{pub.doi}</span>
-                                  </div>
-                                )}
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="text-gray-800 font-medium text-xs mb-1.5 leading-relaxed">{pub.authors}</p>
-                                <span className="inline-block bg-blue-100 text-blue-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-                                  {pub.school}
-                                </span>
-                              </td>
-                              <td className="py-4 px-6">
-                                <p className="font-semibold text-gray-900 text-xs leading-snug">{pub.journal || "GBU Research Publication"}</p>
-                                <p className="text-xs text-gray-500 mt-0.5">
-                                  {pub.year && `Year: ${pub.year}`}
-                                  {pub.volume && ` • Vol: ${pub.volume}`}
-                                  {pub.issue && ` • Issue: ${pub.issue}`}
-                                </p>
-                              </td>
-                              <td className="py-4 px-6">
-                                <span className="inline-block bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-md border border-slate-200">
-                                  {pub.bulletinTitle}
-                                </span>
-                              </td>
-                              <td className="py-4 px-6 text-center">
-                                <div className="flex items-center justify-center">
-                                  <a
-                                    href={pub.pdfUrl || (pub.doi?.startsWith("http") ? pub.doi : `https://doi.org/${pub.doi}`)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-all shadow-sm"
-                                  >
-                                    <Download size={14} /> PDF
-                                  </a>
-                                </div>
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan="7" className="text-center py-12 text-gray-500">
-                              No publications found matching criteria
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-16">
+                    <div className="text-gray-400 text-lg mb-2">No publications found</div>
+                    <p className="text-gray-500 text-sm">Check back later for updates</p>
                   </div>
-                </div>
+                )}
               </div>
-            </div>
+            )
           )}
 
           {/* Patents Section */}
           {activeTab === "patents" && (
-            <div>
-              {/* Patents Sub-Filter Pills Bar */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    onClick={() => {
-                      setSelectedStatus("");
-                      setCurrentPage(1);
-                    }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${!selectedStatus
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
-                      }`}
-                  >
-                    All Patents ({patents.length})
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectedStatus("Granted");
-                      setCurrentPage(1);
-                    }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Granted"
-                        ? "bg-emerald-600 text-white shadow-sm"
-                        : "bg-white text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
-                      }`}
-                  >
-                    Patent Granted ({patents.filter((p) => p.status === "Granted").length})
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectedStatus("Published");
-                      setCurrentPage(1);
-                    }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Published"
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "bg-white text-blue-700 hover:bg-blue-50 border border-blue-200"
-                      }`}
-                  >
-                    Patent Published ({patents.filter((p) => p.status === "Published").length})
-                  </button>
-                  <button
-                    onClick={() => {
-                      setSelectedStatus("Filed");
-                      setCurrentPage(1);
-                    }}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${selectedStatus === "Filed"
-                        ? "bg-sky-600 text-white shadow-sm"
-                        : "bg-white text-sky-700 hover:bg-sky-50 border border-sky-200"
-                      }`}
-                  >
-                    Patent Filed ({patents.filter((p) => p.status === "Filed").length})
-                  </button>
-                </div>
-                <div className="text-xs text-gray-500 font-medium">
-                  Showing {filteredPatents.length} of {patents.length} Patents
-                </div>
-              </div>
-
-              {/* Patents List (Table View or Grid View) */}
-              {viewMode === "table" ? (
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">
-                          <th className="py-3.5 px-4 text-center w-12">#</th>
-                          <th className="py-3.5 px-4">Status</th>
-                          <th className="py-3.5 px-6">Patent Title</th>
-                          <th className="py-3.5 px-4">App / Patent No</th>
-                          <th className="py-3.5 px-4">Type / Office</th>
-                          <th className="py-3.5 px-4">Year</th>
-                          <th className="py-3.5 px-6">Inventors</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100 text-xs text-gray-700 font-medium">
-                        {currentItems.length > 0 ? (
-                          currentItems.map((patent, idx) => (
-                            <tr key={patent.id} className="hover:bg-blue-50/50 transition-colors">
-                              <td className="py-3.5 px-4 text-center font-bold text-gray-400">
-                                {indexOfFirstItem + idx + 1}
-                              </td>
-                              <td className="py-3.5 px-4 whitespace-nowrap">
-                                <span
-                                  className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${patent.status === "Granted"
-                                      ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                                      : patent.status === "Published"
-                                        ? "bg-blue-100 text-blue-800 border border-blue-200"
-                                        : "bg-sky-100 text-sky-800 border border-sky-200"
-                                    }`}
-                                >
-                                  {patent.status}
-                                </span>
-                              </td>
-                              <td className="py-3.5 px-6 font-bold text-gray-900">
-                                {patent.title}
-                              </td>
-                              <td className="py-3.5 px-4 font-mono font-semibold text-gray-800">
-                                {patent.patentNo}
-                              </td>
-                              <td className="py-3.5 px-4 text-gray-600">
-                                {patent.type}
-                              </td>
-                              <td className="py-3.5 px-4 font-bold text-gray-900">
-                                {patent.year}
-                              </td>
-                              <td className="py-3.5 px-6 text-gray-800">
-                                {patent.inventors}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan={7} className="text-center py-12 text-gray-500">
-                              No patents found matching selected criteria
+            viewMode === "table" ? (
+              /* Patents Data Table */
+              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden mb-8">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50/90 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        <th className="py-4 px-6 text-center w-12">#</th>
+                        <th className="py-4 px-6 min-w-[300px]">Patent Title & Category</th>
+                        <th className="py-4 px-6 min-w-[220px]">Inventors & School</th>
+                        <th className="py-4 px-6 min-w-[180px]">Patent No & Date</th>
+                        <th className="py-4 px-6 text-center min-w-[140px]">Status</th>
+                        <th className="py-4 px-6 text-center min-w-[150px]">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100 text-sm">
+                      {currentItems.length > 0 ? (
+                        currentItems.map((patent, index) => (
+                          <tr key={patent.id} className="hover:bg-indigo-50/40 transition-colors">
+                            <td className="py-4 px-6 text-center font-medium text-gray-500">
+                              {indexOfFirstItem + index + 1}
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-bold text-gray-900 leading-snug mb-1">{patent.title}</p>
+                              <span className="bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded font-medium">{patent.category}</span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="text-gray-800 font-medium text-xs mb-1.5">{patent.inventors}</p>
+                              <span className="inline-block bg-indigo-100 text-indigo-800 text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
+                                {patent.school}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6">
+                              <p className="font-mono text-xs font-semibold text-gray-900">{patent.patentNo}</p>
+                              <p className="text-xs text-gray-500">Filing: {patent.filingDate}</p>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+                                patent.status === "Granted"
+                                  ? "bg-green-100 text-green-800 border border-green-200"
+                                  : patent.status === "Filed"
+                                    ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                                    : patent.status === "Under Review"
+                                      ? "bg-orange-100 text-orange-800 border border-orange-200"
+                                      : "bg-blue-100 text-blue-800 border border-blue-200"
+                              }`}>
+                                {patent.status}
+                              </span>
+                            </td>
+                            <td className="py-4 px-6 text-center">
+                              <div className="flex items-center justify-center gap-2">
+                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
+                                  <Eye size={14} /> View
+                                </button>
+                                <button className="inline-flex items-center gap-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-medium transition-all shadow-sm">
+                                  <Download size={14} /> PDF
+                                </button>
+                              </div>
                             </td>
                           </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" className="text-center py-12 text-gray-500">
+                            No patents found matching criteria
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
-              ) : (
-                /* Patent Cards Grid */
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {currentItems.length > 0 ? (
-                    currentItems.map((patent) => {
-                      const isGranted = patent.status === "Granted";
-                      const isPublished = patent.status === "Published";
-                      return (
-                        <div
-                          key={patent.id}
-                          className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                        >
-                          <div>
-                            {/* Header Badge & Date */}
-                            <div className="flex items-center justify-between mb-3">
-                              <span
-                                className={`text-xs font-bold px-3 py-1 rounded-full ${isGranted
-                                    ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                                    : isPublished
-                                      ? "bg-blue-100 text-blue-800 border border-blue-200"
-                                      : "bg-sky-100 text-sky-800 border border-sky-200"
-                                  }`}
-                              >
-                                Patent {patent.status}
-                              </span>
-                              <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
-                                <Calendar size={13} className="text-gray-400" />
-                                {patent.year}
-                              </span>
+              </div>
+            ) : (
+              /* Patents Grid View */
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                {currentItems.length > 0 ? (
+                  currentItems.map((patent, index) => (
+                    <div
+                      key={patent.id}
+                      className="group relative bg-white rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 p-8 overflow-hidden"
+                      style={{
+                        ...cardStyle,
+                        animationDelay: `${index * 100}ms`,
+                        animationFillMode: 'both'
+                      }}
+                      onMouseEnter={(e) => {
+                        Object.assign(e.currentTarget.style, cardHoverStyle);
+                      }}
+                      onMouseLeave={(e) => {
+                        Object.assign(e.currentTarget.style, cardStyle);
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-2xl -mr-16 -mt-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                      <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md transform group-hover:scale-105 transition-transform duration-300">
+                        {patent.school}
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-xl font-bold text-gray-900 mb-4 mt-10 pr-30 leading-tight group-hover:text-indigo-700 transition-colors duration-300">
+                          {patent.title}
+                        </h3>
+
+                        <div className="mb-4">
+                          <p className="text-gray-700 text-sm font-medium mb-1">Inventors</p>
+                          <p className="text-gray-600 text-sm leading-relaxed">{patent.inventors}</p>
+                        </div>
+
+                        <div className="space-y-4 mb-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-gray-700 text-sm font-medium mb-1">Patent Number</p>
+                              <p className="text-gray-900 text-sm font-mono bg-gray-50 px-3 py-2 rounded border">{patent.patentNo}</p>
                             </div>
-
-                            {/* Title */}
-                            <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 font-sans">
-                              {patent.title}
-                            </h3>
-
-                            {/* Description */}
-                            <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                              {patent.description}
-                            </p>
+                            <div>
+                              <p className="text-gray-700 text-sm font-medium mb-1">Filing Date</p>
+                              <p className="text-gray-600 text-sm">{patent.filingDate}</p>
+                            </div>
                           </div>
 
                           <div>
-                            {/* Specs Table */}
-                            <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-gray-400 font-medium">Patent / App No:</span>
-                                <span className="font-semibold text-gray-900 font-mono">{patent.patentNo}</span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-gray-400 font-medium">Type / Office:</span>
-                                <span className="font-semibold text-gray-900">{patent.type}</span>
-                              </div>
-                            </div>
-
-                            {/* Inventors */}
-                            <div className="text-xs">
-                              <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                                INVENTORS
-                              </p>
-                              <p className="font-semibold text-gray-800 leading-snug">
-                                {patent.inventors}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
-                      No patents found matching selected criteria
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Books Section */}
-          {activeTab === "books" && (
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <h4 className="font-bold text-gray-900 text-base">
-                  Published Books & Edited Volumes ({filteredBooks.length})
-                </h4>
-                <div className="text-xs text-gray-500 font-medium">
-                  Showing {filteredBooks.length} Books
-                </div>
-              </div>
-
-              {/* Books List (Table View or Grid View) */}
-              {viewMode === "table" ? (
-                <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">
-                          <th className="py-3.5 px-4 text-center w-12">#</th>
-                          <th className="py-3.5 px-4">Book Type</th>
-                          <th className="py-3.5 px-6">Book / Chapter Title</th>
-                          <th className="py-3.5 px-4">Publisher</th>
-                          <th className="py-3.5 px-4">ISBN</th>
-                          <th className="py-3.5 px-4">Year</th>
-                          <th className="py-3.5 px-6">Authors / Editors</th>
-                          <th className="py-3.5 px-4 text-center">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100 text-xs text-gray-700 font-medium">
-                        {currentItems.length > 0 ? (
-                          currentItems.map((book, idx) => (
-                            <tr key={book.id} className="hover:bg-purple-50/50 transition-colors">
-                              <td className="py-3.5 px-4 text-center font-bold text-gray-400">
-                                {indexOfFirstItem + idx + 1}
-                              </td>
-                              <td className="py-3.5 px-4 whitespace-nowrap">
-                                <span className="bg-purple-100 text-purple-800 text-[11px] font-bold px-2.5 py-1 rounded-full border border-purple-200">
-                                  {book.type}
-                                </span>
-                              </td>
-                              <td className="py-3.5 px-6 font-bold text-gray-900">
-                                {book.title}
-                              </td>
-                              <td className="py-3.5 px-4 font-semibold text-gray-800">
-                                {book.publisher}
-                              </td>
-                              <td className="py-3.5 px-4 font-mono text-gray-600">
-                                {book.isbn}
-                              </td>
-                              <td className="py-3.5 px-4 font-bold text-gray-900">
-                                {book.year}
-                              </td>
-                              <td className="py-3.5 px-6 text-gray-800">
-                                <div>{book.authors}</div>
-                                <div className="text-[10px] text-blue-600 font-semibold">{book.school}</div>
-                              </td>
-                              <td className="py-3.5 px-4 text-center">
-                                {book.link ? (
-                                  <a
-                                    href={book.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg border border-purple-200 transition-colors"
-                                  >
-                                    <Eye size={12} /> Link
-                                  </a>
-                                ) : (
-                                  <span className="text-gray-300 text-xs">-</span>
-                                )}
-                              </td>
-                            </tr>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan={8} className="text-center py-12 text-gray-500">
-                              No books found matching criteria
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              ) : (
-                /* Books Cards Grid */
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {currentItems.length > 0 ? (
-                    currentItems.map((book) => (
-                      <div
-                        key={book.id}
-                        className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                      >
-                        <div>
-                          {/* Type Badge & Year */}
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full border border-purple-200">
-                              {book.type}
-                            </span>
-                            <span className="flex items-center gap-1 text-gray-500 text-xs font-medium">
-                              <Calendar size={13} className="text-gray-400" />
-                              {book.year}
+                            <p className="text-gray-700 text-sm font-medium mb-2">Status</p>
+                            <span
+                              className={`inline-flex items-center px-3 py-2 rounded-full text-sm font-semibold shadow-sm ${patent.status === "Granted"
+                                ? "bg-green-100 text-green-800 border border-green-200"
+                                : patent.status === "Filed"
+                                  ? "bg-yellow-100 text-yellow-800 border border-yellow-200"
+                                  : patent.status === "Under Review"
+                                    ? "bg-orange-100 text-orange-800 border border-orange-200"
+                                    : "bg-blue-100 text-blue-800 border border-blue-200"
+                                }`}
+                            >
+                              <div className={`w-2 h-2 rounded-full mr-2 ${patent.status === "Granted" ? "bg-green-500" :
+                                patent.status === "Filed" ? "bg-yellow-500" :
+                                  patent.status === "Under Review" ? "bg-orange-500" : "bg-blue-500"
+                                }`}></div>
+                              {patent.status}
                             </span>
                           </div>
-
-                          {/* Title */}
-                          <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
-                            {book.title}
-                          </h3>
-
-                          {/* Description */}
-                          <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
-                            {book.description}
-                          </p>
                         </div>
 
-                        <div>
-                          {/* Publisher & ISBN */}
-                          <div className="py-3 border-t border-b border-gray-100 space-y-2 text-xs mb-3">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400 font-medium">Publisher:</span>
-                              <span className="font-semibold text-gray-900">{book.publisher}</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-400 font-medium">ISBN:</span>
-                              <span className="font-mono text-gray-900">{book.isbn}</span>
-                            </div>
-                          </div>
-
-                          {/* Authors & School */}
-                          <div className="text-xs space-y-1">
-                            <p className="text-gray-400 text-[11px] font-bold uppercase tracking-wider">
-                              AUTHORS / EDITORS
-                            </p>
-                            <p className="font-semibold text-gray-800 leading-snug">
-                              {book.authors}
-                            </p>
-                            <p className="text-blue-600 text-[11px] font-medium pt-1">
-                              {book.school}
-                            </p>
-                          </div>
-
-                          {book.link && (
-                            <div className="mt-3 pt-3 border-t border-gray-100">
-                              <a
-                                href={book.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-1.5 w-full px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 text-xs font-semibold rounded-lg transition-colors border border-purple-200"
-                              >
-                                <Eye size={13} /> View Publisher / DOI Link
-                              </a>
-                            </div>
-                          )}
+                        <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                          <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                            <Eye size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            View Details
+                          </button>
+                          <button className="flex items-center gap-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-2 rounded-lg transition-all duration-200 text-sm font-medium group/btn">
+                            <Download size={16} className="group-hover/btn:scale-110 transition-transform duration-200" />
+                            Download
+                          </button>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
-                      No books found matching criteria
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-16">
+                    <div className="text-gray-400 text-lg mb-2">No patents found</div>
+                    <p className="text-gray-500 text-sm">Check back later for updates</p>
+                  </div>
+                )}
+              </div>
+            )
           )}
 
           {/* Pagination */}
-          {totalPages > 1 && (activeTab !== "publications" || selectedBulletin) && (
-            <div className="flex justify-center items-center space-x-1.5 mt-8 py-4">
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-8 space-x-2">
               <button
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="px-3 py-1 bg-gray-200 rounded"
               >
                 Previous
               </button>
-              {(() => {
-                const pages = [];
-                const delta = 2;
-                const left = Math.max(2, currentPage - delta);
-                const right = Math.min(totalPages - 1, currentPage + delta);
-
-                pages.push(1);
-                if (left > 2) pages.push("...");
-                for (let i = left; i <= right; i++) {
-                  pages.push(i);
-                }
-                if (right < totalPages - 1) pages.push("...");
-                if (totalPages > 1) pages.push(totalPages);
-
-                return pages.map((item, idx) =>
-                  item === "..." ? (
-                    <span key={`ellipsis-${idx}`} className="px-2 py-1 text-xs text-gray-400 font-bold">
-                      ...
-                    </span>
-                  ) : (
-                    <button
-                      key={item}
-                      onClick={() => setCurrentPage(item)}
-                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${currentPage === item
-                          ? "bg-blue-600 text-white shadow-sm"
-                          : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-                        }`}
-                    >
-                      {item}
-                    </button>
-                  )
-                );
-              })()}
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-3 py-1 rounded ${currentPage === i + 1 ? "bg-blue-700 text-white" : "bg-gray-200"
+                    }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
               <button
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="px-3 py-1 bg-gray-200 rounded"
               >
                 Next
               </button>

@@ -65,13 +65,13 @@ const normalizeNotice = (item) => ({
   title: String(item?.title || "Notice").trim(),
   content: String(item?.content || item?.summary || "").trim(),
   date: pickDate(item, DATE_KEYS),
+  // The notices endpoint exposes the notice type as `category`.
   type: String(item?.type || item?.category || "General").trim(),
   priority: String(item?.priority || "medium").trim(),
   views: Number(item?.views || 0),
   isNew: Boolean(item?.isNew ?? item?.is_new),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
   schoolName: getSchoolLabel(item),
-  level: String(item?.level || "").trim(),
 });
 
 const normalizeNews = (item) => ({
@@ -79,6 +79,7 @@ const normalizeNews = (item) => ({
   title: String(item?.title || "News").trim(),
   date: pickDate(item, DATE_KEYS),
   publishedAt: pickDate(item, DATE_KEYS),
+  // The news endpoint exposes the short summary as `summary`.
   excerpt: String(item?.excerpt || item?.summary || "").trim(),
   content: String(item?.content || "").trim(),
   author: String(item?.author || "School Office").trim(),
@@ -93,9 +94,6 @@ const normalizeNews = (item) => ({
   featured: Boolean(item?.featured ?? item?.isFeatured),
   status: String(item?.status || "published").trim(),
   schoolName: getSchoolLabel(item),
-  level: String(item?.level || "").trim(),
-  link: String(item?.link || "").trim(),
-  pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
 });
 
 const normalizeEvent = (item) => {
@@ -120,48 +118,33 @@ const normalizeEvent = (item) => {
     type: String(item?.type || "General").trim(),
     mode: String(item?.mode || "Offline").trim(),
     description: String(item?.description || "").trim(),
-    ...(() => {
-      const explicitCover = String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim();
-      const flyer = String(item?.flyer_url || item?.flyerUrl || "").trim();
-      const imagesArr = toList(item?.gallery || item?.images);
-      const evStatus = String(item?.status || "upcoming").trim();
-      
-      const resolvedCover = evStatus === "upcoming"
-        ? (flyer || explicitCover || [...imagesArr].pop() || "")
-        : (explicitCover || [...imagesArr].pop() || flyer || "");
-
-      return {
-        status: evStatus,
-        coverImageUrl: resolvedCover,
-        image: resolvedCover,
-        coverImage: resolvedCover,
-        images: imagesArr,
-        flyerUrl: flyer,
-      };
-    })(),
+    coverImageUrl: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
+    image: String(item?.cover_image || item?.coverImage || item?.coverImageUrl || "").trim(),
+    images: toList(item?.gallery || item?.images),
     attendees: Number(item?.attendees || 0),
     price: String(item?.price || "Free").trim(),
     organizer: String(item?.organizer || "GBU").trim(),
     registrationUrl: String(item?.registration_url || item?.registrationUrl || "").trim(),
     brochureUrl: String(item?.brochure_url || item?.brochureUrl || "").trim(),
+    flyerUrl: String(item?.flyer_url || item?.flyerUrl || "").trim(),
     isUpcoming: eventStart ? eventStart >= today : false,
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),
     schoolName: getSchoolLabel(item),
-    level: String(item?.level || "").trim(),
   };
 };
 
 const normalizeNewsletter = (item, index) => ({
   id: item?.id ?? `newsletter-${index + 1}`,
   title: String(item?.title || "Newsletter").trim(),
+  issueNumber: String(item?.issueNumber || item?.issue_number || "").trim(),
   date: pickDate(item, DATE_KEYS),
   coverImage: String(item?.coverImage || item?.coverImageUrl || item?.cover_image_url || "").trim(),
-  description: String(item?.description || item?.excerpt || "").trim(),
-  englishPdfLink: String(item?.englishPdfLink || item?.english_pdf_url || item?.pdfLink || item?.pdfUrl || "").trim(),
-  hindiPdfLink: String(item?.hindiPdfLink || item?.hindi_pdf_url || "").trim(),
+  excerpt: String(item?.excerpt || "").trim(),
+  pdfLink: String(item?.pdfLink || item?.pdfUrl || item?.pdf_url || "").trim(),
+  views: Number(item?.views || 0),
+  category: String(item?.category || "School Update").trim(),
   schoolName: getSchoolLabel(item),
-  level: String(item?.level || "").trim(),
 });
 
 const normalizeMedia = (item, index) => {
@@ -173,9 +156,8 @@ const normalizeMedia = (item, index) => {
     year: String(item?.year || ""),
     date: pickDate(item, DATE_KEYS),
     images,
-    coverImage: String(item?.coverImage || item?.cover_image || item?.coverImageUrl || [...images].pop() || "").trim(),
+    coverImage: images[0] || "",
     schoolName: getSchoolLabel(item),
-    level: String(item?.level || "").trim(),
   };
 };
 
@@ -205,29 +187,9 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
   const newsletters = newslettersRes.status === "fulfilled"
     ? toArray(unwrapData(newslettersRes.value)).map(normalizeNewsletter)
     : [];
-
-  let mediaGallery = mediaRes.status === "fulfilled"
+  const mediaGallery = mediaRes.status === "fulfilled"
     ? toArray(unwrapData(mediaRes.value)).map(normalizeMedia)
     : [];
-
-  const pastEvents = events.filter((e) => !e.isUpcoming);
-
-  // Merge: past events with gallery images into mediaGallery
-  const eventGalleryItems = events
-    .filter((e) => e.status !== "upcoming" && e.images && e.images.length > 0)
-    .map((e) => ({
-      id: `event-${e.id}`,
-      title: e.title,
-      category: e.type || "Events",
-      year: e.year,
-      date: e.date,
-      images: e.images,
-      coverImage: e.coverImage || [...e.images].pop() || "",
-      schoolName: e.schoolName,
-      level: e.level,
-    }));
-
-  mediaGallery = [...eventGalleryItems, ...mediaGallery];
 
   return {
     schoolName: "GBU",
@@ -236,7 +198,7 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
     events,
     newsletters,
     mediaGallery,
-    eventGallery: pastEvents,
+    eventGallery: mediaGallery,
   };
 };
 

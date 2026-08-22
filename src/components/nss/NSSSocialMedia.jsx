@@ -151,9 +151,9 @@ const NSSSocialMedia = ({ nssData }) => {
           <h2 className="text-3xl font-extrabold text-slate-900 mb-3">
             NSS GBU Social Media Hub
           </h2>
-          {/* <p className="text-base text-slate-600 leading-relaxed">
+          <p className="text-base text-slate-600 leading-relaxed">
             Connect with Gautam Buddha University National Service Scheme across official platforms.
-          </p> */}
+          </p>
         </motion.div>
 
         {/* Social Media Handles Grid */}

@@ -98,8 +98,8 @@ const EventGallerySlider = ({ events = [] }) => {
   return (
     <div className="flex flex-col flex-1 min-h-0">
       {/* Main Image */}
-            <Link
-        to={current.link || (current.id ? `/announcements/event-calendar/${current.id}` : "#")}
+      <Link
+        to={`/announcements/event-calendar/${current.id}`}
         className="relative w-full flex-1 min-h-0 rounded-xl overflow-hidden shadow-md group block bg-gray-100"
       >
         <img
@@ -184,9 +184,9 @@ const EventGallerySlider = ({ events = [] }) => {
   );
 };
 
-const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, title = "Notices and Events", viewAllLink }) => {
+const NoticeEvents = ({ schoolCode, notices: fallbackNotices = [], events: fallbackEvents = [] }) => {
   const scrollRef = useRef(null);
-  const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements(schoolCode));
+  const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements());
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
   // Auto-scroll effect
@@ -216,7 +216,6 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
     let mounted = true;
 
     const loadAnnouncements = async () => {
-      if (customNotices !== null && customEvents !== null) return;
       try {
         await refreshSchoolAnnouncements(schoolCode);
       } catch {
@@ -224,7 +223,7 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
       }
 
       if (mounted) {
-        setAnnouncements(getSchoolAnnouncements(schoolCode));
+        setAnnouncements(getSchoolAnnouncements());
       }
     };
 
@@ -237,20 +236,20 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
       window.removeEventListener("announcements-data-updated", loadAnnouncements);
       window.removeEventListener("focus", loadAnnouncements);
     };
-  }, [schoolCode]);
+  }, []);
 
-  const notices = customNotices !== null ? customNotices : filterBySchool(announcements.notices || [], schoolMeta);
-  const events = customEvents !== null ? customEvents : filterBySchool(announcements.events || [], schoolMeta);
+  const notices = filterBySchool(announcements.notices || [], schoolMeta);
+  const events = filterBySchool(announcements.events || [], schoolMeta);
   const visibleNotices = notices;
   const visibleEvents = events;
 
   return (
-    <section className="py-8 sm:py-10 bg-gray-100">
+    <section className="py-20 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-            {title}
+            Notices and Events
           </h2>
           <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
@@ -277,42 +276,22 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                   msOverflowStyle: "none", // IE 10+
                 }}
               >
-                {visibleNotices.map((notice, index) => {
-                  const noticeUrl = notice.pdfUrl || notice.link || (notice.id ? `/announcements/news-notifications/${notice.id}` : '#');
-                  const isExternal = noticeUrl.startsWith('http') || noticeUrl.endsWith('.pdf');
-                  
-                  const InnerContent = (
-                    <>
-                      <div className="flex items-start justify-between mb-1">
-                        <h4 className="font-semibold text-sm text-blue-900 line-clamp-2">
-                          {notice.title}
-                        </h4>
-                        <Badge className="text-xs px-2 py-0.5 capitalize bg-blue-100 text-blue-800 whitespace-nowrap ml-2 shrink-0">
-                          {notice.type || 'Notice'}
-                        </Badge>
-                      </div>
-                      <p className="text-xs text-gray-500">{notice.date}</p>
-                    </>
-                  );
-
-                  const commonClasses = "block border-l-4 border-blue-500 pl-4 py-2 hover:bg-blue-50 transition-colors";
-
-                  return isExternal ? (
-                    <a
-                      href={noticeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      key={index}
-                      className={commonClasses}
-                    >
-                      {InnerContent}
-                    </a>
-                  ) : (
-                    <Link to={noticeUrl} key={index} className={commonClasses}>
-                      {InnerContent}
-                    </Link>
-                  );
-                })}
+                {visibleNotices.map((notice, index) => (
+                  <div
+                    key={index}
+                    className="border-l-4 border-blue-500 pl-4 py-2 hover:bg-blue-50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h4 className="font-semibold text-sm text-blue-900">
+                        {notice.title}
+                      </h4>
+                      <Badge className="text-xs px-2 py-0.5 capitalize bg-blue-100 text-blue-800 whitespace-nowrap ml-2">
+                        {notice.type}
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-gray-500">{notice.date}</p>
+                  </div>
+                ))}
                 {visibleNotices.length === 0 ? (
                   <p className="text-sm text-gray-500">No notices available.</p>
                 ) : null}
@@ -321,7 +300,7 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
               {/* View More Button */}
               <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-white rounded-b-xl flex justify-center">
                 <Link
-                  to={viewAllLink || (schoolCode ? `/schools/${schoolCode}/about/activities` : "#")}
+                  to={`/schools/${schoolCode}/about/activities`}
                   className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 group"
                 >
                   View All Notices

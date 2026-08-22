@@ -755,7 +755,7 @@ const useEventFiltering = ({ events, itemsPerPage }) => {
 const EventsPage = ({ schoolCode }) => {
   const [activeTab, setActiveTab] = useState("upcoming");
   const [itemsPerPage, setItemsPerPage] = useState(6); // Default 6 events per page
-  const [eventsData, seteventsData] = useState(() => getSchoolAnnouncements(schoolCode).events);
+  const [eventsData, seteventsData] = useState(() => getSchoolAnnouncements().events);
   // Get current events based on active tab (only upcoming and past)
   const getCurrentEvents = () => {
     const currentDate = new Date();
@@ -791,7 +791,7 @@ const EventsPage = ({ schoolCode }) => {
       }
 
       if (isMounted) {
-        seteventsData(getSchoolAnnouncements(schoolCode).events);
+        seteventsData(getSchoolAnnouncements().events);
       }
     };
 
@@ -806,7 +806,7 @@ const EventsPage = ({ schoolCode }) => {
       window.removeEventListener("focus", loadEvents);
       window.removeEventListener("announcements-data-updated", loadEvents);
     };
-  }, [schoolCode]);
+  }, []);
   // Get unique types and years for filters
   const allTypes = [...new Set(eventsData.map((event) => event.type))];
   const allYears = [...new Set(eventsData.map((event) => event.year))];

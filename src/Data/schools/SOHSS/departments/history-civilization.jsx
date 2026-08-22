@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "World Civilizations",
             "Archival Research"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1oIxMReqw9y4zlF_sovZ0cs2tkzanuL0t/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "https://drive.google.com/file/d/1oIxMReqw9y4zlF_sovZ0cs2tkzanuL0t/preview"
             }
         ]
     },
@@ -135,15 +135,15 @@ export const departmentLayoutData = {
             "Sanskrit Hermeneutics",
             "Cultural Heritage"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1Uo9LHHKSvgGWxSmLo-mX32hBSzcQb5Lu/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "https://drive.google.com/file/d/1Uo9LHHKSvgGWxSmLo-mX32hBSzcQb5Lu/preview"
             },
             {
                 session: "Detailed Syllabus",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "https://drive.google.com/file/d/1rBP2ZtTKkn5TFSnoCP2iy6YD5XplJ_GW/preview"
             }
         ]
     },
@@ -162,11 +162,11 @@ export const departmentLayoutData = {
             "Refugee & Humanitarian Law",
             "Fieldwork Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "https://drive.google.com/file/d/11SRxSK-TL6F9JcdUcyKHWtM_MNIVDLNL/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "https://drive.google.com/file/d/11SRxSK-TL6F9JcdUcyKHWtM_MNIVDLNL/preview"
             }
         ]
     },
@@ -185,11 +185,11 @@ export const departmentLayoutData = {
             "Information Retrieval",
             "Central Library Practicum"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview",
+        syllabusUrl: "https://drive.google.com/file/d/13bHACKZbBR5mJfbeEkAHuvukRNWP6JQu/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview"
+                url: "https://drive.google.com/file/d/13bHACKZbBR5mJfbeEkAHuvukRNWP6JQu/preview"
             }
         ]
     }

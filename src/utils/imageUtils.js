@@ -97,53 +97,10 @@ export const parseImageUrl = (path, width = 1000) => {
  * 
  * @param {string} path - The image URL or path
  * @param {string} [placeholder] - Custom placeholder URL
- * @param {number} [width=1000] - Desired width for Google Drive thumbnails
  * @returns {string} - A directly usable image URL
  */
-export const getImageUrl = (path, placeholder = 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found', width = 1000) => {
+export const getImageUrl = (path, placeholder = 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found') => {
   if (!path) return placeholder;
-  const parsed = parseImageUrl(path, width);
+  const parsed = parseImageUrl(path);
   return parsed || placeholder;
 };
-
-/**
- * Extract 1-2 letter initials from a faculty member's name.
- */
-export const getFacultyInitials = (name) => {
-  if (!name) return 'F';
-  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
-  const parts = String(name).split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
-  if (parts.length === 0) return 'F';
-  if (parts.length === 1) return parts[0][0].toUpperCase();
-  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-};
-
-/**
- * Resolve faculty image URL with fallback to local mapped assets or ui-avatars.com.
- */
-export const resolveFacultyImage = (url, image, name, email, id) => {
-  const target = url || image;
-  if (target) {
-    const parsed = parseImageUrl(target);
-    if (parsed) return parsed;
-  }
-
-  // Fallback to mapped local faculty photo assets for specific IT Cell committee members when database image URL is missing
-  const nameLower = String(name || "").toLowerCase();
-  if (nameLower.includes("arti gautam") || nameLower.includes("aarti")) {
-    return "/assets/Faculty/Aarti.jpg";
-  }
-  if (nameLower.includes("rakesh kumar")) {
-    return "/assets/Faculty/Dr. Rakesh Kumar.jpeg";
-  }
-  if (nameLower.includes("gaurav kumar")) {
-    return "https://nss.onlinegbu.com/images/GauravKumar.png";
-  }
-  if (nameLower.includes("pallavi upadhyay") || nameLower.includes("pallavi upadhyaya")) {
-    return "/assets/Faculty/Pallavi.jpeg";
-  }
-
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
-};
-
-

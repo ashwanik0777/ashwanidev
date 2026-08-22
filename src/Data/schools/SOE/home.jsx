@@ -75,7 +75,7 @@ export const sectionsConfig = [
 
   {
     componentName: "SchoolStats",
-    enabled: false,
+    enabled: true,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -958,7 +958,7 @@ As an academic community, the school is committed to the belief that expanding o
 
   {
     componentName: "PlacementsSection",
-    enabled: false,
+    enabled: true,
     position: 10,
     props: {
       data: {
@@ -995,7 +995,7 @@ As an academic community, the school is committed to the belief that expanding o
 
   {
     componentName: "RecentPlacements",
-    enabled: false,
+    enabled: true,
     position: 11,
     props: {
       data: {

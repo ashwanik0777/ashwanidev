@@ -90,7 +90,7 @@ const Textarea = React.forwardRef(({ className, ...props }, ref) => (
 ));
 Textarea.displayName = "Textarea";
 
-const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
+const BookingForm = ({ facility, selectedDate, onSubmit, onCancel }) => {
   const [formData, setFormData] = React.useState({
     userName: "",
     userEmail: "",
@@ -102,7 +102,8 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
     endTime: "17:00",
   });
 
-    const [emailOtpState, setEmailOtpState] = React.useState("idle"); // idle, sending, sent, verifying, verified
+  const [totalCost, setTotalCost] = React.useState(0);
+  const [emailOtpState, setEmailOtpState] = React.useState("idle"); // idle, sending, sent, verifying, verified
   const [otpCode, setOtpCode] = React.useState("");
   const [verificationToken, setVerificationToken] = React.useState("");
   const [otpError, setOtpError] = React.useState("");
@@ -114,8 +115,22 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
     "20:00", "21:00", "22:00"
   ];
 
-  
-  
+  const calculateCost = (start, end) => {
+    if (!start || !end) return 0;
+    const startHour = parseInt(start.split(":")[0]);
+    const endHour = parseInt(end.split(":")[0]);
+    const duration = endHour - startHour;
+    if (duration <= 0) return 0;
+
+    const rate = facility.rentRate?.offPeak || 10000;
+    const hourlyRate = rate / 8;
+    return Math.round(hourlyRate * duration + 1000 + 5000); // base + cleaning + security
+  };
+
+  React.useEffect(() => {
+    setTotalCost(calculateCost(formData.startTime, formData.endTime));
+  }, [formData.startTime, formData.endTime, facility]);
+
   const handleInputChange = (field, value) => {
     // Validate digit inputs for mobile
     if ((field === "userPhonePrimary" || field === "userPhoneSecondary") && value !== "") {
@@ -152,8 +167,8 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
     setOtpError("");
     setEmailOtpState("verifying");
     try {
-      const response = await verifyBookingOtp({ email: formData.userEmail, otp: otpCode });
-      setVerificationToken(response.data.verificationToken);
+      const data = await verifyBookingOtp({ email: formData.userEmail, otp: otpCode });
+      setVerificationToken(data.verificationToken);
       setEmailOtpState("verified");
     } catch (err) {
       setOtpError(err.response?.data?.message || "Invalid OTP code entered.");
@@ -163,20 +178,6 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.userName.trim().length === 0) {
-      alert("Please enter Applicant Full Name");
-      return;
-    }
-    if (formData.userPhonePrimary.length !== 10) {
-      alert("Primary Mobile Number must be 10 digits");
-      return;
-    }
-    if (formData.purpose.trim().length === 0) {
-      alert("Please enter the Purpose of Booking");
-      return;
-    }
-
     if (emailOtpState !== "verified" || !verificationToken) {
       setOtpError("Email verification is mandatory to book the facility.");
       return;
@@ -188,8 +189,8 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
         ...formData,
         facilityId: facility.id,
         facilityName: facility.name,
-        startTime: `${format(dateRange.start, "yyyy-MM-dd")}T${formData.startTime}:00`,
-        endTime: `${format(dateRange.end || dateRange.start, "yyyy-MM-dd")}T${formData.endTime}:00`,
+        startTime: `${format(selectedDate, "yyyy-MM-dd")}T${formData.startTime}:00`,
+        endTime: `${format(selectedDate, "yyyy-MM-dd")}T${formData.endTime}:00`,
         emailVerificationToken: verificationToken,
       };
       await onSubmit(submissionData);
@@ -213,7 +214,7 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
       <CardHeader>
         <CardTitle>Booking Application Form</CardTitle>
         <p className="text-xs text-stone-500 font-medium">
-          Date Range: {format(dateRange.start, "PP")} {dateRange.end ? `to ${format(dateRange.end, "PP")}` : ""}
+          Date Chosen: {format(selectedDate, "PPPP")}
         </p>
       </CardHeader>
       <CardContent>
@@ -338,12 +339,13 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
               />
             </div>
             <div>
-              <Label>Secondary / Emergency Mobile</Label>
+              <Label required>Secondary / Emergency Mobile</Label>
               <Input
                 type="tel"
                 placeholder="10 digit number"
                 value={formData.userPhoneSecondary}
                 onChange={(e) => handleInputChange("userPhoneSecondary", e.target.value)}
+                required
               />
             </div>
           </div>
@@ -367,7 +369,29 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
             />
           </div>
 
-          {/* Estimated Charges section removed */}
+          {totalCost > 0 && (
+            <div className="p-4 bg-stone-50 rounded-xl border border-stone-200">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2.5">Estimated Charges</h4>
+              <div className="space-y-1.5 text-sm text-stone-600">
+                <div className="flex justify-between">
+                  <span>Usage Rent:</span>
+                  <span className="font-semibold text-stone-900">₹{(totalCost - 6000).toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Cleaning Service:</span>
+                  <span className="font-semibold text-stone-900">₹1,000</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Security deposit (Refundable):</span>
+                  <span className="font-semibold text-stone-900">₹5,000</span>
+                </div>
+                <div className="border-t border-stone-200 my-2 pt-2 flex justify-between font-bold text-stone-900 text-base">
+                  <span>Total Payable:</span>
+                  <span>₹{totalCost.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-2">
             <button
@@ -379,7 +403,7 @@ const BookingForm = ({ facility, dateRange, onSubmit, onCancel }) => {
             </button>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={!isFormValid || isSubmitting}
               className="flex-1 rounded-xl bg-stone-900 py-3 text-sm font-semibold text-white hover:bg-stone-850 active:bg-stone-950 transition disabled:opacity-50 shadow-sm flex items-center justify-center"
             >
               {isSubmitting ? (

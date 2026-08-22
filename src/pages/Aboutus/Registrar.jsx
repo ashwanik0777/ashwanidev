@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Building, Calendar, ShieldCheck, FileCheck, Quote } from "lucide-react";
+import { Mail, Phone, MapPin, Building, Calendar, ShieldCheck, FileCheck } from "lucide-react";
 import BannerSection from "../../components/HeroBanner.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import ButtonGroup from "../../components/TabsData.jsx";
@@ -16,7 +16,7 @@ const Registrar = () => {
       content: (
         <div className="space-y-4">
           <p className="text-gray-700 leading-relaxed">
-            Prof. Chander Kumar Singh serves as the Registrar of Gautam Buddha University. He is responsible for the overall administrative affairs, statutory compliance, and institutional governance of the university.
+            Dr. Vishwas Tripathi serves as the Registrar of Gautam Buddha University. He is responsible for the overall administrative affairs, statutory compliance, and institutional governance of the university.
           </p>
           <p className="text-gray-700 leading-relaxed">
             With years of experience in higher education administration, academic planning, and institutional leadership, he leads the administrative team to ensure smooth functioning of the academic sessions, university governance boards, and student support services.
@@ -140,14 +140,14 @@ const Registrar = () => {
               <div className="bg-gradient-to-b from-blue-50/70 to-white p-6 rounded-3xl shadow-sm border border-blue-100">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-200 mb-6 shadow-md relative">
                   <img
-                    src="/assets/Faculty/Prof. Chander Kumar Singh.jpeg"
-                    alt="Prof. Chander Kumar Singh"
-                    className="w-full h-full object-cover object-top"
+                    src="https://ui-avatars.com/api/?name=Vishwas+Tripathi&background=1e3a8a&color=fff&size=300"
+                    alt="Dr. Vishwas Tripathi"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
                 </div>
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-gray-900">Prof. Chander Kumar Singh</h3>
+                  <h3 className="text-xl font-bold text-gray-900">Dr. Vishwas Tripathi</h3>
                   <p className="text-sm font-semibold text-blue-600 mt-1">Registrar</p>
                   <p className="text-xs text-gray-500 mt-0.5">Gautam Buddha University</p>
                 </div>
@@ -167,32 +167,30 @@ const Registrar = () => {
             </div>
 
             {/* Right Card: Message */}
-            <div className="w-full lg:w-2/3 bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
-              <Quote className="w-8 h-8 text-blue-500/30 mb-3" />
-              <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p className="text-base sm:text-lg font-medium text-gray-900">
+            <div className="w-full lg:w-2/2">
+              <div className="text-6xl text-blue-400 font-serif leading-none h-4 -mb-2">“</div>
+              <div className="space-y-6 text-gray-700 leading-relaxed text-justify px-2">
+                <p className="text-lg font-medium text-gray-800">
                   Welcome to Gautam Buddha University. As the administrative heart of the university, the Registrar's Office is committed to ensuring operational excellence, administrative efficiency, and student-centric support.
                 </p>
-                <p className="text-sm sm:text-base text-gray-600">
+                <p>
                   We strive to maintain the highest standards of governance, legal compliance, and statutory integrity, aligning our processes to support GBU's vision of becoming a global hub of learning and research. Our office handles a wide spectrum of responsibilities, including academic administration, student registration, examinations, recruitment, and statutory governance.
                 </p>
-                <p className="text-sm sm:text-base text-gray-600">
+                <p>
                   We are dedicated to providing a transparent, responsive, and digitised administrative ecosystem that enables our students, faculty, and stakeholders to focus on what matters most: academic growth and intellectual pursuits. I welcome all students, parents, scholars, and collaborators to engage with our administration.
                 </p>
               </div>
+              <div className="text-6xl text-blue-400 font-serif leading-none h-4 text-right -mt-4">”</div>
               
-              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                <Quote className="w-6 h-6 text-blue-500/20 rotate-180" />
-                <div className="text-right">
-                  <p className="text-lg font-bold text-gray-900">Prof. Chander Kumar Singh</p>
-                  <p className="text-sm font-semibold text-blue-600">Registrar, Gautam Buddha University</p>
-                </div>
+              <div className="mt-8 text-right">
+                <p className="text-xl font-bold text-gray-900">Dr. Vishwas Tripathi</p>
+                <p className="text-sm font-semibold text-blue-600 mt-0.5">Registrar, Gautam Buddha University</p>
               </div>
             </div>
           </div>
 
           {/* Details Section */}
-          <div className="mt-12 sm:mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-8">
+          <div className="mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
             <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Know the Registrar's Office</h2>
 
             {/* Tabs */}
@@ -200,7 +198,7 @@ const Registrar = () => {
               buttons={tabButtons}
               onClick={setActiveTab}
               activeButton={activeTab}
-              size="md"
+              size="lg"
               fullWidth={true}
               rounded="2xl"
               animated={true}

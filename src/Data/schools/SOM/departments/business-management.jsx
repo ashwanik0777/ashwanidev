@@ -60,7 +60,46 @@ export const departmentLayoutData = {
       phone: "0120-2346144",
     },
   },
-  aboutProps: null,
+  aboutProps: {
+    heading: "About the Department",
+    subheading:
+      "Established in 2008, the Department of Business Management is the primary academic department under the School of Management at Gautam Buddha University.",
+    stats: [
+      { icon: Users, numberText: "500+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "17+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "12+", title: "Research Projects", subtitle: "Active" },
+      { icon: Lightbulb, numberText: "50+", title: "Scholars", subtitle: "Ph.D." },
+    ],
+    highlights: [
+      {
+        title: "Multi-Disciplinary Management Education",
+        description:
+          "The department offers comprehensive programs across MBA, BBA+MBA (Dual Degree), B.Com (Hons), M.Com, MBA (Executive), MBA BADS, and Ph.D. The teaching pedagogy blends lectures, experience sharing, case-based learning, and analytical problem solving.",
+        dotColor: "#f59e0b",
+      },
+      {
+        title: "Industry Collaborations & Placements",
+        description:
+          "The Corporate Resource Center (CRC) ensures strong industry connections through summer internships from the 2nd semester, final placements, and pre-placement training. Recruiters include Adani, Coca Cola, Bank of Baroda, Axis Bank, S&P Global, BHEL, and Hero Motors.",
+        dotColor: "#3b82f6",
+      },
+      {
+        title: "Research & Conferences",
+        description:
+          "Faculty and scholars are actively engaged in research across Finance, HRM, Marketing, Operations, Strategy, and Business Analytics. The school hosts ICSSR-sponsored programs, international conferences (ICBITSS, ICIRASMT), and FDP workshops.",
+        dotColor: "#8b5cf6",
+      },
+    ],
+    vision:
+      "To be a nationally recognized management school producing industry-ready professionals endowed with character, creativity, competence, and commitment.",
+    missionPoints: [
+      "Develop business leaders with ethical values and global perspective",
+      "Foster innovation and research-driven culture in management education",
+      "Build strategic collaborations with institutions and enterprises of national and international repute",
+      "Prepare confident, industry-ready managers through case-based learning and analytical problem solving",
+      "Promote cross-cultural and international focus in all academic activities",
+    ],
+  },
   programsData: [
     {
         id: "dual-degree-bba-mba",
@@ -77,15 +116,15 @@ export const departmentLayoutData = {
             "Cross-Disciplinary Electives",
             "Corporate Summer Internship"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1WsuGwuLmovk4P5EVtdxf-xuXAKlsXGvX/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                url: "https://drive.google.com/file/d/1WsuGwuLmovk4P5EVtdxf-xuXAKlsXGvX/preview"
             },
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                url: "https://drive.google.com/file/d/1NYQ8_evdUR3Qvv6Yqzp8yI_ORzZ8DMIC/preview"
             }
         ]
     },
@@ -104,15 +143,15 @@ export const departmentLayoutData = {
             "Financial Management",
             "NEP Multidisciplinary Framework"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1Z9432xb90zcbHR5FXD-BWtyDyioBETBS/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                url: "https://drive.google.com/file/d/1Z9432xb90zcbHR5FXD-BWtyDyioBETBS/preview"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                url: "https://drive.google.com/file/d/1WW4-023qvJ8tYoNknpQHubH5D2hVWCXA/preview"
             }
         ]
     },
@@ -158,11 +197,11 @@ export const departmentLayoutData = {
             "C-Suite Leadership Modules",
             "Executive Industry Capstone"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1u1itwoiAmIv9NRGK1Lmc7ARY_3wHULUt/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+                url: "https://drive.google.com/file/d/1u1itwoiAmIv9NRGK1Lmc7ARY_3wHULUt/preview"
             },
             {
                 session: "Course Outline",
@@ -185,11 +224,11 @@ export const departmentLayoutData = {
             "Data Visualization & Dashboards",
             "FinTech & Marketing Models"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1oQNhhdlHUN9mh94PFy9-vNj7t9E3aiF3/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+                url: "https://drive.google.com/file/d/1oQNhhdlHUN9mh94PFy9-vNj7t9E3aiF3/preview"
             },
             {
                 session: "Course Outline",
@@ -212,11 +251,11 @@ export const departmentLayoutData = {
             "Peer-Reviewed Journal Publishing",
             "Ph.D. Dissertation Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview",
+        syllabusUrl: "https://drive.google.com/file/d/18zUmK9ecBZsmlotQhhRDsxU6okto16Xm/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview"
+                url: "https://drive.google.com/file/d/18zUmK9ecBZsmlotQhhRDsxU6okto16Xm/preview"
             },
             {
                 session: "Course Outline",
@@ -233,7 +272,11 @@ export const departmentLayoutData = {
       { numberText: "50+", subtitle: "Publications" },
     ],
   },
-  researchStats: [],
+  researchStats: [
+    { numberText: "50+", subtitle: "Publications" },
+    { numberText: "12+", subtitle: "Funded Projects" },
+    { numberText: "50+", subtitle: "Ph.D. Scholars" },
+  ],
   topAchievers: [],
   achievements: [
     {

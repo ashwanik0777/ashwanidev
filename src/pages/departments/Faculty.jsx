@@ -7,8 +7,37 @@ import apiClient from "../../services/apiClient";
 import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
-import { resolveFacultyImage } from "../../utils/imageUtils";
 
+const getInitials = (name) => {
+  if (!name) return 'F';
+  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
+  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  if (parts.length === 0) return 'F';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+const resolveFacultyImage = (url, image, name) => {
+  const target = url || image;
+  if (!target) return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
+
+  let resolvedUrl = target;
+  if (typeof target === 'string') {
+    const matchFile = target.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (matchFile && matchFile[1]) {
+      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
+    } else {
+      const matchOpen = target.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (matchOpen && matchOpen[1] && target.includes('drive.google.com')) {
+        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
+      }
+    }
+  }
+
+  const host = import.meta.env.VITE_HOST || "";
+  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
+  return `${host}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
+};
 
 const Faculty = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -62,52 +91,20 @@ const Faculty = () => {
 
   const getDesignationPriority = (designation) => {
     const desc = (designation || "").toLowerCase();
-    
-    const isDean = desc.includes("dean");
-    const isAssociate = desc.includes("associate");
-    const isAssistant = desc.includes("assistant");
-    const isVisiting = desc.includes("visiting") || desc.includes("recognising") || desc.includes("recognizing") || desc.includes("recognised");
-    const isAdjunct = desc.includes("adjunct");
-    const isProf = desc.includes("prof");
-    const isHod = desc.includes("hod") || desc.includes("head");
-
-    // 1. Professor and Dean
-    if (isDean && !isAssociate && !isAssistant) return 1;
-
-    // 2. Professor (plain professor, not associate/assistant/dean)
-    if (isProf && !isAssociate && !isAssistant && !isVisiting && !isAdjunct && !isDean) return 2;
-
-    // 3. Recognizing / Visiting Professors
-    if (isVisiting) return 3;
-    
-    // 4. Adjunct Professors
-    if (isAdjunct) return 4;
-    
-    // 5. Associate Professor and Dean
-    if (isDean && isAssociate) return 5;
-    
-    // 6. Assistant Professor and Dean(I/C)
-    if (isDean && isAssistant) return 6;
-
-    // 7. Associate Professor
-    if (isAssociate) return 7;
-    
-    // 8. Assistant Professor and HoD
-    if (isAssistant && isHod) return 8;
-    
-    // 9. Assistant Professor
-    if (isAssistant) return 9;
-
-    return 10;
+    if (desc.includes("assistant professor")) return 3;
+    if (desc.includes("associate professor")) return 2;
+    if (desc.includes("professor")) return 1;
+    if (desc.includes("faculty")) return 4;
+    return 5;
   };
 
   const sortFaculty = (a, b) => {
     const pA = getDesignationPriority(a.designation || a.title);
     const pB = getDesignationPriority(b.designation || b.title);
     if (pA !== pB) return pA - pB;
-    
-    // Sort alphabetically by name within the same category
-    return (a.name || "").localeCompare(b.name || "");
+    const expA = parseInt(a.experience_years || a.experience) || 0;
+    const expB = parseInt(b.experience_years || b.experience) || 0;
+    return expB - expA;
   };
 
   const departments = [
@@ -120,8 +117,6 @@ const Faculty = () => {
   ];
 
   const filteredFaculty = facultyData.filter(faculty => {
-    const desc = (faculty.designation || faculty.title || "").toLowerCase();
-    if (desc.includes("ocfd")) return false;
     const searchString = searchTerm.toLowerCase();
     const matchesSearch =
       (faculty.name || '').toLowerCase().includes(searchString) ||
@@ -282,7 +277,7 @@ const Faculty = () => {
                       <div className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <img
-                             src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)}
+                             src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)}
                              alt={faculty.name}
                              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100 group-hover:border-blue-200 transition-colors"
                            />
@@ -350,7 +345,7 @@ const Faculty = () => {
                   <a key={faculty.id} href={`/academics/faculty/${faculty.id}`} className="block bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="p-6">
                       <div className="flex flex-col items-center text-center">
-                        <img src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
+                        <img src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name)} alt={faculty.name} className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-blue-100" />
                         <h3 className="text-xl font-bold text-gray-800 mb-2">{faculty.name}</h3>
                         <p className="text-blue-600 font-semibold mb-4">{faculty.designation || faculty.title}</p>
                       </div>

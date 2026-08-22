@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Classroom Internship",
             "Curriculum Design"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1cU4EK_vs1qkQfRhgeDnYrfLmPd_cH_kS/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview"
+                url: "https://drive.google.com/file/d/1cU4EK_vs1qkQfRhgeDnYrfLmPd_cH_kS/preview"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Hands-on School Practicum",
             "Teaching Tech Tools"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1-c2etHGdZLOp3NaYYrvlFRla16fxKLR6/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview"
+                url: "https://drive.google.com/file/d/1-c2etHGdZLOp3NaYYrvlFRla16fxKLR6/preview"
             }
         ]
     },
@@ -158,11 +158,11 @@ export const departmentLayoutData = {
             "Sports Biomechanics",
             "Gym & Fitness Training"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1Q8cO3_DSbm1SesT5b5UKpmCQ6Uca-u8T/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview"
+                url: "https://drive.google.com/file/d/1Q8cO3_DSbm1SesT5b5UKpmCQ6Uca-u8T/preview"
             }
         ]
     },
@@ -181,11 +181,11 @@ export const departmentLayoutData = {
             "Policy Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1rUFjzdr1L9hUHoU41sfqAjQ-qBYosLvb/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview"
+                url: "https://drive.google.com/file/d/1rUFjzdr1L9hUHoU41sfqAjQ-qBYosLvb/preview"
             }
         ]
     }

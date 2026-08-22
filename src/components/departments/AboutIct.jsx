@@ -9,7 +9,7 @@ const AboutUs = ({ data }) => {
   } = data || {};
 
   return (
-    <section className="py-8 sm:py-10 bg-white border-b border-gray-100">
+    <section className="py-14 sm:py-18 bg-white border-b border-gray-100">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Section Heading */}

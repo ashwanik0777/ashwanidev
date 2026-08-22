@@ -109,7 +109,7 @@ const LeadershipCard = (props) => {
   const linkTarget = facultyLink || "/academics/faculty";
 
   return (
-    <section className="py-8 sm:py-10">
+    <section className="py-12 sm:py-16">
       <div className="text-center mb-10 sm:mb-12">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           Dean's <span className="text-blue-800">Message</span>

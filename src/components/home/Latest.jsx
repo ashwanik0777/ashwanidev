@@ -4,7 +4,6 @@ import {
   refreshSchoolAnnouncements,
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
-import { parseImageUrl } from '../../utils/imageUtils';
 
 export default function LatestUpdates() {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +36,7 @@ export default function LatestUpdates() {
         category: 'Notice/Circulars',
         priority: item.priority || 'medium',
         date: item.date,
-        url: item.pdfUrl ? parseImageUrl(item.pdfUrl) : '/announcements/notices',
+        url: `/announcements/notices/${item.id}`,
       }));
 
     const upcomingEvents = (announcements.events || [])

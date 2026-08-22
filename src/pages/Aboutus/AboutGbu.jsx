@@ -163,7 +163,7 @@ const aboutData = {
   overview: {
     title: "About Gautam Buddha University",
     description: "Gautam Buddha University, established in 2008 by the Government of Uttar Pradesh, stands as a beacon of educational excellence. With UGC recognition and AIU membership, our university is committed to providing world-class multidisciplinary education that combines traditional values with modern innovation across diverse academic fields.",
-    image: "/assets/GBU.png"
+    image: "https://architecture.live/wp-content/uploads/2022/09/7-2048x1448.jpg"
   },
 
   vision: {
@@ -208,9 +208,10 @@ const aboutData = {
       icon: "BookOpen",
       title: "Registrar",
       subtitle: "Administrative Affairs",
-      link: "/about-us/registrar"
+      link: "/registrar"
     }
-  ],
+  ]
+  ,
 
   schools: [
     {
@@ -268,19 +269,19 @@ const aboutData = {
       title: "Central Library",
       icon: "Library",
       summary: "Digital collections & research facilities",
-      link: "/campus-life/library"
+      link: "#"
     },
     {
       title: "Modern Auditoriums",
       icon: "Mic",
       summary: "Advanced audio-visual systems",
-      link: "/booking"
+      link: "#"
     },
     {
       title: "Smart Classrooms",
       icon: "Monitor",
       summary: "Technology-enabled learning spaces",
-      link: "/academic/schools"
+      link: "#"
     },
     {
       title: "Research Labs",
@@ -292,13 +293,13 @@ const aboutData = {
       title: "Computer Centers",
       icon: "Cpu",
       summary: "High-speed connectivity",
-      link: "/it-cell"
+      link: "#"
     },
     {
       title: "Conference Halls",
       icon: "Building",
       summary: "Professional meeting spaces",
-      link: "/booking"
+      link: "#"
     }
   ],
 
@@ -334,27 +335,27 @@ const aboutData = {
   ],
 
   studentLife: [
-    {
-      title: "30+ Clubs & Societies",
-      icon: "Users",
-      link: "/campus-life/clubs-societies"
-    },
-    {
-      title: "NSS/NCC Programs",
-      icon: "Award",
-      link: "/campus-life/NSS"
-    },
-    {
-      title: "Tech & Cultural Fests",
-      icon: "Sparkles",
-      link: "/announcements/event-calendar"
-    },
-    {
-      title: "Campus Amenities",
-      icon: "Home",
-      link: "/campus-life/hostel-facilities"
-    }
-  ]
+  { 
+    title: "30+ Clubs & Societies", 
+    icon: "Users",
+    link: "/campus-life/clubs-societies"
+  },
+  { 
+    title: "NSS/NCC Programs", 
+    icon: "Award",
+    link: "/campus-life/NSS"
+  },
+  { 
+    title: "Tech & Cultural Fests", 
+    icon: "Sparkles",
+    link: "/announcements/event-calendar"
+  },
+  { 
+    title: "Campus Amenities", 
+    icon: "Home",
+    link: "#"
+  }
+]
 
 };
 
@@ -407,117 +408,113 @@ const AboutGbu = () => {
           bgTheme={2}
         />
 
+
         {/* Statistics Section */}
         <StatsCard stats={statistics} />
+
         {/* Overview Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-gray-50 to-white">
+        <section className="py-20 bg-gradient-to-r from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="order-2 md:order-1">
                 <div className="relative">
                   <img
                     src={aboutData.overview.image}
                     alt="Gautam Buddha University Campus"
-                    className="rounded-2xl shadow-xl w-full h-72 md:h-80 object-cover transform hover:scale-105 transition-transform duration-500"
+                    className="rounded-2xl shadow-2xl w-full h-80 object-cover transform hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                 </div>
               </div>
               <div className="order-1 md:order-2">
-                <Badge color="blue" className="mb-4">
+                <Badge color="blue" className="mb-6">
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Est. 2008
                 </Badge>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
                   {aboutData.overview.title}
                 </h2>
-                <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+                <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                   {aboutData.overview.description}
                 </p>
-                <Link to="/aboutUs/GBUHistory">
-                  <Button className="group">
-                    Learn More About Our History
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
+                <Link to="/aboutUs/GBUHistory"><Button className="group">
+                  Learn More About Our History
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button></Link>
               </div>
             </div>
           </div>
         </section>
 
         {/* Vision & Mission Section */}
-        <section className="py-6 sm:py-8 bg-slate-50/70 border-y border-slate-100/80">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-              {/* Vision Card */}
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 p-6 sm:p-8 flex flex-col justify-between group">
-                <div>
-                  <div className="flex items-center space-x-4 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                      {renderIcon(aboutData.vision.icon, "w-6 h-6")}
+        <section className="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="group">
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white mr-4 group-hover:scale-110 transition-transform duration-300">
+                      {renderIcon(aboutData.vision.icon, "w-8 h-8")}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                      {aboutData.vision.title}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-gray-900">{aboutData.vision.title}</h3>
                   </div>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+                  <p className="text-lg text-gray-700 leading-relaxed">
                     {aboutData.vision.description}
                   </p>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
 
-              {/* Mission Card */}
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 p-6 sm:p-8 flex flex-col justify-between group">
-                <div>
-                  <div className="flex items-center space-x-4 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-                      {renderIcon(aboutData.mission.icon, "w-6 h-6")}
+              <Card className="group">
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-white mr-4 group-hover:scale-110 transition-transform duration-300">
+                      {renderIcon(aboutData.mission.icon, "w-8 h-8")}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                      {aboutData.mission.title}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-gray-900">{aboutData.mission.title}</h3>
                   </div>
                   {aboutData.mission.subtitle && (
-                    <p className="text-slate-500 text-xs sm:text-sm font-medium italic mb-4 pb-2 border-b border-slate-100/80">
+                    <p className="text-base font-semibold text-gray-800 mb-4 italic">
                       {aboutData.mission.subtitle}
                     </p>
                   )}
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {aboutData.mission.points.map((point, index) => (
-                      <li key={index} className="flex items-start group/item">
-                        <div className="w-5 h-5 rounded-full bg-emerald-100/80 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 mr-3">
-                          <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                        </div>
-                        <span className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
-                          {point}
-                        </span>
+                      <li key={index} className="flex items-start">
+                        <Check className="text-green-600 mr-3 mt-1 w-5 h-5 flex-shrink-0" />
+                        <span className="text-base sm:text-lg text-gray-700 leading-snug">{point}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
 
         {/* Governance Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-br from-white via-gray-50 to-white">
+        <section className="py-24 bg-gradient-to-br from-white via-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+            {/* Header */}
+            <div className="text-center mb-14">
+              {/* <Badge color="purple" className="inline-flex items-center px-4 py-2 text-sm font-semibold bg-purple-100 text-purple-700 rounded-full shadow-md mb-5">
+                <Shield className="w-5 h-5 mr-2" />
+                Leadership
+              </Badge> */}
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
                 Governance & Organizational Leadership
               </h2>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {aboutData.governance.map((leader, index) => (
                 <Link key={index} to={leader.link} className="block">
-                  <Card className="text-center group bg-white/60 backdrop-blur-md rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <CardContent className="p-6">
-                      <div className="mb-4 flex justify-center">
-                        <div className="p-3.5 rounded-full bg-gradient-to-br from-sky-300 to-blue-800 shadow-md transition-transform transform group-hover:scale-110">
+                  <Card className="text-center group bg-white/60 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardContent className="p-8">
+                      <div className="mb-6 flex justify-center">
+                        <div className="p-4 rounded-full bg-gradient-to-br from-sky-300 to-blue-800 shadow-lg transition-transform transform group-hover:scale-110">
                           <div className="text-white">
-                            {renderIcon(leader.icon, "w-7 h-7")}
+                            {renderIcon(leader.icon, "w-8 h-8")}
                           </div>
                         </div>
                       </div>
@@ -531,27 +528,33 @@ const AboutGbu = () => {
           </div>
         </section>
 
+
         {/* Schools Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <div className="text-center mb-12">
+              {/* <Badge color="blue" className="mb-4">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Academic Excellence
+              </Badge> */}
+              <h2 className="text-4xl font-bold text-gray-900">
                 Academic Schools & Programs
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {aboutData.schools.map((school, index) => (
                 <Link key={index} to={school.link} className="block">
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-32 flex flex-col justify-center">
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-36 flex flex-col justify-center">
                     <CardContent className="p-4 text-center flex flex-col items-center justify-center">
-                      <div className="mb-2.5 flex justify-center">
+                      <div className="mb-3 flex justify-center">
                         <div className="p-2.5 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
-                          {renderIcon(school.icon, "w-5 h-5")}
+                          {renderIcon(school.icon, "w-6 h-6")}
                         </div>
                       </div>
 
-                      <h3 className={`font-bold text-gray-900 leading-tight ${school.name.length > 22 ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
+                      <h3 className={`font-bold text-gray-900 leading-tight ${school.name.length > 22 ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'
+                        }`}>
                         {school.name}
                       </h3>
                     </CardContent>
@@ -562,188 +565,30 @@ const AboutGbu = () => {
           </div>
         </section>
 
-        {/* Hostel Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-amber-50 to-orange-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="space-y-4">
-                <Badge color="orange" className="mb-1">
-                  <Home className="w-4 h-4 mr-2" />
-                  Residential Life
-                </Badge>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
-                  Hostel & Residential Experience
-                </h2>
-
-                <div className="space-y-2.5">
-                  {aboutData.hostelFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center p-3 bg-white/70 rounded-xl backdrop-blur-sm shadow-sm border border-orange-100/80">
-                      <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white mr-3 shrink-0 shadow-sm">
-                        {renderIcon(feature.icon, "w-4 h-4")}
-                      </div>
-                      <span className="text-xs sm:text-sm lg:text-base text-gray-800 font-semibold leading-snug">{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-3">
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
-                    <img
-                      src="/assets/hostels.jpg"
-                      alt="GBU Hostel Building Overview"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
-                    <img
-                      src="/assets/hostel 1.jpg"
-                      alt="GBU Hostel Residence Block"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-3 pt-4">
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
-                    <img
-                      src="/assets/hostel 2.jpg"
-                      alt="GBU Hostel Landscape & Greenery"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
-                    <img
-                      src="/assets/hostel2.jpg"
-                      alt="GBU Student Residential Complex"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Meditation & Wellness Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-white rounded-3xl shadow-lg p-6 md:p-8">
-            <div className="flex items-center justify-center group">
-              <img
-                src="/assets/meditation.jpg"
-                alt="Meditation"
-                className="w-72 h-72 md:w-88 md:h-88 rounded-2xl shadow-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-              />
-            </div>
-
-            <Card className="shadow-none bg-transparent">
-              <CardContent className="p-4 md:p-6">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-                  Meditation & Wellness Center
-                </h2>
-
-                <div className="flex justify-center md:justify-start space-x-8 mb-4">
-                  {[
-                    { icon: "Activity", label: "Yoga" },
-                    { icon: "Smile", label: "Meditation" },
-                    { icon: "Leaf", label: "Wellness" }
-                  ].map((item, index) => (
-                    <div key={index} className="text-center md:text-left">
-                      <div className="p-2.5 bg-gradient-to-r from-green-600 to-teal-700 rounded-full text-white mb-2 mx-auto md:mx-0 w-10 h-10 flex items-center justify-center shadow-md">
-                        {renderIcon(item.icon, "w-5 h-5")}
-                      </div>
-                      <p className="text-xs sm:text-sm text-gray-700 font-medium">{item.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="text-base text-gray-700 mb-6 leading-relaxed text-center md:text-left">
-                  Our dedicated wellness center offers yoga sessions, mindfulness practices,
-                  and spiritual guidance to nurture the holistic development of our students.
-                  Experience tranquility in our serene meditation dome.
-                </p>
-
-                <div className="text-center md:text-left">
-                  <Link to="/campus-life/meditation-center">
-                    <Button className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg">
-                      Explore Wellness Programs
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Sports & Recreation */}
-        <section className="py-6 sm:py-8 bg-white text-gray-800">
+        {/* Facilities Section */}
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Sports & Recreation
+            <div className="text-center mb-16">
+              {/* <Badge color="green" className="mb-4">
+                <Building className="w-4 h-4 mr-2" />
+                Infrastructure
+              </Badge> */}
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                World-Class Facilities & Infrastructure
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
-              {aboutData.sportsFeatures.map((sport, index) => (
-                <Card
-                  key={index}
-                  className="bg-white border border-gray-200 border-solid shadow-sm hover:shadow-md transition-all duration-300 group rounded-lg"
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="p-3 bg-purple-100 text-purple-600 rounded-full group-hover:scale-110 transition-transform duration-300">
-                        {renderIcon(sport.icon, "w-6 h-6")}
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-base text-gray-900 mb-2">
-                      {sport.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">{sport.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Link to="/campus-life/sports-fitness">
-                <Button
-                  variant="outline"
-                  size="md"
-                  className="group border-purple-500 border-[1px] border-solid text-purple-600 hover:bg-purple-50 transition-all"
-                >
-                  Explore Sports Programs
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Student Life & Community */}
-        <section className="py-6 sm:py-8 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-100/30 to-purple-100/30"></div>
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-                Student Life & Community
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {aboutData.studentLife.map((activity, index) => (
-                <Link key={index} to={activity.link} className="block">
-                  <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white/70 backdrop-blur-sm cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <div className="mb-4 flex justify-center">
-                        <div className="p-3.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
-                          {renderIcon(activity.icon, "w-6 h-6")}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {aboutData.facilities.map((facility, index) => (
+                <Link key={index} to={facility.link} className="block">
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-36 flex flex-col justify-center">
+                    <CardContent className="p-6 text-center flex flex-col items-center justify-center">
+                      <div className="mb-3 flex justify-center">
+                        <div className="p-3 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
+                          {renderIcon(facility.icon, "w-6 h-6")}
                         </div>
                       </div>
-                      <h3 className="font-bold text-gray-900 text-base group-hover:text-purple-600 transition-colors">
-                        {activity.title}
-                      </h3>
+                      <h3 className="font-bold text-gray-900 text-base">{facility.title}</h3>
                     </CardContent>
                   </Card>
                 </Link>
@@ -751,6 +596,318 @@ const AboutGbu = () => {
             </div>
           </div>
         </section>
+
+        {/* Hostel Section */}
+        <section className="py-10 sm:py-16 lg:py-20 bg-gradient-to-r from-amber-50 to-orange-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <Badge color="orange" className="mb-2 sm:mb-4">
+                  <Home className="w-4 h-4 mr-2" />
+                  Residential Life
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 sm:mb-6 leading-tight">
+                  Hostel & Residential Experience
+                </h2>
+
+                <div className="space-y-3 sm:space-y-4">
+                  {aboutData.hostelFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-center p-3 sm:p-4 bg-white/70 rounded-xl backdrop-blur-sm shadow-sm border border-orange-100/80">
+                      <div className="p-2 sm:p-2.5 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white mr-3 sm:mr-4 shrink-0 shadow-sm">
+                        {renderIcon(feature.icon, "w-4 h-4 sm:w-5 sm:h-5")}
+                      </div>
+                      <span className="text-xs sm:text-base lg:text-lg text-gray-800 font-semibold leading-snug">{feature.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostels.jpg"
+                      alt="GBU Hostel Building Overview"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel 1.jpg"
+                      alt="GBU Hostel Residence Block"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-8">
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel 2.jpg"
+                      alt="GBU Hostel Landscape & Greenery"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                    <img
+                      src="/assets/hostel2.jpg"
+                      alt="GBU Student Residential Complex"
+                      className="w-full h-36 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* Meditation & Wellness Section */}
+        <section className="py-20 bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 grid md:grid-cols-2 gap-16 items-center bg-white rounded-3xl shadow-lg p-8">
+           
+
+              <div className="flex items-center justify-center group">
+                <img
+                  src="/assets/meditation.jpg"
+                  alt="Meditation"
+                  className="w-80 h-80 md:w-96 md:h-96 rounded-2xl shadow-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                />
+              </div>
+
+              <Card className="shadow-none bg-transparent">
+                <CardContent className="p-8 md:p-12">
+                  {/* <Badge color="green" className="mb-6 inline-flex items-center gap-2 text-lg font-semibold ">
+                    <Heart className="w-5 h-5" />
+                    Wellness
+                  </Badge> */}
+
+                  <h2 className="text-4xl font-extrabold text-gray-900 mb-8">
+                    Meditation & Wellness Center
+                  </h2>
+
+                  <div className="flex justify-center md:justify-start space-x-12 mb-8">
+                    {[
+                      { icon: "Activity", label: "Yoga" },
+                      { icon: "Smile", label: "Meditation" },
+                      { icon: "Leaf", label: "Wellness" }
+                    ].map((item, index) => (
+                      <div key={index} className="text-center md:text-left">
+                        <div className="p-3 bg-gradient-to-r from-green-600 to-teal-700 rounded-full text-white mb-3 mx-auto md:mx-0 w-12 h-12 flex items-center justify-center shadow-md ">
+                          {renderIcon(item.icon, "w-6 h-6")}
+                        </div>
+                        <p className="text-sm text-gray-700 font-medium">{item.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="text-lg text-gray-700 mb-8 leading-relaxed text-center md:text-left">
+                    Our dedicated wellness center offers yoga sessions, mindfulness practices,
+                    and spiritual guidance to nurture the holistic development of our students.
+                    Experience tranquility in our serene meditation dome.
+                  </p>
+
+                  <div className="text-center md:text-left ">
+                    <Link to="/campus-life/meditation-center"><Button className="group/btn inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl ">
+                      Explore Wellness Programs
+                      <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button></Link>
+                  </div>
+                </CardContent>
+              </Card>
+           
+          </div>
+        </section>
+
+
+        {/* Section 10: Green Eco-Friendly Campus */}
+
+        <section className="py-20 bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/50 to-teal-100/50"></div>
+          <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-16">
+              <Badge color="green" className="mb-4">
+                <Leaf className="w-4 h-4 mr-2" />
+                Sustainability
+              </Badge>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                Green Eco-Friendly Campus
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Committed to environmental sustainability and green initiatives
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {aboutData.greenFeatures.map((feature, index) => (
+                <Card key={index} className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                  <CardContent className="p-8 text-center">
+                    <div className="mb-6 flex justify-center">
+                      <div className="p-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                        {renderIcon(feature.icon, "w-8 h-8")}
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-3 text-lg group-hover:text-emerald-600 transition-colors">
+                      {feature.title}
+                    </h3>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-16 text-center">
+              <Card className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
+                <CardContent className="p-8">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-3 bg-white/20 rounded-full">
+                      <Globe className="w-8 h-8" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Our Green Commitment</h3>
+                  <p className="text-lg opacity-90 max-w-2xl mx-auto">
+                    We are dedicated to creating a sustainable future through innovative green technologies,
+                    renewable energy solutions, and eco-friendly campus design.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+
+        {/* Section 11: Sports & Recreation */}
+        <section className="py-20 bg-white text-gray-800">
+          <div className="max-w-7xl mx-auto px-4">
+            {/* Header */}
+            <div className="text-center mb-16">
+              {/* <Badge color="purple" className="mb-4 bg-purple-100 text-purple-700 border border-purple-200 border-solid">
+                <Trophy className="w-4 h-4 mr-2" />
+                Athletics Excellence
+              </Badge> */}
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">
+                Sports & Recreation
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Eklavya Sports Complex - Excellence in Athletics
+              </p>
+            </div>
+
+            {/* Features Grid */}
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              {aboutData.sportsFeatures.map((sport, index) => (
+                <Card
+                  key={index}
+                  className="bg-white border border-gray-200 border-solid shadow-sm hover:shadow-md transition-all duration-300 group rounded-lg"
+                >
+                  <CardContent className="p-8 text-center">
+                    <div className="mb-6 flex justify-center">
+                      <div className="p-4 bg-purple-100 text-purple-600 rounded-full group-hover:scale-110 transition-transform duration-300">
+                        {renderIcon(sport.icon, "w-8 h-8")}
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-lg text-gray-900 mb-3">
+                      {sport.title}
+                    </h3>
+                    <p className="text-gray-600">{sport.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Call to Action */}
+            <div className="text-center">
+              <Link to="/campus-life/sports-fitness"><Button
+                variant="outline"
+                size="lg"
+                className="group border-purple-500 border-[1px] border-solid text-purple-600 hover:bg-purple-50 transition-all"
+              >
+                Explore Sports Programs
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button></Link>
+            </div>
+          </div>
+        </section>
+
+
+        {/* Section 12: Research & Innovation */}
+        <section
+          className="py-16 bg-gray-50"
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Research & Innovation
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <Card className="text-center rounded-xl shadow-md bg-white">
+                <CardContent className="p-6">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">700+</div>
+                  <p className="text-gray-700">Publications</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center rounded-xl shadow-md bg-white">
+                <CardContent className="p-6">
+                  <div className="text-3xl font-bold text-green-600 mb-2">82</div>
+                  <p className="text-gray-700">Ph.D.s Awarded</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center rounded-xl shadow-md bg-white">
+                <CardContent className="p-6">
+                  <div className="text-xl font-bold text-purple-600 mb-2">DST, CSIR</div>
+                  <p className="text-gray-700">Sponsored Research</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center rounded-xl shadow-md bg-white">
+                <CardContent className="p-6">
+                  <div className="text-xl font-bold text-orange-600 mb-2">AI, Cyber</div>
+                  <p className="text-gray-700">Centers of Excellence</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 13: Student Life & Community */}
+        <section className="py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-r from-pink-100/30 to-purple-100/30"></div>
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="text-center mb-16">
+      <Badge color="purple" className="mb-4">
+        <Sparkles className="w-4 h-4 mr-2" />
+        Campus Life
+      </Badge>
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        Student Life & Community
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        Vibrant campus life with diverse opportunities for growth and engagement
+      </p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {aboutData.studentLife.map((activity, index) => (
+        <Link key={index} to={activity.link} className="block">
+          <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-white/70 backdrop-blur-sm cursor-pointer">
+            <CardContent className="p-8 text-center">
+              <div className="mb-6 flex justify-center">
+                <div className="p-4 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                  {renderIcon(activity.icon, "w-8 h-8")}
+                </div>
+              </div>
+              <h3 className="font-bold text-gray-900 mb-3 text-lg group-hover:text-purple-600 transition-colors">
+                {activity.title}
+              </h3>
+            </CardContent>
+          </Card>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
       </div>
     </SearchableWrapper>
   );

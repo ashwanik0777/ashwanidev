@@ -3,7 +3,7 @@ import {
   fetchAnnouncementsSnapshot,
 } from "../services/announcementsService";
 
-const ANNOUNCEMENTS_CACHE_KEY = "gbu_announcements_api_cache_v2";
+const ANNOUNCEMENTS_CACHE_KEY = "gbu_announcements_api_cache_v1";
 const ANNOUNCEMENTS_REFRESH_MIN_INTERVAL_MS = 5000;
 
 const toSafeAnnouncements = (value) => {
@@ -24,84 +24,70 @@ const toSafeAnnouncements = (value) => {
 
 const readFromCache = () => {
   if (typeof window === "undefined") {
-    return {};
+    return { ...EMPTY_ANNOUNCEMENTS };
   }
 
   try {
     const raw = window.localStorage.getItem(ANNOUNCEMENTS_CACHE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    const result = {};
-    for (const key of Object.keys(parsed)) {
-      result[key] = toSafeAnnouncements(parsed[key]);
-    }
-    return result;
+    if (!raw) return { ...EMPTY_ANNOUNCEMENTS };
+    return toSafeAnnouncements(JSON.parse(raw));
   } catch {
-    return {};
+    return { ...EMPTY_ANNOUNCEMENTS };
   }
 };
 
-const saveToCache = (payloadMap) => {
+const saveToCache = (payload) => {
   if (typeof window === "undefined") return;
+
   try {
-    window.localStorage.setItem(ANNOUNCEMENTS_CACHE_KEY, JSON.stringify(payloadMap));
+    const nextValue = JSON.stringify(payload);
+    const previousValue = window.localStorage.getItem(ANNOUNCEMENTS_CACHE_KEY);
+
+    // Avoid writing same payload repeatedly; this prevents storage-event ping-pong across tabs.
+    if (previousValue === nextValue) {
+      return;
+    }
+
+    window.localStorage.setItem(ANNOUNCEMENTS_CACHE_KEY, nextValue);
   } catch {
     // Ignore localStorage write issues and keep runtime data.
   }
 };
 
-let announcementsCacheMap = readFromCache();
-let announcementsRefreshPromises = {};
-let lastAnnouncementsRefreshAtMap = {};
+let announcementsCache = readFromCache();
+let announcementsRefreshPromise = null;
+let lastAnnouncementsRefreshAt = 0;
 
-export const getSchoolAnnouncements = (schoolCode) => {
-  const key = schoolCode || "GLOBAL";
-  const data = announcementsCacheMap[key] || { ...EMPTY_ANNOUNCEMENTS };
-
-  if (schoolCode) {
-    // Exclude 'college' level items from school pages
-    return {
-      ...data,
-      notices: data.notices.filter(item => (item.level || "").toLowerCase() !== "college"),
-      news: data.news.filter(item => (item.level || "").toLowerCase() !== "college"),
-      events: data.events.filter(item => (item.level || "").toLowerCase() !== "college"),
-      newsletters: data.newsletters.filter(item => (item.level || "").toLowerCase() !== "college"),
-      mediaGallery: data.mediaGallery.filter(item => (item.level || "").toLowerCase() !== "college"),
-      eventGallery: data.eventGallery.filter(item => (item.level || "").toLowerCase() !== "college"),
-    };
-  }
-
-  return data;
-};
+export const getSchoolAnnouncements = () => announcementsCache;
 
 export const refreshSchoolAnnouncements = async (schoolCode) => {
-  const key = schoolCode || "GLOBAL";
   const now = Date.now();
 
-  if (announcementsRefreshPromises[key]) {
-    return announcementsRefreshPromises[key];
+  if (announcementsRefreshPromise) {
+    return announcementsRefreshPromise;
   }
 
-  if (now - (lastAnnouncementsRefreshAtMap[key] || 0) < ANNOUNCEMENTS_REFRESH_MIN_INTERVAL_MS) {
-    return announcementsCacheMap[key] || { ...EMPTY_ANNOUNCEMENTS };
+  if (now - lastAnnouncementsRefreshAt < ANNOUNCEMENTS_REFRESH_MIN_INTERVAL_MS) {
+    return announcementsCache;
   }
 
-  announcementsRefreshPromises[key] = fetchAnnouncementsSnapshot(schoolCode)
+  announcementsRefreshPromise = fetchAnnouncementsSnapshot(schoolCode)
     .then((latest) => {
-      announcementsCacheMap[key] = toSafeAnnouncements(latest);
-      saveToCache(announcementsCacheMap);
-      lastAnnouncementsRefreshAtMap[key] = Date.now();
-      return announcementsCacheMap[key];
+      announcementsCache = toSafeAnnouncements(latest);
+      saveToCache(announcementsCache);
+      lastAnnouncementsRefreshAt = Date.now();
+      return announcementsCache;
     })
     .finally(() => {
-      announcementsRefreshPromises[key] = null;
+      announcementsRefreshPromise = null;
     });
 
-  return announcementsRefreshPromises[key];
+  return announcementsRefreshPromise;
 };
 
 export const syncAnnouncementsFromCache = () => {
-  announcementsCacheMap = readFromCache();
+  announcementsCache = readFromCache();
+  return announcementsCache;
 };
 
 /**
@@ -111,5 +97,5 @@ export const syncAnnouncementsFromCache = () => {
  * throttle could serve a stale snapshot and the new item would look missing.
  */
 export const invalidateAnnouncementsCache = () => {
-  lastAnnouncementsRefreshAtMap = {};
+  lastAnnouncementsRefreshAt = 0;
 };

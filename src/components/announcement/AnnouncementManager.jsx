@@ -68,10 +68,6 @@ const formatCell = (item, key) => {
 
 /** Arrays arrive from the API but the textarea inputs work in plain text. */
 const toFormValue = (field, value) => {
-  if (field.type === "image-list") {
-    const list = Array.isArray(value) ? value : (typeof value === "string" && value ? value.split(/[\n,]+/).map(s => s.trim()).filter(Boolean) : []);
-    return list.length ? list : [""];
-  }
   if (field.type === "textarea" && Array.isArray(value)) return value.join("\n");
   if (field.key === "tags" && Array.isArray(value)) return value.join(", ");
   if (field.type === "date") return String(value || "").slice(0, 10);
@@ -99,9 +95,6 @@ const AnnouncementManager = ({
   const [editor, setEditor] = useState(null); // { id, form } — null when closed
   const [deletingId, setDeletingId] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
-
   const notify = useCallback(
     (text, isError = false) => {
       setError(isError ? text : "");
@@ -115,19 +108,7 @@ const AnnouncementManager = ({
     try {
       // An admin viewing one school sees only that school's items; the
       // university-wide tab passes no code and sees everything.
-      let data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
-      
-      // Filter logic: `events` shows ALL events (past and upcoming), `gallery` shows past events
-      if (kind === "events" || kind === "gallery") {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        data = data.filter((item) => {
-          const eventDate = new Date(item.endsAt || item.startsAt || item.date);
-          const isPast = eventDate < today;
-          return kind === "gallery" ? isPast : true;
-        });
-      }
-
+      const data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
       setItems(data);
       setError("");
     } catch (err) {
@@ -153,17 +134,6 @@ const AnnouncementManager = ({
     );
   }, [items, search]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search]);
-
-  const paginatedItems = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    return visibleItems.slice(start, start + itemsPerPage);
-  }, [visibleItems, currentPage]);
-
-  const totalPages = Math.max(1, Math.ceil(visibleItems.length / itemsPerPage));
-
   const openCreate = () => {
     // Managing a specific school defaults to that school's own pages; the
     // university-wide tab defaults to college level.
@@ -174,7 +144,7 @@ const AnnouncementManager = ({
   const openEdit = (item) => {
     const form = { level: item.level || LEVELS.SCHOOL };
     for (const field of fields) form[field.key] = toFormValue(field, item[field.key]);
-    setEditor({ id: item.id, form, originalItem: item });
+    setEditor({ id: item.id, form });
   };
 
   const setField = (key, value) => {
@@ -195,7 +165,7 @@ const AnnouncementManager = ({
 
     setSaving(true);
     try {
-      const payload = { ...(editor.originalItem || {}), ...editor.form };
+      const payload = { ...editor.form };
       // A school account is always pinned to its own school server-side, but
       // send it so an admin can file an item on a school's behalf.
       if (schoolCode) payload.schoolCode = schoolCode;
@@ -257,15 +227,13 @@ const AnnouncementManager = ({
           >
             <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} /> Refresh
           </button>
-          {kind !== "gallery" && (
-            <button
-              type="button"
-              onClick={openCreate}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
-            >
-              <Plus className="h-4 w-4" /> Add New
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={openCreate}
+            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+          >
+            <Plus className="h-3.5 w-3.5" /> Add New
+          </button>
         </div>
       </div>
 
@@ -284,20 +252,18 @@ const AnnouncementManager = ({
 
       <div className="overflow-x-auto rounded-xl border border-slate-200">
         <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-          <thead className="bg-slate-100/60 text-left text-xs font-semibold uppercase tracking-wider text-slate-600">
+          <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
             <tr>
               {columns.map((column) => (
-                <th key={column.key} className="px-4 py-3 border-b border-slate-200">
-                  {column.label}
-                </th>
+                <th key={column.key} className="px-4 py-3">{column.label}</th>
               ))}
-              {kind === "notices" && <th className="px-4 py-3 border-b border-slate-200">Level</th>}
-              {kind === "notices" && <th className="px-4 py-3 border-b border-slate-200">Status</th>}
-              {isAdmin && kind !== "newsletters" && <th className="px-4 py-3 border-b border-slate-200">School</th>}
-              <th className="px-4 py-3 border-b border-slate-200 text-right">Actions</th>
+              <th className="px-4 py-3">Level</th>
+              <th className="px-4 py-3">Status</th>
+              {isAdmin && <th className="px-4 py-3">School</th>}
+              <th className="px-4 py-3 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-slate-100 text-slate-700">
             {loading ? (
               <tr>
                 <td colSpan={columns.length + 4} className="px-4 py-8 text-center text-slate-500">
@@ -311,7 +277,7 @@ const AnnouncementManager = ({
                 </td>
               </tr>
             ) : (
-              paginatedItems.map((item) => (
+              visibleItems.map((item) => (
                 <tr key={item.id} className="transition-colors hover:bg-slate-50/80">
                   {columns.map((column, index) => (
                     <td key={column.key} className="max-w-xs truncate px-4 py-3">
@@ -322,17 +288,13 @@ const AnnouncementManager = ({
                       )}
                     </td>
                   ))}
-                  {kind === "notices" && (
-                    <td className="px-4 py-3">
-                      <span className="rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold uppercase text-indigo-700">
-                        {item.level === LEVELS.COLLEGE ? "College" : "School"}
-                      </span>
-                    </td>
-                  )}
-                  {kind === "notices" && (
-                    <td className="px-4 py-3"><StatusBadge status={item.approvalStatus} /></td>
-                  )}
-                  {isAdmin && kind !== "newsletters" && (
+                  <td className="px-4 py-3">
+                    <span className="rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold uppercase text-indigo-700">
+                      {item.level === LEVELS.COLLEGE ? "College" : "School"}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3"><StatusBadge status={item.approvalStatus} /></td>
+                  {isAdmin && (
                     <td className="px-4 py-3 text-xs text-slate-600">{item.schoolCode || "GBU"}</td>
                   )}
                   <td className="px-4 py-3 text-right">
@@ -360,54 +322,6 @@ const AnnouncementManager = ({
             )}
           </tbody>
         </table>
-        
-        {/* Pagination UI */}
-        <div className="flex flex-col gap-3 border-t border-slate-200 bg-slate-50 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-            <div>
-              Total: <span className="font-semibold text-slate-900">{visibleItems.length}</span>
-            </div>
-            <div className="flex items-center gap-2 border-l border-slate-300 pl-4">
-              <label htmlFor="itemsPerPage" className="text-slate-600">Rows per page:</label>
-              <select
-                id="itemsPerPage"
-                value={itemsPerPage === Number.MAX_SAFE_INTEGER ? "all" : itemsPerPage}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setItemsPerPage(val === "all" ? Number.MAX_SAFE_INTEGER : Number(val));
-                  setCurrentPage(1);
-                }}
-                className="rounded border border-slate-300 bg-white px-2 py-1 text-sm text-slate-700 focus:border-slate-500 focus:outline-none"
-              >
-                <option value={20}>20</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-                <option value="all">All</option>
-              </select>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              disabled={loading || currentPage <= 1}
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              className="rounded-md border border-slate-300 bg-white px-2 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Previous
-            </button>
-            <span className="text-sm text-slate-700">
-              Page {currentPage} / {totalPages}
-            </span>
-            <button
-              type="button"
-              disabled={loading || currentPage >= totalPages}
-              onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-              className="rounded-md border border-slate-300 bg-white px-2 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Next
-            </button>
-          </div>
-        </div>
       </div>
 
       {editor && (
@@ -435,23 +349,21 @@ const AnnouncementManager = ({
             </div>
 
             <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-              {kind !== "newsletters" && (
-                <label className="block">
-                  <span className="mb-1 block text-sm font-medium text-slate-700">
-                    {LEVEL_FIELD.label} <span className="text-rose-600">*</span>
-                  </span>
-                  <select
-                    className={inputClass}
-                    value={editor.form.level}
-                    onChange={(event) => setField("level", event.target.value)}
-                  >
-                    {LEVEL_FIELD.options.map((option) => (
-                      <option key={option.value} value={option.value}>{option.label}</option>
-                    ))}
-                  </select>
-                  <span className="mt-1 block text-xs text-slate-500">{LEVEL_FIELD.help}</span>
-                </label>
-              )}
+              <label className="block">
+                <span className="mb-1 block text-sm font-medium text-slate-700">
+                  {LEVEL_FIELD.label} <span className="text-rose-600">*</span>
+                </span>
+                <select
+                  className={inputClass}
+                  value={editor.form.level}
+                  onChange={(event) => setField("level", event.target.value)}
+                >
+                  {LEVEL_FIELD.options.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+                <span className="mt-1 block text-xs text-slate-500">{LEVEL_FIELD.help}</span>
+              </label>
 
               {willNeedApproval && (
                 <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
@@ -467,87 +379,14 @@ const AnnouncementManager = ({
                 </div>
               )}
 
-              {fields.map((field) => {
-                if (field.hiddenWhenUpcoming && editor.form.status === "upcoming") {
-                  return null;
-                }
-                return (
+              {fields.map((field) => (
                 <label key={field.key} className="block">
                   <span className="mb-1 block text-sm font-medium text-slate-700">
                     {field.label}
                     {field.required && <span className="text-rose-600"> *</span>}
                   </span>
 
-                  {field.type === "image-list" ? (
-                    <div className="space-y-2">
-                      {(editor.form[field.key] || [""]).map((url, i, arr) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <span className="text-xs font-semibold text-slate-500 w-16 shrink-0">Image {i + 1}</span>
-                          <input
-                            className={inputClass}
-                            type="text"
-                            value={url}
-                            placeholder="https://..."
-                            onChange={(e) => {
-                              const newArr = [...arr];
-                              newArr[i] = e.target.value;
-                              setField(field.key, newArr);
-                            }}
-                          />
-                          {arr.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const newArr = arr.filter((_, idx) => idx !== i);
-                                setField(field.key, newArr);
-                                if (field.key === "images") {
-                                  if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
-                                  if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
-                                }
-                              }}
-                              className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          )}
-                        </div>
-                      ))}
-                      {(editor.form[field.key] || [""]).length < 6 && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setField(field.key, [...(editor.form[field.key] || [""]), ""]);
-                          }}
-                          className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 mt-1"
-                        >
-                          <Plus className="w-3.5 h-3.5" /> Add another image
-                        </button>
-                      )}
-                    </div>
-                  ) : field.type === "cover-selector" ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
-                      {(() => {
-                        const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
-                        if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
-                        return images.map((url, i) => (
-                          <label key={i} className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer ${editor.form[field.key] === url || (!editor.form[field.key] && i === 0) ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
-                            <input
-                              type="radio"
-                              name={field.key}
-                              value={url}
-                              checked={editor.form[field.key] === url || (!editor.form[field.key] && i === 0)}
-                              onChange={(e) => setField(field.key, e.target.value)}
-                              className="hidden"
-                            />
-                            <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
-                              {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                            </div>
-                            <span className="text-xs font-medium text-slate-700 truncate">Image {editor.form.images.indexOf(url) + 1}</span>
-                          </label>
-                        ));
-                      })()}
-                    </div>
-                  ) : field.type === "textarea" ? (
+                  {field.type === "textarea" ? (
                     <textarea
                       className={`${inputClass} min-h-[90px]`}
                       value={editor.form[field.key] ?? ""}
@@ -590,8 +429,7 @@ const AnnouncementManager = ({
                     />
                   )}
                 </label>
-                );
-              })}
+              ))}
             </div>
 
             <div className="mt-4 flex gap-2 border-t border-slate-100 pt-4">

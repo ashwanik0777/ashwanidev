@@ -31,7 +31,23 @@ export const departmentLayoutData = {
     ],
     contact: { name: "Dr. Manish T. Meshram", designation: "Coordinator", email: "manish.meshram@gbu.ac.in", phone: "0120-234-9905" },
   },
-  aboutProps: null,
+  aboutProps: {
+    heading: "About the Department",
+    subheading: "Comprehensive training in Buddhist canonical languages and literary heritage.",
+    stats: [
+      { icon: Users, numberText: "50+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "8+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "30+", title: "Research Papers", subtitle: "Published" },
+      { icon: Globe, numberText: "8+", title: "Countries", subtitle: "Represented" },
+    ],
+    highlights: [
+      { title: "Classical Language Training", description: "Structured Pali & Sanskrit courses from beginner to advanced levels.", dotColor: "#F59E0B" },
+      { title: "Textual Scholarship", description: "Critical analysis, philology, paleography, and epigraphy methods.", dotColor: "#EF4444" },
+      { title: "Digital Humanities", description: "Computational linguistics and manuscript digitization tools.", dotColor: "#8B5CF6" },
+    ],
+    vision: "To preserve the linguistic heritage of Buddhism and produce scholars for primary text engagement.",
+    missionPoints: ["Rigorous training in Pali & Sanskrit", "Critical textual scholarship", "Digital tools for language learning", "International collaboration", "Academic career preparation"],
+  },
   programsData: [
     {
         id: "ba-hons-buddhist-studies",
@@ -48,15 +64,15 @@ export const departmentLayoutData = {
             "Indian Epistemology",
             "Vipassana Meditation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1wtsMv7tatznFLunXAuQdJKyEjhZ9c2db/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
+                url: "https://drive.google.com/file/d/1wtsMv7tatznFLunXAuQdJKyEjhZ9c2db/preview"
             },
             {
                 session: "Syllabus (NEP)",
-                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
+                url: "https://drive.google.com/file/d/10hJbJbvhaD7ef85JVUCPiDC68K0uVCpN/preview"
             }
         ]
     },
@@ -75,11 +91,11 @@ export const departmentLayoutData = {
             "Abhidhamma Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1C4EzZRWUUReIVE_oilpSOzYa-k9Ivu_c/preview",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview"
+                url: "https://drive.google.com/file/d/1C4EzZRWUUReIVE_oilpSOzYa-k9Ivu_c/preview"
             }
         ]
     },
@@ -98,11 +114,11 @@ export const departmentLayoutData = {
             "Comparative Buddhist Philosophy",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1CmhEorxdRTCuOvvBnRSJySflcHtxjXMs/preview",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
+                url: "https://drive.google.com/file/d/1CmhEorxdRTCuOvvBnRSJySflcHtxjXMs/preview"
             }
         ]
     },
@@ -121,11 +137,11 @@ export const departmentLayoutData = {
             "Seminars & Peer Reviews",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1DRnRPE7VdSp5tHaBymZtQdP_no8ra2DJ/preview",
         syllabus: [
             {
                 session: "Course Work & Syllabus",
-                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
+                url: "https://drive.google.com/file/d/1DRnRPE7VdSp5tHaBymZtQdP_no8ra2DJ/preview"
             }
         ]
     },
@@ -144,11 +160,11 @@ export const departmentLayoutData = {
             "Textual Analysis",
             "Certificate / PG Diploma"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabusUrl: "https://drive.google.com/file/d/159H3x3f43v8D2HTsMr2KyFQw7hqh1M_v/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
+                url: "https://drive.google.com/file/d/159H3x3f43v8D2HTsMr2KyFQw7hqh1M_v/preview"
             }
         ]
     },
@@ -167,11 +183,11 @@ export const departmentLayoutData = {
             "Tour Guiding & Management",
             "Field Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1GEmb-ktIV_taPiJQMtwULYrjOj_aDV52/preview",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
+                url: "https://drive.google.com/file/d/1GEmb-ktIV_taPiJQMtwULYrjOj_aDV52/preview"
             }
         ]
     },
@@ -190,11 +206,11 @@ export const departmentLayoutData = {
             "Socially Engaged Buddhism",
             "Mindfulness Practice"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview",
+        syllabusUrl: "https://drive.google.com/file/d/16_-GF1VVj_nDF-4_8NEgJCW8Qhmeg4-u/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview"
+                url: "https://drive.google.com/file/d/16_-GF1VVj_nDF-4_8NEgJCW8Qhmeg4-u/preview"
             }
         ]
     }
@@ -210,7 +226,19 @@ export const departmentLayoutData = {
     { icon: GraduationCap, custom: "PhD", numberText: "90%", subtitle: "PhD Faculty", bg: "bg-amber-50", color: "text-amber-600" },
     { icon: GraduationCap, custom: "Exp", numberText: "10+", subtitle: "Avg Experience", bg: "bg-red-50", color: "text-red-600" },
   ]},
-  researchStats: null,
-  topAchievers: null,
-  achievements: null,
+  researchStats: [
+    { numberText: "15+", subtitle: "Research Projects" },
+    { numberText: "₹50L+", subtitle: "Research Funding" },
+    { numberText: "60+", subtitle: "Publications" },
+    { numberText: "5+", subtitle: "Text Translations" },
+  ],
+  topAchievers: [
+    { name: "Bhikkhu Dhammajoti", year: "M.A. 2023", achievement: "Published Pali translation, Ph.D. at University of Delhi", image: "https://images.unsplash.com/photo-1644904105846-095e45fca990?w=600&auto=format&fit=crop", skills: ["Pali", "Canonical Studies", "Translation"] },
+  ],
+  achievements: [
+    { title: "Language Preservation", description: "Active Pali & Sanskrit programs", icon: BookOpen, color: "text-orange-600" },
+    { title: "Text Translations", description: "5+ Buddhist texts published", icon: Award, color: "text-yellow-600" },
+    { title: "International Students", description: "Students from 8+ countries", icon: Globe, color: "text-red-600" },
+    { title: "Digital Archive", description: "Digital manuscript repository contributions", icon: GraduationCap, color: "text-amber-600" },
+  ],
 };

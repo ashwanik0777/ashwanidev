@@ -1,56 +1,469 @@
-import React from 'react';
-import NssNccNoticeBoard from '../campusLife/NssNccNoticeBoard';
-import SearchableWrapper from '../Searchbar/SearchableWrapper';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  MapPin,
+  ChevronDown,
+} from "lucide-react";
+import SearchableWrapper from "../Searchbar/SearchableWrapper";
+
+// Reusable UI components
+const Card = ({ children, className = "", ...props }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    className={`bg-white rounded-lg shadow  ${className}`}
+    {...props}
+  >
+    {children}
+  </motion.div>
+);
+
+const CardHeader = ({ children, className = "", ...props }) => (
+  <div className={`px-6 py-4 border border-gray-300 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+const CardTitle = ({ children, className = "", ...props }) => (
+  <h3 className={`font-bold text-lg ${className}`} {...props}>
+    {children}
+  </h3>
+);
+
+const CardContent = ({ children, className = "", ...props }) => (
+  <div className={`px-6 py-4 ${className}`} {...props}>
+    {children}
+  </div>
+);
+
+const Button = ({
+  children,
+  className = "",
+  variant = "default",
+  size = "md",
+  ...props
+}) => {
+  const base =
+    "inline-flex items-center justify-center rounded font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500";
+  const variants = {
+    default: "bg-blue-600 text-white hover:bg-blue-700",
+    outline: "bg-white text-blue-700 border border-blue-600 hover:bg-blue-50",
+  };
+  const sizes = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
+  };
+  return (
+    <motion.button
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      type="button"
+      className={`${base} ${variants[variant] || variants.default} ${
+        sizes[size] || sizes.md
+      } ${className}`}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+};
+
+const Badge = ({ children, className = "", ...props }) => (
+  <span
+    className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${className}`}
+    {...props}
+  >
+    {children}
+  </span>
+);
+
+
 
 const NCCEvents = ({ nccData }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [filterCategory, setFilterCategory] = useState("all");
+
   const defaultEvents = [
     {
       id: 1,
       title: "Inauguration Ceremony - NCC Senior Wing (Boys & Girls)",
-      date: "15 Oct 2025",
-      type: "Celebration",
+      date: new Date(2025, 9, 15),
+      time: "10:00 - 13:00",
       venue: "Auditorium-5, Gautam Buddha University",
+      category: "Celebration",
       description: "Official inauguration of NCC Senior Wing (Boys & Girls) under 37 UP Battalion NCC (Ghaziabad) & 31 UP Girls Battalion.",
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
-      links: ["https://photos.app.goo.gl/sampleNCC"]
     },
     {
       id: 2,
       title: "Combined Annual Training Camp (CATC)",
-      date: "10 Nov 2025",
-      type: "Camp",
+      date: new Date(2025, 10, 10),
+      time: "06:00 - 18:00",
       venue: "Battalion Training Ground",
-      description: "10-day intensive training camp featuring weapon handling, obstacle training, map reading, and physical fitness.",
-      links: ["https://drive.google.com/drive/folders/sampleNCC"]
+      category: "Camp",
+      description: "10-day intensive training camp featuring weapon handling (.22 Rifle), obstacle training, map reading, and physical fitness.",
     },
     {
       id: 3,
       title: "Thal Sainik Competition (TSC) Selection & Drills",
-      date: "05 Dec 2025",
-      type: "Competition",
+      date: new Date(2025, 11, 5),
+      time: "07:00 - 12:00",
       venue: "GBU Sports Complex Ground",
-      description: "Cadet selections and firing practice for national level representation.",
-      links: ["https://gbu.ac.in/ncc-rules.pdf"]
+      category: "Competition",
+      description: "Cadet selections and firing practice for national level Thal Sainik Competition representation.",
     },
     {
       id: 4,
       title: "Swachh Bharat & Tree Plantation Drive",
-      date: "18 Jan 2026",
-      type: "Training",
+      date: new Date(2026, 0, 18),
+      time: "08:00 - 12:00",
       venue: "GBU Campus Premises",
-      description: "Environmental awareness and clean campus campaign by cadets.",
-      links: ["https://youtu.be/sample"]
+      category: "Training",
+      description: "Environmental awareness, tree plantation, and clean campus campaign by 31 UP Girls Bn and 37 UP Bn cadets.",
+    },
+    {
+      id: 5,
+      title: "Republic Day Ceremonial Parade",
+      date: new Date(2026, 0, 26),
+      time: "08:30 - 11:30",
+      venue: "Main Administrative Block Grounds",
+      category: "Celebration",
+      description: "Annual Republic Day flag hoisting, guard of honour, and drill display by GBU NCC Cadets.",
     },
   ];
 
-  const finalEvents = nccData?.events || defaultEvents;
+  const dbEvents = nccData?.content?.events || [];
+  const events = dbEvents.length > 0
+    ? dbEvents.map((e, idx) => ({
+        id: idx + 1,
+        title: e.title,
+        date: e.date ? new Date(e.date) : new Date(),
+        time: e.startsAt || e.time || "06:00",
+        venue: e.venue || "Campus",
+        category: e.organizer || "NCC Wing",
+        description: e.description || ""
+      }))
+    : defaultEvents;
+
+  const upcomingDeadlines = [
+    {
+      title: "CATC Application",
+      date: "15 Feb 2024",
+      days: 5,
+      priority: "high",
+    },
+    {
+      title: "Medical Fitness Certificate",
+      date: "20 Feb 2024",
+      days: 10,
+      priority: "medium",
+    },
+    {
+      title: "Annual Training Camp Fee",
+      date: "28 Feb 2024",
+      days: 18,
+      priority: "medium",
+    },
+  ];
+
+  const getPriorityColor = (priority) => {
+    switch (priority) {
+      case "high":
+        return "bg-red-100 text-red-800 border-red-200";
+      case "medium":
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "low":
+        return "bg-green-100 text-green-800 border-green-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
+
+  const navigateMonth = (direction) => {
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setMonth(prev.getMonth() + direction);
+      return newDate;
+    });
+  };
+
+  const getDaysInMonth = (date) =>
+    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  const getFirstDayOfMonth = (date) =>
+    new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  const getEventsForDate = (day) =>
+    events.filter(
+      (e) =>
+        e.date.getDate() === day &&
+        e.date.getMonth() === currentDate.getMonth() &&
+        e.date.getFullYear() === currentDate.getFullYear()
+    );
+
+  const renderCalendar = () => {
+    const daysInMonth = getDaysInMonth(currentDate);
+    const firstDay = getFirstDayOfMonth(currentDate);
+    const days = [];
+
+    for (let i = 0; i < firstDay; i++) {
+      days.push(
+        <div key={`empty-${i}`} className="h-24 border border-gray-200"></div>
+      );
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayEvents = getEventsForDate(day);
+      const isToday =
+        new Date().getDate() === day &&
+        new Date().getMonth() === currentDate.getMonth() &&
+        new Date().getFullYear() === currentDate.getFullYear();
+      days.push(
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          key={day}
+          className={`h-24 border border-gray-200 p-1 overflow-hidden ${
+            isToday ? "bg-blue-50 border-blue-300" : "hover:bg-gray-50"
+          }`}
+        >
+          <div
+            className={`font-semibold text-sm ${
+              isToday ? "text-blue-600" : "text-gray-900"
+            }`}
+          >
+            {day}
+          </div>
+          <div className="space-y-1 mt-1">
+            {dayEvents.slice(0, 2).map((event) => (
+              <div
+                key={event.id}
+                className={`text-xs px-1 py-0.5 rounded text-center truncate ${
+                  event.category === "Training"
+                    ? "bg-blue-500 text-white"
+                    : event.category === "Camp"
+                    ? "bg-green-500 text-white"
+                    : event.category === "Competition"
+                    ? "bg-orange-500 text-white"
+                    : event.category === "Deadline"
+                    ? "bg-red-500 text-white"
+                    : "bg-purple-500 text-white"
+                }`}
+                title={event.title}
+              >
+                {event.title}
+              </div>
+            ))}
+            {dayEvents.length > 2 && (
+              <div className="text-xs text-gray-500 text-center">
+                +{dayEvents.length - 2} more
+              </div>
+            )}
+          </div>
+        </motion.div>
+      );
+    }
+
+    return days;
+  };
 
   return (
     <SearchableWrapper>
-      <NssNccNoticeBoard 
-        title="NCC Training & Events"
-        events={finalEvents}
-      />
+      <div className="space-y-8 px-4 sm:px-6 lg:px-20 mx-auto max-w-7xl">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Events & Schedule
+          </h2>
+          <p className="text-lg text-gray-600">
+            Stay updated with NCC training schedules, camps, and important
+            deadlines
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3">
+            <Card>
+              <CardHeader>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <CardTitle className="text-2xl">
+                    {currentDate.toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </CardTitle>
+                  <div className="flex space-x-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => navigateMonth(-1)}
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCurrentDate(new Date())}
+                    >
+                      Today
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => navigateMonth(1)}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-7 gap-0 mb-4 text-[10px] sm:text-xs">
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+                    (day) => (
+                      <div
+                        key={day}
+                        className="h-8 flex items-center justify-center font-semibold text-gray-700 bg-gray-100"
+                      >
+                        {day}
+                      </div>
+                    )
+                  )}
+                </div>
+                <div className="grid grid-cols-7 gap-0 border border-gray-200">
+                  {renderCalendar()}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl text-red-600">
+                  Upcoming Deadlines
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {upcomingDeadlines.map((deadline, index) => (
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    key={index}
+                    className={`border rounded-lg p-3 ${getPriorityColor(
+                      deadline.priority
+                    )}`}
+                  >
+                    <h4 className="font-semibold mb-1">{deadline.title}</h4>
+                    <div className="flex items-center space-x-2 text-sm">
+                      <Calendar className="h-3 w-3" />
+                      <span>{deadline.date}</span>
+                    </div>
+                    <div className="text-sm font-medium mt-1">
+                      {deadline.days} days remaining
+                    </div>
+                  </motion.div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <button className="w-full h-10 bg-blue-800 text-white rounded-md font-semibold">
+                  Apply for Camp
+                </button>
+                <button className="w-full h-10 border border-blue-600 text-blue-600 rounded-md font-semibold">
+                  View Training Schedule
+                </button>
+                <button className="w-full h-10 border border-blue-600 text-blue-600 rounded-md font-semibold">
+                  Download Calendar
+                </button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <div className="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
+              <CardTitle>Upcoming Events</CardTitle>
+              <select
+                value={filterCategory}
+                onChange={(e) => setFilterCategory(e.target.value)}
+                className="border border-gray-300 rounded px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm font-medium"
+              >
+                <option value="all">All Categories</option>
+                <option value="Training">Training</option>
+                <option value="Camp">Camps</option>
+                <option value="Competition">Competitions</option>
+                <option value="Deadline">Deadlines</option>
+                <option value="Celebration">Celebrations</option>
+              </select>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {events
+              .filter(
+                (event) =>
+                  filterCategory === "all" || event.category === filterCategory
+              )
+              .sort((a, b) => a.date.getTime() - b.date.getTime())
+              .map((event) => (
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  key={event.id}
+                  className="border border-gray-300 rounded-lg p-4 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-semibold text-gray-900">
+                      {event.title}
+                    </h3>
+                    <Badge
+                      className={
+                        event.category === "Training"
+                          ? "bg-blue-100 text-blue-800"
+                          : event.category === "Camp"
+                          ? "bg-green-100 text-green-800"
+                          : event.category === "Competition"
+                          ? "bg-orange-100 text-orange-800"
+                          : event.category === "Deadline"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-purple-100 text-purple-800"
+                      }
+                    >
+                      {event.category}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {event.description}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex flex-wrap gap-2 items-center">
+                      <div className="flex items-center space-x-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{event.date.toLocaleDateString("en-IN")}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Clock className="h-4 w-4" />
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <MapPin className="h-4 w-4" />
+                        <span>{event.venue}</span>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      View Details
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+          </CardContent>
+        </Card>
+      </div>
     </SearchableWrapper>
   );
 };

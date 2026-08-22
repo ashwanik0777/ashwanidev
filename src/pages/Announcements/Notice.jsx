@@ -338,7 +338,7 @@ const Notice = ({ schoolCode }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const [viewMode, setViewMode] = useState("grid");
-  const [mockNotices, setMockNotices] = useState(() => getSchoolAnnouncements(schoolCode).notices);
+  const [mockNotices, setMockNotices] = useState(() => getSchoolAnnouncements().notices);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -353,7 +353,7 @@ const Notice = ({ schoolCode }) => {
       }
 
       if (!isMounted) return;
-      setMockNotices(getSchoolAnnouncements(schoolCode).notices);
+      setMockNotices(getSchoolAnnouncements().notices);
       setIsLoading(false);
     };
 
@@ -368,7 +368,7 @@ const Notice = ({ schoolCode }) => {
       window.removeEventListener("focus", loadNotices);
       window.removeEventListener("announcements-data-updated", loadNotices);
     };
-  }, [schoolCode]);
+  }, []);
 
 // Type aur Year nikalne ka logic ab state set hone ke baad map hoga
 const allTypes = Array.from(
@@ -457,98 +457,97 @@ const allYears = collectYears(mockNotices);
     visible: { opacity: 1, y: 0 },
   };
 
-  const NoticeCard = ({ notice, index }) => {
-    const handleShare = async (e) => {
-      e.preventDefault();
-      const shareData = {
-        title: notice.title,
-        text: notice.content ? notice.content.substring(0, 100) + '...' : '',
-        url: notice.pdfUrl || window.location.href,
-      };
-      try {
-        if (navigator.share) {
-          await navigator.share(shareData);
-        } else {
-          await navigator.clipboard.writeText(`${shareData.title}\n${shareData.url}`);
-          alert("Notice details copied to clipboard!");
-        }
-      } catch (err) {
-        console.error("Error sharing:", err);
-      }
-    };
-
-    return (
-      <motion.div
-        key={`notice-${notice.id}`}
-        variants={item}
-        custom={index}
-        layout
-        className={viewMode === "list" ? "w-full" : ""}
-      >
-        <Card className="h-full group overflow-hidden relative flex flex-col">
-          <CardHeader
-            className={viewMode === "list" ? "flex flex-row items-center gap-6 h-full" : "flex flex-col h-full"}
-          >
-            <div className={viewMode === "list" ? "flex-1" : "flex-grow flex flex-col"}>
-              <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Badge variant={getTypeColor(notice.type)}>{notice.type}</Badge>
-                  <div className="flex items-center text-sm text-gray-500 gap-2">
-                    <Calendar size={14} />
-                    {format(new Date(notice.date), "MMMM dd, yyyy")}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500 gap-2">
-                    <Eye size={14} />
-                    {notice.views}
-                  </div>
+  const NoticeCard = ({ notice, index }) => (
+    <motion.div
+      key={`notice-${notice.id}`}
+      variants={item}
+      custom={index}
+      layout
+      className={viewMode === "list" ? "w-full" : ""}
+    >
+      <Card className="h-full group overflow-hidden relative flex flex-col">
+        <CardHeader
+          className={viewMode === "list" ? "flex flex-row items-center gap-6 h-full" : "flex flex-col h-full"}
+        >
+          <div className={viewMode === "list" ? "flex-1" : "flex-grow flex flex-col"}>
+            <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge variant={getTypeColor(notice.type)}>{notice.type}</Badge>
+                <div className="flex items-center text-sm text-gray-500 gap-2">
+                  <Calendar size={14} />
+                  {format(new Date(notice.date), "MMMM dd, yyyy")}
+                </div>
+                <div className="flex items-center text-sm text-gray-500 gap-2">
+                  <Eye size={14} />
+                  {notice.views}
                 </div>
               </div>
 
-              <CardTitle className="text-lg font-bold mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                {notice.title}
-              </CardTitle>
-
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600">
-                {notice.schoolName}
-              </p>
-
-              <CardDescription className="text-gray-600 leading-relaxed mb-4">
-                {viewMode === "list"
-                  ? notice.content.substring(0, 200) + "..."
-                  : notice.content.substring(0, 120) + "..."}
-              </CardDescription>
+              {/* <div className="flex flex-wrap items-center gap-2">
+                {notice.isNew && (
+                  <Badge variant="event" className="animate-pulse">
+                    <Star size={10} className="mr-1" />
+                    NEW
+                  </Badge>
+                )}
+                {notice.priority === "high" && (
+                  <Badge variant="exam">
+                    <AlertCircle size={10} className="mr-1" />
+                    HIGH
+                  </Badge>
+                )}
+              </div> */}
             </div>
 
-            <div
-              className={viewMode === "list" ? "flex flex-col shrink-0 gap-3" : "flex flex-row gap-2 mt-auto pt-4 border-t border-gray-100 justify-between items-center overflow-hidden"}
-            >
-              {notice.pdfUrl && (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  icon={<Download size={14} />}
-                  onClick={() => window.open(notice.pdfUrl, "_blank")}
-                  className="whitespace-nowrap px-2 sm:px-3"
-                >
-                  Download
-                </Button>
-              )}
+            <CardTitle className="text-lg font-bold mb-3 group-hover:text-blue-600 transition-colors duration-300">
+              {notice.title}
+            </CardTitle>
 
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-indigo-600">
+              {notice.schoolName}
+            </p>
+
+            <CardDescription className="text-gray-600 leading-relaxed mb-4">
+              {viewMode === "list"
+                ? notice.content.substring(0, 200) + "..."
+                : notice.content.substring(0, 120) + "..."}
+            </CardDescription>
+          </div>
+
+          <div
+            className={viewMode === "list" ? "flex flex-col shrink-0 gap-3" : "flex flex-row gap-2 mt-auto pt-4 border-t border-gray-100 justify-between items-center overflow-hidden"}
+          >
+            {notice.pdfUrl && (
               <Button
                 size="sm"
-                variant="ghost"
-                icon={<Share2 size={14} />}
-                onClick={handleShare}
-                className="hover:bg-blue-50 hover:text-blue-600 whitespace-nowrap px-2 sm:px-3"
+                variant="outline"
+                icon={<Download size={14} />}
+                onClick={() => window.open(notice.pdfUrl, "_blank")}
+                className="whitespace-nowrap px-2 sm:px-3"
               >
-                Share
+                Download
               </Button>
-            </div>
-          </CardHeader>
-        </Card>
-      </motion.div>
-    );
-  };
+            )}
+
+            <Link to={`/announcements/notices/${notice.id}`}>
+              <Button size="sm" icon={<FileText size={14} />} className="whitespace-nowrap px-2 sm:px-3">
+                Read More
+              </Button>
+            </Link>
+
+            <Button
+              size="sm"
+              variant="ghost"
+              icon={<Share2 size={14} />}
+              className="hover:bg-blue-50 hover:text-blue-600 whitespace-nowrap px-2 sm:px-3"
+            >
+              Share
+            </Button>
+          </div>
+        </CardHeader>
+      </Card>
+    </motion.div>
+  );
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">

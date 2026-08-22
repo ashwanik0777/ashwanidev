@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Thermodynamics & Kinetics",
             "Spectroscopic Characterization"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1Js7W70i9eiMV_i2-dthWDMUSEpQEQPKo/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+                url: "https://drive.google.com/file/d/1Js7W70i9eiMV_i2-dthWDMUSEpQEQPKo/preview"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Organometallic Catalysis",
             "Master Research Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1scrlREqLcSjltwS1MmyOoahDaDx-nQEK/preview",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview"
+                url: "https://drive.google.com/file/d/1scrlREqLcSjltwS1MmyOoahDaDx-nQEK/preview"
             }
         ]
     },
@@ -153,11 +153,11 @@ export const departmentLayoutData = {
             "Coatings & Sealants",
             "Industrial Quality Testing"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1ceYsMuJGIcaMY0sd2kNrafSCnGmJn5x2/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+                url: "https://drive.google.com/file/d/1ceYsMuJGIcaMY0sd2kNrafSCnGmJn5x2/preview"
             }
         ]
     },

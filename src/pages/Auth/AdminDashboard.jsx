@@ -37,7 +37,6 @@ import {
   ArrowUp,
   ArrowDown,
   ClipboardList,
-  Zap,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -139,12 +138,6 @@ const parseDriveLink = (url) => parseImageUrl(url);
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
 import ApprovalQueue from "../../components/announcement/ApprovalQueue";
 import { listPendingAnnouncements } from "../../services/announcementsAdminService";
-import {
-  fetchAllTickerNotices,
-  createTickerNotice,
-  updateTickerNotice,
-  deleteTickerNotice,
-} from "../../services/tickerNoticesService";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -426,7 +419,6 @@ const tabs = [
   { id: "recruitment", label: "Recruitment Management", icon: BriefcaseBusiness },
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
-  { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -587,13 +579,7 @@ const generateStrongPassword = () => {
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(() => {
-    return localStorage.getItem("adminActiveTab") || "overview";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("adminActiveTab", activeTab);
-  }, [activeTab]);
+  const [activeTab, setActiveTab] = useState("overview");
   const [message, setMessage] = useState("");
   const [activeSchoolSubTab, setActiveSchoolSubTab] = useState("basic");
 
@@ -615,12 +601,6 @@ const AdminDashboard = () => {
   const [tenders, setTenders] = useState(getInitialTenders);
   const [recruitmentData, setRecruitmentData] = useState(getInitialRecruitmentData);
   const [facultyProfiles, setFacultyProfiles] = useState(getFacultyProfiles);
-
-  // Ticker Notices state
-  const [tickerNotices, setTickerNotices] = useState([]);
-  const [isTickerLoading, setIsTickerLoading] = useState(false);
-  const [isTickerSaving, setIsTickerSaving] = useState(false);
-  const [tickerEditor, setTickerEditor] = useState({ isAdding: false, editingId: null, text: "", link: "" });
   
   const [uploadState, setUploadState] = useState({
     isUploading: false,
@@ -4656,9 +4636,9 @@ const AdminDashboard = () => {
       }
     };
 
-    const handleUpdateInCharge = async (facilityId, email, name, phone) => {
+    const handleUpdateInCharge = async (facilityId, email, name) => {
       try {
-        await updateFacilityInCharge(facilityId, { email, name, phone });
+        await updateFacilityInCharge(facilityId, { email, name });
         setMessage("In-charge updated successfully.");
         setBookingReloadToken((t) => t + 1);
       } catch (err) {
@@ -4752,11 +4732,12 @@ const AdminDashboard = () => {
                 <>
                   <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
                     <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                      <thead className="bg-slate-50 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                      <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
                         <tr>
-                          <th className="px-4 py-3">Token & Info</th>
-                          <th className="px-4 py-3">User Details</th>
-                          <th className="px-4 py-3">Dates & Time</th>
+                          <th className="px-4 py-3">Token</th>
+                          <th className="px-4 py-3">Applicant</th>
+                          <th className="px-4 py-3">Facility</th>
+                          <th className="px-4 py-3">Date</th>
                           <th className="px-4 py-3">Status</th>
                           <th className="px-4 py-3 text-right">Actions</th>
                         </tr>
@@ -4764,37 +4745,28 @@ const AdminDashboard = () => {
                       <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
                         {bookingRequests.map((req) => (
                           <tr key={req.id} className="hover:bg-slate-50/80 transition-colors">
+                            <td className="px-4 py-3 text-xs font-mono font-bold text-slate-900">{req.token_number || "—"}</td>
                             <td className="px-4 py-3">
-                              <div className="font-bold text-slate-900 font-mono text-xs mb-1">{req.token}</div>
-                              <div className="text-[11px] text-slate-500 max-w-[150px] truncate" title={req.facility_name}>{req.facility_name}</div>
+                              <p className="font-bold text-slate-900 text-xs">{req.applicant_name}</p>
+                              <p className="text-[11px] text-slate-400">{req.applicant_email}</p>
                             </td>
-                            <td className="px-4 py-3">
-                              <div className="font-bold text-slate-900 text-xs">{req.user_name}</div>
-                              <div className="text-[11px] text-slate-500">{req.user_email}</div>
-                              <div className="text-[11px] text-slate-500">{req.user_phone_primary}</div>
-                            </td>
-                            <td className="px-4 py-3">
-                              <div className="text-xs">{new Date(req.start_time).toLocaleDateString()}</div>
-                              <div className="text-[10px] text-slate-500">
-                                {new Date(req.start_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} -
-                                {new Date(req.end_time).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                              </div>
-                            </td>
+                            <td className="px-4 py-3 text-xs">{req.facility_name || req.facility_id}</td>
+                            <td className="px-4 py-3 text-xs">{req.requested_date}</td>
                             <td className="px-4 py-3">{statusBadge(req.status)}</td>
                             <td className="px-4 py-3 text-right">
                               {req.status === "pending" && (
-                                <div className="flex justify-end gap-2">
+                                <div className="flex items-center justify-end gap-1.5">
                                   <button
                                     type="button"
                                     onClick={() => handleApprove(req.id)}
-                                    className="rounded-lg bg-emerald-600 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-emerald-700 transition"
+                                    className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 hover:bg-emerald-100 transition"
                                   >
                                     Approve
                                   </button>
                                   <button
                                     type="button"
                                     onClick={() => handleReject(req.id)}
-                                    className="rounded-lg bg-rose-600 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-rose-700 transition"
+                                    className="rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-[11px] font-semibold text-rose-700 hover:bg-rose-100 transition"
                                   >
                                     Reject
                                   </button>
@@ -4844,7 +4816,6 @@ const AdminDashboard = () => {
                       <th className="px-4 py-3">Facility</th>
                       <th className="px-4 py-3">In-Charge Name</th>
                       <th className="px-4 py-3">In-Charge Email</th>
-                      <th className="px-4 py-3">Phone</th>
                       <th className="px-4 py-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -4857,7 +4828,7 @@ const AdminDashboard = () => {
                           <td className="px-4 py-3">
                             <input
                               type="text"
-                              defaultValue={ic.name || ""}
+                              defaultValue={ic.in_charge_name || ""}
                               id={`ic-name-${facility.id}`}
                               className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-44"
                               placeholder="Name"
@@ -4866,19 +4837,10 @@ const AdminDashboard = () => {
                           <td className="px-4 py-3">
                             <input
                               type="email"
-                              defaultValue={ic.email || ""}
+                              defaultValue={ic.in_charge_email || ""}
                               id={`ic-email-${facility.id}`}
                               className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-52"
                               placeholder="email@gbu.ac.in"
-                            />
-                          </td>
-                          <td className="px-4 py-3">
-                            <input
-                              type="text"
-                              defaultValue={ic.phone || ""}
-                              id={`ic-phone-${facility.id}`}
-                              className="rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs text-slate-700 w-32"
-                              placeholder="Phone"
                             />
                           </td>
                           <td className="px-4 py-3 text-right">
@@ -4887,8 +4849,7 @@ const AdminDashboard = () => {
                               onClick={() => {
                                 const name = document.getElementById(`ic-name-${facility.id}`)?.value || "";
                                 const email = document.getElementById(`ic-email-${facility.id}`)?.value || "";
-                                const phone = document.getElementById(`ic-phone-${facility.id}`)?.value || "";
-                                handleUpdateInCharge(facility.id, email, name, phone);
+                                handleUpdateInCharge(facility.id, email, name);
                               }}
                               className="rounded-lg bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 transition"
                             >
@@ -7267,226 +7228,6 @@ const AdminDashboard = () => {
     );
   };
 
-  // ═══════════════════════════════════════════
-  // TICKER NOTICES TAB
-  // ═══════════════════════════════════════════
-  const loadTickerNotices = async (showSpinner = true) => {
-    if (showSpinner) setIsTickerLoading(true);
-    try {
-      const data = await fetchAllTickerNotices();
-      setTickerNotices(data);
-    } catch (err) {
-      setMessage("Failed to load ticker notices.");
-    } finally {
-      if (showSpinner) setIsTickerLoading(false);
-    }
-  };
-
-  const handleTickerSave = async () => {
-    if (isTickerSaving) return;
-    setIsTickerSaving(true);
-    try {
-      if (tickerEditor.editingId) {
-        await updateTickerNotice(tickerEditor.editingId, { text: tickerEditor.text, link: tickerEditor.link });
-        setMessage("Ticker notice updated successfully.");
-      } else {
-        await createTickerNotice({ text: tickerEditor.text, link: tickerEditor.link });
-        setMessage("Ticker notice created successfully.");
-      }
-      // Close form first, then silently reload list
-      setTickerEditor({ isAdding: false, editingId: null, text: "", link: "" });
-      setIsTickerSaving(false);
-      await loadTickerNotices(false); // silent reload — no loading spinner
-    } catch (err) {
-      setMessage("Failed to save ticker notice.");
-      setIsTickerSaving(false);
-    }
-  };
-
-  const handleTickerDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this ticker notice?")) return;
-    try {
-      await deleteTickerNotice(id);
-      setMessage("Ticker notice deleted.");
-      await loadTickerNotices(false); // silent reload
-    } catch (err) {
-      setMessage("Failed to delete ticker notice.");
-    }
-  };
-
-  const handleTickerToggle = async (notice) => {
-    const newActiveState = !notice.is_active;
-    setTickerNotices(prev =>
-      prev.map(n => n.id === notice.id ? { ...n, is_active: newActiveState } : n)
-    );
-    try {
-      await updateTickerNotice(notice.id, { is_active: newActiveState });
-      setMessage(`Notice ${newActiveState ? "shown on" : "hidden from"} website.`);
-    } catch (err) {
-      setTickerNotices(prev =>
-        prev.map(n => n.id === notice.id ? { ...n, is_active: notice.is_active } : n)
-      );
-      setMessage("Failed to toggle notice.");
-    }
-  };
-
-  // Auto-load when tab is activated
-  useEffect(() => {
-    if (activeTab === "ticker-notices") {
-      loadTickerNotices(true); // with spinner on first load
-    }
-  }, [activeTab]);
-
-  const renderTickerNoticesTab = () => {
-    return (
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900">Homepage Ticker Notices</h2>
-            <p className="text-sm text-slate-500 mt-1">Manage the scrolling ticker bar shown on the homepage. Maximum 3 notices recommended.</p>
-          </div>
-          {!tickerEditor.isAdding && !tickerEditor.editingId && (
-            <button
-              onClick={() => setTickerEditor({ isAdding: true, editingId: null, text: "", link: "" })}
-              className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition shadow-sm"
-            >
-              <Plus className="w-4 h-4" />
-              Add Notice
-            </button>
-          )}
-        </div>
-
-        {/* Add / Edit Form */}
-        {(tickerEditor.isAdding || tickerEditor.editingId) && (
-          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 space-y-4 animate-in fade-in duration-200">
-            <h3 className="font-semibold text-blue-900">
-              {tickerEditor.editingId ? "Edit Ticker Notice" : "Add New Ticker Notice"}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Notice Text *</label>
-                <input
-                  type="text"
-                  disabled={isTickerSaving}
-                  value={tickerEditor.text}
-                  onChange={(e) => setTickerEditor(prev => ({ ...prev, text: e.target.value }))}
-                  placeholder="e.g. Admission Open 2026-27 — Apply Now!"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white disabled:opacity-50 disabled:bg-slate-100"
-                  maxLength={500}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Link (where to navigate on click)</label>
-                <input
-                  type="text"
-                  disabled={isTickerSaving}
-                  value={tickerEditor.link}
-                  onChange={(e) => setTickerEditor(prev => ({ ...prev, link: e.target.value }))}
-                  placeholder="e.g. /announcements/news-notifications or https://..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white disabled:opacity-50 disabled:bg-slate-100"
-                />
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={handleTickerSave}
-                disabled={!tickerEditor.text.trim() || isTickerSaving}
-                className="flex items-center gap-2 px-5 py-2 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition disabled:opacity-50"
-              >
-                {isTickerSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                {isTickerSaving ? "Saving..." : (tickerEditor.editingId ? "Update" : "Save")}
-              </button>
-              <button
-                onClick={() => setTickerEditor({ isAdding: false, editingId: null, text: "", link: "" })}
-                disabled={isTickerSaving}
-                className="px-5 py-2 border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition disabled:opacity-50"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Notices List */}
-        {isTickerLoading ? (
-          <div className="flex items-center justify-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-600" />
-            <span className="ml-3 text-slate-500">Loading ticker notices...</span>
-          </div>
-        ) : tickerNotices.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-2xl border border-slate-200">
-            <Zap className="w-12 h-12 mx-auto text-slate-300 mb-3" />
-            <h3 className="text-lg font-bold text-slate-700">No Ticker Notices</h3>
-            <p className="text-slate-500 text-sm mt-1">Add your first scrolling notice for the homepage.</p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {tickerNotices.map((notice, idx) => (
-              <div
-                key={notice.id}
-                className={`flex items-center gap-4 p-4 rounded-2xl border transition ${
-                  notice.is_active
-                    ? "bg-white border-slate-200 shadow-sm"
-                    : "bg-slate-50 border-slate-100 opacity-60"
-                }`}
-              >
-                {/* Order badge */}
-                <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm shrink-0">
-                  {idx + 1}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <p className="font-medium text-slate-900 truncate">{notice.text}</p>
-                  <p className="text-xs text-slate-500 mt-0.5 truncate">
-                    Link: <span className="text-blue-600">{notice.link || "#"}</span>
-                  </p>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-3 shrink-0">
-                  {/* Toggle switch */}
-                  <button
-                    onClick={() => handleTickerToggle(notice)}
-                    title={notice.is_active ? "Hide from website" : "Show on website"}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none ${
-                      notice.is_active ? "bg-green-500" : "bg-slate-300"
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-md transition-transform duration-300 ${
-                        notice.is_active ? "translate-x-6" : "translate-x-1"
-                      }`}
-                    />
-                  </button>
-                  <span className={`text-xs font-semibold min-w-[24px] ${notice.is_active ? "text-green-600" : "text-slate-400"}`}>
-                    {notice.is_active ? "ON" : "OFF"}
-                  </span>
-
-                  {/* Edit */}
-                  <button
-                    onClick={() => setTickerEditor({ isAdding: false, editingId: notice.id, text: notice.text, link: notice.link || "" })}
-                    className="p-2 rounded-lg text-blue-600 bg-blue-50 hover:bg-blue-100 transition"
-                  >
-                    <Pencil className="w-4 h-4" />
-                  </button>
-
-                  {/* Delete */}
-                  <button
-                    onClick={() => handleTickerDelete(notice.id)}
-                    className="p-2 rounded-lg text-red-600 bg-red-50 hover:bg-red-100 transition"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const renderSemesterRegistrationsTab = () => {
     const totalRegs = semRegData.length;
     const uniqueSchools = new Set(semRegData.map(r => r.school)).size;
@@ -7781,9 +7522,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 p-2 md:p-4">
-      <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
-        <aside className="lg:h-full lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
+    <div className="min-h-screen bg-slate-50 p-2 md:p-4">
+      <div className="flex w-full flex-col gap-6 lg:flex-row">
+        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Admin Navigation</h2>
 
@@ -7927,7 +7668,7 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto lg:pr-4 lg:pb-8">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
           {activeTab === "overview" && (
             <section className="space-y-6">
               <section className={cardClass}>
@@ -8043,7 +7784,6 @@ const AdminDashboard = () => {
           {activeTab === "recruitment" && renderRecruitmentTab()}
           {activeTab === "bookings" && renderBookingsTab()}
           {activeTab === "itcell" && renderItcellTab()}
-          {activeTab === "ticker-notices" && renderTickerNoticesTab()}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>

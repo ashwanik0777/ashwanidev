@@ -14,7 +14,8 @@ import PlacementsSection from "../../../components/departments/Placement.jsx";
 import RecentPlacements from "../../../components/departments/Recent_Placement.jsx";
 import RecruitersShowcase from "../../../components/departments/Recuritor_showcase";
 import ClubsAchievements from "../../../components/departments/Clubs_activevment.jsx";
-import StudentAchievers from "../../../components/departments/cse/StudentAchievers";
+// import StudentAchievements from "../../../components/departments/Student_achievements.jsx";
+// import StudentStartup from "../../../components/departments/Startup.jsx";
 import { resolveSchool } from '../../../Data/schoolsMeta';
 
 const componentsMap = {
@@ -29,7 +30,6 @@ const componentsMap = {
   PlacementsSection,
   RecentPlacements,
   RecruitersShowcase,
-  StudentAchievers,
 };
 
 // Semester registration is not live yet — banner + link kept out of the build.

@@ -38,7 +38,7 @@ function Placement_home() {
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "/assets/Faculty/Vinay_kumar_litoria.jpeg";
+                    e.target.src = "https://via.placeholder.com/200?text=Dr.+Vinay+Kumar+Litoria";
                   }}
                 />
               </div>

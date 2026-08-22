@@ -21,7 +21,7 @@ export const sectionsConfig = [
     position: 1,
     props: { slides: biotechSlides },
   },
-  {
+{
     componentName: "AboutSection",
     enabled: true,
     position: 2,
@@ -75,11 +75,11 @@ export const sectionsConfig = [
       },
     },
   },
-
+  
 
   {
     componentName: "SchoolStats",
-    enabled: false, // Disabled for SOBT as requested
+    enabled: true,
     position: 3,
     props: {
       title: "Our numbers speak for themselves",
@@ -103,12 +103,14 @@ export const sectionsConfig = [
       title: "Dean, University School of Biotechnology",
       image: "https://faculty.gbu.ac.in/uploads/photos/68c152fb1cc8f_Lakshmi_photo_1.png",
       shortMessage:
-        "School of Biotechnology brings together highly talented and experienced faculty with expertise spanning diverse areas of Biotechnology. Our faculty members have strong research backgrounds from renowned institutions in India and abroad and are committed to providing quality education while fostering scientific curiosity, ethics, and innovation among students.",
-      description: `The University School of Biotechnology brings together highly talented and experienced faculty with expertise spanning diverse areas of Biotechnology. Our faculty members have strong research backgrounds from renowned institutions in India and abroad and are committed to providing quality education while fostering scientific curiosity, ethics, and innovation among students.
+        "In the School of Biotechnology, we bring together highly talented, innovative and well groomed faculty with specialization in diverse fields ranging from basic to advanced aspects of Biotechnology. Our objective is to generate substantially trained manpower to meet existing and future global demands.",
+      description: `In the School of Biotechnology, we bring together highly talented, innovative and well groomed faculty with specialization in diverse fields ranging from various basic to advanced aspects of Biotechnology. Our faculty includes skilled personnel with excellent research experience from renowned universities and institutes of India and abroad. These faculty members motivate students to work in collaborative environment. The faculty is imbued with a sense of deep commitment and is capable of imparting state of art education. They work hard to inculcate scientific ethics, morality and inquisitiveness.
 
-The School offers postgraduate programmes in Biotechnology with specializations in Genetic Engineering and Bioinformatics. Our programmes combine strong theoretical foundations with practical laboratory experience, preparing students to pursue careers and research in the rapidly evolving field of Biotechnology.
+The school offers various programmes at different entry levels finally aimed to confer the degree of Master of Technology (M. Tech) in Biotechnology with specializations in the areas of Genetic engineering and Bioinformatics.
 
-With state-of-the-art laboratories and a curriculum aligned with the needs of various sectors, the School encourages students to stay updated with emerging developments and develop their potential as researchers and professionals. Our vision is to establish the School as a centre of excellence in teaching, research, and innovation, contributing to the growing global needs of Biotechnology.`,
+We have started our programme with the objective of generating work force that could turn into a substantially trained manpower to meet the existing and future global demands. The school is equipped with state of art laboratories and a curriculum tailored to suit the needs of various sectors of economy. The programme curricula combine a strong theoretical background coupled with practical experience in laboratory with a view to achieve their optimum potential as researcher. The foundation thus laid enables students to enhance their learning capability and adapt themselves to the fast scientific development in the world.
+
+We strive to keep our students updated with ongoing progress in frontier areas of Biotechnology. Our vision is to make School of Biotechnology a truly academic and research and development center providing the balanced combination of teaching and research fused with power of innovation.`,
     },
   },
 
@@ -640,7 +642,7 @@ With state-of-the-art laboratories and a curriculum aligned with the needs of va
 
   {
     componentName: "PlacementsSection",
-    enabled: false, // Disabled for SOBT as requested
+    enabled: true,
     position: 10,
     props: {
       data: {
@@ -676,7 +678,7 @@ With state-of-the-art laboratories and a curriculum aligned with the needs of va
 
   {
     componentName: "RecentPlacements",
-    enabled: false, // Disabled for SOBT as requested
+    enabled: true,
     position: 11,
     props: {
       data: {
@@ -752,23 +754,21 @@ With state-of-the-art laboratories and a curriculum aligned with the needs of va
     position: 12,
     props: {
       recruitersData: [
-        { name: "Biocon", logo: "/assets/companies/Biocon.jpeg" },
-        { name: "Daiichi Sankyo India", logo: "/assets/companies/Daiichi Sankyo India.png" },
-        { name: "Zydus Cadila", logo: "/assets/companies/Zydus Cadila.png" },
-        { name: "Panacea", logo: "/assets/companies/Panacea.png" },
-        { name: "Johnson & Johnson", logo: "/assets/companies/Johnson & Johnson.png" },
-        { name: "Alere Medical", logo: "/assets/companies/Alere Medical.png" },
-        { name: "Genetix Asia", logo: "/assets/companies/Genetix Asia.png" },
-        { name: "Patanjali", logo: "/assets/companies/Patanjali.png" },
-        { name: "IDS Infotech", logo: "/assets/companies/IDS Infotech.png" },
-        { name: "Bioglobe Research Solutions", logo: "/assets/companies/Bioglobe Research Solutions.jpg" },
+        { name: "Biocon", logo: "https://picsum.photos/200?1" },
+        { name: "Cipla", logo: "https://picsum.photos/200?2" },
+        { name: "Sun Pharma", logo: "https://picsum.photos/200?3" },
+        { name: "Dr. Reddy’s", logo: "https://picsum.photos/200?4" },
+        { name: "Lupin", logo: "https://picsum.photos/200?5" },
+        { name: "Zydus", logo: "https://picsum.photos/200?6" },
+        { name: "Panacea Biotec", logo: "https://picsum.photos/200?7" },
+        { name: "Syngene", logo: "https://picsum.photos/200?8" },
       ],
     },
   },
 
   {
     componentName: "StudentStartup",
-    enabled: false, // Disabled for SOBT as requested
+    enabled: true,
     position: 13,
     props: {
       startupData: {

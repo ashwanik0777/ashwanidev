@@ -42,9 +42,11 @@ export const departmentLayoutData = {
     name: "Dr. Deepali Singh",
     designation: "Assistant Professor & Coordinator",
     messageParagraphs: [
+      "Greetings!",
       "Welcome to the Department of Bioinformatics and Computational Biology at the School of Biotechnology, Gautam Buddha University! In the era of big data and genomics, bioinformatics has emerged as one of the most critical disciplines bridging biology, computer science, and statistics.",
       "Our department equips students with the computational tools and analytical skills needed to extract meaningful insights from vast biological datasets. We focus on hands-on training in genome sequencing analysis, protein structure prediction, molecular simulation, and AI-driven drug design.",
       "Our faculty members are actively involved in research collaborations with leading national and international institutions. We encourage our students to participate in conferences, publish their findings, and engage with the broader scientific community.",
+      "We look forward to shaping the future of data-driven biology with our students. Please reach out if you have any questions.",
     ],
     contact: {
       name: "Dr. Deepali Singh",
@@ -53,7 +55,46 @@ export const departmentLayoutData = {
       phone: "0120-234-9902",
     },
   },
-  aboutProps: null,
+  aboutProps: {
+    heading: "About the Department",
+    subheading:
+      "Combining biological knowledge with computational power to drive discoveries.",
+    stats: [
+      { icon: Users, numberText: "80+", title: "Students", subtitle: "Enrolled" },
+      { icon: BookOpen, numberText: "5+", title: "Faculty", subtitle: "Members" },
+      { icon: Award, numberText: "8+", title: "Research Projects", subtitle: "Completed" },
+      { icon: Lightbulb, numberText: "3+", title: "Tools Developed", subtitle: "Software" },
+    ],
+    highlights: [
+      {
+        title: "Data-Driven Education",
+        description:
+          "Our curriculum integrates biology with data science, programming, and statistical analysis. Students gain proficiency in Python, R, and specialized bioinformatics tools.",
+        dotColor: "#3b82f6",
+      },
+      {
+        title: "Computational Research",
+        description:
+          "Active research in genome analysis, structural bioinformatics, systems biology, and machine learning applications in drug discovery.",
+        dotColor: "#06b6d4",
+      },
+      {
+        title: "Industry Readiness",
+        description:
+          "Strong emphasis on practical skills through hands-on projects, industry internships, and collaborative research with pharma and biotech companies.",
+        dotColor: "#6366f1",
+      },
+    ],
+    vision:
+      "To be a center of excellence in computational biology education and research, producing professionals who can harness data for biological discovery.",
+    missionPoints: [
+      "Provide quality education in bioinformatics and computational biology",
+      "Train students in advanced data analysis and programming skills",
+      "Conduct research at the interface of biology and computing",
+      "Foster innovation through AI/ML applications in life sciences",
+      "Collaborate with national and international research institutions",
+    ],
+  },
   programsData: [
     {
       title: "M.Sc Bioinformatics & Genomics",
@@ -74,7 +115,7 @@ export const departmentLayoutData = {
         "Database Design",
         "Research Dissertation",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/13tLAb-fKH4N4e6ejfj2904ilXmqsojcB/preview",
+      syllabusUrl: "https://drive.google.com/file/d/1_oOHFzQQRsNCwuLf85ekR-I54vHv_xZ8/preview",
       syllabus: [],
     },
     {
@@ -156,7 +197,37 @@ export const departmentLayoutData = {
       },
     ],
   },
-  researchStats: null,
-  topAchievers: null,
-  achievements: null,
+  researchStats: [
+    { numberText: "8+", subtitle: "Research Projects" },
+    { numberText: "₹1.2Cr+", subtitle: "Research Funding" },
+    { numberText: "80+", subtitle: "Publications" },
+    { numberText: "3+", subtitle: "Tools Developed" },
+  ],
+  topAchievers: [],
+  achievements: [
+    {
+      title: "Bioinformatics Tools",
+      description: "3 bioinformatics software tools developed and published",
+      icon: Award,
+      color: "text-blue-600",
+    },
+    {
+      title: "Research Publications",
+      description: "80+ papers in SCI journals on computational biology topics",
+      icon: BookOpen,
+      color: "text-cyan-600",
+    },
+    {
+      title: "International Collaborations",
+      description: "Joint projects with EMBL-EBI and NCBI for database development",
+      icon: Lightbulb,
+      color: "text-teal-600",
+    },
+    {
+      title: "Student Achievements",
+      description: "Students placed in leading bioinformatics companies and research labs",
+      icon: GraduationCap,
+      color: "text-green-600",
+    },
+  ],
 };

@@ -8,7 +8,7 @@ export const researchAreaData = {
   heading: "Research Areas — SOHSS",
   subheading: "Explore the research focus areas of the School of Humanities & Social Sciences at Gautam Buddha University.",
   hero: {
-    title: "Research Area and Profile",
+    title: "Research Excellence at SOHSS",
     subtitle: "Our research ecosystem spans critical domains in literary studies, social sciences, psychology, education, and media studies — fostering scholarship that addresses contemporary societal challenges.",
   },
   stats: [

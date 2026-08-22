@@ -10,9 +10,41 @@ import StatsCard from "../../components/StatsCard.jsx";
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 import { SCHOOL_FILTERS, SCHOOL_DEPARTMENTS, SCHOOL_DIRECTORY } from "../../Data/schools";
 
-import { resolveFacultyImage, getFacultyInitials } from '../../utils/imageUtils';
+const VITE_HOST = import.meta.env.VITE_HOST;
 import { fetchFacultyPublicList } from '../../services/facultyDashboardService';
 
+const getInitials = (name) => {
+  if (!name) return 'F';
+  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
+  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  if (parts.length === 0) return 'F';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+const getImageUrl = (url, image, name) => {
+  if (!url) {
+    if (image) return `${VITE_HOST}/media/${image}`;
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
+  }
+
+  // Resolve Google Drive URLs
+  let resolvedUrl = url;
+  if (typeof url === 'string') {
+    const matchFile = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (matchFile && matchFile[1]) {
+      resolvedUrl = `https://lh3.googleusercontent.com/d/${matchFile[1]}`;
+    } else {
+      const matchOpen = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (matchOpen && matchOpen[1] && url.includes('drive.google.com')) {
+        resolvedUrl = `https://lh3.googleusercontent.com/d/${matchOpen[1]}`;
+      }
+    }
+  }
+
+  if (resolvedUrl.startsWith('http') || resolvedUrl.startsWith('data:')) return resolvedUrl;
+  return `${VITE_HOST}${resolvedUrl.startsWith('/') ? '' : '/'}${resolvedUrl}`;
+};
 
 const Faculty = () => {
   const [facultyMembers, setFacultyMembers] = useState([]);
@@ -135,57 +167,23 @@ const Faculty = () => {
 
   const getDesignationPriority = (designation) => {
     const desc = (designation || "").toLowerCase();
-    
-    const isDean = desc.includes("dean");
-    const isAssociate = desc.includes("associate");
-    const isAssistant = desc.includes("assistant");
-    const isVisiting = desc.includes("visiting") || desc.includes("recognising") || desc.includes("recognizing") || desc.includes("recognised");
-    const isAdjunct = desc.includes("adjunct");
-    const isProf = desc.includes("prof");
-    const isHod = desc.includes("hod") || desc.includes("head");
-
-    // 1. Professor and Dean
-    if (isDean && !isAssociate && !isAssistant) return 1;
-
-    // 2. Professor (plain professor, not associate/assistant/dean)
-    if (isProf && !isAssociate && !isAssistant && !isVisiting && !isAdjunct && !isDean) return 2;
-
-    // 3. Recognizing / Visiting Professors
-    if (isVisiting) return 3;
-    
-    // 4. Adjunct Professors
-    if (isAdjunct) return 4;
-    
-    // 5. Associate Professor and Dean
-    if (isDean && isAssociate) return 5;
-    
-    // 6. Assistant Professor and Dean(I/C)
-    if (isDean && isAssistant) return 6;
-
-    // 7. Associate Professor
-    if (isAssociate) return 7;
-    
-    // 8. Assistant Professor and HoD
-    if (isAssistant && isHod) return 8;
-    
-    // 9. Assistant Professor
-    if (isAssistant) return 9;
-
-    return 10;
+    if (desc.includes("assistant professor")) return 3;
+    if (desc.includes("associate professor")) return 2;
+    if (desc.includes("professor")) return 1;
+    if (desc.includes("faculty")) return 4;
+    return 5;
   };
 
   const sortFaculty = (a, b) => {
     const pA = getDesignationPriority(a.designation || a.title);
     const pB = getDesignationPriority(b.designation || b.title);
     if (pA !== pB) return pA - pB;
-    
-    // Sort alphabetically by name within the same category
-    return (a.name || "").localeCompare(b.name || "");
+    const expA = parseInt(a.experience_years || a.experience) || 0;
+    const expB = parseInt(b.experience_years || b.experience) || 0;
+    return expB - expA;
   };
 
   const filteredFaculty = facultyMembers.filter(faculty => {
-    const desc = (faculty.designation || faculty.title || "").toLowerCase();
-    if (desc.includes("ocfd")) return false;
     const matchesSearch =
       (faculty.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (faculty.designation || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -385,10 +383,10 @@ const Faculty = () => {
                           {/* Photo + Name row */}
                           <div className="flex items-start gap-4 mb-4">
                             <img
-                              src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)}
+                              src={getImageUrl(faculty.image_url, faculty.image, faculty.name)}
                               alt={faculty.name}
                               className="w-20 h-20 rounded-full object-cover border-3 border-blue-100 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0"
-                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
+                              onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
                             />
                             <div className="min-w-0">
                               <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">{faculty.name}</h3>

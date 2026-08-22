@@ -8,7 +8,7 @@ export const researchAreaData = {
   heading: "Research Areas — SOVS",
   subheading: "Explore the research focus areas of the School of Vocational Studies & Applied Sciences at Gautam Buddha University.",
   hero: {
-    title: "Research Area and Profile",
+    title: "Research Excellence at SOVS",
     subtitle: "Our research ecosystem spans critical domains in computational mathematics, materials science, polymer chemistry, environmental remediation, and food preservation.",
   },
   stats: [

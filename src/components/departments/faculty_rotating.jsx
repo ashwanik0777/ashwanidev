@@ -6,7 +6,23 @@ import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { matchDepartmentId } from "../../Data/schoolsMeta";
 
-import { resolveFacultyImage } from "../../utils/imageUtils";
+const VITE_HOST = import.meta.env.VITE_HOST;
+
+const getInitials = (name) => {
+  if (!name) return 'F';
+  const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
+  const parts = name.split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  if (parts.length === 0) return 'F';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
+const getImageUrl = (url, image, name) => {
+  if (url && (url.startsWith("http") || url.startsWith("data:"))) return url;
+  if (url) return `${VITE_HOST}${url.startsWith("/") ? "" : "/"}${url}`;
+  if (image) return `${VITE_HOST}/media/${image}`;
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(getInitials(name || 'Faculty'))}&background=0D8ABC&color=fff&size=150`;
+};
 
 export default function FacultyResponsiveSlider({
   title = "Faculty",
@@ -26,8 +42,11 @@ export default function FacultyResponsiveSlider({
   const navigate = useNavigate();
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
-  const effectiveFacultyList =
-    dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
+  const effectiveFacultyList = schoolCode
+    ? dynamicFaculty
+    : dynamicFaculty.length > 0
+      ? dynamicFaculty
+      : facultyList;
 
   const moveBy = cardWidth + gap;
 
@@ -101,11 +120,10 @@ export default function FacultyResponsiveSlider({
           .map((member) => ({
             name: member?.name || member?.fullName || "Faculty Member",
             title: member?.designation || member?.title || "Faculty",
-            image: resolveFacultyImage(
-              member?.imageUrl || member?.profileImageUrl || member?.image_url,
+            image: getImageUrl(
+              member?.imageUrl || member?.profileImageUrl,
               member?.image,
-              member?.name || member?.fullName,
-              member?.email
+              member?.name || member?.fullName
             ),
           }))
           .filter((member) => member.name && member.title);
@@ -128,7 +146,7 @@ export default function FacultyResponsiveSlider({
   }, [schoolCode, schoolMeta.name, departmentId]);
 
   return (
-    <section className="py-8 bg-white overflow-hidden relative">
+    <section className="py-10 bg-white overflow-hidden relative">
       <div className="text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           {title}

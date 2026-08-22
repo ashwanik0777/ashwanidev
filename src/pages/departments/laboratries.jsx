@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { UserCheck, Wrench, Download, FlaskConical } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
 
 const LaboratoryCard = ({ lab, index }) => {
@@ -9,55 +8,36 @@ const LaboratoryCard = ({ lab, index }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       viewport={{ once: true }}
-      className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-100 p-6 flex flex-col justify-between transition-all group"
+      className="bg-white rounded-2xl shadow-lg border border-gray-100 border-solid overflow-hidden"
     >
-      <div>
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-            #{lab.sno || index + 1}
-          </div>
-          {lab.category && (
-            <span className="text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium border border-emerald-200">
-              {lab.category}
-            </span>
-          )}
-        </div>
-
-        <h3 className="text-lg font-bold text-gray-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors">
-          {lab.name}
-        </h3>
-
-        {lab.description && (
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-            {lab.description}
-          </p>
+      <div className="relative h-44">
+        <img
+          src={lab.image}
+          alt={lab.name}
+          onError={(e) => {
+            e.target.src = "https://via.placeholder.com/400x200.png?text=Lab+Image";
+          }}
+          className="w-full h-full object-cover"
+        />
+        {lab.isNew && (
+          <span className="absolute top-3 right-3 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
+            NEW
+          </span>
         )}
-
-        {(lab.faculty || lab.support) && (
-          <div className="space-y-2.5 pt-3 border-t border-gray-100 text-sm mt-auto">
-            {lab.faculty && (
-              <div className="flex items-center gap-2.5 text-gray-700">
-                <UserCheck className="w-4 h-4 text-blue-600 shrink-0" />
-                <div>
-                  <span className="text-xs text-gray-400 block font-medium">Faculty In-Charge</span>
-                  <span className="font-semibold text-gray-800">{lab.faculty}</span>
-                </div>
-              </div>
-            )}
-
-            {lab.support && (
-              <div className="flex items-center gap-2.5 text-gray-700 pt-1">
-                <Wrench className="w-4 h-4 text-indigo-600 shrink-0" />
-                <div>
-                  <span className="text-xs text-gray-400 block font-medium">Technical Support</span>
-                  <span className="font-semibold text-gray-800">{lab.support}</span>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+        <span className="absolute top-3 left-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
+          {lab.category}
+        </span>
+      </div>
+      <div className="p-6 space-y-3">
+        <h3 className="text-lg font-bold text-gray-800">{lab.name}</h3>
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold">Faculty:</span> {lab.faculty}
+        </p>
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold">Support:</span> {lab.support}
+        </p>
       </div>
     </motion.div>
   );
@@ -67,6 +47,7 @@ export default function Laboratories() {
   const { shortCode } = useParams();
   const [laboratoriesData, setLaboratoriesData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     const loadData = async () => {
@@ -88,9 +69,21 @@ export default function Laboratories() {
     loadData();
   }, [shortCode]);
 
-  const labs = useMemo(() => {
-    return laboratoriesData?.laboratories || [];
+  const categories = useMemo(() => {
+    if (!laboratoriesData?.laboratories) return ["All"];
+    const unique = new Set(
+      laboratoriesData.laboratories.map((lab) => lab.category)
+    );
+    return ["All", ...Array.from(unique)];
   }, [laboratoriesData]);
+
+  const filteredLabs = useMemo(() => {
+    if (!laboratoriesData?.laboratories) return [];
+    if (filter === "All") {
+      return laboratoriesData.laboratories;
+    }
+    return laboratoriesData.laboratories.filter((lab) => lab.category === filter);
+  }, [filter, laboratoriesData]);
 
   if (loading) {
     return (
@@ -105,30 +98,32 @@ export default function Laboratories() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-white">
       <BannerSection
         title={laboratoriesData.heading}
         subtitle={laboratoriesData.subheading}
         bgTheme={3}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {laboratoriesData.pdfUrl && (
-          <div className="flex justify-end mb-8">
-            <a
-              href={laboratoriesData.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="flex flex-wrap gap-3 justify-center mb-10">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setFilter(category)}
+              className={`px-4 py-2 rounded-full text-sm font-semibold border border-solid transition-all ${
+                filter === category
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-700 border-gray-200 hover:border-blue-300"
+              }`}
             >
-              <Download className="w-4 h-4" />
-              Download Full Laboratory List & Facilities (PDF)
-            </a>
-          </div>
-        )}
+              {category}
+            </button>
+          ))}
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {labs.map((lab, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {filteredLabs.map((lab, index) => (
             <LaboratoryCard key={lab.name} lab={lab} index={index} />
           ))}
         </div>

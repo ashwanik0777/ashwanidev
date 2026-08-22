@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getSchoolAnnouncements, refreshSchoolAnnouncements, syncAnnouncementsFromCache } from '../../utils/schoolAnnouncements';
-import { getImageUrl } from '../../utils/imageUtils';
 import homeData from '../../Data/home.json';
 
 export default function CampusGallery() {
@@ -8,83 +7,54 @@ export default function CampusGallery() {
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const BASE = (import.meta.env.VITE_HOST || '').replace(/\/$/, '');
+
+  const getImageUrl = (path) => {
+    if (!path) return 'https://via.placeholder.com/800x500/6B7280/FFFFFF?text=Image+Not+Found';
+
+    // Match drive links first
+    const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=))([a-zA-Z0-9_-]+)/;
+    const match = path.match(driveRegex);
+    if (match && match[1]) {
+      return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+    }
+
+    if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path;
+
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    if (BASE) {
+      return `${BASE}${cleanPath}`;
+    }
+    return cleanPath;
+  };
+
   useEffect(() => {
     let isMounted = true;
 
     const loadGallery = async () => {
       try {
         await refreshSchoolAnnouncements();
-      } catch (err) {
+      } catch {
         syncAnnouncementsFromCache();
       }
       if (!isMounted) return;
 
-      const MAX_SLIDES = 12;
-      const allEvents = getSchoolAnnouncements().events || [];
-      
-      // Filter out upcoming events (only keep ongoing or completed)
-      const pastOrOngoingEvents = allEvents.filter(
-        e => e.status !== "upcoming"
-      );
-
-      // Only keep events that have at least one gallery image
-      const validEvents = pastOrOngoingEvents.filter(
-        (item) => item.images && item.images.length > 0
-      );
-
-      // Phase 1: one cover image per event (up to 12)
-      const slides = [];
-      const extrasPool = [];
-
-      for (const item of validEvents) {
-        const cover = item.coverImage || item.images?.[item.images.length - 1];
-        if (!cover) continue;
-
-        if (slides.length < MAX_SLIDES) {
-          slides.push({
-            id: item.id,
-            image: getImageUrl(cover, undefined, 2500),
-            text: item.title,
-            button1_url: `/announcements/event-calendar/${item.id}`,
-            button1_text: "View Details"
-          });
-        }
-
-        // Collect remaining images from this event for potential fill (latest first)
-        const otherImages = (item.images || []).filter((img) => img && img !== cover).reverse();
-        for (const img of otherImages) {
-          extrasPool.push({
-            id: `${item.id}-extra-${extrasPool.length}`,
-            image: getImageUrl(img, undefined, 2500),
-            text: item.title,
-            button1_url: `/announcements/event-calendar/${item.id}`,
-            button1_text: "View Details"
-          });
-        }
-      }
-
-      // Phase 2: if we have fewer than 12, fill from extras
-      for (const extra of extrasPool) {
-        if (slides.length >= MAX_SLIDES) break;
-        slides.push(extra);
-      }
+      const mediaItems = getSchoolAnnouncements().mediaGallery || [];
+      const normalizedMedia = mediaItems
+        .filter((item) => item.images && item.images.length > 0)
+        .map((item) => ({
+          ...item,
+          image: getImageUrl(item.images[0]),
+          text: item.title,
+        }));
 
       const jsonGallery = (homeData?.sections?.campus_gallery || []).map((item) => ({
         ...item,
-        image: getImageUrl(item.image, undefined, 2500),
+        image: getImageUrl(item.image),
         text: item.text,
       }));
 
-      // Phase 3: if STILL fewer than 12, pad with jsonGallery
-      for (const fallback of jsonGallery) {
-        if (slides.length >= MAX_SLIDES) break;
-        // avoid duplicates if same image
-        if (!slides.some(s => s.image === fallback.image)) {
-           slides.push(fallback);
-        }
-      }
-
-      const finalGallery = slides.length > 0 ? slides : jsonGallery;
+      const finalGallery = normalizedMedia.length > 0 ? normalizedMedia : jsonGallery;
       setGalleryData(finalGallery);
     };
 
@@ -125,8 +95,8 @@ export default function CampusGallery() {
   const currentImage = galleryData[mainImageIndex];
 
   return (
-    <div className="w-full bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <div className="w-full py-4 sm:py-8 lg:py-12 mx-auto px-3 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <div className="w-full py-6 sm:py-10 lg:py-16 mx-auto px-3 sm:px-6 lg:px-8">
         <style>{`
           .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -137,8 +107,8 @@ export default function CampusGallery() {
           }
         `}</style>
 
-        <div className="text-center mb-2 sm:mb-5 lg:mb-6">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-800 mb-2 sm:mb-3">
+        <div className="text-center mb-2 sm:mb-5 lg:mb-8">
+          <h2 className="text-3xl h-14 md:text-4xl md:h-15 font-bold text-blue-800 mb-4">
             Ongoing Events
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full"></div>
@@ -151,19 +121,19 @@ export default function CampusGallery() {
               src={currentImage.image}
               alt={currentImage.text}
               onError={handleImageError}
-              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${isTransitioning ? 'scale-105 opacity-80' : 'scale-100 opacity-100'
+              className={`w-full h-[220px] xs:h-[280px] sm:h-[320px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover transition-all duration-1000 ease-in-out ${isTransitioning ? 'scale-110 opacity-80 blur-[2px]' : 'scale-100 opacity-100 blur-0'
                 }`}
             />
 
             {/* Caption */}
-            <div className="absolute w-[95%] sm:w-auto bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-black/40 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl max-w-[95%] sm:max-w-[90%] border border-white/20 border-solid">
-              <h3 className="text-white text-xs sm:text-sm md:text-lg font-semibold text-center drop-shadow-lg whitespace-normal break-words leading-snug">
+            <div className="absolute w-full bottom-4 left-1/2 transform -translate-x-1/2 bg-black/30 backdrop-blur-md px-4 py-2 rounded-xl max-w-[90%] border border-white/20 border-solid">
+              <h3 className="text-white text-base md:text-lg font-semibold text-center drop-shadow-lg whitespace-normal break-words">
                 {currentImage.text}
               </h3>
             </div>
 
             {/* Dots */}
-            <div className="absolute bottom-4 right-4 hidden sm:flex gap-2">
+            <div className="absolute bottom-4 right-4 flex gap-2">
               {galleryData.map((_, index) => (
                 <button
                   key={index}
@@ -188,8 +158,8 @@ export default function CampusGallery() {
         )}
 
         {/* Thumbnails */}
-        <div className="w-full overflow-x-auto no-scrollbar pb-2 sm:pb-4">
-          <div className="flex justify-center gap-3 sm:gap-4 min-w-max px-2">
+        <div className="w-full overflow-x-auto no-scrollbar pb-4">
+          <div className="flex justify-center gap-4 min-w-max px-2">
             {galleryData.map((img, index) => (
               <div
                 key={img.id}
@@ -203,7 +173,7 @@ export default function CampusGallery() {
                   src={img.image}
                   alt={img.text}
                   onError={handleImageError}
-                  className="w-20 h-14 sm:w-28 sm:h-20 object-cover"
+                  className="w-24 h-16 sm:w-28 sm:h-20 object-cover"
                 />
               </div>
             ))}
@@ -212,9 +182,9 @@ export default function CampusGallery() {
 
         {/* Counter */}
         {galleryData.length > 0 && (
-          <div className="flex justify-center mt-3 sm:mt-4 mb-4 sm:mb-6">
-            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 border-solid rounded-full px-5 py-2 shadow-md">
-              <span className="text-xs sm:text-sm font-medium text-gray-700">
+          <div className="flex justify-center mt-6 mb-8">
+            <div className="bg-white/80 backdrop-blur-sm border border-gray-200/50 border-solid rounded-full px-6 py-3 shadow-md">
+              <span className="text-sm font-medium text-gray-700">
                 <span className="font-bold text-blue-600">{mainImageIndex + 1}</span> of{' '}
                 <span className="font-bold">{galleryData.length}</span>
               </span>
@@ -229,12 +199,12 @@ export default function CampusGallery() {
               href={currentImage.button1_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative px-8 py-2.5 sm:px-10 sm:py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl hover:from-blue-700 hover:to-blue-900 transition-all text-sm sm:text-base md:text-lg font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 border border-blue-500/30"
+              className="group relative px-10 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white rounded-2xl hover:from-blue-700 hover:to-blue-900 transition-all text-lg font-semibold shadow-lg hover:shadow-2xl transform hover:scale-105 active:scale-95 border border-blue-500/30"
             >
               <span className="relative z-10 flex items-center">
                 {currentImage.button1_text}
                 <svg
-                  className="ml-2.5 w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform duration-300"
+                  className="ml-3 w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -248,7 +218,7 @@ export default function CampusGallery() {
         )}
 
         {/* Progress Bar */}
-        <div className="flex justify-center mt-4 sm:mt-6">
+        <div className="flex justify-center mt-8">
           <div className="w-full max-w-md bg-gray-200/50 rounded-full h-1 overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-linear"

@@ -77,7 +77,7 @@ const ContactDirectory = () => {
           subtitle="Gautam Buddha University"
           bgTheme={4}
         />
-      <div className="relative mx-0 md:mx-10 lg:mx-20 mb-20 bg-[#F8FAFC] min-h-screen smooth-transition pb-10">
+      <div className="relative mx-20 mb-20 bg-[#F8FAFC] min-h-screen smooth-transition pb-10">
        
 
         {/* Search & Filter Section */}

@@ -1,13 +1,16 @@
+/**
+ * SOM — Dean's Message
+ * School of Management
+ */
 export const deansMessageData = {
   schoolCode: "SOM",
   schoolName: "School of Management",
   deanName: "Dr. Indu Uprety",
-  designation: "Dean (I/C) & Associate Professor — School of Management",
+  designation: "Dean (I/C) & Associate Professor - School of Management, GBU",
   image:
-    "https://faculty.gbu.ac.in/../uploads/photos/6605384ccc2da_induu (1).jpg",
+    "https://faculty.gbu.ac.in/../uploads/photos/6605384ccc2da_induu (1).jpg ",
   shortMessage:
-    "Guided by the core values of Character, Creativity, Competence, and Commitment, the School imparts value- and skill-based management education relevant to both global and local needs.",
+    "The School of Management is committed to developing business leaders with ethical values and global perspective. We blend academic rigor with practical exposure, fostering innovation and research-driven learning to prepare confident, industry-ready managers.",
   message:
-    "The School of Management at Gautam Buddha University provides an exciting and conducive academic and research environment focused on the holistic development of students. Guided by the core values of Character, Creativity, Competence, and Commitment, the School imparts value- and skill-based management education relevant to both global and local needs. It aims to develop successful leaders, researchers, and entrepreneurs equipped to meet the challenges of a changing world.\n\nThe School offers an integrated approach to management education, with academic programmes designed to develop motivated, innovative, and industry-ready professionals. The curriculum emphasizes professional development, managerial skills, business acumen, and the overall growth of students.\n\nOur teaching pedagogy combines lectures, experience sharing, case-based learning, and problem-solving using analytical tools. Students are encouraged to think creatively and adopt innovative approaches, while interactions with academicians and industry leaders provide valuable exposure to real-world opportunities and challenges.\n\nWe invite students and stakeholders to explore the School of Management and be a part of its journey towards excellence in management education and research.",
+    "Welcome to the School of Management (SOM) at Gautam Buddha University. Our school commenced its first batch of MBA in August 2008 and has since grown with an integrated focus on exploring and creating new avenues for young aspirants through strategic collaborations with institutions and enterprises of national and international repute.\n\nGBUSM has state of the art classroom and computing facilities, supported by an extensive library of books, journals, films and databases, and a meditation centre. All academic programmes of GBU are fully residential. The serene and pollution-free campus, with extensive sports and co-curricular facilities, is well equipped to meet all the essential requirements of the residents.\n\nThe curriculum of all its academic activities has international and cross cultural focus. The teaching pedagogy at SOM blends lectures, experience sharing, case-based learning, and analytical problem solving. We offer a wide range of programs including MBA, Dual Degree BBA+MBA (with exit option), B.Com (Honours), M.Com, MBA (Executive), MBA (Business Analytics & Data Science), and Doctoral Programme across multiple specializations — Finance, HRM, Marketing, Operations, Strategy, and Business Analytics.\n\nOur faculty members are accomplished scholars who bring a rich blend of academic expertise and industry experience. They are actively engaged in research, consultancy, and training programs. The school encourages students to participate in industrial visits, workshops, conclaves, and entrepreneurship initiatives.\n\nThe Corporate Resource Center (CRC) ensures strong industry connections through summer internships, final placements, and pre-placement training. I invite you to explore our programs and become part of a vibrant community that values curiosity, integrity, and excellence in management education.",
 };
-

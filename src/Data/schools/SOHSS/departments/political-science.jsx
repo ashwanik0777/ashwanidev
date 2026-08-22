@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "International Systems",
             "Public Policy Analysis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview",
+        syllabusUrl: "https://drive.google.com/file/d/1wTqL7Q_UD9r26u0IhNp079qDF1Mn0v3o/preview",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview"
+                url: "https://drive.google.com/file/d/1wTqL7Q_UD9r26u0IhNp079qDF1Mn0v3o/preview"
             }
         ]
     },

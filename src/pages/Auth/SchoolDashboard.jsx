@@ -575,6 +575,9 @@ const SchoolDashboard = () => {
   };
 
   const deleteFacultyProfile = async (facultyId) => {
+    if (!window.confirm("Are you sure you want to delete this faculty profile? This action cannot be undone.")) {
+      return;
+    }
     try {
       await adminDeleteFacultyProfile(facultyId);
       setFacultyRefreshKey((prev) => prev + 1);
@@ -846,6 +849,9 @@ const SchoolDashboard = () => {
   };
 
   const deleteCollectionItem = (listKey, index) => {
+    if (!window.confirm(`Are you sure you want to delete this item?`)) {
+      return;
+    }
     setData((prev) => ({
       ...prev,
       [listKey]: (prev[listKey] || []).filter((_, i) => i !== index),

@@ -85,7 +85,7 @@ const INACTIVE_TABS = [
 ];
 
 const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
+  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20";
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 
@@ -866,7 +866,7 @@ const SchoolDashboard = () => {
         <button
           type="button"
           onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
         >
           <Plus className="h-4 w-4" /> Add New
         </button>
@@ -982,7 +982,7 @@ const SchoolDashboard = () => {
               <button
                 type="button"
                 onClick={() => saveCollectionForm(listKey)}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Item
               </button>
@@ -1003,7 +1003,7 @@ const SchoolDashboard = () => {
         <button
           type="button"
           onClick={addFacultyProfile}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
+          className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
         >
           <Plus className="h-4 w-4" /> Add New
         </button>
@@ -1135,7 +1135,7 @@ const SchoolDashboard = () => {
                   saveFacultyProfile(facultyEditor.form);
                   setFacultyEditor({ index: null, form: null });
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Faculty
               </button>
@@ -1521,7 +1521,7 @@ const SchoolDashboard = () => {
           <h2 className="text-xl font-semibold text-slate-800">Semester Registrations</h2>
           <div className="flex flex-wrap gap-4">
             <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2">
-              <span className="text-xs font-semibold uppercase text-blue-600">Total</span>
+              <span className="text-xs font-semibold uppercase text-sky-600">Total</span>
               <p className="text-lg font-bold text-blue-900">{totalCount}</p>
             </div>
             <div className="rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-2">
@@ -1735,11 +1735,11 @@ const SchoolDashboard = () => {
                     key={tab.id}
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                      isActive ? "bg-slate-900 text-white shadow" : "text-slate-700 hover:bg-slate-100"
+                    className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all ${
+                      isActive ? "bg-sky-50 text-sky-700 font-semibold shadow-sm ring-1 ring-sky-500/50" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
                     {tab.label}
                   </button>
                 );
@@ -1765,13 +1765,13 @@ const SchoolDashboard = () => {
 
             <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3 shrink-0">
               <div className="mt-2 space-y-2">
-                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50">
+                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-3 py-2.5 text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/30 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0">
                   <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
                 </button>
                 <button onClick={() => {
                   clearPortalSession();
                   navigate("/login");
-                }} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                }} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100 transition-colors">
                   <LogOut className="h-4 w-4" /> Logout
                 </button>
               </div>
@@ -1783,7 +1783,7 @@ const SchoolDashboard = () => {
           <section className={cardClass}>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>
-              <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">{mySchoolCode}</span>
+              <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
             </div>
             <p className="mt-1 text-sm text-slate-600">Manage your school's content, events, news, notices &amp; more. All changes are saved per-school.</p>
             {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}

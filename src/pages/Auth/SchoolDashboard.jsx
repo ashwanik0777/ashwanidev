@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   Save,
@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   X,
   ClipboardList,
+  CheckCircle,
 } from "lucide-react";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -288,7 +289,21 @@ const SchoolDashboard = () => {
   const setActiveTab = (tabId) => {
     setSearchParams({ tab: tabId }, { replace: true });
   };
-  const [message, setMessage] = useState("");
+  const [toast, setToast] = useState(null);
+  const toastTimerRef = React.useRef(null);
+
+  const setMessage = useCallback((text) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    if (!text) { setToast(null); return; }
+    const isError = /fail|error|expired|cannot|too large/i.test(text);
+    setToast({ text, type: isError ? "error" : "success", key: Date.now() });
+  }, []);
+
+  useEffect(() => {
+    if (!toast) return;
+    toastTimerRef.current = setTimeout(() => setToast(null), 5500);
+    return () => clearTimeout(toastTimerRef.current);
+  }, [toast]);
   const [facultyRefreshKey, setFacultyRefreshKey] = useState(0);
   const [collectionEditors, setCollectionEditors] = useState({});
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
@@ -1796,8 +1811,33 @@ const SchoolDashboard = () => {
               <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
             </div>
             <p className="mt-1 text-sm text-slate-600">Manage your school's content, events, news, notices &amp; more. All changes are saved per-school.</p>
-            {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
           </section>
+
+          {/* Toast Notification */}
+          {toast && (
+            <div
+              key={toast.key}
+              className={`fixed top-4 right-4 z-[9999] flex items-center gap-3 rounded-xl border px-5 py-3.5 shadow-lg backdrop-blur-md animate-toast-in max-w-md ${
+                toast.type === "error"
+                  ? "border-rose-200 bg-rose-50/95 text-rose-800"
+                  : "border-emerald-200 bg-emerald-50/95 text-emerald-800"
+              }`}
+            >
+              {toast.type === "error" ? (
+                <AlertTriangle className="h-5 w-5 shrink-0 text-rose-500" />
+              ) : (
+                <CheckCircle className="h-5 w-5 shrink-0 text-emerald-500" />
+              )}
+              <p className="text-sm font-medium leading-snug">{toast.text}</p>
+              <button
+                type="button"
+                onClick={() => setToast(null)}
+                className="ml-auto shrink-0 rounded-lg p-1 transition-colors hover:bg-black/5"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
 
           <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {summary.map((item) => (

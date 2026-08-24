@@ -482,9 +482,9 @@ const SchoolDashboard = () => {
     setData((prev) => ({
       ...prev,
       tabContent: {
-        ...prev.tabContent,
+        ...(prev.tabContent || {}),
         [section]: {
-          ...prev.tabContent[section],
+          ...(prev.tabContent?.[section] || {}),
           [key]: value,
         },
       },
@@ -1315,10 +1315,10 @@ const SchoolDashboard = () => {
               <input className={inputClass} value={data.deanName || ""} onChange={(e) => updateField("deanName", e.target.value)} />
             </Field>
             <Field label="Hero Title">
-              <input className={inputClass} value={data.tabContent.home.heroTitle || ""} onChange={(e) => updateTabContent("home", "heroTitle", e.target.value)} />
+              <input className={inputClass} value={data.tabContent?.home?.heroTitle || ""} onChange={(e) => updateTabContent("home", "heroTitle", e.target.value)} />
             </Field>
             <Field label="Hero Subtitle">
-              <input className={inputClass} value={data.tabContent.home.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
+              <input className={inputClass} value={data.tabContent?.home?.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
             </Field>
             <Field label="Banner Image URL">
               <input className={inputClass} value={data.bannerImage || ""} onChange={(e) => updateField("bannerImage", e.target.value)} />

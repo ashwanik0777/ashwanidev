@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   Save,
   RotateCcw,
@@ -283,7 +283,11 @@ const toList = (value) => {
 const SchoolDashboard = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA));
-  const [activeTab, setActiveTab] = useState("home");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get("tab") || "home";
+  const setActiveTab = (tabId) => {
+    setSearchParams({ tab: tabId }, { replace: true });
+  };
   const [message, setMessage] = useState("");
   const [facultyRefreshKey, setFacultyRefreshKey] = useState(0);
   const [collectionEditors, setCollectionEditors] = useState({});
@@ -1726,7 +1730,7 @@ const SchoolDashboard = () => {
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">School Navigation</h2>
 
-            <div className="mt-3 flex-1 space-y-2 overflow-y-auto pr-1">
+            <div className="mt-3 flex-1 space-y-2 overflow-y-auto p-1 -mx-1 -my-1 no-scrollbar">
               {ACTIVE_TABS.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;

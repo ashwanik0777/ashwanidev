@@ -21,6 +21,7 @@ import {
   ClipboardList,
   CheckCircle,
 } from "lucide-react";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
@@ -309,6 +310,8 @@ const SchoolDashboard = () => {
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [facultyProfiles, setFacultyProfiles] = useState([]);
   const [isSaving, setIsSaving] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
+
   const [schoolId, setSchoolId] = useState(null);
   // Content as last read from the backend, so a save never drops keys this
   // dashboard does not edit.
@@ -589,10 +592,19 @@ const SchoolDashboard = () => {
     }
   };
 
+  const confirmDeleteFacultyProfile = (facultyId) => {
+    setConfirmDialog({
+      isOpen: true,
+      title: "Delete Faculty Profile",
+      message: "Are you sure you want to delete this faculty profile? This action cannot be undone.",
+      onConfirm: () => {
+        setConfirmDialog({ isOpen: false });
+        deleteFacultyProfile(facultyId);
+      }
+    });
+  };
+
   const deleteFacultyProfile = async (facultyId) => {
-    if (!window.confirm("Are you sure you want to delete this faculty profile? This action cannot be undone.")) {
-      return;
-    }
     try {
       await adminDeleteFacultyProfile(facultyId);
       setFacultyRefreshKey((prev) => prev + 1);
@@ -863,10 +875,19 @@ const SchoolDashboard = () => {
     setMessage(`${listKey} item saved.`);
   };
 
+  const confirmDeleteCollectionItem = (listKey, index) => {
+    setConfirmDialog({
+      isOpen: true,
+      title: "Delete Item",
+      message: "Are you sure you want to delete this item? This action cannot be undone.",
+      onConfirm: () => {
+        setConfirmDialog({ isOpen: false });
+        deleteCollectionItem(listKey, index);
+      }
+    });
+  };
+
   const deleteCollectionItem = (listKey, index) => {
-    if (!window.confirm(`Are you sure you want to delete this item?`)) {
-      return;
-    }
     setData((prev) => ({
       ...prev,
       [listKey]: (prev[listKey] || []).filter((_, i) => i !== index),
@@ -918,7 +939,7 @@ const SchoolDashboard = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => deleteCollectionItem(listKey, index)}
+                    onClick={() => confirmDeleteCollectionItem(listKey, index)}
                     className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
                   >
                     <Trash2 className="h-3 w-3 text-rose-500" /> Delete
@@ -1061,7 +1082,7 @@ const SchoolDashboard = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => deleteFacultyProfile(faculty.id)}
+                  onClick={() => confirmDeleteFacultyProfile(faculty.id)}
                   className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
                 >
                   <Trash2 className="h-3 w-3 text-rose-500" /> Delete
@@ -1849,6 +1870,14 @@ const SchoolDashboard = () => {
           </section>
 
           {renderBody()}
+
+          <ConfirmModal
+            isOpen={confirmDialog.isOpen}
+            title={confirmDialog.title}
+            message={confirmDialog.message}
+            onConfirm={confirmDialog.onConfirm}
+            onCancel={() => setConfirmDialog({ isOpen: false })}
+          />
         </main>
       </div>
     </div>

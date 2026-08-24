@@ -39,6 +39,7 @@ import {
   ClipboardList,
   Zap,
 } from "lucide-react";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
@@ -595,6 +596,7 @@ const AdminDashboard = () => {
     localStorage.setItem("adminActiveTab", activeTab);
   }, [activeTab]);
   const [message, setMessage] = useState("");
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, item: null, type: null });
   const [activeSchoolSubTab, setActiveSchoolSubTab] = useState("basic");
 
   const [schoolData, setSchoolData] = useState(getInitialSchoolData);
@@ -7303,8 +7305,18 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleTickerDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this ticker notice?")) return;
+  const initiateTickerDelete = (id) => {
+    setConfirmDialog({
+      isOpen: true,
+      type: "ticker",
+      item: { id }
+    });
+  };
+
+  const executeTickerDelete = async () => {
+    const id = confirmDialog.item?.id;
+    if (!id) return;
+    setConfirmDialog({ isOpen: false, item: null, type: null });
     try {
       await deleteTickerNotice(id);
       setMessage("Ticker notice deleted.");
@@ -7473,7 +7485,7 @@ const AdminDashboard = () => {
 
                   {/* Delete */}
                   <button
-                    onClick={() => handleTickerDelete(notice.id)}
+                    onClick={() => initiateTickerDelete(notice.id)}
                     className="p-2 rounded-lg text-red-600 bg-red-50 hover:bg-red-100 transition"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -8163,6 +8175,14 @@ const AdminDashboard = () => {
           </div>
         );
       })()}
+
+      <ConfirmModal
+        isOpen={confirmDialog.isOpen}
+        title={confirmDialog.type === "ticker" ? "Delete Ticker Notice" : "Confirm Action"}
+        message="Are you sure you want to delete this notice? This action cannot be undone."
+        onConfirm={executeTickerDelete}
+        onCancel={() => setConfirmDialog({ isOpen: false, item: null, type: null })}
+      />
     </div>
   );
 };

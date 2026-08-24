@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Pencil, Trash2, X, RefreshCw, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import ConfirmModal from "../ui/ConfirmModal";
 import {
   ANNOUNCEMENT_COLUMNS,
   ANNOUNCEMENT_FIELDS,
@@ -95,6 +96,7 @@ const AnnouncementManager = ({
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, item: null });
   const [search, setSearch] = useState("");
   const [editor, setEditor] = useState(null); // { id, form } — null when closed
   const [deletingId, setDeletingId] = useState(null);
@@ -222,8 +224,14 @@ const AnnouncementManager = ({
     }
   };
 
-  const handleDelete = async (item) => {
-    if (!window.confirm(`Delete "${item.title}"? This cannot be undone.`)) return;
+  const initiateDelete = (item) => {
+    setConfirmDialog({ isOpen: true, item });
+  };
+
+  const executeDelete = async () => {
+    const item = confirmDialog.item;
+    if (!item) return;
+    setConfirmDialog({ isOpen: false, item: null });
     setDeletingId(item.id);
     try {
       const message = await deleteAnnouncement(kind, item.id);
@@ -347,7 +355,7 @@ const AnnouncementManager = ({
                       <button
                         type="button"
                         disabled={deletingId === item.id}
-                        onClick={() => handleDelete(item)}
+                        onClick={() => initiateDelete(item)}
                         className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-700 shadow-sm transition hover:bg-rose-100 disabled:opacity-50"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -613,6 +621,14 @@ const AnnouncementManager = ({
           </form>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={confirmDialog.isOpen}
+        title={`Delete ${KIND_LABELS[kind] || "Item"}`}
+        message={`Are you sure you want to delete "${confirmDialog.item?.title}"? This action cannot be undone.`}
+        onConfirm={executeDelete}
+        onCancel={() => setConfirmDialog({ isOpen: false, item: null })}
+      />
     </div>
   );
 };

@@ -495,6 +495,62 @@ const SchoolDashboard = () => {
     [facultyProfiles.length, data.events, data.news, data.newsletters, data.notices]
   );
 
+  const getHeaderContent = () => {
+    switch (activeTab) {
+      case "home":
+        return {
+          title: data.schoolName || "School Dashboard",
+          desc: "Manage your school's content, events, news, notices & more. All changes are saved per-school."
+        };
+      case "faculty-management":
+        return {
+          title: "Faculty Management",
+          desc: "Manage active faculty profiles, roles, and contact information."
+        };
+      case "faculty-requests":
+        return {
+          title: "Faculty Requests",
+          desc: "Review, approve, or reject new faculty registration requests."
+        };
+      case "events":
+        return {
+          title: "Events Management",
+          desc: "Create and update upcoming and past events for your school."
+        };
+      case "news":
+        return {
+          title: "News Management",
+          desc: "Publish and manage school news articles and announcements."
+        };
+      case "newsletters":
+        return {
+          title: "Newsletters",
+          desc: "Upload and manage newsletters and monthly bulletins."
+        };
+      case "notices":
+        return {
+          title: "Notices & Circulars",
+          desc: "Post official notices, circulars, and important announcements."
+        };
+      case "event-gallery":
+        return {
+          title: "Event Gallery",
+          desc: "Manage photo galleries for various school events and activities."
+        };
+      case "clubs":
+        return {
+          title: "Clubs & Societies",
+          desc: "Manage student clubs, their coordinators, and club activities."
+        };
+      default:
+        return {
+          title: "Dashboard",
+          desc: "Manage your school's resources and information."
+        };
+    }
+  };
+  const header = getHeaderContent();
+
   const updateField = (key, value) => {
     setData((prev) => ({ ...prev, [key]: value }));
     setMessage("");
@@ -1828,10 +1884,10 @@ const SchoolDashboard = () => {
         <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] overflow-y-auto custom-scrollbar pb-6 pr-2">
           <section className={cardClass}>
             <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>
+              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{header.title}</h1>
               <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
             </div>
-            <p className="mt-1 text-sm text-slate-600">Manage your school's content, events, news, notices &amp; more. All changes are saved per-school.</p>
+            <p className="mt-1 text-sm text-slate-600">{header.desc}</p>
           </section>
 
           {/* Toast Notification */}
@@ -1860,14 +1916,16 @@ const SchoolDashboard = () => {
             </div>
           )}
 
-          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {summary.map((item) => (
-              <div key={item.label} className={cardClass}>
-                <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
-              </div>
-            ))}
-          </section>
+          {activeTab === "home" && (
+            <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {summary.map((item) => (
+                <div key={item.label} className={cardClass}>
+                  <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
+                  <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
+                </div>
+              ))}
+            </section>
+          )}
 
           {renderBody()}
 

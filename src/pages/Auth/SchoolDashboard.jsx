@@ -1720,9 +1720,9 @@ const SchoolDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="flex w-full flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
+    <div className="h-screen bg-slate-50 p-2 md:p-4 overflow-hidden">
+      <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
+        <aside className="h-auto lg:h-full lg:w-72 min-w-[280px] lg:shrink-0">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">School Navigation</h2>
 
@@ -1763,14 +1763,11 @@ const SchoolDashboard = () => {
               </div>
             </div>
 
-            <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3 shrink-0">
               <div className="mt-2 space-y-2">
                 <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50">
                   <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
                 </button>
-                {/* <button onClick={resetAll} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
-                  <RotateCcw className="h-4 w-4" /> Reset
-                </button> */}
                 <button onClick={() => {
                   clearPortalSession();
                   navigate("/login");
@@ -1782,7 +1779,7 @@ const SchoolDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] overflow-y-auto custom-scrollbar pb-6 pr-2">
           <section className={cardClass}>
             <div className="flex items-center gap-3 flex-wrap">
               <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>

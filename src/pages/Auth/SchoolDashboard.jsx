@@ -1220,7 +1220,18 @@ const SchoolDashboard = () => {
                 </select>
               </Field>
               <Field label="Email" required><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
-              <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
+              <Field label="Phone">
+                <input
+                  className={inputClass}
+                  value={facultyEditor.form.phone || ""}
+                  maxLength={10}
+                  onChange={(e) => {
+                    const numericVal = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: numericVal } }));
+                  }}
+                  placeholder="10-digit mobile number"
+                />
+              </Field>
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">

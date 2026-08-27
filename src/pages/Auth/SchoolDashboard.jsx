@@ -1105,30 +1105,39 @@ const SchoolDashboard = () => {
 
     return (
     <div className={cardClass}>
-      <div className="mb-4 flex flex-col gap-4 border-b border-slate-100 pb-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
-            <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
+      <div className="mb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+        <div>
+          <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
+          <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search faculty..."
+              value={facultySearchTerm}
+              onChange={(e) => setFacultySearchTerm(e.target.value)}
+              className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-shadow bg-slate-50 hover:bg-white focus:bg-white"
+            />
+            {facultySearchTerm && (
+              <button
+                type="button"
+                onClick={() => setFacultySearchTerm("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
           <button
             type="button"
             onClick={addFacultyProfile}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition whitespace-nowrap"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition whitespace-nowrap"
           >
             <Plus className="h-4 w-4" /> Add New
           </button>
-        </div>
-        
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search faculty by name or designation..."
-            value={facultySearchTerm}
-            onChange={(e) => setFacultySearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-shadow bg-slate-50 hover:bg-white focus:bg-white"
-          />
         </div>
       </div>
 

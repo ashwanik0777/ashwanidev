@@ -309,6 +309,7 @@ const SchoolDashboard = () => {
   const [collectionEditors, setCollectionEditors] = useState({});
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [facultyProfiles, setFacultyProfiles] = useState([]);
+  const [facultySearchTerm, setFacultySearchTerm] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
 
@@ -1095,63 +1096,87 @@ const SchoolDashboard = () => {
     </div>
   );
 
-  const renderFacultyEditor = () => (
+  const renderFacultyEditor = () => {
+    const filteredFaculty = facultyProfiles.filter(f => 
+      !facultySearchTerm || 
+      f.name?.toLowerCase().includes(facultySearchTerm.toLowerCase()) || 
+      f.designation?.toLowerCase().includes(facultySearchTerm.toLowerCase())
+    );
+
+    return (
     <div className={cardClass}>
-      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
+      <div className="mb-4 flex flex-col gap-4 border-b border-slate-100 pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
+            <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
+          </div>
+          <button
+            type="button"
+            onClick={addFacultyProfile}
+            className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition whitespace-nowrap"
+          >
+            <Plus className="h-4 w-4" /> Add New
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={addFacultyProfile}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
-        >
-          <Plus className="h-4 w-4" /> Add New
-        </button>
+        
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search faculty by name or designation..."
+            value={facultySearchTerm}
+            onChange={(e) => setFacultySearchTerm(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-shadow bg-slate-50 hover:bg-white focus:bg-white"
+          />
+        </div>
       </div>
 
-      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
-        {facultyProfiles.map((faculty, index) => (
-          <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
-            <div className="flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
-                <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
-              </div>
-
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                <button
-                  type="button"
-                  onClick={() => generateFacultyPassword(faculty.id)}
-                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
-                  title="Generate Initial Login Password"
-                >
-                  <Lock className="h-3 w-3 text-slate-500" /> Gen Pass
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
-                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
-                >
-                  <Pencil className="h-3 w-3 text-slate-500" /> Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => confirmDeleteFacultyProfile(faculty.id)}
-                  className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
-                >
-                  <Trash2 className="h-3 w-3 text-rose-500" /> Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {facultyProfiles.length === 0 && (
+      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
+        {facultyProfiles.length === 0 ? (
           <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
             No faculty profiles found. Click "Add New" to create one.
           </div>
+        ) : filteredFaculty.length === 0 ? (
+          <div className="py-8 text-center text-sm text-slate-500">
+            No faculty found matching your search.
+          </div>
+        ) : (
+          filteredFaculty.map((faculty, index) => (
+            <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
+                  <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => generateFacultyPassword(faculty.id)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                    title="Generate Initial Login Password"
+                  >
+                    <Lock className="h-3 w-3 text-slate-500" /> Gen Pass
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                  >
+                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => confirmDeleteFacultyProfile(faculty.id)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                  >
+                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
         )}
       </div>
 
@@ -1258,6 +1283,7 @@ const SchoolDashboard = () => {
       )}
     </div>
   );
+  };
 
   /* ── Faculty Registration Requests handlers and render ── */
   const handleApproveRequest = async (reqId) => {

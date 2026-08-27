@@ -1105,14 +1105,8 @@ const SchoolDashboard = () => {
 
     return (
     <div className={cardClass}>
-      <div className="mb-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
-          <div className="relative w-full sm:w-64">
+      <div className="mb-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div className="relative w-full sm:max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
             <input
               type="text"
@@ -1138,7 +1132,6 @@ const SchoolDashboard = () => {
           >
             <Plus className="h-4 w-4" /> Add New
           </button>
-        </div>
       </div>
 
       <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">

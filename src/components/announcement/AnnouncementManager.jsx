@@ -554,27 +554,53 @@ const AnnouncementManager = ({
                       )}
                     </div>
                   ) : field.type === "cover-selector" ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
-                      {(() => {
-                        const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
-                        if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
-                        return images.map((url, i) => (
-                          <label key={i} className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer ${editor.form[field.key] === url || (!editor.form[field.key] && i === 0) ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
-                            <input
-                              type="radio"
-                              name={field.key}
-                              value={url}
-                              checked={editor.form[field.key] === url || (!editor.form[field.key] && i === 0)}
-                              onChange={(e) => setField(field.key, e.target.value)}
-                              className="hidden"
-                            />
-                            <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
-                              {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                            </div>
-                            <span className="text-xs font-medium text-slate-700 truncate">Image {editor.form.images.indexOf(url) + 1}</span>
-                          </label>
-                        ));
-                      })()}
+                    <div className="space-y-2 mt-1">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {(() => {
+                          const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
+                          if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
+                          const currentCover = editor.form[field.key] || "";
+                          return images.map((url, i) => {
+                            const isSelected = currentCover === url;
+                            return (
+                              <button key={i} type="button"
+                                onClick={() => {
+                                  if (isSelected) {
+                                    setField(field.key, "");
+                                    notify("Cover image removed.");
+                                  } else {
+                                    setField(field.key, url);
+                                    notify(`Image ${editor.form.images.indexOf(url) + 1} set as cover.`);
+                                  }
+                                }}
+                                className={`flex items-center gap-2 p-2 rounded-xl border-2 transition-all text-left ${
+                                  isSelected
+                                    ? 'border-sky-500 bg-sky-50 ring-2 ring-sky-500/20'
+                                    : 'border-slate-200 hover:border-sky-300 hover:bg-slate-50'
+                                }`}>
+                                <div className="w-10 h-10 rounded-lg shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center relative">
+                                  {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                                  {isSelected && (
+                                    <div className="absolute inset-0 bg-sky-500/20 flex items-center justify-center">
+                                      <CheckCircle2 className="h-4 w-4 text-sky-600" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="min-w-0">
+                                  <span className="text-xs font-medium text-slate-700 block truncate">Image {editor.form.images.indexOf(url) + 1}</span>
+                                  <span className="text-[10px] text-slate-400">{isSelected ? "Click to remove" : "Click to set"}</span>
+                                </div>
+                              </button>
+                            );
+                          });
+                        })()}
+                      </div>
+                      {editor.form[field.key] && (
+                        <div className="flex items-center gap-2 text-xs text-sky-600 bg-sky-50 rounded-lg px-3 py-1.5 border border-sky-200">
+                          <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
+                          <span>Cover image selected. Click it again to remove.</span>
+                        </div>
+                      )}
                     </div>
                   ) : field.type === "textarea" ? (
                     <textarea

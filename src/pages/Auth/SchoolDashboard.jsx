@@ -63,6 +63,7 @@ const getRegistrationStatus = () => ({ active: false, reason: "", customMessage:
 const REASON_OPTIONS = [];
 
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
+import ImageUploadField from "../../components/ui/ImageUploadField";
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -1425,6 +1426,242 @@ const SchoolDashboard = () => {
     </div>
   );
 
+  /* ── Clubs & Societies dedicated renderer ── */
+  const CLUB_CATEGORIES = ["Technical", "Cultural", "Sports", "Social", "Literary", "Other"];
+  const CATEGORY_COLORS = {
+    Technical: "bg-blue-100 text-blue-700",
+    Cultural: "bg-purple-100 text-purple-700",
+    Sports: "bg-green-100 text-green-700",
+    Social: "bg-amber-100 text-amber-700",
+    Literary: "bg-rose-100 text-rose-700",
+    Other: "bg-slate-100 text-slate-700",
+  };
+
+  const clubNewTemplate = {
+    name: "", tagline: "", category: "Technical", logo: "", banner: "",
+    memberCount: 0, facultyAdvisor: "", facultyAdvisorDept: "",
+    presidentName: "", presidentDept: "", vicePresidentName: "", vicePresidentDept: "",
+    secretaryName: "", secretaryDept: "", treasurerName: "", treasurerDept: "",
+    instagram: "", linkedin: "", youtube: "",
+    description: "", objectives: "", history: "", achievements: "",
+  };
+
+  const updateClubField = (key, value) => {
+    setCollectionEditors((prev) => ({
+      ...prev,
+      clubs: { ...prev.clubs, form: { ...prev.clubs?.form, [key]: value } },
+    }));
+  };
+
+  const renderClubsTab = () => {
+    const clubs = data.clubs || [];
+    const editor = collectionEditors.clubs;
+    const form = editor?.form;
+
+    return (
+      <div className={cardClass}>
+        {/* Club list */}
+        <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+          {clubs.map((club, index) => (
+            <div key={`club-${club.id || index}`} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  {club.logo ? (
+                    <img src={club.logo} alt="" className="h-10 w-10 rounded-lg object-cover border border-slate-200 flex-shrink-0" />
+                  ) : (
+                    <div className="h-10 w-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-sm flex-shrink-0">
+                      {(club.name || "C")[0].toUpperCase()}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-slate-900">{club.name || "Untitled Club"}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      {club.category && (
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${CATEGORY_COLORS[club.category] || CATEGORY_COLORS.Other}`}>
+                          {club.category}
+                        </span>
+                      )}
+                      {club.memberCount > 0 && (
+                        <span className="text-[10px] text-slate-500">{club.memberCount} members</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <button type="button" onClick={() => openCollectionEdit("clubs", index, club)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm">
+                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                  </button>
+                  <button type="button" onClick={() => confirmDeleteCollectionItem("clubs", index)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm">
+                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {clubs.length === 0 && (
+            <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+              No clubs found. Click "Add New" to create one.
+            </div>
+          )}
+        </div>
+
+        {/* Club Editor Modal */}
+        {form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+            <div className="w-full max-w-3xl transform rounded-2xl border border-slate-100 bg-white shadow-2xl transition-all max-h-[90vh] flex flex-col">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-slate-100 p-5">
+                <h3 className="text-base font-bold text-slate-950">
+                  {editor.index === null ? "Add New Club" : "Edit Club Details"}
+                </h3>
+                <button type="button" onClick={() => cancelCollectionEdit("clubs")}
+                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Modal Body — scrollable */}
+              <div className="overflow-y-auto flex-1 p-5 space-y-6">
+
+                {/* Section: Basic Info */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Basic Info</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <Field label="Club Name" required>
+                      <input className={inputClass} value={form.name || ""} onChange={(e) => updateClubField("name", e.target.value)} />
+                    </Field>
+                    <Field label="Tagline">
+                      <input className={inputClass} value={form.tagline || ""} onChange={(e) => updateClubField("tagline", e.target.value)} placeholder="Short one-liner about the club" />
+                    </Field>
+                    <Field label="Category" required>
+                      <select className={inputClass} value={form.category || "Technical"} onChange={(e) => updateClubField("category", e.target.value)}>
+                        {CLUB_CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+                      </select>
+                    </Field>
+                    <Field label="Member Count">
+                      <input className={inputClass} type="number" min="0" value={form.memberCount || 0} onChange={(e) => updateClubField("memberCount", Number(e.target.value))} />
+                    </Field>
+                  </div>
+                </div>
+
+                {/* Section: Images */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Images</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <ImageUploadField
+                      label="Club Logo"
+                      value={form.logo || ""}
+                      onChange={(url) => updateClubField("logo", url)}
+                      aspectRatio={1}
+                      recommendedSize="300×300"
+                      folder={`gbu-website/${mySchoolCode || "general"}/clubs`}
+                    />
+                    <ImageUploadField
+                      label="Banner Image"
+                      value={form.banner || ""}
+                      onChange={(url) => updateClubField("banner", url)}
+                      aspectRatio={3}
+                      recommendedSize="1200×400"
+                      folder={`gbu-website/${mySchoolCode || "general"}/clubs`}
+                    />
+                  </div>
+                </div>
+
+                {/* Section: Office Bearers */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Office Bearers</h4>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <Field label="Faculty Advisor Name">
+                      <input className={inputClass} value={form.facultyAdvisor || ""} onChange={(e) => updateClubField("facultyAdvisor", e.target.value)} />
+                    </Field>
+                    <Field label="Faculty Advisor Department">
+                      <input className={inputClass} value={form.facultyAdvisorDept || ""} onChange={(e) => updateClubField("facultyAdvisorDept", e.target.value)} />
+                    </Field>
+                    <Field label="President Name">
+                      <input className={inputClass} value={form.presidentName || ""} onChange={(e) => updateClubField("presidentName", e.target.value)} />
+                    </Field>
+                    <Field label="President Dept/Year">
+                      <input className={inputClass} value={form.presidentDept || ""} onChange={(e) => updateClubField("presidentDept", e.target.value)} />
+                    </Field>
+                    <Field label="Vice President Name">
+                      <input className={inputClass} value={form.vicePresidentName || ""} onChange={(e) => updateClubField("vicePresidentName", e.target.value)} />
+                    </Field>
+                    <Field label="Vice President Dept/Year">
+                      <input className={inputClass} value={form.vicePresidentDept || ""} onChange={(e) => updateClubField("vicePresidentDept", e.target.value)} />
+                    </Field>
+                    <Field label="Secretary Name">
+                      <input className={inputClass} value={form.secretaryName || ""} onChange={(e) => updateClubField("secretaryName", e.target.value)} />
+                    </Field>
+                    <Field label="Secretary Dept/Year">
+                      <input className={inputClass} value={form.secretaryDept || ""} onChange={(e) => updateClubField("secretaryDept", e.target.value)} />
+                    </Field>
+                    <Field label="Treasurer Name">
+                      <input className={inputClass} value={form.treasurerName || ""} onChange={(e) => updateClubField("treasurerName", e.target.value)} />
+                    </Field>
+                    <Field label="Treasurer Dept/Year">
+                      <input className={inputClass} value={form.treasurerDept || ""} onChange={(e) => updateClubField("treasurerDept", e.target.value)} />
+                    </Field>
+                  </div>
+                </div>
+
+                {/* Section: Social Links */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Social Links</h4>
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <Field label="Instagram URL">
+                      <input className={inputClass} value={form.instagram || ""} onChange={(e) => updateClubField("instagram", e.target.value)} placeholder="https://instagram.com/..." />
+                    </Field>
+                    <Field label="LinkedIn URL">
+                      <input className={inputClass} value={form.linkedin || ""} onChange={(e) => updateClubField("linkedin", e.target.value)} placeholder="https://linkedin.com/..." />
+                    </Field>
+                    <Field label="YouTube URL">
+                      <input className={inputClass} value={form.youtube || ""} onChange={(e) => updateClubField("youtube", e.target.value)} placeholder="https://youtube.com/..." />
+                    </Field>
+                  </div>
+                </div>
+
+                {/* Section: About */}
+                <div>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">About the Club</h4>
+                  <div className="space-y-4">
+                    <Field label="Description">
+                      <textarea className={`${inputClass} min-h-24`} value={form.description || ""} onChange={(e) => updateClubField("description", e.target.value)} placeholder="What does this club do?" />
+                    </Field>
+                    <Field label="Objectives (comma separated)">
+                      <textarea className={`${inputClass} min-h-20`} value={form.objectives || ""} onChange={(e) => updateClubField("objectives", e.target.value)} placeholder="Main objectives, separated by commas" />
+                    </Field>
+                    <Field label="History">
+                      <textarea className={`${inputClass} min-h-20`} value={form.history || ""} onChange={(e) => updateClubField("history", e.target.value)} placeholder="When was it founded? Key milestones..." />
+                    </Field>
+                    <Field label="Achievements (comma separated)">
+                      <textarea className={`${inputClass} min-h-20`} value={form.achievements || ""} onChange={(e) => updateClubField("achievements", e.target.value)} placeholder="Awards, competitions won, etc." />
+                    </Field>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex items-center justify-end gap-3 border-t border-slate-100 p-5">
+                <button type="button" onClick={() => cancelCollectionEdit("clubs")}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                  Cancel
+                </button>
+                <button type="button" onClick={() => saveCollectionForm("clubs")}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition">
+                  Save Club
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderBody = () => {
     if (activeTab === "home") {
       return (
@@ -1443,9 +1680,16 @@ const SchoolDashboard = () => {
             <Field label="Hero Subtitle">
               <input className={inputClass} value={data.tabContent?.home?.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
             </Field>
-            <Field label="Banner Image URL">
-              <input className={inputClass} value={data.bannerImage || ""} onChange={(e) => updateField("bannerImage", e.target.value)} />
-            </Field>
+            <div className="md:col-span-2">
+              <ImageUploadField
+                label="Banner Image"
+                value={data.bannerImage || ""}
+                onChange={(url) => updateField("bannerImage", url)}
+                aspectRatio={16 / 9}
+                recommendedSize="1920×1080"
+                folder={`gbu-website/${mySchoolCode || "general"}/banners`}
+              />
+            </div>
             <Field label="School Email">
               <input className={inputClass} value={data.email || ""} onChange={(e) => updateField("email", e.target.value)} />
             </Field>
@@ -1489,60 +1733,7 @@ const SchoolDashboard = () => {
     }
 
     if (activeTab === "clubs") {
-      return renderCollectionEditor(
-        "clubs",
-        "Clubs & Societies Management",
-        [
-          { key: "name", label: "Club Name" },
-          { key: "tagline", label: "Tagline" },
-          { key: "category", label: "Category (Technical / Cultural / Sports / Social)" },
-          { key: "logo", label: "Logo URL" },
-          { key: "banner", label: "Banner Image URL" },
-          { key: "memberCount", label: "Member Count", type: "number" },
-          { key: "facultyAdvisor", label: "Faculty Advisor Name" },
-          { key: "facultyAdvisorDept", label: "Faculty Advisor Department" },
-          { key: "presidentName", label: "President Name" },
-          { key: "presidentDept", label: "President Department/Year" },
-          { key: "vicePresidentName", label: "Vice President Name" },
-          { key: "vicePresidentDept", label: "Vice President Department/Year" },
-          { key: "secretaryName", label: "Secretary Name" },
-          { key: "secretaryDept", label: "Secretary Department/Year" },
-          { key: "treasurerName", label: "Treasurer Name" },
-          { key: "treasurerDept", label: "Treasurer Department/Year" },
-          { key: "instagram", label: "Instagram URL" },
-          { key: "linkedin", label: "LinkedIn URL" },
-          { key: "youtube", label: "YouTube URL" },
-          { key: "description", label: "Description", type: "textarea" },
-          { key: "objectives", label: "Objectives (comma separated)", type: "textarea" },
-          { key: "history", label: "History", type: "textarea" },
-          { key: "achievements", label: "Achievements (comma separated)", type: "textarea" },
-        ],
-        {
-          name: "",
-          tagline: "",
-          category: "Technical",
-          logo: "",
-          banner: "",
-          memberCount: 0,
-          facultyAdvisor: "",
-          facultyAdvisorDept: "",
-          presidentName: "",
-          presidentDept: "",
-          vicePresidentName: "",
-          vicePresidentDept: "",
-          secretaryName: "",
-          secretaryDept: "",
-          treasurerName: "",
-          treasurerDept: "",
-          instagram: "",
-          linkedin: "",
-          youtube: "",
-          description: "",
-          objectives: "",
-          history: "",
-          achievements: "",
-        }
-      );
+      return renderClubsTab();
     }
 
     // if (activeTab === "semester-registrations") return renderSemesterRegistrationsTab(); // hidden until semester registration ships
@@ -1950,13 +2141,7 @@ const SchoolDashboard = () => {
                 {activeTab === "clubs" && (
                   <button
                     type="button"
-                    onClick={() => openCollectionAdd("clubs", {
-                      name: "", tagline: "", category: "Technical", logo: "", banner: "",
-                      memberCount: 0, facultyAdvisor: "", facultyAdvisorDept: "",
-                      presidentName: "", presidentDept: "", vicePresidentName: "", vicePresidentDept: "",
-                      secretaryName: "", secretaryDept: "", treasurerName: "", treasurerDept: "",
-                      instagram: "", linkedin: "", youtube: "", description: "", objectives: "", history: "", achievements: "",
-                    })}
+                    onClick={() => openCollectionAdd("clubs", clubNewTemplate)}
                     className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
                   >
                     <Plus className="h-4 w-4" /> Add New

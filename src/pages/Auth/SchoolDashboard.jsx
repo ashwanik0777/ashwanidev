@@ -21,6 +21,7 @@ import {
   ClipboardList,
   CheckCircle,
 } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
@@ -312,6 +313,7 @@ const SchoolDashboard = () => {
   const [facultySearchTerm, setFacultySearchTerm] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
+  const [announcementActions, setAnnouncementActions] = useState(null);
 
   const [schoolId, setSchoolId] = useState(null);
   // Content as last read from the backend, so a save never drops keys this
@@ -961,19 +963,6 @@ const SchoolDashboard = () => {
 
   const renderCollectionEditor = (listKey, title, fields, newItemTemplate) => (
     <div className={cardClass}>
-      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">{title}</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage, add, and update school listings.</p>
-        </div>
-        <button
-          type="button"
-          onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
-        >
-          <Plus className="h-4 w-4" /> Add New
-        </button>
-      </div>
 
       <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
         {(data[listKey] || []).map((item, index) => {
@@ -1105,7 +1094,7 @@ const SchoolDashboard = () => {
 
     return (
     <div className={cardClass}>
-      <div className="mb-4 flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-slate-100 pb-4">
+      <div className="mb-4 border-b border-slate-100 pb-4">
         <div className="relative w-full sm:max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
             <input
@@ -1124,14 +1113,7 @@ const SchoolDashboard = () => {
                 <X className="h-3.5 w-3.5" />
               </button>
             )}
-          </div>
-          <button
-            type="button"
-            onClick={addFacultyProfile}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition whitespace-nowrap"
-          >
-            <Plus className="h-4 w-4" /> Add New
-          </button>
+        </div>
       </div>
 
       <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
@@ -1319,10 +1301,10 @@ const SchoolDashboard = () => {
   const renderFacultyRequestsTab = () => (
     <div className="space-y-4">
       <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
           <p className="text-sm text-slate-600">Review and approve registration requests for your school.</p>
-        </div>
+        </div> */}
 
         {/* Filters */}
         <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -1501,6 +1483,7 @@ const SchoolDashboard = () => {
           actorRole="school"
           schoolCode={mySchoolCode}
           onMessage={(text) => setMessage(text)}
+          onActionsReady={setAnnouncementActions}
         />
       );
     }
@@ -1922,9 +1905,64 @@ const SchoolDashboard = () => {
 
         <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] overflow-y-auto custom-scrollbar pb-6 pr-2">
           <section className={cardClass}>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{header.title}</h1>
-              <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{header.title}</h1>
+                <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
+              </div>
+
+              {/* Action buttons per tab */}
+              <div className="flex items-center gap-2">
+                {/* Announcement tabs: Refresh + Add New */}
+                {["events", "news", "newsletters", "notices", "event-gallery"].includes(activeTab) && announcementActions && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={announcementActions.load}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition"
+                    >
+                      <RefreshCw className={`h-3.5 w-3.5 ${announcementActions.loading ? "animate-spin" : ""}`} /> Refresh
+                    </button>
+                    {announcementActions.kind !== "gallery" && (
+                      <button
+                        type="button"
+                        onClick={announcementActions.openCreate}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                      >
+                        <Plus className="h-4 w-4" /> Add New
+                      </button>
+                    )}
+                  </>
+                )}
+
+                {/* Faculty Management: Add New */}
+                {activeTab === "faculty-management" && (
+                  <button
+                    type="button"
+                    onClick={addFacultyProfile}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                  >
+                    <Plus className="h-4 w-4" /> Add New
+                  </button>
+                )}
+
+                {/* Clubs: Add New */}
+                {activeTab === "clubs" && (
+                  <button
+                    type="button"
+                    onClick={() => openCollectionAdd("clubs", {
+                      name: "", tagline: "", category: "Technical", logo: "", banner: "",
+                      memberCount: 0, facultyAdvisor: "", facultyAdvisorDept: "",
+                      presidentName: "", presidentDept: "", vicePresidentName: "", vicePresidentDept: "",
+                      secretaryName: "", secretaryDept: "", treasurerName: "", treasurerDept: "",
+                      instagram: "", linkedin: "", youtube: "", description: "", objectives: "", history: "", achievements: "",
+                    })}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                  >
+                    <Plus className="h-4 w-4" /> Add New
+                  </button>
+                )}
+              </div>
             </div>
             <p className="mt-1 text-sm text-slate-600">{header.desc}</p>
           </section>

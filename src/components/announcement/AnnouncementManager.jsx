@@ -87,6 +87,9 @@ const AnnouncementManager = ({
   actorRole = "admin",
   schoolCode = "",
   onMessage,
+  /** Optional callback — parent receives { load, openCreate, loading, kind } so it
+   *  can render action buttons (Refresh / Add New) in its own header bar. */
+  onActionsReady,
 }) => {
   const fields = ANNOUNCEMENT_FIELDS[kind] || [];
   const columns = ANNOUNCEMENT_COLUMNS[kind] || [];
@@ -146,6 +149,14 @@ const AnnouncementManager = ({
   useEffect(() => {
     load();
   }, [load]);
+
+  // Expose action handlers to parent so it can render buttons in its own header
+  useEffect(() => {
+    onActionsReady?.({ load, openCreate: () => {
+      const defaultLevel = schoolCode ? LEVELS.SCHOOL : LEVELS.COLLEGE;
+      setEditor({ id: null, form: buildEmptyAnnouncement(kind, defaultLevel) });
+    }, loading, kind });
+  }, [onActionsReady, load, loading, kind, schoolCode]);
 
   const visibleItems = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -250,12 +261,14 @@ const AnnouncementManager = ({
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      {/* Show action buttons inline only if the parent is NOT rendering them in its own header */}
+      {!onActionsReady && (
       <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>
-          <h3 className="text-base font-semibold text-slate-900">{KIND_LABELS[kind]}</h3>
+          {/* <h3 className="text-base font-semibold text-slate-900">{KIND_LABELS[kind]}</h3>
           <p className="mt-0.5 text-xs text-slate-500">
             Saved straight to the database and shown on the public Announcements pages.
-          </p>
+          </p> */}
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -276,6 +289,7 @@ const AnnouncementManager = ({
           )}
         </div>
       </div>
+      )}
 
       {error ? (
         <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">

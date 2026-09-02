@@ -70,7 +70,7 @@ const ImageCropModal = ({ open, imageSrc, aspectRatio = 1, onCropDone, onClose }
     <div className="fixed inset-0 z-[9999] flex flex-col bg-black/80 backdrop-blur-sm">
       {/* ── Header ── */}
       <div className="flex items-center justify-between px-5 py-3 bg-gray-900/90">
-        <h3 className="text-white font-semibold text-lg">Image Crop करें</h3>
+        <h3 className="text-white font-semibold text-lg">Crop Image</h3>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"

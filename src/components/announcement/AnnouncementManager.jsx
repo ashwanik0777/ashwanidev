@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Pencil, Trash2, X, RefreshCw, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 import ConfirmModal from "../ui/ConfirmModal";
+import ImageUploadField from "../ui/ImageUploadField";
 import {
   ANNOUNCEMENT_COLUMNS,
   ANNOUNCEMENT_FIELDS,
@@ -258,6 +259,15 @@ const AnnouncementManager = ({
 
   const willNeedApproval =
     !isAdmin && editor?.form?.level === LEVELS.COLLEGE;
+
+  /* Detect single-image URL fields — these should use ImageUploadField */
+  const IMAGE_FIELD_KEYS = new Set(["image", "flyerUrl", "coverImage", "coverImageUrl"]);
+  const isImageUrlField = (field) =>
+    !field.type && IMAGE_FIELD_KEYS.has(field.key);
+
+  /* Aspect ratios per field key */
+  const IMAGE_ASPECTS = { image: 16/9, flyerUrl: 3/4, coverImage: 3/4, coverImageUrl: 16/9 };
+  const IMAGE_SIZES = { image: "800×450", flyerUrl: "600×800", coverImage: "600×800", coverImageUrl: "1200×675" };
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -597,6 +607,15 @@ const AnnouncementManager = ({
                       <option value="true">Yes</option>
                       <option value="false">No</option>
                     </select>
+                  ) : isImageUrlField(field) ? (
+                    <ImageUploadField
+                      label=""
+                      value={editor.form[field.key] ?? ""}
+                      onChange={(url) => setField(field.key, url)}
+                      aspectRatio={IMAGE_ASPECTS[field.key] || 16/9}
+                      recommendedSize={IMAGE_SIZES[field.key] || ""}
+                      folder={`gbu-website/${schoolCode || "general"}/${kind}`}
+                    />
                   ) : (
                     <input
                       className={inputClass}

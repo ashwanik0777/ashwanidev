@@ -1242,6 +1242,16 @@ const SchoolDashboard = () => {
                   placeholder="10-digit mobile number"
                 />
               </Field>
+              <div className="md:col-span-2">
+                <ImageUploadField
+                  label="Profile Photo"
+                  value={facultyEditor.form.image_url || ""}
+                  onChange={(url) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, image_url: url } }))}
+                  aspectRatio={3 / 4}
+                  recommendedSize="300×400"
+                  folder={`gbu-website/${mySchoolCode || "general"}/faculty`}
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">

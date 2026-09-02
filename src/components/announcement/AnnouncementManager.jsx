@@ -511,47 +511,44 @@ const AnnouncementManager = ({
                   </span>
 
                   {field.type === "image-list" ? (
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                       {(editor.form[field.key] || [""]).map((url, i, arr) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <span className="text-xs font-semibold text-slate-500 w-16 shrink-0">Image {i + 1}</span>
-                          <input
-                            className={inputClass}
-                            type="text"
+                        <div key={i} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-bold text-slate-500">Image {i + 1}</span>
+                            {arr.length > 1 && (
+                              <button type="button"
+                                onClick={() => {
+                                  const newArr = arr.filter((_, idx) => idx !== i);
+                                  setField(field.key, newArr);
+                                  if (field.key === "images") {
+                                    if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
+                                    if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
+                                  }
+                                }}
+                                className="inline-flex items-center gap-1 text-xs text-rose-500 hover:text-rose-700 transition-colors">
+                                <X className="w-3.5 h-3.5" /> Remove
+                              </button>
+                            )}
+                          </div>
+                          <ImageUploadField
+                            label=""
                             value={url}
-                            placeholder="https://..."
-                            onChange={(e) => {
+                            onChange={(newUrl) => {
                               const newArr = [...arr];
-                              newArr[i] = e.target.value;
+                              newArr[i] = newUrl;
                               setField(field.key, newArr);
                             }}
+                            aspectRatio={16 / 9}
+                            recommendedSize="1200×675"
+                            folder={`gbu-website/${schoolCode || "general"}/${kind}`}
                           />
-                          {arr.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const newArr = arr.filter((_, idx) => idx !== i);
-                                setField(field.key, newArr);
-                                if (field.key === "images") {
-                                  if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
-                                  if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
-                                }
-                              }}
-                              className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          )}
                         </div>
                       ))}
                       {(editor.form[field.key] || [""]).length < 6 && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setField(field.key, [...(editor.form[field.key] || [""]), ""]);
-                          }}
-                          className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 mt-1"
-                        >
+                        <button type="button"
+                          onClick={() => setField(field.key, [...(editor.form[field.key] || [""]), ""])}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-700 transition-colors">
                           <Plus className="w-3.5 h-3.5" /> Add another image
                         </button>
                       )}

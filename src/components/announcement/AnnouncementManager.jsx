@@ -123,6 +123,16 @@ const AnnouncementManager = ({
       // university-wide tab passes no code and sees everything.
       let data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
       
+      // School dashboard: only show items that belong to this school.
+      // The backend already scopes by the JWT school code, but this is an
+      // extra safety net so a school never sees another school's data.
+      if (!isAdmin && schoolCode) {
+        const normalised = schoolCode.trim().toUpperCase();
+        data = data.filter(
+          (item) => (item.schoolCode || "").trim().toUpperCase() === normalised,
+        );
+      }
+
       // Filter logic: `events` shows ALL events (past and upcoming), `gallery` shows past events
       if (kind === "events" || kind === "gallery") {
         const today = new Date();
@@ -145,7 +155,7 @@ const AnnouncementManager = ({
     } finally {
       setLoading(false);
     }
-  }, [kind, schoolCode]);
+  }, [kind, schoolCode, isAdmin]);
 
   useEffect(() => {
     load();

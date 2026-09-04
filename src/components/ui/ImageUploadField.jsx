@@ -10,6 +10,7 @@ const STATUS_DONE = 'done';
 
 const ImageUploadField = ({
   label = 'Image',
+  required = false,
   value = '',
   onChange,
   aspectRatio = 1,
@@ -100,7 +101,7 @@ const ImageUploadField = ({
 
   return (
     <div className="space-y-2">
-      {label && <label className="block text-sm font-medium text-slate-700">{label}</label>}
+      {label && <label className="block text-sm font-medium text-slate-700">{label} {required && <span className="text-rose-500">*</span>}</label>}
 
       {/* Upload drop zone */}
       {uploadStatus === STATUS_UPLOADING ? (

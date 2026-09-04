@@ -7,6 +7,7 @@ export default function CampusGallery() {
   const [galleryData, setGalleryData] = useState([]);
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -146,7 +147,13 @@ export default function CampusGallery() {
 
         {/* Main Image */}
         {currentImage && (
-          <div className="relative w-full rounded-xl overflow-hidden shadow-xl mb-3 group">
+          <div 
+            className="relative w-full rounded-xl overflow-hidden shadow-xl mb-3 group cursor-pointer"
+            onClick={() => setIsLightboxOpen(true)}
+          >
+            <div className="absolute top-3 right-3 z-10 bg-black/50 backdrop-blur-md p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:block">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+            </div>
             <img
               src={currentImage.image}
               alt={currentImage.text}
@@ -256,6 +263,80 @@ export default function CampusGallery() {
             ></div>
           </div>
         </div>
+        {/* Lightbox / Gallery View */}
+        {isLightboxOpen && currentImage && (
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm touch-none"
+            onClick={() => setIsLightboxOpen(false)}
+          >
+            {/* Close Button */}
+            <button 
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white z-50 p-2 bg-black/40 rounded-full transition-colors" 
+              onClick={(e) => { e.stopPropagation(); setIsLightboxOpen(false); }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* Navigation: Prev */}
+            <button 
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white hover:bg-white/10 z-50 p-3 rounded-full transition-all" 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setMainImageIndex((prev) => (prev - 1 + galleryData.length) % galleryData.length); 
+              }}
+            >
+              <svg className="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            {/* Navigation: Next */}
+            <button 
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 text-white/50 hover:text-white hover:bg-white/10 z-50 p-3 rounded-full transition-all" 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                setMainImageIndex((prev) => (prev + 1) % galleryData.length); 
+              }}
+            >
+              <svg className="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            {/* Image Container */}
+            <div 
+              className="relative max-w-7xl max-h-screen px-4 sm:px-24 py-8 flex flex-col items-center justify-center w-full h-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={currentImage.image}
+                alt={currentImage.text}
+                className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 select-none"
+                style={{ WebkitUserDrag: 'none' }}
+              />
+              <div className="mt-4 sm:mt-6 text-center max-w-2xl px-4">
+                <p className="text-white text-base sm:text-xl font-medium leading-relaxed drop-shadow-md">{currentImage.text}</p>
+                <div className="flex items-center justify-center gap-4 mt-2 text-gray-400">
+                  <span className="text-sm font-medium px-3 py-1 bg-white/10 rounded-full">
+                    {mainImageIndex + 1} / {galleryData.length}
+                  </span>
+                  {currentImage.button1_url && (
+                    <a 
+                      href={currentImage.button1_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      {currentImage.button1_text || "View Details"} &rarr;
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

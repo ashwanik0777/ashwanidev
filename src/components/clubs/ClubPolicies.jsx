@@ -92,7 +92,6 @@ const ClubPolicies = ({ club }) => {
     <div className="space-y-6 bg-gray-50 p-6 md:p-10 rounded-xl">
       <div className="text-center">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Club Policies & Guidelines</h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

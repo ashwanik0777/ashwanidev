@@ -71,10 +71,9 @@ const ClubReports  = ({ club }) => {
     <div className="space-y-8">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">Annual Reports</h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-        <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+        {/* <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
           Comprehensive documentation of our club's activities, achievements, and impact throughout the years.
-        </p>
+        </p> */}
       </div>
 
       {/* Report Statistics */}

@@ -279,6 +279,31 @@ const committeesList = [
       { name: "Dr. Nirmita Malhotra", role: "Member (SoE)" },
       { name: "Dr. Anand Pratap Singh", role: "Member (SoHSS)" }
     ]
+  },
+  {
+    id: "equal-opportunity-cell",
+    category: "statutory",
+    name: "Equal Opportunity Cell",
+    badge: "Promotion of Equity",
+    icon: Users,
+    color: "from-pink-600 to-rose-700",
+    bgColor: "bg-pink-50/70 border-pink-100",
+    description:
+      "Constituted in compliance with UGC (Promotion of Equity in Higher Education Institutions) Regulations to promote equity and discharge related functions and responsibilities across the university.",
+    chairperson: "Prof. Rana Pratap Singh",
+    chairpersonRole: "Chairperson, Vice Chancellor",
+    members: [
+      { name: "Prof. Rana Pratap Singh", role: "Chairperson (Vice Chancellor)" },
+      { name: "Prof. Rajeev Varshney", role: "Member" },
+      { name: "Prof. Sanjay Kumar Sharma", role: "Member" },
+      { name: "Dr. Satish Chandra", role: "Member" },
+      { name: "Dr. Pradeep Kumar", role: "Member (Sports Officer)" },
+      { name: "Mrs. Amisha Agarwal", role: "Member (Civil Society)" },
+      { name: "Mrs. Pramila Sharma", role: "Member (Civil Society)" },
+      { name: "Ms. Deepti Singh", role: "Special Invitee (Student)" },
+      { name: "Mr. Manuraj", role: "Special Invitee (Student)" },
+      { name: "Prof. Uttam Kumar", role: "Member Secretary" }
+    ]
   }
 ];
 

@@ -180,52 +180,52 @@ const governanceData = {
     icon: <Users className="w-6 h-6" />,
     members: [
       {
-        name: "(A) Prof. Rana Pratap Singh",
+        name: "Prof. Rana Pratap Singh",
         role: "Chairman",
         designation: "Vice Chancellor, Gautam Buddha University, Greater Noida",
       },
       {
-        name: "(B) Dr. Biranchi Panda",
+        name: "Dr. Biranchi Panda",
         role: "Member",
         designation: "Technical Education Nominee - Department of Mechanical Engineering, Indian Institute of Technology Guwahati, Amingaon North Guwahati, Guwahati, Assam-781039",
       },
       {
-        name: "(C) 1. Prof. Ruchir Gupta",
+        name: "Prof. Ruchir Gupta",
         role: "Member",
         designation: "Education Society Nominee - Indian Institute of Technology, BHU, Varanasi",
       },
       {
-        name: "(C) 2. Prof. Ravi Kumar Gangwar",
+        name: "Prof. Ravi Kumar Gangwar",
         role: "Member",
         designation: "Education Society Nominee - Indian Institute of Technology, Dhanbad",
       },
       {
-        name: "(C) 3. Prof. Sapna Ratan Shah",
+        name: "Prof. Sapna Ratan Shah",
         role: "Member",
         designation: "Education Society Nominee - Jawaharlal Nehru University, New Delhi",
       },
       {
-        name: "(D) 1. Prof. Rajeev Varshney",
+        name: "Prof. Rajeev Varshney",
         role: "Member",
         designation: "Deans (Coordinating) - Dean, Academics, Gautam Buddha University",
       },
       {
-        name: "(D) 2. Prof. Bandana Pandey",
+        name: "Prof. Bandana Pandey",
         role: "Member",
         designation: "Deans (Coordinating) - Professor, School of Humanities & Social Sciences, Gautam Buddha University",
       },
       {
-        name: "(D) 3. Prof. Sanjay kumar Sharma",
+        name: "Prof. Sanjay kumar Sharma",
         role: "Member",
         designation: "Deans (Coordinating) - Professor, School of ICT, Gautam Buddha University",
       },
       {
-        name: "(E) 1. Prof. Chander Kumar Singh",
+        name: "Prof. Chander Kumar Singh",
         role: "Member",
         designation: "School's Deans - Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University, Greater Noida",
       },
       {
-        name: "(E) 2. Prof. S. Dhanalakshmi",
+        name: "Prof. S. Dhanalakshmi",
         role: "Member",
         designation: "School's Deans - Dean, School of Biotechnology, Gautam Buddha University, Greater Noida",
       },

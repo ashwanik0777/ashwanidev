@@ -128,11 +128,6 @@ const governanceData = {
         designation: "Dean, Academics, Gautam Buddha University",
       },
       {
-        name: "Prof. Chander Kumar Singh",
-        role: "Member",
-        designation: "Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University",
-      },
-      {
         name: "Prof. Modho Govind",
         role: "Member",
         designation: "Dean, School of Humanities and Social Sciences, Gautam Buddha University",
@@ -174,8 +169,8 @@ const governanceData = {
       },
       {
         name: "Prof. Chander Kumar Singh",
-        role: "Secretary",
-        designation: "Registrar (I/c), Gautam Buddha University",
+        role: "Member and Secretary",
+        designation: "Registrar (I/c) & Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University",
       },
     ],
   },

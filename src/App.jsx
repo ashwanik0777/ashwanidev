@@ -7,8 +7,11 @@ import Navbar from "../src/components/home/Navbar.jsx";
 import DepartmentNavbar from "../src/components/departments/Navbar.jsx";
 import Footer from "../src/components/home/Footer.jsx";
 import ScrollToTop from "./hooks/scrollToTop.jsx";
+import useHashScroll from "./hooks/useHashScroll.js";
 
 function App() {
+  // Enable cross-page hash-based scrolling (used by search)
+  useHashScroll();
   const [isPreloadComplete, setIsPreloadComplete] = useState(() => {
     return localStorage.getItem("preloadComplete") === "true";
   });

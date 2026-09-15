@@ -29,12 +29,13 @@ export default function FacultyResponsiveSlider({
   const effectiveFacultyList =
     dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
 
+  const shouldScroll = effectiveFacultyList.length > visibleCards;
+
   const moveBy = cardWidth + gap;
 
-  const loopData = [
-    ...effectiveFacultyList,
-    ...effectiveFacultyList.slice(0, visibleCards),
-  ];
+  const loopData = shouldScroll
+    ? [...effectiveFacultyList, ...effectiveFacultyList.slice(0, visibleCards)]
+    : effectiveFacultyList;
 
   useEffect(() => {
     if (effectiveFacultyList.length <= visibleCards) return; 
@@ -127,6 +128,8 @@ export default function FacultyResponsiveSlider({
     };
   }, [schoolCode, schoolMeta.name, departmentId]);
 
+  if (effectiveFacultyList.length === 0) return null;
+
   return (
     <section className="py-8 bg-white overflow-hidden relative">
       <div className="text-center mb-8">
@@ -140,28 +143,32 @@ export default function FacultyResponsiveSlider({
       </div>
 
       <div className="relative w-full max-w-7xl mx-auto px-4">
-        <button
-          onClick={handlePrev}
-          className="absolute -left-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <button
-          onClick={handleNext}
-          className="absolute -right-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
-        >
-          <ChevronRight size={24} />
-        </button>
+        {shouldScroll && (
+          <button
+            onClick={handlePrev}
+            className="absolute -left-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
+          >
+            <ChevronLeft size={24} />
+          </button>
+        )}
+        {shouldScroll && (
+          <button
+            onClick={handleNext}
+            className="absolute -right-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
+          >
+            <ChevronRight size={24} />
+          </button>
+        )}
 
         <div className="overflow-hidden">
           <motion.div
-            animate={{ x: -currentIndex * moveBy }}
+            animate={shouldScroll ? { x: -currentIndex * moveBy } : {}}
             transition={
               disableAnimation ? { duration: 0 } : { ease: "easeInOut", duration: 0.6 }
             }
-            className="flex gap-[38px] py-4 px-2"
+            className={`flex gap-[38px] py-4 px-2${!shouldScroll ? " justify-center" : ""}`}
             style={{
-              width: `${(cardWidth + gap) * (effectiveFacultyList.length + visibleCards)}px`,
+              width: `${(cardWidth + gap) * (shouldScroll ? effectiveFacultyList.length + visibleCards : effectiveFacultyList.length)}px`,
             }}
           >
             {loopData.map((member, i) => (

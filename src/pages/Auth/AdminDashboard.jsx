@@ -38,6 +38,13 @@ import {
   ArrowDown,
   ClipboardList,
   Zap,
+  Mail,
+  Send,
+  RefreshCw,
+  XCircle,
+  CheckCircle,
+  Clock3,
+  AlertCircle,
 } from "lucide-react";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
@@ -422,6 +429,7 @@ const tabs = [
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
   { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
+  { id: "emailSystem", label: "Email System", icon: Mail },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -7523,6 +7531,259 @@ const AdminDashboard = () => {
     );
   };
 
+  // ── Email System Tab ──
+  const handleDispatchAllPending = async () => {
+    const pending = mailQueue.filter((item) => item.status === "pending-backend");
+    if (!pending.length) {
+      setMessage("No pending emails to dispatch.");
+      return;
+    }
+
+    setIsDispatchingMailQueue(true);
+    setMessage(`Dispatching ${pending.length} email(s)... This may take a moment.`);
+
+    try {
+      const result = await dispatchCredentialEmails(
+        pending.map((item) => ({
+          id: item.id,
+          to: item.to,
+          subject: item.subject || "GBU Faculty Portal Credentials",
+          payload: item.payload || {},
+        }))
+      );
+
+      // Update queue items with results
+      const resultMap = {};
+      (result.items || []).forEach((r) => {
+        resultMap[r.id] = r;
+      });
+
+      setMailQueue((prev) =>
+        prev.map((item) => {
+          const res = resultMap[item.id];
+          if (res) {
+            return {
+              ...item,
+              status: res.status === "sent" ? "sent" : res.status === "not-configured" ? "not-configured" : "failed",
+              messageId: res.messageId || "",
+              error: res.error || "",
+              dispatchedAt: new Date().toISOString(),
+            };
+          }
+          return item;
+        })
+      );
+
+      const { sent = 0, failed = 0, notConfigured = 0 } = result.summary || {};
+      if (notConfigured > 0) {
+        setMessage(`SMTP not configured. ${notConfigured} email(s) could not be sent. Configure SMTP settings on the server.`);
+      } else if (failed > 0) {
+        setMessage(`Dispatched: ${sent} sent, ${failed} failed. Check the queue for details.`);
+      } else {
+        setMessage(`All ${sent} email(s) dispatched successfully!`);
+      }
+    } catch (error) {
+      setMessage(`Dispatch failed: ${error.message || "Unknown error"}`);
+    } finally {
+      setIsDispatchingMailQueue(false);
+    }
+  };
+
+  const handleClearMailQueue = (filter) => {
+    if (filter === "all") {
+      setMailQueue([]);
+      setMessage("Mail queue cleared.");
+    } else if (filter === "sent") {
+      setMailQueue((prev) => prev.filter((item) => item.status !== "sent"));
+      setMessage("Sent emails cleared from queue.");
+    } else if (filter === "failed") {
+      setMailQueue((prev) => prev.filter((item) => item.status !== "failed"));
+      setMessage("Failed emails cleared from queue.");
+    }
+  };
+
+  const handleRetryFailed = async () => {
+    // Reset failed items to pending so they can be dispatched again
+    setMailQueue((prev) =>
+      prev.map((item) =>
+        item.status === "failed" ? { ...item, status: "pending-backend", error: "", dispatchedAt: "" } : item
+      )
+    );
+    setMessage("Failed emails reset to pending. Click 'Dispatch All' to retry.");
+  };
+
+  const renderEmailSystemTab = () => {
+    const pending = mailQueue.filter((item) => item.status === "pending-backend");
+    const sent = mailQueue.filter((item) => item.status === "sent");
+    const failed = mailQueue.filter((item) => item.status === "failed");
+    const notConfigured = mailQueue.filter((item) => item.status === "not-configured");
+
+    const stats = [
+      { label: "Total in Queue", value: mailQueue.length, icon: Mail, color: "text-slate-600", bg: "bg-slate-100" },
+      { label: "Pending", value: pending.length, icon: Clock3, color: "text-amber-600", bg: "bg-amber-100" },
+      { label: "Sent", value: sent.length, icon: CheckCircle, color: "text-emerald-600", bg: "bg-emerald-100" },
+      { label: "Failed", value: failed.length, icon: XCircle, color: "text-red-600", bg: "bg-red-100" },
+    ];
+
+    return (
+      <section className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">Email System</h2>
+            <p className="text-xs text-slate-500 mt-1">
+              Manage credential email dispatch queue. Emails are queued when faculty accounts are created.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            {failed.length > 0 && (
+              <button
+                onClick={handleRetryFailed}
+                disabled={isDispatchingMailQueue}
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-amber-700 bg-amber-100 hover:bg-amber-200 rounded-xl transition-colors disabled:opacity-50"
+              >
+                <RefreshCw className="w-3.5 h-3.5" /> Retry Failed ({failed.length})
+              </button>
+            )}
+            <button
+              onClick={handleDispatchAllPending}
+              disabled={isDispatchingMailQueue || pending.length === 0}
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors disabled:opacity-50 shadow-sm"
+            >
+              {isDispatchingMailQueue ? (
+                <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Dispatching...</>
+              ) : (
+                <><Send className="w-3.5 h-3.5" /> Dispatch All ({pending.length})</>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-xl ${stat.bg}`}>
+                  <stat.icon className={`w-4 h-4 ${stat.color}`} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                  <p className="text-[11px] text-slate-500 font-medium">{stat.label}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* SMTP Status */}
+        {notConfigured.length > 0 && (
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-amber-800">SMTP Not Configured</p>
+              <p className="text-xs text-amber-700 mt-1">
+                {notConfigured.length} email(s) could not be sent because SMTP is not configured on the server.
+                Set <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_HOST</code>,{" "}
+                <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_USER</code>, and{" "}
+                <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_PASS</code> environment variables.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Clear Actions */}
+        {mailQueue.length > 0 && (
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs text-slate-500 font-medium">Clear:</span>
+            {sent.length > 0 && (
+              <button
+                onClick={() => handleClearMailQueue("sent")}
+                className="text-xs text-emerald-600 hover:text-emerald-700 font-semibold hover:underline"
+              >
+                Sent ({sent.length})
+              </button>
+            )}
+            {failed.length > 0 && (
+              <button
+                onClick={() => handleClearMailQueue("failed")}
+                className="text-xs text-red-600 hover:text-red-700 font-semibold hover:underline"
+              >
+                Failed ({failed.length})
+              </button>
+            )}
+            <button
+              onClick={() => handleClearMailQueue("all")}
+              className="text-xs text-slate-600 hover:text-slate-700 font-semibold hover:underline"
+            >
+              All ({mailQueue.length})
+            </button>
+          </div>
+        )}
+
+        {/* Queue Table */}
+        {mailQueue.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-sm">
+            <Mail className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-slate-800">No Emails in Queue</h3>
+            <p className="text-sm text-slate-500 mt-1">
+              Emails are automatically queued when faculty accounts are created via bulk upload or individual creation.
+            </p>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
+              <table className="w-full text-xs text-left">
+                <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider sticky top-0">
+                  <tr>
+                    <th className="px-4 py-3 w-10">#</th>
+                    <th className="px-4 py-3">Recipient</th>
+                    <th className="px-4 py-3">Subject</th>
+                    <th className="px-4 py-3 text-center">Status</th>
+                    <th className="px-4 py-3">Details</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {mailQueue.map((item, idx) => {
+                    const statusConfig = {
+                      "pending-backend": { label: "Pending", icon: Clock3, color: "text-amber-600 bg-amber-100" },
+                      "sent": { label: "Sent", icon: CheckCircle, color: "text-emerald-600 bg-emerald-100" },
+                      "failed": { label: "Failed", icon: XCircle, color: "text-red-600 bg-red-100" },
+                      "not-configured": { label: "No SMTP", icon: AlertCircle, color: "text-amber-600 bg-amber-100" },
+                    };
+                    const sc = statusConfig[item.status] || statusConfig["pending-backend"];
+                    const StatusIcon = sc.icon;
+
+                    return (
+                      <tr key={item.id || idx} className="hover:bg-slate-50/50 transition-colors">
+                        <td className="px-4 py-3 text-slate-400 font-mono">{idx + 1}</td>
+                        <td className="px-4 py-3">
+                          <span className="font-semibold text-slate-800">{item.to || "—"}</span>
+                        </td>
+                        <td className="px-4 py-3 text-slate-600 truncate max-w-[200px]">
+                          {item.subject || "GBU Faculty Portal Credentials"}
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-bold ${sc.color}`}>
+                            <StatusIcon className="w-3 h-3" />
+                            {sc.label}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-slate-500 truncate max-w-[200px]">
+                          {item.error || item.messageId || (item.dispatchedAt ? `Dispatched ${new Date(item.dispatchedAt).toLocaleString()}` : "Queued")}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  };
+
   return (
     <div className="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 p-2 md:p-4">
       <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
@@ -7786,6 +8047,7 @@ const AdminDashboard = () => {
           {activeTab === "bookings" && renderBookingsTab()}
           {activeTab === "itcell" && renderItcellTab()}
           {activeTab === "ticker-notices" && renderTickerNoticesTab()}
+          {activeTab === "emailSystem" && renderEmailSystemTab()}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>

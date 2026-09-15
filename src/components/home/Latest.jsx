@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   getSchoolAnnouncements,
   refreshSchoolAnnouncements,
@@ -9,11 +9,6 @@ import { parseImageUrl } from '../../utils/imageUtils';
 export default function LatestUpdates() {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState([]);
-  const [categories] = useState([
-    { category: 'Latest News' },
-    { category: 'Notice/Circulars' },
-    { category: 'Upcoming Events' },
-  ]);
 
   const buildSchoolUpdates = () => {
     const announcements = getSchoolAnnouncements();
@@ -40,7 +35,14 @@ export default function LatestUpdates() {
         url: item.pdfUrl ? parseImageUrl(item.pdfUrl) : '/announcements/notices',
       }));
 
-    const upcomingEvents = (announcements.events || [])
+    const allEvents = announcements.events || [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    // Try upcoming events first
+    const upcomingEvents = allEvents
       .filter((item) => item.isUpcoming)
       .slice(0, 8)
       .map((item) => ({
@@ -52,13 +54,80 @@ export default function LatestUpdates() {
         url: `/announcements/event-calendar/${item.id}`,
       }));
 
-    return [...latestNews, ...noticeItems, ...upcomingEvents];
+    if (upcomingEvents.length > 0) {
+      return [...latestNews, ...noticeItems, ...upcomingEvents];
+    }
+
+    // Try ongoing events if no upcoming
+    const ongoingEvents = allEvents
+      .filter((item) => {
+        if (item.status === 'ongoing') return true;
+        const startDate = item.date ? new Date(item.date) : null;
+        const endDate = item.endDate ? new Date(item.endDate) : null;
+        if (!startDate) return false;
+        startDate.setHours(0, 0, 0, 0);
+        if (endDate) {
+          endDate.setHours(0, 0, 0, 0);
+          return startDate <= today && endDate >= today;
+        }
+        return startDate <= today && startDate >= sevenDaysAgo;
+      })
+      .slice(0, 8)
+      .map((item) => ({
+        id: `event-${item.id}`,
+        content_text: item.title || 'Ongoing event',
+        category: 'Ongoing Events',
+        priority: item.priority || 'high',
+        date: item.date,
+        url: `/announcements/event-calendar/${item.id}`,
+      }));
+
+    if (ongoingEvents.length > 0) {
+      return [...latestNews, ...noticeItems, ...ongoingEvents];
+    }
+
+    // Fall back to past events
+    const pastEvents = allEvents
+      .filter((item) => !item.isUpcoming)
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 6)
+      .map((item) => ({
+        id: `event-${item.id}`,
+        content_text: item.title || 'Past event',
+        category: 'Past Events',
+        priority: item.priority || 'medium',
+        date: item.date,
+        url: `/announcements/event-calendar/${item.id}`,
+      }));
+
+    return [...latestNews, ...noticeItems, ...pastEvents];
   };
+
+  const eventCategory = useMemo(() => {
+    const eventItems = data.filter(
+      (item) =>
+        item.category === 'Upcoming Events' ||
+        item.category === 'Ongoing Events' ||
+        item.category === 'Past Events'
+    );
+    if (eventItems.length > 0) {
+      return eventItems[0].category;
+    }
+    return 'Upcoming Events';
+  }, [data]);
+
+  const categories = useMemo(() => [
+    { category: 'Latest News' },
+    { category: 'Notice/Circulars' },
+    { category: eventCategory },
+  ], [eventCategory]);
 
   const viewMoreUrls = {
     'Latest News': '/announcements/news-notifications',
     'Notice/Circulars': '/announcements/notices',
-    'Upcoming Events': '/announcements/event-calendar'
+    'Upcoming Events': '/announcements/event-calendar',
+    'Ongoing Events': '/announcements/event-calendar',
+    'Past Events': '/announcements/event-calendar',
   };
 
   useEffect(() => {
@@ -97,7 +166,9 @@ export default function LatestUpdates() {
     const colors = {
       'Latest News': 'bg-blue-100 text-blue-600 border-blue-200',
       'Notice/Circulars': 'bg-green-100 text-green-600 border-green-200',
-      'Upcoming Events': 'bg-yellow-100 text-yellow-600 border-yellow-200'
+      'Upcoming Events': 'bg-yellow-100 text-yellow-600 border-yellow-200',
+      'Ongoing Events': 'bg-orange-100 text-orange-600 border-orange-200',
+      'Past Events': 'bg-purple-100 text-purple-600 border-purple-200',
     };
     return colors[category.trim()] || 'bg-gray-100 text-gray-600 border-gray-200';
   };
@@ -106,6 +177,8 @@ export default function LatestUpdates() {
     'Latest News': 'No latest news available right now.',
     'Notice/Circulars': 'No notices or circulars available right now.',
     'Upcoming Events': 'No upcoming events at the moment.',
+    'Ongoing Events': 'No ongoing events at the moment.',
+    'Past Events': 'No past events available right now.',
   };
 
   const NoticeCard = ({ item, index, category }) => (

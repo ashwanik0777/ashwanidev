@@ -1438,31 +1438,54 @@ const AdminDashboard = () => {
     }
   };
 
-  const exportBackup = () => {
-    const payload = {
-      exportedAt: new Date().toISOString(),
-      schoolData,
-      accounts,
-      tenders,
-      recruitmentData,
-      facultyProfiles,
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `gbu-admin-backup-${new Date().toISOString().slice(0, 10)}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    setActivityLog((prev) => [
-      {
-        id: `log-${Date.now()}`,
-        action: "Exported admin backup",
-        time: new Date().toISOString(),
-      },
-      ...prev,
-    ].slice(0, 12));
-    setMessage("Backup exported successfully.");
+  const exportBackup = async () => {
+    setMessage("Generating full database backup...");
+    try {
+      const session = JSON.parse(localStorage.getItem("portal_auth_session") || "{}");
+      const token = session?.accessToken;
+      if (!token) {
+        setMessage("Authentication required. Please log in again.");
+        return;
+      }
+
+      const backendBase = (import.meta.env.VITE_BACKEND_BASE_URL || "").replace(/\/+$/, "");
+      const response = await fetch(
+        `${backendBase}/api/v1/admin/backup`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(errText || `Server returned ${response.status}`);
+      }
+
+      const backupData = await response.json();
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `gbu-full-db-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      setActivityLog((prev) =>
+        [
+          {
+            id: `log-${Date.now()}`,
+            action: "Exported full database backup",
+            time: new Date().toISOString(),
+          },
+          ...prev,
+        ].slice(0, 12),
+      );
+      setMessage(`Full database backup exported successfully! (${backupData.totalTables} tables, ${backupData.totalRows} rows)`);
+    } catch (err) {
+      console.error("Backup export error:", err);
+      setMessage("Backup export failed: " + (err.message || "Unknown error"));
+    }
   };
 
   const importBackup = async (event) => {
@@ -7890,7 +7913,7 @@ const AdminDashboard = () => {
                   onClick={exportBackup}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
                 >
-                  <Download className="h-4 w-4" /> Export Backup
+                  <Download className="h-4 w-4" /> Export DB Backup
                 </button>
                 {/* <button
                   onClick={() => backupInputRef.current?.click()}

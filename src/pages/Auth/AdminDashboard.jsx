@@ -45,6 +45,7 @@ import {
   CheckCircle,
   Clock3,
   AlertCircle,
+  BarChart3,
 } from "lucide-react";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
@@ -148,6 +149,7 @@ import {
   updateTickerNotice,
   deleteTickerNotice,
 } from "../../services/tickerNoticesService";
+import AnalyticsTab from "../../components/admin/AnalyticsTab";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -430,6 +432,7 @@ const tabs = [
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
   { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
   { id: "emailSystem", label: "Email System", icon: Mail },
+  { id: "analytics", label: "Analytics", icon: BarChart3 },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -3815,7 +3818,7 @@ const AdminDashboard = () => {
           <div className="mb-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">Faculty Profiles Management</h2>
-              <p className="text-xs text-slate-500">Manage institutional profiles, generate credentials, and upload in bulk.</p>
+              {/* <p className="text-xs text-slate-500">Manage institutional profiles, generate credentials, and upload in bulk.</p> */}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -4613,7 +4616,7 @@ const AdminDashboard = () => {
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <h2 className="text-lg font-bold text-slate-900">Booking Management</h2>
-              <p className="text-xs text-slate-500 mt-0.5">Review and manage facility booking requests.</p>
+              {/* <p className="text-xs text-slate-500 mt-0.5">Review and manage facility booking requests.</p> */}
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -4974,7 +4977,7 @@ const AdminDashboard = () => {
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-bold text-slate-900">IT Cell Team</h2>
-              <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main IT Cell page.</p>
+              {/* <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main IT Cell page.</p> */}
             </div>
             <button
               type="button"
@@ -5307,7 +5310,7 @@ const AdminDashboard = () => {
           <div className={cardClass}>
             <div className="mb-4">
               <h2 className="text-lg font-semibold text-slate-900">Schools & Organizations Management</h2>
-              <p className="text-sm text-slate-500">Select a school to view and manage its content, events, news, notices, and clubs.</p>
+              {/* <p className="text-sm text-slate-500">Select a school to view and manage its content, events, news, notices, and clubs.</p> */}
             </div>
 
             {schoolApiError && (
@@ -5578,10 +5581,10 @@ const AdminDashboard = () => {
               <h2 className="text-lg font-semibold text-slate-900">University Announcements Management</h2>
               <span className="rounded-lg bg-slate-900 px-2 py-0.5 text-xs font-bold text-white">GBU</span>
             </div>
-            <p className="text-sm text-slate-500">
+            {/* <p className="text-sm text-slate-500">
               Notices, news, events, newsletters and gallery albums shown on the public Announcements
               pages.
-            </p>
+            </p> */}
           </div>
           <button
             type="button"
@@ -5634,7 +5637,7 @@ const AdminDashboard = () => {
             <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Service Scheme (NSS) Management</h2>
-              <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p>
+              {/* <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p> */}
             </div>
           </div>
           <button
@@ -6162,7 +6165,7 @@ const AdminDashboard = () => {
             <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Cadet Corps (NCC) Management</h2>
-              <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p>
+              {/* <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p> */}
             </div>
           </div>
           <button
@@ -7117,7 +7120,7 @@ const AdminDashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Homepage Ticker Notices</h2>
-            <p className="text-sm text-slate-500 mt-1">Manage the scrolling ticker bar shown on the homepage. Maximum 3 notices recommended.</p>
+            {/* <p className="text-sm text-slate-500 mt-1">Manage the scrolling ticker bar shown on the homepage. Maximum 3 notices recommended.</p> */}
           </div>
           {!tickerEditor.isAdding && !tickerEditor.editingId && (
             <button
@@ -7654,9 +7657,9 @@ const AdminDashboard = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-900">Email System</h2>
-            <p className="text-xs text-slate-500 mt-1">
+            {/* <p className="text-xs text-slate-500 mt-1">
               Manage credential email dispatch queue. Emails are queued when faculty accounts are created.
-            </p>
+            </p> */}
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             {failed.length > 0 && (
@@ -7959,9 +7962,9 @@ const AdminDashboard = () => {
             <section className="space-y-6">
               <section className={cardClass}>
                 <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
-                <p className="mt-1 text-sm text-slate-600">
+                {/* <p className="mt-1 text-sm text-slate-600">
                   Manage your school data, faculty profiles, and user accounts all in one place.
-                </p>
+                </p> */}
               </section>
 
               <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -8071,6 +8074,7 @@ const AdminDashboard = () => {
           {activeTab === "itcell" && renderItcellTab()}
           {activeTab === "ticker-notices" && renderTickerNoticesTab()}
           {activeTab === "emailSystem" && renderEmailSystemTab()}
+          {activeTab === "analytics" && <AnalyticsTab />}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>

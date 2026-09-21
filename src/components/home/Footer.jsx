@@ -10,6 +10,7 @@ import {
   Eye,
 } from "lucide-react";
 import { trackVisitor } from "../../services/visitorService";
+import { trackPageVisit } from "../../services/analyticsService";
 
 const Footer = () => {
   const [visitorCount, setVisitorCount] = useState(0);
@@ -18,6 +19,8 @@ const Footer = () => {
     trackVisitor().then((count) => {
       if (count > 0) setVisitorCount(count);
     });
+    // Track page visit for analytics (page path + referrer)
+    trackPageVisit(window.location.pathname, document.referrer);
   }, []);
   return (
     <footer

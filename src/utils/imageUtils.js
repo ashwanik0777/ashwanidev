@@ -58,6 +58,14 @@ export const parseImageUrl = (path, width = 1000) => {
 
   const trimmed = path.trim();
 
+  // 0. Local upload paths from host-based storage
+  if (trimmed.startsWith('/uploads/')) {
+    const backendBase = typeof import.meta !== 'undefined'
+      ? (import.meta.env?.VITE_BACKEND_BASE_URL || '')
+      : '';
+    return backendBase ? `${backendBase.replace(/\/$/, '')}${trimmed}` : trimmed;
+  }
+
   // 1. Google Drive links
   if (trimmed.includes('drive.google.com')) {
     const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=|uc\?export=view&id=|thumbnail\?id=))([a-zA-Z0-9_-]+)/;

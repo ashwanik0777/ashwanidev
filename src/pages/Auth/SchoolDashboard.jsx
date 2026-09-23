@@ -228,9 +228,9 @@ const FIELDS_CONFIG = {
 
 const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">
+    <span className="mb-1 block text-sm font-medium text-slate-700">
       {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
-    </label>
+    </span>
     {children}
   </div>
 );

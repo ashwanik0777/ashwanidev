@@ -16,6 +16,8 @@ import {
 } from "lucide-react";
 import Field from "./Field";
 import { inputClass } from "./constants";
+import ImageUploadField from "../../ui/ImageUploadField";
+import FileUploadField from "../../ui/FileUploadField";
 
 const ProfileForms = ({
   activeSection,
@@ -180,22 +182,26 @@ const ProfileForms = ({
                 placeholder="https://..."
               />
             </Field>
-            <Field label="Profile Image Link/URL">
-              <input
-                className={inputClass}
+            <Field label="Profile Photo">
+              <ImageUploadField
+                label=""
                 value={profile.image_url || ""}
-                onChange={(e) => onUpdateField("image_url", e.target.value)}
-                placeholder="https://..."
+                onChange={(url) => onUpdateField("image_url", url)}
+                aspectRatio={3 / 4}
+                recommendedSize="300×400"
+                folder="faculty/photos"
               />
             </Field>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
-            <Field label="CV Document URL Link">
-              <input
-                className={inputClass}
+            <Field label="CV Document">
+              <FileUploadField
+                label=""
                 value={profile.cv || ""}
-                onChange={(e) => onUpdateField("cv", e.target.value)}
-                placeholder="https://..."
+                onChange={(url) => onUpdateField("cv", url)}
+                accept=".pdf"
+                maxSize={10 * 1024 * 1024}
+                folder="faculty/cv"
               />
             </Field>
             <Field label="Google Scholar Profile Link">

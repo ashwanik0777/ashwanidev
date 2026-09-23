@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Pencil, Trash2, X, RefreshCw, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 import ConfirmModal from "../ui/ConfirmModal";
 import ImageUploadField from "../ui/ImageUploadField";
+import FileUploadField from "../ui/FileUploadField";
 import {
   ANNOUNCEMENT_COLUMNS,
   ANNOUNCEMENT_FIELDS,
@@ -275,9 +276,40 @@ const AnnouncementManager = ({
   const isImageUrlField = (field) =>
     !field.type && IMAGE_FIELD_KEYS.has(field.key);
 
+  /* Detect PDF/document URL fields — these should use FileUploadField */
+  const PDF_FIELD_KEYS = new Set(["pdfUrl", "brochureUrl", "englishPdfLink", "hindiPdfLink"]);
+  const isPdfUrlField = (field) =>
+    !field.type && PDF_FIELD_KEYS.has(field.key);
+
+  /* PDF folder mapping by announcement kind */
+  const PDF_FOLDERS = {
+    notices: "announcements/notices",
+    news: "announcements/news",
+    events: "announcements/events",
+    newsletters: "announcements/newsletters",
+  };
+
   /* Aspect ratios per field key */
   const IMAGE_ASPECTS = { image: 16/9, flyerUrl: 3/4, coverImage: 3/4, coverImageUrl: 16/9 };
   const IMAGE_SIZES = { image: "800×450", flyerUrl: "600×800", coverImage: "600×800", coverImageUrl: "1200×675" };
+
+  /** Turn a title into a URL-safe slug: "Annual Fest 2024!" → "annual-fest-2024" */
+  const slugify = (str) =>
+    (str || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
+
+  /** Build readable fileName from editor form title + field key.
+   *  e.g. title="Annual Fest" + fieldKey="flyerUrl" → "annual-fest_flyer"
+   *       title="Annual Fest" + imageIndex=2 → "annual-fest_3"  */
+  const getFileName = (fieldKey, imageIndex) => {
+    const title = editor?.form?.title || editor?.form?.name || "";
+    const slug = slugify(title);
+    if (!slug) return ""; // fallback to auto-generated name
+    // Map field keys to readable suffixes
+    const SUFFIXES = { flyerUrl: "flyer", coverImage: "cover", coverImageUrl: "cover", image: "image",
+      brochureUrl: "brochure", pdfUrl: "document", englishPdfLink: "english", hindiPdfLink: "hindi" };
+    if (imageIndex !== undefined) return `${slug}_${imageIndex + 1}`;
+    return `${slug}_${SUFFIXES[fieldKey] || fieldKey}`;
+  };
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
@@ -514,7 +546,7 @@ const AnnouncementManager = ({
                   return null;
                 }
                 return (
-                <label key={field.key} className="block">
+                <div key={field.key} className="block">
                   <span className="mb-1 block text-sm font-medium text-slate-700">
                     {field.label}
                     {field.required && <span className="text-rose-600"> *</span>}
@@ -551,7 +583,8 @@ const AnnouncementManager = ({
                             }}
                             aspectRatio={16 / 9}
                             recommendedSize="1200×675"
-                            folder={`gbu-website/${schoolCode || "general"}/${kind}`}
+                            folder={schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`}
+                            fileName={getFileName(field.key, i)}
                           />
                         </div>
                       ))}
@@ -647,7 +680,17 @@ const AnnouncementManager = ({
                       onChange={(url) => setField(field.key, url)}
                       aspectRatio={IMAGE_ASPECTS[field.key] || 16/9}
                       recommendedSize={IMAGE_SIZES[field.key] || ""}
-                      folder={`gbu-website/${schoolCode || "general"}/${kind}`}
+                      folder={schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`}
+                      fileName={getFileName(field.key)}
+                    />
+                  ) : isPdfUrlField(field) ? (
+                    <FileUploadField
+                      label=""
+                      value={editor.form[field.key] ?? ""}
+                      onChange={(url) => setField(field.key, url)}
+                      accept=".pdf"
+                      folder={PDF_FOLDERS[kind] || `announcements/${kind}`}
+                      fileName={getFileName(field.key)}
                     />
                   ) : (
                     <input
@@ -663,7 +706,7 @@ const AnnouncementManager = ({
                       }
                     />
                   )}
-                </label>
+                </div>
                 );
               })}
             </div>

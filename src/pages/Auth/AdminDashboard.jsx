@@ -48,6 +48,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import ConfirmModal from "../../components/ui/ConfirmModal";
+import FileUploadField from "../../components/ui/FileUploadField";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
@@ -447,9 +448,9 @@ const schoolContentTabs = [
 
 const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">
+    <span className="mb-1 block text-sm font-medium text-slate-700">
       {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
-    </label>
+    </span>
     {children}
   </div>
 );
@@ -3098,6 +3099,14 @@ const AdminDashboard = () => {
                           </option>
                         ))}
                       </select>
+                    ) : field.key === "pdfUrl" || field.key === "documentUrl" ? (
+                      <FileUploadField
+                        label=""
+                        value={collectionEditors[listKey].form[field.key] || ""}
+                        onChange={(url) => updateCollectionFormField(listKey, field, url)}
+                        accept=".pdf"
+                        folder={listKey === "notices" ? "nss/notices" : listKey === "nccNotices" ? "ncc/notices" : "documents"}
+                      />
                     ) : (
                       <input
                         className={inputClass}
@@ -4527,14 +4536,15 @@ const AdminDashboard = () => {
                     }
                   />
                 </Field>
-                <Field label="Document URL">
-                  <input
-                    className={inputClass}
+                <Field label="Tender Document">
+                  <FileUploadField
+                    label=""
                     value={tenderEditor.form.documentUrl || ""}
-                    placeholder="Enter link to download official PDF/Doc"
-                    onChange={(e) =>
-                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: e.target.value } }))
+                    onChange={(url) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: url } }))
                     }
+                    accept=".pdf,.doc,.docx"
+                    folder="tenders"
                   />
                 </Field>
               </div>

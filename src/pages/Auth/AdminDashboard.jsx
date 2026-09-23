@@ -3940,7 +3940,7 @@ const AdminDashboard = () => {
                     facultyProfiles.map((faculty, idx) => (
                       <tr key={faculty.id || idx} className="hover:bg-slate-55/50 transition-colors">
                         <td className="px-4 py-3">
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             {faculty.image_url ? (
                               <img
                                 src={parseImageUrl(faculty.image_url)}

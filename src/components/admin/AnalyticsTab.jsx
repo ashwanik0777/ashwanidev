@@ -13,6 +13,10 @@ import {
   Users,
   FileText,
   Loader2,
+  Calendar,
+  CalendarRange,
+  Zap,
+  ExternalLink,
 } from "lucide-react";
 import {
   AreaChart,
@@ -25,7 +29,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
   BarChart,
   Bar,
 } from "recharts";
@@ -37,17 +40,12 @@ import {
   fetchOsBreakdown,
   fetchTopPages,
 } from "../../services/analyticsService";
+import AllPagesModal from "./AllPagesModal";
 
 /* ─── Theme Colors ─── */
 const CHART_COLORS = [
-  "#0ea5e9", // sky-500
-  "#6366f1", // indigo-500
-  "#10b981", // emerald-500
-  "#f59e0b", // amber-500
-  "#f43f5e", // rose-500
-  "#8b5cf6", // violet-500
-  "#06b6d4", // cyan-500
-  "#ec4899", // pink-500
+  "#0ea5e9", "#6366f1", "#10b981", "#f59e0b",
+  "#f43f5e", "#8b5cf6", "#06b6d4", "#ec4899",
 ];
 
 const DEVICE_ICONS = {
@@ -56,10 +54,9 @@ const DEVICE_ICONS = {
   tablet: Tablet,
 };
 
-const RANGE_OPTIONS = [
-  { label: "7 Days", value: 7 },
-  { label: "30 Days", value: 30 },
-  { label: "90 Days", value: 90 },
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
 ];
 
 /* ─── Card component ─── */
@@ -102,7 +99,15 @@ const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent
 /* ═══════════════════════════════════════════════════════════ */
 
 const AnalyticsTab = () => {
-  const [days, setDays] = useState(30);
+  /* ─── Filter State ─── */
+  const [filterMode, setFilterMode] = useState("quick"); // "quick" | "month" | "custom"
+  const [quickDays, setQuickDays] = useState(30);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth()); // 0-11
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [customFrom, setCustomFrom] = useState("");
+  const [customTo, setCustomTo] = useState("");
+
+  /* ─── Data State ─── */
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [overview, setOverview] = useState({});
@@ -111,7 +116,50 @@ const AnalyticsTab = () => {
   const [browsers, setBrowsers] = useState([]);
   const [osList, setOsList] = useState([]);
   const [topPages, setTopPages] = useState([]);
+  const [topPagesTotal, setTopPagesTotal] = useState(0);
+  const [showAllPages, setShowAllPages] = useState(false);
 
+  /* ─── Compute filter params from current filter state ─── */
+  const filterParams = useMemo(() => {
+    if (filterMode === "month") {
+      const y = selectedYear;
+      const m = selectedMonth;
+      const from = `${y}-${String(m + 1).padStart(2, "0")}-01`;
+      // Last day of month
+      const lastDay = new Date(y, m + 1, 0).getDate();
+      const to = `${y}-${String(m + 1).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+      return { from, to };
+    }
+    if (filterMode === "custom") {
+      // Only fetch when BOTH dates are filled — don't reload on partial input
+      if (customFrom && customTo) return { from: customFrom, to: customTo };
+      // Return null to signal "don't reload yet"
+      return null;
+    }
+    // Quick mode
+    return { days: quickDays };
+  }, [filterMode, quickDays, selectedMonth, selectedYear, customFrom, customTo]);
+
+  // Keep a ref to last valid filter so we don't lose data while typing custom dates
+  const [activeFilter, setActiveFilter] = useState({ days: 30 });
+  useEffect(() => {
+    if (filterParams !== null) setActiveFilter(filterParams);
+  }, [filterParams]);
+
+  /* ─── Human-readable label for current filter ─── */
+  const filterLabel = useMemo(() => {
+    if (filterMode === "month") {
+      return `${MONTHS[selectedMonth]} ${selectedYear}`;
+    }
+    if (filterMode === "custom") {
+      if (customFrom && customTo) return `${customFrom} to ${customTo}`;
+      return "Select date range...";
+    }
+    if (quickDays === 0) return "All Time";
+    return `Last ${quickDays} days`;
+  }, [filterMode, quickDays, selectedMonth, selectedYear, customFrom, customTo]);
+
+  /* ─── Load all data ─── */
   const loadAll = useCallback(
     async (showSpinner = true) => {
       if (showSpinner) setLoading(true);
@@ -119,11 +167,11 @@ const AnalyticsTab = () => {
       try {
         const [ov, tl, dv, br, os, pg] = await Promise.all([
           fetchAnalyticsOverview(),
-          fetchVisitorTimeline(days),
-          fetchDeviceBreakdown(days),
-          fetchBrowserBreakdown(days),
-          fetchOsBreakdown(days),
-          fetchTopPages(days),
+          fetchVisitorTimeline(activeFilter),
+          fetchDeviceBreakdown(activeFilter),
+          fetchBrowserBreakdown(activeFilter),
+          fetchOsBreakdown(activeFilter),
+          fetchTopPages({ ...activeFilter, limit: 15 }),
         ]);
         setOverview(ov);
         setTimeline(
@@ -137,7 +185,8 @@ const AnalyticsTab = () => {
         setDevices(dv.map((d) => ({ ...d, value: Number(d.value) })));
         setBrowsers(br.map((d) => ({ ...d, value: Number(d.value) })));
         setOsList(os.map((d) => ({ ...d, value: Number(d.value) })));
-        setTopPages(pg.map((d) => ({ ...d, views: Number(d.views), unique_visitors: Number(d.unique_visitors) })));
+        setTopPages(pg.data.map((d) => ({ ...d, views: Number(d.views), unique_visitors: Number(d.unique_visitors) })));
+        setTopPagesTotal(pg.total);
       } catch (err) {
         console.error("Analytics load error:", err);
       } finally {
@@ -145,7 +194,7 @@ const AnalyticsTab = () => {
         setRefreshing(false);
       }
     },
-    [days],
+    [activeFilter],
   );
 
   useEffect(() => {
@@ -153,7 +202,14 @@ const AnalyticsTab = () => {
   }, [loadAll]);
 
   const totalDeviceVisits = useMemo(() => devices.reduce((sum, d) => sum + d.value, 0), [devices]);
-  const totalBrowserVisits = useMemo(() => browsers.reduce((sum, d) => sum + d.value, 0), [browsers]);
+
+  /* ─── Available years for dropdown ─── */
+  const yearOptions = useMemo(() => {
+    const current = new Date().getFullYear();
+    const years = [];
+    for (let y = current; y >= current - 5; y--) years.push(y);
+    return years;
+  }, []);
 
   /* ─── Stat Cards Data ─── */
   const statCards = [
@@ -163,7 +219,6 @@ const AnalyticsTab = () => {
       icon: Users,
       gradient: "from-sky-500 to-sky-600",
       bg: "bg-sky-50",
-      text: "text-sky-700",
     },
     {
       label: "Today's Visitors",
@@ -171,7 +226,6 @@ const AnalyticsTab = () => {
       icon: Eye,
       gradient: "from-emerald-500 to-emerald-600",
       bg: "bg-emerald-50",
-      text: "text-emerald-700",
     },
     {
       label: "This Week",
@@ -179,7 +233,6 @@ const AnalyticsTab = () => {
       icon: TrendingUp,
       gradient: "from-indigo-500 to-indigo-600",
       bg: "bg-indigo-50",
-      text: "text-indigo-700",
     },
     {
       label: "This Month",
@@ -187,7 +240,6 @@ const AnalyticsTab = () => {
       icon: Globe,
       gradient: "from-amber-500 to-amber-600",
       bg: "bg-amber-50",
-      text: "text-amber-700",
     },
     {
       label: "Today's Page Views",
@@ -195,7 +247,6 @@ const AnalyticsTab = () => {
       icon: FileText,
       gradient: "from-rose-500 to-rose-600",
       bg: "bg-rose-50",
-      text: "text-rose-700",
     },
     {
       label: "Total Page Views",
@@ -203,9 +254,22 @@ const AnalyticsTab = () => {
       icon: BarChart3,
       gradient: "from-violet-500 to-violet-600",
       bg: "bg-violet-50",
-      text: "text-violet-700",
     },
   ];
+
+  /* ─── Filter tab button class ─── */
+  const filterTabClass = (mode) =>
+    `px-3.5 py-2 text-xs font-semibold transition flex items-center gap-1.5 ${
+      filterMode === mode ? "bg-sky-500 text-white" : "text-slate-600 hover:bg-slate-50"
+    }`;
+  const quickBtnClass = (val) =>
+    `px-3 py-1.5 text-xs font-semibold rounded-lg transition ${
+      quickDays === val && filterMode === "quick"
+        ? "bg-sky-500 text-white shadow-sm"
+        : "text-slate-600 hover:bg-slate-100 border border-slate-200"
+    }`;
+  const selectClass = "rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
+  const dateInputClass = "rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
 
   /* ─── RENDER ─── */
 
@@ -233,37 +297,112 @@ const AnalyticsTab = () => {
 
   return (
     <div className="space-y-6">
-      {/* ── Header ── */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-900">Website Analytics</h2>
-          {/* <p className="mt-1 text-sm text-slate-500">Track visitor activity, devices, browsers & popular pages</p> */}
-        </div>
-        <div className="flex items-center gap-2">
-          {/* Range Selector */}
-          <div className="inline-flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-            {RANGE_OPTIONS.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => setDays(opt.value)}
-                className={`px-3.5 py-2 text-xs font-semibold transition ${
-                  days === opt.value
-                    ? "bg-sky-500 text-white"
-                    : "text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
+      {/* ── Header + Filter Bar ── */}
+      <div className={`${cardClass} !p-4`}>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-xl font-bold text-slate-900">Website Analytics</h2>
+
+          <div className="flex items-center gap-2">
+            {/* Refresh */}
+            <button
+              onClick={() => loadAll(false)}
+              disabled={refreshing}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-slate-50"
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? "animate-spin" : ""}`} />
+              Refresh
+            </button>
           </div>
-          <button
-            onClick={() => loadAll(false)}
-            disabled={refreshing}
-            className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 shadow-sm transition hover:bg-slate-50"
-          >
-            <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? "animate-spin" : ""}`} />
-            Refresh
-          </button>
+        </div>
+
+        {/* ── Filter Tabs ── */}
+        <div className="mt-4 flex flex-col gap-3">
+          {/* Mode selector */}
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+              <button onClick={() => setFilterMode("quick")} className={filterTabClass("quick")}>
+                <Zap className="h-3 w-3" /> Quick
+              </button>
+              <button onClick={() => setFilterMode("month")} className={filterTabClass("month")}>
+                <Calendar className="h-3 w-3" /> Month
+              </button>
+              <button onClick={() => setFilterMode("custom")} className={filterTabClass("custom")}>
+                <CalendarRange className="h-3 w-3" /> Custom
+              </button>
+            </div>
+
+            {/* Filter controls per mode */}
+            {filterMode === "quick" && (
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { label: "7D", value: 7 },
+                  { label: "30D", value: 30 },
+                  { label: "90D", value: 90 },
+                  { label: "This Year", value: 365 },
+                  { label: "All Time", value: 0 },
+                ].map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => setQuickDays(opt.value)}
+                    className={quickBtnClass(opt.value)}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {filterMode === "month" && (
+              <div className="flex flex-wrap items-center gap-2">
+                <select
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                  className={selectClass}
+                >
+                  {MONTHS.map((m, i) => (
+                    <option key={i} value={i}>{m}</option>
+                  ))}
+                </select>
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  className={selectClass}
+                >
+                  {yearOptions.map((y) => (
+                    <option key={y} value={y}>{y}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {filterMode === "custom" && (
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-500">From</span>
+                  <input
+                    type="date"
+                    value={customFrom}
+                    onChange={(e) => setCustomFrom(e.target.value)}
+                    className={dateInputClass}
+                  />
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-500">To</span>
+                  <input
+                    type="date"
+                    value={customTo}
+                    onChange={(e) => setCustomTo(e.target.value)}
+                    className={dateInputClass}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Active filter badge */}
+            <span className="rounded-full bg-sky-50 px-3 py-1 text-[10px] font-bold text-sky-600 border border-sky-200">
+              {filterLabel}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -299,7 +438,7 @@ const AnalyticsTab = () => {
             <TrendingUp className="mr-2 inline h-5 w-5 text-sky-500" />
             Visitor Trends
           </h3>
-          <span className="text-xs text-slate-400">Last {days} days</span>
+          <span className="text-xs text-slate-400">{filterLabel}</span>
         </div>
         {timeline.length === 0 ? (
           <div className="flex h-64 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
@@ -502,49 +641,72 @@ const AnalyticsTab = () => {
           )}
         </div>
 
-        {/* Top Pages */}
+        {/* Top Pages — limited to 15 */}
         <div className={cardClass}>
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">
-            <FileText className="mr-2 inline h-5 w-5 text-sky-500" />
-            Most Visited Pages
-          </h3>
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-slate-900">
+              <FileText className="mr-2 inline h-5 w-5 text-sky-500" />
+              Most Visited Pages
+            </h3>
+            <span className="text-[10px] text-slate-400 font-medium">Top 15</span>
+          </div>
           {topPages.length === 0 ? (
             <div className="flex h-56 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
               No page data yet
             </div>
           ) : (
-            <div className="max-h-[320px] space-y-1.5 overflow-y-auto pr-1 custom-scrollbar">
-              {/* Header */}
-              <div className="sticky top-0 z-10 grid grid-cols-[1fr_70px_70px] gap-2 rounded-lg bg-slate-100 px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                <span>Page</span>
-                <span className="text-right">Views</span>
-                <span className="text-right">Unique</span>
-              </div>
-              {topPages.map((page, i) => (
-                <div
-                  key={page.path}
-                  className="grid grid-cols-[1fr_70px_70px] items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 px-3 py-2.5 transition hover:bg-slate-50"
-                >
-                  <div className="flex items-center gap-2 overflow-hidden">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-sky-100 text-[10px] font-extrabold text-sky-600">
-                      {i + 1}
+            <>
+              <div className="max-h-[380px] space-y-1.5 overflow-y-auto pr-1 custom-scrollbar">
+                {/* Header */}
+                <div className="sticky top-0 z-10 grid grid-cols-[1fr_70px_70px] gap-2 rounded-lg bg-slate-100 px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  <span>Page</span>
+                  <span className="text-right">Views</span>
+                  <span className="text-right">Unique</span>
+                </div>
+                {topPages.map((page, i) => (
+                  <div
+                    key={page.path}
+                    className="grid grid-cols-[1fr_70px_70px] items-center gap-2 rounded-xl border border-slate-100 bg-slate-50/50 px-3 py-2.5 transition hover:bg-slate-50"
+                  >
+                    <div className="flex items-center gap-2 overflow-hidden">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-sky-100 text-[10px] font-extrabold text-sky-600">
+                        {i + 1}
+                      </span>
+                      <span className="truncate text-xs font-semibold text-slate-700" title={page.path}>
+                        {page.path}
+                      </span>
+                    </div>
+                    <span className="text-right text-xs font-bold text-slate-900">
+                      {page.views.toLocaleString("en-IN")}
                     </span>
-                    <span className="truncate text-xs font-semibold text-slate-700" title={page.path}>
-                      {page.path}
+                    <span className="text-right text-xs font-semibold text-slate-500">
+                      {page.unique_visitors.toLocaleString("en-IN")}
                     </span>
                   </div>
-                  <span className="text-right text-xs font-bold text-slate-900">
-                    {page.views.toLocaleString("en-IN")}
-                  </span>
-                  <span className="text-right text-xs font-semibold text-slate-500">
-                    {page.unique_visitors.toLocaleString("en-IN")}
-                  </span>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+              {/* View All button */}
+              {topPagesTotal > 15 && (
+                <button
+                  onClick={() => setShowAllPages(true)}
+                  className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-sky-200 bg-sky-50 py-2.5 text-xs font-bold text-sky-600 transition hover:bg-sky-100"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  View All {topPagesTotal.toLocaleString("en-IN")} Pages
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
+
+      {/* ── All Pages Modal ── */}
+      <AllPagesModal
+        open={showAllPages}
+        onClose={() => setShowAllPages(false)}
+        filters={activeFilter}
+        filterLabel={filterLabel}
+      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Facebook,
   Instagram,
@@ -14,14 +14,19 @@ import { trackPageVisit } from "../../services/analyticsService";
 
 const Footer = () => {
   const [visitorCount, setVisitorCount] = useState(0);
+  const { pathname } = useLocation();
 
+  // Track unique visitor once on mount
   useEffect(() => {
     trackVisitor().then((count) => {
       if (count > 0) setVisitorCount(count);
     });
-    // Track page visit for analytics (page path + referrer)
-    trackPageVisit(window.location.pathname, document.referrer);
   }, []);
+
+  // Track page visit on every navigation (SPA route change)
+  useEffect(() => {
+    trackPageVisit(pathname, document.referrer);
+  }, [pathname]);
   return (
     <footer
       className="bg-[#0e1626] text-white px-4 sm:px-8 md:px-16 lg:px-20 py-8 sm:py-12"

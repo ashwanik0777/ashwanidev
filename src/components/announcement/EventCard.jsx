@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Calendar, ExternalLink } from 'lucide-react';
+import { Calendar, ExternalLink, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import SocialShare from './SocialShare';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
@@ -113,13 +113,44 @@ const EventCard = ({ event, isPastEvent = false }) => {
             {event.title}
           </CardTitle>
           <div className="space-y-1 text-sm text-gray-600 mt-2">
-            <div className="flex items-center gap-2">
-              <Calendar size={16} className="text-blue-500" />
-              <span>
-                {format(new Date(event.date), 'MMM dd, yyyy')}
-                {event.endDate && ` - ${format(new Date(event.endDate), 'MMM dd, yyyy')}`}
-              </span>
-            </div>
+            {(() => {
+              const startDate = event.startsAt || event.date ? new Date(event.startsAt || event.date) : null;
+              const endDate = event.endsAt || event.endDate ? new Date(event.endsAt || event.endDate) : null;
+              
+              const formatDate = (d) => d ? format(d, 'MMM dd, yyyy') : '';
+              
+              let isSameDay = true;
+              if (startDate && endDate) {
+                isSameDay = startDate.toDateString() === endDate.toDateString();
+              }
+
+              if (startDate && endDate && !isSameDay) {
+                return (
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={16} className="text-blue-500 flex-shrink-0" />
+                      <span className="truncate">{formatDate(startDate)} - {formatDate(endDate)}</span>
+                    </div>
+                    {event.time && (
+                      <div className="flex items-center gap-2">
+                        <Clock size={16} className="text-gray-400 flex-shrink-0" />
+                        <span className="truncate">{event.time}</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <div className="flex items-center gap-2">
+                  <Calendar size={16} className="text-blue-500 flex-shrink-0" />
+                  <span className="truncate">
+                    {formatDate(startDate)} 
+                    {event.time ? ` • ${event.time}` : ''}
+                  </span>
+                </div>
+              );
+            })()}
           </div>
         </CardHeader>
 

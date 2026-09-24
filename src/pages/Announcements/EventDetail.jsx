@@ -173,7 +173,7 @@ function format(date, formatStr) {
 const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const isExternalGalleryLink = (url) => {
@@ -198,6 +198,7 @@ const EventDetail = () => {
     let isMounted = true;
 
     const loadEvent = async () => {
+      setLoading(true);
       try {
         await refreshSchoolAnnouncements();
       } catch {
@@ -223,16 +224,50 @@ const EventDetail = () => {
       window.removeEventListener("announcements-data-updated", loadEvent);
     };
   }, [id]);
-  // const event = mockEvents.find((item) => String(item.id) === String(id));
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50/50 pb-20 animate-pulse">
+        <div className="container mx-auto px-4 md:px-8 pt-8">
+          <div className="mb-8">
+            <div className="h-8 w-32 bg-gray-200 rounded-md"></div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+            <div className="lg:col-span-6 xl:col-span-5">
+              <div className="rounded-2xl bg-gray-200 aspect-[4/5.5]"></div>
+            </div>
+            <div className="lg:col-span-6 xl:col-span-7 flex flex-col">
+              <div className="mb-6 flex gap-2">
+                <div className="h-6 w-20 bg-gray-200 rounded-full"></div>
+                <div className="h-6 w-20 bg-gray-200 rounded-full"></div>
+              </div>
+              <div className="h-12 w-3/4 bg-gray-200 rounded-md mb-4"></div>
+              <div className="h-6 w-1/3 bg-gray-200 rounded-md mb-8"></div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                <div className="h-16 bg-gray-100 rounded-xl"></div>
+                <div className="h-16 bg-gray-100 rounded-xl"></div>
+                <div className="h-16 bg-gray-100 rounded-xl"></div>
+                <div className="h-16 bg-gray-100 rounded-xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (!event) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4 py-16 text-center">
+        <div className="container mx-auto px-4 py-32 text-center">
           <h1 className="text-3xl font-extrabold text-blue-700 mb-6">
             Event not found
           </h1>
+          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            The event you are looking for might have been removed or the link is temporarily unavailable.
+          </p>
           <Link to="/announcements/event-calendar">
-            <Button>Back to Events</Button>
+            <Button>Back to Events Calendar</Button>
           </Link>
         </div>
       </div>
@@ -388,10 +423,10 @@ const EventDetail = () => {
           </p>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl">
+          <div className="flex flex-col md:flex-row flex-wrap items-center gap-4 max-w-full">
             <Button 
               size="md" 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
+              className="w-full md:w-auto md:flex-1 whitespace-nowrap bg-blue-600 hover:bg-blue-700 text-white shadow-sm" 
               asChild
               disabled={!event.isUpcoming || !event.registrationUrl}
             >
@@ -408,37 +443,57 @@ const EventDetail = () => {
               )}
             </Button>
 
-            <Button 
-              size="md" 
-              variant="outline" 
-              className="w-full border-gray-300 hover:bg-gray-50" 
-              asChild
-              disabled={!event.flyerUrl && !event.brochureUrl}
-            >
-              {(event.flyerUrl || event.brochureUrl) ? (
-                <a href={event.flyerUrl || event.brochureUrl} target="_blank" rel="noopener noreferrer">
+            {event.flyerUrl && (
+              <Button 
+                size="md" 
+                variant="outline" 
+                className="w-full md:w-auto md:flex-1 whitespace-nowrap border-gray-300 hover:bg-gray-50" 
+                asChild
+              >
+                <a href={parseImageUrl(event.flyerUrl)} target="_blank" rel="noopener noreferrer">
                   <Download size={18} className="mr-2 text-gray-600" />
                   Download Flyer
                 </a>
-              ) : (
-                <span>
-                  <Download size={18} className="mr-2 text-gray-400" />
-                  Download Flyer
-                </span>
-              )}
-            </Button>
+              </Button>
+            )}
+
+            {event.brochureUrl && (
+              <Button 
+                size="md" 
+                variant="outline" 
+                className="w-full md:w-auto md:flex-1 whitespace-nowrap border-gray-300 hover:bg-gray-50" 
+                asChild
+              >
+                <a href={parseImageUrl(event.brochureUrl)} target="_blank" rel="noopener noreferrer">
+                  <Download size={18} className="mr-2 text-gray-600" />
+                  Event Brochure
+                </a>
+              </Button>
+            )}
+
+            {!event.flyerUrl && !event.brochureUrl && (
+              <Button 
+                size="md" 
+                variant="outline" 
+                className="w-full md:w-auto md:flex-1 whitespace-nowrap border-gray-300 bg-gray-50 text-gray-400" 
+                disabled
+              >
+                <Download size={18} className="mr-2 text-gray-400" />
+                No Brochure
+              </Button>
+            )}
 
             <Button 
               size="md" 
               variant="outline" 
-              className="w-full border-gray-300 hover:bg-gray-50" 
+              className="w-full md:w-auto md:flex-1 whitespace-nowrap border-gray-300 hover:bg-gray-50" 
               onClick={addToGoogleCalendar}
             >
               <CalendarPlus size={18} className="mr-2 text-gray-600" />
               Add to Calendar
             </Button>
 
-            <SocialShare url={window.location.href} title={event.title} className="w-full" />
+            <SocialShare url={window.location.href} title={event.title} className="w-full md:w-auto md:flex-1 whitespace-nowrap" />
           </div>
         </div>
 

@@ -128,8 +128,12 @@ import {
   listItcellMembers,
   createItcellMember,
   updateItcellMember,
-  deleteItcellMember
 } from "../../services/itcellService";
+import {
+  listFacultyRegistrationRequests,
+  approveFacultyRegistration,
+  rejectFacultyRegistration,
+} from "../../services/facultyRegistrationService";
 import { facilities } from "../../components/bookingData/facilities";
 import UniversityStatsManager from "../../components/admin/UniversityStatsManager";
 /* Semester Registration is held back from this release — the modules below are
@@ -423,6 +427,7 @@ const tabs = [
   { id: "overview", label: "Overview", icon: Shield },
   { id: "accounts", label: "User & Login Management", icon: KeyRound },
   { id: "faculty", label: "Faculty Management", icon: Users },
+  { id: "faculty-requests", label: "Faculty Requests", icon: UserPlus },
   { id: "school", label: "Schools Management", icon: School },
   { id: "announcements", label: "Announcement", icon: Megaphone },
   { id: "nss", label: "NSS Management", icon: Sparkles },
@@ -613,6 +618,14 @@ const AdminDashboard = () => {
   const [schoolDeletingKey, setSchoolDeletingKey] = useState("");
   const [schoolApiError, setSchoolApiError] = useState("");
   const [schoolEditor, setSchoolEditor] = useState({ isCreating: false });
+  
+  // Faculty Requests State
+  const [facultyRequests, setFacultyRequests] = useState([]);
+  const [facultyRequestsMeta, setFacultyRequestsMeta] = useState({ page: 1, limit: 10, totalPages: 1 });
+  const [facultyRequestsFilter, setFacultyRequestsFilter] = useState("pending");
+  const [facultyRequestsQuery, setFacultyRequestsQuery] = useState("");
+  const [facultyRequestsLoading, setFacultyRequestsLoading] = useState(false);
+
   // Collection edits (clubs, NSS/NCC content) are staged in schoolData and only
   // persisted by the tab's Save button — flag it so it is not missed.
   // Announcements are exempt: they save per item, straight to their own tables.
@@ -1166,6 +1179,31 @@ const AdminDashboard = () => {
     return () => { isMounted = false; };
   }, [activeTab, semRegFilters]);
 
+  const loadFacultyRequests = async (page = 1) => {
+    try {
+      setFacultyRequestsLoading(true);
+      const res = await listFacultyRegistrationRequests({
+        page,
+        limit: facultyRequestsMeta.limit,
+        status: facultyRequestsFilter,
+        query: facultyRequestsQuery,
+      });
+      setFacultyRequests(res.items || []);
+      setFacultyRequestsMeta(res.pagination || { page: 1, limit: 10, totalPages: 1 });
+    } catch (error) {
+      console.error("[AdminDashboard] loadFacultyRequests failed", error);
+      setMessage(error?.response?.data?.message || "Failed to load faculty requests");
+    } finally {
+      setFacultyRequestsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === "faculty-requests") {
+      loadFacultyRequests(facultyRequestsMeta.page);
+    }
+  }, [activeTab, facultyRequestsFilter, facultyRequestsQuery, facultyRequestsMeta.page]);
+
   /* ── Announcements own their sub-tab; they no longer read schoolData ── */
   useEffect(() => {
     if (activeTab === "announcements") {
@@ -1183,6 +1221,29 @@ const AdminDashboard = () => {
   }, [activeTab, activeSchoolSubTab, schoolsList, selectedSchoolId]);
 
   /* ── Approval queue badge ── */
+  const handleApproveRequest = async (id) => {
+    if (!window.confirm("Approve this faculty registration? They will receive login credentials via email.")) return;
+    try {
+      await approveFacultyRegistration(id);
+      setMessage("Request approved successfully.");
+      loadFacultyRequests(facultyRequestsMeta.page);
+    } catch (err) {
+      console.error(err);
+      setMessage(err?.response?.data?.message || "Failed to approve request");
+    }
+  };
+
+  const handleRejectRequest = async (id, reason) => {
+    try {
+      await rejectFacultyRegistration(id, reason);
+      setMessage("Request rejected.");
+      loadFacultyRequests(facultyRequestsMeta.page);
+    } catch (err) {
+      console.error(err);
+      setMessage(err?.response?.data?.message || "Failed to reject request");
+    }
+  };
+
   const refreshPendingApprovalCount = useCallback(async () => {
     try {
       const pending = await listPendingAnnouncements();
@@ -4237,6 +4298,150 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+      </div>
+    );
+  };
+
+  const renderFacultyRequestsTab = () => {
+    return (
+      <div className="space-y-4">
+        <div className={cardClass}>
+          {/* Header */}
+          <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
+              <p className="text-xs text-slate-500">Manage incoming faculty registration requests</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <select
+                value={facultyRequestsFilter}
+                onChange={(e) => {
+                  setFacultyRequestsFilter(e.target.value);
+                  setFacultyRequestsMeta(p => ({ ...p, page: 1 }));
+                }}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm"
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Search requests..."
+                value={facultyRequestsQuery}
+                onChange={(e) => {
+                  setFacultyRequestsQuery(e.target.value);
+                  setFacultyRequestsMeta(p => ({ ...p, page: 1 }));
+                }}
+                className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
+              />
+            </div>
+          </div>
+
+          {/* List */}
+          <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <table className="w-full text-left text-sm text-slate-600">
+              <thead className="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Name / Email</th>
+                  <th className="px-4 py-3 font-semibold">School / Dept</th>
+                  <th className="px-4 py-3 font-semibold">Designation</th>
+                  <th className="px-4 py-3 font-semibold">Status</th>
+                  <th className="px-4 py-3 font-semibold">Date</th>
+                  <th className="px-4 py-3 font-semibold text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 bg-white">
+                {facultyRequestsLoading ? (
+                  <tr>
+                    <td colSpan="6" className="px-4 py-8 text-center text-slate-400">Loading requests...</td>
+                  </tr>
+                ) : facultyRequests.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="px-4 py-8 text-center text-slate-400">No registration requests found.</td>
+                  </tr>
+                ) : (
+                  facultyRequests.map((req) => (
+                    <tr key={req.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3">
+                        <div className="font-semibold text-slate-900">{req.name}</div>
+                        <div className="text-xs text-slate-500">{req.email}</div>
+                        <div className="text-xs text-slate-400">{req.mobile}</div>
+                      </td>
+                      <td className="px-4 py-3 text-xs">
+                        <div className="font-medium text-slate-700">{req.school_code}</div>
+                        <div className="text-slate-500">{req.department}</div>
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-700">{req.designation}</td>
+                      <td className="px-4 py-3 text-xs">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full font-medium border ${
+                          req.status === 'approved' ? 'bg-green-50 text-green-700 border-green-200' :
+                          req.status === 'rejected' ? 'bg-red-50 text-red-700 border-red-200' :
+                          'bg-amber-50 text-amber-700 border-amber-200'
+                        }`}>
+                          {req.status}
+                        </span>
+                        {req.status === 'rejected' && req.rejection_reason && (
+                          <div className="mt-1 text-[10px] text-red-500" title={req.rejection_reason}>
+                            {req.rejection_reason.length > 20 ? req.rejection_reason.substring(0, 20) + '...' : req.rejection_reason}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
+                        {new Date(req.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        {req.status === 'pending' && (
+                          <div className="flex justify-end gap-2">
+                            <button
+                              onClick={() => handleApproveRequest(req.id)}
+                              className="rounded bg-green-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-green-700 transition"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => {
+                                const reason = prompt("Enter rejection reason (optional):");
+                                if (reason !== null) handleRejectRequest(req.id, reason);
+                              }}
+                              className="rounded bg-red-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-red-700 transition"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-sm text-slate-500">
+            <span>
+              Page {facultyRequestsMeta.page} of {facultyRequestsMeta.totalPages} ({facultyRequestsMeta.total || 0} total)
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                disabled={facultyRequestsMeta.page <= 1}
+                onClick={() => loadFacultyRequests(facultyRequestsMeta.page - 1)}
+                className="rounded-md border border-slate-300 bg-white px-3 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60 transition"
+              >
+                Prev
+              </button>
+              <button
+                disabled={facultyRequestsMeta.page >= facultyRequestsMeta.totalPages}
+                onClick={() => loadFacultyRequests(facultyRequestsMeta.page + 1)}
+                className="rounded-md border border-slate-300 bg-white px-3 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60 transition"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
@@ -8074,6 +8279,7 @@ const AdminDashboard = () => {
 
           {activeTab === "accounts" && renderAccountsTab()}
           {activeTab === "faculty" && renderFacultyTab()}
+          {activeTab === "faculty-requests" && renderFacultyRequestsTab()}
           {activeTab === "school" && renderSchoolTab()}
           {activeTab === "announcements" && renderAnnouncementsTab()}
           {activeTab === "nss" && renderNssTab()}

@@ -353,6 +353,7 @@ const SchoolDashboard = () => {
             bannerImage: c.bannerImage || "",
             address: c.address || "",
             schoolDescription: school.overview || "",
+            counts: school.counts || {},
             events: c.events || [],
             news: c.news || [],
             notices: c.notices || [],
@@ -456,11 +457,11 @@ const SchoolDashboard = () => {
   const summary = useMemo(
     () => [
       { label: "Faculty", value: facultyProfiles.length },
-      { label: "Events", value: data.events?.length || 0 },
-      { label: "News", value: data.news?.length || 0 },
-      { label: "Notices", value: data.notices?.length || 0 },
+      { label: "Events", value: data.counts?.events || 0 },
+      { label: "News", value: data.counts?.news || 0 },
+      { label: "Notices", value: data.counts?.notices || 0 },
     ],
-    [facultyProfiles.length, data.events, data.news, data.notices]
+    [facultyProfiles.length, data.counts]
   );
 
   const getHeaderContent = () => {

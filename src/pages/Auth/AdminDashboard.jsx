@@ -251,7 +251,7 @@ const getApiErrorMessage = (error, fallback) => {
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
+  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20";
 
 const NOTICES_FIELDS = [
   { key: "title", label: "Notice Title", required: true },
@@ -466,7 +466,7 @@ const FilterBar = ({ searchValue, onSearchChange, searchPlaceholder, children, o
       <div className="relative min-w-[220px] flex-1">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
         <input
-          className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
+          className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
           type="text"
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -777,7 +777,7 @@ const AdminDashboard = () => {
     () => [
       { label: "Total Accounts", value: accountPagination.total },
       { label: "Faculty Profiles", value: facultyProfiles.length },
-      { label: "School Events", value: schoolData.events?.length || 0 },
+      { label: "School Events", value: schoolData.counts?.events || 0 },
       { label: "Active Tenders", value: tenderSplit.current.length },
       { label: "Recruitment Posts", value: recruitmentPostCount },
     ],
@@ -2865,10 +2865,10 @@ const AdminDashboard = () => {
     ).length;
     const facultyWithoutEmail = facultyProfiles.filter((item) => !String(item.email || "").trim()).length;
     const sectionsMissingData = [
-      { key: "events", value: schoolData.events?.length || 0, label: "Events" },
-      { key: "news", value: schoolData.news?.length || 0, label: "News" },
-      { key: "notices", value: schoolData.notices?.length || 0, label: "Notices" },
-      { key: "newsletters", value: schoolData.newsletters?.length || 0, label: "Newsletters" },
+      { key: "events", value: schoolData.counts?.events || 0, label: "Events" },
+      { key: "news", value: schoolData.counts?.news || 0, label: "News" },
+      { key: "notices", value: schoolData.counts?.notices || 0, label: "Notices" },
+      { key: "newsletters", value: schoolData.counts?.newsletters || 0, label: "Newsletters" },
       { key: "gallery", value: schoolData.eventGallery?.length || 0, label: "Event Gallery" },
     ]
       .filter((item) => item.value === 0)
@@ -2951,7 +2951,7 @@ const AdminDashboard = () => {
           <button
             type="button"
             onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+            className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition"
           >
             <Plus className="h-3.5 w-3.5" /> Add New
           </button>
@@ -3183,7 +3183,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={() => saveCollectionForm(listKey)}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-600"
               >
                 Apply Changes
               </button>
@@ -3220,7 +3220,7 @@ const AdminDashboard = () => {
                 },
               })
             }
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600"
           >
             <UserPlus className="h-3.5 w-3.5" /> Create Login
           </button>
@@ -3747,7 +3747,7 @@ const AdminDashboard = () => {
                     type="button"
                     disabled={isAccountSaving}
                     onClick={handleSaveAccount}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-sky-500 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition disabled:opacity-50"
                   >
                     {isAccountSaving ? "Saving..." : "Save Account"}
                   </button>
@@ -3815,7 +3815,7 @@ const AdminDashboard = () => {
           {auditLogs.map((log) => (
             <div key={log.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                <span className="rounded-md bg-slate-900 px-2 py-1 font-semibold text-white">
+                <span className="rounded-md bg-sky-500 px-2 py-1 font-semibold text-white">
                   {log.action}
                 </span>
                 <span className="text-slate-500">{new Date(log.createdAt).toLocaleString()}</span>
@@ -3932,7 +3932,7 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Faculty
               </button>
@@ -4492,7 +4492,7 @@ const AdminDashboard = () => {
                   },
                 })
               }
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition"
             >
               <Plus className="h-3.5 w-3.5" /> Add Tender
             </button>
@@ -4837,14 +4837,14 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={() => setBookingSubSection("requests")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "requests" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "requests" ? "bg-sky-500 text-white shadow-sm" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
               >
                 Requests
               </button>
               <button
                 type="button"
                 onClick={() => setBookingSubSection("in-charges")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "in-charges" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "in-charges" ? "bg-sky-500 text-white shadow-sm" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
               >
                 In-Charges
               </button>
@@ -5036,7 +5036,7 @@ const AdminDashboard = () => {
                                 const phone = document.getElementById(`ic-phone-${facility.id}`)?.value || "";
                                 handleUpdateInCharge(facility.id, email, name, phone);
                               }}
-                              className="rounded-lg bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 transition"
+                              className="rounded-xl bg-sky-500 px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm hover:bg-sky-600 transition"
                             >
                               Save
                             </button>
@@ -5216,7 +5216,7 @@ const AdminDashboard = () => {
                   },
                 })
               }
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition shadow-sm self-start sm:self-auto"
+              className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition self-start sm:self-auto"
             >
               <Plus className="h-4 w-4" /> Add Team Member
             </button>
@@ -5506,7 +5506,7 @@ const AdminDashboard = () => {
                   type="button"
                   disabled={isItcellSaving}
                   onClick={handleSaveItcellMember}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-sky-500 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition disabled:opacity-50"
                 >
                   {isItcellSaving ? "Saving..." : "Save Member"}
                 </button>
@@ -5545,9 +5545,9 @@ const AdminDashboard = () => {
                 {schoolsList.filter((s) => s.code !== "NSS" && s.code !== "NCC" && s.code !== "GBU").map((school) => {
                   const c = school.content || {};
                   const counts = [
-                    { label: "Events", n: (c.events || []).length, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
-                    { label: "News", n: (c.news || []).length, bg: "bg-emerald-50 text-emerald-700 border-emerald-100" },
-                    { label: "Notices", n: (c.notices || []).length, bg: "bg-sky-50 text-sky-700 border-sky-100" },
+                    { label: "Events", n: school.counts?.events || 0, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
+                    { label: "News", n: school.counts?.news || 0, bg: "bg-emerald-50 text-emerald-700 border-emerald-100" },
+                    { label: "Notices", n: school.counts?.notices || 0, bg: "bg-sky-50 text-sky-700 border-sky-100" },
                   ];
                   return (
                     <div
@@ -5557,7 +5557,7 @@ const AdminDashboard = () => {
                     >
                       <div>
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="rounded-lg bg-slate-900 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase">{school.code}</span>
+                          <span className="rounded-lg bg-sky-500 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase shadow-sm">{school.code}</span>
                           <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-250">Active</span>
                         </div>
                         <h3 className="text-base font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-slate-950 transition-colors">{school.name}</h3>
@@ -5603,7 +5603,7 @@ const AdminDashboard = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-slate-900">{schoolData.schoolName || "School"}</h2>
-                <span className="rounded-lg bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">{schoolData.schoolCode}</span>
+                <span className="rounded-lg bg-sky-500 px-2 py-0.5 text-xs font-bold text-white">{schoolData.schoolCode}</span>
               </div>
               <p className="text-sm text-slate-500">Manage this school's content, events, news &amp; more. Data is saved per-school.</p>
             </div>
@@ -5612,7 +5612,7 @@ const AdminDashboard = () => {
             <button
               onClick={handleSaveSchool}
               disabled={isSchoolSaving}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
             >
               <Save className="h-4 w-4" />
               {isSchoolSaving ? "Saving..." : "Save School"}
@@ -5670,13 +5670,13 @@ const AdminDashboard = () => {
                 onChange={(e) => setSchoolData((prev) => ({ ...prev, websiteUrl: e.target.value }))}
               />
             </Field>
-            <Field label="Banner Image URL">
+            {/* <Field label="Banner Image URL">
               <input
                 className={inputClass}
                 value={schoolData.bannerImage || ""}
                 onChange={(e) => setSchoolData((prev) => ({ ...prev, bannerImage: e.target.value }))}
               />
-            </Field>
+            </Field> */}
             <Field label="Address">
               <input
                 className={inputClass}
@@ -5794,7 +5794,7 @@ const AdminDashboard = () => {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-slate-900">University Announcements Management</h2>
-              <span className="rounded-lg bg-slate-900 px-2 py-0.5 text-xs font-bold text-white">GBU</span>
+              <span className="rounded-lg bg-sky-500 px-2 py-0.5 text-xs font-bold text-white shadow-sm">GBU</span>
             </div>
             {/* <p className="text-sm text-slate-500">
               Notices, news, events, newsletters and gallery albums shown on the public Announcements
@@ -5849,7 +5849,7 @@ const AdminDashboard = () => {
         {/* Header Panel */}
         <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
+            <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Service Scheme (NSS) Management</h2>
               {/* <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p> */}
@@ -5858,7 +5858,7 @@ const AdminDashboard = () => {
           <button
             onClick={handleSaveSchool}
             disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSchoolSaving ? "Saving..." : "Save NSS Settings"}
@@ -6099,7 +6099,7 @@ const AdminDashboard = () => {
                     coreCouncil: [...(prev.coreCouncil || []), newMember]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Member
               </button>
@@ -6377,7 +6377,7 @@ const AdminDashboard = () => {
         {/* Header Panel */}
         <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
+            <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Cadet Corps (NCC) Management</h2>
               {/* <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p> */}
@@ -6386,7 +6386,7 @@ const AdminDashboard = () => {
           <button
             onClick={handleSaveSchool}
             disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSchoolSaving ? "Saving..." : "Save NCC Settings"}
@@ -6631,7 +6631,7 @@ const AdminDashboard = () => {
                     cadetLeaders: [...(prev.cadetLeaders || []), newLeader]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Cadet Leader
               </button>
@@ -6736,7 +6736,7 @@ const AdminDashboard = () => {
                     platoons: [...(prev.platoons || []), newPlatoon]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Platoon
               </button>
@@ -6927,7 +6927,7 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
               >
                 <Plus className="h-4 w-4" /> Add Current
               </button>
@@ -7237,7 +7237,7 @@ const AdminDashboard = () => {
                   type="button"
                   onClick={saveRecruitmentEditor}
                   disabled={isRecruitmentSaving}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition disabled:opacity-50"
                 >
                   {isRecruitmentSaving ? "Saving..." : "Save Recruitment Data"}
                 </button>
@@ -7340,7 +7340,7 @@ const AdminDashboard = () => {
           {!tickerEditor.isAdding && !tickerEditor.editingId && (
             <button
               onClick={() => setTickerEditor({ isAdding: true, editingId: null, text: "", link: "" })}
-              className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition shadow-sm"
+              className="flex items-center gap-2 px-4 py-2.5 bg-sky-500 text-white font-semibold rounded-xl hover:bg-sky-600 transition shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Add Notice
@@ -7383,7 +7383,7 @@ const AdminDashboard = () => {
               <button
                 onClick={handleTickerSave}
                 disabled={!tickerEditor.text.trim() || isTickerSaving}
-                className="flex items-center gap-2 px-5 py-2 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2 bg-sky-500 text-white font-semibold rounded-xl hover:bg-sky-600 transition disabled:opacity-50"
               >
                 {isTickerSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 {isTickerSaving ? "Saving..." : (tickerEditor.editingId ? "Update" : "Save")}
@@ -7889,7 +7889,7 @@ const AdminDashboard = () => {
             <button
               onClick={handleDispatchAllPending}
               disabled={isDispatchingMailQueue || pending.length === 0}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors disabled:opacity-50 shadow-sm"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-sky-500 hover:bg-sky-600 rounded-xl transition-colors disabled:opacity-50 shadow-sm"
             >
               {isDispatchingMailQueue ? (
                 <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Dispatching...</>
@@ -8041,11 +8041,11 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                        isActive ? "bg-slate-900 text-white shadow" : "text-slate-700 hover:bg-slate-100"
+                      className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all ${
+                        isActive ? "bg-sky-50 text-sky-700 font-semibold shadow-sm ring-1 ring-sky-500/50" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                       }`}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className={`h-4 w-4 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
                       {tab.label}
                     </button>
 
@@ -8129,9 +8129,9 @@ const AdminDashboard = () => {
               <div className="mt-2 space-y-2">
                 <button
                   onClick={exportBackup}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-300"
                 >
-                  <Download className="h-4 w-4" /> Export DB Backup
+                  <Download className="h-4 w-4 text-slate-500" /> Export DB Backup
                 </button>
                 {/* <button
                   onClick={() => backupInputRef.current?.click()}
@@ -8148,7 +8148,7 @@ const AdminDashboard = () => {
                 />
                 <button
                   onClick={saveAll}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-3 py-2.5 text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/30 hover:-translate-y-0.5"
                 >
                   <Save className="h-4 w-4" /> Save All
                 </button>
@@ -8163,7 +8163,7 @@ const AdminDashboard = () => {
                     clearPortalSession();
                     navigate("/login");
                   }}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100"
                 >
                   <LogOut className="h-4 w-4" /> Logout
                 </button>
@@ -8172,7 +8172,7 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto lg:pr-4 lg:pb-8">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto custom-scrollbar lg:pr-4 lg:pb-8">
           {activeTab === "overview" && (
             <section className="space-y-6">
               <section className={cardClass}>

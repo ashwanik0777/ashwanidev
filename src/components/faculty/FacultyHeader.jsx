@@ -147,34 +147,31 @@ const FacultyHeader = ({ faculty }) => {
         </div>
 
         {/* Quick Stats */}
-        <div className="flex-shrink-0">
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {Array.isArray(faculty?.experience) ? faculty.experience.length : (faculty?.experienceYears || faculty?.experience || '--')}
+        {(() => {
+          const expVal = Array.isArray(faculty?.experience) ? faculty.experience.length : (Number(faculty?.experienceYears) || Number(faculty?.experience) || 0);
+          const pubVal = Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0);
+          const talksVal = Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0);
+          const projVal = Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0);
+          const stats = [
+            expVal > 0 && { value: expVal, label: 'Years Experience', from: 'from-green-50', to: 'to-green-100', border: 'border-green-200', text: 'text-green-600', sub: 'text-green-700' },
+            pubVal > 0 && { value: pubVal, label: 'Publications', from: 'from-blue-50', to: 'to-blue-100', border: 'border-blue-200', text: 'text-blue-600', sub: 'text-blue-700' },
+            talksVal > 0 && { value: talksVal, label: 'Talks Delivered', from: 'from-purple-50', to: 'to-purple-100', border: 'border-purple-200', text: 'text-purple-600', sub: 'text-purple-700' },
+            projVal > 0 && { value: projVal, label: 'Projects', from: 'from-orange-50', to: 'to-orange-100', border: 'border-orange-200', text: 'text-orange-600', sub: 'text-orange-700' },
+          ].filter(Boolean);
+          if (stats.length === 0) return null;
+          return (
+            <div className="flex-shrink-0">
+              <div className={`grid gap-4 ${stats.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} lg:grid-cols-1`}>
+                {stats.map((s) => (
+                  <div key={s.label} className={`bg-gradient-to-br ${s.from} ${s.to} rounded-xl p-4 text-center border ${s.border} border-solid`}>
+                    <div className={`text-2xl font-bold ${s.text}`}>{s.value}</div>
+                    <div className={`text-sm ${s.sub}`}>{s.label}</div>
+                  </div>
+                ))}
               </div>
-              <div className="text-sm text-green-700">Years Experience</div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {Array.isArray(faculty?.publications) ? faculty.publications.length : (faculty?.publicationsCount || faculty?.publications || '--')}
-              </div>
-              <div className="text-sm text-blue-700">Publications</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {Array.isArray(faculty?.talks) ? faculty.talks.length : (faculty?.talks || '--')}
-              </div>
-              <div className="text-sm text-purple-700">Talks Delivered</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {Array.isArray(faculty?.projects) ? faculty.projects.length : (faculty?.projects || '--')}
-              </div>
-              <div className="text-sm text-orange-700">Projects</div>
-            </div>
-          </div>
-        </div>
+          );
+        })()}
       </div>
     </Card>
   );

@@ -11,11 +11,31 @@ import {
 } from "lucide-react";
 import { trackVisitor } from "../../services/visitorService";
 import { trackPageVisit } from "../../services/analyticsService";
+import { subscribeToNewsletter } from "../../services/subscriberService";
 
 const Footer = () => {
   const [visitorCount, setVisitorCount] = useState(0);
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState({ loading: false, message: "", type: "" });
   const { pathname } = useLocation();
 
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribeStatus({ loading: true, message: "", type: "" });
+    try {
+      await subscribeToNewsletter(email);
+      setSubscribeStatus({ loading: false, message: "Successfully subscribed!", type: "success" });
+      setEmail("");
+      setTimeout(() => setSubscribeStatus({ loading: false, message: "", type: "" }), 3000);
+    } catch (err) {
+      setSubscribeStatus({ 
+        loading: false, 
+        message: err.response?.data?.errors?.[0]?.message || "Subscription failed. Try again.", 
+        type: "error" 
+      });
+    }
+  };
   // Track unique visitor once on mount
   useEffect(() => {
     trackVisitor().then((count) => {
@@ -242,21 +262,32 @@ const Footer = () => {
             >
               Subscribe to Newsletter
             </label>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                id="newsletter-email"
-                type="email"
-                placeholder="Your email"
-                className="w-full px-3 py-2 text-white bg-[#1a202c] rounded-l-md outline-none focus:ring-2 focus:ring-orange-500"
-                required
-                aria-label="Email address"
-              />
-              <button
-                type="submit"
-                className="bg-orange-600 text-white px-4 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              >
-                Subscribe
-              </button>
+            <form className="flex flex-col gap-2" onSubmit={handleSubscribe}>
+              <div className="flex">
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 text-white bg-[#1a202c] rounded-l-md outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
+                  required
+                  disabled={subscribeStatus.loading}
+                  aria-label="Email address"
+                />
+                <button
+                  type="submit"
+                  disabled={subscribeStatus.loading}
+                  className="bg-orange-600 text-white px-4 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-75 whitespace-nowrap transition-colors"
+                >
+                  {subscribeStatus.loading ? "Wait..." : "Subscribe"}
+                </button>
+              </div>
+              {subscribeStatus.message && (
+                <span className={`text-xs ${subscribeStatus.type === "success" ? "text-emerald-400" : "text-rose-400"}`}>
+                  {subscribeStatus.message}
+                </span>
+              )}
             </form>
           </div>
         </section>

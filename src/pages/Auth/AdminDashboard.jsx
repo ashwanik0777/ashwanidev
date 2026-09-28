@@ -155,6 +155,7 @@ import {
   deleteTickerNotice,
 } from "../../services/tickerNoticesService";
 import AnalyticsTab from "../../components/admin/AnalyticsTab";
+import SubscribersTab from "../../components/admin/SubscribersTab";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -438,6 +439,7 @@ const tabs = [
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
   { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
   { id: "emailSystem", label: "Email System", icon: Mail },
+  { id: "subscribers", label: "Subscribers", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
@@ -8290,6 +8292,7 @@ const AdminDashboard = () => {
           {activeTab === "itcell" && renderItcellTab()}
           {activeTab === "ticker-notices" && renderTickerNoticesTab()}
           {activeTab === "emailSystem" && renderEmailSystemTab()}
+          {activeTab === "subscribers" && <SubscribersTab />}
           {activeTab === "analytics" && <AnalyticsTab />}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>

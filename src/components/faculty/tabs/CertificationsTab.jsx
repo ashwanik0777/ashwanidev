@@ -29,7 +29,7 @@ export const Badge = ({ className = '', variant = 'solid', children, ...props })
     'inline-flex items-center px-2 py-0.5 rounded-full font-medium border text-xs';
   const variants = {
     solid: 'bg-blue-600 text-white border-transparent',
-    outline: 'bg-white text-blue-700 border-blue-200',
+    outline: 'bg-black text-blue-700 border-blue-200',
   };
   return (
     <span
@@ -95,6 +95,7 @@ const normalizeCertification = (item) => ({
   level: pickText(item, ['level']),
   skills: pickArray(item, ['skills', 'topics']),
   verified: Boolean(item?.verified),
+  image: pickText(item, ['image', 'imageUrl', 'image_url', 'certificateImage']),
 });
 
 const normalizeProgram = (item) => ({
@@ -223,6 +224,18 @@ export const CertificationsTab = ({ profile }) => {
                             <ExternalLink className="w-4 h-4 mr-1" />
                             View Credential
                           </Button>
+                        </a>
+                      </div>
+                    )}
+
+                    {cert.image && (
+                      <div className="mt-3">
+                        <a href={cert.image} target="_blank" rel="noopener noreferrer" className="inline-block">
+                          <img
+                            src={cert.image}
+                            alt={`${cert.title} Certificate`}
+                            className="max-w-xs rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                          />
                         </a>
                       </div>
                     )}

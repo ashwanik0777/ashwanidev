@@ -65,6 +65,7 @@ const OverviewTab = ({ activeTab, profile }) => {
     { label: 'Curriculum Vitae', url: asText(profile.cv) },
     { label: 'Google Scholar', url: asText(profile.googleScholar) },
     { label: 'ORCID Profile', url: asText(profile.orcid) },
+    { label: 'LinkedIn', url: asText(profile.linkedin) },
     { label: 'Faculty Page', url: asText(profile.faculty_url) },
   ].filter((link) => link.url);
 
@@ -115,13 +116,13 @@ const OverviewTab = ({ activeTab, profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-1 gap-4">
             {researchAreas?.map((area, index) => (
               <div
                 key={index}
-                className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
+                className="p-4 bg-white rounded-lg border border-blue-100"
               >
-                <h3 className="font-semibold text-blue-900 mb-2">
+                <h3 className="font-normal text-black mb-2">
                   {area.title}
                 </h3>
                 {area.description && (

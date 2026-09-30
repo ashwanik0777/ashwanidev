@@ -66,9 +66,14 @@ const FacultyHeader = ({ faculty }) => {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               {faculty?.name || 'Dr. Faculty Name'}
             </h1>
-            <p className="text-xl text-blue-600 font-semibold mb-4">
+            <p className="text-xl text-blue-600 font-semibold mb-1">
               {faculty?.designation || 'Designation'}
             </p>
+            {faculty?.school && (
+              <p className="text-base text-gray-600 font-medium mb-4">
+                {faculty.school}
+              </p>
+            )}
 
             {/* Tags */}
             {faculty?.tags && (

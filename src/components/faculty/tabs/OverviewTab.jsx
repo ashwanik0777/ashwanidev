@@ -125,7 +125,7 @@ const OverviewTab = ({ activeTab, profile }) => {
                   {area.title}
                 </h3>
                 {area.description && (
-                  <p className="text-xl text-black">{area.description}</p>
+                  <p className="text-lg text-black">{area.description}</p>
                 )}
               </div>
             ))}

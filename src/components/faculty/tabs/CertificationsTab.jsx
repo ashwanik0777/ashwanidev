@@ -29,7 +29,7 @@ export const Badge = ({ className = '', variant = 'solid', children, ...props })
     'inline-flex items-center px-2 py-0.5 rounded-full font-medium border text-xs';
   const variants = {
     solid: 'bg-blue-600 text-black border-transparent',
-    outline: 'bg-black text-blue-700 border-blue-200',
+    outline: 'bg-white text-blue-700 border-blue-200',
   };
   return (
     <span
@@ -174,85 +174,97 @@ export const CertificationsTab = ({ profile }) => {
         <CardContent>
           <div className="grid gap-4">
             {certifications?.map((cert, index) => (
-              <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-start gap-3 mb-3">
-                      <div className="bg-blue-600 text-white p-2 rounded-lg">
-                        <Award className="w-5 h-5" />
+              <div key={index} className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex flex-col lg:flex-row gap-8">
+                  {/* Left Information Area */}
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex gap-4">
+                        <div className="bg-blue-50 text-blue-600 p-3 rounded-xl mt-1 shrink-0 border border-blue-100">
+                          <Award className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900 leading-tight mb-1.5">{cert.title}</h3>
+                          <p className="text-blue-700 font-semibold text-sm">{cert.platform}</p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">{cert.title}</h3>
-                        <p className="text-blue-600 font-medium">{cert.platform}</p>
+                      <div className="flex flex-col gap-2 shrink-0 ml-4 items-end">
+                        {cert.level && (
+                          <Badge className={`${getLevelColor(cert.level)} px-3 py-1 rounded-md text-xs font-semibold uppercase tracking-wider`}>
+                            {cert.level}
+                          </Badge>
+                        )}
+                        {cert.verified && (
+                          <Badge className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-md text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                            <CheckCircle className="w-3.5 h-3.5" /> Verified
+                          </Badge>
+                        )}
                       </div>
-                      {cert.verified && (
-                        <CheckCircle className="w-5 h-5 text-green-500" />
-                      )}
                     </div>
                     
-                    <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-gray-50/80 p-5 rounded-xl border border-gray-100 mb-6">
                       <div>
-                        <p className="flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Obtained:</span> {displayOr(cert.year)}
+                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Issue Date</p>
+                        <p className="text-gray-900 font-semibold flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4 text-gray-400" />
+                          {displayOr(cert.year)}
                         </p>
-                        <p><span className="font-medium">Valid Until:</span> {displayOr(cert.validUntil)}</p>
                       </div>
                       <div>
-                        <p><span className="font-medium">Credential ID:</span> {displayOr(cert.credentialId)}</p>
-                        <p><span className="font-medium">Level:</span> {displayOr(cert.level)}</p>
+                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Valid Until</p>
+                        <p className="text-gray-900 font-semibold">{displayOr(cert.validUntil)}</p>
+                      </div>
+                      <div className="sm:col-span-2">
+                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Credential ID</p>
+                        <p className="text-gray-800 font-mono text-sm bg-white border border-gray-200 px-2.5 py-1 rounded-md inline-block break-all">
+                          {displayOr(cert.credentialId)}
+                        </p>
                       </div>
                     </div>
 
-                    {cert.skills.length > 0 && (
-                      <div className="mb-4">
-                        <h4 className="font-medium text-gray-900 mb-2">Skills Covered:</h4>
+                    {cert.skills?.length > 0 && (
+                      <div className="mb-6">
+                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-3">Skills Earned</p>
                         <div className="flex flex-wrap gap-2">
-                          {cert.skills?.map((skill, idx) => (
-                            <Badge key={idx} variant="outline" className="text-xs">
+                          {cert.skills.map((skill, idx) => (
+                            <span key={idx} className="bg-indigo-50/50 text-indigo-700 border border-indigo-100 px-3 py-1.5 rounded-lg text-sm font-medium">
                               {skill}
-                            </Badge>
+                            </span>
                           ))}
                         </div>
                       </div>
                     )}
 
                     {cert.credentialUrl && (
-                      <div className="flex gap-2">
+                      <div className="mt-auto pt-2">
                         <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4 mr-1" />
-                            View Credential
+                          <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300 font-semibold">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Verify Credential
                           </Button>
                         </a>
                       </div>
                     )}
+                  </div>
 
-                    {cert.image && (
-                      <div className="mt-3">
-                        <a href={cert.image} target="_blank" rel="noopener noreferrer" className="inline-block">
-                          <img
-                            src={cert.image}
-                            alt={`${cert.title} Certificate`}
-                            className="max-w-xs rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                          />
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="flex flex-col items-start lg:items-end gap-2">
-                    {cert.level && (
-                      <Badge className={getLevelColor(cert.level)}>
-                        {cert.level}
-                      </Badge>
-                    )}
-                    {cert.verified && (
-                      <Badge className="bg-green-100 text-green-800">
-                        Verified
-                      </Badge>
-                    )}
-                  </div>
+                  {/* Right Image Area */}
+                  {cert.image && (
+                    <div className="lg:w-[320px] shrink-0 self-start">
+                      <div className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-3">Certificate File</div>
+                      <a href={cert.image} target="_blank" rel="noopener noreferrer" className="block relative group rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white transition-all hover:shadow-md hover:border-blue-300">
+                        <div className="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                          <span className="text-white font-semibold text-sm bg-blue-900/80 px-4 py-2 rounded-xl flex items-center gap-2 shadow-xl">
+                            <ExternalLink className="w-4 h-4" /> View Full Image
+                          </span>
+                        </div>
+                        <img
+                          src={cert.image}
+                          alt={`${cert.title} Certificate`}
+                          className="w-full aspect-[4/3] object-cover"
+                        />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

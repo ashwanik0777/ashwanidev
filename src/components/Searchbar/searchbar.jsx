@@ -86,7 +86,7 @@ const NAVIGATION_CONFIG = [
     label: "Announcements",
     baseRoute: "/announcements",
     items: [
-      { slug: "news-notifications", label: "News & Updates" },
+      { slug: "news", label: "News & Updates" },
       { slug: "event-calendar", label: "Upcoming Events" },
       { slug: "notices", label: "Notices & Circular" },
       { slug: "media-gallery", label: "Media Gallery" },

@@ -1,3 +1,4 @@
+import { createSlug } from "../../utils/slugUtil";
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   getSchoolAnnouncements,
@@ -30,7 +31,7 @@ export default function LatestUpdates() {
           tag: diffDays <= 10 ? 'Latest News' : 'News',
           priority: item.priority || 'medium',
           date: item.date,
-          url: `/announcements/news-notifications/${item.id}`,
+          url: `/announcements/news/${createSlug(item.title)}`,
         };
       });
 
@@ -84,7 +85,7 @@ export default function LatestUpdates() {
   ], []);
 
   const viewMoreUrls = {
-    'Latest News': '/announcements/news-notifications',
+    'Latest News': '/announcements/news',
     'Notice/Circulars': '/announcements/notices',
     'Ongoing Events': '/announcements/event-calendar',
   };
@@ -232,7 +233,7 @@ export default function LatestUpdates() {
                 <div className="flex align-middle justify-end z-10 mt-4 h-10">
                   <button
                     onClick={() => {
-                      const url = viewMoreUrls[category] || '/announcements/news-notifications';
+                      const url = viewMoreUrls[category] || '/announcements/news';
                       window.location.href = url;
                     }}
                     className="px-4 py-1 text-blue-600  rounded-2xl font-semibold hover:bg-blue-500 hover:text-white transition-colors duration-200 bg-transparent"

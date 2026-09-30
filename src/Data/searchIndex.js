@@ -288,7 +288,7 @@ const SEARCH_INDEX = [
   {
     label: "News & Updates",
     keywords: ["news", "updates", "notifications", "latest news", "announcements", "news updates"],
-    path: "/announcements/news-notifications",
+    path: "/announcements/news",
     category: "Announcements",
     description: "Latest news and university updates"
   },

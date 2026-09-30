@@ -9,6 +9,7 @@ import {
 } from '../../utils/schoolAnnouncements';
 import { formatAnnouncementDate } from '../../utils/announcementDate';
 import { parseImageUrl } from '../../utils/imageUtils.js';
+import { createSlug } from '../../utils/slugUtil';
 
 // Button component
 const Button = ({ children, variant = "default", size = "md", className = "", ...props }) => {
@@ -42,9 +43,13 @@ const Badge = ({ children, className = "" }) => (
 const format = (date) => formatAnnouncementDate(date, "MMMM dd, yyyy");
 
 const NewsDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [mockNews, setMockNews] = useState(() => getSchoolAnnouncements().news);
-  const newsItem = mockNews.find((item) => String(item.id) === String(id));
+  
+  // Find by slug (or fallback to ID if passed)
+  const newsItem = mockNews.find((item) => 
+    createSlug(item.title) === slug || String(item.id) === slug
+  );
   
   useEffect(() => {
     let isMounted = true;
@@ -79,7 +84,7 @@ const NewsDetail = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">News not found</h1>
-          <Link to="/announcements/news-notifications">
+          <Link to="/announcements/news">
             <Button>Back to News</Button>
           </Link>
         </div>
@@ -106,7 +111,7 @@ const NewsDetail = () => {
     <div className="min-h-screen bg-gray-50 px-4 py-20">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
         <div className="mb-6">
-          <Link to="/announcements/news-notifications">
+          <Link to="/announcements/news">
             <Button variant="outline" size="sm">
               <ArrowLeft size={16} className="mr-2" />
               Back to News

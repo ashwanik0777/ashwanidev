@@ -1,3 +1,4 @@
+import { createSlug } from "../../utils/slugUtil";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -852,7 +853,7 @@ const NewsGridCard = ({ news }) => {
         </p>
 
         <div className="flex items-center justify-between">
-          <Link to={`/announcements/news-notifications/${news.id}`}>
+          <Link to={`/announcements/news/${createSlug(news.title)}`}>
             <Button size="sm" className="flex items-center gap-2">
               Details
               <svg
@@ -994,7 +995,7 @@ const NewsListCard = ({ news }) => {
               </div>
 
               <div className="flex items-center gap-2">
-                <Link to={`/announcements/news-notifications/${news.id}`}>
+                <Link to={`/announcements/news/${createSlug(news.title)}`}>
                   <Button size="sm">Details</Button>
                 </Link>
               </div>
@@ -1057,7 +1058,7 @@ const NewsNotifications = ({ schoolCode }) => {
     };
   }, [schoolCode]);
   // Extract unique values
-  const allTags = Array.from(new Set(mockNews.flatMap((news) => news.tags)));
+  const allTags = Array.from(new Set(mockNews.flatMap((news) => news.tags || [])));
   const allCategories = Array.from(
     new Set(mockNews.map((news) => news.category)),
   );
@@ -1073,13 +1074,14 @@ const NewsNotifications = ({ schoolCode }) => {
   // Advanced filtering and sorting logic
   const filteredAndSortedNews = useMemo(() => {
     let filtered = mockNews.filter((news) => {
+      const q = searchQuery ? searchQuery.toLowerCase() : "";
       const matchesSearch =
-        !searchQuery ||
-        news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        news.department.toLowerCase().includes(searchQuery.toLowerCase());
+        !q ||
+        (news.title || "").toLowerCase().includes(q) ||
+        (news.excerpt || "").toLowerCase().includes(q) ||
+        (news.content || "").toLowerCase().includes(q) ||
+        (news.author || "").toLowerCase().includes(q) ||
+        (news.department || "").toLowerCase().includes(q);
 
       const newsDate = new Date(news.date);
       const matchesDateRange =
@@ -1091,7 +1093,7 @@ const NewsNotifications = ({ schoolCode }) => {
         new Date(news.date).getFullYear().toString() === selectedYear;
       const matchesSelectedTags =
         selectedTags.length === 0 ||
-        selectedTags.some((tag) => news.tags.includes(tag));
+        selectedTags.some((tag) => (news.tags || []).includes(tag));
       const matchesSelectedCategories =
         selectedCategories.length === 0 ||
         selectedCategories.includes(news.category);

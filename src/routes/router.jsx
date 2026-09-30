@@ -503,7 +503,7 @@ export default function AppRouter() {
 
           {/* Announcements Routes */}
           <Route
-            path="/announcements/news-notifications"
+            path="/announcements/news"
             element={<NewsNotifications />}
           />
           <Route
@@ -515,7 +515,7 @@ export default function AppRouter() {
             element={<EventDetail />}
           />
           <Route
-            path="/announcements/news-notifications/:id"
+            path="/announcements/news/:slug"
             element={<NewsDetail />}
           />
           <Route path="/announcements/notices" element={<Notice />} />

@@ -70,7 +70,7 @@ export default function CampusLifeSection() {
         src = '/campus-life/sports-fitness';
         break;
       case 3:
-        src = '/announcements/news-notifications';
+        src = '/announcements/news';
         break;
       case 4:
         src = 'https://hostels.gbu.ac.in/';

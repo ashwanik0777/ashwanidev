@@ -7376,7 +7376,7 @@ const AdminDashboard = () => {
                   disabled={isTickerSaving}
                   value={tickerEditor.link}
                   onChange={(e) => setTickerEditor(prev => ({ ...prev, link: e.target.value }))}
-                  placeholder="e.g. /announcements/news-notifications or https://..."
+                  placeholder="e.g. /announcements/news or https://..."
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white disabled:opacity-50 disabled:bg-slate-100"
                 />
               </div>

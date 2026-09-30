@@ -1,3 +1,4 @@
+import { createSlug } from "../../utils/slugUtil";
 import { Calendar } from "lucide-react";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
@@ -278,7 +279,7 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                 }}
               >
                 {visibleNotices.map((notice, index) => {
-                  const noticeUrl = notice.pdfUrl || notice.link || (notice.id ? `/announcements/news-notifications/${notice.id}` : '#');
+                  const noticeUrl = notice.pdfUrl || notice.link || (notice.id ? `/announcements/news/${createSlug(notice.title)}` : '#');
                   const isExternal = noticeUrl.startsWith('http') || noticeUrl.endsWith('.pdf');
                   
                   const InnerContent = (

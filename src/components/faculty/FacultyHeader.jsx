@@ -147,6 +147,18 @@ const FacultyHeader = ({ faculty }) => {
                 <ExternalLink className="w-4 h-4 mr-2" />
                 ORCID Profile
               </Button>
+
+              {faculty?.linkedin && (
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    window.open(faculty.linkedin, '_blank')
+                  }
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </Button>
+              )}
             </div>
           </div>
         </div>

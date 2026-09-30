@@ -65,7 +65,6 @@ const OverviewTab = ({ activeTab, profile }) => {
     { label: 'Curriculum Vitae', url: asText(profile.cv) },
     { label: 'Google Scholar', url: asText(profile.googleScholar) },
     { label: 'ORCID Profile', url: asText(profile.orcid) },
-    { label: 'LinkedIn', url: asText(profile.linkedin) },
     { label: 'Faculty Page', url: asText(profile.faculty_url) },
   ].filter((link) => link.url);
 

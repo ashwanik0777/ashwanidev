@@ -121,11 +121,11 @@ const OverviewTab = ({ activeTab, profile }) => {
                 key={index}
                 className="p-4 bg-white rounded-lg border border-blue-100"
               >
-                <h3 className="font-semibold text-black mb-2">
+                <h3 className="font-semibold text-gray-900 mb-2">
                   {area.title}
                 </h3>
                 {area.description && (
-                  <p className="text-lg text-black">{area.description}</p>
+                  <p className="text-md text-gray-700">{area.description}</p>
                 )}
               </div>
             ))}

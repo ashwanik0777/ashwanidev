@@ -87,49 +87,43 @@ const ProfileForms = ({
         </div>
       </div>
 
-      {/* 2. Stats & Highlights Card */}
+      {/* 2. Stats & Highlights Card (Auto-calculated) */}
       <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
           <Award className="h-5 w-5 text-stone-800" /> Stats &amp; Highlights
+          <span className="ml-2 text-xs font-normal text-stone-400">(Auto-calculated from your data)</span>
         </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Field label="Experience (Years)">
-            <input
-              className={inputClass}
-              type="number"
-              min="0"
-              value={profile.experience_years || 0}
-              onChange={(e) => onUpdateField("experience_years", Number(e.target.value || 0))}
-            />
-          </Field>
-          <Field label="Total Publications">
-            <input
-              className={inputClass}
-              type="number"
-              min="0"
-              value={profile.publications || 0}
-              onChange={(e) => onUpdateField("publications", Number(e.target.value || 0))}
-            />
-          </Field>
-          <Field label="Talks Delivered">
-            <input
-              className={inputClass}
-              type="number"
-              min="0"
-              value={Number(profile.tabData?.talksCount ?? 0)}
-              onChange={(e) => onUpdateTabDataField("talksCount", Number(e.target.value) || 0)}
-            />
-          </Field>
-          <Field label="Projects count">
-            <input
-              className={inputClass}
-              type="number"
-              min="0"
-              value={Number(profile.tabData?.projectsCount ?? 0)}
-              onChange={(e) => onUpdateTabDataField("projectsCount", Number(e.target.value) || 0)}
-            />
-          </Field>
-        </div>
+        {(() => {
+          const expItems = profile.tabData?.qualifications?.experience || [];
+          const currentYear = new Date().getFullYear();
+          let totalExp = 0;
+          expItems.forEach(exp => {
+            const fromYear = parseInt(exp.from || exp.fromYear || '0');
+            const toStr = (exp.to || exp.toYear || '').toLowerCase();
+            const toYear = toStr === 'present' || toStr === 'current' ? currentYear : parseInt(toStr || '0');
+            if (fromYear > 0 && toYear >= fromYear) totalExp += (toYear - fromYear);
+          });
+          const pubCount = (profile.tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
+          const talksCount = (profile.tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
+          const projCount = (profile.tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
+          return (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Field label="Experience (Years)">
+                <input className={inputClass} type="number" min="0" value={totalExp || profile.experience_years || 0} onChange={(e) => onUpdateField("experience_years", Number(e.target.value || 0))} />
+              </Field>
+              <Field label="Total Publications">
+                <input className={inputClass} type="number" min="0" value={pubCount || profile.publications || 0} onChange={(e) => onUpdateField("publications", Number(e.target.value || 0))} />
+              </Field>
+              <Field label="Talks Delivered">
+                <input className={inputClass} type="number" min="0" value={talksCount || Number(profile.tabData?.talksCount ?? 0)} onChange={(e) => onUpdateTabDataField("talksCount", Number(e.target.value) || 0)} />
+              </Field>
+              <Field label="Projects count">
+                <input className={inputClass} type="number" min="0" value={projCount || Number(profile.tabData?.projectsCount ?? 0)} onChange={(e) => onUpdateTabDataField("projectsCount", Number(e.target.value) || 0)} />
+              </Field>
+            </div>
+          );
+        })()}
+        <p className="mt-2 text-xs text-stone-400">These values auto-update as you add Experience, Publications, Talks, and Projects. You can also override them manually.</p>
       </div>
 
       {/* 3. Contact & Location Card */}
@@ -218,6 +212,14 @@ const ProfileForms = ({
                 value={profile.orcid || ""}
                 onChange={(e) => onUpdateField("orcid", e.target.value)}
                 placeholder="https://orcid.org/..."
+              />
+            </Field>
+            <Field label="LinkedIn">
+              <input
+                className={inputClass}
+                value={profile.linkedin || ""}
+                onChange={(e) => onUpdateField("linkedin", e.target.value)}
+                placeholder="https://www.linkedin.com/in/..."
               />
             </Field>
           </div>

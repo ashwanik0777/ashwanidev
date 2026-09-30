@@ -148,10 +148,25 @@ const FacultyHeader = ({ faculty }) => {
 
         {/* Quick Stats */}
         {(() => {
-          const expVal = Array.isArray(faculty?.experience) ? faculty.experience.length : (Number(faculty?.experienceYears) || Number(faculty?.experience) || 0);
-          const pubVal = Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0);
-          const talksVal = Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0);
-          const projVal = Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0);
+          // Auto-count from tabData arrays as fallback
+          const tabData = faculty?.tabData || {};
+          const expEntries = tabData?.qualifications?.experience || [];
+          const currentYear = new Date().getFullYear();
+          let autoExpYears = 0;
+          expEntries.forEach(exp => {
+            const fromYear = parseInt(exp.from || exp.fromYear || '0');
+            const toStr = (exp.to || exp.toYear || '').toLowerCase();
+            const toYear = toStr === 'present' || toStr === 'current' ? currentYear : parseInt(toStr || '0');
+            if (fromYear > 0 && toYear >= fromYear) autoExpYears += (toYear - fromYear);
+          });
+          const autoPubCount = (tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
+          const autoTalksCount = (tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
+          const autoProjCount = (tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
+
+          const expVal = autoExpYears || (Array.isArray(faculty?.experience) ? faculty.experience.length : (Number(faculty?.experienceYears) || Number(faculty?.experience_years) || Number(faculty?.experience) || 0));
+          const pubVal = autoPubCount || (Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0));
+          const talksVal = autoTalksCount || (Number(tabData?.talksCount) || (Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0)));
+          const projVal = autoProjCount || (Number(tabData?.projectsCount) || (Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0)));
           const stats = [
             expVal > 0 && { value: expVal, label: 'Years Experience', from: 'from-green-50', to: 'to-green-100', border: 'border-green-200', text: 'text-green-600', sub: 'text-green-700' },
             pubVal > 0 && { value: pubVal, label: 'Publications', from: 'from-blue-50', to: 'to-blue-100', border: 'border-blue-200', text: 'text-blue-600', sub: 'text-blue-700' },

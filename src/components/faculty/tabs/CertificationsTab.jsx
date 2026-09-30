@@ -28,7 +28,7 @@ export const Badge = ({ className = '', variant = 'solid', children, ...props })
   const base =
     'inline-flex items-center px-2 py-0.5 rounded-full font-medium border text-xs';
   const variants = {
-    solid: 'bg-blue-600 text-white border-transparent',
+    solid: 'bg-blue-600 text-black border-transparent',
     outline: 'bg-black text-blue-700 border-blue-200',
   };
   return (

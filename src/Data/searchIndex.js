@@ -295,7 +295,7 @@ const SEARCH_INDEX = [
   {
     label: "Upcoming Events",
     keywords: ["events", "upcoming events", "event calendar", "conference", "seminar", "workshop", "fest", "convocation"],
-    path: "/announcements/event-calendar",
+    path: "/announcements/event",
     category: "Announcements",
     description: "Upcoming events and event calendar"
   },

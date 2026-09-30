@@ -100,7 +100,7 @@ const EventGallerySlider = ({ events = [] }) => {
     <div className="flex flex-col flex-1 min-h-0">
       {/* Main Image */}
             <Link
-        to={current.link || (current.id ? `/announcements/event-calendar/${current.id}` : "#")}
+        to={current.link || (current.id ? `/announcements/event/${current.title ? createSlug(current.title) : current.id}` : "#")}
         className="relative w-full flex-1 min-h-0 rounded-xl overflow-hidden shadow-md group block bg-gray-100"
       >
         <img

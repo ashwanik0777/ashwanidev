@@ -133,7 +133,7 @@ const EventCard = ({ event, index }) => {
   const isPast = !event.isUpcoming;
 
   return (
-    <Link to={`/announcements/event-calendar/${event.id}`}>
+    <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

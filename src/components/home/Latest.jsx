@@ -71,7 +71,7 @@ export default function LatestUpdates() {
           tag: tag,
           priority: item.priority || 'high',
           date: item.date,
-          url: `/announcements/event-calendar/${item.id}`,
+          url: `/announcements/event/${item.title ? createSlug(item.title) : item.id}`,
         };
       });
 
@@ -87,7 +87,7 @@ export default function LatestUpdates() {
   const viewMoreUrls = {
     'Latest News': '/announcements/news',
     'Notice/Circulars': '/announcements/notices',
-    'Ongoing Events': '/announcements/event-calendar',
+    'Ongoing Events': '/announcements/event',
   };
 
   useEffect(() => {

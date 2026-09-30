@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getSchoolAnnouncements, refreshSchoolAnnouncements, syncAnnouncementsFromCache } from '../../utils/schoolAnnouncements';
 import { getImageUrl } from '../../utils/imageUtils';
+import { createSlug } from '../../utils/slugUtil';
 import homeData from '../../Data/home.json';
 
 export default function CampusGallery() {
@@ -46,7 +47,7 @@ export default function CampusGallery() {
             id: item.id,
             image: getImageUrl(cover, undefined, 2500),
             text: item.title,
-            button1_url: `/announcements/event-calendar/${item.id}`,
+            button1_url: `/announcements/event/${item.title ? createSlug(item.title) : item.id}`,
             button1_text: "View Details"
           });
         }
@@ -58,7 +59,7 @@ export default function CampusGallery() {
             id: `${item.id}-extra-${extrasPool.length}`,
             image: getImageUrl(img, undefined, 2500),
             text: item.title,
-            button1_url: `/announcements/event-calendar/${item.id}`,
+            button1_url: `/announcements/event/${item.title ? createSlug(item.title) : item.id}`,
             button1_text: "View Details"
           });
         }

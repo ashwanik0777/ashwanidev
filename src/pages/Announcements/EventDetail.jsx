@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Image as ImageIcon
 } from "lucide-react";
+import { createSlug } from '../../utils/slugUtil';
 import Header from "../../components/announcement/Header";
 import SocialShare from "../../components/announcement/SocialShare";
 import RelatedEvents from "../../components/announcement/RelatedEvents";
@@ -171,7 +172,7 @@ function format(date, formatStr) {
 }
 
 const EventDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -206,7 +207,9 @@ const EventDetail = () => {
       }
 
       const eventList = getSchoolAnnouncements().events;
-      const selected = eventList.find((item) => String(item.id) === String(id));
+      const selected = eventList.find((item) => 
+        (typeof createSlug === "function" ? createSlug(item.title) : String(item.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')) === slug || String(item.id) === slug
+      );
       if (!isMounted) return;
       setEvent(selected || null);
       setLoading(false);
@@ -223,7 +226,7 @@ const EventDetail = () => {
       window.removeEventListener("focus", loadEvent);
       window.removeEventListener("announcements-data-updated", loadEvent);
     };
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -266,7 +269,7 @@ const EventDetail = () => {
           <p className="text-gray-600 mb-8 max-w-md mx-auto">
             The event you are looking for might have been removed or the link is temporarily unavailable.
           </p>
-          <Link to="/announcements/event-calendar">
+          <Link to="/announcements/event">
             <Button>Back to Events Calendar</Button>
           </Link>
         </div>
@@ -307,7 +310,7 @@ const EventDetail = () => {
     <div className="min-h-screen bg-gray-50/50 pb-20">
       <div className="container mx-auto px-4 md:px-8 pt-8">
         <div className="mb-8">
-          <Link to="/announcements/event-calendar">
+          <Link to="/announcements/event">
             <Button variant="outline" size="sm" className="text-gray-600 border-gray-300 hover:bg-gray-100">
               <ArrowLeft size={16} className="mr-2" />
               Back to Events

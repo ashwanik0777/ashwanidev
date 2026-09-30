@@ -507,11 +507,11 @@ export default function AppRouter() {
             element={<NewsNotifications />}
           />
           <Route
-            path="/announcements/event-calendar"
+            path="/announcements/event"
             element={<EventsPage />}
           />
           <Route
-            path="/announcements/event-calendar/:id"
+            path="/announcements/event/:slug"
             element={<EventDetail />}
           />
           <Route

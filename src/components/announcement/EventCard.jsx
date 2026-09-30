@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Calendar, ExternalLink, Clock } from 'lucide-react';
 import { format } from 'date-fns';
+import { createSlug } from '../../utils/slugUtil';
 import SocialShare from './SocialShare';
 import SearchableWrapper from '../Searchbar/SearchableWrapper';
 
@@ -81,7 +82,7 @@ const EventCard = ({ event, isPastEvent = false }) => {
 
   return (
     <SearchableWrapper>
-    <Link to={`/announcements/event-calendar/${event.id}`} className="block group">
+    <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`} className="block group">
       <Card
         className={`h-130 flex flex-col hover:shadow-2xl transition-shadow duration-300 
           ${isPastEvent ? 'grayscale hover:grayscale-0 transition-all duration-500' : ''}`}

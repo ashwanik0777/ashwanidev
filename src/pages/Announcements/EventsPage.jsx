@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { createSlug } from "../../utils/slugUtil";
 import BannerSection from "../../components/HeroBanner";
 import {
   getSchoolAnnouncements,
@@ -473,7 +474,7 @@ const EventCard = ({ event }) => {
         {/* Spacer to push button down */}
         <div className="flex-grow" />
 
-        <Link to={`/announcements/event-calendar/${event.id}`}>
+        <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`}>
           <button className={`w-full py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
             isUpcoming
               ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow"

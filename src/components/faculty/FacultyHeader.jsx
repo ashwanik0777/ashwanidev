@@ -151,14 +151,32 @@ const FacultyHeader = ({ faculty }) => {
           // Auto-count from tabData arrays as fallback
           const tabData = faculty?.tabData || {};
           const expEntries = tabData?.qualifications?.experience || [];
-          const currentYear = new Date().getFullYear();
-          let autoExpYears = 0;
+          const now = new Date();
+          const currentYear = now.getFullYear();
+          const currentMonth = now.getMonth() + 1;
+          let totalMonths = 0;
           expEntries.forEach(exp => {
-            const fromYear = parseInt(exp.from || exp.fromYear || '0');
-            const toStr = (exp.to || exp.toYear || '').toLowerCase();
-            const toYear = toStr === 'present' || toStr === 'current' ? currentYear : parseInt(toStr || '0');
-            if (fromYear > 0 && toYear >= fromYear) autoExpYears += (toYear - fromYear);
+            const fromStr = (exp.from || exp.fromYear || '').toString();
+            const toStr = (exp.to || exp.toYear || '').toString().toLowerCase();
+            const fromParts = fromStr.split('-');
+            const fromYear = parseInt(fromParts[0]) || 0;
+            const fromMonth = parseInt(fromParts[1]) || 1;
+            const isPresent = toStr === 'present' || toStr === 'current';
+            let toYear, toMonth;
+            if (isPresent) {
+              toYear = currentYear;
+              toMonth = currentMonth;
+            } else {
+              const toParts = toStr.split('-');
+              toYear = parseInt(toParts[0]) || 0;
+              toMonth = parseInt(toParts[1]) || 1;
+            }
+            if (fromYear > 0 && toYear >= fromYear) {
+              const months = (toYear - fromYear) * 12 + (toMonth - fromMonth);
+              if (months > 0) totalMonths += months;
+            }
           });
+          const autoExpYears = Math.round(totalMonths / 12);
           const autoPubCount = (tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
           const autoTalksCount = (tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
           const autoProjCount = (tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;

@@ -88,7 +88,7 @@ const ProfileForms = ({
       </div>
 
       {/* 2. Stats & Highlights Card (Auto-calculated) */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
+      {/* <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
           <Award className="h-5 w-5 text-stone-800" /> Stats &amp; Highlights
           <span className="ml-2 text-xs font-normal text-stone-400">(Auto-calculated from your data)</span>
@@ -124,7 +124,7 @@ const ProfileForms = ({
           );
         })()}
         <p className="mt-2 text-xs text-stone-400">These values auto-update as you add Experience, Publications, Talks, and Projects. You can also override them manually.</p>
-      </div>
+      </div> */}
 
       {/* 3. Contact & Location Card */}
       <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">

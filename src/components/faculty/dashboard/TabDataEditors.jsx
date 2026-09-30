@@ -135,8 +135,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                 </div>
                 <button
                   type="button"
-                  onClick={() => handleAddArrayItem("qualifications", "experience", {
-                    position: "", department: "", institution: "", type: "academic", duration: "", from: "", to: "", responsibilities: []
+                   onClick={() => handleAddArrayItem("qualifications", "experience", {
+                    position: "", department: "", institution: "", type: "academic", from: "", to: "", responsibilities: []
                   })}
                   className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
                 >
@@ -161,9 +161,28 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Designation / Position"><input className={inputClass} value={item.position || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "position", e.target.value)} placeholder="e.g. Assistant Professor" /></Field>
                       <Field label="Department"><input className={inputClass} value={item.department || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "department", e.target.value)} placeholder="e.g. CSE" /></Field>
                       <Field label="Institution / Company"><input className={inputClass} value={item.institution || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "institution", e.target.value)} placeholder="e.g. GBU, Greater Noida" /></Field>
-                      <Field label="From Year/Date"><input className={inputClass} value={item.from || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "from", e.target.value)} placeholder="e.g. 2021" /></Field>
-                      <Field label="To Year/Date (or Present)"><input className={inputClass} value={item.to || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "to", e.target.value)} placeholder="e.g. Present" /></Field>
-                      <Field label="Duration"><input className={inputClass} value={item.duration || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "duration", e.target.value)} placeholder="e.g. 3 Years" /></Field>
+                      <Field label="From Year/Month"><input type="month" className={inputClass} value={item.from || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "from", e.target.value)} /></Field>
+                      <Field label="To Year/Month (or Present)">
+                        <div className="flex gap-2 items-center">
+                          <input
+                            type={item.to === "Present" ? "text" : "month"}
+                            className={inputClass}
+                            value={item.to || ""}
+                            onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "to", e.target.value)}
+                            disabled={item.to === "Present"}
+                            placeholder="Select month or mark Present"
+                          />
+                          <label className="flex items-center gap-1 text-xs text-stone-600 whitespace-nowrap cursor-pointer select-none">
+                            <input
+                              type="checkbox"
+                              checked={item.to === "Present"}
+                              onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "to", e.target.checked ? "Present" : "")}
+                              className="rounded border-stone-300"
+                            />
+                            Present
+                          </label>
+                        </div>
+                      </Field>
                       <Field label="Type">
                         <select className={inputClass} value={item.type || "academic"} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "type", e.target.value)}>
                           <option value="academic">Academic</option>

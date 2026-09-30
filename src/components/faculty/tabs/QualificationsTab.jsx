@@ -49,12 +49,49 @@ export const QualificationsTab = ({ profile }) => {
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
 
-  // "3 Years", or "2021 - Present" when only from/to are filled in.
+  // Calculate and display period from from/to fields (Year/Month format: "2021-06" or just "2021")
   const formatPeriod = (exp) => {
-    const duration = asText(exp.duration);
-    if (duration) return duration;
-    const range = [asText(exp.from), asText(exp.to)].filter(Boolean).join(' - ');
-    return range || '—';
+    const fromStr = asText(exp.from);
+    const toStr = asText(exp.to);
+    if (!fromStr) return '—';
+
+    // Parse year and month from "YYYY-MM" or "YYYY"
+    const parseYearMonth = (str) => {
+      if (!str) return null;
+      const parts = str.split('-');
+      return { year: parseInt(parts[0]) || 0, month: parseInt(parts[1]) || 1 };
+    };
+
+    const from = parseYearMonth(fromStr);
+    if (!from || from.year === 0) return fromStr;
+
+    const isPresent = toStr && (toStr.toLowerCase() === 'present' || toStr.toLowerCase() === 'current');
+    const to = isPresent
+      ? { year: new Date().getFullYear(), month: new Date().getMonth() + 1 }
+      : parseYearMonth(toStr);
+
+    // Format month name
+    const monthName = (m) => {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[(m - 1)] || '';
+    };
+
+    const fromLabel = fromStr.includes('-') ? `${monthName(from.month)} ${from.year}` : `${from.year}`;
+    const toLabel = isPresent ? 'Present' : (to ? (toStr.includes('-') ? `${monthName(to.month)} ${to.year}` : `${to.year}`) : '');
+
+    // Calculate duration
+    let durationText = '';
+    if (to && from.year > 0 && to.year >= from.year) {
+      let totalMonths = (to.year - from.year) * 12 + (to.month - from.month);
+      if (totalMonths < 0) totalMonths = 0;
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+      if (years > 0 && months > 0) durationText = ` (${years} yr ${months} mo)`;
+      else if (years > 0) durationText = ` (${years} yr)`;
+      else if (months > 0) durationText = ` (${months} mo)`;
+    }
+
+    return `${fromLabel} - ${toLabel}${durationText}`;
   };
 
   return (

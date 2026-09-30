@@ -106,9 +106,32 @@ const FacultyDashboard = () => {
     setTagsInput(Array.isArray(profile.tags) ? profile.tags.join(", ") : "");
   }, [profile.tags]);
 
+  const calcExpYears = useMemo(() => {
+    const expEntries = profile?.tabData?.qualifications?.experience || [];
+    const now = new Date();
+    let totalMonths = 0;
+    expEntries.forEach(exp => {
+      const fromStr = (exp.from || '').toString();
+      const toStr = (exp.to || '').toString().toLowerCase();
+      const fromParts = fromStr.split('-');
+      const fromYear = parseInt(fromParts[0]) || 0;
+      const fromMonth = parseInt(fromParts[1]) || 1;
+      const isPresent = toStr === 'present' || toStr === 'current';
+      let toYear, toMonth;
+      if (isPresent) { toYear = now.getFullYear(); toMonth = now.getMonth() + 1; }
+      else { const toParts = toStr.split('-'); toYear = parseInt(toParts[0]) || 0; toMonth = parseInt(toParts[1]) || 1; }
+      if (fromYear > 0 && toYear >= fromYear) {
+        const months = (toYear - fromYear) * 12 + (toMonth - fromMonth);
+        if (months > 0) totalMonths += months;
+      }
+    });
+    const years = Math.round(totalMonths / 12);
+    return years > 0 ? years : (profile.experience_years || 0);
+  }, [profile?.tabData?.qualifications?.experience, profile.experience_years]);
+
   const summary = useMemo(
     () => [
-      { label: "Experience", value: `${profile.experience_years || 0} years` },
+      { label: "Experience", value: `${calcExpYears} years` },
       { label: "Publications", value: profile.publications || 0 },
       { label: "Department", value: profile.department || "-" },
       { label: "School", value: profile.school || "-" },

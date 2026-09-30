@@ -76,7 +76,7 @@ const FacultyHeader = ({ faculty }) => {
             )}
 
             {/* Tags */}
-            {faculty?.tags && (
+            {/* {faculty?.tags && (
               <div className="flex flex-wrap gap-2 mb-6">
                 {faculty.tags.map((tag, index) => (
                   <Badge
@@ -87,7 +87,7 @@ const FacultyHeader = ({ faculty }) => {
                   </Badge>
                 ))}
               </div>
-            )}
+            )} */}
 
             {/* Specialization */}
             <div className="flex items-center gap-3 text-gray-600 mb-4">

@@ -289,6 +289,29 @@ const AnnouncementManager = ({
     newsletters: "announcements/newsletters",
   };
 
+  /**
+   * Build the upload folder path.
+   * For events, includes the event type subdirectory (e.g. announcements/events/conference).
+   */
+  const getUploadFolder = (fieldKey) => {
+    const base = schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`;
+    if (kind === "events") {
+      const eventType = slugify(editor?.form?.type || editor?.form?.eventType || "general");
+      return eventType ? `${base}/${eventType}` : base;
+    }
+    return base;
+  };
+
+  /** Get the PDF/file upload folder (includes event type for events) */
+  const getPdfFolder = () => {
+    const base = PDF_FOLDERS[kind] || `announcements/${kind}`;
+    if (kind === "events") {
+      const eventType = slugify(editor?.form?.type || editor?.form?.eventType || "general");
+      return eventType ? `${base}/${eventType}` : base;
+    }
+    return base;
+  };
+
   /* Aspect ratios per field key */
   const IMAGE_ASPECTS = { image: 16/9, flyerUrl: 3/4, coverImage: 3/4, coverImageUrl: 16/9 };
   const IMAGE_SIZES = { image: "800×450", flyerUrl: "600×800", coverImage: "600×800", coverImageUrl: "1200×675" };
@@ -298,13 +321,13 @@ const AnnouncementManager = ({
     (str || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
 
   /** Build readable fileName from editor form title + field key.
-   *  e.g. title="Annual Fest" + fieldKey="flyerUrl" → "annual-fest_flyer"
-   *       title="Annual Fest" + imageIndex=2 → "annual-fest_3"  */
+   *  For events: title="Annual Fest" + fieldKey="brochureUrl" → "annual-fest-event-pdf"
+   *             title="Annual Fest" + fieldKey="flyerUrl" → "annual-fest-event-flyer"
+   *  For others: title="Notice" + fieldKey="pdfUrl" → "notice_document"  */
   const getFileName = (fieldKey, imageIndex) => {
     const title = editor?.form?.title || editor?.form?.name || "";
     const slug = slugify(title);
-    if (!slug) return ""; // fallback to auto-generated name
-    // Map field keys to readable suffixes
+    if (!slug) return "";
     const SUFFIXES = { flyerUrl: "flyer", coverImage: "cover", coverImageUrl: "cover", image: "image",
       brochureUrl: "brochure", pdfUrl: "document", englishPdfLink: "english", hindiPdfLink: "hindi" };
     if (imageIndex !== undefined) return `${slug}_${imageIndex + 1}`;
@@ -583,7 +606,7 @@ const AnnouncementManager = ({
                             }}
                             aspectRatio={16 / 9}
                             recommendedSize="1200×675"
-                            folder={schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`}
+                            folder={getUploadFolder(field.key)}
                             fileName={getFileName(field.key, i)}
                           />
                         </div>
@@ -680,7 +703,7 @@ const AnnouncementManager = ({
                       onChange={(url) => setField(field.key, url)}
                       aspectRatio={IMAGE_ASPECTS[field.key] || 16/9}
                       recommendedSize={IMAGE_SIZES[field.key] || ""}
-                      folder={schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`}
+                      folder={getUploadFolder(field.key)}
                       fileName={getFileName(field.key)}
                     />
                   ) : isPdfUrlField(field) ? (
@@ -689,7 +712,7 @@ const AnnouncementManager = ({
                       value={editor.form[field.key] ?? ""}
                       onChange={(url) => setField(field.key, url)}
                       accept=".pdf"
-                      folder={PDF_FOLDERS[kind] || `announcements/${kind}`}
+                      folder={getPdfFolder()}
                       fileName={getFileName(field.key)}
                     />
                   ) : (

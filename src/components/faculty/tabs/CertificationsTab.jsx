@@ -142,9 +142,9 @@ export const CertificationsTab = ({ profile }) => {
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
               <div className="text-2xl font-bold text-green-600">
-                {certifications.filter(c => c.verified).length}
+                {professionalDevelopment.length}
               </div>
-              <div className="text-sm text-green-700">Verified</div>
+              <div className="text-sm text-green-700">Training Programs</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
               <div className="text-2xl font-bold text-purple-600">

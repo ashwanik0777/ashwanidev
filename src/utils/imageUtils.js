@@ -94,6 +94,9 @@ export const parseImageUrl = (path, width = 1000) => {
 
   // 6. Relative path - prefix with base URL
   const cleanPath = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  if (cleanPath.startsWith('/assets/')) {
+    return `https://web.onlinegbu.com${cleanPath}`;
+  }
   if (BASE_URL) {
     return `${BASE_URL}${cleanPath}`;
   }

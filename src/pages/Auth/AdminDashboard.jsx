@@ -46,7 +46,9 @@ import {
   Clock3,
   AlertCircle,
   BarChart3,
+  MessageSquareWarning,
 } from "lucide-react";
+import GrievanceAdminTab from "../../components/grievance/GrievanceAdminTab";
 import ConfirmModal from "../../components/ui/ConfirmModal";
 import FileUploadField from "../../components/ui/FileUploadField";
 import {
@@ -441,6 +443,7 @@ const tabs = [
   { id: "emailSystem", label: "Email System", icon: Mail },
   { id: "subscribers", label: "Subscribers", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
+  { id: "grievances", label: "Grievance Management", icon: MessageSquareWarning },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -8294,6 +8297,9 @@ const AdminDashboard = () => {
           {activeTab === "emailSystem" && renderEmailSystemTab()}
           {activeTab === "subscribers" && <SubscribersTab />}
           {activeTab === "analytics" && <AnalyticsTab />}
+          {activeTab === "grievances" && (
+            <GrievanceAdminTab />
+          )}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>

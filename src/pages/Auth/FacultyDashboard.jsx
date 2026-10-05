@@ -10,8 +10,15 @@ import {
   deepClone,
   FACULTY_SIDEBAR_SECTIONS,
   parseCommaList,
+  DEAN_EXTRA_SECTIONS,
+  HOD_EXTRA_SECTIONS,
+  VC_EXTRA_SECTIONS
 } from "../../components/faculty/dashboard/constants";
 import { clearPortalSession, getPortalSession } from "../../utils/portalSession";
+import GrievanceSubmissionForm from "../../components/grievance/GrievanceSubmissionForm";
+import GrievanceTrackingList from "../../components/grievance/GrievanceTrackingList";
+import GrievanceManagementPanel from "../../components/grievance/GrievanceManagementPanel";
+import GrievanceVCPanel from "../../components/grievance/GrievanceVCPanel";
 import {
   fetchMyFacultyProfile,
   updateMyFacultyProfile,
@@ -50,6 +57,19 @@ const FacultyDashboard = () => {
   const [tagsInput, setTagsInput] = useState("");
   const [activeSection, setActiveSection] = useState("dashboard");
   const [linkedFacultyId, setLinkedFacultyId] = useState("");
+
+  // Grievance role from JWT token
+  const portalSession = getPortalSession();
+  const grievanceRole = portalSession?.user?.grievanceRole || null;
+
+  // Build dynamic sidebar sections based on grievance role
+  const dynamicSections = useMemo(() => {
+    let sections = [...FACULTY_SIDEBAR_SECTIONS];
+    if (grievanceRole === 'dean') sections = [...sections, ...DEAN_EXTRA_SECTIONS];
+    else if (grievanceRole === 'hod') sections = [...sections, ...HOD_EXTRA_SECTIONS];
+    else if (grievanceRole === 'vc') sections = [...sections, ...VC_EXTRA_SECTIONS];
+    return sections;
+  }, [grievanceRole]);
 
   // Load profile from backend on mount
   useEffect(() => {
@@ -323,7 +343,7 @@ const FacultyDashboard = () => {
     <div className="min-h-screen bg-slate-50 p-4 md:p-8">
       <div className="mx-auto flex w-full max-w-[98%] flex-col gap-6 lg:flex-row">
         <SidebarNav
-          sections={FACULTY_SIDEBAR_SECTIONS}
+          sections={dynamicSections}
           activeSection={activeSection}
           onSelect={setActiveSection}
           onSave={handleSave}
@@ -410,6 +430,32 @@ const FacultyDashboard = () => {
                 </button>
               </div>
             </div>
+          )}
+
+          {activeSection === "grievance" && (
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-bold text-slate-900 mb-1">Faculty Grievance & Maintenance Desk</h2>
+                <p className="text-sm text-slate-500 mb-6">Submit maintenance and infrastructure issues, and track your existing tickets.</p>
+                <GrievanceSubmissionForm userType="faculty" onSubmitSuccess={() => {}} />
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-bold text-slate-900 mb-4">My Submitted Grievances</h2>
+                <GrievanceTrackingList userType="faculty" />
+              </div>
+            </div>
+          )}
+
+          {activeSection === "grievance-manage" && (grievanceRole === 'dean' || grievanceRole === 'hod') && (
+            <GrievanceManagementPanel
+              scopeLabel={grievanceRole === 'dean' ? 'School' : 'Department'}
+              showSchoolFilter={false}
+              showSubmitterTypeFilter={true}
+            />
+          )}
+
+          {activeSection === "grievance-overview" && grievanceRole === 'vc' && (
+            <GrievanceVCPanel />
           )}
         </div>
       </div>

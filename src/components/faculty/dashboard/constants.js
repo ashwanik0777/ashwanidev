@@ -9,7 +9,21 @@ export const FACULTY_SIDEBAR_SECTIONS = [
   { id: "publications", label: "Publications" },
   { id: "talks", label: "Invited Talks" },
   { id: "awards", label: "Awards" },
-  { id: "other", label: "Other" }
+  { id: "other", label: "Other" },
+  { id: "grievance", label: "Grievance" },
+];
+
+// Extra sidebar sections based on grievance_role (injected dynamically)
+export const DEAN_EXTRA_SECTIONS = [
+  { id: "grievance-manage", label: "Manage Grievances (School)" },
+];
+
+export const HOD_EXTRA_SECTIONS = [
+  { id: "grievance-manage", label: "Manage Grievances (Dept)" },
+];
+
+export const VC_EXTRA_SECTIONS = [
+  { id: "grievance-overview", label: "Grievances Overview" },
 ];
 
 export const inputClass =

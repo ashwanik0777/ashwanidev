@@ -5,7 +5,7 @@ import GrievanceDetailModal from './GrievanceDetailModal';
 import { Loader2, Eye } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const GrievanceTrackingList = ({ userType }) => {
+const GrievanceTrackingList = ({ userType, refreshTrigger }) => {
   const [grievances, setGrievances] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(null);
@@ -27,7 +27,10 @@ const GrievanceTrackingList = ({ userType }) => {
 
   useEffect(() => {
     fetchGrievances();
-  }, []);
+    const handleRefresh = () => fetchGrievances();
+    window.addEventListener('grievance-submitted', handleRefresh);
+    return () => window.removeEventListener('grievance-submitted', handleRefresh);
+  }, [refreshTrigger]);
 
   if (loading) {
     return (

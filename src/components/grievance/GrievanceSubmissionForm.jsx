@@ -83,13 +83,13 @@ const GrievanceSubmissionForm = ({ userType, onSubmitSuccess }) => {
         formData.append('sub_category', form.issueType || 'Other');
         formData.append('complaint_for', form.complaintFor || '');
         formData.append('subject', `Faculty Issue [${form.complaintFor || 'General'}]: ${form.issueType || 'Other'}`);
-        formData.append('priority', 'Medium');
+        formData.append('priority', form.priority || 'Low');
       } else {
         // Student: direct mapping from camelCase form state to snake_case backend keys
         formData.append('category', form.category || '');
         formData.append('sub_category', form.subCategory || '');
         formData.append('subject', form.subject || '');
-        formData.append('priority', form.priority || 'Medium');
+        formData.append('priority', form.priority || 'Low');
       }
 
       formData.append('description', form.description || '');
@@ -100,6 +100,7 @@ const GrievanceSubmissionForm = ({ userType, onSubmitSuccess }) => {
       if (res.data?.success) {
         toast.success(`Grievance submitted successfully. Ticket ID: ${res.data.data.ticket_id}`);
         if (onSubmitSuccess) onSubmitSuccess();
+         window.dispatchEvent(new Event('grievance-submitted'));
         // Reset form
         setForm({ complaintFor: '', issueType: '', category: '', subCategory: '', priority: 'Low', subject: '', description: '' });
         setFile(null);
@@ -142,6 +143,20 @@ const GrievanceSubmissionForm = ({ userType, onSubmitSuccess }) => {
           />
         </div>
       )}
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-2">Priority</label>
+        <select
+          value={form.priority}
+          onChange={e => handleFieldChange('priority', e.target.value)}
+          className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700 focus:ring-1 focus:ring-slate-700"
+        >
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+      </div>
 
       <div>
         <label className="flex items-center justify-between text-sm font-medium text-slate-700 mb-2">

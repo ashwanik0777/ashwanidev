@@ -59,7 +59,7 @@ const GrievanceTrackingList = ({ userType, refreshTrigger }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Subject/Issue</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Priority</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Submitted Date</th>
               <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Action</th>
             </tr>
           </thead>
@@ -71,7 +71,7 @@ const GrievanceTrackingList = ({ userType, refreshTrigger }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 truncate max-w-[200px]">{g.subject || g.issue_type}</td>
                 <td className="px-6 py-4 whitespace-nowrap"><PriorityBadge priority={g.priority || 'Low'} /></td>
                 <td className="px-6 py-4 whitespace-nowrap"><GrievanceStatusBadge status={g.status} /></td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{new Date(g.created_at).toLocaleDateString()}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{new Date(g.created_at).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
                     onClick={() => { setSelected(g); setIsModalOpen(true); }}

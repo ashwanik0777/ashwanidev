@@ -89,15 +89,18 @@ const GrievanceDetailModal = ({ grievance, isOpen, onClose, mode, onUpdate }) =>
                     <p className="text-xs text-slate-500 mb-1">Email</p>
                     <p className="text-sm font-medium text-slate-900 truncate">{grievance.submitter_email}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-slate-500 mb-1">School</p>
-                    <p className="text-sm font-medium text-slate-900">{grievance.school || 'N/A'}</p>
-                  </div>
+                  {grievance.submitter_type === 'student' && grievance.school !== 'N/A' && (
+                    <div>
+                      <p className="text-xs text-slate-500 mb-1">School</p>
+                      <p className="text-sm font-medium text-slate-900">{grievance.school}</p>
+                    </div>
+                  )}
                   <div>
                     <p className="text-xs text-slate-500 mb-1">Type</p>
                     <p className="text-sm font-medium text-slate-900">{grievance.submitter_type}</p>
                   </div>
                 </div>
+
 
                 {/* Details */}
                 <div>

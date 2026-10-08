@@ -32,6 +32,7 @@ const GrievanceCategorySelect = ({ type, category, subCategory, complaintFor, is
           <label className="block text-sm font-medium text-slate-700 mb-2">Complaint For</label>
           <select
             name="complaintFor"
+            required
             value={complaintFor || ''}
             onChange={(e) => onChange('complaintFor', e.target.value)}
             className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700 focus:ring-1 focus:ring-slate-700"
@@ -72,6 +73,7 @@ const GrievanceCategorySelect = ({ type, category, subCategory, complaintFor, is
         <label className="block text-sm font-medium text-slate-700 mb-2">Category</label>
         <select
           name="category"
+          required
           value={category || ''}
           onChange={(e) => {
             onChange('category', e.target.value);
@@ -87,6 +89,7 @@ const GrievanceCategorySelect = ({ type, category, subCategory, complaintFor, is
         <label className="block text-sm font-medium text-slate-700 mb-2">Sub-Category</label>
         <select
           name="subCategory"
+          required
           value={subCategory || ''}
           onChange={(e) => onChange('subCategory', e.target.value)}
           disabled={!category}

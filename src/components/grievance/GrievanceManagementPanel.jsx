@@ -100,7 +100,7 @@ const GrievanceManagementPanel = ({ scopeLabel, showSchoolFilter, showSubmitterT
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Ticket ID</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Submitter</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Category</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Type of Issue</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Priority</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
@@ -115,7 +115,16 @@ const GrievanceManagementPanel = ({ scopeLabel, showSchoolFilter, showSubmitterT
                       <p className="text-slate-900 font-medium">{g.submitter_name}</p>
                       <p className="text-xs">{g.submitter_type}</p>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{g.category || g.complaint_for}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-slate-900">{g.sub_category || g.subject || g.issue_type}</span>
+                        {(g.complaint_for || g.category) && (
+                          <span className="mt-1 inline-flex w-fit items-center rounded-md bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-700">
+                            {g.complaint_for || g.category}
+                          </span>
+                        )}
+                      </div>
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap"><PriorityBadge priority={g.priority || 'Low'} /></td>
                     <td className="px-6 py-4 whitespace-nowrap"><GrievanceStatusBadge status={g.status} /></td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{new Date(g.created_at).toLocaleDateString()}</td>

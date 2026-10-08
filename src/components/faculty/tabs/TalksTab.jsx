@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 // Minimal UI components with Tailwind CSS, matching usage and effects
 
  export const Card = ({ className = "", children, ...props }) => (
@@ -110,14 +110,12 @@ const normalizeTalk = (item) => ({
   date: pickText(item, ['date', 'year']),
   venue: pickText(item, ['venue', 'location']),
   host: pickText(item, ['host', 'organizer', 'organiser']),
-  role: pickText(item, ['role']),
-  audience: pickText(item, ['audience']),
   type: asText(pickText(item, ['type'], 'invited')).toLowerCase(),
-  slidesUrl: pickText(item, ['slidesUrl', 'slides']),
-  recordingUrl: pickText(item, ['recordingUrl', 'recording', 'videoUrl']),
+  photos: asArray(item.photos).filter(Boolean),
 });
 
 export const TalksTab = ({ profile }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const tabData = profile?.tabData?.talks || {};
   const invitedTalks = asArray(tabData.invitedTalks)?.map(normalizeTalk);
 
@@ -125,7 +123,6 @@ export const TalksTab = ({ profile }) => {
   const formatType = (type) => matchKey(type, TYPE_LABELS, asText(type, 'Talk'));
 
   const keynoteCount = invitedTalks.filter((talk) => talk.type === 'keynote').length;
-  const recordedCount = invitedTalks.filter((talk) => talk.recordingUrl).length;
 
   const talkYears = invitedTalks
     ?.map((talk) => Number(String(talk.date).match(/\d{4}/)?.[0] || 0))
@@ -157,7 +154,7 @@ export const TalksTab = ({ profile }) => {
         </CardHeader>
         
         <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
               <div className="text-2xl font-bold text-blue-600">{invitedTalks.length}</div>
               <div className="text-sm text-blue-700">Total Talks</div>
@@ -165,10 +162,6 @@ export const TalksTab = ({ profile }) => {
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
               <div className="text-2xl font-bold text-purple-600">{keynoteCount}</div>
               <div className="text-sm text-purple-700">Keynote Speeches</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{recordedCount}</div>
-              <div className="text-sm text-green-700">Recorded Talks</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
               <div className="text-2xl font-bold text-orange-600">{latestYear}</div>
@@ -218,34 +211,22 @@ export const TalksTab = ({ profile }) => {
                       </div>
                       <div className="space-y-2">
                         {talk.host && <p><span className="font-medium">Host:</span> {talk.host}</p>}
-                        {talk.role && <p><span className="font-medium">Role:</span> {talk.role}</p>}
-                        {talk.audience && (
-                          <p className="flex items-center">
-                            <Users className="w-4 h-4 mr-1" />
-                            {talk.audience}
-                          </p>
-                        )}
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mb-4">
-                      {talk.slidesUrl && (
-                        <a href={talk.slidesUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4 mr-1" />
-                            View Slides
-                          </Button>
-                        </a>
-                      )}
-                      {talk.recordingUrl && (
-                        <a href={talk.recordingUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <Play className="w-4 h-4 mr-1" />
-                            Watch Recording
-                          </Button>
-                        </a>
-                      )}
-                    </div>
+                    {talk.photos && talk.photos.length > 0 && (
+                      <div className="flex flex-wrap gap-4 mt-4">
+                        {talk.photos.map((photoUrl, pIdx) => (
+                          <img
+                            key={pIdx}
+                            src={photoUrl}
+                            alt={`Talk photo ${pIdx + 1}`}
+                            className="h-32 w-auto object-cover rounded-md border border-gray-200 shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => setSelectedPhoto(photoUrl)}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col items-start lg:items-end gap-2">
@@ -284,6 +265,29 @@ export const TalksTab = ({ profile }) => {
             </div>
           </CardContent>
         </Card>
+      )}
+
+      {/* Lightbox for viewing photos */}
+      {selectedPhoto && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <div className="relative max-w-full max-h-full">
+            <button 
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 flex items-center gap-1 font-medium"
+              onClick={() => setSelectedPhoto(null)}
+            >
+              Close
+            </button>
+            <img 
+              src={selectedPhoto} 
+              alt="Full view" 
+              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

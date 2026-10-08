@@ -73,6 +73,22 @@ const GrievanceSubmissionForm = ({ userType, onSubmitSuccess }) => {
       return;
     }
 
+    if (userType === 'faculty') {
+      if (!form.complaintFor) {
+        toast.error('Please select "Complaint For"');
+        return;
+      }
+      if (!form.issueType) {
+        toast.error('Please select an "Issue Type"');
+        return;
+      }
+    } else {
+      if (!form.category || !form.subCategory) {
+        toast.error('Please select both Category and Sub-Category');
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const formData = new FormData();
@@ -108,7 +124,8 @@ const GrievanceSubmissionForm = ({ userType, onSubmitSuccess }) => {
         setWordCount(0);
       }
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to submit grievance');
+      const errorMsg = err.response?.data?.errors?.[0] || err.response?.data?.message || 'Failed to submit grievance';
+      toast.error(errorMsg);
     } finally {
       setLoading(false);
     }

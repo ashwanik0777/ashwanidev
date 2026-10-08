@@ -89,36 +89,38 @@ const GrievanceDetailModal = ({ grievance, isOpen, onClose, mode, onUpdate }) =>
                     <p className="text-xs text-slate-500 mb-1">Email</p>
                     <p className="text-sm font-medium text-slate-900 truncate">{grievance.submitter_email}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-slate-500 mb-1">School</p>
-                    <p className="text-sm font-medium text-slate-900">{grievance.school || 'N/A'}</p>
-                  </div>
+                  {(grievance.school_name || grievance.school_code) && (grievance.school_name !== 'N/A' && grievance.school_code !== 'N/A') && (
+                    <div>
+                      <p className="text-xs text-slate-500 mb-1">School</p>
+                      <p className="text-sm font-medium text-slate-900">{grievance.school_name || grievance.school_code}</p>
+                    </div>
+                  )}
                   <div>
                     <p className="text-xs text-slate-500 mb-1">Type</p>
                     <p className="text-sm font-medium text-slate-900">{grievance.submitter_type}</p>
                   </div>
                 </div>
 
+
                 {/* Details */}
                 <div>
                   <h3 className="text-sm font-semibold text-slate-900 mb-4 border-b border-slate-100 pb-2">Grievance Details</h3>
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <p className="text-xs text-slate-500 mb-1">Category</p>
-                      <p className="text-sm font-medium text-slate-900">{grievance.category || grievance.complaint_for}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500 mb-1">Sub-Category</p>
-                      <p className="text-sm font-medium text-slate-900">{grievance.sub_category || grievance.issue_type}</p>
+                      <p className="text-xs text-slate-500 mb-1">Type of Issue</p>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-slate-900 mb-1">{grievance.sub_category || grievance.subject || grievance.issue_type}</span>
+                        {(grievance.complaint_for || grievance.category) && (
+                          <span className="inline-flex w-fit items-center rounded-md bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-700">
+                            {grievance.complaint_for || grievance.category}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <p className="text-xs text-slate-500 mb-1">Priority</p>
                       <PriorityBadge priority={grievance.priority || 'Low'} />
                     </div>
-                  </div>
-                  <div className="mb-4">
-                    <p className="text-xs text-slate-500 mb-1">Subject</p>
-                    <p className="text-sm font-medium text-slate-900">{grievance.subject || 'N/A'}</p>
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 mb-1">Description</p>

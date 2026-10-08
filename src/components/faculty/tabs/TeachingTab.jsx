@@ -73,11 +73,13 @@ const LEVEL_COLORS = {
   UG: 'bg-green-100 text-green-800',
   PG: 'bg-blue-100 text-blue-800',
   PhD: 'bg-purple-100 text-purple-800',
+  'Integrated UG+PG': 'bg-indigo-100 text-indigo-800',
 };
 
 // The dashboard stores long level names; the filter chips here use short codes.
 const toLevelCode = (value) => {
   const level = asText(value).toLowerCase();
+  if (level.includes('integrated')) return 'Integrated UG+PG';
   if (level.startsWith('under') || level === 'ug') return 'UG';
   if (level.startsWith('post') || level === 'pg') return 'PG';
   if (level.startsWith('doctor') || level === 'phd') return 'PhD';
@@ -127,14 +129,10 @@ export const TeachingTab = ({ profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
               <div className="text-2xl font-bold text-blue-600">{courses.length}</div>
               <div className="text-sm text-blue-700">Total Courses</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{totalStudents}</div>
-              <div className="text-sm text-green-700">Total Students</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
               <div className="text-2xl font-bold text-purple-600">{totalCredits}</div>
@@ -170,7 +168,7 @@ export const TeachingTab = ({ profile }) => {
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <div className="flex gap-2">
-                {['all', 'UG', 'PG', 'PhD']?.map((level) => (
+                {['all', 'UG', 'PG', 'Integrated UG+PG', 'PhD']?.map((level) => (
                   <Button
                     key={level}
                     variant={selectedLevel === level ? "default" : "outline"}
@@ -199,38 +197,13 @@ export const TeachingTab = ({ profile }) => {
                       )}
                       <div>
                         <h3 className="text-lg font-semibold text-gray-900">{course.name}</h3>
-                        {course.description && (
-                          <p className="text-sm text-gray-600 mt-1">{course.description}</p>
-                        )}
                       </div>
                     </div>
 
                     <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-                      {course.semester && (
-                        <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {course.semester}
-                        </div>
-                      )}
-                      {course.students > 0 && (
-                        <div className="flex items-center">
-                          <Users className="w-4 h-4 mr-1" />
-                          {course.students} students
-                        </div>
-                      )}
                       {course.credits > 0 && (
                         <div>
                           <span className="font-medium">Credits:</span> {course.credits}
-                        </div>
-                      )}
-                      {course.batch && (
-                        <div>
-                          <span className="font-medium">Batch:</span> {course.batch}
-                        </div>
-                      )}
-                      {course.role && (
-                        <div>
-                          <span className="font-medium">Role:</span> {course.role}
                         </div>
                       )}
                     </div>

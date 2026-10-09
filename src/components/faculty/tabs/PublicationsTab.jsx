@@ -181,8 +181,10 @@ export default function PublicationsTab({ profile }) {
     return yearMatch && typeMatch;
   });
 
-  const totalCitations = publications.reduce((sum, pub) => sum + (pub?.citations || 0), 0);
   const journalCount = publications.filter((p) => p.type === "journal").length;
+  const conferenceCount = publications.filter((p) => p.type === "conference").length;
+  const bookCount = publications.filter((p) => p.type === "book").length;
+  const bookChapterCount = publications.filter((p) => p.type === "book chapter").length;
 
   const getStatusColor = (status) => matchKey(status, PATENT_STATUS_VARIANTS, "outline");
 
@@ -261,26 +263,14 @@ export default function PublicationsTab({ profile }) {
           <div className="space-y-8">
             {/* Statistics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
+              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
                 <CardContent>
                   <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-yellow-600">
-                      {publications.length}
-                    </div>
-                    <div className="text-sm text-yellow-700 font-medium">
-                      Total Publications
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-purple-600">
+                    <div className="text-3xl font-bold text-blue-600">
                       {journalCount}
                     </div>
-                    <div className="text-sm text-purple-700 font-medium">
-                      Journal Papers
+                    <div className="text-sm text-blue-700 font-medium">
+                      Journal
                     </div>
                   </div>
                 </CardContent>
@@ -289,22 +279,34 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-green-600">
-                      {totalCitations}
+                      {conferenceCount}
                     </div>
                     <div className="text-sm text-green-700 font-medium">
-                      Total Citations
+                      Conference
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
                 <CardContent>
                   <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-blue-600">
-                      {years.length ? years[0] : "--"}
+                    <div className="text-3xl font-bold text-orange-600">
+                      {bookCount}
                     </div>
-                    <div className="text-sm text-blue-700 font-medium">
-                      Latest Year
+                    <div className="text-sm text-orange-700 font-medium">
+                      Book
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+                <CardContent>
+                  <div className="text-center py-4">
+                    <div className="text-3xl font-bold text-purple-600">
+                      {bookChapterCount}
+                    </div>
+                    <div className="text-sm text-purple-700 font-medium">
+                      Book Chapter
                     </div>
                   </div>
                 </CardContent>
@@ -322,7 +324,7 @@ export default function PublicationsTab({ profile }) {
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
                   {publications.length > 0
-                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals and conferences${totalCitations > 0 ? `, with ${totalCitations} recorded citation${totalCitations === 1 ? "" : "s"}` : ""}.`
+                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals, conferences, and books.`
                     : "No publications have been added to this profile yet."}
                 </p>
               </CardContent>

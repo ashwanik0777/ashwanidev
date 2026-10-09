@@ -31,24 +31,29 @@ import { Calendar, MapPin, Settings, Users } from 'lucide-react';
 import { asArray, asText, pickArray, pickText } from './fieldUtils';
 
 // Bridges the dashboard's editor field names to what this tab renders.
-const normalizeRole = (item) => ({
-  role: pickText(item, ['role', 'title', 'position']),
-  department: pickText(item, ['department', 'level', 'scope']),
-  institution: pickText(item, ['institution', 'organization', 'organisation']),
-  duration: pickText(item, ['duration', 'period']),
-  startYear: pickText(item, ['startYear']),
-  endYear: pickText(item, ['endYear']),
-  status: pickText(item, ['status'], 'ongoing'),
-  description: pickText(item, ['description']),
-  responsibilities: pickArray(item, ['responsibilities', 'keyResponsibilities']),
-});
+const normalizeRole = (item) => {
+  const endYearVal = pickText(item, ['endYear', 'to']);
+  const isPresent = !endYearVal || endYearVal.toLowerCase() === 'present';
+  
+  return {
+    role: pickText(item, ['role', 'title', 'position']),
+    department: pickText(item, ['department', 'level', 'scope']),
+    institution: pickText(item, ['institution', 'organization', 'organisation']),
+    duration: pickText(item, ['duration', 'period']),
+    startYear: pickText(item, ['startYear', 'from']),
+    endYear: endYearVal,
+    status: pickText(item, ['status'], isPresent ? 'ongoing' : 'completed'),
+    description: pickText(item, ['description']),
+    responsibilities: pickArray(item, ['responsibilities', 'keyResponsibilities']),
+  };
+};
 
 const normalizeCommittee = (item) => ({
   name: pickText(item, ['name', 'title']),
   role: pickText(item, ['role', 'designation', 'position']),
   period: pickText(item, ['period', 'duration']),
-  startYear: pickText(item, ['startYear']),
-  endYear: pickText(item, ['endYear']),
+  startYear: pickText(item, ['startYear', 'from']),
+  endYear: pickText(item, ['endYear', 'to']),
 });
 
 export const AdministrationTab = ({ profile }) => {

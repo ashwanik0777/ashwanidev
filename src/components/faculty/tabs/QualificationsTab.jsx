@@ -47,6 +47,31 @@ export const QualificationsTab = ({ profile }) => {
   const qualifications = asArray(tabData.qualifications);
   const experience = asArray(tabData.experience);
 
+  const getSortValue = (dateStr) => {
+    if (!dateStr) return 0;
+    const str = String(dateStr).toLowerCase();
+    if (str === 'present' || str === 'current' || str === 'ongoing') return 999999;
+    const parts = str.split('-');
+    const year = parseInt(parts[0], 10) || 0;
+    const month = parts[1] ? parseInt(parts[1], 10) : 0;
+    return year * 100 + month;
+  };
+
+  const sortedQualifications = [...qualifications].sort((a, b) => {
+    const yearA = parseInt(a.year, 10) || 0;
+    const yearB = parseInt(b.year, 10) || 0;
+    return yearB - yearA;
+  });
+
+  const sortedExperience = [...experience].sort((a, b) => {
+    const toA = getSortValue(a.to);
+    const toB = getSortValue(b.to);
+    if (toA !== toB) return toB - toA;
+    const fromA = getSortValue(a.from);
+    const fromB = getSortValue(b.from);
+    return fromB - fromA;
+  });
+
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
 
   // Calculate and display period from from/to fields (Year/Month format: "2021-06" or just "2021")
@@ -106,7 +131,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {qualifications?.map((qual, index) => (
+            {sortedQualifications?.map((qual, index) => (
               <div key={index} className="relative pl-8 pb-6 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-sm border border-gray-100 border-solid hover:shadow-md transition-shadow">
@@ -157,7 +182,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {experience?.map((exp, index) => (
+            {sortedExperience?.map((exp, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div>

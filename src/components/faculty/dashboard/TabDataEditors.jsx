@@ -7,7 +7,53 @@ import Field from "./Field";
 import { inputClass } from "./constants";
 import ImageUploadField from "../../ui/ImageUploadField";
 
+const ArrayItemCard = ({ title, subtitle, index, isExpanded, onToggle, onRemove, children }) => {
+  return (
+    <div className="rounded-lg border border-stone-200 bg-white shadow-sm transition-all duration-200 mb-4">
+      <div 
+        className={`flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50 ${isExpanded ? 'border-b border-stone-100 bg-stone-50 rounded-t-lg' : 'rounded-lg'}`}
+        onClick={(e) => {
+          if (e.target.closest('button')) return;
+          onToggle();
+        }}
+      >
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold text-stone-800">{title || `Item #${index + 1}`}</span>
+          {subtitle && <span className="text-xs text-stone-500 mt-0.5">{subtitle}</span>}
+        </div>
+        <div className="flex items-center gap-2">
+          {!isExpanded && (
+            <button type="button" onClick={onToggle} className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-900">
+              Edit
+            </button>
+          )}
+          <button type="button" onClick={onRemove} className="inline-flex items-center justify-center rounded-md border border-rose-100 bg-rose-50 p-1.5 text-rose-600 hover:bg-rose-100 hover:text-rose-700" title="Delete">
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+      {isExpanded && (
+        <div className="p-4 bg-stone-50/50 rounded-b-lg border-t border-stone-100 animate-in slide-in-from-top-2 duration-200">
+          {children}
+          <div className="mt-5 flex justify-end">
+            <button type="button" onClick={onToggle} className="rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2">
+              Save & Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
+  const [expandedItems, setExpandedItems] = React.useState({});
+  
+  const toggleExpand = (sectionKey, subKey, index) => {
+    const key = `${sectionKey}-${subKey}-${index}`;
+    setExpandedItems(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
   // Local helper to safely update sections in tabData
   const updateSectionKey = (sectionKey, subKey, value) => {
     const currentSection = tabData[sectionKey] || {};
@@ -32,8 +78,11 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
   const handleAddArrayItem = (sectionKey, subKey, template) => {
     const currentSection = tabData[sectionKey] || {};
     const list = [...(currentSection[subKey] || [])];
-    list.push({ ...template });
+    list.unshift({ ...template }); // Add to top
     updateSectionKey(sectionKey, subKey, list);
+    
+    // Automatically expand the new item and collapse others in this section
+    setExpandedItems({ [`${sectionKey}-${subKey}-0`]: true });
     
     // Sync patents to publications.patents and vice-versa
     if (sectionKey === "patents" && subKey === "patents") {
@@ -94,17 +143,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {qualifications.map((item, index) => (
-                  <div key={`qual-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Degree #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("qualifications", "qualifications", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`qual-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Degree #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`qualifications-qualifications-${index}`]}
+    onToggle={() => toggleExpand("qualifications", "qualifications", index)}
+    onRemove={() => handleRemoveArrayItem("qualifications", "qualifications", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Degree Name"><input className={inputClass} value={item.degree || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "qualifications", index, "degree", e.target.value)} placeholder="e.g. Ph.D" /></Field>
                       <Field label="Institution"><input className={inputClass} value={item.institution || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "qualifications", index, "institution", e.target.value)} placeholder="e.g. IIT Delhi" /></Field>
@@ -121,8 +168,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </select>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {qualifications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No degrees added yet.</p>}
               </div>
             </div>
@@ -147,17 +194,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {experience.map((item, index) => (
-                  <div key={`exp-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Experience #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("qualifications", "experience", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`exp-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Experience #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`qualifications-experience-${index}`]}
+    onToggle={() => toggleExpand("qualifications", "experience", index)}
+    onRemove={() => handleRemoveArrayItem("qualifications", "experience", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Designation / Position"><input className={inputClass} value={item.position || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "position", e.target.value)} placeholder="e.g. Assistant Professor" /></Field>
                       <Field label="Department"><input className={inputClass} value={item.department || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "department", e.target.value)} placeholder="e.g. CSE" /></Field>
@@ -198,8 +243,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {experience.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No experiences added yet.</p>}
               </div>
             </div>
@@ -246,17 +291,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {courses.map((item, index) => (
-                  <div key={`course-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Course #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("teaching", "courses", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`course-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Course #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`teaching-courses-${index}`]}
+    onToggle={() => toggleExpand("teaching", "courses", index)}
+    onRemove={() => handleRemoveArrayItem("teaching", "courses", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Course Title"><input className={inputClass} value={item.title || ""} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "title", e.target.value)} placeholder="e.g. Software Engineering" /></Field>
                       <Field label="Course Code"><input className={inputClass} value={item.code || ""} onChange={(e) => handleUpdateArrayItem("teaching", "courses", index, "code", e.target.value)} placeholder="e.g. CS-301" /></Field>
@@ -331,12 +374,12 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                             >
                               <Trash2 className="h-3.5 w-3.5" />
                             </button>
-                          </div>
-                        ))}
+                            </div>
+              ))}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {courses.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No courses added yet.</p>}
               </div>
             </div>
@@ -372,17 +415,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {administrativeRoles.map((item, index) => (
-                  <div key={`admin-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Role #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("administration", "administrativeRoles", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`admin-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Role #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`administration-administrativeRoles-${index}`]}
+    onToggle={() => toggleExpand("administration", "administrativeRoles", index)}
+    onRemove={() => handleRemoveArrayItem("administration", "administrativeRoles", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Role Title"><input className={inputClass} value={item.role || ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "role", e.target.value)} placeholder="e.g. Dean Academics" /></Field>
                       <Field label="Start Month/Year">
@@ -440,8 +481,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </select>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {administrativeRoles.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No roles added yet.</p>}
               </div>
             </div>
@@ -466,17 +507,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {committees.map((item, index) => (
-                  <div key={`comm-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Committee #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("administration", "committees", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`comm-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Committee #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`administration-committees-${index}`]}
+    onToggle={() => toggleExpand("administration", "committees", index)}
+    onRemove={() => handleRemoveArrayItem("administration", "committees", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Committee Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "name", e.target.value)} placeholder="e.g. Board of Studies (CSE)" /></Field>
                       <Field label="Designation / Position"><input className={inputClass} value={item.designation || ""} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "designation", e.target.value)} placeholder="e.g. Chairperson" /></Field>
@@ -503,8 +542,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </div>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {committees.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No committees added yet.</p>}
               </div>
             </div>
@@ -543,17 +582,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {projects.map((item, index) => (
-                  <div key={`proj-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Project #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("researchProjects", "projects", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`proj-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Project #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`researchProjects-projects-${index}`]}
+    onToggle={() => toggleExpand("researchProjects", "projects", index)}
+    onRemove={() => handleRemoveArrayItem("researchProjects", "projects", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Project Title"><input className={inputClass} value={item.title || ""} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "title", e.target.value)} placeholder="e.g. AI-driven Traffic Management" /></Field>
                       <Field label="Funding Agency"><input className={inputClass} value={item.fundingAgency || ""} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "fundingAgency", e.target.value)} placeholder="e.g. DST, Govt of India" /></Field>
@@ -580,8 +617,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {projects.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No projects added yet.</p>}
               </div>
             </div>
@@ -621,17 +658,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {phdScholars.map((item, index) => (
-                  <div key={`phd-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">PhD Scholar #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("researchGroup", "phdScholars", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`phd-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `PhD Scholar #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`researchGroup-phdScholars-${index}`]}
+    onToggle={() => toggleExpand("researchGroup", "phdScholars", index)}
+    onRemove={() => handleRemoveArrayItem("researchGroup", "phdScholars", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Scholar Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "name", e.target.value)} placeholder="e.g. Anita Sharma" /></Field>
                       <Field label="Thesis Topic"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "phdScholars", index, "topic", e.target.value)} placeholder="e.g. Deep Learning in Healthcare" /></Field>
@@ -649,8 +684,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </select>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {phdScholars.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No PhD scholars added yet.</p>}
               </div>
             </div>
@@ -676,17 +711,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {postdocs.map((item, index) => (
-                  <div key={`pd-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Postdoc #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("researchGroup", "postdocs", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`pd-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Postdoc #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`researchGroup-postdocs-${index}`]}
+    onToggle={() => toggleExpand("researchGroup", "postdocs", index)}
+    onRemove={() => handleRemoveArrayItem("researchGroup", "postdocs", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Scholar Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "name", e.target.value)} /></Field>
                       <Field label="Research Topic"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "postdocs", index, "topic", e.target.value)} /></Field>
@@ -704,8 +737,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </select>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {postdocs.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No postdoc scholars added yet.</p>}
               </div>
             </div>
@@ -731,17 +764,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {researchAssistants.map((item, index) => (
-                  <div key={`ra-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Member #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("researchGroup", "researchAssistants", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`ra-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Member #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`researchGroup-researchAssistants-${index}`]}
+    onToggle={() => toggleExpand("researchGroup", "researchAssistants", index)}
+    onRemove={() => handleRemoveArrayItem("researchGroup", "researchAssistants", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
                       <Field label="Member Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "name", e.target.value)} /></Field>
                       <Field label="Project / Role"><input className={inputClass} value={item.topic || ""} onChange={(e) => handleUpdateArrayItem("researchGroup", "researchAssistants", index, "topic", e.target.value)} placeholder="e.g. RA - Data Analytics" /></Field>
@@ -756,8 +787,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </select>
                       </Field>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {researchAssistants.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No research assistants added yet.</p>}
               </div>
             </div>
@@ -793,17 +824,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {publications.map((item, index) => (
-                  <div key={`pub-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Publication #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("publications", "publications", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`pub-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Publication #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`publications-publications-${index}`]}
+    onToggle={() => toggleExpand("publications", "publications", index)}
+    onRemove={() => handleRemoveArrayItem("publications", "publications", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Publication Type">
                         <select className={inputClass} value={item.type || "journal"} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "type", e.target.value)}>
@@ -923,8 +952,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         <Field label="PDF Link / URL"><input className={inputClass} value={item.pdfUrl || ""} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "pdfUrl", e.target.value)} placeholder="e.g. https://gbu.ac.in/faculty/pdf/paper.pdf" /></Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {publications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No publications added yet.</p>}
               </div>
             </div>
@@ -949,17 +978,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {patents.map((item, index) => (
-                  <div key={`patent-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Patent #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("patents", "patents", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`patent-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Patent #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`patents-patents-${index}`]}
+    onToggle={() => toggleExpand("patents", "patents", index)}
+    onRemove={() => handleRemoveArrayItem("patents", "patents", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <div className="sm:col-span-2">
                         <Field label="Patent Title"><input className={inputClass} value={item.title || ""} onChange={(e) => handleUpdateArrayItem("patents", "patents", index, "title", e.target.value)} /></Field>
@@ -991,8 +1018,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {patents.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No patents added yet.</p>}
               </div>
             </div>
@@ -1028,17 +1055,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {certifications.map((item, index) => (
-                  <div key={`cert-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Certification #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("certifications", "certifications", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`cert-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Certification #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`certifications-certifications-${index}`]}
+    onToggle={() => toggleExpand("certifications", "certifications", index)}
+    onRemove={() => handleRemoveArrayItem("certifications", "certifications", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Certification Title"><input className={inputClass} value={item.title || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "title", e.target.value)} placeholder="e.g. AWS Certified Solutions Architect" /></Field>
                       <Field label="Issuing Organization"><input className={inputClass} value={item.issuingOrganization || ""} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "issuingOrganization", e.target.value)} placeholder="e.g. Amazon Web Services" /></Field>
@@ -1067,8 +1092,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {certifications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No certifications added yet.</p>}
               </div>
             </div>
@@ -1093,17 +1118,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {professionalDevelopment.map((item, index) => (
-                  <div key={`fdp-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Program #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("certifications", "professionalDevelopment", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`fdp-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Program #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`certifications-professionalDevelopment-${index}`]}
+    onToggle={() => toggleExpand("certifications", "professionalDevelopment", index)}
+    onRemove={() => handleRemoveArrayItem("certifications", "professionalDevelopment", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Program Title / Topic"><input className={inputClass} value={item.programName || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "programName", e.target.value)} placeholder="e.g. AI in Education Workshop" /></Field>
                       <Field label="Organizer"><input className={inputClass} value={item.organizer || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "organizer", e.target.value)} placeholder="e.g. NPTEL" /></Field>
@@ -1121,8 +1144,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         <Field label="Key Learnings / Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("certifications", "professionalDevelopment", index, "description", e.target.value)} placeholder="Topics covered and outcomes..." /></Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {professionalDevelopment.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No programs added yet.</p>}
               </div>
             </div>
@@ -1155,17 +1178,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
             <div className="space-y-4">
               {invitedTalks.map((item, index) => (
-                <div key={`talk-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                  <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                    <span className="text-xs font-semibold uppercase text-stone-500">Talk #{index + 1}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveArrayItem("talks", "invitedTalks", index)}
-                      className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" /> Remove
-                    </button>
-                  </div>
+  <ArrayItemCard
+    key={`talk-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Talk #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`talks-invitedTalks-${index}`]}
+    onToggle={() => toggleExpand("talks", "invitedTalks", index)}
+    onRemove={() => handleRemoveArrayItem("talks", "invitedTalks", index)}
+  >
                   <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                     <div className="sm:col-span-2">
                       <Field label="Talk Title / Topic"><input className={inputClass} value={item.title || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "title", e.target.value)} placeholder="e.g. Cybersecurity Challenges in Smart Cities" /></Field>
@@ -1205,7 +1226,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                                   <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
-                            ))}
+              ))}
                           </div>
                         )}
 
@@ -1228,7 +1249,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </ArrayItemCard>
               ))}
               {invitedTalks.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No invited talks added yet.</p>}
             </div>
@@ -1264,17 +1285,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {awards.map((item, index) => (
-                  <div key={`award-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Award #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("awards", "awards", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`award-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Award #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`awards-awards-${index}`]}
+    onToggle={() => toggleExpand("awards", "awards", index)}
+    onRemove={() => handleRemoveArrayItem("awards", "awards", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <div className="sm:col-span-2">
                         <Field label="Award Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("awards", "awards", index, "name", e.target.value)} placeholder="e.g. Best Researcher Award" /></Field>
@@ -1297,8 +1316,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {awards.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No awards added yet.</p>}
               </div>
             </div>
@@ -1324,17 +1343,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
               <div className="space-y-4">
                 {socialActivities.map((item, index) => (
-                  <div key={`social-${index}`} className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-                    <div className="mb-3 flex items-center justify-between border-b border-stone-200 pb-2">
-                      <span className="text-xs font-semibold uppercase text-stone-500">Activity #{index + 1}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveArrayItem("socialImpact", "socialActivities", index)}
-                        className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Remove
-                      </button>
-                    </div>
+  <ArrayItemCard
+    key={`social-${index}`}
+    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Activity #${index + 1}`}
+    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    index={index}
+    isExpanded={expandedItems[`socialImpact-socialActivities-${index}`]}
+    onToggle={() => toggleExpand("socialImpact", "socialActivities", index)}
+    onRemove={() => handleRemoveArrayItem("socialImpact", "socialActivities", index)}
+  >
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Activity Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "name", e.target.value)} placeholder="e.g. Rural Literacy Campaign" /></Field>
                       <Field label="Organization"><input className={inputClass} value={item.organization || ""} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "organization", e.target.value)} placeholder="e.g. GBU Social Club" /></Field>
@@ -1363,8 +1380,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                         </Field>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </ArrayItemCard>
+              ))}
                 {socialActivities.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No outreach activities added yet.</p>}
               </div>
             </div>

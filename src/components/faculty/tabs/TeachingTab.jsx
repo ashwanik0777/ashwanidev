@@ -227,9 +227,6 @@ export const TeachingTab = ({ profile }) => {
                                   <p className="text-sm font-medium text-gray-900">
                                     {pickText(slide, ['title', 'name'], 'Lecture slide')}
                                   </p>
-                                  <p className="text-xs text-gray-600">
-                                    {pickText(slide, ['filename', 'file'])}
-                                  </p>
                                 </div>
                               </div>
                               {pickText(slide, ['url', 'fileUrl']) && (

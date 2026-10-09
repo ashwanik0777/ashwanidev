@@ -158,11 +158,11 @@ export const CertificationsTab = ({ profile }) => {
             </div>
           </div>
           
-          <p className="text-gray-700 leading-relaxed">
+          {/* <p className="text-gray-700 leading-relaxed">
             {pickText(profile, ['name'], 'This faculty member')} maintains current professional
             certifications and takes part in faculty development programs, keeping their teaching
             and research aligned with the latest advances and industry best practices.
-          </p>
+          </p> */}
         </CardContent>
       </Card>
 

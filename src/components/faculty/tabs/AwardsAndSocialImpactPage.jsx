@@ -46,7 +46,6 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
   const socialData = profile?.tabData?.socialImpact || {};
 
   const awards = asArray(awardsData?.awards)?.map(normalizeAward);
-  const achievements = asArray(awardsData?.achievements);
   const socialActivities = asArray(socialData?.socialActivities)?.map(normalizeActivity);
 
   const recentYear = useMemo(() => {
@@ -55,6 +54,14 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
       ?.map((award) => Number(String(award.year).match(/\d{4}/)?.[0] || 0))
       .filter((year) => year > 1900);
     return years.length ? Math.max(...years) : "-";
+  }, [awards]);
+
+  const internationalAwards = useMemo(() => {
+    return awards.filter((a) => String(a.level).toLowerCase() === "international").length;
+  }, [awards]);
+
+  const nationalAwards = useMemo(() => {
+    return awards.filter((a) => String(a.level).toLowerCase() === "national").length;
   }, [awards]);
 
   return (
@@ -91,14 +98,18 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
                 <CardTitle className="text-2xl text-gray-900">Awards Summary</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center">
                     <div className="text-2xl font-bold text-blue-700">{awards.length}</div>
                     <div className="text-sm text-blue-700">Total Awards</div>
                   </div>
                   <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-center">
-                    <div className="text-2xl font-bold text-green-700">{achievements.length}</div>
-                    <div className="text-sm text-green-700">Achievements</div>
+                    <div className="text-2xl font-bold text-green-700">{internationalAwards}</div>
+                    <div className="text-sm text-green-700">International</div>
+                  </div>
+                  <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 text-center">
+                    <div className="text-2xl font-bold text-orange-700">{nationalAwards}</div>
+                    <div className="text-sm text-orange-700">National</div>
                   </div>
                   <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 text-center">
                     <div className="text-2xl font-bold text-purple-700">{recentYear}</div>

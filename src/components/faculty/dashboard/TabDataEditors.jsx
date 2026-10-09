@@ -324,7 +324,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                           onClick={() => {
                             const currentSlides = item.slides || [];
                             const updatedCourses = [...courses];
-                            updatedCourses[index] = { ...item, slides: [...currentSlides, { title: "", filename: "", url: "" }] };
+                            updatedCourses[index] = { ...item, slides: [...currentSlides, { title: "", url: "" }] };
                             onReplaceTabData("teaching", { ...section, courses: updatedCourses });
                           }}
                           className="inline-flex items-center gap-1 rounded-md bg-stone-100 px-2 py-1 text-xs font-medium text-stone-700 hover:bg-stone-200 border border-stone-200"
@@ -338,7 +338,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <div className="space-y-2">
                         {(item.slides || []).map((slide, sIdx) => (
                           <div key={`slide-${index}-${sIdx}`} className="flex items-start gap-2 p-2 rounded-md bg-white border border-stone-200">
-                            <div className="flex-1 grid gap-2 sm:grid-cols-3">
+                            <div className="flex-1 grid gap-2 sm:grid-cols-2">
                               <input className={inputClass} value={slide.title || ""} onChange={(e) => {
                                 const updatedCourses = [...courses];
                                 const updatedSlides = [...(item.slides || [])];
@@ -346,13 +346,6 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                                 updatedCourses[index] = { ...item, slides: updatedSlides };
                                 onReplaceTabData("teaching", { ...section, courses: updatedCourses });
                               }} placeholder="Slide title" />
-                              <input className={inputClass} value={slide.filename || ""} onChange={(e) => {
-                                const updatedCourses = [...courses];
-                                const updatedSlides = [...(item.slides || [])];
-                                updatedSlides[sIdx] = { ...updatedSlides[sIdx], filename: e.target.value };
-                                updatedCourses[index] = { ...item, slides: updatedSlides };
-                                onReplaceTabData("teaching", { ...section, courses: updatedCourses });
-                              }} placeholder="Filename (e.g. Lec01.pdf)" />
                               <input className={inputClass} value={slide.url || ""} onChange={(e) => {
                                 const updatedCourses = [...courses];
                                 const updatedSlides = [...(item.slides || [])];

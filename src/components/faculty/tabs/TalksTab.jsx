@@ -127,18 +127,6 @@ export const TalksTab = ({ profile }) => {
   const guestLectureCount = invitedTalks.filter((talk) => talk.type === 'guest-lecture').length;
   const panelCount = invitedTalks.filter((talk) => talk.type === 'panel').length;
 
-  // Speaking expertise mirrors the faculty's own research areas/tags rather than
-  // a hardcoded list.
-  const expertiseTopics = [
-    ...asArray(profile?.researchAreas)?.map((area) =>
-      typeof area === 'string' ? area : pickText(area, ['title', 'name']),
-    ),
-    ...asArray(profile?.tags),
-  ]
-    ?.map((topic) => asText(topic))
-    .filter(Boolean)
-    .slice(0, 6);
-
   return (
     <div className="space-y-6 bg-gray-50">
       {/* Talks Overview */}
@@ -248,26 +236,6 @@ export const TalksTab = ({ profile }) => {
         </CardContent>
       </Card>
 
-      {/* Speaking Topics */}
-      {expertiseTopics.length > 0 && (
-        <Card className="hover:shadow-lg transition-shadow duration-300">
-          <CardHeader>
-            <CardTitle className="text-xl text-gray-900">Speaking Expertise</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {expertiseTopics?.map((topic, index) => (
-                <div
-                  key={`${topic}-${index}`}
-                  className={`rounded-lg p-4 border border-solid ${EXPERTISE_STYLES[index % EXPERTISE_STYLES.length]}`}
-                >
-                  <h3 className="font-semibold">{topic}</h3>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Lightbox for viewing photos */}
       {selectedPhoto && (

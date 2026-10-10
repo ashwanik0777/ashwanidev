@@ -1197,7 +1197,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </select>
                     </Field>
                     <div className="sm:col-span-2 md:col-span-3">
-                      <Field label="Talk Description"><textarea className={`${inputClass} min-h-16`} value={item.description || ""} onChange={(e) => handleUpdateArrayItem("talks", "invitedTalks", index, "description", e.target.value)} placeholder="What the talk covered..." /></Field>
+
                       
                       <div className="mt-4">
                         <label className="block text-sm font-semibold mb-2 text-stone-700">Event Photos (Max 4)</label>

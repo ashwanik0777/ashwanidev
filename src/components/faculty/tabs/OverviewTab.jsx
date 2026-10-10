@@ -139,7 +139,7 @@ const OverviewTab = ({ activeTab, profile }) => {
       </Card>
 
       {/* Quick Links */}
-      {quickLinks.length > 0 && (
+      {/* {quickLinks.length > 0 && (
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
             <CardTitle className="text-xl text-gray-900">Quick Links</CardTitle>
@@ -161,7 +161,7 @@ const OverviewTab = ({ activeTab, profile }) => {
             </div>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </div>
   );
 };

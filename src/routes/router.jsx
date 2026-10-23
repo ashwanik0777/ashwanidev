@@ -51,13 +51,7 @@ import LoginPortal from "../pages/Auth/LoginPortal.jsx";
 import FacultyRegister from "../pages/Auth/FacultyRegister.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import ProtectedPortalRoute from "../components/Auth/ProtectedPortalRoute.jsx";
-
-// ═══════════════════════════════════════════════════════════════════
-// STUDENT GRIEVANCE PORTAL — Built & Ready, Activate When Needed
-// To activate: uncomment the import and route below, and enable
-// 'student_module_enabled' in Admin Dashboard → Grievances → Settings
-// ═══════════════════════════════════════════════════════════════════
-// import StudentGrievanceDashboard from "../pages/Auth/StudentGrievanceDashboard";
+const MaintenanceDashboard = lazy(() => import("../pages/Auth/MaintenanceDashboard.jsx"));
 
 /* Semester Registration — disabled for now, not part of the current release.
    Re-enable together with the routes below and the student login option in
@@ -334,6 +328,14 @@ export default function AppRouter() {
             }
           />
           <Route
+            path="/maintenance-portal/dashboard"
+            element={
+              <ProtectedPortalRoute>
+                <MaintenanceDashboard />
+              </ProtectedPortalRoute>
+            }
+          />
+          <Route
             path="/academics/academic-calendar"
             element={<AcademicCalendar />}
           />
@@ -581,13 +583,6 @@ export default function AppRouter() {
           {/* Course Details Routes - Dynamic Course Pages */}
           <Route path="/schools/departments/courseDetailed" element={<CourseDetails />} />
           {/* <Route path="/schools/departments/courseDetailed/:school/:course" element={<CourseDetails />} /> */}
-
-          {/* ═══ Student Grievance Portal (Hidden — activate when ready) ═══ */}
-          {/* <Route path="/student-portal/grievance" element={
-            <ProtectedPortalRoute>
-              <StudentGrievanceDashboard />
-            </ProtectedPortalRoute>
-          } /> */}
 
           {/* Semester Registration Routes — disabled for now (not being shipped yet)
           <Route path="/semester-registration" element={

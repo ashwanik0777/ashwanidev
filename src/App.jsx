@@ -25,7 +25,8 @@ function App() {
   const isFacultyPortalPage = location.pathname.startsWith("/faculty-portal");
   const isSchoolPortalPage = location.pathname.startsWith("/school-portal");
   const isAdminPortalPage = location.pathname.startsWith("/admin-portal");
-  const isPortalPage = isFacultyPortalPage || isSchoolPortalPage || isAdminPortalPage;
+  const isMaintenancePortalPage = location.pathname.startsWith("/maintenance-portal");
+  const isPortalPage = isFacultyPortalPage || isSchoolPortalPage || isAdminPortalPage || isMaintenancePortalPage;
   const isAuthPage = ["/login", "/login/forgot-password", "/admission/login", "/faculty-register"].includes(
     location.pathname
   );

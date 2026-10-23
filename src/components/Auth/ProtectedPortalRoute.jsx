@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import {
-  allowedRoleForPath,
+  allowedRolesForPath,
   getPortalSession,
   getRoleHomeRoute,
   isTokenExpired,
@@ -49,8 +49,8 @@ const ProtectedPortalRoute = ({ children }) => {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
 
-  const requiredRole = allowedRoleForPath(location.pathname);
-  if (requiredRole && session?.user?.role !== requiredRole) {
+  const allowedRoles = allowedRolesForPath(location.pathname);
+  if (allowedRoles && !allowedRoles.includes(session?.user?.role)) {
     return <Navigate to={getRoleHomeRoute(session?.user?.role)} replace />;
   }
 

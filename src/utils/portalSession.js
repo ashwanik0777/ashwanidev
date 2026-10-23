@@ -47,18 +47,24 @@ export const isTokenExpired = (token) => {
   }
 };
 
+// JE, vendor, senior officer and director share the maintenance portal; each sees only their own screen.
+export const MAINTENANCE_ROLES = ["je", "vendor", "senior_officer", "director"];
+
 export const getRoleHomeRoute = (role) => {
   if (role === "faculty") return "/faculty-portal/dashboard";
   if (role === "school") return "/school-portal/dashboard";
   if (role === "super_admin") return "/admin-portal/dashboard";
+  if (MAINTENANCE_ROLES.includes(role)) return "/maintenance-portal/dashboard";
   // if (role === "student") return "/semester-registration"; // disabled with semester registration
   return "/login";
 };
 
-export const allowedRoleForPath = (pathname) => {
-  if (pathname.startsWith("/faculty-portal")) return "faculty";
-  if (pathname.startsWith("/school-portal")) return "school";
-  if (pathname.startsWith("/admin-portal")) return "super_admin";
-  // if (pathname.startsWith("/semester-registration")) return "student"; // disabled with semester registration
+// Roles allowed on a portal path, or null for unrestricted paths.
+export const allowedRolesForPath = (pathname) => {
+  if (pathname.startsWith("/faculty-portal")) return ["faculty"];
+  if (pathname.startsWith("/school-portal")) return ["school"];
+  if (pathname.startsWith("/admin-portal")) return ["super_admin"];
+  if (pathname.startsWith("/maintenance-portal")) return MAINTENANCE_ROLES;
+  // if (pathname.startsWith("/semester-registration")) return ["student"]; // disabled with semester registration
   return null;
 };

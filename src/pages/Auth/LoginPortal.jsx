@@ -11,7 +11,8 @@ import {
   Building2,
   Lock,
   Fingerprint,
-  KeyRound
+  KeyRound,
+  Wrench
 } from "lucide-react";
 import { loginByRole, verifyLoginOtpService } from "../../services/authService";
 import { getRoleHomeRoute, setPortalSession } from "../../utils/portalSession";
@@ -34,6 +35,12 @@ const ROLE_OPTIONS = [
     title: "Faculty Login",
     subtitle: "Faculty staff",
     icon: GraduationCap
+  },
+  {
+    id: "maintenance",
+    title: "Maintenance Login",
+    subtitle: "JE, vendor & officers",
+    icon: Wrench
   },
   /* Student Login — disabled until semester registration ships.
   {
@@ -195,7 +202,7 @@ const LoginPortal = () => {
                   </span>
                 </h1>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-slate-600">
-                  Secure login portal for Faculty, School Administration, and Super Admin accounts.
+                  Secure login portal for Faculty, School Administration, Maintenance staff, and Super Admin accounts.
                 </p>
               </div>
 
@@ -234,7 +241,7 @@ const LoginPortal = () => {
               </div>
 
               {/* Role Selector */}
-              <div className="grid gap-3 sm:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {ROLE_OPTIONS.map((item) => {
                   const Icon = item.icon;
                   const isActive = role === item.id;

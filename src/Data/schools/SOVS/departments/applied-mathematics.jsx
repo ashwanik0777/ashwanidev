@@ -5,7 +5,7 @@ export const departmentLayoutData = {
   departmentId: "applied-mathematics",
   heroProps: {
     title: "Department of Mathematics",
-    highlight: "Department of Applied Mathematics | SOVSAS",
+    highlight: "Department of Applied Mathematics | SoVSAS",
     subtitle:
       "Delivering outstanding teaching and research in mathematical sciences, scientific computing, mathematical modeling, and optimization since the inception of Gautam Buddha University.",
     primaryButton: { label: "Explore Programmes" },

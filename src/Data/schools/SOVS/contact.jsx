@@ -30,7 +30,7 @@ export const contactData = {
   officeHours: [],
   departments: [],
   directoryTable: {
-    title: "Directory | SOVSAS",
+    title: "Directory | SoVSAS",
     rows: [
       { name: "Dr. Chander Kumar Singh (Dean)", phone: "0120-2344341", ext: "4341" },
       { name: "Dr. Sushil Kumar", phone: "0120-2344350", ext: "4350" },

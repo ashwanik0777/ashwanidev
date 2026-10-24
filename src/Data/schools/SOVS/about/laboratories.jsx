@@ -5,7 +5,7 @@
 export const laboratoriesData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Laboratories | SOVSAS",
+  heading: "Laboratories | SoVSAS",
   subheading: "State-of-the-art teaching and research laboratory facilities across Chemistry, Physics, Mathematics, Food Science, and Environmental Science.",
   laboratories: [
     // Chemistry Laboratory

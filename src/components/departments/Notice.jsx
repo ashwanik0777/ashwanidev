@@ -1,7 +1,34 @@
 import { createSlug } from "../../utils/slugUtil";
-import { Calendar } from "lucide-react";
+import { Calendar, Bell, Images, ArrowRight } from "lucide-react";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
+
+// Shared card look for Notice Board and Event Gallery (same as the department cards)
+const CARD_CLASSES =
+  "flex flex-col bg-white border border-slate-200 rounded-xl sm:rounded-2xl shadow-sm overflow-hidden";
+// Both cards share one height so they line up side by side; shorter on mobile where they stack
+const CARD_HEIGHT =
+  "h-[27rem] sm:h-[31rem] lg:h-[34rem] min-[1920px]:h-[38rem] min-[2560px]:h-[52rem]";
+const CARD_HEADER =
+  "shrink-0 flex items-center justify-between gap-2 px-4 sm:px-5 min-[2560px]:px-8 py-3 min-[2560px]:py-5 border-b border-slate-100";
+const CARD_ICON =
+  "p-1.5 min-[2560px]:p-2.5 rounded-lg bg-blue-600 text-white";
+const CARD_TITLE = "text-base sm:text-lg min-[2560px]:text-3xl font-bold text-blue-900";
+
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** "2026-07-09" (or any parseable date) -> { day: "09", month: "Jul", year: 2026 }; null if unparseable. */
+const splitDate = (value) => {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return {
+    day: String(date.getDate()).padStart(2, "0"),
+    month: MONTHS[date.getMonth()],
+    year: date.getFullYear(),
+  };
+};
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
@@ -116,11 +143,11 @@ const EventGallerySlider = ({ events = [] }) => {
 
         {/* Caption overlay */}
         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 py-3 pt-12">
-          <h4 className="font-semibold text-white text-sm sm:text-base leading-snug line-clamp-2 drop-shadow-lg">
+          <h4 className="font-semibold text-white text-sm sm:text-base min-[2560px]:text-2xl leading-snug line-clamp-2 drop-shadow-lg pr-16">
             {current.title}
           </h4>
           {current.date && (
-            <p className="text-xs text-blue-200 mt-1 font-medium">{current.date}</p>
+            <p className="text-xs min-[2560px]:text-lg text-blue-200 mt-1 font-medium">{current.date}</p>
           )}
         </div>
 
@@ -131,7 +158,7 @@ const EventGallerySlider = ({ events = [] }) => {
               <button
                 key={i}
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); goTo(i); }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 min-[2560px]:w-3.5 min-[2560px]:h-3.5 rounded-full transition-all duration-300 ${
                   i === activeIndex
                     ? "bg-white scale-125 shadow shadow-white/50"
                     : "bg-white/50 hover:bg-white/80"
@@ -144,7 +171,7 @@ const EventGallerySlider = ({ events = [] }) => {
 
       {/* Thumbnail strip */}
       {events.length > 1 && (
-        <div className="mt-3 overflow-x-auto flex gap-2 pb-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        <div className="mt-2.5 overflow-x-auto flex gap-2 p-1" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
           <style>{`.evt-thumbs::-webkit-scrollbar{display:none}`}</style>
           {events.map((evt, i) => {
             const thumbSrc = resolveEventImage(evt);
@@ -161,7 +188,7 @@ const EventGallerySlider = ({ events = [] }) => {
                 <img
                   src={thumbSrc || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80"}
                   alt={evt.title}
-                  className="w-20 h-14 sm:w-24 sm:h-16 object-cover"
+                  className="w-16 h-11 sm:w-20 sm:h-14 lg:w-24 lg:h-16 min-[2560px]:w-36 min-[2560px]:h-24 object-cover"
                   onError={(e) => {
                     e.target.src = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80";
                   }}
@@ -187,6 +214,7 @@ const EventGallerySlider = ({ events = [] }) => {
 
 const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, title = "Notices and Events", viewAllLink }) => {
   const scrollRef = useRef(null);
+  const pausedRef = useRef(false);
   const [announcements, setAnnouncements] = useState(() => getSchoolAnnouncements(schoolCode));
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
 
@@ -198,7 +226,7 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
 
     const startScroll = () => {
       intervalId = setInterval(() => {
-        if (!scrollEl) return;
+        if (!scrollEl || pausedRef.current) return;
 
         scrollEl.scrollTop += scrollSpeed;
 
@@ -246,33 +274,35 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
   const visibleEvents = events;
 
   return (
-    <section className="py-8 sm:py-10 bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-            {title}
-          </h2>
-          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-        </div>
+    <section className={`${SECTION_PADDING} bg-white`}>
+      <SectionHeading className={`${HEADING_SPACE} px-4`}>{title}</SectionHeading>
 
-        {/* Main Grid */}
-        <div className="grid lg:grid-cols-12 gap-10">
+      {/* Same width as the faculty / departments sections */}
+      <div className={`${SECTION_CONTAINER} ${SLIDER_SIDE_SPACE}`}>
+        <div className="grid lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 min-[2560px]:gap-12">
           {/* Notice Board */}
-          <div className="lg:col-span-4">
-            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-6 h-[37.5rem] flex flex-col relative pb-16">
-              <div className="text-blue-800 text-lg font-bold flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Calendar size={20} />
-                  Notice Board
+          <div className="lg:col-span-5 xl:col-span-4">
+            <div className={`${CARD_CLASSES} ${CARD_HEIGHT}`}>
+              <div className={CARD_HEADER}>
+                <div className="flex items-center gap-2.5">
+                  <span className={CARD_ICON}>
+                    <Bell className="w-4 h-4 sm:w-5 sm:h-5 min-[2560px]:w-8 min-[2560px]:h-8" />
+                  </span>
+                  <h3 className={CARD_TITLE}>Notice Board</h3>
                 </div>
+                {visibleNotices.length > 0 && (
+                  <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs min-[2560px]:text-lg font-semibold">
+                    {visibleNotices.length}
+                  </span>
+                )}
               </div>
 
-             
-              {/* Auto-Scrolling Notice List */}
+              {/* Auto-Scrolling Notice List (pauses on hover) */}
               <div
                 ref={scrollRef}
-                className="space-y-4 flex-grow overflow-y-auto pr-2 scrollbar-hide"
+                onMouseEnter={() => (pausedRef.current = true)}
+                onMouseLeave={() => (pausedRef.current = false)}
+                className="flex-1 min-h-0 overflow-y-auto px-3 sm:px-4 py-3 space-y-2 min-[2560px]:space-y-4"
                 style={{
                   scrollbarWidth: "none", // Firefox
                   msOverflowStyle: "none", // IE 10+
@@ -281,22 +311,39 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                 {visibleNotices.map((notice, index) => {
                   const noticeUrl = notice.pdfUrl || notice.link || (notice.id ? `/announcements/news/${createSlug(notice.title)}` : '#');
                   const isExternal = noticeUrl.startsWith('http') || noticeUrl.endsWith('.pdf');
-                  
+                  const dateParts = splitDate(notice.date);
+
                   const InnerContent = (
                     <>
-                      <div className="flex items-start justify-between mb-1">
-                        <h4 className="font-semibold text-sm text-blue-900 line-clamp-2">
+                      {/* Date tile */}
+                      <div className="shrink-0 w-11 sm:w-12 min-[2560px]:w-20 rounded-lg bg-blue-600 text-white text-center py-1 min-[2560px]:py-2 leading-none">
+                        {dateParts ? (
+                          <>
+                            <div className="text-base sm:text-lg min-[2560px]:text-3xl font-bold">{dateParts.day}</div>
+                            <div className="text-[10px] min-[2560px]:text-base uppercase tracking-wide mt-0.5">{dateParts.month}</div>
+                          </>
+                        ) : (
+                          <Calendar className="w-5 h-5 mx-auto my-1.5" />
+                        )}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-xs sm:text-sm min-[2560px]:text-xl text-slate-800 group-hover:text-blue-700 leading-snug line-clamp-2">
                           {notice.title}
                         </h4>
-                        <Badge className="text-xs px-2 py-0.5 capitalize bg-blue-100 text-blue-800 whitespace-nowrap ml-2 shrink-0">
-                          {notice.type || 'Notice'}
-                        </Badge>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <Badge className="text-[10px] sm:text-[11px] min-[2560px]:text-base px-2 py-0 capitalize border-blue-100 bg-blue-50 text-blue-700">
+                            {notice.type || 'Notice'}
+                          </Badge>
+                          {dateParts?.year && (
+                            <span className="text-[11px] min-[2560px]:text-base text-slate-500">{dateParts.year}</span>
+                          )}
+                        </div>
                       </div>
-                      <p className="text-xs text-gray-500">{notice.date}</p>
                     </>
                   );
 
-                  const commonClasses = "block border-l-4 border-blue-500 pl-4 py-2 hover:bg-blue-50 transition-colors";
+                  const commonClasses = "group flex items-start gap-3 p-2.5 min-[2560px]:p-4 rounded-lg border border-slate-100 hover:border-blue-200 hover:bg-blue-50/50 transition-colors";
 
                   return isExternal ? (
                     <a
@@ -315,44 +362,48 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                   );
                 })}
                 {visibleNotices.length === 0 ? (
-                  <p className="text-sm text-gray-500">No notices available.</p>
+                  <div className="h-full flex flex-col items-center justify-center text-center text-slate-400 gap-2">
+                    <Bell className="w-8 h-8 min-[2560px]:w-14 min-[2560px]:h-14" />
+                    <p className="text-sm min-[2560px]:text-xl">No notices available.</p>
+                  </div>
                 ) : null}
               </div>
 
-              {/* View More Button */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-white rounded-b-xl flex justify-center">
+              {/* View All */}
+              <div className="shrink-0 px-4 py-2.5 min-[2560px]:py-4 border-t border-slate-100 flex justify-center">
                 <Link
                   to={viewAllLink || (schoolCode ? `/schools/${schoolCode}/about/activities` : "#")}
-                  className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 group"
+                  className="text-sm min-[2560px]:text-xl font-semibold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 group"
                 >
                   View All Notices
-                  <svg
-                    className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
+                  <ArrowRight className="w-4 h-4 min-[2560px]:w-6 min-[2560px]:h-6 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
           </div>
 
           {/* Event Gallery */}
-          <div className="lg:col-span-8">
-            <div className="rounded-xl shadow-lg border border-gray-200 bg-white p-4 sm:p-6 h-[37.5rem] flex flex-col">
-              <h3 className="text-blue-800 text-lg font-bold mb-3">
-                Event Gallery
-              </h3>
-
-              {visibleEvents.length > 0 ? (
-                <EventGallerySlider events={visibleEvents} />
-              ) : (
-                <div className="flex-1 flex items-center justify-center text-sm text-gray-500">
-                  No events available.
+          <div className="lg:col-span-7 xl:col-span-8">
+            <div className={`${CARD_CLASSES} ${CARD_HEIGHT}`}>
+              <div className={CARD_HEADER}>
+                <div className="flex items-center gap-2.5">
+                  <span className={CARD_ICON}>
+                    <Images className="w-4 h-4 sm:w-5 sm:h-5 min-[2560px]:w-8 min-[2560px]:h-8" />
+                  </span>
+                  <h3 className={CARD_TITLE}>Event Gallery</h3>
                 </div>
-              )}
+              </div>
+
+              <div className="flex-1 min-h-0 flex flex-col p-3 sm:p-4 min-[2560px]:p-6">
+                {visibleEvents.length > 0 ? (
+                  <EventGallerySlider events={visibleEvents} />
+                ) : (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center text-slate-400 gap-2">
+                    <Images className="w-8 h-8 min-[2560px]:w-14 min-[2560px]:h-14" />
+                    <p className="text-sm min-[2560px]:text-xl">No events available.</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

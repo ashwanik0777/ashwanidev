@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Clock, ChevronDown, FileText } from "lucide-react";
+import SectionHeading, { SECTION_PADDING, SECTION_GUTTER, SECTION_CONTAINER } from "../SectionHeading";
 
 /**
  * Parse duration string like "4 Years" or "3-5 Years" into a number.
@@ -69,36 +70,36 @@ const ProgramCard = ({ program }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 p-6 hover:border-blue-200 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+    <div className="h-full bg-white rounded-xl sm:rounded-2xl border border-slate-200/80 px-3.5 py-4 sm:px-4 min-[2560px]:px-6 min-[2560px]:py-6 hover:border-blue-200 hover:shadow-md transition-all duration-200 flex flex-col">
       {/* Header Row: Title & Duration Badge */}
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="flex-grow">
-          <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
-            {program.title}
-          </h3>
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="min-w-0 flex-1">
           {program.level && (
-            <span className="inline-block mt-1 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <span className="inline-block mb-1.5 px-2 py-0.5 rounded-md bg-blue-50 text-[10px] sm:text-[11px] min-[2560px]:text-sm font-semibold text-blue-700 uppercase tracking-wider">
               {program.level}
             </span>
           )}
+          <h3 className="text-sm sm:text-base min-[1920px]:text-lg min-[2560px]:text-2xl font-bold text-slate-900 leading-snug break-words">
+            {program.title || program.name}
+          </h3>
         </div>
 
         {program.duration && (
-          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-slate-100/80 px-3 py-1.5 rounded-full flex-shrink-0">
-            <Clock className="w-3.5 h-3.5 text-slate-500" />
+          <div className="flex items-center gap-1 text-[11px] sm:text-xs min-[2560px]:text-base font-medium text-slate-600 bg-slate-100/80 px-2.5 py-1 rounded-full shrink-0 whitespace-nowrap">
+            <Clock className="w-3.5 h-3.5 min-[2560px]:w-5 min-[2560px]:h-5 text-slate-500" />
             <span>{program.duration}</span>
           </div>
         )}
       </div>
 
       {/* Action Row: Dropdown + Download Button */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t border-slate-100">
+      <div className="mt-auto flex items-center gap-2 pt-4 border-t border-slate-100">
         {/* Session Dropdown */}
-        <div className="relative min-w-[140px] flex-grow sm:flex-grow-0">
+        <div className="relative min-w-0 flex-1">
           <button
             type="button"
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full flex items-center justify-between gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 hover:bg-slate-100/80 transition-colors"
+            className="w-full flex items-center justify-between gap-2 px-3 py-2 min-[2560px]:py-3 bg-slate-50 border border-slate-200 rounded-lg sm:rounded-xl text-xs min-[2560px]:text-base font-medium text-slate-700 hover:bg-slate-100/80 transition-colors"
           >
             <span className="truncate">{selectedSession}</span>
             <ChevronDown
@@ -122,7 +123,7 @@ const ProgramCard = ({ program }) => {
                       setSelectedSession(session);
                       setDropdownOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2 text-xs transition-colors ${
+                    className={`w-full text-left px-3 py-2 text-xs min-[2560px]:text-base transition-colors ${
                       selectedSession === session
                         ? "bg-blue-50 text-blue-700 font-semibold"
                         : "text-slate-700 hover:bg-slate-50"
@@ -145,14 +146,14 @@ const ProgramCard = ({ program }) => {
               ? `Download ${selectedSession} Syllabus`
               : "Syllabus not available"
           }
-          className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+          className={`shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 min-[2560px]:px-5 min-[2560px]:py-3 rounded-lg sm:rounded-xl text-xs min-[2560px]:text-base font-semibold whitespace-nowrap transition-all ${
             syllabusUrl
               ? "bg-blue-600 hover:bg-blue-700 text-white shadow-sm cursor-pointer"
               : "bg-slate-100 text-slate-400 cursor-not-allowed"
           }`}
         >
-          <FileText className="w-3.5 h-3.5" />
-          <span>View Syllabus PDF</span>
+          <FileText className="w-3.5 h-3.5 min-[2560px]:w-5 min-[2560px]:h-5" />
+          <span>View Syllabus</span>
         </button>
       </div>
     </div>
@@ -188,7 +189,6 @@ const checkMatch = (program, filterId) => {
 
 const Programs = ({
   heading = "Academic Programs",
-  subheading = "Choose from our diverse range of programs designed to meet your academic and career goals.",
   programs = [],
 }) => {
   const [activeFilter, setActiveFilter] = useState("ALL");
@@ -215,19 +215,16 @@ const Programs = ({
   }
 
   return (
-    <section id="programs" className="py-8 sm:py-12 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+    <section id="programs" className={`${SECTION_PADDING} bg-white`}>
+      <div className={SECTION_GUTTER}>
+        <div className={SECTION_CONTAINER}>
           {/* Section Header */}
-          <div className="text-center mb-6">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2.5">
-              {heading}
-            </h2>
-            <div className="h-1 w-12 bg-blue-600 mx-auto mb-6 rounded-full"></div>
+          <div className="text-center">
+            <SectionHeading>{heading}</SectionHeading>
 
             {/* Medium Fully-Rounded Pills with Single-Line Horizontal Layout */}
             {availableTabs.length > 1 && (
-              <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 scrollbar-none max-w-full px-1">
+              <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto pb-2 sm:pb-0 mb-3 sm:mb-4 min-[2560px]:mb-8 scrollbar-none max-w-full px-1">
                 {availableTabs.map((tab) => {
                   const isActive = activeFilter === tab.id;
                   return (
@@ -235,7 +232,7 @@ const Programs = ({
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveFilter(tab.id)}
-                      className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer shrink-0 whitespace-nowrap ${
+                      className={`px-3.5 sm:px-5 min-[2560px]:px-8 py-1.5 sm:py-2 min-[2560px]:py-3 rounded-full text-xs sm:text-sm min-[2560px]:text-xl font-medium transition-all duration-200 cursor-pointer shrink-0 whitespace-nowrap ${
                         isActive
                           ? "bg-blue-600 text-white border border-blue-600 shadow-sm shadow-blue-500/20"
                           : "bg-transparent border border-slate-300/80 text-slate-600 hover:border-blue-400 hover:text-blue-600 hover:shadow-[0_0_10px_rgba(59,130,246,0.15)]"
@@ -252,7 +249,8 @@ const Programs = ({
 
           {/* Cards Grid */}
           {filteredPrograms.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 min-[1920px]:grid-cols-5 gap-3 lg:gap-4 min-[2560px]:gap-6 ">
+
               {filteredPrograms.map((program, index) => (
                 <ProgramCard key={program.id || index} program={program} />
               ))}

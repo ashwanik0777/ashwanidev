@@ -46,7 +46,7 @@ export const trainingConsultancyData = {
         textColor: "text-blue-800",
         textColor2: "text-blue-600",
         label: "Corporate Registration:",
-        value: "Contact SOVS office for schedules",
+        value: "Contact SoVSAS office for schedules",
         note: "Laboratory certification provided upon completion",
       },
     },

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Youtube } from "lucide-react";
 import { getSchoolByCode } from "../../services/schoolsService";
+import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
 
 const ClubsAchievements = ({ schoolCode }) => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const ClubsAchievements = ({ schoolCode }) => {
 
   const renderSocialIcon = (platform, url) => {
     if (!url) return null;
-    const baseClass = "w-5 h-5 transition-colors cursor-pointer";
+    const baseClass = "w-5 h-5 min-[2560px]:w-8 min-[2560px]:h-8 transition-colors cursor-pointer";
     const classMap = {
       facebook: `${baseClass} text-gray-600 hover:text-blue-600`,
       instagram: `${baseClass} text-gray-600 hover:text-pink-500`,
@@ -109,55 +110,58 @@ const ClubsAchievements = ({ schoolCode }) => {
   if (displayClubs.length === 0) return null;
 
   return (
-    <section className="py-10 bg-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-            Student Clubs &amp; Activities
-          </h2>
-          <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-        </div>
+    <section className={`${SECTION_PADDING} bg-white`}>
+      <SectionHeading className={`${HEADING_SPACE} px-4`}>Student Clubs &amp; Activities</SectionHeading>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Same width as the faculty / departments sections */}
+      <div className={`${SECTION_CONTAINER} ${SLIDER_SIDE_SPACE}`}>
+        <div className="grid gap-5 sm:gap-6 lg:gap-8 min-[2560px]:gap-12 sm:grid-cols-2 lg:grid-cols-3 min-[1920px]:grid-cols-4">
           {displayClubs.map((club, idx) => (
             <div
               key={club.id || idx}
-              className="bg-white rounded-xl shadow hover:shadow-xl transition cursor-pointer flex flex-col justify-between"
+              className="bg-white rounded-xl sm:rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-200 transition-all cursor-pointer flex flex-col overflow-hidden"
               onClick={() => handleCardClick(club)}
             >
-              <div>
-                <div className="relative">
-                  <img
-                    src={
-                      club.banner ||
-                      club.image ||
-                      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800"
-                    }
-                    alt={club.name || "Club"}
-                    className="w-full h-48 object-cover rounded-t-xl"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="outline" className="bg-white">
+              <div className="relative">
+                <img
+                  src={
+                    club.banner ||
+                    club.image ||
+                    "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800"
+                  }
+                  alt={club.name || "Club"}
+                  loading="lazy"
+                  className="w-full h-36 sm:h-40 lg:h-44 min-[2560px]:h-72 object-cover"
+                />
+                {club.category && (
+                  <div className="absolute top-3 right-3">
+                    <Badge variant="outline" className="bg-white text-blue-700 border-blue-100 min-[2560px]:text-lg">
                       {club.category}
                     </Badge>
                   </div>
-                </div>
-                <div className="p-6">
-                  <h4 className="text-college-navy text-lg font-semibold mb-2">
-                    {club.name}
-                  </h4>
-                  <p className="text-gray-600 mb-3 line-clamp-2">
-                    {club.description}
-                  </p>
-                  <p className="text-sm text-gray-500 mb-1">Faculty Advisor:</p>
-                  <p className="text-sm font-medium text-college-navy mb-3 truncate">
-                    {club.facultyAdvisor ||
-                      club.team?.facultyCoordinator?.name ||
-                      "N/A"}
-                  </p>
-                  <div className="flex justify-between text-sm mb-4">
-                    <span className="text-gray-500">Members:</span>
-                    <span className="font-semibold text-college-blue">
+                )}
+              </div>
+
+              <div className="p-4 sm:p-5 min-[2560px]:p-8 flex-1 flex flex-col">
+                <h4 className="text-base sm:text-lg min-[2560px]:text-3xl font-bold text-blue-900 leading-snug mb-1.5">
+                  {club.name}
+                </h4>
+                <p className="text-xs sm:text-sm min-[2560px]:text-xl text-slate-600 leading-relaxed line-clamp-2 mb-3">
+                  {club.description}
+                </p>
+
+                <div className="mt-auto pt-3 border-t border-slate-100 space-y-1.5 text-xs sm:text-sm min-[2560px]:text-xl">
+                  <div className="flex justify-between gap-3">
+                    <span className="text-slate-500 shrink-0">Faculty Advisor</span>
+                    <span className="font-medium text-slate-800 truncate text-right">
+                      {club.facultyAdvisor ||
+                        club.team?.facultyCoordinator?.name ||
+                        "N/A"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between gap-3">
+                    <span className="text-slate-500">Members</span>
+                    <span className="font-semibold text-blue-700">
                       {club.members || club.memberCount || "N/A"}
                     </span>
                   </div>
@@ -167,8 +171,8 @@ const ClubsAchievements = ({ schoolCode }) => {
               {/* Social links */}
               {club.socialMedia &&
                 Object.values(club.socialMedia).some((v) => v) && (
-                  <div className="border-t pt-4 pb-6 px-6">
-                    <div className="flex justify-center gap-4">
+                  <div className="border-t border-slate-100 py-3 min-[2560px]:py-5 px-4">
+                    <div className="flex justify-center gap-4 min-[2560px]:gap-6">
                       {Object.entries(club.socialMedia).map(
                         ([platform, url]) =>
                           url && (

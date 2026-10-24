@@ -5,7 +5,7 @@ export const departmentLayoutData = {
   departmentId: "applied-physics",
   heroProps: {
     title: "Department of Physics",
-    highlight: "Department of Applied Physics | SOVSAS",
+    highlight: "Department of Applied Physics | SoVSAS",
     subtitle:
       "A beacon of innovation, exploration, and academic excellence — Offering undergraduate, postgraduate, and doctoral courses in physics, optics, nanomaterials, and solid state physics.",
     primaryButton: { label: "Explore Programmes" },

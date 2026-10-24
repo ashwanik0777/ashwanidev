@@ -5,7 +5,7 @@ export const researchScholarsData = {
   schoolName: "School of Vocational Studies & Applied Sciences",
   hero: {
     title: "Research Community — School of Vocational Studies & Applied Sciences",
-    subtitle: "Meet the Ph.D. scholars advancing scientific boundaries in physics, chemistry, mathematics, environmental monitoring, and food engineering at SOVS, Gautam Buddha University.",
+    subtitle: "Meet the Ph.D. scholars advancing scientific boundaries in physics, chemistry, mathematics, environmental monitoring, and food engineering at SoVSAS, Gautam Buddha University.",
     bgTheme: 3,
   },
   stats: [

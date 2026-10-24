@@ -52,7 +52,7 @@ export const schoolCard = {
 
 export const admissionsKey = "Vocational";
 export const admissionsLabel = "Vocational Studies & Applied Sciences";
-export const admissionsShortLabel = "SOVS";
+export const admissionsShortLabel = "SoVSAS";
 export const admissions = {
   icon: Building,
   color: "from-teal-600 to-emerald-600",

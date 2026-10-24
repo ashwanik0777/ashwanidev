@@ -1,10 +1,10 @@
 export const academicCollaborationData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Academic Collaboration | SOVSAS",
+  heading: "Academic Collaboration | SoVSAS",
   customLayout: "academicCollaboration",
   hero: {
-    title: "Academic Collaboration | SOVSAS",
+    title: "Academic Collaboration | SoVSAS",
     subtitle: "Institutional MoUs, International Research Collaborations & Global Patents",
     bgTheme: 9,
   },
@@ -33,5 +33,5 @@ export const academicCollaborationData = {
     "Institute of Pesticide Formulation Technology — Ministry of Chemicals & Fertilizers, Gurgaon, India",
   ],
   futureScope:
-    "SOVSAS actively drives interdisciplinary research collaborations with premier national and international laboratories, focusing on green chemistry, advanced materials, food technology, and environmental sustainability.",
+    "SoVSAS actively drives interdisciplinary research collaborations with premier national and international laboratories, focusing on green chemistry, advanced materials, food technology, and environmental sustainability.",
 };

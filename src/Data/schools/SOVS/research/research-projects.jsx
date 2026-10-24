@@ -4,7 +4,7 @@ export const researchProjectsData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
   hero: {
-    title: "Research and Publications | SOVSAS",
+    title: "Research and Publications | SoVSAS",
     description:
       "Peer-reviewed research articles, books, international patents, and conference proceedings contributed by faculty members of the School of Vocational Studies & Applied Sciences.",
   },

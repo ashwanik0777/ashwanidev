@@ -222,9 +222,9 @@ const Navbar = () => {
         { label: "Dean's Message", href: routes.about.dean },
         { label: "Guest Speakers", href: `/schools/${activeSchool}/departments/guest-speakers` },
         { label: "Academic Collaboration", href: `/schools/${activeSchool}/departments/academic-collaboration` },
-        { label: "SOVS Board of Studies", href: routes.about.board },
-        { label: "SOVS Laboratories", href: routes.about.labs },
-        { label: "SOVS Activities", href: routes.about.activities },
+        { label: "SoVSAS Board of Studies", href: routes.about.board },
+        { label: "SoVSAS Laboratories", href: routes.about.labs },
+        { label: "SoVSAS Activities", href: routes.about.activities },
       ];
     }
 

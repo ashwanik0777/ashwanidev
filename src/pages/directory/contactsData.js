@@ -695,7 +695,7 @@ export const contactsData = [
   {
     "category": "School Of Applied Science",
     "location": "School Of Applied Science",
-    "name": "Dean SOVSAS",
+    "name": "Dean SoVSAS",
     "phone": "0120-2344341",
     "id": "100"
   },

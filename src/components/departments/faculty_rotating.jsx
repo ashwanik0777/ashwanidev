@@ -5,68 +5,64 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { matchDepartmentId } from "../../Data/schoolsMeta";
+import useResponsiveSlider from "./useResponsiveSlider";
+import SectionHeading, { SECTION_PADDING, SECTION_GUTTER, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
 
 import { resolveFacultyImage } from "../../utils/imageUtils";
 
+// [min viewport width, cards per view]: mobile, tablet, laptop, desktop, full HD / projector, 4K
+const CARD_BREAKPOINTS = [
+  [0, 2],
+  [640, 3],
+  [1024, 4],
+  [1280, 5],
+  [1920, 6],
+  [2560, 7],
+];
+
 export default function FacultyResponsiveSlider({
   title = "Faculty",
-  subTitle = "",
   facultyList = [],
   autoSlideInterval = 3000,
-  visibleCards = 4,
-  cardWidth = 280,
-  gap = 38,
+  gap = 16,
   navigateTo,
   schoolCode,
   departmentId,
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [disableAnimation, setDisableAnimation] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [dynamicFaculty, setDynamicFaculty] = useState([]);
   const navigate = useNavigate();
   const schoolMeta = useMemo(() => getSchoolMeta(schoolCode), [schoolCode]);
+  const { viewportRef, cardsPerView, cardWidth, step } = useResponsiveSlider(CARD_BREAKPOINTS, gap);
 
   const effectiveFacultyList =
     dynamicFaculty.length > 0 ? dynamicFaculty : facultyList;
 
-  const shouldScroll = effectiveFacultyList.length > visibleCards;
+  const shouldScroll = effectiveFacultyList.length > cardsPerView;
+  const maxIndex = Math.max(0, effectiveFacultyList.length - cardsPerView);
 
-  const moveBy = cardWidth + gap;
-
-  const loopData = shouldScroll
-    ? [...effectiveFacultyList, ...effectiveFacultyList.slice(0, visibleCards)]
-    : effectiveFacultyList;
+  // Keep the index valid when the screen size (and so cards per view) changes
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   useEffect(() => {
-    if (effectiveFacultyList.length <= visibleCards) return; 
+    if (!shouldScroll || isPaused) return undefined;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => {
-        if (prev === effectiveFacultyList.length) {
-          setDisableAnimation(true);
-          setTimeout(() => {
-            setCurrentIndex(0);
-            setDisableAnimation(false);
-          }, 50);
-          return prev + 1;
-        }
-        return prev + 1;
-      });
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, autoSlideInterval);
 
     return () => clearInterval(interval);
-  }, [effectiveFacultyList.length, autoSlideInterval, visibleCards]);
+  }, [shouldScroll, isPaused, maxIndex, autoSlideInterval]);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? effectiveFacultyList.length - 1 : prev - 1
-    );
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) =>
-      prev === effectiveFacultyList.length ? 0 : prev + 1
-    );
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
   };
 
   const handleCardClick = () => {
@@ -130,65 +126,60 @@ export default function FacultyResponsiveSlider({
 
   if (effectiveFacultyList.length === 0) return null;
 
+  const arrowClass =
+    "absolute top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-9 sm:h-9 min-[2560px]:w-14 min-[2560px]:h-14 flex items-center justify-center rounded-full bg-white border border-blue-100 text-blue-700 shadow-md hover:bg-blue-50 active:scale-95 transition";
+
   return (
-    <section className="py-8 bg-white overflow-hidden relative">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-          {title}
-        </h2>
-        <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-        {/* {subTitle && (
-          <p className="text-gray-600 text-sm mt-1">{subTitle}</p>
-        )} */}
-      </div>
+    <section className={`${SECTION_PADDING} bg-white overflow-hidden`}>
+      <SectionHeading className={`${HEADING_SPACE} px-4`}>{title}</SectionHeading>
 
-      <div className="relative w-full max-w-7xl mx-auto px-4">
+      <div
+        className={`relative ${SECTION_CONTAINER} ${
+          shouldScroll ? SLIDER_SIDE_SPACE : SECTION_GUTTER
+        }`}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {shouldScroll && (
-          <button
-            onClick={handlePrev}
-            className="absolute -left-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
-          >
-            <ChevronLeft size={24} />
+          <button onClick={handlePrev} aria-label="Previous faculty" className={`${arrowClass} left-1 sm:left-2`}>
+            <ChevronLeft className="w-5 h-5 min-[2560px]:w-8 min-[2560px]:h-8" />
           </button>
         )}
         {shouldScroll && (
-          <button
-            onClick={handleNext}
-            className="absolute -right-10 top-1/2 -translate-y-1/2 bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-full shadow-md z-10"
-          >
-            <ChevronRight size={24} />
+          <button onClick={handleNext} aria-label="Next faculty" className={`${arrowClass} right-1 sm:right-2`}>
+            <ChevronRight className="w-5 h-5 min-[2560px]:w-8 min-[2560px]:h-8" />
           </button>
         )}
 
-        <div className="overflow-hidden">
+        <div ref={viewportRef} className="overflow-hidden">
           <motion.div
-            animate={shouldScroll ? { x: -currentIndex * moveBy } : {}}
-            transition={
-              disableAnimation ? { duration: 0 } : { ease: "easeInOut", duration: 0.6 }
-            }
-            className={`flex gap-[38px] py-4 px-2${!shouldScroll ? " justify-center" : ""}`}
-            style={{
-              width: `${(cardWidth + gap) * (shouldScroll ? effectiveFacultyList.length + visibleCards : effectiveFacultyList.length)}px`,
-            }}
+            animate={{ x: shouldScroll ? -currentIndex * step : 0 }}
+            transition={{ ease: "easeInOut", duration: 0.6 }}
+            className={`flex py-3${!shouldScroll ? " justify-center" : ""}`}
+            style={{ gap: `${gap}px` }}
           >
-            {loopData.map((member, i) => (
-              <div
-                key={i}
-                onClick={handleCardClick}
-                className="flex-shrink-0 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-md border border-blue-200 p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-lg hover:scale-105 transform transition-all duration-300"
-                style={{ width: `${cardWidth}px` }}
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-36 h-44 object-cover rounded-xl shadow mb-4"
-                />
-                <h3 className="text-lg font-semibold text-blue-800">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-gray-600">{member.title}</p>
-              </div>
-            ))}
+            {cardWidth > 0 &&
+              effectiveFacultyList.map((member, i) => (
+                <div
+                  key={i}
+                  onClick={handleCardClick}
+                  className="shrink-0 bg-gradient-to-br from-white to-blue-50 rounded-xl shadow-sm border border-blue-100 p-2.5 sm:p-3 min-[2560px]:p-5 flex flex-col items-center text-center cursor-pointer hover:shadow-md hover:-translate-y-1 transition-all duration-300"
+                  style={{ width: `${cardWidth}px` }}
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    loading="lazy"
+                    className="w-full max-w-36 min-[2560px]:max-w-60 aspect-[4/5] object-cover object-top rounded-lg shadow-sm mb-2.5"
+                  />
+                  <h3 className="text-sm sm:text-base min-[2560px]:text-2xl font-semibold text-blue-800 leading-snug line-clamp-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm min-[2560px]:text-xl text-gray-600 leading-snug line-clamp-2 mt-0.5">
+                    {member.title}
+                  </p>
+                </div>
+              ))}
           </motion.div>
         </div>
       </div>

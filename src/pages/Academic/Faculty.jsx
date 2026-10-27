@@ -184,8 +184,6 @@ const Faculty = () => {
   };
 
   const filteredFaculty = facultyMembers.filter(faculty => {
-    const desc = (faculty.designation || faculty.title || "").toLowerCase();
-    if (desc.includes("ocfd")) return false;
     const matchesSearch =
       (faculty.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (faculty.designation || '').toLowerCase().includes(searchTerm.toLowerCase()) ||

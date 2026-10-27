@@ -7,6 +7,7 @@ import FacultyTabs from '../../components/faculty/FacultyTabs';
 import TabContent from '../../components/faculty/TabContent';
 import { TrendingUp, BookOpenCheck, Presentation, FolderOpen, FileText, FlaskConical, GraduationCap, Newspaper } from 'lucide-react';
 import { fetchFacultyPublicProfile } from '../../services/facultyDashboardService';
+import { hasContent } from '../../components/faculty/tabs/fieldUtils';
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -23,12 +24,34 @@ const TAB_ITEMS = [
   { id: 'other', label: 'Other' },
 ];
 
-const TAB_IDS = TAB_ITEMS.map((tab) => tab.id);
+/* The tabData sections each tab renders. A tab is hidden only when every one of
+   its sections is completely empty; Overview has no entry and always shows. */
+const TAB_SECTIONS = {
+  qualifications: ['qualifications'],
+  certifications: ['certifications'],
+  teaching: ['teaching'],
+  administration: ['administration'],
+  'research-projects': ['researchProjects', 'researchGroup'],
+  publications: ['publications', 'patents'],
+  talks: ['talks'],
+  awards: ['awards', 'socialImpact'],
+  other: ['other'],
+};
 
 const FacultyDetail = () => {
   const { id } = useParams();
   const [faculty, setFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const visibleTabs = useMemo(
+    () =>
+      TAB_ITEMS.filter((tab) => {
+        const sections = TAB_SECTIONS[tab.id];
+        if (!sections) return true;
+        return sections.some((key) => hasContent(faculty?.tabData?.[key]));
+      }),
+    [faculty],
+  );
 
   /* The active tab lives in the URL (?tab=teaching) so the browser back button
      steps through tabs instead of leaving the profile entirely, and so a tab can
@@ -36,8 +59,8 @@ const FacultyDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedTab = searchParams.get('tab');
   const activeTab = useMemo(
-    () => (TAB_IDS.includes(requestedTab) ? requestedTab : 'overview'),
-    [requestedTab],
+    () => (visibleTabs.some((tab) => tab.id === requestedTab) ? requestedTab : 'overview'),
+    [requestedTab, visibleTabs],
   );
 
   const handleTabChange = useCallback(
@@ -176,7 +199,7 @@ const FacultyDetail = () => {
     <SearchableWrapper>
       <SimpleLayout>
         <FacultyHeader faculty={faculty} />
-        <FacultyTabs tabItems={TAB_ITEMS} activeTab={activeTab} onTabChange={handleTabChange} />
+        <FacultyTabs tabItems={visibleTabs}activeTab={activeTab} onTabChange={handleTabChange} />
         <TabContent activeTab={activeTab} profile={faculty} />
       </SimpleLayout>
     </SearchableWrapper>

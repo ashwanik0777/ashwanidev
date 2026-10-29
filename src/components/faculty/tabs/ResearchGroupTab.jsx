@@ -92,11 +92,11 @@ export const ResearchGroupTab = ({ profile }) => {
     matchKey(status, GROUP_STATUS_COLORS, 'bg-gray-100 text-gray-800');
 
   const totalPublications = sumPublications(phdScholars, postdocs);
-  const groupOverview = pickText(
-    tabData,
-    ['overview', 'description'],
-    `Research group led by ${pickText(profile, ['name'], 'this faculty member')}, bringing together PhD scholars, postdoctoral fellows and research assistants working on collaborative projects.`,
-  );
+  // const groupOverview = pickText(
+  //   tabData,
+  //   ['overview', 'description'],
+  //   `Research group led by ${pickText(profile, ['name'], 'this faculty member')}, bringing together PhD scholars, postdoctoral fellows and research assistants working on collaborative projects.`,
+  // );
 
   return (
     <div className="space-y-6">

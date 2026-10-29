@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { Navigate, useNavigate, useSearchParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   UserCog,
@@ -15,7 +15,15 @@ import {
   Wrench
 } from "lucide-react";
 import { loginByRole, verifyLoginOtpService } from "../../services/authService";
-import { getRoleHomeRoute, setPortalSession } from "../../utils/portalSession";
+import {
+  getPortalSession,
+  getRoleHomeRoute,
+  isTokenExpired,
+  setPortalSession
+} from "../../utils/portalSession";
+
+// Seconds the faculty must wait before another OTP can be requested.
+const RESEND_COOLDOWN_SECONDS = 30;
 
 const ROLE_OPTIONS = [
   {
@@ -67,15 +75,64 @@ const LoginPortal = () => {
   const [forcePasswordReset, setForcePasswordReset] = useState(false);
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [info, setInfo] = useState("");
+  const [resending, setResending] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   const selectedRole = useMemo(
     () => ROLE_OPTIONS.find((item) => item.id === role) || ROLE_OPTIONS[0],
     [role]
   );
 
+  useEffect(() => {
+    if (resendCooldown <= 0) return undefined;
+    const timer = setTimeout(() => setResendCooldown((prev) => prev - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
+
+  /* Already signed in (e.g. pressed Back from the dashboard): go straight to the
+     portal instead of showing the login form again. A session that can still be
+     refreshed counts — ProtectedPortalRoute renews the access token. */
+  const existingSession = getPortalSession();
+  if (
+    existingSession &&
+    (!isTokenExpired(existingSession.accessToken) || existingSession.refreshToken)
+  ) {
+    return <Navigate to={getRoleHomeRoute(existingSession.user.role)} replace />;
+  }
+
+  // Logging in again with the same credentials invalidates the old OTP and
+  // emails a fresh one.
+  const handleResendOtp = async () => {
+    if (resending || resendCooldown > 0) return;
+    setError("");
+    setInfo("");
+
+    try {
+      setResending(true);
+      const response = await loginByRole({
+        role,
+        email: username.trim(),
+        password,
+      });
+      const authData = response?.data;
+      setOtpEmail(response?.email || authData?.email || otpEmail);
+      setOtp("");
+      setInfo("A new OTP has been sent to your email.");
+      setResendCooldown(RESEND_COOLDOWN_SECONDS);
+    } catch (err) {
+      const serverMessage =
+        err?.response?.data?.errors?.[0]?.message || err?.response?.data?.message;
+      setError(serverMessage || "Could not resend OTP. Please try again.");
+    } finally {
+      setResending(false);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
+    setInfo("");
 
     try {
       setLoading(true);
@@ -106,7 +163,8 @@ const LoginPortal = () => {
         }
 
         setPortalSession(authData);
-        navigate(getRoleHomeRoute(authData.user.role));
+        // Replace so Back from the dashboard does not land on the login page.
+        navigate(getRoleHomeRoute(authData.user.role), { replace: true });
       } else {
         if (!username.trim() || !password.trim()) {
           setError("Please enter both username and password.");
@@ -125,6 +183,7 @@ const LoginPortal = () => {
           setRequiresOtp(true);
           setOtpEmail(response?.email || authData?.email);
           setForcePasswordReset(response?.forcePasswordReset || authData?.forcePasswordReset);
+          setResendCooldown(RESEND_COOLDOWN_SECONDS);
           return;
         }
 
@@ -134,7 +193,7 @@ const LoginPortal = () => {
         }
 
         setPortalSession(authData);
-        navigate(getRoleHomeRoute(authData.user.role));
+        navigate(getRoleHomeRoute(authData.user.role), { replace: true });
       }
     } catch (err) {
       const serverMessage =
@@ -299,6 +358,21 @@ const LoginPortal = () => {
                         placeholder="6-digit OTP"
                         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
                       />
+                      <div className="mt-2 flex items-center justify-between gap-3 text-sm">
+                        <span className="text-slate-500">Didn&apos;t receive the OTP?</span>
+                        <button
+                          type="button"
+                          onClick={handleResendOtp}
+                          disabled={resending || resendCooldown > 0 || loading}
+                          className="font-medium text-sky-600 transition hover:text-sky-700 disabled:cursor-not-allowed disabled:text-slate-400"
+                        >
+                          {resending
+                            ? "Sending..."
+                            : resendCooldown > 0
+                              ? `Resend OTP in ${resendCooldown}s`
+                              : "Resend OTP"}
+                        </button>
+                      </div>
                     </div>
                     {forcePasswordReset && (
                       <div>
@@ -367,6 +441,10 @@ const LoginPortal = () => {
                     </div>
                   </>
                 )}
+
+                {info ? (
+                  <p className="rounded-lg border border-green-200 bg-green-50 px-3 py-2.5 text-sm font-medium text-green-700">{info}</p>
+                ) : null}
 
                 {error ? (
                   <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2.5 text-sm font-medium text-red-700">{error}</p>

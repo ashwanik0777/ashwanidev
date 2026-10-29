@@ -13,7 +13,8 @@ import {
   HOD_EXTRA_SECTIONS,
   VC_EXTRA_SECTIONS
 } from "../../components/faculty/dashboard/constants";
-import { clearPortalSession, getGrievanceRole } from "../../utils/portalSession";
+import { getGrievanceRole } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
 import MaintenanceComplaintForm from "../../components/grievance/maintenance/MaintenanceComplaintForm";
 import MyMaintenanceTickets from "../../components/grievance/maintenance/MyMaintenanceTickets";
 import MaintenanceOverview from "../../components/grievance/maintenance/MaintenanceOverview";
@@ -348,8 +349,8 @@ const FacultyDashboard = () => {
           onSave={handleSave}
           onViewPublic={() => facultyPublicId ? navigate(`/academics/faculty/${facultyPublicId}`) : alert("Profile not linked yet.")}
           onLogout={() => {
-            clearPortalSession();
-            navigate("/login");
+            logoutPortalSession();
+            navigate("/login", { replace: true });
           }}
         />
 

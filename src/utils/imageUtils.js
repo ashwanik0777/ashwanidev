@@ -141,6 +141,10 @@ export const resolveFacultyImage = (url, image, name, email, id) => {
 
   // Fallback to mapped local faculty photo assets for specific IT Cell committee members when database image URL is missing
   const nameLower = String(name || "").toLowerCase();
+  const idUpper = String(id || "").toUpperCase();
+  if (idUpper === "SOICT-F0023" || nameLower.includes("rakesh kumar y")) {
+    return "/assets/Faculty/SOICT-F0023.jpg";
+  }
   if (nameLower.includes("arti gautam") || nameLower.includes("aarti")) {
     return "/assets/Faculty/Aarti.jpg";
   }

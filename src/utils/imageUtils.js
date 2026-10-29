@@ -133,6 +133,14 @@ export const getFacultyInitials = (name) => {
  * Resolve faculty image URL with fallback to local mapped assets or ui-avatars.com.
  */
 export const resolveFacultyImage = (url, image, name, email, id) => {
+  const nameLower = String(name || "").toLowerCase();
+  const idUpper = String(id || "").toUpperCase();
+
+  // Explicit overrides for Dr. Rakesh Kumar Y to prevent Dr. Rakesh Kumar photo collision
+  if (idUpper === "SOICT-F0023" || nameLower.includes("rakesh kumar y")) {
+    return "/assets/Faculty/SOICT-F0023.jpg";
+  }
+
   const target = url || image;
   if (target) {
     const parsed = parseImageUrl(target);
@@ -140,11 +148,6 @@ export const resolveFacultyImage = (url, image, name, email, id) => {
   }
 
   // Fallback to mapped local faculty photo assets for specific IT Cell committee members when database image URL is missing
-  const nameLower = String(name || "").toLowerCase();
-  const idUpper = String(id || "").toUpperCase();
-  if (idUpper === "SOICT-F0023" || nameLower.includes("rakesh kumar y")) {
-    return "/assets/Faculty/SOICT-F0023.jpg";
-  }
   if (nameLower.includes("arti gautam") || nameLower.includes("aarti")) {
     return "/assets/Faculty/Aarti.jpg";
   }

@@ -33,7 +33,7 @@ import {
   adminUpdateFacultyProfile,
   adminDeleteFacultyProfile,
 } from "../../services/facultyDashboardService";
-import { clearPortalSession } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
 import {
   SCHOOLS_META,
   getSchoolByApiParam,
@@ -2067,8 +2067,8 @@ const SchoolDashboard = () => {
                   <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
                 </button>
                 <button onClick={() => {
-                  clearPortalSession();
-                  navigate("/login");
+                  logoutPortalSession();
+                  navigate("/login", { replace: true });
                 }} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100 transition-colors">
                   <LogOut className="h-4 w-4" /> Logout
                 </button>

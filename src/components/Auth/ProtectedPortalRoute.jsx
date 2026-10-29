@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import {
   allowedRolesForPath,
+  clearPortalSession,
   getPortalSession,
   getRoleHomeRoute,
   isTokenExpired,
@@ -23,6 +24,9 @@ const ProtectedPortalRoute = ({ children }) => {
 
     let cancelled = false;
     refreshAccessToken().then((token) => {
+      // Drop a session that cannot be renewed, otherwise the login page would
+      // treat it as signed in and bounce straight back here.
+      if (!token) clearPortalSession();
       if (!cancelled) setRecovery(token ? "idle" : "failed");
     });
 

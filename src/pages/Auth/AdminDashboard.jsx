@@ -102,7 +102,7 @@ import {
   listFacultyProfiles,
   updateFacultyProfile,
 } from "../../services/facultyService";
-import { clearPortalSession } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
 import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
   createRecruitment,
@@ -8165,8 +8165,8 @@ const AdminDashboard = () => {
                 </button> */}
                 <button
                   onClick={() => {
-                    clearPortalSession();
-                    navigate("/login");
+                    logoutPortalSession();
+                    navigate("/login", { replace: true });
                   }}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100"
                 >

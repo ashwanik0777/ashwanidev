@@ -16,7 +16,8 @@ import {
   History,
   Hourglass,
 } from "lucide-react";
-import { clearPortalSession, getPortalSession } from "../../utils/portalSession";
+import { getPortalSession } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
 import { getMaintenanceStats, getMaintenanceStaffProfile } from "../../services/maintenanceService";
 import NotificationBell from "../../components/grievance/maintenance/NotificationBell";
 import TicketWorkspace from "../../components/grievance/maintenance/TicketWorkspace";
@@ -130,8 +131,8 @@ const MaintenanceDashboard = () => {
   const closeNotificationTicket = useCallback(() => setNotificationTicket(null), []);
 
   const logout = () => {
-    clearPortalSession();
-    navigate("/login");
+    logoutPortalSession();
+    navigate("/login", { replace: true });
   };
 
   const statCards = role === "senior_officer"

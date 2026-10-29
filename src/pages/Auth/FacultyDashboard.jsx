@@ -129,24 +129,44 @@ const FacultyDashboard = () => {
   const calcExpYears = useMemo(() => {
     const expEntries = profile?.tabData?.qualifications?.experience || [];
     const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    const parseExpDate = (val, defaultMonth = 1) => {
+      if (!val) return { year: 0, month: defaultMonth };
+      const s = String(val).trim();
+      const lower = s.toLowerCase();
+      if (lower === 'present' || lower === 'current') {
+        return { year: currentYear, month: currentMonth };
+      }
+      const yMatch = s.match(/\b(19\d\d|20\d\d)\b/);
+      const year = yMatch ? parseInt(yMatch[1], 10) : 0;
+      let month = defaultMonth;
+      const slashMatch = s.match(/\b(0?[1-9]|1[0-2])[\/\-](19\d\d|20\d\d)\b/);
+      if (slashMatch) {
+        month = parseInt(slashMatch[1], 10);
+      } else {
+        const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        const mIdx = monthNames.findIndex(m => lower.includes(m));
+        if (mIdx !== -1) month = mIdx + 1;
+      }
+      return { year, month };
+    };
+
     let totalMonths = 0;
     expEntries.forEach(exp => {
-      const fromStr = (exp.from || '').toString();
-      const toStr = (exp.to || '').toString().toLowerCase();
-      const fromParts = fromStr.split('-');
-      const fromYear = parseInt(fromParts[0]) || 0;
-      const fromMonth = parseInt(fromParts[1]) || 1;
-      const isPresent = toStr === 'present' || toStr === 'current';
-      let toYear, toMonth;
-      if (isPresent) { toYear = now.getFullYear(); toMonth = now.getMonth() + 1; }
-      else { const toParts = toStr.split('-'); toYear = parseInt(toParts[0]) || 0; toMonth = parseInt(toParts[1]) || 1; }
-      if (fromYear > 0 && toYear >= fromYear) {
-        const months = (toYear - fromYear) * 12 + (toMonth - fromMonth);
+      const from = parseExpDate(exp.from || exp.fromYear || '', 1);
+      const to = parseExpDate(exp.to || exp.toYear || '', 1);
+      if (from.year > 0 && to.year >= from.year) {
+        const months = (to.year - from.year) * 12 + (to.month - from.month);
         if (months > 0) totalMonths += months;
       }
     });
-    const years = Math.round(totalMonths / 12);
-    return years > 0 ? years : (profile.experience_years || 0);
+    const rawYears = Math.round(totalMonths / 12);
+    const years = (rawYears > 0 && rawYears <= 70) ? rawYears : 0;
+    const fallbackExp = Number(profile.experience_years) || 0;
+    const safeFallback = (fallbackExp > 0 && fallbackExp <= 70) ? fallbackExp : 0;
+    return years > 0 ? years : safeFallback;
   }, [profile?.tabData?.qualifications?.experience, profile.experience_years]);
 
   const summary = useMemo(

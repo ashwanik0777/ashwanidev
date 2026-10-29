@@ -171,34 +171,46 @@ const FacultyHeader = ({ faculty }) => {
           const now = new Date();
           const currentYear = now.getFullYear();
           const currentMonth = now.getMonth() + 1;
+
+          const parseExpDate = (val, defaultMonth = 1) => {
+            if (!val) return { year: 0, month: defaultMonth };
+            const s = String(val).trim();
+            const lower = s.toLowerCase();
+            if (lower === 'present' || lower === 'current') {
+              return { year: currentYear, month: currentMonth };
+            }
+            const yMatch = s.match(/\b(19\d\d|20\d\d)\b/);
+            const year = yMatch ? parseInt(yMatch[1], 10) : 0;
+            let month = defaultMonth;
+            const slashMatch = s.match(/\b(0?[1-9]|1[0-2])[\/\-](19\d\d|20\d\d)\b/);
+            if (slashMatch) {
+              month = parseInt(slashMatch[1], 10);
+            } else {
+              const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+              const mIdx = monthNames.findIndex(m => lower.includes(m));
+              if (mIdx !== -1) month = mIdx + 1;
+            }
+            return { year, month };
+          };
+
           let totalMonths = 0;
           expEntries.forEach(exp => {
-            const fromStr = (exp.from || exp.fromYear || '').toString();
-            const toStr = (exp.to || exp.toYear || '').toString().toLowerCase();
-            const fromParts = fromStr.split('-');
-            const fromYear = parseInt(fromParts[0]) || 0;
-            const fromMonth = parseInt(fromParts[1]) || 1;
-            const isPresent = toStr === 'present' || toStr === 'current';
-            let toYear, toMonth;
-            if (isPresent) {
-              toYear = currentYear;
-              toMonth = currentMonth;
-            } else {
-              const toParts = toStr.split('-');
-              toYear = parseInt(toParts[0]) || 0;
-              toMonth = parseInt(toParts[1]) || 1;
-            }
-            if (fromYear > 0 && toYear >= fromYear) {
-              const months = (toYear - fromYear) * 12 + (toMonth - fromMonth);
+            const from = parseExpDate(exp.from || exp.fromYear || '', 1);
+            const to = parseExpDate(exp.to || exp.toYear || '', 1);
+            if (from.year > 0 && to.year >= from.year) {
+              const months = (to.year - from.year) * 12 + (to.month - from.month);
               if (months > 0) totalMonths += months;
             }
           });
-          const autoExpYears = Math.round(totalMonths / 12);
+          const rawExpYears = Math.round(totalMonths / 12);
+          const autoExpYears = (rawExpYears > 0 && rawExpYears <= 70) ? rawExpYears : 0;
           const autoPubCount = (tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
           const autoTalksCount = (tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
           const autoProjCount = (tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
 
-          const expVal = autoExpYears || (Array.isArray(faculty?.experience) ? faculty.experience.length : (Number(faculty?.experienceYears) || Number(faculty?.experience_years) || Number(faculty?.experience) || 0));
+          const rawFallbackExp = Number(faculty?.experienceYears) || Number(faculty?.experience_years) || Number(faculty?.experience) || 0;
+          const safeFallbackExp = (rawFallbackExp > 0 && rawFallbackExp <= 70) ? rawFallbackExp : 0;
+          const expVal = autoExpYears || safeFallbackExp;
           const pubVal = autoPubCount || (Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0));
           const talksVal = autoTalksCount || (Number(tabData?.talksCount) || (Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0)));
           const projVal = autoProjCount || (Number(tabData?.projectsCount) || (Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0)));

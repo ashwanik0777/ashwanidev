@@ -350,7 +350,7 @@ const ResearchGroupTab = ({ profile }) => {
             </div>
           </div>
 
-          <p className="text-gray-700 leading-relaxed">{groupOverview}</p>
+          {/* <p className="text-gray-700 leading-relaxed">{groupOverview}</p> */}
         </CardContent>
       </Card>
 

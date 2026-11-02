@@ -882,21 +882,45 @@ const AdminDashboard = () => {
       setIsAccountsLoading(true);
       setAccountApiError("");
       try {
-        const response = await listAdminAccounts({
-          query: accountFilters.query,
-          role: accountFilters.role,
-          status: accountFilters.status,
-          page: accountPagination.page,
-          limit: accountPagination.limit,
-        });
+        /* Admin and school logins are few and always shown pinned above the
+           faculty list, so they are fetched in full; only faculty accounts are
+           paginated. Paging through faculty used to shuffle them in and out
+           because all roles shared one id-ordered page. */
+        const selectedRole = accountFilters.role;
+        const sharedFilters = { query: accountFilters.query, status: accountFilters.status };
+        const pinnedRoles = ["admin", "school"].filter(
+          (role) => selectedRole === "all" || selectedRole === role,
+        );
+        const includeFaculty = selectedRole === "all" || selectedRole === "faculty";
+
+        const [pinnedResponses, facultyResponse] = await Promise.all([
+          Promise.all(
+            pinnedRoles.map((role) =>
+              listAdminAccounts({ ...sharedFilters, role, page: 1, limit: 500 }),
+            ),
+          ),
+          includeFaculty
+            ? listAdminAccounts({
+                ...sharedFilters,
+                role: "faculty",
+                page: accountPagination.page,
+                limit: accountPagination.limit,
+              })
+            : Promise.resolve(null),
+        ]);
         if (!isMounted) return;
-        setAccounts(Array.isArray(response?.items) ? response.items : []);
+
+        const pinnedAccounts = pinnedResponses.flatMap((response) =>
+          Array.isArray(response?.items) ? response.items : [],
+        );
+        const facultyPage = Array.isArray(facultyResponse?.items) ? facultyResponse.items : [];
+        setAccounts([...pinnedAccounts, ...facultyPage]);
         setAccountPagination((prev) => ({
           ...prev,
-          page: response?.pagination?.page || prev.page,
-          limit: response?.pagination?.limit || prev.limit,
-          total: response?.pagination?.total || 0,
-          totalPages: response?.pagination?.totalPages || 1,
+          page: facultyResponse?.pagination?.page || 1,
+          limit: facultyResponse?.pagination?.limit || prev.limit,
+          total: facultyResponse?.pagination?.total || 0,
+          totalPages: facultyResponse?.pagination?.totalPages || 1,
         }));
       } catch (error) {
         if (!isMounted) return;
@@ -2135,7 +2159,10 @@ const AdminDashboard = () => {
 
         try {
           await deleteAdminAccount(accountId);
-          const shouldMoveToPreviousPage = accounts.length === 1 && accountPagination.page > 1;
+          // Only faculty accounts are paginated; step back if the last one on this page went.
+          const facultyOnPage = accounts.filter((item) => item.role === "faculty").length;
+          const shouldMoveToPreviousPage =
+            account.role === "faculty" && facultyOnPage === 1 && accountPagination.page > 1;
           if (shouldMoveToPreviousPage) {
             setAccountPagination((prev) => ({ ...prev, page: prev.page - 1 }));
           }
@@ -2172,6 +2199,24 @@ const AdminDashboard = () => {
     if (accountEditor.index === null && !form?.password) {
       setMessage("Password is required for new account creation.");
       return;
+    }
+
+    // New admin/school logins need a real email — the login OTP is sent there.
+    const needsEmail = accountEditor.index === null && (form.role === "admin" || form.role === "school");
+    if (needsEmail) {
+      const normalizedEmail = String(form.email || "").trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+        setMessage("Please enter a valid email. The login OTP will be sent to this email.");
+        return;
+      }
+
+      const duplicateEmail = accounts.some(
+        (item) => String(item.email || "").toLowerCase() === normalizedEmail,
+      );
+      if (duplicateEmail) {
+        setMessage("This email is already used by another account.");
+        return;
+      }
     }
 
     const duplicate = accounts.some(
@@ -3216,6 +3261,7 @@ const AdminDashboard = () => {
                   id: `acc-${Date.now()}`,
                   name: "",
                   username: "",
+                  email: "",
                   password: "",
                   role: "faculty",
                   status: "active",
@@ -3287,10 +3333,11 @@ const AdminDashboard = () => {
             {(() => {
               const adminAndSchoolAccounts = accounts.filter(acc => acc.role === "admin" || acc.role === "school");
               const facultyAccounts = accounts.filter(acc => acc.role === "faculty");
+              const showFacultySection = accountFilters.role === "all" || accountFilters.role === "faculty";
 
               return (
-                <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1 pb-2">
-                  {/* Category 1: Admins and School Management Accounts */}
+                <div className="space-y-6">
+                  {/* Category 1: Admins and School Management Accounts — always pinned on top, not paginated */}
                   <div className="space-y-2">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-blue-500" />
@@ -3361,17 +3408,19 @@ const AdminDashboard = () => {
                       </div>
                     ) : (
                       <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-4 text-center text-xs text-slate-500">
-                        No admin or school accounts found on this page.
+                        No admin or school accounts found.
                       </div>
                     )}
                   </div>
 
-                  {/* Category 2: Faculty Portal Accounts */}
+                  {/* Category 2: Faculty Portal Accounts — the only paginated list */}
+                  {showFacultySection ? (
                   <div className="space-y-2">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                      Faculty Portal Accounts ({facultyAccounts.length})
+                      Faculty Portal Accounts ({accountPagination.total})
                     </h3>
+                    <div className="max-h-[600px] overflow-y-auto pr-1 pb-2">
                     {facultyAccounts.length > 0 ? (
                       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
                         <table className="w-full border-collapse text-left text-xs">
@@ -3446,7 +3495,9 @@ const AdminDashboard = () => {
                         No faculty accounts found on this page.
                       </div>
                     )}
+                    </div>
                   </div>
+                  ) : null}
                 </div>
               );
             })()}
@@ -3458,7 +3509,7 @@ const AdminDashboard = () => {
                   Showing {accountPagination.total ? (accountPagination.page - 1) * accountPagination.limit + 1 : 0}
                   -
                   {Math.min(accountPagination.page * accountPagination.limit, accountPagination.total)} of{" "}
-                  {accountPagination.total}
+                  {accountPagination.total} faculty accounts
                 </span>
 
                 <div className="flex items-center gap-1.5">
@@ -3557,6 +3608,21 @@ const AdminDashboard = () => {
                       }
                     />
                   </Field>
+                  {accountEditor.index === null &&
+                  (accountEditor.form.role === "admin" || accountEditor.form.role === "school") ? (
+                  <Field label="Email">
+                    <input
+                      className={inputClass}
+                      type="email"
+                      autoComplete="off"
+                      placeholder="name@gbu.ac.in"
+                      value={accountEditor.form.email || ""}
+                      onChange={(e) =>
+                        setAccountEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))
+                      }
+                    />
+                  </Field>
+                  ) : null}
                   <Field label="Password">
                     <div className="flex items-center gap-2">
                       <input

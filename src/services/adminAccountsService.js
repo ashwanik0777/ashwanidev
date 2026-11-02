@@ -22,6 +22,7 @@ const normalizeAccount = (item) => ({
   id: item?.id,
   name: String(item?.name || "").trim(),
   username: String(item?.username || "").trim(),
+  email: String(item?.email || "").trim(),
   password: String(item?.password || ""),
   role: String(item?.role || "faculty"),
   status: String(item?.status || "active"),
@@ -49,6 +50,7 @@ const normalizeAuditLog = (item) => ({
 const toPayload = (account) => ({
   name: String(account?.name || "").trim(),
   username: String(account?.username || "").trim(),
+  email: String(account?.email || "").trim().toLowerCase(),
   password: String(account?.password || ""),
   role: String(account?.role || "faculty"),
   status: String(account?.status || "active"),

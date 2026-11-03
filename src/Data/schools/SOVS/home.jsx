@@ -515,7 +515,7 @@ export const sectionsConfig = [
     enabled: true,
     position: 7,
     props: {
-      title: "Faculty of SOVSAS",
+      title: "Faculty of SoVSAS",
       subTitle: "",
       facultyList: [
         {
@@ -939,7 +939,7 @@ export const sectionsConfig = [
         sectionTitle: "Success Stories",
         students: [
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Environmental Research Lab",
             package: "INR 6.5 LPA",
             department: "Environmental Science",
@@ -947,7 +947,7 @@ export const sectionsConfig = [
               "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=400&fit=crop",
           },
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Food Processing Industry",
             package: "INR 7.2 LPA",
             department: "Food Processing",
@@ -955,7 +955,7 @@ export const sectionsConfig = [
               "https://images.unsplash.com/photo-1581092160612-33d00a8b99c1?w=600&h=400&fit=crop",
           },
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Applied Chemistry Lab",
             package: "INR 6.8 LPA",
             department: "Applied Chemistry",
@@ -963,7 +963,7 @@ export const sectionsConfig = [
               "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=400&fit=crop",
           },
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Physics Research Center",
             package: "INR 7.0 LPA",
             department: "Applied Physics",
@@ -971,7 +971,7 @@ export const sectionsConfig = [
               "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&h=400&fit=crop",
           },
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Analytics Firm",
             package: "INR 7.8 LPA",
             department: "Applied Mathematics",
@@ -979,7 +979,7 @@ export const sectionsConfig = [
               "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop",
           },
           {
-            name: "SOVSAS Graduate",
+            name: "SoVSAS Graduate",
             company: "Quality Assurance Lab",
             package: "INR 6.9 LPA",
             department: "Food Science",
@@ -1032,7 +1032,7 @@ export const sectionsConfig = [
         startups: [
           {
             name: "Applied Sciences Innovation Cell",
-            founder: "SOVSAS Students",
+            founder: "SoVSAS Students",
             description:
               "Student-led initiatives translating lab research into prototypes and community solutions.",
             funding: "University Supported",
@@ -1059,7 +1059,7 @@ export const sectionsConfig = [
           title: "National Science Day Celebration",
           achievement: "Campus-wide Participation",
           year: "2023",
-          student: "SOVSAS Students",
+          student: "SoVSAS Students",
           department: "Applied Sciences",
           image:
             "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&h=400&fit=crop",
@@ -1070,7 +1070,7 @@ export const sectionsConfig = [
           title: "Guest Speaker Series",
           achievement: "Expert Talks",
           year: "2024",
-          student: "SOVSAS Community",
+          student: "SoVSAS Community",
           department: "Interdisciplinary",
           image:
             "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop",
@@ -1081,7 +1081,7 @@ export const sectionsConfig = [
           title: "Workshops and Seminars",
           achievement: "Skill Training",
           year: "2024",
-          student: "SOVSAS Students",
+          student: "SoVSAS Students",
           department: "Applied Chemistry",
           image:
             "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=600&h=400&fit=crop",

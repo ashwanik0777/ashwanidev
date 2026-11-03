@@ -58,6 +58,14 @@ export const parseImageUrl = (path, width = 1000) => {
 
   const trimmed = path.trim();
 
+  // 0. Local upload paths from host-based storage
+  if (trimmed.startsWith('/uploads/')) {
+    const backendBase = typeof import.meta !== 'undefined'
+      ? (import.meta.env?.VITE_BACKEND_BASE_URL || '')
+      : '';
+    return backendBase ? `${backendBase.replace(/\/$/, '')}${trimmed}` : trimmed;
+  }
+
   // 1. Google Drive links
   if (trimmed.includes('drive.google.com')) {
     const driveRegex = /(?:drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=|uc\?export=view&id=|thumbnail\?id=))([a-zA-Z0-9_-]+)/;
@@ -86,6 +94,9 @@ export const parseImageUrl = (path, width = 1000) => {
 
   // 6. Relative path - prefix with base URL
   const cleanPath = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  if (cleanPath.startsWith('/assets/')) {
+    return `https://web.onlinegbu.com${cleanPath}`;
+  }
   if (BASE_URL) {
     return `${BASE_URL}${cleanPath}`;
   }
@@ -122,6 +133,14 @@ export const getFacultyInitials = (name) => {
  * Resolve faculty image URL with fallback to local mapped assets or ui-avatars.com.
  */
 export const resolveFacultyImage = (url, image, name, email, id) => {
+  const nameLower = String(name || "").toLowerCase();
+  const idUpper = String(id || "").toUpperCase();
+
+  // Explicit overrides for Dr. Rakesh Kumar Y to prevent Dr. Rakesh Kumar photo collision
+  if (idUpper === "SOICT-F0023" || nameLower.includes("rakesh kumar y")) {
+    return "/assets/Faculty/SOICT-F0023.jpg";
+  }
+
   const target = url || image;
   if (target) {
     const parsed = parseImageUrl(target);
@@ -129,7 +148,6 @@ export const resolveFacultyImage = (url, image, name, email, id) => {
   }
 
   // Fallback to mapped local faculty photo assets for specific IT Cell committee members when database image URL is missing
-  const nameLower = String(name || "").toLowerCase();
   if (nameLower.includes("arti gautam") || nameLower.includes("aarti")) {
     return "/assets/Faculty/Aarti.jpg";
   }

@@ -102,8 +102,8 @@ const NAVIGATION_CONFIG = [
     icon: Camera,
     baseRoute: "/announcements",
     items: [
-      { slug: "news-notifications", label: "News & Updates" },
-      { slug: "event-calendar", label: "Upcoming Events" },
+      { slug: "news", label: "News & Updates" },
+      { slug: "event", label: "Upcoming Events" },
       { slug: "notices", label: "Notices & Circular" },
       { slug: "media-gallery", label: "Media Gallery" },
       { slug: "newsletter", label: "Newsletter" },

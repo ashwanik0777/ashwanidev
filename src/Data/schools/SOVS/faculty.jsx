@@ -5,7 +5,7 @@
 export const facultyPageData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Faculty — SOVS",
+  heading: "Faculty — SoVSAS",
   subheading: "Meet the distinguished faculty members of School of Vocational Studies & Applied Sciences.",
   // Faculty data is loaded dynamically from the backend API using school_code="SOVS"
 };

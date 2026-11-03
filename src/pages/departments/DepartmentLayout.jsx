@@ -13,7 +13,6 @@ const DepartmentLayout = ({
   programsData,
   schoolCode,
   departmentId,
-  facultyStats,
   facultyMembers,
   researchAreas,
   researchStats,
@@ -27,33 +26,31 @@ const DepartmentLayout = ({
   const shouldHideAbout = hideAbout || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
   const shouldHideResearch = hideResearch || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
   const shouldHideAchievers = hideAchievers || currentSchool === "SOM" || currentSchool === "SOHSS" || currentSchool === "SOVS";
+  // "Department of Civil Engineering" -> "Civil Engineering"
+  const departmentName = (heroProps?.title || "").replace(/^(Department|School) of\s+/i, "").trim();
 
   return (
     <div className="min-h-screen bg-background">
-      <BannerSection {...heroProps} />
+      {/* Same banner theme for every department so all schools look identical */}
+      <BannerSection {...heroProps} bgTheme={1} />
       <HodMessage {...hodProps} />
       {aboutProps && !shouldHideAbout && <AboutDepartment {...aboutProps} />}
       <Programs
         heading="Academic Programs"
-        subheading="Choose from our diverse range of programs designed to meet your academic and career goals."
         programs={programsData}
       />
       <FacultyCarousel
-        title="Meet Our Faculty"
-        subTitle="Experienced educators and researchers dedicated to student success"
+        title={departmentName ? `Meet ${departmentName} Faculty` : "Meet Our Faculty"}
         schoolCode={schoolCode}
         departmentId={departmentId}
         facultyList={facultyMembers}
         navigateTo={schoolCode ? `/schools/${schoolCode}/faculty` : "/academics/faculty"}
         autoSlideInterval={5000}
-        visibleCards={3}
-        bottomStats={facultyStats}
       />
 
       {!shouldHideResearch && ((researchAreas && researchAreas.length > 0) || (researchStats && researchStats.length > 0)) && (
         <ResearchSection
           title="Research & Innovation"
-          subtitle="Pioneering technology research and real-world domain solutions."
           researchAreas={researchAreas}
           researchStats={researchStats}
         />

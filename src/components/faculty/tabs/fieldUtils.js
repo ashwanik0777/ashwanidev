@@ -59,6 +59,20 @@ export const matchKey = (value, map, fallback) => {
   return map[key] ?? fallback;
 };
 
+/**
+ * True when `value` holds anything the faculty actually filled in: a non-blank
+ * string, a non-zero number, or an array/object containing such a value.
+ * Booleans are ignored because the editor seeds them as defaults.
+ */
+export const hasContent = (value) => {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") return value.trim() !== "";
+  if (typeof value === "number") return Number.isFinite(value) && value !== 0;
+  if (Array.isArray(value)) return value.some(hasContent);
+  if (typeof value === "object") return Object.values(value).some(hasContent);
+  return false;
+};
+
 /** Placeholder for a field the faculty has not filled in yet. */
 export const NOT_PROVIDED = "—";
 

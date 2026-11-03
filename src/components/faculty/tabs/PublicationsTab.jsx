@@ -40,8 +40,28 @@ const normalizePublication = (item) => ({
   year: pickNumber(item, ["year"], 0),
   citations: pickNumber(item, ["citations"], 0),
   impactFactor: pickText(item, ["impactFactor", "impact_factor"]),
-  paperUrl: pickText(item, ["paperUrl", "url", "doi"]),
+  paperUrl: pickText(item, ["paperUrl", "url"]),
   pdfUrl: pickText(item, ["pdfUrl", "pdf"]),
+  publisher: pickText(item, ["publisher"]),
+  keyword: pickText(item, ["keyword"]),
+  doi: pickText(item, ["doi"]),
+  issn: pickText(item, ["issn"]),
+  journalName: pickText(item, ["journalName"]),
+  volume: pickText(item, ["volume"]),
+  volumePage: pickText(item, ["volumePage"]),
+  conferenceName: pickText(item, ["conferenceName"]),
+  location: pickText(item, ["location"]),
+  pageNo: pickText(item, ["pageNo"]),
+  chapterTitle: pickText(item, ["chapterTitle"]),
+  bookTitle: pickText(item, ["bookTitle"]),
+  editorName: pickText(item, ["editorName"]),
+  pageCount: pickText(item, ["pageCount"]),
+  scopus: item.scopus,
+  wos: item.wos,
+  sci: item.sci,
+  ssci: item.ssci,
+  ahci: item.ahci,
+  esci: item.esci || item.csci,
 });
 
 const normalizePatent = (item) => ({
@@ -161,8 +181,10 @@ export default function PublicationsTab({ profile }) {
     return yearMatch && typeMatch;
   });
 
-  const totalCitations = publications.reduce((sum, pub) => sum + (pub?.citations || 0), 0);
   const journalCount = publications.filter((p) => p.type === "journal").length;
+  const conferenceCount = publications.filter((p) => p.type === "conference").length;
+  const bookCount = publications.filter((p) => p.type === "book").length;
+  const bookChapterCount = publications.filter((p) => p.type === "book chapter").length;
 
   const getStatusColor = (status) => matchKey(status, PATENT_STATUS_VARIANTS, "outline");
 
@@ -241,26 +263,14 @@ export default function PublicationsTab({ profile }) {
           <div className="space-y-8">
             {/* Statistics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
+              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
                 <CardContent>
                   <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-yellow-600">
-                      {publications.length}
-                    </div>
-                    <div className="text-sm text-yellow-700 font-medium">
-                      Total Publications
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-purple-600">
+                    <div className="text-3xl font-bold text-blue-600">
                       {journalCount}
                     </div>
-                    <div className="text-sm text-purple-700 font-medium">
-                      Journal Papers
+                    <div className="text-sm text-blue-700 font-medium">
+                      Journal
                     </div>
                   </div>
                 </CardContent>
@@ -269,22 +279,34 @@ export default function PublicationsTab({ profile }) {
                 <CardContent>
                   <div className="text-center py-4">
                     <div className="text-3xl font-bold text-green-600">
-                      {totalCitations}
+                      {conferenceCount}
                     </div>
                     <div className="text-sm text-green-700 font-medium">
-                      Total Citations
+                      Conference
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
                 <CardContent>
                   <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-blue-600">
-                      {years.length ? years[0] : "--"}
+                    <div className="text-3xl font-bold text-orange-600">
+                      {bookCount}
                     </div>
-                    <div className="text-sm text-blue-700 font-medium">
-                      Latest Year
+                    <div className="text-sm text-orange-700 font-medium">
+                      Book
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+                <CardContent>
+                  <div className="text-center py-4">
+                    <div className="text-3xl font-bold text-purple-600">
+                      {bookChapterCount}
+                    </div>
+                    <div className="text-sm text-purple-700 font-medium">
+                      Book Chapter
                     </div>
                   </div>
                 </CardContent>
@@ -302,7 +324,7 @@ export default function PublicationsTab({ profile }) {
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
                   {publications.length > 0
-                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals and conferences${totalCitations > 0 ? `, with ${totalCitations} recorded citation${totalCitations === 1 ? "" : "s"}` : ""}.`
+                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals, conferences, and books.`
                     : "No publications have been added to this profile yet."}
                 </p>
               </CardContent>
@@ -356,14 +378,35 @@ export default function PublicationsTab({ profile }) {
                         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                           <div className="flex-1">
                             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                              {publication.title}
+                              {publication.title || publication.chapterTitle || publication.bookTitle}
                             </h3>
                             <p className="text-sm text-gray-600 mb-2">
-                              {publication.authors}
+                              {publication.authors} {publication.editorName && `(Ed: ${publication.editorName})`}
                             </p>
-                            <p className="text-blue-600 font-medium mb-3">
-                              {publication.venue}
-                            </p>
+                            
+                            {publication.type === "journal" && (
+                              <p className="text-blue-600 font-medium mb-3">
+                                {publication.journalName || publication.venue}
+                                {publication.volume ? ` | ${publication.volume}` : ""}
+                                {publication.pageNo ? `, page no ${publication.pageNo}` : ""}
+                                {publication.volumePage && !publication.volume && !publication.pageNo ? ` | ${publication.volumePage}` : ""}
+                              </p>
+                            )}
+                            {publication.type === "conference" && (
+                              <p className="text-blue-600 font-medium mb-3">
+                                {publication.conferenceName || publication.venue} {publication.location && `| ${publication.location}`} {publication.pageNo && `| ${publication.pageNo}`}
+                              </p>
+                            )}
+                            {publication.type === "book chapter" && (
+                              <p className="text-blue-600 font-medium mb-3">
+                                {publication.bookTitle} {publication.pageNo && `| ${publication.pageNo}`}
+                              </p>
+                            )}
+                            {publication.type === "book" && (
+                              <p className="text-blue-600 font-medium mb-3">
+                                {publication.publisher} {publication.pageCount && `| ${publication.pageCount} pages`}
+                              </p>
+                            )}
 
                             <div className="flex flex-wrap gap-2 mb-4">
                               <Badge variant={getTypeColor(publication.type)}>
@@ -371,7 +414,7 @@ export default function PublicationsTab({ profile }) {
                                   (publication.type || 'publication').slice(1)}
                               </Badge>
 
-                              {publication.quartile && (
+                              {publication.type === "journal" && publication.quartile && publication.quartile !== "None" && (
                                 <Badge
                                   variant={getQuartileColor(
                                     publication.quartile
@@ -381,7 +424,7 @@ export default function PublicationsTab({ profile }) {
                                 </Badge>
                               )}
 
-                              {publication.ranking && (
+                              {publication.type === "conference" && publication.ranking && publication.ranking !== "None" && (
                                 <Badge
                                   variant={getRankingColor(publication.ranking)}
                                 >
@@ -397,14 +440,47 @@ export default function PublicationsTab({ profile }) {
                             </div>
 
                             <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-                              <span>
-                                <strong>Citations:</strong>{" "}
-                                {publication.citations}
-                              </span>
+                              {publication.publisher && (
+                                <span>
+                                  <strong>Publisher:</strong> {publication.publisher}
+                                </span>
+                              )}
+                              {publication.keyword && (
+                                <span>
+                                  <strong>Keywords:</strong> {publication.keyword}
+                                </span>
+                              )}
+                              {publication.doi && (
+                                <span>
+                                  <strong>DOI:</strong> {publication.doi}
+                                </span>
+                              )}
+                              {publication.issn && (
+                                <span>
+                                  <strong>ISSN/ISBN:</strong> {publication.issn}
+                                </span>
+                              )}
+                              {publication.citations > 0 && (
+                                <span>
+                                  <strong>Citations:</strong>{" "}
+                                  {publication.citations}
+                                </span>
+                              )}
                               {publication.impactFactor && (
                                 <span>
                                   <strong>Impact Factor:</strong>{" "}
                                   {publication.impactFactor}
+                                </span>
+                              )}
+                              {publication.type === "journal" && (publication.scopus || publication.wos) && (
+                                <span>
+                                  <strong>Indexed:</strong>{" "}
+                                  {[
+                                    publication.scopus ? "Scopus" : null,
+                                    publication.wos
+                                      ? `Web of Science ${[(publication.sci && "SCI/SCIE"), (publication.ssci && "SSCI"), (publication.ahci && "AHCI"), (publication.esci && "ESCI")].filter(Boolean).length > 0 ? `(${[(publication.sci && "SCI/SCIE"), (publication.ssci && "SSCI"), (publication.ahci && "AHCI"), (publication.esci && "ESCI")].filter(Boolean).join(", ")})` : ""}`.trim()
+                                      : null
+                                  ].filter(Boolean).join(", ")}
                                 </span>
                               )}
                             </div>

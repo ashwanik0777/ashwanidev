@@ -115,17 +115,17 @@ const OverviewTab = ({ activeTab, profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-1 gap-4">
             {researchAreas?.map((area, index) => (
               <div
                 key={index}
-                className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
+                className="p-4 bg-white rounded-lg border border-blue-100"
               >
-                <h3 className="font-semibold text-blue-900 mb-2">
+                <h3 className="font-semibold text-gray-900 mb-2">
                   {area.title}
                 </h3>
                 {area.description && (
-                  <p className="text-sm text-blue-700">{area.description}</p>
+                  <p className="text-md text-gray-700">{area.description}</p>
                 )}
               </div>
             ))}
@@ -139,7 +139,7 @@ const OverviewTab = ({ activeTab, profile }) => {
       </Card>
 
       {/* Quick Links */}
-      {quickLinks.length > 0 && (
+      {/* {quickLinks.length > 0 && (
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
             <CardTitle className="text-xl text-gray-900">Quick Links</CardTitle>
@@ -161,7 +161,7 @@ const OverviewTab = ({ activeTab, profile }) => {
             </div>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </div>
   );
 };

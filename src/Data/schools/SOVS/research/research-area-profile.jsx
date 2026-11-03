@@ -5,7 +5,7 @@
 export const researchAreaData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Research Areas — SOVS",
+  heading: "Research Areas — SoVSAS",
   subheading: "Explore the research focus areas of the School of Vocational Studies & Applied Sciences at Gautam Buddha University.",
   hero: {
     title: "Research Area and Profile",

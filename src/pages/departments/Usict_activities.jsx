@@ -1,3 +1,4 @@
+import { createSlug } from "../../utils/slugUtil";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { 
@@ -132,7 +133,7 @@ const EventCard = ({ event, index }) => {
   const isPast = !event.isUpcoming;
 
   return (
-    <Link to={`/announcements/event-calendar/${event.id}`}>
+    <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -254,7 +255,7 @@ const NewsCard = ({ news, index }) => {
             )}
           </div>
           <Link
-            to={`/announcements/news-notifications/${news.id}`}
+            to={`/announcements/news/${createSlug(news.title)}`}
             className="inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors ml-auto"
           >
             Details <ArrowRight className="w-3.5 h-3.5" />

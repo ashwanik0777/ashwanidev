@@ -10,8 +10,15 @@ import {
   deepClone,
   FACULTY_SIDEBAR_SECTIONS,
   parseCommaList,
+  HOD_EXTRA_SECTIONS,
+  VC_EXTRA_SECTIONS
 } from "../../components/faculty/dashboard/constants";
-import { clearPortalSession, getPortalSession } from "../../utils/portalSession";
+import { getGrievanceRole } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
+import MaintenanceComplaintForm from "../../components/grievance/maintenance/MaintenanceComplaintForm";
+import MyMaintenanceTickets from "../../components/grievance/maintenance/MyMaintenanceTickets";
+import MaintenanceOverview from "../../components/grievance/maintenance/MaintenanceOverview";
+import NotificationBell from "../../components/grievance/maintenance/NotificationBell";
 import {
   fetchMyFacultyProfile,
   updateMyFacultyProfile,
@@ -50,6 +57,19 @@ const FacultyDashboard = () => {
   const [tagsInput, setTagsInput] = useState("");
   const [activeSection, setActiveSection] = useState("dashboard");
   const [linkedFacultyId, setLinkedFacultyId] = useState("");
+  const [grievanceRefreshKey, setGrievanceRefreshKey] = useState(0);
+  const [notificationTicket, setNotificationTicket] = useState(null);
+
+  // Grievance role (vc / hod) from the JWT access token
+  const grievanceRole = getGrievanceRole();
+
+  // Build dynamic sidebar sections based on grievance role
+  const dynamicSections = useMemo(() => {
+    let sections = [...FACULTY_SIDEBAR_SECTIONS];
+    if (grievanceRole === 'hod') sections = [...sections, ...HOD_EXTRA_SECTIONS];
+    else if (grievanceRole === 'vc') sections = [...sections, ...VC_EXTRA_SECTIONS];
+    return sections;
+  }, [grievanceRole]);
 
   // Load profile from backend on mount
   useEffect(() => {
@@ -106,9 +126,52 @@ const FacultyDashboard = () => {
     setTagsInput(Array.isArray(profile.tags) ? profile.tags.join(", ") : "");
   }, [profile.tags]);
 
+  const calcExpYears = useMemo(() => {
+    const expEntries = profile?.tabData?.qualifications?.experience || [];
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    const parseExpDate = (val, defaultMonth = 1) => {
+      if (!val) return { year: 0, month: defaultMonth };
+      const s = String(val).trim();
+      const lower = s.toLowerCase();
+      if (lower === 'present' || lower === 'current') {
+        return { year: currentYear, month: currentMonth };
+      }
+      const yMatch = s.match(/\b(19\d\d|20\d\d)\b/);
+      const year = yMatch ? parseInt(yMatch[1], 10) : 0;
+      let month = defaultMonth;
+      const slashMatch = s.match(/\b(0?[1-9]|1[0-2])[\/\-](19\d\d|20\d\d)\b/);
+      if (slashMatch) {
+        month = parseInt(slashMatch[1], 10);
+      } else {
+        const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        const mIdx = monthNames.findIndex(m => lower.includes(m));
+        if (mIdx !== -1) month = mIdx + 1;
+      }
+      return { year, month };
+    };
+
+    let totalMonths = 0;
+    expEntries.forEach(exp => {
+      const from = parseExpDate(exp.from || exp.fromYear || '', 1);
+      const to = parseExpDate(exp.to || exp.toYear || '', 1);
+      if (from.year > 0 && to.year >= from.year) {
+        const months = (to.year - from.year) * 12 + (to.month - from.month);
+        if (months > 0) totalMonths += months;
+      }
+    });
+    const rawYears = Math.round(totalMonths / 12);
+    const years = (rawYears > 0 && rawYears <= 70) ? rawYears : 0;
+    const fallbackExp = Number(profile.experience_years) || 0;
+    const safeFallback = (fallbackExp > 0 && fallbackExp <= 70) ? fallbackExp : 0;
+    return years > 0 ? years : safeFallback;
+  }, [profile?.tabData?.qualifications?.experience, profile.experience_years]);
+
   const summary = useMemo(
     () => [
-      { label: "Experience", value: `${profile.experience_years || 0} years` },
+      { label: "Experience", value: `${calcExpYears} years` },
       { label: "Publications", value: profile.publications || 0 },
       { label: "Department", value: profile.department || "-" },
       { label: "School", value: profile.school || "-" },
@@ -300,14 +363,14 @@ const FacultyDashboard = () => {
     <div className="min-h-screen bg-slate-50 p-4 md:p-8">
       <div className="mx-auto flex w-full max-w-[98%] flex-col gap-6 lg:flex-row">
         <SidebarNav
-          sections={FACULTY_SIDEBAR_SECTIONS}
+          sections={dynamicSections}
           activeSection={activeSection}
           onSelect={setActiveSection}
           onSave={handleSave}
           onViewPublic={() => facultyPublicId ? navigate(`/academics/faculty/${facultyPublicId}`) : alert("Profile not linked yet.")}
           onLogout={() => {
-            clearPortalSession();
-            navigate("/login");
+            logoutPortalSession();
+            navigate("/login", { replace: true });
           }}
         />
 
@@ -387,6 +450,47 @@ const FacultyDashboard = () => {
                 </button>
               </div>
             </div>
+          )}
+
+          {activeSection === "grievance" && (
+            <div className="space-y-6">
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="mb-6 flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-900 mb-1">Faculty Grievance & Maintenance Desk</h2>
+                    <p className="text-sm text-slate-500">
+                      Report a maintenance problem. It is routed automatically to the responsible JE, who assigns a vendor and keeps you updated.
+                    </p>
+                  </div>
+                  <NotificationBell onOpenTicket={setNotificationTicket} />
+                </div>
+                <MaintenanceComplaintForm onSubmitted={() => setGrievanceRefreshKey((key) => key + 1)} />
+              </div>
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-bold text-slate-900 mb-4">My Complaints</h2>
+                <MyMaintenanceTickets
+                  refreshKey={grievanceRefreshKey}
+                  openTicketId={notificationTicket}
+                  onOpenTicket={setNotificationTicket}
+                />
+              </div>
+            </div>
+          )}
+
+          {activeSection === "grievance-overview" && grievanceRole === 'vc' && (
+            <MaintenanceOverview
+              title="Vice Chancellor Overview"
+              subtitle="Read-only view of all faculty maintenance complaints across the university."
+              accentClass="bg-blue-600"
+            />
+          )}
+
+          {activeSection === "grievance-overview" && grievanceRole === 'hod' && (
+            <MaintenanceOverview
+              title="Department Maintenance Complaints"
+              subtitle="Read-only view of complaints raised by faculty of your department."
+              accentClass="bg-slate-800"
+            />
           )}
         </div>
       </div>

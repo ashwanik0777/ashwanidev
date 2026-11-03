@@ -66,12 +66,17 @@ const FacultyHeader = ({ faculty }) => {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               {faculty?.name || 'Dr. Faculty Name'}
             </h1>
-            <p className="text-xl text-blue-600 font-semibold mb-4">
+            <p className="text-xl text-blue-600 font-semibold mb-1">
               {faculty?.designation || 'Designation'}
             </p>
+            {faculty?.school && (
+              <p className="text-base text-gray-600 font-medium mb-4">
+                {faculty.school}
+              </p>
+            )}
 
             {/* Tags */}
-            {faculty?.tags && (
+            {/* {faculty?.tags && (
               <div className="flex flex-wrap gap-2 mb-6">
                 {faculty.tags.map((tag, index) => (
                   <Badge
@@ -82,7 +87,7 @@ const FacultyHeader = ({ faculty }) => {
                   </Badge>
                 ))}
               </div>
-            )}
+            )} */}
 
             {/* Specialization */}
             <div className="flex items-center gap-3 text-gray-600 mb-4">
@@ -142,39 +147,93 @@ const FacultyHeader = ({ faculty }) => {
                 <ExternalLink className="w-4 h-4 mr-2" />
                 ORCID Profile
               </Button>
+
+              {faculty?.linkedin && (
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    window.open(faculty.linkedin, '_blank')
+                  }
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  LinkedIn
+                </Button>
+              )}
             </div>
           </div>
         </div>
 
         {/* Quick Stats */}
-        <div className="flex-shrink-0">
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {Array.isArray(faculty?.experience) ? faculty.experience.length : (faculty?.experienceYears || faculty?.experience || '--')}
+        {(() => {
+          // Auto-count from tabData arrays as fallback
+          const tabData = faculty?.tabData || {};
+          const expEntries = tabData?.qualifications?.experience || [];
+          const now = new Date();
+          const currentYear = now.getFullYear();
+          const currentMonth = now.getMonth() + 1;
+
+          const parseExpDate = (val, defaultMonth = 1) => {
+            if (!val) return { year: 0, month: defaultMonth };
+            const s = String(val).trim();
+            const lower = s.toLowerCase();
+            if (lower === 'present' || lower === 'current') {
+              return { year: currentYear, month: currentMonth };
+            }
+            const yMatch = s.match(/\b(19\d\d|20\d\d)\b/);
+            const year = yMatch ? parseInt(yMatch[1], 10) : 0;
+            let month = defaultMonth;
+            const slashMatch = s.match(/\b(0?[1-9]|1[0-2])[\/\-](19\d\d|20\d\d)\b/);
+            if (slashMatch) {
+              month = parseInt(slashMatch[1], 10);
+            } else {
+              const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+              const mIdx = monthNames.findIndex(m => lower.includes(m));
+              if (mIdx !== -1) month = mIdx + 1;
+            }
+            return { year, month };
+          };
+
+          let totalMonths = 0;
+          expEntries.forEach(exp => {
+            const from = parseExpDate(exp.from || exp.fromYear || '', 1);
+            const to = parseExpDate(exp.to || exp.toYear || '', 1);
+            if (from.year > 0 && to.year >= from.year) {
+              const months = (to.year - from.year) * 12 + (to.month - from.month);
+              if (months > 0) totalMonths += months;
+            }
+          });
+          const rawExpYears = Math.round(totalMonths / 12);
+          const autoExpYears = (rawExpYears > 0 && rawExpYears <= 70) ? rawExpYears : 0;
+          const autoPubCount = (tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
+          const autoTalksCount = (tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
+          const autoProjCount = (tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
+
+          const rawFallbackExp = Number(faculty?.experienceYears) || Number(faculty?.experience_years) || Number(faculty?.experience) || 0;
+          const safeFallbackExp = (rawFallbackExp > 0 && rawFallbackExp <= 70) ? rawFallbackExp : 0;
+          const expVal = autoExpYears || safeFallbackExp;
+          const pubVal = autoPubCount || (Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0));
+          const talksVal = autoTalksCount || (Number(tabData?.talksCount) || (Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0)));
+          const projVal = autoProjCount || (Number(tabData?.projectsCount) || (Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0)));
+          const stats = [
+            expVal > 0 && { value: expVal, label: 'Years Experience', from: 'from-green-50', to: 'to-green-100', border: 'border-green-200', text: 'text-green-600', sub: 'text-green-700' },
+            pubVal > 0 && { value: pubVal, label: 'Publications', from: 'from-blue-50', to: 'to-blue-100', border: 'border-blue-200', text: 'text-blue-600', sub: 'text-blue-700' },
+            talksVal > 0 && { value: talksVal, label: 'Talks Delivered', from: 'from-purple-50', to: 'to-purple-100', border: 'border-purple-200', text: 'text-purple-600', sub: 'text-purple-700' },
+            projVal > 0 && { value: projVal, label: 'Projects', from: 'from-orange-50', to: 'to-orange-100', border: 'border-orange-200', text: 'text-orange-600', sub: 'text-orange-700' },
+          ].filter(Boolean);
+          if (stats.length === 0) return null;
+          return (
+            <div className="flex-shrink-0">
+              <div className={`grid gap-4 ${stats.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} lg:grid-cols-1`}>
+                {stats.map((s) => (
+                  <div key={s.label} className={`bg-gradient-to-br ${s.from} ${s.to} rounded-xl p-4 text-center border ${s.border} border-solid`}>
+                    <div className={`text-2xl font-bold ${s.text}`}>{s.value}</div>
+                    <div className={`text-sm ${s.sub}`}>{s.label}</div>
+                  </div>
+                ))}
               </div>
-              <div className="text-sm text-green-700">Years Experience</div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {Array.isArray(faculty?.publications) ? faculty.publications.length : (faculty?.publicationsCount || faculty?.publications || '--')}
-              </div>
-              <div className="text-sm text-blue-700">Publications</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {Array.isArray(faculty?.talks) ? faculty.talks.length : (faculty?.talks || '--')}
-              </div>
-              <div className="text-sm text-purple-700">Talks Delivered</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">
-                {Array.isArray(faculty?.projects) ? faculty.projects.length : (faculty?.projects || '--')}
-              </div>
-              <div className="text-sm text-orange-700">Projects</div>
-            </div>
-          </div>
-        </div>
+          );
+        })()}
       </div>
     </Card>
   );

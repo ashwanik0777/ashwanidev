@@ -1,10 +1,10 @@
 export const sovsGuestSpeakersData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Guest Speak | SOVSAS",
+  heading: "Guest Speak | SoVSAS",
   customLayout: "sovsGuestSpeakers",
   hero: {
-    title: "Guest Speakers & Eminent Lectures | SOVSAS",
+    title: "Guest Speakers & Eminent Lectures | SoVSAS",
     subtitle: "Distinguished Academic & Industry Speakers, Memorial Lecture Series, and National Symposia",
     bgTheme: 9,
   },
@@ -86,7 +86,7 @@ export const sovsGuestSpeakersData = {
           topic: "Accelerator Physics & Research Applications",
         },
       ],
-      description: "Campus-wide Science Day involving inter-school debate and quiz competitions with students from School of Biotechnology (SOBT), School of Engineering (SOE), and SOVSAS.",
+      description: "Campus-wide Science Day involving inter-school debate and quiz competitions with students from School of Biotechnology (SOBT), School of Engineering (SOE), and SoVSAS.",
     },
     {
       id: 6,

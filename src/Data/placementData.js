@@ -15,7 +15,7 @@ export const crcInfo = {
     email: "vinay.litoria@gbu.ac.in",
     image: "/assets/Faculty/Vinay_kumar_litoria.jpeg"
   },
-  guidelinesPdf: "https://www.gbu.ac.in/content/placement/The%20Placement%20Guidelines%20for%20the%20year%202019.pdf",
+  guidelinesPdf: "https://drive.google.com/file/d/13yxpIuatfUsFRKq_sw4jBHX5mjjUMsBj/view",
   forms: {
     recruiterInterestForm: "https://docs.google.com/forms/d/e/1FAIpQLSduUv1ABymG823prkIupnd5pMkos0jO4dFQGhJS7KUIFuMd1Q/viewform",
     studentPlacementForm: "https://docs.google.com/forms/d/e/1FAIpQLSeJr3vBDCcLeQUueGXTVMFK907VrM5hZUEYScMzvb_i_ZmKKQ/viewform"
@@ -28,7 +28,7 @@ export const brochuresData = [
     title: "GBU Placement Brochure 2025",
     school: "Gautam Buddha University (General)",
     year: "2025",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/GBU_PB_2025.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1dZiuF00NM9kVEqAEY_4aG7rzXRc4cNaq/view",
     bgGradient: "from-blue-600 to-indigo-600"
   },
   {
@@ -36,7 +36,7 @@ export const brochuresData = [
     title: "SoICT Placement Brochure 2025",
     school: "School of Information & Communication Technology",
     year: "2025",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/Placement/PB_ICT%202025.pdf",
+    pdfUrl: "https://drive.google.com/file/d/164j9h1RFOlLtRxPgim_xFruzrPzbGp5Y/view",
     bgGradient: "from-cyan-600 to-blue-700"
   },
   {
@@ -44,7 +44,7 @@ export const brochuresData = [
     title: "SoM Placement Brochure 2025",
     school: "School of Management",
     year: "2025",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/Placement/PB_SoM%202025.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1MQurhIaSjDmuHRlVSVGwiSpuloT8Ut-M/view",
     bgGradient: "from-purple-600 to-indigo-700"
   },
   {
@@ -52,7 +52,7 @@ export const brochuresData = [
     title: "SoE Placement Brochure 2023-24",
     school: "School of Engineering",
     year: "2023-24",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/SOE_PlacementBrochure23-24.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1BI7Q_eEv4-hf94AONqMbifKM0to2MvLZ/view",
     bgGradient: "from-emerald-600 to-teal-700"
   },
   {
@@ -60,7 +60,7 @@ export const brochuresData = [
     title: "SoLJG Placement Brochure 2025",
     school: "School of Law, Justice and Governance",
     year: "2025",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/Brochure-SOLJG-GBU-2025.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1392l9yxhfSHzwqK2wazoDjYDKsSXEt64/view",
     bgGradient: "from-amber-600 to-orange-700"
   },
   {
@@ -68,7 +68,7 @@ export const brochuresData = [
     title: "SoBT Placement Brochure",
     school: "School of Biotechnology",
     year: "2023-24",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/Placement/SOBT_12April2023.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1V6snjtCdM_dG978M2qXJx_mjNxqTfUZT/view",
     bgGradient: "from-rose-600 to-pink-700"
   },
   {
@@ -76,7 +76,7 @@ export const brochuresData = [
     title: "Food Processing & Tech Brochure",
     school: "Dept. of Food Processing & Technology",
     year: "2024",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/Placement/PlacementBroch_DeptFood_Jan2024.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1m-4I5NpPI6F5ySNCw0XkzN23IMNZ4qrg/view",
     bgGradient: "from-orange-500 to-amber-600"
   },
   {
@@ -84,7 +84,7 @@ export const brochuresData = [
     title: "MSW Placement Brochure",
     school: "School of Humanities & Social Sciences (SoHSS)",
     year: "2024",
-    pdfUrl: "https://www.gbu.ac.in/content/placement/PlacementBrochure_MSW.pdf",
+    pdfUrl: "https://drive.google.com/file/d/1snx07z1ea0rQOnAWehwitJrsjMQpfcs8/view",
     bgGradient: "from-violet-600 to-purple-800"
   }
 ];

@@ -100,7 +100,7 @@ export const clubsData = [
       meetingFrequency: 'Practice sessions 3 days a week at Sports Complex Dance Studio'
     },
     team: {
-      facultyCoordinator: { name: 'Dr. Sumitra Huidrom', role: 'Faculty Advisor', department: 'SoVS' },
+      facultyCoordinator: { name: 'Dr. Sumitra Huidrom', role: 'Faculty Advisor', department: 'SoVSAS' },
       president: { name: 'Ananya Verma', role: 'Dance President', department: 'SOM, 3rd Year' }
     },
     events: [
@@ -333,7 +333,7 @@ export const clubsData = [
     },
     team: {
       facultyCoordinator: { name: 'Dr. Jitendra Rathore', role: 'Faculty Advisor', department: 'Buddhist Studies' },
-      president: { name: 'Anupam Tiwari', role: 'Secretary', department: 'SOVS, 3rd Year' }
+      president: { name: 'Anupam Tiwari', role: 'Secretary', department: 'SoVSAS, 3rd Year' }
     },
     events: [
       { id: 'ym1', title: 'International Yoga Day Celebration', date: 'June 21', description: 'Mass yoga session at Meditation Complex.' }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import {
-  allowedRoleForPath,
+  allowedRolesForPath,
+  clearPortalSession,
   getPortalSession,
   getRoleHomeRoute,
   isTokenExpired,
@@ -23,6 +24,9 @@ const ProtectedPortalRoute = ({ children }) => {
 
     let cancelled = false;
     refreshAccessToken().then((token) => {
+      // Drop a session that cannot be renewed, otherwise the login page would
+      // treat it as signed in and bounce straight back here.
+      if (!token) clearPortalSession();
       if (!cancelled) setRecovery(token ? "idle" : "failed");
     });
 
@@ -49,8 +53,8 @@ const ProtectedPortalRoute = ({ children }) => {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
 
-  const requiredRole = allowedRoleForPath(location.pathname);
-  if (requiredRole && session?.user?.role !== requiredRole) {
+  const allowedRoles = allowedRolesForPath(location.pathname);
+  if (allowedRoles && !allowedRoles.includes(session?.user?.role)) {
     return <Navigate to={getRoleHomeRoute(session?.user?.role)} replace />;
   }
 

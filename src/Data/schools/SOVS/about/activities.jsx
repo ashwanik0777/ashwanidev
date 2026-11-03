@@ -5,7 +5,7 @@
 export const activitiesData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Activities & Events — SOVS",
+  heading: "Activities & Events — SoVSAS",
   subheading:
     "Seminars, workshops, expert lectures, and academic events at the School of Vocational Studies & Applied Sciences.",
   activities: [

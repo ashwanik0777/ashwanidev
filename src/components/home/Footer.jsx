@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Facebook,
   Instagram,
@@ -7,9 +7,46 @@ import {
   Twitter,
   Linkedin,
   Youtube,
+  Eye,
 } from "lucide-react";
+import { trackVisitor } from "../../services/visitorService";
+import { trackPageVisit } from "../../services/analyticsService";
+import { subscribeToNewsletter } from "../../services/subscriberService";
 
 const Footer = () => {
+  const [visitorCount, setVisitorCount] = useState(0);
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState({ loading: false, message: "", type: "" });
+  const { pathname } = useLocation();
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribeStatus({ loading: true, message: "", type: "" });
+    try {
+      await subscribeToNewsletter(email);
+      setSubscribeStatus({ loading: false, message: "Successfully subscribed!", type: "success" });
+      setEmail("");
+      setTimeout(() => setSubscribeStatus({ loading: false, message: "", type: "" }), 3000);
+    } catch (err) {
+      setSubscribeStatus({ 
+        loading: false, 
+        message: err.response?.data?.errors?.[0]?.message || "Subscription failed. Try again.", 
+        type: "error" 
+      });
+    }
+  };
+  // Track unique visitor once on mount
+  useEffect(() => {
+    trackVisitor().then((count) => {
+      if (count > 0) setVisitorCount(count);
+    });
+  }, []);
+
+  // Track page visit on every navigation (SPA route change)
+  useEffect(() => {
+    trackPageVisit(pathname, document.referrer);
+  }, [pathname]);
   return (
     <footer
       className="bg-[#0e1626] text-white px-4 sm:px-8 md:px-16 lg:px-20 py-8 sm:py-12"
@@ -225,29 +262,50 @@ const Footer = () => {
             >
               Subscribe to Newsletter
             </label>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                id="newsletter-email"
-                type="email"
-                placeholder="Your email"
-                className="w-full px-3 py-2 text-white bg-[#1a202c] rounded-l-md outline-none focus:ring-2 focus:ring-orange-500"
-                required
-                aria-label="Email address"
-              />
-              <button
-                type="submit"
-                className="bg-orange-600 text-white px-4 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
-              >
-                Subscribe
-              </button>
+            <form className="flex flex-col gap-2" onSubmit={handleSubscribe}>
+              <div className="flex">
+                <input
+                  id="newsletter-email"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2 text-white bg-[#1a202c] rounded-l-md outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-50"
+                  required
+                  disabled={subscribeStatus.loading}
+                  aria-label="Email address"
+                />
+                <button
+                  type="submit"
+                  disabled={subscribeStatus.loading}
+                  className="bg-orange-600 text-white px-4 rounded-r-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-75 whitespace-nowrap transition-colors"
+                >
+                  {subscribeStatus.loading ? "Wait..." : "Subscribe"}
+                </button>
+              </div>
+              {subscribeStatus.message && (
+                <span className={`text-xs ${subscribeStatus.type === "success" ? "text-emerald-400" : "text-rose-400"}`}>
+                  {subscribeStatus.message}
+                </span>
+              )}
             </form>
           </div>
         </section>
       </div>
 
       {/* Bottom Line */}
-      <div className="mt-6 border-t border-gray-700 pt-4 text-sm text-gray-400 flex flex-col md:flex-row justify-between">
+      <div className="mt-6 border-t border-gray-700 pt-4 text-sm text-gray-400 flex flex-col md:flex-row justify-between items-center gap-3">
         <p>Copyright © 2026 GBU | All Rights Reserved</p>
+
+        {/* Unique Visitor Counter */}
+        {visitorCount > 0 && (
+          <div className="flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-gray-700 rounded-full text-xs text-gray-400 select-none" title="Unique Visitors">
+            <Eye className="w-3.5 h-3.5 text-blue-400" />
+            <span className="font-semibold text-gray-300">{visitorCount.toLocaleString("en-IN")}</span>
+            <span className="hidden sm:inline">Visitors</span>
+          </div>
+        )}
+
         <div>
           <p>
             Designed and developed by{" "}

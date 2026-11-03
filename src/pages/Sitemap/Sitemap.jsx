@@ -150,11 +150,11 @@ const sitemapAbout = [
   },
   {
     title: "Announcements",
-    path: "/announcements/news-notifications",
+    path: "/announcements/news",
     icon: Calendar,
     children: [
-      { title: "News & Notifications", path: "/announcements/news-notifications" },
-      { title: "Event Calendar", path: "/announcements/event-calendar" },
+      { title: "News & Notifications", path: "/announcements/news" },
+      { title: "Event Calendar", path: "/announcements/event" },
       { title: "Notices Board", path: "/announcements/notices" },
       { title: "Media & Press Gallery", path: "/announcements/media-gallery" },
       { title: "University Newsletter", path: "/announcements/newsletter" }

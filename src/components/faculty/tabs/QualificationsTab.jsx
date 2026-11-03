@@ -47,14 +47,76 @@ export const QualificationsTab = ({ profile }) => {
   const qualifications = asArray(tabData.qualifications);
   const experience = asArray(tabData.experience);
 
+  const getSortValue = (dateStr) => {
+    if (!dateStr) return 0;
+    const str = String(dateStr).toLowerCase();
+    if (str === 'present' || str === 'current' || str === 'ongoing') return 999999;
+    const parts = str.split('-');
+    const year = parseInt(parts[0], 10) || 0;
+    const month = parts[1] ? parseInt(parts[1], 10) : 0;
+    return year * 100 + month;
+  };
+
+  const sortedQualifications = [...qualifications].sort((a, b) => {
+    const yearA = parseInt(a.year, 10) || 0;
+    const yearB = parseInt(b.year, 10) || 0;
+    return yearB - yearA;
+  });
+
+  const sortedExperience = [...experience].sort((a, b) => {
+    const toA = getSortValue(a.to);
+    const toB = getSortValue(b.to);
+    if (toA !== toB) return toB - toA;
+    const fromA = getSortValue(a.from);
+    const fromB = getSortValue(b.from);
+    return fromB - fromA;
+  });
+
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
 
-  // "3 Years", or "2021 - Present" when only from/to are filled in.
+  // Calculate and display period from from/to fields (Year/Month format: "2021-06" or just "2021")
   const formatPeriod = (exp) => {
-    const duration = asText(exp.duration);
-    if (duration) return duration;
-    const range = [asText(exp.from), asText(exp.to)].filter(Boolean).join(' - ');
-    return range || '—';
+    const fromStr = asText(exp.from);
+    const toStr = asText(exp.to);
+    if (!fromStr) return '—';
+
+    // Parse year and month from "YYYY-MM" or "YYYY"
+    const parseYearMonth = (str) => {
+      if (!str) return null;
+      const parts = str.split('-');
+      return { year: parseInt(parts[0]) || 0, month: parseInt(parts[1]) || 1 };
+    };
+
+    const from = parseYearMonth(fromStr);
+    if (!from || from.year === 0) return fromStr;
+
+    const isPresent = toStr && (toStr.toLowerCase() === 'present' || toStr.toLowerCase() === 'current');
+    const to = isPresent
+      ? { year: new Date().getFullYear(), month: new Date().getMonth() + 1 }
+      : parseYearMonth(toStr);
+
+    // Format month name
+    const monthName = (m) => {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[(m - 1)] || '';
+    };
+
+    const fromLabel = fromStr.includes('-') ? `${monthName(from.month)} ${from.year}` : `${from.year}`;
+    const toLabel = isPresent ? 'Present' : (to ? (toStr.includes('-') ? `${monthName(to.month)} ${to.year}` : `${to.year}`) : '');
+
+    // Calculate duration
+    let durationText = '';
+    if (to && from.year > 0 && to.year >= from.year) {
+      let totalMonths = (to.year - from.year) * 12 + (to.month - from.month);
+      if (totalMonths < 0) totalMonths = 0;
+      const years = Math.floor(totalMonths / 12);
+      const months = totalMonths % 12;
+      if (years > 0 && months > 0) durationText = ` (${years} yr ${months} mo)`;
+      else if (years > 0) durationText = ` (${years} yr)`;
+      else if (months > 0) durationText = ` (${months} mo)`;
+    }
+
+    return `${fromLabel} - ${toLabel}${durationText}`;
   };
 
   return (
@@ -69,7 +131,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {qualifications?.map((qual, index) => (
+            {sortedQualifications?.map((qual, index) => (
               <div key={index} className="relative pl-8 pb-6 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
                 <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-sm border border-gray-100 border-solid hover:shadow-md transition-shadow">
@@ -120,7 +182,7 @@ export const QualificationsTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {experience?.map((exp, index) => (
+            {sortedExperience?.map((exp, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div>

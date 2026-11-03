@@ -83,7 +83,6 @@ const ClubTeam = ({ club }) => {
             <Sparkles className="w-8 h-8 text-blue-600" />
             Meet Our Leadership & Team
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Faculty Coordinator Section */}

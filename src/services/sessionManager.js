@@ -77,6 +77,23 @@ export const getValidAccessToken = async () => {
   return refreshAccessToken();
 };
 
+/**
+ * User-initiated logout: forget the session locally and revoke its refresh
+ * token on the server, so a copied token cannot mint new access tokens.
+ * Revocation is best effort — the local session is gone either way.
+ */
+export const logoutPortalSession = async () => {
+  const session = getPortalSession();
+  clearPortalSession();
+  if (!session?.refreshToken) return;
+
+  try {
+    await refreshClient.post("/logout", { refreshToken: session.refreshToken });
+  } catch {
+    // Already revoked/expired, or the network is down — nothing left to do.
+  }
+};
+
 /** Drop the dead session and send the user back to the login screen. */
 export const handleSessionExpired = () => {
   clearPortalSession();

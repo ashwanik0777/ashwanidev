@@ -12,7 +12,7 @@ const Index = () => {
       bgClass: "bg-gradient-to-br from-blue-50/80 to-cyan-50/80 border border-blue-200/30",
       textColorClass: "text-blue-800",
       delay: 100,
-      navigateTo: "/news-notifications"
+      navigateTo: "/news"
     },
     {
       title: "Events Calendar",

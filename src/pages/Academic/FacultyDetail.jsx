@@ -7,6 +7,7 @@ import FacultyTabs from '../../components/faculty/FacultyTabs';
 import TabContent from '../../components/faculty/TabContent';
 import { TrendingUp, BookOpenCheck, Presentation, FolderOpen, FileText, FlaskConical, GraduationCap, Newspaper } from 'lucide-react';
 import { fetchFacultyPublicProfile } from '../../services/facultyDashboardService';
+import { hasContent } from '../../components/faculty/tabs/fieldUtils';
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -23,12 +24,34 @@ const TAB_ITEMS = [
   { id: 'other', label: 'Other' },
 ];
 
-const TAB_IDS = TAB_ITEMS.map((tab) => tab.id);
+/* The tabData sections each tab renders. A tab is hidden only when every one of
+   its sections is completely empty; Overview has no entry and always shows. */
+const TAB_SECTIONS = {
+  qualifications: ['qualifications'],
+  certifications: ['certifications'],
+  teaching: ['teaching'],
+  administration: ['administration'],
+  'research-projects': ['researchProjects', 'researchGroup'],
+  publications: ['publications', 'patents'],
+  talks: ['talks'],
+  awards: ['awards', 'socialImpact'],
+  other: ['other'],
+};
 
 const FacultyDetail = () => {
   const { id } = useParams();
   const [faculty, setFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const visibleTabs = useMemo(
+    () =>
+      TAB_ITEMS.filter((tab) => {
+        const sections = TAB_SECTIONS[tab.id];
+        if (!sections) return true;
+        return sections.some((key) => hasContent(faculty?.tabData?.[key]));
+      }),
+    [faculty],
+  );
 
   /* The active tab lives in the URL (?tab=teaching) so the browser back button
      steps through tabs instead of leaving the profile entirely, and so a tab can
@@ -36,8 +59,8 @@ const FacultyDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedTab = searchParams.get('tab');
   const activeTab = useMemo(
-    () => (TAB_IDS.includes(requestedTab) ? requestedTab : 'overview'),
-    [requestedTab],
+    () => (visibleTabs.some((tab) => tab.id === requestedTab) ? requestedTab : 'overview'),
+    [requestedTab, visibleTabs],
   );
 
   const handleTabChange = useCallback(
@@ -52,11 +75,55 @@ const FacultyDetail = () => {
     [activeTab, searchParams, setSearchParams],
   );
 
+  const calcExperienceYears = (member) => {
+    const expEntries = member?.tabData?.qualifications?.experience || [];
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    const parseExpDate = (val, defaultMonth = 1) => {
+      if (!val) return { year: 0, month: defaultMonth };
+      const s = String(val).trim();
+      const lower = s.toLowerCase();
+      if (lower === 'present' || lower === 'current') {
+        return { year: currentYear, month: currentMonth };
+      }
+      const yMatch = s.match(/\b(19\d\d|20\d\d)\b/);
+      const year = yMatch ? parseInt(yMatch[1], 10) : 0;
+      let month = defaultMonth;
+      const slashMatch = s.match(/\b(0?[1-9]|1[0-2])[\/\-](19\d\d|20\d\d)\b/);
+      if (slashMatch) {
+        month = parseInt(slashMatch[1], 10);
+      } else {
+        const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        const mIdx = monthNames.findIndex(m => lower.includes(m));
+        if (mIdx !== -1) month = mIdx + 1;
+      }
+      return { year, month };
+    };
+
+    let totalMonths = 0;
+    expEntries.forEach(exp => {
+      const from = parseExpDate(exp.from || exp.fromYear || '', 1);
+      const to = parseExpDate(exp.to || exp.toYear || '', 1);
+      if (from.year > 0 && to.year >= from.year) {
+        const months = (to.year - from.year) * 12 + (to.month - from.month);
+        if (months > 0) totalMonths += months;
+      }
+    });
+    const rawYears = Math.round(totalMonths / 12);
+    const years = (rawYears > 0 && rawYears <= 70) ? rawYears : 0;
+    const fallbackExp = Number(member?.experience_years) || Number(member?.experienceYears) || 0;
+    const safeFallback = (fallbackExp > 0 && fallbackExp <= 70) ? fallbackExp : 0;
+    const finalYears = years || safeFallback;
+    return finalYears > 0 ? `${finalYears} years` : '0 years';
+  };
+
   const normalizeFacultyProfile = (member) => ({
     ...member,
     image_url: member.image_url,
     // Used by FacultyHeader stats
-    experience: `${member.experience_years || 0} years`,
+    experience: calcExperienceYears(member),
     // Used by OverviewTab
     shortBio: member.shortBio || member.bio || 'Faculty profile is available.',
     fullBio: member.fullBio || member.bio || 'Faculty profile details are available.',
@@ -121,7 +188,7 @@ const FacultyDetail = () => {
   const summaryStats = [
     {
       icon: TrendingUp,
-      value: Array.isArray(faculty?.experience) ? faculty.experience.length : (faculty?.experienceYears || faculty?.experience || '--'),
+      value: faculty?.experience || '--',
       label: 'Experience',
       color: 'text-green-600',
       bgColor: 'bg-green-100'
@@ -153,7 +220,7 @@ const FacultyDetail = () => {
     <SearchableWrapper>
       <SimpleLayout>
         <FacultyHeader faculty={faculty} />
-        <FacultyTabs tabItems={TAB_ITEMS} activeTab={activeTab} onTabChange={handleTabChange} />
+        <FacultyTabs tabItems={visibleTabs}activeTab={activeTab} onTabChange={handleTabChange} />
         <TabContent activeTab={activeTab} profile={faculty} />
       </SimpleLayout>
     </SearchableWrapper>

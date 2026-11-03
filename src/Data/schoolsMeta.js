@@ -97,6 +97,8 @@ export const SCHOOLS_META = [
   },
   {
     code: "SOVS",
+    // Abbreviation shown to users; `code` stays "SOVS" because URLs, data folders and the API use it
+    displayCode: "SoVSAS",
     name: "School of Vocational Studies & Applied Sciences",
     shortName: "Vocational",
     slug: "sovs",
@@ -115,6 +117,13 @@ export const getSchoolByCode = (code) =>
   SCHOOLS_META.find(
     (school) => school.code.toLowerCase() === String(code || "").toLowerCase()
   ) || null;
+
+/** Abbreviation to show users (e.g. "SoVSAS" for SOVS); falls back to the school code. */
+export const getSchoolDisplayCode = (code) => {
+  if (!code) return "";
+  const school = resolveSchool(code);
+  return school?.displayCode || school?.code || String(code).toUpperCase();
+};
 
 export const getSchoolBySlug = (slug) =>
   SCHOOLS_META.find(

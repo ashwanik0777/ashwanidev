@@ -1,7 +1,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOVS",
   schoolName: "School of Vocational Studies & Applied Sciences",
-  heading: "Board of Studies | SOVSAS",
+  heading: "Board of Studies | SoVSAS",
   subheading: "Academic council and curriculum oversight for School of Vocational Studies & Applied Sciences.",
   dean: {
     name: "Prof. Chander Kumar Singh",

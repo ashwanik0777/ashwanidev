@@ -191,7 +191,7 @@ const EventDetail = () => {
           <h1 className="text-3xl font-extrabold text-blue-700 mb-6">
             Event not found
           </h1>
-          <Link to="/announcements/event-calendar">
+          <Link to="/announcements/event">
             <Button>Back to Events</Button>
           </Link>
         </div>
@@ -250,7 +250,7 @@ const EventDetail = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="container mx-auto px-2 md:px-8 pt-2 pb-10">
         <div className="mb-4">
-          <Link to="/announcements/event-calendar">
+          <Link to="/announcements/event">
             <Button variant="outline" size="sm">
               <ArrowLeft size={16} className="mr-2" />
               Back to Events

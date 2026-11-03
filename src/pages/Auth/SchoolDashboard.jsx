@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   Save,
   RotateCcw,
@@ -19,7 +19,10 @@ import {
   AlertTriangle,
   X,
   ClipboardList,
+  CheckCircle,
 } from "lucide-react";
+import { RefreshCw } from "lucide-react";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
@@ -29,14 +32,8 @@ import {
   adminCreateFacultyProfile,
   adminUpdateFacultyProfile,
   adminDeleteFacultyProfile,
-  adminGenerateFacultyPassword
 } from "../../services/facultyDashboardService";
-import { clearPortalSession } from "../../utils/portalSession";
-import {
-  listFacultyRegistrationRequests,
-  approveFacultyRegistration,
-  rejectFacultyRegistration,
-} from "../../services/facultyRegistrationService";
+import { logoutPortalSession } from "../../services/sessionManager";
 import {
   SCHOOLS_META,
   getSchoolByApiParam,
@@ -60,16 +57,15 @@ const getRegistrationStatus = () => ({ active: false, reason: "", customMessage:
 const REASON_OPTIONS = [];
 
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
+import ImageUploadField from "../../components/ui/ImageUploadField";
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
 const ACTIVE_TABS = [
   { id: "home", label: "Home", icon: Home },
   { id: "faculty-management", label: "Faculty Management", icon: Users },
-  { id: "faculty-requests", label: "Faculty Requests", icon: UserPlus },
   { id: "events", label: "Events", icon: CalendarDays },
   { id: "news", label: "News", icon: Newspaper },
-  { id: "newsletters", label: "Newsletters", icon: Newspaper },
   { id: "notices", label: "Notices", icon: Bell },
   { id: "event-gallery", label: "Event Gallery", icon: Images },
   { id: "clubs", label: "Clubs & Societies", icon: Users },
@@ -85,7 +81,7 @@ const INACTIVE_TABS = [
 ];
 
 const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
+  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20";
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 
@@ -201,34 +197,6 @@ const NEWS_TEMPLATE = {
   status: "published",
 };
 
-const NEWSLETTERS_FIELDS = [
-  { key: "title", label: "Title", required: true },
-  { key: "date", label: "Date", type: "date", required: true },
-  { key: "issueNumber", label: "Issue Number (e.g. Vol. 1, Issue 2)", required: true },
-  { key: "category", label: "Category", type: "select", options: ["Monthly Digest", "Special Edition", "Annual Report", "Academic Update", "Student Newsletter", "Other"], required: true },
-  { key: "views", label: "Views Count", type: "number" },
-  { key: "coverImage", label: "Cover Image URL", required: true },
-  { key: "imageLink", label: "Image Click Link" },
-  { key: "pdfLink", label: "PDF Link / URL", required: true },
-  { key: "excerpt", label: "Excerpt (Short Summary)", type: "textarea", required: true },
-  { key: "content", label: "Content (Full Details)", type: "textarea", required: true },
-  { key: "isPublished", label: "Published", type: "boolean", required: true },
-];
-
-const NEWSLETTERS_TEMPLATE = {
-  title: "",
-  date: "",
-  category: "Monthly Digest",
-  issueNumber: "",
-  views: 0,
-  coverImage: "",
-  imageLink: "",
-  pdfLink: "",
-  excerpt: "",
-  content: "",
-  isPublished: true,
-};
-
 const GALLERY_FIELDS = [
   { key: "title", label: "Gallery Title", required: true },
   { key: "eventDate", label: "Event Date", type: "date", required: true },
@@ -255,15 +223,14 @@ const FIELDS_CONFIG = {
   notices: NOTICES_FIELDS,
   news: NEWS_FIELDS,
   events: EVENTS_FIELDS,
-  newsletters: NEWSLETTERS_FIELDS,
   eventGallery: GALLERY_FIELDS,
 };
 
 const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">
+    <span className="mb-1 block text-sm font-medium text-slate-700">
       {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
-    </label>
+    </span>
     {children}
   </div>
 );
@@ -283,13 +250,38 @@ const toList = (value) => {
 const SchoolDashboard = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA));
-  const [activeTab, setActiveTab] = useState("home");
-  const [message, setMessage] = useState("");
+  const dataRef = React.useRef(data);
+  React.useEffect(() => { dataRef.current = data; }, [data]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeTab = searchParams.get("tab") || "home";
+  const setActiveTab = (tabId) => {
+    setSearchParams({ tab: tabId }, { replace: true });
+  };
+  const [toast, setToast] = useState(null);
+  const toastTimerRef = React.useRef(null);
+
+  const setMessage = useCallback((text) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    if (!text) { setToast(null); return; }
+    const isError = /fail|error|expired|cannot|too large/i.test(text);
+    setToast({ text, type: isError ? "error" : "success", key: Date.now() });
+  }, []);
+
+  useEffect(() => {
+    if (!toast) return;
+    toastTimerRef.current = setTimeout(() => setToast(null), 5500);
+    return () => clearTimeout(toastTimerRef.current);
+  }, [toast]);
   const [facultyRefreshKey, setFacultyRefreshKey] = useState(0);
   const [collectionEditors, setCollectionEditors] = useState({});
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [facultyProfiles, setFacultyProfiles] = useState([]);
+  const [facultySearchTerm, setFacultySearchTerm] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
+  const [announcementActions, setAnnouncementActions] = useState(null);
+  const [activeClubTab, setActiveClubTab] = useState("basic");
+
   const [schoolId, setSchoolId] = useState(null);
   // Content as last read from the backend, so a save never drops keys this
   // dashboard does not edit.
@@ -361,10 +353,10 @@ const SchoolDashboard = () => {
             bannerImage: c.bannerImage || "",
             address: c.address || "",
             schoolDescription: school.overview || "",
+            counts: school.counts || {},
             events: c.events || [],
             news: c.news || [],
             notices: c.notices || [],
-            newsletters: c.newsletters || [],
             eventGallery: c.eventGallery || [],
             clubs: c.clubs || [],
             tabContent: c.tabContent || deepClone(DEFAULT_SCHOOL_DASHBOARD_DATA.tabContent),
@@ -465,13 +457,58 @@ const SchoolDashboard = () => {
   const summary = useMemo(
     () => [
       { label: "Faculty", value: facultyProfiles.length },
-      { label: "Events", value: data.events?.length || 0 },
-      { label: "News", value: data.news?.length || 0 },
-      { label: "Newsletters", value: data.newsletters?.length || 0 },
-      { label: "Notices", value: data.notices?.length || 0 },
+      { label: "Events", value: data.counts?.events || 0 },
+      { label: "News", value: data.counts?.news || 0 },
+      { label: "Notices", value: data.counts?.notices || 0 },
     ],
-    [facultyProfiles.length, data.events, data.news, data.newsletters, data.notices]
+    [facultyProfiles.length, data.counts]
   );
+
+  const getHeaderContent = () => {
+    switch (activeTab) {
+      case "home":
+        return {
+          title: data.schoolName || "School Dashboard",
+          desc: "Manage your school's content, events, news, notices & more. All changes are saved per-school."
+        };
+      case "faculty-management":
+        return {
+          title: "Faculty Management",
+          desc: "Manage active faculty profiles, roles, and contact information."
+        };
+      case "events":
+        return {
+          title: "Events Management",
+          desc: "Create and update upcoming and past events for your school."
+        };
+      case "news":
+        return {
+          title: "News Management",
+          desc: "Publish and manage school news articles and announcements."
+        };
+      case "notices":
+        return {
+          title: "Notices & Circulars",
+          desc: "Post official notices, circulars, and important announcements."
+        };
+      case "event-gallery":
+        return {
+          title: "Event Gallery",
+          desc: "Manage photo galleries for various school events and activities."
+        };
+      case "clubs":
+        return {
+          title: "Clubs & Societies",
+          desc: "Manage student clubs, their coordinators, and club activities."
+        };
+      default:
+        return {
+          title: "Dashboard",
+          desc: "Manage your school's resources and information."
+        };
+    }
+  };
+  const header = getHeaderContent();
 
   const updateField = (key, value) => {
     setData((prev) => ({ ...prev, [key]: value }));
@@ -482,9 +519,9 @@ const SchoolDashboard = () => {
     setData((prev) => ({
       ...prev,
       tabContent: {
-        ...prev.tabContent,
+        ...(prev.tabContent || {}),
         [section]: {
-          ...prev.tabContent[section],
+          ...(prev.tabContent?.[section] || {}),
           [key]: value,
         },
       },
@@ -498,28 +535,28 @@ const SchoolDashboard = () => {
       return;
     }
     setIsSaving(true);
+    const currentData = dataRef.current;
     try {
       const { updateSchool } = await import("../../services/schoolsService");
       const updated = await updateSchool(schoolId, {
-        name: data.schoolName,
-        overview: data.schoolDescription || "",
+        name: currentData.schoolName,
+        overview: currentData.schoolDescription || "",
         // Overlay onto the stored content so keys this dashboard does not edit
         // (e.g. anything added by the admin portal) survive the save.
         content: {
           ...storedSchoolContent,
-          deanName: data.deanName || "",
-          email: data.email || "",
-          phone: data.phone || "",
-          websiteUrl: data.websiteUrl || "",
-          bannerImage: data.bannerImage || "",
-          address: data.address || "",
-          events: data.events || [],
-          news: data.news || [],
-          notices: data.notices || [],
-          newsletters: data.newsletters || [],
-          eventGallery: data.eventGallery || [],
-          tabContent: data.tabContent || {},
-          clubs: data.clubs || [],
+          deanName: currentData.deanName || "",
+          email: currentData.email || "",
+          phone: currentData.phone || "",
+          websiteUrl: currentData.websiteUrl || "",
+          bannerImage: currentData.bannerImage || "",
+          address: currentData.address || "",
+          events: currentData.events || [],
+          news: currentData.news || [],
+          notices: currentData.notices || [],
+          eventGallery: currentData.eventGallery || [],
+          tabContent: currentData.tabContent || {},
+          clubs: currentData.clubs || [],
         },
         is_active: true,
       });
@@ -555,7 +592,7 @@ const SchoolDashboard = () => {
         });
         setFacultyRefreshKey((prev) => prev + 1);
         if (result?.loginAccount) {
-          setMessage(`Faculty "${faculty.name}" created! Login — Username: ${result.loginAccount.username} | Password: ${result.loginAccount.password}`);
+          setMessage(`Faculty "${faculty.name}" created! Credentials have been sent to their email.`);
         } else {
           setMessage(`Faculty profile created: ${faculty.name}`);
         }
@@ -570,6 +607,18 @@ const SchoolDashboard = () => {
     }
   };
 
+  const confirmDeleteFacultyProfile = (facultyId) => {
+    setConfirmDialog({
+      isOpen: true,
+      title: "Delete Faculty Profile",
+      message: "Are you sure you want to delete this faculty profile? This action cannot be undone.",
+      onConfirm: () => {
+        setConfirmDialog({ isOpen: false });
+        deleteFacultyProfile(facultyId);
+      }
+    });
+  };
+
   const deleteFacultyProfile = async (facultyId) => {
     try {
       await adminDeleteFacultyProfile(facultyId);
@@ -582,15 +631,6 @@ const SchoolDashboard = () => {
     }
   };
 
-  const generateFacultyPassword = async (facultyId) => {
-    try {
-      const result = await adminGenerateFacultyPassword(facultyId);
-      setMessage(`Password generated successfully: ${result?.password || "Check Email"}`);
-    } catch (err) {
-      console.error(err);
-      setMessage(`Failed to generate password: ${err?.response?.data?.errors?.[0]?.message || err?.response?.data?.message || err.message}`);
-    }
-  };
 
   const addFacultyProfile = () => {
     const schoolMeta = resolveSchool(data.schoolCode) || getSchoolByName(data.schoolName);
@@ -620,6 +660,7 @@ const SchoolDashboard = () => {
       ...prev,
       [listKey]: { index: null, form: { ...template, id: `${listKey}-${Date.now()}` } },
     }));
+    if (listKey === "clubs") setActiveClubTab("basic");
   };
 
   const openCollectionEdit = (listKey, index, item) => {
@@ -647,9 +688,13 @@ const SchoolDashboard = () => {
         instagram: item.socialMedia?.instagram || item.instagram || "",
         linkedin: item.socialMedia?.linkedin || item.linkedin || "",
         youtube: item.socialMedia?.youtube || item.youtube || "",
-        objectives: Array.isArray(item.objectives) ? item.objectives.join(", ") : (item.objectives || ""),
-        achievements: Array.isArray(item.achievements) ? item.achievements.join(", ") : (item.achievements || "")
+        objectives: Array.isArray(item.objectives) ? item.objectives : (typeof item.objectives === "string" ? item.objectives.split(",").map(i => i.trim()).filter(Boolean) : []),
+        achievements: Array.isArray(item.achievements) ? item.achievements : (typeof item.achievements === "string" ? item.achievements.split(",").map(i => i.trim()).filter(Boolean) : []),
+        policies: item.policies || null,
+        events: item.events || [],
+        reports: item.reports || [],
       };
+      setActiveClubTab("basic");
       setCollectionEditors((prev) => ({
         ...prev,
         [listKey]: { index, form: flatClub },
@@ -722,16 +767,33 @@ const SchoolDashboard = () => {
     }
 
     if (listKey === "clubs") {
-      const objectivesArray = typeof nextForm.objectives === "string" 
-        ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
-        : (nextForm.objectives || []);
-      const achievementsArray = typeof nextForm.achievements === "string" 
-        ? nextForm.achievements.split(",").map(x => x.trim()).filter(Boolean) 
-        : (nextForm.achievements || []);
+      if (!nextForm.name?.trim()) {
+        setToast({ type: "error", message: "Club Name is required" });
+        return;
+      }
+      if (!nextForm.description?.trim()) {
+        setToast({ type: "error", message: "Club Description is required" });
+        return;
+      }
+      if (!nextForm.logo?.trim()) {
+        setToast({ type: "error", message: "Club Logo is required" });
+        return;
+      }
+      if (!nextForm.banner?.trim()) {
+        setToast({ type: "error", message: "Banner Image is required" });
+        return;
+      }
+
+      const objectivesArray = Array.isArray(nextForm.objectives)
+        ? nextForm.objectives.filter(x => String(x).trim() !== "")
+        : (typeof nextForm.objectives === "string" ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) : []);
+      const achievementsArray = Array.isArray(nextForm.achievements)
+        ? nextForm.achievements.filter(x => String(x).trim() !== "")
+        : (typeof nextForm.achievements === "string" ? nextForm.achievements.split(",").map(x => x.trim()).filter(Boolean) : []);
 
       nextForm = {
         id: nextForm.id || nextForm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-        name: nextForm.name || "",
+        name: nextForm.name.trim(),
         tagline: nextForm.tagline || "",
         category: nextForm.category || "Technical",
         logo: nextForm.logo || "",
@@ -774,7 +836,12 @@ const SchoolDashboard = () => {
           linkedin: nextForm.linkedin || "",
           youtube: nextForm.youtube || ""
         },
-        policies: {
+        policies: nextForm.policies ? {
+          ...nextForm.policies,
+          codeOfConduct: (nextForm.policies.codeOfConduct || []).filter(x => String(x).trim() !== ""),
+          eligibility: (nextForm.policies.eligibility || []).filter(x => String(x).trim() !== ""),
+          responsibilities: (nextForm.policies.responsibilities || []).filter(x => String(x).trim() !== "")
+        } : {
           codeOfConduct: [
             "Respect all members regardless of skill level",
             "Contribute positively to club activities",
@@ -793,8 +860,8 @@ const SchoolDashboard = () => {
           ],
           meetingFrequency: "Weekly sessions as scheduled by coordinator"
         },
-        events: [],
-        reports: []
+        events: nextForm.events || [],
+        reports: nextForm.reports || []
       };
     }
 
@@ -838,7 +905,26 @@ const SchoolDashboard = () => {
       ...prev,
       [listKey]: { index: null, form: null },
     }));
+
+    // For clubs, auto-save to backend so changes persist immediately
+    if (listKey === "clubs") {
+      // Use setTimeout to let setData finish first, then trigger backend save
+      setTimeout(() => saveAll(), 100);
+    }
+
     setMessage(`${listKey} item saved.`);
+  };
+
+  const confirmDeleteCollectionItem = (listKey, index) => {
+    setConfirmDialog({
+      isOpen: true,
+      title: "Delete Item",
+      message: "Are you sure you want to delete this item? This action cannot be undone.",
+      onConfirm: () => {
+        setConfirmDialog({ isOpen: false });
+        deleteCollectionItem(listKey, index);
+      }
+    });
   };
 
   const deleteCollectionItem = (listKey, index) => {
@@ -853,24 +939,16 @@ const SchoolDashboard = () => {
       return prev;
     });
 
+    // For clubs, auto-save to backend so deletion persists immediately
+    if (listKey === "clubs") {
+      setTimeout(() => saveAll(), 100);
+    }
+
     setMessage(`${listKey} item deleted.`);
   };
 
   const renderCollectionEditor = (listKey, title, fields, newItemTemplate) => (
     <div className={cardClass}>
-      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">{title}</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage, add, and update school listings.</p>
-        </div>
-        <button
-          type="button"
-          onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
-        >
-          <Plus className="h-4 w-4" /> Add New
-        </button>
-      </div>
 
       <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
         {(data[listKey] || []).map((item, index) => {
@@ -893,7 +971,7 @@ const SchoolDashboard = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => deleteCollectionItem(listKey, index)}
+                    onClick={() => confirmDeleteCollectionItem(listKey, index)}
                     className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
                   >
                     <Trash2 className="h-3 w-3 text-rose-500" /> Delete
@@ -982,7 +1060,7 @@ const SchoolDashboard = () => {
               <button
                 type="button"
                 onClick={() => saveCollectionForm(listKey)}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Item
               </button>
@@ -993,63 +1071,74 @@ const SchoolDashboard = () => {
     </div>
   );
 
-  const renderFacultyEditor = () => (
+  const renderFacultyEditor = () => {
+    const filteredFaculty = facultyProfiles.filter(f => 
+      !facultySearchTerm || 
+      f.name?.toLowerCase().includes(facultySearchTerm.toLowerCase()) || 
+      f.designation?.toLowerCase().includes(facultySearchTerm.toLowerCase())
+    );
+
+    return (
     <div className={cardClass}>
-      <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-4">
-        <div>
-          <h2 className="text-lg font-bold text-slate-950">Faculty Management</h2>
-          <p className="text-xs text-slate-500 mt-1">Manage active faculty profiles for your school.</p>
+      <div className="mb-4 border-b border-slate-100 pb-4">
+        <div className="relative w-full sm:max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search faculty..."
+              value={facultySearchTerm}
+              onChange={(e) => setFacultySearchTerm(e.target.value)}
+              className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-shadow bg-slate-50 hover:bg-white focus:bg-white"
+            />
+            {facultySearchTerm && (
+              <button
+                type="button"
+                onClick={() => setFacultySearchTerm("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
         </div>
-        <button
-          type="button"
-          onClick={addFacultyProfile}
-          className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
-        >
-          <Plus className="h-4 w-4" /> Add New
-        </button>
       </div>
 
-      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
-        {facultyProfiles.map((faculty, index) => (
-          <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
-            <div className="flex items-center justify-between gap-3">
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
-                <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
-              </div>
-
-              <div className="flex items-center gap-1.5 flex-shrink-0">
-                <button
-                  type="button"
-                  onClick={() => generateFacultyPassword(faculty.id)}
-                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
-                  title="Generate Initial Login Password"
-                >
-                  <Lock className="h-3 w-3 text-slate-500" /> Gen Pass
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
-                  className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
-                >
-                  <Pencil className="h-3 w-3 text-slate-500" /> Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => deleteFacultyProfile(faculty.id)}
-                  className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
-                >
-                  <Trash2 className="h-3 w-3 text-rose-500" /> Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {facultyProfiles.length === 0 && (
+      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
+        {facultyProfiles.length === 0 ? (
           <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
             No faculty profiles found. Click "Add New" to create one.
           </div>
+        ) : filteredFaculty.length === 0 ? (
+          <div className="py-8 text-center text-sm text-slate-500">
+            No faculty found matching your search.
+          </div>
+        ) : (
+          filteredFaculty.map((faculty, index) => (
+            <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
+                  <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
+                  >
+                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => confirmDeleteFacultyProfile(faculty.id)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
+                  >
+                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
         )}
       </div>
 
@@ -1118,7 +1207,28 @@ const SchoolDashboard = () => {
                 </select>
               </Field>
               <Field label="Email" required><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
-              <Field label="Phone"><input className={inputClass} value={facultyEditor.form.phone || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: e.target.value } }))} /></Field>
+              <Field label="Phone">
+                <input
+                  className={inputClass}
+                  value={facultyEditor.form.phone || ""}
+                  maxLength={10}
+                  onChange={(e) => {
+                    const numericVal = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: numericVal } }));
+                  }}
+                  placeholder="10-digit mobile number"
+                />
+              </Field>
+              <div className="md:col-span-2">
+                <ImageUploadField
+                  label="Profile Photo"
+                  value={facultyEditor.form.image_url || ""}
+                  onChange={(url) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, image_url: url } }))}
+                  aspectRatio={3 / 4}
+                  recommendedSize="300×400"
+                  folder={`gbu-website/${mySchoolCode || "general"}/faculty`}
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
@@ -1135,7 +1245,7 @@ const SchoolDashboard = () => {
                   saveFacultyProfile(facultyEditor.form);
                   setFacultyEditor({ index: null, form: null });
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition"
               >
                 Save Faculty
               </button>
@@ -1145,162 +1255,397 @@ const SchoolDashboard = () => {
       )}
     </div>
   );
-
-  /* ── Faculty Registration Requests handlers and render ── */
-  const handleApproveRequest = async (reqId) => {
-    setRegActionLoading(`approve-${reqId}`);
-    try {
-      await approveFacultyRegistration(reqId);
-      setMessage("Faculty registration approved. Login credentials sent to their email.");
-      setRegReloadToken((p) => p + 1);
-      setFacultyRefreshKey((p) => p + 1);
-    } catch (err) {
-      setMessage(`Approve failed: ${err?.response?.data?.message || err?.message || "Error"}`);
-    } finally {
-      setRegActionLoading("");
-    }
   };
 
-  const handleRejectRequest = async (reqId) => {
-    const reason = prompt("Enter rejection reason (optional):");
-    setRegActionLoading(`reject-${reqId}`);
-    try {
-      await rejectFacultyRegistration(reqId, reason || "");
-      setMessage("Faculty registration request rejected.");
-      setRegReloadToken((p) => p + 1);
-    } catch (err) {
-      setMessage(`Reject failed: ${err?.response?.data?.message || err?.message || "Error"}`);
-    } finally {
-      setRegActionLoading("");
-    }
+  /* ── Clubs & Societies dedicated renderer ── */
+
+  /* ── Clubs & Societies dedicated renderer ── */
+  const CLUB_CATEGORIES = ["Technical", "Cultural", "Sports", "Social", "Literary", "Other"];
+  const CATEGORY_COLORS = {
+    Technical: "bg-blue-100 text-blue-700",
+    Cultural: "bg-purple-100 text-purple-700",
+    Sports: "bg-green-100 text-green-700",
+    Social: "bg-amber-100 text-amber-700",
+    Literary: "bg-rose-100 text-rose-700",
+    Other: "bg-slate-100 text-slate-700",
   };
 
-  const renderFacultyRequestsTab = () => (
-    <div className="space-y-4">
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-3">
-          <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
-          <p className="text-sm text-slate-600">Review and approve registration requests for your school.</p>
+  const clubNewTemplate = {
+    name: "", tagline: "", category: "Technical", logo: "", banner: "",
+    memberCount: 0, facultyAdvisor: "", facultyAdvisorDept: "",
+    presidentName: "", presidentDept: "", vicePresidentName: "", vicePresidentDept: "",
+    secretaryName: "", secretaryDept: "", treasurerName: "", treasurerDept: "",
+    instagram: "", linkedin: "", youtube: "",
+    description: "", objectives: [], history: "", achievements: [],
+  };
+
+  const updateClubField = (key, value) => {
+    setCollectionEditors((prev) => ({
+      ...prev,
+      clubs: { ...prev.clubs, form: { ...prev.clubs?.form, [key]: value } },
+    }));
+  };
+
+  const renderClubsTab = () => {
+    const clubs = data.clubs || [];
+    const editor = collectionEditors.clubs;
+    const form = editor?.form;
+
+    const renderDynamicList = (label, items, onChange, maxLimit = 15, placeholder = "Enter point...") => {
+      const list = Array.isArray(items) ? items : [];
+      return (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <h5 className="text-sm font-semibold text-slate-700">{label}</h5>
+            {list.length < maxLimit && (
+              <button type="button" onClick={() => onChange([...list, ""])}
+                className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold text-slate-600 hover:bg-slate-200 transition">
+                <Plus className="h-3 w-3" /> Add Point
+              </button>
+            )}
+          </div>
+          <div className="space-y-2">
+            {list.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-2">
+                <input
+                  className={inputClass}
+                  value={item}
+                  onChange={(e) => {
+                    const next = [...list];
+                    next[idx] = e.target.value;
+                    onChange(next);
+                  }}
+                  placeholder={`${placeholder} ${idx + 1}`}
+                />
+                <button type="button" onClick={() => {
+                  const next = [...list];
+                  next.splice(idx, 1);
+                  onChange(next);
+                }} className="mt-1 flex-shrink-0 rounded-md p-1.5 text-slate-400 hover:bg-rose-50 hover:text-rose-500 transition">
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ))}
+            {list.length === 0 && (
+              <div className="text-xs text-slate-500 italic px-1">No points added. Click "Add Point" to start.</div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    return (
+      <div className={cardClass}>
+        {/* Club list */}
+        <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+          {clubs.map((club, index) => (
+            <div key={`club-${club.id || index}`} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0">
+                  {club.logo ? (
+                    <img src={club.logo} alt="" className="h-10 w-10 rounded-lg object-cover border border-slate-200 flex-shrink-0" />
+                  ) : (
+                    <div className="h-10 w-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-sm flex-shrink-0">
+                      {(club.name || "C")[0].toUpperCase()}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-slate-900">{club.name || "Untitled Club"}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      {club.category && (
+                        <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${CATEGORY_COLORS[club.category] || CATEGORY_COLORS.Other}`}>
+                          {club.category}
+                        </span>
+                      )}
+                      {club.memberCount > 0 && (
+                        <span className="text-[10px] text-slate-500">{club.memberCount} members</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <button type="button" onClick={() => openCollectionEdit("clubs", index, club)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm">
+                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
+                  </button>
+                  <button type="button" onClick={() => confirmDeleteCollectionItem("clubs", index)}
+                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm">
+                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {clubs.length === 0 && (
+            <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
+              No clubs found. Click "Add New" to create one.
+            </div>
+          )}
         </div>
 
-        {/* Filters */}
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <div className="relative min-w-[200px] flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
-              type="text"
-              value={regSearchQuery}
-              onChange={(e) => setRegSearchQuery(e.target.value)}
-              placeholder="Search by name, email..."
-            />
-          </div>
-          <select
-            className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-slate-700"
-            value={regStatusFilter}
-            onChange={(e) => setRegStatusFilter(e.target.value)}
-          >
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-            <option value="all">All</option>
-          </select>
-          <button
-            type="button"
-            onClick={() => { setRegSearchQuery(""); setRegStatusFilter("pending"); }}
-            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100"
-          >
-            Clear
-          </button>
-        </div>
+        {/* Club Editor Modal */}
+        {form && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+            <div className="w-full max-w-3xl transform rounded-2xl border border-slate-100 bg-white shadow-2xl transition-all max-h-[90vh] flex flex-col">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between border-b border-slate-100 p-5">
+                <h3 className="text-base font-bold text-slate-950">
+                  {editor.index === null ? "Add New Club" : "Edit Club Details"}
+                </h3>
+                <button type="button" onClick={() => cancelCollectionEdit("clubs")}
+                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-        {regRequestsError && (
-          <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
-            <AlertTriangle className="mr-1 inline h-4 w-4" /> {regRequestsError}
-          </div>
-        )}
+              {/* Modal Body — scrollable */}
+              <div className="overflow-y-auto flex-1 p-5 space-y-6">
+                
+                {/* Tabs */}
+                <div className="flex border-b border-slate-200">
+                  <button
+                    type="button"
+                    className={`px-4 py-2 text-sm font-medium border-b-2 ${activeClubTab === "basic" ? "border-sky-500 text-sky-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+                    onClick={() => setActiveClubTab("basic")}
+                  >
+                    Basic Info
+                  </button>
+                  <button
+                    type="button"
+                    className={`px-4 py-2 text-sm font-medium border-b-2 ${activeClubTab === "policies" ? "border-sky-500 text-sky-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+                    onClick={() => setActiveClubTab("policies")}
+                  >
+                    Policies & Guidelines
+                  </button>
+                  <button
+                    type="button"
+                    className={`px-4 py-2 text-sm font-medium border-b-2 ${activeClubTab === "reports" ? "border-sky-500 text-sky-600" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+                    onClick={() => setActiveClubTab("reports")}
+                  >
+                    Annual Reports
+                  </button>
+                </div>
 
-        {regRequestsLoading && (
-          <div className="py-8 text-center text-sm text-slate-500">Loading requests...</div>
-        )}
+                {activeClubTab === "basic" && (
+                  <div className="space-y-6">
+                    {/* Section: Basic Info */}
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Basic Info</h4>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <Field label="Club Name" required>
+                          <input className={inputClass} value={form.name || ""} onChange={(e) => updateClubField("name", e.target.value)} placeholder="Enter club name" />
+                        </Field>
+                        <Field label="Tagline">
+                          <input className={inputClass} value={form.tagline || ""} onChange={(e) => updateClubField("tagline", e.target.value)} placeholder="Short one-liner about the club" />
+                        </Field>
+                        <Field label="Category" required>
+                          <select className={inputClass} value={form.category || "Technical"} onChange={(e) => updateClubField("category", e.target.value)}>
+                            {CLUB_CATEGORIES.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+                          </select>
+                        </Field>
+                        <Field label="Member Count">
+                          <input className={inputClass} type="number" min="0" value={form.memberCount || 0} onChange={(e) => updateClubField("memberCount", Number(e.target.value))} />
+                        </Field>
+                      </div>
+                    </div>
 
-        {!regRequestsLoading && regRequests.length === 0 && (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
-            No {regStatusFilter !== "all" ? regStatusFilter : ""} registration requests found.
-          </div>
-        )}
+                    {/* Section: Images */}
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Images</h4>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <ImageUploadField
+                          label="Club Logo"
+                          required
+                          value={form.logo || ""}
+                          onChange={(url) => updateClubField("logo", url)}
+                          aspectRatio={1}
+                          recommendedSize="300×300"
+                          folder={`gbu-website/${mySchoolCode || "general"}/clubs`}
+                        />
+                        <ImageUploadField
+                          label="Banner Image"
+                          required
+                          value={form.banner || ""}
+                          onChange={(url) => updateClubField("banner", url)}
+                          aspectRatio={3}
+                          recommendedSize="1200×400"
+                          folder={`gbu-website/${mySchoolCode || "general"}/clubs`}
+                        />
+                      </div>
+                    </div>
 
-        {!regRequestsLoading && regRequests.length > 0 && (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 text-xs font-semibold uppercase text-slate-500">
-                  <th className="px-3 py-2">Name / Designation</th>
-                  <th className="px-3 py-2">Category</th>
-                  <th className="px-3 py-2">Department</th>
-                  <th className="px-3 py-2">Contact Details</th>
-                  <th className="px-3 py-2">Status</th>
-                  <th className="px-3 py-2">Date</th>
-                  <th className="px-3 py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {regRequests.map((req) => (
-                  <tr key={req.id} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="px-3 py-2.5">
-                      <div className="font-semibold text-slate-900">{req.name}</div>
-                      <div className="text-xs text-slate-500">{req.designation}</div>
-                    </td>
-                    <td className="px-3 py-2.5 text-slate-600">{req.category}</td>
-                    <td className="px-3 py-2.5 text-slate-600">{req.department}</td>
-                    <td className="px-3 py-2.5">
-                      <div className="text-slate-700 font-medium">{req.email}</div>
-                      <div className="text-xs text-slate-500">{req.mobile}</div>
-                    </td>
-                    <td className="px-3 py-2.5">
-                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${
-                        req.status === "pending" ? "bg-amber-100 text-amber-800" :
-                        req.status === "approved" ? "bg-emerald-100 text-emerald-800" :
-                        "bg-rose-100 text-rose-800"
-                      }`}>
-                        {req.status}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2.5 text-slate-500 text-xs">{new Date(req.created_at).toLocaleDateString()}</td>
-                    <td className="px-3 py-2.5">
-                      {req.status === "pending" && (
-                        <div className="flex items-center gap-1">
-                          <button
-                            type="button"
-                            onClick={() => handleApproveRequest(req.id)}
-                            disabled={regActionLoading === `approve-${req.id}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
-                          >
-                            {regActionLoading === `approve-${req.id}` ? "..." : "Approve"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleRejectRequest(req.id)}
-                            disabled={regActionLoading === `reject-${req.id}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100 disabled:opacity-50"
-                          >
-                            {regActionLoading === `reject-${req.id}` ? "..." : "Reject"}
-                          </button>
+                    {/* Section: Office Bearers */}
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Office Bearers</h4>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <Field label="Faculty Advisor Name">
+                          <input className={inputClass} value={form.facultyAdvisor || ""} onChange={(e) => updateClubField("facultyAdvisor", e.target.value)} placeholder="e.g. Dr. Rajesh Kumar" />
+                        </Field>
+                        <Field label="Faculty Advisor Department">
+                          <input className={inputClass} value={form.facultyAdvisorDept || ""} onChange={(e) => updateClubField("facultyAdvisorDept", e.target.value)} placeholder="e.g. Computer Science" />
+                        </Field>
+                        <Field label="President Name">
+                          <input className={inputClass} value={form.presidentName || ""} onChange={(e) => updateClubField("presidentName", e.target.value)} placeholder="Full name" />
+                        </Field>
+                        <Field label="President Dept/Year">
+                          <input className={inputClass} value={form.presidentDept || ""} onChange={(e) => updateClubField("presidentDept", e.target.value)} placeholder="e.g. B.Tech CSE, 3rd Year" />
+                        </Field>
+                        <Field label="Vice President Name">
+                          <input className={inputClass} value={form.vicePresidentName || ""} onChange={(e) => updateClubField("vicePresidentName", e.target.value)} placeholder="Full name" />
+                        </Field>
+                        <Field label="Vice President Dept/Year">
+                          <input className={inputClass} value={form.vicePresidentDept || ""} onChange={(e) => updateClubField("vicePresidentDept", e.target.value)} placeholder="e.g. B.Tech IT, 2nd Year" />
+                        </Field>
+                        <Field label="Secretary Name">
+                          <input className={inputClass} value={form.secretaryName || ""} onChange={(e) => updateClubField("secretaryName", e.target.value)} placeholder="Full name" />
+                        </Field>
+                        <Field label="Secretary Dept/Year">
+                          <input className={inputClass} value={form.secretaryDept || ""} onChange={(e) => updateClubField("secretaryDept", e.target.value)} placeholder="e.g. MCA, 1st Year" />
+                        </Field>
+                        <Field label="Treasurer Name">
+                          <input className={inputClass} value={form.treasurerName || ""} onChange={(e) => updateClubField("treasurerName", e.target.value)} placeholder="Full name" />
+                        </Field>
+                        <Field label="Treasurer Dept/Year">
+                          <input className={inputClass} value={form.treasurerDept || ""} onChange={(e) => updateClubField("treasurerDept", e.target.value)} placeholder="e.g. MBA, 2nd Year" />
+                        </Field>
+                      </div>
+                    </div>
+
+                    {/* Section: Social Links */}
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Social Links</h4>
+                      <div className="grid gap-4 md:grid-cols-3">
+                        <Field label="Instagram URL">
+                          <input className={inputClass} value={form.instagram || ""} onChange={(e) => updateClubField("instagram", e.target.value)} placeholder="https://instagram.com/..." />
+                        </Field>
+                        <Field label="LinkedIn URL">
+                          <input className={inputClass} value={form.linkedin || ""} onChange={(e) => updateClubField("linkedin", e.target.value)} placeholder="https://linkedin.com/..." />
+                        </Field>
+                        <Field label="YouTube URL">
+                          <input className={inputClass} value={form.youtube || ""} onChange={(e) => updateClubField("youtube", e.target.value)} placeholder="https://youtube.com/..." />
+                        </Field>
+                      </div>
+                    </div>
+
+                    {/* Section: About */}
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">About the Club</h4>
+                      <div className="space-y-4">
+                        <Field label="Description" required>
+                          <textarea className={`${inputClass} min-h-24`} value={form.description || ""} onChange={(e) => updateClubField("description", e.target.value)} placeholder="What does this club do? Brief overview of activities and purpose." />
+                        </Field>
+                        {renderDynamicList("Objectives", form.objectives, (val) => updateClubField("objectives", val), 10, "Objective")}
+                        <Field label="History">
+                          <textarea className={`${inputClass} min-h-20`} value={form.history || ""} onChange={(e) => updateClubField("history", e.target.value)} placeholder="When was it founded? Key milestones..." />
+                        </Field>
+                        {renderDynamicList("Achievements", form.achievements, (val) => updateClubField("achievements", val), 15, "Achievement")}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeClubTab === "policies" && (() => {
+                  const policies = form.policies || {};
+                  const updatePolicy = (key, val) => {
+                    updateClubField("policies", { ...policies, [key]: val });
+                  };
+                  return (
+                    <div className="space-y-6">
+                      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Policies & Guidelines</h4>
+                      {renderDynamicList("Code of Conduct", policies.codeOfConduct, (val) => updatePolicy("codeOfConduct", val), 10, "Rule")}
+                      {renderDynamicList("Eligibility Criteria", policies.eligibility, (val) => updatePolicy("eligibility", val), 10, "Criteria")}
+                      {renderDynamicList("Roles & Responsibilities", policies.responsibilities, (val) => updatePolicy("responsibilities", val), 15, "Role description")}
+                      <Field label="Meeting Frequency">
+                        <input className={inputClass} 
+                          value={policies.meetingFrequency || ""} 
+                          onChange={(e) => updatePolicy("meetingFrequency", e.target.value)} 
+                          placeholder="e.g. Weekly sessions as scheduled by coordinator" 
+                        />
+                      </Field>
+                    </div>
+                  );
+                })()}
+
+                {activeClubTab === "reports" && (() => {
+                  const reports = form.reports || [];
+                  const updateReport = (idx, key, val) => {
+                    const next = [...reports];
+                    next[idx] = { ...next[idx], [key]: val };
+                    updateClubField("reports", next);
+                  };
+                  const removeReport = (idx) => {
+                    updateClubField("reports", reports.filter((_, i) => i !== idx));
+                  };
+                  const addReport = () => {
+                    updateClubField("reports", [...reports, { id: `report-${Date.now()}`, title: "", year: "", link: "", summary: "" }]);
+                  };
+                  
+                  return (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">Annual Reports</h4>
+                        <button type="button" onClick={addReport} className="inline-flex items-center gap-1 rounded-lg bg-sky-50 px-2.5 py-1.5 text-xs font-semibold text-sky-700 hover:bg-sky-100 transition">
+                          <Plus className="h-3 w-3" /> Add Report
+                        </button>
+                      </div>
+                      
+                      {reports.length === 0 ? (
+                        <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
+                          No reports added. Click "Add Report" to add one.
+                        </div>
+                      ) : (
+                        <div className="space-y-4">
+                          {reports.map((report, idx) => (
+                            <div key={report.id || idx} className="relative rounded-xl border border-slate-200 bg-slate-50 p-4">
+                              <button type="button" onClick={() => removeReport(idx)} className="absolute top-3 right-3 text-rose-500 hover:text-rose-700 transition">
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                              <div className="grid gap-4 md:grid-cols-2 mt-2">
+                                <Field label="Title">
+                                  <input className={inputClass} value={report.title || ""} onChange={(e) => updateReport(idx, "title", e.target.value)} placeholder="e.g. Annual Report 2023-2024" />
+                                </Field>
+                                <Field label="Year">
+                                  <input className={inputClass} value={report.year || ""} onChange={(e) => updateReport(idx, "year", e.target.value)} placeholder="e.g. 2023-2024" />
+                                </Field>
+                                <div className="md:col-span-2">
+                                  <Field label="Summary">
+                                    <textarea className={`${inputClass} min-h-16`} value={report.summary || ""} onChange={(e) => updateReport(idx, "summary", e.target.value)} placeholder="Brief description of the report..." />
+                                  </Field>
+                                </div>
+                                <div className="md:col-span-2">
+                                  <Field label="Document URL">
+                                    <input className={inputClass} value={report.link || ""} onChange={(e) => updateReport(idx, "link", e.target.value)} placeholder="https://..." />
+                                  </Field>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       )}
-                      {req.status === "rejected" && req.rejection_reason && (
-                        <span className="text-xs text-slate-500" title={req.rejection_reason}>Reason: {req.rejection_reason.slice(0, 30)}{req.rejection_reason.length > 30 ? "..." : ""}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              {/* Modal Footer */}
+              <div className="flex items-center justify-end gap-3 border-t border-slate-100 p-5">
+                <button type="button" onClick={() => cancelCollectionEdit("clubs")}
+                  className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition">
+                  Cancel
+                </button>
+                <button type="button" onClick={() => saveCollectionForm("clubs")}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition">
+                  Save Club
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderBody = () => {
     if (activeTab === "home") {
@@ -1315,14 +1660,21 @@ const SchoolDashboard = () => {
               <input className={inputClass} value={data.deanName || ""} onChange={(e) => updateField("deanName", e.target.value)} />
             </Field>
             <Field label="Hero Title">
-              <input className={inputClass} value={data.tabContent.home.heroTitle || ""} onChange={(e) => updateTabContent("home", "heroTitle", e.target.value)} />
+              <input className={inputClass} value={data.tabContent?.home?.heroTitle || ""} onChange={(e) => updateTabContent("home", "heroTitle", e.target.value)} />
             </Field>
             <Field label="Hero Subtitle">
-              <input className={inputClass} value={data.tabContent.home.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
+              <input className={inputClass} value={data.tabContent?.home?.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
             </Field>
-            <Field label="Banner Image URL">
-              <input className={inputClass} value={data.bannerImage || ""} onChange={(e) => updateField("bannerImage", e.target.value)} />
-            </Field>
+            <div className="md:col-span-2">
+              <ImageUploadField
+                label="Banner Image"
+                value={data.bannerImage || ""}
+                onChange={(url) => updateField("bannerImage", url)}
+                aspectRatio={16 / 9}
+                recommendedSize="1920×1080"
+                folder={`gbu-website/${mySchoolCode || "general"}/banners`}
+              />
+            </div>
             <Field label="School Email">
               <input className={inputClass} value={data.email || ""} onChange={(e) => updateField("email", e.target.value)} />
             </Field>
@@ -1339,7 +1691,6 @@ const SchoolDashboard = () => {
 
     if (activeTab === "faculty-management") return renderFacultyEditor();
 
-    if (activeTab === "faculty-requests") return renderFacultyRequestsTab();
 
     /* Announcements are real database rows shared with the public site, not
        part of this school's content blob. Each item saves on its own; a
@@ -1347,7 +1698,6 @@ const SchoolDashboard = () => {
     const announcementKind = {
       events: "events",
       news: "news",
-      newsletters: "newsletters",
       notices: "notices",
       "event-gallery": "gallery",
     }[activeTab];
@@ -1360,65 +1710,13 @@ const SchoolDashboard = () => {
           actorRole="school"
           schoolCode={mySchoolCode}
           onMessage={(text) => setMessage(text)}
+          onActionsReady={setAnnouncementActions}
         />
       );
     }
 
     if (activeTab === "clubs") {
-      return renderCollectionEditor(
-        "clubs",
-        "Clubs & Societies Management",
-        [
-          { key: "name", label: "Club Name" },
-          { key: "tagline", label: "Tagline" },
-          { key: "category", label: "Category (Technical / Cultural / Sports / Social)" },
-          { key: "logo", label: "Logo URL" },
-          { key: "banner", label: "Banner Image URL" },
-          { key: "memberCount", label: "Member Count", type: "number" },
-          { key: "facultyAdvisor", label: "Faculty Advisor Name" },
-          { key: "facultyAdvisorDept", label: "Faculty Advisor Department" },
-          { key: "presidentName", label: "President Name" },
-          { key: "presidentDept", label: "President Department/Year" },
-          { key: "vicePresidentName", label: "Vice President Name" },
-          { key: "vicePresidentDept", label: "Vice President Department/Year" },
-          { key: "secretaryName", label: "Secretary Name" },
-          { key: "secretaryDept", label: "Secretary Department/Year" },
-          { key: "treasurerName", label: "Treasurer Name" },
-          { key: "treasurerDept", label: "Treasurer Department/Year" },
-          { key: "instagram", label: "Instagram URL" },
-          { key: "linkedin", label: "LinkedIn URL" },
-          { key: "youtube", label: "YouTube URL" },
-          { key: "description", label: "Description", type: "textarea" },
-          { key: "objectives", label: "Objectives (comma separated)", type: "textarea" },
-          { key: "history", label: "History", type: "textarea" },
-          { key: "achievements", label: "Achievements (comma separated)", type: "textarea" },
-        ],
-        {
-          name: "",
-          tagline: "",
-          category: "Technical",
-          logo: "",
-          banner: "",
-          memberCount: 0,
-          facultyAdvisor: "",
-          facultyAdvisorDept: "",
-          presidentName: "",
-          presidentDept: "",
-          vicePresidentName: "",
-          vicePresidentDept: "",
-          secretaryName: "",
-          secretaryDept: "",
-          treasurerName: "",
-          treasurerDept: "",
-          instagram: "",
-          linkedin: "",
-          youtube: "",
-          description: "",
-          objectives: "",
-          history: "",
-          achievements: "",
-        }
-      );
+      return renderClubsTab();
     }
 
     // if (activeTab === "semester-registrations") return renderSemesterRegistrationsTab(); // hidden until semester registration ships
@@ -1521,7 +1819,7 @@ const SchoolDashboard = () => {
           <h2 className="text-xl font-semibold text-slate-800">Semester Registrations</h2>
           <div className="flex flex-wrap gap-4">
             <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-2">
-              <span className="text-xs font-semibold uppercase text-blue-600">Total</span>
+              <span className="text-xs font-semibold uppercase text-sky-600">Total</span>
               <p className="text-lg font-bold text-blue-900">{totalCount}</p>
             </div>
             <div className="rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-2">
@@ -1720,13 +2018,13 @@ const SchoolDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-2 md:p-4">
-      <div className="flex w-full flex-col gap-6 lg:flex-row">
-        <aside className="lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-72 min-w-[280px] lg:shrink-0 lg:self-start">
+    <div className="h-screen bg-slate-50 p-2 md:p-4 overflow-hidden">
+      <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
+        <aside className="h-auto lg:h-full lg:w-72 min-w-[280px] lg:shrink-0">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">School Navigation</h2>
 
-            <div className="mt-3 flex-1 space-y-2 overflow-y-auto pr-1">
+            <div className="mt-3 flex-1 space-y-2 overflow-y-auto p-1 -mx-1 -my-1 no-scrollbar">
               {ACTIVE_TABS.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -1735,11 +2033,11 @@ const SchoolDashboard = () => {
                     key={tab.id}
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                      isActive ? "bg-slate-900 text-white shadow" : "text-slate-700 hover:bg-slate-100"
+                    className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all ${
+                      isActive ? "bg-sky-50 text-sky-700 font-semibold shadow-sm ring-1 ring-sky-500/50" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className={`h-4 w-4 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
                     {tab.label}
                   </button>
                 );
@@ -1763,18 +2061,15 @@ const SchoolDashboard = () => {
               </div>
             </div>
 
-            <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3 shrink-0">
               <div className="mt-2 space-y-2">
-                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800 disabled:opacity-50">
+                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-3 py-2.5 text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/30 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0">
                   <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
                 </button>
-                {/* <button onClick={resetAll} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100">
-                  <RotateCcw className="h-4 w-4" /> Reset
-                </button> */}
                 <button onClick={() => {
-                  clearPortalSession();
-                  navigate("/login");
-                }} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100">
+                  logoutPortalSession();
+                  navigate("/login", { replace: true });
+                }} className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100 transition-colors">
                   <LogOut className="h-4 w-4" /> Logout
                 </button>
               </div>
@@ -1782,26 +2077,110 @@ const SchoolDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%]">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] overflow-y-auto custom-scrollbar pb-6 pr-2">
           <section className={cardClass}>
-            <div className="flex items-center gap-3 flex-wrap">
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{data.schoolName || "School Dashboard"}</h1>
-              <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">{mySchoolCode}</span>
+            <div className="flex items-center justify-between gap-3 flex-wrap">
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{header.title}</h1>
+                <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">{mySchoolCode}</span>
+              </div>
+
+              {/* Action buttons per tab */}
+              <div className="flex items-center gap-2">
+                {/* Announcement tabs: Refresh + Add New */}
+                {["events", "news", "notices", "event-gallery"].includes(activeTab) && announcementActions && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={announcementActions.load}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition"
+                    >
+                      <RefreshCw className={`h-3.5 w-3.5 ${announcementActions.loading ? "animate-spin" : ""}`} /> Refresh
+                    </button>
+                    {announcementActions.kind !== "gallery" && (
+                      <button
+                        type="button"
+                        onClick={announcementActions.openCreate}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                      >
+                        <Plus className="h-4 w-4" /> Add New
+                      </button>
+                    )}
+                  </>
+                )}
+
+                {/* Faculty Management: Add New */}
+                {activeTab === "faculty-management" && (
+                  <button
+                    type="button"
+                    onClick={addFacultyProfile}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                  >
+                    <Plus className="h-4 w-4" /> Add New
+                  </button>
+                )}
+
+                {/* Clubs: Add New */}
+                {activeTab === "clubs" && (
+                  <button
+                    type="button"
+                    onClick={() => openCollectionAdd("clubs", clubNewTemplate)}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
+                  >
+                    <Plus className="h-4 w-4" /> Add New
+                  </button>
+                )}
+              </div>
             </div>
-            <p className="mt-1 text-sm text-slate-600">Manage your school's content, events, news, notices &amp; more. All changes are saved per-school.</p>
-            {message ? <p className="mt-3 text-sm font-medium text-emerald-700">{message}</p> : null}
+            <p className="mt-1 text-sm text-slate-600">{header.desc}</p>
           </section>
 
-          <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {summary.map((item) => (
-              <div key={item.label} className={cardClass}>
-                <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
-                <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
-              </div>
-            ))}
-          </section>
+          {/* Toast Notification */}
+          {toast && (
+            <div
+              key={toast.key}
+              className={`fixed top-4 right-4 z-[9999] flex items-center gap-3 rounded-xl border px-5 py-3.5 shadow-lg backdrop-blur-md animate-toast-in max-w-md ${
+                toast.type === "error"
+                  ? "border-rose-200 bg-rose-50/95 text-rose-800"
+                  : "border-emerald-200 bg-emerald-50/95 text-emerald-800"
+              }`}
+            >
+              {toast.type === "error" ? (
+                <AlertTriangle className="h-5 w-5 shrink-0 text-rose-500" />
+              ) : (
+                <CheckCircle className="h-5 w-5 shrink-0 text-emerald-500" />
+              )}
+              <p className="text-sm font-medium leading-snug">{toast.text}</p>
+              <button
+                type="button"
+                onClick={() => setToast(null)}
+                className="ml-auto shrink-0 rounded-lg p-1 transition-colors hover:bg-black/5"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          )}
+
+          {activeTab === "home" && (
+            <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {summary.map((item) => (
+                <div key={item.label} className={cardClass}>
+                  <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
+                  <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
+                </div>
+              ))}
+            </section>
+          )}
 
           {renderBody()}
+
+          <ConfirmModal
+            isOpen={confirmDialog.isOpen}
+            title={confirmDialog.title}
+            message={confirmDialog.message}
+            onConfirm={confirmDialog.onConfirm}
+            onCancel={() => setConfirmDialog({ isOpen: false })}
+          />
         </main>
       </div>
     </div>

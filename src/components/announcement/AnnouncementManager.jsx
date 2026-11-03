@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Plus, Pencil, Trash2, X, RefreshCw, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import ConfirmModal from "../ui/ConfirmModal";
+import ImageUploadField from "../ui/ImageUploadField";
+import FileUploadField from "../ui/FileUploadField";
 import {
   ANNOUNCEMENT_COLUMNS,
   ANNOUNCEMENT_FIELDS,
@@ -86,6 +89,9 @@ const AnnouncementManager = ({
   actorRole = "admin",
   schoolCode = "",
   onMessage,
+  /** Optional callback — parent receives { load, openCreate, loading, kind } so it
+   *  can render action buttons (Refresh / Add New) in its own header bar. */
+  onActionsReady,
 }) => {
   const fields = ANNOUNCEMENT_FIELDS[kind] || [];
   const columns = ANNOUNCEMENT_COLUMNS[kind] || [];
@@ -95,6 +101,7 @@ const AnnouncementManager = ({
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, item: null });
   const [search, setSearch] = useState("");
   const [editor, setEditor] = useState(null); // { id, form } — null when closed
   const [deletingId, setDeletingId] = useState(null);
@@ -117,6 +124,16 @@ const AnnouncementManager = ({
       // university-wide tab passes no code and sees everything.
       let data = await listAnnouncements(kind, schoolCode ? { schoolCode } : {});
       
+      // School dashboard: only show items that belong to this school.
+      // The backend already scopes by the JWT school code, but this is an
+      // extra safety net so a school never sees another school's data.
+      if (!isAdmin && schoolCode) {
+        const normalised = schoolCode.trim().toUpperCase();
+        data = data.filter(
+          (item) => (item.schoolCode || "").trim().toUpperCase() === normalised,
+        );
+      }
+
       // Filter logic: `events` shows ALL events (past and upcoming), `gallery` shows past events
       if (kind === "events" || kind === "gallery") {
         const today = new Date();
@@ -139,11 +156,19 @@ const AnnouncementManager = ({
     } finally {
       setLoading(false);
     }
-  }, [kind, schoolCode]);
+  }, [kind, schoolCode, isAdmin]);
 
   useEffect(() => {
     load();
   }, [load]);
+
+  // Expose action handlers to parent so it can render buttons in its own header
+  useEffect(() => {
+    onActionsReady?.({ load, openCreate: () => {
+      const defaultLevel = schoolCode ? LEVELS.SCHOOL : LEVELS.COLLEGE;
+      setEditor({ id: null, form: buildEmptyAnnouncement(kind, defaultLevel) });
+    }, loading, kind });
+  }, [onActionsReady, load, loading, kind, schoolCode]);
 
   const visibleItems = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -222,8 +247,14 @@ const AnnouncementManager = ({
     }
   };
 
-  const handleDelete = async (item) => {
-    if (!window.confirm(`Delete "${item.title}"? This cannot be undone.`)) return;
+  const initiateDelete = (item) => {
+    setConfirmDialog({ isOpen: true, item });
+  };
+
+  const executeDelete = async () => {
+    const item = confirmDialog.item;
+    if (!item) return;
+    setConfirmDialog({ isOpen: false, item: null });
     setDeletingId(item.id);
     try {
       const message = await deleteAnnouncement(kind, item.id);
@@ -240,14 +271,79 @@ const AnnouncementManager = ({
   const willNeedApproval =
     !isAdmin && editor?.form?.level === LEVELS.COLLEGE;
 
+  /* Detect single-image URL fields — these should use ImageUploadField */
+  const IMAGE_FIELD_KEYS = new Set(["image", "flyerUrl", "coverImage", "coverImageUrl"]);
+  const isImageUrlField = (field) =>
+    !field.type && IMAGE_FIELD_KEYS.has(field.key);
+
+  /* Detect PDF/document URL fields — these should use FileUploadField */
+  const PDF_FIELD_KEYS = new Set(["pdfUrl", "brochureUrl", "englishPdfLink", "hindiPdfLink"]);
+  const isPdfUrlField = (field) =>
+    !field.type && PDF_FIELD_KEYS.has(field.key);
+
+  /* PDF folder mapping by announcement kind */
+  const PDF_FOLDERS = {
+    notices: "announcements/notices",
+    news: "announcements/news",
+    events: "announcements/events",
+    newsletters: "announcements/newsletters",
+  };
+
+  /**
+   * Build the upload folder path.
+   * For events, includes the event type subdirectory (e.g. announcements/events/conference).
+   */
+  const getUploadFolder = (fieldKey) => {
+    const base = schoolCode ? `schools/${schoolCode}/${kind}` : `announcements/${kind}`;
+    if (kind === "events") {
+      const eventType = slugify(editor?.form?.type || editor?.form?.eventType || "general");
+      return eventType ? `${base}/${eventType}` : base;
+    }
+    return base;
+  };
+
+  /** Get the PDF/file upload folder (includes event type for events) */
+  const getPdfFolder = () => {
+    const base = PDF_FOLDERS[kind] || `announcements/${kind}`;
+    if (kind === "events") {
+      const eventType = slugify(editor?.form?.type || editor?.form?.eventType || "general");
+      return eventType ? `${base}/${eventType}` : base;
+    }
+    return base;
+  };
+
+  /* Aspect ratios per field key */
+  const IMAGE_ASPECTS = { image: 16/9, flyerUrl: 3/4, coverImage: 3/4, coverImageUrl: 16/9 };
+  const IMAGE_SIZES = { image: "800×450", flyerUrl: "600×800", coverImage: "600×800", coverImageUrl: "1200×675" };
+
+  /** Turn a title into a URL-safe slug: "Annual Fest 2024!" → "annual-fest-2024" */
+  const slugify = (str) =>
+    (str || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").substring(0, 60);
+
+  /** Build readable fileName from editor form title + field key.
+   *  For events: title="Annual Fest" + fieldKey="brochureUrl" → "annual-fest-event-pdf"
+   *             title="Annual Fest" + fieldKey="flyerUrl" → "annual-fest-event-flyer"
+   *  For others: title="Notice" + fieldKey="pdfUrl" → "notice_document"  */
+  const getFileName = (fieldKey, imageIndex) => {
+    const title = editor?.form?.title || editor?.form?.name || "";
+    const slug = slugify(title);
+    if (!slug) return "";
+    const SUFFIXES = { flyerUrl: "flyer", coverImage: "cover", coverImageUrl: "cover", image: "image",
+      brochureUrl: "brochure", pdfUrl: "document", englishPdfLink: "english", hindiPdfLink: "hindi" };
+    if (imageIndex !== undefined) return `${slug}_${imageIndex + 1}`;
+    return `${slug}_${SUFFIXES[fieldKey] || fieldKey}`;
+  };
+
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      {/* Show action buttons inline only if the parent is NOT rendering them in its own header */}
+      {!onActionsReady && (
       <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>
-          <h3 className="text-base font-semibold text-slate-900">{KIND_LABELS[kind]}</h3>
+          {/* <h3 className="text-base font-semibold text-slate-900">{KIND_LABELS[kind]}</h3>
           <p className="mt-0.5 text-xs text-slate-500">
             Saved straight to the database and shown on the public Announcements pages.
-          </p>
+          </p> */}
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -268,6 +364,7 @@ const AnnouncementManager = ({
           )}
         </div>
       </div>
+      )}
 
       {error ? (
         <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
@@ -347,7 +444,7 @@ const AnnouncementManager = ({
                       <button
                         type="button"
                         disabled={deletingId === item.id}
-                        onClick={() => handleDelete(item)}
+                        onClick={() => initiateDelete(item)}
                         className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-semibold text-rose-700 shadow-sm transition hover:bg-rose-100 disabled:opacity-50"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
@@ -472,80 +569,104 @@ const AnnouncementManager = ({
                   return null;
                 }
                 return (
-                <label key={field.key} className="block">
+                <div key={field.key} className="block">
                   <span className="mb-1 block text-sm font-medium text-slate-700">
                     {field.label}
                     {field.required && <span className="text-rose-600"> *</span>}
                   </span>
 
                   {field.type === "image-list" ? (
-                    <div className="space-y-2">
+                    <div className="space-y-4">
                       {(editor.form[field.key] || [""]).map((url, i, arr) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <span className="text-xs font-semibold text-slate-500 w-16 shrink-0">Image {i + 1}</span>
-                          <input
-                            className={inputClass}
-                            type="text"
+                        <div key={i} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-bold text-slate-500">Image {i + 1}</span>
+                            {arr.length > 1 && (
+                              <button type="button"
+                                onClick={() => {
+                                  const newArr = arr.filter((_, idx) => idx !== i);
+                                  setField(field.key, newArr);
+                                  if (field.key === "images") {
+                                    if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
+                                    if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
+                                  }
+                                }}
+                                className="inline-flex items-center gap-1 text-xs text-rose-500 hover:text-rose-700 transition-colors">
+                                <X className="w-3.5 h-3.5" /> Remove
+                              </button>
+                            )}
+                          </div>
+                          <ImageUploadField
+                            label=""
                             value={url}
-                            placeholder="https://..."
-                            onChange={(e) => {
+                            onChange={(newUrl) => {
                               const newArr = [...arr];
-                              newArr[i] = e.target.value;
+                              newArr[i] = newUrl;
                               setField(field.key, newArr);
                             }}
+                            aspectRatio={16 / 9}
+                            recommendedSize="1200×675"
+                            folder={getUploadFolder(field.key)}
+                            fileName={getFileName(field.key, i)}
                           />
-                          {arr.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const newArr = arr.filter((_, idx) => idx !== i);
-                                setField(field.key, newArr);
-                                if (field.key === "images") {
-                                  if (editor.form.coverImage === url) setField("coverImage", newArr[0] || "");
-                                  if (editor.form.coverImageUrl === url) setField("coverImageUrl", newArr[0] || "");
-                                }
-                              }}
-                              className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50"
-                            >
-                              <X className="w-4 h-4" />
-                            </button>
-                          )}
                         </div>
                       ))}
                       {(editor.form[field.key] || [""]).length < 6 && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setField(field.key, [...(editor.form[field.key] || [""]), ""]);
-                          }}
-                          className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 mt-1"
-                        >
+                        <button type="button"
+                          onClick={() => setField(field.key, [...(editor.form[field.key] || [""]), ""])}
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-700 transition-colors">
                           <Plus className="w-3.5 h-3.5" /> Add another image
                         </button>
                       )}
                     </div>
                   ) : field.type === "cover-selector" ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
-                      {(() => {
-                        const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
-                        if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
-                        return images.map((url, i) => (
-                          <label key={i} className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer ${editor.form[field.key] === url || (!editor.form[field.key] && i === 0) ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`}>
-                            <input
-                              type="radio"
-                              name={field.key}
-                              value={url}
-                              checked={editor.form[field.key] === url || (!editor.form[field.key] && i === 0)}
-                              onChange={(e) => setField(field.key, e.target.value)}
-                              className="hidden"
-                            />
-                            <div className="w-8 h-8 rounded shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center">
-                              {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
-                            </div>
-                            <span className="text-xs font-medium text-slate-700 truncate">Image {editor.form.images.indexOf(url) + 1}</span>
-                          </label>
-                        ));
-                      })()}
+                    <div className="space-y-2 mt-1">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {(() => {
+                          const images = (editor.form.images || []).filter(url => typeof url === 'string' && url.trim() !== "");
+                          if (images.length === 0) return <span className="text-xs text-slate-500 col-span-full">Please add image URLs first</span>;
+                          const currentCover = editor.form[field.key] || "";
+                          return images.map((url, i) => {
+                            const isSelected = currentCover === url;
+                            return (
+                              <button key={i} type="button"
+                                onClick={() => {
+                                  if (isSelected) {
+                                    setField(field.key, "");
+                                    notify("Cover image removed.");
+                                  } else {
+                                    setField(field.key, url);
+                                    notify(`Image ${editor.form.images.indexOf(url) + 1} set as cover.`);
+                                  }
+                                }}
+                                className={`flex items-center gap-2 p-2 rounded-xl border-2 transition-all text-left ${
+                                  isSelected
+                                    ? 'border-sky-500 bg-sky-50 ring-2 ring-sky-500/20'
+                                    : 'border-slate-200 hover:border-sky-300 hover:bg-slate-50'
+                                }`}>
+                                <div className="w-10 h-10 rounded-lg shrink-0 overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center relative">
+                                  {url && <img src={url} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; }} />}
+                                  {isSelected && (
+                                    <div className="absolute inset-0 bg-sky-500/20 flex items-center justify-center">
+                                      <CheckCircle2 className="h-4 w-4 text-sky-600" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="min-w-0">
+                                  <span className="text-xs font-medium text-slate-700 block truncate">Image {editor.form.images.indexOf(url) + 1}</span>
+                                  <span className="text-[10px] text-slate-400">{isSelected ? "Click to remove" : "Click to set"}</span>
+                                </div>
+                              </button>
+                            );
+                          });
+                        })()}
+                      </div>
+                      {editor.form[field.key] && (
+                        <div className="flex items-center gap-2 text-xs text-sky-600 bg-sky-50 rounded-lg px-3 py-1.5 border border-sky-200">
+                          <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
+                          <span>Cover image selected. Click it again to remove.</span>
+                        </div>
+                      )}
                     </div>
                   ) : field.type === "textarea" ? (
                     <textarea
@@ -575,6 +696,25 @@ const AnnouncementManager = ({
                       <option value="true">Yes</option>
                       <option value="false">No</option>
                     </select>
+                  ) : isImageUrlField(field) ? (
+                    <ImageUploadField
+                      label=""
+                      value={editor.form[field.key] ?? ""}
+                      onChange={(url) => setField(field.key, url)}
+                      aspectRatio={IMAGE_ASPECTS[field.key] || 16/9}
+                      recommendedSize={IMAGE_SIZES[field.key] || ""}
+                      folder={getUploadFolder(field.key)}
+                      fileName={getFileName(field.key)}
+                    />
+                  ) : isPdfUrlField(field) ? (
+                    <FileUploadField
+                      label=""
+                      value={editor.form[field.key] ?? ""}
+                      onChange={(url) => setField(field.key, url)}
+                      accept=".pdf"
+                      folder={getPdfFolder()}
+                      fileName={getFileName(field.key)}
+                    />
                   ) : (
                     <input
                       className={inputClass}
@@ -589,7 +729,7 @@ const AnnouncementManager = ({
                       }
                     />
                   )}
-                </label>
+                </div>
                 );
               })}
             </div>
@@ -613,6 +753,14 @@ const AnnouncementManager = ({
           </form>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={confirmDialog.isOpen}
+        title={`Delete ${KIND_LABELS[kind] || "Item"}`}
+        message={`Are you sure you want to delete "${confirmDialog.item?.title}"? This action cannot be undone.`}
+        onConfirm={executeDelete}
+        onCancel={() => setConfirmDialog({ isOpen: false, item: null })}
+      />
     </div>
   );
 };

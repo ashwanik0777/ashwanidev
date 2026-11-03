@@ -347,7 +347,7 @@ const aboutData = {
     {
       title: "Tech & Cultural Fests",
       icon: "Sparkles",
-      link: "/announcements/event-calendar"
+      link: "/announcements/event"
     },
     {
       title: "Campus Amenities",

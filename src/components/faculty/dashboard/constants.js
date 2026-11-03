@@ -9,7 +9,19 @@ export const FACULTY_SIDEBAR_SECTIONS = [
   { id: "publications", label: "Publications" },
   { id: "talks", label: "Invited Talks" },
   { id: "awards", label: "Awards" },
-  { id: "other", label: "Other" }
+  { id: "other", label: "Other" },
+  { id: "grievance", label: "Grievance" },
+];
+
+// Extra sidebar sections based on grievance_role (injected dynamically).
+// Maintenance complaints are handled by JEs; the Director (maintenance portal)
+// replaced the Dean's management screen, and HOD / VC have read-only views.
+export const HOD_EXTRA_SECTIONS = [
+  { id: "grievance-overview", label: "Maintenance Complaints (Dept)" },
+];
+
+export const VC_EXTRA_SECTIONS = [
+  { id: "grievance-overview", label: "Maintenance Complaints Overview" },
 ];
 
 export const inputClass =

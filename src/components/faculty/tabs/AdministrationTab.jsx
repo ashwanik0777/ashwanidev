@@ -31,21 +31,29 @@ import { Calendar, MapPin, Settings, Users } from 'lucide-react';
 import { asArray, asText, pickArray, pickText } from './fieldUtils';
 
 // Bridges the dashboard's editor field names to what this tab renders.
-const normalizeRole = (item) => ({
-  role: pickText(item, ['role', 'title', 'position']),
-  department: pickText(item, ['department', 'level', 'scope']),
-  institution: pickText(item, ['institution', 'organization', 'organisation']),
-  duration: pickText(item, ['duration', 'period']),
-  status: pickText(item, ['status'], 'ongoing'),
-  description: pickText(item, ['description']),
-  responsibilities: pickArray(item, ['responsibilities', 'keyResponsibilities']),
-});
+const normalizeRole = (item) => {
+  const endYearVal = pickText(item, ['endYear', 'to']);
+  const isPresent = !endYearVal || endYearVal.toLowerCase() === 'present';
+  
+  return {
+    role: pickText(item, ['role', 'title', 'position']),
+    department: pickText(item, ['department', 'level', 'scope']),
+    institution: pickText(item, ['institution', 'organization', 'organisation']),
+    duration: pickText(item, ['duration', 'period']),
+    startYear: pickText(item, ['startYear', 'from']),
+    endYear: endYearVal,
+    status: pickText(item, ['status'], isPresent ? 'ongoing' : 'completed'),
+    description: pickText(item, ['description']),
+    responsibilities: pickArray(item, ['responsibilities', 'keyResponsibilities']),
+  };
+};
 
 const normalizeCommittee = (item) => ({
   name: pickText(item, ['name', 'title']),
   role: pickText(item, ['role', 'designation', 'position']),
   period: pickText(item, ['period', 'duration']),
-  responsibility: pickText(item, ['responsibility', 'contribution', 'description']),
+  startYear: pickText(item, ['startYear', 'from']),
+  endYear: pickText(item, ['endYear', 'to']),
 });
 
 export const AdministrationTab = ({ profile }) => {
@@ -116,11 +124,16 @@ export const AdministrationTab = ({ profile }) => {
                       <p className="text-blue-600 font-medium mb-1">{role.department}</p>
                     )}
                     {role.institution && <p className="text-gray-700 mb-2">{role.institution}</p>}
-                    {role.duration && (
+                    {(role.startYear || role.endYear || role.duration) && (
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
-                          {role.duration}
+                          {role.startYear || role.endYear
+                            ? `${(() => {
+                                const fmt = (v) => v && /^\d{4}-\d{2}$/.test(v) ? new Date(v.split('-')[0], v.split('-')[1]-1).toLocaleDateString('en-US', {month:'short', year:'numeric'}) : v;
+                                return `${fmt(role.startYear) || ''} - ${fmt(role.endYear) || 'Present'}`;
+                              })()}`
+                            : role.duration}
                         </div>
                       </div>
                     )}
@@ -129,24 +142,6 @@ export const AdministrationTab = ({ profile }) => {
                     {titleCase(role.status, 'Active')}
                   </Badge>
                 </div>
-
-                {role.description && (
-                  <p className="mb-3 text-sm text-gray-700">{role.description}</p>
-                )}
-
-                {role.responsibilities.length > 0 && (
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
-                    <ul className="space-y-1">
-                      {role.responsibilities?.map((responsibility, idx) => (
-                        <li key={idx} className="text-sm text-gray-700 flex items-start">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          {responsibility}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
             ))}
             {administrativeRoles.length === 0 && (
@@ -174,14 +169,16 @@ export const AdministrationTab = ({ profile }) => {
                   <div>
                     <h3 className="font-semibold text-gray-900">{committee.name}</h3>
                     {committee.role && <p className="text-sm text-blue-600">{committee.role}</p>}
-                    {committee.responsibility && (
-                      <p className="mt-1 text-sm text-gray-700">{committee.responsibility}</p>
-                    )}
                   </div>
-                  {committee.period && (
+                  {(committee.startYear || committee.endYear || committee.period) && (
                     <div className="flex items-center text-sm text-gray-600">
                       <Calendar className="w-4 h-4 mr-1" />
-                      {committee.period}
+                      {committee.startYear || committee.endYear
+                        ? `${(() => {
+                            const fmt = (v) => v && /^\d{4}-\d{2}$/.test(v) ? new Date(v.split('-')[0], v.split('-')[1]-1).toLocaleDateString('en-US', {month:'short', year:'numeric'}) : v;
+                            return `${fmt(committee.startYear) || ''} - ${fmt(committee.endYear) || 'Present'}`;
+                          })()}`
+                        : committee.period}
                     </div>
                   )}
                 </div>

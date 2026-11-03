@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { createSlug } from "../../utils/slugUtil";
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   getSchoolAnnouncements,
   refreshSchoolAnnouncements,
@@ -9,25 +10,30 @@ import { parseImageUrl } from '../../utils/imageUtils';
 export default function LatestUpdates() {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState([]);
-  const [categories] = useState([
-    { category: 'Latest News' },
-    { category: 'Notice/Circulars' },
-    { category: 'Upcoming Events' },
-  ]);
 
   const buildSchoolUpdates = () => {
     const announcements = getSchoolAnnouncements();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
     const latestNews = (announcements.news || [])
       .slice(0, 8)
-      .map((item) => ({
-        id: `news-${item.id}`,
-        content_text: item.title || 'News update',
-        category: 'Latest News',
-        priority: item.priority || 'medium',
-        date: item.date,
-        url: `/announcements/news-notifications/${item.id}`,
-      }));
+      .map((item) => {
+        const itemDate = new Date(item.date);
+        itemDate.setHours(0, 0, 0, 0);
+        const diffTime = today.getTime() - itemDate.getTime();
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        return {
+          id: `news-${item.id}`,
+          content_text: item.title || 'News update',
+          category: 'Latest News',
+          tag: diffDays <= 10 ? 'Latest News' : 'News',
+          priority: item.priority || 'medium',
+          date: item.date,
+          url: `/announcements/news/${createSlug(item.title)}`,
+        };
+      });
 
     const noticeItems = (announcements.notices || [])
       .slice(0, 8)
@@ -35,30 +41,53 @@ export default function LatestUpdates() {
         id: `notice-${item.id}`,
         content_text: item.title || 'Notice update',
         category: 'Notice/Circulars',
+        tag: 'Notice',
         priority: item.priority || 'medium',
         date: item.date,
         url: item.pdfUrl ? parseImageUrl(item.pdfUrl) : '/announcements/notices',
       }));
 
-    const upcomingEvents = (announcements.events || [])
-      .filter((item) => item.isUpcoming)
-      .slice(0, 8)
-      .map((item) => ({
-        id: `event-${item.id}`,
-        content_text: item.title || 'Upcoming event',
-        category: 'Upcoming Events',
-        priority: item.priority || 'high',
-        date: item.date,
-        url: `/announcements/event-calendar/${item.id}`,
-      }));
+    const allEvents = announcements.events || [];
 
-    return [...latestNews, ...noticeItems, ...upcomingEvents];
+    // Newest 6 events
+    const events = allEvents
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+      .slice(0, 6)
+      .map((item) => {
+        const itemDate = new Date(item.date);
+        itemDate.setHours(0, 0, 0, 0);
+        let tag = 'Ongoing Event';
+        
+        if (itemDate > today) {
+          tag = 'Upcoming Event';
+        } else if (itemDate < today) {
+          tag = 'Past Event';
+        }
+
+        return {
+          id: `event-${item.id}`,
+          content_text: item.title || 'Event update',
+          category: 'Ongoing Events',
+          tag: tag,
+          priority: item.priority || 'high',
+          date: item.date,
+          url: `/announcements/event/${item.title ? createSlug(item.title) : item.id}`,
+        };
+      });
+
+    return [...latestNews, ...noticeItems, ...events];
   };
 
+  const categories = useMemo(() => [
+    { category: 'Latest News' },
+    { category: 'Notice/Circulars' },
+    { category: 'Ongoing Events' },
+  ], []);
+
   const viewMoreUrls = {
-    'Latest News': '/announcements/news-notifications',
+    'Latest News': '/announcements/news',
     'Notice/Circulars': '/announcements/notices',
-    'Upcoming Events': '/announcements/event-calendar'
+    'Ongoing Events': '/announcements/event',
   };
 
   useEffect(() => {
@@ -93,22 +122,27 @@ export default function LatestUpdates() {
     return 'bg-green-500';
   };
 
-  const getTypeColor = (category) => {
+  const getTypeColor = (tag) => {
     const colors = {
       'Latest News': 'bg-blue-100 text-blue-600 border-blue-200',
+      'News': 'bg-sky-100 text-sky-600 border-sky-200',
+      'Notice': 'bg-green-100 text-green-600 border-green-200',
       'Notice/Circulars': 'bg-green-100 text-green-600 border-green-200',
-      'Upcoming Events': 'bg-yellow-100 text-yellow-600 border-yellow-200'
+      'Ongoing Event': 'bg-orange-100 text-orange-600 border-orange-200',
+      'Ongoing Events': 'bg-orange-100 text-orange-600 border-orange-200',
+      'Upcoming Event': 'bg-purple-100 text-purple-600 border-purple-200',
+      'Past Event': 'bg-gray-100 text-gray-600 border-gray-200',
     };
-    return colors[category.trim()] || 'bg-gray-100 text-gray-600 border-gray-200';
+    return colors[tag?.trim()] || 'bg-gray-100 text-gray-600 border-gray-200';
   };
 
   const emptyMessages = {
     'Latest News': 'No latest news available right now.',
     'Notice/Circulars': 'No notices or circulars available right now.',
-    'Upcoming Events': 'No upcoming events at the moment.',
+    'Ongoing Events': 'No ongoing events at the moment.',
   };
 
-  const NoticeCard = ({ item, index, category }) => (
+  const NoticeCard = ({ item, index }) => (
     <a
       href={item.url}
       className={`group relative flex items-start gap-3 p-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg border border-transparent hover:border-blue-100 ${isVisible ? 'animate-slide-in' : 'opacity-0 translate-y-4'}`}
@@ -126,7 +160,7 @@ export default function LatestUpdates() {
           {new Date(item.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })}
         </p>
       </div>
-      <span className={`px-3 py-1.5 rounded-full text-xs font-medium flex-shrink-0 border transition-all duration-200 group-hover:scale-105 ${getTypeColor(category)}`}>{category}</span>
+      <span className={`px-3 py-1.5 rounded-full text-xs font-medium flex-shrink-0 border transition-all duration-200 group-hover:scale-105 ${getTypeColor(item.tag)}`}>{item.tag}</span>
       <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/0 to-indigo-600/0 group-hover:from-blue-600/5 group-hover:to-indigo-600/5 transition-all duration-300"></div>
     </a>
   );
@@ -199,7 +233,7 @@ export default function LatestUpdates() {
                 <div className="flex align-middle justify-end z-10 mt-4 h-10">
                   <button
                     onClick={() => {
-                      const url = viewMoreUrls[category] || '/announcements/news-notifications';
+                      const url = viewMoreUrls[category] || '/announcements/news';
                       window.location.href = url;
                     }}
                     className="px-4 py-1 text-blue-600  rounded-2xl font-semibold hover:bg-blue-500 hover:text-white transition-colors duration-200 bg-transparent"

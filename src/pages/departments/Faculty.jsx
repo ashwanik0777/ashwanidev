@@ -120,8 +120,6 @@ const Faculty = () => {
   ];
 
   const filteredFaculty = facultyData.filter(faculty => {
-    const desc = (faculty.designation || faculty.title || "").toLowerCase();
-    if (desc.includes("ocfd")) return false;
     const searchString = searchTerm.toLowerCase();
     const matchesSearch =
       (faculty.name || '').toLowerCase().includes(searchString) ||

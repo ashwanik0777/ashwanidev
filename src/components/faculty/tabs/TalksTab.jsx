@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useState } from 'react';
+import { parseImageUrl } from '../../../utils/imageUtils';
 // Minimal UI components with Tailwind CSS, matching usage and effects
 
  export const Card = ({ className = "", children, ...props }) => (
@@ -110,39 +110,22 @@ const normalizeTalk = (item) => ({
   date: pickText(item, ['date', 'year']),
   venue: pickText(item, ['venue', 'location']),
   host: pickText(item, ['host', 'organizer', 'organiser']),
-  role: pickText(item, ['role']),
-  audience: pickText(item, ['audience']),
   type: asText(pickText(item, ['type'], 'invited')).toLowerCase(),
-  slidesUrl: pickText(item, ['slidesUrl', 'slides']),
-  recordingUrl: pickText(item, ['recordingUrl', 'recording', 'videoUrl']),
+  photos: asArray(item.photos).filter(Boolean),
 });
 
 export const TalksTab = ({ profile }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const tabData = profile?.tabData?.talks || {};
   const invitedTalks = asArray(tabData.invitedTalks)?.map(normalizeTalk);
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
   const formatType = (type) => matchKey(type, TYPE_LABELS, asText(type, 'Talk'));
 
+  const invitedCount = invitedTalks.filter((talk) => talk.type === 'invited').length;
   const keynoteCount = invitedTalks.filter((talk) => talk.type === 'keynote').length;
-  const recordedCount = invitedTalks.filter((talk) => talk.recordingUrl).length;
-
-  const talkYears = invitedTalks
-    ?.map((talk) => Number(String(talk.date).match(/\d{4}/)?.[0] || 0))
-    .filter((year) => year > 1900);
-  const latestYear = talkYears.length ? Math.max(...talkYears) : '--';
-
-  // Speaking expertise mirrors the faculty's own research areas/tags rather than
-  // a hardcoded list.
-  const expertiseTopics = [
-    ...asArray(profile?.researchAreas)?.map((area) =>
-      typeof area === 'string' ? area : pickText(area, ['title', 'name']),
-    ),
-    ...asArray(profile?.tags),
-  ]
-    ?.map((topic) => asText(topic))
-    .filter(Boolean)
-    .slice(0, 6);
+  const guestLectureCount = invitedTalks.filter((talk) => talk.type === 'guest-lecture').length;
+  const panelCount = invitedTalks.filter((talk) => talk.type === 'panel').length;
 
   return (
     <div className="space-y-6 bg-gray-50">
@@ -159,28 +142,28 @@ export const TalksTab = ({ profile }) => {
         <CardContent>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{invitedTalks.length}</div>
-              <div className="text-sm text-blue-700">Total Talks</div>
+              <div className="text-2xl font-bold text-blue-600">{invitedCount}</div>
+              <div className="text-sm text-blue-700">Invited Talks</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
               <div className="text-2xl font-bold text-purple-600">{keynoteCount}</div>
               <div className="text-sm text-purple-700">Keynote Speeches</div>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{recordedCount}</div>
-              <div className="text-sm text-green-700">Recorded Talks</div>
+              <div className="text-2xl font-bold text-green-600">{guestLectureCount}</div>
+              <div className="text-sm text-green-700">Guest Lectures</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{latestYear}</div>
-              <div className="text-sm text-orange-700">Latest Year</div>
+              <div className="text-2xl font-bold text-orange-600">{panelCount}</div>
+              <div className="text-sm text-orange-700">Panel Discussions</div>
             </div>
           </div>
 
-          <p className="text-gray-700 leading-relaxed">
+          {/* <p className="text-gray-700 leading-relaxed">
             {pickText(profile, ['name'], 'This faculty member')} delivers invited talks, keynotes and
             guest lectures, sharing research insights and their practical applications with academic
             and industry audiences.
-          </p>
+          </p> */}
         </CardContent>
       </Card>
 
@@ -218,34 +201,22 @@ export const TalksTab = ({ profile }) => {
                       </div>
                       <div className="space-y-2">
                         {talk.host && <p><span className="font-medium">Host:</span> {talk.host}</p>}
-                        {talk.role && <p><span className="font-medium">Role:</span> {talk.role}</p>}
-                        {talk.audience && (
-                          <p className="flex items-center">
-                            <Users className="w-4 h-4 mr-1" />
-                            {talk.audience}
-                          </p>
-                        )}
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mb-4">
-                      {talk.slidesUrl && (
-                        <a href={talk.slidesUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4 mr-1" />
-                            View Slides
-                          </Button>
-                        </a>
-                      )}
-                      {talk.recordingUrl && (
-                        <a href={talk.recordingUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <Play className="w-4 h-4 mr-1" />
-                            Watch Recording
-                          </Button>
-                        </a>
-                      )}
-                    </div>
+                    {talk.photos && talk.photos.length > 0 && (
+                      <div className="flex flex-wrap gap-4 mt-4">
+                        {talk.photos.map((photoUrl, pIdx) => (
+                          <img
+                            key={pIdx}
+                            src={parseImageUrl(photoUrl)}
+                            alt={`Talk photo ${pIdx + 1}`}
+                            className="h-32 w-auto object-cover rounded-md border border-gray-200 shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => setSelectedPhoto(parseImageUrl(photoUrl))}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col items-start lg:items-end gap-2">
@@ -265,25 +236,28 @@ export const TalksTab = ({ profile }) => {
         </CardContent>
       </Card>
 
-      {/* Speaking Topics */}
-      {expertiseTopics.length > 0 && (
-        <Card className="hover:shadow-lg transition-shadow duration-300">
-          <CardHeader>
-            <CardTitle className="text-xl text-gray-900">Speaking Expertise</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {expertiseTopics?.map((topic, index) => (
-                <div
-                  key={`${topic}-${index}`}
-                  className={`rounded-lg p-4 border border-solid ${EXPERTISE_STYLES[index % EXPERTISE_STYLES.length]}`}
-                >
-                  <h3 className="font-semibold">{topic}</h3>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+
+      {/* Lightbox for viewing photos */}
+      {selectedPhoto && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <div className="relative max-w-full max-h-full">
+            <button 
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 flex items-center gap-1 font-medium"
+              onClick={() => setSelectedPhoto(null)}
+            >
+              Close
+            </button>
+            <img 
+              src={selectedPhoto} 
+              alt="Full view" 
+              className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

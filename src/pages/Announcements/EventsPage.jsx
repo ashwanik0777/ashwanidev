@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { createSlug } from "../../utils/slugUtil";
 import BannerSection from "../../components/HeroBanner";
 import {
   getSchoolAnnouncements,
@@ -421,11 +422,44 @@ const EventCard = ({ event }) => {
         </p>
 
         <div className="space-y-1.5 mb-3">
-          <div className="flex items-center text-gray-500 text-sm">
-            <Calendar className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
-            {event.date ? new Date(event.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
-            {event.time ? ` • ${event.time}` : ''}
-          </div>
+          {(() => {
+            const startDate = event.startsAt || event.date ? new Date(event.startsAt || event.date) : null;
+            const endDate = event.endsAt ? new Date(event.endsAt) : null;
+            
+            const formatDate = (d) => d ? d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+            
+            let isSameDay = true;
+            if (startDate && endDate) {
+              isSameDay = startDate.toDateString() === endDate.toDateString();
+            }
+
+            if (startDate && endDate && !isSameDay) {
+              return (
+                <div className="flex flex-col text-gray-500 text-sm gap-1">
+                  <div className="flex items-center">
+                    <Calendar className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                    <span className="truncate">{formatDate(startDate)} - {formatDate(endDate)}</span>
+                  </div>
+                  {event.time && (
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Clock className="w-4 h-4 mr-2 text-gray-400 flex-shrink-0" />
+                      <span className="truncate">{event.time}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            return (
+              <div className="flex items-center text-gray-500 text-sm">
+                <Calendar className="w-4 h-4 mr-2 text-blue-500 flex-shrink-0" />
+                <span className="truncate">
+                  {formatDate(startDate)} 
+                  {event.time ? ` • ${event.time}` : ''}
+                </span>
+              </div>
+            );
+          })()}
           <div className="flex items-center text-gray-500 text-sm">
             <MapPin className="w-4 h-4 mr-2 text-red-500 flex-shrink-0" />
             <span className="truncate">{event.location || event.venue}</span>
@@ -440,7 +474,7 @@ const EventCard = ({ event }) => {
         {/* Spacer to push button down */}
         <div className="flex-grow" />
 
-        <Link to={`/announcements/event-calendar/${event.id}`}>
+        <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`}>
           <button className={`w-full py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
             isUpcoming
               ? "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow"
@@ -956,13 +990,13 @@ const EventsPage = ({ schoolCode }) => {
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 No Events Found
               </h3>
-              <p className="text-gray-600 mb-6">
+              {/* <p className="text-gray-600 mb-6">
                 We couldn't find any {activeTab} events matching your criteria.
                 Try adjusting your filters or search terms.
-              </p>
+              </p> */}
               <button
                 onClick={handleClearAllFilters}
-                className="px-8 py-4 bg-gradient-to-r  text-white rounded-xl font-medium 
+                className="px-8 py-4 bg-gradient-to-r  text-black rounded-xl font-medium 
                           transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Clear All Filters

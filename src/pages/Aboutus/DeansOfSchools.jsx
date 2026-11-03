@@ -117,13 +117,13 @@ const administrativeOfficers = [
   },
   {
     role: "Finance Officer",
-    name: "Smt. Anita Singh",
-    image: "https://ui-avatars.com/api/?name=Anita+Singh&background=0284c7&color=fff&size=300"
+    name: "Shri Satyendra Sagar",
+    image: "/assets/Satyendra_Sagar.jpeg"
   },
   {
     role: "Deputy Registrar",
     name: "Prof. Uttam Kumar",
-    image: "https://ui-avatars.com/api/?name=Uttam+Kumar&background=0284c7&color=fff&size=300"
+    image: "/assets/Deputy-Registrar.jpg"
   },
   {
     role: "Assistant Registrar (Academics)",

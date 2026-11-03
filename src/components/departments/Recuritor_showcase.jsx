@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
 
 const fallbackLogo = "https://ui-avatars.com/api/?name=Company&background=e2e8f0&color=475569&size=120&bold=true";
 
@@ -11,7 +12,7 @@ const RecruitersShowcase = ({ recruitersData = [] }) => {
   const displayRecruiters = [...recruitersData, ...recruitersData];
 
   return (
-    <section className="py-8 bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden">
+    <section className={`${SECTION_PADDING} bg-white overflow-hidden`}>
       <style>{`
         @keyframes softMarquee {
           0% { transform: translateX(0%); }
@@ -27,42 +28,35 @@ const RecruitersShowcase = ({ recruitersData = [] }) => {
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div className="text-center mb-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">
-            Our Recruiters
-          </h2>
-          <div className="w-20 sm:w-24 h-1.5 bg-blue-600 mx-auto mt-3 rounded-full" />
-          <p className="text-sm text-gray-500 mt-2 font-medium">
-            Leading companies recruiting our graduates
-          </p>
-        </div>
+      <SectionHeading className={`${HEADING_SPACE} px-4`}>Our Recruiters</SectionHeading>
 
+      {/* Same width as the faculty / departments sections */}
+      <div className={`${SECTION_CONTAINER} ${SLIDER_SIDE_SPACE}`}>
         {/* Marquee Track Container with Soft Edge Fades */}
         <div
-          className="relative w-full overflow-hidden py-4"
+          className="relative w-full overflow-hidden py-3"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Gradient Masks for Soft Edge Fading */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-10 sm:w-20 min-[2560px]:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-10 sm:w-20 min-[2560px]:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           {/* Continuous Sliding Track */}
-          <div className={`animate-soft-marquee gap-4 sm:gap-6 ${isPaused ? "paused" : ""}`}>
+          <div className={`animate-soft-marquee gap-3 sm:gap-4 lg:gap-5 min-[2560px]:gap-8 ${isPaused ? "paused" : ""}`}>
             {displayRecruiters.map((company, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-36 sm:w-44 px-4 py-3 sm:px-6 sm:py-4 rounded-2xl bg-white shadow-sm border border-gray-200/80 hover:shadow-xl hover:border-blue-300 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer flex items-center justify-center"
+                className="flex-shrink-0 w-28 sm:w-36 lg:w-40 min-[1920px]:w-44 min-[2560px]:w-64 px-3 py-2.5 sm:px-5 sm:py-3 min-[2560px]:px-8 min-[2560px]:py-5 rounded-xl sm:rounded-2xl bg-white shadow-sm border border-slate-200 hover:shadow-md hover:border-blue-200 transition-all duration-300 group flex items-center justify-center"
               >
-                <div className="w-full h-14 sm:h-18 flex items-center justify-center">
+                <div className="w-full h-10 sm:h-14 min-[2560px]:h-24 flex items-center justify-center">
                   <img
                     src={company.logo}
                     alt={company.name}
                     title={company.name}
+                    loading="lazy"
                     onError={(e) => (e.target.src = fallbackLogo)}
-                    className="max-w-full max-h-full object-contain filter group-hover:scale-110 transition-transform duration-300"
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </div>

@@ -15,7 +15,7 @@ import RecentPlacements from "../../../components/departments/Recent_Placement.j
 import RecruitersShowcase from "../../../components/departments/Recuritor_showcase";
 import ClubsAchievements from "../../../components/departments/Clubs_activevment.jsx";
 import StudentAchievers from "../../../components/departments/cse/StudentAchievers";
-import { resolveSchool } from '../../../Data/schoolsMeta';
+import { resolveSchool, getSchoolDisplayCode } from '../../../Data/schoolsMeta';
 
 const componentsMap = {
   Landing,
@@ -87,10 +87,16 @@ export default function SchoolDetail() {
         const Component = componentsMap[section.componentName];
         if (!Component) return null;
 
+        // Every school uses the same short-name faculty heading, e.g. "Meet SOE Faculty"
+        const extraProps =
+          section.componentName === "FacultyCarousel"
+            ? { title: `Meet ${getSchoolDisplayCode(resolvedCode)} Faculty` }
+            : {};
+
         // Spread the backend/json props directly to the targeted module
         return (
           <React.Fragment key={idx}>
-            <Component {...(section.props || {})} schoolCode={resolvedCode} />
+            <Component {...(section.props || {})} {...extraProps} schoolCode={resolvedCode} />
             {/* {section.componentName === 'Landing' && <SemesterRegistrationBanner />} */}
           </React.Fragment>
         );

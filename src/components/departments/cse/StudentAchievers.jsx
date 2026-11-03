@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Medal, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import StatsCard from "../../StatsCard";
+import useResponsiveSlider from "../useResponsiveSlider";
+import SectionHeading, { SECTION_PADDING, SECTION_GUTTER, SECTION_CONTAINER } from "../SectionHeading";
 
 // ✅ Reusable Card
 const Card = ({ children, className = "" }) => (
@@ -11,42 +13,47 @@ const Card = ({ children, className = "" }) => (
 );
 
 const CardHeader = ({ children, className = "" }) => (
-  <div className={`p-6 border-b ${className}`}>{children}</div>
+  <div className={className}>{children}</div>
 );
 
 const CardTitle = ({ children, className = "" }) => (
-  <h3 className={`text-xl font-bold text-foreground ${className}`}>{children}</h3>
+  <h3 className={`font-bold text-foreground ${className}`}>{children}</h3>
 );
 
 const CardDescription = ({ children, className = "" }) => (
-  <p className={`text-muted-foreground text-sm ${className}`}>{children}</p>
+  <p className={`text-muted-foreground ${className}`}>{children}</p>
 );
 
 const CardContent = ({ children, className = "" }) => (
-  <div className={`p-6 ${className}`}>{children}</div>
+  <div className={className}>{children}</div>
 );
+
+// [min viewport width, cards per view]: mobile, tablet, laptop, desktop, full HD / projector, 4K
+const ACHIEVER_BREAKPOINTS = [
+  [0, 1],
+  [560, 2],
+  [1024, 3],
+  [1280, 4],
+  [1920, 5],
+  [2560, 6],
+];
+const ACHIEVER_GAP = 16;
 
 const AchieversSlider = ({ topAchievers }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [cardsPerView, setCardsPerView] = useState(3);
-
-  const getCardsPerView = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1024) return 3;
-      if (window.innerWidth >= 640) return 2;
-    }
-    return 1;
-  };
-
-  useEffect(() => {
-    const handleResize = () => setCardsPerView(getCardsPerView());
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { viewportRef, cardsPerView, cardWidth, step } = useResponsiveSlider(
+    ACHIEVER_BREAKPOINTS,
+    ACHIEVER_GAP
+  );
 
   const maxIndex = Math.max(0, topAchievers.length - cardsPerView);
+  const shouldScroll = topAchievers.length > cardsPerView;
+
+  // Keep the index valid when the screen size (and so cards per view) changes
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
 
   useEffect(() => {
     if (isPaused || topAchievers.length <= cardsPerView) return;
@@ -68,24 +75,26 @@ const AchieversSlider = ({ topAchievers }) => {
 
   return (
     <div
-      className="relative px-2 sm:px-8"
+      className={`relative ${shouldScroll ? "px-10 sm:px-12 min-[2560px]:px-20" : ""}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="overflow-hidden py-4">
+      <div ref={viewportRef} className="overflow-hidden py-3">
         <motion.div
-          className="flex gap-6"
-          animate={{ x: `-${currentIndex * (100 / cardsPerView)}%` }}
+          className={`flex${!shouldScroll ? " justify-center" : ""}`}
+          style={{ gap: `${ACHIEVER_GAP}px` }}
+          animate={{ x: shouldScroll ? -currentIndex * step : 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 28 }}
         >
-          {topAchievers.map((student, index) => (
+          {cardWidth > 0 && topAchievers.map((student, index) => (
             <div
               key={index}
-              className="shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              className="shrink-0"
+              style={{ width: `${cardWidth}px` }}
             >
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-white border border-gray-100 shadow-lg rounded-2xl flex flex-col justify-between overflow-hidden">
-                <CardHeader className="text-center pb-2">
-                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-700 text-white flex items-center justify-center font-bold text-3xl border-2 border-white">
+              <Card className="h-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-white border border-gray-100 shadow-sm rounded-xl sm:rounded-2xl flex flex-col overflow-hidden">
+                <CardHeader className="text-center px-4 pt-4 pb-2 min-[2560px]:px-7 min-[2560px]:pt-7">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 min-[2560px]:w-36 min-[2560px]:h-36 rounded-full overflow-hidden mx-auto mb-3 shadow-md bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-700 text-white flex items-center justify-center font-bold text-2xl min-[2560px]:text-4xl border-2 border-white">
                     {student.image ? (
                       <img
                         src={student.image}
@@ -106,21 +115,21 @@ const AchieversSlider = ({ topAchievers }) => {
                         .toUpperCase()}
                     </span>
                   </div>
-                  <CardTitle>{student.name}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg min-[2560px]:text-3xl leading-snug">{student.name}</CardTitle>
                   {student.rollNo && (
-                    <span className="text-xs font-medium text-gray-500 block mt-0.5">
+                    <span className="text-[11px] sm:text-xs min-[2560px]:text-lg font-medium text-gray-500 block mt-0.5">
                       Roll No: {student.rollNo}
                     </span>
                   )}
-                  <CardDescription className="text-blue-600 font-semibold mt-1">
+                  <CardDescription className="text-xs sm:text-sm min-[2560px]:text-xl text-blue-600 font-semibold mt-0.5">
                     {student.year}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4 flex-grow flex flex-col justify-between">
-                  <div className="bg-blue-50/70 p-4 rounded-xl border border-blue-100">
-                    <div className="flex items-start space-x-2.5">
-                      <Medal className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-gray-800 leading-relaxed">
+                <CardContent className="px-3 pb-3 pt-1 sm:px-4 sm:pb-4 min-[2560px]:px-7 min-[2560px]:pb-7 flex-grow flex flex-col">
+                  <div className="flex-grow bg-blue-50/70 p-3 min-[2560px]:p-5 rounded-lg sm:rounded-xl border border-blue-100">
+                    <div className="flex items-start gap-2">
+                      <Medal className="h-4 w-4 sm:h-5 sm:w-5 min-[2560px]:h-7 min-[2560px]:w-7 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <p className="text-xs sm:text-sm min-[2560px]:text-xl text-gray-800 leading-relaxed">
                         {student.achievement}
                       </p>
                     </div>
@@ -133,34 +142,35 @@ const AchieversSlider = ({ topAchievers }) => {
       </div>
 
       {/* Navigation arrows */}
-      {topAchievers.length > cardsPerView && (
+      {shouldScroll && (
         <>
           <button
             onClick={handlePrev}
             aria-label="Previous Slide"
-            className="absolute -left-2 sm:left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white text-gray-800 rounded-full shadow-lg border border-gray-100 flex items-center justify-center z-20 transition-all hover:scale-110 active:scale-95"
+            className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 min-[2560px]:w-14 min-[2560px]:h-14 bg-white hover:bg-blue-50 rounded-full shadow-md border border-blue-100 flex items-center justify-center z-20 transition-all active:scale-95"
           >
-            <ChevronLeft className="w-5 h-5 text-blue-700" />
+            <ChevronLeft className="w-5 h-5 min-[2560px]:w-8 min-[2560px]:h-8 text-blue-700" />
           </button>
           <button
             onClick={handleNext}
             aria-label="Next Slide"
-            className="absolute -right-2 sm:right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white text-gray-800 rounded-full shadow-lg border border-gray-100 flex items-center justify-center z-20 transition-all hover:scale-110 active:scale-95"
+            className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 min-[2560px]:w-14 min-[2560px]:h-14 bg-white hover:bg-blue-50 rounded-full shadow-md border border-blue-100 flex items-center justify-center z-20 transition-all active:scale-95"
           >
-            <ChevronRight className="w-5 h-5 text-blue-700" />
+            <ChevronRight className="w-5 h-5 min-[2560px]:w-8 min-[2560px]:h-8 text-blue-700" />
           </button>
 
           {/* Dots */}
-          <div className="flex justify-center items-center gap-2 mt-6">
+          <div className="flex justify-center items-center flex-wrap gap-1.5 mt-3">
+
             {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2.5 rounded-full transition-all duration-300 ${
+                className={`h-2 min-[2560px]:h-3 rounded-full transition-all duration-300 ${
                   idx === currentIndex
-                    ? "w-8 bg-blue-600 shadow-md"
-                    : "w-2.5 bg-blue-200 hover:bg-blue-300"
+                    ? "w-6 min-[2560px]:w-10 bg-blue-600"
+                    : "w-2 min-[2560px]:w-3 bg-blue-200 hover:bg-blue-300"
                 }`}
               />
             ))}
@@ -190,15 +200,10 @@ const StudentAchievers = ({
     <>
       {/* Top Achievers */}
       {topAchievers && topAchievers.length > 0 && (
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50 overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
-                  {achieversHeading}
-                </h2>
-                <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
-              </div>
+        <section className={`${SECTION_PADDING} bg-white overflow-hidden`}>
+          <div className={SECTION_GUTTER}>
+            <div className={SECTION_CONTAINER}>
+              <SectionHeading>{achieversHeading}</SectionHeading>
 
               <AchieversSlider topAchievers={topAchievers} />
             </div>

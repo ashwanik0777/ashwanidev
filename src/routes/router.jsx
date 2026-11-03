@@ -51,6 +51,7 @@ import LoginPortal from "../pages/Auth/LoginPortal.jsx";
 import FacultyRegister from "../pages/Auth/FacultyRegister.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
 import ProtectedPortalRoute from "../components/Auth/ProtectedPortalRoute.jsx";
+const MaintenanceDashboard = lazy(() => import("../pages/Auth/MaintenanceDashboard.jsx"));
 
 /* Semester Registration — disabled for now, not part of the current release.
    Re-enable together with the routes below and the student login option in
@@ -327,6 +328,14 @@ export default function AppRouter() {
             }
           />
           <Route
+            path="/maintenance-portal/dashboard"
+            element={
+              <ProtectedPortalRoute>
+                <MaintenanceDashboard />
+              </ProtectedPortalRoute>
+            }
+          />
+          <Route
             path="/academics/academic-calendar"
             element={<AcademicCalendar />}
           />
@@ -503,19 +512,19 @@ export default function AppRouter() {
 
           {/* Announcements Routes */}
           <Route
-            path="/announcements/news-notifications"
+            path="/announcements/news"
             element={<NewsNotifications />}
           />
           <Route
-            path="/announcements/event-calendar"
+            path="/announcements/event"
             element={<EventsPage />}
           />
           <Route
-            path="/announcements/event-calendar/:id"
+            path="/announcements/event/:slug"
             element={<EventDetail />}
           />
           <Route
-            path="/announcements/news-notifications/:id"
+            path="/announcements/news/:slug"
             element={<NewsDetail />}
           />
           <Route path="/announcements/notices" element={<Notice />} />

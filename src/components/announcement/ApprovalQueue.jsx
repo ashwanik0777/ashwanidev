@@ -72,9 +72,9 @@ const ApprovalQueue = ({ onMessage }) => {
               </span>
             )}
           </h3>
-          <p className="mt-0.5 text-xs text-slate-500">
+          {/* <p className="mt-0.5 text-xs text-slate-500">
             College-level announcements submitted by schools. These stay off the website until approved.
-          </p>
+          </p> */}
         </div>
         <button
           type="button"

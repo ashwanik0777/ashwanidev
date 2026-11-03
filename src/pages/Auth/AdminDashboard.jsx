@@ -38,7 +38,19 @@ import {
   ArrowDown,
   ClipboardList,
   Zap,
+  Mail,
+  Send,
+  RefreshCw,
+  XCircle,
+  CheckCircle,
+  Clock3,
+  AlertCircle,
+  BarChart3,
+  MessageSquareWarning,
 } from "lucide-react";
+import GrievanceAdminTab from "../../components/grievance/GrievanceAdminTab";
+import ConfirmModal from "../../components/ui/ConfirmModal";
+import FileUploadField from "../../components/ui/FileUploadField";
 import {
   DEFAULT_SCHOOL_DASHBOARD_DATA,
   SCHOOL_DASHBOARD_STORAGE_KEY,
@@ -90,7 +102,7 @@ import {
   listFacultyProfiles,
   updateFacultyProfile,
 } from "../../services/facultyService";
-import { clearPortalSession } from "../../utils/portalSession";
+import { logoutPortalSession } from "../../services/sessionManager";
 import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
   createRecruitment,
@@ -108,11 +120,6 @@ import {
   updateSchool,
 } from "../../services/schoolsService";
 import {
-  listFacultyRegistrationRequests,
-  approveFacultyRegistration,
-  rejectFacultyRegistration,
-} from "../../services/facultyRegistrationService";
-import {
   listBookingRequests,
   approveBookingRequest,
   rejectBookingRequest,
@@ -123,8 +130,12 @@ import {
   listItcellMembers,
   createItcellMember,
   updateItcellMember,
-  deleteItcellMember
 } from "../../services/itcellService";
+import {
+  listFacultyRegistrationRequests,
+  approveFacultyRegistration,
+  rejectFacultyRegistration,
+} from "../../services/facultyRegistrationService";
 import { facilities } from "../../components/bookingData/facilities";
 import UniversityStatsManager from "../../components/admin/UniversityStatsManager";
 /* Semester Registration is held back from this release — the modules below are
@@ -145,6 +156,8 @@ import {
   updateTickerNotice,
   deleteTickerNotice,
 } from "../../services/tickerNoticesService";
+import AnalyticsTab from "../../components/admin/AnalyticsTab";
+import SubscribersTab from "../../components/admin/SubscribersTab";
 
 const EMPTY_SCHOOL_DATA = {
   schoolName: "",
@@ -241,7 +254,7 @@ const getApiErrorMessage = (error, fallback) => {
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
+  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20";
 
 const NOTICES_FIELDS = [
   { key: "title", label: "Notice Title", required: true },
@@ -427,6 +440,10 @@ const tabs = [
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
   { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
+  { id: "emailSystem", label: "Email System", icon: Mail },
+  { id: "subscribers", label: "Subscribers", icon: Users },
+  { id: "analytics", label: "Analytics", icon: BarChart3 },
+  { id: "grievances", label: "Grievance Management", icon: MessageSquareWarning },
   // { id: "semester-registrations", label: "Semester Registrations", icon: ClipboardList }, // hidden until semester registration ships
 ];
 
@@ -441,9 +458,9 @@ const schoolContentTabs = [
 
 const Field = ({ label, children, required }) => (
   <div>
-    <label className="mb-1 block text-sm font-medium text-slate-700">
+    <span className="mb-1 block text-sm font-medium text-slate-700">
       {label} {required && <span className="text-red-500 font-bold ml-0.5">*</span>}
-    </label>
+    </span>
     {children}
   </div>
 );
@@ -454,7 +471,7 @@ const FilterBar = ({ searchValue, onSearchChange, searchPlaceholder, children, o
       <div className="relative min-w-[220px] flex-1">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
         <input
-          className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
+          className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition-all focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
           type="text"
           value={searchValue}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -595,6 +612,7 @@ const AdminDashboard = () => {
     localStorage.setItem("adminActiveTab", activeTab);
   }, [activeTab]);
   const [message, setMessage] = useState("");
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, item: null, type: null });
   const [activeSchoolSubTab, setActiveSchoolSubTab] = useState("basic");
 
   const [schoolData, setSchoolData] = useState(getInitialSchoolData);
@@ -605,6 +623,14 @@ const AdminDashboard = () => {
   const [schoolDeletingKey, setSchoolDeletingKey] = useState("");
   const [schoolApiError, setSchoolApiError] = useState("");
   const [schoolEditor, setSchoolEditor] = useState({ isCreating: false });
+  
+  // Faculty Requests State
+  const [facultyRequests, setFacultyRequests] = useState([]);
+  const [facultyRequestsMeta, setFacultyRequestsMeta] = useState({ page: 1, limit: 10, totalPages: 1 });
+  const [facultyRequestsFilter, setFacultyRequestsFilter] = useState("pending");
+  const [facultyRequestsQuery, setFacultyRequestsQuery] = useState("");
+  const [facultyRequestsLoading, setFacultyRequestsLoading] = useState(false);
+
   // Collection edits (clubs, NSS/NCC content) are staged in schoolData and only
   // persisted by the tab's Save button — flag it so it is not missed.
   // Announcements are exempt: they save per item, straight to their own tables.
@@ -713,13 +739,7 @@ const AdminDashboard = () => {
   const bulkFacultyInputRef = useRef(null);
 
   /* ── Faculty Registration Requests state ── */
-  const [regRequests, setRegRequests] = useState([]);
-  const [regRequestsLoading, setRegRequestsLoading] = useState(false);
-  const [regRequestsError, setRegRequestsError] = useState("");
-  const [regStatusFilter, setRegStatusFilter] = useState("pending");
-  const [regSearchQuery, setRegSearchQuery] = useState("");
   const [regReloadToken, setRegReloadToken] = useState(0);
-  const [regActionLoading, setRegActionLoading] = useState("");
 
   /* ── Booking Management state ── */
   const [bookingRequests, setBookingRequests] = useState([]);
@@ -762,7 +782,7 @@ const AdminDashboard = () => {
     () => [
       { label: "Total Accounts", value: accountPagination.total },
       { label: "Faculty Profiles", value: facultyProfiles.length },
-      { label: "School Events", value: schoolData.events?.length || 0 },
+      { label: "School Events", value: schoolData.counts?.events || 0 },
       { label: "Active Tenders", value: tenderSplit.current.length },
       { label: "Recruitment Posts", value: recruitmentPostCount },
     ],
@@ -862,21 +882,45 @@ const AdminDashboard = () => {
       setIsAccountsLoading(true);
       setAccountApiError("");
       try {
-        const response = await listAdminAccounts({
-          query: accountFilters.query,
-          role: accountFilters.role,
-          status: accountFilters.status,
-          page: accountPagination.page,
-          limit: accountPagination.limit,
-        });
+        /* Admin and school logins are few and always shown pinned above the
+           faculty list, so they are fetched in full; only faculty accounts are
+           paginated. Paging through faculty used to shuffle them in and out
+           because all roles shared one id-ordered page. */
+        const selectedRole = accountFilters.role;
+        const sharedFilters = { query: accountFilters.query, status: accountFilters.status };
+        const pinnedRoles = ["admin", "school"].filter(
+          (role) => selectedRole === "all" || selectedRole === role,
+        );
+        const includeFaculty = selectedRole === "all" || selectedRole === "faculty";
+
+        const [pinnedResponses, facultyResponse] = await Promise.all([
+          Promise.all(
+            pinnedRoles.map((role) =>
+              listAdminAccounts({ ...sharedFilters, role, page: 1, limit: 500 }),
+            ),
+          ),
+          includeFaculty
+            ? listAdminAccounts({
+                ...sharedFilters,
+                role: "faculty",
+                page: accountPagination.page,
+                limit: accountPagination.limit,
+              })
+            : Promise.resolve(null),
+        ]);
         if (!isMounted) return;
-        setAccounts(Array.isArray(response?.items) ? response.items : []);
+
+        const pinnedAccounts = pinnedResponses.flatMap((response) =>
+          Array.isArray(response?.items) ? response.items : [],
+        );
+        const facultyPage = Array.isArray(facultyResponse?.items) ? facultyResponse.items : [];
+        setAccounts([...pinnedAccounts, ...facultyPage]);
         setAccountPagination((prev) => ({
           ...prev,
-          page: response?.pagination?.page || prev.page,
-          limit: response?.pagination?.limit || prev.limit,
-          total: response?.pagination?.total || 0,
-          totalPages: response?.pagination?.totalPages || 1,
+          page: facultyResponse?.pagination?.page || 1,
+          limit: facultyResponse?.pagination?.limit || prev.limit,
+          total: facultyResponse?.pagination?.total || 0,
+          totalPages: facultyResponse?.pagination?.totalPages || 1,
         }));
       } catch (error) {
         if (!isMounted) return;
@@ -1085,31 +1129,7 @@ const AdminDashboard = () => {
     };
   }, [itcellReloadToken]);
 
-  /* ── Fetch faculty registration requests ── */
-  useEffect(() => {
-    let isMounted = true;
-    const fetchRegRequests = async () => {
-      setRegRequestsLoading(true);
-      setRegRequestsError("");
-      try {
-        const data = await listFacultyRegistrationRequests({
-          status: regStatusFilter,
-          query: regSearchQuery,
-          page: 1,
-          limit: 100,
-        });
-        if (!isMounted) return;
-        setRegRequests(data?.items || []);
-      } catch (err) {
-        if (!isMounted) return;
-        setRegRequestsError(err?.response?.data?.message || err?.message || "Failed to fetch requests");
-      } finally {
-        if (isMounted) setRegRequestsLoading(false);
-      }
-    };
-    fetchRegRequests();
-    return () => { isMounted = false; };
-  }, [regStatusFilter, regSearchQuery, regReloadToken]);
+
 
   /* ── Fetch booking requests for admin ── */
   useEffect(() => {
@@ -1188,6 +1208,31 @@ const AdminDashboard = () => {
     return () => { isMounted = false; };
   }, [activeTab, semRegFilters]);
 
+  const loadFacultyRequests = async (page = 1) => {
+    try {
+      setFacultyRequestsLoading(true);
+      const res = await listFacultyRegistrationRequests({
+        page,
+        limit: facultyRequestsMeta.limit,
+        status: facultyRequestsFilter,
+        query: facultyRequestsQuery,
+      });
+      setFacultyRequests(res.items || []);
+      setFacultyRequestsMeta(res.pagination || { page: 1, limit: 10, totalPages: 1 });
+    } catch (error) {
+      console.error("[AdminDashboard] loadFacultyRequests failed", error);
+      setMessage(error?.response?.data?.message || "Failed to load faculty requests");
+    } finally {
+      setFacultyRequestsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === "faculty-requests") {
+      loadFacultyRequests(facultyRequestsMeta.page);
+    }
+  }, [activeTab, facultyRequestsFilter, facultyRequestsQuery, facultyRequestsMeta.page]);
+
   /* ── Announcements own their sub-tab; they no longer read schoolData ── */
   useEffect(() => {
     if (activeTab === "announcements") {
@@ -1205,6 +1250,29 @@ const AdminDashboard = () => {
   }, [activeTab, activeSchoolSubTab, schoolsList, selectedSchoolId]);
 
   /* ── Approval queue badge ── */
+  const handleApproveRequest = async (id) => {
+    if (!window.confirm("Approve this faculty registration? They will receive login credentials via email.")) return;
+    try {
+      await approveFacultyRegistration(id);
+      setMessage("Request approved successfully.");
+      loadFacultyRequests(facultyRequestsMeta.page);
+    } catch (err) {
+      console.error(err);
+      setMessage(err?.response?.data?.message || "Failed to approve request");
+    }
+  };
+
+  const handleRejectRequest = async (id, reason) => {
+    try {
+      await rejectFacultyRegistration(id, reason);
+      setMessage("Request rejected.");
+      loadFacultyRequests(facultyRequestsMeta.page);
+    } catch (err) {
+      console.error(err);
+      setMessage(err?.response?.data?.message || "Failed to reject request");
+    }
+  };
+
   const refreshPendingApprovalCount = useCallback(async () => {
     try {
       const pending = await listPendingAnnouncements();
@@ -1464,31 +1532,54 @@ const AdminDashboard = () => {
     }
   };
 
-  const exportBackup = () => {
-    const payload = {
-      exportedAt: new Date().toISOString(),
-      schoolData,
-      accounts,
-      tenders,
-      recruitmentData,
-      facultyProfiles,
-    };
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `gbu-admin-backup-${new Date().toISOString().slice(0, 10)}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    setActivityLog((prev) => [
-      {
-        id: `log-${Date.now()}`,
-        action: "Exported admin backup",
-        time: new Date().toISOString(),
-      },
-      ...prev,
-    ].slice(0, 12));
-    setMessage("Backup exported successfully.");
+  const exportBackup = async () => {
+    setMessage("Generating full database backup...");
+    try {
+      const session = JSON.parse(localStorage.getItem("portal_auth_session") || "{}");
+      const token = session?.accessToken;
+      if (!token) {
+        setMessage("Authentication required. Please log in again.");
+        return;
+      }
+
+      const backendBase = (import.meta.env.VITE_BACKEND_BASE_URL || "").replace(/\/+$/, "");
+      const response = await fetch(
+        `${backendBase}/api/v1/admin/backup`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(errText || `Server returned ${response.status}`);
+      }
+
+      const backupData = await response.json();
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `gbu-full-db-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      setActivityLog((prev) =>
+        [
+          {
+            id: `log-${Date.now()}`,
+            action: "Exported full database backup",
+            time: new Date().toISOString(),
+          },
+          ...prev,
+        ].slice(0, 12),
+      );
+      setMessage(`Full database backup exported successfully! (${backupData.totalTables} tables, ${backupData.totalRows} rows)`);
+    } catch (err) {
+      console.error("Backup export error:", err);
+      setMessage("Backup export failed: " + (err.message || "Unknown error"));
+    }
   };
 
   const importBackup = async (event) => {
@@ -2068,7 +2159,10 @@ const AdminDashboard = () => {
 
         try {
           await deleteAdminAccount(accountId);
-          const shouldMoveToPreviousPage = accounts.length === 1 && accountPagination.page > 1;
+          // Only faculty accounts are paginated; step back if the last one on this page went.
+          const facultyOnPage = accounts.filter((item) => item.role === "faculty").length;
+          const shouldMoveToPreviousPage =
+            account.role === "faculty" && facultyOnPage === 1 && accountPagination.page > 1;
           if (shouldMoveToPreviousPage) {
             setAccountPagination((prev) => ({ ...prev, page: prev.page - 1 }));
           }
@@ -2105,6 +2199,24 @@ const AdminDashboard = () => {
     if (accountEditor.index === null && !form?.password) {
       setMessage("Password is required for new account creation.");
       return;
+    }
+
+    // New admin/school logins need a real email — the login OTP is sent there.
+    const needsEmail = accountEditor.index === null && (form.role === "admin" || form.role === "school");
+    if (needsEmail) {
+      const normalizedEmail = String(form.email || "").trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+        setMessage("Please enter a valid email. The login OTP will be sent to this email.");
+        return;
+      }
+
+      const duplicateEmail = accounts.some(
+        (item) => String(item.email || "").toLowerCase() === normalizedEmail,
+      );
+      if (duplicateEmail) {
+        setMessage("This email is already used by another account.");
+        return;
+      }
     }
 
     const duplicate = accounts.some(
@@ -2450,49 +2562,12 @@ const AdminDashboard = () => {
 
         // Backend auto-creates login account and returns credentials
         if (rawResponse?.loginAccount) {
-          const { username, password } = rawResponse.loginAccount;
-          resultMessage = `Faculty "${savedFaculty.name}" created successfully! Login credentials — Username: ${username} | Password: ${password}`;
+          resultMessage = `Faculty "${savedFaculty.name}" created successfully! Credentials have been sent to their email.`;
           
           // Refresh accounts list since a new account was created
           setAccountPagination((prev) => ({ ...prev, page: 1 }));
           setAccountsReloadToken((prev) => prev + 1);
           setAuditReloadToken((prev) => prev + 1);
-
-          // Queue credential email if requested
-          if (facultyForm.sendCredentialsEmail && savedFaculty.email) {
-            const queueItem = {
-              id: `mail-${Date.now()}`,
-              to: savedFaculty.email,
-              subject: "GBU Faculty Portal Credentials",
-              status: "pending-backend",
-              payload: {
-                facultyName: savedFaculty.name,
-                username,
-                password,
-                linkedFacultyId: savedFaculty.id,
-              },
-              createdAt: new Date().toISOString(),
-            };
-
-            setMailQueue((prev) => [queueItem, ...prev].slice(0, 100));
-
-            try {
-              const dispatchResult = await dispatchCredentialEmails([queueItem]);
-              const resultItem = dispatchResult?.items?.[0];
-              if (resultItem?.status) {
-                setMailQueue((prev) =>
-                  prev.map((item) =>
-                    item.id === queueItem.id
-                      ? { ...item, status: resultItem.status, error: resultItem.error || "" }
-                      : item,
-                  ),
-                );
-              }
-            } catch (mailError) {
-              // Email send failed but account was created
-              console.error("Credential email dispatch failed:", mailError);
-            }
-          }
         } else if (!isEdit && facultyForm.createLoginAccount) {
           resultMessage = `Faculty "${savedFaculty.name}" created. Login account may already exist or email was missing.`;
         }
@@ -2840,10 +2915,10 @@ const AdminDashboard = () => {
     ).length;
     const facultyWithoutEmail = facultyProfiles.filter((item) => !String(item.email || "").trim()).length;
     const sectionsMissingData = [
-      { key: "events", value: schoolData.events?.length || 0, label: "Events" },
-      { key: "news", value: schoolData.news?.length || 0, label: "News" },
-      { key: "notices", value: schoolData.notices?.length || 0, label: "Notices" },
-      { key: "newsletters", value: schoolData.newsletters?.length || 0, label: "Newsletters" },
+      { key: "events", value: schoolData.counts?.events || 0, label: "Events" },
+      { key: "news", value: schoolData.counts?.news || 0, label: "News" },
+      { key: "notices", value: schoolData.counts?.notices || 0, label: "Notices" },
+      { key: "newsletters", value: schoolData.counts?.newsletters || 0, label: "Newsletters" },
       { key: "gallery", value: schoolData.eventGallery?.length || 0, label: "Event Gallery" },
     ]
       .filter((item) => item.value === 0)
@@ -2926,7 +3001,7 @@ const AdminDashboard = () => {
           <button
             type="button"
             onClick={() => openCollectionAdd(listKey, newItemTemplate)}
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+            className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition"
           >
             <Plus className="h-3.5 w-3.5" /> Add New
           </button>
@@ -3135,6 +3210,14 @@ const AdminDashboard = () => {
                           </option>
                         ))}
                       </select>
+                    ) : field.key === "pdfUrl" || field.key === "documentUrl" ? (
+                      <FileUploadField
+                        label=""
+                        value={collectionEditors[listKey].form[field.key] || ""}
+                        onChange={(url) => updateCollectionFormField(listKey, field, url)}
+                        accept=".pdf"
+                        folder={listKey === "notices" ? "nss/notices" : listKey === "nccNotices" ? "ncc/notices" : "documents"}
+                      />
                     ) : (
                       <input
                         className={inputClass}
@@ -3150,7 +3233,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={() => saveCollectionForm(listKey)}
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-600"
               >
                 Apply Changes
               </button>
@@ -3178,6 +3261,7 @@ const AdminDashboard = () => {
                   id: `acc-${Date.now()}`,
                   name: "",
                   username: "",
+                  email: "",
                   password: "",
                   role: "faculty",
                   status: "active",
@@ -3187,7 +3271,7 @@ const AdminDashboard = () => {
                 },
               })
             }
-            className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+            className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600"
           >
             <UserPlus className="h-3.5 w-3.5" /> Create Login
           </button>
@@ -3249,10 +3333,11 @@ const AdminDashboard = () => {
             {(() => {
               const adminAndSchoolAccounts = accounts.filter(acc => acc.role === "admin" || acc.role === "school");
               const facultyAccounts = accounts.filter(acc => acc.role === "faculty");
+              const showFacultySection = accountFilters.role === "all" || accountFilters.role === "faculty";
 
               return (
-                <div className="space-y-6 max-h-[600px] overflow-y-auto pr-1 pb-2">
-                  {/* Category 1: Admins and School Management Accounts */}
+                <div className="space-y-6">
+                  {/* Category 1: Admins and School Management Accounts — always pinned on top, not paginated */}
                   <div className="space-y-2">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-blue-500" />
@@ -3323,17 +3408,19 @@ const AdminDashboard = () => {
                       </div>
                     ) : (
                       <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-4 text-center text-xs text-slate-500">
-                        No admin or school accounts found on this page.
+                        No admin or school accounts found.
                       </div>
                     )}
                   </div>
 
-                  {/* Category 2: Faculty Portal Accounts */}
+                  {/* Category 2: Faculty Portal Accounts — the only paginated list */}
+                  {showFacultySection ? (
                   <div className="space-y-2">
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                      Faculty Portal Accounts ({facultyAccounts.length})
+                      Faculty Portal Accounts ({accountPagination.total})
                     </h3>
+                    <div className="max-h-[600px] overflow-y-auto pr-1 pb-2">
                     {facultyAccounts.length > 0 ? (
                       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
                         <table className="w-full border-collapse text-left text-xs">
@@ -3408,7 +3495,9 @@ const AdminDashboard = () => {
                         No faculty accounts found on this page.
                       </div>
                     )}
+                    </div>
                   </div>
+                  ) : null}
                 </div>
               );
             })()}
@@ -3420,7 +3509,7 @@ const AdminDashboard = () => {
                   Showing {accountPagination.total ? (accountPagination.page - 1) * accountPagination.limit + 1 : 0}
                   -
                   {Math.min(accountPagination.page * accountPagination.limit, accountPagination.total)} of{" "}
-                  {accountPagination.total}
+                  {accountPagination.total} faculty accounts
                 </span>
 
                 <div className="flex items-center gap-1.5">
@@ -3519,6 +3608,21 @@ const AdminDashboard = () => {
                       }
                     />
                   </Field>
+                  {accountEditor.index === null &&
+                  (accountEditor.form.role === "admin" || accountEditor.form.role === "school") ? (
+                  <Field label="Email">
+                    <input
+                      className={inputClass}
+                      type="email"
+                      autoComplete="off"
+                      placeholder="name@gbu.ac.in"
+                      value={accountEditor.form.email || ""}
+                      onChange={(e) =>
+                        setAccountEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))
+                      }
+                    />
+                  </Field>
+                  ) : null}
                   <Field label="Password">
                     <div className="flex items-center gap-2">
                       <input
@@ -3714,7 +3818,7 @@ const AdminDashboard = () => {
                     type="button"
                     disabled={isAccountSaving}
                     onClick={handleSaveAccount}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-sky-500 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition disabled:opacity-50"
                   >
                     {isAccountSaving ? "Saving..." : "Save Account"}
                   </button>
@@ -3782,7 +3886,7 @@ const AdminDashboard = () => {
           {auditLogs.map((log) => (
             <div key={log.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
               <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                <span className="rounded-md bg-slate-900 px-2 py-1 font-semibold text-white">
+                <span className="rounded-md bg-sky-500 px-2 py-1 font-semibold text-white">
                   {log.action}
                 </span>
                 <span className="text-slate-500">{new Date(log.createdAt).toLocaleString()}</span>
@@ -3855,7 +3959,7 @@ const AdminDashboard = () => {
           <div className="mb-3 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">Faculty Profiles Management</h2>
-              <p className="text-xs text-slate-500">Manage institutional profiles, generate credentials, and upload in bulk.</p>
+              {/* <p className="text-xs text-slate-500">Manage institutional profiles, generate credentials, and upload in bulk.</p> */}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <button
@@ -3899,7 +4003,7 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+                className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Faculty
               </button>
@@ -3968,7 +4072,7 @@ const AdminDashboard = () => {
                     facultyProfiles.map((faculty, idx) => (
                       <tr key={faculty.id || idx} className="hover:bg-slate-55/50 transition-colors">
                         <td className="px-4 py-3">
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             {faculty.image_url ? (
                               <img
                                 src={parseImageUrl(faculty.image_url)}
@@ -4240,38 +4344,6 @@ const AdminDashboard = () => {
                         <option value="false">No</option>
                       </select>
                     </Field>
-                    <Field label="Send Credentials Email">
-                      <select
-                        className={inputClass}
-                        value={String(facultyEditor.form.sendCredentialsEmail ?? true)}
-                        onChange={(e) =>
-                          setFacultyEditor((prev) => ({
-                            ...prev,
-                            form: { ...prev.form, sendCredentialsEmail: e.target.value === "true" },
-                          }))
-                        }
-                      >
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                      </select>
-                    </Field>
-                    <Field label="Generated Temporary Password">
-                      <div className="flex items-center gap-2">
-                        <input className={inputClass} value={facultyEditor.form.generatedPassword || ""} readOnly />
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setFacultyEditor((prev) => ({
-                              ...prev,
-                              form: { ...prev.form, generatedPassword: generateStrongPassword() },
-                            }))
-                          }
-                          className="inline-flex h-10 items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-100"
-                        >
-                          <Sparkles className="h-3.5 w-3.5" /> Regenerate
-                        </button>
-                      </div>
-                    </Field>
                   </>
                 )}
               </div>
@@ -4297,6 +4369,150 @@ const AdminDashboard = () => {
             </div>
           </div>
         )}
+      </div>
+    );
+  };
+
+  const renderFacultyRequestsTab = () => {
+    return (
+      <div className="space-y-4">
+        <div className={cardClass}>
+          {/* Header */}
+          <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
+              <p className="text-xs text-slate-500">Manage incoming faculty registration requests</p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <select
+                value={facultyRequestsFilter}
+                onChange={(e) => {
+                  setFacultyRequestsFilter(e.target.value);
+                  setFacultyRequestsMeta(p => ({ ...p, page: 1 }));
+                }}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm"
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Search requests..."
+                value={facultyRequestsQuery}
+                onChange={(e) => {
+                  setFacultyRequestsQuery(e.target.value);
+                  setFacultyRequestsMeta(p => ({ ...p, page: 1 }));
+                }}
+                className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
+              />
+            </div>
+          </div>
+
+          {/* List */}
+          <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <table className="w-full text-left text-sm text-slate-600">
+              <thead className="bg-slate-50 text-xs uppercase text-slate-500 border-b border-slate-200">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Name / Email</th>
+                  <th className="px-4 py-3 font-semibold">School / Dept</th>
+                  <th className="px-4 py-3 font-semibold">Designation</th>
+                  <th className="px-4 py-3 font-semibold">Status</th>
+                  <th className="px-4 py-3 font-semibold">Date</th>
+                  <th className="px-4 py-3 font-semibold text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 bg-white">
+                {facultyRequestsLoading ? (
+                  <tr>
+                    <td colSpan="6" className="px-4 py-8 text-center text-slate-400">Loading requests...</td>
+                  </tr>
+                ) : facultyRequests.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="px-4 py-8 text-center text-slate-400">No registration requests found.</td>
+                  </tr>
+                ) : (
+                  facultyRequests.map((req) => (
+                    <tr key={req.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3">
+                        <div className="font-semibold text-slate-900">{req.name}</div>
+                        <div className="text-xs text-slate-500">{req.email}</div>
+                        <div className="text-xs text-slate-400">{req.mobile}</div>
+                      </td>
+                      <td className="px-4 py-3 text-xs">
+                        <div className="font-medium text-slate-700">{req.school_code}</div>
+                        <div className="text-slate-500">{req.department}</div>
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-700">{req.designation}</td>
+                      <td className="px-4 py-3 text-xs">
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full font-medium border ${
+                          req.status === 'approved' ? 'bg-green-50 text-green-700 border-green-200' :
+                          req.status === 'rejected' ? 'bg-red-50 text-red-700 border-red-200' :
+                          'bg-amber-50 text-amber-700 border-amber-200'
+                        }`}>
+                          {req.status}
+                        </span>
+                        {req.status === 'rejected' && req.rejection_reason && (
+                          <div className="mt-1 text-[10px] text-red-500" title={req.rejection_reason}>
+                            {req.rejection_reason.length > 20 ? req.rejection_reason.substring(0, 20) + '...' : req.rejection_reason}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-xs text-slate-500 whitespace-nowrap">
+                        {new Date(req.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        {req.status === 'pending' && (
+                          <div className="flex justify-end gap-2">
+                            <button
+                              onClick={() => handleApproveRequest(req.id)}
+                              className="rounded bg-green-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-green-700 transition"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => {
+                                const reason = prompt("Enter rejection reason (optional):");
+                                if (reason !== null) handleRejectRequest(req.id, reason);
+                              }}
+                              className="rounded bg-red-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-red-700 transition"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-sm text-slate-500">
+            <span>
+              Page {facultyRequestsMeta.page} of {facultyRequestsMeta.totalPages} ({facultyRequestsMeta.total || 0} total)
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                disabled={facultyRequestsMeta.page <= 1}
+                onClick={() => loadFacultyRequests(facultyRequestsMeta.page - 1)}
+                className="rounded-md border border-slate-300 bg-white px-3 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60 transition"
+              >
+                Prev
+              </button>
+              <button
+                disabled={facultyRequestsMeta.page >= facultyRequestsMeta.totalPages}
+                onClick={() => loadFacultyRequests(facultyRequestsMeta.page + 1)}
+                className="rounded-md border border-slate-300 bg-white px-3 py-1 font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60 transition"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   };
@@ -4347,7 +4563,7 @@ const AdminDashboard = () => {
                   },
                 })
               }
-              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-3.5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition"
             >
               <Plus className="h-3.5 w-3.5" /> Add Tender
             </button>
@@ -4596,14 +4812,15 @@ const AdminDashboard = () => {
                     }
                   />
                 </Field>
-                <Field label="Document URL">
-                  <input
-                    className={inputClass}
+                <Field label="Tender Document">
+                  <FileUploadField
+                    label=""
                     value={tenderEditor.form.documentUrl || ""}
-                    placeholder="Enter link to download official PDF/Doc"
-                    onChange={(e) =>
-                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: e.target.value } }))
+                    onChange={(url) =>
+                      setTenderEditor((prev) => ({ ...prev, form: { ...prev.form, documentUrl: url } }))
                     }
+                    accept=".pdf,.doc,.docx"
+                    folder="tenders"
                   />
                 </Field>
               </div>
@@ -4685,20 +4902,20 @@ const AdminDashboard = () => {
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
               <h2 className="text-lg font-bold text-slate-900">Booking Management</h2>
-              <p className="text-xs text-slate-500 mt-0.5">Review and manage facility booking requests.</p>
+              {/* <p className="text-xs text-slate-500 mt-0.5">Review and manage facility booking requests.</p> */}
             </div>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setBookingSubSection("requests")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "requests" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "requests" ? "bg-sky-500 text-white shadow-sm" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
               >
                 Requests
               </button>
               <button
                 type="button"
                 onClick={() => setBookingSubSection("in-charges")}
-                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "in-charges" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${bookingSubSection === "in-charges" ? "bg-sky-500 text-white shadow-sm" : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
               >
                 In-Charges
               </button>
@@ -4890,7 +5107,7 @@ const AdminDashboard = () => {
                                 const phone = document.getElementById(`ic-phone-${facility.id}`)?.value || "";
                                 handleUpdateInCharge(facility.id, email, name, phone);
                               }}
-                              className="rounded-lg bg-slate-900 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-slate-800 transition"
+                              className="rounded-xl bg-sky-500 px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm hover:bg-sky-600 transition"
                             >
                               Save
                             </button>
@@ -5046,7 +5263,7 @@ const AdminDashboard = () => {
           <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
               <h2 className="text-lg font-bold text-slate-900">IT Cell Team</h2>
-              <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main IT Cell page.</p>
+              {/* <p className="text-xs text-slate-500 mt-1">Manage faculty advisors, student developers, and their display order on the main IT Cell page.</p> */}
             </div>
             <button
               type="button"
@@ -5070,7 +5287,7 @@ const AdminDashboard = () => {
                   },
                 })
               }
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-slate-800 transition shadow-sm self-start sm:self-auto"
+              className="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition self-start sm:self-auto"
             >
               <Plus className="h-4 w-4" /> Add Team Member
             </button>
@@ -5360,7 +5577,7 @@ const AdminDashboard = () => {
                   type="button"
                   disabled={isItcellSaving}
                   onClick={handleSaveItcellMember}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-5 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-sky-500 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-sky-600 transition disabled:opacity-50"
                 >
                   {isItcellSaving ? "Saving..." : "Save Member"}
                 </button>
@@ -5379,7 +5596,7 @@ const AdminDashboard = () => {
           <div className={cardClass}>
             <div className="mb-4">
               <h2 className="text-lg font-semibold text-slate-900">Schools & Organizations Management</h2>
-              <p className="text-sm text-slate-500">Select a school to view and manage its content, events, news, notices, and clubs.</p>
+              {/* <p className="text-sm text-slate-500">Select a school to view and manage its content, events, news, notices, and clubs.</p> */}
             </div>
 
             {schoolApiError && (
@@ -5399,9 +5616,9 @@ const AdminDashboard = () => {
                 {schoolsList.filter((s) => s.code !== "NSS" && s.code !== "NCC" && s.code !== "GBU").map((school) => {
                   const c = school.content || {};
                   const counts = [
-                    { label: "Events", n: (c.events || []).length, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
-                    { label: "News", n: (c.news || []).length, bg: "bg-emerald-50 text-emerald-700 border-emerald-100" },
-                    { label: "Notices", n: (c.notices || []).length, bg: "bg-sky-50 text-sky-700 border-sky-100" },
+                    { label: "Events", n: school.counts?.events || 0, bg: "bg-indigo-50 text-indigo-700 border-indigo-100" },
+                    { label: "News", n: school.counts?.news || 0, bg: "bg-emerald-50 text-emerald-700 border-emerald-100" },
+                    { label: "Notices", n: school.counts?.notices || 0, bg: "bg-sky-50 text-sky-700 border-sky-100" },
                   ];
                   return (
                     <div
@@ -5411,7 +5628,7 @@ const AdminDashboard = () => {
                     >
                       <div>
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="rounded-lg bg-slate-900 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase">{school.code}</span>
+                          <span className="rounded-lg bg-sky-500 px-3 py-1 text-xs font-bold text-white tracking-wider uppercase shadow-sm">{school.code}</span>
                           <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold text-emerald-800 border border-emerald-250">Active</span>
                         </div>
                         <h3 className="text-base font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-slate-950 transition-colors">{school.name}</h3>
@@ -5457,7 +5674,7 @@ const AdminDashboard = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-semibold text-slate-900">{schoolData.schoolName || "School"}</h2>
-                <span className="rounded-lg bg-blue-600 px-2 py-0.5 text-xs font-bold text-white">{schoolData.schoolCode}</span>
+                <span className="rounded-lg bg-sky-500 px-2 py-0.5 text-xs font-bold text-white">{schoolData.schoolCode}</span>
               </div>
               <p className="text-sm text-slate-500">Manage this school's content, events, news &amp; more. Data is saved per-school.</p>
             </div>
@@ -5466,7 +5683,7 @@ const AdminDashboard = () => {
             <button
               onClick={handleSaveSchool}
               disabled={isSchoolSaving}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
             >
               <Save className="h-4 w-4" />
               {isSchoolSaving ? "Saving..." : "Save School"}
@@ -5524,13 +5741,13 @@ const AdminDashboard = () => {
                 onChange={(e) => setSchoolData((prev) => ({ ...prev, websiteUrl: e.target.value }))}
               />
             </Field>
-            <Field label="Banner Image URL">
+            {/* <Field label="Banner Image URL">
               <input
                 className={inputClass}
                 value={schoolData.bannerImage || ""}
                 onChange={(e) => setSchoolData((prev) => ({ ...prev, bannerImage: e.target.value }))}
               />
-            </Field>
+            </Field> */}
             <Field label="Address">
               <input
                 className={inputClass}
@@ -5648,12 +5865,12 @@ const AdminDashboard = () => {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-slate-900">University Announcements Management</h2>
-              <span className="rounded-lg bg-slate-900 px-2 py-0.5 text-xs font-bold text-white">GBU</span>
+              <span className="rounded-lg bg-sky-500 px-2 py-0.5 text-xs font-bold text-white shadow-sm">GBU</span>
             </div>
-            <p className="text-sm text-slate-500">
+            {/* <p className="text-sm text-slate-500">
               Notices, news, events, newsletters and gallery albums shown on the public Announcements
               pages.
-            </p>
+            </p> */}
           </div>
           <button
             type="button"
@@ -5703,16 +5920,16 @@ const AdminDashboard = () => {
         {/* Header Panel */}
         <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
+            <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white">NSS</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Service Scheme (NSS) Management</h2>
-              <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p>
+              {/* <p className="text-sm text-slate-500">Configure overview text, coordinator details, core council list, and program units.</p> */}
             </div>
           </div>
           <button
             onClick={handleSaveSchool}
             disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSchoolSaving ? "Saving..." : "Save NSS Settings"}
@@ -5953,7 +6170,7 @@ const AdminDashboard = () => {
                     coreCouncil: [...(prev.coreCouncil || []), newMember]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Member
               </button>
@@ -6231,16 +6448,16 @@ const AdminDashboard = () => {
         {/* Header Panel */}
         <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-3">
-            <span className="rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
+            <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white">NCC</span>
             <div>
               <h2 className="text-lg font-semibold text-slate-900">National Cadet Corps (NCC) Management</h2>
-              <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p>
+              {/* <p className="text-sm text-slate-500">Configure overview text, ANO details, cadet leadership, and platoons.</p> */}
             </div>
           </div>
           <button
             onClick={handleSaveSchool}
             disabled={isSchoolSaving}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-600 disabled:opacity-50"
           >
             <Save className="h-4 w-4" />
             {isSchoolSaving ? "Saving..." : "Save NCC Settings"}
@@ -6485,7 +6702,7 @@ const AdminDashboard = () => {
                     cadetLeaders: [...(prev.cadetLeaders || []), newLeader]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Cadet Leader
               </button>
@@ -6590,7 +6807,7 @@ const AdminDashboard = () => {
                     platoons: [...(prev.platoons || []), newPlatoon]
                   }));
                 }}
-                className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
+                className="inline-flex items-center gap-1 rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-semibold text-white hover:bg-sky-600"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Platoon
               </button>
@@ -6726,170 +6943,6 @@ const AdminDashboard = () => {
     );
   };
 
-  /* ── Faculty Registration Requests Tab ── */
-  const handleApproveRequest = async (reqId) => {
-    setRegActionLoading(`approve-${reqId}`);
-    try {
-      await approveFacultyRegistration(reqId);
-      setMessage("Faculty registration approved. Login credentials sent to their email.");
-      setRegReloadToken((p) => p + 1);
-      setFacultyReloadToken((p) => p + 1);
-    } catch (err) {
-      setMessage(`Approve failed: ${getApiErrorMessage(err, "Could not approve request")}`);
-    } finally {
-      setRegActionLoading("");
-    }
-  };
-
-  const handleRejectRequest = async (reqId) => {
-    const reason = prompt("Enter rejection reason (optional):");
-    setRegActionLoading(`reject-${reqId}`);
-    try {
-      await rejectFacultyRegistration(reqId, reason || "");
-      setMessage("Faculty registration request rejected.");
-      setRegReloadToken((p) => p + 1);
-    } catch (err) {
-      setMessage(`Reject failed: ${getApiErrorMessage(err, "Could not reject request")}`);
-    } finally {
-      setRegActionLoading("");
-    }
-  };
-
-  const renderFacultyRequestsTab = () => (
-    <div className="space-y-4">
-      <div className={cardClass}>
-        <div className="mb-3 flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-semibold text-slate-900">Faculty Registration Requests</h2>
-            <p className="text-sm text-slate-600">Review and approve faculty registration requests.</p>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <div className="relative min-w-[200px] flex-1">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              className="w-full rounded-xl border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm text-slate-900 outline-none transition focus:border-slate-700"
-              type="text"
-              value={regSearchQuery}
-              onChange={(e) => setRegSearchQuery(e.target.value)}
-              placeholder="Search by name, email, school..."
-            />
-          </div>
-          <select
-            className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-slate-700"
-            value={regStatusFilter}
-            onChange={(e) => setRegStatusFilter(e.target.value)}
-          >
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-            <option value="all">All</option>
-          </select>
-          <button
-            type="button"
-            onClick={() => { setRegSearchQuery(""); setRegStatusFilter("pending"); }}
-            className="rounded-lg border border-slate-300 bg-white px-2.5 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100"
-          >
-            Clear
-          </button>
-        </div>
-
-        {/* Error */}
-        {regRequestsError && (
-          <div className="mb-3 rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm text-rose-700">
-            <AlertTriangle className="mr-1 inline h-4 w-4" /> {regRequestsError}
-          </div>
-        )}
-
-        {/* Loading */}
-        {regRequestsLoading && (
-          <div className="py-8 text-center text-sm text-slate-500">Loading requests...</div>
-        )}
-
-        {/* Empty */}
-        {!regRequestsLoading && regRequests.length === 0 && (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
-            No {regStatusFilter !== "all" ? regStatusFilter : ""} registration requests found.
-          </div>
-        )}
-
-        {/* Table */}
-        {!regRequestsLoading && regRequests.length > 0 && (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 text-xs font-semibold uppercase text-slate-500">
-                  <th className="px-3 py-2">Name / Designation</th>
-                  <th className="px-3 py-2">Category</th>
-                  <th className="px-3 py-2">School</th>
-                  <th className="px-3 py-2">Department</th>
-                  <th className="px-3 py-2">Contact Details</th>
-                  <th className="px-3 py-2">Status</th>
-                  <th className="px-3 py-2">Date</th>
-                  <th className="px-3 py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {regRequests.map((req) => (
-                  <tr key={req.id} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="px-3 py-2.5">
-                      <div className="font-semibold text-slate-900">{req.name}</div>
-                      <div className="text-xs text-slate-500">{req.designation}</div>
-                    </td>
-                    <td className="px-3 py-2.5 text-slate-600">{req.category}</td>
-                    <td className="px-3 py-2.5 text-slate-600 font-semibold uppercase">{req.school_code}</td>
-                    <td className="px-3 py-2.5 text-slate-600">{req.department}</td>
-                    <td className="px-3 py-2.5">
-                      <div className="text-slate-700 font-medium">{req.email}</div>
-                      <div className="text-xs text-slate-500">{req.mobile}</div>
-                    </td>
-                    <td className="px-3 py-2.5">
-                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${
-                        req.status === "pending" ? "bg-amber-100 text-amber-800" :
-                        req.status === "approved" ? "bg-emerald-100 text-emerald-800" :
-                        "bg-rose-100 text-rose-800"
-                      }`}>
-                        {req.status}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2.5 text-slate-500 text-xs">{new Date(req.created_at).toLocaleDateString()}</td>
-                    <td className="px-3 py-2.5">
-                      {req.status === "pending" && (
-                        <div className="flex items-center gap-1">
-                          <button
-                            type="button"
-                            onClick={() => handleApproveRequest(req.id)}
-                            disabled={regActionLoading === `approve-${req.id}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-100 disabled:opacity-50"
-                          >
-                            {regActionLoading === `approve-${req.id}` ? "..." : "Approve"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleRejectRequest(req.id)}
-                            disabled={regActionLoading === `reject-${req.id}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-rose-200 bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 hover:bg-rose-100 disabled:opacity-50"
-                          >
-                            {regActionLoading === `reject-${req.id}` ? "..." : "Reject"}
-                          </button>
-                        </div>
-                      )}
-                      {req.status === "rejected" && req.rejection_reason && (
-                        <span className="text-xs text-slate-500" title={req.rejection_reason}>Reason: {req.rejection_reason.slice(0, 30)}{req.rejection_reason.length > 30 ? "..." : ""}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
   const renderRecruitmentTab = () => {
     const defaultDocumentsText =
       "Extension Notice|Official extension notification|#\nDetailed Advertisement|Complete vacancy details|#";
@@ -6945,7 +6998,7 @@ const AdminDashboard = () => {
                     },
                   })
                 }
-                className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 shadow-sm transition"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-sky-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-sky-600 shadow-sm transition"
               >
                 <Plus className="h-4 w-4" /> Add Current
               </button>
@@ -7255,7 +7308,7 @@ const AdminDashboard = () => {
                   type="button"
                   onClick={saveRecruitmentEditor}
                   disabled={isRecruitmentSaving}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 text-xs font-semibold transition disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition disabled:opacity-50"
                 >
                   {isRecruitmentSaving ? "Saving..." : "Save Recruitment Data"}
                 </button>
@@ -7303,8 +7356,18 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleTickerDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this ticker notice?")) return;
+  const initiateTickerDelete = (id) => {
+    setConfirmDialog({
+      isOpen: true,
+      type: "ticker",
+      item: { id }
+    });
+  };
+
+  const executeTickerDelete = async () => {
+    const id = confirmDialog.item?.id;
+    if (!id) return;
+    setConfirmDialog({ isOpen: false, item: null, type: null });
     try {
       await deleteTickerNotice(id);
       setMessage("Ticker notice deleted.");
@@ -7343,12 +7406,12 @@ const AdminDashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-900">Homepage Ticker Notices</h2>
-            <p className="text-sm text-slate-500 mt-1">Manage the scrolling ticker bar shown on the homepage. Maximum 3 notices recommended.</p>
+            {/* <p className="text-sm text-slate-500 mt-1">Manage the scrolling ticker bar shown on the homepage. Maximum 3 notices recommended.</p> */}
           </div>
           {!tickerEditor.isAdding && !tickerEditor.editingId && (
             <button
               onClick={() => setTickerEditor({ isAdding: true, editingId: null, text: "", link: "" })}
-              className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition shadow-sm"
+              className="flex items-center gap-2 px-4 py-2.5 bg-sky-500 text-white font-semibold rounded-xl hover:bg-sky-600 transition shadow-sm"
             >
               <Plus className="w-4 h-4" />
               Add Notice
@@ -7382,7 +7445,7 @@ const AdminDashboard = () => {
                   disabled={isTickerSaving}
                   value={tickerEditor.link}
                   onChange={(e) => setTickerEditor(prev => ({ ...prev, link: e.target.value }))}
-                  placeholder="e.g. /announcements/news-notifications or https://..."
+                  placeholder="e.g. /announcements/news or https://..."
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white disabled:opacity-50 disabled:bg-slate-100"
                 />
               </div>
@@ -7391,7 +7454,7 @@ const AdminDashboard = () => {
               <button
                 onClick={handleTickerSave}
                 disabled={!tickerEditor.text.trim() || isTickerSaving}
-                className="flex items-center gap-2 px-5 py-2 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2 bg-sky-500 text-white font-semibold rounded-xl hover:bg-sky-600 transition disabled:opacity-50"
               >
                 {isTickerSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                 {isTickerSaving ? "Saving..." : (tickerEditor.editingId ? "Update" : "Save")}
@@ -7473,7 +7536,7 @@ const AdminDashboard = () => {
 
                   {/* Delete */}
                   <button
-                    onClick={() => handleTickerDelete(notice.id)}
+                    onClick={() => initiateTickerDelete(notice.id)}
                     className="p-2 rounded-lg text-red-600 bg-red-50 hover:bg-red-100 transition"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -7780,6 +7843,259 @@ const AdminDashboard = () => {
     );
   };
 
+  // ── Email System Tab ──
+  const handleDispatchAllPending = async () => {
+    const pending = mailQueue.filter((item) => item.status === "pending-backend");
+    if (!pending.length) {
+      setMessage("No pending emails to dispatch.");
+      return;
+    }
+
+    setIsDispatchingMailQueue(true);
+    setMessage(`Dispatching ${pending.length} email(s)... This may take a moment.`);
+
+    try {
+      const result = await dispatchCredentialEmails(
+        pending.map((item) => ({
+          id: item.id,
+          to: item.to,
+          subject: item.subject || "GBU Faculty Portal Credentials",
+          payload: item.payload || {},
+        }))
+      );
+
+      // Update queue items with results
+      const resultMap = {};
+      (result.items || []).forEach((r) => {
+        resultMap[r.id] = r;
+      });
+
+      setMailQueue((prev) =>
+        prev.map((item) => {
+          const res = resultMap[item.id];
+          if (res) {
+            return {
+              ...item,
+              status: res.status === "sent" ? "sent" : res.status === "not-configured" ? "not-configured" : "failed",
+              messageId: res.messageId || "",
+              error: res.error || "",
+              dispatchedAt: new Date().toISOString(),
+            };
+          }
+          return item;
+        })
+      );
+
+      const { sent = 0, failed = 0, notConfigured = 0 } = result.summary || {};
+      if (notConfigured > 0) {
+        setMessage(`SMTP not configured. ${notConfigured} email(s) could not be sent. Configure SMTP settings on the server.`);
+      } else if (failed > 0) {
+        setMessage(`Dispatched: ${sent} sent, ${failed} failed. Check the queue for details.`);
+      } else {
+        setMessage(`All ${sent} email(s) dispatched successfully!`);
+      }
+    } catch (error) {
+      setMessage(`Dispatch failed: ${error.message || "Unknown error"}`);
+    } finally {
+      setIsDispatchingMailQueue(false);
+    }
+  };
+
+  const handleClearMailQueue = (filter) => {
+    if (filter === "all") {
+      setMailQueue([]);
+      setMessage("Mail queue cleared.");
+    } else if (filter === "sent") {
+      setMailQueue((prev) => prev.filter((item) => item.status !== "sent"));
+      setMessage("Sent emails cleared from queue.");
+    } else if (filter === "failed") {
+      setMailQueue((prev) => prev.filter((item) => item.status !== "failed"));
+      setMessage("Failed emails cleared from queue.");
+    }
+  };
+
+  const handleRetryFailed = async () => {
+    // Reset failed items to pending so they can be dispatched again
+    setMailQueue((prev) =>
+      prev.map((item) =>
+        item.status === "failed" ? { ...item, status: "pending-backend", error: "", dispatchedAt: "" } : item
+      )
+    );
+    setMessage("Failed emails reset to pending. Click 'Dispatch All' to retry.");
+  };
+
+  const renderEmailSystemTab = () => {
+    const pending = mailQueue.filter((item) => item.status === "pending-backend");
+    const sent = mailQueue.filter((item) => item.status === "sent");
+    const failed = mailQueue.filter((item) => item.status === "failed");
+    const notConfigured = mailQueue.filter((item) => item.status === "not-configured");
+
+    const stats = [
+      { label: "Total in Queue", value: mailQueue.length, icon: Mail, color: "text-slate-600", bg: "bg-slate-100" },
+      { label: "Pending", value: pending.length, icon: Clock3, color: "text-amber-600", bg: "bg-amber-100" },
+      { label: "Sent", value: sent.length, icon: CheckCircle, color: "text-emerald-600", bg: "bg-emerald-100" },
+      { label: "Failed", value: failed.length, icon: XCircle, color: "text-red-600", bg: "bg-red-100" },
+    ];
+
+    return (
+      <section className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-900">Email System</h2>
+            {/* <p className="text-xs text-slate-500 mt-1">
+              Manage credential email dispatch queue. Emails are queued when faculty accounts are created.
+            </p> */}
+          </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            {failed.length > 0 && (
+              <button
+                onClick={handleRetryFailed}
+                disabled={isDispatchingMailQueue}
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-amber-700 bg-amber-100 hover:bg-amber-200 rounded-xl transition-colors disabled:opacity-50"
+              >
+                <RefreshCw className="w-3.5 h-3.5" /> Retry Failed ({failed.length})
+              </button>
+            )}
+            <button
+              onClick={handleDispatchAllPending}
+              disabled={isDispatchingMailQueue || pending.length === 0}
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-sky-500 hover:bg-sky-600 rounded-xl transition-colors disabled:opacity-50 shadow-sm"
+            >
+              {isDispatchingMailQueue ? (
+                <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Dispatching...</>
+              ) : (
+                <><Send className="w-3.5 h-3.5" /> Dispatch All ({pending.length})</>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+              <div className="flex items-center gap-3">
+                <div className={`p-2 rounded-xl ${stat.bg}`}>
+                  <stat.icon className={`w-4 h-4 ${stat.color}`} />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                  <p className="text-[11px] text-slate-500 font-medium">{stat.label}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* SMTP Status */}
+        {notConfigured.length > 0 && (
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-amber-800">SMTP Not Configured</p>
+              <p className="text-xs text-amber-700 mt-1">
+                {notConfigured.length} email(s) could not be sent because SMTP is not configured on the server.
+                Set <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_HOST</code>,{" "}
+                <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_USER</code>, and{" "}
+                <code className="bg-amber-100 px-1 rounded text-[11px]">SMTP_PASS</code> environment variables.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Clear Actions */}
+        {mailQueue.length > 0 && (
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs text-slate-500 font-medium">Clear:</span>
+            {sent.length > 0 && (
+              <button
+                onClick={() => handleClearMailQueue("sent")}
+                className="text-xs text-emerald-600 hover:text-emerald-700 font-semibold hover:underline"
+              >
+                Sent ({sent.length})
+              </button>
+            )}
+            {failed.length > 0 && (
+              <button
+                onClick={() => handleClearMailQueue("failed")}
+                className="text-xs text-red-600 hover:text-red-700 font-semibold hover:underline"
+              >
+                Failed ({failed.length})
+              </button>
+            )}
+            <button
+              onClick={() => handleClearMailQueue("all")}
+              className="text-xs text-slate-600 hover:text-slate-700 font-semibold hover:underline"
+            >
+              All ({mailQueue.length})
+            </button>
+          </div>
+        )}
+
+        {/* Queue Table */}
+        {mailQueue.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center shadow-sm">
+            <Mail className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-lg font-bold text-slate-800">No Emails in Queue</h3>
+            <p className="text-sm text-slate-500 mt-1">
+              Emails are automatically queued when faculty accounts are created via bulk upload or individual creation.
+            </p>
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
+              <table className="w-full text-xs text-left">
+                <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider sticky top-0">
+                  <tr>
+                    <th className="px-4 py-3 w-10">#</th>
+                    <th className="px-4 py-3">Recipient</th>
+                    <th className="px-4 py-3">Subject</th>
+                    <th className="px-4 py-3 text-center">Status</th>
+                    <th className="px-4 py-3">Details</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {mailQueue.map((item, idx) => {
+                    const statusConfig = {
+                      "pending-backend": { label: "Pending", icon: Clock3, color: "text-amber-600 bg-amber-100" },
+                      "sent": { label: "Sent", icon: CheckCircle, color: "text-emerald-600 bg-emerald-100" },
+                      "failed": { label: "Failed", icon: XCircle, color: "text-red-600 bg-red-100" },
+                      "not-configured": { label: "No SMTP", icon: AlertCircle, color: "text-amber-600 bg-amber-100" },
+                    };
+                    const sc = statusConfig[item.status] || statusConfig["pending-backend"];
+                    const StatusIcon = sc.icon;
+
+                    return (
+                      <tr key={item.id || idx} className="hover:bg-slate-50/50 transition-colors">
+                        <td className="px-4 py-3 text-slate-400 font-mono">{idx + 1}</td>
+                        <td className="px-4 py-3">
+                          <span className="font-semibold text-slate-800">{item.to || "—"}</span>
+                        </td>
+                        <td className="px-4 py-3 text-slate-600 truncate max-w-[200px]">
+                          {item.subject || "GBU Faculty Portal Credentials"}
+                        </td>
+                        <td className="px-4 py-3 text-center">
+                          <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-bold ${sc.color}`}>
+                            <StatusIcon className="w-3 h-3" />
+                            {sc.label}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-slate-500 truncate max-w-[200px]">
+                          {item.error || item.messageId || (item.dispatchedAt ? `Dispatched ${new Date(item.dispatchedAt).toLocaleString()}` : "Queued")}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </section>
+    );
+  };
+
   return (
     <div className="min-h-screen lg:h-screen lg:overflow-hidden bg-slate-50 p-2 md:p-4">
       <div className="flex h-full w-full flex-col gap-6 lg:flex-row">
@@ -7787,7 +8103,7 @@ const AdminDashboard = () => {
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">Admin Navigation</h2>
 
-            <div className="mt-3 flex-1 space-y-2 overflow-y-auto pr-1">
+            <div className="mt-3 flex-1 space-y-2 overflow-y-auto px-1 py-1">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -7796,11 +8112,11 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                        isActive ? "bg-slate-900 text-white shadow" : "text-slate-700 hover:bg-slate-100"
+                      className={`flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition-all ${
+                        isActive ? "bg-sky-50 text-sky-700 font-semibold shadow-sm ring-1 ring-sky-500/50" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                       }`}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className={`h-4 w-4 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
                       {tab.label}
                     </button>
 
@@ -7884,9 +8200,9 @@ const AdminDashboard = () => {
               <div className="mt-2 space-y-2">
                 <button
                   onClick={exportBackup}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-300"
                 >
-                  <Download className="h-4 w-4" /> Export Backup
+                  <Download className="h-4 w-4 text-slate-500" /> Export DB Backup
                 </button>
                 {/* <button
                   onClick={() => backupInputRef.current?.click()}
@@ -7903,7 +8219,7 @@ const AdminDashboard = () => {
                 />
                 <button
                   onClick={saveAll}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-3 py-2.5 text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/30 hover:-translate-y-0.5"
                 >
                   <Save className="h-4 w-4" /> Save All
                 </button>
@@ -7915,10 +8231,10 @@ const AdminDashboard = () => {
                 </button> */}
                 <button
                   onClick={() => {
-                    clearPortalSession();
-                    navigate("/login");
+                    logoutPortalSession();
+                    navigate("/login", { replace: true });
                   }}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700 hover:bg-rose-100"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2.5 text-sm font-medium text-rose-700 transition-colors hover:bg-rose-100"
                 >
                   <LogOut className="h-4 w-4" /> Logout
                 </button>
@@ -7927,14 +8243,14 @@ const AdminDashboard = () => {
           </div>
         </aside>
 
-        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto lg:pr-4 lg:pb-8">
+        <main className="flex-1 min-w-0 space-y-6 lg:w-[80%] lg:h-full lg:overflow-y-auto custom-scrollbar lg:pr-4 lg:pb-8">
           {activeTab === "overview" && (
             <section className="space-y-6">
               <section className={cardClass}>
                 <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Admin Dashboard</h1>
-                <p className="mt-1 text-sm text-slate-600">
+                {/* <p className="mt-1 text-sm text-slate-600">
                   Manage your school data, faculty profiles, and user accounts all in one place.
-                </p>
+                </p> */}
               </section>
 
               <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -8044,6 +8360,12 @@ const AdminDashboard = () => {
           {activeTab === "bookings" && renderBookingsTab()}
           {activeTab === "itcell" && renderItcellTab()}
           {activeTab === "ticker-notices" && renderTickerNoticesTab()}
+          {activeTab === "emailSystem" && renderEmailSystemTab()}
+          {activeTab === "subscribers" && <SubscribersTab />}
+          {activeTab === "analytics" && <AnalyticsTab />}
+          {activeTab === "grievances" && (
+            <GrievanceAdminTab />
+          )}
           {/* {activeTab === "semester-registrations" && renderSemesterRegistrationsTab()} */}
         </main>
       </div>
@@ -8163,6 +8485,14 @@ const AdminDashboard = () => {
           </div>
         );
       })()}
+
+      <ConfirmModal
+        isOpen={confirmDialog.isOpen}
+        title={confirmDialog.type === "ticker" ? "Delete Ticker Notice" : "Confirm Action"}
+        message="Are you sure you want to delete this notice? This action cannot be undone."
+        onConfirm={executeTickerDelete}
+        onCancel={() => setConfirmDialog({ isOpen: false, item: null, type: null })}
+      />
     </div>
   );
 };

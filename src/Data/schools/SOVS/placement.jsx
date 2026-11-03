@@ -59,12 +59,12 @@ export const placementData = {
     ],
   },
   achievers: [
-    { name: "SOVS Graduate", company: "Nestle", package: "10 LPA", program: "B.Tech. Food Processing" },
-    { name: "SOVS Graduate", company: "Jubilant Life Sciences", package: "8.2 LPA", program: "M.Sc. Chemistry" },
-    { name: "SOVS Graduate", company: "ONGC", package: "9 LPA", program: "M.Sc. Environmental Sciences" },
-    { name: "SOVS Graduate", company: "Mother Dairy", package: "7.5 LPA", program: "B.Tech. Food Processing" },
-    { name: "SOVS Graduate", company: "Torrent Power", package: "7 LPA", program: "M.Sc. Physics" },
-    { name: "SOVS Graduate", company: "SGS India", package: "6.2 LPA", program: "M.Sc. Chemistry" },
+    { name: "SoVSAS Graduate", company: "Nestle", package: "10 LPA", program: "B.Tech. Food Processing" },
+    { name: "SoVSAS Graduate", company: "Jubilant Life Sciences", package: "8.2 LPA", program: "M.Sc. Chemistry" },
+    { name: "SoVSAS Graduate", company: "ONGC", package: "9 LPA", program: "M.Sc. Environmental Sciences" },
+    { name: "SoVSAS Graduate", company: "Mother Dairy", package: "7.5 LPA", program: "B.Tech. Food Processing" },
+    { name: "SoVSAS Graduate", company: "Torrent Power", package: "7 LPA", program: "M.Sc. Physics" },
+    { name: "SoVSAS Graduate", company: "SGS India", package: "6.2 LPA", program: "M.Sc. Chemistry" },
   ],
   placementRules: [
     "Prior registration within the specified deadline is mandatory for all placement drives",

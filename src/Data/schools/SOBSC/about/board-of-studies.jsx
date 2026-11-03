@@ -5,7 +5,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  heading: "Board of Studies — SOBSC",
+  heading: "Board of Studies SOBSC",
   subheading: "Academic oversight and curriculum guidance committee for School of Buddhist Studies & Civilization.",
   dean: {
     name: "Dean",

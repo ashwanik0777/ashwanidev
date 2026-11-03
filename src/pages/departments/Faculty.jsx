@@ -156,7 +156,7 @@ const Faculty = () => {
       {/* Hero Section with Dark Overlay */}
 
       <BannerSection
-        title="Meet Our Faculty Members"
+        title="Faculty Members"
         subtitle="Dedicated to Excellence in Teaching, Research, and Innovation"
         bgtheme={5}
       />

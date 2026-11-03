@@ -5,7 +5,7 @@
 export const activitiesData = {
   schoolCode: "SOM",
   schoolName: "School of Management",
-  heading: "Activities & Events — SOM",
+  heading: "Activities & Events SOM",
   subheading:
     "Conferences, workshops, industrial visits, and co-curricular activities at School of Management.",
   activities: [

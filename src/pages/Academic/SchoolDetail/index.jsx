@@ -32,6 +32,9 @@ const componentsMap = {
   StudentAchievers,
 };
 
+// Added on top of each section's own padding, only on the school home page.
+const SECTION_SPACING = "py-2 sm:py-3 lg:py-4 min-[2560px]:py-8";
+
 // Semester registration is not live yet — banner + link kept out of the build.
 // import SemesterRegistrationBanner from "../../../components/home/SemesterRegistrationBanner.jsx";
 
@@ -87,16 +90,25 @@ export default function SchoolDetail() {
         const Component = componentsMap[section.componentName];
         if (!Component) return null;
 
-        // Every school uses the same short-name faculty heading, e.g. "Meet SOE Faculty"
+        // Every school uses the same short-name faculty heading, e.g. "SOE Faculty"
         const extraProps =
           section.componentName === "FacultyCarousel"
-            ? { title: `Meet ${getSchoolDisplayCode(resolvedCode)} Faculty` }
+            ? { title: `${getSchoolDisplayCode(resolvedCode)} Faculty` }
             : {};
+
+        const content = (
+          <Component {...(section.props || {})} {...extraProps} schoolCode={resolvedCode} />
+        );
 
         // Spread the backend/json props directly to the targeted module
         return (
           <React.Fragment key={idx}>
-            <Component {...(section.props || {})} {...extraProps} schoolCode={resolvedCode} />
+            {/* Extra breathing room between home-page sections; the hero banner stays flush. */}
+            {section.componentName === "Landing" ? (
+              content
+            ) : (
+              <div className={SECTION_SPACING}>{content}</div>
+            )}
             {/* {section.componentName === 'Landing' && <SemesterRegistrationBanner />} */}
           </React.Fragment>
         );

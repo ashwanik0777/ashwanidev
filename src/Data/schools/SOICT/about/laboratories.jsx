@@ -1,7 +1,7 @@
 export const laboratoriesData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
-  heading: "Laboratories — SOICT",
+  heading: "Laboratories SOICT",
   subheading: "Academic and research laboratories powering practical innovation.",
   laboratories: [
     {

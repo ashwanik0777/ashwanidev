@@ -1,7 +1,7 @@
 export const staffmembersData = {
   schoolCode: "SOHSS",
   schoolName: "School of Humanities & Social Sciences",
-  heading: "Staff Members — SOHSS",
+  heading: "Staff Members SOHSS",
   subheading: "Meet the dedicated technical and administrative team of the School of Humanities & Social Sciences.",
   departments: [
     {

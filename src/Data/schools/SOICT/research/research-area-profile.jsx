@@ -1,7 +1,7 @@
 export const researchAreaData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
-  heading: "Research Area and Profile — SOICT",
+  heading: "Research Area and Profile SOICT",
   subheading:
     "Explore the research focus areas and faculty profiles of the School of Information & Communication Technology.",
   hero: {

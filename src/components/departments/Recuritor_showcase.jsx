@@ -28,7 +28,7 @@ const RecruitersShowcase = ({ recruitersData = [] }) => {
         }
       `}</style>
 
-      <SectionHeading className={`${HEADING_SPACE} px-4`}>Our Recruiters</SectionHeading>
+      <SectionHeading className={`${HEADING_SPACE} px-4`}>Recruiters</SectionHeading>
 
       {/* Same width as the faculty / departments sections */}
       <div className={`${SECTION_CONTAINER} ${SLIDER_SIDE_SPACE}`}>

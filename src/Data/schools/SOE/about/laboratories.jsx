@@ -5,7 +5,7 @@
 export const laboratoriesData = {
   schoolCode: "SOE",
   schoolName: "School of Engineering",
-  heading: "Laboratories & Facilities — SOE",
+  heading: "Laboratories & Facilities SOE",
   subheading: "Comprehensive departmental labs equipped with state-of-the-art instruments, simulation toolkits, and heavy testing machinery.",
   pdfUrl: "https://drive.google.com/file/d/1WEgVjOiNcWzwhk63uGaFOKg7euCdvXX_/view?usp=sharing",
   laboratories: [

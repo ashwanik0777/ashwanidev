@@ -40,7 +40,7 @@ const DepartmentLayout = ({
         programs={programsData}
       />
       <FacultyCarousel
-        title={departmentName ? `Meet ${departmentName} Faculty` : "Meet Our Faculty"}
+        title={departmentName ? `${departmentName} Faculty` : "Faculty"}
         schoolCode={schoolCode}
         departmentId={departmentId}
         facultyList={facultyMembers}

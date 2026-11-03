@@ -5,6 +5,6 @@
 export const laboratoriesData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  heading: "lauoratories — SOBSC",
+  heading: "Laboratories SOBSC",
   content: [],
 };

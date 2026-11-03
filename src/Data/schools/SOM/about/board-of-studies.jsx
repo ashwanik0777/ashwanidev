@@ -1,7 +1,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOM",
   schoolName: "School of Management",
-  heading: "Board of Studies — School of Management",
+  heading: "Board of Studies School of Management",
   subheading: "Academic leadership and external expert advisory board for management programmes.",
   dean: {
     name: "Dr. Indu Uprety",

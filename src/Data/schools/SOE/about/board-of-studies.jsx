@@ -5,7 +5,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOE",
   schoolName: "School of Engineering",
-  heading: "Board of Studies — SOE",
+  heading: "Board of Studies SOE",
   subheading: "Academic oversight, curriculum guidance committees, and external domain experts.",
   dean: {
     name: "Dr. Kirti Pal",

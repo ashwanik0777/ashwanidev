@@ -5,7 +5,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOBT",
   schoolName: "School of Biotechnology",
-  heading: "Board of Studies — SOBT",
+  heading: "Board of Studies SOBT",
   subheading: "Academic oversight and curriculum guidance committee for University School of Biotechnology.",
   departments: [
     {

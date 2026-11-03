@@ -5,7 +5,7 @@
 export const laboratoriesData = {
   schoolCode: "SOBT",
   schoolName: "School of Biotechnology",
-  heading: "Laboratories & Facilities — SOBT",
+  heading: "Laboratories & Facilities SOBT",
   subheading: "State-of-the-art research laboratories, teaching labs, and specialized infrastructure.",
   pdfUrl: "https://drive.google.com/file/d/1HdfoljdTapAfg3aDfPJceC7IASwb30pI/view?usp=sharing",
   laboratories: [

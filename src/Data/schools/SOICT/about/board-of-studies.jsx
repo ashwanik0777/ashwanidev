@@ -1,7 +1,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
-  heading: "Board of Studies — SOICT",
+  heading: "Board of Studies SOICT",
   subheading: "Academic oversight and curriculum guidance committees.",
   departments: [
     {

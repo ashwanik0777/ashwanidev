@@ -398,7 +398,7 @@ export default function AppRouter() {
               <Route path="faculty" element={<Faculty />} />
               <Route path="placement" element={<PlacementDashboard />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="about/dean" element={<Dean />} />
+              <Route path="about/dean" element={<Dean showFullMessage />} />
               <Route path="about/board" element={<BoardOfStudies />} />
               <Route path="about/staff" element={<StaffMembers />} />
               <Route path="about/labs" element={<LaboratoryCards />} />

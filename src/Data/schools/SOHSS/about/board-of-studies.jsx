@@ -1,7 +1,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOHSS",
   schoolName: "School of Humanities & Social Sciences",
-  heading: "Board of Studies — SOHSS",
+  heading: "Board of Studies SOHSS",
   subheading: "Academic oversight and curriculum guidance for humanities and social sciences programs.",
   departments: [
     {

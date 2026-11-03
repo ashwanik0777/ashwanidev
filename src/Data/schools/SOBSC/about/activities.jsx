@@ -5,7 +5,7 @@
 export const activitiesData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  heading: "Activities & Events — SOBSC",
+  heading: "Activities & Events SOBSC",
   subheading: "Academic, cultural, and spiritual activities at the School of Buddhist Studies & Civilization.",
   activities: [
     {

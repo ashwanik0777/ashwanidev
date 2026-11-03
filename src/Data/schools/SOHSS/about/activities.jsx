@@ -5,7 +5,7 @@
 export const activitiesData = {
   schoolCode: "SOHSS",
   schoolName: "School of Humanities & Social Sciences",
-  heading: "Activities & Events — SOHSS",
+  heading: "Activities & Events SOHSS",
   subheading:
     "Conferences, workshops, seminars, and co-curricular activities at School of Humanities & Social Sciences.",
   activities: [

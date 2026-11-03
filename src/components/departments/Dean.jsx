@@ -102,14 +102,16 @@ const LeadershipCard = (props) => {
   const fullText = typeof data.description === "string" ? data.description : "";
   const shortText = typeof data.shortMessage === "string" ? data.shortMessage : "";
 
-  const hasToggle = Boolean(shortText && fullText && shortText.trim() !== fullText.trim());
+  // The About Us > Dean page (showFullMessage) always shows the whole message;
+  // the school home page keeps the short version with a "Read full message" toggle.
+  const hasToggle = !props.showFullMessage && Boolean(shortText && fullText && shortText.trim() !== fullText.trim());
 
   const displayedText = hasToggle
     ? (isExpanded ? fullText : shortText)
     : (fullText || shortText || "Dean's message will be updated soon. Please check back later.");
 
   // Long messages without a separate short version are clamped, so every school's card stays compact
-  const canClamp = !hasToggle && displayedText.length > 500;
+  const canClamp = !props.showFullMessage && !hasToggle && displayedText.length > 500;
   const showToggle = hasToggle || canClamp;
 
   const linkTarget = facultyLink || "/academics/faculty";

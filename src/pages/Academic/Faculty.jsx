@@ -267,7 +267,7 @@ const Faculty = () => {
           <>
             {/* Hero Section */}
             <BannerSection
-              title={isSchoolScoped ? `${(shortCode || '').toUpperCase()} — Faculty` : (directoryStats?.title || 'Faculty Directory')}
+              title={isSchoolScoped ? `${(shortCode || '').toUpperCase()} Faculty` : (directoryStats?.title || 'Faculty Directory')}
               bgTheme={3}
             />
 

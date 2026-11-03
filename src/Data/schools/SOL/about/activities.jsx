@@ -1,7 +1,7 @@
 export const activitiesData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
-  heading: "Activities & Events — SOL",
+  heading: "Activities & Events SOL",
   subheading: "Academic, professional, and co-curricular activities at the School of Law, Justice & Governance.",
   activities: [
     {

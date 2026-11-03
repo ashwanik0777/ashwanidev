@@ -346,7 +346,7 @@ const SchoolActivitiesAnnouncements = () => {
 
       <div className="relative z-10">
         <BannerSection
-          title={`${schoolDisplayName} — Updates`}
+          title={`${schoolDisplayName} Updates`}
           subtitle="Stay updated with the latest notices, circulars, events, news and activities."
           bgTheme={9}
         />

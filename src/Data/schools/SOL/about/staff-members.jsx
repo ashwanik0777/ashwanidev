@@ -1,7 +1,7 @@
 export const staffmembersData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
-  heading: "Staff Members — SOL",
+  heading: "Staff Members SOL",
   subheading: "Meet the dedicated administrative and support team of the School of Law, Justice & Governance.",
   departments: [
     {

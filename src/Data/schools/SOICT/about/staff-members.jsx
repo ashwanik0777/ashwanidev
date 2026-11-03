@@ -1,7 +1,7 @@
 export const staffmembersData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
-  heading: "Staff Members — SOICT",
+  heading: "Staff Members SOICT",
   subheading: "Meet the dedicated technical and administrative team of USICT.",
   departments: [
     {

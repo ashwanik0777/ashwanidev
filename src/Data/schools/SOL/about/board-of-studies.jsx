@@ -1,7 +1,7 @@
 export const boardofstudiesData = {
   schoolCode: "SOL",
   schoolName: "School of Law, Justice & Governance",
-  heading: "Board of Studies — SOL",
+  heading: "Board of Studies SOL",
   subheading: "Academic oversight and curriculum guidance committee for School of Law, Justice & Governance.",
   dean: {
     name: "Dr. Krishna Kant Dwivedi",

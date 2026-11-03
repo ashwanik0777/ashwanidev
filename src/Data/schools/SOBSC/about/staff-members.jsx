@@ -5,7 +5,7 @@
 export const staffmembersData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  heading: "Staff Members — SOBSC",
+  heading: "Staff Members SOBSC",
   subheading: "Meet the dedicated technical and administrative team of the School of Buddhist Studies & Civilization.",
   departments: [
     {

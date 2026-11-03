@@ -1,7 +1,7 @@
 export const activitiesData = {
   schoolCode: "SOICT",
   schoolName: "School of Information & Communication Technology",
-  heading: "Activities & Events — SOICT",
+  heading: "Activities & Events SOICT",
   subheading: "Conferences, symposia, and academic events organized by USICT.",
   activities: [
     {

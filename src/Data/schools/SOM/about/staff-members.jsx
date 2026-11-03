@@ -1,7 +1,7 @@
 export const staffmembersData = {
   schoolCode: "SOM",
   schoolName: "School of Management",
-  heading: "Staff Members — SOM",
+  heading: "Staff Members SOM",
   subheading: "Meet the dedicated technical and administrative team of the School of Management.",
   departments: [
     {

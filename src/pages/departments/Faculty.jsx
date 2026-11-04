@@ -6,6 +6,7 @@ import {
 import apiClient from "../../services/apiClient";
 import BannerSection from '../../components/HeroBanner';
 import { getSchoolMeta } from "../../utils/schoolMeta";
+import { formatExperience } from "../../utils/facultyExperience";
 import { getDepartmentsForSchool, matchDepartmentId } from "../../Data/schoolsMeta";
 import { resolveFacultyImage } from "../../utils/imageUtils";
 
@@ -293,8 +294,8 @@ const Faculty = () => {
                             </div>
                             <div className="grid grid-cols-2 gap-3">
                               <div className="bg-blue-50 rounded-lg p-3 text-center">
-                                <p className="text-lg font-bold text-blue-600">{faculty.experience_years || faculty.experience || 0}</p>
-                                <p className="text-xs text-gray-600">Years Exp</p>
+                                <p className="text-lg font-bold text-blue-600">{formatExperience(faculty.experience_months ?? (faculty.experience_years || 0) * 12)}</p>
+                                <p className="text-xs text-gray-600">Experience</p>
                               </div>
                               <div className="bg-green-50 rounded-lg p-3 text-center">
                                 <p className="text-lg font-bold text-green-600">{faculty.publications || "N/A"}</p>

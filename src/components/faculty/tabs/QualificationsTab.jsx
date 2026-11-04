@@ -34,6 +34,7 @@ const Badge = ({ className = '', children }) => (
 );
 import { Calendar, MapPin, GraduationCap } from 'lucide-react';
 import { asArray, asText, matchKey, pickArray } from './fieldUtils';
+import { calculateExperienceMonths, formatExperience, parseExperienceDate } from '../../../utils/facultyExperience';
 
 const TYPE_COLORS = {
   doctorate: 'bg-purple-100 text-purple-800',
@@ -48,13 +49,10 @@ export const QualificationsTab = ({ profile }) => {
   const experience = asArray(tabData.experience);
 
   const getSortValue = (dateStr) => {
-    if (!dateStr) return 0;
-    const str = String(dateStr).toLowerCase();
-    if (str === 'present' || str === 'current' || str === 'ongoing') return 999999;
-    const parts = str.split('-');
-    const year = parseInt(parts[0], 10) || 0;
-    const month = parts[1] ? parseInt(parts[1], 10) : 0;
-    return year * 100 + month;
+    const date = parseExperienceDate(dateStr);
+    if (!date) return 0;
+    if (date.present) return 999999;
+    return date.year * 100 + (date.hasMonth ? date.month : 0);
   };
 
   const sortedQualifications = [...qualifications].sort((a, b) => {
@@ -74,49 +72,30 @@ export const QualificationsTab = ({ profile }) => {
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
 
-  // Calculate and display period from from/to fields (Year/Month format: "2021-06" or just "2021")
+  // Display period from from/to fields, in any format parseExperienceDate understands
   const formatPeriod = (exp) => {
     const fromStr = asText(exp.from);
     const toStr = asText(exp.to);
     if (!fromStr) return '—';
 
-    // Parse year and month from "YYYY-MM" or "YYYY"
-    const parseYearMonth = (str) => {
-      if (!str) return null;
-      const parts = str.split('-');
-      return { year: parseInt(parts[0]) || 0, month: parseInt(parts[1]) || 1 };
-    };
+    const from = parseExperienceDate(fromStr);
+    if (!from || from.present) return fromStr;
 
-    const from = parseYearMonth(fromStr);
-    if (!from || from.year === 0) return fromStr;
-
-    const isPresent = toStr && (toStr.toLowerCase() === 'present' || toStr.toLowerCase() === 'current');
-    const to = isPresent
-      ? { year: new Date().getFullYear(), month: new Date().getMonth() + 1 }
-      : parseYearMonth(toStr);
-
-    // Format month name
     const monthName = (m) => {
       const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       return months[(m - 1)] || '';
     };
 
-    const fromLabel = fromStr.includes('-') ? `${monthName(from.month)} ${from.year}` : `${from.year}`;
-    const toLabel = isPresent ? 'Present' : (to ? (toStr.includes('-') ? `${monthName(to.month)} ${to.year}` : `${to.year}`) : '');
+    const dateLabel = (date, fallback) => {
+      if (!date) return fallback;
+      if (date.present) return 'Present';
+      return date.hasMonth ? `${monthName(date.month)} ${date.year}` : `${date.year}`;
+    };
 
-    // Calculate duration
-    let durationText = '';
-    if (to && from.year > 0 && to.year >= from.year) {
-      let totalMonths = (to.year - from.year) * 12 + (to.month - from.month);
-      if (totalMonths < 0) totalMonths = 0;
-      const years = Math.floor(totalMonths / 12);
-      const months = totalMonths % 12;
-      if (years > 0 && months > 0) durationText = ` (${years} yr ${months} mo)`;
-      else if (years > 0) durationText = ` (${years} yr)`;
-      else if (months > 0) durationText = ` (${months} mo)`;
-    }
+    const months = calculateExperienceMonths([exp]);
+    const durationText = months > 0 ? ` (${formatExperience(months)})` : '';
 
-    return `${fromLabel} - ${toLabel}${durationText}`;
+    return `${dateLabel(from, fromStr)} - ${dateLabel(parseExperienceDate(toStr), toStr)}${durationText}`;
   };
 
   return (

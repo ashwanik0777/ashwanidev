@@ -4246,7 +4246,7 @@ const AdminDashboard = () => {
                 <Field label="School">
                   <select
                     className={inputClass}
-                    value={facultyEditor.form.school || ""}
+                    value={getSchoolByName(facultyEditor.form.school)?.code || facultyEditor.form.school || ""}
                     onChange={(e) =>
                       setFacultyEditor((prev) => ({
                         ...prev,

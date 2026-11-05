@@ -55,16 +55,14 @@ export const checkUploadStatus = async () => {
  * @param {File} file - Image file to upload
  * @param {string} folder - Route-aware folder path (e.g. "schools/SOICT/clubs")
  * @param {string} [fileName] - Readable name for the file (e.g. "annual-fest_flyer")
- * @param {string} [replaceUrl] - URL of old file to delete (auto-replace)
  * @returns {{ url: string, public_id: string, width?: number, height?: number, size?: number }}
  */
-export const uploadImage = async (file, folder = '', fileName = '', replaceUrl = '') => {
+export const uploadImage = async (file, folder = '', fileName = '') => {
   const formData = new FormData();
   formData.append('image', file);
 
   const params = new URLSearchParams({ folder });
   if (fileName) params.set('name', fileName);
-  if (replaceUrl) params.set('replace', replaceUrl);
 
   const res = await axios.post(
     `${getApiBase()}/upload/image?${params.toString()}`,
@@ -84,16 +82,14 @@ export const uploadImage = async (file, folder = '', fileName = '', replaceUrl =
  * @param {File} file - Document file to upload
  * @param {string} folder - Route-aware folder path (e.g. "announcements/notices")
  * @param {string} [fileName] - Readable name for the file (e.g. "annual-fest_brochure")
- * @param {string} [replaceUrl] - URL of old file to delete (auto-replace)
  * @returns {{ url: string, public_id: string, originalName: string, size: number }}
  */
-export const uploadFile = async (file, folder = '', fileName = '', replaceUrl = '') => {
+export const uploadFile = async (file, folder = '', fileName = '') => {
   const formData = new FormData();
   formData.append('file', file);
 
   const params = new URLSearchParams({ folder });
   if (fileName) params.set('name', fileName);
-  if (replaceUrl) params.set('replace', replaceUrl);
 
   const res = await axios.post(
     `${getApiBase()}/upload/file?${params.toString()}`,

@@ -1,7 +1,6 @@
 import React from "react";
-import { Mail, CircleCheck, Clock, Sparkles, Quote } from "lucide-react";
+import { CircleCheck, Clock, Sparkles, Quote } from "lucide-react";
 import TeamSection from "../../components/itcell/TeamSection";
-import ApplicationForm from "../../components/itcell/ApplicationForm";
 import RoadmapTimeline from "../../components/itcell/RoadmapTimeline";
 import { motion } from "framer-motion";
 import {
@@ -246,24 +245,6 @@ const ITCell = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">People Behind IT Cell</h2>
           </div>
           <TeamSection />
-        </section>
-
-        <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
-          <div className="grid gap-6 md:grid-cols-[1.2fr_auto] md:items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900">Join IT Cell Team</h3>
-              <p className="mt-2 text-sm text-slate-600 ">
-                If you are passionate about web development, AI systems, product design, or automation, apply to contribute to real university systems.
-              </p>
-              <p className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-slate-700">
-                <Mail className="h-4 w-4" /> itcell@gbu.ac.in
-              </p>
-            </div>
-
-            <div className="justify-self-start md:justify-self-end">
-              <ApplicationForm />
-            </div>
-          </div>
         </section>
       </div>
     </div>

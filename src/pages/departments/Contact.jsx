@@ -22,7 +22,7 @@ const ContactCard = ({ children, className = "" }) => (
 );
 
 // Contact Page Content Component
-const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directoryTable }) => {
+const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, directory, directoryTable, schoolCode }) => {
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-purple-200">
       {/* Hero Section */}
@@ -62,11 +62,13 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
                     </div>
 
                     <div className="space-y-4 text-sm">
-                      {/* Address */}
+                      {/* Address (only cards with separate phone/email fields hold an address in content) */}
                       <div className="space-y-1.5">
-                        <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-slate-400 uppercase">
-                          <MapPin className="w-3.5 h-3.5 text-purple-600 shrink-0" /> Address
-                        </div>
+                        {(info.phone || info.email) && (
+                          <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-slate-400 uppercase">
+                            <MapPin className="w-3.5 h-3.5 text-purple-600 shrink-0" /> Address
+                          </div>
+                        )}
                         <p className="text-xs sm:text-sm text-slate-700 whitespace-pre-line leading-relaxed font-medium">
                           {info.content}
                         </p>
@@ -124,7 +126,7 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
             <section className="space-y-6 max-w-5xl mx-auto">
               <div className="text-center max-w-2xl mx-auto">
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight font-outfit">
-                  Directory | SOM
+                  Directory | {schoolCode}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
                   Faculty and administrative direct phone numbers and extensions
@@ -458,7 +460,9 @@ const ContactPage = () => {
       officeHours={contactData.officeHours}
       generalInfo={contactData.generalInfo}
       deanInfo={contactData.deanInfo}
-      directoryTable={contactData.directoryTable || contactData.directory}
+      directory={contactData.directory}
+      directoryTable={contactData.directoryTable}
+      schoolCode={contactData.schoolCode}
     />
   );
 };

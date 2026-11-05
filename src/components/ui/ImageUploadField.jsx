@@ -73,8 +73,7 @@ const ImageUploadField = ({
     if (imageSrc) { URL.revokeObjectURL(imageSrc); setImageSrc(null); }
     try {
       const file = new File([blob], 'cropped-image.webp', { type: blob.type || 'image/webp' });
-      // Pass current value as replaceUrl to auto-delete old file
-      const result = await uploadImage(file, folder, fileName, value || '');
+      const result = await uploadImage(file, folder, fileName);
       if (result?.url) {
         onChange(result.url);
         setUploadStatus(STATUS_DONE);

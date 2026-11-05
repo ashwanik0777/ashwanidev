@@ -99,10 +99,9 @@ const FileUploadField = ({
         return;
       }
 
-      // Upload — pass current value as replaceUrl to auto-delete old file
       setUploadStatus(STATUS_UPLOADING);
       try {
-        const result = await uploadFile(file, folder, fileName, value || '');
+        const result = await uploadFile(file, folder, fileName);
         if (result?.url) {
           onChange(result.url);
           setUploadedName(result.originalName || file.name);

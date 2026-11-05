@@ -65,7 +65,7 @@ export const contactData = {
       designation: "Professor (Dean)",
       roomNo: "201",
       landline: "6149",
-      mobile: "-",
+      mobile: "",
       email: "niranjan.melkania@gbu.ac.in",
     },
     {

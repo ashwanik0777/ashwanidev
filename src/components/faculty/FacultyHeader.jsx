@@ -91,7 +91,7 @@ const FacultyHeader = ({ faculty }) => {
             )} */}
 
             {/* Specialization */}
-            <div className="flex items-center gap-3 text-gray-600 mb-4">
+            <div className="flex items-center gap-3 text-gray-600 mb-4 max-w-3xl">
               <span className="font-medium">
                 {faculty?.specialization || 'Specialization Area'}
               </span>

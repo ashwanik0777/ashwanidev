@@ -603,6 +603,10 @@ const AnnouncementManager = ({
                               const newArr = [...arr];
                               newArr[i] = newUrl;
                               setField(field.key, newArr);
+                              if (field.key === "images" && url) {
+                                if (editor.form.coverImage === url) setField("coverImage", newUrl);
+                                if (editor.form.coverImageUrl === url) setField("coverImageUrl", newUrl);
+                              }
                             }}
                             aspectRatio={16 / 9}
                             recommendedSize="1200×675"
@@ -664,7 +668,15 @@ const AnnouncementManager = ({
                       {editor.form[field.key] && (
                         <div className="flex items-center gap-2 text-xs text-sky-600 bg-sky-50 rounded-lg px-3 py-1.5 border border-sky-200">
                           <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
-                          <span>Cover image selected. Click it again to remove.</span>
+                          <span className="flex-1">Cover image selected. This event shows on the homepage.</span>
+                          <button type="button"
+                            onClick={() => {
+                              setField(field.key, "");
+                              notify("Cover image removed.");
+                            }}
+                            className="inline-flex items-center gap-1 font-semibold text-rose-500 hover:text-rose-700 transition-colors">
+                            <X className="w-3.5 h-3.5" /> Remove
+                          </button>
                         </div>
                       )}
                     </div>

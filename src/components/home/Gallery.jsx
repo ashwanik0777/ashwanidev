@@ -29,9 +29,10 @@ export default function CampusGallery() {
         e => e.status !== "upcoming"
       );
 
-      // Only keep events that have at least one gallery image
+      // Only keep events with a dashboard-selected cover and at least one gallery
+      // image, so clearing the cover takes the event off the home page
       const validEvents = pastOrOngoingEvents.filter(
-        (item) => item.images && item.images.length > 0
+        (item) => item.homeCoverImage && item.images && item.images.length > 0
       );
 
       // Phase 1: one cover image per event (up to 12)
@@ -39,8 +40,7 @@ export default function CampusGallery() {
       const extrasPool = [];
 
       for (const item of validEvents) {
-        const cover = item.coverImage || item.images?.[item.images.length - 1];
-        if (!cover) continue;
+        const cover = item.homeCoverImage;
 
         if (slides.length < MAX_SLIDES) {
           slides.push({

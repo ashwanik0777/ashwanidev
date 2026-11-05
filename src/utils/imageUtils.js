@@ -58,11 +58,10 @@ export const parseImageUrl = (path, width = 1000) => {
 
   const trimmed = path.trim();
 
-  // 0. Local upload paths from host-based storage
+  // 0. Local upload paths: the live site serves /uploads itself, only local dev needs the backend host
   if (trimmed.startsWith('/uploads/')) {
-    const backendBase = typeof import.meta !== 'undefined'
-      ? (import.meta.env?.VITE_BACKEND_BASE_URL || '')
-      : '';
+    const viteEnv = typeof import.meta !== 'undefined' ? import.meta.env : undefined;
+    const backendBase = viteEnv?.PROD ? '' : (viteEnv?.VITE_BACKEND_BASE_URL || '');
     return backendBase ? `${backendBase.replace(/\/$/, '')}${trimmed}` : trimmed;
   }
 

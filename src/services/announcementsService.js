@@ -135,6 +135,9 @@ const normalizeEvent = (item) => {
         coverImageUrl: resolvedCover,
         image: resolvedCover,
         coverImage: resolvedCover,
+        // Only the cover chosen in the dashboard, with no fallback: an event
+        // appears on the home page gallery only when this is set.
+        homeCoverImage: explicitCover,
         images: imagesArr,
         flyerUrl: flyer,
       };

@@ -29,13 +29,14 @@ const getAuthHeaders = () => {
 /**
  * Resolve an upload URL to its full absolute form.
  * - Absolute URLs (Cloudinary, Drive, external) → returned as-is
- * - Relative paths (/uploads/...) → prepend backend base
+ * - Relative paths (/uploads/...) → served by the live site itself, or the backend in local dev
  */
 export const resolveUploadUrl = (url) => {
   if (!url) return '';
   // Already absolute
   if (/^https?:\/\//i.test(url)) return url;
   if (url.startsWith('data:')) return url;
+  if (import.meta.env.PROD && url.startsWith('/uploads/')) return url;
   // Relative — prepend backend base
   const base = getBackendBase();
   return `${base}${url.startsWith('/') ? url : '/' + url}`;

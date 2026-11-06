@@ -112,7 +112,7 @@ const Footer = () => {
   >
     <Twitter
       strokeWidth={1.5}
-      className=" transition-all duration-300   hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.35)] cursor-pointer"
+      className="text-white/80 transition-all duration-300 hover:text-white hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.35)] cursor-pointer"
     />
   </a>
 

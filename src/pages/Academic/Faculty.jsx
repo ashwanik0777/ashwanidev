@@ -276,31 +276,31 @@ const Faculty = () => {
 
             {/* Search + Filters — Single Row */}
             <section className="py-4 w-full bg-gray-50">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-3">
+              <div className="max-w-7xl min-[2560px]:max-w-[2200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+                <div className="bg-white rounded-xl border border-gray-200 shadow-sm px-3 sm:px-4 py-3 min-[2560px]:px-6 min-[2560px]:py-5">
                   <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-3">
                     {/* Search */}
                     <div className="relative flex-grow min-w-0">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4 min-[2560px]:w-6 min-[2560px]:h-6" />
                       <input
                         type="text"
                         placeholder="Search by name, specialization..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                        className="w-full pl-9 min-[2560px]:pl-12 pr-4 py-2 min-[2560px]:py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm min-[2560px]:text-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                       />
                     </div>
 
                     {/* Divider (desktop) */}
                     <div className="hidden lg:block w-px h-8 bg-gray-200 flex-shrink-0" />
 
-                    {/* Filters — inline */}
-                    <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
+                    {/* Filters — stacked on mobile, 2 per row on tablet, inline from desktop */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:items-center gap-2 lg:flex-shrink-0">
                       {!isSchoolScoped && (
                         <select
                           value={selectedSchool}
                           onChange={(e) => setSelectedSchool(e.target.value)}
-                          className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                          className="w-full min-w-0 lg:w-48 xl:w-56 min-[2560px]:w-80 truncate bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 min-[2560px]:py-3 text-sm min-[2560px]:text-xl text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
                         >
                           {schools.map(school => (
                             <option key={school} value={school}>{school}</option>
@@ -310,7 +310,7 @@ const Faculty = () => {
                       <select
                         value={selectedDepartment}
                         onChange={(e) => setSelectedDepartment(e.target.value)}
-                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                        className="w-full min-w-0 lg:w-48 xl:w-56 min-[2560px]:w-80 truncate bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 min-[2560px]:py-3 text-sm min-[2560px]:text-xl text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
                       >
                         {departments.map(dept => (
                           <option key={dept} value={dept}>{dept}</option>
@@ -319,7 +319,7 @@ const Faculty = () => {
                       <select
                         value={selectedExperience}
                         onChange={(e) => setSelectedExperience(e.target.value)}
-                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
+                        className="w-full min-w-0 lg:w-48 xl:w-56 min-[2560px]:w-80 truncate bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 min-[2560px]:py-3 text-sm min-[2560px]:text-xl text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
                       >
                         <option value="All">Experience</option>
                         {experienceRanges.filter(r => r !== 'All').map(range => (
@@ -330,10 +330,10 @@ const Faculty = () => {
                       {(selectedDepartment !== 'All Departments' || selectedExperience !== 'All' || (!isSchoolScoped && selectedSchool !== 'All Schools') || searchTerm) && (
                         <button
                           onClick={clearFilters}
-                          className="flex items-center gap-1.5 text-red-600 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-lg transition-colors whitespace-nowrap"
+                          className="flex items-center justify-center gap-1.5 text-red-600 bg-red-50 hover:bg-red-100 px-3 py-2 min-[2560px]:py-3 rounded-lg transition-colors whitespace-nowrap"
                         >
                           <X className="w-3.5 h-3.5" />
-                          <span className="font-medium text-sm">Clear</span>
+                          <span className="font-medium text-sm min-[2560px]:text-xl">Clear</span>
                         </button>
                       )}
                     </div>
@@ -341,7 +341,7 @@ const Faculty = () => {
                 </div>
 
                 {/* Results Count */}
-                <div className="px-1 flex justify-between items-center text-sm text-gray-500">
+                <div className="px-1 flex justify-between items-center text-sm min-[2560px]:text-xl text-gray-500">
                   <span>
                     Showing <strong className="text-gray-700">{filteredFaculty.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1}–{Math.min(currentPage * itemsPerPage, filteredFaculty.length)}</strong> of <strong className="text-gray-700">{filteredFaculty.length}</strong> results
                   </span>
@@ -350,8 +350,8 @@ const Faculty = () => {
             </section>
 
             {/* Faculty Grid */}
-            <section className="pt-4 pb-16 bg-gray-50">
-              <div className="container mx-auto px-4">
+            <section className="pt-4 pb-10 sm:pb-16 bg-gray-50">
+              <div className="container min-[2560px]:max-w-[2200px] mx-auto px-4">
                 {filteredFaculty.length === 0 ? (
                   <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">No faculty members found matching your criteria.</p>
@@ -363,7 +363,7 @@ const Faculty = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-[2560px]:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                     {(() => {
                       const totalPages = Math.max(1, Math.ceil(filteredFaculty.length / itemsPerPage));
                       const paginatedFaculty = filteredFaculty.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -379,34 +379,34 @@ const Faculty = () => {
                       >
                         {/* Top accent bar */}
                         <div className="h-1.5 bg-blue-600 w-full" />
-                        <div className="p-6 flex flex-col flex-grow">
+                        <div className="p-4 sm:p-6 min-[2560px]:p-8 flex flex-col flex-grow">
                           {/* Photo + Name row */}
                           <div className="flex items-start gap-4 mb-4">
                             <img
                               src={resolveFacultyImage(faculty.image_url, faculty.image, faculty.name, faculty.email)}
                               alt={faculty.name}
-                              className="w-20 h-20 rounded-full object-cover border-3 border-blue-100 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0"
+                              className="w-16 h-16 sm:w-20 sm:h-20 min-[2560px]:w-28 min-[2560px]:h-28 rounded-full object-cover border-3 border-blue-100 group-hover:border-blue-400 transition-colors shadow-sm flex-shrink-0"
                               onError={(e) => { e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(getFacultyInitials(faculty.name))}&background=0D8ABC&color=fff&size=150`; }}
                             />
                             <div className="min-w-0">
-                              <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">{faculty.name}</h3>
-                              <p className="text-blue-600 font-semibold text-sm mt-1">{faculty.designation}</p>
+                              <h3 className="text-base sm:text-lg min-[2560px]:text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">{faculty.name}</h3>
+                              <p className="text-blue-600 font-semibold text-sm min-[2560px]:text-xl mt-1">{faculty.designation}</p>
                             </div>
                           </div>
 
                           {/* Department & School */}
                           <div className="space-y-2 mb-4">
                             <div className="flex items-start gap-2">
-                              <Award className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                              <p className="text-sm text-gray-600 leading-snug line-clamp-2">{normalizeSchoolName(faculty.school)}</p>
+                              <Award className="w-4 h-4 min-[2560px]:w-6 min-[2560px]:h-6 text-gray-400 mt-0.5 flex-shrink-0" />
+                              <p className="text-sm min-[2560px]:text-xl text-gray-600 leading-snug line-clamp-2">{normalizeSchoolName(faculty.school)}</p>
                             </div>
                           </div>
 
                           {/* Specialization */}
                           {faculty.specialization && (
                             <div className="bg-gray-50 rounded-lg px-3 py-2.5 mb-4">
-                              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Specialization</p>
-                              <p className="text-sm text-gray-800 line-clamp-2">{faculty.specialization}</p>
+                              <p className="text-xs min-[2560px]:text-lg font-semibold text-gray-500 uppercase tracking-wide mb-1">Specialization</p>
+                              <p className="text-sm min-[2560px]:text-xl text-gray-800 line-clamp-2">{faculty.specialization}</p>
                             </div>
                           )}
 
@@ -415,7 +415,7 @@ const Faculty = () => {
 
                           {/* View Profile link */}
                           <div className="pt-3 border-t border-gray-100">
-                            <span className="text-sm font-semibold text-blue-600 group-hover:text-blue-700 transition-colors">
+                            <span className="text-sm min-[2560px]:text-xl font-semibold text-blue-600 group-hover:text-blue-700 transition-colors">
                               View Profile →
                             </span>
                           </div>
@@ -430,16 +430,16 @@ const Faculty = () => {
 
                 {/* Pagination */}
                 {Math.ceil(filteredFaculty.length / itemsPerPage) > 1 && (
-                  <div className="mt-12 flex justify-center items-center space-x-2">
+                  <div className="mt-8 sm:mt-12 flex flex-wrap justify-center items-center gap-2">
                     <button
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
-                      className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="px-3 sm:px-4 py-2 min-[2560px]:px-6 min-[2560px]:py-3 min-[2560px]:text-xl rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       Previous
                     </button>
                     
-                    <div className="flex items-center space-x-1 hidden sm:flex">
+                    <div className="items-center gap-1 hidden sm:flex">
                       {[...Array(Math.ceil(filteredFaculty.length / itemsPerPage))].map((_, i) => {
                         const pageNum = i + 1;
                         const totalPages = Math.ceil(filteredFaculty.length / itemsPerPage);
@@ -455,7 +455,7 @@ const Faculty = () => {
                           <button
                             key={i}
                             onClick={() => setCurrentPage(pageNum)}
-                            className={`w-10 h-10 rounded-lg font-medium transition-colors ${
+                            className={`w-10 h-10 min-[2560px]:w-14 min-[2560px]:h-14 min-[2560px]:text-xl rounded-lg font-medium transition-colors ${
                               currentPage === pageNum 
                                 ? 'bg-blue-600 text-white shadow-md' 
                                 : 'text-gray-600 hover:bg-gray-100 border border-gray-200'
@@ -470,7 +470,7 @@ const Faculty = () => {
                     <button
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredFaculty.length / itemsPerPage)))}
                       disabled={currentPage === Math.ceil(filteredFaculty.length / itemsPerPage)}
-                      className="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      className="px-3 sm:px-4 py-2 min-[2560px]:px-6 min-[2560px]:py-3 min-[2560px]:text-xl rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
                       Next
                     </button>

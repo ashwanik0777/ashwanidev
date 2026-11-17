@@ -11,12 +11,17 @@ const HodMessage = ({
   contact = null,
 }) => {
   const [showFull, setShowFull] = useState(false);
-  const visibleCount = 2;
+  const paragraphs = Array.isArray(messageParagraphs) ? messageParagraphs : [];
+  // 3+ paragraphs: show 2; 1-2 paragraphs: show only the first.
+  const visibleCount = paragraphs.length > 2 ? 2 : 1;
+  // A single long paragraph is clamped to a few lines instead.
+  const clampSingle = paragraphs.length === 1 && String(paragraphs[0] || "").length > 500;
+  const hasMore = paragraphs.length > visibleCount || clampSingle;
 
   const toggleView = () => setShowFull((prev) => !prev);
   const visibleParagraphs = showFull
-    ? messageParagraphs
-    : messageParagraphs.slice(0, visibleCount);
+    ? paragraphs
+    : paragraphs.slice(0, visibleCount);
 
   return (
     <section className="pt-3 sm:pt-4 min-[2560px]:pt-8 pb-3 sm:pb-4 min-[2560px]:pb-8 bg-white">
@@ -56,12 +61,17 @@ const HodMessage = ({
               {Array.isArray(messageParagraphs) && messageParagraphs.length > 0 ? (
                 <>
                   {visibleParagraphs.map((para, idx) => (
-                    <p key={idx} className="leading-relaxed text-sm sm:text-base min-[2560px]:text-2xl text-justify">
+                    <p
+                      key={idx}
+                      className={`leading-relaxed text-sm sm:text-base min-[2560px]:text-2xl text-justify ${
+                        clampSingle && !showFull ? "line-clamp-5" : ""
+                      }`}
+                    >
                       {para}
                     </p>
                   ))}
 
-                  {messageParagraphs.length > visibleCount && (
+                  {hasMore && (
                     <button
                       onClick={toggleView}
                       className="px-4 py-1.5 min-[2560px]:px-6 min-[2560px]:py-2.5 text-sm min-[2560px]:text-xl font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 shadow-sm transition duration-200"

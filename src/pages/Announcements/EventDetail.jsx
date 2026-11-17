@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   Calendar,
@@ -173,6 +173,8 @@ function format(date, formatStr) {
 
 const EventDetail = () => {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const school = searchParams.get("school") || undefined;
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -198,18 +200,24 @@ const EventDetail = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const loadEvent = async () => {
-      setLoading(true);
+    const findEvent = async (schoolCode) => {
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(schoolCode);
       } catch {
         syncAnnouncementsFromCache();
       }
 
-      const eventList = getSchoolAnnouncements().events;
-      const selected = eventList.find((item) => 
+      const eventList = getSchoolAnnouncements(schoolCode).events;
+      return eventList.find((item) =>
         (typeof createSlug === "function" ? createSlug(item.title) : String(item.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')) === slug || String(item.id) === slug
       );
+    };
+
+    const loadEvent = async () => {
+      setLoading(true);
+      // A school's link names its school, since a school-only event is not in
+      // the university list. Anything not found there is looked up university-wide.
+      const selected = (school && (await findEvent(school))) || (await findEvent());
       if (!isMounted) return;
       setEvent(selected || null);
       setLoading(false);
@@ -226,7 +234,7 @@ const EventDetail = () => {
       window.removeEventListener("focus", loadEvent);
       window.removeEventListener("announcements-data-updated", loadEvent);
     };
-  }, [slug]);
+  }, [slug, school]);
 
   if (loading) {
     return (

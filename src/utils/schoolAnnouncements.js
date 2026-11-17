@@ -59,21 +59,24 @@ export const getSchoolAnnouncements = (schoolCode) => {
   const data = announcementsCacheMap[key] || { ...EMPTY_ANNOUNCEMENTS };
 
   if (schoolCode) {
-    // Notices and news the school also sent to the university stay on its own page.
+    // An item with a Publish To choice is on this page when it is the school's
+    // own. Older items keep their old rule: college-level ones belong to the
+    // university pages, except older notices and news the school also sent to
+    // the university, which stay on its own page.
     const ownCode = String(schoolCode).trim().toUpperCase();
-    const isOwnOrSchoolLevel = (item) =>
-      (item.level || "").toLowerCase() !== "college" ||
-      String(item.schoolCode || "").trim().toUpperCase() === ownCode;
+    const isOwn = (item) => String(item.schoolCode || "").trim().toUpperCase() === ownCode;
+    const onSchoolPage = (item) =>
+      item.publishScope ? isOwn(item) : (item.level || "").toLowerCase() !== "college";
+    const noticeOnSchoolPage = (item) => onSchoolPage(item) || (!item.publishScope && isOwn(item));
 
-    // Exclude 'college' level items from school pages
     return {
       ...data,
-      notices: data.notices.filter(isOwnOrSchoolLevel),
-      news: data.news.filter(isOwnOrSchoolLevel),
-      events: data.events.filter(item => (item.level || "").toLowerCase() !== "college"),
-      newsletters: data.newsletters.filter(item => (item.level || "").toLowerCase() !== "college"),
-      mediaGallery: data.mediaGallery.filter(item => (item.level || "").toLowerCase() !== "college"),
-      eventGallery: data.eventGallery.filter(item => (item.level || "").toLowerCase() !== "college"),
+      notices: data.notices.filter(noticeOnSchoolPage),
+      news: data.news.filter(noticeOnSchoolPage),
+      events: data.events.filter(onSchoolPage),
+      newsletters: data.newsletters.filter(onSchoolPage),
+      mediaGallery: data.mediaGallery.filter(onSchoolPage),
+      eventGallery: data.eventGallery.filter(onSchoolPage),
     };
   }
 

@@ -59,31 +59,37 @@ export const GALLERY_CATEGORIES = [
 export const PRIORITIES = ["low", "medium", "high"];
 
 /**
- * Level is handled separately from the per-kind fields because it drives the
- * approval workflow rather than the announcement's own content.
+ * Where an item shows. The backend's announcements/schema.js explains each value;
+ * items saved before this choice existed have none and keep their old placement.
  */
-export const LEVEL_FIELD = {
-  key: "level",
-  label: "Announcement Level",
-  type: "select",
-  options: [
-    { value: "school", label: "School & University — visible on your school's page and global page" },
-    { value: "college", label: "University-wide Only — visible only on global page" },
-  ],
-  required: true,
-
+export const PUBLISH_SCOPES = {
+  SCHOOL: "school",
+  SCHOOL_UNIVERSITY: "school_university",
+  UNIVERSITY: "university",
 };
 
 /*
- * Notices and news: a school-level item stays on the school's page, and reaching
- * the university page takes admin approval. Other kinds still use LEVEL_FIELD.
+ * Older notices and news, saved without a Publish To choice: a school-level
+ * item stays on the school's page, and a college-level one reaches the
+ * university page only after admin approval. Other older kinds show
+ * school-level items on both pages.
  */
 export const UNIVERSITY_GATED_KINDS = new Set(["notices", "news"]);
 
-export const GATED_LEVEL_OPTIONS = [
-  { value: "school", label: "School only — visible only on the school's page" },
-  { value: "college", label: "School & University — also visible on the university page" },
-];
+/**
+ * Asked on every save by a school, and by a super admin filing for a school.
+ * Handled apart from the per-kind fields because it drives the approval
+ * workflow, and it starts empty so nothing is chosen by default.
+ */
+export const PUBLISH_TO_FIELD = {
+  key: "publishScope",
+  label: "Publish To",
+  placeholder: "Select where to publish",
+  options: [
+    { value: PUBLISH_SCOPES.SCHOOL, label: "School Page Only" },
+    { value: PUBLISH_SCOPES.SCHOOL_UNIVERSITY, label: "School Page and University Page" },
+  ],
+};
 
 export const ANNOUNCEMENT_FIELDS = {
   notices: [
@@ -154,9 +160,9 @@ export const ANNOUNCEMENT_FIELDS = {
 };
 
 /** A blank item for each kind, matching the field definitions above. */
-export const buildEmptyAnnouncement = (kind, level = "school") => {
+export const buildEmptyAnnouncement = (kind) => {
   const today = new Date().toISOString().slice(0, 10);
-  const base = { level };
+  const base = { publishScope: "" };
 
   for (const field of ANNOUNCEMENT_FIELDS[kind] || []) {
     if (field.type === "boolean") base[field.key] = false;

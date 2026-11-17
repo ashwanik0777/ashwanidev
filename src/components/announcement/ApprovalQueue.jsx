@@ -1,20 +1,102 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { CheckCircle2, XCircle, RefreshCw, Inbox } from "lucide-react";
+import { CheckCircle2, XCircle, RefreshCw, Inbox, ChevronDown, ExternalLink } from "lucide-react";
 import {
   KIND_LABELS,
   approveAnnouncement,
   listPendingAnnouncements,
   rejectAnnouncement,
 } from "../../services/announcementsAdminService";
+import { ANNOUNCEMENT_FIELDS, optionLabel } from "../../Data/announcementFields";
+import { parseImageUrl } from "../../utils/imageUtils";
 
 /*
  * Super-admin review queue.
  *
- * A school can publish its own school-level announcements freely, but anything
- * it wants shown university-wide lands here first. Nothing in this list is on
- * the university pages until it is approved. A notice or news item already shows
- * on its own school's page; other kinds stay off the public site until then.
+ * A school publishes to its own page freely, but an item it also wants on the
+ * university page lands here first. It already shows on the school's page and
+ * reaches the university page only once approved.
  */
+
+const IMAGE_KEYS = new Set(["image", "flyerUrl", "coverImage", "coverImageUrl"]);
+const LINK_KEYS = new Set([
+  "pdfUrl", "brochureUrl", "englishPdfLink", "hindiPdfLink", "registrationUrl", "link", "imageLink",
+]);
+
+const formatDate = (value, withTime = false) => {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return String(value);
+  return withTime
+    ? date.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })
+    : date.toLocaleDateString("en-IN", { dateStyle: "medium" });
+};
+
+const isBlank = (value) =>
+  value === null || value === undefined || value === "" || value === 0 ||
+  (Array.isArray(value) && value.filter(Boolean).length === 0);
+
+const Thumbnail = ({ url }) => (
+  <a href={parseImageUrl(url)} target="_blank" rel="noreferrer"
+    className="block h-20 w-28 overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
+    <img src={parseImageUrl(url, 400)} alt="" className="h-full w-full object-cover" />
+  </a>
+);
+
+/** One filled-in form field, shown the way the school entered it. */
+const FieldValue = ({ field, value }) => {
+  if (field.type === "image-list") {
+    return (
+      <div className="flex flex-wrap gap-2">
+        {value.filter(Boolean).map((url) => <Thumbnail key={url} url={url} />)}
+      </div>
+    );
+  }
+  if (IMAGE_KEYS.has(field.key)) return <Thumbnail url={value} />;
+  if (LINK_KEYS.has(field.key)) {
+    return (
+      <a href={value} target="_blank" rel="noreferrer"
+        className="inline-flex max-w-full items-center gap-1 break-all text-sky-700 hover:underline">
+        {value} <ExternalLink className="h-3 w-3 shrink-0" />
+      </a>
+    );
+  }
+  if (field.type === "date") return formatDate(value);
+  if (field.type === "boolean") return value ? "Yes" : "No";
+  if (field.type === "select") {
+    const option = (field.options || []).find((entry) => (entry?.value ?? entry) === value);
+    return option ? optionLabel(option) : String(value);
+  }
+  if (Array.isArray(value)) return value.join(", ");
+  return <span className="whitespace-pre-wrap">{String(value)}</span>;
+};
+
+/** Everything the school filled in, so the admin can judge the whole request. */
+const RequestDetails = ({ item }) => {
+  const fields = (ANNOUNCEMENT_FIELDS[item.kind] || []).filter((field) => !isBlank(item[field.key]));
+  const rows = [
+    { label: "School", value: item.schoolName || item.schoolCode },
+    { label: "Submitted By", value: item.createdByName },
+    { label: "Submitted On", value: item.createdAt ? formatDate(item.createdAt, true) : "" },
+    { label: "Last Updated", value: item.updatedAt ? formatDate(item.updatedAt, true) : "" },
+    { label: "Publish To", value: "School Page and University Page" },
+  ].filter((row) => row.value);
+
+  return (
+    <dl className="mt-3 grid gap-x-4 gap-y-3 rounded-xl border border-slate-200 bg-white p-4 text-xs sm:grid-cols-[10rem_1fr]">
+      {rows.map((row) => (
+        <React.Fragment key={row.label}>
+          <dt className="font-semibold text-slate-500">{row.label}</dt>
+          <dd className="text-slate-800">{row.value}</dd>
+        </React.Fragment>
+      ))}
+      {fields.map((field) => (
+        <React.Fragment key={field.key}>
+          <dt className="font-semibold text-slate-500">{field.label.replace(/\s*\(.*\)\s*$/, "")}</dt>
+          <dd className="min-w-0 text-slate-800"><FieldValue field={field} value={item[field.key]} /></dd>
+        </React.Fragment>
+      ))}
+    </dl>
+  );
+};
 
 const ApprovalQueue = ({ onMessage }) => {
   const [items, setItems] = useState([]);
@@ -22,6 +104,7 @@ const ApprovalQueue = ({ onMessage }) => {
   const [error, setError] = useState("");
   const [notes, setNotes] = useState({});
   const [busyKey, setBusyKey] = useState("");
+  const [openKey, setOpenKey] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -114,7 +197,7 @@ const ApprovalQueue = ({ onMessage }) => {
                     {KIND_LABELS[item.kind] || item.kind}
                   </span>
                   <span className="rounded border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700">
-                    Requested: University page
+                    Requested: University Page
                   </span>
                   <span className="text-xs text-slate-500">
                     from <strong className="text-slate-700">{item.schoolName || item.schoolCode}</strong>
@@ -124,11 +207,21 @@ const ApprovalQueue = ({ onMessage }) => {
                 </div>
 
                 <h4 className="text-sm font-bold text-slate-900">{item.title}</h4>
-                {(item.excerpt || item.content || item.description) && (
+                {(item.excerpt || item.content || item.description) && openKey !== key && (
                   <p className="mt-1 line-clamp-3 text-xs text-slate-600">
                     {item.excerpt || item.content || item.description}
                   </p>
                 )}
+
+                <button
+                  type="button"
+                  onClick={() => setOpenKey(openKey === key ? "" : key)}
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-sky-700 hover:text-sky-800"
+                >
+                  {openKey === key ? "Hide Details" : "View Details"}
+                  <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openKey === key ? "rotate-180" : ""}`} />
+                </button>
+                {openKey === key && <RequestDetails item={item} />}
 
                 <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
                   <input

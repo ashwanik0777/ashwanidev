@@ -6,8 +6,8 @@ import FileUploadField from "../ui/FileUploadField";
 import {
   ANNOUNCEMENT_COLUMNS,
   ANNOUNCEMENT_FIELDS,
-  GATED_LEVEL_OPTIONS,
-  LEVEL_FIELD,
+  PUBLISH_SCOPES,
+  PUBLISH_TO_FIELD,
   UNIVERSITY_GATED_KINDS,
   buildEmptyAnnouncement,
   optionLabel,
@@ -37,8 +37,8 @@ const inputClass =
   "w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700";
 
 const STATUS_BADGES = {
-  [APPROVAL_STATUS.PUBLISHED]: { label: "Published", className: "bg-emerald-50 text-emerald-700 border-emerald-200", Icon: CheckCircle2 },
-  [APPROVAL_STATUS.PENDING]: { label: "Awaiting approval", className: "bg-amber-50 text-amber-700 border-amber-200", Icon: Clock },
+  [APPROVAL_STATUS.PUBLISHED]: { label: "Approved", className: "bg-emerald-50 text-emerald-700 border-emerald-200", Icon: CheckCircle2 },
+  [APPROVAL_STATUS.PENDING]: { label: "Pending", className: "bg-amber-50 text-amber-700 border-amber-200", Icon: Clock },
   [APPROVAL_STATUS.REJECTED]: { label: "Rejected", className: "bg-rose-50 text-rose-700 border-rose-200", Icon: AlertCircle },
 };
 
@@ -58,11 +58,34 @@ const isUniversityOwned = (code) => {
   return !normalised || normalised === "GBU";
 };
 
-/** Where a notice or news item shows, in the words of the level dropdown. */
-const reachLabel = (item) => {
-  if (item.level !== LEVELS.COLLEGE) return "School only";
-  return isUniversityOwned(item.schoolCode) ? "University" : "School & University";
+const SCOPE_LABELS = {
+  [PUBLISH_SCOPES.SCHOOL]: "School Page Only",
+  [PUBLISH_SCOPES.SCHOOL_UNIVERSITY]: "School Page and University Page",
+  [PUBLISH_SCOPES.UNIVERSITY]: "University Page",
 };
+
+/**
+ * Where an item shows, in the words of the Publish To dropdown. Items saved
+ * before that choice existed are described by where their older rule shows them.
+ */
+const publishToLabel = (item, kind) => {
+  if (SCOPE_LABELS[item.publishScope]) return SCOPE_LABELS[item.publishScope];
+  if (isUniversityOwned(item.schoolCode)) return SCOPE_LABELS[PUBLISH_SCOPES.UNIVERSITY];
+  if (UNIVERSITY_GATED_KINDS.has(kind)) {
+    return item.level === LEVELS.COLLEGE
+      ? SCOPE_LABELS[PUBLISH_SCOPES.SCHOOL_UNIVERSITY]
+      : SCOPE_LABELS[PUBLISH_SCOPES.SCHOOL];
+  }
+  return item.level === LEVELS.COLLEGE
+    ? SCOPE_LABELS[PUBLISH_SCOPES.UNIVERSITY]
+    : SCOPE_LABELS[PUBLISH_SCOPES.SCHOOL_UNIVERSITY];
+};
+
+/** A school's request for the university page, which the admin approves. */
+const needsUniversityApproval = (item) =>
+  item.publishScope
+    ? item.publishScope === PUBLISH_SCOPES.SCHOOL_UNIVERSITY
+    : item.level === LEVELS.COLLEGE && !isUniversityOwned(item.schoolCode);
 
 /**
  * The public Announcements pages cache their snapshot and listen for this event,
@@ -109,7 +132,10 @@ const AnnouncementManager = ({
   const fields = ANNOUNCEMENT_FIELDS[kind] || [];
   const columns = ANNOUNCEMENT_COLUMNS[kind] || [];
   const isAdmin = actorRole === "admin";
-  const isGated = UNIVERSITY_GATED_KINDS.has(kind);
+  // A school always chooses where an item shows, and so does an admin filing for
+  // a school. The admin's university-wide tab asks nothing: those items are the
+  // university's own, and editing one there leaves it where it is.
+  const showPublishTo = !isAdmin || !isUniversityOwned(schoolCode);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -179,10 +205,9 @@ const AnnouncementManager = ({
   // Expose action handlers to parent so it can render buttons in its own header
   useEffect(() => {
     onActionsReady?.({ load, openCreate: () => {
-      const defaultLevel = schoolCode ? LEVELS.SCHOOL : LEVELS.COLLEGE;
-      setEditor({ id: null, form: buildEmptyAnnouncement(kind, defaultLevel) });
+      setEditor({ id: null, form: buildEmptyAnnouncement(kind) });
     }, loading, kind });
-  }, [onActionsReady, load, loading, kind, schoolCode]);
+  }, [onActionsReady, load, loading, kind]);
 
   const visibleItems = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -204,14 +229,16 @@ const AnnouncementManager = ({
   const totalPages = Math.max(1, Math.ceil(visibleItems.length / itemsPerPage));
 
   const openCreate = () => {
-    // Managing a specific school defaults to that school's own pages; the
-    // university-wide tab defaults to college level.
-    const defaultLevel = schoolCode ? LEVELS.SCHOOL : LEVELS.COLLEGE;
-    setEditor({ id: null, form: buildEmptyAnnouncement(kind, defaultLevel) });
+    setEditor({ id: null, form: buildEmptyAnnouncement(kind) });
   };
 
   const openEdit = (item) => {
-    const form = { level: item.level || LEVELS.SCHOOL };
+    // An item saved before Publish To existed has no choice yet, so the
+    // dropdown starts empty and has to be chosen before saving.
+    const savedScope = PUBLISH_TO_FIELD.options.some((option) => option.value === item.publishScope)
+      ? item.publishScope
+      : "";
+    const form = { publishScope: savedScope };
     for (const field of fields) form[field.key] = toFormValue(field, item[field.key]);
     setEditor({ id: item.id, form, originalItem: item });
   };
@@ -223,6 +250,11 @@ const AnnouncementManager = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!editor) return;
+
+    if (showPublishTo && !editor.form.publishScope) {
+      notify("Please select where to publish.", true);
+      return;
+    }
 
     const missing = fields.filter(
       (field) => field.required && String(editor.form[field.key] ?? "").trim() === "",
@@ -238,6 +270,8 @@ const AnnouncementManager = ({
       // A school account is always pinned to its own school server-side, but
       // send it so an admin can file an item on a school's behalf.
       if (schoolCode) payload.schoolCode = schoolCode;
+      // No choice sent tells the backend to leave an edited item where it is.
+      if (!showPublishTo) delete payload.publishScope;
 
       const { message } = editor.id
         ? await updateAnnouncement(kind, editor.id, payload)
@@ -283,12 +317,7 @@ const AnnouncementManager = ({
   };
 
   const willNeedApproval =
-    !isAdmin && editor?.form?.level === LEVELS.COLLEGE;
-
-  // An admin's university-wide notice or news has no school, so no level to pick.
-  const showLevelField =
-    kind !== "newsletters" &&
-    !(isGated && isAdmin && isUniversityOwned(schoolCode || editor?.originalItem?.schoolCode));
+    !isAdmin && editor?.form?.publishScope === PUBLISH_SCOPES.SCHOOL_UNIVERSITY;
 
   /* Detect single-image URL fields — these should use ImageUploadField */
   const IMAGE_FIELD_KEYS = new Set(["image", "flyerUrl", "coverImage", "coverImageUrl"]);
@@ -407,8 +436,8 @@ const AnnouncementManager = ({
                   {column.label}
                 </th>
               ))}
-              {isGated && <th className="px-4 py-3 border-b border-slate-200">Level</th>}
-              {isGated && <th className="px-4 py-3 border-b border-slate-200">Status</th>}
+              <th className="px-4 py-3 border-b border-slate-200">Publish To</th>
+              <th className="px-4 py-3 border-b border-slate-200">University Approval</th>
               {isAdmin && kind !== "newsletters" && <th className="px-4 py-3 border-b border-slate-200">School</th>}
               <th className="px-4 py-3 border-b border-slate-200 text-right">Actions</th>
             </tr>
@@ -438,21 +467,23 @@ const AnnouncementManager = ({
                       )}
                     </td>
                   ))}
-                  {isGated && (
-                    <td className="px-4 py-3">
-                      <span className="rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold uppercase text-indigo-700">
-                        {reachLabel(item)}
-                      </span>
-                    </td>
-                  )}
-                  {isGated && (
-                    <td className="px-4 py-3">
-                      <StatusBadge status={item.approvalStatus} />
-                      {item.approvalStatus === APPROVAL_STATUS.REJECTED && item.reviewNote && (
-                        <p className="mt-1 max-w-[14rem] text-xs text-rose-700">{item.reviewNote}</p>
-                      )}
-                    </td>
-                  )}
+                  <td className="px-4 py-3">
+                    <span className="whitespace-nowrap rounded border border-indigo-100 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700">
+                      {publishToLabel(item, kind)}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    {needsUniversityApproval(item) ? (
+                      <>
+                        <StatusBadge status={item.approvalStatus} />
+                        {item.approvalStatus === APPROVAL_STATUS.REJECTED && item.reviewNote && (
+                          <p className="mt-1 max-w-[14rem] text-xs text-rose-700">{item.reviewNote}</p>
+                        )}
+                      </>
+                    ) : (
+                      <span className="text-xs text-slate-400">Not Required</span>
+                    )}
+                  </td>
                   {isAdmin && kind !== "newsletters" && (
                     <td className="px-4 py-3 text-xs text-slate-600">{item.schoolCode || "GBU"}</td>
                   )}
@@ -556,36 +587,27 @@ const AnnouncementManager = ({
             </div>
 
             <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-              {showLevelField && (
+              {showPublishTo && (
                 <label className="block">
                   <span className="mb-1 block text-sm font-medium text-slate-700">
-                    {LEVEL_FIELD.label} <span className="text-rose-600">*</span>
+                    {PUBLISH_TO_FIELD.label} <span className="text-rose-600">*</span>
                   </span>
                   <select
                     className={inputClass}
-                    value={editor.form.level}
-                    onChange={(event) => setField("level", event.target.value)}
+                    value={editor.form.publishScope || ""}
+                    onChange={(event) => setField("publishScope", event.target.value)}
                   >
-                    {(isGated ? GATED_LEVEL_OPTIONS : LEVEL_FIELD.options).map((option) => (
+                    <option value="" disabled>{PUBLISH_TO_FIELD.placeholder}</option>
+                    {PUBLISH_TO_FIELD.options.map((option) => (
                       <option key={option.value} value={option.value}>{option.label}</option>
                     ))}
                   </select>
-                  <span className="mt-1 block text-xs text-slate-500">{LEVEL_FIELD.help}</span>
                 </label>
               )}
 
               {willNeedApproval && (
                 <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-                  {isGated
-                    ? "This will show on your school's page straight away. It goes to the university admin as a request, and appears on the university page only after it is approved."
-                    : "This will be submitted to the university admin for approval and will not appear on the website until it is approved."}
-                </div>
-              )}
-
-              {isAdmin && !isGated && schoolCode && editor.form.level === LEVELS.COLLEGE && (
-                <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800">
-                  College-level items belong to the university rather than to {schoolCode}, so this
-                  will move to the university-wide Announcements list after saving.
+                  Your school page shows this now. The university page shows it after admin approval.
                 </div>
               )}
 

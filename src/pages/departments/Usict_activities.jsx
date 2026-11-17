@@ -1,4 +1,4 @@
-import { createSlug, newsDetailPath } from "../../utils/slugUtil";
+import { eventDetailPath, newsDetailPath } from "../../utils/slugUtil";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { 
@@ -133,7 +133,7 @@ const EventCard = ({ event, index }) => {
   const isPast = !event.isUpcoming;
 
   return (
-    <Link to={`/announcements/event/${event.title ? createSlug(event.title) : event.id}`}>
+    <Link to={eventDetailPath(event)}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

@@ -13,3 +13,9 @@ export const newsDetailPath = (news) => {
   return school && school !== "GBU" ? `${path}?school=${encodeURIComponent(school)}` : path;
 };
 
+/** Link to an event, carrying its school for the same reason as news. */
+export const eventDetailPath = (event) => {
+  const path = `/announcements/event/${event?.title ? createSlug(event.title) : event?.id}`;
+  const school = String(event?.schoolCode || "").trim().toUpperCase();
+  return school && school !== "GBU" ? `${path}?school=${encodeURIComponent(school)}` : path;
+};

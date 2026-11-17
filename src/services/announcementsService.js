@@ -73,6 +73,7 @@ const normalizeNotice = (item) => ({
   schoolName: getSchoolLabel(item),
   schoolCode: String(item?.schoolCode || "").trim(),
   level: String(item?.level || "").trim(),
+  publishScope: String(item?.publishScope || "").trim(),
 });
 
 const normalizeNews = (item) => ({
@@ -96,6 +97,7 @@ const normalizeNews = (item) => ({
   schoolName: getSchoolLabel(item),
   schoolCode: String(item?.schoolCode || "").trim(),
   level: String(item?.level || "").trim(),
+  publishScope: String(item?.publishScope || "").trim(),
   link: String(item?.link || "").trim(),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
 });
@@ -153,7 +155,9 @@ const normalizeEvent = (item) => {
     tags: toList(item?.tags),
     year: String(item?.year || (eventDate ? new Date(eventDate).getFullYear() : "")),
     schoolName: getSchoolLabel(item),
+    schoolCode: String(item?.schoolCode || "").trim(),
     level: String(item?.level || "").trim(),
+    publishScope: String(item?.publishScope || "").trim(),
   };
 };
 
@@ -166,7 +170,9 @@ const normalizeNewsletter = (item, index) => ({
   englishPdfLink: String(item?.englishPdfLink || item?.english_pdf_url || item?.pdfLink || item?.pdfUrl || "").trim(),
   hindiPdfLink: String(item?.hindiPdfLink || item?.hindi_pdf_url || "").trim(),
   schoolName: getSchoolLabel(item),
+  schoolCode: String(item?.schoolCode || "").trim(),
   level: String(item?.level || "").trim(),
+  publishScope: String(item?.publishScope || "").trim(),
 });
 
 const normalizeMedia = (item, index) => {
@@ -180,7 +186,9 @@ const normalizeMedia = (item, index) => {
     images,
     coverImage: String(item?.coverImage || item?.cover_image || item?.coverImageUrl || [...images].pop() || "").trim(),
     schoolName: getSchoolLabel(item),
+    schoolCode: String(item?.schoolCode || "").trim(),
     level: String(item?.level || "").trim(),
+    publishScope: String(item?.publishScope || "").trim(),
   };
 };
 
@@ -229,7 +237,9 @@ export const fetchAnnouncementsSnapshot = async (schoolCode) => {
       images: e.images,
       coverImage: e.coverImage || [...e.images].pop() || "",
       schoolName: e.schoolName,
+      schoolCode: e.schoolCode,
       level: e.level,
+      publishScope: e.publishScope,
     }));
 
   mediaGallery = [...eventGalleryItems, ...mediaGallery];

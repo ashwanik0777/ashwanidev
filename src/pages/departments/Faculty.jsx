@@ -72,6 +72,9 @@ const Faculty = () => {
     const isProf = desc.includes("prof");
     const isHod = desc.includes("hod") || desc.includes("head");
 
+    // OCFD (contract) faculty always come last, after every permanent designation
+    if (desc.includes("ocfd")) return 11;
+
     // 1. Professor and Dean
     if (isDean && !isAssociate && !isAssistant) return 1;
 

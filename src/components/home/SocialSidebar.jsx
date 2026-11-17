@@ -66,6 +66,7 @@ export default function SocialSidebar() {
 
   return (
     <div
+      data-social-sidebar
       className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ease-out ${visible
           ? "opacity-100 translate-x-0"
           : "opacity-0 -translate-x-full pointer-events-none"
@@ -113,13 +114,13 @@ export default function SocialSidebar() {
         })}
       </div>
 
-      {/* Inline styles for icon colors */}
+      {/* Inline styles for icon colors, scoped to this sidebar so footer icons keep their own colors */}
       <style>{`
         ${socialLinks.map((item) => `
-          a[aria-label="${item.name}"] svg {
+          [data-social-sidebar] a[aria-label="${item.name}"] svg {
             color: ${item.color};
           }
-          a[aria-label="${item.name}"]:hover svg {
+          [data-social-sidebar] a[aria-label="${item.name}"]:hover svg {
             color: #ffffff !important;
           }
         `).join('')}

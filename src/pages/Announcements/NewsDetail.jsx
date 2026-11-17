@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
 import SocialShare from '../../components/announcement/SocialShare';
 import { useState, useEffect } from "react";
@@ -44,7 +44,9 @@ const format = (date) => formatAnnouncementDate(date, "MMMM dd, yyyy");
 
 const NewsDetail = () => {
   const { slug } = useParams();
-  const [mockNews, setMockNews] = useState(() => getSchoolAnnouncements().news);
+  const [searchParams] = useSearchParams();
+  const school = searchParams.get('school') || undefined;
+  const [mockNews, setMockNews] = useState(() => getSchoolAnnouncements(school).news);
   
   // Find by slug (or fallback to ID if passed)
   const newsItem = mockNews.find((item) => 
@@ -56,13 +58,13 @@ const NewsDetail = () => {
 
     const loadNews = async () => {
       try {
-        await refreshSchoolAnnouncements();
+        await refreshSchoolAnnouncements(school);
       } catch {
         syncAnnouncementsFromCache();
       }
 
       if (isMounted) {
-        setMockNews(getSchoolAnnouncements().news);
+        setMockNews(getSchoolAnnouncements(school).news);
       }
     };
 
@@ -77,7 +79,7 @@ const NewsDetail = () => {
       window.removeEventListener("focus", loadNews);
       window.removeEventListener("announcements-data-updated", loadNews);
     };
-  }, []);
+  }, [school]);
 
   if (!newsItem) {
     return (

@@ -71,6 +71,7 @@ const normalizeNotice = (item) => ({
   isNew: Boolean(item?.isNew ?? item?.is_new),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),
   schoolName: getSchoolLabel(item),
+  schoolCode: String(item?.schoolCode || "").trim(),
   level: String(item?.level || "").trim(),
 });
 
@@ -93,6 +94,7 @@ const normalizeNews = (item) => ({
   featured: Boolean(item?.featured ?? item?.isFeatured),
   status: String(item?.status || "published").trim(),
   schoolName: getSchoolLabel(item),
+  schoolCode: String(item?.schoolCode || "").trim(),
   level: String(item?.level || "").trim(),
   link: String(item?.link || "").trim(),
   pdfUrl: String(item?.pdfUrl || item?.pdf_url || "").trim(),

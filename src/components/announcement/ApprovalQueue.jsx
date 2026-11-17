@@ -11,8 +11,9 @@ import {
  * Super-admin review queue.
  *
  * A school can publish its own school-level announcements freely, but anything
- * it wants shown university-wide lands here first. Nothing in this list is
- * visible on the public site until it is approved.
+ * it wants shown university-wide lands here first. Nothing in this list is on
+ * the university pages until it is approved. A notice or news item already shows
+ * on its own school's page; other kinds stay off the public site until then.
  */
 
 const ApprovalQueue = ({ onMessage }) => {
@@ -113,7 +114,7 @@ const ApprovalQueue = ({ onMessage }) => {
                     {KIND_LABELS[item.kind] || item.kind}
                   </span>
                   <span className="rounded border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700">
-                    Requested: College-wide
+                    Requested: University page
                   </span>
                   <span className="text-xs text-slate-500">
                     from <strong className="text-slate-700">{item.schoolName || item.schoolCode}</strong>

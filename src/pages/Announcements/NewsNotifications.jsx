@@ -1,4 +1,4 @@
-import { createSlug } from "../../utils/slugUtil";
+import { newsDetailPath } from "../../utils/slugUtil";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SocialShare from "../../components/announcement/SocialShare";
@@ -548,7 +548,7 @@ const NewsGridCard = ({ news }) => {
         </p>
 
         <div className="flex items-center justify-between">
-          <Link to={`/announcements/news/${createSlug(news.title)}`}>
+          <Link to={newsDetailPath(news)}>
             <Button size="sm" className="flex items-center gap-2">
               Details
               <svg
@@ -690,7 +690,7 @@ const NewsListCard = ({ news }) => {
               </div>
 
               <div className="flex items-center gap-2">
-                <Link to={`/announcements/news/${createSlug(news.title)}`}>
+                <Link to={newsDetailPath(news)}>
                   <Button size="sm">Details</Button>
                 </Link>
               </div>

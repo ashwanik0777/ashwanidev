@@ -74,6 +74,17 @@ export const LEVEL_FIELD = {
 
 };
 
+/*
+ * Notices and news: a school-level item stays on the school's page, and reaching
+ * the university page takes admin approval. Other kinds still use LEVEL_FIELD.
+ */
+export const UNIVERSITY_GATED_KINDS = new Set(["notices", "news"]);
+
+export const GATED_LEVEL_OPTIONS = [
+  { value: "school", label: "School only — visible only on the school's page" },
+  { value: "college", label: "School & University — also visible on the university page" },
+];
+
 export const ANNOUNCEMENT_FIELDS = {
   notices: [
     { key: "title", label: "Notice Title", required: true },

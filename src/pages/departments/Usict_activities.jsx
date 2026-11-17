@@ -1,4 +1,4 @@
-import { createSlug } from "../../utils/slugUtil";
+import { createSlug, newsDetailPath } from "../../utils/slugUtil";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { 
@@ -255,7 +255,7 @@ const NewsCard = ({ news, index }) => {
             )}
           </div>
           <Link
-            to={`/announcements/news/${createSlug(news.title)}`}
+            to={newsDetailPath(news)}
             className="inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors ml-auto"
           >
             Details <ArrowRight className="w-3.5 h-3.5" />

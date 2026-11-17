@@ -49,7 +49,7 @@ export const departmentLayoutData = {
   },
   hodProps: {
     title: "From the Desk of HOD, IT",
-    image: "/assets/Faculty/NEETA MAAM IT.png",
+    image: "/assets/Faculty/SOICT-F0007.png",
     name: "Dr. Neeta Singh",
     designation: "Head of Department",
     messageParagraphs: [

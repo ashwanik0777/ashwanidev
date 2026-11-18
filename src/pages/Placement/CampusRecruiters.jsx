@@ -146,7 +146,7 @@ const CampusRecruiters = () => {
         }
       `}</style>
 
-      <div className="py-14 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
+      <div className="py-14 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}
@@ -154,7 +154,7 @@ const CampusRecruiters = () => {
             <h2 className="text-3xl font-extrabold text-blue-900 sm:text-4xl">
               Our Esteemed Corporate Partners
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto mt-4 rounded-full" />
+            <div className="w-24 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
 
             {/* View Mode Toggle Controls */}
             <div className="flex justify-center mt-5">

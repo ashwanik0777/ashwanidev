@@ -28,64 +28,56 @@ export const brochuresData = [
     title: "GBU Placement Brochure 2025",
     school: "Gautam Buddha University (General)",
     year: "2025",
-    pdfUrl: "https://drive.google.com/file/d/1dZiuF00NM9kVEqAEY_4aG7rzXRc4cNaq/view",
-    bgGradient: "from-blue-600 to-indigo-600"
+    pdfUrl: "https://drive.google.com/file/d/1dZiuF00NM9kVEqAEY_4aG7rzXRc4cNaq/view"
   },
   {
     id: 2,
     title: "SoICT Placement Brochure 2025",
     school: "School of Information & Communication Technology",
     year: "2025",
-    pdfUrl: "https://drive.google.com/file/d/164j9h1RFOlLtRxPgim_xFruzrPzbGp5Y/view",
-    bgGradient: "from-cyan-600 to-blue-700"
+    pdfUrl: "https://drive.google.com/file/d/164j9h1RFOlLtRxPgim_xFruzrPzbGp5Y/view"
   },
   {
     id: 3,
     title: "SoM Placement Brochure 2025",
     school: "School of Management",
     year: "2025",
-    pdfUrl: "https://drive.google.com/file/d/1MQurhIaSjDmuHRlVSVGwiSpuloT8Ut-M/view",
-    bgGradient: "from-purple-600 to-indigo-700"
+    pdfUrl: "https://drive.google.com/file/d/1MQurhIaSjDmuHRlVSVGwiSpuloT8Ut-M/view"
   },
   {
     id: 4,
     title: "SoE Placement Brochure 2023-24",
     school: "School of Engineering",
     year: "2023-24",
-    pdfUrl: "https://drive.google.com/file/d/1BI7Q_eEv4-hf94AONqMbifKM0to2MvLZ/view",
-    bgGradient: "from-emerald-600 to-teal-700"
+    pdfUrl: "https://drive.google.com/file/d/1BI7Q_eEv4-hf94AONqMbifKM0to2MvLZ/view"
   },
   {
     id: 5,
     title: "SoLJG Placement Brochure 2025",
     school: "School of Law, Justice and Governance",
     year: "2025",
-    pdfUrl: "https://drive.google.com/file/d/1392l9yxhfSHzwqK2wazoDjYDKsSXEt64/view",
-    bgGradient: "from-amber-600 to-orange-700"
+    pdfUrl: "https://drive.google.com/file/d/1392l9yxhfSHzwqK2wazoDjYDKsSXEt64/view"
   },
   {
     id: 6,
     title: "SoBT Placement Brochure",
     school: "School of Biotechnology",
     year: "2023-24",
-    pdfUrl: "https://drive.google.com/file/d/1V6snjtCdM_dG978M2qXJx_mjNxqTfUZT/view",
-    bgGradient: "from-rose-600 to-pink-700"
+    pdfUrl: "https://drive.google.com/file/d/1V6snjtCdM_dG978M2qXJx_mjNxqTfUZT/view"
   },
   {
     id: 7,
     title: "Food Processing & Tech Brochure",
     school: "Dept. of Food Processing & Technology",
     year: "2024",
-    pdfUrl: "https://drive.google.com/file/d/1m-4I5NpPI6F5ySNCw0XkzN23IMNZ4qrg/view",
-    bgGradient: "from-orange-500 to-amber-600"
+    pdfUrl: "https://drive.google.com/file/d/1m-4I5NpPI6F5ySNCw0XkzN23IMNZ4qrg/view"
   },
   {
     id: 8,
     title: "MSW Placement Brochure",
     school: "School of Humanities & Social Sciences (SoHSS)",
     year: "2024",
-    pdfUrl: "https://drive.google.com/file/d/1snx07z1ea0rQOnAWehwitJrsjMQpfcs8/view",
-    bgGradient: "from-violet-600 to-purple-800"
+    pdfUrl: "https://drive.google.com/file/d/1snx07z1ea0rQOnAWehwitJrsjMQpfcs8/view"
   }
 ];
 

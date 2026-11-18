@@ -66,6 +66,11 @@ const bgThemes = {
       { class: "bottom-0 left-1/4 w-28 h-28 bg-yellow-200/30 animate-pulse" },
     ],
   },
+  // Solid light blue, no gradient or floating circles.
+  11: {
+    sectionBg: "bg-blue-50 border-b border-blue-100",
+    circles: [],
+  },
   10: {
     sectionBg: "bg-gradient-to-br from-indigo-50 to-pink-50",
     circles: [

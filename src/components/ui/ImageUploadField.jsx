@@ -18,6 +18,8 @@ const ImageUploadField = ({
   recommendedSize = '',
   folder = '',
   fileName = '',
+  showPreview = true,
+  cropHint = '',
 }) => {
   const [uploadStatus, setUploadStatus] = useState(STATUS_IDLE);
   const [storageReady, setStorageReady] = useState(null); // null = not checked yet
@@ -170,7 +172,7 @@ const ImageUploadField = ({
       {recommendedSize && <p className="text-[10px] text-slate-400">Recommended: {recommendedSize}</p>}
 
       {/* Preview thumbnail */}
-      {displayUrl && (
+      {showPreview && displayUrl && (
         <div className="relative inline-block">
           <img src={displayUrl} alt="Preview" className="w-16 h-16 object-cover rounded-lg border border-slate-200 shadow-sm"
             onError={(e) => { e.target.style.display = 'none'; }} />
@@ -183,7 +185,7 @@ const ImageUploadField = ({
 
       {/* Crop Modal */}
       <ImageCropModal open={uploadStatus === STATUS_CROPPING && !!imageSrc} imageSrc={imageSrc}
-        aspectRatio={aspectRatio} onCropDone={handleCropDone} onClose={handleCropClose} />
+        aspectRatio={aspectRatio} hint={cropHint} onCropDone={handleCropDone} onClose={handleCropClose} />
     </div>
   );
 };

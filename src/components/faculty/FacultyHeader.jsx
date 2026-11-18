@@ -52,11 +52,12 @@ const FacultyHeader = ({ faculty }) => {
       <div className="flex flex-col p-5 lg:flex-row gap-8">
         {/* Profile Image */}
         <div className="flex-shrink-0">
-          <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+          {/* 3:4 portrait, the same frame the dashboards crop photos to, so nothing is cut off here */}
+          <div className="w-48 h-64 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
             <img
               src={profileImage}
               alt={faculty?.name || 'Faculty'}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
             />
           </div>
         </div>

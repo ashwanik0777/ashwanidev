@@ -41,7 +41,7 @@ const getCroppedImg = async (imageSrc, pixelCrop) => {
 /* ══════════════════════════════════════════════
    ImageCropModal
    ══════════════════════════════════════════════ */
-const ImageCropModal = ({ open, imageSrc, aspectRatio = 1, onCropDone, onClose }) => {
+const ImageCropModal = ({ open, imageSrc, aspectRatio = 1, hint = '', onCropDone, onClose }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -70,7 +70,10 @@ const ImageCropModal = ({ open, imageSrc, aspectRatio = 1, onCropDone, onClose }
     <div className="fixed inset-0 z-[9999] flex flex-col bg-black/80 backdrop-blur-sm">
       {/* ── Header ── */}
       <div className="flex items-center justify-between px-5 py-3 bg-gray-900/90">
-        <h3 className="text-white font-semibold text-lg">Crop Image</h3>
+        <div>
+          <h3 className="text-white font-semibold text-lg">Crop Image</h3>
+          {hint && <p className="text-xs text-gray-400">{hint}</p>}
+        </div>
         <button
           onClick={onClose}
           className="text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10"

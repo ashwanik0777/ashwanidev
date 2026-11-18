@@ -1,23 +1,44 @@
 import React from "react";
 import {
-  User,
-  Mail,
-  GraduationCap,
   BookOpen,
+  Camera,
+  GraduationCap,
+  Link,
+  Lock,
+  Mail,
   Plus,
   Trash2,
-  FileText,
-  Link,
-  Award,
-  Briefcase,
-  Phone,
-  Hash,
-  Globe
+  User,
 } from "lucide-react";
 import Field from "./Field";
-import { inputClass } from "./constants";
+import { FacultyAvatar } from "./SidebarNav";
+import { cardClass, inputClass } from "./constants";
 import ImageUploadField from "../../ui/ImageUploadField";
 import FileUploadField from "../../ui/FileUploadField";
+
+const CardTitle = ({ icon, title }) => {
+  const Icon = icon;
+  return (
+    <div className="mb-5 flex items-center gap-3 border-b border-slate-100 pb-4">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sky-600 text-white">
+        <Icon className="h-[18px] w-[18px]" />
+      </span>
+      <h2 className="font-display text-lg font-bold tracking-tight text-slate-900">{title}</h2>
+    </div>
+  );
+};
+
+// Department, school and email are set by the school; the faculty update API does not change them.
+const LockedField = ({ label, value }) => (
+  <Field label={label}>
+    <div className="relative">
+      <input className={`${inputClass} pr-9`} value={value || ""} disabled readOnly />
+      <span title="Set by your school admin" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+        <Lock className="h-4 w-4" />
+      </span>
+    </div>
+  </Field>
+);
 
 const ProfileForms = ({
   activeSection,
@@ -32,122 +53,80 @@ const ProfileForms = ({
   newAreaDesc,
   setNewAreaTitle,
   setNewAreaDesc,
-  onUpdateTabDataField,
 }) => {
   if (activeSection !== "personal-details") return null;
 
   return (
     <div className="space-y-6">
-      {/* 1. General Information Card */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <User className="h-5 w-5 text-stone-800" /> General Information
-        </h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          <Field label="Full Name">
-            <input
-              className={inputClass}
-              value={profile.name || ""}
-              onChange={(e) => onUpdateField("name", e.target.value)}
-              placeholder="e.g. Dr. Jane Doe"
+      {/* Photo and general information */}
+      <section className={cardClass}>
+        <CardTitle icon={User} title="General Information" />
+        <div className="grid gap-6 lg:grid-cols-[13rem_minmax(0,1fr)]">
+          <div className="space-y-3">
+            <span className="block text-sm font-medium text-slate-700">Profile Photo</span>
+            <div className="relative mx-auto w-40 lg:mx-0">
+              <FacultyAvatar profile={profile} className="h-[13.33rem] w-40 rounded-2xl border border-slate-200 bg-slate-100 shadow-sm" />
+              <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-md bg-slate-900/70 px-2 py-0.5 text-[10px] font-semibold text-white">
+                <Camera className="h-3 w-3" /> 3:4 portrait
+              </span>
+            </div>
+           
+            <ImageUploadField
+              label=""
+              value={profile.image_url || ""}
+              onChange={(url) => onUpdateField("image_url", url)}
+              aspectRatio={3 / 4}
+              folder="faculty/photos"
+              showPreview={false}
+              cropHint="This exact frame is shown on your public profile."
             />
-          </Field>
-          <Field label="Designation">
-            <input
-              className={inputClass}
-              value={profile.designation || ""}
-              onChange={(e) => onUpdateField("designation", e.target.value)}
-              placeholder="e.g. Assistant Professor"
-            />
-          </Field>
-          <Field label="Specialization">
-            <input
-              className={inputClass}
-              value={profile.specialization || ""}
-              onChange={(e) => onUpdateField("specialization", e.target.value)}
-              placeholder="e.g. Artificial Intelligence, NLP"
-            />
-          </Field>
-          <Field label="Department">
-            <input
-              className={inputClass}
-              value={profile.department || ""}
-              onChange={(e) => onUpdateField("department", e.target.value)}
-              placeholder="e.g. Department of Computer Science"
-            />
-          </Field>
-          <Field label="School">
-            <input
-              className={inputClass}
-              value={profile.school || ""}
-              onChange={(e) => onUpdateField("school", e.target.value)}
-              placeholder="e.g. SOICT"
-            />
-          </Field>
-        </div>
-      </div>
+          </div>
 
-      {/* 2. Stats & Highlights Card (Auto-calculated) */}
-      {/* <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <Award className="h-5 w-5 text-stone-800" /> Stats &amp; Highlights
-          <span className="ml-2 text-xs font-normal text-stone-400">(Auto-calculated from your data)</span>
-        </h2>
-        {(() => {
-          const expItems = profile.tabData?.qualifications?.experience || [];
-          const currentYear = new Date().getFullYear();
-          let totalExp = 0;
-          expItems.forEach(exp => {
-            const fromYear = parseInt(exp.from || exp.fromYear || '0');
-            const toStr = (exp.to || exp.toYear || '').toLowerCase();
-            const toYear = toStr === 'present' || toStr === 'current' ? currentYear : parseInt(toStr || '0');
-            if (fromYear > 0 && toYear >= fromYear) totalExp += (toYear - fromYear);
-          });
-          const pubCount = (profile.tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
-          const talksCount = (profile.tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
-          const projCount = (profile.tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
-          return (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <Field label="Experience (Years)">
-                <input className={inputClass} type="number" min="0" value={totalExp || profile.experience_years || 0} onChange={(e) => onUpdateField("experience_years", Number(e.target.value || 0))} />
-              </Field>
-              <Field label="Total Publications">
-                <input className={inputClass} type="number" min="0" value={pubCount || profile.publications || 0} onChange={(e) => onUpdateField("publications", Number(e.target.value || 0))} />
-              </Field>
-              <Field label="Talks Delivered">
-                <input className={inputClass} type="number" min="0" value={talksCount || Number(profile.tabData?.talksCount ?? 0)} onChange={(e) => onUpdateTabDataField("talksCount", Number(e.target.value) || 0)} />
-              </Field>
-              <Field label="Projects count">
-                <input className={inputClass} type="number" min="0" value={projCount || Number(profile.tabData?.projectsCount ?? 0)} onChange={(e) => onUpdateTabDataField("projectsCount", Number(e.target.value) || 0)} />
+          <div className="grid content-start gap-4 md:grid-cols-2">
+            <Field label="Full Name">
+              <input
+                className={inputClass}
+                value={profile.name || ""}
+                onChange={(e) => onUpdateField("name", e.target.value)}
+                placeholder="e.g. Dr. Jane Doe"
+              />
+            </Field>
+            <Field label="Designation">
+              <input
+                className={inputClass}
+                value={profile.designation || ""}
+                onChange={(e) => onUpdateField("designation", e.target.value)}
+                placeholder="e.g. Assistant Professor"
+              />
+            </Field>
+            <div className="md:col-span-2">
+              <Field label="Specialization">
+                <input
+                  className={inputClass}
+                  value={profile.specialization || ""}
+                  onChange={(e) => onUpdateField("specialization", e.target.value)}
+                  placeholder="e.g. Artificial Intelligence, NLP"
+                />
               </Field>
             </div>
-          );
-        })()}
-        <p className="mt-2 text-xs text-stone-400">These values auto-update as you add Experience, Publications, Talks, and Projects. You can also override them manually.</p>
-      </div> */}
+            <LockedField label="Department" value={profile.department} />
+            <LockedField label="School" value={profile.school} />
+          </div>
+        </div>
+      </section>
 
-      {/* 3. Contact & Location Card */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <Mail className="h-5 w-5 text-stone-800" /> Contact Details
-        </h2>
+      {/* Contact */}
+      <section className={cardClass}>
+        <CardTitle icon={Mail} title="Contact Details" />
         <div className="grid gap-4 md:grid-cols-3">
-          <Field label="Email Address">
-            <input
-              className={inputClass}
-              type="email"
-              value={profile.email || ""}
-              onChange={(e) => onUpdateField("email", e.target.value)}
-              placeholder="e.g. jane.doe@gbu.ac.in"
-            />
-          </Field>
+          <LockedField label="Email Address" value={profile.email} />
           <Field label="Phone Number">
             <input
               className={inputClass}
               type="tel"
               value={profile.phone || ""}
               onChange={(e) => onUpdateField("phone", e.target.value)}
-              placeholder="e.g. +91-9999999999"
+              placeholder="e.g. 0120-2344200"
             />
           </Field>
           <Field label="Office Location">
@@ -159,36 +138,14 @@ const ProfileForms = ({
             />
           </Field>
         </div>
-      </div>
+      </section>
 
-      {/* 4. Profile Links & Tags Card */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <Link className="h-5 w-5 text-stone-800" /> External Profiles &amp; Links
-        </h2>
+      {/* Links, CV and tags */}
+      <section className={cardClass}>
+        <CardTitle icon={Link} title="CV, Profiles & Links" />
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
-            <Field label="Faculty Profile Website URL">
-              <input
-                className={inputClass}
-                value={profile.faculty_url || ""}
-                onChange={(e) => onUpdateField("faculty_url", e.target.value)}
-                placeholder="https://..."
-              />
-            </Field>
-            <Field label="Profile Photo">
-              <ImageUploadField
-                label=""
-                value={profile.image_url || ""}
-                onChange={(url) => onUpdateField("image_url", url)}
-                aspectRatio={3 / 4}
-                recommendedSize="300×400"
-                folder="faculty/photos"
-              />
-            </Field>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Field label="CV Document">
+            <Field label="CV Document (PDF)">
               <FileUploadField
                 label=""
                 value={profile.cv || ""}
@@ -198,7 +155,17 @@ const ProfileForms = ({
                 folder="faculty/cv"
               />
             </Field>
-            <Field label="Google Scholar Profile Link">
+            <Field label="Personal / Faculty Website">
+              <input
+                className={inputClass}
+                value={profile.faculty_url || ""}
+                onChange={(e) => onUpdateField("faculty_url", e.target.value)}
+                placeholder="https://..."
+              />
+            </Field>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Field label="Google Scholar">
               <input
                 className={inputClass}
                 value={profile.googleScholar || ""}
@@ -206,7 +173,7 @@ const ProfileForms = ({
                 placeholder="https://scholar.google.com/..."
               />
             </Field>
-            <Field label="ORCID Profile Link">
+            <Field label="ORCID">
               <input
                 className={inputClass}
                 value={profile.orcid || ""}
@@ -223,22 +190,20 @@ const ProfileForms = ({
               />
             </Field>
           </div>
-          <Field label="Profile Tags (comma separated)">
+          <Field label="Profile Tags">
             <input
               className={inputClass}
               value={tagsInput}
               onChange={(e) => onUpdateTags(e.target.value)}
-              placeholder="e.g. Machine Learning, NLP, Data Science"
+              placeholder="Comma separated, e.g. Machine Learning, NLP, Data Science"
             />
           </Field>
         </div>
-      </div>
+      </section>
 
-      {/* 5. Biography & Academic Summary Card */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <GraduationCap className="h-5 w-5 text-stone-800" /> Biography &amp; Academic Summary
-        </h2>
+      {/* Biography */}
+      <section className={cardClass}>
+        <CardTitle icon={GraduationCap} title="Biography & Academic Summary" />
         <div className="space-y-4">
           <Field label="Education Summary">
             <input
@@ -248,33 +213,31 @@ const ProfileForms = ({
               placeholder="e.g. B.Tech (IIT D), M.Tech (IIT D), Ph.D (IISc)"
             />
           </Field>
-          <Field label="Short Biography (for preview panels)">
+          <Field label="Short Biography">
             <textarea
-              className={`${inputClass} min-h-20`}
+              className={`${inputClass} min-h-24`}
               value={profile.shortBio || ""}
               onChange={(e) => onUpdateField("shortBio", e.target.value)}
-              placeholder="A brief 1-2 sentence description of your professional focus..."
+              placeholder="A brief description of your professional focus..."
             />
           </Field>
-          <Field label="Full Biography (detailed summary of achievements)">
+          <Field label="Full Biography">
             <textarea
-              className={`${inputClass} min-h-36`}
+              className={`${inputClass} min-h-48`}
               value={profile.fullBio || ""}
               onChange={(e) => onUpdateField("fullBio", e.target.value)}
               placeholder="Detailed professional biography and career milestones..."
             />
           </Field>
         </div>
-      </div>
+      </section>
 
-      {/* 6. Research Areas List Builder Card */}
-      <div className="rounded-2xl border border-stone-300 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-stone-900 border-b border-stone-100 pb-2">
-          <BookOpen className="h-5 w-5 text-stone-800" /> Research Areas
-        </h2>
+      {/* Research areas */}
+      <section className={cardClass}>
+        <CardTitle icon={BookOpen} title="Research Areas" />
         <div className="space-y-3">
           {(profile.researchAreas || []).map((area, index) => (
-            <div key={`area-${index}`} className="rounded-xl border border-stone-200 p-3 bg-stone-50">
+            <div key={`area-${index}`} className="rounded-xl border border-slate-200 bg-slate-50/60 p-3">
               <div className="grid gap-3 md:grid-cols-[1fr_auto]">
                 <div className="space-y-3">
                   <input
@@ -293,17 +256,22 @@ const ProfileForms = ({
                 <button
                   type="button"
                   onClick={() => onRemoveResearchArea(index)}
-                  className="inline-flex h-10 items-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 text-sm font-medium text-rose-700 hover:bg-rose-100 self-start"
+                  className="inline-flex h-10 items-center gap-2 self-start rounded-lg border border-rose-200 bg-rose-50 px-3 text-sm font-medium text-rose-700 hover:bg-rose-100"
                 >
                   <Trash2 className="h-4 w-4" /> Remove
                 </button>
               </div>
             </div>
           ))}
+          {(profile.researchAreas || []).length === 0 && (
+            <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">
+              No research areas added yet.
+            </p>
+          )}
         </div>
 
-        <div className="mt-4 rounded-xl border border-stone-200 bg-stone-50/50 p-4">
-          <p className="mb-3 text-sm font-semibold text-stone-700">Add New Research Area</p>
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p className="mb-3 font-display text-sm font-bold text-slate-800">Add Research Area</p>
           <div className="grid gap-3">
             <input
               className={inputClass}
@@ -320,13 +288,14 @@ const ProfileForms = ({
             <button
               type="button"
               onClick={onAddResearchArea}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-stone-900 px-3 py-2 text-sm font-semibold text-white hover:bg-stone-800"
+              disabled={!newAreaTitle.trim() || !newAreaDesc.trim()}
+              className="inline-flex items-center justify-center gap-1.5 justify-self-start rounded-xl bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Plus className="h-4 w-4" /> Add Area
             </button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

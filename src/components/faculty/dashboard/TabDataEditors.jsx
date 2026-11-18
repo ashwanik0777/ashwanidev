@@ -1,50 +1,127 @@
 import React from "react";
 import {
+  ChevronDown,
   Plus,
   Trash2
 } from "lucide-react";
 import Field from "./Field";
-import { inputClass } from "./constants";
+import { cardClass, inputClass } from "./constants";
 import ImageUploadField from "../../ui/ImageUploadField";
+import { parseExperienceDate } from "../../../utils/facultyExperience";
 
-const ArrayItemCard = ({ title, subtitle, index, isExpanded, onToggle, onRemove, children }) => {
+const joinParts = (...parts) =>
+  parts.filter((part) => part !== undefined && part !== null && String(part).trim()).join(" · ");
+
+const formatPeriod = (from, to) => joinParts(from, to).replace(" · ", " – ");
+
+// The month picker only understands "YYYY-MM". Older entries ("2018", "06/2021", "2019/Aug") are shown in
+// that form, a bare year as its January just as the experience total counts it; they are saved only if edited.
+const toMonthValue = (value) => {
+  const parsed = parseExperienceDate(value);
+  if (!parsed || parsed.present) return "";
+  return `${parsed.year}-${String(parsed.month).padStart(2, "0")}`;
+};
+
+// One entry per line. Keeps exactly what was typed (spaces, blank lines) while editing; the profile only
+// stores the cleaned list. Cleaning on every keystroke made spaces and new lines impossible to type.
+const ListTextarea = ({ value, onChange, placeholder }) => {
+  const toText = (list) => (Array.isArray(list) ? list.join("\n") : String(list || ""));
+  const [text, setText] = React.useState(() => toText(value));
+  const lastSent = React.useRef(value);
+
+  React.useEffect(() => {
+    if (value !== lastSent.current) {
+      lastSent.current = value;
+      setText(toText(value));
+    }
+  }, [value]);
+
   return (
-    <div className="rounded-lg border border-stone-200 bg-white shadow-sm transition-all duration-200 mb-4">
-      <div 
-        className={`flex items-center justify-between p-4 cursor-pointer hover:bg-stone-50 ${isExpanded ? 'border-b border-stone-100 bg-stone-50 rounded-t-lg' : 'rounded-lg'}`}
-        onClick={(e) => {
-          if (e.target.closest('button')) return;
+    <textarea
+      className={`${inputClass} min-h-20`}
+      value={text}
+      placeholder={placeholder}
+      onChange={(e) => {
+        const next = e.target.value;
+        const list = next.split("\n").map((row) => row.trim()).filter(Boolean);
+        setText(next);
+        lastSent.current = list;
+        onChange(list);
+      }}
+    />
+  );
+};
+
+const ArrayItemCard = ({ title, subtitle, index, isExpanded, onToggle, onRemove, children }) => (
+  <div
+    className={`overflow-hidden rounded-xl border bg-white transition-all ${
+      isExpanded ? "border-sky-300 shadow-md ring-1 ring-sky-500/20" : "border-slate-200 shadow-sm hover:border-slate-300"
+    }`}
+  >
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={!!isExpanded}
+      className="flex cursor-pointer items-center gap-3 p-3.5 sm:p-4"
+      onClick={(e) => {
+        if (e.target.closest("button")) return;
+        onToggle();
+      }}
+      onKeyDown={(e) => {
+        if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
           onToggle();
-        }}
+        }
+      }}
+    >
+      {/* On phones the number and the button text give their width to the title */}
+      <span
+        className={`hidden h-8 w-8 shrink-0 items-center justify-center rounded-lg text-xs font-bold sm:flex ${
+          isExpanded ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-500"
+        }`}
       >
-        <div className="flex flex-col">
-          <span className="text-sm font-semibold text-stone-800">{title || `Item #${index + 1}`}</span>
-          {subtitle && <span className="text-xs text-stone-500 mt-0.5">{subtitle}</span>}
-        </div>
-        <div className="flex items-center gap-2">
-          {!isExpanded && (
-            <button type="button" onClick={onToggle} className="inline-flex items-center gap-1 rounded-md border border-stone-200 bg-white px-2.5 py-1.5 text-xs font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-900">
-              Edit
-            </button>
-          )}
-          <button type="button" onClick={onRemove} className="inline-flex items-center justify-center rounded-md border border-rose-100 bg-rose-50 p-1.5 text-rose-600 hover:bg-rose-100 hover:text-rose-700" title="Delete">
-            <Trash2 className="h-4 w-4" />
+        {index + 1}
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="line-clamp-2 text-sm font-semibold text-slate-900 sm:line-clamp-1">{title}</p>
+        {subtitle && <p className="mt-0.5 truncate text-xs text-slate-500">{subtitle}</p>}
+      </div>
+      <div className="flex shrink-0 items-center gap-1.5">
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-label={isExpanded ? "Collapse" : "Edit"}
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white p-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 sm:px-2.5"
+        >
+          <span className="hidden sm:inline">{isExpanded ? "Collapse" : "Edit"}</span>
+          <ChevronDown className={`h-4 w-4 transition-transform sm:h-3.5 sm:w-3.5 ${isExpanded ? "rotate-180" : ""}`} />
+        </button>
+        <button
+          type="button"
+          onClick={onRemove}
+          className="inline-flex items-center justify-center rounded-lg border border-rose-100 bg-rose-50 p-1.5 text-rose-600 hover:bg-rose-100 hover:text-rose-700"
+          title="Delete"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+    {isExpanded && (
+      <div className="border-t border-slate-100 bg-slate-50/60 p-4">
+        {children}
+        <div className="mt-5 flex justify-end">
+          <button
+            type="button"
+            onClick={onToggle}
+            className="rounded-lg bg-sky-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700"
+          >
+            Done
           </button>
         </div>
       </div>
-      {isExpanded && (
-        <div className="p-4 bg-stone-50/50 rounded-b-lg border-t border-stone-100 animate-in slide-in-from-top-2 duration-200">
-          {children}
-          <div className="mt-5 flex justify-end">
-            <button type="button" onClick={onToggle} className="rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2">
-              Save & Close
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+    )}
+  </div>
+);
 
 const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
   const [expandedItems, setExpandedItems] = React.useState({});
@@ -95,22 +172,16 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
     const currentSection = tabData[sectionKey] || {};
     const list = (currentSection[subKey] || []).filter((_, i) => i !== index);
     updateSectionKey(sectionKey, subKey, list);
+    // Entries below the removed one move up an index, so their open/closed state would point at the wrong entry.
+    setExpandedItems((prev) =>
+      Object.fromEntries(Object.entries(prev).filter(([key]) => !key.startsWith(`${sectionKey}-${subKey}-`)))
+    );
 
     // Sync patents to publications.patents and vice-versa
     if (sectionKey === "patents" && subKey === "patents") {
       const pubSection = tabData["publications"] || {};
       onReplaceTabData("publications", { ...pubSection, patents: list });
     }
-  };
-
-  // Helper for array responsibilities string -> list parsing
-  const getListValue = (val) => {
-    if (Array.isArray(val)) return val.join("\n");
-    return val || "";
-  };
-
-  const setListValue = (val) => {
-    return val.split("\n").map(r => r.trim()).filter(Boolean);
   };
 
   // Render Sub-tab Editors
@@ -124,29 +195,28 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Qualifications */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Educational Qualifications</h3>
-                  <p className="text-xs text-stone-500">Add your degrees and academic qualifications.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Educational Qualifications</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("qualifications", "qualifications", {
                     degree: "", institution: "", specialization: "", year: "", location: "", type: "doctorate"
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Degree
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {qualifications.map((item, index) => (
   <ArrayItemCard
     key={`qual-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Degree #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.degree || `Degree #${index + 1}`}
+    subtitle={joinParts(item.institution, item.year)}
     index={index}
     isExpanded={expandedItems[`qualifications-qualifications-${index}`]}
     onToggle={() => toggleExpand("qualifications", "qualifications", index)}
@@ -170,34 +240,33 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {qualifications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No degrees added yet.</p>}
+                {qualifications.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No degrees added yet.</p>}
               </div>
             </div>
 
             {/* Experience */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Professional Experience</h3>
-                  <p className="text-xs text-stone-500">Add your academic, research, or industry experience.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Professional Experience</h3>
                 </div>
                 <button
                   type="button"
                    onClick={() => handleAddArrayItem("qualifications", "experience", {
                     position: "", department: "", institution: "", type: "academic", from: "", to: "", responsibilities: []
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Experience
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {experience.map((item, index) => (
   <ArrayItemCard
     key={`exp-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Experience #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.position || `Experience #${index + 1}`}
+    subtitle={joinParts(item.institution, formatPeriod(item.from, item.to))}
     index={index}
     isExpanded={expandedItems[`qualifications-experience-${index}`]}
     onToggle={() => toggleExpand("qualifications", "experience", index)}
@@ -207,23 +276,23 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Designation / Position"><input className={inputClass} value={item.position || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "position", e.target.value)} placeholder="e.g. Assistant Professor" /></Field>
                       <Field label="Department"><input className={inputClass} value={item.department || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "department", e.target.value)} placeholder="e.g. CSE" /></Field>
                       <Field label="Institution / Company"><input className={inputClass} value={item.institution || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "institution", e.target.value)} placeholder="e.g. GBU, Greater Noida" /></Field>
-                      <Field label="From Year/Month"><input type="month" className={inputClass} value={item.from || ""} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "from", e.target.value)} /></Field>
+                      <Field label="From Year/Month"><input type="month" className={inputClass} value={toMonthValue(item.from)} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "from", e.target.value)} /></Field>
                       <Field label="To Year/Month (or Present)">
                         <div className="flex gap-2 items-center">
                           <input
-                            type={item.to === "Present" ? "text" : "month"}
+                            type="month"
                             className={inputClass}
-                            value={item.to || ""}
+                            value={item.to === "Present" ? "" : toMonthValue(item.to)}
                             onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "to", e.target.value)}
                             disabled={item.to === "Present"}
                             placeholder="Select month or mark Present"
                           />
-                          <label className="flex items-center gap-1 text-xs text-stone-600 whitespace-nowrap cursor-pointer select-none">
+                          <label className="flex items-center gap-1 text-xs text-slate-600 whitespace-nowrap cursor-pointer select-none">
                             <input
                               type="checkbox"
                               checked={item.to === "Present"}
                               onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "to", e.target.checked ? "Present" : "")}
-                              className="rounded border-stone-300"
+                              className="rounded border-slate-300"
                             />
                             Present
                           </label>
@@ -239,13 +308,13 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Responsibilities (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.responsibilities)} onChange={(e) => handleUpdateArrayItem("qualifications", "experience", index, "responsibilities", setListValue(e.target.value))} placeholder="e.g. Teaching Operating Systems&#10;Research in Distributed Systems" />
+                          <ListTextarea value={item.responsibilities} onChange={(list) => handleUpdateArrayItem("qualifications", "experience", index, "responsibilities", list)} placeholder="e.g. Teaching Operating Systems&#10;Research in Distributed Systems" />
                         </Field>
                       </div>
                     </div>
                   </ArrayItemCard>
               ))}
-                {experience.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No experiences added yet.</p>}
+                {experience.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No experiences added yet.</p>}
               </div>
             </div>
           </div>
@@ -259,9 +328,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
         return (
           <div className="space-y-6">
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-base font-semibold text-stone-800">Teaching Philosophy</h3>
-              <p className="mb-3 text-xs text-stone-500">Describe your teaching values, methods, and pedagogical approach.</p>
+            <div className={cardClass}>
+              <h3 className="mb-4 font-display text-lg font-bold tracking-tight text-slate-900">Teaching Philosophy</h3>
               <Field label="Philosophy Statement">
                 <textarea
                   className={`${inputClass} min-h-24`}
@@ -272,29 +340,28 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
               </Field>
             </div>
 
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Courses Taught</h3>
-                  <p className="text-xs text-stone-500">Add graduate or undergraduate courses you have instructed.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Courses Taught</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("teaching", "courses", {
                     code: "", title: "", level: "Undergraduate", credits: 0
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Course
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {courses.map((item, index) => (
   <ArrayItemCard
     key={`course-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Course #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || `Course #${index + 1}`}
+    subtitle={joinParts(item.code, item.level)}
     index={index}
     isExpanded={expandedItems[`teaching-courses-${index}`]}
     onToggle={() => toggleExpand("teaching", "courses", index)}
@@ -316,9 +383,9 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
 
                     {/* Lecture Slides */}
-                    <div className="mt-4 pt-3 border-t border-stone-200">
+                    <div className="mt-4 pt-3 border-t border-slate-200">
                       <div className="flex items-center justify-between mb-3">
-                        <h4 className="text-xs font-semibold text-stone-600 uppercase tracking-wider">Lecture Slides</h4>
+                        <h4 className="text-xs font-semibold text-slate-600 uppercase tracking-wider">Lecture Slides</h4>
                         <button
                           type="button"
                           onClick={() => {
@@ -327,17 +394,17 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                             updatedCourses[index] = { ...item, slides: [...currentSlides, { title: "", url: "" }] };
                             onReplaceTabData("teaching", { ...section, courses: updatedCourses });
                           }}
-                          className="inline-flex items-center gap-1 rounded-md bg-stone-100 px-2 py-1 text-xs font-medium text-stone-700 hover:bg-stone-200 border border-stone-200"
+                          className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-200 border border-slate-200"
                         >
                           <Plus className="h-3 w-3" /> Add Slide
                         </button>
                       </div>
                       {(item.slides || []).length === 0 && (
-                        <p className="text-xs text-stone-400 text-center py-2">No lecture slides added for this course.</p>
+                        <p className="text-xs text-slate-400 text-center py-2">No lecture slides added for this course.</p>
                       )}
                       <div className="space-y-2">
                         {(item.slides || []).map((slide, sIdx) => (
-                          <div key={`slide-${index}-${sIdx}`} className="flex items-start gap-2 p-2 rounded-md bg-white border border-stone-200">
+                          <div key={`slide-${index}-${sIdx}`} className="flex items-start gap-2 p-2 rounded-md bg-white border border-slate-200">
                             <div className="flex-1 grid gap-2 sm:grid-cols-2">
                               <input className={inputClass} value={slide.title || ""} onChange={(e) => {
                                 const updatedCourses = [...courses];
@@ -373,7 +440,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {courses.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No courses added yet.</p>}
+                {courses.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No courses added yet.</p>}
               </div>
             </div>
           </div>
@@ -388,11 +455,10 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Roles */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Administrative Roles</h3>
-                  <p className="text-xs text-stone-500">List official positions held (e.g. Dean, HOD, Coordinator).</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Administrative Roles</h3>
                 </div>
                 <button
                   type="button"
@@ -400,18 +466,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     role: "", level: "University", startYear: "", endYear: "",
                     department: "", institution: "", status: "ongoing"
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Role
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {administrativeRoles.map((item, index) => (
   <ArrayItemCard
     key={`admin-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Role #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.role || `Role #${index + 1}`}
+    subtitle={joinParts(item.department || item.institution, formatPeriod(item.startYear, item.endYear))}
     index={index}
     isExpanded={expandedItems[`administration-administrativeRoles-${index}`]}
     onToggle={() => toggleExpand("administration", "administrativeRoles", index)}
@@ -420,14 +486,14 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <Field label="Role Title"><input className={inputClass} value={item.role || ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "role", e.target.value)} placeholder="e.g. Dean Academics" /></Field>
                       <Field label="Start Month/Year">
-                        <input type="month" className={inputClass} value={item.startYear && item.startYear !== "Present" ? item.startYear : ""} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "startYear", e.target.value)} />
+                        <input type="month" className={inputClass} value={toMonthValue(item.startYear)} onChange={(e) => handleUpdateArrayItem("administration", "administrativeRoles", index, "startYear", e.target.value)} />
                       </Field>
                       <Field label="End Month/Year">
                         <div className="flex flex-col gap-2">
                           <input 
                             type="month"
-                            className={`${inputClass} disabled:opacity-50 disabled:bg-gray-100`}
-                            value={item.endYear === "Present" ? "" : (item.endYear || "")} 
+                            className={`${inputClass} `}
+                            value={item.endYear === "Present" ? "" : toMonthValue(item.endYear)} 
                             disabled={item.endYear === "Present"}
                             onChange={(e) => {
                               const val = e.target.value;
@@ -437,7 +503,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                               onReplaceTabData("administration", { ...currentSection, administrativeRoles: list });
                             }} 
                           />
-                          <label className="flex items-center gap-2 text-sm text-gray-700">
+                          <label className="flex items-center gap-2 text-sm text-slate-700">
                             <input 
                               type="checkbox" 
                               checked={item.endYear === "Present"}
@@ -476,34 +542,33 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {administrativeRoles.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No roles added yet.</p>}
+                {administrativeRoles.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No roles added yet.</p>}
               </div>
             </div>
 
             {/* Committees */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Committee Memberships</h3>
-                  <p className="text-xs text-stone-500">Committees or boards you participate in (e.g. Board of Studies, Academic Council).</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Committee Memberships</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("administration", "committees", {
                     name: "", designation: "Member", startYear: "", endYear: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Committee
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {committees.map((item, index) => (
   <ArrayItemCard
     key={`comm-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Committee #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `Committee #${index + 1}`}
+    subtitle={joinParts(item.designation, formatPeriod(item.startYear, item.endYear))}
     index={index}
     isExpanded={expandedItems[`administration-committees-${index}`]}
     onToggle={() => toggleExpand("administration", "committees", index)}
@@ -513,18 +578,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       <Field label="Committee Name"><input className={inputClass} value={item.name || ""} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "name", e.target.value)} placeholder="e.g. Board of Studies (CSE)" /></Field>
                       <Field label="Designation / Position"><input className={inputClass} value={item.designation || ""} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "designation", e.target.value)} placeholder="e.g. Chairperson" /></Field>
                       <Field label="Start Month/Year">
-                        <input type="month" className={inputClass} value={item.startYear && item.startYear !== "Present" ? item.startYear : ""} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "startYear", e.target.value)} />
+                        <input type="month" className={inputClass} value={toMonthValue(item.startYear)} onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "startYear", e.target.value)} />
                       </Field>
                       <Field label="End Month/Year">
                         <div className="flex flex-col gap-2">
                           <input 
                             type="month"
-                            className={`${inputClass} disabled:opacity-50 disabled:bg-gray-100`}
-                            value={item.endYear === "Present" ? "" : (item.endYear || "")} 
+                            className={`${inputClass} `}
+                            value={item.endYear === "Present" ? "" : toMonthValue(item.endYear)} 
                             disabled={item.endYear === "Present"}
                             onChange={(e) => handleUpdateArrayItem("administration", "committees", index, "endYear", e.target.value)} 
                           />
-                          <label className="flex items-center gap-2 text-sm text-gray-700">
+                          <label className="flex items-center gap-2 text-sm text-slate-700">
                             <input 
                               type="checkbox" 
                               checked={item.endYear === "Present"}
@@ -537,7 +602,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {committees.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No committees added yet.</p>}
+                {committees.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No committees added yet.</p>}
               </div>
             </div>
           </div>
@@ -555,11 +620,10 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Research & Consultancy Projects */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Research &amp; Consultancy Projects</h3>
-                  <p className="text-xs text-stone-500">List funded research schemes or corporate consultancies.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Research &amp; Consultancy Projects</h3>
                 </div>
                 <button
                   type="button"
@@ -567,18 +631,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     title: "", role: "Principal Investigator", fundingAgency: "", grantAmount: "",
                     duration: "", status: "ongoing", description: "", collaborators: [], deliverables: []
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Project
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {projects.map((item, index) => (
   <ArrayItemCard
     key={`proj-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Project #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || `Project #${index + 1}`}
+    subtitle={joinParts(item.fundingAgency, item.status === "completed" ? "Completed" : "Ongoing")}
     index={index}
     isExpanded={expandedItems[`researchProjects-projects-${index}`]}
     onToggle={() => toggleExpand("researchProjects", "projects", index)}
@@ -603,23 +667,22 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </div>
                       <div className="sm:col-span-2 md:col-span-3 grid gap-3 sm:grid-cols-2">
                         <Field label="Collaborators (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.collaborators)} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "collaborators", setListValue(e.target.value))} placeholder="e.g. Dr. A. Sharma, IIT Delhi&#10;Prof. R. Verma, GBU" />
+                          <ListTextarea value={item.collaborators} onChange={(list) => handleUpdateArrayItem("researchProjects", "projects", index, "collaborators", list)} placeholder="e.g. Dr. A. Sharma, IIT Delhi&#10;Prof. R. Verma, GBU" />
                         </Field>
                         <Field label="Key Deliverables (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.deliverables)} onChange={(e) => handleUpdateArrayItem("researchProjects", "projects", index, "deliverables", setListValue(e.target.value))} placeholder="e.g. Prototype system&#10;2 journal papers" />
+                          <ListTextarea value={item.deliverables} onChange={(list) => handleUpdateArrayItem("researchProjects", "projects", index, "deliverables", list)} placeholder="e.g. Prototype system&#10;2 journal papers" />
                         </Field>
                       </div>
                     </div>
                   </ArrayItemCard>
               ))}
-                {projects.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No projects added yet.</p>}
+                {projects.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No projects added yet.</p>}
               </div>
             </div>
 
             {/* Research Group Overview */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-base font-semibold text-stone-800">Research Group Overview</h3>
-              <p className="mb-3 text-xs text-stone-500">Shown at the top of the Research Group tab on your public profile.</p>
+            <div className={cardClass}>
+              <h3 className="mb-4 font-display text-lg font-bold tracking-tight text-slate-900">Research Group Overview</h3>
               <Field label="Group Description">
                 <textarea
                   className={`${inputClass} min-h-24`}
@@ -631,11 +694,10 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
             </div>
 
             {/* PhD Scholars */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">PhD Scholars Guided</h3>
-                  <p className="text-xs text-stone-500">PhD scholars under your mentorship.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">PhD Scholars Guided</h3>
                 </div>
                 <button
                   type="button"
@@ -643,18 +705,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     name: "", topic: "", status: "ongoing", year: "",
                     program: "", researchArea: "", publications: 0, email: "", profileUrl: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add PhD Scholar
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {phdScholars.map((item, index) => (
   <ArrayItemCard
     key={`phd-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `PhD Scholar #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `PhD Scholar #${index + 1}`}
+    subtitle={joinParts(item.topic || item.researchArea, item.year)}
     index={index}
     isExpanded={expandedItems[`researchGroup-phdScholars-${index}`]}
     onToggle={() => toggleExpand("researchGroup", "phdScholars", index)}
@@ -679,16 +741,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {phdScholars.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No PhD scholars added yet.</p>}
+                {phdScholars.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No PhD scholars added yet.</p>}
               </div>
             </div>
 
             {/* Postdocs */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Postdoc Fellows</h3>
-                  <p className="text-xs text-stone-500">Postdoctoral scholars mentored.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Postdoc Fellows</h3>
                 </div>
                 <button
                   type="button"
@@ -696,18 +757,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     name: "", topic: "", status: "ongoing", year: "",
                     program: "", researchArea: "", previousInstitute: "", publications: 0, email: "", profileUrl: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Postdoc
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {postdocs.map((item, index) => (
   <ArrayItemCard
     key={`pd-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Postdoc #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `Postdoc #${index + 1}`}
+    subtitle={joinParts(item.topic || item.researchArea, item.year)}
     index={index}
     isExpanded={expandedItems[`researchGroup-postdocs-${index}`]}
     onToggle={() => toggleExpand("researchGroup", "postdocs", index)}
@@ -732,16 +793,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {postdocs.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No postdoc scholars added yet.</p>}
+                {postdocs.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No postdoc scholars added yet.</p>}
               </div>
             </div>
 
             {/* Research Assistants */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Research Assistants / Group Members</h3>
-                  <p className="text-xs text-stone-500">RAs or student group members working in your lab.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Research Assistants / Group Members</h3>
                 </div>
                 <button
                   type="button"
@@ -749,18 +809,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     name: "", topic: "", status: "ongoing", year: "",
                     program: "", email: "", profileUrl: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add RA / Member
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {researchAssistants.map((item, index) => (
   <ArrayItemCard
     key={`ra-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Member #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `Member #${index + 1}`}
+    subtitle={joinParts(item.topic || item.program, item.year)}
     index={index}
     isExpanded={expandedItems[`researchGroup-researchAssistants-${index}`]}
     onToggle={() => toggleExpand("researchGroup", "researchAssistants", index)}
@@ -782,7 +842,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {researchAssistants.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No research assistants added yet.</p>}
+                {researchAssistants.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No research assistants added yet.</p>}
               </div>
             </div>
           </div>
@@ -798,29 +858,28 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Publications */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Publications (Journals &amp; Conferences)</h3>
-                  <p className="text-xs text-stone-500">Add published articles, reviews, or book chapters.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Publications (Journals &amp; Conferences)</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("publications", "publications", {
                     type: "journal", title: "", year: new Date().getFullYear(), authors: "", publisher: "", keyword: "", doi: "", issn: "", paperUrl: "", pdfUrl: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Publication
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {publications.map((item, index) => (
   <ArrayItemCard
     key={`pub-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Publication #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || item.chapterTitle || item.bookTitle || `Publication #${index + 1}`}
+    subtitle={joinParts(item.journalName || item.conferenceName || item.publisher, item.year)}
     index={index}
     isExpanded={expandedItems[`publications-publications-${index}`]}
     onToggle={() => toggleExpand("publications", "publications", index)}
@@ -866,7 +925,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                             </select>
                           </Field>
                           <div className="sm:col-span-2 md:col-span-3">
-                            <div className="text-xs font-semibold text-stone-700 mb-2">Indexing</div>
+                            <div className="text-xs font-semibold text-slate-700 mb-2">Indexing</div>
                             <div className="flex flex-col sm:flex-row gap-6">
                               <label className="flex items-start gap-2 text-sm mt-1">
                                 <input type="checkbox" className="mt-1" checked={item.scopus || false} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "scopus", e.target.checked)} />
@@ -947,34 +1006,33 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {publications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No publications added yet.</p>}
+                {publications.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No publications added yet.</p>}
               </div>
             </div>
 
             {/* Patents */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Patents Portfolio</h3>
-                  <p className="text-xs text-stone-500">Add filed, published, or granted patents.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Patents Portfolio</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("patents", "patents", {
                     title: "", description: "", status: "Filed", applicationNo: "", technicalField: "", applicationDate: "", country: "India", patentOffice: "Indian Patent Office", filedYear: new Date().getFullYear(), inventors: []
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Patent
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {patents.map((item, index) => (
   <ArrayItemCard
     key={`patent-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Patent #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || `Patent #${index + 1}`}
+    subtitle={joinParts(item.status, item.applicationNo)}
     index={index}
     isExpanded={expandedItems[`patents-patents-${index}`]}
     onToggle={() => toggleExpand("patents", "patents", index)}
@@ -1001,7 +1059,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Inventors Names (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.inventors)} onChange={(e) => handleUpdateArrayItem("patents", "patents", index, "inventors", setListValue(e.target.value))} placeholder="e.g. Dr. Rahul Kumar&#10;Dr. Amit Sharma" />
+                          <ListTextarea value={item.inventors} onChange={(list) => handleUpdateArrayItem("patents", "patents", index, "inventors", list)} placeholder="e.g. Dr. Rahul Kumar&#10;Dr. Amit Sharma" />
                         </Field>
                       </div>
                       
@@ -1013,7 +1071,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {patents.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No patents added yet.</p>}
+                {patents.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No patents added yet.</p>}
               </div>
             </div>
           </div>
@@ -1028,11 +1086,10 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Certifications */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Certifications &amp; Licenses</h3>
-                  <p className="text-xs text-stone-500">Add credentials, online courses certificates, or professional licenses.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Certifications &amp; Licenses</h3>
                 </div>
                 <button
                   type="button"
@@ -1040,18 +1097,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     title: "", issuingOrganization: "", issueDate: "", expirationDate: "",
                     credentialId: "", credentialUrl: "", level: "", skills: [], verified: false
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Certification
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {certifications.map((item, index) => (
   <ArrayItemCard
     key={`cert-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Certification #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || `Certification #${index + 1}`}
+    subtitle={joinParts(item.issuingOrganization, item.issueDate)}
     index={index}
     isExpanded={expandedItems[`certifications-certifications-${index}`]}
     onToggle={() => toggleExpand("certifications", "certifications", index)}
@@ -1081,40 +1138,39 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </Field>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Skills Covered (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.skills)} onChange={(e) => handleUpdateArrayItem("certifications", "certifications", index, "skills", setListValue(e.target.value))} placeholder="e.g. Cloud Architecture&#10;Network Security" />
+                          <ListTextarea value={item.skills} onChange={(list) => handleUpdateArrayItem("certifications", "certifications", index, "skills", list)} placeholder="e.g. Cloud Architecture&#10;Network Security" />
                         </Field>
                       </div>
                     </div>
                   </ArrayItemCard>
               ))}
-                {certifications.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No certifications added yet.</p>}
+                {certifications.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No certifications added yet.</p>}
               </div>
             </div>
 
             {/* FDPs */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">FDPs &amp; Professional Development</h3>
-                  <p className="text-xs text-stone-500">Faculty Development Programs, workshops, or training attended.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">FDPs &amp; Professional Development</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("certifications", "professionalDevelopment", {
                     programName: "", organizer: "", duration: "", year: new Date().getFullYear(), description: "", type: "fdp"
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Program
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {professionalDevelopment.map((item, index) => (
   <ArrayItemCard
     key={`fdp-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Program #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.programName || `Program #${index + 1}`}
+    subtitle={joinParts(item.organizer, item.year)}
     index={index}
     isExpanded={expandedItems[`certifications-professionalDevelopment-${index}`]}
     onToggle={() => toggleExpand("certifications", "professionalDevelopment", index)}
@@ -1139,7 +1195,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {professionalDevelopment.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No programs added yet.</p>}
+                {professionalDevelopment.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No programs added yet.</p>}
               </div>
             </div>
           </div>
@@ -1151,11 +1207,10 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         const invitedTalks = section.invitedTalks || [];
 
         return (
-          <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-            <div className="mb-4 flex items-center justify-between">
+          <div className={cardClass}>
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 className="text-base font-semibold text-stone-800">Invited Talks Delivered</h3>
-                <p className="text-xs text-stone-500">List guest lectures, keynotes, or panel invitations you delivered.</p>
+                <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Invited Talks Delivered</h3>
               </div>
               <button
                 type="button"
@@ -1163,18 +1218,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                   title: "", event: "", organizer: "", location: "", date: "",
                   type: "invited", description: "", photos: []
                 })}
-                className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Talk
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {invitedTalks.map((item, index) => (
   <ArrayItemCard
     key={`talk-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Talk #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.title || `Talk #${index + 1}`}
+    subtitle={joinParts(item.event, item.date)}
     index={index}
     isExpanded={expandedItems[`talks-invitedTalks-${index}`]}
     onToggle={() => toggleExpand("talks", "invitedTalks", index)}
@@ -1200,16 +1255,16 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
                       
                       <div className="mt-4">
-                        <label className="block text-sm font-semibold mb-2 text-stone-700">Event Photos (Max 4)</label>
+                        <label className="block text-sm font-semibold mb-2 text-slate-700">Event Photos (Max 4)</label>
                         {/* Display uploaded photos */}
                         {(item.photos && item.photos.length > 0) && (
                           <div className="flex flex-wrap gap-4 mb-4">
                             {item.photos.map((photoUrl, photoIdx) => (
-                              <div key={`talk-${index}-photo-${photoIdx}`} className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-lg border border-stone-200 overflow-hidden shadow-sm group bg-stone-50">
+                              <div key={`talk-${index}-photo-${photoIdx}`} className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-lg border border-slate-200 overflow-hidden shadow-sm group bg-slate-50">
                                 <img src={photoUrl} alt="Talk" className="w-full h-full object-cover" />
                                 <button 
                                   type="button"
-                                  className="absolute top-1.5 right-1.5 bg-red-500/90 hover:bg-red-600 text-white p-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                                  className="absolute top-1.5 right-1.5 bg-rose-500/90 hover:bg-rose-600 text-white p-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
                                   onClick={() => {
                                     const newPhotos = item.photos.filter((_, i) => i !== photoIdx);
                                     handleUpdateArrayItem("talks", "invitedTalks", index, "photos", newPhotos);
@@ -1244,7 +1299,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                   </div>
                 </ArrayItemCard>
               ))}
-              {invitedTalks.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No invited talks added yet.</p>}
+              {invitedTalks.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No invited talks added yet.</p>}
             </div>
           </div>
         );
@@ -1259,29 +1314,28 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         return (
           <div className="space-y-6">
             {/* Awards & Honors */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Awards &amp; Honors</h3>
-                  <p className="text-xs text-stone-500">Record academic recognition, fellowships, or research prizes.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Awards &amp; Honors</h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleAddArrayItem("awards", "awards", {
                     name: "", organization: "", year: "", description: "", level: ""
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Award
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {awards.map((item, index) => (
   <ArrayItemCard
     key={`award-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Award #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `Award #${index + 1}`}
+    subtitle={joinParts(item.organization, item.year)}
     index={index}
     isExpanded={expandedItems[`awards-awards-${index}`]}
     onToggle={() => toggleExpand("awards", "awards", index)}
@@ -1311,16 +1365,15 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     </div>
                   </ArrayItemCard>
               ))}
-                {awards.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No awards added yet.</p>}
+                {awards.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No awards added yet.</p>}
               </div>
             </div>
 
             {/* Social Impact */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-              <div className="mb-4 flex items-center justify-between">
+            <div className={cardClass}>
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h3 className="text-base font-semibold text-stone-800">Social Impact &amp; Outreach</h3>
-                  <p className="text-xs text-stone-500">Community projects, public lectures, or CSR activities.</p>
+                  <h3 className="font-display text-lg font-bold tracking-tight text-slate-900">Social Impact &amp; Outreach</h3>
                 </div>
                 <button
                   type="button"
@@ -1328,18 +1381,18 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                     name: "", organization: "", role: "", duration: "", description: "",
                     location: "", type: "", beneficiaries: "", impact: []
                   })}
-                  className="inline-flex items-center gap-1 rounded-lg bg-stone-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-stone-800"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-sky-600 px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-sky-700"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Activity
                 </button>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {socialActivities.map((item, index) => (
   <ArrayItemCard
     key={`social-${index}`}
-    title={item.title || item.name || item.degree || item.courseName || item.role || item.topic || item.eventName || item.activity || `Activity #${index + 1}`}
-    subtitle={item.year || item.date || item.institution || item.organization || ""}
+    title={item.name || `Activity #${index + 1}`}
+    subtitle={joinParts(item.organization, item.duration)}
     index={index}
     isExpanded={expandedItems[`socialImpact-socialActivities-${index}`]}
     onToggle={() => toggleExpand("socialImpact", "socialActivities", index)}
@@ -1369,13 +1422,13 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
                       </div>
                       <div className="sm:col-span-2 md:col-span-3">
                         <Field label="Key Impact Points (One per line)">
-                          <textarea className={`${inputClass} min-h-16`} value={getListValue(item.impact)} onChange={(e) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "impact", setListValue(e.target.value))} placeholder="e.g. 500 villagers trained in digital literacy&#10;3 community centres set up" />
+                          <ListTextarea value={item.impact} onChange={(list) => handleUpdateArrayItem("socialImpact", "socialActivities", index, "impact", list)} placeholder="e.g. 500 villagers trained in digital literacy&#10;3 community centres set up" />
                         </Field>
                       </div>
                     </div>
                   </ArrayItemCard>
               ))}
-                {socialActivities.length === 0 && <p className="text-center py-4 text-xs text-stone-500">No outreach activities added yet.</p>}
+                {socialActivities.length === 0 && <p className="rounded-xl border border-dashed border-slate-200 bg-slate-50/60 py-6 text-center text-xs text-slate-500">No outreach activities added yet.</p>}
               </div>
             </div>
           </div>
@@ -1387,9 +1440,8 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
         const message = section.message || "";
 
         return (
-          <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
-            <h3 className="mb-2 text-base font-semibold text-stone-800">Other Information</h3>
-            <p className="mb-3 text-xs text-stone-500">Any other academic credentials, references, or details you want to show.</p>
+          <div className={cardClass}>
+            <h3 className="mb-4 font-display text-lg font-bold tracking-tight text-slate-900">Other Information</h3>
             <Field label="Custom Profile Message / Other Details">
               <textarea
                 className={`${inputClass} min-h-36`}
@@ -1407,7 +1459,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
     }
   };
 
-  return <div className="mt-4">{renderSubTabContent()}</div>;
+  return <div>{renderSubTabContent()}</div>;
 };
 
 export default TabDataEditors;

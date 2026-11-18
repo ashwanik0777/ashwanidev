@@ -147,6 +147,7 @@ const SchoolAchievements = lazy(() =>
   import("../pages/departments/SchoolAchievements")
 );
 import SchoolsLayout from "../components/departments/SchoolsLayout.jsx";
+import SchoolPageSkeleton from "../components/departments/SchoolPageSkeleton.jsx";
 import Dean from "../components/departments/Dean.jsx";
 import Conferences from "../pages/departments/Usict_activities.jsx";
 import LaboratoryCards from "../pages/departments/laboratries.jsx";
@@ -391,7 +392,7 @@ export default function AppRouter() {
 
           <Route path="/schools/:shortCode" element={<SchoolsLayout />}>
               <Route index element={
-                <Suspense fallback={<div>Loading School...</div>}>
+                <Suspense fallback={<SchoolPageSkeleton />}>
                   <SchoolDetail />
                 </Suspense>
               } />

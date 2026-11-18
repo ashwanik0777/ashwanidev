@@ -6,6 +6,12 @@ import {
   syncAnnouncementsFromCache,
 } from '../../utils/schoolAnnouncements';
 import { parseImageUrl } from '../../utils/imageUtils';
+import NewBadge from '../ui/NewBadge';
+
+// The newest few items of Latest News and Notice/Circulars carry the NEW badge.
+const NEW_BADGE_COUNT = 5;
+const newestFirst = (items) =>
+  [...items].sort((a, b) => (new Date(b.date).getTime() || 0) - (new Date(a.date).getTime() || 0));
 
 export default function LatestUpdates() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,9 +22,9 @@ export default function LatestUpdates() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const latestNews = (announcements.news || [])
+    const latestNews = newestFirst(announcements.news || [])
       .slice(0, 8)
-      .map((item) => {
+      .map((item, index) => {
         const itemDate = new Date(item.date);
         itemDate.setHours(0, 0, 0, 0);
         const diffTime = today.getTime() - itemDate.getTime();
@@ -31,19 +37,21 @@ export default function LatestUpdates() {
           tag: diffDays <= 10 ? 'Latest News' : 'News',
           priority: item.priority || 'medium',
           date: item.date,
+          isNew: index < NEW_BADGE_COUNT,
           url: `/announcements/news/${createSlug(item.title)}`,
         };
       });
 
-    const noticeItems = (announcements.notices || [])
+    const noticeItems = newestFirst(announcements.notices || [])
       .slice(0, 8)
-      .map((item) => ({
+      .map((item, index) => ({
         id: `notice-${item.id}`,
         content_text: item.title || 'Notice update',
         category: 'Notice/Circulars',
         tag: 'Notice',
         priority: item.priority || 'medium',
         date: item.date,
+        isNew: index < NEW_BADGE_COUNT,
         url: item.pdfUrl ? parseImageUrl(item.pdfUrl) : '/announcements/notices',
       }));
 
@@ -152,6 +160,7 @@ export default function LatestUpdates() {
       <div className="flex-1 min-w-0">
         <h4 className="font-semibold text-gray-800 text-sm leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200">
           {item.content_text}
+          {item.isNew && <NewBadge className="ml-1 -my-1 h-6 w-6 align-middle" />}
         </h4>
         <p className="text-xs text-gray-500 flex items-center gap-1">
           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

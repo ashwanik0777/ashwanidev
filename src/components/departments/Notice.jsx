@@ -1,5 +1,5 @@
 import { createSlug, eventDetailPath } from "../../utils/slugUtil";
-import { Calendar, Bell, Images, ArrowRight } from "lucide-react";
+import { Calendar, CalendarDays, Bell, Images, ArrowRight, MapPin } from "lucide-react";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
@@ -29,6 +29,61 @@ const splitDate = (value) => {
     year: date.getFullYear(),
   };
 };
+/* ── Events on the notice board ── */
+
+const dayOf = (value) => {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  date.setHours(0, 0, 0, 0);
+  return date;
+};
+
+/**
+ * "ongoing" while today is between the start and end day, "upcoming" before it, null after.
+ * Worked out from the dates, because a stored status is often left as it was.
+ */
+const eventTiming = (event, today) => {
+  const start = dayOf(event.startsAt || event.starts_at || event.date);
+  if (!start) return null;
+  const end = dayOf(event.endsAt || event.ends_at);
+  const last = end && end > start ? end : start;
+  if (today < start) return "upcoming";
+  if (today <= last) return "ongoing";
+  return null;
+};
+
+// Ongoing events first (the one ending soonest on top), then upcoming ones by start date.
+const liveEventsOf = (events) => {
+  const today = dayOf(new Date());
+  return events
+    .map((event) => ({
+      event,
+      timing: eventTiming(event, today),
+      start: dayOf(event.startsAt || event.starts_at || event.date),
+      end: dayOf(event.endsAt || event.ends_at),
+    }))
+    .filter((item) => item.timing)
+    .sort((a, b) => {
+      if (a.timing !== b.timing) return a.timing === "ongoing" ? -1 : 1;
+      return a.timing === "ongoing" ? (a.end || a.start) - (b.end || b.start) : a.start - b.start;
+    });
+};
+
+// "18 Nov", "18–20 Nov" or "30 Nov – 2 Dec"
+const dateRange = (start, end) => {
+  if (!start) return "";
+  const day = (d) => `${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  if (!end || end <= start) return day(start);
+  if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) return `${start.getDate()}–${day(end)}`;
+  return `${day(start)} – ${day(end)}`;
+};
+
+const TIMING_TAG = {
+  ongoing: { label: "Ongoing", className: "bg-emerald-50 text-emerald-700 border-emerald-200", dot: "bg-emerald-500" },
+  upcoming: { label: "Upcoming", className: "bg-amber-50 text-amber-700 border-amber-200", dot: "bg-amber-500" },
+};
+
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { parseImageUrl } from "../../utils/imageUtils.js";
 import {
@@ -272,6 +327,9 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
   const events = customEvents !== null ? customEvents : filterBySchool(announcements.events || [], schoolMeta);
   const visibleNotices = notices;
   const visibleEvents = events;
+  const liveEvents = useMemo(() => liveEventsOf(events), [events]);
+  const ongoingCount = liveEvents.filter((item) => item.timing === "ongoing").length;
+  const boardCount = visibleNotices.length + liveEvents.length;
 
   return (
     <section className={`${SECTION_PADDING} bg-white`}>
@@ -290,11 +348,22 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                   </span>
                   <h3 className={CARD_TITLE}>Notice Board</h3>
                 </div>
-                {visibleNotices.length > 0 && (
-                  <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs min-[2560px]:text-lg font-semibold">
-                    {visibleNotices.length}
-                  </span>
-                )}
+                <div className="flex items-center gap-1.5">
+                  {ongoingCount > 0 && (
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs min-[2560px]:text-lg font-semibold">
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                      </span>
+                      {ongoingCount} live
+                    </span>
+                  )}
+                  {boardCount > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs min-[2560px]:text-lg font-semibold">
+                      {boardCount}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Auto-Scrolling Notice List (pauses on hover) */}
@@ -308,6 +377,50 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                   msOverflowStyle: "none", // IE 10+
                 }}
               >
+                {/* Ongoing and upcoming events, above the notices; each opens its event page */}
+                {liveEvents.map(({ event, timing, start, end }) => {
+                  const tag = TIMING_TAG[timing];
+                  return (
+                    <Link
+                      key={`event-${event.id || event.title}`}
+                      to={eventDetailPath(event)}
+                      className="group flex items-start gap-3 p-2.5 min-[2560px]:p-4 rounded-lg border border-blue-100 bg-blue-50/40 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                    >
+                      <div
+                        className={`shrink-0 w-11 sm:w-12 min-[2560px]:w-20 rounded-lg text-white text-center py-1 min-[2560px]:py-2 leading-none ${
+                          timing === "ongoing" ? "bg-emerald-600" : "bg-blue-600"
+                        }`}
+                      >
+                        <div className="text-base sm:text-lg min-[2560px]:text-3xl font-bold">{String(start.getDate()).padStart(2, "0")}</div>
+                        <div className="text-[10px] min-[2560px]:text-base uppercase tracking-wide mt-0.5">{MONTHS[start.getMonth()]}</div>
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold text-xs sm:text-sm min-[2560px]:text-xl text-slate-800 group-hover:text-blue-700 leading-snug line-clamp-2">
+                          {event.title}
+                        </h4>
+                        <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                          <Badge className="gap-1 text-[10px] sm:text-[11px] min-[2560px]:text-base px-2 py-0 border-blue-600 bg-blue-600 text-white">
+                            <CalendarDays className="w-3 h-3 min-[2560px]:w-5 min-[2560px]:h-5" /> Event
+                          </Badge>
+                          <Badge className={`gap-1 text-[10px] sm:text-[11px] min-[2560px]:text-base px-2 py-0 ${tag.className}`}>
+                            <span className={`h-1.5 w-1.5 rounded-full ${tag.dot} ${timing === "ongoing" ? "animate-pulse" : ""}`} />
+                            {tag.label}
+                          </Badge>
+                          <span className="text-[11px] min-[2560px]:text-base text-slate-500">{dateRange(start, end)}</span>
+                        </div>
+                        {event.venue && event.venue !== "Campus" && (
+                          <p className="mt-1 flex items-center gap-1 text-[11px] min-[2560px]:text-base text-slate-500">
+                            <MapPin className="w-3 h-3 shrink-0" /> <span className="truncate">{event.venue}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      <ArrowRight className="mt-1 w-4 h-4 shrink-0 text-slate-300 transition-all group-hover:translate-x-0.5 group-hover:text-blue-600" />
+                    </Link>
+                  );
+                })}
+
                 {visibleNotices.map((notice, index) => {
                   const noticeUrl = notice.pdfUrl || notice.link || (notice.id ? `/announcements/news/${createSlug(notice.title)}` : '#');
                   const isExternal = noticeUrl.startsWith('http') || noticeUrl.endsWith('.pdf');
@@ -361,7 +474,7 @@ const NoticeEvents = ({ schoolCode, customNotices = null, customEvents = null, t
                     </Link>
                   );
                 })}
-                {visibleNotices.length === 0 ? (
+                {boardCount === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center text-slate-400 gap-2">
                     <Bell className="w-8 h-8 min-[2560px]:w-14 min-[2560px]:h-14" />
                     <p className="text-sm min-[2560px]:text-xl">No notices available.</p>

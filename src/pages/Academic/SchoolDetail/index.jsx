@@ -18,6 +18,7 @@ import StudentAchievers from "../../../components/departments/cse/StudentAchieve
 import { resolveSchool, getSchoolDisplayCode } from '../../../Data/schoolsMeta';
 import { fetchSchoolWithin } from '../../../services/schoolContentService';
 import { applyHomePage, normalizeHomePage } from '../../../components/schoolHome/homePageModel';
+import SchoolPageSkeleton from '../../../components/departments/SchoolPageSkeleton';
 
 const componentsMap = {
   Landing,
@@ -84,7 +85,7 @@ export default function SchoolDetail() {
   }, [shortCode]);
 
   if (loading) {
-    return <div className="min-h-screen flex justify-center items-center">Loading School Details...</div>;
+    return <SchoolPageSkeleton />;
   }
 
   if (sections.length === 0) {

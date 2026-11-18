@@ -106,3 +106,44 @@ html, body {
   animation: backdrop-fade-in 0.2s ease-out;
 }
 
+/* Club page blocks fade up as they load; the club editor panel pops in.
+   No fill mode, so no transform stays behind to trap fixed-position children (crop modal). */
+@keyframes club-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes panel-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-club-fade {
+  animation: club-fade-up 0.45s ease-out;
+}
+
+.animate-panel-in {
+  animation: panel-pop-in 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-club-fade,
+  .animate-panel-in,
+  .animate-drawer-in,
+  .animate-backdrop-in {
+    animation: none;
+  }
+}
+

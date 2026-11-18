@@ -148,6 +148,7 @@ const fetchAllRegistrations = async () => ({ data: [] });
 const parseDriveLink = (url) => parseImageUrl(url);
 
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
+import ClubManager from "../../components/clubs/manage/ClubManager";
 import ApprovalQueue from "../../components/announcement/ApprovalQueue";
 import { listPendingAnnouncements } from "../../services/announcementsAdminService";
 import {
@@ -449,6 +450,7 @@ const tabs = [
 
 const schoolContentTabs = [
   { id: "basic", label: "Basic Settings", icon: School },
+  { id: "clubs", label: "Clubs & Societies", icon: Users },
   { id: "events", label: "Events", icon: CalendarDays },
   { id: "news", label: "News", icon: Newspaper },
   { id: "notices", label: "Notices", icon: Bell },
@@ -1658,40 +1660,6 @@ const AdminDashboard = () => {
   };
 
   const openCollectionEdit = (listKey, index, item) => {
-    if (listKey === "clubs") {
-      const flatClub = {
-        id: item.id || `club-${Date.now()}`,
-        name: item.name || "",
-        tagline: item.tagline || "",
-        category: item.category || "Technical",
-        logo: item.logo || "",
-        banner: item.banner || "",
-        memberCount: item.memberCount || 0,
-        description: item.description || "",
-        history: item.history || "",
-        facultyAdvisor: item.team?.facultyCoordinator?.name || item.facultyAdvisor || "",
-        facultyAdvisorDept: item.team?.facultyCoordinator?.department || item.facultyAdvisorDept || "",
-        presidentName: item.team?.president?.name || item.presidentName || "",
-        presidentDept: item.team?.president?.department || item.presidentDept || "",
-        vicePresidentName: item.team?.vicePresident?.name || item.vicePresidentName || "",
-        vicePresidentDept: item.team?.vicePresident?.department || item.vicePresidentDept || "",
-        secretaryName: item.team?.secretary?.name || item.secretaryName || "",
-        secretaryDept: item.team?.secretary?.department || item.secretaryDept || "",
-        treasurerName: item.team?.treasurer?.name || item.treasurerName || "",
-        treasurerDept: item.team?.treasurer?.department || item.treasurerDept || "",
-        instagram: item.socialMedia?.instagram || item.instagram || "",
-        linkedin: item.socialMedia?.linkedin || item.linkedin || "",
-        youtube: item.socialMedia?.youtube || item.youtube || "",
-        objectives: Array.isArray(item.objectives) ? item.objectives.join(", ") : (item.objectives || ""),
-        achievements: Array.isArray(item.achievements) ? item.achievements.join(", ") : (item.achievements || "")
-      };
-      setCollectionEditors((prev) => ({
-        ...prev,
-        [listKey]: { index, form: flatClub },
-      }));
-      return;
-    }
-
     if (listKey === "eventGallery") {
       const sourceImages = toList(item.images);
       const baseImages = [item.imageUrl, ...sourceImages].map((image) => String(image || "").trim()).filter(Boolean);
@@ -1746,83 +1714,6 @@ const AdminDashboard = () => {
           }
         }
       }
-    }
-
-    if (listKey === "clubs") {
-      const objectivesArray = typeof nextForm.objectives === "string" 
-        ? nextForm.objectives.split(",").map(x => x.trim()).filter(Boolean) 
-        : (nextForm.objectives || []);
-      const achievementsArray = typeof nextForm.achievements === "string" 
-        ? nextForm.achievements.split(",").map(x => x.trim()).filter(Boolean) 
-        : (nextForm.achievements || []);
-
-      nextForm = {
-        id: nextForm.id || nextForm.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-        name: nextForm.name || "",
-        tagline: nextForm.tagline || "",
-        category: nextForm.category || "Technical",
-        logo: nextForm.logo || "",
-        banner: nextForm.banner || "",
-        memberCount: Number(nextForm.memberCount || 0),
-        description: nextForm.description || "",
-        history: nextForm.history || "",
-        objectives: objectivesArray,
-        achievements: achievementsArray,
-        team: {
-          facultyCoordinator: {
-            name: nextForm.facultyAdvisor || "",
-            role: "Faculty Advisor",
-            department: nextForm.facultyAdvisorDept || ""
-          },
-          president: {
-            name: nextForm.presidentName || "",
-            role: "President",
-            department: nextForm.presidentDept || ""
-          },
-          vicePresident: {
-            name: nextForm.vicePresidentName || "",
-            role: "Vice President",
-            department: nextForm.vicePresidentDept || ""
-          },
-          secretary: {
-            name: nextForm.secretaryName || "",
-            role: "Secretary",
-            department: nextForm.secretaryDept || ""
-          },
-          treasurer: {
-            name: nextForm.treasurerName || "",
-            role: "Treasurer",
-            department: nextForm.treasurerDept || ""
-          },
-          members: []
-        },
-        socialMedia: {
-          instagram: nextForm.instagram || "",
-          linkedin: nextForm.linkedin || "",
-          youtube: nextForm.youtube || ""
-        },
-        policies: {
-          codeOfConduct: [
-            "Respect all members regardless of skill level",
-            "Contribute positively to club activities",
-            "Follow ethical practices"
-          ],
-          eligibility: [
-            "Open to all students of the school",
-            "Passion to learn and collaborate",
-            "Commitment to attend regular sessions"
-          ],
-          responsibilities: [
-            "President: Strategic planning & leadership",
-            "Vice-President: Event coordination & engagement",
-            "Secretary: Communication & documentation",
-            "Treasurer: Budget management"
-          ],
-          meetingFrequency: "Weekly sessions as scheduled by coordinator"
-        },
-        events: [],
-        reports: []
-      };
     }
 
     if (listKey === "eventGallery") {
@@ -2088,7 +1979,12 @@ const AdminDashboard = () => {
   // Keys held in schoolData that are UI-only and must not be written into content.
   const SCHOOL_META_KEYS = new Set(["schoolCode", "schoolName", "schoolDescription", "name", "overview", "id"]);
 
-  const handleSaveSchool = async () => {
+  // Resolves to true when the save went through. Called from a click it gets the event, so only
+  // a plain options object ({ silent, ...fields to save over schoolData }) is read.
+  const handleSaveSchool = async (options) => {
+    const extra = options && typeof options === "object" && !("nativeEvent" in options) ? options : {};
+    const { silent = false, ...overrides } = extra;
+    const source = { ...schoolData, ...overrides };
     /* Every school tab (School, Announcement, NSS, NCC) shares this handler and
        the same schoolData state, but each one only edits a slice of it. Building
        the payload from a fixed key list used to drop everything the current tab
@@ -2098,19 +1994,19 @@ const AdminDashboard = () => {
     const storedContent = schoolsList.find((s) => s.id === selectedSchoolId)?.content || {};
 
     const editedContent = Object.fromEntries(
-      Object.entries(schoolData).filter(([key]) => !SCHOOL_META_KEYS.has(key)),
+      Object.entries(source).filter(([key]) => !SCHOOL_META_KEYS.has(key)),
     );
 
     const payload = {
-        name: schoolData.schoolName || schoolData.name || "",
-        overview: schoolData.schoolDescription || schoolData.overview || "",
+        name: source.schoolName || source.name || "",
+        overview: source.schoolDescription || source.overview || "",
         content: { ...storedContent, ...editedContent },
         is_active: true
     };
 
     if (!payload.name) {
       setMessage("School Name is required.");
-      return;
+      return false;
     }
 
     setIsSchoolSaving(true);
@@ -2120,10 +2016,11 @@ const AdminDashboard = () => {
             const updated = await updateSchool(selectedSchoolId, payload);
             setSchoolsList(prev => prev.map(s => s.id === selectedSchoolId ? updated : s));
             setHasUnsavedSchoolChanges(false);
-            setMessage("School updated successfully!");
-        } else {
-            setMessage("Schools are pre-seeded. Select a school to update.");
+            if (!silent) setMessage("School updated successfully!");
+            return true;
         }
+        setMessage("Schools are pre-seeded. Select a school to update.");
+        return false;
     } catch (error) {
         const status = error?.response?.status;
         let detail;
@@ -2136,9 +2033,18 @@ const AdminDashboard = () => {
         }
         setSchoolApiError(detail);
         setMessage(detail);
+        return false;
     } finally {
         setIsSchoolSaving(false);
     }
+  };
+
+  /* Club changes are saved straight away (with anything else edited for this school), and
+     the list only changes on screen once the save has gone through. */
+  const saveSchoolClubs = async (nextClubs) => {
+    const ok = await handleSaveSchool({ clubs: nextClubs, silent: true });
+    if (ok) setSchoolData((prev) => ({ ...prev, clubs: nextClubs }));
+    return ok;
   };
 
 
@@ -3027,11 +2933,10 @@ const AdminDashboard = () => {
             <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
               <thead className="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
                 <tr>
-                  <th className="px-4 py-3">{listKey === "clubs" ? "Club Name" : "Title / Name"}</th>
-                  {listKey !== "clubs" && <th className="px-4 py-3">Date</th>}
+                  <th className="px-4 py-3">Title / Name</th>
+                  <th className="px-4 py-3">Date</th>
                   <th className="px-4 py-3">Category / Type</th>
                   {listKey === "events" && <th className="px-4 py-3">Venue</th>}
-                  {listKey === "clubs" && <th className="px-4 py-3">Faculty Advisor</th>}
                   <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -3051,11 +2956,9 @@ const AdminDashboard = () => {
                             {item.excerpt && <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xs">{item.excerpt}</p>}
                           </div>
                         </td>
-                        {listKey !== "clubs" && (
-                          <td className="px-4 py-3 text-xs font-semibold text-slate-600">
-                            {itemDate || "N/A"}
-                          </td>
-                        )}
+                        <td className="px-4 py-3 text-xs font-semibold text-slate-600">
+                          {itemDate || "N/A"}
+                        </td>
                         <td className="px-4 py-3">
                           <span className="rounded bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 border border-indigo-100 uppercase tracking-wider">
                             {categoryValue}
@@ -3064,11 +2967,6 @@ const AdminDashboard = () => {
                         {listKey === "events" && (
                           <td className="px-4 py-3 text-xs text-slate-600 font-semibold truncate max-w-xs">
                             {item.venue || "N/A"}
-                          </td>
-                        )}
-                        {listKey === "clubs" && (
-                          <td className="px-4 py-3 text-xs text-slate-600 font-semibold">
-                            {item.facultyAdvisor || "N/A"}
                           </td>
                         )}
                         <td className="px-4 py-3 text-right">
@@ -5688,7 +5586,7 @@ const AdminDashboard = () => {
               <Save className="h-4 w-4" />
               {isSchoolSaving ? "Saving..." : "Save School"}
             </button>
-            {/* Clubs and NSS/NCC content is still staged locally until this Save. */}
+            {/* Basic settings are staged locally until this Save; clubs save on their own. */}
             {hasUnsavedSchoolChanges && !isSchoolSaving && (
               <span className="text-xs font-semibold text-amber-600">Unsaved changes</span>
             )}
@@ -5783,61 +5681,19 @@ const AdminDashboard = () => {
         />
       )}
 
-      {activeSchoolSubTab === "clubs" && schoolData.schoolCode !== "NSS" && schoolData.schoolCode !== "NCC" &&
-        renderCollectionEditor(
-          "clubs",
-          "Clubs & Societies",
-          [
-            { key: "name", label: "Club Name" },
-            { key: "tagline", label: "Tagline" },
-            { key: "category", label: "Category (Technical / Cultural / Sports / Social)" },
-            { key: "logo", label: "Logo URL" },
-            { key: "banner", label: "Banner Image URL" },
-            { key: "memberCount", label: "Member Count", type: "number" },
-            { key: "facultyAdvisor", label: "Faculty Advisor Name" },
-            { key: "facultyAdvisorDept", label: "Faculty Advisor Department" },
-            { key: "presidentName", label: "President Name" },
-            { key: "presidentDept", label: "President Department/Year" },
-            { key: "vicePresidentName", label: "Vice President Name" },
-            { key: "vicePresidentDept", label: "Vice President Department/Year" },
-            { key: "secretaryName", label: "Secretary Name" },
-            { key: "secretaryDept", label: "Secretary Department/Year" },
-            { key: "treasurerName", label: "Treasurer Name" },
-            { key: "treasurerDept", label: "Treasurer Department/Year" },
-            { key: "instagram", label: "Instagram URL" },
-            { key: "linkedin", label: "LinkedIn URL" },
-            { key: "youtube", label: "YouTube URL" },
-            { key: "description", label: "Description", type: "textarea" },
-            { key: "objectives", label: "Objectives (comma separated)", type: "textarea" },
-            { key: "history", label: "History", type: "textarea" },
-            { key: "achievements", label: "Achievements (comma separated)", type: "textarea" },
-          ],
-          {
-            name: "",
-            tagline: "",
-            category: "Technical",
-            logo: "",
-            banner: "",
-            memberCount: 0,
-            facultyAdvisor: "",
-            facultyAdvisorDept: "",
-            presidentName: "",
-            presidentDept: "",
-            vicePresidentName: "",
-            vicePresidentDept: "",
-            secretaryName: "",
-            secretaryDept: "",
-            treasurerName: "",
-            treasurerDept: "",
-            instagram: "",
-            linkedin: "",
-            youtube: "",
-            description: "",
-            objectives: "",
-            history: "",
-            achievements: "",
-          }
-        )}
+      {/* Same club manager as the School dashboard; every change is saved straight away. */}
+      {activeSchoolSubTab === "clubs" && schoolData.schoolCode !== "NSS" && schoolData.schoolCode !== "NCC" && (
+        <ClubManager
+          key={schoolData.schoolCode}
+          clubs={schoolData.clubs || []}
+          schoolCode={schoolData.schoolCode}
+          onSaveClubs={saveSchoolClubs}
+          onMessage={(text, isError) => {
+            setMessage(text);
+            setSchoolApiError(isError ? text : "");
+          }}
+        />
+      )}
     </div>
   );
 };

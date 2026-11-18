@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Youtube } from "lucide-react";
 import { getSchoolByCode } from "../../services/schoolsService";
+import { clubId, isClubVisible } from "../clubs/clubModel";
+import { parseImageUrl } from "../../utils/imageUtils";
 import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
 
 const ClubsAchievements = ({ schoolCode }) => {
@@ -39,9 +41,7 @@ const ClubsAchievements = ({ schoolCode }) => {
     if (club.isUniversityLevel) {
       navigate(club.path);
     } else {
-      const clubId =
-        club.id || (club.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      navigate(`/club/${clubId}?school=${schoolCode}`);
+      navigate(`/club/${encodeURIComponent(clubId(club))}?school=${schoolCode}`);
     }
   };
 
@@ -92,6 +92,8 @@ const ClubsAchievements = ({ schoolCode }) => {
 
   // Build display list — add stable IDs
   const displayClubs = clubs
+    // Clubs hidden from the dashboard stay off the website.
+    .filter(isClubVisible)
     .filter((club) => {
       const name = (club.name || "").toLowerCase();
       return (
@@ -103,7 +105,7 @@ const ClubsAchievements = ({ schoolCode }) => {
     })
     .map((club) => ({
       ...club,
-      id: club.id || (club.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      id: clubId(club),
     }));
 
   // If no clubs, hide the entire section
@@ -125,8 +127,7 @@ const ClubsAchievements = ({ schoolCode }) => {
               <div className="relative">
                 <img
                   src={
-                    club.banner ||
-                    club.image ||
+                    parseImageUrl(club.banner || club.image, 800) ||
                     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800"
                   }
                   alt={club.name || "Club"}

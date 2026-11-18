@@ -4,6 +4,8 @@ import { Quote, ChevronDown } from "lucide-react";
 import { resolveSchool } from "../../Data/schoolsMeta";
 import { getSchoolMeta } from "../../utils/schoolMeta";
 import { fetchFacultyPublicList } from "../../services/facultyDashboardService";
+import { fetchSchoolWithin } from "../../services/schoolContentService";
+import { deanCardProps, normalizeHomePage } from "../schoolHome/homePageModel";
 import SectionHeading, { SECTION_PADDING, VISION_CONTAINER } from "./SectionHeading";
 
 const LeadershipCard = (props) => {
@@ -51,6 +53,14 @@ const LeadershipCard = (props) => {
           }
         } catch (error) {
           console.error("Error loading leadership config:", error);
+        }
+
+        // A dean saved from the School / Admin dashboard replaces the built-in one.
+        const schoolRow = await fetchSchoolWithin(canonicalCode);
+        const savedDean = normalizeHomePage(schoolRow?.content?.homePage)?.dean;
+        if (savedDean?.name) {
+          currentData = deanCardProps(savedDean);
+          if (isMounted) setData(currentData);
         }
       }
 

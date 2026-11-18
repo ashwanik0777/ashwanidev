@@ -92,7 +92,8 @@ export const ListEditor = ({ label, items, onChange, placeholder, addLabel = "Ad
  * A small photo box: pick a file, crop it, upload it. Used for team photos and event images.
  * shape "circle" for people, "rect" for event images.
  */
-export const PhotoInput = ({ value, onChange, folder, aspectRatio = 1, shape = "circle", label = "Photo", cropHint = "" }) => {
+// showThumb={false} when the form already shows a large preview of the same photo.
+export const PhotoInput = ({ value, onChange, folder, aspectRatio = 1, shape = "circle", label = "Photo", cropHint = "", showThumb = true }) => {
   const inputRef = useRef(null);
   const [cropSrc, setCropSrc] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -138,20 +139,22 @@ export const PhotoInput = ({ value, onChange, folder, aspectRatio = 1, shape = "
 
   return (
     <div className="flex items-center gap-3">
-      <button
-        type="button"
-        onClick={() => inputRef.current?.click()}
-        className={`group relative flex shrink-0 items-center justify-center overflow-hidden border border-dashed border-slate-300 bg-slate-50 text-slate-400 transition hover:border-sky-400 hover:bg-sky-50 hover:text-sky-600 ${frame}`}
-        aria-label={value ? `Change ${label.toLowerCase()}` : `Upload ${label.toLowerCase()}`}
-      >
-        {busy ? (
-          <Loader2 className="h-5 w-5 animate-spin text-sky-600" />
-        ) : value ? (
-          <img src={parseImageUrl(value, 300)} alt="" className="h-full w-full object-cover object-top" />
-        ) : (
-          <ImagePlus className="h-5 w-5" />
-        )}
-      </button>
+      {showThumb && (
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className={`group relative flex shrink-0 items-center justify-center overflow-hidden border border-dashed border-slate-300 bg-slate-50 text-slate-400 transition hover:border-sky-400 hover:bg-sky-50 hover:text-sky-600 ${frame}`}
+          aria-label={value ? `Change ${label.toLowerCase()}` : `Upload ${label.toLowerCase()}`}
+        >
+          {busy ? (
+            <Loader2 className="h-5 w-5 animate-spin text-sky-600" />
+          ) : value ? (
+            <img src={parseImageUrl(value, 300)} alt="" className="h-full w-full object-cover object-top" />
+          ) : (
+            <ImagePlus className="h-5 w-5" />
+          )}
+        </button>
+      )}
       <div className="min-w-0">
         <div className="flex flex-wrap gap-x-3 gap-y-1">
           <button type="button" onClick={() => inputRef.current?.click()} disabled={busy} className="text-sm font-semibold text-sky-700 transition hover:text-sky-800">

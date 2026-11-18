@@ -59,6 +59,7 @@ const REASON_OPTIONS = [];
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
 import ImageUploadField from "../../components/ui/ImageUploadField";
 import ClubManager from "../../components/clubs/manage/ClubManager";
+import SchoolHomeEditor from "../../components/schoolHome/SchoolHomeEditor";
 
 const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
@@ -278,7 +279,6 @@ const SchoolDashboard = () => {
   const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
   const [facultyProfiles, setFacultyProfiles] = useState([]);
   const [facultySearchTerm, setFacultySearchTerm] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
   const [announcementActions, setAnnouncementActions] = useState(null);
 
@@ -456,10 +456,10 @@ const SchoolDashboard = () => {
 
   const summary = useMemo(
     () => [
-      { label: "Faculty", value: facultyProfiles.length },
-      { label: "Events", value: data.counts?.events || 0 },
-      { label: "News", value: data.counts?.news || 0 },
-      { label: "Notices", value: data.counts?.notices || 0 },
+      { label: "Faculty", value: facultyProfiles.length, tab: "faculty-management", icon: Users },
+      { label: "Events", value: data.counts?.events || 0, tab: "events", icon: CalendarDays },
+      { label: "News", value: data.counts?.news || 0, tab: "news", icon: Newspaper },
+      { label: "Notices", value: data.counts?.notices || 0, tab: "notices", icon: Bell },
     ],
     [facultyProfiles.length, data.counts]
   );
@@ -469,7 +469,7 @@ const SchoolDashboard = () => {
       case "home":
         return {
           title: data.schoolName || "School Dashboard",
-          desc: "Manage your school's content, events, news, notices & more. All changes are saved per-school."
+          desc: "Banners, About Us and the dean's message on your school's home page."
         };
       case "faculty-management":
         return {
@@ -510,24 +510,6 @@ const SchoolDashboard = () => {
   };
   const header = getHeaderContent();
 
-  const updateField = (key, value) => {
-    setData((prev) => ({ ...prev, [key]: value }));
-    setMessage("");
-  };
-
-  const updateTabContent = (section, key, value) => {
-    setData((prev) => ({
-      ...prev,
-      tabContent: {
-        ...(prev.tabContent || {}),
-        [section]: {
-          ...(prev.tabContent?.[section] || {}),
-          [key]: value,
-        },
-      },
-    }));
-    setMessage("");
-  };
 
   // Resolves to true when the save went through. { silent: true } skips the generic success message.
   const saveAll = async (options) => {
@@ -536,7 +518,6 @@ const SchoolDashboard = () => {
       setMessage("School not loaded from backend. Cannot save.");
       return false;
     }
-    setIsSaving(true);
     const currentData = dataRef.current;
     try {
       const { updateSchool } = await import("../../services/schoolsService");
@@ -559,6 +540,7 @@ const SchoolDashboard = () => {
           eventGallery: currentData.eventGallery || [],
           tabContent: currentData.tabContent || {},
           clubs: currentData.clubs || [],
+          ...(currentData.homePage ? { homePage: currentData.homePage } : {}),
         },
         is_active: true,
       });
@@ -576,8 +558,6 @@ const SchoolDashboard = () => {
         setMessage(`Failed to save: ${err?.response?.data?.message || err.message}`);
       }
       return false;
-    } finally {
-      setIsSaving(false);
     }
   };
 
@@ -589,6 +569,17 @@ const SchoolDashboard = () => {
     const ok = await saveAll({ silent: true });
     if (ok) setData((prev) => ({ ...prev, clubs: nextClubs }));
     else dataRef.current = { ...dataRef.current, clubs: previousClubs };
+    return ok;
+  };
+
+  /* The home page editor saves on its own. Like clubs, the stored copy only changes once the
+     save has gone through. */
+  const saveHomePage = async ({ homePage }) => {
+    const previous = dataRef.current.homePage;
+    dataRef.current = { ...dataRef.current, homePage };
+    const ok = await saveAll({ silent: true });
+    if (ok) setMessage("Home page saved. The school page now shows these changes.");
+    else dataRef.current = { ...dataRef.current, homePage: previous };
     return ok;
   };
 
@@ -1123,43 +1114,18 @@ const SchoolDashboard = () => {
 
   const renderBody = () => {
     if (activeTab === "home") {
+      if (!schoolId) {
+        return <div className={`${cardClass} py-12 text-center text-sm text-slate-500`}>Loading the school...</div>;
+      }
+      // Same editor as Admin > Schools > Basic Settings; the school name is set by the admin.
       return (
-        <div className={cardClass}>
-          <h2 className="mb-4 text-lg font-semibold text-slate-900">Home Management</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="School Name">
-              <input className={inputClass} value={data.schoolName || ""} onChange={(e) => updateField("schoolName", e.target.value)} />
-            </Field>
-            <Field label="Dean Name">
-              <input className={inputClass} value={data.deanName || ""} onChange={(e) => updateField("deanName", e.target.value)} />
-            </Field>
-            <Field label="Hero Title">
-              <input className={inputClass} value={data.tabContent?.home?.heroTitle || ""} onChange={(e) => updateTabContent("home", "heroTitle", e.target.value)} />
-            </Field>
-            <Field label="Hero Subtitle">
-              <input className={inputClass} value={data.tabContent?.home?.heroSubtitle || ""} onChange={(e) => updateTabContent("home", "heroSubtitle", e.target.value)} />
-            </Field>
-            <div className="md:col-span-2">
-              <ImageUploadField
-                label="Banner Image"
-                value={data.bannerImage || ""}
-                onChange={(url) => updateField("bannerImage", url)}
-                aspectRatio={16 / 9}
-                recommendedSize="1920×1080"
-                folder={`gbu-website/${mySchoolCode || "general"}/banners`}
-              />
-            </div>
-            <Field label="School Email">
-              <input className={inputClass} value={data.email || ""} onChange={(e) => updateField("email", e.target.value)} />
-            </Field>
-          </div>
-
-          <div className="mt-4">
-            <Field label="School Description">
-              <textarea className={`${inputClass} min-h-28`} value={data.schoolDescription || ""} onChange={(e) => updateField("schoolDescription", e.target.value)} />
-            </Field>
-          </div>
-        </div>
+        <SchoolHomeEditor
+          key={schoolId}
+          schoolCode={data.schoolCode || mySchoolCode}
+          schoolName={data.schoolName}
+          storedContent={storedSchoolContent}
+          onSave={saveHomePage}
+        />
       );
     }
 
@@ -1536,10 +1502,8 @@ const SchoolDashboard = () => {
             </div>
 
             <div className="mt-auto rounded-xl border border-slate-200 bg-slate-50 p-3 shrink-0">
-              <div className="mt-2 space-y-2">
-                <button onClick={saveAll} disabled={isSaving} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 px-3 py-2.5 text-sm font-semibold text-white shadow-md shadow-sky-500/20 transition-all hover:from-sky-400 hover:to-sky-500 hover:shadow-sky-500/30 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0">
-                  <Save className="h-4 w-4" /> {isSaving ? "Saving..." : "Save All"}
-                </button>
+              {/* No Save All: the home page, clubs, announcements and faculty each save on their own. */}
+              <div className="space-y-2">
                 <button onClick={() => {
                   logoutPortalSession();
                   navigate("/login", { replace: true });
@@ -1626,13 +1590,26 @@ const SchoolDashboard = () => {
           )}
 
           {activeTab === "home" && (
-            <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {summary.map((item) => (
-                <div key={item.label} className={cardClass}>
-                  <p className="text-xs uppercase tracking-wide text-slate-500">{item.label}</p>
-                  <p className="mt-2 text-2xl font-bold text-slate-900">{item.value}</p>
-                </div>
-              ))}
+            <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+              {summary.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => setActiveTab(item.tab)}
+                    className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-sky-200 hover:shadow-md sm:gap-4 sm:p-5"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-600 text-white sm:h-12 sm:w-12">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block font-display text-xl font-extrabold leading-tight text-slate-900 sm:text-2xl">{item.value}</span>
+                      <span className="block text-xs font-medium text-slate-500 transition-colors group-hover:text-sky-700 sm:text-sm">{item.label}</span>
+                    </span>
+                  </button>
+                );
+              })}
             </section>
           )}
 

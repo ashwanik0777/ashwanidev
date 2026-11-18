@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Youtube } from "lucide-react";
-import { getSchoolByCode } from "../../services/schoolsService";
+import { fetchSchoolCached } from "../../services/schoolContentService";
 import { clubId, isClubVisible } from "../clubs/clubModel";
 import { parseImageUrl } from "../../utils/imageUtils";
 import SectionHeading, { SECTION_PADDING, SECTION_CONTAINER, SLIDER_SIDE_SPACE, HEADING_SPACE } from "./SectionHeading";
@@ -21,7 +21,7 @@ const ClubsAchievements = ({ schoolCode }) => {
       }
       setLoading(true);
       try {
-        const school = await getSchoolByCode(schoolCode);
+        const school = await fetchSchoolCached(schoolCode);
         const dbClubs =
           school && school.content && Array.isArray(school.content.clubs)
             ? school.content.clubs

@@ -16,6 +16,8 @@ import RecruitersShowcase from "../../../components/departments/Recuritor_showca
 import ClubsAchievements from "../../../components/departments/Clubs_activevment.jsx";
 import StudentAchievers from "../../../components/departments/cse/StudentAchievers";
 import { resolveSchool, getSchoolDisplayCode } from '../../../Data/schoolsMeta';
+import { fetchSchoolWithin } from '../../../services/schoolContentService';
+import { applyHomePage, normalizeHomePage } from '../../../components/schoolHome/homePageModel';
 
 const componentsMap = {
   Landing,
@@ -53,8 +55,12 @@ export default function SchoolDetail() {
         const canonicalCode = school?.code || shortCode.toUpperCase();
         setResolvedCode(canonicalCode);
 
-        // Load from folder structure: Data/schools/SOICT/home.jsx
-        const structureModule = await import(`../../../Data/schools/${canonicalCode}/home.jsx`);
+        // Page layout from Data/schools/SOICT/home.jsx; banners, About Us and the dean's
+        // message from the School / Admin dashboard when they have been saved there.
+        const [structureModule, schoolRow] = await Promise.all([
+          import(`../../../Data/schools/${canonicalCode}/home.jsx`),
+          fetchSchoolWithin(canonicalCode),
+        ]);
 
         const configData = structureModule.sectionsConfig;
 
@@ -62,7 +68,8 @@ export default function SchoolDetail() {
           const enabledSorted = configData
             .filter((sec) => sec.enabled)
             .sort((a, b) => a.position - b.position);
-          setSections(enabledSorted);
+          const homePage = normalizeHomePage(schoolRow?.content?.homePage);
+          setSections(applyHomePage(enabledSorted, homePage, school?.name || schoolRow?.name || ""));
         } else {
           setSections([]);
         }

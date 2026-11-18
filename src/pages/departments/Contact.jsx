@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import BannerSection from "../../components/HeroBanner";
+import { fetchSchoolWithin } from "../../services/schoolContentService";
+import { deanCardProps, normalizeHomePage } from "../../components/schoolHome/homePageModel";
 
 // Reusable Card Component with Framer Motion hover
 const ContactCard = ({ children, className = "" }) => (
@@ -411,6 +413,24 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
   );
 };
 
+/* The dean saved from the School / Admin dashboard replaces the built-in dean card. A different
+   person keeps the office address and phone but not the previous dean's email. */
+const withSavedDean = (data, dean) => {
+  if (!data?.deanInfo || !dean?.name) return data;
+  const samePerson = data.deanInfo.name?.trim().toLowerCase() === dean.name.toLowerCase();
+  const card = deanCardProps(dean);
+  return {
+    ...data,
+    deanInfo: {
+      ...data.deanInfo,
+      name: card.name,
+      title: card.title || data.deanInfo.title,
+      image: card.image || (samePerson ? data.deanInfo.image : ""),
+      email: samePerson ? data.deanInfo.email : "",
+    },
+  };
+};
+
 // Dynamic Contact Page Component
 const ContactPage = () => {
   const { shortCode } = useParams();
@@ -422,8 +442,11 @@ const ContactPage = () => {
       setLoading(true);
       try {
         const schoolCode = (shortCode || "SOICT").toUpperCase();
-        const module = await import(`../../Data/schools/${schoolCode}/contact.jsx`);
-        setContactData(module.contactData);
+        const [module, schoolRow] = await Promise.all([
+          import(`../../Data/schools/${schoolCode}/contact.jsx`),
+          fetchSchoolWithin(schoolCode),
+        ]);
+        setContactData(withSavedDean(module.contactData, normalizeHomePage(schoolRow?.content?.homePage)?.dean));
       } catch (err) {
         try {
           const fallback = await import("../../Data/schools/SOICT/contact.jsx");

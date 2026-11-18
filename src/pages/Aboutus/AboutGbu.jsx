@@ -68,14 +68,15 @@ const Button = ({ children, className = "", size = "md", variant = "primary", ..
   };
 
   const variantClasses = {
-    primary: "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl",
+    primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow-md",
     secondary: "bg-white text-gray-900 border-2 border-gray-200 hover:border-gray-300 shadow-md hover:shadow-lg",
+    outline: "bg-white text-blue-700 border border-blue-200 hover:bg-blue-600 hover:text-white hover:border-blue-600",
     ghost: "bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900"
   };
 
   return (
     <button
-      className={`inline-flex items-center justify-center font-medium rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/30 ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
+      className={`inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-500/30 ${sizeClasses[size]} ${variantClasses[variant] || variantClasses.primary} ${className}`}
       {...props}
     >
       {children}
@@ -86,7 +87,7 @@ const Button = ({ children, className = "", size = "md", variant = "primary", ..
 // Enhanced Card component with hover effects
 const Card = ({ children, className = "", hover = true, ...props }) => (
   <div
-    className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50 border-solid transition-all duration-300${hover ? 'hover:shadow-2xl hover:scale-105 hover:bg-white/90' : ''} ${className}`}
+    className={`bg-white rounded-2xl shadow-sm border border-slate-200 transition-all duration-300 ${hover ? "hover:-translate-y-1 hover:border-blue-200 hover:shadow-md" : ""} ${className}`}
     {...props}
   >
     {children}
@@ -154,10 +155,10 @@ const aboutData = {
   // Values are injected from the university-stats source at render time; only
   // the icons and colours are configured here. See buildStatistics() below.
   statisticsMeta: [
-    { icon: MapPin, statKey: "acres_campus", title: "Acres Campus", iconColor: "#3b82f6" },
-    { icon: Users, statKey: "students", title: "Students", iconColor: "#10b981" },
-    { icon: Award, statKey: "faculty_members", title: "Faculty Members", iconColor: "#8b5cf6" },
-    { icon: BookOpen, statKey: "programs", title: "Programs", iconColor: "#f97316" },
+    { icon: MapPin, statKey: "acres_campus", title: "Acres Campus", iconColor: "#2563eb" },
+    { icon: Users, statKey: "students", title: "Students", iconColor: "#2563eb" },
+    { icon: Award, statKey: "faculty_members", title: "Faculty Members", iconColor: "#2563eb" },
+    { icon: BookOpen, statKey: "programs", title: "Programs", iconColor: "#2563eb" },
   ],
 
   overview: {
@@ -399,18 +400,18 @@ const AboutGbu = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
+      <div className="min-h-screen bg-white">
         {/* Hero Section */}
         <BannerSection
           title={aboutData.hero.title}
           subtitle={aboutData.hero.subtitle}
-          bgTheme={2}
+          bgTheme={11}
         />
 
         {/* Statistics Section */}
         <StatsCard stats={statistics} />
         {/* Overview Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-gray-50 to-white">
+        <section className="py-6 sm:py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
               <div className="order-2 md:order-1">
@@ -418,9 +419,8 @@ const AboutGbu = () => {
                   <img
                     src={aboutData.overview.image}
                     alt="Gautam Buddha University Campus"
-                    className="rounded-2xl shadow-xl w-full h-72 md:h-80 object-cover transform hover:scale-105 transition-transform duration-500"
+                    className="rounded-2xl shadow-md ring-1 ring-slate-200 w-full h-72 md:h-80 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                 </div>
               </div>
               <div className="order-1 md:order-2">
@@ -428,7 +428,7 @@ const AboutGbu = () => {
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Est. 2008
                 </Badge>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 leading-tight">
                   {aboutData.overview.title}
                 </h2>
                 <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
@@ -446,14 +446,14 @@ const AboutGbu = () => {
         </section>
 
         {/* Vision & Mission Section */}
-        <section className="py-6 sm:py-8 bg-slate-50/70 border-y border-slate-100/80">
+        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
               {/* Vision Card */}
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 p-6 sm:p-8 flex flex-col justify-between group">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">
                       {renderIcon(aboutData.vision.icon, "w-6 h-6")}
                     </div>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
@@ -467,10 +467,10 @@ const AboutGbu = () => {
               </div>
 
               {/* Mission Card */}
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 p-6 sm:p-8 flex flex-col justify-between group">
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">
                       {renderIcon(aboutData.mission.icon, "w-6 h-6")}
                     </div>
                     <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
@@ -485,7 +485,7 @@ const AboutGbu = () => {
                   <ul className="space-y-3">
                     {aboutData.mission.points.map((point, index) => (
                       <li key={index} className="flex items-start group/item">
-                        <div className="w-5 h-5 rounded-full bg-emerald-100/80 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 mr-3">
+                        <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 flex items-center justify-center shrink-0 mt-0.5 mr-3">
                           <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                         </div>
                         <span className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
@@ -501,27 +501,26 @@ const AboutGbu = () => {
         </section>
 
         {/* Governance Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-br from-white via-gray-50 to-white">
+        <section className="py-6 sm:py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900">
                 Governance & Organizational Leadership
               </h2>
+              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {aboutData.governance.map((leader, index) => (
                 <Link key={index} to={leader.link} className="block">
-                  <Card className="text-center group bg-white/60 backdrop-blur-md rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                  <Card className="text-center group h-full cursor-pointer">
                     <CardContent className="p-6">
                       <div className="mb-4 flex justify-center">
-                        <div className="p-3.5 rounded-full bg-gradient-to-br from-sky-300 to-blue-800 shadow-md transition-transform transform group-hover:scale-110">
-                          <div className="text-white">
-                            {renderIcon(leader.icon, "w-7 h-7")}
-                          </div>
+                        <div className="p-3.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
+                          {renderIcon(leader.icon, "w-7 h-7")}
                         </div>
                       </div>
-                      <h3 className="font-semibold text-gray-900 text-lg mb-1">{leader.title}</h3>
+                      <h3 className="font-semibold text-slate-900 text-lg mb-1 transition-colors group-hover:text-blue-700">{leader.title}</h3>
                       <p className="text-gray-600 text-sm">{leader.subtitle}</p>
                     </CardContent>
                   </Card>
@@ -532,26 +531,27 @@ const AboutGbu = () => {
         </section>
 
         {/* Schools Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
                 Academic Schools & Programs
               </h2>
+              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
               {aboutData.schools.map((school, index) => (
                 <Link key={index} to={school.link} className="block">
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 hover:scale-105 h-32 flex flex-col justify-center">
+                  <Card className="group cursor-pointer h-32 flex flex-col justify-center">
                     <CardContent className="p-4 text-center flex flex-col items-center justify-center">
                       <div className="mb-2.5 flex justify-center">
-                        <div className="p-2.5 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
+                        <div className="p-2.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
                           {renderIcon(school.icon, "w-5 h-5")}
                         </div>
                       </div>
 
-                      <h3 className={`font-bold text-gray-900 leading-tight ${school.name.length > 22 ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
+                      <h3 className={`font-bold text-slate-900 leading-tight transition-colors group-hover:text-blue-700 ${school.name.length > 22 ? 'text-xs sm:text-sm' : 'text-sm sm:text-base'}`}>
                         {school.name}
                       </h3>
                     </CardContent>
@@ -563,25 +563,25 @@ const AboutGbu = () => {
         </section>
 
         {/* Hostel Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-amber-50 to-orange-50">
+        <section className="py-6 sm:py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="space-y-4">
-                <Badge color="orange" className="mb-1">
+                <Badge color="blue" className="mb-1">
                   <Home className="w-4 h-4 mr-2" />
                   Residential Life
                 </Badge>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-900 mb-4 leading-tight">
                   Hostel & Residential Experience
                 </h2>
 
                 <div className="space-y-2.5">
                   {aboutData.hostelFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-center p-3 bg-white/70 rounded-xl backdrop-blur-sm shadow-sm border border-orange-100/80">
-                      <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full text-white mr-3 shrink-0 shadow-sm">
+                    <div key={index} className="group flex items-center p-3 bg-slate-50 rounded-xl border border-slate-200 transition hover:border-blue-200 hover:bg-white hover:shadow-sm">
+                      <div className="p-2 rounded-full mr-3 shrink-0 bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
                         {renderIcon(feature.icon, "w-4 h-4")}
                       </div>
-                      <span className="text-xs sm:text-sm lg:text-base text-gray-800 font-semibold leading-snug">{feature.text}</span>
+                      <span className="text-xs sm:text-sm lg:text-base text-slate-800 font-semibold leading-snug">{feature.text}</span>
                     </div>
                   ))}
                 </div>
@@ -589,14 +589,14 @@ const AboutGbu = () => {
 
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3">
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
                     <img
                       src="/assets/hostels.jpg"
                       alt="GBU Hostel Building Overview"
                       className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
                     <img
                       src="/assets/hostel 1.jpg"
                       alt="GBU Hostel Residence Block"
@@ -605,14 +605,14 @@ const AboutGbu = () => {
                   </div>
                 </div>
                 <div className="space-y-3 pt-4">
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
                     <img
                       src="/assets/hostel 2.jpg"
                       alt="GBU Hostel Landscape & Greenery"
                       className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-2xl shadow-md border border-orange-200/60 group bg-white">
+                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
                     <img
                       src="/assets/hostel2.jpg"
                       alt="GBU Student Residential Complex"
@@ -626,8 +626,8 @@ const AboutGbu = () => {
         </section>
 
         {/* Meditation & Wellness Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-r from-green-100 via-blue-100 to-purple-100">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-white rounded-3xl shadow-lg p-6 md:p-8">
+        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100 px-4">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
             <div className="flex items-center justify-center group">
               <img
                 src="/assets/meditation.jpg"
@@ -636,9 +636,9 @@ const AboutGbu = () => {
               />
             </div>
 
-            <Card className="shadow-none bg-transparent">
+            <Card hover={false} className="shadow-none border-0 bg-transparent">
               <CardContent className="p-4 md:p-6">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">
                   Meditation & Wellness Center
                 </h2>
 
@@ -649,7 +649,7 @@ const AboutGbu = () => {
                     { icon: "Leaf", label: "Wellness" }
                   ].map((item, index) => (
                     <div key={index} className="text-center md:text-left">
-                      <div className="p-2.5 bg-gradient-to-r from-green-600 to-teal-700 rounded-full text-white mb-2 mx-auto md:mx-0 w-10 h-10 flex items-center justify-center shadow-md">
+                      <div className="p-2.5 bg-blue-50 text-blue-700 ring-1 ring-blue-100 rounded-full mb-2 mx-auto md:mx-0 w-10 h-10 flex items-center justify-center">
                         {renderIcon(item.icon, "w-5 h-5")}
                       </div>
                       <p className="text-xs sm:text-sm text-gray-700 font-medium">{item.label}</p>
@@ -665,7 +665,7 @@ const AboutGbu = () => {
 
                 <div className="text-center md:text-left">
                   <Link to="/campus-life/meditation-center">
-                    <Button className="group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg">
+                    <Button className="group/btn gap-2">
                       Explore Wellness Programs
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Button>
@@ -680,20 +680,21 @@ const AboutGbu = () => {
         <section className="py-6 sm:py-8 bg-white text-gray-800">
           <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
                 Sports & Recreation
               </h2>
+              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-6">
               {aboutData.sportsFeatures.map((sport, index) => (
                 <Card
                   key={index}
-                  className="bg-white border border-gray-200 border-solid shadow-sm hover:shadow-md transition-all duration-300 group rounded-lg"
+                  className="group"
                 >
                   <CardContent className="p-6 text-center">
                     <div className="mb-4 flex justify-center">
-                      <div className="p-3 bg-purple-100 text-purple-600 rounded-full group-hover:scale-110 transition-transform duration-300">
+                      <div className="p-3 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
                         {renderIcon(sport.icon, "w-6 h-6")}
                       </div>
                     </div>
@@ -711,7 +712,7 @@ const AboutGbu = () => {
                 <Button
                   variant="outline"
                   size="md"
-                  className="group border-purple-500 border-[1px] border-solid text-purple-600 hover:bg-purple-50 transition-all"
+                  className="group"
                 >
                   Explore Sports Programs
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -722,26 +723,26 @@ const AboutGbu = () => {
         </section>
 
         {/* Student Life & Community */}
-        <section className="py-6 sm:py-8 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-pink-100/30 to-purple-100/30"></div>
+        <section className="py-6 sm:py-8 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 relative z-10">
             <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
                 Student Life & Community
               </h2>
+              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {aboutData.studentLife.map((activity, index) => (
                 <Link key={index} to={activity.link} className="block">
-                  <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white/70 backdrop-blur-sm cursor-pointer">
+                  <Card className="group h-full cursor-pointer">
                     <CardContent className="p-6 text-center">
                       <div className="mb-4 flex justify-center">
-                        <div className="p-3.5 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white group-hover:scale-110 transition-transform duration-300">
+                        <div className="p-3.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
                           {renderIcon(activity.icon, "w-6 h-6")}
                         </div>
                       </div>
-                      <h3 className="font-bold text-gray-900 text-base group-hover:text-purple-600 transition-colors">
+                      <h3 className="font-bold text-slate-900 text-base group-hover:text-blue-700 transition-colors">
                         {activity.title}
                       </h3>
                     </CardContent>

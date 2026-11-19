@@ -1,10 +1,11 @@
 {
-  "total_courses_count": 166,
+  "total_courses_count": 180,
   "schools": [
     "SOBT",
     "SOE",
     "SOICT",
-    "SOL"
+    "SOL",
+    "SOM"
   ],
   "courses": [
     {
@@ -1666,6 +1667,146 @@
       "size_bytes": 1336287,
       "size_kb": 1304.97,
       "size_mb": 1.27
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "bba-mba-dual-degree-structure-2025.pdf",
+      "web_url": "/courses/som/business-management/bba-mba-dual-degree-structure-2025.pdf",
+      "size_bytes": 531217,
+      "size_kb": 518.77,
+      "size_mb": 0.51
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "bba-mba-dual-degree-syllabus-2025.pdf",
+      "web_url": "/courses/som/business-management/bba-mba-dual-degree-syllabus-2025.pdf",
+      "size_bytes": 3579264,
+      "size_kb": 3495.38,
+      "size_mb": 3.41
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "bcom-hons-structure-2023.pdf",
+      "web_url": "/courses/som/business-management/bcom-hons-structure-2023.pdf",
+      "size_bytes": 261108,
+      "size_kb": 254.99,
+      "size_mb": 0.25
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "bcom-hons-syllabus-2025.pdf",
+      "web_url": "/courses/som/business-management/bcom-hons-syllabus-2025.pdf",
+      "size_bytes": 1760141,
+      "size_kb": 1718.89,
+      "size_mb": 1.68
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-business-analytics-brochure.pdf",
+      "web_url": "/courses/som/business-management/mba-business-analytics-brochure.pdf",
+      "size_bytes": 937086,
+      "size_kb": 915.12,
+      "size_mb": 0.89
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-business-analytics-outline-2025.pdf",
+      "web_url": "/courses/som/business-management/mba-business-analytics-outline-2025.pdf",
+      "size_bytes": 23045924,
+      "size_kb": 22505.79,
+      "size_mb": 21.98
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-business-analytics-structure.pdf",
+      "web_url": "/courses/som/business-management/mba-business-analytics-structure.pdf",
+      "size_bytes": 143390,
+      "size_kb": 140.03,
+      "size_mb": 0.14
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-course-outline-2025.pdf",
+      "web_url": "/courses/som/business-management/mba-course-outline-2025.pdf",
+      "size_bytes": 10462261,
+      "size_kb": 10217.05,
+      "size_mb": 9.98
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-executive-brochure.pdf",
+      "web_url": "/courses/som/business-management/mba-executive-brochure.pdf",
+      "size_bytes": 3002336,
+      "size_kb": 2931.97,
+      "size_mb": 2.86
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-executive-outline-2025.pdf",
+      "web_url": "/courses/som/business-management/mba-executive-outline-2025.pdf",
+      "size_bytes": 2913868,
+      "size_kb": 2845.57,
+      "size_mb": 2.78
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-executive-structure-2025.pdf",
+      "web_url": "/courses/som/business-management/mba-executive-structure-2025.pdf",
+      "size_bytes": 158180,
+      "size_kb": 154.47,
+      "size_mb": 0.15
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "mba-structure-2023.pdf",
+      "web_url": "/courses/som/business-management/mba-structure-2023.pdf",
+      "size_bytes": 352598,
+      "size_kb": 344.33,
+      "size_mb": 0.34
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "phd-business-management-outline-2025.pdf",
+      "web_url": "/courses/som/business-management/phd-business-management-outline-2025.pdf",
+      "size_bytes": 162204,
+      "size_kb": 158.4,
+      "size_mb": 0.15
+    },
+    {
+      "school_code": "SOM",
+      "school_name": "School of Management",
+      "department": "business-management",
+      "filename": "phd-business-management-structure-2025.pdf",
+      "web_url": "/courses/som/business-management/phd-business-management-structure-2025.pdf",
+      "size_bytes": 162188,
+      "size_kb": 158.39,
+      "size_mb": 0.15
     }
   ]
 }

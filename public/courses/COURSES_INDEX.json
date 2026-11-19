@@ -1,5 +1,5 @@
 {
-  "total_courses_count": 161,
+  "total_courses_count": 160,
   "schools": [
     "SOBT",
     "SOE",
@@ -295,16 +295,6 @@
       "size_bytes": 4347109,
       "size_kb": 4245.22,
       "size_mb": 4.15
-    },
-    {
-      "school_code": "SOE",
-      "school_name": "School of Engineering",
-      "department": "automobile",
-      "filename": "btech-automobile-structure.pdf",
-      "web_url": "/courses/soe/automobile/btech-automobile-structure.pdf",
-      "size_bytes": 229938,
-      "size_kb": 224.55,
-      "size_mb": 0.22
     },
     {
       "school_code": "SOE",

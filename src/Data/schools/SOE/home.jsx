@@ -201,7 +201,7 @@ As an academic community, the school is committed to the belief that expanding o
           image:
             "https://images.unsplash.com/photo-1505842465776-3acb1f4a0a94?w=600&h=400&fit=crop",
           gradient: "from-blue-500 to-blue-700",
-          link: "/schools/SOE/departments/automobile",
+          link: "/schools/SOE/departments/architecture",
         },
       ],
     },

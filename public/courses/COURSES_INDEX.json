@@ -1,9 +1,10 @@
 {
-  "total_courses_count": 160,
+  "total_courses_count": 166,
   "schools": [
     "SOBT",
     "SOE",
-    "SOICT"
+    "SOICT",
+    "SOL"
   ],
   "courses": [
     {
@@ -1605,6 +1606,66 @@
       "size_bytes": 1091639,
       "size_kb": 1066.05,
       "size_mb": 1.04
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "ba-llb-structure-2021.pdf",
+      "web_url": "/courses/sol/law-governance/ba-llb-structure-2021.pdf",
+      "size_bytes": 53362521,
+      "size_kb": 52111.84,
+      "size_mb": 50.89
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "bci-approval-2023.pdf",
+      "web_url": "/courses/sol/law-governance/bci-approval-2023.pdf",
+      "size_bytes": 2049266,
+      "size_kb": 2001.24,
+      "size_mb": 1.95
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "bci-approval-2026-27.pdf",
+      "web_url": "/courses/sol/law-governance/bci-approval-2026-27.pdf",
+      "size_bytes": 1036242,
+      "size_kb": 1011.96,
+      "size_mb": 0.99
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "bci-letter-3-august-2022.pdf",
+      "web_url": "/courses/sol/law-governance/bci-letter-3-august-2022.pdf",
+      "size_bytes": 1902189,
+      "size_kb": 1857.61,
+      "size_mb": 1.81
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "llm-structure-syllabus.pdf",
+      "web_url": "/courses/sol/law-governance/llm-structure-syllabus.pdf",
+      "size_bytes": 1191669,
+      "size_kb": 1163.74,
+      "size_mb": 1.14
+    },
+    {
+      "school_code": "SOL",
+      "school_name": "School of Law, Justice & Governance",
+      "department": "law-governance",
+      "filename": "phd-law-structure.pdf",
+      "web_url": "/courses/sol/law-governance/phd-law-structure.pdf",
+      "size_bytes": 1336287,
+      "size_kb": 1304.97,
+      "size_mb": 1.27
     }
   ]
 }

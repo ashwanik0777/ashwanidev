@@ -112,11 +112,15 @@ export const departmentLayoutData = {
             "World Civilizations",
             "Archival Research"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "/courses/sohss/history-civilization/ba-ma-history-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "/courses/sohss/history-civilization/ba-ma-history-structure.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/history-civilization/history-dept-profile.pdf"
             }
         ]
     },
@@ -135,15 +139,19 @@ export const departmentLayoutData = {
             "Sanskrit Hermeneutics",
             "Cultural Heritage"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "/courses/sohss/history-civilization/ma-hindu-studies-structure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                session: "Course Structure (May 2023)",
+                url: "/courses/sohss/history-civilization/ma-hindu-studies-structure-2023.pdf"
             },
             {
                 session: "Detailed Syllabus",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
+                url: "/courses/sohss/history-civilization/ma-hindu-studies-syllabus-detail.pdf"
+            },
+            {
+                session: "Centre Details",
+                url: "/courses/sohss/history-civilization/hindu-studies-centre-details.pdf"
             }
         ]
     },
@@ -162,34 +170,15 @@ export const departmentLayoutData = {
             "Refugee & Humanitarian Law",
             "Fieldwork Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
+        syllabusUrl: "/courses/sohss/history-civilization/ma-human-rights-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
-            }
-        ]
-    },
-    {
-        id: "mlibisc-library-science",
-        title: "M.Lib.I.Sc. (Master of Library and Information Science)",
-        level: "PG",
-        duration: "1-2 Years",
-        intake: "30 Students",
-        description: "Digital library architectures, metadata standards, information retrieval systems, research metrics, and database indexing.",
-        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-indigo-600 to-teal-700",
-        highlights: [
-            "Digital Library Software",
-            "Knowledge Organization (DDC/UDC)",
-            "Information Retrieval",
-            "Central Library Practicum"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview",
-        syllabus: [
+                url: "/courses/sohss/history-civilization/ma-human-rights-structure.pdf"
+            },
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview"
+                session: "Centre Brochure",
+                url: "/courses/sohss/history-civilization/human-rights-centre-brochure.pdf"
             }
         ]
     }
@@ -256,29 +245,7 @@ export const departmentLayoutData = {
     { numberText: "25+", subtitle: "Publications" },
     { numberText: "8+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Prachi Gupta",
-      year: "M.A. History 2024",
-      achievement: "UGC NET Qualified, Selected for Ph.D. at JNU",
-      image: "https://randomuser.me/api/portraits/women/31.jpg",
-      skills: ["Modern History", "Archival Research", "Academic Writing", "Source Analysis"],
-    },
-    {
-      name: "Deepak Verma",
-      year: "B.A. (Hons.) History 2024",
-      achievement: "Gold Medalist, Selected for UPSC Civil Services Preparation",
-      image: "https://randomuser.me/api/portraits/men/41.jpg",
-      skills: ["Indian History", "World History", "Critical Analysis", "Essay Writing"],
-    },
-    {
-      name: "Shruti Yadav",
-      year: "M.A. History 2024",
-      achievement: "Best Paper Award at National History Congress, Published in ICHR Journal",
-      image: "https://randomuser.me/api/portraits/women/46.jpg",
-      skills: ["Cultural History", "Heritage Studies", "Research Methodology", "Historiography"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Academic Excellence",

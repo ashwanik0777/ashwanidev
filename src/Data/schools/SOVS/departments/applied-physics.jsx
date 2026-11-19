@@ -54,34 +54,46 @@ export const departmentLayoutData = {
       title: "B.Sc. Physical Sciences",
       level: "Undergraduate",
       duration: "3-4 Years",
-      intake: "50 Students",
-      description: "Foundational undergraduate curriculum spanning classical mechanics, electromagnetism, wave optics, modern physics, and experimental laboratory methods.",
+      intake: "40 Students",
+      description: "Broad foundational program integrating physics principles, chemical dynamics, mathematical techniques, and computational science.",
       image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-600 to-indigo-700",
+      gradient: "from-indigo-600 to-blue-700",
       highlights: [
-        "Classical & Quantum Mechanics",
-        "Electromagnetic Theory",
-        "Wave Optics & Lasers",
-        "Modern Physics Labs",
+        "Mechanics & Electromagnetism",
+        "Optics & Modern Physics",
+        "Chemical Dynamics",
+        "Laboratory Instrumentation",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-physics/bsc-physical-sciences-structure-syllabus-2023.pdf",
+      syllabus: [
+        {
+          session: "Course Structure & Syllabus",
+          url: "/courses/sovs/applied-physics/bsc-physical-sciences-structure-syllabus-2023.pdf"
+        }
+      ],
     },
     {
       id: "bsc-hons-physics-research",
       title: "B.Sc. (Hons.) Physics / with Research",
       level: "Undergraduate",
-      duration: "4 Years",
+      duration: "3-4 Years",
       intake: "40 Students",
-      description: "NEP-aligned honors physics degree emphasizing solid state physics, nuclear physics, quantum mechanics, and dedicated undergraduate research.",
+      description: "NEP-aligned honours degree focusing on quantum theory, solid state physics, nuclear physics, and research-based laboratory projects.",
       image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-600 to-blue-700",
+      gradient: "from-blue-600 to-indigo-700",
       highlights: [
+        "Quantum Mechanics",
         "Solid State Physics",
         "Nuclear & Particle Physics",
-        "Computational Physics",
         "Honors Research Project",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-physics/bsc-hons-physics-structure-syllabus.pdf",
+      syllabus: [
+        {
+          session: "Course Structure & Syllabus",
+          url: "/courses/sovs/applied-physics/bsc-hons-physics-structure-syllabus.pdf"
+        }
+      ],
     },
     {
       id: "msc-physics-specializations",
@@ -98,7 +110,25 @@ export const departmentLayoutData = {
         "Photonics & Lasers",
         "Quantum Computing & Info",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-physics/msc-physics-astrophysics-structure.pdf",
+      syllabus: [
+        {
+          session: "Astrophysics Structure",
+          url: "/courses/sovs/applied-physics/msc-physics-astrophysics-structure.pdf"
+        },
+        {
+          session: "Energy Studies Structure",
+          url: "/courses/sovs/applied-physics/msc-physics-energy-studies-structure.pdf"
+        },
+        {
+          session: "Photonics Structure",
+          url: "/courses/sovs/applied-physics/msc-physics-photonics-structure.pdf"
+        },
+        {
+          session: "Quantum Information Structure",
+          url: "/courses/sovs/applied-physics/msc-physics-quantum-structure.pdf"
+        }
+      ],
     },
     {
       id: "msc-physics-batch",
@@ -115,7 +145,13 @@ export const departmentLayoutData = {
         "Statistical Physics",
         "Master Thesis Project",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-physics/msc-physics-cbcs-syllabus-2024-26.pdf",
+      syllabus: [
+        {
+          session: "CBCS Syllabus (2024-26)",
+          url: "/courses/sovs/applied-physics/msc-physics-cbcs-syllabus-2024-26.pdf"
+        }
+      ],
     },
     {
       id: "phd-applied-physics",
@@ -132,7 +168,25 @@ export const departmentLayoutData = {
         "Peer-Reviewed Publications",
         "Ph.D. Defense",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-physics/phd-physics-structure-syllabus-2023.pdf",
+      syllabus: [
+        {
+          session: "Course Structure & Syllabus",
+          url: "/courses/sovs/applied-physics/phd-physics-structure-syllabus-2023.pdf"
+        },
+        {
+          session: "About Department",
+          url: "/courses/sovs/applied-physics/physics-about-department.pdf"
+        },
+        {
+          session: "Department Academics",
+          url: "/courses/sovs/applied-physics/physics-academics.pdf"
+        },
+        {
+          session: "Admission Booklet",
+          url: "/courses/sovs/applied-physics/physics-admission-booklet-2023-24.pdf"
+        }
+      ],
     },
   ],
 };

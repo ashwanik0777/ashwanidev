@@ -7,7 +7,6 @@ import {
   Calendar,
   Clock,
   ChevronDown,
-  Eye,
   Share2,
   BookOpen,
   AlertCircle,
@@ -496,10 +495,6 @@ const allYears = collectYears(mockNotices);
                   <div className="flex items-center text-sm text-gray-500 gap-2">
                     <Calendar size={14} />
                     {format(new Date(notice.date), "MMMM dd, yyyy")}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500 gap-2">
-                    <Eye size={14} />
-                    {notice.views}
                   </div>
                 </div>
               </div>

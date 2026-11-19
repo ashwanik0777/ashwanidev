@@ -1,0 +1,106 @@
+School,Department,Degree,Specialization,Batch,Type,Filename,Web URL,Size (KB),Original Program Name
+SOICT,CSE,BTECH,ai,2019-23,structure,btech-ai-structure-2019-23.pdf,/courses/soict/cse/btech-ai-structure-2019-23.pdf,6665.0,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2020-24,structure,btech-ai-structure-2020-24.pdf,/courses/soict/cse/btech-ai-structure-2020-24.pdf,3095.1,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2021-25,structure,btech-ai-structure-2021-25.pdf,/courses/soict/cse/btech-ai-structure-2021-25.pdf,4737.7,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2022-26,structure,btech-ai-structure-2022-26.pdf,/courses/soict/cse/btech-ai-structure-2022-26.pdf,3155.4,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2023-27,structure,btech-ai-structure-2023-27.pdf,/courses/soict/cse/btech-ai-structure-2023-27.pdf,2822.5,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2024-28,structure,btech-ai-structure-2024-28.pdf,/courses/soict/cse/btech-ai-structure-2024-28.pdf,275.5,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2025-29,structure,btech-ai-structure-2025-29.pdf,/courses/soict/cse/btech-ai-structure-2025-29.pdf,27701.8,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2026-30,structure,btech-ai-structure-2026-30.pdf,/courses/soict/cse/btech-ai-structure-2026-30.pdf,10937.0,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2023,syllabus,btech-ai-syllabus-2023.pdf,/courses/soict/cse/btech-ai-syllabus-2023.pdf,7452.4,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,ai,2025,syllabus,btech-ai-syllabus-2025.pdf,/courses/soict/cse/btech-ai-syllabus-2025.pdf,16536.2,B. Tech. Computer Science and Engineering with specialization in Artificial Intelligence
+SOICT,CSE,BTECH,,2019-23,structure,btech-cse-structure-2019-23.pdf,/courses/soict/cse/btech-cse-structure-2019-23.pdf,2979.4,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2020-24,structure,btech-cse-structure-2020-24.pdf,/courses/soict/cse/btech-cse-structure-2020-24.pdf,2276.1,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2021-25,structure,btech-cse-structure-2021-25.pdf,/courses/soict/cse/btech-cse-structure-2021-25.pdf,3940.6,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2022-26,structure,btech-cse-structure-2022-26.pdf,/courses/soict/cse/btech-cse-structure-2022-26.pdf,3229.9,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2023-27,structure,btech-cse-structure-2023-27.pdf,/courses/soict/cse/btech-cse-structure-2023-27.pdf,2929.7,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2024-28,structure,btech-cse-structure-2024-28.pdf,/courses/soict/cse/btech-cse-structure-2024-28.pdf,275.2,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2025-29,structure,btech-cse-structure-2025-29.pdf,/courses/soict/cse/btech-cse-structure-2025-29.pdf,40937.0,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2026-30,structure,btech-cse-structure-2026-30.pdf,/courses/soict/cse/btech-cse-structure-2026-30.pdf,33515.7,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2023,syllabus,btech-cse-syllabus-2023.pdf,/courses/soict/cse/btech-cse-syllabus-2023.pdf,2790.4,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,,2025-29,syllabus,btech-cse-syllabus-2025-29.pdf,/courses/soict/cse/btech-cse-syllabus-2025-29.pdf,18013.6,B. Tech. Computer Science and Engineering
+SOICT,CSE,BTECH,self-finance,2019-23,structure,btech-self-finance-structure-2019-23.pdf,/courses/soict/cse/btech-self-finance-structure-2019-23.pdf,2853.9,B. Tech. Computer Science and Engineering (Under Self Finance Scheme)
+SOICT,CSE,BTECH,self-finance,2020-24,structure,btech-self-finance-structure-2020-24.pdf,/courses/soict/cse/btech-self-finance-structure-2020-24.pdf,2963.1,B. Tech. Computer Science and Engineering (Under Self Finance Scheme)
+SOICT,CSE,BTECH,self-finance,2021-25,structure,btech-self-finance-structure-2021-25.pdf,/courses/soict/cse/btech-self-finance-structure-2021-25.pdf,2634.0,B. Tech. Computer Science and Engineering (Under Self Finance Scheme)
+SOICT,CSE,BTECH,self-finance,2022-26,structure,btech-self-finance-structure-2022-26.pdf,/courses/soict/cse/btech-self-finance-structure-2022-26.pdf,3006.8,B. Tech. Computer Science and Engineering (Under Self Finance Scheme)
+SOICT,CSE,BTECH,self-finance,2023,syllabus,btech-self-finance-syllabus-2023.pdf,/courses/soict/cse/btech-self-finance-syllabus-2023.pdf,2792.4,B. Tech. Computer Science and Engineering (Under Self Finance Scheme)
+SOICT,CSE,BTECH,ml,2021-25,structure,btech-ml-structure-2021-25.pdf,/courses/soict/cse/btech-ml-structure-2021-25.pdf,6249.2,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ml,2022-26,structure,btech-ml-structure-2022-26.pdf,/courses/soict/cse/btech-ml-structure-2022-26.pdf,3795.2,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ml,2023-27,structure,btech-ml-structure-2023-27.pdf,/courses/soict/cse/btech-ml-structure-2023-27.pdf,2006.9,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ml,2024-28,structure,btech-ml-structure-2024-28.pdf,/courses/soict/cse/btech-ml-structure-2024-28.pdf,291.9,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ml,2023,syllabus,btech-ml-syllabus-2023.pdf,/courses/soict/cse/btech-ml-syllabus-2023.pdf,2618.9,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ml,2024,syllabus,btech-ml-syllabus-2024.pdf,/courses/soict/cse/btech-ml-syllabus-2024.pdf,6078.4,B. Tech. Computer Science and Engineering with specialization in Machine Learning
+SOICT,CSE,BTECH,ds,2021-25,structure,btech-ds-structure-2021-25.pdf,/courses/soict/cse/btech-ds-structure-2021-25.pdf,3824.9,B.Tech. Computer Science and Engineering with specialization in Data Science
+SOICT,CSE,BTECH,ds,2022-26,structure,btech-ds-structure-2022-26.pdf,/courses/soict/cse/btech-ds-structure-2022-26.pdf,3301.3,B.Tech. Computer Science and Engineering with specialization in Data Science
+SOICT,CSE,BTECH,ds,2023-27,structure,btech-ds-structure-2023-27.pdf,/courses/soict/cse/btech-ds-structure-2023-27.pdf,2098.6,B.Tech. Computer Science and Engineering with specialization in Data Science
+SOICT,CSE,BTECH,ds,2024-28,structure,btech-ds-structure-2024-28.pdf,/courses/soict/cse/btech-ds-structure-2024-28.pdf,285.9,B.Tech. Computer Science and Engineering with specialization in Data Science
+SOICT,CSE,BTECH,ds,2023,syllabus,btech-ds-syllabus-2023.pdf,/courses/soict/cse/btech-ds-syllabus-2023.pdf,2710.1,B.Tech. Computer Science and Engineering with specialization in Data Science
+SOICT,CSE,BTECH,cyber,2021-25,structure,btech-cyber-structure-2021-25.pdf,/courses/soict/cse/btech-cyber-structure-2021-25.pdf,3418.0,B. Tech. Computer Science and Engineering with specialization in Cyber Security
+SOICT,CSE,BTECH,cyber,2022-26,structure,btech-cyber-structure-2022-26.pdf,/courses/soict/cse/btech-cyber-structure-2022-26.pdf,381.9,B. Tech. Computer Science and Engineering with specialization in Cyber Security
+SOICT,CSE,BTECH,cyber,2023-27,structure,btech-cyber-structure-2023-27.pdf,/courses/soict/cse/btech-cyber-structure-2023-27.pdf,283.3,B. Tech. Computer Science and Engineering with specialization in Cyber Security
+SOICT,CSE,BTECH,cyber,2024-28,structure,btech-cyber-structure-2024-28.pdf,/courses/soict/cse/btech-cyber-structure-2024-28.pdf,285.3,B. Tech. Computer Science and Engineering with specialization in Cyber Security
+SOICT,CSE,BTECH,cyber,2023,syllabus,btech-cyber-syllabus-2023.pdf,/courses/soict/cse/btech-cyber-syllabus-2023.pdf,819.9,B. Tech. Computer Science and Engineering with specialization in Cyber Security
+SOICT,CSE,BTECH,iot,2021-25,structure,btech-iot-structure-2021-25.pdf,/courses/soict/cse/btech-iot-structure-2021-25.pdf,2581.5,B. Tech. Computer Science and Engineering with specialization in Internet of Things
+SOICT,CSE,INT-BTECH-MTECH,,2020-25,structure,int-btech-mtech-structure-2020-25.pdf,/courses/soict/cse/int-btech-mtech-structure-2020-25.pdf,1981.8,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2021-26,structure,int-btech-mtech-structure-2021-26.pdf,/courses/soict/cse/int-btech-mtech-structure-2021-26.pdf,1952.7,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2022-27,structure,int-btech-mtech-structure-2022-27.pdf,/courses/soict/cse/int-btech-mtech-structure-2022-27.pdf,1987.5,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2023-28,structure,int-btech-mtech-structure-2023-28.pdf,/courses/soict/cse/int-btech-mtech-structure-2023-28.pdf,1975.5,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2024-29,structure,int-btech-mtech-structure-2024-29.pdf,/courses/soict/cse/int-btech-mtech-structure-2024-29.pdf,275.1,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2025-30,structure,int-btech-mtech-structure-2025-30.pdf,/courses/soict/cse/int-btech-mtech-structure-2025-30.pdf,1730.5,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2026-31,structure,int-btech-mtech-structure-2026-31.pdf,/courses/soict/cse/int-btech-mtech-structure-2026-31.pdf,1757.3,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2023,syllabus,int-btech-mtech-syllabus-2023.pdf,/courses/soict/cse/int-btech-mtech-syllabus-2023.pdf,2779.0,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,,2025,syllabus,int-btech-mtech-syllabus-2025.pdf,/courses/soict/cse/int-btech-mtech-syllabus-2025.pdf,26227.9,5 Year Integrated B. Tech.-M. Tech. (CSE) with Specialization -
+SOICT,CSE,INT-BTECH-MTECH,ai,2023,structure,int-btech-mtech-ai-structure-2023.pdf,/courses/soict/cse/int-btech-mtech-ai-structure-2023.pdf,517.4,5 Year Integrated B. Tech.-M. Tech. (ICT)
+SOICT,CSE,MTECH,ai-robotics,2024-26,structure,mtech-ai-robotics-structure-2024-26.pdf,/courses/soict/cse/mtech-ai-robotics-structure-2024-26.pdf,268.5,M. Tech.. CSE (Specialization: Artificial Intelligence and Robotics)
+SOICT,CSE,MTECH,ai-robotics,2025-27,structure,mtech-ai-robotics-structure-2025-27.pdf,/courses/soict/cse/mtech-ai-robotics-structure-2025-27.pdf,11579.1,M. Tech.. CSE (Specialization: Artificial Intelligence and Robotics)
+SOICT,CSE,MTECH,ai-robotics,2026-28,structure,mtech-ai-robotics-structure-2026-28.pdf,/courses/soict/cse/mtech-ai-robotics-structure-2026-28.pdf,1689.9,M. Tech.. CSE (Specialization: Artificial Intelligence and Robotics)
+SOICT,CSE,MTECH,ai-robotics,2025,syllabus,mtech-ai-robotics-syllabus-2025.pdf,/courses/soict/cse/mtech-ai-robotics-syllabus-2025.pdf,10739.2,M. Tech.. CSE (Specialization: Artificial Intelligence and Robotics)
+SOICT,CSE,MTECH,ds,2022-24,structure,mtech-ds-structure-2022-24.pdf,/courses/soict/cse/mtech-ds-structure-2022-24.pdf,1295.6,M. Tech. CSE (Specialization: Data Science)
+SOICT,CSE,MTECH,ds,2024-26,structure,mtech-ds-structure-2024-26.pdf,/courses/soict/cse/mtech-ds-structure-2024-26.pdf,281.8,M. Tech. CSE (Specialization: Data Science)
+SOICT,CSE,MTECH,ds,2023,syllabus,mtech-ds-syllabus-2023.pdf,/courses/soict/cse/mtech-ds-syllabus-2023.pdf,1778.8,M. Tech. CSE (Specialization: Data Science)
+SOICT,CSE,MTECH,ds,2025,syllabus,mtech-ds-syllabus-2025.pdf,/courses/soict/cse/mtech-ds-syllabus-2025.pdf,10824.5,M. Tech. CSE (Specialization: Data Science)
+SOICT,CSE,MTECH,,2024-26,structure,mtech-cse-structure-2024-26.pdf,/courses/soict/cse/mtech-cse-structure-2024-26.pdf,267.3,M. Tech.. CSE (Specialization: Software Engineering)
+SOICT,CSE,MTECH,,2025,syllabus,mtech-cse-syllabus-2025.pdf,/courses/soict/cse/mtech-cse-syllabus-2025.pdf,10215.3,M. Tech.. CSE (Specialization: Software Engineering)
+SOICT,CSE,MTECH,working-prof,2026,structure,mtech-working-prof-structure-2026.pdf,/courses/soict/cse/mtech-working-prof-structure-2026.pdf,1967.3,M.Tech Computer Science and Engineering (for Working Professionals)
+SOICT,CSE,MTECH,working-prof,,syllabus,mtech-working-prof-syllabus.pdf,/courses/soict/cse/mtech-working-prof-syllabus.pdf,4562.4,M.Tech Computer Science and Engineering (for Working Professionals)
+SOICT,CSE,PHD,,,structure,phd-structure.pdf,/courses/soict/cse/phd-structure.pdf,114.0,Ph.D. (CSE)
+SOICT,IT,BCA,,2026-29,structure,bca-structure-2026-29.pdf,/courses/soict/it/bca-structure-2026-29.pdf,556.0,1. Bachelors in Computer Application (BCA)2026-20292025-20282024-20252021-20242020-20232019-2022
+SOICT,IT,BCA,,2025-28,structure,bca-structure-2025-28.pdf,/courses/soict/it/bca-structure-2025-28.pdf,3740.8,1. Bachelors in Computer Application (BCA)2026-20292025-20282024-20252021-20242020-20232019-2022
+SOICT,IT,BCA,,2024-25,structure,bca-structure-2024-25.pdf,/courses/soict/it/bca-structure-2024-25.pdf,513.0,1. Bachelors in Computer Application (BCA)2026-20292025-20282024-20252021-20242020-20232019-2022
+SOICT,IT,BCA,,2021-24,structure,bca-structure-2021-24.pdf,/courses/soict/it/bca-structure-2021-24.pdf,91.7,1. Bachelors in Computer Application (BCA)2026-20292025-20282024-20252021-20242020-20232019-2022
+SOICT,IT,BCA,,2019-22,structure,bca-structure-2019-22.pdf,/courses/soict/it/bca-structure-2019-22.pdf,91.8,1. Bachelors in Computer Application (BCA)2026-20292025-20282024-20252021-20242020-20232019-2022
+SOICT,IT,BTECH,,2026-30,structure,btech-it-structure-2026-30.pdf,/courses/soict/it/btech-it-structure-2026-30.pdf,671.5,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,BTECH,,2025-29,structure,btech-it-structure-2025-29.pdf,/courses/soict/it/btech-it-structure-2025-29.pdf,4269.8,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,BTECH,,2023-27,structure,btech-it-structure-2023-27.pdf,/courses/soict/it/btech-it-structure-2023-27.pdf,1588.9,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,BTECH,,2021-25,structure,btech-it-structure-2021-25.pdf,/courses/soict/it/btech-it-structure-2021-25.pdf,97.8,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,BTECH,,2019-23,structure,btech-it-structure-2019-23.pdf,/courses/soict/it/btech-it-structure-2019-23.pdf,95.9,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,BTECH,,2018-22,structure,btech-it-structure-2018-22.pdf,/courses/soict/it/btech-it-structure-2018-22.pdf,98.0,2. B. Tech. Information Technology2026-20302025-20292023-20272021-20252019-20232019-20232018-2022
+SOICT,IT,MCA,ds,2026-28,structure,mca-ds-structure-2026-28.pdf,/courses/soict/it/mca-ds-structure-2026-28.pdf,1066.1,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ds,2025-27,structure,mca-ds-structure-2025-27.pdf,/courses/soict/it/mca-ds-structure-2025-27.pdf,4129.9,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ds,2022,structure,mca-ds-structure-2022.pdf,/courses/soict/it/mca-ds-structure-2022.pdf,685.3,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ds,2021-23,structure,mca-ds-structure-2021-23.pdf,/courses/soict/it/mca-ds-structure-2021-23.pdf,97.6,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ds,2020-23,structure,mca-ds-structure-2020-23.pdf,/courses/soict/it/mca-ds-structure-2020-23.pdf,97.0,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ds,2019-22,structure,mca-ds-structure-2019-22.pdf,/courses/soict/it/mca-ds-structure-2019-22.pdf,92.9,7. M.C.A (Specialization: Data Science)2026-282025-272022-242021-20232020-20232019-2022
+SOICT,IT,MCA,ai,2026-28,structure,mca-ai-structure-2026-28.pdf,/courses/soict/it/mca-ai-structure-2026-28.pdf,816.9,8. M.C.A (Specialization: Artificial Intelligence)2026-20282025-20272024-20262021-20232020-20232019-2022
+SOICT,IT,MCA,ai,2025-27,structure,mca-ai-structure-2025-27.pdf,/courses/soict/it/mca-ai-structure-2025-27.pdf,4417.0,8. M.C.A (Specialization: Artificial Intelligence)2026-20282025-20272024-20262021-20232020-20232019-2022
+SOICT,IT,MCA,ai,2024-26,structure,mca-ai-structure-2024-26.pdf,/courses/soict/it/mca-ai-structure-2024-26.pdf,99.1,8. M.C.A (Specialization: Artificial Intelligence)2026-20282025-20272024-20262021-20232020-20232019-2022
+SOICT,IT,MCA,ai,2021-23,structure,mca-ai-structure-2021-23.pdf,/courses/soict/it/mca-ai-structure-2021-23.pdf,423.1,8. M.C.A (Specialization: Artificial Intelligence)2026-20282025-20272024-20262021-20232020-20232019-2022
+SOICT,ECE,BTECH,,2024-28,structure,btech-ece-structure-2024-28.pdf,/courses/soict/ece/btech-ece-structure-2024-28.pdf,3438.8,1. Bachelor of Technology (B.Tech) ECE2024-20282025-20292026-2030
+SOICT,ECE,BTECH,,2025-29,structure,btech-ece-structure-2025-29.pdf,/courses/soict/ece/btech-ece-structure-2025-29.pdf,2135.3,1. Bachelor of Technology (B.Tech) ECE2024-20282025-20292026-2030
+SOICT,ECE,BTECH,,2026-30,structure,btech-ece-structure-2026-30.pdf,/courses/soict/ece/btech-ece-structure-2026-30.pdf,2240.4,1. Bachelor of Technology (B.Tech) ECE2024-20282025-20292026-2030
+SOICT,ECE,BTECH,ai,2026,syllabus,btech-ece-ai-syllabus-2026.pdf,/courses/soict/ece/btech-ece-ai-syllabus-2026.pdf,826.3,1. Bachelor of Technology (B.Tech) ECE2024-20282025-20292026-2030
+SOICT,ECE,BTECH,ai,2025,syllabus,btech-ece-ai-syllabus-2025.pdf,/courses/soict/ece/btech-ece-ai-syllabus-2025.pdf,992.4,1. Bachelor of Technology (B.Tech) ECE2024-20282025-20292026-2030
+SOICT,ECE,BTECH,aiml,2026-30,structure,btech-ece-aiml-structure-2026-30.pdf,/courses/soict/ece/btech-ece-aiml-structure-2026-30.pdf,2240.4,2. Bachelor of Technology (B.Tech) ECE (AI & ML)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,aiml,2025-29,structure,btech-ece-aiml-structure-2025-29.pdf,/courses/soict/ece/btech-ece-aiml-structure-2025-29.pdf,2135.3,2. Bachelor of Technology (B.Tech) ECE (AI & ML)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,aiml,2024-28,structure,btech-ece-aiml-structure-2024-28.pdf,/courses/soict/ece/btech-ece-aiml-structure-2024-28.pdf,1989.5,2. Bachelor of Technology (B.Tech) ECE (AI & ML)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,aiml,2025-29,syllabus,btech-ece-aiml-syllabus-2025-29.pdf,/courses/soict/ece/btech-ece-aiml-syllabus-2025-29.pdf,992.4,2. Bachelor of Technology (B.Tech) ECE (AI & ML)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,aiml,2026-30,syllabus,btech-ece-aiml-syllabus-2026-30.pdf,/courses/soict/ece/btech-ece-aiml-syllabus-2026-30.pdf,826.3,2. Bachelor of Technology (B.Tech) ECE (AI & ML)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,vlsi,2026-30,structure,btech-ece-vlsi-structure-2026-30.pdf,/courses/soict/ece/btech-ece-vlsi-structure-2026-30.pdf,2240.4,3. Bachelor of Technology (B.Tech) ECE (VLSI Design)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,vlsi,2025-29,structure,btech-ece-vlsi-structure-2025-29.pdf,/courses/soict/ece/btech-ece-vlsi-structure-2025-29.pdf,2135.3,3. Bachelor of Technology (B.Tech) ECE (VLSI Design)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,vlsi,2024-28,structure,btech-ece-vlsi-structure-2024-28.pdf,/courses/soict/ece/btech-ece-vlsi-structure-2024-28.pdf,4065.3,3. Bachelor of Technology (B.Tech) ECE (VLSI Design)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,ai,2026-30,syllabus,btech-ece-ai-syllabus-2026-30.pdf,/courses/soict/ece/btech-ece-ai-syllabus-2026-30.pdf,826.3,3. Bachelor of Technology (B.Tech) ECE (VLSI Design)2026-20302025-20292024-2028
+SOICT,ECE,BTECH,ai,2025-29,syllabus,btech-ece-ai-syllabus-2025-29.pdf,/courses/soict/ece/btech-ece-ai-syllabus-2025-29.pdf,992.4,3. Bachelor of Technology (B.Tech) ECE (VLSI Design)2026-20302025-20292024-2028
+SOICT,ECE,INT-BTECH-MTECH,,2022-27,structure,int-btech-mtech-structure-2022-27.pdf,/courses/soict/ece/int-btech-mtech-structure-2022-27.pdf,3482.5,4. Five Year Integrated B.Tech.-M.Tech (ECE)2022-2027
+SOICT,ECE,MTECH,wcn,2026-28,structure,mtech-ece-wcn-structure-2026-28.pdf,/courses/soict/ece/mtech-ece-wcn-structure-2026-28.pdf,213.5,5. M.Tech. ECE (Specialization: Wireless Communication and Networks)2026-2028
+SOICT,ECE,MTECH,vlsi,2026-28,structure,mtech-ece-vlsi-structure-2026-28.pdf,/courses/soict/ece/mtech-ece-vlsi-structure-2026-28.pdf,212.3,6. M.Tech. ECE (Specialization: VLSI Design)2026-2028
+SOICT,ECE,MTECH,iot,2026-28,structure,mtech-ece-iot-structure-2026-28.pdf,/courses/soict/ece/mtech-ece-iot-structure-2026-28.pdf,213.9,7. M.Tech. ECE (Specialization: IoT and Robotics)2026-2028

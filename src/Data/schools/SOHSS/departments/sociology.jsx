@@ -108,11 +108,15 @@ export const departmentLayoutData = {
             "Sociology of Development",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview",
+        syllabusUrl: "/courses/sohss/sociology/ma-sociology-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/15RDIbNvUXzJgILnHnkDKQnT99XMZnSvd/preview"
+                session: "Course Structure (2025)",
+                url: "/courses/sohss/sociology/ma-sociology-structure-2025.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/sociology/sociology-dept-profile.pdf"
             }
         ]
     }
@@ -132,22 +136,7 @@ export const departmentLayoutData = {
     { numberText: "35+", subtitle: "Publications" },
     { numberText: "8+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Meera Kumari",
-      year: "M.A. Sociology 2023",
-      achievement: "UGC-NET qualified, pursuing Ph.D. at JNU",
-      image: "https://randomuser.me/api/portraits/women/56.jpg",
-      skills: ["Social Research", "Gender Studies", "Qualitative Methods", "Academic Writing"],
-    },
-    {
-      name: "Ravi Shankar",
-      year: "Ph.D. Sociology 2024",
-      achievement: "Published 5 papers, received ICSSR fellowship",
-      image: "https://randomuser.me/api/portraits/men/48.jpg",
-      skills: ["Development Sociology", "Ethnography", "Rural Studies", "Statistical Analysis"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "ICSSR Research Grant",

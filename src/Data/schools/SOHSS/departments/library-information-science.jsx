@@ -94,79 +94,6 @@ export const departmentLayoutData = {
   },
   programsData: [
     {
-        id: "ba-ma-history",
-        title: "B.A. and M.A. (History)",
-        level: "UG/PG",
-        duration: "3-5 Years",
-        intake: "40 Students",
-        description: "Ancient, medieval, and modern Indian history, world civilizations, historiography, epigraphy, and archival studies.",
-        image: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-600 to-orange-700",
-        highlights: [
-            "Indian Historiography",
-            "Epigraphy & Numismatics",
-            "World Civilizations",
-            "Archival Research"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
-            }
-        ]
-    },
-    {
-        id: "ma-hindu-studies",
-        title: "M.A. in Hindu Studies",
-        level: "PG",
-        duration: "2 Years",
-        intake: "30 Students",
-        description: "Systematic exploration of Vedic literature, Darshana systems, Upanishadic thought, Sanskrit source texts, and cultural traditions.",
-        image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-orange-500 to-yellow-600",
-        highlights: [
-            "Vedic & Upanishadic Texts",
-            "Six Darshanas",
-            "Sanskrit Hermeneutics",
-            "Cultural Heritage"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
-            },
-            {
-                session: "Detailed Syllabus",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
-            }
-        ]
-    },
-    {
-        id: "ma-human-rights",
-        title: "M.A. in Human Rights",
-        level: "PG",
-        duration: "2 Years",
-        intake: "25 Students",
-        description: "International human rights jurisprudence, constitutional safeguards, refugee laws, humanitarian interventions, and civil liberties.",
-        image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-blue-600 to-slate-700",
-        highlights: [
-            "Human Rights Jurisprudence",
-            "UN Human Rights System",
-            "Refugee & Humanitarian Law",
-            "Fieldwork Project"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/16JZ-lU2TrLhH9a77hDNjAKwIAs7kTCmV/preview"
-            }
-        ]
-    },
-    {
         id: "mlibisc-library-science",
         title: "M.Lib.I.Sc. (Master of Library and Information Science)",
         level: "PG",
@@ -181,11 +108,19 @@ export const departmentLayoutData = {
             "Information Retrieval",
             "Central Library Practicum"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview",
+        syllabusUrl: "/courses/sohss/library-information-science/mlibisc-course-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1iWt9pq8CfeZ7n5qiN4UAUBgfSOgHUp3y/preview"
+                url: "/courses/sohss/library-information-science/mlibisc-course-structure.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/library-information-science/library-info-sci-dept-profile.pdf"
+            },
+            {
+                session: "Adjunct Faculty Details",
+                url: "/courses/sohss/library-information-science/library-info-sci-adjunct-faculty.pdf"
             }
         ]
     }
@@ -205,22 +140,7 @@ export const departmentLayoutData = {
     { numberText: "10+", subtitle: "Publications" },
     { numberText: "5+", subtitle: "Collaborating Libraries" },
   ],
-  topAchievers: [
-    {
-      name: "Amit Sharma",
-      year: "M.Lib.I.Sc 2024",
-      achievement: "Appointed as Assistant Librarian at a national institute, managing digital archives",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      skills: ["Digital Archiving", "Koha", "Metadata", "Cataloging"],
-    },
-    {
-      name: "Priya Patel",
-      year: "B.Lib.I.Sc 2023",
-      achievement: "Qualified UGC NET in Library and Information Science",
-      image: "https://randomuser.me/api/portraits/women/33.jpg",
-      skills: ["Information Retrieval", "Cataloging", "Reference Services"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Central Library Integration",

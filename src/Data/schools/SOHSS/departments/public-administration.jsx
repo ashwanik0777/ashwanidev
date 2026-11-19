@@ -105,7 +105,7 @@ export const departmentLayoutData = {
         "Administrative Theory", "Public Policy", "Governance", "Administrative Law",
         "E-Governance", "Rural Development", "Research Methods", "Dissertation",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
+      syllabusUrl: "",
       syllabus: [],
     },
     {
@@ -121,6 +121,7 @@ export const departmentLayoutData = {
         "Conference Presentations", "Field Research", "Policy Analysis",
         "Teaching Assistantship", "Thesis Defense",
       ],
+      syllabusUrl: "",
       syllabus: [],
     },
   ],
@@ -139,22 +140,7 @@ export const departmentLayoutData = {
     { numberText: "15+", subtitle: "Publications" },
     { numberText: "5+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Ankita Mishra",
-      year: "M.A. Public Administration 2023",
-      achievement: "Cleared UPSC Prelims, selected for state civil services",
-      image: "https://randomuser.me/api/portraits/women/38.jpg",
-      skills: ["Public Policy", "Governance", "Administrative Law", "Current Affairs"],
-    },
-    {
-      name: "Suresh Yadav",
-      year: "Ph.D. Public Administration 2024",
-      achievement: "Published research on e-governance in rural India",
-      image: "https://randomuser.me/api/portraits/men/42.jpg",
-      skills: ["E-Governance", "Rural Development", "Research Methodology", "Policy Analysis"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Governance Workshop Series",

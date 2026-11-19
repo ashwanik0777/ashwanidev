@@ -61,7 +61,13 @@ export const departmentLayoutData = {
       highlights: [
         "Workplace Training", "Skill Certification", "Industry Exposure", "Vocational Excellence"
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/vocational-studies/sovsas-mous.pdf",
+      syllabus: [
+        {
+          session: "List of MoUs & Skill Initiatives",
+          url: "/courses/sovs/vocational-studies/sovsas-mous.pdf"
+        }
+      ],
     },
   ],
 };

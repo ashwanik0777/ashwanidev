@@ -107,15 +107,27 @@ export const departmentLayoutData = {
             "GIS & Satellite Remote Sensing",
             "Field Research Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
+        syllabusUrl: "/courses/sovs/environmental-science/msc-env-science-structure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                session: "Course Structure (2023)",
+                url: "/courses/sovs/environmental-science/msc-env-science-structure-2023.pdf"
             },
             {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                session: "Detailed Syllabus",
+                url: "/courses/sovs/environmental-science/msc-env-science-syllabus-2023.pdf"
+            },
+            {
+                session: "Syllabus CStr (May 2023)",
+                url: "/courses/sovs/environmental-science/msc-env-science-syllabus-cstr-may2023.pdf"
+            },
+            {
+                session: "About Department",
+                url: "/courses/sovs/environmental-science/env-science-about-dept.pdf"
+            },
+            {
+                session: "Admission Flyer (2025-26)",
+                url: "/courses/sovs/environmental-science/env-science-admission-flyer-2025-26.pdf"
             }
         ]
     },
@@ -134,11 +146,11 @@ export const departmentLayoutData = {
             "Mineral Exploration",
             "Geological Field Camps"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview",
+        syllabusUrl: "/courses/sovs/environmental-science/msc-geology-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1Wt9HfW96ur5QXIuJ2vaMwUKQ5TXR7rG1/preview"
+                url: "/courses/sovs/environmental-science/msc-geology-structure.pdf"
             }
         ]
     },
@@ -157,15 +169,15 @@ export const departmentLayoutData = {
             "Climate Impact Studies",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview",
+        syllabusUrl: "/courses/sovs/environmental-science/phd-env-science-structure-2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
+                url: "/courses/sovs/environmental-science/phd-env-science-structure-2023.pdf"
             },
             {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1BFyoZ8fPUps7z5QT774dx0ayWsRvx-kG/preview"
+                session: "Specific Syllabus",
+                url: "/courses/sovs/environmental-science/phd-env-science-syllabus-2023.pdf"
             }
         ]
     }
@@ -185,22 +197,7 @@ export const departmentLayoutData = {
     { numberText: "45+", subtitle: "Publications" },
     { numberText: "6+", subtitle: "PhDs Awarded" },
   ],
-  topAchievers: [
-    {
-      name: "Anjali Sharma",
-      year: "M.Sc 2023",
-      achievement: "Placed as Environmental Consultant at Ernst & Young (EY), Mumbai",
-      image: "https://randomuser.me/api/portraits/women/53.jpg",
-      skills: ["EIA", "Carbon Footprinting", "GIS"],
-    },
-    {
-      name: "Rohit Kumar",
-      year: "M.Sc 2024",
-      achievement: "Qualified UGC-NET Lectureship in Environmental Sciences",
-      image: "https://randomuser.me/api/portraits/men/54.jpg",
-      skills: ["Ecology", "EIA", "Environmental Chemistry"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Collaborative Study on Yamuna Water Quality",

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import {
   Save,
+  Award,
   ArrowLeft,
   RotateCcw,
   LogOut,
@@ -151,6 +152,8 @@ const parseDriveLink = (url) => parseImageUrl(url);
 import AnnouncementManager from "../../components/announcement/AnnouncementManager";
 import ClubManager from "../../components/clubs/manage/ClubManager";
 import SchoolHomeEditor from "../../components/schoolHome/SchoolHomeEditor";
+import VisitorsManager from "../../components/visitors/VisitorsManager";
+import { VISITORS_KEY, VISITORS_SCHOOL_CODE } from "../../components/visitors/visitorsModel";
 import ApprovalQueue from "../../components/announcement/ApprovalQueue";
 import { listPendingAnnouncements } from "../../services/announcementsAdminService";
 import {
@@ -443,6 +446,7 @@ const tabs = [
   { id: "bookings", label: "Booking Management", icon: CalendarDays },
   { id: "itcell", label: "IT Cell Management", icon: Cpu },
   { id: "ticker-notices", label: "Ticker Notices", icon: Zap },
+  { id: "visitors", label: "Distinguished Visitors", icon: Award },
   { id: "emailSystem", label: "Email System", icon: Mail },
   { id: "subscribers", label: "Subscribers", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
@@ -2046,6 +2050,29 @@ const AdminDashboard = () => {
       setMessage("Home page saved. The school page now shows these changes.");
     }
     return ok;
+  };
+
+  /* Distinguished visitors live on the university's own row (code GBU) and save straight away. */
+  const saveVisitors = async (list) => {
+    const university = schoolsList.find((s) => s.code === VISITORS_SCHOOL_CODE);
+    if (!university) {
+      setMessage("The university record (GBU) was not found. Reload the page and try again.");
+      return false;
+    }
+    try {
+      const updated = await updateSchool(university.id, {
+        name: university.name,
+        overview: university.overview || "",
+        content: { ...(university.content || {}), [VISITORS_KEY]: list },
+        is_active: true,
+      });
+      setSchoolsList((prev) => prev.map((s) => (s.id === university.id ? updated : s)));
+      setMessage("Distinguished visitors saved. The home page now shows these changes.");
+      return true;
+    } catch (error) {
+      setMessage(getApiErrorMessage(error, "Failed to save the visitors."));
+      return false;
+    }
   };
 
   const saveSchoolClubs = async (nextClubs) => {
@@ -8149,6 +8176,14 @@ const AdminDashboard = () => {
           {activeTab === "bookings" && renderBookingsTab()}
           {activeTab === "itcell" && renderItcellTab()}
           {activeTab === "ticker-notices" && renderTickerNoticesTab()}
+          {activeTab === "visitors" &&
+            (schoolsList.some((s) => s.code === VISITORS_SCHOOL_CODE) ? (
+              <VisitorsManager content={schoolsList.find((s) => s.code === VISITORS_SCHOOL_CODE)?.content || {}} onSave={saveVisitors} />
+            ) : (
+              <div className={`${cardClass} py-12 text-center text-sm text-slate-500`}>
+                {isSchoolsLoading ? "Loading..." : "The university record (GBU) was not found. Reload the page to try again."}
+              </div>
+            ))}
           {activeTab === "emailSystem" && renderEmailSystemTab()}
           {activeTab === "subscribers" && <SubscribersTab />}
           {activeTab === "analytics" && <AnalyticsTab />}

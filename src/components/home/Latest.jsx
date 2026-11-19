@@ -175,7 +175,7 @@ export default function LatestUpdates() {
   );
 
   return (
-    <section className="px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-10 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
+    <section className="px-4 sm:px-6 md:px-8 lg:px-16 pt-6 pb-4 sm:pt-10 sm:pb-6 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
       <style jsx>{`
         @keyframes slide-in {
           from { opacity: 0; transform: translateY(20px); }

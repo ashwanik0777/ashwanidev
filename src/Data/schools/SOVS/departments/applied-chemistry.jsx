@@ -107,11 +107,11 @@ export const departmentLayoutData = {
             "Thermodynamics & Kinetics",
             "Spectroscopic Characterization"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabusUrl: "/courses/sovs/applied-chemistry/bsc-hons-chemistry-structure-2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+                url: "/courses/sovs/applied-chemistry/bsc-hons-chemistry-structure-2023.pdf"
             }
         ]
     },
@@ -130,11 +130,11 @@ export const departmentLayoutData = {
             "Organometallic Catalysis",
             "Master Research Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview",
+        syllabusUrl: "/courses/sovs/applied-chemistry/msc-chemistry-syllabus-2023.pdf",
         syllabus: [
             {
                 session: "Syllabus",
-                url: "https://drive.google.com/file/d/1q-INX6ZPO4YeE4yaqLAEdtkhziAobNkQ/preview"
+                url: "/courses/sovs/applied-chemistry/msc-chemistry-syllabus-2023.pdf"
             }
         ]
     },
@@ -153,11 +153,19 @@ export const departmentLayoutData = {
             "Coatings & Sealants",
             "Industrial Quality Testing"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabusUrl: "/courses/sovs/applied-chemistry/pu-admission-brochure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+                session: "Admission Brochure",
+                url: "/courses/sovs/applied-chemistry/pu-admission-brochure-2023.pdf"
+            },
+            {
+                session: "Placement Record",
+                url: "/courses/sovs/applied-chemistry/ipua-placement-2023.pdf"
+            },
+            {
+                session: "Chemistry Placements",
+                url: "/courses/sovs/applied-chemistry/chemistry-placements.pdf"
             }
         ]
     },
@@ -176,11 +184,11 @@ export const departmentLayoutData = {
             "Indexed Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview",
+        syllabusUrl: "/courses/sovs/applied-chemistry/phd-chemistry-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1H83BUHg9jUKlEOe3wgT5A1DF-Png9a-G/preview"
+                url: "/courses/sovs/applied-chemistry/phd-chemistry-structure.pdf"
             }
         ]
     }
@@ -200,22 +208,7 @@ export const departmentLayoutData = {
     { numberText: "60+", subtitle: "Publications" },
     { numberText: "12+", subtitle: "PhDs Awarded" },
   ],
-  topAchievers: [
-    {
-      name: "Ritu Singhal",
-      year: "M.Sc 2023",
-      achievement: "Placed as Research Associate at Jubilant Biosys, Noida",
-      image: "https://randomuser.me/api/portraits/women/49.jpg",
-      skills: ["Organic Synthesis", "HPLC", "Spectroscopy"],
-    },
-    {
-      name: "Vikas Nagar",
-      year: "B.Sc 2024",
-      achievement: "Accepted for PG studies at Indian Institute of Science (IISc), Bangalore",
-      image: "https://randomuser.me/api/portraits/men/50.jpg",
-      skills: ["Physical Chemistry", "Polymer Chemistry", "Lab safety"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "UGC-DAE Funded Research Project",

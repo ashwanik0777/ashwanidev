@@ -55,159 +55,82 @@ export const departmentLayoutData = {
   aboutProps: null,
   programsData: [
     {
-        id: "btech-mechanical-engg",
-        title: "B.Tech (Mechanical Engineering)",
-        level: "UG",
-        duration: "4 Years",
-        intake: "60 Students",
-        description: "Comprehensive study of thermodynamics, solid mechanics, fluid machinery, manufacturing processes, and machine design.",
-        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-500 to-orange-600",
-        highlights: [
-            "Thermodynamics & Heat Transfer",
-            "Machine Design & CAD",
-            "Manufacturing Technologies",
-            "Fluid Mechanics"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
-            },
-            {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
-            }
-        ]
+      id: "btech-automobile-engg",
+      title: "B.Tech Automobile Engineering (with Industrial Engineering)",
+      level: "UG",
+      duration: "4 Years",
+      intake: "60 Students",
+      description: "Dedicated curriculum in vehicle dynamics, automotive chassis, powertrain design, hybrid/electric vehicles, and automated production.",
+      image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-red-500 to-orange-600",
+      highlights: [
+        "Vehicle Dynamics & Aerodynamics",
+        "Automotive Powertrain & Chassis",
+        "Electric & Hybrid Drivetrains",
+        "Industrial Manufacturing & Operations"
+      ],
+      syllabusUrl: "/courses/soe/automobile/btech-automobile-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/soe/automobile/btech-automobile-structure.pdf"
+        }
+      ]
     },
     {
-        id: "btech-me-automobile-minor",
-        title: "B.Tech Mechanical Engineering with minor (Automobile and Industrial Engineering)",
-        level: "UG",
-        duration: "4 Years",
-        intake: "30 Students",
-        description: "Specialized mechanical track in automotive chassis engineering, IC engines, vehicle aerodynamics, and operations research.",
-        image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-red-500 to-orange-600",
-        highlights: [
-            "Automotive Chassis & Engines",
-            "Industrial Operations Research",
-            "Vehicle Dynamics",
-            "Quality Control"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1s9XPZwupSDUFdiff2dQSBoAJn4QP89UZ/preview"
-            }
-        ]
+      id: "btech-me-ev-mobility",
+      title: "B.Tech Electric Vehicles & Autonomous Mobility",
+      level: "UG",
+      duration: "4 Years",
+      intake: "30 Students",
+      description: "Focuses on battery management systems (BMS), electric motor controls, charging infrastructure, and connected autonomous driving.",
+      image: "https://images.unsplash.com/photo-1558441719-8b489c652756?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-cyan-500 to-blue-600",
+      highlights: [
+        "Battery Management Systems (BMS)",
+        "Traction Inverters & Motors",
+        "Charging Station Infrastructure",
+        "Automotive Electronics"
+      ],
+      syllabusUrl: "/courses/soe/electrical/btech-ee-ev-biomedical-automation-structure-2023.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (EV Specialization)",
+          url: "/courses/soe/electrical/btech-ee-ev-biomedical-automation-structure-2023.pdf"
+        }
+      ]
     },
     {
-        id: "btech-me-mechatronics-minor",
-        title: "B.Tech Mechanical Engineering with minor (Mechatronics and Automation)",
-        level: "UG",
-        duration: "4 Years",
-        intake: "30 Students",
-        description: "Interdisciplinary minor merging microcontrollers, pneumatic/hydraulic actuators, PLC systems, and robotic cells.",
-        image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-orange-500 to-amber-600",
-        highlights: [
-            "PLC & Pneumatics",
-            "Sensors & Actuators",
-            "Robotic Cells",
-            "Embedded Mechatronics"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
-            }
-        ]
-    },
-    {
-        id: "mtech-me-streams",
-        title: "M.Tech. (Manufacturing Engg, Design Engg., Thermal Engg.)",
-        level: "PG",
-        duration: "2 Years",
-        intake: "30 Students",
-        description: "Advanced postgraduate modules in FEA analysis, computational fluid dynamics (CFD), additive manufacturing, and thermal design.",
-        image: "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-amber-600 to-red-700",
-        highlights: [
-            "Finite Element Analysis (FEA)",
-            "Computational Fluid Dynamics",
-            "Additive Manufacturing",
-            "Thesis"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
-            },
-            {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1zkOHHtiF8YZWnJHWijfEM1ff2q9Kd17o/preview"
-            }
-        ]
-    },
-    {
-        id: "mtech-me-working-prof",
-        title: "M.Tech in Mechanical Engineering (Weekend Program for Working Professionals)",
-        level: "PG (Working Exec)",
-        duration: "3 Years",
-        intake: "30 Students",
-        description: "Flexible weekend postgraduate degree providing industrial engineers with advanced design and manufacturing tools.",
-        image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-slate-600 to-slate-800",
-        highlights: [
-            "Weekend Timetable",
-            "Applied Industrial Projects",
-            "CAD/CAM & FEA",
-            "Executive Degree"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1AvtHXvJl-axg52LdpYXIt05eprE2jz2L/preview"
-            }
-        ]
-    },
-    {
-        id: "phd-mechanical-engg",
-        title: "Ph.D. (Mechanical Engg.)",
-        level: "Doctoral",
-        duration: "3-5 Years",
-        intake: "15 Students",
-        description: "Doctoral research program promoting original contributions in thermal sciences, nanomaterials, renewable energy, and CAD/CAM.",
-        image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-        gradient: "from-orange-600 to-amber-700",
-        highlights: [
-            "Doctoral Coursework",
-            "Thermal & Materials Research",
-            "Indexed Journal Publications",
-            "Ph.D. Defense"
-        ],
-        syllabusUrl: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview",
-        syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1I8EGGiF-TBLELUy2wXcgUVCekO0P9jNL/preview"
-            }
-        ]
+      id: "btech-me-mechatronics-auto",
+      title: "B.Tech Mechatronics & Automotive Robotics",
+      level: "UG",
+      duration: "4 Years",
+      intake: "30 Students",
+      description: "Interdisciplinary engineering merging microcontrollers, pneumatic/hydraulic actuators, robotic weld cells, and automotive sensors.",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-orange-500 to-amber-600",
+      highlights: [
+        "Robotic Cells & Automation",
+        "Sensors & Vehicle Telematics",
+        "Embedded Automotive Mechatronics",
+        "PLC & Hydraulics"
+      ],
+      syllabusUrl: "/courses/soe/mechanical/btech-me-mechatronics-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/soe/mechanical/btech-me-mechatronics-structure.pdf"
+        }
+      ]
     }
-],
+  ],
   facultyStats: {
-    text: "Our department has 3+ specialized faculty members with expertise in automotive engineering.",
+    text: "Our department has experienced faculty members specialized in automotive engineering, vehicle dynamics, and powertrain systems.",
     stats: [
-      { icon: BookOpen, numberText: "25+", subtitle: "Research Papers", bg: "bg-orange-50", color: "text-orange-600" },
-      { icon: Award, numberText: "2+", subtitle: "Awards", bg: "bg-red-50", color: "text-red-600" },
+      { icon: BookOpen, numberText: "40+", subtitle: "Research Papers", bg: "bg-red-50", color: "text-red-600" },
+      { icon: Award, numberText: "4+", subtitle: "Awards", bg: "bg-orange-50", color: "text-orange-600" },
       { icon: GraduationCap, custom: "PhD", numberText: "100%", subtitle: "PhD Faculty", bg: "bg-amber-50", color: "text-amber-600" },
-      { icon: GraduationCap, custom: "Exp", numberText: "8+", subtitle: "Avg Experience", bg: "bg-yellow-50", color: "text-yellow-600" },
+      { icon: GraduationCap, custom: "Exp", numberText: "10+", subtitle: "Avg Experience", bg: "bg-red-50", color: "text-red-600" },
     ],
   },
   researchStats: null,

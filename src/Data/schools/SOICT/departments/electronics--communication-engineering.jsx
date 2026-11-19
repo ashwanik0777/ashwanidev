@@ -62,7 +62,7 @@ export const departmentLayoutData = {
     },
   },
   aboutProps: null,
-  programsData: [
+    programsData: [
     {
       id: "btech-ece",
       title: "B.Tech Electronics & Communication Engineering",
@@ -78,24 +78,13 @@ export const departmentLayoutData = {
         "Microcontrollers & Embedded Systems",
         "RF & Microwave Design"
       ],
-      syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
+      syllabusUrl: "/courses/soict/ece/btech-ece-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
-        },
-        {
-          session: "2024-28 (Structure)",
-          url: "/schools/ece/COURSE STRUCTURE B.TECH(EC).xlsx - EC2024.pdf"
-        },
-        {
-          session: "2024 Onward",
-          url: "/schools/ece/Syllabus_B.Tech(ECE)-2024 onward .pdf"
-        },
-        {
-          session: "2021-25",
-          url: "/schools/ece/Syllabus_B.Tech(ECE)-January-2021.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/ece/btech-ece-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/ece/btech-ece-structure-2025-29.pdf" },
+        { session: "2024-28", url: "/courses/soict/ece/btech-ece-structure-2024-28.pdf" },
+        { session: "Syllabus 2026-30", url: "/courses/soict/ece/btech-ece-ai-syllabus-2026-30.pdf" },
+        { session: "Syllabus 2025-29", url: "/courses/soict/ece/btech-ece-ai-syllabus-2025-29.pdf" }
       ]
     },
     {
@@ -113,16 +102,13 @@ export const departmentLayoutData = {
         "Hardware Accelerators",
         "Robotics & Automation"
       ],
-      syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf",
+      syllabusUrl: "/courses/soict/ece/btech-ece-aiml-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "/schools/ece/Course Structure B.Tech ECE_2026-30_AI_ML.pdf"
-        },
-        {
-          session: "2024 Onward",
-          url: "/schools/ece/Btech ECE in AI&ML_2024_Onward.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/ece/btech-ece-aiml-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/ece/btech-ece-aiml-structure-2025-29.pdf" },
+        { session: "2024-28", url: "/courses/soict/ece/btech-ece-aiml-structure-2024-28.pdf" },
+        { session: "Syllabus 2026-30", url: "/courses/soict/ece/btech-ece-aiml-syllabus-2026-30.pdf" },
+        { session: "Syllabus 2025-29", url: "/courses/soict/ece/btech-ece-aiml-syllabus-2025-29.pdf" }
       ]
     },
     {
@@ -140,22 +126,17 @@ export const departmentLayoutData = {
         "SoC Verification",
         "Semiconductor Fabrication"
       ],
-      syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf",
+      syllabusUrl: "/courses/soict/ece/btech-ece-vlsi-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "/schools/ece/Course Structure B.Tech ECE_2026-30_VLSI.pdf"
-        },
-        {
-          session: "2024 Scheme",
-          url: "/schools/ece/Final VLSI Design & Embedded Systems _2024.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/ece/btech-ece-vlsi-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/ece/btech-ece-vlsi-structure-2025-29.pdf" },
+        { session: "2024-28", url: "/courses/soict/ece/btech-ece-vlsi-structure-2024-28.pdf" }
       ]
     },
     {
       id: "int-btech-mtech-ece",
       title: "Integrated B.Tech.-M.Tech. (ECE)",
-      level: "Dual Degree",
+      level: "Integrated",
       duration: "5 Years",
       intake: "30 Students",
       description: "Comprehensive 5-year integrated dual degree providing seamless progression into advanced telecommunication systems and VLSI research.",
@@ -167,12 +148,9 @@ export const departmentLayoutData = {
         "VLSI Research",
         "Master Thesis"
       ],
-      syllabusUrl: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf",
+      syllabusUrl: "/courses/soict/ece/int-btech-mtech-structure-2022-27.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "/schools/ece/Course Structure B.Tech ECE_2026-30.pdf"
-        }
+        { session: "2022-27", url: "/courses/soict/ece/int-btech-mtech-structure-2022-27.pdf" }
       ]
     },
     {
@@ -181,21 +159,18 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "20 Students",
-      description: "Advanced study of cellular networks (5G/6G), MIMO systems, wireless channel modeling, and RF frontend engineering.",
+      description: "Cutting-edge curriculum covering 5G/6G systems, optical communications, MIMO architectures, and software-defined networks.",
       image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-blue-600 to-cyan-600",
+      gradient: "from-cyan-600 to-blue-700",
       highlights: [
-        "5G/6G Cellular Architectures",
-        "MIMO Antenna Systems",
-        "RF Optimization",
-        "Dissertation"
+        "5G & Beyond Wireless Networks",
+        "MIMO & Beamforming",
+        "Optical Communications",
+        "Network Simulation Labs"
       ],
-      syllabusUrl: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf",
+      syllabusUrl: "/courses/soict/ece/mtech-ece-wcn-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "Master Scheme",
-          url: "/schools/ece/M.Tech. Wireless Communication and Networks_Scheme and Syllabi.pdf"
-        }
+        { session: "2026-28", url: "/courses/soict/ece/mtech-ece-wcn-structure-2026-28.pdf" }
       ]
     },
     {
@@ -204,21 +179,38 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "20 Students",
-      description: "Postgraduate curriculum covering mixed-signal IC design, nano-scale CMOS architectures, automated testing, and ASIC flows.",
+      description: "Comprehensive microelectronics curriculum encompassing low-power design, analog IC layout, physical design, and ASIC flow.",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-600 to-indigo-700",
+      gradient: "from-purple-600 to-pink-700",
       highlights: [
-        "Mixed-Signal VLSI",
-        "Nano-Scale CMOS",
-        "ASIC Design Flows",
-        "Postgraduate Thesis"
+        "Analog & Mixed-Signal ICs",
+        "Digital ASIC Implementation",
+        "Cadence / Synopsys EDA Tools",
+        "VLSI Testing & Fault Modeling"
       ],
-      syllabusUrl: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf",
+      syllabusUrl: "/courses/soict/ece/mtech-ece-vlsi-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "Master Scheme",
-          url: "/schools/ece/M.Tech. VLSI Design_Scheme and Syllabi.docx.pdf"
-        }
+        { session: "2026-28", url: "/courses/soict/ece/mtech-ece-vlsi-structure-2026-28.pdf" }
+      ]
+    },
+    {
+      id: "mtech-ece-iot",
+      title: "M.Tech ECE (IoT and Robotics)",
+      level: "PG",
+      duration: "2 Years",
+      intake: "20 Students",
+      description: "Advanced master specialization in Internet of Things hardware architectures, robotic actuation, sensor networks, and edge automation.",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-teal-600 to-cyan-700",
+      highlights: [
+        "IoT Hardware Design",
+        "Robotics & Actuation",
+        "Sensor Integration",
+        "Edge Microcontrollers"
+      ],
+      syllabusUrl: "/courses/soict/ece/mtech-ece-iot-structure-2026-28.pdf",
+      syllabus: [
+        { session: "2026-28", url: "/courses/soict/ece/mtech-ece-iot-structure-2026-28.pdf" }
       ]
     },
     {
@@ -236,12 +228,9 @@ export const departmentLayoutData = {
         "Train Control & SCADA",
         "Rail Telecommunication"
       ],
-      syllabusUrl: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf",
+      syllabusUrl: "/courses/soict/ece/mtech-ece-wcn-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "Master Scheme",
-          url: "/schools/ece/M.Tech. Railway Signalling_course structure.pdf"
-        }
+        { session: "Master Scheme", url: "/courses/soict/ece/mtech-ece-wcn-structure-2026-28.pdf" }
       ]
     },
     {
@@ -259,12 +248,9 @@ export const departmentLayoutData = {
         "Specialized Labs",
         "Thesis Defense"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
+      syllabusUrl: "/courses/soict/cse/phd-structure.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
-        }
+        { session: "Current Scheme", url: "/courses/soict/cse/phd-structure.pdf" }
       ]
     }
   ],

@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Creative Writing",
             "Phonetics & Linguistics"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview",
+        syllabusUrl: "/courses/sohss/english/ba-english-structure-nep.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1n6s7oWsS8kaWkfuMdzP9wsl9Ddp_Rm96/preview"
+                session: "Course Structure (NEP)",
+                url: "/courses/sohss/english/ba-english-structure-nep.pdf"
             }
         ]
     },
@@ -135,11 +135,11 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview",
+        syllabusUrl: "/courses/sohss/english/ma-english-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1f4bnv6jP8GjhXBtpnuTMbZq--E6zlycH/preview"
+                url: "/courses/sohss/english/ma-english-structure.pdf"
             }
         ]
     },
@@ -158,11 +158,23 @@ export const departmentLayoutData = {
             "Sociolinguistics",
             "Language Documentation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview",
+        syllabusUrl: "/courses/sohss/english/ma-linguistics-structure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1xIiuuu4Ki6WNdyhJYy-Jk28GVc5aPWEl/preview"
+                session: "Program Structure (May 2023)",
+                url: "/courses/sohss/english/ma-linguistics-structure-2023.pdf"
+            },
+            {
+                session: "Academic Programmes",
+                url: "/courses/sohss/english/linguistics-academic-programmes.pdf"
+            },
+            {
+                session: "Information Brochure",
+                url: "/courses/sohss/english/linguistics-brochure.pdf"
+            },
+            {
+                session: "About Linguistics Centre",
+                url: "/courses/sohss/english/linguistics-center-about.pdf"
             }
         ]
     },
@@ -181,11 +193,11 @@ export const departmentLayoutData = {
             "Indexed Journal Publications",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview",
+        syllabusUrl: "/courses/sohss/english/phd-english-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1GJG72d1S_DZ5-6Kl7KErtuysFS_Ba0m8/preview"
+                url: "/courses/sohss/english/phd-english-structure.pdf"
             }
         ]
     }
@@ -270,29 +282,7 @@ export const departmentLayoutData = {
     { numberText: "80+", subtitle: "Publications" },
     { numberText: "15+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Priya Sharma",
-      year: "M.A. English 2024",
-      achievement: "UGC NET Qualified, Published in International Journal of Literary Studies",
-      image: "https://randomuser.me/api/portraits/women/33.jpg",
-      skills: ["Literary Criticism", "Creative Writing", "Research", "Translation"],
-    },
-    {
-      name: "Arjun Verma",
-      year: "B.A. (Hons.) English 2024",
-      achievement: "Best Paper Award at National Literature Conference",
-      image: "https://randomuser.me/api/portraits/men/34.jpg",
-      skills: ["Postcolonial Studies", "Academic Writing", "Public Speaking", "Editing"],
-    },
-    {
-      name: "Meera Iyer",
-      year: "Ph.D. English 2024",
-      achievement: "Published 4 research papers, International Conference Presenter",
-      image: "https://randomuser.me/api/portraits/women/55.jpg",
-      skills: ["Comparative Literature", "Gender Studies", "Translation Studies", "Pedagogy"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Literary Excellence",

@@ -112,11 +112,23 @@ export const departmentLayoutData = {
             "Translation Studies",
             "Functional Hindi for Media"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview",
+        syllabusUrl: "/courses/sohss/indian-languages/hindi-course-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview"
+                session: "Course Structure (March 2025)",
+                url: "/courses/sohss/indian-languages/hindi-course-structure-2025.pdf"
+            },
+            {
+                session: "Course Structure (Hindi Archive)",
+                url: "/courses/sohss/indian-languages/ba-ma-hindi-structure.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/indian-languages/hindi-dept-profile.pdf"
+            },
+            {
+                session: "Admission Brochure (2025)",
+                url: "/courses/sohss/indian-languages/hindi-admission-brochure-2025.pdf"
             }
         ]
     },
@@ -135,11 +147,11 @@ export const departmentLayoutData = {
             "Classical Sanskrit Drama",
             "Manuscriptology"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz/preview",
+        syllabusUrl: "/courses/sohss/indian-languages/ba-sanskrit-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1zp1AOS_c7H5K020Yhrgqg8VakyZLhSHz/preview"
+                url: "/courses/sohss/indian-languages/ba-sanskrit-structure.pdf"
             }
         ]
     },
@@ -158,11 +170,11 @@ export const departmentLayoutData = {
             "Progressive Literature",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview",
+        syllabusUrl: "/courses/sohss/indian-languages/ma-urdu-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1WVThBsOLvtfsFTSPrWgkmkV8WCrpQwUy/preview"
+                url: "/courses/sohss/indian-languages/ma-urdu-structure.pdf"
             }
         ]
     }
@@ -247,29 +259,7 @@ export const departmentLayoutData = {
     { numberText: "50+", subtitle: "Publications" },
     { numberText: "12+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Ananya Singh",
-      year: "M.A. Hindi 2024",
-      achievement: "UGC NET Qualified, Published research in Hindi Sahitya Journal",
-      image: "https://randomuser.me/api/portraits/women/28.jpg",
-      skills: ["Hindi Literature", "Creative Writing", "Translation", "Research"],
-    },
-    {
-      name: "Mohammad Faiz",
-      year: "M.A. Urdu 2024",
-      achievement: "Best Paper Award at National Urdu Seminar, Published 2 research papers",
-      image: "https://randomuser.me/api/portraits/men/36.jpg",
-      skills: ["Urdu Poetry", "Literary Criticism", "Translation", "Academic Writing"],
-    },
-    {
-      name: "Kavita Devi",
-      year: "B.A. (Hons.) Hindi 2024",
-      achievement: "Gold Medalist, Selected for M.A. at JNU",
-      image: "https://randomuser.me/api/portraits/women/42.jpg",
-      skills: ["Hindi Fiction", "Creative Writing", "Journalism", "Public Speaking"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Literary Contributions",

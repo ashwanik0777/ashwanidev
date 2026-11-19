@@ -112,15 +112,15 @@ export const departmentLayoutData = {
             "Photojournalism",
             "Audio-Video Editing"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview",
+        syllabusUrl: "/courses/sohss/mass-communication/bjmc-structure-2024.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+                session: "Course Structure (2024)",
+                url: "/courses/sohss/mass-communication/bjmc-structure-2024.pdf"
             },
             {
                 session: "Course Structure NEP",
-                url: "https://drive.google.com/file/d/1S1QT_g3dxP1JHeBGFdXXwXIxCyQMDaK2/preview"
+                url: "/courses/sohss/mass-communication/bajmc-structure-nep.pdf"
             }
         ]
     },
@@ -139,11 +139,11 @@ export const departmentLayoutData = {
             "Documentary Film Making",
             "Media Management"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview",
+        syllabusUrl: "/courses/sohss/mass-communication/ma-mass-communication-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1vQN-ylxNIvnys48yr2n-cpi-ucu5Cu7g/preview"
+                url: "/courses/sohss/mass-communication/ma-mass-communication-structure.pdf"
             }
         ]
     },
@@ -162,11 +162,19 @@ export const departmentLayoutData = {
             "Broadcast Production",
             "Newsroom Leadership"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview",
+        syllabusUrl: "/courses/sohss/mass-communication/mjmc-course-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/14Xu5lwP1EgAgLUcrhbUlVsPT6PIu3hc-/preview"
+                url: "/courses/sohss/mass-communication/mjmc-course-structure.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/mass-communication/mass-comm-dept-profile.pdf"
+            },
+            {
+                session: "Admission Brochure",
+                url: "/courses/sohss/mass-communication/mass-comm-admission-brochure.pdf"
             }
         ]
     }
@@ -233,29 +241,7 @@ export const departmentLayoutData = {
     { numberText: "40+", subtitle: "Publications" },
     { numberText: "10+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Sakshi Gupta",
-      year: "M.A. Mass Communication 2024",
-      achievement: "Placed at NDTV, Best Media Project Award",
-      image: "https://randomuser.me/api/portraits/women/22.jpg",
-      skills: ["Broadcast Journalism", "Digital Media", "Video Editing", "Reporting"],
-    },
-    {
-      name: "Rahul Tiwari",
-      year: "B.A. (Hons.) JMC 2024",
-      achievement: "National Press Award for Student Journalism",
-      image: "https://randomuser.me/api/portraits/men/25.jpg",
-      skills: ["Print Journalism", "Photography", "Content Writing", "Social Media"],
-    },
-    {
-      name: "Neha Patel",
-      year: "M.A. Journalism 2024",
-      achievement: "Interned at Times of India, Published investigative feature",
-      image: "https://randomuser.me/api/portraits/women/48.jpg",
-      skills: ["Investigative Reporting", "Data Journalism", "Media Ethics", "Writing"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Media Placements",

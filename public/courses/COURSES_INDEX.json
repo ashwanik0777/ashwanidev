@@ -1,8 +1,9 @@
 {
-  "total_courses_count": 180,
+  "total_courses_count": 239,
   "schools": [
     "SOBT",
     "SOE",
+    "SOHSS",
     "SOICT",
     "SOL",
     "SOM"
@@ -557,6 +558,596 @@
       "size_bytes": 4014,
       "size_kb": 3.92,
       "size_mb": 0.0
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "economics",
+      "filename": "ba-economics-structure.pdf",
+      "web_url": "/courses/sohss/economics/ba-economics-structure.pdf",
+      "size_bytes": 1143897,
+      "size_kb": 1117.09,
+      "size_mb": 1.09
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "economics",
+      "filename": "ba-ma-economics-structure-2025.pdf",
+      "web_url": "/courses/sohss/economics/ba-ma-economics-structure-2025.pdf",
+      "size_bytes": 306522,
+      "size_kb": 299.34,
+      "size_mb": 0.29
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "economics",
+      "filename": "economics-dept-profile.pdf",
+      "web_url": "/courses/sohss/economics/economics-dept-profile.pdf",
+      "size_bytes": 190651,
+      "size_kb": 186.18,
+      "size_mb": 0.18
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "bed-programme-structure.pdf",
+      "web_url": "/courses/sohss/education-training/bed-programme-structure.pdf",
+      "size_bytes": 132673,
+      "size_kb": 129.56,
+      "size_mb": 0.13
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "bpes-course-structure-2023.pdf",
+      "web_url": "/courses/sohss/education-training/bpes-course-structure-2023.pdf",
+      "size_bytes": 352888,
+      "size_kb": 344.62,
+      "size_mb": 0.34
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "education-course-details-2025.pdf",
+      "web_url": "/courses/sohss/education-training/education-course-details-2025.pdf",
+      "size_bytes": 61637,
+      "size_kb": 60.19,
+      "size_mb": 0.06
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "education-dept-profile-2026-27.pdf",
+      "web_url": "/courses/sohss/education-training/education-dept-profile-2026-27.pdf",
+      "size_bytes": 17899479,
+      "size_kb": 17479.96,
+      "size_mb": 17.07
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "itep-course-structure.pdf",
+      "web_url": "/courses/sohss/education-training/itep-course-structure.pdf",
+      "size_bytes": 254534,
+      "size_kb": 248.57,
+      "size_mb": 0.24
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "education-training",
+      "filename": "ma-education-structure.pdf",
+      "web_url": "/courses/sohss/education-training/ma-education-structure.pdf",
+      "size_bytes": 76518,
+      "size_kb": 74.72,
+      "size_mb": 0.07
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "ba-english-structure-nep.pdf",
+      "web_url": "/courses/sohss/english/ba-english-structure-nep.pdf",
+      "size_bytes": 182488,
+      "size_kb": 178.21,
+      "size_mb": 0.17
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "english-admission-brochure.pdf",
+      "web_url": "/courses/sohss/english/english-admission-brochure.pdf",
+      "size_bytes": 675813,
+      "size_kb": 659.97,
+      "size_mb": 0.64
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "english-dept-profile.pdf",
+      "web_url": "/courses/sohss/english/english-dept-profile.pdf",
+      "size_bytes": 2131496,
+      "size_kb": 2081.54,
+      "size_mb": 2.03
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "linguistics-academic-programmes.pdf",
+      "web_url": "/courses/sohss/english/linguistics-academic-programmes.pdf",
+      "size_bytes": 306397,
+      "size_kb": 299.22,
+      "size_mb": 0.29
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "linguistics-brochure.pdf",
+      "web_url": "/courses/sohss/english/linguistics-brochure.pdf",
+      "size_bytes": 4805644,
+      "size_kb": 4693.01,
+      "size_mb": 4.58
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "linguistics-center-about.pdf",
+      "web_url": "/courses/sohss/english/linguistics-center-about.pdf",
+      "size_bytes": 164872,
+      "size_kb": 161.01,
+      "size_mb": 0.16
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "ma-english-structure.pdf",
+      "web_url": "/courses/sohss/english/ma-english-structure.pdf",
+      "size_bytes": 316221,
+      "size_kb": 308.81,
+      "size_mb": 0.3
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "ma-linguistics-structure-2023.pdf",
+      "web_url": "/courses/sohss/english/ma-linguistics-structure-2023.pdf",
+      "size_bytes": 185734,
+      "size_kb": 181.38,
+      "size_mb": 0.18
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "english",
+      "filename": "phd-english-structure.pdf",
+      "web_url": "/courses/sohss/english/phd-english-structure.pdf",
+      "size_bytes": 159236,
+      "size_kb": 155.5,
+      "size_mb": 0.15
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "ba-ma-history-structure.pdf",
+      "web_url": "/courses/sohss/history-civilization/ba-ma-history-structure.pdf",
+      "size_bytes": 969617,
+      "size_kb": 946.89,
+      "size_mb": 0.92
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "hindu-studies-centre-details.pdf",
+      "web_url": "/courses/sohss/history-civilization/hindu-studies-centre-details.pdf",
+      "size_bytes": 144854,
+      "size_kb": 141.46,
+      "size_mb": 0.14
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "history-dept-profile.pdf",
+      "web_url": "/courses/sohss/history-civilization/history-dept-profile.pdf",
+      "size_bytes": 52006,
+      "size_kb": 50.79,
+      "size_mb": 0.05
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "human-rights-centre-brochure.pdf",
+      "web_url": "/courses/sohss/history-civilization/human-rights-centre-brochure.pdf",
+      "size_bytes": 197711,
+      "size_kb": 193.08,
+      "size_mb": 0.19
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "ma-hindu-studies-structure-2023.pdf",
+      "web_url": "/courses/sohss/history-civilization/ma-hindu-studies-structure-2023.pdf",
+      "size_bytes": 2169508,
+      "size_kb": 2118.66,
+      "size_mb": 2.07
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "ma-hindu-studies-syllabus-detail.pdf",
+      "web_url": "/courses/sohss/history-civilization/ma-hindu-studies-syllabus-detail.pdf",
+      "size_bytes": 333138,
+      "size_kb": 325.33,
+      "size_mb": 0.32
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "history-civilization",
+      "filename": "ma-human-rights-structure.pdf",
+      "web_url": "/courses/sohss/history-civilization/ma-human-rights-structure.pdf",
+      "size_bytes": 1063224,
+      "size_kb": 1038.3,
+      "size_mb": 1.01
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "ba-ma-hindi-structure.pdf",
+      "web_url": "/courses/sohss/indian-languages/ba-ma-hindi-structure.pdf",
+      "size_bytes": 541140,
+      "size_kb": 528.46,
+      "size_mb": 0.52
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "ba-sanskrit-structure.pdf",
+      "web_url": "/courses/sohss/indian-languages/ba-sanskrit-structure.pdf",
+      "size_bytes": 1891265,
+      "size_kb": 1846.94,
+      "size_mb": 1.8
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "hindi-admission-brochure-2025.pdf",
+      "web_url": "/courses/sohss/indian-languages/hindi-admission-brochure-2025.pdf",
+      "size_bytes": 595516,
+      "size_kb": 581.56,
+      "size_mb": 0.57
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "hindi-course-structure-2025.pdf",
+      "web_url": "/courses/sohss/indian-languages/hindi-course-structure-2025.pdf",
+      "size_bytes": 515777,
+      "size_kb": 503.69,
+      "size_mb": 0.49
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "hindi-dept-profile.pdf",
+      "web_url": "/courses/sohss/indian-languages/hindi-dept-profile.pdf",
+      "size_bytes": 595086,
+      "size_kb": 581.14,
+      "size_mb": 0.57
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "indian-languages",
+      "filename": "ma-urdu-structure.pdf",
+      "web_url": "/courses/sohss/indian-languages/ma-urdu-structure.pdf",
+      "size_bytes": 1083839,
+      "size_kb": 1058.44,
+      "size_mb": 1.03
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "library-information-science",
+      "filename": "library-info-sci-adjunct-faculty.pdf",
+      "web_url": "/courses/sohss/library-information-science/library-info-sci-adjunct-faculty.pdf",
+      "size_bytes": 170356,
+      "size_kb": 166.36,
+      "size_mb": 0.16
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "library-information-science",
+      "filename": "library-info-sci-dept-profile.pdf",
+      "web_url": "/courses/sohss/library-information-science/library-info-sci-dept-profile.pdf",
+      "size_bytes": 184459,
+      "size_kb": 180.14,
+      "size_mb": 0.18
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "library-information-science",
+      "filename": "mlibisc-course-structure.pdf",
+      "web_url": "/courses/sohss/library-information-science/mlibisc-course-structure.pdf",
+      "size_bytes": 233177,
+      "size_kb": 227.71,
+      "size_mb": 0.22
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "bajmc-structure-nep.pdf",
+      "web_url": "/courses/sohss/mass-communication/bajmc-structure-nep.pdf",
+      "size_bytes": 223242,
+      "size_kb": 218.01,
+      "size_mb": 0.21
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "bjmc-structure-2024.pdf",
+      "web_url": "/courses/sohss/mass-communication/bjmc-structure-2024.pdf",
+      "size_bytes": 176057,
+      "size_kb": 171.93,
+      "size_mb": 0.17
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "ma-mass-communication-structure.pdf",
+      "web_url": "/courses/sohss/mass-communication/ma-mass-communication-structure.pdf",
+      "size_bytes": 1027142,
+      "size_kb": 1003.07,
+      "size_mb": 0.98
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "mass-comm-admission-brochure.pdf",
+      "web_url": "/courses/sohss/mass-communication/mass-comm-admission-brochure.pdf",
+      "size_bytes": 1212132,
+      "size_kb": 1183.72,
+      "size_mb": 1.16
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "mass-comm-dept-profile.pdf",
+      "web_url": "/courses/sohss/mass-communication/mass-comm-dept-profile.pdf",
+      "size_bytes": 1283828,
+      "size_kb": 1253.74,
+      "size_mb": 1.22
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "mass-communication",
+      "filename": "mjmc-course-structure.pdf",
+      "web_url": "/courses/sohss/mass-communication/mjmc-course-structure.pdf",
+      "size_bytes": 119106,
+      "size_kb": 116.31,
+      "size_mb": 0.11
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "political-science",
+      "filename": "ba-political-science-structure-2023.pdf",
+      "web_url": "/courses/sohss/political-science/ba-political-science-structure-2023.pdf",
+      "size_bytes": 421064,
+      "size_kb": 411.2,
+      "size_mb": 0.4
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "political-science",
+      "filename": "ma-political-science-ir-structure.pdf",
+      "web_url": "/courses/sohss/political-science/ma-political-science-ir-structure.pdf",
+      "size_bytes": 833542,
+      "size_kb": 814.01,
+      "size_mb": 0.79
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "political-science",
+      "filename": "political-science-admission-brochure.pdf",
+      "web_url": "/courses/sohss/political-science/political-science-admission-brochure.pdf",
+      "size_bytes": 502302,
+      "size_kb": 490.53,
+      "size_mb": 0.48
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "political-science",
+      "filename": "political-science-dept-brochure-cstr.pdf",
+      "web_url": "/courses/sohss/political-science/political-science-dept-brochure-cstr.pdf",
+      "size_bytes": 1288196,
+      "size_kb": 1258.0,
+      "size_mb": 1.23
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "ba-bsc-psychology-research-degree.pdf",
+      "web_url": "/courses/sohss/psychology/ba-bsc-psychology-research-degree.pdf",
+      "size_bytes": 852962,
+      "size_kb": 832.97,
+      "size_mb": 0.81
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "ma-msc-applied-psychology-structure.pdf",
+      "web_url": "/courses/sohss/psychology/ma-msc-applied-psychology-structure.pdf",
+      "size_bytes": 696272,
+      "size_kb": 679.95,
+      "size_mb": 0.66
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "mphil-clinical-psychology-structure.pdf",
+      "web_url": "/courses/sohss/psychology/mphil-clinical-psychology-structure.pdf",
+      "size_bytes": 525284,
+      "size_kb": 512.97,
+      "size_mb": 0.5
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-admission-brochure-final.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-admission-brochure-final.pdf",
+      "size_bytes": 2819021,
+      "size_kb": 2752.95,
+      "size_mb": 2.69
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-admissions-flyer-latest.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-admissions-flyer-latest.pdf",
+      "size_bytes": 6070141,
+      "size_kb": 5927.87,
+      "size_mb": 5.79
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-ceild.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-ceild.pdf",
+      "size_bytes": 786058,
+      "size_kb": 767.63,
+      "size_mb": 0.75
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-course-structure-nep.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-course-structure-nep.pdf",
+      "size_bytes": 188251,
+      "size_kb": 183.84,
+      "size_mb": 0.18
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-mental-health-structure-2023.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-mental-health-structure-2023.pdf",
+      "size_bytes": 649534,
+      "size_kb": 634.31,
+      "size_mb": 0.62
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "psychology",
+      "filename": "psychology-scart.pdf",
+      "web_url": "/courses/sohss/psychology/psychology-scart.pdf",
+      "size_bytes": 1521489,
+      "size_kb": 1485.83,
+      "size_mb": 1.45
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "social-work",
+      "filename": "bsw-structure-nep.pdf",
+      "web_url": "/courses/sohss/social-work/bsw-structure-nep.pdf",
+      "size_bytes": 367093,
+      "size_kb": 358.49,
+      "size_mb": 0.35
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "social-work",
+      "filename": "msw-course-structure.pdf",
+      "web_url": "/courses/sohss/social-work/msw-course-structure.pdf",
+      "size_bytes": 66114,
+      "size_kb": 64.56,
+      "size_mb": 0.06
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "social-work",
+      "filename": "social-work-admission-brochure.pdf",
+      "web_url": "/courses/sohss/social-work/social-work-admission-brochure.pdf",
+      "size_bytes": 404739,
+      "size_kb": 395.25,
+      "size_mb": 0.39
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "social-work",
+      "filename": "social-work-dept-profile-2026.pdf",
+      "web_url": "/courses/sohss/social-work/social-work-dept-profile-2026.pdf",
+      "size_bytes": 104712493,
+      "size_kb": 102258.29,
+      "size_mb": 99.86
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "sociology",
+      "filename": "ma-sociology-structure-2025.pdf",
+      "web_url": "/courses/sohss/sociology/ma-sociology-structure-2025.pdf",
+      "size_bytes": 1445039,
+      "size_kb": 1411.17,
+      "size_mb": 1.38
+    },
+    {
+      "school_code": "SOHSS",
+      "school_name": "School of Humanities and Social Sciences",
+      "department": "sociology",
+      "filename": "sociology-dept-profile.pdf",
+      "web_url": "/courses/sohss/sociology/sociology-dept-profile.pdf",
+      "size_bytes": 149275,
+      "size_kb": 145.78,
+      "size_mb": 0.14
     },
     {
       "school_code": "SOICT",

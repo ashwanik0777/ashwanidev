@@ -12,6 +12,7 @@ SCHOOL_NAMES = {
     "SOICT": "School of Information and Communication Technology",
     "SOL": "School of Law, Justice & Governance",
     "SOM": "School of Management",
+    "SOVS": "School of Vocational Studies and Applied Sciences",
     "SOVSAS": "School of Vocational Studies and Applied Sciences",
     "SOHSS": "School of Humanities and Social Sciences",
     "SOBSC": "School of Buddhist Studies and Civilization",
@@ -24,7 +25,8 @@ DIR_TO_CODE = {
     "soict": "SOICT",
     "sol": "SOL",
     "som": "SOM",
-    "sovsas": "SOVSAS",
+    "sovs": "SOVS",
+    "sovsas": "SOVS",
     "sohss": "SOHSS",
     "sobsc": "SOBSC",
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { Mail, Phone, Download, ExternalLink, MapPin } from 'lucide-react';
 import { resolveFacultyImage } from '../../utils/imageUtils';
 import { calculateExperienceMonths, formatExperience } from '../../utils/facultyExperience';
+import { facultySections } from './tabs/facultyTabData';
+import { profileLink } from '../../utils/profileLinks';
 
 
 // Reusable Card component
@@ -45,6 +47,21 @@ const Button = ({ className = '', variant = 'solid', children, ...props }) => {
 
 const FacultyHeader = ({ faculty }) => {
   const profileImage = resolveFacultyImage(faculty?.image_url, faculty?.image, faculty?.name, faculty?.email);
+  const text = (value) => String(value ?? '').trim();
+
+  const contacts = [
+    { key: 'phone', icon: Phone, text: text(faculty?.phone) },
+    { key: 'email', icon: Mail, text: text(faculty?.email), href: text(faculty?.email) && `mailto:${text(faculty?.email)}` },
+    { key: 'office', icon: MapPin, text: text(faculty?.office) },
+  ].filter((item) => item.text);
+
+  const links = [
+    { key: 'cv', label: 'Download CV', url: text(faculty?.cv), icon: Download, variant: 'solid' },
+    // Typed as "www.linkedin.com/...", a bare ORCID iD and so on; opened as-is these break.
+    { key: 'scholar', label: 'Google Scholar', url: profileLink(faculty?.googleScholar, 'googleScholar'), icon: ExternalLink, variant: 'outline' },
+    { key: 'orcid', label: 'ORCID Profile', url: profileLink(faculty?.orcid, 'orcid'), icon: ExternalLink, variant: 'outline' },
+    { key: 'linkedin', label: 'LinkedIn', url: profileLink(faculty?.linkedin, 'linkedin'), icon: ExternalLink, variant: 'outline' },
+  ].filter((item) => item.url);
 
 
   return (
@@ -68,100 +85,57 @@ const FacultyHeader = ({ faculty }) => {
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
               {faculty?.name || 'Dr. Faculty Name'}
             </h1>
-            <p className="text-xl text-blue-600 font-semibold mb-1">
-              {faculty?.designation || 'Designation'}
-            </p>
+            {faculty?.designation && (
+              <p className="text-xl text-blue-600 font-semibold mb-1">
+                {faculty.designation}
+              </p>
+            )}
             {faculty?.school && (
               <p className="text-base text-gray-600 font-medium mb-4">
                 {faculty.school}
               </p>
             )}
 
-            {/* Tags */}
-            {/* {faculty?.tags && (
-              <div className="flex flex-wrap gap-2 mb-6">
-                {faculty.tags.map((tag, index) => (
-                  <Badge
-                    key={index}
-                    className="bg-blue-100 text-blue-800 hover:bg-blue-200"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            )} */}
-
             {/* Specialization */}
-            <div className="flex items-center gap-3 text-gray-600 mb-4 max-w-3xl">
-              <span className="font-medium">
-                {faculty?.specialization || 'Specialization Area'}
-              </span>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-3 mb-6">
-              <div className="flex items-center gap-3 text-gray-600">
-                <Phone className="w-5 h-5" />
-                <span>{faculty?.phone || 'Phone Number'}</span>
+            {faculty?.specialization && (
+              <div className="flex items-center gap-3 text-gray-600 mb-4 max-w-3xl">
+                <span className="font-medium">{faculty.specialization}</span>
               </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <Mail className="w-5 h-5" />
-                <a
-                  href={`mailto:${faculty?.email || '#'}`}
-                  className="text-blue-600 hover:underline"
-                >
-                  {faculty?.email || 'email@example.com'}
-                </a>
+            )}
+
+            {/* Contact Info: only the details the faculty filled in */}
+            {contacts.length > 0 && (
+              <div className="space-y-3 mb-6">
+                {contacts.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.key} className="flex items-center gap-3 text-gray-600">
+                      <Icon className="w-5 h-5 shrink-0" />
+                      {item.href ? (
+                        <a href={item.href} className="text-blue-600 hover:underline break-all">{item.text}</a>
+                      ) : (
+                        <span>{item.text}</span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              <div className="flex items-center gap-3 text-gray-600">
-                <MapPin className="w-5 h-5" />
-                <span>{faculty?.office || 'Office Address'}</span>
+            )}
+
+            {/* Profile links: only the ones with a link */}
+            {links.length > 0 && (
+              <div className="flex flex-wrap gap-3">
+                {links.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Button key={item.key} variant={item.variant} onClick={() => window.open(item.url, '_blank', 'noopener')}>
+                      <Icon className="w-4 h-4 mr-2" />
+                      {item.label}
+                    </Button>
+                  );
+                })}
               </div>
-            </div>
-
-            {/* Action Buttons — always visible! */}
-            <div className="flex flex-wrap gap-3">
-              <Button
-                onClick={() =>
-                  window.open(faculty?.cv || '#', '_blank')
-                }
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download CV
-              </Button>
-
-              <Button
-                variant="outline"
-                onClick={() =>
-                  window.open(faculty?.googleScholar || '#', '_blank')
-                }
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Google Scholar
-              </Button>
-
-              <Button
-                variant="outline"
-                onClick={() =>
-                  window.open(faculty?.orcid || '#', '_blank')
-                }
-              >
-                <ExternalLink className="w-4 h-4 mr-2" />
-                ORCID Profile
-              </Button>
-
-              {faculty?.linkedin && (
-                <Button
-                  variant="outline"
-                  onClick={() =>
-                    window.open(faculty.linkedin, '_blank')
-                  }
-                >
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  LinkedIn
-                </Button>
-              )}
-            </div>
+            )}
           </div>
         </div>
 
@@ -170,13 +144,14 @@ const FacultyHeader = ({ faculty }) => {
           // Auto-count from tabData arrays as fallback
           const tabData = faculty?.tabData || {};
           const expMonths = calculateExperienceMonths(tabData?.qualifications?.experience);
-          const autoPubCount = (tabData?.publications?.publications || []).filter(p => p.title && p.title.trim()).length;
-          const autoTalksCount = (tabData?.talks?.invitedTalks || []).filter(t => t.title && t.title.trim()).length;
-          const autoProjCount = (tabData?.researchProjects?.projects || []).filter(p => p.title && p.title.trim()).length;
+          // Count only the entries that are filled in (the same rule the tabs use); a count
+          // typed in directly is the fallback. Blank rows never add to these numbers.
+          const sections = facultySections(faculty);
+          const typedCount = (value) => (Array.isArray(value) ? 0 : Number(value) || 0);
 
-          const pubVal = autoPubCount || (Array.isArray(faculty?.publications) ? faculty.publications.length : (Number(faculty?.publicationsCount) || Number(faculty?.publications) || 0));
-          const talksVal = autoTalksCount || (Number(tabData?.talksCount) || (Array.isArray(faculty?.talks) ? faculty.talks.length : (Number(faculty?.talks) || 0)));
-          const projVal = autoProjCount || (Number(tabData?.projectsCount) || (Array.isArray(faculty?.projects) ? faculty.projects.length : (Number(faculty?.projects) || 0)));
+          const pubVal = sections.publications.length || typedCount(faculty?.publicationsCount) || typedCount(faculty?.publications);
+          const talksVal = sections.talks.length || typedCount(tabData?.talksCount);
+          const projVal = sections.projects.length || typedCount(tabData?.projectsCount);
           const stats = [
             expMonths > 0 && { value: formatExperience(expMonths), label: 'Experience', from: 'from-green-50', to: 'to-green-100', border: 'border-green-200', text: 'text-green-600', sub: 'text-green-700' },
             pubVal > 0 && { value: pubVal, label: 'Publications', from: 'from-blue-50', to: 'to-blue-100', border: 'border-blue-200', text: 'text-blue-600', sub: 'text-blue-700' },

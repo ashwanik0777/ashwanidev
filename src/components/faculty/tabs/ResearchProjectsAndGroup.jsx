@@ -4,12 +4,14 @@ import {
   Calendar,
   DollarSign,
   FileText,
-  Download,
   Users,
   Mail,
   ExternalLink,
 } from "lucide-react";
-import { asArray, asText, matchKey, pickText, displayOr } from "./fieldUtils";
+import { asText, matchKey } from "./fieldUtils";
+import { facultySections, withValue } from "./facultyTabData";
+import StatTiles from "./StatTiles";
+import SubTabs from "./SubTabs";
 import {
   GROUP_STATUS_COLORS,
   normalizeGroupMember,
@@ -88,11 +90,36 @@ const Button = ({
   );
 };
 
+const titleCase = (value) => {
+  const text = asText(value);
+  return text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
+};
+
+// Label / value rows with the empty ones left out.
+const DetailRows = ({ rows, className = "" }) => {
+  const shown = rows.filter((row) => asText(row.value));
+  if (!shown.length) return null;
+  return (
+    <div className={className}>
+      {shown.map((row) => {
+        const Icon = row.icon;
+        return (
+          <p key={row.label} className="text-gray-600 flex items-center">
+            {Icon && <Icon className="w-4 h-4 mr-1 shrink-0" />}
+            <span className="font-medium mr-1">{row.label}:</span>
+            {row.value}
+          </p>
+        );
+      })}
+    </div>
+  );
+};
+
 // Research Projects Tab Component
 const ResearchProjectsTab = ({ profile }) => {
   const [filterStatus, setFilterStatus] = useState("all");
-  const tabData = profile?.tabData?.researchProjects || {};
-  const projects = asArray(tabData.projects)?.map(normalizeProject);
+  const projects = facultySections(profile).projects.map(normalizeProject);
+  const statuses = [...new Set(projects.map((project) => project.status).filter(Boolean))];
 
   const filteredProjects =
     filterStatus === "all"
@@ -107,79 +134,69 @@ const ResearchProjectsTab = ({ profile }) => {
 
   const ongoingCount = projects.filter((project) => project.status === "ongoing").length;
   const collaboratorCount = new Set(
-    projects.flatMap((project) => project.collaborators)?.map((name) => asText(name)),
+    projects.flatMap((project) => project.collaborators).map((name) => asText(name)).filter(Boolean),
   ).size;
+
+  const stats = withValue([
+    { label: "Total Projects", value: projects.length, tone: "blue" },
+    { label: "Ongoing Projects", value: ongoingCount, tone: "green" },
+    { label: "Completed Projects", value: projects.length - ongoingCount, tone: "purple" },
+    { label: "Collaborators", value: collaboratorCount, tone: "orange" },
+  ]);
+
+  if (!projects.length) return null;
 
   return (
     <div className="space-y-8">
       {/* Project Statistics */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">
-            Project Statistics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {projects.length}
-              </div>
-              <div className="text-sm text-blue-700">Total Projects</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{ongoingCount}</div>
-              <div className="text-sm text-green-700">Ongoing Projects</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {projects.length - ongoingCount}
-              </div>
-              <div className="text-sm text-purple-700">Completed Projects</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{collaboratorCount}</div>
-              <div className="text-sm text-orange-700">Collaborators</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {stats.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-xl text-gray-900">
+              Project Statistics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatTiles stats={stats} />
+          </CardContent>
+        </Card>
+      )}
 
-      {/* Filter Section */}
+      {/* Projects, with a status filter when there is more than one status */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <CardTitle className="text-2xl text-gray-900">
               Research Projects
             </CardTitle>
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-500" />
-              <div className="flex gap-2">
-                {["all", "ongoing", "completed"]?.map((status) => (
-                  <Button
-                    key={status}
-                    variant={filterStatus === status ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setFilterStatus(status)}
-                    className="text-xs"
-                  >
-                    {status === "all"
-                      ? "All Projects"
-                      : status.charAt(0).toUpperCase() + status.slice(1)}
-                  </Button>
-                ))}
+            {statuses.length > 1 && (
+              <div className="flex items-center gap-2">
+                <Filter className="w-4 h-4 text-gray-500" />
+                <div className="flex flex-wrap gap-2">
+                  {["all", ...statuses].map((status) => (
+                    <Button
+                      key={status}
+                      variant={filterStatus === status ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setFilterStatus(status)}
+                      className="text-xs"
+                    >
+                      {status === "all" ? "All Projects" : titleCase(status)}
+                    </Button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-6">
-            {filteredProjects?.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <div
                 key={index}
                 className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
               >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {project.title}
@@ -188,36 +205,28 @@ const ResearchProjectsTab = ({ profile }) => {
                       <p className="text-gray-700 mb-3">{project.description}</p>
                     )}
 
-                    <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <p className="text-gray-600">
-                          <span className="font-medium">Funding Agency:</span>{" "}
-                          {displayOr(project.fundingAgency)}
-                        </p>
-                        <p className="text-gray-600">
-                          <span className="font-medium">Role:</span>{" "}
-                          {displayOr(project.role)}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-gray-600 flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Duration:</span>{" "}
-                          {displayOr(project.duration)}
-                        </p>
-                        <p className="text-gray-600 flex items-center">
-                          <DollarSign className="w-4 h-4 mr-1" />
-                          <span className="font-medium">Budget:</span>{" "}
-                          {displayOr(project.budget)}
-                        </p>
-                      </div>
+                    <div className="grid sm:grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                      <DetailRows
+                        rows={[
+                          { label: "Funding Agency", value: project.fundingAgency },
+                          { label: "Role", value: project.role },
+                        ]}
+                      />
+                      <DetailRows
+                        rows={[
+                          { label: "Duration", value: project.duration, icon: Calendar },
+                          { label: "Budget", value: project.budget, icon: DollarSign },
+                        ]}
+                      />
                     </div>
                   </div>
-                  <div className="flex flex-col items-start lg:items-end gap-2">
-                    <Badge className={getStatusColor(project.status)}>
-                      {project.status.charAt(0).toUpperCase() + project.status.slice(1)}
-                    </Badge>
-                  </div>
+                  {project.status && (
+                    <div className="flex flex-col items-start lg:items-end gap-2">
+                      <Badge className={getStatusColor(project.status)}>
+                        {titleCase(project.status)}
+                      </Badge>
+                    </div>
+                  )}
                 </div>
 
                 {(project.collaborators.length > 0 || project.deliverables.length > 0) && (
@@ -228,7 +237,7 @@ const ResearchProjectsTab = ({ profile }) => {
                           Collaborators:
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {project.collaborators?.map((collaborator, idx) => (
+                          {project.collaborators.map((collaborator, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {collaborator}
                             </Badge>
@@ -242,7 +251,7 @@ const ResearchProjectsTab = ({ profile }) => {
                           Key Deliverables:
                         </h4>
                         <ul className="space-y-1">
-                          {project.deliverables.slice(0, 2)?.map((deliverable, idx) => (
+                          {project.deliverables.slice(0, 2).map((deliverable, idx) => (
                             <li
                               key={idx}
                               className="text-xs text-gray-600 flex items-start"
@@ -258,13 +267,6 @@ const ResearchProjectsTab = ({ profile }) => {
                 )}
               </div>
             ))}
-            {filteredProjects.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                {projects.length === 0
-                  ? "No research projects added yet."
-                  : "No projects match the selected filter."}
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
@@ -297,290 +299,218 @@ const GroupMemberLinks = ({ member, className = "" }) => {
   );
 };
 
-// Research Group Tab Component
-const ResearchGroupTab = ({ profile }) => {
-  const tabData = profile?.tabData?.researchGroup || {};
-  const phdScholars = asArray(tabData.phdScholars)?.map(normalizeGroupMember);
-  const postdocs = asArray(tabData.postdocs)?.map(normalizeGroupMember);
-  const researchAssistants = asArray(tabData.researchAssistants)?.map(normalizeGroupMember);
-
-  const getStatusColor = (status) =>
-    matchKey(status, GROUP_STATUS_COLORS, "bg-gray-100 text-gray-800");
-
-  const totalPublications = sumPublications(phdScholars, postdocs);
-  // const groupOverview = pickText(
-  //   tabData,
-  //   ["overview", "description"],
-  //   `Research group led by ${pickText(profile, ["name"], "this faculty member")}, bringing together PhD scholars, postdoctoral fellows and research assistants working on collaborative projects.`,
-  // );
-
+// Year and publication count line under a member, when either is filled.
+const MemberMeta = ({ when, publications }) => {
+  if (!when && !(publications > 0)) return null;
   return (
-    <div className="space-y-8">
-      {/* Research Group Overview */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <Users className="w-6 h-6 mr-2 text-blue-600" />
-            Research Group Overview
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {phdScholars.length}
-              </div>
-              <div className="text-sm text-blue-700">PhD Scholars</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {postdocs.length}
-              </div>
-              <div className="text-sm text-green-700">Postdocs</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {researchAssistants.length}
-              </div>
-              <div className="text-sm text-purple-700">Research Assistants</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{totalPublications}</div>
-              <div className="text-sm text-orange-700">Total Publications</div>
-            </div>
-          </div>
-
-          {/* <p className="text-gray-700 leading-relaxed">{groupOverview}</p> */}
-        </CardContent>
-      </Card>
-
-      {/* PhD Scholars */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">PhD Scholars</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            {phdScholars?.map((scholar, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">
-                          {scholar.name}
-                        </h3>
-                        {scholar.program && (
-                          <p className="text-blue-600 text-sm">{scholar.program}</p>
-                        )}
-                      </div>
-                      <Badge className={getStatusColor(scholar.status)}>
-                        {scholar.status}
-                      </Badge>
-                    </div>
-
-                    <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <p>
-                        <span className="font-medium">Research Area:</span>{" "}
-                        {displayOr(scholar.researchArea)}
-                      </p>
-                      <p>
-                        <span className="font-medium">Thesis:</span>{" "}
-                        {displayOr(scholar.thesis)}
-                      </p>
-                      <div className="flex items-center gap-4">
-                        {scholar.year && (
-                          <span className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {scholar.year}
-                          </span>
-                        )}
-                        {scholar.publications > 0 && (
-                          <span className="flex items-center">
-                            <FileText className="w-4 h-4 mr-1" />
-                            {scholar.publications} Publications
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <GroupMemberLinks member={scholar} />
-                  </div>
-                </div>
-              </div>
-            ))}
-            {phdScholars.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No PhD scholars added yet.
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Postdoctoral Fellows */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">
-            Postdoctoral Fellows
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            {postdocs?.map((postdoc, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100"
-              >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                      {postdoc.name}
-                    </h3>
-                    {postdoc.program && (
-                      <p className="text-blue-600 text-sm mb-3">{postdoc.program}</p>
-                    )}
-
-                    <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <p>
-                        <span className="font-medium">Research Area:</span>{" "}
-                        {displayOr(postdoc.researchArea)}
-                      </p>
-                      {postdoc.previousInstitute && (
-                        <p>
-                          <span className="font-medium">Previous Institute:</span>{" "}
-                          {postdoc.previousInstitute}
-                        </p>
-                      )}
-                      <div className="flex items-center gap-4">
-                        {postdoc.duration && (
-                          <span className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {postdoc.duration}
-                          </span>
-                        )}
-                        {postdoc.publications > 0 && (
-                          <span className="flex items-center">
-                            <FileText className="w-4 h-4 mr-1" />
-                            {postdoc.publications} Publications
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <GroupMemberLinks member={postdoc} />
-                  </div>
-                </div>
-              </div>
-            ))}
-            {postdocs.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No postdoctoral fellows added yet.
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Research Assistants */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-xl text-gray-900">
-            Research Assistants
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-2 gap-4">
-            {researchAssistants?.map((assistant, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 border-solid"
-              >
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  {assistant.name}
-                </h3>
-                {assistant.program && (
-                  <p className="text-green-600 text-sm mb-2">{assistant.program}</p>
-                )}
-
-                <div className="space-y-1 text-sm text-gray-600 mb-3">
-                  <p>
-                    <span className="font-medium">Project / Role:</span>{" "}
-                    {displayOr(assistant.project)}
-                  </p>
-                  {assistant.year && (
-                    <p className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {assistant.year}
-                    </p>
-                  )}
-                </div>
-
-                <GroupMemberLinks member={assistant} />
-              </div>
-            ))}
-            {researchAssistants.length === 0 && (
-              <p className="col-span-full py-6 text-center text-sm text-gray-500">
-                No research assistants added yet.
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+    <div className="flex items-center gap-4">
+      {when && (
+        <span className="flex items-center">
+          <Calendar className="w-4 h-4 mr-1" />
+          {when}
+        </span>
+      )}
+      {publications > 0 && (
+        <span className="flex items-center">
+          <FileText className="w-4 h-4 mr-1" />
+          {publications} Publications
+        </span>
+      )}
     </div>
   );
 };
 
-// Main Combined Component
+// The editor saves one "topic"; show it once, not as both research area and thesis.
+const withoutRepeat = (value, ...others) => (others.includes(value) ? "" : value);
+
+// Research Group Tab Component
+const ResearchGroupTab = ({ profile }) => {
+  const sections = facultySections(profile);
+  const phdScholars = sections.phdScholars.map(normalizeGroupMember);
+  const postdocs = sections.postdocs.map(normalizeGroupMember);
+  const researchAssistants = sections.researchAssistants.map(normalizeGroupMember);
+
+  const getStatusColor = (status) =>
+    matchKey(status, GROUP_STATUS_COLORS, "bg-gray-100 text-gray-800");
+
+  const stats = withValue([
+    { label: "PhD Scholars", value: phdScholars.length, tone: "blue" },
+    { label: "Postdocs", value: postdocs.length, tone: "green" },
+    { label: "Research Assistants", value: researchAssistants.length, tone: "purple" },
+    { label: "Total Publications", value: sumPublications(phdScholars, postdocs), tone: "orange" },
+  ]);
+
+  return (
+    <div className="space-y-8">
+      {/* Research Group Overview */}
+      {stats.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gray-900 flex items-center">
+              <Users className="w-6 h-6 mr-2 text-blue-600" />
+              Research Group Overview
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatTiles stats={stats} />
+          </CardContent>
+        </Card>
+      )}
+
+      {/* PhD Scholars */}
+      {phdScholars.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-xl text-gray-900">PhD Scholars</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {phdScholars.map((scholar, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow flex flex-col gap-3"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {scholar.name}
+                      </h3>
+                      {scholar.program && (
+                        <p className="text-blue-600 text-sm">{scholar.program}</p>
+                      )}
+                    </div>
+                    {scholar.status && (
+                      <Badge className={getStatusColor(scholar.status)}>
+                        {scholar.status}
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 text-sm text-gray-600 empty:hidden">
+                    <DetailRows
+                      className="space-y-2"
+                      rows={[
+                        { label: "Research Area", value: scholar.researchArea },
+                        { label: "Thesis", value: withoutRepeat(scholar.thesis, scholar.researchArea) },
+                      ]}
+                    />
+                    <MemberMeta when={scholar.year} publications={scholar.publications} />
+                  </div>
+
+                  <GroupMemberLinks member={scholar} />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Postdoctoral Fellows */}
+      {postdocs.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-xl text-gray-900">
+              Postdoctoral Fellows
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {postdocs.map((postdoc, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100 flex flex-col gap-3"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {postdoc.name}
+                    </h3>
+                    {postdoc.program && (
+                      <p className="text-blue-600 text-sm mt-1">{postdoc.program}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2 text-sm text-gray-600 empty:hidden">
+                    <DetailRows
+                      className="space-y-2"
+                      rows={[
+                        { label: "Research Area", value: postdoc.researchArea },
+                        { label: "Previous Institute", value: postdoc.previousInstitute },
+                      ]}
+                    />
+                    <MemberMeta when={postdoc.duration} publications={postdoc.publications} />
+                  </div>
+
+                  <GroupMemberLinks member={postdoc} />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Research Assistants */}
+      {researchAssistants.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-xl text-gray-900">
+              Research Assistants
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-4">
+              {researchAssistants.map((assistant, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-100 border-solid flex flex-col gap-2"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {assistant.name}
+                    </h3>
+                    {assistant.program && (
+                      <p className="text-green-600 text-sm mt-1">{assistant.program}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1 text-sm text-gray-600 empty:hidden">
+                    <DetailRows rows={[{ label: "Project / Role", value: assistant.project }]} />
+                    <MemberMeta when={assistant.year} />
+                  </div>
+
+                  <GroupMemberLinks member={assistant} />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+};
+
+// Main Combined Component: only the sub-tabs that have data are offered.
 const ResearchProjectsAndGroup = ({ profile }) => {
   const [activeTab, setActiveTab] = useState("projects");
+  const sections = facultySections(profile);
+  const subTabs = [
+    sections.projects.length > 0 && { id: "projects", label: "Research Projects", icon: FileText },
+    (sections.phdScholars.length > 0 || sections.postdocs.length > 0 || sections.researchAssistants.length > 0) && {
+      id: "group",
+      label: "Research Group",
+      icon: Users,
+    },
+  ].filter(Boolean);
+  const current = subTabs.some((tab) => tab.id === activeTab) ? activeTab : subTabs[0]?.id;
+
+  if (!current) return null;
 
   return (
     <div className="w-full">
-    <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
-    
-        {/* Tab Navigation */}
-     <div className="flex flex-wrap items-center gap-4 mb-8">
-  <div
-    onClick={() => setActiveTab("projects")}
-    className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-      activeTab === "projects"
-        ? "text-blue-600 border-b-4 border-blue-600"
-        : "text-gray-900"
-    }`}
-  >
-    <FileText
-      className={`w-6 h-6 mr-2 ${
-        activeTab === "projects" ? "text-blue-600" : "text-gray-400"
-      }`}
-    />
-    Research Projects
-  </div>
+      <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
+        <SubTabs tabs={subTabs} active={current} onChange={setActiveTab} />
 
-  <div
-    onClick={() => setActiveTab("group")}
-    className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-      activeTab === "group"
-        ? "text-blue-600 border-b-4 border-blue-600"
-        : "text-gray-900"
-    }`}
-  >
-    <Users
-      className={`w-6 h-6 mr-2 ${
-        activeTab === "group" ? "text-blue-600" : "text-gray-400"
-      }`}
-    />
-    Research Group
-  </div>
-</div>
-
-
-        {/* Tab Content */}
         <div className="transition-opacity duration-300">
-          {activeTab === "projects" ? (
+          {current === "projects" ? (
             <ResearchProjectsTab profile={profile} />
           ) : (
             <ResearchGroupTab profile={profile} />
@@ -588,7 +518,6 @@ const ResearchProjectsAndGroup = ({ profile }) => {
         </div>
       </div>
     </div>
-   
   );
 };
 

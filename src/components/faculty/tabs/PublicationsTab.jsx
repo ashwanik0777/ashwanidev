@@ -13,14 +13,14 @@ import {
   Target,
 } from "lucide-react";
 import {
-  asArray,
   asText,
   matchKey,
   pickArray,
   pickNumber,
   pickText,
-  displayOr,
 } from "./fieldUtils";
+import { facultySections, withValue } from "./facultyTabData";
+import SubTabs from "./SubTabs";
 
 const PATENT_STATUS_VARIANTS = {
   filed: "blue",
@@ -157,18 +157,88 @@ const Button = ({
   );
 };
 
+// Static class names only, so Tailwind can see them.
+const STAT_TONES = {
+  blue: ["from-blue-50 to-blue-100 border-blue-200", "text-blue-600", "text-blue-700"],
+  green: ["from-green-50 to-green-100 border-green-200", "text-green-600", "text-green-700"],
+  orange: ["from-orange-50 to-orange-100 border-orange-200", "text-orange-600", "text-orange-700"],
+  purple: ["from-purple-50 to-purple-100 border-purple-200", "text-purple-600", "text-purple-700"],
+  yellow: ["from-yellow-50 to-yellow-100 border-yellow-200", "text-yellow-600", "text-yellow-700"],
+};
+
+// Count cards; the ones with nothing to count are already left out by the caller.
+const StatCards = ({ stats }) => {
+  if (!stats.length) return null;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map((stat) => {
+        const [box, value, label] = STAT_TONES[stat.tone] || STAT_TONES.blue;
+        return (
+          <Card key={stat.label} className={`bg-gradient-to-br ${box}`}>
+            <CardContent>
+              <div className="text-center py-4">
+                <div className={`text-3xl font-bold ${value}`}>{stat.value}</div>
+                <div className={`text-sm font-medium ${label}`}>{stat.label}</div>
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </div>
+  );
+};
+
+// Patent fields in two columns, with the empty ones left out.
+const PatentDetails = ({ patent }) => {
+  const columns = [
+    [
+      { label: "Application No", value: patent.applicationNo },
+      { label: "Technical Field", value: patent.technicalField },
+      { label: "Filed", value: patent.applicationDate, icon: Calendar },
+    ],
+    [
+      { label: "Country", value: patent.country, icon: MapPin },
+      { label: "Patent Office", value: patent.patentOffice },
+      { label: "Year", value: patent.filedYear > 0 ? String(patent.filedYear) : "" },
+    ],
+  ]
+    .map((rows) => rows.filter((row) => asText(row.value)))
+    .filter((rows) => rows.length);
+  if (!columns.length) return null;
+  return (
+    <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
+      {columns.map((rows, index) => (
+        <div key={index} className="space-y-2">
+          {rows.map((row) => {
+            const Icon = row.icon;
+            return (
+              <p key={row.label} className="text-gray-600 flex items-center">
+                {Icon && <Icon className="w-4 h-4 mr-1 shrink-0" />}
+                <span className="font-medium mr-1">{row.label}:</span>
+                {row.value}
+              </p>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export default function PublicationsTab({ profile }) {
   const [activeTab, setActiveTab] = useState("publications");
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
-  const tabData = profile?.tabData?.publications || {};
-  const publications = asArray(tabData.publications)?.map(normalizePublication);
-  // Dashboard saves patents under publications.patents; legacy fallback to patents.patents
-  const pubPatents = asArray(tabData.patents);
-  const patents = (pubPatents.length
-    ? pubPatents
-    : asArray(profile?.tabData?.patents?.patents)
-  )?.map(normalizePatent);
+  const sections = facultySections(profile);
+  const publications = sections.publications.map(normalizePublication);
+  const patents = sections.patents.map(normalizePatent);
+
+  // Only the sub-tabs that have data are offered.
+  const subTabs = [
+    publications.length > 0 && { id: "publications", label: "Publications", icon: BookOpen },
+    patents.length > 0 && { id: "patents", label: "Patents", icon: Award },
+  ].filter(Boolean);
+  const current = subTabs.some((tab) => tab.id === activeTab) ? activeTab : subTabs[0]?.id;
 
   const years = [...new Set(publications?.map((p) => p.year).filter(Boolean))].sort(
     (a, b) => b - a
@@ -186,6 +256,13 @@ export default function PublicationsTab({ profile }) {
   const bookCount = publications.filter((p) => p.type === "book").length;
   const bookChapterCount = publications.filter((p) => p.type === "book chapter").length;
 
+  const publicationStats = withValue([
+    { label: "Journal", value: journalCount, tone: "blue" },
+    { label: "Conference", value: conferenceCount, tone: "green" },
+    { label: "Book", value: bookCount, tone: "orange" },
+    { label: "Book Chapter", value: bookChapterCount, tone: "purple" },
+  ]);
+
   const getStatusColor = (status) => matchKey(status, PATENT_STATUS_VARIANTS, "outline");
 
   const countPatentsByStatus = (status) =>
@@ -193,6 +270,15 @@ export default function PublicationsTab({ profile }) {
 
   // Sort a copy — `.sort()` on the source array mutates state during render.
   const patentsByYear = [...patents].sort((a, b) => b.filedYear - a.filedYear);
+
+  const patentStats = withValue([
+    { label: "Total Patents", value: patents.length, tone: "yellow" },
+    { label: "Filed", value: countPatentsByStatus("filed"), tone: "blue" },
+    { label: "Published", value: countPatentsByStatus("published"), tone: "green" },
+    { label: "Latest Year", value: patentsByYear[0]?.filedYear || 0, tone: "purple" },
+  ]);
+
+  if (!current) return null;
 
   const getTypeColor = (type) => {
     return type === "journal" ? "blue" : "green";
@@ -223,95 +309,12 @@ export default function PublicationsTab({ profile }) {
   return (
     <div className="w-full">
       <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
-        {/* Tab Navigation */}
+        <SubTabs tabs={subTabs} active={current} onChange={setActiveTab} />
 
-        <div className="flex flex-wrap items-center gap-4 mb-8">
-          <div
-            onClick={() => setActiveTab("publications")}
-            className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-              activeTab === "publications"
-                ? "text-blue-600 border-b-4 border-blue-600"
-                : "text-gray-900"
-            }`}
-          >
-            <BookOpen
-              className={`w-6 h-6 mr-2 ${
-                activeTab === "publications" ? "text-blue-600" : "text-gray-400"
-              }`}
-            />
-            Publications
-          </div>
-
-          <div
-            onClick={() => setActiveTab("patents")}
-            className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-              activeTab === "patents"
-                ? "text-blue-600 border-b-4 border-blue-600"
-                : "text-gray-900"
-            }`}
-          >
-            <Award
-              className={`w-6 h-6 mr-2 ${
-                activeTab === "patents" ? "text-blue-600" : "text-gray-400"
-              }`}
-            />
-            Patents
-          </div>
-        </div>
-
-        {activeTab === "publications" && (
+        {current === "publications" && (
           <div className="space-y-8">
             {/* Statistics Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-blue-600">
-                      {journalCount}
-                    </div>
-                    <div className="text-sm text-blue-700 font-medium">
-                      Journal
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-green-600">
-                      {conferenceCount}
-                    </div>
-                    <div className="text-sm text-green-700 font-medium">
-                      Conference
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-orange-600">
-                      {bookCount}
-                    </div>
-                    <div className="text-sm text-orange-700 font-medium">
-                      Book
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-purple-600">
-                      {bookChapterCount}
-                    </div>
-                    <div className="text-sm text-purple-700 font-medium">
-                      Book Chapter
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <StatCards stats={publicationStats} />
 
             {/* Overview Text */}
             <Card>
@@ -323,9 +326,7 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
-                  {publications.length > 0
-                    ? `${publications.length} publication${publications.length === 1 ? "" : "s"} across journals, conferences, and books.`
-                    : "No publications have been added to this profile yet."}
+                  {`${publications.length} publication${publications.length === 1 ? "" : "s"} across journals, conferences, and books.`}
                 </p>
               </CardContent>
             </Card>
@@ -335,9 +336,11 @@ export default function PublicationsTab({ profile }) {
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <CardTitle>Publication Timeline</CardTitle>
+                  {(years.length > 1 || types.length > 1) && (
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
                       <Filter className="w-4 h-4 text-gray-500" />
+                      {years.length > 1 && (
                       <select
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
@@ -350,6 +353,8 @@ export default function PublicationsTab({ profile }) {
                           </option>
                         ))}
                       </select>
+                      )}
+                      {types.length > 1 && (
                       <select
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
@@ -362,8 +367,10 @@ export default function PublicationsTab({ profile }) {
                           </option>
                         ))}
                       </select>
+                      )}
                     </div>
                   </div>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>
@@ -380,11 +387,13 @@ export default function PublicationsTab({ profile }) {
                             <h3 className="text-lg font-semibold text-gray-900 mb-2">
                               {publication.title || publication.chapterTitle || publication.bookTitle}
                             </h3>
-                            <p className="text-sm text-gray-600 mb-2">
-                              {publication.authors} {publication.editorName && `(Ed: ${publication.editorName})`}
-                            </p>
+                            {(publication.authors || publication.editorName) && (
+                              <p className="text-sm text-gray-600 mb-2">
+                                {publication.authors} {publication.editorName && `(Ed: ${publication.editorName})`}
+                              </p>
+                            )}
                             
-                            {publication.type === "journal" && (
+                            {publication.type === "journal" && (publication.journalName || publication.venue || publication.volume || publication.pageNo || publication.volumePage) && (
                               <p className="text-blue-600 font-medium mb-3">
                                 {publication.journalName || publication.venue}
                                 {publication.volume ? ` | ${publication.volume}` : ""}
@@ -392,17 +401,17 @@ export default function PublicationsTab({ profile }) {
                                 {publication.volumePage && !publication.volume && !publication.pageNo ? ` | ${publication.volumePage}` : ""}
                               </p>
                             )}
-                            {publication.type === "conference" && (
+                            {publication.type === "conference" && (publication.conferenceName || publication.venue || publication.location || publication.pageNo) && (
                               <p className="text-blue-600 font-medium mb-3">
                                 {publication.conferenceName || publication.venue} {publication.location && `| ${publication.location}`} {publication.pageNo && `| ${publication.pageNo}`}
                               </p>
                             )}
-                            {publication.type === "book chapter" && (
+                            {publication.type === "book chapter" && (publication.bookTitle || publication.pageNo) && (
                               <p className="text-blue-600 font-medium mb-3">
                                 {publication.bookTitle} {publication.pageNo && `| ${publication.pageNo}`}
                               </p>
                             )}
-                            {publication.type === "book" && (
+                            {publication.type === "book" && (publication.publisher || publication.pageCount) && (
                               <p className="text-blue-600 font-medium mb-3">
                                 {publication.publisher} {publication.pageCount && `| ${publication.pageCount} pages`}
                               </p>
@@ -439,7 +448,7 @@ export default function PublicationsTab({ profile }) {
                               )}
                             </div>
 
-                            <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                            <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4 empty:hidden">
                               {publication.publisher && (
                                 <span>
                                   <strong>Publisher:</strong> {publication.publisher}
@@ -485,7 +494,7 @@ export default function PublicationsTab({ profile }) {
                               )}
                             </div>
 
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 empty:hidden">
                               {publication.paperUrl && (
                                 <a
                                   href={publication.paperUrl}
@@ -518,9 +527,7 @@ export default function PublicationsTab({ profile }) {
                   ))}
                   {filteredPublications.length === 0 && (
                     <p className="py-6 text-center text-sm text-gray-500">
-                      {publications.length === 0
-                        ? "No publications added yet."
-                        : "No publications match the selected filters."}
+                      No publications match the selected filters.
                     </p>
                   )}
                 </div>
@@ -529,61 +536,10 @@ export default function PublicationsTab({ profile }) {
           </div>
         )}
 
-        {activeTab === "patents" && (
+        {current === "patents" && (
           <div className="space-y-8">
             {/* Patent Statistics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Card className="bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-yellow-600">
-                      {patents.length}
-                    </div>
-                    <div className="text-sm text-yellow-700 font-medium">
-                      Total Patents
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-blue-600">
-                      {countPatentsByStatus("filed")}
-                    </div>
-                    <div className="text-sm text-blue-700 font-medium">
-                      Filed
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-green-600">
-                      {countPatentsByStatus("published")}
-                    </div>
-                    <div className="text-sm text-green-700 font-medium">
-                      Published
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
-                <CardContent>
-                  <div className="text-center py-4">
-                    <div className="text-3xl font-bold text-purple-600">
-                      {patentsByYear.length && patentsByYear[0].filedYear > 0
-                        ? patentsByYear[0].filedYear
-                        : "--"}
-                    </div>
-                    <div className="text-sm text-purple-700 font-medium">
-                      Latest Year
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <StatCards stats={patentStats} />
 
             {/* Patent Overview */}
             <Card>
@@ -595,9 +551,7 @@ export default function PublicationsTab({ profile }) {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700 leading-relaxed">
-                  {patents.length > 0
-                    ? `${patents.length} patent application${patents.length === 1 ? "" : "s"} translating research work into practical, real-world solutions.`
-                    : "No patents have been added to this profile yet."}
+                  {`${patents.length} patent application${patents.length === 1 ? "" : "s"} translating research work into practical, real-world solutions.`}
                 </p>
               </CardContent>
             </Card>
@@ -628,48 +582,7 @@ export default function PublicationsTab({ profile }) {
                                 </p>
                               )}
 
-                              <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
-                                <div className="space-y-2">
-                                  <p className="text-gray-600">
-                                    <span className="font-medium">
-                                      Application No:
-                                    </span>{" "}
-                                    {displayOr(patent.applicationNo)}
-                                  </p>
-                                  <p className="text-gray-600">
-                                    <span className="font-medium">
-                                      Technical Field:
-                                    </span>{" "}
-                                    {displayOr(patent.technicalField)}
-                                  </p>
-                                  <p className="text-gray-600 flex items-center">
-                                    <Calendar className="w-4 h-4 mr-1" />
-                                    <span className="font-medium">
-                                      Filed:
-                                    </span>{" "}
-                                    {displayOr(patent.applicationDate)}
-                                  </p>
-                                </div>
-                                <div className="space-y-2">
-                                  <p className="text-gray-600 flex items-center">
-                                    <MapPin className="w-4 h-4 mr-1" />
-                                    <span className="font-medium">
-                                      Country:
-                                    </span>{" "}
-                                    {displayOr(patent.country)}
-                                  </p>
-                                  <p className="text-gray-600">
-                                    <span className="font-medium">
-                                      Patent Office:
-                                    </span>{" "}
-                                    {displayOr(patent.patentOffice)}
-                                  </p>
-                                  <p className="text-gray-600">
-                                    <span className="font-medium">Year:</span>{" "}
-                                    {patent.filedYear || "—"}
-                                  </p>
-                                </div>
-                              </div>
+                              <PatentDetails patent={patent} />
 
                               {patent.inventors.length > 0 && (
                                 <div className="mb-4">
@@ -687,20 +600,17 @@ export default function PublicationsTab({ profile }) {
                               )}
                             </div>
 
-                            <div className="flex-shrink-0">
-                              <Badge variant={getStatusColor(patent.status)}>
-                                {patent.status}
-                              </Badge>
-                            </div>
+                            {patent.status && (
+                              <div className="flex-shrink-0">
+                                <Badge variant={getStatusColor(patent.status)}>
+                                  {patent.status}
+                                </Badge>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
                     ))}
-                  {patentsByYear.length === 0 && (
-                    <p className="py-6 text-center text-sm text-gray-500">
-                      No patents added yet.
-                    </p>
-                  )}
                 </div>
               </CardContent>
             </Card>

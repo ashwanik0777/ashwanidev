@@ -67,7 +67,9 @@ export const Button = ({
   );
 };
 import { BookOpen, Clock, Users, Filter, FileText, Download, Eye } from 'lucide-react';
-import { asArray, asText, pick, pickArray, pickNumber, pickText } from './fieldUtils';
+import { asText, pick, pickArray, pickNumber, pickText } from './fieldUtils';
+import { facultySections, withValue } from './facultyTabData';
+import StatTiles from './StatTiles';
 
 const LEVEL_COLORS = {
   UG: 'bg-green-100 text-green-800',
@@ -83,7 +85,7 @@ const toLevelCode = (value) => {
   if (level.startsWith('under') || level === 'ug') return 'UG';
   if (level.startsWith('post') || level === 'pg') return 'PG';
   if (level.startsWith('doctor') || level === 'phd') return 'PhD';
-  return asText(value, 'Other');
+  return asText(value);
 };
 
 // Bridges the dashboard's editor field names to what this tab renders.
@@ -102,8 +104,10 @@ const normalizeCourse = (item) => ({
 
 export const TeachingTab = ({ profile }) => {
   const [selectedLevel, setSelectedLevel] = useState('all');
-  const tabData = profile?.tabData?.teaching || {};
-  const courses = asArray(tabData.courses)?.map(normalizeCourse);
+  const sections = facultySections(profile);
+  const courses = sections.courses.map(normalizeCourse);
+  // Filter chips only for the levels these courses actually have.
+  const levels = ['UG', 'PG', 'Integrated UG+PG', 'PhD'].filter((level) => courses.some((course) => course.level === level));
 
   const filteredCourses = selectedLevel === 'all'
     ? courses
@@ -111,41 +115,34 @@ export const TeachingTab = ({ profile }) => {
 
   const getLevelColor = (level) => LEVEL_COLORS[level] || 'bg-gray-100 text-gray-800';
 
-  const totalStudents = courses.reduce((sum, course) => sum + (course?.students || 0), 0);
   const totalCredits = courses.reduce((sum, course) => sum + (course?.credits || 0), 0);
   const totalSlides = courses.reduce((sum, course) => sum + (course?.slides?.length || 0), 0);
 
-  const teachingPhilosophy = asText(tabData.philosophy);
+  const teachingPhilosophy = sections.teachingPhilosophy;
+  const stats = withValue([
+    { label: 'Total Courses', value: courses.length, tone: 'blue' },
+    { label: 'Total Credits', value: totalCredits, tone: 'purple' },
+    { label: 'Lecture Slides', value: totalSlides, tone: 'orange' },
+  ]);
 
   return (
     <div className="space-y-6 bg-gray-50">
-        {/* Teaching Statistics */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-         
-        <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <BookOpen  className="w-6 h-6 mr-2 text-blue-600" />
-             Teaching Statistics
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{courses.length}</div>
-              <div className="text-sm text-blue-700">Total Courses</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">{totalCredits}</div>
-              <div className="text-sm text-purple-700">Total Credits</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{totalSlides}</div>
-              <div className="text-sm text-orange-700">Lecture Slides</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Teaching Statistics */}
+      {stats.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gray-900 flex items-center">
+              <BookOpen className="w-6 h-6 mr-2 text-blue-600" />
+              Teaching Statistics
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatTiles stats={stats} columns="sm:grid-cols-3" />
+          </CardContent>
+        </Card>
+      )}
       {/* Teaching Philosophy */}
+      {teachingPhilosophy && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-900 flex items-center">
@@ -155,20 +152,23 @@ export const TeachingTab = ({ profile }) => {
         </CardHeader>
         <CardContent>
           <p className="text-gray-700 leading-relaxed">
-            {teachingPhilosophy || 'No teaching philosophy added yet.'}
+            {teachingPhilosophy}
           </p>
         </CardContent>
       </Card>
+      )}
 
       {/* Courses Section */}
+      {courses.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <CardTitle className="text-2xl text-gray-900">Courses Taught</CardTitle>
+            {levels.length > 1 && (
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-gray-500" />
-              <div className="flex gap-2">
-                {['all', 'UG', 'PG', 'Integrated UG+PG', 'PhD']?.map((level) => (
+              <div className="flex flex-wrap gap-2">
+                {['all', ...levels].map((level) => (
                   <Button
                     key={level}
                     variant={selectedLevel === level ? "default" : "outline"}
@@ -181,6 +181,7 @@ export const TeachingTab = ({ profile }) => {
                 ))}
               </div>
             </div>
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -195,18 +196,20 @@ export const TeachingTab = ({ profile }) => {
                           {course.code}
                         </div>
                       )}
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{course.name}</h3>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-                      {course.credits > 0 && (
+                      {course.name && (
                         <div>
-                          <span className="font-medium">Credits:</span> {course.credits}
+                          <h3 className="text-lg font-semibold text-gray-900">{course.name}</h3>
                         </div>
                       )}
                     </div>
+
+                    {course.credits > 0 && (
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
+                        <div>
+                          <span className="font-medium">Credits:</span> {course.credits}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Lecture Slides Section */}
                     {course.slides.length > 0 && (
@@ -254,24 +257,20 @@ export const TeachingTab = ({ profile }) => {
                     )}
                   </div>
 
-                  <div className="flex-shrink-0">
-                    <Badge className={getLevelColor(course.level)}>
-                      {course.level}
-                    </Badge>
-                  </div>
+                  {course.level && (
+                    <div className="flex-shrink-0">
+                      <Badge className={getLevelColor(course.level)}>
+                        {course.level}
+                      </Badge>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
-            {filteredCourses.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                {courses.length === 0
-                  ? 'No courses added yet.'
-                  : 'No courses match the selected level.'}
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
     
     </div>

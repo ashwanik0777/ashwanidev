@@ -70,7 +70,9 @@ export const Button = ({
   );
 };
 import { Award, Calendar, ExternalLink, CheckCircle } from 'lucide-react';
-import { asArray, matchKey, pickArray, pickText, displayOr } from './fieldUtils';
+import { asText, matchKey, pickArray, pickText } from './fieldUtils';
+import { facultySections, withValue } from './facultyTabData';
+import StatTiles from './StatTiles';
 
 const LEVEL_COLORS = {
   professional: 'bg-purple-100 text-purple-800',
@@ -108,9 +110,9 @@ const normalizeProgram = (item) => ({
 });
 
 export const CertificationsTab = ({ profile }) => {
-  const tabData = profile?.tabData?.certifications || {};
-  const certifications = asArray(tabData.certifications)?.map(normalizeCertification);
-  const professionalDevelopment = asArray(tabData.professionalDevelopment)?.map(normalizeProgram);
+  const sections = facultySections(profile);
+  const certifications = sections.certifications.map(normalizeCertification);
+  const professionalDevelopment = sections.professionalDevelopment.map(normalizeProgram);
 
   const getLevelColor = (level) => matchKey(level, LEVEL_COLORS, 'bg-gray-100 text-gray-800');
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
@@ -120,53 +122,41 @@ export const CertificationsTab = ({ profile }) => {
   const certificationYears = certifications
     ?.map((cert) => Number(String(cert.year).match(/\d{4}/)?.[0] || 0))
     .filter((year) => year > 1900);
-  const yearsOfLearning = certificationYears.length
-    ? `${new Date().getFullYear() - Math.min(...certificationYears)}+`
-    : '--';
+  const learningYears = certificationYears.length
+    ? new Date().getFullYear() - Math.min(...certificationYears)
+    : 0;
+
+  // Counts with nothing in them are left out.
+  const stats = withValue([
+    { label: 'Total Certifications', value: certifications.length, tone: 'blue' },
+    { label: 'Training Programs', value: professionalDevelopment.length, tone: 'green' },
+    {
+      label: 'Professional Level',
+      value: certifications.filter((cert) => asText(cert.level).toLowerCase() === 'professional').length,
+      tone: 'purple',
+    },
+    { label: 'Years of Learning', value: learningYears > 0 ? `${learningYears}+` : '', tone: 'orange' },
+  ]);
 
   return (
     <div className="space-y-6">
       {/* Certifications Overview */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <Award className="w-6 h-6 mr-2 text-blue-600" />
-            Professional Certifications
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{certifications.length}</div>
-              <div className="text-sm text-blue-700">Total Certifications</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
-                {professionalDevelopment.length}
-              </div>
-              <div className="text-sm text-green-700">Training Programs</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
-                {certifications.filter(c => c.level === 'Professional').length}
-              </div>
-              <div className="text-sm text-purple-700">Professional Level</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{yearsOfLearning}</div>
-              <div className="text-sm text-orange-700">Years of Learning</div>
-            </div>
-          </div>
-          
-          {/* <p className="text-gray-700 leading-relaxed">
-            {pickText(profile, ['name'], 'This faculty member')} maintains current professional
-            certifications and takes part in faculty development programs, keeping their teaching
-            and research aligned with the latest advances and industry best practices.
-          </p> */}
-        </CardContent>
-      </Card>
+      {stats.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gray-900 flex items-center">
+              <Award className="w-6 h-6 mr-2 text-blue-600" />
+              Professional Certifications
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatTiles stats={stats} />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Certification Details */}
+      {certifications.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900">Certification Portfolio</CardTitle>
@@ -185,7 +175,7 @@ export const CertificationsTab = ({ profile }) => {
                         </div>
                         <div>
                           <h3 className="text-xl font-bold text-gray-900 leading-tight mb-1.5">{cert.title}</h3>
-                          <p className="text-blue-700 font-semibold text-sm">{cert.platform}</p>
+                          {cert.platform && <p className="text-blue-700 font-semibold text-sm">{cert.platform}</p>}
                         </div>
                       </div>
                       <div className="flex flex-col gap-2 shrink-0 ml-4 items-end">
@@ -202,25 +192,33 @@ export const CertificationsTab = ({ profile }) => {
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-gray-50/80 p-5 rounded-xl border border-gray-100 mb-6">
-                      <div>
-                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Issue Date</p>
-                        <p className="text-gray-900 font-semibold flex items-center gap-1.5">
-                          <Calendar className="w-4 h-4 text-gray-400" />
-                          {displayOr(cert.year)}
-                        </p>
+                    {(cert.year || cert.validUntil || cert.credentialId) && (
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-gray-50/80 p-5 rounded-xl border border-gray-100 mb-6">
+                        {cert.year && (
+                          <div>
+                            <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Issue Date</p>
+                            <p className="text-gray-900 font-semibold flex items-center gap-1.5">
+                              <Calendar className="w-4 h-4 text-gray-400" />
+                              {cert.year}
+                            </p>
+                          </div>
+                        )}
+                        {cert.validUntil && (
+                          <div>
+                            <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Valid Until</p>
+                            <p className="text-gray-900 font-semibold">{cert.validUntil}</p>
+                          </div>
+                        )}
+                        {cert.credentialId && (
+                          <div className="sm:col-span-2">
+                            <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Credential ID</p>
+                            <p className="text-gray-800 font-mono text-sm bg-white border border-gray-200 px-2.5 py-1 rounded-md inline-block break-all">
+                              {cert.credentialId}
+                            </p>
+                          </div>
+                        )}
                       </div>
-                      <div>
-                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Valid Until</p>
-                        <p className="text-gray-900 font-semibold">{displayOr(cert.validUntil)}</p>
-                      </div>
-                      <div className="sm:col-span-2">
-                        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-1.5">Credential ID</p>
-                        <p className="text-gray-800 font-mono text-sm bg-white border border-gray-200 px-2.5 py-1 rounded-md inline-block break-all">
-                          {displayOr(cert.credentialId)}
-                        </p>
-                      </div>
-                    </div>
+                    )}
 
                     {cert.skills?.length > 0 && (
                       <div className="mb-6">
@@ -268,16 +266,13 @@ export const CertificationsTab = ({ profile }) => {
                 </div>
               </div>
             ))}
-            {certifications.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No certifications added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Professional Development */}
+      {professionalDevelopment.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900">Professional Development</CardTitle>
@@ -289,7 +284,7 @@ export const CertificationsTab = ({ profile }) => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900 mb-1">{activity.title}</h3>
-                    <p className="text-blue-600 text-sm mb-2">{activity.organizer}</p>
+                    {activity.organizer && <p className="text-blue-600 text-sm mb-2">{activity.organizer}</p>}
                     {activity.duration && (
                       <p className="text-xs text-gray-600">Duration: {activity.duration}</p>
                     )}
@@ -297,7 +292,7 @@ export const CertificationsTab = ({ profile }) => {
                       <p className="text-xs text-gray-600 mt-1">{activity.description}</p>
                     )}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 empty:hidden">
                     {activity.type && (
                       <Badge className={getTypeColor(activity.type)}>
                         {activity.type}
@@ -313,14 +308,10 @@ export const CertificationsTab = ({ profile }) => {
                 </div>
               </div>
             ))}
-            {professionalDevelopment.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No professional development programs added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
     </div>
   );
 };

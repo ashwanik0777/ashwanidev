@@ -77,6 +77,8 @@ export const Button = ({
 };
 import { Mic, Calendar, MapPin, Users, ExternalLink, Play } from 'lucide-react';
 import { asArray, asText, matchKey, pickText } from './fieldUtils';
+import { facultySections, withValue } from './facultyTabData';
+import StatTiles from './StatTiles';
 
 const TYPE_COLORS = {
   keynote: 'bg-purple-100 text-purple-800',
@@ -116,8 +118,7 @@ const normalizeTalk = (item) => ({
 
 export const TalksTab = ({ profile }) => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const tabData = profile?.tabData?.talks || {};
-  const invitedTalks = asArray(tabData.invitedTalks)?.map(normalizeTalk);
+  const invitedTalks = facultySections(profile).talks.map(normalizeTalk);
 
   const getTypeColor = (type) => matchKey(type, TYPE_COLORS, 'bg-gray-100 text-gray-800');
   const formatType = (type) => matchKey(type, TYPE_LABELS, asText(type, 'Talk'));
@@ -127,9 +128,20 @@ export const TalksTab = ({ profile }) => {
   const guestLectureCount = invitedTalks.filter((talk) => talk.type === 'guest-lecture').length;
   const panelCount = invitedTalks.filter((talk) => talk.type === 'panel').length;
 
+  // Counts with nothing in them are left out.
+  const stats = withValue([
+    { label: 'Invited Talks', value: invitedCount, tone: 'blue' },
+    { label: 'Keynote Speeches', value: keynoteCount, tone: 'purple' },
+    { label: 'Guest Lectures', value: guestLectureCount, tone: 'green' },
+    { label: 'Panel Discussions', value: panelCount, tone: 'orange' },
+  ]);
+
+  if (!invitedTalks.length) return null;
+
   return (
     <div className="space-y-6 bg-gray-50">
       {/* Talks Overview */}
+      {stats.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         
          <CardHeader>
@@ -140,24 +152,7 @@ export const TalksTab = ({ profile }) => {
         </CardHeader>
         
         <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{invitedCount}</div>
-              <div className="text-sm text-blue-700">Invited Talks</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">{keynoteCount}</div>
-              <div className="text-sm text-purple-700">Keynote Speeches</div>
-            </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{guestLectureCount}</div>
-              <div className="text-sm text-green-700">Guest Lectures</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{panelCount}</div>
-              <div className="text-sm text-orange-700">Panel Discussions</div>
-            </div>
-          </div>
+          <StatTiles stats={stats} />
 
           {/* <p className="text-gray-700 leading-relaxed">
             {pickText(profile, ['name'], 'This faculty member')} delivers invited talks, keynotes and
@@ -166,6 +161,7 @@ export const TalksTab = ({ profile }) => {
           </p> */}
         </CardContent>
       </Card>
+      )}
 
       {/* Talk Details */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
@@ -178,13 +174,13 @@ export const TalksTab = ({ profile }) => {
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{talk.title}</h3>
+                    {talk.title && <h3 className="text-lg font-semibold text-gray-900 mb-2">{talk.title}</h3>}
                     {talk.description && (
                       <p className="text-gray-700 mb-4 leading-relaxed">{talk.description}</p>
                     )}
 
-                    <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
-                      <div className="space-y-2">
+                    <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-4 empty:hidden">
+                      <div className="space-y-2 empty:hidden">
                         {talk.event && <p className="font-medium text-blue-600">{talk.event}</p>}
                         {talk.date && (
                           <p className="flex items-center">
@@ -199,9 +195,11 @@ export const TalksTab = ({ profile }) => {
                           </p>
                         )}
                       </div>
-                      <div className="space-y-2">
-                        {talk.host && <p><span className="font-medium">Host:</span> {talk.host}</p>}
-                      </div>
+                      {talk.host && (
+                        <div className="space-y-2">
+                          <p><span className="font-medium">Host:</span> {talk.host}</p>
+                        </div>
+                      )}
                     </div>
 
                     {talk.photos && talk.photos.length > 0 && (
@@ -227,11 +225,6 @@ export const TalksTab = ({ profile }) => {
                 </div>
               </div>
             ))}
-            {invitedTalks.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No invited talks added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>

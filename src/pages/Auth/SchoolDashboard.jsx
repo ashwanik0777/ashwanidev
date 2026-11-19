@@ -29,13 +29,16 @@ import {
 } from "../../Data/schoolDashboardData";
 import {
   adminGetFacultyList,
+  adminGetFacultyProfile,
   adminCreateFacultyProfile,
   adminUpdateFacultyProfile,
   adminDeleteFacultyProfile,
 } from "../../services/facultyDashboardService";
+import FacultyTable from "../../components/faculty/manage/FacultyTable";
+import FacultyEditorModal from "../../components/faculty/manage/FacultyEditorModal";
+import { toFacultyForm, toFacultyPayload, validateFacultyForm } from "../../components/faculty/manage/facultyForm";
 import { logoutPortalSession } from "../../services/sessionManager";
 import {
-  SCHOOLS_META,
   getSchoolByApiParam,
   getSchoolByName,
   getDepartmentsForSchool,
@@ -276,9 +279,10 @@ const SchoolDashboard = () => {
   }, [toast]);
   const [facultyRefreshKey, setFacultyRefreshKey] = useState(0);
   const [collectionEditors, setCollectionEditors] = useState({});
-  const [facultyEditor, setFacultyEditor] = useState({ index: null, form: null });
+  // { form, profile, isNew, loading, loadError, saving, saveError, errors }; form is null when closed
+  const [facultyEditor, setFacultyEditor] = useState({ form: null });
   const [facultyProfiles, setFacultyProfiles] = useState([]);
-  const [facultySearchTerm, setFacultySearchTerm] = useState("");
+  const [facultyLoading, setFacultyLoading] = useState(true);
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: "", message: "", onConfirm: null });
   const [announcementActions, setAnnouncementActions] = useState(null);
 
@@ -375,10 +379,13 @@ const SchoolDashboard = () => {
       try {
         const schoolMeta = resolveSchool(mySchoolCode) || getSchoolByName(data.schoolName);
         const schoolParam = schoolMeta?.code || mySchoolCode || data.schoolName;
-        const dataList = await adminGetFacultyList({ school: schoolParam, limit: 1000 });
+        // Whole profiles, so the table can show how complete each one is. 100 is the API's page limit.
+        const dataList = await adminGetFacultyList({ school: schoolParam, limit: 100, include: "profile" });
         setFacultyProfiles(dataList.items || []);
       } catch (err) {
         console.error("Failed to fetch faculty list:", err);
+      } finally {
+        setFacultyLoading(false);
       }
     };
     if (mySchoolCode || data.schoolName) {
@@ -437,22 +444,6 @@ const SchoolDashboard = () => {
     loadData();
     return () => { isMounted = false; };
   }, [activeTab, mySchoolCode, semRegFilters]);
-
-  const schoolOptions = useMemo(
-    () => SCHOOLS_META.map((school) => ({
-      label: school.name,
-      value: school.code,
-    })),
-    []
-  );
-
-  const departmentOptions = useMemo(() => {
-    const schoolMeta = resolveSchool(facultyEditor.form?.school);
-    return (schoolMeta?.departments || []).map((dept) => ({
-      label: dept.name,
-      value: dept.name,
-    }));
-  }, [facultyEditor.form?.school]);
 
   const summary = useMemo(
     () => [
@@ -588,28 +579,68 @@ const SchoolDashboard = () => {
     setMessage("School dashboard reset to default data. Save to apply.");
   };
 
-  const saveFacultyProfile = async (faculty) => {
+  const facultySchoolCode = resolveSchool(mySchoolCode)?.code || mySchoolCode;
+  const facultySchoolName = resolveSchool(mySchoolCode)?.name || data.schoolName;
+
+  const closeFacultyEditor = useCallback(() => setFacultyEditor({ form: null }), []);
+  const updateFacultyForm = useCallback(
+    (patch) =>
+      setFacultyEditor((prev) => {
+        if (!prev.form) return prev;
+        const errors = { ...(prev.errors || {}) };
+        Object.keys(patch).forEach((key) => delete errors[key]);
+        return { ...prev, form: { ...prev.form, ...patch }, errors, saveError: "" };
+      }),
+    [],
+  );
+
+  // The list row is only a summary, so the whole profile (photo, bios, links ...) is loaded before editing.
+  const loadFacultyForEdit = async (faculty) => {
+    setFacultyEditor({ form: toFacultyForm(faculty, facultySchoolCode), profile: faculty, isNew: false, loading: true });
     try {
-      if (faculty.id && faculty.id.startsWith("faculty-")) {
-        // New faculty – auto-create login account
-        const result = await adminCreateFacultyProfile({
-          ...faculty,
-          createLoginAccount: true,
-        });
-        setFacultyRefreshKey((prev) => prev + 1);
-        if (result?.loginAccount) {
-          setMessage(`Faculty "${faculty.name}" created! Credentials have been sent to their email.`);
-        } else {
-          setMessage(`Faculty profile created: ${faculty.name}`);
-        }
+      const full = await adminGetFacultyProfile(faculty.id);
+      if (!full) throw new Error("Profile not found");
+      setFacultyEditor((prev) =>
+        prev.profile?.id === faculty.id ? { ...prev, form: toFacultyForm(full, facultySchoolCode), profile: full, loading: false, loadError: "" } : prev,
+      );
+    } catch (err) {
+      setFacultyEditor((prev) =>
+        prev.profile?.id === faculty.id
+          ? { ...prev, loading: false, loadError: `Could not load this profile: ${err?.response?.data?.message || err.message}` }
+          : prev,
+      );
+    }
+  };
+
+  const saveFacultyProfile = async () => {
+    const { form, profile, isNew } = facultyEditor;
+    if (!form) return;
+    const errors = validateFacultyForm(form);
+    if (Object.keys(errors).length) {
+      setFacultyEditor((prev) => ({ ...prev, errors, saveError: "Please fix the highlighted fields." }));
+      return;
+    }
+    const payload = toFacultyPayload(form, facultySchoolCode);
+    setFacultyEditor((prev) => ({ ...prev, saving: true, saveError: "" }));
+    try {
+      if (isNew) {
+        // The backend gives the new profile its SCHOOL-F0000 id and creates the login.
+        const result = await adminCreateFacultyProfile({ ...payload, createLoginAccount: true });
+        setMessage(
+          result?.loginAccount
+            ? `Faculty "${payload.name}" created! Credentials have been sent to their email.`
+            : `Faculty profile created: ${payload.name}`,
+        );
       } else {
-        await adminUpdateFacultyProfile(faculty.id, faculty);
-        setFacultyRefreshKey((prev) => prev + 1);
-        setMessage(`Faculty profile updated: ${faculty.name}`);
+        await adminUpdateFacultyProfile(profile.id, payload);
+        setMessage(`Faculty profile updated: ${payload.name}`);
       }
+      setFacultyRefreshKey((prev) => prev + 1);
+      setFacultyEditor({ form: null });
     } catch (err) {
       console.error(err);
-      setMessage(`Failed to update faculty: ${err?.response?.data?.message || err.message}`);
+      const detail = err?.response?.data?.errors?.[0]?.message || err?.response?.data?.message || err.message;
+      setFacultyEditor((prev) => ({ ...prev, saving: false, saveError: `Could not save: ${detail}` }));
     }
   };
 
@@ -629,7 +660,7 @@ const SchoolDashboard = () => {
     try {
       await adminDeleteFacultyProfile(facultyId);
       setFacultyRefreshKey((prev) => prev + 1);
-      setFacultyEditor({ index: null, form: null });
+      setFacultyEditor({ form: null });
       setMessage("Faculty profile deleted.");
     } catch (err) {
       console.error(err);
@@ -639,20 +670,7 @@ const SchoolDashboard = () => {
 
 
   const addFacultyProfile = () => {
-    const schoolMeta = resolveSchool(data.schoolCode) || getSchoolByName(data.schoolName);
-    setFacultyEditor({
-      index: null,
-      form: {
-        id: `faculty-${Date.now()}`,
-        name: "",
-        designation: "",
-        department: "",
-        school: schoolMeta?.code || data.schoolCode || "",
-        school_code: schoolMeta?.code || data.schoolCode || "",
-        email: "",
-        phone: "",
-      },
-    });
+    setFacultyEditor({ form: toFacultyForm(null, facultySchoolCode), profile: null, isNew: true });
   };
 
   const normalizeFieldInput = (field, value) => {
@@ -921,191 +939,27 @@ const SchoolDashboard = () => {
     </div>
   );
 
-  const renderFacultyEditor = () => {
-    const filteredFaculty = facultyProfiles.filter(f => 
-      !facultySearchTerm || 
-      f.name?.toLowerCase().includes(facultySearchTerm.toLowerCase()) || 
-      f.designation?.toLowerCase().includes(facultySearchTerm.toLowerCase())
-    );
-
-    return (
-    <div className={cardClass}>
-      <div className="mb-4 border-b border-slate-100 pb-4">
-        <div className="relative w-full sm:max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search faculty..."
-              value={facultySearchTerm}
-              onChange={(e) => setFacultySearchTerm(e.target.value)}
-              className="w-full pl-9 pr-8 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500 transition-shadow bg-slate-50 hover:bg-white focus:bg-white"
-            />
-            {facultySearchTerm && (
-              <button
-                type="button"
-                onClick={() => setFacultySearchTerm("")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-colors"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            )}
-        </div>
-      </div>
-
-      <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1 custom-scrollbar">
-        {facultyProfiles.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm text-slate-500">
-            No faculty profiles found. Click "Add New" to create one.
-          </div>
-        ) : filteredFaculty.length === 0 ? (
-          <div className="py-8 text-center text-sm text-slate-500">
-            No faculty found matching your search.
-          </div>
-        ) : (
-          filteredFaculty.map((faculty, index) => (
-            <div key={faculty.id || index} className="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 hover:bg-slate-50 transition">
-              <div className="flex items-center justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-slate-900">{faculty.name || "Untitled Faculty"}</p>
-                  <p className="text-xs text-slate-500 mt-1">{faculty.designation || "No designation"}</p>
-                </div>
-
-                <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setFacultyEditor({ index, form: { ...faculty } })}
-                    className="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-sm"
-                  >
-                    <Pencil className="h-3 w-3 text-slate-500" /> Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => confirmDeleteFacultyProfile(faculty.id)}
-                    className="inline-flex items-center gap-1 rounded-lg border border-rose-200 bg-rose-50 px-2.5 py-1.5 text-xs font-semibold text-rose-700 hover:bg-rose-100 transition shadow-sm"
-                  >
-                    <Trash2 className="h-3 w-3 text-rose-500" /> Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
+  const renderFacultyEditor = () => (
+    <>
+      <FacultyTable
+        profiles={facultyProfiles}
+        loading={facultyLoading}
+        onEdit={loadFacultyForEdit}
+        onDelete={(faculty) => confirmDeleteFacultyProfile(faculty.id)}
+      />
       {facultyEditor.form && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-2xl transform rounded-2xl border border-slate-100 bg-white p-6 shadow-2xl transition-all animate-scale-in">
-            <div className="mb-4 flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold text-slate-950">
-                {facultyEditor.index === null ? "Add Faculty Profile" : "Edit Faculty Details"}
-              </h3>
-              <button
-                type="button"
-                onClick={() => setFacultyEditor({ index: null, form: null })}
-                className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 max-h-[60vh] overflow-y-auto pr-1 py-1">
-              <Field label="Name" required><input className={inputClass} value={facultyEditor.form.name || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, name: e.target.value } }))} /></Field>
-              <Field label="Designation" required><input className={inputClass} value={facultyEditor.form.designation || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, designation: e.target.value } }))} /></Field>
-              <Field label="School" required>
-                <select
-                  className={inputClass}
-                  value={facultyEditor.form.school || ""}
-                  onChange={(e) =>
-                    setFacultyEditor((prev) => ({
-                      ...prev,
-                      form: {
-                        ...prev.form,
-                        school: e.target.value,
-                        department: "",
-                      },
-                    }))
-                  }
-                >
-                  <option value="">Select school</option>
-                  {schoolOptions.map((school) => (
-                    <option key={school.value} value={school.value}>
-                      {school.label}
-                    </option>
-                  ))}
-                </select>
-              </Field>
-              <Field label="Department" required>
-                <select
-                  className={inputClass}
-                  value={facultyEditor.form.department || ""}
-                  onChange={(e) =>
-                    setFacultyEditor((prev) => ({
-                      ...prev,
-                      form: { ...prev.form, department: e.target.value },
-                    }))
-                  }
-                  disabled={!departmentOptions.length}
-                >
-                  <option value="">
-                    {departmentOptions.length ? "Select department" : "Select school first"}
-                  </option>
-                  {departmentOptions.map((dept) => (
-                    <option key={dept.value} value={dept.value}>
-                      {dept.label}
-                    </option>
-                  ))}
-                </select>
-              </Field>
-              <Field label="Email" required><input className={inputClass} value={facultyEditor.form.email || ""} onChange={(e) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, email: e.target.value } }))} /></Field>
-              <Field label="Phone">
-                <input
-                  className={inputClass}
-                  value={facultyEditor.form.phone || ""}
-                  maxLength={10}
-                  onChange={(e) => {
-                    const numericVal = e.target.value.replace(/\D/g, "").slice(0, 10);
-                    setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, phone: numericVal } }));
-                  }}
-                  placeholder="10-digit mobile number"
-                />
-              </Field>
-              <div className="md:col-span-2">
-                <ImageUploadField
-                  label="Profile Photo"
-                  value={facultyEditor.form.image_url || ""}
-                  onChange={(url) => setFacultyEditor((prev) => ({ ...prev, form: { ...prev.form, image_url: url } }))}
-                  aspectRatio={3 / 4}
-                  recommendedSize="300×400"
-                  folder={`gbu-website/${mySchoolCode || "general"}/faculty`}
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
-              <button
-                type="button"
-                onClick={() => setFacultyEditor({ index: null, form: null })}
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  saveFacultyProfile(facultyEditor.form);
-                  setFacultyEditor({ index: null, form: null });
-                }}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white px-5 py-2 text-xs font-semibold transition"
-              >
-                Save Faculty
-              </button>
-            </div>
-          </div>
-        </div>
+        <FacultyEditorModal
+          editor={facultyEditor}
+          schoolCode={facultySchoolCode}
+          schoolName={facultySchoolName}
+          onChange={updateFacultyForm}
+          onClose={closeFacultyEditor}
+          onSave={saveFacultyProfile}
+          onRetry={() => loadFacultyForEdit(facultyEditor.profile)}
+        />
       )}
-    </div>
+    </>
   );
-  };
 
   /* ── Clubs & Societies: the same club manager as the Admin dashboard ── */
   const renderClubsTab = () => (

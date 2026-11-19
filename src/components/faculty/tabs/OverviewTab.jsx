@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, ExternalLink, Info } from "lucide-react";
-import { asArray, asText, pickText } from "./fieldUtils";
+import { asText, pickText } from "./fieldUtils";
+import { facultySections } from "./facultyTabData";
  export const Card = ({ className = "", children, ...props }) => (
    <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
      {children}
@@ -48,13 +49,14 @@ const OverviewTab = ({ activeTab, profile }) => {
   }
 
   const name = asText(profile.name, 'this faculty member');
-  const shortBio = asText(profile.shortBio);
-  const fullBio = asText(profile.fullBio, shortBio);
+  const sections = facultySections(profile);
+  const shortBio = sections.shortBio || sections.fullBio;
+  const fullBio = sections.fullBio || shortBio;
   const hasLongBio = Boolean(fullBio) && fullBio !== shortBio;
 
   // Research areas may be stored as objects ({title, description}) or as plain
   // strings coming from the tags field.
-  const researchAreas = asArray(profile.researchAreas)?.map((area) =>
+  const researchAreas = sections.researchAreas.map((area) =>
     typeof area === 'string'
       ? { title: area, description: '' }
       : { title: pickText(area, ['title', 'name']), description: pickText(area, ['description']) },
@@ -71,6 +73,7 @@ const OverviewTab = ({ activeTab, profile }) => {
   return (
     <div className="space-y-6 bg-gray-50">
       {/* Bio Section */}
+      {shortBio && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-900 flex items-center">
@@ -82,7 +85,7 @@ const OverviewTab = ({ activeTab, profile }) => {
         <CardContent>
           <div className="prose max-w-none">
             <p className="text-gray-700 leading-relaxed">
-              {(expanded ? fullBio : shortBio) || 'No biography added yet.'}
+              {expanded ? fullBio : shortBio}
             </p>
             {hasLongBio && (
               <Button
@@ -106,8 +109,10 @@ const OverviewTab = ({ activeTab, profile }) => {
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Research Areas */}
+      {researchAreas.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900">
@@ -129,14 +134,10 @@ const OverviewTab = ({ activeTab, profile }) => {
                 )}
               </div>
             ))}
-            {researchAreas.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500 md:col-span-2">
-                No research areas added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Quick Links */}
       {/* {quickLinks.length > 0 && (

@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { Heart, Trophy, Calendar } from "lucide-react";
-import { asArray, pickText } from "./fieldUtils";
+import { pickText } from "./fieldUtils";
+import { facultySections, withValue } from "./facultyTabData";
+import SubTabs from "./SubTabs";
 
 const Card = ({ className = "", children }) => (
   <div className={`rounded-xl bg-white border border-gray-200 shadow-sm ${className}`}>
@@ -31,6 +33,14 @@ const normalizeAward = (item) => ({
   year: pickText(item, ["year"]),
 });
 
+// Static class names only, so Tailwind can see them.
+const AWARD_TONES = {
+  blue: "border-blue-200 bg-blue-50 text-blue-700",
+  green: "border-green-200 bg-green-50 text-green-700",
+  orange: "border-orange-200 bg-orange-50 text-orange-700",
+  purple: "border-purple-200 bg-purple-50 text-purple-700",
+};
+
 const normalizeActivity = (item) => ({
   title: pickText(item, ["title", "name"]),
   organization: pickText(item, ["organization", "organisation"]),
@@ -42,18 +52,23 @@ const normalizeActivity = (item) => ({
 const AwardsAndSocialImpactPage = ({ profile }) => {
   const [activeTab, setActiveTab] = useState("awards");
 
-  const awardsData = profile?.tabData?.awards || {};
-  const socialData = profile?.tabData?.socialImpact || {};
+  const sections = facultySections(profile);
+  const awards = sections.awards.map(normalizeAward);
+  const socialActivities = sections.socialActivities.map(normalizeActivity);
 
-  const awards = asArray(awardsData?.awards)?.map(normalizeAward);
-  const socialActivities = asArray(socialData?.socialActivities)?.map(normalizeActivity);
+  // Only the sub-tabs that have data are offered.
+  const subTabs = [
+    awards.length > 0 && { id: "awards", label: "Awards & Recognition", icon: Trophy },
+    socialActivities.length > 0 && { id: "social", label: "Social Impact", icon: Heart },
+  ].filter(Boolean);
+  const current = subTabs.some((tab) => tab.id === activeTab) ? activeTab : subTabs[0]?.id;
 
   const recentYear = useMemo(() => {
     // Award years are free text in the editor — pull out any 4-digit year.
     const years = awards
       ?.map((award) => Number(String(award.year).match(/\d{4}/)?.[0] || 0))
       .filter((year) => year > 1900);
-    return years.length ? Math.max(...years) : "-";
+    return years.length ? Math.max(...years) : 0;
   }, [awards]);
 
   const internationalAwards = useMemo(() => {
@@ -64,60 +79,40 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
     return awards.filter((a) => String(a.level).toLowerCase() === "national").length;
   }, [awards]);
 
+  // Counts with nothing in them are left out.
+  const stats = withValue([
+    { label: "Total Awards", value: awards.length, tone: "blue" },
+    { label: "International", value: internationalAwards, tone: "green" },
+    { label: "National", value: nationalAwards, tone: "orange" },
+    { label: "Latest Year", value: recentYear, tone: "purple" },
+  ]);
+
+  if (!current) return null;
+
   return (
     <div className="w-full">
       <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
-        <div className="flex flex-wrap items-center gap-4 mb-8">
-          <button
-            type="button"
-            onClick={() => setActiveTab("awards")}
-            className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-              activeTab === "awards" ? "text-blue-600 border-b-4 border-blue-600" : "text-gray-900"
-            }`}
-          >
-            <Trophy className={`w-6 h-6 mr-2 ${activeTab === "awards" ? "text-blue-600" : "text-gray-400"}`} />
-            Awards & Recognition
-          </button>
+        <SubTabs tabs={subTabs} active={current} onChange={setActiveTab} />
 
-          <button
-            type="button"
-            onClick={() => setActiveTab("social")}
-            className={`flex items-center cursor-pointer text-xl sm:text-2xl font-bold pb-2 ${
-              activeTab === "social" ? "text-blue-600 border-b-4 border-blue-600" : "text-gray-900"
-            }`}
-          >
-            <Heart className={`w-6 h-6 mr-2 ${activeTab === "social" ? "text-blue-600" : "text-gray-400"}`} />
-            Social Impact
-          </button>
-        </div>
-
-        {activeTab === "awards" ? (
+        {current === "awards" ? (
           <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl text-gray-900">Awards Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center">
-                    <div className="text-2xl font-bold text-blue-700">{awards.length}</div>
-                    <div className="text-sm text-blue-700">Total Awards</div>
+            {stats.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-gray-900">Awards Summary</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {stats.map((stat) => (
+                      <div key={stat.label} className={`rounded-lg border p-4 text-center ${AWARD_TONES[stat.tone]}`}>
+                        <div className="text-2xl font-bold">{stat.value}</div>
+                        <div className="text-sm">{stat.label}</div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-center">
-                    <div className="text-2xl font-bold text-green-700">{internationalAwards}</div>
-                    <div className="text-sm text-green-700">International</div>
-                  </div>
-                  <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 text-center">
-                    <div className="text-2xl font-bold text-orange-700">{nationalAwards}</div>
-                    <div className="text-sm text-orange-700">National</div>
-                  </div>
-                  <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 text-center">
-                    <div className="text-2xl font-bold text-purple-700">{recentYear}</div>
-                    <div className="text-sm text-purple-700">Latest Year</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            )}
 
             <Card>
               <CardHeader>
@@ -146,11 +141,6 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
                       )}
                     </div>
                   ))}
-                  {awards.length === 0 && (
-                    <p className="py-6 text-center text-sm text-gray-500">
-                      No awards added yet.
-                    </p>
-                  )}
                 </div>
               </CardContent>
             </Card>
@@ -179,11 +169,6 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
                       )}
                     </div>
                   ))}
-                  {socialActivities.length === 0 && (
-                    <p className="py-6 text-center text-sm text-gray-500">
-                      No social impact activities added yet.
-                    </p>
-                  )}
                 </div>
               </CardContent>
             </Card>

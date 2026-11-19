@@ -1,7 +1,8 @@
 
 export const OtherTab = ({ profile }) => {
-  const message =
-    profile?.tabData?.other?.message || 'No Information Available';
+  const message = String(profile?.tabData?.other?.message ?? '').trim();
+  // The tab itself is hidden when there is no message; this is only a guard.
+  if (!message) return null;
 
   return (
     <div className="space-y-6  p-6 min-h-[200px] flex items-center justify-center">

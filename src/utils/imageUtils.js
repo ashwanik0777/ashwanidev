@@ -122,7 +122,8 @@ export const getImageUrl = (path, placeholder = 'https://via.placeholder.com/800
 export const getFacultyInitials = (name) => {
   if (!name) return 'F';
   const skip = ['dr.', 'dr', 'prof.', 'prof', 'mr.', 'mr', 'ms.', 'ms', 'mrs.', 'mrs', 'shri', 'smt.', 'smt'];
-  const parts = String(name).split(/\s+/).filter(w => !skip.includes(w.toLowerCase()));
+  // filter(Boolean): a name being typed ("Dr. ") ends in a space and would leave an empty part
+  const parts = String(name).split(/\s+/).filter(w => w && !skip.includes(w.toLowerCase()));
   if (parts.length === 0) return 'F';
   if (parts.length === 1) return parts[0][0].toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();

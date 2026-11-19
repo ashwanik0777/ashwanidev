@@ -33,7 +33,8 @@ const Badge = ({ className = '', children }) => (
   </span>
 );
 import { Calendar, MapPin, GraduationCap } from 'lucide-react';
-import { asArray, asText, matchKey, pickArray } from './fieldUtils';
+import { asText, matchKey, pickArray } from './fieldUtils';
+import { facultySections } from './facultyTabData';
 import { calculateExperienceMonths, formatExperience, parseExperienceDate } from '../../../utils/facultyExperience';
 
 const TYPE_COLORS = {
@@ -44,9 +45,7 @@ const TYPE_COLORS = {
 };
 
 export const QualificationsTab = ({ profile }) => {
-  const tabData = profile?.tabData?.qualifications || {};
-  const qualifications = asArray(tabData.qualifications);
-  const experience = asArray(tabData.experience);
+  const { qualifications, experience } = facultySections(profile);
 
   const getSortValue = (dateStr) => {
     const date = parseExperienceDate(dateStr);
@@ -76,7 +75,7 @@ export const QualificationsTab = ({ profile }) => {
   const formatPeriod = (exp) => {
     const fromStr = asText(exp.from);
     const toStr = asText(exp.to);
-    if (!fromStr) return '—';
+    if (!fromStr) return '';
 
     const from = parseExperienceDate(fromStr);
     if (!from || from.present) return fromStr;
@@ -101,6 +100,7 @@ export const QualificationsTab = ({ profile }) => {
   return (
     <div className="space-y-8">
       {/* Educational Qualifications */}
+      {qualifications.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-900 flex items-center">
@@ -116,7 +116,7 @@ export const QualificationsTab = ({ profile }) => {
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-sm border border-gray-100 border-solid hover:shadow-md transition-shadow">
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{qual.degree}</h3>
+                      {qual.degree && <h3 className="text-lg font-semibold text-gray-900 mb-2">{qual.degree}</h3>}
                       {qual.institution && (
                         <p className="text-blue-600 font-medium mb-1">{qual.institution}</p>
                       )}
@@ -138,23 +138,22 @@ export const QualificationsTab = ({ profile }) => {
                         )}
                       </div>
                     </div>
-                    <Badge className={getTypeColor(qual.type)}>
-                      {qual.type ? qual.type.charAt(0).toUpperCase() + qual.type.slice(1) : 'General'}
-                    </Badge>
+                    {asText(qual.type) && (
+                      <Badge className={getTypeColor(qual.type)}>
+                        {qual.type.charAt(0).toUpperCase() + qual.type.slice(1)}
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
-            {qualifications.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No educational qualifications added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Professional Experience */}
+      {experience.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-900">Professional Experience</CardTitle>
@@ -163,23 +162,29 @@ export const QualificationsTab = ({ profile }) => {
           <div className="space-y-6">
             {sortedExperience?.map((exp, index) => (
               <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+                <div className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 ${pickArray(exp, ['responsibilities']).length > 0 ? 'mb-4' : ''}`}>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-1">{exp.position}</h3>
+                    {exp.position && <h3 className="text-xl font-semibold text-gray-900 mb-1">{exp.position}</h3>}
                     {exp.department && (
                       <p className="text-blue-600 font-medium mb-1">{exp.department}</p>
                     )}
                     {exp.institution && <p className="text-gray-700">{exp.institution}</p>}
                   </div>
-                  <div className="flex flex-col items-start lg:items-end gap-2">
-                    <Badge className={getTypeColor(exp.type)}>
-                      {exp.type ? exp.type.charAt(0).toUpperCase() + exp.type.slice(1) : 'Experience'}
-                    </Badge>
-                    <span className="text-sm text-gray-600 flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {formatPeriod(exp)}
-                    </span>
-                  </div>
+                  {(asText(exp.type) || formatPeriod(exp)) && (
+                    <div className="flex flex-col items-start lg:items-end gap-2">
+                      {asText(exp.type) && (
+                        <Badge className={getTypeColor(exp.type)}>
+                          {exp.type.charAt(0).toUpperCase() + exp.type.slice(1)}
+                        </Badge>
+                      )}
+                      {formatPeriod(exp) && (
+                        <span className="text-sm text-gray-600 flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {formatPeriod(exp)}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
                 {pickArray(exp, ['responsibilities']).length > 0 && (
                   <div>
@@ -196,14 +201,10 @@ export const QualificationsTab = ({ profile }) => {
                 )}
               </div>
             ))}
-            {experience.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No professional experience added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
     </div>
   );
 };

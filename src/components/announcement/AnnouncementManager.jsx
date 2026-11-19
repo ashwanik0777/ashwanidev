@@ -23,6 +23,11 @@ import {
   updateAnnouncement,
 } from "../../services/announcementsAdminService";
 import { invalidateAnnouncementsCache } from "../../utils/schoolAnnouncements";
+import { removeEmoji, stripEmoji } from "../../utils/emoji";
+
+// Titles and descriptions take no icons or emoji. The backend removes them on
+// every save as well (announcements/schema.js marks the same fields plainText).
+const ICON_FREE_KEYS = new Set(["title", "excerpt", "content", "description"]);
 
 /*
  * One CRUD surface for every announcement kind, used by both the admin portal
@@ -145,6 +150,12 @@ const AnnouncementManager = ({
   const [search, setSearch] = useState("");
   const [editor, setEditor] = useState(null); // { id, form } — null when closed
   const [deletingId, setDeletingId] = useState(null);
+  // The field an icon was just removed from, so it can say why.
+  const [iconNoticeKey, setIconNoticeKey] = useState("");
+
+  useEffect(() => {
+    if (!editor) setIconNoticeKey("");
+  }, [editor]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
@@ -244,7 +255,12 @@ const AnnouncementManager = ({
   };
 
   const setField = (key, value) => {
-    setEditor((prev) => (prev ? { ...prev, form: { ...prev.form, [key]: value } } : prev));
+    let next = value;
+    if (ICON_FREE_KEYS.has(key) && typeof value === "string") {
+      next = removeEmoji(value);
+      if (next !== value) setIconNoticeKey(key);
+    }
+    setEditor((prev) => (prev ? { ...prev, form: { ...prev.form, [key]: next } } : prev));
   };
 
   const handleSubmit = async (event) => {
@@ -267,6 +283,9 @@ const AnnouncementManager = ({
     setSaving(true);
     try {
       const payload = { ...(editor.originalItem || {}), ...editor.form };
+      for (const key of ICON_FREE_KEYS) {
+        if (typeof payload[key] === "string") payload[key] = stripEmoji(payload[key]);
+      }
       // A school account is always pinned to its own school server-side, but
       // send it so an admin can file an item on a school's behalf.
       if (schoolCode) payload.schoolCode = schoolCode;
@@ -787,6 +806,9 @@ const AnnouncementManager = ({
                         )
                       }
                     />
+                  )}
+                  {iconNoticeKey === field.key && (
+                    <span className="mt-1 block text-xs text-amber-700">Icons are not allowed here.</span>
                   )}
                 </div>
                 );

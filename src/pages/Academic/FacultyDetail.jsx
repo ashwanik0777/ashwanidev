@@ -2,12 +2,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import SimpleLayout from '../../components/faculty/SimpleLayout';
 import FacultyHeader from '../../components/faculty/FacultyHeader';
-import SummaryDashboard from '../../components/faculty/SummaryDashboard';
 import FacultyTabs from '../../components/faculty/FacultyTabs';
 import TabContent from '../../components/faculty/TabContent';
-import { TrendingUp, BookOpenCheck, Presentation, FolderOpen, FileText, FlaskConical, GraduationCap, Newspaper } from 'lucide-react';
+import { FileText, FlaskConical, GraduationCap, Newspaper } from 'lucide-react';
 import { fetchFacultyPublicProfile } from '../../services/facultyDashboardService';
-import { hasContent } from '../../components/faculty/tabs/fieldUtils';
+import { facultySections, TAB_HAS_DATA } from '../../components/faculty/tabs/facultyTabData';
 import { calculateExperienceMonths, formatExperience } from '../../utils/facultyExperience';
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
@@ -25,34 +24,19 @@ const TAB_ITEMS = [
   { id: 'other', label: 'Other' },
 ];
 
-/* The tabData sections each tab renders. A tab is hidden only when every one of
-   its sections is completely empty; Overview has no entry and always shows. */
-const TAB_SECTIONS = {
-  qualifications: ['qualifications'],
-  certifications: ['certifications'],
-  teaching: ['teaching'],
-  administration: ['administration'],
-  'research-projects': ['researchProjects', 'researchGroup'],
-  publications: ['publications', 'patents'],
-  talks: ['talks'],
-  awards: ['awards', 'socialImpact'],
-  other: ['other'],
-};
-
 const FacultyDetail = () => {
   const { id } = useParams();
   const [faculty, setFaculty] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const visibleTabs = useMemo(
-    () =>
-      TAB_ITEMS.filter((tab) => {
-        const sections = TAB_SECTIONS[tab.id];
-        if (!sections) return true;
-        return sections.some((key) => hasContent(faculty?.tabData?.[key]));
-      }),
-    [faculty],
-  );
+  /* Tabs with nothing filled in are left out, and the first tab that has data
+     opens by default. */
+  const visibleTabs = useMemo(() => {
+    if (!faculty) return [];
+    const sections = facultySections(faculty);
+    return TAB_ITEMS.filter((tab) => TAB_HAS_DATA[tab.id]?.(sections));
+  }, [faculty]);
+  const defaultTab = visibleTabs[0]?.id;
 
   /* The active tab lives in the URL (?tab=teaching) so the browser back button
      steps through tabs instead of leaving the profile entirely, and so a tab can
@@ -60,29 +44,29 @@ const FacultyDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedTab = searchParams.get('tab');
   const activeTab = useMemo(
-    () => (visibleTabs.some((tab) => tab.id === requestedTab) ? requestedTab : 'overview'),
-    [requestedTab, visibleTabs],
+    () => (visibleTabs.some((tab) => tab.id === requestedTab) ? requestedTab : defaultTab),
+    [requestedTab, visibleTabs, defaultTab],
   );
 
   const handleTabChange = useCallback(
     (tabId) => {
       if (tabId === activeTab) return;
       const next = new URLSearchParams(searchParams);
-      if (tabId === 'overview') next.delete('tab');
+      if (tabId === defaultTab) next.delete('tab');
       else next.set('tab', tabId);
       // Push (not replace) so each tab becomes its own history entry.
       setSearchParams(next);
     },
-    [activeTab, searchParams, setSearchParams],
+    [activeTab, defaultTab, searchParams, setSearchParams],
   );
 
   const normalizeFacultyProfile = (member) => ({
     ...member,
     image_url: member.image_url,
     experience: formatExperience(calculateExperienceMonths(member?.tabData?.qualifications?.experience)),
-    // Used by OverviewTab
-    shortBio: member.shortBio || member.bio || 'Faculty profile is available.',
-    fullBio: member.fullBio || member.bio || 'Faculty profile details are available.',
+    // Used by OverviewTab; left empty when the faculty has not written a bio
+    shortBio: member.shortBio || member.bio || '',
+    fullBio: member.fullBio || member.bio || '',
     // Used by FacultyHeader & FacultyDetail stats (projects/talks counts)
     projects: member.tabData?.projectsCount !== undefined && member.tabData?.projectsCount !== null && member.tabData?.projectsCount !== ""
       ? Number(member.tabData.projectsCount)
@@ -141,43 +125,16 @@ const FacultyDetail = () => {
     );
   }
 
-  const summaryStats = [
-    {
-      icon: TrendingUp,
-      value: faculty?.experience || '--',
-      label: 'Experience',
-      color: 'text-green-600',
-      bgColor: 'bg-green-100'
-    },
-    {
-      icon: BookOpenCheck,
-      value: `${Array.isArray(faculty?.publications) ? faculty.publications.length : (faculty?.publicationsCount || faculty?.publications || 0)}+`,
-      label: 'Publications',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100'
-    },
-    {
-      icon: Presentation,
-      value: Array.isArray(faculty?.talks) ? faculty.talks.length : (faculty?.talks || '--'),
-      label: 'Talks Delivered',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-100'
-    },
-    {
-      icon: FolderOpen,
-      value: Array.isArray(faculty?.projects) ? faculty.projects.length : (faculty?.projects || '--'),
-      label: 'Projects',
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-100'
-    }
-  ];
-
   return (
     <SearchableWrapper>
       <SimpleLayout>
         <FacultyHeader faculty={faculty} />
-        <FacultyTabs tabItems={visibleTabs}activeTab={activeTab} onTabChange={handleTabChange} />
-        <TabContent activeTab={activeTab} profile={faculty} />
+        {visibleTabs.length > 0 && (
+          <>
+            <FacultyTabs tabItems={visibleTabs} activeTab={activeTab} onTabChange={handleTabChange} />
+            <TabContent activeTab={activeTab} profile={faculty} />
+          </>
+        )}
       </SimpleLayout>
     </SearchableWrapper>
   );

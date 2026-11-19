@@ -28,7 +28,9 @@ const Badge = ({ children, className = '' }) => (
   </span>
 );
 import { Calendar, MapPin, Settings, Users } from 'lucide-react';
-import { asArray, asText, pickArray, pickText } from './fieldUtils';
+import { asText, pickArray, pickText } from './fieldUtils';
+import { facultySections, withValue } from './facultyTabData';
+import StatTiles from './StatTiles';
 
 // Bridges the dashboard's editor field names to what this tab renders.
 const normalizeRole = (item) => {
@@ -57,9 +59,16 @@ const normalizeCommittee = (item) => ({
 });
 
 export const AdministrationTab = ({ profile }) => {
-  const tabData = profile?.tabData?.administration || {};
-  const administrativeRoles = asArray(tabData.administrativeRoles)?.map(normalizeRole);
-  const committees = asArray(tabData.committees)?.map(normalizeCommittee);
+  const sections = facultySections(profile);
+  const administrativeRoles = sections.administrativeRoles.map(normalizeRole);
+  const committees = sections.committees.map(normalizeCommittee);
+
+  // Counts with nothing in them are left out.
+  const stats = withValue([
+    { label: 'Total Roles', value: administrativeRoles.length, tone: 'green' },
+    { label: 'Current Roles', value: administrativeRoles.filter((role) => role.status === 'ongoing').length, tone: 'blue' },
+    { label: 'Committees', value: committees.length, tone: 'purple' },
+  ]);
 
   const getStatusColor = (status) => {
     return asText(status).toLowerCase() === 'ongoing'
@@ -74,38 +83,22 @@ export const AdministrationTab = ({ profile }) => {
 
   return (
     <div className="space-y-6 bg-gray-50">
-        {/* Administrative Impact */}
-      <Card className="hover:shadow-lg transition-shadow duration-300">
-        <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <Settings  className="w-6 h-6 mr-2 text-blue-600" />
-             Administrative Impact
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{administrativeRoles.length}</div>
-              <div className="text-sm text-green-700">Total Roles</div>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">
-                {administrativeRoles.filter(role => role.status === 'ongoing').length}
-              </div>
-              <div className="text-sm text-blue-700">Current Roles</div>
-            </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">{committees.length}</div>
-              <div className="text-sm text-purple-700">Committees</div>
-            </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">3+</div>
-              <div className="text-sm text-orange-700">Years Service</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Administrative Impact */}
+      {stats.length > 0 && (
+        <Card className="hover:shadow-lg transition-shadow duration-300">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gray-900 flex items-center">
+              <Settings className="w-6 h-6 mr-2 text-blue-600" />
+              Administrative Impact
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <StatTiles stats={stats} columns="sm:grid-cols-3" />
+          </CardContent>
+        </Card>
+      )}
       {/* Administrative Roles */}
+      {administrativeRoles.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-2xl text-gray-900 flex items-center">
@@ -117,7 +110,7 @@ export const AdministrationTab = ({ profile }) => {
           <div className="space-y-6">
             {administrativeRoles?.map((role, index) => (
               <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">{role.role}</h3>
                     {role.department && (
@@ -144,16 +137,13 @@ export const AdministrationTab = ({ profile }) => {
                 </div>
               </div>
             ))}
-            {administrativeRoles.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No administrative roles added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Committee Memberships */}
+      {committees.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
           <CardTitle className="text-xl text-gray-900 flex items-center">
@@ -184,14 +174,10 @@ export const AdministrationTab = ({ profile }) => {
                 </div>
               </div>
             ))}
-            {committees.length === 0 && (
-              <p className="py-6 text-center text-sm text-gray-500">
-                No committee memberships added yet.
-              </p>
-            )}
           </div>
         </CardContent>
       </Card>
+      )}
 
     
     </div>

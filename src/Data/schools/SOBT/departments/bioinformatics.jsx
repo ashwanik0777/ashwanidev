@@ -56,11 +56,13 @@ export const departmentLayoutData = {
   aboutProps: null,
   programsData: [
     {
-      title: "M.Sc Bioinformatics & Genomics",
+      id: "msc-bioinformatics-genomics",
+      title: "M.Sc. Bioinformatics & Genomics",
+      level: "PG",
       duration: "2 Years",
-      intake: "20 Students",
+      intake: "25 Students",
       description:
-        "Postgraduate program combining biology with computational tools for genomic data analysis, drug design, and systems biology.",
+        "Postgraduate program combining biology with computational tools for genomic data analysis, NGS workflows, drug design, and systems biology.",
       image:
         "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=400&q=80",
       gradient: "from-blue-500 to-blue-600",
@@ -74,31 +76,151 @@ export const departmentLayoutData = {
         "Database Design",
         "Research Dissertation",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/13tLAb-fKH4N4e6ejfj2904ilXmqsojcB/preview",
-      syllabus: [],
+      syllabusUrl: "/courses/sobt/bioinformatics/msc-bioinformatics-syllabus.pdf",
+      syllabus: [
+        {
+          session: "Course Content / Syllabus",
+          url: "/courses/sobt/bioinformatics/msc-bioinformatics-syllabus.pdf"
+        }
+      ],
     },
     {
-      title: "Ph.D. in Bioinformatics",
-      duration: "3-5 Years",
-      intake: "5 Students",
+      id: "msc-life-sciences",
+      title: "M.Sc. Life Sciences",
+      level: "PG",
+      duration: "2 Years",
+      intake: "30 Students",
       description:
-        "Doctoral program focused on computational approaches to solve biological problems.",
+        "Comprehensive postgraduate degree covering molecular medicine, genomics, cellular physiology, and modern analytical biological methods.",
+      image:
+        "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-teal-600 to-emerald-700",
+      highlights: [
+        "Genomics & Bioinformatics",
+        "Molecular Pathology",
+        "Cellular Physiology",
+        "Laboratory Dissertation"
+      ],
+      syllabusUrl: "/courses/sobt/bioinformatics/msc-lifesciences-structure-2025-27.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2025-27)",
+          url: "/courses/sobt/bioinformatics/msc-lifesciences-structure-2025-27.pdf"
+        },
+        {
+          session: "Course Structure (Specialization)",
+          url: "/courses/sobt/bioinformatics/msc-lifesciences-structure-special.pdf"
+        }
+      ]
+    },
+    {
+      id: "int-msc-phd-lifesciences",
+      title: "Integrated M.Sc.- Ph.D. Life Sciences & Systems Medicine",
+      level: "Doctoral",
+      duration: "5 Years",
+      intake: "15 Students",
+      description:
+        "Direct doctoral research pathway bridging master's level computational biology with comprehensive Ph.D. dissertation research.",
+      image:
+        "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-violet-600 to-purple-700",
+      highlights: [
+        "Integrated Doctoral Track",
+        "Systems Medicine",
+        "Translational Lab Research",
+        "Ph.D. Defense"
+      ],
+      syllabusUrl: "/courses/sobt/bioinformatics/int-msc-phd-lifesciences-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sobt/bioinformatics/int-msc-phd-lifesciences-structure.pdf"
+        }
+      ]
+    },
+    {
+      id: "int-bsc-msc-ayurveda",
+      title: "Integrated B.Sc.- M.Sc. Ayurveda Biology",
+      level: "Dual Degree",
+      duration: "5 Years",
+      intake: "30 Students",
+      description:
+        "Interdisciplinary dual degree combining fundamental Ayurvedic concepts with modern biological, pharmacological, and genomic tools.",
+      image:
+        "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-green-500 to-emerald-600",
+      highlights: [
+        "Ayurvedic Pharmacognosy",
+        "Phytochemistry",
+        "Herbal Drug Standardization",
+        "Systems Biology"
+      ],
+      syllabusUrl: "/courses/sobt/bioinformatics/int-bsc-msc-ayurveda-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sobt/bioinformatics/int-bsc-msc-ayurveda-structure.pdf"
+        },
+        {
+          session: "Course Content",
+          url: "/courses/sobt/bioinformatics/int-bsc-msc-ayurveda-syllabus.pdf"
+        }
+      ]
+    },
+    {
+      id: "bsc-forensic-science",
+      title: "B.Sc. (Hons.) Forensic Science",
+      level: "UG",
+      duration: "3-4 Years",
+      intake: "40 Students",
+      description:
+        "Forensic analysis, crime scene documentation, toxicology, digital forensics, DNA profiling, and legal evidence procedures.",
+      image:
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-blue-500 to-indigo-600",
+      highlights: [
+        "Crime Scene Management",
+        "Forensic Toxicology",
+        "DNA Fingerprinting",
+        "Ballistics Analysis"
+      ],
+      syllabusUrl: "/courses/sobt/bioinformatics/bsc-forensic-science-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sobt/bioinformatics/bsc-forensic-science-structure.pdf"
+        },
+        {
+          session: "Course Content",
+          url: "/courses/sobt/bioinformatics/bsc-forensic-science-syllabus.pdf"
+        }
+      ]
+    },
+    {
+      id: "phd-bioinformatics",
+      title: "Ph.D. in Bioinformatics & Computational Biology",
+      level: "Doctoral",
+      duration: "3-5 Years",
+      intake: "10 Students",
+      description:
+        "Doctoral research program promoting advanced innovations in computational biology, deep learning for proteomics, and structural pharmacology.",
       image:
         "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80",
       gradient: "from-cyan-500 to-cyan-600",
       highlights: [
         "Independent Research",
-        "Advanced Algorithms",
         "Deep Learning in Biology",
         "Publication Track",
-        "Conference Participation",
-        "International Collaboration",
-        "Teaching Assistantship",
-        "Thesis Defense",
+        "Thesis Defense"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview",
-      syllabus: [],
-    },
+      syllabusUrl: "/courses/sobt/biotechnology/phd-biotech-structure-2020.pdf",
+      syllabus: [
+        {
+          session: "Doctoral Coursework",
+          url: "/courses/sobt/biotechnology/phd-biotech-structure-2020.pdf"
+        }
+      ]
+    }
   ],
   facultyMembers: [
     {

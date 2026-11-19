@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Psychological First Aid",
             "Community Outreach"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "/courses/sohss/psychology/psychology-mental-health-structure-2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "/courses/sohss/psychology/psychology-mental-health-structure-2023.pdf"
             }
         ]
     },
@@ -131,11 +131,15 @@ export const departmentLayoutData = {
             "Behavioral Statistics",
             "Undergraduate Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "/courses/sohss/psychology/ba-bsc-psychology-research-degree.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                session: "Course Structure (Research Degree 2024)",
+                url: "/courses/sohss/psychology/ba-bsc-psychology-research-degree.pdf"
+            },
+            {
+                session: "Course Structure (NEP)",
+                url: "/courses/sohss/psychology/psychology-course-structure-nep.pdf"
             }
         ]
     },
@@ -154,11 +158,11 @@ export const departmentLayoutData = {
             "Neuropsychology",
             "Hospital Internship"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "/courses/sohss/psychology/ma-msc-applied-psychology-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "/courses/sohss/psychology/ma-msc-applied-psychology-structure.pdf"
             }
         ]
     },
@@ -177,11 +181,27 @@ export const departmentLayoutData = {
             "Psychodiagnostics",
             "Psychotherapy Practice"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview",
+        syllabusUrl: "/courses/sohss/psychology/mphil-clinical-psychology-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1BptcEBX8zbEhQEj-r7phB9MgjL7LetGg/preview"
+                url: "/courses/sohss/psychology/mphil-clinical-psychology-structure.pdf"
+            },
+            {
+                session: "Admission Brochure",
+                url: "/courses/sohss/psychology/psychology-admission-brochure-final.pdf"
+            },
+            {
+                session: "Admission Flyer",
+                url: "/courses/sohss/psychology/psychology-admissions-flyer-latest.pdf"
+            },
+            {
+                session: "SCART Center",
+                url: "/courses/sohss/psychology/psychology-scart.pdf"
+            },
+            {
+                session: "CEILD Center",
+                url: "/courses/sohss/psychology/psychology-ceild.pdf"
             }
         ]
     }
@@ -201,29 +221,7 @@ export const departmentLayoutData = {
     { numberText: "80+", subtitle: "Publications" },
     { numberText: "500+", subtitle: "OPD Cases Handled" },
   ],
-  topAchievers: [
-    {
-      name: "Priya Sharma",
-      year: "M.Phil. Clinical Psychology 2024",
-      achievement: "Selected for NIMHANS fellowship, published 3 papers",
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      skills: ["Clinical Assessment", "CBT", "Neuropsychology", "Research"],
-    },
-    {
-      name: "Rahul Verma",
-      year: "M.A. Applied Psychology 2023",
-      achievement: "UGC-NET qualified, placed at corporate wellness firm",
-      image: "https://randomuser.me/api/portraits/men/36.jpg",
-      skills: ["Organizational Psychology", "Counseling", "Psychometrics", "Training"],
-    },
-    {
-      name: "Neha Gupta",
-      year: "Ph.D. Psychology 2024",
-      achievement: "Published 6 papers, received ICSSR research grant",
-      image: "https://randomuser.me/api/portraits/women/55.jpg",
-      skills: ["Health Psychology", "Research Methodology", "Statistical Analysis", "Academic Writing"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "RCI Recognition",

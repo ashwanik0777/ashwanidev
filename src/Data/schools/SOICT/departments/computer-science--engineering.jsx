@@ -54,7 +54,7 @@ export const departmentLayoutData = {
     },
   },
   aboutProps: null,
-  programsData: [
+    programsData: [
     {
       id: "btech-cse",
       title: "B.Tech Computer Science & Engineering",
@@ -70,24 +70,18 @@ export const departmentLayoutData = {
         "DBMS & Cloud Computing",
         "Full-Stack Development"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8/preview",
+      syllabusUrl: "/courses/soict/cse/btech-cse-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "https://drive.google.com/file/d/1fzrS3CiDd3PQaN29ifcUH-Y9-GBhyrN8/preview"
-        },
-        {
-          session: "2025-29",
-          url: "https://drive.google.com/file/d/1qTaZrZI3xqAK2kUmRuizoe1VTt4FcbXl/preview"
-        },
-        {
-          session: "2024-28",
-          url: "https://drive.google.com/file/d/1JnhCU6KMOXLh5CkH0nzpaeOArQ-b70T8/preview"
-        },
-        {
-          session: "2023-27",
-          url: "https://drive.google.com/file/d/1QQ7Ee3r4escqlQecxa95b3IeM6GNis45/preview"
-        }
+        { session: "2026-30", url: "/courses/soict/cse/btech-cse-structure-2026-30.pdf" },
+        { session: "2025-29 (Structure)", url: "/courses/soict/cse/btech-cse-structure-2025-29.pdf" },
+        { session: "2025-29 (Syllabus)", url: "/courses/soict/cse/btech-cse-syllabus-2025-29.pdf" },
+        { session: "2024-28", url: "/courses/soict/cse/btech-cse-structure-2024-28.pdf" },
+        { session: "2023-27", url: "/courses/soict/cse/btech-cse-structure-2023-27.pdf" },
+        { session: "2022-26", url: "/courses/soict/cse/btech-cse-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-cse-structure-2021-25.pdf" },
+        { session: "2020-24", url: "/courses/soict/cse/btech-cse-structure-2020-24.pdf" },
+        { session: "2019-23", url: "/courses/soict/cse/btech-cse-structure-2019-23.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-cse-syllabus-2023.pdf" }
       ]
     },
     {
@@ -105,24 +99,42 @@ export const departmentLayoutData = {
         "Computer Vision",
         "Reinforcement Learning"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF/preview",
+      syllabusUrl: "/courses/soict/cse/btech-ai-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "https://drive.google.com/file/d/1yEuBOzyiatX06GsdBT8pp4Xcgp_MheoF/preview"
-        },
-        {
-          session: "2025-29",
-          url: "https://drive.google.com/file/d/1qLv-_S8OqvdtiPvbDfaiUAvMVMXvxqoy/preview"
-        },
-        {
-          session: "2024-28",
-          url: "https://drive.google.com/file/d/12k9afe6ZphBtEFh1l1up6ivxqug7rtlQ/preview"
-        },
-        {
-          session: "2023-27",
-          url: "https://drive.google.com/file/d/1WCbDN7ypzescNZjooD02CsbvTT170jlc/preview"
-        }
+        { session: "2026-30", url: "/courses/soict/cse/btech-ai-structure-2026-30.pdf" },
+        { session: "2025-29 (Structure)", url: "/courses/soict/cse/btech-ai-structure-2025-29.pdf" },
+        { session: "2025-29 (Syllabus)", url: "/courses/soict/cse/btech-ai-syllabus-2025.pdf" },
+        { session: "2024-28", url: "/courses/soict/cse/btech-ai-structure-2024-28.pdf" },
+        { session: "2023-27", url: "/courses/soict/cse/btech-ai-structure-2023-27.pdf" },
+        { session: "2022-26", url: "/courses/soict/cse/btech-ai-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-ai-structure-2021-25.pdf" },
+        { session: "2020-24", url: "/courses/soict/cse/btech-ai-structure-2020-24.pdf" },
+        { session: "2019-23", url: "/courses/soict/cse/btech-ai-structure-2019-23.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-ai-syllabus-2023.pdf" }
+      ]
+    },
+    {
+      id: "btech-cse-usfs",
+      title: "B.Tech CSE (Self Finance Scheme)",
+      level: "UG",
+      duration: "4 Years",
+      intake: "60 Students",
+      description: "Undergraduate computer engineering curriculum offered under the university self-finance scheme covering core computing, software engineering, and applied systems.",
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-slate-600 to-slate-800",
+      highlights: [
+        "Core Computer Science",
+        "Self Finance Track",
+        "Algorithms & Systems",
+        "Software Projects"
+      ],
+      syllabusUrl: "/courses/soict/cse/btech-self-finance-structure-2022-26.pdf",
+      syllabus: [
+        { session: "2022-26", url: "/courses/soict/cse/btech-self-finance-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-self-finance-structure-2021-25.pdf" },
+        { session: "2020-24", url: "/courses/soict/cse/btech-self-finance-structure-2020-24.pdf" },
+        { session: "2019-23", url: "/courses/soict/cse/btech-self-finance-structure-2019-23.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-self-finance-syllabus-2023.pdf" }
       ]
     },
     {
@@ -140,24 +152,13 @@ export const departmentLayoutData = {
         "Cryptography & PKI",
         "Digital Forensics"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A/preview",
+      syllabusUrl: "/courses/soict/cse/btech-cyber-structure-2024-28.pdf",
       syllabus: [
-        {
-          session: "2024-28",
-          url: "https://drive.google.com/file/d/1RDjbB9q0tfqZrVPrbxI6XJ_yvB6jP18A/preview"
-        },
-        {
-          session: "2023-27",
-          url: "https://drive.google.com/file/d/1_Gvlr5JjAmAAggmGWFo5tBeo6uIG2kkS/preview"
-        },
-        {
-          session: "2022-26",
-          url: "https://drive.google.com/file/d/1bH_dt7Hi8AGujC2RNJsG6fd_bKYFuBmu/preview"
-        },
-        {
-          session: "June 2023 Scheme",
-          url: "https://drive.google.com/file/d/1H9O_5TMytl-1h_ZoWDVBrc1uezI8Iat7/preview"
-        }
+        { session: "2024-28", url: "/courses/soict/cse/btech-cyber-structure-2024-28.pdf" },
+        { session: "2023-27", url: "/courses/soict/cse/btech-cyber-structure-2023-27.pdf" },
+        { session: "2022-26", url: "/courses/soict/cse/btech-cyber-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-cyber-structure-2021-25.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-cyber-syllabus-2023.pdf" }
       ]
     },
     {
@@ -166,33 +167,22 @@ export const departmentLayoutData = {
       level: "UG",
       duration: "4 Years",
       intake: "60 Students",
-      description: "Curriculum tailored for big data storage systems, predictive modeling, statistical learning, and distributed processing frameworks.",
+      description: "Mathematical computing, statistical modeling, big data pipelines, distributed computing, and visual data engineering.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
+      gradient: "from-amber-500 to-amber-600",
       highlights: [
-        "Big Data Platforms",
-        "Statistical Machine Learning",
-        "Data Warehousing",
-        "Predictive Analytics"
+        "Data Engineering",
+        "Big Data Analytics",
+        "Statistical Modeling",
+        "Predictive Modeling"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H/preview",
+      syllabusUrl: "/courses/soict/cse/btech-ds-structure-2024-28.pdf",
       syllabus: [
-        {
-          session: "2024-28",
-          url: "https://drive.google.com/file/d/1uU66ZH8KXQxtiQHSOmOK3EyKYF1dtK-H/preview"
-        },
-        {
-          session: "2023-27",
-          url: "https://drive.google.com/file/d/1gXD0-pRzdGpBuLMknL8OXPM9KtJjm1W2/preview"
-        },
-        {
-          session: "2022-26",
-          url: "https://drive.google.com/file/d/1lyuCG3VSJy1g2e4fXZYY5Cc2644MPpSw/preview"
-        },
-        {
-          session: "June 2023 Scheme",
-          url: "https://drive.google.com/file/d/1DeRIzkOE4kT2kUPGy5S3HqYekxvzoO20/preview"
-        }
+        { session: "2024-28", url: "/courses/soict/cse/btech-ds-structure-2024-28.pdf" },
+        { session: "2023-27", url: "/courses/soict/cse/btech-ds-structure-2023-27.pdf" },
+        { session: "2022-26", url: "/courses/soict/cse/btech-ds-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-ds-structure-2021-25.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-ds-syllabus-2023.pdf" }
       ]
     },
     {
@@ -201,103 +191,158 @@ export const departmentLayoutData = {
       level: "UG",
       duration: "4 Years",
       intake: "60 Students",
-      description: "Focused program in machine learning algorithms, pattern recognition, feature optimization, and scalable MLOps pipelines.",
+      description: "Dedicated curriculum focused on machine learning models, statistical inference, data preprocessing, and predictive intelligence.",
       image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-emerald-600",
+      gradient: "from-teal-500 to-teal-600",
       highlights: [
-        "Supervised/Unsupervised Learning",
-        "Pattern Recognition",
-        "MLOps Pipelines",
-        "Applied Neural Models"
+        "Supervised & Unsupervised ML",
+        "Predictive Modeling",
+        "Feature Engineering",
+        "MLOps & Deployment"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX/preview",
+      syllabusUrl: "/courses/soict/cse/btech-ml-structure-2024-28.pdf",
       syllabus: [
-        {
-          session: "2024-28",
-          url: "https://drive.google.com/file/d/1jV-mF6_JS8WGDO7zFuKnzeDeUigDWBAX/preview"
-        },
-        {
-          session: "2023-27",
-          url: "https://drive.google.com/file/d/120ctPJnITwNiYjC2ybvrxHsysMrPjM8r/preview"
-        },
-        {
-          session: "2022-26",
-          url: "https://drive.google.com/file/d/1WMnQ_d4Me3qOjdVF-OVLUkDB8VsVJrBo/preview"
-        },
-        {
-          session: "June 2023 Scheme",
-          url: "/schools/cse/B Tech_CSE_ML_Syll_June2023.pdf"
-        }
+        { session: "2024-28", url: "/courses/soict/cse/btech-ml-structure-2024-28.pdf" },
+        { session: "2023-27", url: "/courses/soict/cse/btech-ml-structure-2023-27.pdf" },
+        { session: "2022-26", url: "/courses/soict/cse/btech-ml-structure-2022-26.pdf" },
+        { session: "2021-25", url: "/courses/soict/cse/btech-ml-structure-2021-25.pdf" },
+        { session: "2024 Syllabus", url: "/courses/soict/cse/btech-ml-syllabus-2024.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/btech-ml-syllabus-2023.pdf" }
+      ]
+    },
+    {
+      id: "btech-cse-iot",
+      title: "B.Tech CSE (Internet of Things)",
+      level: "UG",
+      duration: "4 Years",
+      intake: "60 Students",
+      description: "Undergraduate engineering program focusing on smart devices, sensor interfacing, embedded microcontrollers, IoT cloud platforms, and wireless sensor networks.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-emerald-500 to-teal-600",
+      highlights: [
+        "Sensors & Actuators",
+        "Embedded IoT Systems",
+        "IoT Cloud Platforms",
+        "Wireless Sensor Networks"
+      ],
+      syllabusUrl: "/courses/soict/cse/btech-iot-structure-2021-25.pdf",
+      syllabus: [
+        { session: "2021-25", url: "/courses/soict/cse/btech-iot-structure-2021-25.pdf" }
       ]
     },
     {
       id: "int-btech-mtech-cse",
       title: "Integrated B.Tech-M.Tech CSE",
-      level: "Dual Degree",
+      level: "Integrated",
       duration: "5 Years",
       intake: "30 Students",
-      description: "Seamless 5-year integrated dual degree program combining core undergraduate engineering with master's research dissertation.",
+      description: "Five-year integrated dual degree program combining core undergraduate computer science with specialized postgraduate coursework and research thesis.",
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-amber-500 to-amber-600",
+      gradient: "from-indigo-600 to-indigo-700",
       highlights: [
-        "Integrated Curriculum",
-        "Master's Thesis Project",
-        "High Performance Computing",
-        "Advanced Electives"
+        "Dual Degree in 5 Years",
+        "Integrated Research Track",
+        "Advanced Electives",
+        "Master Thesis Project"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon/preview",
+      syllabusUrl: "/courses/soict/cse/int-btech-mtech-structure-2026-31.pdf",
       syllabus: [
-        {
-          session: "2026-31",
-          url: "https://drive.google.com/file/d/1z6xj5tQiskG1_xoFs_MRK30eFW7fMXon/preview"
-        },
-        {
-          session: "2025-30",
-          url: "https://drive.google.com/file/d/1rEwc_43p-F9-lMnBXvueXQXwLh_RWd9U/preview"
-        },
-        {
-          session: "2024-29",
-          url: "https://drive.google.com/file/d/1IaEPkoCp-VqkUh3adluWy17q78x1Xt3a/preview"
-        },
-        {
-          session: "2023-28",
-          url: "https://drive.google.com/file/d/18CrdsWzKvwdEg7s2ZThf8jNFz302tPcm/preview"
-        }
+        { session: "2026-31", url: "/courses/soict/cse/int-btech-mtech-structure-2026-31.pdf" },
+        { session: "2025-30 (Structure)", url: "/courses/soict/cse/int-btech-mtech-structure-2025-30.pdf" },
+        { session: "2025-30 (Syllabus)", url: "/courses/soict/cse/int-btech-mtech-syllabus-2025.pdf" },
+        { session: "2024-29", url: "/courses/soict/cse/int-btech-mtech-structure-2024-29.pdf" },
+        { session: "2023-28", url: "/courses/soict/cse/int-btech-mtech-structure-2023-28.pdf" },
+        { session: "2022-27", url: "/courses/soict/cse/int-btech-mtech-structure-2022-27.pdf" },
+        { session: "2021-26", url: "/courses/soict/cse/int-btech-mtech-structure-2021-26.pdf" },
+        { session: "2020-25", url: "/courses/soict/cse/int-btech-mtech-structure-2020-25.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/int-btech-mtech-syllabus-2023.pdf" }
       ]
     },
     {
-      id: "mtech-cse-specializations",
-      title: "M.Tech CSE (AI, Data Science & SE)",
+      id: "int-btech-mtech-ict",
+      title: "5 Year Integrated B.Tech.-M.Tech. (ICT)",
+      level: "Integrated",
+      duration: "5 Years",
+      intake: "30 Students",
+      description: "Dual-degree program in Information and Communication Technology combining core computer science, telecommunications, and advanced master level research.",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-cyan-600 to-blue-700",
+      highlights: [
+        "Dual Degree Award",
+        "ICT Research Labs",
+        "Advanced Communications",
+        "Master Thesis"
+      ],
+      syllabusUrl: "/courses/soict/cse/int-btech-mtech-ai-structure-2023.pdf",
+      syllabus: [
+        { session: "Approved Scheme", url: "/courses/soict/cse/int-btech-mtech-ai-structure-2023.pdf" }
+      ]
+    },
+    {
+      id: "mtech-cse-ai",
+      title: "M.Tech CSE (Artificial Intelligence & Robotics)",
       level: "PG",
       duration: "2 Years",
-      intake: "60 Students",
-      description: "Postgraduate programs offering cutting-edge specializations in Artificial Intelligence, Big Data Science, and Software Engineering.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
+      intake: "20 Students",
+      description: "Postgraduate specialization focusing on autonomous robotics, reinforcement learning, computer vision, kinematics, and intelligent industrial automation.",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
       gradient: "from-purple-600 to-indigo-700",
       highlights: [
-        "AI & Robotics",
-        "Big Data Analytics",
-        "Software Engineering Architecture",
-        "Master Dissertation"
+        "Autonomous Robotics",
+        "Reinforcement Learning",
+        "Motion Planning",
+        "Computer Vision"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG/preview",
+      syllabusUrl: "/courses/soict/cse/mtech-ai-robotics-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "AI (2024-26)",
-          url: "https://drive.google.com/file/d/1ZU9TQiWptSQ0V_rEBzxbMEAj9a6zquaG/preview"
-        },
-        {
-          session: "Data Science (2024-26)",
-          url: "https://drive.google.com/file/d/1x3Z1BQH-75B2_n8O0UUnoM0t-dYfc3OY/preview"
-        },
-        {
-          session: "Software Engg (2024-26)",
-          url: "/schools/cse/MTech-CSE-SE 2024-26.pdf"
-        },
-        {
-          session: "Cyber Security Scheme",
-          url: "https://drive.google.com/file/d/1hwBSGmjhmTqi91kLCt2rr4Um0OHrxmre/preview"
-        }
+        { session: "2026-28", url: "/courses/soict/cse/mtech-ai-robotics-structure-2026-28.pdf" },
+        { session: "2025-27", url: "/courses/soict/cse/mtech-ai-robotics-structure-2025-27.pdf" },
+        { session: "2024-26", url: "/courses/soict/cse/mtech-ai-robotics-structure-2024-26.pdf" },
+        { session: "Syllabus Batch 2025-27", url: "/courses/soict/cse/mtech-ai-robotics-syllabus-2025.pdf" }
+      ]
+    },
+    {
+      id: "mtech-cse-ds",
+      title: "M.Tech CSE (Data Science)",
+      level: "PG",
+      duration: "2 Years",
+      intake: "20 Students",
+      description: "Advanced master program specializing in big data ecosystems, predictive modeling, deep statistical analysis, and large-scale data engineering.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-blue-600 to-cyan-700",
+      highlights: [
+        "Big Data Analytics",
+        "Statistical Machine Learning",
+        "Distributed Systems",
+        "Data Mining"
+      ],
+      syllabusUrl: "/courses/soict/cse/mtech-ds-structure-2024-26.pdf",
+      syllabus: [
+        { session: "2024-26", url: "/courses/soict/cse/mtech-ds-structure-2024-26.pdf" },
+        { session: "2022-24", url: "/courses/soict/cse/mtech-ds-structure-2022-24.pdf" },
+        { session: "Syllabus 2025", url: "/courses/soict/cse/mtech-ds-syllabus-2025.pdf" },
+        { session: "June 2023 Scheme", url: "/courses/soict/cse/mtech-ds-syllabus-2023.pdf" }
+      ]
+    },
+    {
+      id: "mtech-cse-se",
+      title: "M.Tech CSE (Software Engineering)",
+      level: "PG",
+      duration: "2 Years",
+      intake: "20 Students",
+      description: "Advanced software architectures, formal verification, agile engineering management, cloud native microservices, and DevOps pipelines.",
+      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-emerald-600 to-teal-700",
+      highlights: [
+        "Software Architecture",
+        "Microservices & Cloud",
+        "Agile Methodologies",
+        "Software Verification"
+      ],
+      syllabusUrl: "/courses/soict/cse/mtech-cse-structure-2024-26.pdf",
+      syllabus: [
+        { session: "2024-26", url: "/courses/soict/cse/mtech-cse-structure-2024-26.pdf" },
+        { session: "Syllabus Batch 2025", url: "/courses/soict/cse/mtech-cse-syllabus-2025.pdf" }
       ]
     },
     {
@@ -306,56 +351,19 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "30 Students",
-      description: "Flexible executive master's program designed for industry professionals to upskill in modern software and computing architectures.",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-slate-600 to-slate-800",
+      description: "Flexible, high-impact evening and weekend hybrid master's degree crafted specifically for employed software engineers and technology leaders.",
+      image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-slate-700 to-slate-800",
       highlights: [
-        "Executive Schedule",
-        "Applied Industry Projects",
-        "Advanced System Design",
-        "Dissertation"
+        "Flexible Weekend Classes",
+        "Industry Aligned",
+        "Applied Industry Thesis",
+        "Cloud & DevOps Focus"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I/preview",
+      syllabusUrl: "/courses/soict/cse/mtech-working-prof-structure-2026.pdf",
       syllabus: [
-        {
-          session: "2026-28 Batch",
-          url: "https://drive.google.com/file/d/1IVjbKy-3O-ClnlZPXmHT_fUoqn6JZD2I/preview"
-        },
-        {
-          session: "Standard Scheme",
-          url: "https://drive.google.com/file/d/1Kb6XZbEpBqAGfAGAIQnZI-40ZSjqcrzF/preview"
-        }
-      ]
-    },
-    {
-      id: "mca-cse",
-      title: "Master of Computer Applications (MCA)",
-      level: "PG",
-      duration: "2 Years",
-      intake: "60 Students",
-      description: "Applied postgraduate degree focused on modern software architectures, data processing frameworks, and cloud computing.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-cyan-500 to-blue-600",
-      highlights: [
-        "Enterprise Application Design",
-        "Applied AI Tools",
-        "Data Science Paradigms",
-        "Capstone Project"
-      ],
-      syllabusUrl: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview",
-      syllabus: [
-        {
-          session: "2024-26 (AI)",
-          url: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview"
-        },
-        {
-          session: "2021-23 (DS)",
-          url: "https://drive.google.com/file/d/1C2rjUcBKXmqIbNLUooV4VS-3HfJVszhk/preview"
-        },
-        {
-          session: "2020-23",
-          url: "https://drive.google.com/file/d/1d6dBp98RmeUvdLFuufdjs4gZSYzSrBea/preview"
-        }
+        { session: "2026-28 Structure", url: "/courses/soict/cse/mtech-working-prof-structure-2026.pdf" },
+        { session: "Detailed Syllabus", url: "/courses/soict/cse/mtech-working-prof-syllabus.pdf" }
       ]
     },
     {
@@ -364,21 +372,18 @@ export const departmentLayoutData = {
       level: "Doctoral",
       duration: "3-5 Years",
       intake: "15 Students",
-      description: "Doctoral research program promoting original theoretical and applied computer science inquiry and indexed publications.",
+      description: "Premier research doctorate aimed at producing groundbreaking contributions in computing, artificial intelligence, security, and algorithmic complexity.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-green-500 to-green-600",
+      gradient: "from-blue-700 to-indigo-900",
       highlights: [
         "Independent Research",
-        "Peer-Reviewed Publications",
-        "High-End Computing Labs",
+        "High-Impact Publications",
+        "Conference Grants",
         "Thesis Defense"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
+      syllabusUrl: "/courses/soict/cse/phd-structure.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
-        }
+        { session: "Current Scheme", url: "/courses/soict/cse/phd-structure.pdf" }
       ]
     }
   ],

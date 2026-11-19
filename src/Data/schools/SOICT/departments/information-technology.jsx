@@ -65,13 +65,13 @@ export const departmentLayoutData = {
     },
   },
   aboutProps: null,
-  programsData: [
+    programsData: [
     {
       id: "bca",
       title: "Bachelor in Computer Applications (BCA)",
       level: "UG",
       duration: "3 Years",
-      intake: "60 Students",
+      intake: "40 Students",
       description: "Foundational software application development, programming paradigms, web technologies, and database design.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80",
       gradient: "from-cyan-500 to-blue-600",
@@ -81,24 +81,13 @@ export const departmentLayoutData = {
         "Object-Oriented Programming",
         "Web Technologies"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5/preview",
+      syllabusUrl: "/courses/soict/it/bca-structure-2026-29.pdf",
       syllabus: [
-        {
-          session: "2026-29",
-          url: "https://drive.google.com/file/d/1Ur4ncmac5q7M6ERxxhgUV8PTYckt9SF5/preview"
-        },
-        {
-          session: "2025-28",
-          url: "https://drive.google.com/file/d/1PyjL213j0X8_uot3RVr5pk3IQImF4Isb/preview"
-        },
-        {
-          session: "2024-25",
-          url: "/schools/it/BCA_2024-25 Session.pdf"
-        },
-        {
-          session: "2021-24",
-          url: "/schools/it/2021_24_BCA 2021-24.pdf"
-        }
+        { session: "2026-29", url: "/courses/soict/it/bca-structure-2026-29.pdf" },
+        { session: "2025-28", url: "/courses/soict/it/bca-structure-2025-28.pdf" },
+        { session: "2024-25", url: "/courses/soict/it/bca-structure-2024-25.pdf" },
+        { session: "2021-24", url: "/courses/soict/it/bca-structure-2021-24.pdf" },
+        { session: "2019-22", url: "/courses/soict/it/bca-structure-2019-22.pdf" }
       ]
     },
     {
@@ -116,24 +105,14 @@ export const departmentLayoutData = {
         "Enterprise Systems",
         "Information Security"
       ],
-      syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
+      syllabusUrl: "/courses/soict/it/btech-it-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "2026-30",
-          url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
-        },
-        {
-          session: "2025-29",
-          url: "https://drive.google.com/file/d/1RpWCxLdDaua2yh6G8i6wtQoGXqvOxtZ_/preview"
-        },
-        {
-          session: "2023-27",
-          url: "/schools/it/B.Tech. IT 2023-27.pdf"
-        },
-        {
-          session: "2021-25",
-          url: "/schools/it/2021_25_B.TECH. IT 2021-25.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/it/btech-it-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/it/btech-it-structure-2025-29.pdf" },
+        { session: "2023-27", url: "/courses/soict/it/btech-it-structure-2023-27.pdf" },
+        { session: "2021-25", url: "/courses/soict/it/btech-it-structure-2021-25.pdf" },
+        { session: "2019-23", url: "/courses/soict/it/btech-it-structure-2019-23.pdf" },
+        { session: "2018-22", url: "/courses/soict/it/btech-it-structure-2018-22.pdf" }
       ]
     },
     {
@@ -151,12 +130,10 @@ export const departmentLayoutData = {
         "Natural Language Processing",
         "Autonomous Systems"
       ],
-      syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
+      syllabusUrl: "/courses/soict/it/btech-it-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/it/btech-it-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/it/btech-it-structure-2025-29.pdf" }
       ]
     },
     {
@@ -174,12 +151,10 @@ export const departmentLayoutData = {
         "Predictive Analytics",
         "Data Mining & Visualization"
       ],
-      syllabusUrl: "/schools/it/2026_2030_B.Tech. IT .docx.pdf",
+      syllabusUrl: "/courses/soict/it/btech-it-structure-2026-30.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "/schools/it/2026_2030_B.Tech. IT .docx.pdf"
-        }
+        { session: "2026-30", url: "/courses/soict/it/btech-it-structure-2026-30.pdf" },
+        { session: "2025-29", url: "/courses/soict/it/btech-it-structure-2025-29.pdf" }
       ]
     },
     {
@@ -188,44 +163,39 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "20 Students",
-      description: "Advanced postgraduate program in enterprise AI infrastructure, big data engineering, and dissertation research.",
-      image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-600 to-indigo-700",
+      description: "Postgraduate specialization focusing on advanced data mining, deep learning, statistical modeling, and large-scale AI applications.",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-violet-600 to-purple-700",
       highlights: [
-        "Enterprise ML Pipelines",
-        "Advanced Data Engineering",
-        "High-Performance Computing",
-        "Master Thesis"
+        "Advanced Data Analytics",
+        "Deep Learning Models",
+        "Cloud AI Services",
+        "Research Project"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview",
+      syllabusUrl: "/courses/soict/cse/mtech-ds-structure-2024-26.pdf",
       syllabus: [
-        {
-          session: "Master Scheme",
-          url: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview"
-        }
+        { session: "2024-26", url: "/courses/soict/cse/mtech-ds-structure-2024-26.pdf" },
+        { session: "Master Scheme", url: "/courses/soict/cse/mtech-ds-syllabus-2025.pdf" }
       ]
     },
     {
-      id: "mtech-it-se",
-      title: "M.Tech Software Engineering",
+      id: "mtech-ict",
+      title: "M.Tech. ICT (Information & Communication Tech)",
       level: "PG",
       duration: "2 Years",
       intake: "20 Students",
-      description: "Advanced study of software architecture, requirement engineering, quality metrics, agile workflows, and research dissertation.",
-      image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-teal-500 to-teal-700",
+      description: "Advanced postgraduate program combining modern telecommunications, data networks, embedded systems, IoT, and high-performance computing.",
+      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-cyan-600 to-blue-700",
       highlights: [
-        "Software Architecture",
-        "Agile & DevOps Workflows",
-        "Quality Assurance & Testing",
-        "Dissertation"
+        "Telecommunications & Networks",
+        "Embedded Systems & IoT",
+        "Data Engineering",
+        "Master Dissertation"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview",
+      syllabusUrl: "/courses/soict/cse/int-btech-mtech-ai-structure-2023.pdf",
       syllabus: [
-        {
-          session: "Master Scheme",
-          url: "https://drive.google.com/file/d/1ZuJqmGp77-dg2ZcSf4B7gv2KeAqucsgz/preview"
-        }
+        { session: "Approved Scheme", url: "/courses/soict/cse/int-btech-mtech-ai-structure-2023.pdf" }
       ]
     },
     {
@@ -234,33 +204,23 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "30 Students",
-      description: "Professional master's specialization focused on data pipelines, business analytics, predictive modeling, and database technologies.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-500 to-indigo-600",
+      description: "Advanced master in computer applications emphasizing big data pipelines, machine learning, business intelligence, and full-stack software development.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-teal-600 to-emerald-700",
       highlights: [
-        "Data Mining & Analytics",
-        "Statistical Modeling",
-        "Database Platforms",
-        "Industry Project"
+        "Big Data Systems",
+        "Data Visualization",
+        "Applied Machine Learning",
+        "Industry Capstone"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V/preview",
+      syllabusUrl: "/courses/soict/it/mca-ds-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "2026-28",
-          url: "https://drive.google.com/file/d/1_1_GjRPQaVh71lBkF-X1N_fCnOWJ5O2V/preview"
-        },
-        {
-          session: "2025-27",
-          url: "https://drive.google.com/file/d/1VX84S1jXR3JEdB97rqa9K-sbwD3OYgjw/preview"
-        },
-        {
-          session: "2022-23",
-          url: "/schools/it/MCA DS 2022-23.pdf"
-        },
-        {
-          session: "2021-23",
-          url: "/schools/it/2021_23_MCA DS 2021-23.pdf"
-        }
+        { session: "2026-28", url: "/courses/soict/it/mca-ds-structure-2026-28.pdf" },
+        { session: "2025-27", url: "/courses/soict/it/mca-ds-structure-2025-27.pdf" },
+        { session: "2022-24", url: "/courses/soict/it/mca-ds-structure-2022.pdf" },
+        { session: "2021-23", url: "/courses/soict/it/mca-ds-structure-2021-23.pdf" },
+        { session: "2020-23", url: "/courses/soict/it/mca-ds-structure-2020-23.pdf" },
+        { session: "2019-22", url: "/courses/soict/it/mca-ds-structure-2019-22.pdf" }
       ]
     },
     {
@@ -269,33 +229,21 @@ export const departmentLayoutData = {
       level: "PG",
       duration: "2 Years",
       intake: "30 Students",
-      description: "Applied postgraduate curriculum covering neural network design, cognitive computing, automated pipelines, and intelligent software.",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-blue-600",
+      description: "Master in computer applications with focused training in artificial intelligence, neural architectures, computer vision, and cognitive systems.",
+      image: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-blue-600 to-indigo-700",
       highlights: [
-        "Applied AI Systems",
-        "Natural Language Tools",
-        "Neural Architectures",
-        "Intelligent Applications"
+        "Cognitive AI Systems",
+        "Natural Language Processing",
+        "AI Application Development",
+        "Thesis / Project"
       ],
-      syllabusUrl: "/schools/it/MCA_AI 2026_28_4th.docx.docx.pdf",
+      syllabusUrl: "/courses/soict/it/mca-ai-structure-2026-28.pdf",
       syllabus: [
-        {
-          session: "2026-28",
-          url: "/schools/it/MCA_AI 2026_28_4th.docx.docx.pdf"
-        },
-        {
-          session: "2025-27",
-          url: "https://drive.google.com/file/d/1p1a5d_SNyk6_e5zMJpSBrDtjBscmI6kG/preview"
-        },
-        {
-          session: "2024-26",
-          url: "https://drive.google.com/file/d/1gq4oAym9fiYUonnhHEkpEVcSMaCoQ7GY/preview"
-        },
-        {
-          session: "2021-23",
-          url: "/schools/it/MCA AI 2021-23.pdf"
-        }
+        { session: "2026-28", url: "/courses/soict/it/mca-ai-structure-2026-28.pdf" },
+        { session: "2025-27", url: "/courses/soict/it/mca-ai-structure-2025-27.pdf" },
+        { session: "2024-26", url: "/courses/soict/it/mca-ai-structure-2024-26.pdf" },
+        { session: "2021-23", url: "/courses/soict/it/mca-ai-structure-2021-23.pdf" }
       ]
     },
     {
@@ -304,21 +252,18 @@ export const departmentLayoutData = {
       level: "Doctoral",
       duration: "3-5 Years",
       intake: "10 Students",
-      description: "Doctoral research program promoting advanced inquiry into cloud architectures, network protocols, and distributed intelligence.",
+      description: "Doctoral research program promoting advanced scientific contributions in networking, cloud architectures, cybersecurity, and data systems.",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-emerald-500 to-teal-600",
+      gradient: "from-blue-700 to-indigo-900",
       highlights: [
         "Doctoral Research",
-        "Indexed Journal Publications",
-        "Research Methodology",
+        "Peer-Reviewed Publications",
+        "Specialized Computing Labs",
         "Thesis Defense"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview",
+      syllabusUrl: "/courses/soict/cse/phd-structure.pdf",
       syllabus: [
-        {
-          session: "Current Scheme",
-          url: "https://drive.google.com/file/d/1iw6fCBR3g1tp-5oIbWHLYzHzpAa0h-3M/preview"
-        }
+        { session: "Current Scheme", url: "/courses/soict/cse/phd-structure.pdf" }
       ]
     }
   ],

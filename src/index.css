@@ -138,6 +138,22 @@ html, body {
   animation: panel-pop-in 0.25s ease-out;
 }
 
+/*
+ * Justified body text.
+ * - On a paragraph: <p class="justify-text">.
+ * - On a wrapper (a section, a page, later the whole site): justifies the paragraphs and
+ *   list items inside, but skips anything in a centred block (cards, captions, headings).
+ * It sits in the components layer, so an explicit text-center / text-left on an element still wins.
+ * No hyphenation: words are never split across lines, as with justified text in Word.
+ */
+@layer components {
+  .justify-text,
+  .justify-text :where(p, li):not(:where(.text-center, .text-center *)) {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-club-fade,
   .animate-panel-in,

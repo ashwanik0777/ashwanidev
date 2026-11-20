@@ -118,7 +118,7 @@ export default function AboutSection() {
               <div className="prose prose-slate prose-lg text-slate-600 mb-8 max-w-none text-center sm:text-left">
                 {aboutData.description &&
                   aboutData.description.split(/\r?\n\r?\n/).map((para, index) => (
-                    <p key={index} className="mb-4 leading-relaxed text-sm sm:text-base">
+                    <p key={index} className="justify-text mb-4 leading-relaxed text-sm sm:text-base">
                       {para}
                     </p>
                   ))}

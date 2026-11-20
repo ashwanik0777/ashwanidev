@@ -431,7 +431,7 @@ const AboutGbu = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 leading-tight">
                   {aboutData.overview.title}
                 </h2>
-                <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+                <p className="justify-text text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
                   {aboutData.overview.description}
                 </p>
                 <Link to="/aboutUs/GBUHistory">
@@ -460,7 +460,7 @@ const AboutGbu = () => {
                       {aboutData.vision.title}
                     </h3>
                   </div>
-                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+                  <p className="justify-text text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
                     {aboutData.vision.description}
                   </p>
                 </div>
@@ -488,7 +488,7 @@ const AboutGbu = () => {
                         <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 flex items-center justify-center shrink-0 mt-0.5 mr-3">
                           <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                         </div>
-                        <span className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
+                        <span className="justify-text text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
                           {point}
                         </span>
                       </li>
@@ -657,7 +657,7 @@ const AboutGbu = () => {
                   ))}
                 </div>
 
-                <p className="text-base text-gray-700 mb-6 leading-relaxed text-center md:text-left">
+                <p className="justify-text text-base text-gray-700 mb-6 leading-relaxed">
                   Our dedicated wellness center offers yoga sessions, mindfulness practices,
                   and spiritual guidance to nurture the holistic development of our students.
                   Experience tranquility in our serene meditation dome.

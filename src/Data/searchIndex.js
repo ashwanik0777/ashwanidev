@@ -198,6 +198,24 @@ const SEARCH_INDEX = [
     description: "Research centers and laboratories"
   },
   {
+    label: "Green Skills and Applied AI Centre of Excellence",
+    keywords: [
+      "green skills",
+      "applied ai",
+      "green skills and applied ai",
+      "centre of excellence",
+      "coe ai",
+      "1m1b",
+      "microsoft ai",
+      "meity",
+      "sustainable manufacturing",
+      "ai talkie"
+    ],
+    path: "/schools/SOVS/departments/coe-green-skills-ai",
+    category: "Research",
+    description: "Green Skills and Applied AI Centre of Excellence at SoVSAS"
+  },
+  {
     label: "Publications",
     keywords: ["publications", "research papers", "journals", "articles", "papers", "published"],
     path: "/research/publications",

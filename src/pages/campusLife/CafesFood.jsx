@@ -15,7 +15,7 @@ const GBU_AUTHENTIC_FOOD_OUTLETS = [
   {
     id: 1,
     name: "Grand Street Cafe",
-    image: "https://www.gbu.ac.in/Content/clubs/img/shoppingcomplex.jpg",
+    image: "/assets/clubs/shoppingcomplex.jpg",
     description: "Official GBU on-campus cafe inaugurated by VC Prof. R.K. Sinha. Serving fresh coffee, burgers, grilled sandwiches, wraps, and quick fast-food bites.",
     rating: 4.7,
     review_count: 420,
@@ -47,7 +47,7 @@ const GBU_AUTHENTIC_FOOD_OUTLETS = [
   {
     id: 3,
     name: "Nescafé Academic Kiosk",
-    image: "https://www.gbu.ac.in/Content/clubs/img/canteen.jpeg",
+    image: "/assets/clubs/canteen.jpeg",
     description: "Located near the School of ICT and Engineering blocks. The preferred stop for students between lectures for hot coffee, iced brews, Maggi, and muffins.",
     rating: 4.8,
     review_count: 610,

@@ -1,6 +1,7 @@
 {
-  "total_courses_count": 281,
+  "total_courses_count": 304,
   "schools": [
+    "SOBSC",
     "SOBT",
     "SOE",
     "SOHSS",
@@ -10,6 +11,236 @@
     "SOVS"
   ],
   "courses": [
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "BA_H_BuddhistStudies_May2023.pdf",
+      "web_url": "/courses/sobsc/BA_H_BuddhistStudies_May2023.pdf",
+      "size_bytes": 776788,
+      "size_kb": 758.58,
+      "size_mb": 0.74
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Bouddh_Samaja_Sammelan.pdf",
+      "web_url": "/courses/sobsc/Bouddh_Samaja_Sammelan.pdf",
+      "size_bytes": 321092,
+      "size_kb": 313.57,
+      "size_mb": 0.31
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "BuddhPurnima.pdf",
+      "web_url": "/courses/sobsc/BuddhPurnima.pdf",
+      "size_bytes": 1007596,
+      "size_kb": 983.98,
+      "size_mb": 0.96
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Buddhist-monk-Venerable-Pannazawda.pdf",
+      "web_url": "/courses/sobsc/Buddhist-monk-Venerable-Pannazawda.pdf",
+      "size_bytes": 966852,
+      "size_kb": 944.19,
+      "size_mb": 0.92
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
+      "web_url": "/courses/sobsc/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
+      "size_bytes": 259105,
+      "size_kb": 253.03,
+      "size_mb": 0.25
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Hue-Visit-GBU.pdf",
+      "web_url": "/courses/sobsc/Hue-Visit-GBU.pdf",
+      "size_bytes": 487990,
+      "size_kb": 476.55,
+      "size_mb": 0.47
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "MA_Syllabus_May2023.pdf",
+      "web_url": "/courses/sobsc/MA_Syllabus_May2023.pdf",
+      "size_bytes": 447319,
+      "size_kb": 436.83,
+      "size_mb": 0.43
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "MPhil_Syllabus_May2023.pdf",
+      "web_url": "/courses/sobsc/MPhil_Syllabus_May2023.pdf",
+      "size_bytes": 454844,
+      "size_kb": 444.18,
+      "size_mb": 0.43
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Meditation.pdf",
+      "web_url": "/courses/sobsc/Meditation.pdf",
+      "size_bytes": 501952,
+      "size_kb": 490.19,
+      "size_mb": 0.48
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Meditation_prog.pdf",
+      "web_url": "/courses/sobsc/Meditation_prog.pdf",
+      "size_bytes": 3413153,
+      "size_kb": 3333.16,
+      "size_mb": 3.26
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "NEP_BA_BuddhistStudies_syllabus2023.pdf",
+      "web_url": "/courses/sobsc/NEP_BA_BuddhistStudies_syllabus2023.pdf",
+      "size_bytes": 30836301,
+      "size_kb": 30113.58,
+      "size_mb": 29.41
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "PALI_CERTIFICATE_COURSE_PGDIPLOMA_PALI_May2023.pdf",
+      "web_url": "/courses/sobsc/PALI_CERTIFICATE_COURSE_PGDIPLOMA_PALI_May2023.pdf",
+      "size_bytes": 301101,
+      "size_kb": 294.04,
+      "size_mb": 0.29
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "PG_Diploma_BuddhistTourism_Heritage_Syllabus_May2023.pdf",
+      "web_url": "/courses/sobsc/PG_Diploma_BuddhistTourism_Heritage_Syllabus_May2023.pdf",
+      "size_bytes": 1757436,
+      "size_kb": 1716.25,
+      "size_mb": 1.68
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "PhD_CWork_SoBSC.pdf",
+      "web_url": "/courses/sobsc/PhD_CWork_SoBSC.pdf",
+      "size_bytes": 3539637,
+      "size_kb": 3456.68,
+      "size_mb": 3.38
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "REPORT_SIDDHAM_EXHIBITION_SOBSC.pdf",
+      "web_url": "/courses/sobsc/REPORT_SIDDHAM_EXHIBITION_SOBSC.pdf",
+      "size_bytes": 4507190,
+      "size_kb": 4401.55,
+      "size_mb": 4.3
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Report-ICPR.pdf",
+      "web_url": "/courses/sobsc/Report-ICPR.pdf",
+      "size_bytes": 3613206,
+      "size_kb": 3528.52,
+      "size_mb": 3.45
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Report-News-SoBSC.pdf",
+      "web_url": "/courses/sobsc/Report-News-SoBSC.pdf",
+      "size_bytes": 814610,
+      "size_kb": 795.52,
+      "size_mb": 0.78
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "SOBSC-Meditation-Report.pdf",
+      "web_url": "/courses/sobsc/SOBSC-Meditation-Report.pdf",
+      "size_bytes": 496928,
+      "size_kb": 485.28,
+      "size_mb": 0.47
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "SOBSC_AbhidamaDiwas.pdf",
+      "web_url": "/courses/sobsc/SOBSC_AbhidamaDiwas.pdf",
+      "size_bytes": 1565592,
+      "size_kb": 1528.9,
+      "size_mb": 1.49
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "TRAINING_AT_MEDITATION_CENTRE-GBU.pdf",
+      "web_url": "/courses/sobsc/TRAINING_AT_MEDITATION_CENTRE-GBU.pdf",
+      "size_bytes": 955796,
+      "size_kb": 933.39,
+      "size_mb": 0.91
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "VenThichNhatTu-Visited.pdf",
+      "web_url": "/courses/sobsc/VenThichNhatTu-Visited.pdf",
+      "size_bytes": 281257,
+      "size_kb": 274.67,
+      "size_mb": 0.27
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "Vipassana_workshop.pdf",
+      "web_url": "/courses/sobsc/Vipassana_workshop.pdf",
+      "size_bytes": 847116,
+      "size_kb": 827.26,
+      "size_mb": 0.81
+    },
+    {
+      "school_code": "SOBSC",
+      "school_name": "School of Buddhist Studies and Civilization",
+      "department": "buddhist-studies",
+      "filename": "jpg2pdf.pdf",
+      "web_url": "/courses/sobsc/jpg2pdf.pdf",
+      "size_bytes": 789066,
+      "size_kb": 770.57,
+      "size_mb": 0.75
+    },
     {
       "school_code": "SOBT",
       "school_name": "School of Biotechnology",

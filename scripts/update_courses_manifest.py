@@ -41,26 +41,32 @@ for root, dirs, files in os.walk(COURSES_DIR):
         full_path = os.path.join(root, f)
         rel_path = os.path.relpath(full_path, COURSES_DIR).replace("\\", "/")
         parts = rel_path.split("/")
-        if len(parts) >= 2:
+        if len(parts) >= 3:
             school_dir = parts[0]
             dept_dir = parts[1]
-            school_code = DIR_TO_CODE.get(school_dir.lower(), school_dir.upper())
-            school_name = SCHOOL_NAMES.get(school_code, school_code)
-            schools_found.add(school_code)
-            size_bytes = os.path.getsize(full_path)
-            size_kb = round(size_bytes / 1024, 2)
-            size_mb = round(size_bytes / (1024 * 1024), 2)
-            web_url = f"/courses/{rel_path}"
-            courses.append({
-                "school_code": school_code,
-                "school_name": school_name,
-                "department": dept_dir,
-                "filename": f,
-                "web_url": web_url,
-                "size_bytes": size_bytes,
-                "size_kb": size_kb,
-                "size_mb": size_mb
-            })
+        elif len(parts) == 2:
+            school_dir = parts[0]
+            dept_dir = "buddhist-studies" if school_dir.lower() == "sobsc" else "general"
+        else:
+            continue
+            
+        school_code = DIR_TO_CODE.get(school_dir.lower(), school_dir.upper())
+        school_name = SCHOOL_NAMES.get(school_code, school_code)
+        schools_found.add(school_code)
+        size_bytes = os.path.getsize(full_path)
+        size_kb = round(size_bytes / 1024, 2)
+        size_mb = round(size_bytes / (1024 * 1024), 2)
+        web_url = f"/courses/{rel_path}"
+        courses.append({
+            "school_code": school_code,
+            "school_name": school_name,
+            "department": dept_dir,
+            "filename": f,
+            "web_url": web_url,
+            "size_bytes": size_bytes,
+            "size_kb": size_kb,
+            "size_mb": size_mb
+        })
 
 courses.sort(key=lambda x: (x["school_code"], x["department"], x["filename"]))
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Users, School, BookMarked, Briefcase, Compass, TrendingUp, ArrowRight } from "lucide-react";
 import homeData from "../../Data/home.json";
 import SearchableWrapper from "../Searchbar/SearchableWrapper";
@@ -133,15 +134,14 @@ export default function AboutSection() {
               {/* Actions */}
               {aboutData.button1_text && aboutData.button1_url && (
                 <div className="w-full flex justify-center sm:justify-start">
-                  <a
-                    href={aboutData.button1_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-600/20 hover:-translate-y-0.5 hover:shadow-xl shadow-blue-600/30 text-sm sm:text-base"
+                  {/* Same tab: a page on our own site opens in place, without reloading the app */}
+                  <Link
+                    to={aboutData.button1_url}
+                    className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold tracking-wide transition-all shadow-lg shadow-blue-600/20 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/30 text-sm sm:text-base"
                   >
                     {aboutData.button1_text}
                     <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
               )}
             </div>

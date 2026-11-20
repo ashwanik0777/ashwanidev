@@ -1,6 +1,6 @@
 import Home from "../pages/Aboutus/Home.jsx";
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import InternshipProgrammes from "../pages/Placement/InternshipProgrammes.jsx";
 
 import PlacementStatistics from "../pages/Placement/PlacementStatistics.jsx";
@@ -207,11 +207,13 @@ export default function AppRouter() {
 
           <Route path="/comingSoon" element={<ComingSoon />} />
           <Route path="/" element={<Home />} />
-          <Route path="/about-us/About GBU" element={<AboutGbu />} />
-          <Route path="/about-us/About%20Gbu" element={<AboutGbu />} />
-          <Route path="/about-us/About%20GBU" element={<AboutGbu />} />
           <Route path="/about-us/about-gbu" element={<AboutGbu />} />
-          <Route path="/about-us/about" element={<AboutGbu />} />
+          {/* Older spellings of the About GBU address move to the one above */}
+          <Route path="/about-us/About GBU" element={<Navigate to="/about-us/about-gbu" replace />} />
+          <Route path="/about-us/About Gbu" element={<Navigate to="/about-us/about-gbu" replace />} />
+          <Route path="/about-us/About%20Gbu" element={<Navigate to="/about-us/about-gbu" replace />} />
+          <Route path="/about-us/About%20GBU" element={<Navigate to="/about-us/about-gbu" replace />} />
+          <Route path="/about-us/about" element={<Navigate to="/about-us/about-gbu" replace />} />
           <Route path="/about-us/act" element={<Act />} />
           <Route path="/about-us/act-statute-ordinance" element={<Act />} />
           <Route path="/about/act" element={<Act />} />

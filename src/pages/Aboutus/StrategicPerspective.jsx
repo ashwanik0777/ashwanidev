@@ -9,7 +9,7 @@ const StrategicPerspective = () => {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-teal-50/20 to-slate-100">
         {/* Banner */}
         <BannerSection
-          title="GBU: A Strategic Perspective"
+          title="GBU - A Strategic Perspective"
           subtitle="Transformative Vision, Academic Innovation & National Ethos"
           bgTheme={2}
         />

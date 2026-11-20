@@ -29,7 +29,7 @@ const NAVIGATION_CONFIG = [
       { slug: "about-gbu", label: "About GBU" },
       { slug: "chancellor-message", label: "Chancellor Message" },
       { slug: "vice-chancellor-message", label: "Vice Chancellor Message" },
-      { slug: "strategic-perspective", label: "GBU: A Strategic Perspective" },
+      { slug: "strategic-perspective", label: "GBU - A Strategic Perspective" },
       { slug: "organization", label: "Organization" },
       { slug: "governing-bodies", label: "Governing Bodies" },
       { slug: "regulatory-bodies", label: "Regulatory Bodies" },

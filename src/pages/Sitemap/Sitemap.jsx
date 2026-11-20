@@ -94,7 +94,7 @@ const sitemapAbout = [
       { title: "University History", path: "/aboutUs/GBUHistory" },
       { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
       { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },
-      { title: "GBU: A Strategic Perspective", path: "/about-us/strategic-perspective" },
+      { title: "GBU - A Strategic Perspective", path: "/about-us/strategic-perspective" },
       { title: "Governing Bodies", path: "/about-us/governing-bodies" },
       { title: "Policies", path: "/about-us/policies" },
       { title: "Mandatory Disclosures", path: "/about-us/mandatory-disclosures" },

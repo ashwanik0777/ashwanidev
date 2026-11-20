@@ -45,7 +45,7 @@ const SEARCH_INDEX = [
     description: "Message from the Vice Chancellor"
   },
   {
-    label: "GBU: A Strategic Perspective",
+    label: "GBU - A Strategic Perspective",
     keywords: ["strategic", "perspective", "vision", "mission", "strategy", "strategic perspective"],
     path: "/about-us/strategic-perspective",
     category: "About Us",

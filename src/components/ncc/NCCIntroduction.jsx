@@ -138,7 +138,7 @@ const nccStatsData = [
             {/* Official NCC Emblem Logo */}
             <div className="shrink-0 self-center md:self-auto">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                src="/assets/ncc/emblem.png"
                 alt="Official NCC Logo"
                 className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain bg-white rounded-full p-2.5 shadow-2xl border-4 border-amber-400/80"
                 onError={(e) => {

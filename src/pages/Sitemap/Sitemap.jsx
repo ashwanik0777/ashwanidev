@@ -91,7 +91,7 @@ const sitemapAbout = [
     icon: Home,
     children: [
       { title: "About GBU Overview", path: "/about-us/about-gbu" },
-      { title: "University History", path: "/aboutUs/GBUHistory" },
+      { title: "University History", path: "/aboutUs/learnGBU" },
       { title: "Chancellor's Message", path: "/about-us/chancellor-message" },
       { title: "Vice-Chancellor's Message", path: "/about-us/vice-chancellor-message" },
       { title: "GBU - A Strategic Perspective", path: "/about-us/strategic-perspective" },

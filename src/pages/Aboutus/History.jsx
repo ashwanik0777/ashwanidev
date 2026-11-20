@@ -1,63 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useUniversityStats } from "../../hooks/useUniversityStats";
-import { 
-  GraduationCap, 
-  Star, 
-  Handshake, 
-  Trophy, 
-  Scale, 
-  User, 
-  Brain, 
-  Building2, 
-  CheckCircle, 
-  Calendar, 
-  Target, 
-  Medal, 
-  TreePine, 
-  University, 
-  Sprout, 
-  Book, 
-  Home, 
-  Drama, 
-  ArrowRight,
-  ChevronDown,
-  Award,
-  Users,
-  MapPin,
-  BookOpen,
-  Globe,
+import {
+  GraduationCap,
+  Star,
+  Handshake,
+  Trophy,
+  Scale,
+  User,
+  Brain,
+  Building2,
+  CheckCircle,
+  Calendar,
+  Medal,
+  TreePine,
   Shield,
-  Zap
+  Landmark,
+  MapPin,
+  Wallet,
+  BadgeCheck,
 } from "lucide-react";
 import BannerSection from "../../components/HeroBanner";
-import StatsCard from "../../components/StatsCard";
+
+// Static class names only, so Tailwind can see them. Solid light tints, no gradients.
+const TONES = {
+  blue: "bg-blue-50 text-blue-700 ring-blue-100 group-hover:bg-blue-600",
+  amber: "bg-amber-50 text-amber-700 ring-amber-100 group-hover:bg-amber-500",
+  emerald: "bg-emerald-50 text-emerald-700 ring-emerald-100 group-hover:bg-emerald-600",
+  violet: "bg-violet-50 text-violet-700 ring-violet-100 group-hover:bg-violet-600",
+  orange: "bg-orange-50 text-orange-700 ring-orange-100 group-hover:bg-orange-500",
+};
+
+const IconTile = ({ icon, tone, size = "w-12 h-12", iconSize = "w-6 h-6" }) => {
+  const Icon = icon;
+  return (
+    <div className={`${size} ${TONES[tone]} shrink-0 rounded-xl ring-1 flex items-center justify-center transition-colors duration-300 group-hover:text-white group-hover:ring-transparent`}>
+      <Icon className={iconSize} />
+    </div>
+  );
+};
+
+const SectionHeading = ({ title }) => (
+  <div className="text-center mb-6 sm:mb-8">
+    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-900">{title}</h2>
+    <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
+  </div>
+);
 
 export default function AboutUsPage() {
   // Campus acreage comes from the shared university-stats source.
   const universityStats = useUniversityStats();
-  const [isVisible, setIsVisible] = useState({});
-
-  // Intersection Observer for animations
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(prev => ({
-              ...prev,
-              [entry.target.id]: true
-            }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const sections = document.querySelectorAll('[data-animate]');
-    sections.forEach(section => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, []);
 
   const recognitions = [
     {
@@ -66,7 +57,7 @@ export default function AboutUsPage() {
       body: "University Grants Commission of India",
       details: "F.9-18/2009 (CRP-I) dated 13 May 2009 under section 2(f) of UGC Act 1956. Empowered to award degrees under section 22 of the UGC Act 1956.",
       icon: GraduationCap,
-      color: "from-blue-500 to-indigo-600"
+      tone: "blue"
     },
     {
       id: 2,
@@ -74,7 +65,7 @@ export default function AboutUsPage() {
       body: "B+ Grade Accreditation",
       details: "Recognised under UGC Section 12B and NAAC accredited with B+ Grade, ensuring quality education standards.",
       icon: Star,
-      color: "from-yellow-500 to-orange-600"
+      tone: "amber"
     },
     {
       id: 3,
@@ -82,7 +73,7 @@ export default function AboutUsPage() {
       body: "Association of Indian Universities",
       details: "Granted membership of the Association of Indian Universities, connecting us with premier institutions across India.",
       icon: Handshake,
-      color: "from-green-500 to-teal-600"
+      tone: "emerald"
     },
     {
       id: 4,
@@ -90,7 +81,7 @@ export default function AboutUsPage() {
       body: "ISO 9001:2008 Certification",
       details: "Accredited by Joint Accreditation System of Australia & New Zealand (JAS-ANZ), vide 1015QBC26 for quality management.",
       icon: Trophy,
-      color: "from-purple-500 to-pink-600"
+      tone: "violet"
     }
   ];
 
@@ -101,7 +92,7 @@ export default function AboutUsPage() {
       school: "School of Law, Justice, & Governance",
       description: "Approved program preparing students for legal practice with comprehensive curriculum.",
       icon: Scale,
-      color: "bg-blue-100 text-blue-800"
+      tone: "blue"
     },
     {
       title: "National Council for Teacher Education (NCTE)",
@@ -109,7 +100,7 @@ export default function AboutUsPage() {
       school: "Department of Education & Training, School of Humanities & Social Sciences",
       description: "NCTE recognized program for aspiring educators and teaching professionals.",
       icon: User,
-      color: "bg-green-100 text-green-800"
+      tone: "emerald"
     },
     {
       title: "Rehabilitation Council of India",
@@ -117,7 +108,7 @@ export default function AboutUsPage() {
       school: "Department of Psychology & Mental Health, School of Humanities & Social Sciences",
       description: "Specialized program for clinical psychology professionals and mental health practitioners.",
       icon: Brain,
-      color: "bg-purple-100 text-purple-800"
+      tone: "violet"
     },
     {
       title: "Council of Architecture, India",
@@ -125,341 +116,158 @@ export default function AboutUsPage() {
       school: "Department of Architecture & Planning, School of Engineering",
       description: "Professional architecture programs approved for practice and higher studies.",
       icon: Building2,
-      color: "bg-orange-100 text-orange-800"
+      tone: "orange"
     }
+  ];
+
+  const stats = [
+    { value: universityStats.acres_campus, label: "Acres of Green Campus", icon: TreePine, tone: "emerald" },
+    { value: "18+", label: "Years of Academic Excellence", icon: Calendar, tone: "blue" },
+    { value: "B+", label: "NAAC Accreditation", icon: Medal, tone: "amber" },
+    { value: "4+", label: "Statutory Approvals", icon: Shield, tone: "violet" },
+  ];
+
+  // The overview's key facts at a glance (all taken from the text below them).
+  const keyFacts = [
+    { label: "Established", value: "Uttar Pradesh Act (9) of 2002", icon: Landmark },
+    { label: "First academic session", value: "August 2008", icon: Calendar },
+    { label: "Campus", value: `${universityStats.acres_campus} acres, Greater Noida`, icon: MapPin },
+    { label: "Funded by", value: "NOIDA & Greater Noida Authority (GNIDA)", icon: Wallet },
+    { label: "Recognition", value: "UGC 2(f) & 12B, AIU member", icon: BadgeCheck },
   ];
 
   return (
     <div className="min-h-screen bg-white">
-   
       <BannerSection
-        title="History of Gautam Buddha University"
+        title="Gautam Buddha University"
         subtitle="A Journey of Excellence in Education"
-        bgTheme={7}
-        />
-      
+        bgTheme={11}
+      />
 
-    {/* Stats Section - Separate from Banner */}
-          
-    <StatsCard
-      stats={[
-        { numberText: universityStats.acres_campus, subtitle: "Acres of Green Campus", icon: TreePine, iconColor: "#16a34a" },
-        { numberText: "18+", subtitle: "Years of Academic Excellence", icon: Calendar, iconColor: "#4f46e5" },
-        { numberText: "B+", subtitle: "NAAC Accreditation", icon: Medal, iconColor: "#eab308" },
-        { numberText: "4+", subtitle: "Statutory Approvals", icon: Shield, iconColor: "#a855f7" }
-      ]}
-    />
-    {/* University Overview */}
-      <section 
-        id="overview" 
-        data-animate 
-        className={`py-20 bg-white transition-opacity duration-1000 ${
-          isVisible.overview ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
-            <div className="space-y-8">
-              <div>
-                <span className="inline-flex items-center space-x-2 px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-4">
-                  <University className="w-4 h-4" />
-                  <span>About Our University</span>
-                </span>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                  Excellence in <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Education</span>
-                </h2>
-              </div>
-
-              <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
-                <p>
-                  <strong>Gautam Buddha University</strong>, established by the <strong>Uttar Pradesh Act (9) of 2002</strong>, 
-                  commenced its first academic session at its 511 acres lush green campus at Greater Noida in <strong>August 2008</strong>.
-                </p>
-                <p>
-                  The University is fully funded by the <strong>New Okhla Industrial Development Authority (NOIDA)</strong> 
-                  and the <strong>Greater Noida Industrial Development Authority (GNIDA)</strong>, both undertakings of the 
-                  Government of Uttar Pradesh.
-                </p>
-                <p>
-                  The University is <strong>recognized by the University Grants Commission</strong> under UGC Act and is a 
-                  member of the <strong>Association of Indian Universities</strong>. All academic programmes offered by the 
-                  University are recognised by the University Grants Commission of India and various other Statutory Bodies and Councils.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                  <University className="w-8 h-8 text-indigo-600 mb-3" />
-                  <h3 className="font-bold text-gray-900 mb-2">Established</h3>
-                  <p className="text-gray-600">UP Act (9) of 2002</p>
-                  <p className="text-sm text-indigo-600 mt-1">August 2008</p>
-                </div>
-                <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                  <Sprout className="w-8 h-8 text-green-600 mb-3" />
-                  <h3 className="font-bold text-gray-900 mb-2">Campus</h3>
-                  <p className="text-gray-600">{universityStats.acres_campus} Acres</p>
-                  <p className="text-sm text-green-600 mt-1">Greater Noida</p>
+      {/* Key numbers: one strip overlapping the banner's lower edge, thin dividers between the cells */}
+      <section className="relative z-10 -mt-4 sm:-mt-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-md">
+            {stats.map((stat) => (
+              // Phones: icon above the number, so the label gets the full cell width
+              <div key={stat.label} className="group flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4 bg-white p-4 sm:p-5 transition-colors duration-300 hover:bg-slate-50">
+                <IconTile icon={stat.icon} tone={stat.tone} size="w-10 h-10 sm:w-12 sm:h-12" iconSize="w-5 h-5 sm:w-6 sm:h-6" />
+                <div className="min-w-0">
+                  <div className="text-2xl sm:text-3xl font-extrabold leading-none tracking-tight text-blue-900">{stat.value}</div>
+                  <div className="mt-1.5 text-xs sm:text-sm font-medium leading-snug text-slate-600">{stat.label}</div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* University Overview: the story on the left, key facts beside it */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="About the University" />
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            {/* justify-all: these paragraphs are justified (see index.css); short card text below stays left-aligned */}
+            <div className="justify-all lg:col-span-8 space-y-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+              <p>
+                <strong className="text-slate-900">Gautam Buddha University</strong>, established by the <strong className="text-slate-900">Uttar Pradesh Act (9) of 2002</strong>,
+                commenced its first academic session at its 511 acres lush green campus at Greater Noida in <strong className="text-slate-900">August 2008</strong>.
+              </p>
+              <p>
+                The University is fully funded by the <strong className="text-slate-900">New Okhla Industrial Development Authority (NOIDA)</strong>
+                {" "}and the <strong className="text-slate-900">Greater Noida Industrial Development Authority (GNIDA)</strong>, both undertakings of the
+                Government of Uttar Pradesh.
+              </p>
+              <p>
+                The University is <strong className="text-slate-900">recognized by the University Grants Commission</strong> under UGC Act and is a
+                member of the <strong className="text-slate-900">Association of Indian Universities</strong>. All academic programmes offered by the
+                University are recognised by the University Grants Commission of India and various other Statutory Bodies and Councils.
+              </p>
             </div>
 
-            {/* Visual Element */}
-            <div className="relative">
-              <div className="relative bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl p-8 shadow-2xl">
-                <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                  GBU
-                </div>
-                
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
-                      <CheckCircle className="w-6 h-6" />
+            <aside className="lg:col-span-4 rounded-2xl border border-slate-200 bg-slate-50 p-5" aria-label="Key facts">
+              <h3 className="text-sm font-bold uppercase tracking-wide text-blue-900 mb-3">At a glance</h3>
+              <dl className="divide-y divide-slate-200">
+                {keyFacts.map((fact) => {
+                  const Icon = fact.icon;
+                  return (
+                    <div key={fact.label} className="flex items-start gap-3 py-2.5 first:pt-0 last:pb-0">
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white text-blue-700 ring-1 ring-slate-200">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <div className="min-w-0">
+                        <dt className="text-xs font-medium text-slate-500">{fact.label}</dt>
+                        <dd className="text-sm font-semibold text-slate-900">{fact.value}</dd>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900">UGC Recognized</h4>
-                      <p className="text-gray-600 text-sm">Section 2(f) & 12B</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">
-                      <Star className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900">NAAC Accredited</h4>
-                      <p className="text-gray-600 text-sm">B+ Grade</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                      <Handshake className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-900">AIU Member</h4>
-                      <p className="text-gray-600 text-sm">Association of Indian Universities</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                  );
+                })}
+              </dl>
+            </aside>
           </div>
         </div>
       </section>
 
       {/* Recognition Section */}
-      <section 
-        id="recognitions" 
-        data-animate 
-        className={`py-20 bg-white transition-opacity duration-1000 ${
-          isVisible.recognitions ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-800 rounded-full text-sm font-semibold mb-4">
-              <Award className="w-4 h-4" />
-              <span>Our Achievements</span>
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Recognized & <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Accredited</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our commitment to excellence is reflected in our numerous recognitions and certifications from prestigious institutions.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {recognitions.map((recognition, index) => {
-              const IconComponent = recognition.icon;
-              return (
-                <div 
-                  key={recognition.id}
-                  className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
-                  <div className={`w-16 h-16 bg-gradient-to-r ${recognition.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-8 h-8" />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
-                    {recognition.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 font-medium mb-4">
-                    {recognition.body}
-                  </p>
-                  
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {recognition.details}
-                  </p>
-                  
-                  <div className="mt-6 h-1 bg-gray-200 rounded-full overflow-hidden">
-                    <div className={`h-full bg-gradient-to-r ${recognition.color} rounded-full transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700`} />
-                  </div>
-                </div>
-              );
-            })}
+      <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="Recognised & Accredited" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {recognitions.map((recognition) => (
+              <div
+                key={recognition.id}
+                className="group flex flex-col bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
+              >
+                <IconTile icon={recognition.icon} tone={recognition.tone} />
+                <h3 className="mt-4 text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-700">
+                  {recognition.title}
+                </h3>
+                <p className="mt-1 text-sm font-semibold text-blue-700">{recognition.body}</p>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">{recognition.details}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Statutory Approvals */}
-      <section 
-        id="approvals" 
-        data-animate 
-        className={`py-20 bg-white transition-opacity duration-1000 ${
-          isVisible.approvals ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center space-x-2 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-4">
-              <CheckCircle className="w-4 h-4" />
-              <span>Professional Approvals</span>
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Statutory <span className="bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">Approvals</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our academic programs are approved and recognized by various statutory bodies and professional councils, ensuring quality education and career opportunities.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {approvals.map((approval, index) => {
-              const IconComponent = approval.icon;
-              return (
-                <div 
-                  key={index}
-                  className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group"
-                >
-                  <div className="flex items-start space-x-6">
-                    <div className="flex-shrink-0">
-                      <div className={`w-16 h-16 ${approval.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComponent className="w-8 h-8" />
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">
-                        {approval.title}
-                      </h3>
-                      
-                      <div className="space-y-3">
-                        <div>
-                          <span className="text-sm text-gray-500 font-medium">Programme:</span>
-                          <p className="text-lg font-semibold text-gray-800">{approval.program}</p>
-                        </div>
-                        
-                        <div>
-                          <span className="text-sm text-gray-500 font-medium">School/Department:</span>
-                          <p className="text-gray-700">{approval.school}</p>
-                        </div>
-
-                        <div>
-                          <p className="text-gray-600 leading-relaxed">{approval.description}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-6 flex items-center space-x-2">
-                        <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-green-500 to-teal-600 rounded-full group-hover:animate-pulse" />
-                        </div>
-                        <span className="text-sm font-medium text-green-600 inline-flex items-center space-x-1">
-                          <CheckCircle className="w-4 h-4" />
-                          <span>Approved</span>
-                        </span>
-                      </div>
-                    </div>
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="Statutory Approvals" />
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
+            {approvals.map((approval) => (
+              <div
+                key={approval.title}
+                className="group flex gap-4 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
+              >
+                <IconTile icon={approval.icon} tone={approval.tone} />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 transition-colors group-hover:text-blue-700">
+                      {approval.title}
+                    </h3>
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 ring-1 ring-emerald-200">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      Approved
+                    </span>
                   </div>
+                  <dl className="mt-3 space-y-2 text-sm">
+                    <div>
+                      <dt className="text-xs font-medium text-slate-500">Programme</dt>
+                      <dd className="font-semibold text-slate-800">{approval.program}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs font-medium text-slate-500">School / Department</dt>
+                      <dd className="text-slate-700">{approval.school}</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-3 text-sm text-slate-600 leading-relaxed">{approval.description}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
-      {/* Campus Life Section */}
-      <section 
-        id="campus" 
-        data-animate 
-        className={`py-20 bg-white transition-opacity duration-1000 ${
-          isVisible.campus ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center space-x-2 px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold mb-4">
-              <Users className="w-4 h-4" />
-              <span>Experience GBU</span>
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Life at <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">GBU</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover the vibrant campus life that awaits you at our 511-acre green campus in Greater Noida, fully funded by NOIDA and GNIDA.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Academic Excellence",
-                description: "State-of-the-art facilities with programs recognized by UGC and various statutory bodies",
-                icon: Book,
-                color: "from-blue-500 to-indigo-600",
-                features: ["UGC Recognized Programs", "Research Facilities", "Digital Library", "Smart Campus"]
-              },
-              {
-                title: "Campus Facilities",
-                description: "Everything you need for a comfortable and enriching campus life experience",
-                icon: Home,
-                color: "from-green-500 to-teal-600",
-                features: ["511-Acre Green Campus", "Modern Infrastructure", "Hostel Facilities", "Medical Center"]
-              },
-              {
-                title: "Professional Development",
-                description: "Multiple statutory approvals ensuring career-ready graduates",
-                icon: Drama,
-                color: "from-purple-500 to-pink-600",
-                features: ["Industry Connections", "Professional Programs", "Skill Development", "Placement Support"]
-              }
-            ].map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <div 
-                  key={index}
-                  className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group"
-                >
-                  <div className={`w-16 h-16 bg-gradient-to-r ${item.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-8 h-8" />
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {item.description}
-                  </p>
-                  
-                  <ul className="space-y-2">
-                    {item.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center space-x-3">
-                        <div className={`w-2 h-2 bg-gradient-to-r ${item.color} rounded-full`} />
-                        <span className="text-gray-700 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }

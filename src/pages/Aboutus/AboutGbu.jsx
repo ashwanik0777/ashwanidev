@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUniversityStats } from "../../hooks/useUniversityStats";
 import { Link } from 'react-router-dom';
+import { LIBRARY_INFO, LIBRARY_PAGE, LIBRARY_STATS } from '../../Data/libraryData';
 import {
   Lightbulb,
   Users,
@@ -400,7 +401,8 @@ const AboutGbu = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-white">
+      {/* justify-all: every paragraph and list item on this page is justified, headings are not (see index.css) */}
+      <div className="min-h-screen bg-white justify-all">
         {/* Hero Section */}
         <BannerSection
           title={aboutData.hero.title}
@@ -413,17 +415,18 @@ const AboutGbu = () => {
         {/* Overview Section */}
         <section className="py-6 sm:py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Side by side, the image stretches to the height of the text, so neither leaves an empty band */}
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:items-stretch">
               <div className="order-2 md:order-1">
-                <div className="relative">
+                <div className="relative h-72 md:h-full md:min-h-80">
                   <img
                     src={aboutData.overview.image}
                     alt="Gautam Buddha University Campus"
-                    className="rounded-2xl shadow-md ring-1 ring-slate-200 w-full h-72 md:h-80 object-cover"
+                    className="absolute inset-0 rounded-2xl shadow-md ring-1 ring-slate-200 w-full h-full object-cover"
                   />
                 </div>
               </div>
-              <div className="order-1 md:order-2">
+              <div className="order-1 md:order-2 md:flex md:flex-col md:justify-center">
                 <Badge color="blue" className="mb-4">
                   <GraduationCap className="w-4 h-4 mr-2" />
                   Est. 2008
@@ -434,9 +437,9 @@ const AboutGbu = () => {
                 <p className="justify-text text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
                   {aboutData.overview.description}
                 </p>
-                <Link to="/aboutUs/GBUHistory">
+                <Link to="/aboutUs/learnGBU">
                   <Button className="group">
-                    Learn More About Our History
+                    Learn More
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
@@ -448,9 +451,11 @@ const AboutGbu = () => {
         {/* Vision & Mission Section */}
         <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+            {/* Vision is one short statement and Mission a list of goals, so Vision takes a third
+                of the row and Mission two thirds; both cards end up with little empty space. */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
               {/* Vision Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
+              <div className="lg:col-span-1 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-center group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">
@@ -460,14 +465,16 @@ const AboutGbu = () => {
                       {aboutData.vision.title}
                     </h3>
                   </div>
-                  <p className="justify-text text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+                  {/* Justified on phones and tablets; in the narrow desktop column justified text
+                      opens wide gaps between words, so it is left-aligned there. */}
+                  <p className="justify-text lg:text-left text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed font-normal">
                     {aboutData.vision.description}
                   </p>
                 </div>
               </div>
 
               {/* Mission Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
+              <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">
@@ -562,10 +569,63 @@ const AboutGbu = () => {
           </div>
         </section>
 
-        {/* Hostel Section */}
+        {/* Central Library — a short section from the Library page (same data, src/Data/libraryData.js) */}
         <section className="py-6 sm:py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-stretch">
+              <div className="lg:col-span-5 group">
+                <div className="relative h-64 sm:h-80 lg:h-full lg:min-h-80 overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                  <img
+                    src="/assets/campusimg/library.jpg"
+                    alt="Students studying in the GBU Central Library"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                  />
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 flex flex-col justify-center space-y-5">
+                <Badge color="blue" className="self-start">
+                  <Library className="w-4 h-4 mr-2" />
+                  Central Library
+                </Badge>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-blue-900 leading-tight">
+                  {LIBRARY_INFO.title}
+                </h2>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                  {LIBRARY_INFO.description}
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {LIBRARY_STATS.map((stat) => (
+                    <div
+                      key={stat.value}
+                      className="rounded-xl border border-slate-200 bg-slate-50 p-3 text-center transition hover:border-blue-200 hover:bg-white hover:shadow-sm"
+                    >
+                      <div className="text-lg sm:text-xl font-extrabold text-blue-900">{stat.label}</div>
+                      <div className="mt-0.5 text-[11px] sm:text-xs text-slate-500 leading-snug">{stat.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <Link to={LIBRARY_PAGE}>
+                    <Button className="group">
+                      Explore the Library
+                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Hostel Section */}
+        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* The photo grid stretches to the height of the feature list beside it */}
+            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center md:items-stretch">
               <div className="space-y-4">
                 <Badge color="blue" className="mb-1">
                   <Home className="w-4 h-4 mr-2" />
@@ -577,7 +637,7 @@ const AboutGbu = () => {
 
                 <div className="space-y-2.5">
                   {aboutData.hostelFeatures.map((feature, index) => (
-                    <div key={index} className="group flex items-center p-3 bg-slate-50 rounded-xl border border-slate-200 transition hover:border-blue-200 hover:bg-white hover:shadow-sm">
+                    <div key={index} className="group flex items-center p-3 bg-white rounded-xl border border-slate-200 transition hover:border-blue-200 hover:bg-blue-50/40 hover:shadow-sm">
                       <div className="p-2 rounded-full mr-3 shrink-0 bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
                         {renderIcon(feature.icon, "w-4 h-4")}
                       </div>
@@ -587,36 +647,36 @@ const AboutGbu = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <div className="space-y-3">
-                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 md:h-full">
+                <div className="flex flex-col gap-3 pb-4 md:h-full">
+                  <div className="relative overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white h-32 sm:h-40 md:h-auto md:flex-1 md:min-h-32">
                     <img
                       src="/assets/hostels.jpg"
                       alt="GBU Hostel Building Overview"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
+                  <div className="relative overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white h-32 sm:h-40 md:h-auto md:flex-1 md:min-h-32">
                     <img
                       src="/assets/hostel 1.jpg"
                       alt="GBU Hostel Residence Block"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
-                <div className="space-y-3 pt-4">
-                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
+                <div className="flex flex-col gap-3 pt-4 md:h-full">
+                  <div className="relative overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white h-32 sm:h-40 md:h-auto md:flex-1 md:min-h-32">
                     <img
                       src="/assets/hostel 2.jpg"
                       alt="GBU Hostel Landscape & Greenery"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white">
+                  <div className="relative overflow-hidden rounded-2xl shadow-sm border border-slate-200 group bg-white h-32 sm:h-40 md:h-auto md:flex-1 md:min-h-32">
                     <img
                       src="/assets/hostel2.jpg"
                       alt="GBU Student Residential Complex"
-                      className="w-full h-32 sm:h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                 </div>
@@ -625,31 +685,34 @@ const AboutGbu = () => {
           </div>
         </section>
 
-        {/* Meditation & Wellness Section */}
-        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100 px-4">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-8 md:gap-12 items-center bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
-            <div className="flex items-center justify-center group">
-              <img
-                src="/assets/meditation.jpg"
-                alt="Meditation"
-                className="w-72 h-72 md:w-88 md:h-88 rounded-2xl shadow-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-              />
-            </div>
+        {/* Meditation & Wellness Section — image left, text right, open layout like the Hostel section.
+            The image fills its column (it was a fixed 352px square, leaving a wide empty band). */}
+        <section className="py-6 sm:py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-stretch">
+              <div className="lg:col-span-5 group">
+                <div className="relative h-64 sm:h-80 lg:h-full lg:min-h-80 overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                  <img
+                    src="/assets/meditation.jpg"
+                    alt="Meditation dome at Gautam Buddha University"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                  />
+                </div>
+              </div>
 
-            <Card hover={false} className="shadow-none border-0 bg-transparent">
-              <CardContent className="p-4 md:p-6">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">
+              <div className="lg:col-span-7 flex flex-col justify-center space-y-5">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-900 tracking-tight leading-tight">
                   Meditation & Wellness Center
                 </h2>
 
-                <div className="flex justify-center md:justify-start space-x-8 mb-4">
+                <div className="flex gap-8">
                   {[
                     { icon: "Activity", label: "Yoga" },
                     { icon: "Smile", label: "Meditation" },
                     { icon: "Leaf", label: "Wellness" }
                   ].map((item, index) => (
-                    <div key={index} className="text-center md:text-left">
-                      <div className="p-2.5 bg-blue-50 text-blue-700 ring-1 ring-blue-100 rounded-full mb-2 mx-auto md:mx-0 w-10 h-10 flex items-center justify-center">
+                    <div key={index} className="text-center">
+                      <div className="p-2.5 bg-blue-50 text-blue-700 ring-1 ring-blue-100 rounded-full mb-2 mx-auto w-10 h-10 flex items-center justify-center">
                         {renderIcon(item.icon, "w-5 h-5")}
                       </div>
                       <p className="text-xs sm:text-sm text-gray-700 font-medium">{item.label}</p>
@@ -657,13 +720,13 @@ const AboutGbu = () => {
                   ))}
                 </div>
 
-                <p className="justify-text text-base text-gray-700 mb-6 leading-relaxed">
+                <p className="justify-text text-sm sm:text-base text-slate-600 leading-relaxed">
                   Our dedicated wellness center offers yoga sessions, mindfulness practices,
                   and spiritual guidance to nurture the holistic development of our students.
                   Experience tranquility in our serene meditation dome.
                 </p>
 
-                <div className="text-center md:text-left">
+                <div>
                   <Link to="/campus-life/meditation-center">
                     <Button className="group/btn gap-2">
                       Explore Wellness Programs
@@ -671,18 +734,18 @@ const AboutGbu = () => {
                     </Button>
                   </Link>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Sports & Recreation — Zigzag Item 1 (Content Left, Image Right) */}
-        <section className="py-8 sm:py-10 bg-white text-gray-800">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="grid lg:grid-cols-12 gap-8 md:gap-12 items-center bg-slate-50/70 rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 md:p-10 relative overflow-hidden">
+        <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100 text-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-stretch">
               {/* Content on Left */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-800 text-xs font-bold border border-blue-200">
+              <div className="lg:col-span-7 space-y-5 lg:flex lg:flex-col lg:justify-center">
+                <div className="self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-800 text-xs font-bold border border-blue-200">
                   <Trophy className="w-3.5 h-3.5 text-blue-600" />
                   <span>Olympic-Standard Athletics</span>
                 </div>
@@ -729,11 +792,11 @@ const AboutGbu = () => {
 
               {/* Image on Right */}
               <div className="lg:col-span-5 relative group">
-                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white h-72 sm:h-88 lg:h-full lg:min-h-88">
                   <img
                     src="/assets/campusimg/gbu-cricket-stadium.jpg"
                     alt="GBU Cricket Stadium and Sports Arena"
-                    className="w-full h-72 sm:h-88 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -754,16 +817,16 @@ const AboutGbu = () => {
         </section>
 
         {/* Student Life & Community — Zigzag Item 2 (Image Left, Content Right) */}
-        <section className="py-8 sm:py-10 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="grid lg:grid-cols-12 gap-8 md:gap-12 items-center bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 md:p-10 relative overflow-hidden">
+        <section className="py-6 sm:py-8 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center lg:items-stretch">
               {/* Image on Left (Zigzag) */}
               <div className="lg:col-span-5 relative group order-2 lg:order-1">
-                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white h-72 sm:h-88 lg:h-full lg:min-h-88">
                   <img
                     src="/assets/clubs/clubs.jpg"
                     alt="GBU Student Clubs and Cultural Life"
-                    className="w-full h-72 sm:h-88 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                 </div>
@@ -781,8 +844,8 @@ const AboutGbu = () => {
               </div>
 
               {/* Content on Right (Zigzag) */}
-              <div className="lg:col-span-7 space-y-5 order-1 lg:order-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100/80 text-indigo-800 text-xs font-bold border border-indigo-200">
+              <div className="lg:col-span-7 space-y-5 order-1 lg:order-2 lg:flex lg:flex-col lg:justify-center">
+                <div className="self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100/80 text-indigo-800 text-xs font-bold border border-indigo-200">
                   <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
                   <span>Campus Life & Community</span>
                 </div>

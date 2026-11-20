@@ -249,7 +249,7 @@ const RegulatoryBodies = () => {
                             {item.badge}
                           </span>
                           <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                            {item.acronym} — {item.name}
+                            {item.acronym} <span className="text-gray-400 font-normal text-sm sm:text-base mx-1.5">-</span> {item.name}
                           </h3>
                         </div>
                       </div>

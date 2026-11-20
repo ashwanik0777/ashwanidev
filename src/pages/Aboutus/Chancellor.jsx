@@ -191,11 +191,12 @@ const Chancellor = () => {
         <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12">
           
           {/* Top Profile & Message Box */}
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-start mb-8 sm:mb-12">
-            
+          {/* On desktop both cards stretch to the same height */}
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-start lg:items-stretch mb-8 sm:mb-12">
+
             {/* Chancellor Card */}
             <div className="w-full lg:w-1/3 shrink-0">
-              <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-200 text-center">
+              <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-200 text-center lg:h-full lg:flex lg:flex-col lg:justify-center">
                 <div className="w-full max-w-[200px] sm:max-w-[250px] h-[250px] sm:h-[320px] mx-auto mb-3.5 sm:mb-4 rounded-xl sm:rounded-2xl overflow-hidden shadow-md ring-4 ring-amber-500/15 border border-amber-500/20">
                   <img
                     src="/assets/Yogiji.jpg"
@@ -204,16 +205,17 @@ const Chancellor = () => {
                   />
                 </div>
                
-                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Shri Yogi Adityanath</h3>
-                <p className="text-xs sm:text-sm font-semibold  mt-1">Hon'ble Chief Minister, Uttar Pradesh
+                <h3 className="text-lg sm:text-xl font-extrabold text-amber-800 leading-tight">Shri Yogi Adityanath</h3>
+                <p className="text-xs font-semibold text-slate-500 mt-1">Hon'ble Chief Minister, Uttar Pradesh
 and Hon'ble Chancellor of Gautam Buddha University</p>
               </div>
             </div>
 
             {/* Message Narrative */}
-            <div className="w-full lg:w-2/3 bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-slate-200 flex flex-col justify-between">
-              <div>
-                <div className="text-3xl sm:text-4xl text-amber-600 font-serif leading-none mb-2">"</div>
+            <div className="relative overflow-hidden w-full lg:w-2/3 bg-white p-5 sm:p-6 lg:p-7 rounded-2xl shadow-lg border border-slate-200 flex flex-col justify-center">
+              {/* Opening quote as a light corner mark, so it does not take a line of its own */}
+              <span aria-hidden="true" className="pointer-events-none absolute left-3 top-0 font-serif text-7xl sm:text-8xl leading-none text-amber-500/15 select-none">&ldquo;</span>
+              <div className="relative pt-5 lg:pt-0">
                 <div className="space-y-3 sm:space-y-4 text-slate-700 text-xs sm:text-sm lg:text-base leading-relaxed text-left sm:text-justify">
                   <p>
                     Education is the most powerful weapon which can change the world and transform society. At Gautam Buddha University, we are committed to providing world-class education that nurtures both intellectual growth and moral values.
@@ -223,13 +225,13 @@ and Hon'ble Chancellor of Gautam Buddha University</p>
                   </p>
                   <p>
                     The university stands as a beacon of hope and progress, fostering an environment where diverse minds collaborate to address contemporary challenges and build a sustainable future for our nation and the world.
+                    <span aria-hidden="true" className="pointer-events-none absolute left-90 top-60 font-serif text-7xl sm:text-8xl leading-none text-amber-500/15 select-none">&rdquo;</span>
                   </p>
                 </div>
-                <div className="text-3xl sm:text-4xl text-amber-600 font-serif leading-none text-right mt-1 sm:mt-2">"</div>
               </div>
-              <div className="mt-4 text-right border-t border-slate-100 pt-3 sm:pt-4">
+              <div className="relative mt-4 sm:mt-5 text-right border-t border-slate-100 pt-3">
                 <p className="text-sm sm:text-base font-bold text-amber-800">Shri Yogi Adityanath</p>
-                <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Hon'ble Chief Minister, Uttar Pradesh & Chancellor, GBU</p>
+                <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Hon'ble Chief Minister, Uttar Pradesh and Hon'ble Chancellor of Gautam Buddha University</p>
               </div>
             </div>
 

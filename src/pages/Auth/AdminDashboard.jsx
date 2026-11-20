@@ -1814,20 +1814,20 @@ const AdminDashboard = () => {
           email: "gaurav.kumar@gbu.ac.in",
           linkedin: "https://www.linkedin.com/in/gauravjnu/",
           twitter: "https://x.com/gauravkjnu",
-          image: "https://nss.onlinegbu.com/images/GauravKumar.png",
+          image: "/assets/nss/team/GauravKumar.png",
         },
         coreCouncil: content.coreCouncil || [
           {
             name: "Akanksha Pandey",
             role: "Vice President",
-            image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1755153073/uploads/general/1755153072503-84fb0ce1b8cd-a12.webp.webp",
+            image: "/assets/nss/uploads/general/1755153072503-84fb0ce1b8cd-a12.webp.webp",
             email: "245dcs025@gbu.ac.in",
             achievements: "NSS Core Team Lead, Community Service Lead",
           },
           {
             name: "Ashwani Kushwaha",
             role: "Vice President & Tech Head",
-            image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1764310861/uploads/general/1764310859023-ea2b935030a4-20251124_153222.jpg.jpg",
+            image: "/assets/nss/uploads/general/1764310859023-ea2b935030a4-20251124_153222.jpg.jpg",
             email: "235ucs039@gbu.ac.in",
             achievements: "NSS Portal Developer, Digital Outreach Lead",
           },
@@ -1835,7 +1835,7 @@ const AdminDashboard = () => {
         units: content.units || [
           {
             unitNumber: 1,
-            programOfficer: { name: "Dr. Gaurav Kumar", department: "School of ICT", image: "https://nss.onlinegbu.com/images/GauravKumar.png" },
+            programOfficer: { name: "Dr. Gaurav Kumar", department: "School of ICT", image: "/assets/nss/team/GauravKumar.png" },
             facultyMentor: { name: "Dr. Nishta Pareek", department: "School of Humanities", image: "" },
             convenors: "Anjali Yadav, Jaysuvankar Pradhan",
             coConvenors: "Anushka Shakya, Ashish"

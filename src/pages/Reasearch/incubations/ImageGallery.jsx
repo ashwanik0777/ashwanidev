@@ -11,9 +11,9 @@ export default function GallerySlider() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const images = incubationGallery.length > 0 ? incubationGallery : [
-    "https://www.gburif.org/images/intro-carousel/dsf8939-b-copy.jpg",
-    "https://www.gburif.org/images/intro-carousel/gautam-buddha-university-3.jpg",
-    "https://www.gburif.org/images/about-mission.jpg"
+    "/assets/incubation/gallery/dsf8939-b-copy.jpg",
+    "/assets/incubation/gallery/gautam-buddha-university-3.jpg",
+    "/assets/incubation/gallery/about-mission.jpg"
   ];
 
   useEffect(() => {

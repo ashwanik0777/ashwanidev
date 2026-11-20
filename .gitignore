@@ -45,3 +45,8 @@ README.md
 # for `npm run dev`; upload new or changed PDFs to the server.
 public/**/*.pdf
 public/**/*.PDF
+
+# Server deployment downloads & archives (Do not commit to git)
+drive_assets_for_server/
+migration_downloads/
+*.zip

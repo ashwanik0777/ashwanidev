@@ -58,7 +58,7 @@ const NCCStructure = ({ nccData }) => {
     designation: 'Associate NCC Officer (ANO)',
     email: 'bhawna.joshi@gbu.ac.in',
     phone: '+91-120-234-4000',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png',
+    image: '/assets/ncc/emblem.png',
     serviceRecord: 'Associate NCC Officer leading 31 UP Girls Battalion & 37 UP Battalion wings at Gautam Buddha University.',
     qualifications: ['Ph.D in Physics', 'Officer Training Academy (OTA)', 'Military & Disaster Management Training'],
     awards: ['University ANO Commendation', 'Outstanding Leadership Award']
@@ -147,7 +147,7 @@ const NCCStructure = ({ nccData }) => {
               {/* Lt. Bhawna Joshi */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                  src="/assets/ncc/emblem.png"
                   alt="Lt. Bhawna Joshi"
                   className="w-24 h-24 rounded-2xl object-contain bg-white p-2 border-2 border-amber-300 shadow-md shrink-0"
                 />
@@ -167,7 +167,7 @@ const NCCStructure = ({ nccData }) => {
               {/* Dr. Nitesh Singh Bhati */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png"
+                  src="/assets/ncc/emblem.png"
                   alt="Dr. Nitesh Singh Bhati"
                   className="w-24 h-24 rounded-2xl object-contain bg-white p-2 border-2 border-blue-300 shadow-md shrink-0"
                 />

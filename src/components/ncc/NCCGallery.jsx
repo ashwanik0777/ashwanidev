@@ -136,9 +136,9 @@ const NCCGallery = ({ nccData }) => {
       year: '2025',
       date: '2025-10-15',
       images: [
-        { url: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png', caption: 'Official Inauguration under 37 UP BN & 31 UP Girls Bn at Auditorium-5, GBU' },
-        { url: 'https://static.mygov.in/indiancc/2021/05/mygov-9999999991614076475-1024x576.jpg', caption: 'Cadets Guard of Honour for Dignitaries' },
-        { url: 'https://static.mygov.in/indiancc/2021/08/mygov-9999999991629807572.jpg', caption: 'Rank Ceremony for Cadet Leaders' },
+        { url: '/assets/ncc/emblem.png', caption: 'Official Inauguration under 37 UP BN & 31 UP Girls Bn at Auditorium-5, GBU' },
+        { url: '/assets/ncc/gallery/mygov-9999999991614076475-1024x576.jpg', caption: 'Cadets Guard of Honour for Dignitaries' },
+        { url: '/assets/ncc/gallery/mygov-9999999991629807572.jpg', caption: 'Rank Ceremony for Cadet Leaders' },
       ],
     },
     {
@@ -148,9 +148,9 @@ const NCCGallery = ({ nccData }) => {
       year: '2025',
       date: '2025-11-10',
       images: [
-        { url: 'https://static.mygov.in/indiancc/2021/08/mygov-9999999991629807572.jpg', caption: '10-Day CATC Drill & Weapon Training' },
-        { url: 'https://static.mygov.in/indiancc/2021/05/mygov-9999999991614076475-1024x576.jpg', caption: 'Morning Marching & Physical Fitness Drills' },
-        { url: 'https://static.mygov.in/indiancc/2021/06/mygov-9999999991623838421.jpg', caption: 'Obstacle Course & Map Reading Exercises' },
+        { url: '/assets/ncc/gallery/mygov-9999999991629807572.jpg', caption: '10-Day CATC Drill & Weapon Training' },
+        { url: '/assets/ncc/gallery/mygov-9999999991614076475-1024x576.jpg', caption: 'Morning Marching & Physical Fitness Drills' },
+        { url: '/assets/ncc/gallery/mygov-9999999991623838421.jpg', caption: 'Obstacle Course & Map Reading Exercises' },
       ],
     },
     {
@@ -160,8 +160,8 @@ const NCCGallery = ({ nccData }) => {
       year: '2025',
       date: '2025-12-05',
       images: [
-        { url: 'https://static.mygov.in/indiancc/2021/05/mygov-9999999991614076475-1024x576.jpg', caption: '.22 Rifle Firing Practice at Shooting Range' },
-        { url: 'https://static.mygov.in/indiancc/2021/08/mygov-9999999991629807572.jpg', caption: 'Thal Sainik Competition Cadet Selections' },
+        { url: '/assets/ncc/gallery/mygov-9999999991614076475-1024x576.jpg', caption: '.22 Rifle Firing Practice at Shooting Range' },
+        { url: '/assets/ncc/gallery/mygov-9999999991629807572.jpg', caption: 'Thal Sainik Competition Cadet Selections' },
       ],
     },
     {
@@ -171,8 +171,8 @@ const NCCGallery = ({ nccData }) => {
       year: '2026',
       date: '2026-01-18',
       images: [
-        { url: 'https://static.mygov.in/indiancc/2021/09/mygov-9999999991631526438.jpg', caption: 'GBU NCC Cadets Tree Plantation Drive' },
-        { url: 'https://static.mygov.in/indiancc/2021/06/mygov-9999999991623838421.jpg', caption: 'Swachh Bharat Abhiyan Campaign at GBU Campus' },
+        { url: '/assets/ncc/gallery/mygov-9999999991631526438.jpg', caption: 'GBU NCC Cadets Tree Plantation Drive' },
+        { url: '/assets/ncc/gallery/mygov-9999999991623838421.jpg', caption: 'Swachh Bharat Abhiyan Campaign at GBU Campus' },
       ],
     },
     {
@@ -182,8 +182,8 @@ const NCCGallery = ({ nccData }) => {
       year: '2026',
       date: '2026-01-26',
       images: [
-        { url: 'https://static.mygov.in/indiancc/2021/05/mygov-9999999991614076475-1024x576.jpg', caption: 'Republic Day Parade Display at Main Administrative Block' },
-        { url: 'https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_National_Cadet_Corps_%28India%29.png', caption: 'Salute to National Flag by 31 UP Girls & 37 UP BN Cadets' },
+        { url: '/assets/ncc/gallery/mygov-9999999991614076475-1024x576.jpg', caption: 'Republic Day Parade Display at Main Administrative Block' },
+        { url: '/assets/ncc/emblem.png', caption: 'Salute to National Flag by 31 UP Girls & 37 UP BN Cadets' },
       ],
     },
   ];

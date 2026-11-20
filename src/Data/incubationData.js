@@ -55,12 +55,12 @@ export const incubationTeam = [
   {
     name: "Dr. Shakti Sahi",
     role: "Director & Chief Executive Officer",
-    photo: "https://www.gburif.org/mentors/shakti_sahi_edit.jpg"
+    photo: "/assets/incubation/mentors/shakti_sahi_edit.jpg"
   },
   {
     name: "Dr. Satish K Mittal",
     role: "Head & Chief Finance Officer",
-    photo: "https://www.gburif.org/mentors/satish_mittal.jpg"
+    photo: "/assets/incubation/mentors/satish_mittal.jpg"
   },
   {
     name: "Dr. Vinay Kumar Litoria",
@@ -70,47 +70,47 @@ export const incubationTeam = [
   {
     name: "Dr. Raju Pal",
     role: "Chief Technology Officer",
-    photo: "https://www.gburif.org/mentors/raju.jpeg"
+    photo: "/assets/incubation/mentors/raju.jpeg"
   },
   {
     name: "Dr. Anant Pratap Singh",
     role: "Chief Innovation Officer",
-    photo: "https://www.gburif.org/mentors/anantsingh.jpeg"
+    photo: "/assets/incubation/mentors/anantsingh.jpeg"
   },
   {
     name: "Mr. Raj Kumar",
     role: "Chief IT Officer",
-    photo: "https://www.gburif.org/mentors/raj_kumar_edit.jpg"
+    photo: "/assets/incubation/mentors/raj_kumar_edit.jpg"
   },
   {
     name: "Dr. Vimlesh Kr Ray",
     role: "Chief Operating Officer",
-    photo: "https://www.gburif.org/mentors/vimlesh_ray_edit.jpg"
+    photo: "/assets/incubation/mentors/vimlesh_ray_edit.jpg"
   },
   {
     name: "Ms. Nisha Gupta",
     role: "Manager - Accounts",
-    photo: "https://www.gburif.org/mentors/nisha.jpeg"
+    photo: "/assets/incubation/mentors/nisha.jpeg"
   },
   {
     name: "Mr. Abhishek Tripathi",
     role: "Manager - IT",
-    photo: "https://www.gburif.org/mentors/abhi.jpg"
+    photo: "/assets/incubation/mentors/abhi.jpg"
   },
   {
     name: "Ms. Kanika Sinha",
     role: "Manager - Office",
-    photo: "https://www.gburif.org/mentors/coming.jpg"
+    photo: "/assets/incubation/mentors/coming.jpg"
   },
   {
     name: "Mr. Manish Bhardwaj",
     role: "Office Assistant",
-    photo: "https://www.gburif.org/mentors/coming.jpg"
+    photo: "/assets/incubation/mentors/coming.jpg"
   },
   {
     name: "Mr. Shekhar Chandra",
     role: "Office Attendant",
-    photo: "https://www.gburif.org/mentors/coming.jpg"
+    photo: "/assets/incubation/mentors/coming.jpg"
   }
 ];
 

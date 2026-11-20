@@ -77,15 +77,15 @@ export const departmentLayoutData = {
             "Cross-Disciplinary Electives",
             "Corporate Summer Internship"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabusUrl: "/courses/som/business-management/bba-mba-dual-degree-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                session: "Course Structure (2025 onwards)",
+                url: "/courses/som/business-management/bba-mba-dual-degree-structure-2025.pdf"
             },
             {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                session: "Course Outline / Syllabus",
+                url: "/courses/som/business-management/bba-mba-dual-degree-syllabus-2025.pdf"
             }
         ]
     },
@@ -104,15 +104,15 @@ export const departmentLayoutData = {
             "Financial Management",
             "NEP Multidisciplinary Framework"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview",
+        syllabusUrl: "/courses/som/business-management/bcom-hons-structure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                session: "Course Structure (NEP 2023)",
+                url: "/courses/som/business-management/bcom-hons-structure-2023.pdf"
             },
             {
-                session: "Syllabus (NEP)",
-                url: "https://drive.google.com/file/d/11AuSp3jVB6PldyzPxO7fHzeV4CzHgVKk/preview"
+                session: "Syllabus (NEP 2025)",
+                url: "/courses/som/business-management/bcom-hons-syllabus-2025.pdf"
             }
         ]
     },
@@ -131,15 +131,15 @@ export const departmentLayoutData = {
             "Corporate Mentorship",
             "Live Consulting Projects"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabusUrl: "/courses/som/business-management/mba-structure-2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+                url: "/courses/som/business-management/mba-structure-2023.pdf"
             },
             {
-                session: "Course Outline",
-                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+                session: "Course Outline (2025 onwards)",
+                url: "/courses/som/business-management/mba-course-outline-2025.pdf"
             }
         ]
     },
@@ -158,15 +158,19 @@ export const departmentLayoutData = {
             "C-Suite Leadership Modules",
             "Executive Industry Capstone"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabusUrl: "/courses/som/business-management/mba-executive-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+                session: "Course Structure (2025 onwards)",
+                url: "/courses/som/business-management/mba-executive-structure-2025.pdf"
             },
             {
-                session: "Course Outline",
-                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+                session: "Course Outline (2025 onwards)",
+                url: "/courses/som/business-management/mba-executive-outline-2025.pdf"
+            },
+            {
+                session: "Executive MBA Brochure",
+                url: "/courses/som/business-management/mba-executive-brochure.pdf"
             }
         ]
     },
@@ -185,15 +189,19 @@ export const departmentLayoutData = {
             "Data Visualization & Dashboards",
             "FinTech & Marketing Models"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview",
+        syllabusUrl: "/courses/som/business-management/mba-business-analytics-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/13B-SpaRwiOt2T1K-pZgzL7wpzCk8gpNf/preview"
+                url: "/courses/som/business-management/mba-business-analytics-structure.pdf"
             },
             {
-                session: "Course Outline",
-                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+                session: "Course Outline (2025 onwards)",
+                url: "/courses/som/business-management/mba-business-analytics-outline-2025.pdf"
+            },
+            {
+                session: "Programme Brochure",
+                url: "/courses/som/business-management/mba-business-analytics-brochure.pdf"
             }
         ]
     },
@@ -212,15 +220,15 @@ export const departmentLayoutData = {
             "Peer-Reviewed Journal Publishing",
             "Ph.D. Dissertation Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview",
+        syllabusUrl: "/courses/som/business-management/phd-business-management-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1mHI20aIaPwmhpPN_JcksIHxxJy0laUiq/preview"
+                session: "Course Structure (2025 onwards)",
+                url: "/courses/som/business-management/phd-business-management-structure-2025.pdf"
             },
             {
-                session: "Course Outline",
-                url: "https://drive.google.com/file/d/1Met6fLCQvyyqx0CPqdXQuB_0mZyf6m2e/preview"
+                session: "Course Outline (2025 onwards)",
+                url: "/courses/som/business-management/phd-business-management-outline-2025.pdf"
             }
         ]
     }

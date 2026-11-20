@@ -114,9 +114,9 @@ const GBU_COE_GALLERY = [
 const GBU_COE_CTA = {
   title: "Join Our Centers of Excellence",
   description: "Collaborate with our researchers, faculty, and industry partners to drive next-generation innovation and research in computing, intelligence, and mobility.",
-  url1: "https://www.gbu.ac.in/",
+  url1: "/",
   button1_text: "Apply for Research",
-  url2: "https://www.gbu.ac.in/",
+  url2: "/",
   button2_text: "Contact COE Office"
 };
 

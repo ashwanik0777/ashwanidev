@@ -43,7 +43,7 @@ const ViceChancellor = () => {
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <a
-              href="https://www.gbu.ac.in/Content/about/VC%20Profile.pdf"
+              href="/assets/pdf/general/VC_Profile.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-md"

@@ -3,7 +3,7 @@ import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 import { deansMessageData } from "./about/deans-message";
 
 const lawBanner =
-  "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1soljg.jpg";
+  "/assets/schools/Artboard1soljg.jpg";
 
 const lawSlides = [
   {

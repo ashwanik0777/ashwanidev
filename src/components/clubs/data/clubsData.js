@@ -8,7 +8,7 @@ export const clubsData = [
     tagline: 'Theatrical Expression, Stagecraft & Street Plays',
     category: 'Cultural',
     logo: tcclogo,
-    banner: 'https://www.gbu.ac.in/Content/img/club/techno.jpg',
+    banner: '/assets/clubs/techno.jpg',
     memberCount: 220,
     description: 'Qalakriti (Dishayan) is the premier dramatics society of Gautam Buddha University, fostering theatrical expression, stage productions, street plays (Nukkad Natak), scriptwriting, and national drama festival participation.',
     objectives: [
@@ -46,7 +46,7 @@ export const clubsData = [
     tagline: 'Melodic Harmonies & Classical Rhythms',
     category: 'Cultural',
     logo: musiclogo,
-    banner: 'https://www.gbu.ac.in/Content/clubs/img/music/music1.jpg',
+    banner: '/assets/clubs/music1.jpg',
     memberCount: 180,
     description: 'Swaranjali brings together vocalists, instrumentalists, and university bands to celebrate Indian classical, semi-classical, western fusion, and choir performances.',
     objectives: [
@@ -80,7 +80,7 @@ export const clubsData = [
     tagline: 'Rhythm, Grace & Expression in Motion',
     category: 'Cultural',
     logo: tcclogo,
-    banner: 'https://www.gbu.ac.in/Content/clubs/img/buddha25.jpg',
+    banner: '/assets/clubs/buddha25.jpg',
     memberCount: 195,
     description: 'Nrityangana is GBU’s official dance society, specializing in classical Kathak/Bharatanatyam, hip-hop, contemporary, Bollywood fusion, and folk dance forms.',
     objectives: [
@@ -246,7 +246,7 @@ export const clubsData = [
     tagline: 'Innovating at the Intersection of Tech & Art',
     category: 'Technical',
     logo: tcclogo,
-    banner: 'https://www.gbu.ac.in/Content/img/club/techno.jpg',
+    banner: '/assets/clubs/techno.jpg',
     memberCount: 310,
     description: 'The Techno-Cultural Club bridges digital technology and creative expression through hackathons, open-source coding, robotics, web development, and tech fests.',
     objectives: [
@@ -279,7 +279,7 @@ export const clubsData = [
     tagline: 'Living in Harmony with Nature',
     category: 'Environmental',
     logo: tcclogo,
-    banner: 'https://www.gbu.ac.in/Content/img/club/nature.jpg',
+    banner: '/assets/clubs/nature.jpg',
     memberCount: 150,
     description: 'Trisha is the environmental conservation club of Gautam Buddha University devoted to green initiatives, campus biodiversity drives, tree plantations, and eco-sustainability.',
     objectives: [

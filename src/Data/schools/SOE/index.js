@@ -15,7 +15,7 @@ export const contactInfo = {
   address: "Academic Block D, Gautam Buddha University, Greater Noida, UP 201312",
   phone: "+91-120-234-9902",
   email: "soe.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/SOE/",
+  website: "/schools/SOE",
   dean: "",
 };
 
@@ -26,10 +26,10 @@ export const aboutData = {
 };
 
 export const departmentPages = [
-  { id: "mechanical", name: "Mechanical Engineering", path: "departments/mechanical" },
   { id: "civil", name: "Civil Engineering", path: "departments/civil" },
   { id: "electrical", name: "Electrical Engineering", path: "departments/electrical" },
-  { id: "automobile", name: "Automobile Engineering", path: "departments/automobile" },
+  { id: "mechanical", name: "Mechanical Engineering", path: "departments/mechanical" },
+  { id: "architecture", name: "Architecture & Regional Planning", path: "departments/architecture" },
 ];
 
 export const researchPages = [
@@ -42,9 +42,9 @@ export const schoolCard = {
   imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
   label: SCHOOL_NAME,
   description:
-    "Excellence in mechanical, civil, electrical, and chemical engineering with focus on sustainable technology and innovation.",
+    "Excellence in civil, electrical, mechanical, and architectural engineering with focus on sustainable technology and innovation.",
   path: "/schools/SOE",
-  features: ["Mechanical", "Civil", "Electrical", "Chemical"],
+  features: ["Civil", "Electrical", "Mechanical", "Architecture & Planning"],
 };
 
 export const admissionsKey = "Engineering";

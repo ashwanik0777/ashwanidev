@@ -62,7 +62,7 @@ export default function IprPolicy() {
 
           <div className="pt-4 border-t border-gray-100">
             <a
-              href="https://gbu.ac.in/Content/gbudata/IPR/GBU_%20IPR-POLICY_12July2021.pdf"
+              href="/assets/pdf/ipr/GBU__IPR-POLICY_12July2021.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-bold text-lg hover:underline"

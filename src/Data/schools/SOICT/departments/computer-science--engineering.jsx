@@ -38,7 +38,7 @@ export const departmentLayoutData = {
   },
   hodProps: {
     title: "From the Desk of HOD, CSE",
-    image: "https://www.gbu.ac.in/USICT/media/img/Arun%20Solanki.jpeg",
+    image: "/assets/schools/Arun_Solanki.jpeg",
     name: "Dr. Arun Solanki",
     designation: "Head of Department",
     messageParagraphs: [

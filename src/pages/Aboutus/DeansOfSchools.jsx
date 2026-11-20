@@ -25,7 +25,7 @@ const coordinatingDeans = [
   {
     title: "Dean Academics",
     name: "Prof. Rajeev Varshney",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/R.jpg",
+    image: "/assets/deans/R.jpg",
     icon: <GraduationCap className="w-6 h-6 text-blue-600" />
   },
   {
@@ -56,7 +56,7 @@ const deansList = [
     schoolName: "School of Buddhist Studies & Civilization",
     deanName: "Prof. Rajeev Varshney",
     designation: "Dean, School of Buddhist Studies and Civilization",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/R.jpg",
+    image: "/assets/deans/R.jpg",
     link: "/schools/SOBSC"
   },
   {
@@ -88,7 +88,7 @@ const deansList = [
     schoolName: "School of Law, Justice & Governance",
     deanName: "Dr. Krishna Kant Dwivedi",
     designation: "Dean (I/C), School of Law, Justice and Governance",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/krishankant.jpg",
+    image: "/assets/deans/krishankant.jpg",
     link: "/schools/SOL"
   },
   {
@@ -104,7 +104,7 @@ const deansList = [
     schoolName: "School of Information & Communication Technology",
     deanName: "Dr. Arpit Bhardwaj",
     designation: "Dean (I/C), School of Information & Communication Technology",
-    image: "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg",
+    image: "/assets/schools/arpit_bhardwaj.jpg",
     link: "/schools/SOICT"
   }
 ];
@@ -128,17 +128,17 @@ const administrativeOfficers = [
   {
     role: "Assistant Registrar (Academics)",
     name: "Dr. C. S. Paswan",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/chandrashekhar.jpg"
+    image: "/assets/deans/chandrashekhar.jpg"
   },
   {
     role: "Accounts Officer",
     name: "Dr. Sandeep Kumar Dwivedi",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/AO.jpg"
+    image: "/assets/deans/AO.jpg"
   },
   {
     role: "Assistant Registrar (Examination)",
     name: "Dr. Vikram Karuna",
-    image: "https://www.gbu.ac.in/Content/gbudata/Employee/img/Dr.%20Vikram%20Karuna.jpg"
+    image: "/assets/deans/Dr._Vikram_Karuna.jpg"
   }
 ];
 

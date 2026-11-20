@@ -112,11 +112,11 @@ export const departmentLayoutData = {
             "Financial Markets",
             "Statistical Computing"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview",
+        syllabusUrl: "/courses/sohss/economics/ba-economics-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/14C6rHV5piTkMEYb3jqBU5qGqPzPjmEVJ/preview"
+                url: "/courses/sohss/economics/ba-economics-structure.pdf"
             }
         ]
     },
@@ -135,11 +135,15 @@ export const departmentLayoutData = {
             "International Trade",
             "Master Thesis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview",
+        syllabusUrl: "/courses/sohss/economics/ba-ma-economics-structure-2025.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1HPbHXTYA3a6weK97toyz9kGJVqqzZNGo/preview"
+                session: "Course Structure (Updated March 2025)",
+                url: "/courses/sohss/economics/ba-ma-economics-structure-2025.pdf"
+            },
+            {
+                session: "Department Profile",
+                url: "/courses/sohss/economics/economics-dept-profile.pdf"
             }
         ]
     }
@@ -197,29 +201,7 @@ export const departmentLayoutData = {
     { numberText: "30+", subtitle: "Publications" },
     { numberText: "8+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Aditya Mishra",
-      year: "M.A. Economics 2024",
-      achievement: "UGC NET Qualified, Selected for Ph.D. at Delhi School of Economics",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      skills: ["Econometrics", "Data Analysis", "Policy Research", "STATA"],
-    },
-    {
-      name: "Surbhi Jain",
-      year: "B.A. (Hons.) Economics 2024",
-      achievement: "Gold Medalist, Placed at Deloitte as Economic Analyst",
-      image: "https://randomuser.me/api/portraits/women/35.jpg",
-      skills: ["Macroeconomics", "Financial Analysis", "Excel", "Research"],
-    },
-    {
-      name: "Vikash Kumar",
-      year: "Ph.D. Economics 2024",
-      achievement: "Published 3 papers in ABDC-listed journals, RBI Research Fellowship",
-      image: "https://randomuser.me/api/portraits/men/40.jpg",
-      skills: ["Development Economics", "Panel Data Analysis", "R Programming", "Policy Analysis"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Research Excellence",

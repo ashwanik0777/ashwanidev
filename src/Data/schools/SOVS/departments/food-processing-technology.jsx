@@ -72,8 +72,8 @@ export const departmentLayoutData = {
       duration: "4 Years (8 Semesters)",
       intake: "30 Seats",
       description:
-        "Lays foundational concepts in food processing, engineering principles, food preservation, thermal technology, and food safety standards.",
-      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+        "Comprehensive engineering degree covering food biochemistry, unit operations, food microbiology, preservation technologies, and dairy/meat processing.",
+      image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=400&q=80",
       gradient: "from-orange-500 to-amber-600",
       highlights: [
         "30 Student Intake",
@@ -81,7 +81,17 @@ export const departmentLayoutData = {
         "Food Engineering & Preservation",
         "FSSAI Quality & Safety Standards",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/food-processing-technology/btech-fpt-structure-2024.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2024)",
+          url: "/courses/sovs/food-processing-technology/btech-fpt-structure-2024.pdf"
+        },
+        {
+          session: "Course Structure (Archive 2023)",
+          url: "/courses/sovs/food-processing-technology/btech-fpt-structure-2023.pdf"
+        }
+      ],
     },
     {
       id: "mtech-fpt",
@@ -99,7 +109,17 @@ export const departmentLayoutData = {
         "Advanced Process Engineering",
         "Master Research Thesis",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/food-processing-technology/mtech-fpt-structure-2024.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2024)",
+          url: "/courses/sovs/food-processing-technology/mtech-fpt-structure-2024.pdf"
+        },
+        {
+          session: "Course Structure (Archive 2023)",
+          url: "/courses/sovs/food-processing-technology/mtech-fpt-structure-2023.pdf"
+        }
+      ],
     },
     {
       id: "msc-fst",
@@ -117,7 +137,17 @@ export const departmentLayoutData = {
         "Food Chemistry & Microbiology",
         "Laboratory Testing & Research",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/food-processing-technology/msc-food-science-structure-2024.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2024)",
+          url: "/courses/sovs/food-processing-technology/msc-food-science-structure-2024.pdf"
+        },
+        {
+          session: "Course Structure (Archive 2023)",
+          url: "/courses/sovs/food-processing-technology/msc-food-science-structure-2023.pdf"
+        }
+      ],
     },
     {
       id: "phd-fpt",
@@ -135,7 +165,21 @@ export const departmentLayoutData = {
         "Advanced Product Development",
         "Ph.D. Dissertation Defense",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/food-processing-technology/phd-fpt-structure-2024.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2024)",
+          url: "/courses/sovs/food-processing-technology/phd-fpt-structure-2024.pdf"
+        },
+        {
+          session: "Department Activities",
+          url: "/courses/sovs/food-processing-technology/fpt-department-activities.pdf"
+        },
+        {
+          session: "Department Infrastructure",
+          url: "/courses/sovs/food-processing-technology/fpt-department-infrastructure.pdf"
+        }
+      ],
     },
   ],
 };

@@ -18,7 +18,7 @@ const GBU_HERO_SLIDES = [
   },
   {
     id: 2,
-    background_image: "https://www.gbu.ac.in/Content/clubs/img/Artboard-1meditationatnight.jpg",
+    background_image: "/assets/clubs/Artboard-1meditationatnight.jpg",
     tagline: "Character, Creativity, Competence & Commitment",
     title: "Mahatma Jyotiba Phule Dhyana Kendra",
     description: "Inspired by stupa architecture, our meditation and retreat centre gives an experience of the power of peace, inner silence, positive values, and stress-free living.",
@@ -37,7 +37,7 @@ const GBU_HERO_SLIDES = [
     button1_text: "Explore Library",
     button1_url: "#library",
     button2_text: "E-Resources",
-    button2_url: "https://www.gbu.ac.in/",
+    button2_url: "/",
     icon: BookOpen
   },
   {

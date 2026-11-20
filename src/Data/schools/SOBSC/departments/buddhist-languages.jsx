@@ -48,17 +48,17 @@ export const departmentLayoutData = {
             "Indian Epistemology",
             "Vipassana Meditation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview",
+        syllabusUrl: "/courses/sobsc/BA_H_BuddhistStudies_May2023.pdf",
         syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
-            },
-            {
-                session: "Syllabus (NEP)",
-                url: "https://drive.google.com/file/d/1gUEaEHqiclGC47Tdnv4gAErlJhSF_ZmO/preview"
-            }
-        ]
+                {
+                    session: "Course Structure",
+                    url: "/courses/sobsc/BA_H_BuddhistStudies_May2023.pdf"
+                },
+                {
+                    session: "Syllabus (NEP)",
+                    url: "/courses/sobsc/NEP_BA_BuddhistStudies_syllabus2023.pdf"
+                }
+            ]
     },
     {
         id: "ma-buddhist-studies",
@@ -75,13 +75,13 @@ export const departmentLayoutData = {
             "Abhidhamma Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview",
+        syllabusUrl: "/courses/sobsc/MA_Syllabus_May2023.pdf",
         syllabus: [
-            {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1FBbN4W5_HBACzC9QgWno3X73eX8Jzspj/preview"
-            }
-        ]
+                {
+                    session: "Syllabus",
+                    url: "/courses/sobsc/MA_Syllabus_May2023.pdf"
+                }
+            ]
     },
     {
         id: "mphil-buddhist-studies",
@@ -98,13 +98,13 @@ export const departmentLayoutData = {
             "Comparative Buddhist Philosophy",
             "Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabusUrl: "/courses/sobsc/MPhil_Syllabus_May2023.pdf",
         syllabus: [
-            {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
-            }
-        ]
+                {
+                    session: "Syllabus",
+                    url: "/courses/sobsc/MPhil_Syllabus_May2023.pdf"
+                }
+            ]
     },
     {
         id: "phd-buddhist-studies",
@@ -121,13 +121,13 @@ export const departmentLayoutData = {
             "Seminars & Peer Reviews",
             "Ph.D. Defense"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview",
+        syllabusUrl: "/courses/sobsc/PhD_CWork_SoBSC.pdf",
         syllabus: [
-            {
-                session: "Course Work & Syllabus",
-                url: "https://drive.google.com/file/d/11UfejtO7DXdKaygMlvLrT_egeRtpdNfF/preview"
-            }
-        ]
+                {
+                    session: "PhD Course Work Syllabus",
+                    url: "/courses/sobsc/PhD_CWork_SoBSC.pdf"
+                }
+            ]
     },
     {
         id: "pali-language-literature",
@@ -144,13 +144,13 @@ export const departmentLayoutData = {
             "Textual Analysis",
             "Certificate / PG Diploma"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabusUrl: "/courses/sobsc/PALI_CERTIFICATE_COURSE_PGDIPLOMA_PALI_May2023.pdf",
         syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
-            }
-        ]
+                {
+                    session: "Course Structure",
+                    url: "/courses/sobsc/PALI_CERTIFICATE_COURSE_PGDIPLOMA_PALI_May2023.pdf"
+                }
+            ]
     },
     {
         id: "buddhist-tourism-heritage",
@@ -167,13 +167,13 @@ export const departmentLayoutData = {
             "Tour Guiding & Management",
             "Field Project"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview",
+        syllabusUrl: "/courses/sobsc/PG_Diploma_BuddhistTourism_Heritage_Syllabus_May2023.pdf",
         syllabus: [
-            {
-                session: "Syllabus",
-                url: "https://drive.google.com/file/d/1XqxhWrvE0cDiiCDnYI7ZmaW5jTlVTDtA/preview"
-            }
-        ]
+                {
+                    session: "Syllabus",
+                    url: "/courses/sobsc/PG_Diploma_BuddhistTourism_Heritage_Syllabus_May2023.pdf"
+                }
+            ]
     },
     {
         id: "human-values-buddhist-ethics",
@@ -190,13 +190,13 @@ export const departmentLayoutData = {
             "Socially Engaged Buddhism",
             "Mindfulness Practice"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview",
+        syllabusUrl: "/courses/sobsc/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf",
         syllabus: [
-            {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1XyXVcmunBx2lWyhgaij5OrgxmIF1QKOX/preview"
-            }
-        ]
+                {
+                    session: "Course Structure",
+                    url: "/courses/sobsc/HUMAN_VALUES_BUDDHIST_ETHICS_May2023.pdf"
+                }
+            ]
     }
 ],
   facultyMembers: [

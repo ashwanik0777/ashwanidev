@@ -23,7 +23,7 @@ export const contactData = {
     name: "Dr. Arpit Bhardwaj",
     title: "Dean",
     department: "School of ICT, Gautam Buddha University",
-    image: "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg",
+    image: "/assets/schools/arpit_bhardwaj.jpg",
     phone: "0120-234 6067",
     email: "arpit.bhardwaj@gbu.ac.in",
     office:

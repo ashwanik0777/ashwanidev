@@ -32,19 +32,19 @@ const officialOrders = [
   {
     title: "Office Order - Chief Wardens (M/F), Wardens & Non Resident Wardens",
     date: "27-09-2025",
-    link: "https://www.gbu.ac.in/Content/gbudata/General/OfficeOrder-Wardens-ChiefWardens.pdf",
+    link: "/assets/pdf/committee/OfficeOrder-Wardens-ChiefWardens.pdf",
     badge: "Office Order"
   },
   {
     title: "IIC Council @ GBU (Institution's Innovation Council)",
     date: "Official Notice",
-    link: "https://www.gbu.ac.in/Content/gbudata/General/IIC_Council.pdf",
+    link: "/assets/pdf/iic/IIC_Council.pdf",
     badge: "IIC Council"
   },
   {
     title: "Research and Development Committee (RDC) Policy & Guidelines",
     date: "RDC Notice",
-    link: "https://www.gbu.ac.in/Content/gbudata/General/RDC.pdf",
+    link: "/assets/pdf/committee/RDC.pdf",
     badge: "RDC Guidelines"
   }
 ];
@@ -253,7 +253,7 @@ const committeesList = [
       "Drives interdisciplinary research, sponsored project grants, publications, patent filings, and technology transfer activities in accordance with national research guidelines.",
     chairperson: "Research & Development Cell",
     chairpersonRole: "University R&D Directorate",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/General/RDC.pdf",
+    pdfLink: "/assets/pdf/committee/RDC.pdf",
     members: [
       { name: "Dean Planning & Research", role: "Head of Directorate" },
       { name: "School Research Coordinators", role: "Domain Representatives" },

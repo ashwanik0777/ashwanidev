@@ -30,7 +30,7 @@ const NCCEvents = ({ nccData }) => {
       type: "Competition",
       venue: "GBU Sports Complex Ground",
       description: "Cadet selections and firing practice for national level representation.",
-      links: ["https://gbu.ac.in/ncc-rules.pdf"]
+      links: ["/assets/pdf/general/AntiRagging-Home-rev-2025.pdf"]
     },
     {
       id: 4,

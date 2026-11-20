@@ -62,7 +62,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "A major collaborative agreement signed under the auspices of the Uttar Pradesh government to foster academic collaboration, joint doctoral research, faculty capacity building, and innovative educational research initiatives.",
     country: "Australia",
     since_year: 2025,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   },
   {
     id: 2,
@@ -70,7 +70,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "A comprehensive academic partnership with the College of Buddhist Studies and the Buddhist Culture Research Institute of Dongguk University. Focuses on exchanging research dissertations, joint academic projects, student internships, and doctoral research exchanges.",
     country: "South Korea",
     since_year: 2023,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   },
   {
     id: 3,
@@ -78,7 +78,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "An industry-academia alliance focusing on elevating artificial intelligence and machine learning education. Students gain exclusive access to specialized industry-standard AI certifications, curriculum resources, and hands-on workshops.",
     country: "United States",
     since_year: 2024,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   },
   {
     id: 4,
@@ -86,7 +86,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "A long-standing academic agreement promoting mutual research initiatives, joint seminars, and student/faculty mobility programs across engineering, computing, and social sciences.",
     country: "United Kingdom",
     since_year: 2018,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   },
   {
     id: 5,
@@ -94,7 +94,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "Collaborative agreement focusing on curriculum design advisory, joint workshops, guest faculty lectures, and bilateral research opportunities in management and humanities.",
     country: "United Kingdom",
     since_year: 2019,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   },
   {
     id: 6,
@@ -102,7 +102,7 @@ const GBU_COLLAB_PARTNERS = [
     card_desc: "Bilateral student exchange program offering business management and international trade students the opportunity to spend a semester studying in Denmark with fully transferable academic credits.",
     country: "Denmark",
     since_year: 2017,
-    url: "https://www.gbu.ac.in/"
+    url: "/"
   }
 ];
 
@@ -143,7 +143,7 @@ const GBU_COLLAB_OPPORTUNITIES = [
     benefits: "Fully Funded Monthly Stipend & Travel Allowance",
     elegibility: "Pre-Final Year B.Tech / M.Tech / M.Sc. Students with CGPA > 8.5",
     deadline: "2026-09-15",
-    url: "https://www.gbu.ac.in/",
+    url: "/",
     button_text: "Apply Fellowship"
   },
   {
@@ -153,7 +153,7 @@ const GBU_COLLAB_OPPORTUNITIES = [
     benefits: "Free Accommodation in Seoul, Korea & Tuition Fee Waiver",
     elegibility: "MA & Ph.D. Students of Buddhist Studies & Civilizations",
     deadline: "2026-10-01",
-    url: "https://www.gbu.ac.in/",
+    url: "/",
     button_text: "Apply Program"
   },
   {
@@ -163,7 +163,7 @@ const GBU_COLLAB_OPPORTUNITIES = [
     benefits: "Industry-standard AI Engineer Certification & Mentorship",
     elegibility: "B.Tech SOICT Students (CSE / AI / Data Science) in 3rd/4th Year",
     deadline: "2026-08-30",
-    url: "https://www.gbu.ac.in/",
+    url: "/",
     button_text: "Register Now"
   }
 ];

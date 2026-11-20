@@ -304,7 +304,7 @@ export const coeDroneData = {
       title: "Smart Classroom",
       description:
         "Modern teaching spaces with projectors, LCD panels, and an integrated learning management system.",
-      image: "https://www.gbu.ac.in/facilities/assets/images/audi-04_1.jpeg",
+      image: "/assets/schools/audi-04_1.jpeg",
     },
   ],
   talks: [

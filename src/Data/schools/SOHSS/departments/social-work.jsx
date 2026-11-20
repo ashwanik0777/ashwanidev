@@ -108,11 +108,11 @@ export const departmentLayoutData = {
             "Social Policy & Advocacy",
             "NGO Administration"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview",
+        syllabusUrl: "/courses/sohss/social-work/bsw-structure-nep.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview"
+                session: "Course Structure (NEP)",
+                url: "/courses/sohss/social-work/bsw-structure-nep.pdf"
             }
         ]
     },
@@ -131,11 +131,19 @@ export const departmentLayoutData = {
             "Medical & Psychiatric Social Work",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview",
+        syllabusUrl: "/courses/sohss/social-work/msw-course-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1fRyPgHSZbhXQUdgc6amsSJ9HgIbBtLMb/preview"
+                url: "/courses/sohss/social-work/msw-course-structure.pdf"
+            },
+            {
+                session: "Department Profile (2026)",
+                url: "/courses/sohss/social-work/social-work-dept-profile-2026.pdf"
+            },
+            {
+                session: "Admission Brochure",
+                url: "/courses/sohss/social-work/social-work-admission-brochure.pdf"
             }
         ]
     }
@@ -155,22 +163,7 @@ export const departmentLayoutData = {
     { numberText: "25+", subtitle: "Publications" },
     { numberText: "10+", subtitle: "Fieldwork Partners" },
   ],
-  topAchievers: [
-    {
-      name: "Sunita Devi",
-      year: "MSW 2023",
-      achievement: "Selected for UNICEF internship, working in child rights advocacy",
-      image: "https://randomuser.me/api/portraits/women/48.jpg",
-      skills: ["Child Welfare", "Counseling", "Community Organization", "Advocacy"],
-    },
-    {
-      name: "Vikram Singh",
-      year: "BSW 2024",
-      achievement: "Led community health awareness campaign reaching 5000+ beneficiaries",
-      image: "https://randomuser.me/api/portraits/men/52.jpg",
-      skills: ["Community Development", "Health Education", "Project Management", "Field Work"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "Community Outreach Program",

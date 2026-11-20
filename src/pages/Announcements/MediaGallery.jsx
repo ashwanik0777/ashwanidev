@@ -320,8 +320,8 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     year: '2025',
 //     date: '2025-02-18',
 //     images: [
-//       'https://www.gbu.ac.in/Content/img/sports/banner2.jpg',
-//       'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
+//       '/assets/media_gallery/banner2.jpg',
+//       '/assets/media_gallery/banner1.jpg',
 //     ],
 //   },
 //   {
@@ -332,7 +332,7 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     date: '2025-03-10',
 //     images: [
 //       'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80',
-//       'https://www.gbu.ac.in/Content/img/cc/Artboard%201abhivyanjana7.jpg',
+//       '/assets/media_gallery/Artboard_1abhivyanjana7.jpg',
 //     ],
 //   },
 //   {
@@ -364,7 +364,7 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     year: '2025',
 //     date: '2025-01-22',
 //     images: [
-//       'https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic9.jpg',
+//       '/assets/incubation/Incubation_Pic9.jpg',
 //       'https://www.ic3ecsbhi.com/dsf8951%20copy.jpeg',
 //     ],
 //   },
@@ -407,7 +407,7 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     year: '2024',
 //     date: '2024-09-20',
 //     images: [
-//       'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
+//       '/assets/media_gallery/banner1.jpg',
 //     ],
 //   },
 //   {
@@ -437,8 +437,8 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     year: '2024',
 //     date: '2024-07-05',
 //     images: [
-//       'https://www.gbu.ac.in/Content/gbudata/meditation/img/buddha28.jpg',
-//       'https://www.gbu.ac.in/Content/gbudata/meditation/img/buddha31.jpg',
+//       '/assets/media_gallery/buddha28.jpg',
+//       '/assets/media_gallery/buddha31.jpg',
 //     ],
 //   },
 //   {
@@ -458,7 +458,7 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 //     year: '2025',
 //     date: '2025-01-28',
 //     images: [
-//       'https://www.gbu.ac.in/Content/img/sports/banner1.jpg',
+//       '/assets/media_gallery/banner1.jpg',
 //     ],
 //   },
 //   {
@@ -564,7 +564,7 @@ const format = (date, formatStr) => formatAnnouncementDate(date, formatStr);
 // ];
 
 const VITE_HOST = import.meta.env.VITE_HOST;
-const BASE_URL = VITE_HOST ? (VITE_HOST.endsWith('/') ? VITE_HOST.slice(0, -1) : VITE_HOST) : 'http://localhost:3000';
+const BASE_URL = VITE_HOST ? (VITE_HOST.endsWith('/') ? VITE_HOST.slice(0, -1) : VITE_HOST) : '';
 
 const parseDriveLink = (url) => {
   return parseImageUrl(url);

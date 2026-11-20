@@ -1001,7 +1001,7 @@ const TabDataEditors = ({ tabData = {}, activeSection, onReplaceTabData }) => {
 
                       <div className="sm:col-span-2 md:col-span-3 grid gap-3 sm:grid-cols-2">
                         <Field label="Paper Link / URL"><input className={inputClass} value={item.paperUrl || ""} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "paperUrl", e.target.value)} placeholder="e.g. https://ieeexplore.ieee.org/document/..." /></Field>
-                        <Field label="PDF Link / URL"><input className={inputClass} value={item.pdfUrl || ""} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "pdfUrl", e.target.value)} placeholder="e.g. https://gbu.ac.in/faculty/pdf/paper.pdf" /></Field>
+                        <Field label="PDF Link / URL"><input className={inputClass} value={item.pdfUrl || ""} onChange={(e) => handleUpdateArrayItem("publications", "publications", index, "pdfUrl", e.target.value)} placeholder="e.g. #" /></Field>
                       </div>
                     </div>
                   </ArrayItemCard>

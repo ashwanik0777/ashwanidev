@@ -121,7 +121,7 @@ export const sectionsConfig = [
     props: {
       title: "Our numbers speak for themselves",
       stats: [
-        { value: 5, label: "Departments", suffix: "" },
+        { value: 6, label: "Departments", suffix: "" },
         { value: 35, label: "Faculty", suffix: "+" },
         { value: 22, label: "Programs", suffix: "+" },
         { value: 16, label: "Labs", suffix: "+" },
@@ -229,10 +229,9 @@ export const sectionsConfig = [
           description:
             "Environmental science education and research with emphasis on sustainability, assessment, and remediation.",
           courses: [
-            "B.Sc. (Hons.) in Environmental Science",
             "M.Sc. Environmental Science",
+            "M.Sc. Geology",
             "Ph.D. in Environmental Sciences",
-            "PG Diploma in Environmental Management",
           ],
           faculty: 8,
           labs: 2,

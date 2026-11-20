@@ -40,7 +40,7 @@ export default function IprActivities() {
               <div className="pl-2">
                 <p>
                   1. <a
-                    href="https://gbu.ac.in/Conferences/IPR_worshopBrochure_20Feb2020.pdf"
+                    href="/assets/pdf/ipr/IPR_worshopBrochure_20Feb2020.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800 font-semibold underline"

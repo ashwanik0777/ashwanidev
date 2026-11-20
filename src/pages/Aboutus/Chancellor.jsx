@@ -40,7 +40,7 @@ const Chancellor = () => {
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <a
-              href="https://www.gbu.ac.in/Content/gbudata/about/Profile_ShYogiAdityanath_latest.pdf"
+              href="/assets/pdf/general/Profile_ShYogiAdityanath_latest.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-md"

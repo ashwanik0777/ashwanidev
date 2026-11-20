@@ -49,7 +49,7 @@ export const placementData = {
   missionObjective: {
     aboutTitle: "About SOE Placement Cell",
     aboutText:
-      "The School of Engineering produces highly skilled engineers in Mechanical, Civil, Electrical, and Automobile Engineering. Our placement cell works tirelessly to connect our graduates with leading engineering and manufacturing companies, PSUs, and research organizations across India.",
+      "The School of Engineering produces highly skilled professionals in Mechanical, Civil, Electrical, and Architecture & Regional Planning. Our placement cell works tirelessly to connect our graduates with leading engineering, architectural, design and manufacturing companies, PSUs, and research organizations across India.",
     objectiveTitle: "Our Objective",
     objectiveText:
       "Our objective is to ensure quality placements for all SOE graduates by organizing pre-placement training, aptitude workshops, mock interviews, and industry interaction sessions. We aim to achieve 100% employability through skill development and industry alignment.",

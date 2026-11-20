@@ -47,7 +47,7 @@ export const departmentLayoutData = {
   },
   hodProps: {
     title: "From the Desk of HOD, ECE",
-    image: "https://www.gbu.ac.in/USICT/media/img/vidushii.jpg",
+    image: "/assets/schools/vidushii.jpg",
     name: "Dr. Vidushi Sharma",
     designation: "Head of Department",
     messageParagraphs: [

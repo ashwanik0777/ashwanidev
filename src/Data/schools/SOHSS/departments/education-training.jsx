@@ -112,11 +112,15 @@ export const departmentLayoutData = {
             "Classroom Internship",
             "Curriculum Design"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview",
+        syllabusUrl: "/courses/sohss/education-training/bed-programme-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1rI9i1ms5Wfei_jSoU37j_FSQqwyY9yHS/preview"
+                url: "/courses/sohss/education-training/bed-programme-structure.pdf"
+            },
+            {
+                session: "Course Details (2025)",
+                url: "/courses/sohss/education-training/education-course-details-2025.pdf"
             }
         ]
     },
@@ -135,11 +139,11 @@ export const departmentLayoutData = {
             "Hands-on School Practicum",
             "Teaching Tech Tools"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview",
+        syllabusUrl: "/courses/sohss/education-training/itep-course-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/18R1U0JDE8dDGv9ZQSp8UVvUO_9Jbu5SH/preview"
+                url: "/courses/sohss/education-training/itep-course-structure.pdf"
             }
         ]
     },
@@ -158,11 +162,11 @@ export const departmentLayoutData = {
             "Sports Biomechanics",
             "Gym & Fitness Training"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview",
+        syllabusUrl: "/courses/sohss/education-training/bpes-course-structure-2023.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1JlJUTJS6d9Arfe3zvmqo10OXAwSZisiK/preview"
+                url: "/courses/sohss/education-training/bpes-course-structure-2023.pdf"
             }
         ]
     },
@@ -181,11 +185,15 @@ export const departmentLayoutData = {
             "Policy Research",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview",
+        syllabusUrl: "/courses/sohss/education-training/ma-education-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/11HRu2q7Z6ork5RQigHBZZC8Us_zmZxaH/preview"
+                url: "/courses/sohss/education-training/ma-education-structure.pdf"
+            },
+            {
+                session: "Department Profile (2026-27)",
+                url: "/courses/sohss/education-training/education-dept-profile-2026-27.pdf"
             }
         ]
     }
@@ -270,29 +278,7 @@ export const departmentLayoutData = {
     { numberText: "45+", subtitle: "Publications" },
     { numberText: "15+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Pooja Sharma",
-      year: "B.Ed. 2024",
-      achievement: "Placed as PGT at Kendriya Vidyalaya, CTET Qualified with distinction",
-      image: "https://randomuser.me/api/portraits/women/29.jpg",
-      skills: ["Pedagogy", "Classroom Management", "Educational Technology", "Assessment"],
-    },
-    {
-      name: "Amit Kumar",
-      year: "M.A. Education 2024",
-      achievement: "UGC NET Qualified, Published 2 research papers on NEP 2020",
-      image: "https://randomuser.me/api/portraits/men/38.jpg",
-      skills: ["Educational Research", "Curriculum Studies", "Policy Analysis", "Academic Writing"],
-    },
-    {
-      name: "Ritu Singh",
-      year: "B.A. B.Ed. ITEP 2024",
-      achievement: "Best Student Teacher Award, Innovative Teaching Practice Recognition",
-      image: "https://randomuser.me/api/portraits/women/52.jpg",
-      skills: ["Inclusive Education", "ICT Integration", "Creative Teaching", "Action Research"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "NEP 2020 Pioneer",

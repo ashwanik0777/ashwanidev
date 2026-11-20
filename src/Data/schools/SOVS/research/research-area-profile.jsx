@@ -108,7 +108,7 @@ export const researchAreaData = {
   ],
 };
 export const schoolCard = {
-  imageUrl: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1sovsas.jpg",
+  imageUrl: "/assets/schools/Artboard1soe.jpg",
   label: "School of Vocational Studies & Applied Sciences",
   description: "Fostering scientific innovation and vocational competence through advanced labs and research in mathematics, physics, chemistry, environmental science, and food technology.",
   path: "/schools/SOVS",

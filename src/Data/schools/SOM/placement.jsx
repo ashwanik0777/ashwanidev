@@ -117,12 +117,12 @@ export const placementData = {
   brochure: {
     title: "MBA Executive Brochure",
     year: "2025-26",
-    link: "https://gbu.ac.in/Content/gbudata/data/SOM/Executive MBA.pdf",
+    link: "# MBA.pdf",
   },
   report: {
     title: "MBA BADS Brochure",
     year: "2025-26",
-    link: "https://gbu.ac.in/Content/gbudata/data/SOM/MBA Analytics brochure.pdf",
+    link: "# Analytics brochure.pdf",
   },
   growth: [
     { year: "2020", rate: "65%" },

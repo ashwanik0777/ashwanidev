@@ -27,7 +27,7 @@ const regulatoryBodiesData = [
     icon: ShieldCheck,
     color: "from-blue-600 to-indigo-700",
     bgColor: "bg-blue-50/70 border-blue-100",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/approval/UGC_12BCertificate_28June19.pdf",
+    pdfLink: "/assets/pdf/disclosures/UGC_12BCertificate_28June19.pdf",
     buttonText: "UGC 12 B Certificate",
     description:
       "University Grants Commission, New Delhi has granted Gautam Buddha University recognition under section 12(B) of the UGC Act, 1956. The University Grants Commission (UGC) declared GBU fit to receive central assistance (UGC grant) under Section 12(B) of UGC Act, 1956 as per approved pattern of assistance under various schemes.",
@@ -49,7 +49,7 @@ const regulatoryBodiesData = [
     icon: Award,
     color: "from-emerald-600 to-teal-700",
     bgColor: "bg-emerald-50/70 border-emerald-100",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/approval/NAAC Certificate_31Dec18.jpg",
+    pdfLink: "/assets/pdf/disclosures/NAAC_Certificate_31Dec18.jpg",
     buttonText: "NAAC Accreditation Certificate",
     description:
       "The National Assessment and Accreditation Council (NAAC) is established by University Grants Commission (UGC) to assess and accredit institutions of higher learning in the country. The NAAC was originally formed in 1992 as a result of recommendations from 'National Policy on Education - 1986' which emphasizes quality assurance and institutional grading in higher education.",
@@ -71,7 +71,7 @@ const regulatoryBodiesData = [
     icon: Scale,
     color: "from-purple-600 to-indigo-800",
     bgColor: "bg-purple-50/70 border-purple-100",
-    pdfLink: "https://gbu.ac.in/Content/gbudata/approval/BCI_Letter_3August22.pdf",
+    pdfLink: "/assets/pdf/regulatory_bodies/BCI_Letter_3August22.pdf",
     buttonText: "BCI Approval Letter",
     description:
       "The Bar Council of India is a statutory body established under section 4 of Advocates Act 1961 that regulates legal practice and legal education in India. Its members are elected from amongst lawyers in India and represent the Indian Bar.",
@@ -93,7 +93,7 @@ const regulatoryBodiesData = [
     icon: BookOpen,
     color: "from-amber-600 to-orange-700",
     bgColor: "bg-amber-50/70 border-amber-100",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/approval/Deppt_Education_NCT_17May2017.pdf",
+    pdfLink: "/assets/pdf/disclosures/Deppt_Education_NCT_17May2017.pdf",
     buttonText: "NCTE Recognition Order",
     description:
       "The National Council for Teacher Education, in its previous status since 1973, was an advisory body for the Central and State Governments on all matters pertaining to teacher education, with its Secretariat in the Department of Teacher Education of NCERT.",
@@ -115,7 +115,7 @@ const regulatoryBodiesData = [
     icon: Building2,
     color: "from-cyan-600 to-blue-700",
     bgColor: "bg-cyan-50/70 border-cyan-100",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/AcadProg/SOE/CoA_2024.pdf",
+    pdfLink: "/assets/pdf/regulatory_bodies/CoA_2024.pdf",
     buttonText: "CoA Approval Letter",
     description:
       "The Council of Architecture (COA) has been constituted by the Government of India under the provisions of the Architects Act, 1972, enacted by the Parliament of India, which came into force on 1st September, 1972. The Act provides for registration of Architects, standards of education, recognized qualifications and standards of practice.",
@@ -137,7 +137,7 @@ const regulatoryBodiesData = [
     icon: HeartPulse,
     color: "from-rose-600 to-pink-700",
     bgColor: "bg-rose-50/70 border-rose-100",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/approval/RCI.jpg",
+    pdfLink: "/assets/pdf/regulatory_bodies/RCI.jpg",
     buttonText: "RCI Approval Letter",
     description:
       "The Rehabilitation Council of India (RCI) was set up as a registered society in 1986. On September 1992 the RCI Act was enacted by Parliament and it became a Statutory Body on 22 June 1993. The mandate given to RCI is to regulate and monitor services given to persons with disability, standardise syllabi and maintain a Central Rehabilitation Register.",

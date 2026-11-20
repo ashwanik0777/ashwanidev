@@ -3,7 +3,7 @@ export const deansMessageData = {
   schoolName: "School of Information & Communication Technology",
   deanName: "Dr. Arpit Bhardwaj",
   designation: "Dean (I/C) - School of ICT, GBU",
-  image: "https://www.gbu.ac.in/USICT/media/img/arpit%20bhardwaj.jpg",
+  image: "/assets/schools/arpit_bhardwaj.jpg",
   shortMessage:
     "School of ICT is committed to providing the highest quality education and producing technocrats who can work on the latest available technologies in the global context, with the sole objective of acquiring and propagating knowledge.",
   message:

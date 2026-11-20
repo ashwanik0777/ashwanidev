@@ -108,11 +108,15 @@ export const departmentLayoutData = {
             "International Systems",
             "Public Policy Analysis"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview",
+        syllabusUrl: "/courses/sohss/political-science/ba-political-science-structure-2023.pdf",
         syllabus: [
             {
-                session: "Course Structure",
-                url: "https://drive.google.com/file/d/14H0UXYQHTjkozp7UIMVbCl1gjDaoZR7C/preview"
+                session: "Course Structure (May 2023)",
+                url: "/courses/sohss/political-science/ba-political-science-structure-2023.pdf"
+            },
+            {
+                session: "Department Information Brochure & Course Structure",
+                url: "/courses/sohss/political-science/political-science-dept-brochure-cstr.pdf"
             }
         ]
     },
@@ -131,11 +135,15 @@ export const departmentLayoutData = {
             "Foreign Policy Analysis",
             "Master Dissertation"
         ],
-        syllabusUrl: "https://drive.google.com/file/d/1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv/preview",
+        syllabusUrl: "/courses/sohss/political-science/ma-political-science-ir-structure.pdf",
         syllabus: [
             {
                 session: "Course Structure",
-                url: "https://drive.google.com/file/d/1nZpjQW0rg1L4-N9Wl1wa6fqOrVa-0QPv/preview"
+                url: "/courses/sohss/political-science/ma-political-science-ir-structure.pdf"
+            },
+            {
+                session: "Admission Brochure",
+                url: "/courses/sohss/political-science/political-science-admission-brochure.pdf"
             }
         ]
     }
@@ -155,22 +163,7 @@ export const departmentLayoutData = {
     { numberText: "40+", subtitle: "Publications" },
     { numberText: "10+", subtitle: "Conference Papers" },
   ],
-  topAchievers: [
-    {
-      name: "Shikha Yadav",
-      year: "M.A. Political Science 2023",
-      achievement: "Cleared UPSC Prelims, NET qualified",
-      image: "https://randomuser.me/api/portraits/women/32.jpg",
-      skills: ["Indian Politics", "International Relations", "Policy Analysis", "Research"],
-    },
-    {
-      name: "Amit Kumar",
-      year: "Ph.D. Political Science 2024",
-      achievement: "Published 4 papers in international journals",
-      image: "https://randomuser.me/api/portraits/men/28.jpg",
-      skills: ["Central Asian Studies", "Foreign Policy", "Security Studies", "Academic Writing"],
-    },
-  ],
+  topAchievers: [],
   achievements: [
     {
       title: "International Conference on Central Asian Studies",

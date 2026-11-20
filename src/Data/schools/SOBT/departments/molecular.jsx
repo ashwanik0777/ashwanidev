@@ -57,14 +57,16 @@ export const departmentLayoutData = {
   aboutProps: null,
   programsData: [
     {
-      title: "M.Sc Molecular Medicine",
+      id: "msc-molecular-medicine",
+      title: "M.Sc. Molecular Medicine",
+      level: "PG",
       duration: "2 Years",
       intake: "25 Students",
       description:
-        "Postgraduate program focusing on molecular mechanisms of diseases, diagnostics, drug discovery, and personalized medicine approaches.",
+        "Postgraduate program focusing on molecular mechanisms of diseases, diagnostics, immunotherapy, drug discovery, and personalized medicine approaches.",
       image:
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-purple-500 to-purple-600",
+        "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-rose-500 to-pink-600",
       highlights: [
         "Human Molecular Biology",
         "Cancer Biology",
@@ -75,53 +77,103 @@ export const departmentLayoutData = {
         "Clinical Research",
         "Research Dissertation",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/1rwFl8A40JqHjTmxvMus3PJ0e_sabS-aC/preview",
-      syllabus: [],
+      syllabusUrl: "/courses/sobt/molecular/msc-molmed-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sobt/molecular/msc-molmed-structure.pdf"
+        },
+        {
+          session: "Course Content",
+          url: "/courses/sobt/molecular/msc-molmed-syllabus.pdf"
+        }
+      ],
     },
     {
-      title: "M.Sc Microbial Biotechnology",
+      id: "msc-microbiology",
+      title: "M.Sc. Microbiology & Microbial Biotechnology",
+      level: "PG",
       duration: "2 Years",
-      intake: "20 Students",
+      intake: "30 Students",
       description:
-        "Postgraduate program focusing on microbial applications in industry, healthcare, and environmental management.",
+        "Postgraduate curriculum covering advanced fermentation technology, virology, immunology, antimicrobial resistance, and microbial genetics.",
       image:
-        "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-pink-500 to-pink-600",
+        "https://images.unsplash.com/photo-1583912267670-6575ad36248b?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-amber-500 to-orange-600",
       highlights: [
-        "Microbial Physiology",
-        "Industrial Microbiology",
-        "Environmental Microbiology",
-        "Fermentation Technology",
-        "Metagenomics",
+        "Medical Microbiology",
+        "Industrial Fermentation",
+        "Virology & Immunology",
         "Bioprocess Engineering",
         "Quality Control",
         "Research Project",
       ],
-      syllabusUrl: "https://drive.google.com/file/d/17hLso0pXo2YDf0pYdXiQyK7VgaVYrV9W/preview",
-      syllabus: [],
+      syllabusUrl: "/courses/sobt/molecular/msc-microbiology-structure-2025-27.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2025-27)",
+          url: "/courses/sobt/molecular/msc-microbiology-structure-2025-27.pdf"
+        },
+        {
+          session: "Course Content",
+          url: "/courses/sobt/molecular/msc-microbiology-syllabus.pdf"
+        }
+      ],
     },
     {
-      title: "Ph.D. in Molecular Biology / Microbiology",
-      duration: "3-5 Years",
-      intake: "8 Students",
+      id: "msc-nuclear-medicine",
+      title: "M.Sc. Nuclear Medicine",
+      level: "PG",
+      duration: "2 Years",
+      intake: "15 Students",
       description:
-        "Doctoral program for advanced research in molecular medicine, cancer biology, microbial biotechnology, and related areas.",
+        "Specialized clinical postgraduate program in radiopharmacy, radiation safety, radiation physics, and PET/SPECT imaging workflows.",
+      image:
+        "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=400&q=80",
+      gradient: "from-blue-600 to-violet-700",
+      highlights: [
+        "Radiopharmacy & Tracers",
+        "PET & SPECT Imaging",
+        "Radiation Dosimetry",
+        "Hospital Clinical Training"
+      ],
+      syllabusUrl: "/courses/sobt/molecular/msc-nuclear-medicine-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sobt/molecular/msc-nuclear-medicine-structure.pdf"
+        }
+      ]
+    },
+    {
+      id: "phd-molecular-medicine",
+      title: "Ph.D. in Molecular Medicine / Microbiology",
+      level: "Doctoral",
+      duration: "3-5 Years",
+      intake: "10 Students",
+      description:
+        "Doctoral research program for original investigation in molecular medicine, translational pathology, cancer biology, and microbial bioprocesses.",
       image:
         "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80",
       gradient: "from-rose-500 to-rose-600",
       highlights: [
         "Independent Research",
         "Advanced Coursework",
-        "Conference Publications",
-        "Industry Collaborations",
-        "Patent Filing",
-        "International Exposure",
-        "Teaching Assistantship",
-        "Thesis Defense",
+        "Journal Publications",
+        "Doctoral Defense"
       ],
-      syllabusUrl: "https://drive.google.com/file/d/14yy7SDczdwj_GNQhLRF3b_k4YaMjHnJZ/preview",
-      syllabus: [],
-    },
+      syllabusUrl: "/courses/sobt/biotechnology/phd-biotech-structure-2020.pdf",
+      syllabus: [
+        {
+          session: "Course Structure (2020 onwards)",
+          url: "/courses/sobt/biotechnology/phd-biotech-structure-2020.pdf"
+        },
+        {
+          session: "Course Content (2020 onwards)",
+          url: "/courses/sobt/biotechnology/phd-biotech-syllabus-2020.pdf"
+        }
+      ]
+    }
   ],
   facultyMembers: [
     {
@@ -154,7 +206,7 @@ export const departmentLayoutData = {
     },
   ],
   facultyStats: {
-    text: "Our department has 10+ experienced faculty members with expertise across molecular medicine and microbial biotechnology.",
+    text: "Our department has experienced faculty members with expertise across molecular medicine and microbial biotechnology.",
     stats: [
       {
         icon: BookOpen,
@@ -181,10 +233,10 @@ export const departmentLayoutData = {
       {
         icon: GraduationCap,
         custom: "Exp",
-        numberText: "10+",
+        numberText: "12+",
         subtitle: "Avg Experience",
-        bg: "bg-red-50",
-        color: "text-red-600",
+        bg: "bg-amber-50",
+        color: "text-amber-600",
       },
     ],
   },

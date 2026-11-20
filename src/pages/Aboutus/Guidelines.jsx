@@ -8,14 +8,14 @@ const guidelinesData = [
     sno: 1,
     title: "UGC Guidelines on Plagiarism",
     category: "Academic Integrity & Research",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/General/UGC_PublicNoticeDraftUGCRegulations_2Jan2018.pdf",
+    pdfLink: "/assets/pdf/general/UGC_PublicNoticeDraftUGCRegulations_2Jan2018.pdf",
     format: "PDF Document"
   },
   {
     sno: 2,
     title: "Fellowship for GATE Qualified Students",
     category: "Student Financial Aid & Scholarships",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/General/GATE_Notice_9May2014.tif",
+    pdfLink: "/assets/pdf/general/GATE_Notice_9May2014.tif",
     format: "Notice Document"
   }
 ];

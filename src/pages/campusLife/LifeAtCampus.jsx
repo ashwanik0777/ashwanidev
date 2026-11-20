@@ -22,7 +22,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Sports Facilities",
     subtitle: "Indoor Arena, Stadiums & Courts",
-    image: "https://www.gbu.ac.in/Content/clubs/img/sportsimg.JPG",
+    image: "/assets/clubs/sportsimg.JPG",
     link: "/campus-life/sports-fitness",
     icon: Trophy,
     badge: "Olympic Standard",
@@ -31,7 +31,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Meditation Center",
     subtitle: "Mahatma Jyotiba Phule Dhyana Kendra",
-    image: "https://www.gbu.ac.in/Content/clubs/img/buddha25.jpg",
+    image: "/assets/clubs/buddha25.jpg",
     link: "/campus-life/meditation-center",
     icon: Sun,
     badge: "Peace & Silence",
@@ -40,7 +40,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Student Accommodation",
     subtitle: "Single-Occupancy Hostels & Mess",
-    image: "https://www.gbu.ac.in/Content/clubs/img/hostel.jpg",
+    image: "/assets/clubs/hostel.jpg",
     link: "/campus-life/hostel-facilities",
     icon: Bed,
     badge: "18+ Hostels",
@@ -49,7 +49,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Clubs & Societies",
     subtitle: "Student-Led Creative Communities",
-    image: "https://www.gbu.ac.in/Content/clubs/img/clubs.jpg",
+    image: "/assets/clubs/clubs.jpg",
     link: "/campus-life/clubs-societies",
     icon: Users,
     badge: "Vibrant Life",
@@ -58,7 +58,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Cultural Activities",
     subtitle: "Festivals, Music & Performing Arts",
-    image: "https://www.gbu.ac.in/Content/clubs/img/buddha25.jpg",
+    image: "/assets/clubs/buddha25.jpg",
     link: "/campus-life/sports-fitness",
     icon: Sparkles,
     badge: "Annual Fests",
@@ -67,7 +67,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Shopping Complex",
     subtitle: "Essential Goods, Cafes & Stationery",
-    image: "https://www.gbu.ac.in/Content/clubs/img/shoppingcomplex.jpg",
+    image: "/assets/clubs/shoppingcomplex.jpg",
     link: "#cafes-food",
     icon: ShoppingBag,
     badge: "On-Campus Stores",
@@ -76,7 +76,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "Auditorium Complex",
     subtitle: "Vast Halls for Events & Conventions",
-    image: "https://www.gbu.ac.in/Content/clubs/img/auditorium.jpg",
+    image: "/assets/clubs/auditorium.jpg",
     link: "#campus-tour",
     icon: Building,
     badge: "3000+ Seating",
@@ -85,7 +85,7 @@ const CAMPUS_LIFE_HUB_ITEMS = [
   {
     title: "University Dispensary",
     subtitle: "24/7 Medical Care & Ambulance Support",
-    image: "https://www.gbu.ac.in/Content/clubs/img/dispensary.jpg",
+    image: "/assets/clubs/dispensary.jpg",
     link: "#home",
     icon: HeartPulse,
     badge: "24x7 Health Care",
@@ -99,7 +99,7 @@ const FEATURED_HIGHLIGHTS = [
     title: "Dining Services",
     tagline: "Nutritious Meals & Variety On Campus",
     description: "Feast on fresh, nutritious food, or grab a quick snack on campus! In addition to our buffet-style hostel dining halls, explore our Grand Street Cafe, Central Shopping Complex food court, Nescafé academic kiosks, Revive Juice & Shake bars, and specialized campus cafeterias. You will eat well at GBU!",
-    image: "https://www.gbu.ac.in/Content/clubs/img/canteen.jpeg",
+    image: "/assets/clubs/canteen.jpeg",
     badge: "Fresh & Vegetarian",
     icon: Utensils,
     color: "text-amber-600 bg-amber-50 border-amber-100"
@@ -109,7 +109,7 @@ const FEATURED_HIGHLIGHTS = [
     title: "Evening Out @ Grand Walk",
     tagline: "Lush Green Walkways & Wellness",
     description: "The cardiovascular benefits of walking are biologically plausible — like other forms of regular moderate exercise, walking improves cardiac risk factors, mental clarity, and overall physical vitality. Enjoy quiet, tree-lined avenues across our 511-acre green sanctuary as sunset falls over campus.",
-    image: "https://www.gbu.ac.in/Content/clubs/img/eveningout1.jpg",
+    image: "/assets/clubs/eveningout1.jpg",
     badge: "Eco Promenade",
     icon: Footprints,
     color: "text-emerald-600 bg-emerald-50 border-emerald-100"
@@ -119,7 +119,7 @@ const FEATURED_HIGHLIGHTS = [
     title: "Meditation Center @ GBU",
     tagline: "Mahatma Jyotiba Phule Dhyana Kendra",
     description: "In addition to curricular inputs, the university provides facilities to guide and shape character. Inspired by stupa architecture, Mahatma Jyotiba Phule Dhyana Kendra is a retreat centre giving students an experience of inner silence, positive values, stress-free living, and self-management.",
-    image: "https://www.gbu.ac.in/Content/clubs/img/meditationcenternight2.jpg",
+    image: "/assets/clubs/meditationcenternight2.jpg",
     badge: "Architectural Marvel",
     icon: Compass,
     color: "text-blue-600 bg-blue-50 border-blue-100"
@@ -129,7 +129,7 @@ const FEATURED_HIGHLIGHTS = [
     title: "Meet at Shanti Sarowar",
     tagline: "Oasis of Spiritual Recharge & Peace",
     description: "An oasis of peace in the happening life at GBU, Shanti Sarovar is a perfect place to relax, refresh, and recharge the soul. As an academy for higher learning of values and spiritual skills, it conducts retreats, seminars, and experiential workshops throughout the academic year.",
-    image: "https://www.gbu.ac.in/Content/clubs/img/4.jpg",
+    image: "/assets/clubs/4.jpg",
     badge: "Serene Water Body",
     icon: Heart,
     color: "text-purple-600 bg-purple-50 border-purple-100"

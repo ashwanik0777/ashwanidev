@@ -57,16 +57,22 @@ export const departmentLayoutData = {
       level: "Undergraduate",
       duration: "4 Years",
       intake: "60 Students",
-      description: "Blended program uniting advanced discrete mathematics, numerical algorithms, cryptographic foundations, data structures, and scientific computing.",
+      description: "Interdisciplinary programme blending pure mathematics, computational algorithms, software architecture, and scientific computing.",
       image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=400&q=80",
       gradient: "from-blue-600 to-indigo-700",
       highlights: [
-        "Discrete Mathematics & Algorithms",
-        "Cryptographic Methods",
-        "Scientific Computing",
-        "Machine Learning Math",
+        "Advanced Calculus & Linear Algebra",
+        "Data Structures & Algorithms",
+        "Scientific & High-Performance Computing",
+        "Machine Learning Foundations",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-mathematics/btech-maths-computing-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sovs/applied-mathematics/btech-maths-computing-structure.pdf"
+        }
+      ],
     },
     {
       id: "bsc-hons-mathematics",
@@ -74,16 +80,22 @@ export const departmentLayoutData = {
       level: "Undergraduate",
       duration: "3-4 Years",
       intake: "40 Students",
-      description: "Rigorous training in pure and applied mathematics, covering real analysis, abstract algebra, linear programming, and differential geometry (started in 2019).",
+      description: "Rigorous training in pure and applied mathematics covering algebra, real analysis, differential equations, and complex analysis.",
       image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=400&q=80",
-      gradient: "from-indigo-600 to-cyan-700",
+      gradient: "from-indigo-600 to-purple-700",
       highlights: [
+        "Abstract Algebra & Group Theory",
         "Real & Complex Analysis",
-        "Abstract Algebra",
-        "Differential Equations",
-        "Numerical Analysis",
+        "Ordinary & Partial Differential Equations",
+        "Numerical Analysis & Programming",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-mathematics/bsc-hons-mathematics-structure-2023.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sovs/applied-mathematics/bsc-hons-mathematics-structure-2023.pdf"
+        }
+      ],
     },
     {
       id: "bsc-hons-mes",
@@ -100,7 +112,13 @@ export const departmentLayoutData = {
         "Applied Optimization",
         "Quantitative Finance",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-mathematics/bsc-mes-structure-2023.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sovs/applied-mathematics/bsc-mes-structure-2023.pdf"
+        }
+      ],
     },
     {
       id: "msc-applied-mathematics",
@@ -117,7 +135,13 @@ export const departmentLayoutData = {
         "Operations Research",
         "Master Dissertation",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-mathematics/msc-mathematics-syllabus-2018.pdf",
+      syllabus: [
+        {
+          session: "Course Structure & Syllabus",
+          url: "/courses/sovs/applied-mathematics/msc-mathematics-syllabus-2018.pdf"
+        }
+      ],
     },
     {
       id: "phd-applied-mathematics",
@@ -134,7 +158,13 @@ export const departmentLayoutData = {
         "Mathematical Modeling",
         "Ph.D. Defense",
       ],
-      syllabus: [],
+      syllabusUrl: "/courses/sovs/applied-mathematics/phd-mathematics-structure.pdf",
+      syllabus: [
+        {
+          session: "Course Structure",
+          url: "/courses/sovs/applied-mathematics/phd-mathematics-structure.pdf"
+        }
+      ],
     },
   ],
 };

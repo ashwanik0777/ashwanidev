@@ -196,7 +196,11 @@ export const sectionsConfig = [
           code: "HIS",
           description:
             "Studies historical events, civilizations, and cultural heritage.",
-          courses: ["B.A. and M.A. (History)"],
+          courses: [
+            "B.A. and M.A. (History)",
+            "M.A. in Hindu Studies",
+            "M.A. in Human Rights",
+          ],
           image:
             "https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=600&h=400&fit=crop",
           gradient: "from-indigo-400 to-indigo-600",

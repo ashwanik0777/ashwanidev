@@ -15,7 +15,7 @@ export const contactInfo = {
   address: "Academic Block H, Gautam Buddha University, Yamuna Expressway, Greater Noida, Gautam Budh Nagar, UP 201312",
   phone: "0120-2344345",
   email: "sovs.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/school/sovs",
+  website: "/schools/SOVS",
   dean: "Prof. Chander Kumar Singh",
 };
 
@@ -31,6 +31,7 @@ export const departmentPages = [
   { id: "applied-physics", name: "Department of Applied Physics", path: "departments/applied-physics" },
   { id: "environmental-science", name: "Department of Environmental Sciences", path: "departments/environmental-science" },
   { id: "food-processing-technology", name: "Department of Food Processing and Technology", path: "departments/food-processing-technology" },
+  { id: "vocational-studies", name: "Department of Vocational Studies", path: "departments/vocational-studies" },
 ];
 
 export const researchPages = [

@@ -24,7 +24,7 @@ const actData = [
     bgColor: "bg-blue-50/70 border-blue-100",
     description:
       "Under Article 200 of the Constitution of India, The Governor approved Uttar Pradesh Gautam Buddha University Bill, 2002, passed by the Uttar Pradesh Legislature on 5 September 2002. Enacted in the 53rd year of the Republic of India, this foundational Act establishes Gautam Buddha University as a premier state university.",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/Programfiles/Act_10Jan18.pdf",
+    pdfLink: "/assets/pdf/act/Act_10Jan18.pdf",
     buttonText: "Read Gautam Buddha University Act",
     keyHighlights: [
       "Passed by UP Legislature on 5th September 2002",
@@ -42,7 +42,7 @@ const actData = [
     bgColor: "bg-indigo-50/70 border-indigo-100",
     description:
       "Promulgated by the Governor of Uttar Pradesh under clause (1) of Article 213 of the Constitution of India. This Amendment Ordinance enacts strategic updates to governance structures, administrative frameworks, and statutory authority of the university.",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/Programfiles/AmendedAct_10Jan18.pdf",
+    pdfLink: "/assets/pdf/act/AmendedAct_10Jan18.pdf",
     buttonText: "Read Gautam Buddha University (Amendment) Act",
     keyHighlights: [
       "Promulgated under Article 213(1) of the Constitution",
@@ -60,7 +60,7 @@ const actData = [
     bgColor: "bg-cyan-50/70 border-cyan-100",
     description:
       "In pursuance of provisions of section 24 of the Uttar Pradesh Gautam Buddha University Act 2002 (U.P. Act No. 9 of 2002), the Gautam Buddha Education Society enacted 'The Uttar Pradesh's First Statutes, 2007', defining official roles, appointments, and board powers.",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/Programfiles/Statute_10Jan18.pdf",
+    pdfLink: "/assets/pdf/act/Statute_10Jan18.pdf",
     buttonText: "Read Gautam Buddha University Statute",
     keyHighlights: [
       "Enacted pursuant to Section 24 of UP Act No. 9 of 2002",
@@ -78,7 +78,7 @@ const actData = [
     bgColor: "bg-slate-50 border-slate-200",
     description:
       "Compilation of the first amended Ordinances providing detailed operational rules for Schools of Studies, Academic Council, International Students Affairs, fee structures, employee conduct rules, leave rules, and service regulations for existing employees.",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/Programfiles/ApprovedOrdinance_10Jan18.pdf",
+    pdfLink: "/assets/pdf/act/ApprovedOrdinance_10Jan18.pdf",
     buttonText: "Read Approved Ordinance",
     keyHighlights: [
       "Governs Schools of Studies & Academic Council norms",
@@ -96,7 +96,7 @@ const actData = [
     bgColor: "bg-sky-50/70 border-sky-100",
     description:
       "Comprehensive regulatory code governing academic programs, Choice Based Credit System (CBCS), examination schemes, continuous evaluation, attendance requirements, and degree award criteria across all undergraduate, postgraduate, and doctoral studies.",
-    pdfLink: "https://www.gbu.ac.in/Content/gbudata/Programfiles/academic_Odinance.pdf",
+    pdfLink: "/assets/pdf/act/academic_Odinance.pdf",
     buttonText: "Read Academic Ordinance",
     keyHighlights: [
       "Sets credit framework for UG, PG & Ph.D. degrees",

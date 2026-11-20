@@ -183,6 +183,7 @@ import SoeAdvancedComputing from "../pages/departments/SoeAdvancedComputing.jsx"
 import SoeDesignLab from "../pages/departments/SoeDesignLab.jsx";
 import SoeInnovationCell from "../pages/departments/SoeInnovationCell.jsx";
 import GenericCentrePage from "../pages/departments/GenericCentrePage.jsx";
+import CoeGreenSkillsAi from "../pages/departments/CoeGreenSkillsAi.jsx";
 
 import ITCell from "../pages/itcell/ITCell.jsx";
 import PlacementDashboard from "../pages/departments/PlacementDashboard.jsx";
@@ -448,6 +449,8 @@ export default function AppRouter() {
               <Route path="departments/cyber-security" element={<CyberSecurity />} />
               <Route path="departments/coedt" element={<Coedt />} />
               <Route path="departments/raem" element={<Raem />} />
+              <Route path="departments/coe-green-skills-ai" element={<CoeGreenSkillsAi />} />
+              <Route path="departments/green-skills-ai" element={<CoeGreenSkillsAi />} />
           </Route>
 
           {/* ------------------------------------------------------------------------------------------------------------------ */}
@@ -480,6 +483,18 @@ export default function AppRouter() {
           <Route
             path="/research/research-centers"
             element={<ResearchCenters />}
+          />
+          <Route
+            path="/research/green-skills-ai-coe"
+            element={<CoeGreenSkillsAi />}
+          />
+          <Route
+            path="/research/green-skills-applied-ai"
+            element={<CoeGreenSkillsAi />}
+          />
+          <Route
+            path="/coe/green-skills-ai"
+            element={<CoeGreenSkillsAi />}
           />
           <Route path="/research/publications" element={<Index />} />
           <Route path="/research/publications-patents" element={<Index />} />

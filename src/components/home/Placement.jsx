@@ -6,14 +6,14 @@ import homeData from "../../Data/home.json";
 
 // Curated list of top recruiter logos evenly spaced along the semicircle arc
 const RECRUITER_LOGOS = [
-  { id: 1, name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-  { id: 2, name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
-  { id: 3, name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-  { id: 4, name: "Meta", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
-  { id: 5, name: "Samsung", logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" },
-  { id: 6, name: "TCS", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg" },
-  { id: 7, name: "Adobe", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Adobe_Systems_logo_and_wordmark.svg" },
-  { id: 8, name: "HCL Tech", logo: "https://upload.wikimedia.org/wikipedia/commons/8/87/HCL_Technologies_logo.svg" },
+  { id: 1, name: "Google", logo: "/company_logos/google.svg" },
+  { id: 2, name: "Microsoft", logo: "/company_logos/microsoft.svg" },
+  { id: 3, name: "Amazon", logo: "/company_logos/amazon.svg" },
+  { id: 4, name: "Meta", logo: "/company_logos/meta.svg" },
+  { id: 5, name: "Samsung", logo: "/company_logos/samsung.svg" },
+  { id: 6, name: "TCS", logo: "/company_logos/tcs.svg" },
+  { id: 7, name: "Adobe", logo: "/company_logos/adobe.svg" },
+  { id: 8, name: "HCL Tech", logo: "/company_logos/hcl.svg" },
 ];
 
 const BASE = import.meta.env.VITE_HOST?.replace(/\/$/, "");

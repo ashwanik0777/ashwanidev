@@ -63,21 +63,21 @@ const NSSStructure = ({ nssData }) => {
     email: "gaurav.kumar@gbu.ac.in",
     linkedin: "https://www.linkedin.com/in/gauravjnu/",
     twitter: "https://x.com/gauravkjnu",
-    image: "https://nss.onlinegbu.com/images/GauravKumar.png",
+    image: "/assets/nss/team/GauravKumar.png",
   };
 
   const defaultCoreCouncil = [
     {
       name: "Akanksha Pandey",
       role: "Vice President",
-      image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1755153073/uploads/general/1755153072503-84fb0ce1b8cd-a12.webp.webp",
+      image: "/assets/nss/uploads/general/1755153072503-84fb0ce1b8cd-a12.webp.webp",
       email: "245dcs025@gbu.ac.in",
       achievements: ["NSS Core Team Lead", "Community Service Lead"],
     },
     {
       name: "Ashwani Kushwaha",
       role: "Vice President & Tech Head",
-      image: "https://res.cloudinary.com/dzbkwsdfy/image/upload/v1764310861/uploads/general/1764310859023-ea2b935030a4-20251124_153222.jpg.jpg",
+      image: "/assets/nss/uploads/general/1764310859023-ea2b935030a4-20251124_153222.jpg.jpg",
       email: "235ucs039@gbu.ac.in",
       achievements: ["NSS Portal Developer", "Digital Outreach Lead"],
     },
@@ -89,7 +89,7 @@ const NSSStructure = ({ nssData }) => {
       programOfficer: {
         name: "Dr. Gaurav Kumar",
         department: "School of ICT",
-        image: "https://nss.onlinegbu.com/images/GauravKumar.png",
+        image: "/assets/nss/team/GauravKumar.png",
       },
       facultyMentor: {
         name: "Dr. Nishta Pareek",
@@ -97,12 +97,12 @@ const NSSStructure = ({ nssData }) => {
         image: "",
       },
       convenors: [
-        { name: "Anjali Yadav", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767949411/team/profile-photos/x3p6ngy9b5xcruqxcelj.jpg" },
-        { name: "Jaysuvankar Pradhan", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767952028/team/profile-photos/ihabj079bomjazwbxrug.jpg" }
+        { name: "Anjali Yadav", image: "/assets/nss/team/profile-photos/x3p6ngy9b5xcruqxcelj.jpg" },
+        { name: "Jaysuvankar Pradhan", image: "/assets/nss/team/profile-photos/ihabj079bomjazwbxrug.jpg" }
       ],
       coConvenors: [
-        { name: "Anushka Shakya", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767951329/team/profile-photos/mhnnvvnuuuyfw29qzaug.jpg" },
-        { name: "Ashish", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767949664/team/profile-photos/dlrtef1p9ampqmgqlilr.jpg" }
+        { name: "Anushka Shakya", image: "/assets/nss/team/profile-photos/mhnnvvnuuuyfw29qzaug.jpg" },
+        { name: "Ashish", image: "/assets/nss/team/profile-photos/dlrtef1p9ampqmgqlilr.jpg" }
       ]
     },
     {
@@ -118,12 +118,12 @@ const NSSStructure = ({ nssData }) => {
         image: "https://faculty.gbu.ac.in/uploads/photos/67c162743188f_2.jpg",
       },
       convenors: [
-        { name: "Bhakti Gupta", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767979754/team/profile-photos/wmq4q4iyc46y0mumzlfj.jpg" },
-        { name: "Roshan Baburao Ingle", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767979974/team/profile-photos/waate9hooq3ijrg2gxbn.jpg" }
+        { name: "Bhakti Gupta", image: "/assets/nss/team/profile-photos/wmq4q4iyc46y0mumzlfj.jpg" },
+        { name: "Roshan Baburao Ingle", image: "/assets/nss/team/profile-photos/waate9hooq3ijrg2gxbn.jpg" }
       ],
       coConvenors: [
         { name: "Disha Dalmiya", image: "" },
-        { name: "Harshita Rao", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767979473/team/profile-photos/slaxozlsttdy0thuwijy.jpg" }
+        { name: "Harshita Rao", image: "/assets/nss/team/profile-photos/slaxozlsttdy0thuwijy.jpg" }
       ]
     },
     {
@@ -139,8 +139,8 @@ const NSSStructure = ({ nssData }) => {
         image: "",
       },
       convenors: [
-        { name: "Nitish Kumar Pradhan", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767954054/team/profile-photos/qcu9hcz88bvkj4qcfjun.jpg" },
-        { name: "Prerna", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767979494/team/profile-photos/ffvdz0tett35verzmafh.jpg" }
+        { name: "Nitish Kumar Pradhan", image: "/assets/nss/team/profile-photos/qcu9hcz88bvkj4qcfjun.jpg" },
+        { name: "Prerna", image: "/assets/nss/team/profile-photos/ffvdz0tett35verzmafh.jpg" }
       ],
       coConvenors: [
         { name: "Saumya Singh", image: "" },
@@ -160,12 +160,12 @@ const NSSStructure = ({ nssData }) => {
         image: "",
       },
       convenors: [
-        { name: "Aryan Kumar Rathore", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767953974/team/profile-photos/jzasqa5st2h4wct2vmxw.jpg" },
+        { name: "Aryan Kumar Rathore", image: "/assets/nss/team/profile-photos/jzasqa5st2h4wct2vmxw.jpg" },
         { name: "Prince Kumar Singh", image: "" }
       ],
       coConvenors: [
-        { name: "Pari Tyagi", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767978717/team/profile-photos/zycsunhz8p4tnydqook2.jpg" },
-        { name: "Deepak Kumar", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767978455/team/profile-photos/syk3ajxkimj6ra1abr8t.jpg" }
+        { name: "Pari Tyagi", image: "/assets/nss/team/profile-photos/zycsunhz8p4tnydqook2.jpg" },
+        { name: "Deepak Kumar", image: "/assets/nss/team/profile-photos/syk3ajxkimj6ra1abr8t.jpg" }
       ]
     },
     {
@@ -181,12 +181,12 @@ const NSSStructure = ({ nssData }) => {
         image: "",
       },
       convenors: [
-        { name: "Prabhanshi Gupta", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767976641/team/profile-photos/ix7n0zwvwpjakpoqmclx.jpg" },
+        { name: "Prabhanshi Gupta", image: "/assets/nss/team/profile-photos/ix7n0zwvwpjakpoqmclx.jpg" },
         { name: "Sameeksha Sharma", image: "" }
       ],
       coConvenors: [
-        { name: "Abhay Singh", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767976760/team/profile-photos/mbtidi6kyi6pzr3x1sad.jpg" },
-        { name: "Priyanshi Nautiyal", image: "https://res.cloudinary.com/dn7pqxqsy/image/upload/v1767979521/team/profile-photos/d1zks5bzuaahd34yzw3y.jpg" }
+        { name: "Abhay Singh", image: "/assets/nss/team/profile-photos/mbtidi6kyi6pzr3x1sad.jpg" },
+        { name: "Priyanshi Nautiyal", image: "/assets/nss/team/profile-photos/d1zks5bzuaahd34yzw3y.jpg" }
       ]
     },
     {

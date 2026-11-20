@@ -106,7 +106,7 @@ const CampusRecruiters = () => {
     { name: "Times of India", logo: "/assets/companies/times of india.png" },
     { name: "Unacademy", logo: "/assets/companies/unacademy.png" },
     { name: "Zee Media", logo: "/assets/companies/zee media.webp" },
-    { name: "Swiggy", logo: "/company_logos/swiggy.svg", fallbackLogo: "https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" },
+    { name: "Swiggy", logo: "/company_logos/swiggy.svg", fallbackLogo: "/company_logos/swiggy.svg" },
   ];
 
   // 6 distinct rows of 10 items each

@@ -32,6 +32,7 @@ export const departmentPages = [
   { id: "environmental-science", name: "Department of Environmental Sciences", path: "departments/environmental-science" },
   { id: "food-processing-technology", name: "Department of Food Processing and Technology", path: "departments/food-processing-technology" },
   { id: "vocational-studies", name: "Department of Vocational Studies", path: "departments/vocational-studies" },
+  { id: "coe-green-skills-ai", name: "Green Skills & Applied AI CoE", path: "departments/coe-green-skills-ai" },
 ];
 
 export const researchPages = [
@@ -43,7 +44,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://i.ytimg.com/vi/IfisxZvHfFs/maxresdefault.jpg",
+  imageUrl: "/assets/schools/sovs.jpg",
   label: SCHOOL_NAME,
   description:
     "Fostering scientific innovation and vocational competence through advanced labs and research in mathematics, physics, chemistry, environmental science, and food technology.",
@@ -135,6 +136,22 @@ export const courseApplications = [
 
 export const schoolBadge = { bg: "bg-teal-100", text: "text-teal-800" };
 export const researchCenters = [
+  {
+    id: 200,
+    name: "Green Skills and Applied AI Centre of Excellence",
+    shortName: "CoE - Green Skills & AI",
+    description:
+      "State-of-the-art facility launched with UP Govt, Microsoft, 1M1B, and MeitY Startup Hub for applied AI, green manufacturing, and youth skills.",
+    image:
+      "/assets/green-skills-ai/DSC03112.JPG",
+    location: "SoVSAS Complex, Gautam Buddha University",
+    head: "SoVSAS Secretariat",
+    established: "2026",
+    facilities: ["Applied AI & Computing Lab", "Green Tech & Renewable Energy Rig", "Smart Manufacturing Simulator", "AI Talkie Incubation Studio"],
+    researchAreas: ["Applied AI", "Green Skills & Clean Tech", "Sustainable Manufacturing", "Resource Efficiency"],
+    school: admissionsLabel,
+    portalLink: "/schools/SOVS/departments/coe-green-skills-ai"
+  },
   {
     id: 201,
     name: "Environmental Science Research Lab",

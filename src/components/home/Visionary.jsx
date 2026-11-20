@@ -101,7 +101,7 @@ const VisionaryLeadership = () => {
           <div className="hidden lg:block w-1/2 min-h-[220px] pointer-events-none" />
 
           {/* Right Side (50% Width on Desktop, 100% on Mobile/Tablet): VC & Chancellor Cards in RMNLU Style */}
-          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center justify-center">
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 auto-rows-fr gap-4 items-stretch justify-center">
             {leaders.map((leader) => (
               <Link
                 key={leader.id || leader.name}

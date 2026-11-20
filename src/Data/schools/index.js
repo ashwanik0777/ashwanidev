@@ -115,6 +115,30 @@ export const RESEARCH_CENTERS = [
     image: "/coe_ai_robotics.png",
     portalLink: "https://gburif.org/coe.php",
     hidden: true
+  },
+  {
+    id: 4,
+    name: "Green Skills and Applied AI Centre of Excellence",
+    shortName: "CoE - Green Skills & AI",
+    school: "School of Vocational Studies and Applied Sciences",
+    established: 2026,
+    head: "SoVSAS, Gautam Buddha University",
+    location: "School of Vocational Studies and Applied Sciences (SoVSAS), GBU",
+    description: "Inaugurated by the Govt. of Uttar Pradesh with 1M1B Foundation, Microsoft, and MeitY Startup Hub. Dedicated to training youth in applied AI, green manufacturing, sustainable technologies, and student startup incubation.",
+    facilities: [
+      "Applied AI & Computing Lab",
+      "Green Tech & Renewable Energy Rig",
+      "Smart Manufacturing Simulator",
+      "AI Talkie & Startup Incubation Studio"
+    ],
+    researchAreas: [
+      "Applied Artificial Intelligence",
+      "Green Skills & Renewable Energy",
+      "Sustainable Manufacturing",
+      "Resource Efficiency & Climate Action"
+    ],
+    image: "/assets/green-skills-ai/DSC03112.JPG",
+    portalLink: "/schools/SOVS/departments/coe-green-skills-ai"
   }
 ];
 
@@ -122,8 +146,16 @@ export const SCHOOL_BADGES = SCHOOL_MODULES.reduce((acc, school) => {
   if (school.admissionsLabel && school.schoolBadge) {
     acc[school.admissionsLabel] = school.schoolBadge;
   }
+  if (school.SCHOOL_NAME && school.schoolBadge) {
+    acc[school.SCHOOL_NAME] = school.schoolBadge;
+  }
   return acc;
-}, {});
+}, {
+  "School of Information & Communication Technology": { bg: "bg-blue-100", text: "text-blue-800" },
+  "School of Vocational Studies and Applied Sciences": { bg: "bg-teal-100", text: "text-teal-800" },
+  "School of Vocational Studies & Applied Sciences": { bg: "bg-teal-100", text: "text-teal-800" },
+  "Vocational Studies & Applied Sciences": { bg: "bg-teal-100", text: "text-teal-800" }
+});
 
 export const getSchoolModuleByCode = (code) =>
   SCHOOL_MODULES.find((school) => school.SCHOOL_CODE === code);

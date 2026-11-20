@@ -47,12 +47,12 @@ const HoverCards = () => {
       path: "/schools/SOICT"
     },
     {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUoLwvVWxxxBLWiAC0R019yjKPhFJzb5TuFg&s",
+      imageUrl: "/assets/schools/sobt.jpg",
       label: "School of Biotechnology",
       path: "/schools/SOBT"
     },
     {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
+      imageUrl: "/assets/schools/soe.jpg",
       label: "School of Engineering",
       path: "/schools/SOE"
     },
@@ -62,12 +62,12 @@ const HoverCards = () => {
       path: "/schools/SOBSC"
     },
     {
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk75RFQPIldQiGk1kAwU7bEURFQV0ORVlqyg&s",
+      imageUrl: "/assets/schools/sol.jpg",
       label: "School of Law, Justice & Governance",
       path: "/schools/SOL"
     },
     {
-      imageUrl: "https://allegiance-educare.in/storage/uploads/colleges/14974330541497431571kjhldf.jpg",
+      imageUrl: "/assets/schools/som.jpg",
       label: "School of Management",
       path: "/schools/SOM"
     },
@@ -77,7 +77,7 @@ const HoverCards = () => {
       path: "/schools/SOHSS"
     },
     {
-      imageUrl: "https://images.shiksha.com/mediadata/images/1742534877phpTHlfCW.jpeg",
+      imageUrl: "/assets/schools/sovs.jpg",
       label: "School of Vocational Studies & Applied Sciences",
       path: "/schools/SOVS"
     }

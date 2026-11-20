@@ -205,8 +205,8 @@ const Chancellor = () => {
                   />
                 </div>
                
-                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Shri Yogi Adityanath</h3>
-                <p className="text-xs font-semibold text-slate-600  mt-1">Hon'ble Chief Minister, Uttar Pradesh
+                <h3 className="text-lg sm:text-xl font-extrabold text-amber-800 leading-tight">Shri Yogi Adityanath</h3>
+                <p className="text-xs font-semibold text-slate-500 mt-1">Hon'ble Chief Minister, Uttar Pradesh
 and Hon'ble Chancellor of Gautam Buddha University</p>
               </div>
             </div>
@@ -225,7 +225,7 @@ and Hon'ble Chancellor of Gautam Buddha University</p>
                   </p>
                   <p>
                     The university stands as a beacon of hope and progress, fostering an environment where diverse minds collaborate to address contemporary challenges and build a sustainable future for our nation and the world.
-                    <span aria-hidden="true" className="ml-1 font-serif text-2xl leading-none text-amber-600 align-[-0.35em]">&rdquo;</span>
+                    <span aria-hidden="true" className="pointer-events-none absolute left-90 top-60 font-serif text-7xl sm:text-8xl leading-none text-amber-500/15 select-none">&rdquo;</span>
                   </p>
                 </div>
               </div>

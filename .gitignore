@@ -37,3 +37,11 @@ src/config/semesterRegistrationConfig.js
 src/services/semesterRegistrationService.js
 src/services/registrationControl.js
 README.md
+
+# PDFs (syllabi, brochures, acts...) are not kept in git: together they made the repository
+# too big for Hostinger to clone. They live on the server in gbu-storage/static under the
+# same path as here (public/courses/x.pdf -> gbu-storage/static/courses/x.pdf), and
+# public/static-files.php serves them at the usual address. Keep a local copy in public/
+# for `npm run dev`; upload new or changed PDFs to the server.
+public/**/*.pdf
+public/**/*.PDF

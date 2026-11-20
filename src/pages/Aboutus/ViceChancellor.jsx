@@ -305,9 +305,7 @@ const ViceChancellor = () => {
                       className="w-full h-full object-cover object-top"
                     />
                   </div>
-                  <span className="inline-block bg-teal-50 text-teal-800 text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full border border-teal-100 mb-1.5">
-                    Executive Leadership
-                  </span>
+                 
                   <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Prof. Rana Pratap Singh</h3>
                   <p className="text-xs sm:text-sm font-semibold text-teal-700 mt-1">Vice-Chancellor</p>
                   <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">Gautam Buddha University</p>

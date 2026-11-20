@@ -79,9 +79,6 @@ const StrategicPerspective = () => {
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                     <Quote className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-[#008c95]/30" />
-                    <span className="bg-teal-50 text-[#008c95] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-teal-100">
-                      Institutional Mission Statement
-                    </span>
                   </div>
 
                   <blockquote className="text-slate-800 text-sm sm:text-base lg:text-lg font-medium leading-relaxed sm:leading-loose italic mb-6 sm:mb-8 relative z-10">

@@ -25,6 +25,8 @@ const iconMap = {
   'drone technology': Zap,
   'data science': Brain,
   'robotics': Zap,
+  'green skills': Award,
+  'green skills & applied ai': Brain,
 };
 
 // Data for Centers of Excellence sourced from GBURIF (https://gburif.org/coe.php)
@@ -75,6 +77,18 @@ const GBU_COE_LIST = [
     link: "https://gburif.org/coe.php",
     image: "/coe_ai_robotics.png",
     hidden: true
+  },
+  {
+    id: 4,
+    title: "green skills",
+    card_title: "Green Skills and Applied AI Centre of Excellence",
+    card_desc: "Set up by Govt. of UP in collaboration with 1M1B, Microsoft, and MeitY Startup Hub. Dedicated to training youth in applied AI, green manufacturing, clean energy, and startup incubation.",
+    faculty_count: 12,
+    student_count: 120,
+    project_count: 8,
+    director: "SoVSAS, Gautam Buddha University",
+    link: "/schools/SOVS/departments/coe-green-skills-ai",
+    image: "/assets/green-skills-ai/DSC03112.JPG"
   }
 ];
 

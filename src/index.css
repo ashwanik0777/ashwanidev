@@ -140,15 +140,17 @@ html, body {
 
 /*
  * Justified body text.
- * - On a paragraph: <p class="justify-text">.
- * - On a wrapper (a section, a page, later the whole site): justifies the paragraphs and
- *   list items inside, but skips anything in a centred block (cards, captions, headings).
- * It sits in the components layer, so an explicit text-center / text-left on an element still wins.
+ * - justify-text, on one paragraph: <p class="justify-text">.
+ * - justify-all, on a wrapper (a section, a page, later the whole site): justifies the
+ *   paragraphs and list items inside, but never headings, and skips anything in a centred
+ *   block (cards, captions). The wrapper itself is not justified, so headings keep their
+ *   own alignment.
+ * Both sit in the components layer, so an explicit text-center / text-left on an element still wins.
  * No hyphenation: words are never split across lines, as with justified text in Word.
  */
 @layer components {
   .justify-text,
-  .justify-text :where(p, li):not(:where(.text-center, .text-center *)) {
+  .justify-all :where(p, li):not(:where(.text-center, .text-center *)) {
     text-align: justify;
     text-justify: inter-word;
   }

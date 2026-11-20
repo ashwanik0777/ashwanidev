@@ -401,8 +401,8 @@ const AboutGbu = () => {
 
   return (
     <SearchableWrapper>
-      {/* justify-text: every paragraph and list item on this page is justified (see index.css) */}
-      <div className="min-h-screen bg-white justify-text">
+      {/* justify-all: every paragraph and list item on this page is justified, headings are not (see index.css) */}
+      <div className="min-h-screen bg-white justify-all">
         {/* Hero Section */}
         <BannerSection
           title={aboutData.hero.title}

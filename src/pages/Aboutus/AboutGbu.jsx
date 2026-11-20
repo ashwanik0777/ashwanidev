@@ -676,79 +676,157 @@ const AboutGbu = () => {
           </div>
         </section>
 
-        {/* Sports & Recreation */}
-        <section className="py-6 sm:py-8 bg-white text-gray-800">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-                Sports & Recreation
-              </h2>
-              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
-            </div>
+        {/* Sports & Recreation — Zigzag Item 1 (Content Left, Image Right) */}
+        <section className="py-8 sm:py-10 bg-white text-gray-800">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid lg:grid-cols-12 gap-8 md:gap-12 items-center bg-slate-50/70 rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 md:p-10 relative overflow-hidden">
+              {/* Content on Left */}
+              <div className="lg:col-span-7 space-y-5">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 text-blue-800 text-xs font-bold border border-blue-200">
+                  <Trophy className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Olympic-Standard Athletics</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 tracking-tight leading-tight">
+                  Sports & Recreation
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  GBU boasts a sprawling 47-acre outdoor sports zone alongside the international-standard Eklavya Indoor Stadium, promoting athletic excellence, physical fitness, and competitive team spirit.
+                </p>
 
-            <div className="grid md:grid-cols-3 gap-6 mb-6">
-              {aboutData.sportsFeatures.map((sport, index) => (
-                <Card
-                  key={index}
-                  className="group"
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="mb-4 flex justify-center">
-                      <div className="p-3 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
-                        {renderIcon(sport.icon, "w-6 h-6")}
+                {/* 3 Sports Features in Clean Responsive Grid */}
+                <div className="grid sm:grid-cols-3 gap-3.5 pt-1">
+                  {aboutData.sportsFeatures.map((sport, index) => (
+                    <div
+                      key={index}
+                      className="p-4 rounded-2xl bg-white hover:bg-blue-50/60 border border-slate-200/90 hover:border-blue-200 transition-all duration-300 shadow-sm hover:shadow group"
+                    >
+                      <div className="p-2.5 rounded-xl bg-blue-50 text-blue-700 w-fit mb-3 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        {renderIcon(sport.icon, "w-5 h-5")}
                       </div>
+                      <h3 className="font-bold text-slate-900 text-sm mb-1 group-hover:text-blue-700 transition-colors">
+                        {sport.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-snug">
+                        {sport.description}
+                      </p>
                     </div>
-                    <h3 className="font-bold text-base text-gray-900 mb-2">
-                      {sport.title}
-                    </h3>
-                    <p className="text-sm text-gray-600">{sport.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  ))}
+                </div>
 
-            <div className="text-center">
-              <Link to="/campus-life/sports-fitness">
-                <Button
-                  variant="outline"
-                  size="md"
-                  className="group"
-                >
-                  Explore Sports Programs
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
+                <div className="pt-2">
+                  <Link to="/campus-life/sports-fitness">
+                    <Button
+                      variant="primary"
+                      size="md"
+                      className="group shadow-sm hover:shadow-md"
+                    >
+                      Explore Sports Programs
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Image on Right */}
+              <div className="lg:col-span-5 relative group">
+                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                  <img
+                    src="/assets/campusimg/gbu-cricket-stadium.jpg"
+                    alt="GBU Cricket Stadium and Sports Arena"
+                    className="w-full h-72 sm:h-88 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                </div>
+
+                {/* Floating Glassmorphism Badge */}
+                <div className="absolute -bottom-3 -left-3 sm:bottom-4 sm:left-4 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-2xl shadow-xl border border-slate-200/90 flex items-center gap-3 z-10">
+                  <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shrink-0">
+                    <Trophy className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-900">47-Acre Sports Zone</div>
+                    <div className="text-[11px] text-slate-500 font-medium">Olympic Standard Stadium</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Student Life & Community */}
-        <section className="py-6 sm:py-8 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 relative z-10">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
-                Student Life & Community
-              </h2>
-              <div className="w-20 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
-            </div>
+        {/* Student Life & Community — Zigzag Item 2 (Image Left, Content Right) */}
+        <section className="py-8 sm:py-10 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 md:px-8">
+            <div className="grid lg:grid-cols-12 gap-8 md:gap-12 items-center bg-white rounded-3xl border border-slate-200/90 shadow-sm p-6 sm:p-8 md:p-10 relative overflow-hidden">
+              {/* Image on Left (Zigzag) */}
+              <div className="lg:col-span-5 relative group order-2 lg:order-1">
+                <div className="relative overflow-hidden rounded-2xl shadow-md border border-slate-200 bg-white">
+                  <img
+                    src="/assets/clubs/clubs.jpg"
+                    alt="GBU Student Clubs and Cultural Life"
+                    className="w-full h-72 sm:h-88 object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {aboutData.studentLife.map((activity, index) => (
-                <Link key={index} to={activity.link} className="block">
-                  <Card className="group h-full cursor-pointer">
-                    <CardContent className="p-6 text-center">
-                      <div className="mb-4 flex justify-center">
-                        <div className="p-3.5 rounded-full bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600">
-                          {renderIcon(activity.icon, "w-6 h-6")}
-                        </div>
+                {/* Floating Glassmorphism Badge */}
+                <div className="absolute -bottom-3 -right-3 sm:bottom-4 sm:right-4 bg-white/95 backdrop-blur-md p-3 sm:p-3.5 rounded-2xl shadow-xl border border-slate-200/90 flex items-center gap-3 z-10">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm shrink-0">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-900">30+ Active Societies</div>
+                    <div className="text-[11px] text-slate-500 font-medium">Cultural, Tech & Leadership</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content on Right (Zigzag) */}
+              <div className="lg:col-span-7 space-y-5 order-1 lg:order-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-100/80 text-indigo-800 text-xs font-bold border border-indigo-200">
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                  <span>Campus Life & Community</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-950 tracking-tight leading-tight">
+                  Student Life & Community
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                  Beyond the classrooms, campus life at GBU thrives with student-led passion, cultural expressions, nationwide competitions, and inclusive residential camaraderie.
+                </p>
+
+                {/* 4 Interactive Activity Cards in 2x2 Grid */}
+                <div className="grid sm:grid-cols-2 gap-3.5 pt-1">
+                  {aboutData.studentLife.map((activity, index) => (
+                    <Link
+                      key={index}
+                      to={activity.link}
+                      className="p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50/60 border border-slate-200/80 hover:border-indigo-200 transition-all duration-300 flex items-center gap-3.5 group cursor-pointer shadow-none hover:shadow-sm"
+                    >
+                      <div className="p-3 rounded-xl bg-indigo-100/70 text-indigo-700 shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+                        {renderIcon(activity.icon, "w-5 h-5")}
                       </div>
-                      <h3 className="font-bold text-slate-900 text-base group-hover:text-blue-700 transition-colors">
-                        {activity.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+                      <div className="flex-1">
+                        <h3 className="font-bold text-slate-900 text-sm group-hover:text-indigo-700 transition-colors flex items-center justify-between">
+                          <span>{activity.title}</span>
+                          <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
+                        </h3>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="pt-2">
+                  <Link to="/campus-life/clubs-societies">
+                    <Button
+                      variant="outline"
+                      size="md"
+                      className="group"
+                    >
+                      Explore All Societies
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>

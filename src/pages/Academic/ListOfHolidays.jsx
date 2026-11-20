@@ -1322,7 +1322,7 @@ const ListOfHolidays = () => {
           {/* DOWNLOAD HOLIDAY LIST BUTTON */}
           <div className="flex justify-center sm:justify-start mb-6">
             <a
-              href="https://drive.google.com/file/d/1HybU2q30VtmToiYTP1UGkXeJJtwYrYWl/view?usp=sharing"
+              href="/assets/pdf/general/List_of_Vacation-2026.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm sm:text-base rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"

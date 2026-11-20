@@ -17,7 +17,7 @@ export const contactInfo = {
   address: "Academic Block A, Gautam Buddha University, Greater Noida, UP 201312",
   phone: "+91-120-234-9988",
   email: "soict.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/USICT/",
+  website: "/schools/SOICT",
   dean: "Prof. (Dr.) Rajeev Malhotra",
 };
 
@@ -48,7 +48,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
+  imageUrl: "/assets/schools/1.jpg",
   label: SCHOOL_NAME,
   description:
     "Leading innovation in computer science, AI, cybersecurity, and digital transformation with cutting-edge research facilities.",

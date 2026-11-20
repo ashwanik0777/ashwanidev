@@ -9,7 +9,7 @@ const buddhistslides = [
     subtitle: "Promoting Peace, Harmony & Mindfulness",
   },
   {
-    image: "https://www.gbu.ac.in/Content/schools/img/sobs/buddhism.jpg",
+    image: "/assets/schools/buddhism.jpg",
     title: "Established and successfully running since 2011, with over 90% international students from 10 countries",
     subtitle: "Scientific & Non-Sectarian Research",
   },

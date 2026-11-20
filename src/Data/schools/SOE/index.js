@@ -15,7 +15,7 @@ export const contactInfo = {
   address: "Academic Block D, Gautam Buddha University, Greater Noida, UP 201312",
   phone: "+91-120-234-9902",
   email: "soe.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/SOE/",
+  website: "/schools/SOE",
   dean: "",
 };
 

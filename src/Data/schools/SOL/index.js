@@ -17,7 +17,7 @@ export const contactInfo = {
   address: "Academic Block E, Gautam Buddha University, Greater Noida, UP 201312",
   phone: "+91-120-234-7002",
   email: "sol.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/SOL/",
+  website: "/schools/SOL",
   dean: "Dr. Krishna Kant Dwivedi",
 };
 

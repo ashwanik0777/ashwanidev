@@ -205,13 +205,13 @@ The corporate relationship center (CRC) involves students strategically and guid
       name: "Dr. Raju Pal",
       role: "Placement In-charge SoICT, GBU",
       email: "placement.usict@gbu.ac.in",
-      image: "https://www.gbu.ac.in/USICT/media/img/profile/2.jpeg",
+      image: "/assets/schools/Arun_Solanki.jpeg",
     },
   ],
   contactInfo: {
     people: [
       { name: "Dr. Vinay Litoria", role: "Director, Corporate Relation Cell (CRC)", image: "/assets/Faculty/Vinay_kumar_litoria.jpeg" },
-      { name: "Dr. Raju Pal", role: "Placement In-charge, SoICT", image: "https://www.gbu.ac.in/USICT/media/img/profile/2.jpeg" },
+      { name: "Dr. Raju Pal", role: "Placement In-charge, SoICT", image: "/assets/schools/Arun_Solanki.jpeg" },
     ],
     emails: ["crc@gbu.ac.in", "placement.usict@gbu.ac.in"],
   },

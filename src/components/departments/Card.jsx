@@ -42,7 +42,7 @@ const Card = ({ imageUrl, label, path }) => {
 const HoverCards = () => {
   const cards = [
     {
-      imageUrl: "https://www.gbu.ac.in/USICT/media/img/slider/1.jpg",
+      imageUrl: "/assets/schools/1.jpg",
       label: "School of Information & Communication Technology",
       path: "/schools/SOICT"
     },
@@ -90,7 +90,7 @@ const HoverCards = () => {
       {/* Hero Section */}
       <section className="relative h-[60vh] w-full flex items-center justify-center text-white">
         <img
-          src="https://gbu.ac.in/Content/img/slider2.jpg"
+          src="/assets/schools/1.jpg"
           alt="Campus"
           className="absolute w-full h-full object-cover z-0"
         />

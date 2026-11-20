@@ -3,7 +3,7 @@ import { Code, Lightbulb, Rocket, Target, Trophy } from "lucide-react";
 
 const biotechSlides = [
   {
-    image: "https://www.gbu.ac.in/Content/schools/img/banner/Artboard1SObt.jpg",
+    image: "/assets/schools/Artboard1SObt.jpg",
     title: "School of Biotechnology",
     subtitle: "Advancing Life Sciences",
   },

@@ -17,7 +17,7 @@ export const contactInfo = {
   address: "Academic Block C, Gautam Buddha University, Greater Noida, UP 201312",
   phone: "+91-120-234-9901",
   email: "sobsc.office@gbu.ac.in",
-  website: "https://www.gbu.ac.in/SOBSC/",
+  website: "/schools/SOBSC",
   dean: "Prof. Rajeev Varshney",
 };
 

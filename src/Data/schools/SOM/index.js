@@ -15,7 +15,7 @@ export const contactInfo = {
   address: "Gautam Buddha University, Yamuna Expressway, Greater Noida, Gautam Budh Nagar, UP 201312",
   phone: "0120-2346144",
   email: "som@gbu.ac.in",
-  website: "https://www.gbu.ac.in/school/som",
+  website: "/schools/SOM",
   dean: "Dr. Indu Uprety",
 };
 

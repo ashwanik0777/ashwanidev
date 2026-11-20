@@ -15,7 +15,7 @@ export const contactInfo = {
   address: "Academic Block G, Gautam Buddha University, Yamuna Expressway, Greater Noida, Gautam Budh Nagar, UP 201312",
   phone: "0120-2344223",
   email: "deanhss@gbu.ac.in",
-  website: "https://www.gbu.ac.in/school/soh",
+  website: "/schools/SOHSS",
   dean: "Prof. Madhav Govind",
 };
 

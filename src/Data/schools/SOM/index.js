@@ -38,7 +38,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://www.onlineresultportal.com/images/university/gautam-buddha-university.jpg",
+  imageUrl: "/assets/schools/som.jpg",
   label: SCHOOL_NAME,
   description:
     "Developing business leaders through innovative MBA programs, entrepreneurship studies, and strategic management education.",

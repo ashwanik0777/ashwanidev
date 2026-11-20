@@ -20,11 +20,11 @@
       {
         "id": 2,
         "title": "About Gautam Buddha University",
-        "description": "Established in 2008, Gautam Buddha University stands as a beacon of academic excellence in the National Capital Region. Named after Lord Buddha, the university embodies the principles of knowledge, wisdom, and enlightenment.\r\n\r\nWith state-of-the-art infrastructure, world-class faculty, and innovative research programs, GBU is committed to nurturing global citizens who can contribute meaningfully to society and the nation.",
+        "description": "Established in 2008 under the Uttar Pradesh Gautam Buddha University Act, 2002, Gautam Buddha University (GBU), Greater Noida, is a state goverment university committed to excellence in higher education, research and innovation. Inspired by the ideals of wisdom, compassion and human values, the University fosters an intellectually vibrant and inclusive academic environment. With a multidisciplinary academic ecosystem, a distinctive residential campus and a commitment to holistic development, GBU nurtures future-ready graduates, researchers and entrepreneurs equipped to contribute meaningfully to society and the nation.",
         "image": "/assets/GBU.png",
         "button1_text": "Learn More",
         "button2_text": "Our Mission",
-        "button1_url": "/about-us/About%20Gbu"
+        "button1_url": "/about-us/about-gbu"
       }
     ],
     "leadership": [

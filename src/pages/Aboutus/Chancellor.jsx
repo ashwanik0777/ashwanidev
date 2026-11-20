@@ -173,8 +173,8 @@ const Chancellor = () => {
   const tabButtons = [
     { id: 'Overview', label: 'Overview' },
     { id: 'Political_Career', label: 'Political & Parliamentary Career' },
-    { id: 'Institutions_Social', label: 'Institutions & Publications' },
-    { id: 'Vision', label: 'Vision' }
+    // { id: 'Institutions_Social', label: 'Institutions & Publications' },
+    // { id: 'Vision', label: 'Vision' }
   ];
 
   return (
@@ -203,13 +203,10 @@ const Chancellor = () => {
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
-                <span className="inline-block bg-amber-50 text-amber-800 text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full border border-amber-100 mb-1.5 sm:mb-2">
-                  Hon'ble Chancellor
-                </span>
+               
                 <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">Shri Yogi Adityanath</h3>
-                <p className="text-xs sm:text-sm font-semibold text-amber-700 mt-1">Hon'ble Chief Minister</p>
-                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">Government of Uttar Pradesh</p>
-                <p className="text-[11px] sm:text-xs font-semibold text-slate-600 mt-1 italic">Peethadheeshwar, Gorakshpeeth</p>
+                <p className="text-xs sm:text-sm font-semibold  mt-1">Hon'ble Chief Minister, Uttar Pradesh
+and Hon'ble Chancellor of Gautam Buddha University</p>
               </div>
             </div>
 

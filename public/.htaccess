@@ -4,6 +4,10 @@
   RewriteRule ^index\.html$ - [L]
   # Uploaded files live outside the deploy folder; uploads.php serves them.
   RewriteRule ^uploads/ uploads.php [L]
+  # PDFs live outside the deploy folder too (gbu-storage/static); static-files.php serves
+  # any PDF that is not part of the deployed site, at the same address.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule \.pdf$ static-files.php [L,NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l

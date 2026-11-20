@@ -6,14 +6,14 @@ import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx"
 
 const leadership = [
   {
-    role: "Hon'ble Chancellor",
+
     name: "Shri Yogi Adityanath Ji",
-    designation: "Hon'ble Chief Minister, UP & Chancellor, GBU",
+    designation: "Hon'ble Chief Minister, Uttar Pradesh and Hon'ble Chancellor of Gautam Buddha University",
     image: "/assets/Yogiji.jpg",
     objectPos: "object-top"
   },
   {
-    role: "Vice Chancellor",
+
     name: "Prof. Rana Pratap Singh",
     designation: "Vice Chancellor, Gautam Buddha University",
     image: "/assets/prof.jpeg",
@@ -111,7 +111,7 @@ const deansList = [
 
 const administrativeOfficers = [
   {
-    role: "Registrar (I/c) & Director Works",
+    role: "Registrar (I/c)",
     name: "Prof. Chander Kumar Singh",
     image: "https://i1.rgstatic.net/ii/profile.image/337623269822466-1457507069206_Q512/Chander-Singh.jpg"
   },

@@ -37,7 +37,7 @@ const VisionaryLeadership = () => {
 
         let displayDesignation = leader.designation;
         if (leader.name?.includes("Yogi")) {
-          displayDesignation = "Hon'ble Chief Minister of Uttar Pradesh & Chancellor, GBU";
+          displayDesignation = "Hon'ble Chief Minister, Uttar Pradesh and Hon'ble Chancellor of Gautam Buddha University";
         } else if (leader.name?.includes("Rana")) {
           displayDesignation = "Vice-Chancellor, Gautam Buddha University";
         }

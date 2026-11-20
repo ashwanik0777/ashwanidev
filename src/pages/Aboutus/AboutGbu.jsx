@@ -437,9 +437,9 @@ const AboutGbu = () => {
                 <p className="justify-text text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
                   {aboutData.overview.description}
                 </p>
-                <Link to="/aboutUs/GBUHistory">
+                <Link to="/aboutUs/learnGBU">
                   <Button className="group">
-                    Learn More About Our History
+                    Learn More
                     <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>

@@ -46,7 +46,6 @@ import SitemapAbout from "../pages/Sitemap/SitemapAbout.jsx";
 import SitemapContact from "../pages/Sitemap/SitemapContact.jsx";
 import SitemapAcademics from "../pages/Sitemap/SitemapAcademics.jsx";
 import InstitutionInnovation from "../pages/Reasearch/InstitutionInnovation.jsx";
-import GBUHistory from "../pages/Aboutus/History.jsx";
 import LoginPortal from "../pages/Auth/LoginPortal.jsx";
 import FacultyRegister from "../pages/Auth/FacultyRegister.jsx";
 import ForgotPassword from "../pages/Auth/ForgotPassword.jsx";
@@ -222,7 +221,9 @@ export default function AppRouter() {
           <Route path="/about/committee" element={<Committee />} />
           <Route path="/about-us/regulatory-bodies" element={<RegulatoryBodies />} />
           <Route path="/about/regulatorybodies" element={<RegulatoryBodies />} />
-          <Route path="/aboutUs/GBUHistory" element={<History />} />
+          <Route path="/aboutUs/learnGBU" element={<History />} />
+          {/* Old address of the same page */}
+          <Route path="/aboutUs/GBUHistory" element={<Navigate to="/aboutUs/learnGBU" replace />} />
           <Route path="/about-us/chancellor-message" element={<Chancellor />} />
           <Route
             path="/about-us/vice-chancellor-message"

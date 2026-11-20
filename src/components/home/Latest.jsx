@@ -124,12 +124,6 @@ export default function LatestUpdates() {
     };
   }, []);
 
-  const getPriorityIndicator = (priority = 'low') => {
-    if (priority === 'high') return 'bg-red-500 animate-pulse';
-    if (priority === 'medium') return 'bg-yellow-500';
-    return 'bg-green-500';
-  };
-
   const getTypeColor = (tag) => {
     const colors = {
       'Latest News': 'bg-blue-100 text-blue-600 border-blue-200',
@@ -138,7 +132,7 @@ export default function LatestUpdates() {
       'Notice/Circulars': 'bg-green-100 text-green-600 border-green-200',
       'Ongoing Event': 'bg-orange-100 text-orange-600 border-orange-200',
       'Ongoing Events': 'bg-orange-100 text-orange-600 border-orange-200',
-      'Upcoming Event': 'bg-purple-100 text-purple-600 border-purple-200',
+      'Upcoming Event': 'bg-green-100 text-green-600 border-green-200',
       'Past Event': 'bg-gray-100 text-gray-600 border-gray-200',
     };
     return colors[tag?.trim()] || 'bg-gray-100 text-gray-600 border-gray-200';
@@ -150,29 +144,39 @@ export default function LatestUpdates() {
     'Ongoing Events': 'No ongoing events at the moment.',
   };
 
-  const NoticeCard = ({ item, index }) => (
-    <a
-      href={item.url}
-      className={`group relative flex items-start gap-3 p-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg border border-transparent hover:border-blue-100 ${isVisible ? 'animate-slide-in' : 'opacity-0 translate-y-4'}`}
-      style={{ animationDelay: `${index * 150}ms` }}
-    >
-      <div className={`w-1.5 h-16 ${getPriorityIndicator(item.priority)} rounded-full flex-shrink-0 mt-1 shadow-sm`}></div>
-      <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-gray-800 text-sm leading-snug mb-2 group-hover:text-blue-700 transition-colors duration-200">
-          {item.content_text}
-          {item.isNew && <NewBadge className="ml-1 -my-1 h-6 w-6 align-middle" />}
-        </h4>
-        <p className="text-xs text-gray-500 flex items-center gap-1">
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          {new Date(item.date).toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })}
-        </p>
-      </div>
-      <span className={`px-3 py-1.5 rounded-full text-xs font-medium flex-shrink-0 border transition-all duration-200 group-hover:scale-105 ${getTypeColor(item.tag)}`}>{item.tag}</span>
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/0 to-indigo-600/0 group-hover:from-blue-600/5 group-hover:to-indigo-600/5 transition-all duration-300"></div>
-    </a>
-  );
+  const NoticeCard = ({ item, index }) => {
+    const date = new Date(item.date);
+    const hasDate = !Number.isNaN(date.getTime());
+
+    return (
+      <a
+        href={item.url}
+        className={`group relative flex items-start gap-3 px-4 py-2.5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg border border-transparent hover:border-blue-100 ${isVisible ? 'animate-slide-in' : 'opacity-0 translate-y-4'}`}
+        style={{ animationDelay: `${index * 150}ms` }}
+      >
+        {/* Calendar-style date block */}
+        <div className="w-11 flex-shrink-0 rounded-md border border-slate-200 bg-white text-center overflow-hidden shadow-sm">
+          <div className="bg-slate-100 py-px text-[9px] font-semibold uppercase tracking-wide text-slate-600">
+            {hasDate ? date.toLocaleDateString('en-IN', { month: 'short' }) : '—'}
+          </div>
+          <div className="pt-0.5 text-base font-bold leading-none text-slate-800">
+            {hasDate ? date.getDate() : '--'}
+          </div>
+          <div className="pb-0.5 text-[9px] font-medium text-slate-500">
+            {hasDate ? date.getFullYear() : ''}
+          </div>
+        </div>
+        <div className="flex-1 min-w-0 self-center">
+          <h4 className="font-semibold text-gray-800 text-sm leading-snug group-hover:text-blue-700 transition-colors duration-200">
+            {item.content_text}
+            {item.isNew && <NewBadge className="ml-1 -my-1 h-6 w-6 align-middle" />}
+          </h4>
+        </div>
+        <span className={`px-3 py-1.5 rounded-full text-xs font-medium flex-shrink-0 border transition-all duration-200 group-hover:scale-105 ${getTypeColor(item.tag)}`}>{item.tag}</span>
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/0 to-indigo-600/0 group-hover:from-blue-600/5 group-hover:to-indigo-600/5 transition-all duration-300"></div>
+      </a>
+    );
+  };
 
   return (
     <section className="px-4 sm:px-6 md:px-8 lg:px-16 pt-6 pb-4 sm:pt-10 sm:pb-6 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30">
@@ -216,7 +220,7 @@ export default function LatestUpdates() {
               <div className="relative flex-1 flex flex-col">
                 <div className="marquee-wrapper">
                   {hasItems ? (
-                    <div className="marquee-content space-y-3" style={{ animationDuration: marqueeDuration }}>
+                    <div className="marquee-content space-y-1" style={{ animationDuration: marqueeDuration }}>
                       {filtered.concat(filtered).map((item, i) => (
                         <NoticeCard key={`${item.id}-${i}`} item={item} index={i} category={category} />
                       ))}

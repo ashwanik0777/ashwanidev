@@ -43,7 +43,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://i.ytimg.com/vi/IfisxZvHfFs/maxresdefault.jpg",
+  imageUrl: "/assets/schools/sovs.jpg",
   label: SCHOOL_NAME,
   description:
     "Fostering scientific innovation and vocational competence through advanced labs and research in mathematics, physics, chemistry, environmental science, and food technology.",

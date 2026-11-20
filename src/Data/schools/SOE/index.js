@@ -39,7 +39,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU89cU4dCM-KXWNc_7tD7_VrF45IcfZGDgFQ&s",
+  imageUrl: "/assets/schools/soe.jpg",
   label: SCHOOL_NAME,
   description:
     "Excellence in civil, electrical, mechanical, and architectural engineering with focus on sustainable technology and innovation.",

@@ -20,7 +20,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/AICTE_approved_courses.pdf"
+        url: "/assets/pdf/disclosures/AICTE_approved_courses.pdf"
       }
     ]
   },
@@ -32,7 +32,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/UGC_12BCertificate_28June19.pdf"
+        url: "/assets/pdf/disclosures/UGC_12BCertificate_28June19.pdf"
       }
     ]
   },
@@ -44,7 +44,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/UGC-GBU%202f.pdf"
+        url: "/assets/pdf/disclosures/UGC-GBU_2f.pdf"
       }
     ]
   },
@@ -56,7 +56,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/NAAC%20Certificate_31Dec18.jpg"
+        url: "/assets/pdf/disclosures/NAAC_Certificate_31Dec18.jpg"
       }
     ]
   },
@@ -68,7 +68,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/Deppt_Education_NCT_17May2017.pdf"
+        url: "/assets/pdf/disclosures/Deppt_Education_NCT_17May2017.pdf"
       }
     ]
   },
@@ -80,11 +80,11 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "Quality Manual",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/Certificate.pdf"
+        url: "/assets/pdf/disclosures/Certificate.pdf"
       },
       {
         label: "Certificate",
-        url: "https://www.gbu.ac.in/Content/gbudata/approval/Quality_Manual.pdf"
+        url: "/assets/pdf/disclosures/Quality_Manual.pdf"
       }
     ]
   },
@@ -96,7 +96,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/General/MOU_NSDC_DOC_1July15.pdf"
+        url: "/assets/pdf/disclosures/MOU_NSDC_DOC_1July15.pdf"
       }
     ]
   },
@@ -108,7 +108,7 @@ const mandatoryDisclosuresData = [
     links: [
       {
         label: "View Document",
-        url: "https://www.gbu.ac.in/Content/gbudata/General/GBU_SocietyRegistration.pdf"
+        url: "/assets/pdf/disclosures/GBU_SocietyRegistration.pdf"
       }
     ]
   }

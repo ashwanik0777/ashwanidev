@@ -106,10 +106,10 @@ const VisionaryLeadership = () => {
               <Link
                 key={leader.id || leader.name}
                 to={leader.url}
-                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 lg:p-5 flex flex-row lg:flex-col items-center text-left lg:text-center gap-3.5 sm:gap-4 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
+                className="w-full bg-white border-2 border-[#ea7a16] hover:border-orange-600 rounded-2xl p-3.5 sm:p-4 lg:p-5 flex flex-row lg:flex-col items-center text-left lg:text-center gap-2.5 sm:gap-3 lg:gap-1 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group cursor-pointer"
               >
                 {/* Leader Avatar Photo (Circular RMNLU Frame) */}
-                <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300 lg:mx-auto lg:mb-1">
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-slate-200 shadow-sm shrink-0 bg-slate-50 group-hover:border-orange-400 transition-colors duration-300 lg:mx-auto">
                   <img
                     src={getPhotoUrl(leader.photo)}
                     alt={leader.name}
@@ -118,11 +118,11 @@ const VisionaryLeadership = () => {
                 </div>
 
                 {/* Leader Details Block */}
-                <div className="flex flex-col items-start lg:items-center text-left lg:text-center justify-center min-w-0 flex-1">
+                <div className="flex flex-col items-start lg:items-center text-left lg:text-center justify-center lg:justify-start min-w-0 flex-1">
                   <h3 className="font-extrabold text-[#1a2942] text-sm sm:text-base group-hover:text-orange-600 transition-colors leading-snug">
                     {leader.name}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-snug mt-0.5 lg:mt-1 max-w-[280px] lg:max-w-none">
+                  <p className="text-[11px] sm:text-xs text-slate-600 font-medium leading-snug mt-0.5 lg:mt-1 max-w-[280px] lg:max-w-none">
                     {leader.displayDesignation}
                   </p>
                 </div>

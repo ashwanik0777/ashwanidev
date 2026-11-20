@@ -125,52 +125,52 @@ const governanceData = {
       {
         name: "Prof. Rajeev Varshney",
         role: "Member",
-        designation: "Dean, Academics, Gautam Buddha University",
+        designation: "Dean, Academics, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Modho Govind",
         role: "Member",
-        designation: "Dean, School of Humanities and Social Sciences, Gautam Buddha University",
+        designation: "Dean, School of Humanities and Social Sciences, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. S. Dhanalakshmi",
         role: "Member",
-        designation: "Dean, School of Biotechnology, Gautam Buddha University",
+        designation: "Dean, School of Biotechnology, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Rajeev Varshney",
         role: "Member",
-        designation: "Dean, School of Buddhist Studies & Civilization, Gautam Buddha University",
+        designation: "Dean, School of Buddhist Studies & Civilization, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Dr. Indu Uprety",
         role: "Member",
-        designation: "Dean (I/c) Planning and Research, Gautam Buddha University",
+        designation: "Dean (I/c) Planning and Research, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Dr. Indu Uprety",
         role: "Member",
-        designation: "Dean (I/c), School of Management, Gautam Buddha University",
+        designation: "Dean (I/c), School of Management, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Dr. Krishna Kant Dwivedi",
         role: "Member",
-        designation: "Dean (I/c), School of Law Justice and Governance, Gautam Buddha University",
+        designation: "Dean (I/c), School of Law Justice and Governance, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Dr. Kirti Pal",
         role: "Member",
-        designation: "Dean (I/c), School of Engineering, Gautam Buddha University",
+        designation: "Dean (I/c), School of Engineering, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Dr. Arpit Bhardwaj",
         role: "Member",
-        designation: "Dean (I/c), School of Information & Communication Technology, Gautam Buddha University",
+        designation: "Dean (I/c), School of Information & Communication Technology, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Chander Kumar Singh",
         role: "Member and Secretary",
-        designation: "Registrar (I/c) & Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University",
+        designation: "Registrar (I/c) & Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University, Greater Noida",
       },
     ],
   },
@@ -187,7 +187,7 @@ const governanceData = {
       {
         name: "Dr. Biranchi Panda",
         role: "Member",
-        designation: "Technical Education Nominee - Department of Mechanical Engineering, Indian Institute of Technology Guwahati, Amingaon North Guwahati, Guwahati, Assam-781039",
+        designation: "Technical Education Nominee - Department of Mechanical Engineering, Indian Institute of Technology Guwahati, Assam",
       },
       {
         name: "Prof. Ruchir Gupta",
@@ -207,27 +207,27 @@ const governanceData = {
       {
         name: "Prof. Rajeev Varshney",
         role: "Member",
-        designation: "Deans (Coordinating) - Dean, Academics, Gautam Buddha University",
+        designation: "Dean, Academics, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Bandana Pandey",
         role: "Member",
-        designation: "Deans (Coordinating) - Professor, School of Humanities & Social Sciences, Gautam Buddha University",
+        designation: "Professor, School of Humanities & Social Sciences, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Sanjay kumar Sharma",
         role: "Member",
-        designation: "Deans (Coordinating) - Professor, School of ICT, Gautam Buddha University",
+        designation: "Professor, School of ICT, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. Chander Kumar Singh",
         role: "Member",
-        designation: "School's Deans - Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University, Greater Noida",
+        designation: "Dean, School of Vocational Studies and Applied Sciences, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Prof. S. Dhanalakshmi",
         role: "Member",
-        designation: "School's Deans - Dean, School of Biotechnology, Gautam Buddha University, Greater Noida",
+        designation: "Dean, School of Biotechnology, Gautam Buddha University, Greater Noida",
       },
       {
         name: "Secretary",
@@ -237,7 +237,7 @@ const governanceData = {
       {
         name: "Prof. Chander Kumar Singh",
         role: "Secretary",
-        designation: "Registrar (I/c), Gautam Buddha University",
+        designation: "Registrar (I/c), Gautam Buddha University, Greater Noida",
       },
     ],
   },
@@ -254,7 +254,7 @@ const governanceData = {
       {
         name: "2. Vice Chancellor",
         role: "Member Secretary",
-        designation: "Gautam Buddha University",
+        designation: "Gautam Buddha University, Greater Noida",
       },
       {
         name: "3. Prof. Jaimala Bishnoi",

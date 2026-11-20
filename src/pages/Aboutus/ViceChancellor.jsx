@@ -46,7 +46,7 @@ const ViceChancellor = () => {
               href="/assets/pdf/general/VC_Profile.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-md"
+              className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-all shadow-md"
             >
               <Download className="w-4 h-4" />
               <span>Download CV</span>
@@ -298,7 +298,7 @@ const ViceChancellor = () => {
             <div className="w-full lg:w-1/3 shrink-0 flex flex-col">
               <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-200 text-center h-full flex flex-col justify-between">
                 <div>
-                  <div className="w-full max-w-[220px] sm:max-w-[260px] h-[260px] sm:h-[320px] mx-auto mb-3.5 sm:mb-4 rounded-xl sm:rounded-2xl overflow-hidden shadow-md ring-4 ring-teal-500/15 border border-teal-500/20">
+                  <div className="w-full max-w-[220px] sm:max-w-[260px] h-[260px] sm:h-[320px] mx-auto mb-3.5 sm:mb-4 rounded-xl sm:rounded-2xl overflow-hidden shadow-md ring-4 ring-amber-500/15 border border-amber-500/20">
                     <img
                       src="/assets/prof.jpeg"
                       alt="Prof. Rana Pratap Singh"
@@ -336,7 +336,7 @@ const ViceChancellor = () => {
             {/* Message Narrative */}
             <div className="w-full lg:w-2/3 bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-lg border border-slate-200 flex flex-col justify-between">
               <div>
-                <div className="text-3xl sm:text-4xl text-teal-600 font-serif leading-none mb-2">"</div>
+                <div className="text-3xl sm:text-4xl text-amber-600 font-serif leading-none mb-2">"</div>
                 <div className="space-y-3 sm:space-y-4 text-slate-700 text-xs sm:text-sm lg:text-base leading-relaxed text-left sm:text-justify">
                   <p>
                     It is a great honour and privilege to work under the able leadership of hon’ble Chief Minister, Shri Yogi Adityanath Ji, the hon’ble Chancellor of Gautam Buddha University.
@@ -354,10 +354,10 @@ const ViceChancellor = () => {
                     As we continue our journey toward becoming a globally recognized university, I invite faculty, students, scholars, and industry leaders to collaborate in our shared mission of academic excellence, cultivation of research and innovation, and transformative impact. Together, let us build a future that is enlightened, empowered, and enduring.
                   </p>
                 </div>
-                <div className="text-3xl sm:text-4xl text-teal-600 font-serif leading-none text-right mt-1 sm:mt-2">"</div>
+                <div className="text-3xl sm:text-4xl text-amber-600 font-serif leading-none text-right mt-1 sm:mt-2">"</div>
               </div>
               <div className="mt-4 sm:mt-6 text-right border-t border-slate-100 pt-3 sm:pt-4">
-                <p className="text-sm sm:text-base font-bold text-teal-800">Prof. Rana Pratap Singh</p>
+                <p className="text-sm sm:text-base font-bold text-amber-800">Prof. Rana Pratap Singh</p>
                 <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Vice-Chancellor, Gautam Buddha University</p>
               </div>
             </div>
@@ -379,7 +379,7 @@ const ViceChancellor = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 whitespace-nowrap shrink-0 ${
                       isActive
-                        ? "bg-[#008c95] text-white shadow-md shadow-teal-500/20 scale-[1.02]"
+                        ? "bg-amber-600 text-white shadow-md shadow-amber-500/20 scale-[1.02]"
                         : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200/90 shadow-sm"
                     }`}
                   >

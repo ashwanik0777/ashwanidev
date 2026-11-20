@@ -83,212 +83,212 @@ const officialEvents = [
     date: "14th October 2024",
     category: "IPR & Bioethics",
     description: "Organized by IPR Cell & sponsored by IIC, GBU. Debated technical, legal, and moral angles of life form research with future lawyers, scientists, and technocrats. Judged by Dr. Jaya Maitra & Dr. Bhaswati Banerjee. Concluded by Dr. Tanvi Vats.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IICReport-14October2024.pdf"
+    pdfReport: "/assets/pdf/iic/IICReport-14October2024.pdf"
   },
   {
     title: "One Day Industrial Visit on GRC & Zonal NASA Convention",
     date: "9th September 2024",
     category: "Industrial Visit",
     description: "19 B.Arch (2nd & 3rd Year) students & 4 faculty members visited MRK GRC Surajpur, Greater Noida and participated in Zonal NASA convention at CT Institute, Jalandhar, Punjab.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/industrial%20visit%20Architecture%20and%20Regional%20Planning%20dept%20gbu.pdf"
+    pdfReport: "/assets/pdf/iic/industrial_visit_Architecture_and_Regional_Planning_dept_gbu.pdf"
   },
   {
     title: "Poster Making Competition on National Science Day",
     date: "28th February 2024",
     category: "Competition",
     description: "University-level competition with 60+ entries. Judged by Prof. M.R. Shenoy (Emeritus Professor, IIT Delhi). Cash prizes awarded to Shubra Dixit (1st - Rs. 5000), Anushka Devi (2nd - Rs. 3000), Bhargavi (3rd - Rs. 2000).",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_posterCompt.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_posterCompt.pdf"
   },
   {
     title: "National Awareness Programme on Intellectual Property Rights",
     date: "24th February 2024",
     category: "National Programme",
     description: "Sponsored by Council of Science and Technology (CST), UP. Chief Guest: Hon'ble VC Prof. Ravindra Kumar Sinha. Guest: Registrar Dr. Vishwas Tripathi. Focused on AI in legal research and IPR.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_NationalAwareness.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_NationalAwareness.pdf"
   },
   {
     title: "Workshop on Intellectual Property Rights (IPR) & IP Management for Startups",
     date: "28th August 2023",
     category: "IPR Workshop",
     description: "Sensitizing students on IP portfolios, enforcement, infringement, and international IP agencies scenario.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Report-IPR-Workshop.pdf"
+    pdfReport: "/assets/pdf/iic/Report-IPR-Workshop.pdf"
   },
   {
     title: "Industry Visit of Mechanical and Electrical Engineering",
     date: "26th August 2023",
     category: "Industrial Visit",
     description: "Industrial exposure at Bharat Test House Pvt. Ltd. for Mechanical & Electrical Engineering students.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Industry_Visit_26th_August.pdf"
+    pdfReport: "/assets/pdf/iic/Industry_Visit_26th_August.pdf"
   },
   {
     title: "Special Assembly & Live Telecast for Chandrayaan-3 Moon Landing",
     date: "23rd August 2023",
     category: "National Celebration",
     description: "Live telecast in Main Auditorium with 2000 students and 115 faculty members witnessing ISRO's historic moon landing. VC Prof. Ravindra Kumar Sinha congratulated ISRO scientists.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/ChandrayaanLanding_celebration_23_August.pdf"
+    pdfReport: "/assets/pdf/iic/ChandrayaanLanding_celebration_23_August.pdf"
   },
   {
     title: "Industry Talk and Orientation Programme",
     date: "21-22 August 2023",
     category: "Orientation",
     description: "Orientation program introducing freshers to IIC activities, startup culture, and industry innovation linkages.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IndustryTalk_OrientationProgramme_21-22_August.pdf"
+    pdfReport: "/assets/pdf/iic/IndustryTalk_OrientationProgramme_21-22_August.pdf"
   },
   {
     title: "Independence Day Assembly & Cultural Celebrations",
     date: "15th August 2023",
     category: "Celebration",
     description: "National Flag Hoisting followed by cultural events and address by Hon'ble Vice Chancellor Prof. Ravindra Kumar Sinha.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Independence_Day_Celebration_15th%20August.pdf"
+    pdfReport: "/assets/pdf/iic/Independence_Day_Celebration_15th_August.pdf"
   },
   {
     title: "Startup Meet 2023",
     date: "10th August 2023",
     category: "Startup Event",
     description: "Organized by Dr. Satish K. Mittal under GBU Incubation Centre & IIC. Featured 15 participating startups, 50 students, and 15 faculty mentors with interactive pitching.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/StartUp_Meet_10th%20August.pdf"
+    pdfReport: "/assets/pdf/iic/StartUp_Meet_10th_August.pdf"
   },
   {
     title: "STTP / Workshop on Machine Learning for Optimal Process Design & Development",
     date: "5-10 June 2023",
     category: "Training Program",
     description: "1-Week online STTP guided by Hon'ble VC Prof. R.K. Sinha. Convenors: Dr. Indu Uprety (President IIC), Dr. Dipti Singh, Dr. Nidhi Singh. Covered Python ML tools and process design.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Machine%20Learning_Process-Design-One%20Week%20Workshop_5-10_June.pdf"
+    pdfReport: "/assets/pdf/iic/Machine_Learning_Process-Design-One_Week_Workshop_5-10_June.pdf"
   },
   {
     title: "Electrical Engineering Students Project Exhibition",
     date: "18th May 2023",
     category: "Exhibition",
     description: "Hardware & software prototype project exhibition organized by Electrical Engineering students.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Project%20Exhibition.pdf"
+    pdfReport: "/assets/pdf/iic/Project_Exhibition.pdf"
   },
   {
     title: "National Technology Day Celebration",
     date: "11th May 2023",
     category: "Celebration",
     description: "Organized by Techno Cultural Club featuring workshops, technical seminars, and hackathons.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/National%20Technology%20Day%20Celebration.pdf"
+    pdfReport: "/assets/pdf/iic/National_Technology_Day_Celebration.pdf"
   },
   {
     title: "International Expert Lecture: 'Empowering Grassroot Communities Through Virtual Heritage'",
     date: "28th April 2023",
     category: "International Lecture",
     description: "Keynote by Ar. Imamur Hossain (Sonargaon University, Bangladesh, ICOMOS member). Welcomed by Dr. Indu Kirti (Dean Planning & Research) & Dr. Kirti Pal (Dean SOE).",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Empowering%20Community_28th%20April.pdf"
+    pdfReport: "/assets/pdf/iic/Empowering_Community_28th_April.pdf"
   },
   {
     title: "IPR Day Celebration & Design Thinking Workshop",
     date: "26th April 2023",
     category: "Workshop",
     description: "One Day Workshop on Ansys EV Simulation & Design Thinking for engineering innovation.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IPR%20DAy%20Celebration_26th%20April.pdf"
+    pdfReport: "/assets/pdf/iic/IPR_DAy_Celebration_26th_April.pdf"
   },
   {
     title: "National Science Day Celebration & Video Showcase",
     date: "10th March 2023",
     category: "Science Day",
     description: "Interactive science drives, student project presentations, and video demonstrations.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/National%20Science%20Day.pdf",
-    videoMedia: "https://www.gbu.ac.in/Content/gbudata/IIC/VID-20230310-WA0002.mp4"
+    pdfReport: "/assets/pdf/iic/National_Science_Day.pdf",
+    videoMedia: "/assets/videos/VID-20230310-WA0002.mp4"
   },
   {
     title: "Industrial Visit to National Small Industries Corporation (NSIC)",
     date: "Academic Session 2022-23",
     category: "Industrial Visit",
     description: "Exposure visit for university students to NSIC incubators and MSME technological facilities.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/NSIC%20Visit%20Report.pdf",
-    videoMedia: "https://www.gbu.ac.in/Content/gbudata/IIC/NSIC%20Visit%20Vedio%201.mp4"
+    pdfReport: "/assets/pdf/iic/NSIC_Visit_Report.pdf",
+    videoMedia: "/assets/videos/NSIC_Visit_Vedio_1.mp4"
   },
   {
     title: "Workshop on Technology Readiness Level (TRL) & Innovation Assessment",
     date: "Session 2022-23",
     category: "Workshop",
     description: "Technical training on evaluating TRL levels from ideation to commercial prototype.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_TRL.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_TRL.pdf"
   },
   {
     title: "Problem Solving & Ideation Workshop",
     date: "28th January 2023",
     category: "Ideation",
     description: "Hands-on ideation workshop helping students transform problem statements into technical solutions.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Problem%20Solving%20and%20Ideation%20Workshop%2028%20Jan%23.pdf"
+    pdfReport: "#"
   },
   {
     title: "National Youth Day 2023",
     date: "12th January 2023",
     category: "Celebration",
     description: "Commemorating Swami Vivekananda's birth anniversary with youth innovation pledges.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/National_Youth_Day2023.pdf"
+    pdfReport: "/assets/pdf/iic/National_Youth_Day2023.pdf"
   },
   {
     title: "Industrial Visit to FunZoo Toys Industry",
     date: "Session 2022-23",
     category: "Industrial Visit",
     description: "Field study on manufacturing process design and product safety standards.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/industrial_visit_FunZooToys.pdf"
+    pdfReport: "/assets/pdf/iic/industrial_visit_FunZooToys.pdf"
   },
   {
     title: "Workshop on Patents & Prior Art Patent Search",
     date: "19th December 2022",
     category: "IPR",
     description: "Training session on executing patent searches on Indian & international patent databases.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_PatentsatSearch_19December2022.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_PatentsatSearch_19December2022.pdf"
   },
   {
     title: "Computational Design Workshop",
     date: "19th December 2022",
     category: "Technology",
     description: "Advanced CAD & computational modeling session by international experts.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_ComputationalDesign_19Dec2022.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_ComputationalDesign_19Dec2022.pdf"
   },
   {
     title: "Expert Lecture on Thermal Comfort by Ar. Ritu Gulati",
     date: "13th December 2022",
     category: "Expert Lecture",
     description: "Session on climate-responsive architectural design and energy efficiency.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/ReportThermalComfort-RituGulati.pdf"
+    pdfReport: "/assets/pdf/iic/ReportThermalComfort-RituGulati.pdf"
   },
   {
     title: "International Expert Lecture: 'New Tools for Urban Morphology' by Prof. Marco Maretto",
     date: "13th December 2022",
     category: "International Lecture",
     description: "Expert lecture on urban design tools and morphological analysis.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/Report_NewTools_UrbanMorphology-MarcoMaretto.pdf"
+    pdfReport: "/assets/pdf/iic/Report_NewTools_UrbanMorphology-MarcoMaretto.pdf"
   },
   {
     title: "National Education Day & IP Awareness Lecture",
     date: "11th November 2022",
     category: "Celebration",
     description: "Expert lecture by Mr. Vivek Singh (IP Attorney) on intellectual property rights in higher education.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_NEDay.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_NEDay.pdf"
   },
   {
     title: "Entrepreneurial Opportunities in E-Commerce by Mr. Pankaj Gupta",
     date: "2nd November 2022",
     category: "Entrepreneurship",
     description: "Session for management & engineering students on e-commerce business models.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/ExpertLecture%20Report_IIC_2Nov2022.pdf"
+    pdfReport: "/assets/pdf/iic/ExpertLecture_Report_IIC_2Nov2022.pdf"
   },
   {
     title: "National Innovation Day - Tribute to Dr. A.P.J. Abdul Kalam",
     date: "15th October 2022",
     category: "Celebration",
     description: "University-wide innovation events commemorating Dr. APJ Abdul Kalam.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IICEvent_15thOct22.pdf"
+    pdfReport: "/assets/pdf/iic/IICEvent_15thOct22.pdf"
   },
   {
     title: "Water Centric Urban Planning by Prof. K.K. Dhote",
     date: "12th October 2022",
     category: "Expert Lecture",
     description: "Online session on sustainable water management in urban development.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/IIC_WaterCentricPlanning.pdf"
+    pdfReport: "/assets/pdf/iic/IIC_WaterCentricPlanning.pdf"
   },
   {
     title: "Keynote Lecture: 'Academic R&D to Startups' by Prof. V. Ramgopal Rao",
     date: "29th September 2022",
     category: "Keynote Lecture",
     description: "Former Director of IIT Delhi addressing 2000+ students and 300+ faculty on converting academic research into commercial ventures.",
-    pdfReport: "https://www.gbu.ac.in/Content/gbudata/IIC/11Nov290922.pdf"
+    pdfReport: "/assets/pdf/iic/11Nov290922.pdf"
   }
 ];
 
@@ -573,7 +573,7 @@ const InstitutionInnovation = () => {
                   </div>
 
                   <a
-                    href="https://www.gbu.ac.in/Content/gbudata/IIC/GBU-Innovation-StartupPolicy-Mar2025.pdf"
+                    href="/assets/pdf/iic/GBU-Innovation-StartupPolicy-Mar2025.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition-all shrink-0"

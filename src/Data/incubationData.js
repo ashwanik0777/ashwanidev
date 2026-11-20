@@ -1,5 +1,5 @@
 // Exact Content for GBU Incubation Center Page
-// Source: https://www.gbu.ac.in/public/incubation-about, https://www.gburif.org/team.php, https://www.gbu.ac.in/public/incubation-facilities
+// Source: https://www.gburif.org/team.php
 
 export const incubationExactData = {
   title: "GBU Incubation Centre",
@@ -114,66 +114,66 @@ export const incubationTeam = [
   }
 ];
 
-// Exact Facilities Data from https://www.gbu.ac.in/public/incubation-facilities
+// Exact Facilities Data
 // width/height: the photo's pixel size, so the page keeps its space while it loads.
 export const incubationFacilities = [
   {
     name: "GBU Incubation Centre",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic1.jpg",
+    image: "/assets/incubation/Incubation_Pic1.jpg",
     width: 642,
     height: 642
   },
   {
     name: "Board Room",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic2.jpg",
+    image: "/assets/incubation/Incubation_Pic2.jpg",
     width: 642,
     height: 436
   },
   {
     name: "Meeting Room",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic3.jpg",
+    image: "/assets/incubation/Incubation_Pic3.jpg",
     width: 642,
     height: 642
   },
   {
     name: "Co-working Space Area",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic4.jpg",
+    image: "/assets/incubation/Incubation_Pic4.jpg",
     width: 642,
     height: 642
   },
   {
     name: "Cubical design-co working space for 25 Startups",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic5.jpg",
+    image: "/assets/incubation/Incubation_Pic5.jpg",
     width: 571,
     height: 357
   },
   {
     name: "Meeting Hall",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic6.jpg",
+    image: "/assets/incubation/Incubation_Pic6.jpg",
     width: 572,
     height: 399
   },
   {
     name: "Conference Hall",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic7.jpg",
+    image: "/assets/incubation/Incubation_Pic7.jpg",
     width: 641,
     height: 731
   },
   {
     name: "Auditorium",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic8.jpg",
+    image: "/assets/incubation/Incubation_Pic8.jpg",
     width: 642,
     height: 790
   },
   {
     name: "Cafeteria/Refreshment Zone",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic9.jpg",
+    image: "/assets/incubation/Incubation_Pic9.jpg",
     width: 642,
     height: 642
   },
   {
     name: "Co-working Space Area",
-    image: "https://www.gbu.ac.in/Content/gbudata/incubation/Incubation_Pic10.jpg",
+    image: "/assets/incubation/Incubation_Pic10.jpg",
     width: 624,
     height: 704
   }

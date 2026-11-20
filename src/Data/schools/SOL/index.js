@@ -44,7 +44,7 @@ export const researchPages = [
 ];
 
 export const schoolCard = {
-  imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk75RFQPIldQiGk1kAwU7bEURFQV0ORVlqyg&s",
+  imageUrl: "/assets/schools/sol.jpg",
   label: SCHOOL_NAME,
   description:
     "Shaping future legal minds through comprehensive programs in constitutional law, corporate law, criminal law, and public policy.",

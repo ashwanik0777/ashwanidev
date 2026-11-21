@@ -9,12 +9,13 @@ import {
   ClipboardCheck,
   Hammer,
   Clock,
-  ShieldCheck,
   AlertTriangle,
   CheckCircle,
   List,
   History,
   Hourglass,
+  CalendarCheck,
+  LayoutDashboard,
 } from "lucide-react";
 import { getPortalSession } from "../../utils/portalSession";
 import { logoutPortalSession } from "../../services/sessionManager";
@@ -24,7 +25,8 @@ import TicketWorkspace from "../../components/grievance/maintenance/TicketWorksp
 import TicketDetailModal from "../../components/grievance/maintenance/TicketDetailModal";
 import MaintenanceStatsCards from "../../components/grievance/maintenance/MaintenanceStatsCards";
 import MaintenanceOverview from "../../components/grievance/maintenance/MaintenanceOverview";
-import { OVERVIEW_TABS } from "../../components/grievance/maintenance/maintenanceMeta";
+import SeniorOfficerMonitor from "../../components/grievance/maintenance/SeniorOfficerMonitor";
+import { OVERVIEW_TABS, todayInIst } from "../../components/grievance/maintenance/maintenanceMeta";
 
 const cardClass = "rounded-2xl border border-slate-200 bg-white p-5 shadow-sm";
 
@@ -38,21 +40,19 @@ const ROLE_TITLES = {
 const ROLE_DESCRIPTIONS = {
   je: "Review complaints routed to you, assign vendors and verify completed work.",
   vendor: "Your assigned maintenance tasks — visit, inspect, work and report progress.",
-  senior_officer: "Cases escalated by the JEs that need a decision.",
+  senior_officer: "Monitor all maintenance work and decide cases escalated by the JEs.",
   director: "University-wide view of all maintenance complaints, including cases escalated to the senior officers.",
 };
 
 const JE_TABS = [
+  { key: "today", label: "Today's Complaints", icon: CalendarCheck, today: true },
+  { key: "all", label: "All", icon: List },
   { key: "new", label: "New Complaints", icon: Inbox, stages: ["pending_je_review"], description: "Review the complaint and assign it to a vendor." },
-  { key: "vendor", label: "With Vendor", icon: Truck, stages: ["assigned_to_vendor"], description: "Vendor must visit within 2 working days. Overdue visits are flagged automatically." },
-  { key: "overdue", label: "Visit Overdue", icon: AlarmClock, flag: "site_visit_overdue", description: "Vendor missed the site visit — follow up or escalate." },
-  { key: "inspection", label: "Inspection Review", icon: ClipboardCheck, stages: ["inspection_submitted"], description: "Review the vendor's inspection report and approve the completion date." },
-  { key: "progress", label: "Work in Progress", icon: Hammer, stages: ["work_in_progress"] },
+  { key: "vendor", label: "With Vendor", icon: Truck, stages: ["assigned_to_vendor", "work_in_progress"], description: "Vendor must visit within 2 working days, then carry out the work. Overdue visits are flagged automatically." },
+  { key: "review", label: "Review & Verify", icon: ClipboardCheck, stages: ["inspection_submitted", "work_completed"], description: "Approve the completion date from the vendor's inspection report, or verify finished work and resolve / request rework." },
   { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], description: "Promised date passed. Review vendor remarks, then approve a revised timeline or escalate." },
-  { key: "verify", label: "Verify Work", icon: ShieldCheck, stages: ["work_completed"], description: "Vendor says the work is done — verify, then resolve or request rework." },
   { key: "escalated", label: "Escalated", icon: AlertTriangle, stages: ["escalated"] },
   { key: "closed", label: "Closed", icon: CheckCircle, stages: ["closed"] },
-  { key: "all", label: "All", icon: List },
 ];
 
 const VENDOR_TABS = [
@@ -64,9 +64,14 @@ const VENDOR_TABS = [
   { key: "all", label: "All My Tasks", icon: List },
 ];
 
+// Senior officers monitor all work; "Overview" is the JE / vendor summary, the rest are ticket lists.
 const SENIOR_OFFICER_TABS = [
+  { key: "overview", label: "Overview", icon: LayoutDashboard, monitor: true },
   { key: "pending", label: "Action Required", icon: AlertTriangle, stages: ["escalated"], description: "Escalated by a JE. Any one senior officer can record the decision." },
-  { key: "history", label: "All Escalated Cases", icon: History, flag: "escalated_ever" },
+  { key: "all", label: "All Complaints", icon: List },
+  { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], description: "Promised completion date has passed." },
+  { key: "history", label: "Escalation History", icon: History, flag: "escalated_ever", description: "Every case that was escalated at any point, with the senior officer decision." },
+  { key: "resolved", label: "Resolved", icon: CheckCircle, stages: ["closed"] },
 ];
 
 // The director's sidebar drives the overview's own tabs.
@@ -97,7 +102,7 @@ const STATS_FOR_ROLE = {
 const EMPTY_TEXT = {
   je: "Nothing in this queue.",
   vendor: "No tasks here.",
-  senior_officer: "No escalated cases.",
+  senior_officer: "No complaints here.",
 };
 
 const MaintenanceDashboard = () => {
@@ -114,6 +119,8 @@ const MaintenanceDashboard = () => {
   const [stats, setStats] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [notificationTicket, setNotificationTicket] = useState(null);
+  // JE sidebar: number of complaints submitted today, shown on the Today tab.
+  const [todayCount, setTodayCount] = useState(null);
   // Day / month chosen in the ticket list; the stats cards follow it.
   const [dateFilter, setDateFilter] = useState({});
   const { date, month } = dateFilter;
@@ -127,6 +134,13 @@ const MaintenanceDashboard = () => {
     getMaintenanceStats({ date, month }).then(setStats).catch(() => {});
   }, [role, refreshKey, date, month]);
 
+  useEffect(() => {
+    if (role !== "je") return;
+    getMaintenanceStats({ date: todayInIst() })
+      .then((today) => setTodayCount(today?.total ?? 0))
+      .catch(() => {});
+  }, [role, refreshKey]);
+
   const refresh = useCallback(() => setRefreshKey((key) => key + 1), []);
   const closeNotificationTicket = useCallback(() => setNotificationTicket(null), []);
 
@@ -135,16 +149,16 @@ const MaintenanceDashboard = () => {
     navigate("/login", { replace: true });
   };
 
-  const statCards = role === "senior_officer"
-    ? [
-        { key: "escalated", label: "Awaiting Decision", value: stats?.escalated },
-        { key: "escalated_ever", label: "Total Escalated", value: stats?.escalated_ever },
-        { key: "resolved", label: "Resolved (after escalation)", value: stats?.resolved },
-      ]
-    : null;
-
   const displayName = profile?.name || session?.user?.name;
   const profileLine = [profile?.designation, profile?.company_name].filter(Boolean).join(" · ");
+  // JE: show only the designation, split as "Junior Engineer (Civil)" / "Residence".
+  const [jeTitle, ...jeAreaParts] = String(profile?.designation || "").split(" - ");
+  const jeArea = jeAreaParts.join(" - ");
+  // Vendor: company name, then the trade ("Civil Vendor" / "Electrical Vendor").
+  const vendorTitle = profile?.company_name || "";
+  const vendorTrade = profile?.trade ? `${profile.trade.charAt(0).toUpperCase()}${profile.trade.slice(1)} Vendor` : "";
+  // JE, vendor and senior officer get a plain portal header with no per-tab title or subheading.
+  const plainHeader = ["je", "vendor", "senior_officer"].includes(role);
 
   return (
     <div className="min-h-screen bg-slate-50 p-2 md:p-4 lg:h-screen lg:overflow-hidden">
@@ -156,9 +170,29 @@ const MaintenanceDashboard = () => {
                 <Wrench className="h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-bold text-slate-900">GBU Maintenance Portal</p>
-                <p className="truncate text-xs text-slate-500">{displayName}</p>
-                {profileLine && <p className="truncate text-xs text-slate-400">{profileLine}</p>}
+                {role === "je" ? (
+                  jeTitle && (
+                    <>
+                      <p className="truncate text-sm font-bold text-slate-900">{jeTitle}</p>
+                      {jeArea && <p className="truncate text-xs text-slate-400">{jeArea}</p>}
+                    </>
+                  )
+                ) : role === "vendor" ? (
+                  (vendorTitle || vendorTrade) && (
+                    <>
+                      <p className="truncate text-sm font-bold text-slate-900">{vendorTitle || vendorTrade}</p>
+                      {vendorTitle && vendorTrade && <p className="truncate text-xs text-slate-400">{vendorTrade}</p>}
+                    </>
+                  )
+                ) : role === "senior_officer" ? (
+                  <p className="truncate text-sm font-bold text-slate-900">{profile?.designation || "Senior Officer"}</p>
+                ) : (
+                  <>
+                    <p className="truncate text-sm font-bold text-slate-900">GBU Maintenance Portal</p>
+                    <p className="truncate text-xs text-slate-500">{displayName}</p>
+                    {profileLine && <p className="truncate text-xs text-slate-400">{profileLine}</p>}
+                  </>
+                )}
               </div>
             </div>
 
@@ -170,6 +204,7 @@ const MaintenanceDashboard = () => {
               {navTabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab?.key === tab.key;
+                const count = role === "je" && tab.today ? todayCount : null;
                 return (
                   <button
                     key={tab.key}
@@ -180,7 +215,12 @@ const MaintenanceDashboard = () => {
                     }`}
                   >
                     <Icon className={`h-4 w-4 ${isActive ? "text-sky-600" : "text-slate-400"}`} />
-                    {tab.label}
+                    <span className="flex-1 truncate">{tab.label}</span>
+                    {count !== null && (
+                      <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${isActive ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                        {count}
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -202,34 +242,27 @@ const MaintenanceDashboard = () => {
           <section className={cardClass}>
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{activeTab?.label || "Dashboard"}</h1>
+                <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">{plainHeader ? "GBU Maintenance Portal" : activeTab?.label || "Dashboard"}</h1>
                 <span className="rounded-lg bg-sky-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm">
                   {ROLE_TITLES[role] || role}
                 </span>
               </div>
               <NotificationBell onOpenTicket={setNotificationTicket} />
             </div>
-            <p className="mt-1 text-sm text-slate-600">{activeTab?.description || ROLE_DESCRIPTIONS[role]}</p>
+            {!plainHeader && (
+              <p className="mt-1 text-sm text-slate-600">{activeTab?.description || ROLE_DESCRIPTIONS[role]}</p>
+            )}
           </section>
 
           {role === "director" && <MaintenanceOverview activeTab={activeTab?.key} />}
 
-          {role === "senior_officer" && statCards && (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {statCards.map((card) => (
-                <div key={card.key} className={cardClass}>
-                  <p className="text-xs uppercase tracking-wide text-slate-500">{card.label}</p>
-                  <p className="mt-2 text-2xl font-bold text-slate-900">{card.value ?? "—"}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          {role === "senior_officer" && activeTab?.monitor && <SeniorOfficerMonitor refreshKey={refreshKey} />}
 
           {(role === "je" || role === "vendor") && <MaintenanceStatsCards stats={stats} only={STATS_FOR_ROLE[role]} />}
 
-          {["je", "vendor", "senior_officer"].includes(role) && activeTab && (
+          {["je", "vendor", "senior_officer"].includes(role) && activeTab && !activeTab.monitor && (
             <TicketWorkspace
-              tabs={navTabs}
+              tabs={navTabs.filter((tab) => !tab.monitor)}
               activeTab={activeTab.key}
               hideTabs
               columns={role === "senior_officer" ? { je: true } : undefined}

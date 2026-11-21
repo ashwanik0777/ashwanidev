@@ -118,3 +118,6 @@ export const OVERVIEW_TABS = [
 
 export const inputClass =
   'w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition focus:border-slate-700 focus:ring-1 focus:ring-slate-700 disabled:bg-slate-50 disabled:text-slate-500';
+
+/** Today's date as YYYY-MM-DD in IST — the backend filters submission dates in IST. */
+export const todayInIst = () => new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });

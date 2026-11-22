@@ -37,6 +37,7 @@ const NotificationBell = ({ onOpenTicket }) => {
   const markAllRead = async () => {
     await markMaintenanceNotificationsRead().catch(() => {});
     setData((prev) => ({ items: prev.items.map((item) => ({ ...item, is_read: true })), unread: 0 }));
+    setOpen(false);
   };
 
   const handleItemClick = async (item) => {

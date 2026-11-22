@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Upload, X, Loader2, Building2, Wrench, Droplet, Droplets, Zap, Fan, Sparkles, HelpCircle, Hammer, CheckCircle2 } from 'lucide-react';
 import {
@@ -11,7 +11,8 @@ import { inputClass } from './maintenanceMeta';
 
 const MAX_WORDS = 100;
 const MAX_FILE_MB = 8;
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+const MAX_PHOTOS = 3;
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 const ISSUE_ICONS = {
   civil: Building2,
@@ -36,8 +37,11 @@ const EMPTY_FORM = {
 
 const countWords = (text) => text.trim().split(/\s+/).filter(Boolean).length;
 
+// Every field is required; the red star says so.
 const StepLabel = ({ children }) => (
-  <label className="mb-2 block text-sm font-semibold text-slate-800">{children}</label>
+  <label className="mb-2 block text-sm font-semibold text-slate-800">
+    {children} <span className="text-rose-600">*</span>
+  </label>
 );
 
 /*
@@ -49,8 +53,8 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
   const [meta, setMeta] = useState(null);
   const [moduleEnabled, setModuleEnabled] = useState(true);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  // Up to MAX_PHOTOS photos: [{ file, preview }].
+  const [photos, setPhotos] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [lastTicket, setLastTicket] = useState(null);
 
@@ -63,7 +67,10 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
       .catch(() => {});
   }, []);
 
-  useEffect(() => () => preview && URL.revokeObjectURL(preview), [preview]);
+  // Free the preview URLs when the form unmounts.
+  const photosRef = useRef(photos);
+  photosRef.current = photos;
+  useEffect(() => () => photosRef.current.forEach((photo) => URL.revokeObjectURL(photo.preview)), []);
 
   const category = useMemo(
     () => meta?.categories.find((item) => item.category_key === form.location_category),
@@ -75,25 +82,37 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
 
   const chooseCategory = (key) => setForm((prev) => ({ ...prev, location_category: key, location_id: '' }));
 
-  const handleFile = (event) => {
-    const selected = event.target.files?.[0];
+  const handleFiles = (event) => {
+    const selected = Array.from(event.target.files || []);
     event.target.value = '';
-    if (!selected) return;
-    if (!ALLOWED_TYPES.includes(selected.type)) {
-      toast.error('Only JPG, PNG, WEBP or PDF files are allowed');
-      return;
+    if (!selected.length) return;
+
+    const room = MAX_PHOTOS - photos.length;
+    if (selected.length > room) toast.error(`You can upload up to ${MAX_PHOTOS} photos`);
+
+    const accepted = [];
+    for (const file of selected.slice(0, Math.max(room, 0))) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        toast.error('Only JPG, PNG or WEBP photos are allowed');
+        continue;
+      }
+      if (file.size > MAX_FILE_MB * 1024 * 1024) {
+        toast.error(`Each photo must be ${MAX_FILE_MB} MB or smaller`);
+        continue;
+      }
+      accepted.push({ file, preview: URL.createObjectURL(file) });
     }
-    if (selected.size > MAX_FILE_MB * 1024 * 1024) {
-      toast.error(`File must be ${MAX_FILE_MB} MB or smaller`);
-      return;
-    }
-    setFile(selected);
-    setPreview(selected.type.startsWith('image/') ? URL.createObjectURL(selected) : null);
+    if (accepted.length) setPhotos((prev) => [...prev, ...accepted]);
   };
 
-  const clearFile = () => {
-    setFile(null);
-    setPreview(null);
+  const removePhoto = (index) => {
+    URL.revokeObjectURL(photos[index]?.preview);
+    setPhotos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const clearPhotos = () => {
+    photos.forEach((photo) => URL.revokeObjectURL(photo.preview));
+    setPhotos([]);
   };
 
   const handleSubmit = async (event) => {
@@ -105,17 +124,19 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
     if (!form.severity_level) return toast.error('Please select the severity level');
     if (!form.description.trim()) return toast.error('Please describe the problem');
     if (wordCount > MAX_WORDS) return toast.error(`Description must be ${MAX_WORDS} words or less`);
+    if (!form.submitter_contact.trim()) return toast.error('Please enter your contact number');
+    if (!/^[0-9+\-\s]{7,15}$/.test(form.submitter_contact.trim())) return toast.error('Please enter a valid contact number');
 
     setSubmitting(true);
     try {
-      const result = await submitMaintenanceTicket(form, file);
+      const result = await submitMaintenanceTicket(form, photos.map((photo) => photo.file));
       setLastTicket(result);
-      toast.success(`Grievance submitted. Ticket ID: ${result.ticket_id}`);
+      toast.success(`Complaint submitted. Ticket ID: ${result.ticket_id}`);
       setForm(EMPTY_FORM);
-      clearFile();
+      clearPhotos();
       onSubmitted?.(result);
     } catch (error) {
-      toast.error(getApiErrorMessage(error, 'Failed to submit grievance'));
+      toast.error(getApiErrorMessage(error, 'Failed to submit complaint'));
     } finally {
       setSubmitting(false);
     }
@@ -124,8 +145,8 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
   if (!moduleEnabled) {
     return (
       <div className="rounded-2xl border border-rose-200 bg-rose-50 p-6 text-center text-rose-700">
-        <h3 className="mb-2 text-lg font-semibold">Grievance Module Offline</h3>
-        <p>The grievance module is currently disabled. Please try again later.</p>
+        <h3 className="mb-2 text-lg font-semibold">Online Maintenance Offline</h3>
+        <p>Online Maintenance is currently disabled. Please try again later.</p>
       </div>
     );
   }
@@ -243,7 +264,7 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-700">Contact number for site visit (optional)</label>
+          <StepLabel>Contact number for site visit</StepLabel>
           <input
             value={form.submitter_contact}
             onChange={(e) => setField('submitter_contact', e.target.value)}
@@ -254,7 +275,7 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm font-medium text-slate-700">Severity Level</label>
+          <StepLabel>Severity Level</StepLabel>
           <select value={form.severity_level} onChange={(e) => setField('severity_level', e.target.value)} className={inputClass}>
             <option value="">Select severity level…</option>
             {(meta.severity_levels || []).map((level) => (
@@ -265,24 +286,30 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
       </div>
 
       <div>
-        <StepLabel>Attach photo / supporting file (optional)</StepLabel>
-        <div className="flex flex-wrap items-center gap-4">
-          <label className="flex cursor-pointer items-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
-            <Upload className="mr-2 h-4 w-4" />
-            Upload File
-            <input type="file" className="hidden" onChange={handleFile} accept=".jpg,.jpeg,.png,.webp,.pdf" />
-          </label>
-          {file && (
-            <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-600">
-              <span className="max-w-[180px] truncate">{file.name}</span>
-              <button type="button" onClick={clearFile} className="text-slate-400 hover:text-slate-600">
+        <label className="mb-2 block text-sm font-semibold text-slate-800">Photos of the problem (optional, up to {MAX_PHOTOS})</label>
+        <div className="flex flex-wrap items-start gap-3">
+          {photos.map((photo, index) => (
+            <div key={photo.preview} className="relative">
+              <img src={photo.preview} alt={`Photo ${index + 1}`} className="h-24 w-24 rounded-lg border border-slate-200 object-cover sm:h-28 sm:w-28" />
+              <button
+                type="button"
+                onClick={() => removePhoto(index)}
+                className="absolute -right-2 -top-2 rounded-full bg-white p-0.5 text-slate-500 shadow ring-1 ring-slate-200 hover:text-rose-600"
+                aria-label={`Remove photo ${index + 1}`}
+              >
                 <X className="h-4 w-4" />
               </button>
             </div>
+          ))}
+          {photos.length < MAX_PHOTOS && (
+            <label className="flex h-24 w-24 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-slate-300 bg-white text-xs font-medium text-slate-600 transition hover:border-slate-400 hover:bg-slate-50 sm:h-28 sm:w-28">
+              <Upload className="mb-1 h-5 w-5" />
+              Add photo
+              <input type="file" className="hidden" onChange={handleFiles} accept=".jpg,.jpeg,.png,.webp" multiple />
+            </label>
           )}
         </div>
-        {preview && <img src={preview} alt="Preview" className="mt-3 h-32 rounded-lg border border-slate-200 object-cover" />}
-        <p className="mt-2 text-xs text-slate-500">Max {MAX_FILE_MB} MB. Allowed: JPG, PNG, WEBP, PDF.</p>
+        <p className="mt-2 text-xs text-slate-500">{photos.length} / {MAX_PHOTOS} photos · Max {MAX_FILE_MB} MB each. Allowed: JPG, PNG, WEBP.</p>
       </div>
 
       <div className="flex justify-end border-t border-slate-100 pt-4">
@@ -292,7 +319,7 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
           className="flex items-center justify-center rounded-xl bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {submitting ? 'Submitting…' : 'Submit Grievance'}
+          {submitting ? 'Submitting…' : 'Submit Complaint'}
         </button>
       </div>
     </form>

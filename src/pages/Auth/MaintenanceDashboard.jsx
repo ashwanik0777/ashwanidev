@@ -45,19 +45,19 @@ const ROLE_DESCRIPTIONS = {
 };
 
 const JE_TABS = [
-  { key: "today", label: "Today's Complaints", icon: CalendarCheck, today: true },
+  { key: "today", label: "Today's Complaints", icon: CalendarCheck, today: true, actionStages: ["pending_je_review"] },
   { key: "all", label: "All", icon: List },
-  { key: "new", label: "New Complaints", icon: Inbox, stages: ["pending_je_review"], description: "Review the complaint and assign it to a vendor." },
+  { key: "new", label: "New Complaints", icon: Inbox, stages: ["pending_je_review"], action: true, description: "Review the complaint and assign it to a vendor." },
   { key: "vendor", label: "With Vendor", icon: Truck, stages: ["assigned_to_vendor", "work_in_progress"], description: "Vendor must visit within 2 working days, then carry out the work. Overdue visits are flagged automatically." },
-  { key: "review", label: "Review & Verify", icon: ClipboardCheck, stages: ["inspection_submitted", "work_completed"], description: "Approve the completion date from the vendor's inspection report, or verify finished work and resolve / request rework." },
-  { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], description: "Promised date passed. Review vendor remarks, then approve a revised timeline or escalate." },
+  { key: "review", label: "Review & Verify", icon: ClipboardCheck, stages: ["inspection_submitted", "work_completed"], action: true, description: "Approve the completion date from the vendor's inspection report, or verify finished work and resolve / request rework." },
+  { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], action: true, description: "Promised date passed. Review vendor remarks, then approve a revised timeline or escalate." },
   { key: "escalated", label: "Escalated", icon: AlertTriangle, stages: ["escalated"] },
   { key: "closed", label: "Closed", icon: CheckCircle, stages: ["closed"] },
 ];
 
 const VENDOR_TABS = [
-  { key: "visit", label: "Site Visit Pending", icon: Truck, stages: ["assigned_to_vendor"], description: "Visit the location within 2 working days and submit your inspection report." },
-  { key: "work", label: "Work in Progress", icon: Hammer, stages: ["work_in_progress", "delayed"], description: "Update progress regularly and mark the work completed when done." },
+  { key: "visit", label: "Site Visit Pending", icon: Truck, stages: ["assigned_to_vendor"], action: true, description: "Visit the location within 2 working days and submit your inspection report." },
+  { key: "work", label: "Work in Progress", icon: Hammer, stages: ["work_in_progress", "delayed"], action: true, description: "Update progress regularly and mark the work completed when done." },
   { key: "waiting", label: "Waiting for JE", icon: Hourglass, stages: ["inspection_submitted", "work_completed"] },
   { key: "escalated", label: "Escalated", icon: AlertTriangle, stages: ["escalated"] },
   { key: "closed", label: "Closed", icon: CheckCircle, stages: ["closed"] },
@@ -67,7 +67,7 @@ const VENDOR_TABS = [
 // Senior officers monitor all work; "Overview" is the JE / vendor summary, the rest are ticket lists.
 const SENIOR_OFFICER_TABS = [
   { key: "overview", label: "Overview", icon: LayoutDashboard, monitor: true },
-  { key: "pending", label: "Action Required", icon: AlertTriangle, stages: ["escalated"], description: "Escalated by a JE. Any one senior officer can record the decision." },
+  { key: "pending", label: "Action Required", icon: AlertTriangle, stages: ["escalated"], action: true, description: "Escalated by a JE. Any one senior officer can record the decision." },
   { key: "all", label: "All Complaints", icon: List },
   { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], description: "Promised completion date has passed." },
   { key: "history", label: "Escalation History", icon: History, flag: "escalated_ever", description: "Every case that was escalated at any point, with the senior officer decision." },
@@ -119,8 +119,11 @@ const MaintenanceDashboard = () => {
   const [stats, setStats] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [notificationTicket, setNotificationTicket] = useState(null);
-  // JE sidebar: number of complaints submitted today, shown on the Today tab.
-  const [todayCount, setTodayCount] = useState(null);
+  // JE sidebar: complaints submitted today (count + stages), shown on the Today tab.
+  const [todayStats, setTodayStats] = useState(null);
+  const todayCount = todayStats ? todayStats.total ?? 0 : null;
+  // All-time counts per stage, for the red "work pending" dots on the sidebar tabs.
+  const [pendingStats, setPendingStats] = useState(null);
   // Day / month chosen in the ticket list; the stats cards follow it.
   const [dateFilter, setDateFilter] = useState({});
   const { date, month } = dateFilter;
@@ -137,9 +140,27 @@ const MaintenanceDashboard = () => {
   useEffect(() => {
     if (role !== "je") return;
     getMaintenanceStats({ date: todayInIst() })
-      .then((today) => setTodayCount(today?.total ?? 0))
+      .then(setTodayStats)
       .catch(() => {});
   }, [role, refreshKey]);
+
+  // Red dot: refreshed with the list and every minute, so newly arrived work shows up.
+  useEffect(() => {
+    if (!["je", "vendor", "senior_officer"].includes(role)) return undefined;
+    const load = () => getMaintenanceStats({}).then(setPendingStats).catch(() => {});
+    load();
+    const timer = setInterval(load, 60000);
+    return () => clearInterval(timer);
+  }, [role, refreshKey]);
+
+  const stageTotal = (source, stages = []) =>
+    stages.reduce((sum, stage) => sum + Number(source?.by_stage?.[stage] || 0), 0);
+
+  // A tab gets the dot while it still holds work this user has to act on.
+  const hasPendingWork = (tab) => {
+    if (tab.today) return stageTotal(todayStats, tab.actionStages) > 0;
+    return Boolean(tab.action) && stageTotal(pendingStats, tab.stages) > 0;
+  };
 
   const refresh = useCallback(() => setRefreshKey((key) => key + 1), []);
   const closeNotificationTicket = useCallback(() => setNotificationTicket(null), []);
@@ -205,6 +226,7 @@ const MaintenanceDashboard = () => {
                 const Icon = tab.icon;
                 const isActive = activeTab?.key === tab.key;
                 const count = role === "je" && tab.today ? todayCount : null;
+                const pending = hasPendingWork(tab);
                 return (
                   <button
                     key={tab.key}
@@ -220,6 +242,9 @@ const MaintenanceDashboard = () => {
                       <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${isActive ? "bg-sky-600 text-white" : "bg-slate-100 text-slate-600"}`}>
                         {count}
                       </span>
+                    )}
+                    {pending && (
+                      <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-red-500 ring-2 ring-red-100" aria-label="Work pending" title="Work pending" />
                     )}
                   </button>
                 );

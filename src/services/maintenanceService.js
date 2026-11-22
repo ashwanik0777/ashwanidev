@@ -17,13 +17,17 @@ const unwrap = (response) => response.data?.data;
 
 export const getMaintenanceMeta = () => apiClient.get(`${BASE}/meta`).then(unwrap);
 
-export const submitMaintenanceTicket = (fields, file) =>
-  apiClient
-    .post(`${BASE}/tickets`, toFormData(fields, file), {
+// `photos`: up to 3 image files, sent as `attachments`.
+export const submitMaintenanceTicket = (fields, photos = []) => {
+  const formData = toFormData(fields);
+  photos.forEach((photo) => formData.append('attachments', photo));
+  return apiClient
+    .post(`${BASE}/tickets`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
       timeout: UPLOAD_TIMEOUT,
     })
     .then(unwrap);
+};
 
 export const getMyMaintenanceTickets = () => apiClient.get(`${BASE}/tickets/mine`).then(unwrap);
 
@@ -45,6 +49,15 @@ export const performMaintenanceAction = (ticketId, action, fields, file) =>
       timeout: UPLOAD_TIMEOUT,
     })
     .then(unwrap);
+
+// Fetches an attachment (needs the auth header) as a Blob, e.g. to show a photo in-page.
+export const fetchMaintenanceAttachment = async (ticketId, fileId) => {
+  const response = await apiClient.get(
+    `${BASE}/tickets/${encodeURIComponent(ticketId)}/files/${fileId}`,
+    { responseType: 'blob', timeout: UPLOAD_TIMEOUT }
+  );
+  return response.data;
+};
 
 // Attachments need the auth header, so fetch as a blob and open via an object URL.
 export const openMaintenanceAttachment = async (ticketId, fileId) => {

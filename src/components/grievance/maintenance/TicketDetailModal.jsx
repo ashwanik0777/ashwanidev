@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Loader2, Paperclip, X, AlertTriangle } from 'lucide-react';
-import { getMaintenanceTicket, openMaintenanceAttachment, getApiErrorMessage } from '../../../services/maintenanceService';
+import { getMaintenanceTicket, openMaintenanceAttachment, fetchMaintenanceAttachment, getApiErrorMessage } from '../../../services/maintenanceService';
 import StageBadge, { SeverityBadge } from './StageBadge';
 import TicketTimeline from './TicketTimeline';
 import TicketActions from './TicketActions';
@@ -24,6 +24,9 @@ const Section = ({ title, children }) => (
 const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
+  // Complaint photo shown in-page: { url, label }.
+  const [photoView, setPhotoView] = useState(null);
+  const closePhoto = useCallback(() => setPhotoView(null), []);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -41,11 +44,19 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
     if (ticketId) load();
   }, [ticketId, load]);
 
+  // Escape closes the photo first, then the ticket.
   useEffect(() => {
-    const onKey = (event) => event.key === 'Escape' && onClose();
+    const onKey = (event) => {
+      if (event.key !== 'Escape') return;
+      if (photoView) closePhoto();
+      else onClose();
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  }, [onClose, photoView, closePhoto]);
+
+  // Free the photo's object URL when it is closed or replaced.
+  useEffect(() => () => photoView && URL.revokeObjectURL(photoView.url), [photoView]);
 
   if (!ticketId) return null;
 
@@ -55,9 +66,21 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
     onChanged?.();
   };
 
-  const openComplaintFile = async () => {
+  // Complaint photos: 'complaint', then 'complaint-2', 'complaint-3'.
+  const complaintFileIds = Array.from(
+    { length: ticket?.attachment_count || (ticket?.has_attachment ? 1 : 0) },
+    (_, index) => (index === 0 ? 'complaint' : `complaint-${index + 1}`)
+  );
+
+  // Photos open in a viewer on the dashboard; other files (old PDFs) open in a new tab.
+  const openComplaintFile = async (fileId = 'complaint', label = 'Photo') => {
     try {
-      await openMaintenanceAttachment(ticket.ticket_id, 'complaint');
+      const blob = await fetchMaintenanceAttachment(ticket.ticket_id, fileId);
+      if (blob?.type?.startsWith('image/')) {
+        setPhotoView({ url: URL.createObjectURL(blob), label });
+      } else {
+        await openMaintenanceAttachment(ticket.ticket_id, fileId);
+      }
     } catch (error) {
       toast.error(getApiErrorMessage(error, 'Could not open attachment'));
     }
@@ -114,11 +137,20 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
                   <p className="text-xs font-medium uppercase tracking-wide text-slate-500">Description</p>
                   <p className="mt-1 whitespace-pre-line text-sm text-slate-800">{ticket.description}</p>
                 </div>
-                {ticket.has_attachment && (
-                  <button type="button" onClick={openComplaintFile} className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800">
-                    <Paperclip className="h-4 w-4" />
-                    View attached photo / file
-                  </button>
+                {complaintFileIds.length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+                    {complaintFileIds.map((fileId, index) => (
+                      <button
+                        key={fileId}
+                        type="button"
+                        onClick={() => openComplaintFile(fileId, complaintFileIds.length > 1 ? `Photo ${index + 1}` : 'Photo')}
+                        className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
+                      >
+                        <Paperclip className="h-4 w-4" />
+                        {complaintFileIds.length > 1 ? `View photo ${index + 1}` : 'View attached photo / file'}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </Section>
 
@@ -139,7 +171,8 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
                   )}
                 </dl>
 
-                {ticket.assigned_vendor_id && (
+                {/* Vendors and JEs no longer track progress, so they don't see the bar. */}
+                {ticket.assigned_vendor_id && !['vendor', 'je'].includes(detail.viewer) && (
                   <div className="mt-4">
                     <div className="mb-1 flex justify-between text-xs text-slate-500">
                       <span>Progress</span>
@@ -192,11 +225,34 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
             </div>
 
             <Section title="Timeline">
-              <TicketTimeline ticketId={ticket.ticket_id} events={detail.events} />
+              <TicketTimeline ticketId={ticket.ticket_id} events={detail.events} simple={detail.viewer === 'owner'} />
             </Section>
           </div>
         ) : null}
       </div>
+
+      {photoView && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/85 p-3 sm:p-6"
+          onClick={(event) => {
+            event.stopPropagation();
+            closePhoto();
+          }}
+        >
+          <button
+            type="button"
+            onClick={closePhoto}
+            className="absolute right-3 top-3 rounded-full bg-white/90 p-2 text-slate-700 shadow-lg transition hover:bg-white hover:text-rose-600 sm:right-6 sm:top-6"
+            aria-label="Close photo"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <figure className="flex max-h-full max-w-full flex-col items-center" onClick={(event) => event.stopPropagation()}>
+            <img src={photoView.url} alt={photoView.label} className="max-h-[85vh] max-w-full rounded-lg object-contain shadow-2xl" />
+            <figcaption className="mt-2 text-sm text-white/80">{photoView.label}</figcaption>
+          </figure>
+        </div>
+      )}
     </div>
   );
 };

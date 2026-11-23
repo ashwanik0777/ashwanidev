@@ -6,7 +6,7 @@ const Card = ({ className = '', children }) => (
 );
 
 const CardHeader = ({ children }) => (
-  <div className="px-6 pt-6 pb-2 border-b border-gray-100 border-solid">{children}</div>
+  <div className="px-4 sm:px-6 pt-5 sm:pt-6 pb-2 border-b border-gray-100 border-solid">{children}</div>
 );
 
 const CardTitle = ({ className = '', children }) => (
@@ -14,7 +14,7 @@ const CardTitle = ({ className = '', children }) => (
 );
 
 const CardContent = ({ children }) => (
-  <div className="px-6 py-4">{children}</div>
+  <div className="px-4 sm:px-6 py-4">{children}</div>
 );
 
 // Badge Component
@@ -115,22 +115,22 @@ export const SocialImpactTab = ({ profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{socialActivities.length}</div>
-              <div className="text-sm text-blue-700">Active Initiatives</div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-6">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-2.5 sm:p-4 text-center border border-blue-200">
+              <div className="text-lg sm:text-2xl font-bold text-blue-600 leading-tight">{socialActivities.length}</div>
+              <div className="text-[11px] sm:text-sm text-blue-700 mt-0.5 sm:mt-1 leading-tight">Active Initiatives</div>
             </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">{organisationCount}</div>
-              <div className="text-sm text-green-700">Partner Organisations</div>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-2.5 sm:p-4 text-center border border-green-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-green-600 leading-tight">{organisationCount}</div>
+              <div className="text-[11px] sm:text-sm text-green-700 mt-0.5 sm:mt-1 leading-tight">Partner Organisations</div>
             </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">{focusAreaCount}</div>
-              <div className="text-sm text-purple-700">Focus Areas</div>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2.5 sm:p-4 text-center border border-purple-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-purple-600 leading-tight">{focusAreaCount}</div>
+              <div className="text-[11px] sm:text-sm text-purple-700 mt-0.5 sm:mt-1 leading-tight">Focus Areas</div>
             </div>
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 text-center border border-orange-200 border-solid">
-              <div className="text-2xl font-bold text-orange-600">{impactPointCount}</div>
-              <div className="text-sm text-orange-700">Recorded Outcomes</div>
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-2.5 sm:p-4 text-center border border-orange-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-orange-600 leading-tight">{impactPointCount}</div>
+              <div className="text-[11px] sm:text-sm text-orange-700 mt-0.5 sm:mt-1 leading-tight">Recorded Outcomes</div>
             </div>
           </div>
 

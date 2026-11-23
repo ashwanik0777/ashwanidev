@@ -64,9 +64,9 @@ const FacultyTabs = ({ tabItems = DEFAULT_FACULTY_TABS, activeTab, onTabChange }
   }, [activeTab]);
 
   return (
-    <div className="sticky w-5/6 mx-auto top-0 z-10 bg-white/80 backdrop-blur-sm border-b border-gray-200 border-solid mb-8">
-      <div className="overflow-x-auto" ref={tabStripRef}>
-        <div className="flex space-x-1 min-w-max p-2">
+    <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-gray-200 border-solid mb-6 sm:mb-8 w-full max-w-7xl px-3 sm:px-6 lg:w-5/6 mx-auto">
+      <div className="overflow-x-auto no-scrollbar scroll-smooth" ref={tabStripRef}>
+        <div className="flex space-x-1.5 sm:space-x-2 min-w-max py-2 px-0.5">
           {tabItems.map((tab) => {
             const Icon = TAB_ICONS[tab.id] || User;
             const isActive = activeTab === tab.id;
@@ -78,13 +78,13 @@ const FacultyTabs = ({ tabItems = DEFAULT_FACULTY_TABS, activeTab, onTabChange }
                 onClick={() => onTabChange(tab.id)}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  'flex items-center space-x-2 px-4 py-3 rounded-lg font-medium text-sm transition-all duration-200 whitespace-nowrap',
+                  'flex items-center space-x-1.5 sm:space-x-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg font-medium text-xs sm:text-sm transition-all duration-200 whitespace-nowrap shrink-0',
                   isActive
-                    ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50 hover:scale-102',
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50',
                 )}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                 <span>{tab.label}</span>
               </button>
             );

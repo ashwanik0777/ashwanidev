@@ -8,7 +8,7 @@ export const Card = ({ className = '', children, ...props }) => (
 );
 
 export const CardHeader = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pt-6 pb-2 border-b border-gray-100 border-solid${className}`} {...props}>
+  <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 border-b border-gray-100 border-solid ${className}`} {...props}>
     {children}
   </div>
 );
@@ -20,7 +20,7 @@ export const CardTitle = ({ className = '', children, ...props }) => (
 );
 
 export const CardContent = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pb-6 pt-4 ${className}`} {...props}>
+  <div className={`px-4 sm:px-6 pb-5 sm:pb-6 pt-3 sm:pt-4 ${className}`} {...props}>
     {children}
   </div>
 );
@@ -116,28 +116,28 @@ export const PatentsTab = ({ profile }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-blue-600">{patents.length}</div>
-              <div className="text-sm text-blue-700">Total Patents</div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mb-6">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-2.5 sm:p-4 text-center border border-blue-200">
+              <div className="text-lg sm:text-2xl font-bold text-blue-600 leading-tight">{patents.length}</div>
+              <div className="text-[11px] sm:text-sm text-blue-700 mt-0.5 sm:mt-1 leading-tight">Total Patents</div>
             </div>
-            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 text-center border border-green-200 border-solid">
-              <div className="text-2xl font-bold text-green-600">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-2.5 sm:p-4 text-center border border-green-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-green-600 leading-tight">
                 {countByStatus(patents, 'filed')}
               </div>
-              <div className="text-sm text-green-700">Filed</div>
+              <div className="text-[11px] sm:text-sm text-green-700 mt-0.5 sm:mt-1 leading-tight">Filed</div>
             </div>
-            <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 text-center border border-yellow-200 border-solid">
-              <div className="text-2xl font-bold text-yellow-600">
+            <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-2.5 sm:p-4 text-center border border-yellow-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-yellow-600 leading-tight">
                 {countByStatus(patents, 'under examination')}
               </div>
-              <div className="text-sm text-yellow-700">Under Review</div>
+              <div className="text-[11px] sm:text-sm text-yellow-700 mt-0.5 sm:mt-1 leading-tight">Under Review</div>
             </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 text-center border border-purple-200 border-solid">
-              <div className="text-2xl font-bold text-purple-600">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2.5 sm:p-4 text-center border border-purple-200 border-solid">
+              <div className="text-lg sm:text-2xl font-bold text-purple-600 leading-tight">
                 {countByStatus(patents, 'published')}
               </div>
-              <div className="text-sm text-purple-700">Published</div>
+              <div className="text-[11px] sm:text-sm text-purple-700 mt-0.5 sm:mt-1 leading-tight">Published</div>
             </div>
           </div>
 

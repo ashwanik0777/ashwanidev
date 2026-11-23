@@ -29,7 +29,7 @@ export const FACULTY_SIDEBAR_SECTIONS = [
   { id: "publications", label: "Publications" },
   { id: "talks", label: "Invited Talks" },
   { id: "awards", label: "Awards" },
-  { id: "grievance", label: "Grievance" },
+  { id: "grievance", label: "Online Maintenance" },
 ];
 
 // Sidebar groups and the sections under each. A group with one section shows as a plain item;
@@ -82,7 +82,7 @@ export const SECTION_TITLES = {
   "talks": "Invited Talks",
   "awards": "Awards & Outreach",
   "other": "Other Information",
-  "grievance": "Grievance & Maintenance",
+  "grievance": "Online Maintenance",
   "grievance-overview": "Maintenance Complaints",
 };
 

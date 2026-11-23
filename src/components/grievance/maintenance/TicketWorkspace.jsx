@@ -4,7 +4,7 @@ import { Loader2, Search, Eye, RefreshCw, CalendarDays } from 'lucide-react';
 import { listMaintenanceTickets, getApiErrorMessage } from '../../../services/maintenanceService';
 import StageBadge, { SeverityBadge } from './StageBadge';
 import TicketDetailModal from './TicketDetailModal';
-import { formatDate, formatDateTime, inputClass } from './maintenanceMeta';
+import { formatDate, formatDateTime, inputClass, todayInIst } from './maintenanceMeta';
 
 const PAGE_SIZE = 15;
 
@@ -68,6 +68,10 @@ const TicketWorkspace = ({
   // Primitive deps: parents pass a new `tabs` array on every render.
   const stageParam = tab.stages?.join(',') || undefined;
   const flagParam = tab.flag;
+  // A `today` tab always lists complaints submitted today (IST), ignoring the date filter.
+  const todayOnly = Boolean(tab.today);
+  const listDate = todayOnly ? todayInIst() : dateParam;
+  const listMonth = todayOnly ? undefined : monthParam;
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -76,8 +80,8 @@ const TicketWorkspace = ({
         stage: stageParam,
         flag: flagParam,
         search: query || undefined,
-        date: dateParam,
-        month: monthParam,
+        date: listDate,
+        month: listMonth,
         page,
         limit: PAGE_SIZE,
       }));
@@ -86,7 +90,7 @@ const TicketWorkspace = ({
     } finally {
       setLoading(false);
     }
-  }, [stageParam, flagParam, query, dateParam, monthParam, page]);
+  }, [stageParam, flagParam, query, listDate, listMonth, page]);
 
   useEffect(() => {
     load();
@@ -139,6 +143,7 @@ const TicketWorkspace = ({
         </form>
       </div>
 
+      {!todayOnly && (
       <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 px-4 py-3 text-sm">
         <CalendarDays className="h-4 w-4 text-slate-500" />
         <span className="font-medium text-slate-700">Submitted on:</span>
@@ -168,6 +173,7 @@ const TicketWorkspace = ({
           </span>
         )}
       </div>
+      )}
 
       {tab.description && <p className="border-b border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-600">{tab.description}</p>}
 

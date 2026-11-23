@@ -346,9 +346,6 @@ const Committee = () => {
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   Official Orders & PDF Notifications
                 </h2>
-                <p className="text-xs sm:text-sm text-gray-500">
-                  Important university office orders and council notifications
-                </p>
               </div>
             </div>
 

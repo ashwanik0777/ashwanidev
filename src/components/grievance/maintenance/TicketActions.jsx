@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Loader2, Upload, X } from 'lucide-react';
+import { Loader2, Upload, X, ChevronDown } from 'lucide-react';
 import {
   performMaintenanceAction,
   listMaintenanceVendors,
@@ -37,10 +37,7 @@ const ACTION_FORMS = {
     fields: [
       { name: 'work_completed', type: 'checkbox', label: 'Work completed during this inspection visit' },
       { name: 'inspection_report', type: 'textarea', label: 'Inspection report', required: true },
-      { name: 'pending_tasks', type: 'textarea', label: 'Work / pending tasks', showWhen: { work_completed: '' } },
       { name: 'estimated_completion_date', type: 'date', label: 'Estimated completion date', required: true, showWhen: { work_completed: '' } },
-      { name: 'progress_percent', type: 'percent', label: 'Current progress (%)', showWhen: { work_completed: '' } },
-      { name: 'remarks', type: 'textarea', label: 'Remarks' },
     ],
   },
   approve_timeline: {
@@ -50,16 +47,6 @@ const ACTION_FORMS = {
     fields: [
       { name: 'approved_completion_date', type: 'date', label: 'Approved completion date', required: true, defaultFrom: 'vendor_estimated_date' },
       { name: 'remarks', type: 'textarea', label: 'Remarks' },
-    ],
-  },
-  update_progress: {
-    title: 'Update work progress',
-    button: 'Save Progress',
-    attachment: true,
-    fields: [
-      { name: 'progress_percent', type: 'percent', label: 'Progress (%)', required: true, defaultFrom: 'progress_percent' },
-      { name: 'pending_tasks', type: 'textarea', label: 'Pending tasks', defaultFrom: 'pending_tasks' },
-      { name: 'remarks', type: 'textarea', label: 'Progress remarks / reason for delay', required: true },
     ],
   },
   mark_completed: {
@@ -331,10 +318,17 @@ const TicketActions = ({ ticket, allowedActions, onUpdated }) => {
             <button
               type="button"
               onClick={() => setOpenAction(isOpen ? null : name)}
-              className="flex w-full items-center justify-between px-4 py-3 text-left text-sm font-semibold text-slate-800"
+              className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-semibold text-slate-800"
             >
               {form.title}
-              <span className="text-xs font-normal text-slate-500">{isOpen ? 'Hide' : 'Open'}</span>
+              <span
+                className={`inline-flex shrink-0 items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold shadow-sm transition ${
+                  isOpen ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-sky-600 text-white hover:bg-sky-700'
+                }`}
+              >
+                {isOpen ? 'Hide' : 'Open'}
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              </span>
             </button>
             {isOpen && (
               <div className="border-t border-slate-200 px-4 py-4">

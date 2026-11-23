@@ -143,12 +143,12 @@ const governanceData = {
         designation: "Dean, School of Buddhist Studies & Civilization, Gautam Buddha University, Greater Noida",
       },
       {
-        name: "Dr. Indu Uprety",
+        name: "Prof. Dhananjay Singh",
         role: "Member",
         designation: "Dean (I/c) Planning and Research, Gautam Buddha University, Greater Noida",
       },
       {
-        name: "Dr. Indu Uprety",
+        name: "Dr. Neeti Rana",
         role: "Member",
         designation: "Dean (I/c), School of Management, Gautam Buddha University, Greater Noida",
       },

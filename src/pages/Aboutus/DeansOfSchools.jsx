@@ -78,9 +78,9 @@ const deansList = [
   {
     schoolCode: "SOM",
     schoolName: "School of Management",
-    deanName: "Dr. Indu Uprety",
+    deanName: "Dr. Neeti Rana",
     designation: "Dean (I/C), School of Management",
-    image: "https://faculty.gbu.ac.in/uploads/photos/6605384ccc2da_induu%20(1).jpg",
+    image: "/assets/Faculty/Dr. Neeti Rana.jpg",
     link: "/schools/SOM"
   },
   {

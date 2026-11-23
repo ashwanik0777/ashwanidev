@@ -7,7 +7,7 @@ export const laboratoriesData = {
   schoolName: "School of Biotechnology",
   heading: "Laboratories & Facilities SOBT",
   subheading: "State-of-the-art research laboratories, teaching labs, and specialized infrastructure.",
-  pdfUrl: "https://drive.google.com/file/d/1HdfoljdTapAfg3aDfPJceC7IASwb30pI/view?usp=sharing",
+  pdfUrl: "/assets/pdf/academic/sobt-biotech-laboratories.pdf",
   laboratories: [
     {
       sno: 1,

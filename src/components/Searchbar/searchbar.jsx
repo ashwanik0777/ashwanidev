@@ -74,6 +74,7 @@ const NAVIGATION_CONFIG = [
     items: [
       { slug: "hero", label: "Overview" },
       { slug: "hostel-facilities", label: "Hostels" },
+      { slug: "library", label: "Library" },
       { slug: "sports-fitness", label: "Sports" },
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },

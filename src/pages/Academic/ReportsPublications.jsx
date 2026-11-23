@@ -8,37 +8,37 @@ const ANNUAL_REPORTS_LIST = [
     id: "ar-6",
     title: "Annual Report 2023-24",
     period: "2023 - 2024",
-    file: "https://drive.google.com/file/d/16uXdaavWgULLBuvUdcZMPLWwESSXXONK/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2023-24.pdf"
   },
   {
     id: "ar-5",
     title: "Annual Report 2022-23",
     period: "2022 - 2023",
-    file: "https://drive.google.com/file/d/1IO2ALO-HtOxyWZAfXz9bIIgBKvp8uyqm/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2022-23.pdf"
   },
   {
     id: "ar-4",
     title: "Annual Report 2021-22",
     period: "2021 - 2022",
-    file: "https://drive.google.com/file/d/1duZnaf4iPnicJR4dQ97RwL4YsiNiJFeh/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2021-22.pdf"
   },
   {
     id: "ar-3",
     title: "Annual Report 2018-19, 2019-20 & 2020-21",
     period: "2018 - 2021",
-    file: "https://drive.google.com/file/d/1H-GVoAW3kQU92Oc16rKyDz6bR-enOK1y/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2018-21.pdf"
   },
   {
     id: "ar-2",
     title: "Annual Report 2016-17 & 2017-18",
     period: "2016 - 2018",
-    file: "https://drive.google.com/file/d/1TP5uibI1VuCOZ3B7o08VJcLeTI02ueMc/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2016-18.pdf"
   },
   {
     id: "ar-1",
     title: "Annual Report 2014-15",
     period: "2014 - 2015",
-    file: "https://drive.google.com/file/d/1-NMA0VLsslJt-wyKb6xZumNWcOXBEf6x/view?usp=drive_web"
+    file: "/assets/pdf/annual_reports/gbu-annual-report-2014-15.pdf"
   }
 ];
 

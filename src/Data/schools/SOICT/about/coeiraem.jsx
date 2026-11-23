@@ -94,8 +94,8 @@ export const coeRaemData = {
       bgImage:
         "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "Maintenance Fundamental", url: "https://drive.google.com/file/d/1g9g9Vfpg-mFCcqvVz_up48KN9yThTKAp/view?usp=drive_web" },
-        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
+        { label: "Maintenance Fundamental", url: "/assets/pdf/academic/raem-maintenance-fundamental.pdf" },
+        { label: "RAEM Brochure", url: "/assets/pdf/academic/raem-centre-brochure.pdf" },
       ],
     },
     {
@@ -117,8 +117,8 @@ export const coeRaemData = {
       bgImage:
         "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "PHM Basic", url: "https://drive.google.com/file/d/1NR_KYgVojPetRq0ArkT5f5JEpdaucGcN/view?usp=drive_web" },
-        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
+        { label: "PHM Basic", url: "/assets/pdf/academic/raem-phm-basic.pdf" },
+        { label: "RAEM Brochure", url: "/assets/pdf/academic/raem-centre-brochure.pdf" },
       ],
     },
     {
@@ -140,9 +140,9 @@ export const coeRaemData = {
       bgImage:
         "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop",
       syllabusLinks: [
-        { label: "RAMS Advanced", url: "https://drive.google.com/file/d/1TivVp4qHz1M574ccZKlfAlK-YdZCWbwx/view?usp=drive_web" },
-        { label: "RAMS Fundamental", url: "https://drive.google.com/file/d/1U6Nnze6J1lJs4phPoqwbeV731XZoBpqx/view?usp=drive_web" },
-        { label: "RAEM Brochure", url: "https://drive.google.com/file/d/1ddggOgPemgdsUirUIKNCS7N3JV8OIfJF/view?usp=drive_web" },
+        { label: "RAMS Advanced", url: "/assets/pdf/academic/raem-rams-advanced.pdf" },
+        { label: "RAMS Fundamental", url: "/assets/pdf/academic/raem-rams-fundamental.pdf" },
+        { label: "RAEM Brochure", url: "/assets/pdf/academic/raem-centre-brochure.pdf" },
       ],
     },
   ],

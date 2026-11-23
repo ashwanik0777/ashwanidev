@@ -1,7 +1,7 @@
 export const trainingConsultancyData = {
   schoolCode: "SOBSC",
   schoolName: "School of Buddhist Studies & Civilization",
-  pdfUrl: "https://drive.google.com/file/d/1btagzeWT8gwQrws-4mgx875tkEN-5Wr4/view?usp=sharing",
+  pdfUrl: "/assets/pdf/academic/sobsc-training-consultancy.pdf",
   hero: {
     title: "TRAINING AND CONSULTANCY",
     subtitle: "Mindfulness and Vipassana Meditation Programs for Stress Reduction, Mental Health & Holistic Wellness — Mahatma Jyotiba Phule Dhyan Kendra, GBU.",

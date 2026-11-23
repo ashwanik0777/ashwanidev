@@ -9,7 +9,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1080/02564602.2026.26213 27",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -24,7 +24,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468972",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -39,7 +39,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s41060-026-01067-z",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -54,7 +54,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s10723-025-09820-7",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -69,7 +69,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/s13369-026-11366-z",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -84,7 +84,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469169",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -99,7 +99,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2026",
     "doi": "10.1002/wer.70401",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -114,7 +114,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2026",
     "doi": "10.1007/s10661-026-15135-1",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -129,7 +129,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/AKGEC68790.2026.1 1485849",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -144,7 +144,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469171",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -159,7 +159,7 @@ export const allResearchPublications = [
     "issue": "12",
     "year": "2026",
     "doi": "10.1007/s10854-026-17257-1",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -174,7 +174,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14197- 2_30",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -189,7 +189,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.22068/IJEEE.22.1.3492",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -204,7 +204,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-981-96-8399- 4_33",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -219,7 +219,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1051/epjconf/20263560200 2",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -234,7 +234,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14044- 9_28",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -249,7 +249,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1080/10889868.2024.24048 80",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -264,7 +264,7 @@ export const allResearchPublications = [
     "issue": "Michal (55992015 900); Orish",
     "year": "Kenneth Ikenna (55443978 500); Opitz",
     "doi": "Eric (57198278374); Othman",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -279,7 +279,7 @@ export const allResearchPublications = [
     "issue": "Hanoi",
     "year": "VinUniver sity",
     "doi": "University of Cambridge",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -294,7 +294,7 @@ export const allResearchPublications = [
     "issue": "GA",
     "year": "IT Departme nt",
     "doi": "Iran",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -309,7 +309,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003771937-18",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Humanities & Social Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -324,7 +324,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469043",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -339,7 +339,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15401- 9_12",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -354,7 +354,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469027",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -369,7 +369,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469028",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -384,7 +384,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469150",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -399,7 +399,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.57159/jcmm.5.2.25388",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -414,7 +414,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-08859- 8_30",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -429,7 +429,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.4324/9781003725084-74",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -444,7 +444,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.mex.2025.103759",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -459,7 +459,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003752196",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -474,7 +474,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003633952-9",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -489,7 +489,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-981-95-3671- 9_28",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -504,7 +504,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469134",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -519,7 +519,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1038/s41598-026-37336-x",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -534,7 +534,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469113",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -549,7 +549,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-09825- 2_37",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -564,7 +564,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469165",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -579,7 +579,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14189- 7_12",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -594,7 +594,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468905",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -609,7 +609,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-10667- 4_29",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -624,7 +624,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -639,7 +639,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s43939-026-00542-5",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -654,7 +654,7 @@ export const allResearchPublications = [
     "issue": "2 Special Issue on Recent Advances in Computati onal and Applied Mathemati cs",
     "year": "2026",
     "doi": "10.5269/bspm.80446",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -669,7 +669,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-08859- 8_17",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -684,7 +684,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003633952",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -699,7 +699,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469129",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -714,7 +714,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469135",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -729,7 +729,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/B978-0-443-40316- 3.00018-7",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -744,7 +744,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15407- 1_19",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -759,7 +759,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468914",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -774,7 +774,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.4324/9781003725084-84",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -789,7 +789,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469066",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -804,7 +804,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1002/9781394315727.ch8",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -819,7 +819,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468925",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -834,7 +834,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468991",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -849,7 +849,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-08859- 8_28",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -864,7 +864,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_36",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -879,7 +879,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.clwat.2026.100265",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -894,7 +894,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14044- 9_29",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -909,7 +909,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468921",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -924,7 +924,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14044- 9_25",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -939,7 +939,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.molstruc.2026.14563 6",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -954,7 +954,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1186/s12864-026-12565-6",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -969,7 +969,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468898",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -984,7 +984,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/s10040-026-03045-y",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -999,7 +999,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2026",
     "doi": "10.1080/07391102.2024.24466 75",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1014,7 +1014,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469116",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1029,7 +1029,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468979",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1044,7 +1044,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003633952-2",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1059,7 +1059,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469044",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1074,7 +1074,7 @@ export const allResearchPublications = [
     "issue": "9",
     "year": "2026",
     "doi": "10.1016/j.asr.2026.02.007",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1089,7 +1089,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1002/9781394315727.ch9",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1104,7 +1104,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2026",
     "doi": "10.1007/s11760-026-05191-y",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1119,7 +1119,7 @@ export const allResearchPublications = [
     "issue": "8",
     "year": "2026",
     "doi": "10.1080/07391102.2025.25679 18",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1134,7 +1134,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1016/j.jaim.2025.101313",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1149,7 +1149,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469111",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1164,7 +1164,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469045",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1179,7 +1179,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s12647-025-00882-2",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1194,7 +1194,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469144",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1209,7 +1209,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2026",
     "doi": "10.1007/s00284-026-04873-7",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1224,7 +1224,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1239,7 +1239,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468906",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1254,7 +1254,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15410- 1_17",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1269,7 +1269,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/S41742-025-01040-X",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1284,7 +1284,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15407-1_2",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1299,7 +1299,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468890",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1314,7 +1314,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468879",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1329,7 +1329,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15398- 2_22",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1344,7 +1344,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-18846- 5_15",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1359,7 +1359,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469024",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1374,7 +1374,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15407-1_3",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1389,7 +1389,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2026",
     "doi": "10.5281/zenodo.18667066",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1404,7 +1404,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.26651/allelo.j/2026-67-1- 1567",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1419,7 +1419,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.26651/allelo.j/2026-67-1- 1565",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1434,7 +1434,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_37",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1449,7 +1449,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-10756- 5_29",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1464,7 +1464,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1002/9781394315727.ch10",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1479,7 +1479,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.2174/011389557543892426 0331114108",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1494,7 +1494,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-06732-6_5",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1509,7 +1509,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003633952-10",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1524,7 +1524,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468976",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1539,7 +1539,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469108",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1554,7 +1554,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1007/s11030-025-11332-1",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1569,7 +1569,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469172",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1584,7 +1584,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2026",
     "doi": "10.1093/jeb/voaf142",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1599,7 +1599,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03751- 0_21",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1614,7 +1614,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1002/9781394315727.ch7",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1629,7 +1629,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1038/s41598-026-39104-3",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1644,7 +1644,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2026",
     "doi": "10.1007/s00202-026-03629-7",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1659,7 +1659,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.microb.2026.100683",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1674,7 +1674,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469119",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1689,7 +1689,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469132",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1704,7 +1704,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468947",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1719,7 +1719,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/s12596-026-03129-8",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1734,7 +1734,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s12031-025-02463-z",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1749,7 +1749,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469010",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1764,7 +1764,7 @@ export const allResearchPublications = [
     "issue": "9",
     "year": "2026",
     "doi": "10.1080/09500340.2026.26204 63",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1779,7 +1779,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-15404- 0_32",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1794,7 +1794,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03751- 0_40",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1809,7 +1809,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03740- 4_25",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1824,7 +1824,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14189-7_1",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1839,7 +1839,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1854,7 +1854,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2026",
     "doi": "10.1109/LSENS.2026.3658617",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1869,7 +1869,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-981-96-8987- 3_18",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1884,7 +1884,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468948",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1899,7 +1899,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1914,7 +1914,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_40",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1929,7 +1929,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-981-95-3671- 9_47",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1944,7 +1944,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468882",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1959,7 +1959,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-02831- 0_39",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1974,7 +1974,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1080/09507116.2026.26695 50",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -1989,7 +1989,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.56042/ijbb.v63i1.23024",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2004,7 +2004,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-981-95-3671- 9_33",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2019,7 +2019,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.ctarc.2026.101179",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2034,7 +2034,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11468963",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2049,7 +2049,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.3844/jcssp.2026.360.366",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2064,7 +2064,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.micpath.2026.10847 3",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2079,7 +2079,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2026",
     "doi": "10.1007/s42452-026-08305-w",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2094,7 +2094,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834.20 26.11469138",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2109,7 +2109,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-14194- 1_28",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2124,7 +2124,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.aeue.2026.156340",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2139,7 +2139,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_19",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2154,7 +2154,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.28951/bjb.v44i1.925",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2169,7 +2169,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2184,7 +2184,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2199,7 +2199,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.5281/zenodo.17011143",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2214,7 +2214,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1109/IC3ECSBHI67834",
-    "pdfUrl": "https://drive.google.com/file/d/1_6xHxKEKOXyzuCjkFltoixxgS_zh8uxt/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2229,7 +2229,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1002/9781394336487",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2244,7 +2244,7 @@ export const allResearchPublications = [
     "issue": "04-Jul",
     "year": "2026",
     "doi": "10.1007/s11244-025-02109-9",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2259,7 +2259,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1002/cmdc.202500554",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2274,7 +2274,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1038/s41598-025-28403-w",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2289,7 +2289,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1007/s00203-025-04653-0",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2304,7 +2304,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1038/s41598-025-28448-x",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2319,7 +2319,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.4324/9781003646662-6",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2334,7 +2334,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1016/j.asr.2025.10.080",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2349,7 +2349,7 @@ export const allResearchPublications = [
     "issue": "12",
     "year": "2025",
     "doi": "10.1002/pen.70140",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2364,7 +2364,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.scs.2026.107158",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2379,7 +2379,7 @@ export const allResearchPublications = [
     "issue": "10",
     "year": "2025",
     "doi": "10.56042/jsir.v84i10.4499",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2394,7 +2394,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1039/d5se01308a",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2409,7 +2409,7 @@ export const allResearchPublications = [
     "issue": "677",
     "year": "2025",
     "doi": "12",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2424,7 +2424,7 @@ export const allResearchPublications = [
     "issue": "Kazakhstan; School of Architecture",
     "year": "Australia; Atchabar Scientific Research Institute",
     "doi": "NSW",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2439,7 +2439,7 @@ export const allResearchPublications = [
     "issue": "Thai Binh University of Medicine and Pharmacy in Vietnam",
     "year": "OH",
     "doi": "Jodhpur",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2454,7 +2454,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s00240-025-01794-1",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2469,7 +2469,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1016/j.ajoms.2025.07.010",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2484,7 +2484,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s41872-025-00324-7",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2499,7 +2499,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1186/s12964-025-02360-3",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2514,7 +2514,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.mssp.2025.110072",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2529,7 +2529,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s13562-025-00990-9",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2544,7 +2544,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.pce.2025.104264",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2559,7 +2559,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.sciaf.2025.e03043",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2574,7 +2574,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s10032-025-00521-1",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2589,7 +2589,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.2174/9798898811891125010 1_2",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2604,7 +2604,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.clwat.2025.100131",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2619,7 +2619,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.compbiolchem.2025.1 08646",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2634,7 +2634,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.25303/212rjbt2860292",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2649,7 +2649,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1038/s41598-025-16033-1",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2664,7 +2664,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s41748-025-00706-y",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2679,7 +2679,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s13668-025-00715-3",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2694,7 +2694,7 @@ export const allResearchPublications = [
     "issue": "18",
     "year": "2025",
     "doi": "10.1007/s12633-025-03520-3",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2709,7 +2709,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1002/ente.202502656",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2724,7 +2724,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s43926-025-00143-3",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2739,7 +2739,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1201/9781003494782-8",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2754,7 +2754,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2026",
     "doi": "10.3390/app16042152",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2769,7 +2769,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2026",
     "doi": "10.1088/2631-8695/ae4456",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2784,7 +2784,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1007/s11664-025-12498-y",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2799,7 +2799,7 @@ export const allResearchPublications = [
     "issue": "04-Jul",
     "year": "2026",
     "doi": "10.1007/s11244-024-02017-4",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2814,7 +2814,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "10.1007/s00339-025-09275-3",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2829,7 +2829,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1002/slct.202504410",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2844,7 +2844,7 @@ export const allResearchPublications = [
     "issue": "7",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2859,7 +2859,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2874,7 +2874,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2026",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1Jp80O2TjVckwozZyGKs9S4LTgjCWqKVs/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2026-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2889,7 +2889,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.sciaf.2025.e03043",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2904,7 +2904,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.clwat.2025.100131",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2919,7 +2919,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1063/5.0294856",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2934,7 +2934,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1063/5.0292934",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2949,7 +2949,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1177/09544089231200467",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2964,7 +2964,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.3390/colloids9050055",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2979,7 +2979,7 @@ export const allResearchPublications = [
     "issue": "10",
     "year": "2025",
     "doi": "10.1002/mc.70022",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -2994,7 +2994,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.5493/wjem.v15.i3.104678",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3009,7 +3009,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4018/979-8-3373-2555- 2.ch006",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3024,7 +3024,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003542513-1",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3039,7 +3039,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003542513-3",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3054,7 +3054,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003542513-6",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3069,7 +3069,7 @@ export const allResearchPublications = [
     "issue": "36",
     "year": "2025",
     "doi": "10.1021/acsomega.5c01589",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3084,7 +3084,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.1145/3757732",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3099,7 +3099,7 @@ export const allResearchPublications = [
     "issue": "9",
     "year": "2025",
     "doi": "10.1016/j.lddd.2025.100153",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3114,7 +3114,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.22207/JPAM.19.3.29",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3129,7 +3129,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4018/979-8-3373-5791- 1.ch005",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3144,7 +3144,7 @@ export const allResearchPublications = [
     "issue": "Specia l Issue",
     "year": "2025",
     "doi": "10.12944/CRNFSJ.13.Special- Issue-July.10",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3159,7 +3159,7 @@ export const allResearchPublications = [
     "issue": "13",
     "year": "2025",
     "doi": "10.3390/cancers17132100",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3174,7 +3174,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.1002/met.70067",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3189,7 +3189,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.3390/su17052115",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3204,7 +3204,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1080/03772063.2025.2463 621",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3219,7 +3219,7 @@ export const allResearchPublications = [
     "issue": "16",
     "year": "2025",
     "doi": "10.1080/07391102.2024.2325 661",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3234,7 +3234,7 @@ export const allResearchPublications = [
     "issue": "15",
     "year": "2025",
     "doi": "10.1080/07391102.2024.2311 337",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3249,7 +3249,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.2174/01138920103772752 50930170651",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3264,7 +3264,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-7336-0_6",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3279,7 +3279,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-3-031-91171-2",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3294,7 +3294,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3309,7 +3309,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-3-031-90613- 8_11",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3324,7 +3324,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003509608",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3339,7 +3339,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003593034-20",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3354,7 +3354,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-7137-3_1",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3369,7 +3369,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003560814-6",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3384,7 +3384,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003560814-4",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3399,7 +3399,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1556/606.2025.01351",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3414,7 +3414,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-7131- 1_16",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3429,7 +3429,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-6883- 0_11",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3444,7 +3444,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/MRIE66930.2025.11 156237",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3459,7 +3459,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/GCON65540.2025.11 173328",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3474,7 +3474,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.26651/allelo.j/2025-66-2- 1555",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3489,7 +3489,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICOCT64433.2025.1 1118919",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3504,7 +3504,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICOCT64433.2025.1 1118689",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3519,7 +3519,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICOCT64433.2025.1 1118847",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3534,7 +3534,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICOCT64433.2025.1 1118491",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3549,7 +3549,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-3936- 6_20",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3564,7 +3564,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-5781- 0_22",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3579,7 +3579,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102212",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3594,7 +3594,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102670",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3609,7 +3609,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102242",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3624,7 +3624,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/EAIC66483.2025.111 01517",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3639,7 +3639,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102763",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3654,7 +3654,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102781",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3669,7 +3669,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102656",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3684,7 +3684,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102586",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3699,7 +3699,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102617",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3714,7 +3714,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102513",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3729,7 +3729,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/NETCRYPT65877.20 25.11102366",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3744,7 +3744,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003488255-8",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3759,7 +3759,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s44146-025-00188-4",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3774,7 +3774,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/10428194.2025.2547 246",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3789,7 +3789,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s11030-025-11332-1",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3804,7 +3804,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/TETCI.2025.3573240",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3819,7 +3819,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "http://dx.doi.org/10.1016/j.org el.2025.107303",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3834,7 +3834,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "http://dx.doi.org/10.1016/j.cjph .2025.06.047",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3849,7 +3849,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "http://dx.doi.org/10.1016/j.inoc he.2025.114855",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3864,7 +3864,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "http://dx.doi.org/10.1016/j.phy sb.2025.417520",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3879,7 +3879,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "https://doi.org/10.55766/sujst8 220",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3894,7 +3894,7 @@ export const allResearchPublications = [
     "issue": "12",
     "year": "2025",
     "doi": "https://doi.org/10.1002/pen.70 140",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3909,7 +3909,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3924,7 +3924,7 @@ export const allResearchPublications = [
     "issue": "14",
     "year": "2025",
     "doi": "https://doi.org/10.1007/s126 33-025-03520-3",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3939,7 +3939,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "https://doi.org/10.1039/D5SE 01308A",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3954,7 +3954,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.22068/IJEEE.22.1.3492",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3969,7 +3969,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.compbiolchem.2025. 108646",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3984,7 +3984,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03740- 4_25",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -3999,7 +3999,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_37",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4014,7 +4014,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_36",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4029,7 +4029,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-02831- 0_39",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4044,7 +4044,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_19",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4059,7 +4059,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03769- 5_40",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4074,7 +4074,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03751- 0_21",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4089,7 +4089,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1007/978-3-032-03751- 0_40",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4104,7 +4104,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2026",
     "doi": "10.1016/j.mssp.2025.110072",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4119,7 +4119,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2026",
     "doi": "10.1016/j.ajoms.2025.07.010",
-    "pdfUrl": "https://drive.google.com/file/d/1aIwv4M5dqNkesn-EdGKGZvRuK83lWSa5/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol1.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4134,7 +4134,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s00240-025-01794-1",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4149,7 +4149,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.orgel.2025.107303",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4164,7 +4164,7 @@ export const allResearchPublications = [
     "issue": "9",
     "year": "2025",
     "doi": "10.1007/s00203-025-04414-z",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4179,7 +4179,7 @@ export const allResearchPublications = [
     "issue": "8",
     "year": "2025",
     "doi": "10.1080/17460441.2025.2522896",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4194,7 +4194,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1051/bioconf/202517803002",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4209,7 +4209,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s41870-024-01728-x",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4224,7 +4224,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/07391102.2024.2446675",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4239,7 +4239,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/GINOTECH63460.2025.11077102",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4254,7 +4254,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/GINOTECH63460.2025.11076772",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4269,7 +4269,7 @@ export const allResearchPublications = [
     "issue": "6",
     "year": "2025",
     "doi": "10.2174/0126662558304595240528111535",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4284,7 +4284,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICCSAI64074.2025.11063702",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4299,7 +4299,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/OTCON65728.2025.11070983",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4314,7 +4314,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1504/IJCSE.2025.147611",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4329,7 +4329,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.2174/0122127968379517250519053237",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4344,7 +4344,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1088/1755-1315/1489/1/012008",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4359,7 +4359,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991253",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4374,7 +4374,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990967",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4389,7 +4389,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991050",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4404,7 +4404,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991177",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4419,7 +4419,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990882",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4434,7 +4434,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990688",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4449,7 +4449,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990898",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4464,7 +4464,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990983",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4479,7 +4479,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990605",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4494,7 +4494,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990830",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4509,7 +4509,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991299",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4524,7 +4524,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991248",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4539,7 +4539,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991012",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4554,7 +4554,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991254",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4569,7 +4569,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991281",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4584,7 +4584,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991034",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4599,7 +4599,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991191",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4614,7 +4614,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990985",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4629,7 +4629,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991132",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4644,7 +4644,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990436",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4659,7 +4659,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991321",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4674,7 +4674,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990543",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4689,7 +4689,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991121",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4704,7 +4704,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990776",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4719,7 +4719,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990693",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4734,7 +4734,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990546",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4749,7 +4749,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990655",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4764,7 +4764,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990999",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4779,7 +4779,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990912",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4794,7 +4794,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991005",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4809,7 +4809,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990961",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4824,7 +4824,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991134",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4839,7 +4839,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991263",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4854,7 +4854,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991277",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4869,7 +4869,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990399",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4884,7 +4884,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991117",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4899,7 +4899,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990681",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4914,7 +4914,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991020",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4929,7 +4929,7 @@ export const allResearchPublications = [
     "issue": "16",
     "year": "2025",
     "doi": "10.1109/JIOT.2025.3578350",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4944,7 +4944,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s41872-025-00324-7",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4959,7 +4959,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/DevIC63749.2025.11012513",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4974,7 +4974,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-3460-6_10",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -4989,7 +4989,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/15435075.2025.2514489",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5004,7 +5004,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_9",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5019,7 +5019,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_13",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5034,7 +5034,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5049,7 +5049,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_1",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5064,7 +5064,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_2",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5079,7 +5079,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_6",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5094,7 +5094,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-1041-9_8",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5109,7 +5109,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s13562-025-00990-9",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5124,7 +5124,7 @@ export const allResearchPublications = [
     "issue": "14",
     "year": "2025",
     "doi": "https://doi.org/10.64252/x2gwee28",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5139,7 +5139,7 @@ export const allResearchPublications = [
     "issue": "6",
     "year": "2025",
     "doi": "https://doi.org/10.64252/5m5jwd21",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5154,7 +5154,7 @@ export const allResearchPublications = [
     "issue": "180093",
     "year": "2025",
     "doi": "https://doi.org/10.1016/j.scitotenv.2025.180",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5169,7 +5169,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "https://doi.org/10.1039/d4su00582a",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5184,7 +5184,7 @@ export const allResearchPublications = [
     "issue": "-",
     "year": "2025",
     "doi": "https://doi.org/10.1007/s11581-024-05936-0",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5199,7 +5199,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "https://doi.org/10.1007/s13042-025-02720-y",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5214,7 +5214,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "https://doi.org/10.1007/s42979-025-03990-7",
-    "pdfUrl": "https://drive.google.com/file/d/1f6j9Q_s-QWaxVkXVgcNjb7ibMtj0rgbk/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol2.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5229,7 +5229,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s42044-025-00243-x",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5244,7 +5244,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.3390/d17020098",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5259,7 +5259,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s12033-024-01157-y",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5274,7 +5274,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.bbrc.2024.151200",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5289,7 +5289,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s13538-025-01775-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5304,7 +5304,7 @@ export const allResearchPublications = [
     "issue": "12",
     "year": "2025",
     "doi": "10.1007/s11356-023-28633-3",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5319,7 +5319,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003483052-8",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5334,7 +5334,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1002/bip.23645",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5349,7 +5349,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307_12",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5364,7 +5364,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/B978-0-443-33321-7.00008-1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5379,7 +5379,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.3390/su17052115",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5394,7 +5394,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5409,7 +5409,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.3389/fimmu.2025.1442101",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5424,7 +5424,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/bs.pmbts.2024.11.004",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5439,7 +5439,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781032702391",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5454,7 +5454,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.1088/2631-8695/add85a",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5469,7 +5469,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s12524-025-02122-1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5484,7 +5484,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1080/07391102.2023.2280707",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5499,7 +5499,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.1504/IJPELEC.2025.144694",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5514,7 +5514,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1080/18387357.2024.2345236",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5529,7 +5529,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/ICAET63349.2025.10932161",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5544,7 +5544,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.compeleceng.2024.109857",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5559,7 +5559,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.pmcj.2025.102041",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5574,7 +5574,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s00779-024-01836-2",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5589,7 +5589,7 @@ export const allResearchPublications = [
     "issue": "6",
     "year": "2025",
     "doi": "10.3390/molecules30061305",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5604,7 +5604,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5619,7 +5619,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-0047-2_27",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5634,7 +5634,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s11696-025-03964-2",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5649,7 +5649,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1155/int/6914757",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5664,7 +5664,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s00604-025-07067-3",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5679,7 +5679,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1155/js/1982719",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5694,7 +5694,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s12204-023-2591-1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5709,7 +5709,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1079/9781800624597.0014",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Management",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5724,7 +5724,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003483052-15",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5739,7 +5739,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4018/979-8-3693-7984-4.ch021",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5754,7 +5754,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/07391102.2024.2446675",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5769,7 +5769,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003493402-10",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5784,7 +5784,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.3844/jcssp.2025.223.234",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5799,7 +5799,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1080/2374068X.2023.2293346",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5814,7 +5814,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307_1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5829,7 +5829,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-3-031-80912-5_9",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5844,7 +5844,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.sciaf.2024.e02522",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5859,7 +5859,7 @@ export const allResearchPublications = [
     "issue": "6",
     "year": "2025",
     "doi": "10.1007/s13205-025-04343-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5874,7 +5874,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4324/9781003596806",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Humanities & Social Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5889,7 +5889,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307_6",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5904,7 +5904,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1063/5.0259290",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5919,7 +5919,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1080/19475705.2024.2446589",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5934,7 +5934,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.inoche.2025.114047",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5949,7 +5949,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.microb.2025.100233",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5964,7 +5964,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s11581-024-05936-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5979,7 +5979,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4018/979-8-3693-8487-9.ch013",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -5994,7 +5994,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/03772063.2025.2463621",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6009,7 +6009,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/10496475.2025.2500534",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6024,7 +6024,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1088/2631-8695/adb1a3",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6039,7 +6039,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394186426.ch14",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6054,7 +6054,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s11664-024-11533-8",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6069,7 +6069,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s00203-025-04315-1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6084,7 +6084,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1080/09205063.2024.2394300",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6099,7 +6099,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s11105-024-01475-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6114,7 +6114,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-97-7075-5_22",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6129,7 +6129,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.sajce.2025.04.006",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6144,7 +6144,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-0047-2_20",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6159,7 +6159,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s41872-024-00292-4",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6174,7 +6174,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4324/9781003596806-38",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Humanities & Social Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6189,7 +6189,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.1007/s10825-025-02332-3",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6204,7 +6204,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1201/9781003483052",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6219,7 +6219,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1007/s00289-024-05554-w",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6234,7 +6234,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s41870-025-02470-8",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6249,7 +6249,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s00034-025-03082-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6264,7 +6264,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.1177/0021955X251314036",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6279,7 +6279,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.2174/0109298673361923250101072831",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6294,7 +6294,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1088/2631-8695/adbfdd",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6309,7 +6309,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307_7",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6324,7 +6324,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.scenv.2025.100253",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6339,7 +6339,7 @@ export const allResearchPublications = [
     "issue": "4",
     "year": "2025",
     "doi": "10.1002/cnma.202400584",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6354,7 +6354,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394248506.ch13",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6369,7 +6369,7 @@ export const allResearchPublications = [
     "issue": "01-Feb",
     "year": "2025",
     "doi": "10.1504/IJBM.2025.143727",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6384,7 +6384,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s13562-025-00979-4",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6399,7 +6399,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-96-0047-2_26",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6414,7 +6414,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394248506.ch24",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Engineering",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6429,7 +6429,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9781394287307_11",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6444,7 +6444,7 @@ export const allResearchPublications = [
     "issue": "2",
     "year": "2025",
     "doi": "10.1007/s00339-024-08212-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6459,7 +6459,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.21769/BioProtoc.5146",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6474,7 +6474,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1080/07391102.2025.2509789",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6489,7 +6489,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s42979-025-03990-7",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6504,7 +6504,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/s10032-025-00521-1",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6519,7 +6519,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.1039/d4su00582a",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6534,7 +6534,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1016/j.optcom.2025.131875",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6549,7 +6549,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s12045-025-1798-x",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6564,7 +6564,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1108/IJIS-02-2025-0066",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6579,7 +6579,7 @@ export const allResearchPublications = [
     "issue": "5",
     "year": "2025",
     "doi": "10.1007/s42979-025-04033-x",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6594,7 +6594,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1002/9783527849949.ch03",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Basic Sciences",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6609,7 +6609,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s43926-025-00143-3",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6624,7 +6624,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1177/0021955X251329393",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6639,7 +6639,7 @@ export const allResearchPublications = [
     "issue": "1",
     "year": "2025",
     "doi": "10.1007/s11664-024-11565-0",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6654,7 +6654,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.1088/1402-4896/adadad",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6669,7 +6669,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1007/978-981-97-7395-4_18",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6684,7 +6684,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.4018/979-8-3693-8628-6.ch010",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "Planning & Research Division",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6699,7 +6699,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/CSNT64827.2025.10968661",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Information & Communication Technology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6714,7 +6714,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10990468",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6729,7 +6729,7 @@ export const allResearchPublications = [
     "issue": "3",
     "year": "2025",
     "doi": "10.5493/wjem.v15.i3.104678",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"
@@ -6744,7 +6744,7 @@ export const allResearchPublications = [
     "issue": "",
     "year": "2025",
     "doi": "10.1109/IC3ECSBHI63591.2025.10991071",
-    "pdfUrl": "https://drive.google.com/file/d/1vQSD1qBa3dSWYObyrgW-VK32cAmY1tI0/view?usp=drive_web",
+    "pdfUrl": "/assets/pdf/research/gbu-research-bulletin-2025-vol3.pdf",
     "school": "School of Biotechnology",
     "type": "Article",
     "category": "Research Bulletin"

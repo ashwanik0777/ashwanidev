@@ -83,6 +83,7 @@ const NAVIGATION_CONFIG = [
     items: [
       { slug: "hero", label: "Overview" },
       { slug: "https://hostels.gbu.ac.in/", label: "Hostels", isExternal: true },
+      { slug: "library", label: "Library" },
       { slug: "sports-fitness", label: "Sports" },
       { slug: "clubs-societies", label: "Clubs and Societies" },
       { slug: "meditation-center", label: "Meditation Centre" },

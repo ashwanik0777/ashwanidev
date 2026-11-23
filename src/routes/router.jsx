@@ -106,6 +106,7 @@ const Registrar = lazy(() =>
 
 const PrivacyPolicy = lazy(() => import("../pages/Legal/PrivacyPolicy.jsx"));
 const TermsOfUse = lazy(() => import("../pages/Legal/TermsOfUse.jsx"));
+const Forms = lazy(() => import("../pages/Forms/Forms.jsx"));
 
 const FundedProjects = lazy(() =>
   import("../pages/Reasearch/researchhighlights/FundedProjects")
@@ -596,6 +597,7 @@ export default function AppRouter() {
           <Route path="/sitemapAcademics" element={<SitemapAcademics />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/forms" element={<Forms />} />
 
           <Route path="/contactDirectory" element={<ContactDirectory/>}/>
 

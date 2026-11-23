@@ -7,7 +7,7 @@ export const laboratoriesData = {
   schoolName: "School of Engineering",
   heading: "Laboratories & Facilities SOE",
   subheading: "Comprehensive departmental labs equipped with state-of-the-art instruments, simulation toolkits, and heavy testing machinery.",
-  pdfUrl: "https://drive.google.com/file/d/1WEgVjOiNcWzwhk63uGaFOKg7euCdvXX_/view?usp=sharing",
+  pdfUrl: "/assets/pdf/academic/soe-engineering-laboratories.pdf",
   laboratories: [
     // Department of Architecture
     {

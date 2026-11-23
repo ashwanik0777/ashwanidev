@@ -380,6 +380,13 @@ const SEARCH_INDEX = [
     description: "Staff and department contact directory"
   },
   {
+    label: "Leave / Medical Forms",
+    keywords: ["forms", "leave form", "leave application", "casual leave", "earned leave", "duty leave", "maternity leave", "medical claim", "medical reimbursement", "medical form", "declaration form", "download forms"],
+    path: "/forms",
+    category: "Services",
+    description: "Leave, medical claim and general forms (PDF)"
+  },
+  {
     label: "Facility Booking",
     keywords: ["booking", "facility", "hall booking", "auditorium", "seminar hall", "room booking", "venue"],
     path: "/booking",

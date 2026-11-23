@@ -4,6 +4,10 @@ import { ChevronDown, ChevronUp, Search, Menu, X } from "lucide-react";
 import { resolveSchool } from "../../Data/schoolsMeta";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Other sites and our own files (PDFs on the server) open as plain links in a new tab;
+// a router <Link> would send a PDF path to the site's 404 page.
+const opensDirectly = (href) => href.startsWith("http") || /\.pdf(?:$|[?#])/i.test(href);
+
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -256,7 +260,7 @@ const Navbar = () => {
         { label: "Corporate Resource Center (CRC)", href: `/schools/${activeSchool}/departments/corporate-resource-center` },
         { label: "Research and Publications", href: `/schools/${activeSchool}/departments/research-development` },
         { label: "Training and Consultancy", href: `/schools/${activeSchool}/departments/training-consultancy` },
-        { label: "MDP Calendar", href: "https://drive.google.com/file/d/1L9GL0Yw9WRi6eYIuDp_zBN4Fp3lJh-fF/view?usp=sharing" },
+        { label: "MDP Calendar", href: "/assets/pdf/academic/mdp-calendar-gbu.pdf" },
       ];
     }
 
@@ -540,7 +544,7 @@ const Navbar = () => {
                 >
                   {items.map((item, idx) => (
                     <motion.li key={idx} variants={itemVariants}>
-                      {item.href.startsWith("http") ? (
+                      {opensDirectly(item.href) ? (
                         <a
                           href={item.href}
                           target="_blank"
@@ -653,7 +657,7 @@ const Navbar = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: idx * 0.05 }}
                           >
-                            {item.href.startsWith("http") ? (
+                            {opensDirectly(item.href) ? (
                               <a
                                 href={item.href}
                                 target="_blank"

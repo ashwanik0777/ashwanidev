@@ -141,6 +141,7 @@ const sitemapAbout = [
       { title: "Campus Overview", path: "/campus-life/hero" },
       { title: "Hostel Facilities & Dining", path: "/campus-life/hostel-facilities" },
       { title: "Hostel Details", path: "https://hostels.gbu.ac.in/" },
+      { title: "Library", path: "/campus-life/library" },
       { title: "Sports & Cultural Activities", path: "/campus-life/sports-fitness" },
       { title: "Clubs & Societies", path: "/campus-life/clubs-societies" },
       { title: "National Service Scheme (NSS)", path: "/campus-life/NSS" },
@@ -196,7 +197,8 @@ const sitemapAbout = [
     icon: Phone,
     children: [
       { title: "Contact Information", path: "/contactUs" },
-      { title: "Contact Directory", path: "/contactDirectory" }
+      { title: "Contact Directory", path: "/contactDirectory" },
+      { title: "Leave / Medical Forms", path: "/forms" }
     ],
   },
   {

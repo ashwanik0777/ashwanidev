@@ -145,7 +145,7 @@ const administrativeOfficers = [
 const DeansOfSchools = () => {
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gray-50/50 pb-16">
+      <div className="min-h-screen bg-gray-50/50 pb-10">
         {/* Banner Section */}
         <BannerSection
           title="Organization"
@@ -193,7 +193,7 @@ const DeansOfSchools = () => {
         </div>
 
         {/* 2. Coordinating Deans Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="p-3 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full">
               <Award className="w-6 h-6 text-purple-600" />
@@ -227,7 +227,7 @@ const DeansOfSchools = () => {
         </div>
 
         {/* 3. School's Deans Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="p-3 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-full">
               <GraduationCap className="w-6 h-6 text-blue-600" />
@@ -272,7 +272,7 @@ const DeansOfSchools = () => {
         </div>
 
         {/* 4. Administration Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="p-3 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-full">
               <Briefcase className="w-6 h-6 text-indigo-600" />

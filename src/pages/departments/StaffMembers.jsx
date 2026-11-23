@@ -15,7 +15,7 @@ const StaffMembers = ({ staffData, heading, subheading }) => {
         subtitle={subheading}
         bgTheme={4}
       />
-      <div className="min-h-screen bg-white py-12 px-6">
+      <div className="min-h-screen bg-white py-8 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {allMembers.map((member, index) => {
@@ -102,14 +102,14 @@ export default function StaffPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!staffmembersData) {
-    return <div className="flex justify-center items-center h-screen text-gray-500">Staff data not available.</div>;
+    return <div className="flex justify-center items-center min-h-[40vh] text-gray-500">Staff data not available.</div>;
   }
 
   return <StaffMembers staffData={staffmembersData.departments} heading={staffmembersData.heading} subheading={staffmembersData.subheading} />;

@@ -88,9 +88,9 @@ export default function EventsGrid() {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-white py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100 relative">
+      <div className="min-h-screen bg-white py-12 px-4 sm:px-10 md:px-20 border-t border-gray-100 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
               Events & News
             </h2>
@@ -152,7 +152,7 @@ export default function EventsGrid() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-20"
+              className="text-center py-10"
             >
               <p className="text-xl text-slate-500">No events found in this category.</p>
             </motion.div>

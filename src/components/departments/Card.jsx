@@ -106,8 +106,8 @@ const HoverCards = () => {
       </section>
 
       {/* Cards Section */}
-      <section className="p-6 mt-12">
-        <div className="text-center mb-12">
+      <section className="p-6 mt-8">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">Schools</h2>
           <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>

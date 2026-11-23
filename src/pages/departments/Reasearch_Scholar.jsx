@@ -59,7 +59,7 @@ const ScholarDirectorySection = ({ byYear = [] }) => {
   });
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
           <div>
@@ -243,7 +243,7 @@ const ScholarDirectorySection = ({ byYear = [] }) => {
         )}
 
         {filtered.length === 0 && (
-          <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
+          <div className="text-center py-10 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
             <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
             <h3 className="text-base font-bold text-slate-800">No Scholars Found</h3>
             <p className="text-sm text-slate-500 mt-1">
@@ -268,13 +268,13 @@ const ScholarDirectorySection = ({ byYear = [] }) => {
 
 // Featured Scholars (Legacy fallback if needed)
 const FeaturedScholars = ({ scholars = [] }) => (
-  <section className="py-16 px-4 bg-white">
+  <section className="py-6 sm:py-10 px-4 bg-white">
     <div className="max-w-7xl mx-auto">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-gray-900 mb-12 text-center"
+        className="text-3xl font-bold text-gray-900 mb-8 text-center"
       >
         Featured Research Scholars
       </motion.h2>
@@ -361,14 +361,14 @@ export default function ResearchScholars() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!researchScholarsData) {
-    return <div className="flex justify-center items-center h-screen text-gray-500">Research scholars data not available.</div>;
+    return <div className="flex justify-center items-center min-h-[40vh] text-gray-500">Research scholars data not available.</div>;
   }
 
   const {

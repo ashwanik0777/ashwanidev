@@ -18,7 +18,7 @@ import React from 'react';
 
 const SummaryDashboard = ({ summaryStats }) => {
   return (
-    <section className="bg-gray-50 py-8">
+    <section className="bg-gray-50 py-6 sm:py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Summary Dashboard</h2>

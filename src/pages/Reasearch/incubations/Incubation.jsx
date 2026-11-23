@@ -51,7 +51,7 @@ const Incubation = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50/50 pb-12 sm:pb-20">
+      <div className="min-h-screen bg-slate-50/50 pb-8 sm:pb-10">
         {/* Banner Section */}
         <BannerSection
           title="GBU Incubation Centre"

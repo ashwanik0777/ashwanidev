@@ -183,9 +183,9 @@ const CentersOfExcellence = () => {
         <StatsCard stats={stats} />
 
         {/* Centers Grid */}
-        <section className="py-10 md:py-20 bg-gray-50">
+        <section className="py-6 sm:py-10 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-10 md:mb-16">
+            <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 md:mb-4">Centers of Excellence</h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                 Our centers drive excellence in research, technology, and societal impact through interdisciplinary collaboration and innovation.
@@ -271,9 +271,9 @@ const CentersOfExcellence = () => {
         </section>
 
         {/* Gallery */}
-        <section className="py-20 bg-white">
+        <section className="py-6 sm:py-10 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">
                 Gallery of Excellence
               </h2>
@@ -303,7 +303,7 @@ const CentersOfExcellence = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-10 md:py-16 bg-white">
+        <section className="py-6 sm:py-10 bg-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-6">{ctaData.title}</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-3xl mx-auto">

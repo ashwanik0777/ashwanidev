@@ -139,7 +139,7 @@ const FEATURED_HIGHLIGHTS = [
 const LifeAtCampus = () => {
   return (
     <SearchableWrapper>
-      <section id="life-at-gbu" className="py-16 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden font-sans text-left">
+      <section id="life-at-gbu" className="py-6 sm:py-10 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden font-sans text-left">
         {/* Decorative ambient background glows */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
 
@@ -148,7 +148,7 @@ const LifeAtCampus = () => {
 
 
           {/* Life At Campus Grid (8 Key Facilities) */}
-          <div className="mb-20">
+          <div className="mb-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
               <div>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Explore Campus Ecosystem</h3>
@@ -213,11 +213,11 @@ const LifeAtCampus = () => {
 
           {/* Featured Campus Highlights (Deep Dives) */}
           <div>
-            <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="text-center max-w-2xl mx-auto mb-8">
               <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Special Campus Experiences</h3>
             </div>
 
-            <div className="space-y-12">
+            <div className="space-y-8">
               {FEATURED_HIGHLIGHTS.map((item, index) => {
                 const IconComponent = item.icon;
                 const isEven = index % 2 === 0;

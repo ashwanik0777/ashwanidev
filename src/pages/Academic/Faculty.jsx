@@ -207,11 +207,11 @@ const Faculty = () => {
       <SimpleLayout>
         {id ? (
           selectedFaculty ? (
-            <section className="py-12">
+            <section className="py-6 sm:py-8">
               <TabContent activeTab="overview" profile={selectedFaculty} />
             </section>
           ) : (
-            <section className="py-12 text-center">
+            <section className="py-6 sm:py-8 text-center">
               <p className="text-gray-600">Loading faculty profile...</p>
             </section>
           )
@@ -302,10 +302,10 @@ const Faculty = () => {
             </section>
 
             {/* Faculty Grid */}
-            <section className="pt-4 pb-10 sm:pb-16 bg-gray-50">
+            <section className="pt-4 pb-10 bg-gray-50">
               <div className="container min-[2560px]:max-w-[2200px] mx-auto px-4">
                 {filteredFaculty.length === 0 ? (
-                  <div className="text-center py-12">
+                  <div className="text-center py-8">
                     <p className="text-gray-500 text-lg">No faculty members found matching your criteria.</p>
                     <button
                       onClick={clearFilters}
@@ -382,7 +382,7 @@ const Faculty = () => {
 
                 {/* Pagination */}
                 {Math.ceil(filteredFaculty.length / itemsPerPage) > 1 && (
-                  <div className="mt-8 sm:mt-12 flex flex-wrap justify-center items-center gap-2">
+                  <div className="mt-8 flex flex-wrap justify-center items-center gap-2">
                     <button
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}

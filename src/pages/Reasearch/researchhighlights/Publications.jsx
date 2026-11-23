@@ -806,7 +806,7 @@ const Publications = () => {
                           ))
                         ) : (
                           <tr>
-                            <td colSpan="7" className="text-center py-12 text-gray-500">
+                            <td colSpan="7" className="text-center py-8 text-gray-500">
                               No publications found matching criteria
                             </td>
                           </tr>
@@ -933,7 +933,7 @@ const Publications = () => {
                           ))
                         ) : (
                           <tr>
-                            <td colSpan={7} className="text-center py-12 text-gray-500">
+                            <td colSpan={7} className="text-center py-8 text-gray-500">
                               No patents found matching selected criteria
                             </td>
                           </tr>
@@ -1011,7 +1011,7 @@ const Publications = () => {
                       );
                     })
                   ) : (
-                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                    <div className="col-span-full text-center py-10 bg-white rounded-2xl border border-gray-200 text-gray-500">
                       No patents found matching selected criteria
                     </div>
                   )}
@@ -1095,7 +1095,7 @@ const Publications = () => {
                           ))
                         ) : (
                           <tr>
-                            <td colSpan={8} className="text-center py-12 text-gray-500">
+                            <td colSpan={8} className="text-center py-8 text-gray-500">
                               No books found matching criteria
                             </td>
                           </tr>
@@ -1178,7 +1178,7 @@ const Publications = () => {
                       </div>
                     ))
                   ) : (
-                    <div className="col-span-full text-center py-16 bg-white rounded-2xl border border-gray-200 text-gray-500">
+                    <div className="col-span-full text-center py-10 bg-white rounded-2xl border border-gray-200 text-gray-500">
                       No books found matching criteria
                     </div>
                   )}

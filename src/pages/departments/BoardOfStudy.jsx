@@ -30,7 +30,7 @@ const BoardOfStudies = ({ departments, dean }) => {
       : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start";
 
   return (
-    <div className="min-h-screen bg-gray-50/50 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50/50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Optional Dean / Chairperson Hero Card */}
         {dean && (
@@ -188,14 +188,14 @@ export default function BoardOfStudyPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!boardofstudiesData) {
-    return <div className="flex justify-center items-center h-screen text-gray-500">Board of Studies data not available.</div>;
+    return <div className="flex justify-center items-center min-h-[40vh] text-gray-500">Board of Studies data not available.</div>;
   }
 
   return (

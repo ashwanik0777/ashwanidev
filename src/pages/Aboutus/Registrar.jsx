@@ -124,7 +124,7 @@ const Registrar = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gray-50/50 pb-20">
+      <div className="min-h-screen bg-gray-50/50 pb-10">
         {/* Hero Section */}
         <BannerSection
           title="Registrar's Office"
@@ -133,7 +133,7 @@ const Registrar = () => {
         />
 
         {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             {/* Left Card: Registrar Profile */}
             <div className="w-full lg:w-1/3">
@@ -192,7 +192,7 @@ const Registrar = () => {
           </div>
 
           {/* Details Section */}
-          <div className="mt-12 sm:mt-16 bg-white rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-8">
+          <div className="mt-8 sm:mt-10 bg-white rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-8">
             <h2 className="text-2xl font-bold text-center mb-8 text-gray-900">Know the Registrar's Office</h2>
 
             {/* Tabs */}

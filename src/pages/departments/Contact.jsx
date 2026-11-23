@@ -34,7 +34,7 @@ const Contact = ({ data, departments, officeHours, generalInfo, deanInfo, direct
         bgTheme={3}
       />
 
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl py-8 sm:py-12 space-y-8 sm:space-y-12">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl py-8 space-y-8">
         
         {/* USICT Main Office Section */}
         {generalInfo?.cards && generalInfo.cards.length > 0 && (
@@ -462,7 +462,7 @@ const ContactPage = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600"></div>
       </div>
     );
@@ -470,7 +470,7 @@ const ContactPage = () => {
 
   if (!contactData) {
     return (
-      <div className="flex justify-center items-center h-screen text-slate-500 font-medium text-sm">
+      <div className="flex justify-center items-center min-h-[40vh] text-slate-500 font-medium text-sm">
         Contact data not available for this school.
       </div>
     );

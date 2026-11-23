@@ -135,7 +135,7 @@ const SportsWellness = () => {
 
   return (
     <SearchableWrapper>
-      <section id="sports-wellness" className="py-10 sm:py-14 min-[160rem]:py-24 bg-white font-sans text-left">
+      <section id="sports-wellness" className="py-10 sm:py-8 min-[160rem]:py-24 bg-white font-sans text-left">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl min-[160rem]:max-w-[2200px]">
 
           {/* Header */}

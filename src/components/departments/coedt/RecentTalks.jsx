@@ -7,7 +7,7 @@ export default function RecentTalks({
   talks = [],
 }) {
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-6 sm:py-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="text-center mb-10">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">
           {sectionTitle}

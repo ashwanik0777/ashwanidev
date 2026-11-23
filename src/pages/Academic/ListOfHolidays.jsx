@@ -922,7 +922,7 @@ const ListOfHolidays = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50/70 font-sans text-slate-800 pb-16">
+      <div className="min-h-screen bg-slate-50/70 font-sans text-slate-800 pb-10">
         {/* Banner */}
         <BannerSection
           title="List of Holidays 2026"
@@ -1153,7 +1153,7 @@ const ListOfHolidays = () => {
 
           {/* MAIN CONTENT AREA */}
           {filteredHolidays.length === 0 ? (
-            <div className="text-center py-12 sm:py-16 bg-white rounded-2xl border border-slate-200">
+            <div className="text-center py-8 sm:py-10 bg-white rounded-2xl border border-slate-200">
               <CalendarIcon className="w-10 h-10 sm:w-12 sm:h-12 text-slate-300 mx-auto mb-3" />
               <h3 className="text-sm sm:text-base font-bold text-slate-800 mb-1">No Holidays Found</h3>
               <p className="text-slate-500 text-xs">Try adjusting your search terms or filter selections.</p>

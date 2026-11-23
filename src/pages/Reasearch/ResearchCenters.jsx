@@ -12,7 +12,7 @@ const ResearchCenters = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gray-50 pb-16">
+      <div className="min-h-screen bg-gray-50 pb-10">
         {/* Hero Section */}
         <BannerSection
           title="Center of Excellence & Laboratories"
@@ -20,7 +20,7 @@ const ResearchCenters = () => {
         />
 
         {/* Cards */}
-        <div className="max-w-6xl mx-auto mt-8 md:mt-12 px-4">
+        <div className="max-w-6xl mx-auto mt-8 px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {centers.length > 0 ? (
               centers.map((center) => (
@@ -112,7 +112,7 @@ const ResearchCenters = () => {
                 </div>
               ))
             ) : (
-              <div className="col-span-2 text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <div className="col-span-2 text-center py-10 bg-white rounded-2xl shadow-sm border border-gray-100">
                 <BookOpen className="w-16 h-16 text-blue-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">No Research Centers Found</h3>
                 <p className="text-gray-500 text-sm">Official laboratory and research center profiles will appear here when added.</p>

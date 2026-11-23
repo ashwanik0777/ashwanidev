@@ -81,9 +81,9 @@ export default function PrivacyPolicy() {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50 font-sans pb-16">
+      <div className="min-h-screen bg-slate-50 font-sans pb-10">
         {/* Page Banner */}
-        <div className="relative py-20 bg-[#0e1626] text-white overflow-hidden">
+        <div className="relative py-10 bg-[#0e1626] text-white overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-900/40 rounded-full blur-[120px] opacity-40" />
             <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-900/30 rounded-full blur-[120px] opacity-35" />
@@ -98,7 +98,7 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-6 mt-12">
+        <div className="max-w-7xl mx-auto px-6 mt-8">
           {/* Top Metadata Card */}
           <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/60 shadow-sm mb-8">
             <h2 className="text-lg font-bold text-slate-800 mb-2">Effective Date: June 26, 2026</h2>

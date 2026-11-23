@@ -45,7 +45,7 @@ const ComingSoon = () => {
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center">
-      <div className="relative w-full max-w-md px-8 py-12 rounded-3xl border border-gray-200 shadow-xl flex flex-col items-center text-center">
+      <div className="relative w-full max-w-md px-8 py-8 rounded-3xl border border-gray-200 shadow-xl flex flex-col items-center text-center">
         <Hourglass size={42} className="text-blue-700 mb-3" />
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
           Coming Soon

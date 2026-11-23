@@ -13,16 +13,16 @@ const getLinkConfig = (url) => {
 
 const CampusActivityGallery = ({ title, subtitle, items = [] }) => {
   return (
-    <section className="py-12 bg-gray-50/50">
+    <section className="py-6 sm:py-8 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{title}</h2>
           {subtitle && <p className="text-lg text-gray-600 max-w-2xl mx-auto">{subtitle}</p>}
           <div className="w-20 h-1.5 bg-blue-600 mx-auto mt-6 rounded-full" />
         </div>
 
         {items.length === 0 ? (
-          <div className="text-center text-gray-500 py-12">No activities found.</div>
+          <div className="text-center text-gray-500 py-8">No activities found.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {items.map((item, idx) => (

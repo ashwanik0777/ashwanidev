@@ -34,7 +34,7 @@ const RTI = () => {
           bgTheme={9}
         />
 
-        <main className="container mx-auto px-4 py-8 sm:py-16 max-w-6xl space-y-12 sm:space-y-20">
+        <main className="container mx-auto px-4 py-8 sm:py-10 max-w-6xl space-y-8 sm:space-y-10">
           {/* About RTI */}
           <motion.section
             variants={fadeIn}

@@ -615,7 +615,7 @@ const allYears = collectYears(mockNotices);
       )}
 
       {/* Notices Grid/List */}
-      <div className="container mx-auto mt-16 px-4 pb-16 notices-container">
+      <div className="container mx-auto mt-10 px-4 pb-10 notices-container">
         <motion.div
           variants={container}
           initial="hidden"
@@ -641,7 +641,7 @@ const allYears = collectYears(mockNotices);
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-20"
+            className="text-center py-10"
           >
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <BookOpen size={32} className="text-gray-400" />

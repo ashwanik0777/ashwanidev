@@ -42,7 +42,7 @@ const EmptyState = ({ type }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col items-center justify-center py-24 text-center px-4"
+      className="flex flex-col items-center justify-center py-12 text-center px-4"
     >
       <div className="w-24 h-24 mb-6 rounded-full bg-indigo-50/50 flex items-center justify-center">
         <Icon className="w-12 h-12 text-indigo-300" />
@@ -351,7 +351,7 @@ const SchoolActivitiesAnnouncements = () => {
           bgTheme={9}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Tabs + Search */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
             <div className="inline-flex bg-white/80 backdrop-blur-md p-1.5 rounded-2xl shadow-sm border border-gray-100">
@@ -428,7 +428,7 @@ const SchoolActivitiesAnnouncements = () => {
                 </AnimatePresence>
 
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center mt-12 gap-2">
+                  <div className="flex justify-center items-center mt-8 gap-2">
                     <button
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={currentPage === 1}

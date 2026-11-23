@@ -66,7 +66,7 @@ const PlacementDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
       </div>
     );
@@ -74,7 +74,7 @@ const PlacementDashboard = () => {
 
   if (!placementData) {
     return (
-      <div className="flex justify-center items-center h-screen text-slate-500 font-medium text-sm">
+      <div className="flex justify-center items-center min-h-[40vh] text-slate-500 font-medium text-sm">
         Placement data not available for this school.
       </div>
     );
@@ -90,7 +90,7 @@ const PlacementDashboard = () => {
           bgTheme={hero?.bgTheme || 9}
         />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10 sm:space-y-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 sm:space-y-8">
           
           {/* Overview */}
           {overview && (

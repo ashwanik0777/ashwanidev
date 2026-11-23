@@ -211,9 +211,9 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-12 sm:py-20 bg-gray-100 px-4 sm:px-6"
+          className="py-8 sm:py-10 bg-gray-100 px-4 sm:px-6"
         >
-          <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-8 sm:mb-12 text-gray-800">Our Global Partners</h2>
+          <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-8 text-gray-800">Our Global Partners</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {partners.map((p, i) => {
               const isExpanded = expanded[p.id] || false;
@@ -274,10 +274,10 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-12 sm:py-20 bg-white px-4 sm:px-6"
+          className="py-8 sm:py-10 bg-white px-4 sm:px-6"
         >
           <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-4">{programs[0]?.title}</h2>
-          <p className="text-center text-gray-800 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">{programs[0]?.description}</p>
+          <p className="text-center text-gray-800 mb-8 max-w-2xl mx-auto text-sm sm:text-base">{programs[0]?.description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {programs.map((p, i) => (
               <motion.div
@@ -313,10 +313,10 @@ const Collaboration = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="py-12 sm:py-20 bg-gray-100 px-4 sm:px-6"
+          className="py-8 sm:py-10 bg-gray-100 px-4 sm:px-6"
         >
           <h2 className="text-center text-3xl sm:text-4xl font-extrabold mb-4">{opportunities[0]?.title}</h2>
-          <p className="text-center text-gray-700 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base">{opportunities[0]?.description}</p>
+          <p className="text-center text-gray-700 mb-8 max-w-2xl mx-auto text-sm sm:text-base">{opportunities[0]?.description}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto">
             {opportunities.map((o, i) => (
               <motion.div
@@ -357,7 +357,7 @@ const Collaboration = () => {
 
         {/* CTA */}
         {cta && (
-          <section className="py-20 px-4 text-center" style={{ backgroundColor: cta.background_color }}>
+          <section className="py-6 sm:py-10 px-4 text-center" style={{ backgroundColor: cta.background_color }}>
             <h2 className="text-3xl font-bold mb-2">{cta.title}</h2>
             <p className="text-gray-600 mb-4">{cta.description}</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

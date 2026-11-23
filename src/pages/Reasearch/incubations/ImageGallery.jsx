@@ -42,11 +42,11 @@ export default function GallerySlider() {
 
   return (
     <SearchableWrapper>
-      <div className="w-full bg-slate-50 py-24 px-4 sm:px-10 md:px-20 border-t border-gray-100" id="gallery">
+      <div className="w-full bg-slate-50 py-12 px-4 sm:px-10 md:px-20 border-t border-gray-100" id="gallery">
         <div className="max-w-6xl mx-auto">
           
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <span className="text-xs font-bold tracking-widest text-indigo-600 uppercase bg-indigo-100/80 px-4 py-1.5 rounded-full border border-indigo-200">
               Campus & Activities
             </span>

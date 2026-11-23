@@ -146,7 +146,7 @@ const CampusRecruiters = () => {
         }
       `}</style>
 
-      <div className="py-14 bg-white overflow-hidden">
+      <div className="py-8 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Section Header */}

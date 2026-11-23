@@ -47,7 +47,7 @@ const BookingMain = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-24">
+    <div className="min-h-screen bg-stone-50 pb-12">
       <HeroBanner />
 
       <main className="container mx-auto px-4 py-5">
@@ -56,7 +56,7 @@ const BookingMain = () => {
           onRoleChange={setUserRole}
         /> */}
 
-        <section className="mb-12 mt-6">
+        <section className="mb-8 mt-6">
           <h2 className="text-3xl font-bold text-stone-900 mb-8 text-center">
             Available Facilities
           </h2>
@@ -69,7 +69,7 @@ const BookingMain = () => {
             if (auditoriums.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Auditorium Facilities
                 </h3>
@@ -93,7 +93,7 @@ const BookingMain = () => {
             if (conferenceRooms.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Conference Facilities
                 </h3>
@@ -117,7 +117,7 @@ const BookingMain = () => {
             if (accommodation.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Accommodation Facilities
                 </h3>
@@ -141,7 +141,7 @@ const BookingMain = () => {
             if (sports.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Sports Facilities
                 </h3>
@@ -165,7 +165,7 @@ const BookingMain = () => {
             if (dining.length === 0) return null;
 
             return (
-              <div className="mb-12">
+              <div className="mb-8">
                 <h3 className="text-2xl font-semibold text-stone-900 mb-6">
                   Kitchen & Dining Facilities
                 </h3>
@@ -184,7 +184,7 @@ const BookingMain = () => {
           })()}
         </section>
 
-        <div className="max-w-5xl mx-auto my-12 p-6 bg-white border border-stone-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+        <div className="max-w-5xl mx-auto my-8 p-6 bg-white border border-stone-200 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
           <div>
             <h4 className="font-semibold text-stone-900 text-lg">Already submitted a booking request?</h4>
             <p className="text-stone-500 text-sm">Use your unique tracking token to check status, admin responses, and facility in-charge details.</p>

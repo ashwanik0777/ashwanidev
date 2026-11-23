@@ -235,7 +235,7 @@ const NSSStructure = ({ nssData }) => {
 
   return (
     <SearchableWrapper>
-      <div className="space-y-16 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="space-y-10 py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         
         {/* NSS Coordinator */}
         <motion.div variants={fadeIn} initial="hidden" animate="visible" className="text-center">

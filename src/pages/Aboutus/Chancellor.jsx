@@ -188,11 +188,11 @@ const Chancellor = () => {
         />
 
         {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-8">
           
           {/* Top Profile & Message Box */}
           {/* On desktop both cards stretch to the same height */}
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-start lg:items-stretch mb-8 sm:mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-start lg:items-stretch mb-8">
 
             {/* Chancellor Card */}
             <div className="w-full lg:w-1/3 shrink-0">

@@ -72,7 +72,7 @@ const CoeGreenSkillsAi = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50 text-slate-900 pb-16">
+      <div className="min-h-screen bg-slate-50 text-slate-900 pb-10">
         {/* Hero Banner */}
         <BannerSection
           title={data.hero.title}
@@ -110,7 +110,7 @@ const CoeGreenSkillsAi = () => {
         {/* ========================================================================= */}
         {/* FOUNDING PARTNERS & LOGO SHOWCASE                                         */}
         {/* ========================================================================= */}
-        <section className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="text-emerald-700 font-bold text-xs uppercase tracking-wider">
               Partners & Enablers
@@ -189,7 +189,7 @@ const CoeGreenSkillsAi = () => {
         {/* ========================================================================= */}
         {/* CORE FOCUS AREAS & OBJECTIVES                                             */}
         {/* ========================================================================= */}
-        <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="text-emerald-700 font-bold text-xs uppercase tracking-wider">
               Focus Areas & Objectives
@@ -238,7 +238,7 @@ const CoeGreenSkillsAi = () => {
         {/* ========================================================================= */}
         {/* CLEAN PHOTO GALLERY (With Smooth Lightbox Navigation)                     */}
         {/* ========================================================================= */}
-        <section className="py-12 bg-slate-100/70 border-y border-slate-200">
+        <section className="py-6 sm:py-8 bg-slate-100/70 border-y border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <span className="text-emerald-700 font-bold text-xs uppercase tracking-wider">
@@ -345,7 +345,7 @@ const CoeGreenSkillsAi = () => {
         {/* ========================================================================= */}
         {/* MEDIA COVERAGE (Concise)                                                  */}
         {/* ========================================================================= */}
-        <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <span className="text-emerald-700 font-bold text-xs uppercase tracking-wider">
               Press & Media

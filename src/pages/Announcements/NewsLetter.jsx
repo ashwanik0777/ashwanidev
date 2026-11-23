@@ -182,16 +182,16 @@ const NewsLetter = ({ schoolCode }) => {
 
         {/* Loading State or Newsletter Grid */}
         {loading ? (
-          <div className="flex justify-center items-center py-20">
+          <div className="flex justify-center items-center py-10">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : mockNewsletters.length === 0 ? (
-          <div className="text-center py-20 text-gray-500">
+          <div className="text-center py-10 text-gray-500">
             <FileText size={48} className="mx-auto mb-4 opacity-50" />
             <p className="text-lg">No newsletters found.</p>
           </div>
         ) : filteredNewsletters.length === 0 ? (
-          <div className="text-center py-20 text-gray-500">
+          <div className="text-center py-10 text-gray-500">
             <FileText size={48} className="mx-auto mb-4 opacity-50" />
             <p className="text-lg">No newsletters match current filters.</p>
           </div>
@@ -205,7 +205,7 @@ const NewsLetter = ({ schoolCode }) => {
                 hidden: {},
                 visible: { transition: { staggerChildren: 0.1 } },
               }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8"
             >
               {currentNewsletters.map((newsletter) => (
                 <motion.div

@@ -162,9 +162,9 @@ const handleClubClick = (club) => {
 
   return (
     <SearchableWrapper>
-    <section id="clubs-events" className="py-20 bg-white">
+    <section id="clubs-events" className="py-6 sm:py-10 bg-white">
   <div className="container mx-auto px-4">
-    <div className="text-center mb-16">
+    <div className="text-center mb-10">
       <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
         Student <span className="text-blue-600">Clubs</span>
       </h2>
@@ -173,7 +173,7 @@ const handleClubClick = (club) => {
       </p>
     </div>
 
-        <div className="mb-16">
+        <div className="mb-10">
           <Carousel className="w-5/6 mx-auto">
             <CarouselContent className="ml-4">
               {clubs.map((club, index) => (

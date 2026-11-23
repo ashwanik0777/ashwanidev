@@ -21,7 +21,7 @@ const ProjectsSection = ({
   projects = [],
 }) => {
   return (
-    <section className="py-8 sm:py-12 bg-gray-50">
+    <section className="py-6 sm:py-8 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <motion.div

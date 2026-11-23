@@ -60,7 +60,7 @@ export default function SchoolAchievements() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -68,7 +68,7 @@ export default function SchoolAchievements() {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500 font-medium">
+      <div className="flex justify-center items-center min-h-[40vh] text-gray-500 font-medium">
         Achievements data not available.
       </div>
     );
@@ -108,7 +108,7 @@ export default function SchoolAchievements() {
         bgTheme={1}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-8 space-y-8 sm:space-y-10">
         
         {/* MOUs Section */}
         {mous.length > 0 && (

@@ -16,7 +16,7 @@ const ACADEMIC_LINKS = [
 const SitemapAcademics = () => {
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50 font-sans py-12">
+      <div className="min-h-screen bg-slate-50 font-sans py-8">
         <div className="container mx-auto px-4 max-w-5xl">
           {/* Breadcrumb */}
           <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">

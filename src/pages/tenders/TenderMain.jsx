@@ -12,11 +12,11 @@ const TenderMain = () => {
       subtitle="Explore active opportunities and submit your bids before deadlines."
       bgTheme={9}
     />
-        <div className="container mx-auto px-6 py-12 max-w-7xl">
+        <div className="container mx-auto px-6 py-8 max-w-7xl">
 
         
           <motion.div
-            className="mb-12"
+            className="mb-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -45,7 +45,7 @@ const TenderMain = () => {
           </motion.div>
 
           <motion.div
-            className="mb-16"
+            className="mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}

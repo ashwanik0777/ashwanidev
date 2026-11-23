@@ -326,7 +326,7 @@ const Committee = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50/60 pb-20">
+      <div className="min-h-screen bg-slate-50/60 pb-10">
         {/* Hero Banner */}
         <BannerSection
           title="Committees & Statutory Cells"
@@ -337,7 +337,7 @@ const Committee = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
 
           {/* Official Orders & Notifications Download Cards */}
-          <div className="mb-12">
+          <div className="mb-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 bg-blue-100 rounded-xl text-blue-700">
                 <FileDown className="w-5 h-5" />
@@ -512,7 +512,7 @@ const Committee = () => {
           </div>
 
           {filteredCommittees.length === 0 && (
-            <div className="text-center py-16 bg-white rounded-3xl border border-gray-100 shadow-sm">
+            <div className="text-center py-10 bg-white rounded-3xl border border-gray-100 shadow-sm">
               <Info className="w-12 h-12 text-gray-300 mx-auto mb-3" />
               <h3 className="text-lg font-bold text-gray-800">No Committees Found</h3>
               <p className="text-sm text-gray-500 mt-1">

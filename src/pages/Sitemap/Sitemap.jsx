@@ -262,10 +262,10 @@ const Sitemap = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="container mx-auto px-4 sm:px-6 py-8 sm:py-14 max-w-7xl relative z-10"
+          className="container mx-auto px-4 sm:px-6 py-8 max-w-7xl relative z-10"
         >
           {/* Search Input */}
-          <div className="max-w-md mx-auto mb-10 sm:mb-16">
+          <div className="max-w-md mx-auto mb-10">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
               <Input
@@ -359,7 +359,7 @@ const Sitemap = () => {
 
           {/* No Search Results */}
           {searchTerm && filteredData.length === 0 && (
-            <div className="text-center py-20">
+            <div className="text-center py-10">
               <div className="p-4 bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Search className="w-8 h-8 text-slate-400" />
               </div>
@@ -369,7 +369,7 @@ const Sitemap = () => {
           )}
 
           {/* Active Status Badge */}
-          <div className="mt-16 text-center">
+          <div className="mt-10 text-center">
             <div className="inline-flex items-center space-x-2.5 px-4.5 py-2.5 bg-white border border-slate-200 rounded-full shadow-sm">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

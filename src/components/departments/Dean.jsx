@@ -100,7 +100,7 @@ const LeadershipCard = (props) => {
   }, [props.name, props.schoolCode, props.shortMessage, props.description, shortCode]);
 
   if (loading) {
-    return <div className="py-12 text-center text-gray-500">Loading Dean's Profile...</div>;
+    return <div className="py-8 text-center text-gray-500">Loading Dean's Profile...</div>;
   }
 
   const safeName = data.name || "Dean";

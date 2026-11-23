@@ -126,7 +126,7 @@ const Disclosures = () => {
         />
 
         {/* Mandatory Disclosures Table Section */}
-        <section className="py-16 bg-gradient-to-br from-slate-50 via-teal-50/40 to-slate-100 min-h-screen">
+        <section className="py-6 sm:py-10 bg-gradient-to-br from-slate-50 via-teal-50/40 to-slate-100 min-h-screen">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             
             {/* Table View */}

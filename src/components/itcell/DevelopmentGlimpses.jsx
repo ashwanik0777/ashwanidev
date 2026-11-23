@@ -81,7 +81,7 @@ const DevelopmentGlimpses = () => {
   };
 
   return (
-    <div className="mb-20 relative">
+    <div className="mb-10 relative">
       <h2 className="text-4xl font-bold text-center mb-2 text-gray-800">
         Development Glimpses
       </h2>

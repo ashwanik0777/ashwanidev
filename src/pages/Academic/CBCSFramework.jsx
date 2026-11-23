@@ -96,7 +96,7 @@ const CBCSFramework = () => {
 
   return (
     <SearchableWrapper>
-      <div className="bg-slate-50/50 min-h-screen text-slate-800 selection:bg-blue-100 selection:text-blue-900 pb-12 sm:pb-16">
+      <div className="bg-slate-50/50 min-h-screen text-slate-800 selection:bg-blue-100 selection:text-blue-900 pb-8 sm:pb-10">
         {/* Hero Banner */}
         <BannerSection
           title={heroData.title}
@@ -105,7 +105,7 @@ const CBCSFramework = () => {
         />
 
         {/* What is CBCS Section */}
-        <section className="pt-6 pb-10 sm:pt-8 sm:pb-14 px-4 sm:px-6 max-w-7xl mx-auto">
+        <section className="pt-6 pb-10 sm:pt-8 sm:pb-8 px-4 sm:px-6 max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-8">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-2 border border-blue-200/60">
               Curriculum Architecture
@@ -145,7 +145,7 @@ const CBCSFramework = () => {
         </section>
 
         {/* 10-Point Grading System Section */}
-        <section className="py-8 sm:py-12 bg-white border-y border-slate-200/70 px-4 sm:px-6">
+        <section className="py-6 sm:py-8 bg-white border-y border-slate-200/70 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2 border border-emerald-200/60">
@@ -258,7 +258,7 @@ const CBCSFramework = () => {
         </section>
 
         {/* Key Benefits of CBCS */}
-        <section className="py-8 sm:py-12 lg:py-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <section className="py-8 lg:py-10 px-4 sm:px-6 max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-8">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800 mb-2 border border-indigo-200/60">
               Advantages

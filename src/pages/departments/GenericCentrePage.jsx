@@ -60,7 +60,7 @@ const GenericCentrePage = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-600"></div>
       </div>
     );
@@ -68,7 +68,7 @@ const GenericCentrePage = () => {
 
   if (!data) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500">
+      <div className="flex justify-center items-center min-h-[40vh] text-gray-500">
         Centre/Unit data not available.
       </div>
     );
@@ -83,7 +83,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 sm:space-y-10">
             
             {/* Library Collection Holdings - Stats Grid */}
             {data.collectionStats && (
@@ -428,7 +428,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-purple-700">
@@ -517,7 +517,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             {/* MoU Info Card */}
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
@@ -603,7 +603,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
             {/* Overview Card */}
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -679,7 +679,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
@@ -751,7 +751,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             {/* Overview Section */}
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -837,7 +837,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div>
@@ -889,7 +889,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
                 <div>
@@ -938,7 +938,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
@@ -986,7 +986,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
             {data.committeeSection && (
               <section className="space-y-8">
                 <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
@@ -1058,7 +1058,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
             {data.lettersSection && (
               <section className="space-y-8">
                 <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-8">
@@ -1127,7 +1127,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 sm:space-y-10">
             
             {/* Legal Aid Booklet Download Card */}
             {data.bookletUrl && (
@@ -1350,7 +1350,7 @@ const GenericCentrePage = () => {
             bgTheme={data.hero.bgTheme || 9}
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12 sm:space-y-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 sm:space-y-10">
             
             {/* Overview & BCI Mandate */}
             {data.overviewSection && (
@@ -1568,12 +1568,12 @@ const GenericCentrePage = () => {
 
       {/* Key Activities Section */}
       {data.keyActivities && data.keyActivities.length > 0 && (
-        <section className="py-16 px-6 bg-gradient-to-br from-gray-50 to-white">
+        <section className="py-6 sm:py-10 px-6 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
               Key Activities & Programs
             </h2>
-            <p className="text-center text-gray-500 mb-12 max-w-2xl mx-auto">
+            <p className="text-center text-gray-500 mb-8 max-w-2xl mx-auto">
               Discover our flagship initiatives and regular programs
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1605,7 +1605,7 @@ const GenericCentrePage = () => {
 
       {/* Contact & Faculty Coordinators Section */}
       {data.contact && (
-        <section className="py-12 px-6 bg-slate-50 border-t border-slate-200">
+        <section className="py-6 sm:py-8 px-6 bg-slate-50 border-t border-slate-200">
           <div className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-md border border-slate-200">
             <h2 className="text-2xl font-bold text-slate-900 mb-6 font-outfit text-center">
               {data.contact.title || "Contact & Faculty Coordinators"}

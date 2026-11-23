@@ -206,7 +206,7 @@ const Faculty = () => {
 
           if (deptFilteredFaculty.length > 0) {
             return (
-              <div key={dept.id} className="mb-12">
+              <div key={dept.id} className="mb-8">
                 <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
                   <div
                     className="absolute inset-0 bg-cover bg-center"
@@ -287,7 +287,7 @@ const Faculty = () => {
           const uncategorized = filteredFaculty.filter(f => !knownIds.has(getDeptId(f.department)));
           if (uncategorized.length === 0) return null;
           return (
-            <div className="mb-12">
+            <div className="mb-8">
               <div className="relative h-[200px] rounded-xl overflow-hidden shadow-lg">
                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/assets/GBU.webp)' }} />
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />

@@ -81,7 +81,7 @@ const BookingTrack = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pt-10 pb-32 px-4 sm:px-6">
+    <div className="min-h-screen bg-stone-50 pt-10 pb-12 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto space-y-6">
         {/* Back Link */}
         <button

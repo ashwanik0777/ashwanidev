@@ -719,7 +719,7 @@ const Searchbar = ({ isMobile = false, onClose }) => {
             <div className="max-h-72 sm:max-h-80 md:max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {/* Empty state — no query */}
               {!query && (
-                <div className="px-4 sm:px-6 py-8 sm:py-12 text-center">
+                <div className="px-4 sm:px-6 py-8 text-center">
                   <div className="relative mb-4 sm:mb-6">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full animate-pulse"></div>
@@ -741,7 +741,7 @@ const Searchbar = ({ isMobile = false, onClose }) => {
 
               {/* No results state */}
               {query && results.length === 0 && !isLoading && (
-                <div className="px-4 sm:px-6 py-8 sm:py-12 text-center">
+                <div className="px-4 sm:px-6 py-8 text-center">
                   <div className="relative mb-4 sm:mb-6">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full"></div>

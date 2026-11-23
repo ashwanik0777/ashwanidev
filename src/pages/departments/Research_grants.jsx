@@ -44,7 +44,7 @@ export default function ResearchGrants() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -52,7 +52,7 @@ export default function ResearchGrants() {
 
   if (!grantsData) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500">
+      <div className="flex justify-center items-center min-h-[40vh] text-gray-500">
         Research grants data not available.
       </div>
     );
@@ -82,7 +82,7 @@ export default function ResearchGrants() {
         bgTheme={1}
       />
 
-      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
@@ -201,7 +201,7 @@ export default function ResearchGrants() {
         </div>
 
         {filteredGrants.length === 0 && (
-          <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
+          <div className="text-center py-10 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
             <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
             <h3 className="text-base font-bold text-slate-800">No Research Grants Found</h3>
             <p className="text-sm text-slate-500 mt-1">

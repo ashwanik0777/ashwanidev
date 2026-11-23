@@ -28,16 +28,16 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white">
+    <section id="about" className="py-6 sm:py-10 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             About Our Institute
           </h2>
           <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-10">
           <div className="group">
             <img
               src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop"

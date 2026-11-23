@@ -121,7 +121,7 @@ const NSSIntroduction = ({ nssData }) => {
         initial="hidden"
         animate="visible"
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-        className="space-y-12 px-4 sm:px-6 lg:px-12 mx-auto max-w-7xl"
+        className="space-y-8 px-4 sm:px-6 lg:px-12 mx-auto max-w-7xl"
       >
         {/* Hero Mission Statement Card */}
         <motion.div variants={fadeInUp}>

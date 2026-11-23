@@ -776,7 +776,7 @@ const MediaGallery = ({ schoolCode }) => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-20"
+            className="text-center py-10"
           >
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Eye size={32} className="text-gray-400" />
@@ -790,7 +790,7 @@ const MediaGallery = ({ schoolCode }) => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-12">
+          <div className="mt-8">
             <ProfessionalPagination
               currentPage={currentPage}
               totalPages={totalPages}

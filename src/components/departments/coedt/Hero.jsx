@@ -49,7 +49,7 @@ const Hero = ({
   return (
     <section
       id="home"
-      className="relative bg-gradient-to-br from-blue-50 via-background to-purple-50 py-24 overflow-hidden"
+      className="relative bg-gradient-to-br from-blue-50 via-background to-purple-50 py-12 overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 opacity-30">

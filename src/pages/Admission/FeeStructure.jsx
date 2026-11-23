@@ -462,7 +462,7 @@ const feeTabs = [
       />
       <div className="max-w-7xl mx-auto px-6 py-10">
         {/* Important Notice */}
-        <div className="mb-12">
+        <div className="mb-8">
           <Card className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-400 border-solid">
             <CardContent className="flex items-start space-x-4 py-6">
               <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
@@ -510,7 +510,7 @@ const feeTabs = [
   className="mb-8 flex-wrap justify-center"
 />
         {/* Tab Content */}
-        <div className="space-y-12 mb-20">
+        <div className="space-y-8 mb-10">
           {activeTab === "fees" && (
             <div className="grid lg:grid-cols-2 gap-12">
               <div className="space-y-6">
@@ -548,7 +548,7 @@ const feeTabs = [
 
           {activeTab === "payment" && (
             <div>
-              <div className="text-center mb-12">
+              <div className="text-center mb-8">
                 <h3 className="text-3xl font-bold text-slate-800 mb-4">
                   Payment Options
                 </h3>
@@ -567,7 +567,7 @@ const feeTabs = [
 
           {activeTab === "scholarship" && (
             <div>
-              <div className="text-center mb-12">
+              <div className="text-center mb-8">
                 <h3 className="text-3xl font-bold text-slate-800 mb-4">
                   Scholarships & Financial Aid
                 </h3>
@@ -586,7 +586,7 @@ const feeTabs = [
 
           {activeTab === "prospectus" && (
             <div>
-              <div className="text-center mb-12">
+              <div className="text-center mb-8">
                 <h3 className="text-3xl font-bold text-slate-800 mb-4">
                   Download Prospectus
                 </h3>

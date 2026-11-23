@@ -18,7 +18,7 @@ const Policies = () => {
         />
 
         {/* Content Section */}
-        <section className="py-12 sm:py-16">
+        <section className="py-8 sm:py-10">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-teal-100 p-6 sm:p-10 transition-all duration-300">
               

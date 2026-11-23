@@ -23,7 +23,7 @@ const AboutSection = ({
   const isCustomDepartment = Boolean(visionDescription || storyText || whatWeDoText);
 
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-b from-white via-blue-50/30 to-white">
+    <section className="py-6 sm:py-8 bg-gradient-to-b from-white via-blue-50/30 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* About Us Banner & Tagline */}
@@ -32,7 +32,7 @@ const AboutSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-blue-800 text-xs font-extrabold uppercase tracking-wider mb-3">
             <Sparkles className="w-4 h-4 text-blue-600" />

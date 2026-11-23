@@ -40,7 +40,7 @@ const CoursesOffered = ({
   if (!courses || courses.length === 0) return null;
 
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-6 sm:py-8 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}

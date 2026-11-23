@@ -121,7 +121,7 @@ const Library = () => {
 
   return (
     <SearchableWrapper>
-      <section id="library" className="py-16 bg-white relative overflow-hidden font-sans text-left">
+      <section id="library" className="py-6 sm:py-10 bg-white relative overflow-hidden font-sans text-left">
         {/* Floating background decorative details */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 rounded-full filter blur-3xl pointer-events-none" />
@@ -129,7 +129,7 @@ const Library = () => {
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl relative z-10">
           
           {/* Main Info showcase */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-8">
             <div className="lg:col-span-6 relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl opacity-10 filter blur-xl group-hover:opacity-15 transition-opacity" />
               <img

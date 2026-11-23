@@ -14,10 +14,10 @@ const StrategicPerspective = () => {
           bgTheme={2}
         />
 
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 lg:py-10">
           
           {/* Top Leaders & Quote Card (Clean Bright Executive Theme) */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden mb-8 sm:mb-12 lg:mb-16">
+          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 overflow-hidden mb-8 lg:mb-10">
             <div className="grid grid-cols-1 lg:grid-cols-12">
               
               {/* Leadership Photo Section (Mobile Responsive High-Focus Layout) */}

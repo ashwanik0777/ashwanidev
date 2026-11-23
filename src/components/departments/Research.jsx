@@ -67,7 +67,7 @@ const HeroBanner = ({
 
           {/* Decorative spinning shapes */}
           {showDecorations && (
-            <div className="mt-12 flex justify-center space-x-8">
+            <div className="mt-8 flex justify-center space-x-8">
               <div
                 className="w-12 h-12 border-2 border-white/30 rounded-full animate-spin"
                 style={{ animationDuration: "8s" }}

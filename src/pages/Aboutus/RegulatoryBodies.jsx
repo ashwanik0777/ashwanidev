@@ -159,7 +159,7 @@ const RegulatoryBodies = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 pb-24">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 pb-12">
         {/* Banner Section */}
         <BannerSection
           title="Regulatory Bodies & Accreditations"

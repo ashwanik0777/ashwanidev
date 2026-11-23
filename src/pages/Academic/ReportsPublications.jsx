@@ -45,7 +45,7 @@ const ANNUAL_REPORTS_LIST = [
 const ReportsPublications = () => {
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50 font-sans pb-16">
+      <div className="min-h-screen bg-slate-50 font-sans pb-10">
         {/* Banner Section */}
         <BannerSection
           title="Annual Reports"

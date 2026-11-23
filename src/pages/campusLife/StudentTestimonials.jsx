@@ -47,7 +47,7 @@ const StudentTestimonials = () => {
 
   return (
     <SearchableWrapper>
-      <section className="py-16 bg-slate-50 relative overflow-hidden font-sans text-left border-t border-slate-100">
+      <section className="py-6 sm:py-10 bg-slate-50 relative overflow-hidden font-sans text-left border-t border-slate-100">
         {/* Background blobs */}
         <div className="absolute top-0 left-0 w-80 h-80 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/5 rounded-full filter blur-3xl pointer-events-none" />
@@ -55,7 +55,7 @@ const StudentTestimonials = () => {
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-5xl relative z-10">
           
           {/* Header */}
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-10 max-w-3xl mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

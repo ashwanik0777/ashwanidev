@@ -94,14 +94,14 @@ export default function Laboratories() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!laboratoriesData) {
-    return <div className="flex justify-center items-center h-screen text-gray-500">Laboratories data not available.</div>;
+    return <div className="flex justify-center items-center min-h-[40vh] text-gray-500">Laboratories data not available.</div>;
   }
 
   return (
@@ -112,7 +112,7 @@ export default function Laboratories() {
         bgTheme={3}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {laboratoriesData.pdfUrl && (
           <div className="flex justify-end mb-8">
             <a

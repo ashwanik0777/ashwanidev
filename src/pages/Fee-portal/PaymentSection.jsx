@@ -225,7 +225,7 @@ const PaymentSection = ({ amount, onBack, onComplete }) => {
             )}
 
             {currentStep === 3 && (
-              <div className="text-center py-12">
+              <div className="text-center py-8">
                 <div className="mb-6">
                   {isProcessing ? (
                     <Loader2 className="w-16 h-16 text-blue-600 animate-spin mx-auto" />
@@ -253,7 +253,7 @@ const PaymentSection = ({ amount, onBack, onComplete }) => {
             )}
 
             {currentStep === 4 && (
-              <div className="text-center py-12">
+              <div className="text-center py-8">
                 <div className="mb-6">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                     <CheckCircle className="w-8 h-8 text-green-600" />

@@ -238,12 +238,12 @@ const EventDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50/50 pb-20 animate-pulse">
+      <div className="min-h-screen bg-gray-50/50 pb-10 animate-pulse">
         <div className="container mx-auto px-4 md:px-8 pt-8">
           <div className="mb-8">
             <div className="h-8 w-32 bg-gray-200 rounded-md"></div>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-8">
             <div className="lg:col-span-6 xl:col-span-5">
               <div className="rounded-2xl bg-gray-200 aspect-[4/5.5]"></div>
             </div>
@@ -270,7 +270,7 @@ const EventDetail = () => {
   if (!event) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4 py-32 text-center">
+        <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-3xl font-extrabold text-blue-700 mb-6">
             Event not found
           </h1>
@@ -315,7 +315,7 @@ const EventDetail = () => {
   const flyerImage = event.flyerUrl || '';
 
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-20">
+    <div className="min-h-screen bg-gray-50/50 pb-10">
       <div className="container mx-auto px-4 md:px-8 pt-8">
         <div className="mb-8">
           <Link to="/announcements/event">
@@ -326,7 +326,7 @@ const EventDetail = () => {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-8">
           {/* Left Column: Flyer */}
           <div className="lg:col-span-6 xl:col-span-5">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5.5] bg-gray-100 border border-gray-200 flex items-center justify-center">
@@ -427,7 +427,7 @@ const EventDetail = () => {
         </div>
 
         {/* Full-width Description & Actions */}
-        <div className="mb-16 max-w-7xl">
+        <div className="mb-10 max-w-7xl">
           <h3 className="text-3xl font-bold text-gray-900 mb-6 border-b pb-4">About This Event</h3>
           <p className="text-gray-700 leading-relaxed text-lg whitespace-pre-line mb-10">
             {event.description}
@@ -510,7 +510,7 @@ const EventDetail = () => {
 
         {/* Gallery Section */}
         {event.status !== "upcoming" && eventImages.length > 0 && (
-          <div className="mt-20">
+          <div className="mt-10">
             <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b pb-4">Event Gallery</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {eventImages.map((image, index) => (

@@ -44,9 +44,9 @@ const StudentStartup = ( {startupData={startups: [], stats: {}}}) => {
   };
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-6 sm:py-10 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             Student Startups
           </h2>
@@ -54,7 +54,7 @@ const StudentStartup = ( {startupData={startups: [], stats: {}}}) => {
         </div>
 
         {/* Dynamic Stats Section */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           <div className="bg-white backdrop-blur-sm rounded-lg p-6 text-center shadow-lg">
             <div className="text-3xl font-bold text-blue-600 mb-2">{startups.length}</div>
             <div className="text-gray-600">Active Student Startups</div>

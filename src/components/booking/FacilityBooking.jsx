@@ -18,7 +18,7 @@ const FacilityBooking = () => {
 
   if (!facility) {
     return (
-      <div className="container mx-auto py-12 text-center">
+      <div className="container mx-auto py-8 text-center">
         <p className="text-xl">Facility not found.</p>
         <button
           onClick={() => navigate('/booking')}
@@ -41,7 +41,7 @@ const FacilityBooking = () => {
   };
 
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto py-8">
       <button
         onClick={() => navigate('/booking')}
         className="mb-4 bg-gray-300 border-2 border-gray-600 rounded-md px-4 py-2 text-gbu-blue hover:text-gbu-darkBlue"

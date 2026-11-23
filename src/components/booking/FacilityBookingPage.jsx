@@ -87,7 +87,7 @@ const FacilityBookingPage = () => {
 
   if (!facility) {
     return (
-      <div className="container mx-auto py-16 text-center">
+      <div className="container mx-auto py-10 text-center">
         <p className="text-xl text-stone-600 mb-4">Facility not found in database.</p>
         <button
           onClick={() => navigate("/booking")}
@@ -156,7 +156,7 @@ const FacilityBookingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 pt-8 pb-32 px-4 sm:px-6">
+    <div className="min-h-screen bg-stone-50 pt-8 pb-12 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Back Link */}
         <button
@@ -169,7 +169,7 @@ const FacilityBookingPage = () => {
 
         {/* Success Page Render */}
         {bookingSuccessToken ? (
-          <div className="max-w-xl mx-auto my-12 p-8 bg-white border border-stone-200 rounded-3xl shadow-lg text-center space-y-6">
+          <div className="max-w-xl mx-auto my-8 p-8 bg-white border border-stone-200 rounded-3xl shadow-lg text-center space-y-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-50 text-emerald-600">
               <CheckCircle className="h-10 w-10" />
             </div>
@@ -425,7 +425,7 @@ const FacilityBookingPage = () => {
             {showBookingForm && (
               <div 
                 ref={bookingSectionRef} 
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 pt-8 border-t border-stone-200"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 pt-8 border-t border-stone-200"
               >
                 <div className="space-y-4">
                   <h3 className="text-lg font-bold text-stone-950 px-1">Check Space Availability</h3>

@@ -404,7 +404,7 @@ const [dialogImage, setDialogImage] = useState(null);
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-32"
+              className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-12"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}

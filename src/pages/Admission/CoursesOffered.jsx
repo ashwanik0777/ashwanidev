@@ -267,7 +267,7 @@ const CoursesOffered = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50/50 pb-16">
+      <div className="min-h-screen bg-slate-50/50 pb-10">
         <HeroBanner
           title="Courses Offered"
           subtitle="Explore our diverse academic programs across multiple schools and degree levels"
@@ -278,7 +278,7 @@ const CoursesOffered = () => {
           <StatsCard stats={educationStatsData} />
 
           {/* Controls Bar */}
-          <div className="mt-12 bg-white rounded-2xl border border-slate-100 shadow-xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="mt-8 bg-white rounded-2xl border border-slate-100 shadow-xl p-5 md:p-6 mb-8 flex flex-col md:flex-row items-center justify-between gap-5">
             {/* Program Tabs */}
             <div className="flex bg-slate-100/85 p-1 rounded-xl w-full md:w-auto">
               {programButtons.map((btn) => (

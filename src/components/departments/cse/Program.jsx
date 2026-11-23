@@ -206,7 +206,7 @@ const Programs = ({
 
   if (!programs || programs.length === 0) {
     return (
-      <section className="py-12 bg-white">
+      <section className="py-6 sm:py-8 bg-white">
         <div className="container mx-auto px-4">
           <p className="text-center text-slate-500">No programs available</p>
         </div>
@@ -256,7 +256,7 @@ const Programs = ({
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 bg-slate-50/80 rounded-2xl border border-slate-100">
+            <div className="text-center py-8 bg-slate-50/80 rounded-2xl border border-slate-100">
               <p className="text-sm text-slate-500">No programs available in this category.</p>
               <button
                 onClick={() => setActiveFilter("ALL")}

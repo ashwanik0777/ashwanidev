@@ -323,7 +323,7 @@ const UniversityGovernance = () => {
           bgTheme={9}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Tabs Section */}
           <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-4 sm:p-8 mb-8 sm:mb-10 border border-slate-100">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6 sm:mb-8 text-center">
@@ -377,7 +377,7 @@ const UniversityGovernance = () => {
               </div>
 
               {/* Meeting Table */}
-              <div className="flex items-center justify-center mt-10 sm:mt-12 gap-3 mb-4 sm:mb-6">
+              <div className="flex items-center justify-center mt-10 sm:mt-8 gap-3 mb-4 sm:mb-6">
                 <div className="p-2.5 sm:p-3 bg-gradient-to-r from-teal-100 to-indigo-100 rounded-full text-teal-700">
                   <NotebookPen className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>

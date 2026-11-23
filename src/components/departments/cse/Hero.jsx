@@ -50,7 +50,7 @@ const HeroSection = ({
   backgroundImage
 }) => {
   return (
-    <section id="home" className="relative bg-gradient-to-br from-blue-50 via-background to-purple-50 py-20 overflow-hidden">
+    <section id="home" className="relative bg-gradient-to-br from-blue-50 via-background to-purple-50 py-6 sm:py-10 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 opacity-20">
         <img
@@ -81,7 +81,7 @@ const HeroSection = ({
             {subtitle}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Button size="lg" className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
               {primaryButton.label}
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -92,7 +92,7 @@ const HeroSection = ({
           </div>
 
           {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
             {features.map((feature, idx) => (
               <div
                 key={idx}

@@ -13,7 +13,7 @@ const iconMap = {
 };
 
 const OngoingProjects = ({ projects = [] }) => (
-  <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit mb-8 pb-4 border-b border-slate-200">
       Ongoing Sponsored Research Projects
     </h2>
@@ -103,7 +103,7 @@ const ResearchPublications = ({ publications = [] }) => {
   });
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
         <div>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
@@ -221,7 +221,7 @@ const ResearchProjects = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -229,7 +229,7 @@ const ResearchProjects = () => {
 
   if (!researchProjectsData) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500">
+      <div className="flex justify-center items-center min-h-[40vh] text-gray-500">
         Research projects data not available.
       </div>
     );

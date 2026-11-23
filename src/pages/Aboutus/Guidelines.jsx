@@ -23,7 +23,7 @@ const guidelinesData = [
 const Guidelines = () => {
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 pb-20">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100 pb-10">
         {/* Banner Section - No subtitle or description */}
         <BannerSection
           title="Guidelines"
@@ -31,7 +31,7 @@ const Guidelines = () => {
           bgTheme={9}
         />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header Card */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200 mb-8 sm:mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">

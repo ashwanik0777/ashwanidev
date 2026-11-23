@@ -29,10 +29,10 @@ const VirtualTour = () => {
 
   return (
     <SearchableWrapper>
-      <section id="campus-tour" className="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden font-sans">
+      <section id="campus-tour" className="py-6 sm:py-10 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden font-sans">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl">
           {/* Header */}
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-10 max-w-3xl mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

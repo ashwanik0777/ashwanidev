@@ -9,7 +9,7 @@ const AboutRAEM = ({
   photos = [],
 }) => {
   return (
-    <section className="py-8 sm:py-12 bg-white">
+    <section className="py-6 sm:py-8 bg-white">
       <div className="text-center mb-10">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-900 tracking-tight">
           {title} <span className="text-blue-600">{highlight}</span>

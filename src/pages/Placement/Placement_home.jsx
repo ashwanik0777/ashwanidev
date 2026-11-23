@@ -25,8 +25,8 @@ function Placement_home() {
         bgTheme={11}
       />
 
-      <div className="bg-white py-10 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="bg-white py-10 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           
           {/* Welcome & Director Contact */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-sm border border-slate-200 flex flex-col lg:flex-row items-center gap-8">

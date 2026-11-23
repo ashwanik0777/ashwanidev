@@ -18,7 +18,7 @@ const EventGallery = ({
     categoryColors[category] || "bg-gray-100 text-gray-800";
 
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-6 sm:py-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ const EventGallery = ({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-20"
+              className="bg-white rounded-xl shadow-2xl p-4 md:p-6 w-[90vw] max-w-xl relative mt-10"
               onClick={(e) => e.stopPropagation()}
             >
               <button

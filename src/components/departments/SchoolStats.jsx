@@ -55,7 +55,7 @@ const SchoolStats = ({ title, stats }) => {
   const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   return (
-    <section className="py-10 bg-white" ref={containerRef}>
+    <section className="py-6 sm:py-10 bg-white" ref={containerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {title && (
           <motion.div

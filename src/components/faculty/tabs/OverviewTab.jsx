@@ -42,7 +42,7 @@ const OverviewTab = ({ activeTab, profile }) => {
 
   if (!profile) {
     return (
-      <div className="text-center text-gray-600 py-12">
+      <div className="text-center text-gray-600 py-8">
         Loading faculty details...
       </div>
     );

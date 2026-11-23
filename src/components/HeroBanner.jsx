@@ -85,7 +85,8 @@ const BannerSection = ({ title, subtitle, bgTheme = 1 }) => {
   const theme = bgThemes[bgTheme] || bgThemes[1];
 
   return (
-    <section className={clsx("relative min-h-[15vh] flex items-center justify-center overflow-hidden py-8", theme.sectionBg)}>
+    // Sized by its title, with modest padding: a fixed minimum height left wide empty bands above and below.
+    <section className={clsx("relative flex items-center justify-center overflow-hidden py-6 sm:py-8", theme.sectionBg)}>
       {/* Animated Background Circles */}
       <div className="absolute inset-0">
         {theme.circles.map((circle, idx) => (

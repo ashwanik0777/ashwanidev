@@ -20,7 +20,7 @@ export default function DroneCourseCard({
   syllabusLink,
 }) {
   return (
-    <section className="py-8 sm:py-12 bg-white w-full">
+    <section className="py-6 sm:py-8 bg-white w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <motion.div

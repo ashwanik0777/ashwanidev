@@ -14,8 +14,8 @@ At Gautam Buddha University, we are resolute in our commitment to attain and sur
   };
 
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-br from-blue-50 to-purple-50">
-      <div className="text-center mb-12">
+    <section className="py-8 sm:py-10 bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
           Vice Chancellor's Message
         </h2>

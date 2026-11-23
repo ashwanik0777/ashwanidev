@@ -63,7 +63,7 @@ const SuccessStoriesCarousel = () => {
 
   return (
     <SearchableWrapper>
-    <div className="bg-gray-100 rounded-lg p-8 mb-16">
+    <div className="bg-gray-100 rounded-lg p-8 mb-10">
       <Slider {...settings}>
         {successStories.map((story, idx) => (
           <div key={idx}>

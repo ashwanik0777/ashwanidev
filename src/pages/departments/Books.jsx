@@ -160,7 +160,7 @@ export default function Books() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -168,7 +168,7 @@ export default function Books() {
 
   if (!booksData) {
     return (
-      <div className="flex justify-center items-center h-screen text-gray-500">
+      <div className="flex justify-center items-center min-h-[40vh] text-gray-500">
         Books data not available.
       </div>
     );
@@ -213,7 +213,7 @@ export default function Books() {
         />
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search & Filter Header */}
         <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-slate-200 mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

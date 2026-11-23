@@ -290,10 +290,10 @@ const ViceChancellor = () => {
         />
 
         {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-8">
 
           {/* Top Profile & Message Box */}
-          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-stretch mb-8 sm:mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 items-stretch mb-8">
             {/* Vice Chancellor Card */}
             <div className="w-full lg:w-1/3 shrink-0 flex flex-col">
               <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-200 text-center h-full flex flex-col justify-between">

@@ -109,7 +109,7 @@ const actData = [
 const Act = () => {
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/40 to-slate-100 pb-24">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/40 to-slate-100 pb-12">
         {/* Banner Section */}
         <BannerSection
           title="GBU Act, Statute and Ordinance"
@@ -119,7 +119,7 @@ const Act = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
           {/* Legislative Overview Banner Card */}
-          <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-md border border-blue-100 mb-12 relative overflow-hidden bg-gradient-to-br from-blue-50/70 via-slate-50 to-white">
+          <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-md border border-blue-100 mb-8 relative overflow-hidden bg-gradient-to-br from-blue-50/70 via-slate-50 to-white">
             <div className="absolute -top-10 -right-10 w-60 h-60 bg-blue-100/50 rounded-full blur-2xl" />
             <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-4">

@@ -977,7 +977,7 @@ const NewsNotifications = ({ schoolCode }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-center py-16"
+            className="text-center py-10"
           >
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 max-w-md mx-auto">
               <svg
@@ -1024,7 +1024,7 @@ const NewsNotifications = ({ schoolCode }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-12"
+            className="mt-8"
           >
             <EnhancedPagination
               currentPage={currentPage}

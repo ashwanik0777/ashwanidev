@@ -214,7 +214,7 @@ const StudentAchievements = () => {
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-6 pb-12">
+      <main className="max-w-7xl mx-auto px-6 pb-8">
         <div className="flex justify-end mb-4">
           <button
             onClick={() => setShowArchived(!showArchived)}

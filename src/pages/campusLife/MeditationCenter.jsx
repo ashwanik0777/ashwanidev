@@ -125,7 +125,7 @@ const MeditationCenter = () => {
 
   return (
     <SearchableWrapper>
-      <div className="min-h-screen bg-slate-50 font-sans text-left pb-16">
+      <div className="min-h-screen bg-slate-50 font-sans text-left pb-10">
         {/* Banner Section */}
         <BannerSection
           title="Mahatma Jyotiba Phule Dhyan Kendra"
@@ -134,7 +134,7 @@ const MeditationCenter = () => {
         />
 
         {/* Main Single Page Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
           {/* Section 1: ABOUT */}
           <section className="bg-white rounded-3xl p-6 sm:p-8 md:p-12 border border-slate-100 shadow-md">

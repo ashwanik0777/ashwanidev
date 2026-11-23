@@ -145,7 +145,7 @@ export default function AboutUsPage() {
       />
 
       {/* Key numbers: one strip overlapping the banner's lower edge, thin dividers between the cells */}
-      <section className="relative z-10 -mt-4 sm:-mt-5">
+      <section className="relative z-10 -mt-2 sm:-mt-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-md">
             {stats.map((stat) => (

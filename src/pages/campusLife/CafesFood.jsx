@@ -131,11 +131,11 @@ const CafesFood = () => {
 
   return (
     <SearchableWrapper>
-      <section id="cafes-food" className="py-16 bg-white relative overflow-hidden font-sans text-left">
+      <section id="cafes-food" className="py-6 sm:py-10 bg-white relative overflow-hidden font-sans text-left">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl relative z-10">
           
           {/* Header */}
-          <div className="text-center mb-14 max-w-3xl mx-auto">
+          <div className="text-center mb-8 max-w-3xl mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -147,7 +147,7 @@ const CafesFood = () => {
           </div>
 
           {/* Category Filters Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-14 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 max-w-4xl mx-auto">
             {GBU_FOOD_CATEGORIES.map((cat, idx) => (
               <motion.div
                 key={idx}

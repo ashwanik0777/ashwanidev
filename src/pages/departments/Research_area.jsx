@@ -153,7 +153,7 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
 
       {/* Faculty Research Profiles Section */}
       {facultyProfiles && facultyProfiles.length > 0 && (
-        <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 bg-slate-50">
           <div className="max-w-7xl mx-auto">
             {/* Header & Filter Controls */}
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 pb-6 border-b border-slate-200">
@@ -208,7 +208,7 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
             </div>
 
             {filteredFaculty.length === 0 && (
-              <div className="text-center py-16 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
+              <div className="text-center py-10 bg-white rounded-xl border border-slate-200 shadow-sm mt-6">
                 <Search className="w-10 h-10 text-slate-300 mx-auto mb-3" />
                 <h3 className="text-base font-bold text-slate-800">No Faculty Profiles Found</h3>
                 <p className="text-sm text-slate-500 mt-1">
@@ -227,9 +227,9 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
       )}
 
       {domains && domains.length > 0 && (
-        <section className="py-16 px-4 bg-white">
+        <section className="py-6 sm:py-10 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
               Major Research Domains
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -279,7 +279,7 @@ const ResearchArea = ({ hero, stats, domains, funding, collaborations, facultyPr
       )}
 
       {((funding && funding.length > 0) || (collaborations && collaborations.length > 0)) && (
-        <section className="py-16 px-4 bg-white">
+        <section className="py-6 sm:py-10 px-4 bg-white">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
             {funding && funding.length > 0 && (
               <div>
@@ -356,14 +356,14 @@ export default function ResearchPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!researchAreaData) {
-    return <div className="flex justify-center items-center h-screen text-gray-500">Research data not available.</div>;
+    return <div className="flex justify-center items-center min-h-[40vh] text-gray-500">Research data not available.</div>;
   }
 
   const stats = (researchAreaData.stats || []).map((item) => ({

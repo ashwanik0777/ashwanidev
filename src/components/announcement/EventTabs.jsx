@@ -63,7 +63,7 @@ const EventTabs = ({
 
         <TabsContent value={activeTab} active>
           {showEmptyMessage ? (
-            <div className="text-center text-gray-500 py-12 text-lg">
+            <div className="text-center text-gray-500 py-8 text-lg">
               No {activeTab} events.
             </div>
           ) : (

@@ -33,7 +33,7 @@ const ContactBanner = () => {
       <div className="min-h-screen bg-[#F8FAFC] selection:bg-blue-200 font-inter">
         
         {/* Custom Premium Hero Section */}
-        <div className="relative pt-20 sm:pt-32 pb-10 sm:pb-20 overflow-hidden">
+        <div className="relative pt-10 sm:pt-12 pb-10 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/40 via-[#F8FAFC] to-purple-100/40"></div>
             <motion.div 
@@ -80,7 +80,7 @@ const ContactBanner = () => {
         </div>
 
         {/* Highly Organized Contact Information Section */}
-        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-20 pb-12 sm:pb-20">
+        <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-20 pb-8 sm:pb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             
             {/* Campus Address Card */}
@@ -154,7 +154,7 @@ const ContactBanner = () => {
         </div>
 
         {/* Map & Social Section */}
-        <section className="py-20 bg-white border-t border-slate-100">
+        <section className="py-6 sm:py-10 bg-white border-t border-slate-100">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               

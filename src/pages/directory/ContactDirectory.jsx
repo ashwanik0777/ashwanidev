@@ -77,7 +77,7 @@ const ContactDirectory = () => {
           subtitle="Gautam Buddha University"
           bgTheme={4}
         />
-      <div className="relative mx-0 md:mx-10 lg:mx-20 mb-20 bg-[#F8FAFC] min-h-screen smooth-transition pb-10">
+      <div className="relative mx-0 md:mx-10 lg:mx-20 mb-10 bg-[#F8FAFC] min-h-screen smooth-transition pb-10">
        
 
         {/* Search & Filter Section */}
@@ -130,7 +130,7 @@ const ContactDirectory = () => {
         {/* Contacts Section */}
         <div className="container mx-auto px-4">
           {filteredContacts.length === 0 ? (
-            <div className="text-center py-16 md:py-24 animate-fade-in bg-white rounded-3xl border border-slate-100 shadow-sm">
+            <div className="text-center py-10 md:py-12 animate-fade-in bg-white rounded-3xl border border-slate-100 shadow-sm">
               <Search className="h-16 w-16 mx-auto mb-4 text-slate-300" />
               <h3 className="text-xl md:text-2xl font-bold text-slate-700 mb-2 font-outfit">
                 No contacts found
@@ -170,7 +170,7 @@ const ContactDirectory = () => {
 
               {/* Pagination Controls */}
               {totalPages > 1 && (
-                <div className="flex justify-center mt-12 gap-4 items-center animate-fade-in-up">
+                <div className="flex justify-center mt-8 gap-4 items-center animate-fade-in-up">
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                     disabled={currentPage === 1}

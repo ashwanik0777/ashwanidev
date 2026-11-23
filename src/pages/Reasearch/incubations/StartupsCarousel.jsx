@@ -5,7 +5,7 @@ import { incubationLogos } from "../../../Data/incubationData.js";
 export default function StartupsCarousel() {
   return (
     <SearchableWrapper>
-      <div className="bg-slate-900 py-16 border-t border-slate-800 text-white overflow-hidden">
+      <div className="bg-slate-900 py-10 border-t border-slate-800 text-white overflow-hidden">
         <div className="text-center mb-10">
           <span className="text-xs font-bold tracking-widest text-indigo-400 uppercase bg-indigo-950/80 px-4 py-1.5 rounded-full border border-indigo-800">
             Portfolio Highlights

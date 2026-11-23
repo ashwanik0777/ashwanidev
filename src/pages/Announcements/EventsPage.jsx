@@ -908,9 +908,9 @@ const EventsPage = ({ schoolCode }) => {
         bgTheme={2}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Navigation Tabs - Only 2 tabs */}
-        <div className="mb-12">
+        <div className="mb-8">
           <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
               {tabs.map((tab) => {
@@ -944,7 +944,7 @@ const EventsPage = ({ schoolCode }) => {
         </div>
 
         {/* Modern Search Filters */}
-        <div className="mb-12">
+        <div className="mb-8">
           <ModernSearchFilters
             onSearch={handleSearch}
             onDateRangeFilter={handleDateRangeFilter}
@@ -976,13 +976,13 @@ const EventsPage = ({ schoolCode }) => {
 
         {/* Events Grid */}
         {paginatedEvents.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             {paginatedEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-20">
+          <div className="text-center py-10">
             <div className="max-w-md mx-auto">
               <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Search className="w-12 h-12 text-blue-600" />

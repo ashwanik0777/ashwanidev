@@ -18,9 +18,9 @@ const StudentAchievements = ({achievements=[]}) => {
     setCurrentSlide((prev) => (prev - 1 + achievements.length) % achievements.length);
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-6 sm:py-10 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-800">
             Student Achievements
           </h2>

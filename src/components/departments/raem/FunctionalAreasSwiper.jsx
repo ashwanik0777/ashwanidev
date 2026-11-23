@@ -11,7 +11,7 @@ export default function FunctionalAreasSwiper({
   functionalAreas = [],
 }) {
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <section className="py-6 sm:py-8 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function FunctionalAreasSwiper({
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="pb-14"
+            className="pb-8"
           >
             {functionalAreas.map((area, index) => (
               <SwiperSlide key={index} className="h-auto">

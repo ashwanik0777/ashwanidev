@@ -125,7 +125,7 @@ const AcademicCalendar = () => {
         />
 
         {/* Content Container */}
-        <section className="py-14 bg-white">
+        <section className="py-6 sm:py-8 bg-white">
           <div className="container mx-auto px-4 max-w-5xl">
             {/* Header Title & Search Bar */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-6 border-b border-slate-200">
@@ -157,7 +157,7 @@ const AcademicCalendar = () => {
             {/* Calendars List */}
             <div className="space-y-4">
               {filteredCalendars.length === 0 ? (
-                <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200">
+                <div className="text-center py-8 bg-slate-50 rounded-2xl border border-slate-200">
                   <FileText className="w-10 h-10 text-slate-400 mx-auto mb-3" />
                   <p className="text-gray-600 font-medium">No academic calendar found matching "{searchTerm}"</p>
                 </div>

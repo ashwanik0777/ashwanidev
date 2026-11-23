@@ -86,7 +86,7 @@ const StrategicPerspective = () => {
       </section>
 
       {/* Quote Ticker */}
-      <section className="py-8 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-6 sm:py-8 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <p className="text-2xl text-white font-light italic">
@@ -97,9 +97,9 @@ const StrategicPerspective = () => {
       </section>
 
       {/* Strategic Goals */}
-      <section className="py-16 bg-gradient-to-br from-cyan-50 to-white">
+      <section className="py-6 sm:py-10 bg-gradient-to-br from-cyan-50 to-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Strategic Execution</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">Strategic Execution</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {strategies.map((strategy, index) => (
@@ -136,9 +136,9 @@ const StrategicPerspective = () => {
       </section>
 
       {/* International Collaborations Map */}
-      <section className="py-16 bg-gradient-to-br from-purple-50 to-white">
+      <section className="py-6 sm:py-10 bg-gradient-to-br from-purple-50 to-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Global Collaborations</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">Global Collaborations</h2>
           
           <div className="max-w-6xl mx-auto">
             <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl p-12 border border-white/20">
@@ -176,9 +176,9 @@ const StrategicPerspective = () => {
       </section>
 
       {/* Future Vision */}
-      <section className="py-16 bg-gradient-to-br from-indigo-50 to-white">
+      <section className="py-6 sm:py-10 bg-gradient-to-br from-indigo-50 to-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Vision 2030</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">Vision 2030</h2>
           
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl p-12 border border-white/20">
@@ -208,7 +208,7 @@ const StrategicPerspective = () => {
                 </div>
               </div>
               
-              <div className="text-center mt-12">
+              <div className="text-center mt-8">
                 <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 flex items-center mx-auto">
                   Learn More About Our Vision
                   <ArrowRight className="w-5 h-5 ml-2" />

@@ -242,7 +242,7 @@ const HostelDetailed = () => {
         subtitle="Explore our hostels with modern amenities and comfortable living."
         bgTheme={1}
       />
-      <div className="container mt-6 sm:mt-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl pb-12">
+      <div className="container mt-6 sm:mt-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl pb-8">
         {/* === Category Cards === */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8">
           {categories.map((cat) => (
@@ -371,7 +371,7 @@ const HostelDetailed = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="my-12 pt-5"
+            className="my-8 pt-5"
           >
             <Card className="p-4 md:p-6 rounded-3xl bg-gradient-to-br from-white to-gray-50 shadow-xl hover:shadow-2xl transition-shadow duration-300">
               <CardContent>

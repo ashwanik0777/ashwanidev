@@ -57,7 +57,7 @@ const EventGallerySlider = ({ events = [] }) => {
         />
 
         {/* Caption overlay */}
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent px-4 py-4 pt-16">
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent px-4 py-4 pt-10">
           <h4 className="font-semibold text-white text-base sm:text-lg leading-snug line-clamp-2 drop-shadow-md">
             {current?.title}
           </h4>

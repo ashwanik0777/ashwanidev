@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 
 const Mentors = ({ sectionTitle, mentors }) => {
   return (
-    <section className="pt-4 pb-16 bg-gray-50 mx-20">
+    <section className="pt-4 pb-10 bg-gray-50 mx-20">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-3xl sm:text-4xl font-bold text-center text-black mb-10 sm:mb-12"
+          className="text-3xl sm:text-4xl font-bold text-center text-black mb-10 sm:mb-8"
         >
           <span className="text-blue-800">{sectionTitle}</span>
           <div className="w-20 sm:w-24 h-1 bg-blue-500 mx-auto mt-2 rounded-full"></div>

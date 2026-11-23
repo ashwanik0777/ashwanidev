@@ -52,11 +52,11 @@ const HostelDining = () => {
 
   return (
     <SearchableWrapper>
-      <section id="hostel-life" className="py-16 bg-slate-50 relative overflow-hidden font-sans text-left">
+      <section id="hostel-life" className="py-6 sm:py-10 bg-slate-50 relative overflow-hidden font-sans text-left">
         <div className="container mx-auto px-4 sm:px-8 lg:px-16 max-w-7xl relative z-10">
 
           {/* Section Header */}
-          <div className="text-center mb-16 max-w-3xl mx-auto">
+          <div className="text-center mb-10 max-w-3xl mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ const HostelDining = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 p-6 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-500/10"
+            className="mb-8 p-6 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-blue-500/10"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/20 flex-shrink-0">
@@ -94,7 +94,7 @@ const HostelDining = () => {
           </motion.div>
 
           {/* Main Option Tabs (Hostels vs Dining) */}
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-8">
             <div className="bg-slate-200/60 p-1.5 rounded-full flex gap-1 border border-slate-200">
               <button
                 onClick={() => setActiveMainTab('hostels')}
@@ -116,7 +116,7 @@ const HostelDining = () => {
           {activeMainTab === 'hostels' ? (
             <div>
               {/* Category subtabs (boys vs girls vs married) */}
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <button
                   onClick={() => setHostelCategory('boys')}
                   className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 border cursor-pointer ${hostelCategory === 'boys' ? 'bg-slate-900 text-white border-slate-900 shadow-md' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
@@ -184,7 +184,7 @@ const HostelDining = () => {
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-3xl p-8 md:p-12 border border-slate-100 shadow-xl text-left"
             >
-              <div className="max-w-3xl mb-12">
+              <div className="max-w-3xl mb-8">
                 <h3 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <Utensils size={24} className="text-blue-600" />
                   <span>Centralized Cooperative Mess Management</span>
@@ -193,7 +193,7 @@ const HostelDining = () => {
               </div>
 
               {/* Dining Features */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {GBU_HOSTELS_DATA.dining.features.map((feature, i) => (
                   <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-100">
                     <h4 className="font-bold text-slate-900 mb-2">{feature.title}</h4>

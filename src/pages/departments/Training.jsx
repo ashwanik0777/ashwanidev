@@ -115,7 +115,7 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Overview Section */}
       {overview && (
-        <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section className="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {overview.lead && (
             <div className="bg-white border border-slate-200/90 p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm mb-8">
               <div className="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">
@@ -171,7 +171,7 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Training Programs */}
       {trainingPrograms && trainingPrograms.length > 0 && (
-        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
+        <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
               Training Programs & Courses
@@ -188,7 +188,7 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Short-Term Workshops & Symposia Table */}
       {workshopsList && workshopsList.length > 0 && (
-        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
+        <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200/60">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 font-outfit">
               Short-Term Workshops & Symposia (2014 – Present)
@@ -226,8 +226,8 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Consultancy Services */}
       {((technicalConsultancy && technicalConsultancy.length > 0) || (businessConsultancy && businessConsultancy.length > 0)) && (
-        <section className="py-16 px-4 bg-gray-50 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Consultancy Services</h2>
+        <section className="py-6 sm:py-10 px-4 bg-gray-50 max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Consultancy Services</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {technicalConsultancy && technicalConsultancy.length > 0 && <ConsultancyBlock title="Technical Consultancy" services={technicalConsultancy} />}
             {businessConsultancy && businessConsultancy.length > 0 && <ConsultancyBlock title="Business Consultancy" services={businessConsultancy} />}
@@ -237,8 +237,8 @@ const TrainingConsultancy = ({ hero, stats, overview, trainingPrograms, technica
 
       {/* Success Stories */}
       {successStories && successStories.length > 0 && (
-        <section className="py-16 px-4 bg-white max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Success Stories</h2>
+        <section className="py-6 sm:py-10 px-4 bg-white max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Success Stories</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {successStories.map((s, i) => <SuccessCard key={i} {...s} />)}
           </div>
@@ -287,7 +287,7 @@ export default function TrainingConsultancyPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center min-h-[40vh]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );

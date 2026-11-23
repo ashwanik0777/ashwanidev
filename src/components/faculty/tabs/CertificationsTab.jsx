@@ -7,7 +7,7 @@ import React from 'react';
  );
  
  export const CardHeader = ({ className = "", children, ...props }) => (
-   <div className={`px-6 pt-6 pb-2  border-solid${className}`} {...props}>
+   <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 ${className}`} {...props}>
      {children}
    </div>
  );
@@ -19,7 +19,7 @@ import React from 'react';
  );
  
  export const CardContent = ({ className = "", children, ...props }) => (
-   <div className={`px-6 py-4 ${className}`} {...props}>
+   <div className={`px-4 sm:px-6 py-4 ${className}`} {...props}>
      {children}
    </div>
  );
@@ -247,7 +247,7 @@ export const CertificationsTab = ({ profile }) => {
 
                   {/* Right Image Area */}
                   {cert.image && (
-                    <div className="lg:w-[320px] shrink-0 self-start">
+                    <div className="w-full lg:w-[320px] shrink-0 self-start">
                       <div className="text-gray-500 text-[11px] font-bold uppercase tracking-wider mb-3">Certificate File</div>
                       <a href={cert.image} target="_blank" rel="noopener noreferrer" className="block relative group rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-white transition-all hover:shadow-md hover:border-blue-300">
                         <div className="absolute inset-0 bg-blue-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">

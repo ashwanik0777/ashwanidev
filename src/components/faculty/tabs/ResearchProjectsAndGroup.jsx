@@ -31,17 +31,17 @@ const Card = ({ className = "", children }) => (
 );
 
 const CardHeader = ({ children }) => (
-  <div className="px-6 pt-6 pb-2  ">
+  <div className="px-4 sm:px-6 pt-5 sm:pt-6 pb-2">
     {children}
   </div>
 );
 
 const CardTitle = ({ className = "", children }) => (
-  <h2 className={`font-semibold text-lg ${className}`}>{children}</h2>
+  <h2 className={`font-semibold text-base sm:text-lg ${className}`}>{children}</h2>
 );
 
 const CardContent = ({ children }) => (
-  <div className="px-6 pb-6 pt-4">{children}</div>
+  <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-3 sm:pt-4">{children}</div>
 );
 
 // Badge Component
@@ -147,12 +147,12 @@ const ResearchProjectsTab = ({ profile }) => {
   if (!projects.length) return null;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Project Statistics */}
       {stats.length > 0 && (
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="text-xl text-gray-900">
+            <CardTitle className="text-xl sm:text-2xl text-gray-900">
               Project Statistics
             </CardTitle>
           </CardHeader>
@@ -165,21 +165,21 @@ const ResearchProjectsTab = ({ profile }) => {
       {/* Projects, with a status filter when there is more than one status */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <CardTitle className="text-2xl text-gray-900">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+            <CardTitle className="text-xl sm:text-2xl text-gray-900">
               Research Projects
             </CardTitle>
             {statuses.length > 1 && (
-              <div className="flex items-center gap-2">
-                <Filter className="w-4 h-4 text-gray-500" />
-                <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <Filter className="w-4 h-4 text-gray-500 shrink-0" />
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {["all", ...statuses].map((status) => (
                     <Button
                       key={status}
                       variant={filterStatus === status ? "default" : "outline"}
                       size="sm"
                       onClick={() => setFilterStatus(status)}
-                      className="text-xs"
+                      className="text-xs px-2.5 py-1"
                     >
                       {status === "all" ? "All Projects" : titleCase(status)}
                     </Button>
@@ -190,14 +190,14 @@ const ResearchProjectsTab = ({ profile }) => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {filteredProjects.map((project, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
+                className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 sm:p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow"
               >
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                  <div className="flex-1">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4">
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {project.title}
                     </h3>

@@ -14,20 +14,20 @@ const TONES = {
  * left out, and the row renders nothing when no tile is left.
  * `stats`: [{ label, value, tone: "blue" | "green" | "purple" | "orange" }]
  */
-const StatTiles = ({ stats, columns = "sm:grid-cols-2 lg:grid-cols-4", className = "" }) => {
+const StatTiles = ({ stats, columns = "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4", className = "" }) => {
   const shown = withValue(stats);
   if (!shown.length) return null;
   return (
-    <div className={`grid gap-4 ${columns} ${className}`}>
+    <div className={`grid gap-2.5 sm:gap-4 ${columns} ${className}`}>
       {shown.map((stat) => {
         const tone = TONES[stat.tone] || TONES.blue;
         return (
           <div
             key={stat.label}
-            className={`rounded-lg border border-solid bg-gradient-to-br p-4 text-center transition-shadow duration-200 hover:shadow-md ${tone.box}`}
+            className={`rounded-lg border border-solid bg-gradient-to-br p-2.5 sm:p-4 text-center transition-shadow duration-200 hover:shadow-md min-w-0 ${tone.box}`}
           >
-            <div className={`text-2xl font-bold ${tone.value}`}>{stat.value}</div>
-            <div className={`text-sm ${tone.label}`}>{stat.label}</div>
+            <div className={`text-lg sm:text-2xl font-bold ${tone.value} leading-tight`}>{stat.value}</div>
+            <div className={`text-[11px] sm:text-sm ${tone.label} mt-0.5 sm:mt-1 leading-tight`}>{stat.label}</div>
           </div>
         );
       })}

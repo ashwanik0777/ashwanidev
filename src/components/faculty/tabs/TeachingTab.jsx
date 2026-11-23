@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 // Minimal custom UI components styled with Tailwind CSS
  
 export const Card = ({ className = "", children, ...props }) => (
-  <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
+  <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm ${className}`} {...props}>
     {children}
   </div>
 );
 
 export const CardHeader = ({ className = "", children, ...props }) => (
-  <div className={`px-6 pt-6 pb-2 `} {...props}>
+  <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 ${className}`} {...props}>
     {children}
   </div>
 );
@@ -21,7 +21,7 @@ export const CardTitle = ({ className = "", children, ...props }) => (
 );
 
 export const CardContent = ({ className = "", children, ...props }) => (
-  <div className={`px-6 py-4 ${className}`} {...props}>
+  <div className={`px-4 sm:px-6 py-4 ${className}`} {...props}>
     {children}
   </div>
 );
@@ -126,18 +126,18 @@ export const TeachingTab = ({ profile }) => {
   ]);
 
   return (
-    <div className="space-y-6 bg-gray-50">
+    <div className="space-y-4 sm:space-y-6">
       {/* Teaching Statistics */}
       {stats.length > 0 && (
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="text-2xl text-gray-900 flex items-center">
-              <BookOpen className="w-6 h-6 mr-2 text-blue-600" />
+            <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+              <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
               Teaching Statistics
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <StatTiles stats={stats} columns="sm:grid-cols-3" />
+            <StatTiles stats={stats} columns="grid-cols-2 sm:grid-cols-3" />
           </CardContent>
         </Card>
       )}
@@ -145,13 +145,13 @@ export const TeachingTab = ({ profile }) => {
       {teachingPhilosophy && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <BookOpen className="w-6 h-6 mr-2 text-blue-600" />
+          <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
             Teaching Philosophy
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-gray-700 leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
             {teachingPhilosophy}
           </p>
         </CardContent>

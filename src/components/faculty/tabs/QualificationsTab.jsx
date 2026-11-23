@@ -4,12 +4,12 @@ import React from 'react';
 
 // Card container with subtle shadow and rounded corners
 const Card = ({ className = '', children }) => (
-  <div className={`bg-white rounded-2xl shadow border border-gray-100 border-solid${className}`}>{children}</div>
+  <div className={`bg-white rounded-2xl shadow border border-gray-100 border-solid ${className}`}>{children}</div>
 );
 
 // CardHeader with padding and bottom border
  export const CardHeader = ({ className = "", children, ...props }) => (
-   <div className={`px-6 pt-6 pb-2  `} {...props}>
+   <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 ${className}`} {...props}>
      {children}
    </div>
  );
@@ -21,7 +21,7 @@ const CardTitle = ({ className = '', children }) => (
 
 // CardContent with padding
 const CardContent = ({ children }) => (
-  <div className="px-6 pb-6 pt-4">{children}</div>
+  <div className="px-4 sm:px-6 pb-5 sm:pb-6 pt-3 sm:pt-4">{children}</div>
 );
 
 // Badge with pill shape, subtle shadow, and transition
@@ -98,41 +98,41 @@ export const QualificationsTab = ({ profile }) => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Educational Qualifications */}
       {qualifications.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <GraduationCap className="w-6 h-6 mr-2 text-blue-600" />
+          <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+            <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
             Educational Qualifications
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {sortedQualifications?.map((qual, index) => (
-              <div key={index} className="relative pl-8 pb-6 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
-                <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full transform -translate-x-2"></div>
-                <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 shadow-sm border border-gray-100 border-solid hover:shadow-md transition-shadow">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                    <div className="flex-1">
-                      {qual.degree && <h3 className="text-lg font-semibold text-gray-900 mb-2">{qual.degree}</h3>}
+              <div key={index} className="relative pl-6 sm:pl-8 pb-5 sm:pb-6 border-l-2 border-blue-200 last:border-l-0 last:pb-0">
+                <div className="absolute left-0 top-0 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-blue-600 rounded-full transform -translate-x-[7px] sm:-translate-x-2"></div>
+                <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 sm:p-6 shadow-xs border border-gray-100 border-solid hover:shadow-sm transition-shadow">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                    <div className="flex-1 min-w-0">
+                      {qual.degree && <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">{qual.degree}</h3>}
                       {qual.institution && (
-                        <p className="text-blue-600 font-medium mb-1">{qual.institution}</p>
+                        <p className="text-blue-600 font-medium text-sm sm:text-base mb-1">{qual.institution}</p>
                       )}
                       {qual.specialization && (
-                        <p className="text-sm text-gray-600 mb-2">{qual.specialization}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 mb-2">{qual.specialization}</p>
                       )}
-                      <div className="flex flex-wrap gap-2 text-sm text-gray-500">
+                      <div className="flex flex-wrap gap-2 text-xs sm:text-sm text-gray-500">
                         {qual.year && (
                           <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
+                            <Calendar className="w-3.5 h-3.5 mr-1" />
                             {qual.year}
                           </div>
                         )}
                         {qual.location && (
                           <div className="flex items-center">
-                            <MapPin className="w-4 h-4 mr-1" />
+                            <MapPin className="w-3.5 h-3.5 mr-1" />
                             {qual.location}
                           </div>
                         )}
@@ -156,30 +156,30 @@ export const QualificationsTab = ({ profile }) => {
       {experience.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-2xl text-gray-900">Professional Experience</CardTitle>
+          <CardTitle className="text-xl sm:text-2xl text-gray-900">Professional Experience</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {sortedExperience?.map((exp, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-100">
-                <div className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 ${pickArray(exp, ['responsibilities']).length > 0 ? 'mb-4' : ''}`}>
-                  <div>
-                    {exp.position && <h3 className="text-xl font-semibold text-gray-900 mb-1">{exp.position}</h3>}
+              <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 sm:p-6 border border-blue-100">
+                <div className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4 ${pickArray(exp, ['responsibilities']).length > 0 ? 'mb-3 sm:mb-4' : ''}`}>
+                  <div className="min-w-0 flex-1">
+                    {exp.position && <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1">{exp.position}</h3>}
                     {exp.department && (
-                      <p className="text-blue-600 font-medium mb-1">{exp.department}</p>
+                      <p className="text-blue-600 font-medium text-sm sm:text-base mb-1">{exp.department}</p>
                     )}
-                    {exp.institution && <p className="text-gray-700">{exp.institution}</p>}
+                    {exp.institution && <p className="text-sm sm:text-base text-gray-700">{exp.institution}</p>}
                   </div>
                   {(asText(exp.type) || formatPeriod(exp)) && (
-                    <div className="flex flex-col items-start lg:items-end gap-2">
+                    <div className="flex flex-wrap lg:flex-col items-start lg:items-end gap-2 shrink-0">
                       {asText(exp.type) && (
                         <Badge className={getTypeColor(exp.type)}>
                           {exp.type.charAt(0).toUpperCase() + exp.type.slice(1)}
                         </Badge>
                       )}
                       {formatPeriod(exp) && (
-                        <span className="text-sm text-gray-600 flex items-center">
-                          <Calendar className="w-4 h-4 mr-1" />
+                        <span className="text-xs sm:text-sm text-gray-600 flex items-center">
+                          <Calendar className="w-3.5 h-3.5 mr-1" />
                           {formatPeriod(exp)}
                         </span>
                       )}
@@ -188,11 +188,11 @@ export const QualificationsTab = ({ profile }) => {
                 </div>
                 {pickArray(exp, ['responsibilities']).length > 0 && (
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Key Responsibilities:</h4>
+                    <h4 className="font-medium text-sm sm:text-base text-gray-900 mb-2">Key Responsibilities:</h4>
                     <ul className="space-y-1">
                       {pickArray(exp, ['responsibilities'])?.map((responsibility, idx) => (
-                        <li key={idx} className="text-sm text-gray-700 flex items-start">
-                          <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <li key={idx} className="text-xs sm:text-sm text-gray-700 flex items-start">
+                          <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 mr-2.5 flex-shrink-0"></span>
                           {responsibility}
                         </li>
                       ))}

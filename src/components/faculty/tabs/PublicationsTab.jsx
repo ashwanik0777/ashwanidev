@@ -86,17 +86,17 @@ const Card = ({ className = "", children }) => (
   </div>
 );
 const CardHeader = ({ children }) => (
-  <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white rounded-t-xl  ">
+  <div className="px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-gray-50 to-white rounded-t-xl">
     {children}
   </div>
 );
 const CardTitle = ({ className = "", children }) => (
-  <h2 className={`font-semibold text-lg text-gray-800 ${className}`}>
+  <h2 className={`font-semibold text-base sm:text-lg text-gray-800 ${className}`}>
     {children}
   </h2>
 );
 const CardContent = ({ children }) => (
-  <div className="px-6 py-4">{children}</div>
+  <div className="px-4 sm:px-6 py-3 sm:py-4">{children}</div>
 );
 
 // Badge Component
@@ -170,15 +170,15 @@ const STAT_TONES = {
 const StatCards = ({ stats }) => {
   if (!stats.length) return null;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
       {stats.map((stat) => {
         const [box, value, label] = STAT_TONES[stat.tone] || STAT_TONES.blue;
         return (
           <Card key={stat.label} className={`bg-gradient-to-br ${box}`}>
             <CardContent>
-              <div className="text-center py-4">
-                <div className={`text-3xl font-bold ${value}`}>{stat.value}</div>
-                <div className={`text-sm font-medium ${label}`}>{stat.label}</div>
+              <div className="text-center py-2 sm:py-4">
+                <div className={`text-xl sm:text-3xl font-bold ${value}`}>{stat.value}</div>
+                <div className={`text-xs sm:text-sm font-medium ${label} mt-0.5 sm:mt-1`}>{stat.label}</div>
               </div>
             </CardContent>
           </Card>
@@ -308,11 +308,11 @@ export default function PublicationsTab({ profile }) {
 
   return (
     <div className="w-full">
-      <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
+      <div className="w-full px-0 sm:px-2 py-4">
         <SubTabs tabs={subTabs} active={current} onChange={setActiveTab} />
 
         {current === "publications" && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Statistics Cards */}
             <StatCards stats={publicationStats} />
 
@@ -320,12 +320,12 @@ export default function PublicationsTab({ profile }) {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Trophy className="w-5 h-5 mr-2 text-yellow-500" />
+                  <Trophy className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-yellow-500 shrink-0" />
                   Publications Overview
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   {`${publications.length} publication${publications.length === 1 ? "" : "s"} across journals, conferences, and books.`}
                 </p>
               </CardContent>
@@ -334,17 +334,17 @@ export default function PublicationsTab({ profile }) {
             {/* Filters */}
             <Card>
               <CardHeader>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
                   <CardTitle>Publication Timeline</CardTitle>
                   {(years.length > 1 || types.length > 1) && (
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2">
-                      <Filter className="w-4 h-4 text-gray-500" />
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+                    <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                      <Filter className="w-4 h-4 text-gray-500 shrink-0" />
                       {years.length > 1 && (
                       <select
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-300 rounded-lg px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
                       >
                         <option value="all">All Years</option>
                         {years?.map((year) => (
@@ -358,7 +358,7 @@ export default function PublicationsTab({ profile }) {
                       <select
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
-                        className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="border border-gray-300 rounded-lg px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
                       >
                         <option value="all">All Types</option>
                         {types.filter(Boolean)?.map((type) => (

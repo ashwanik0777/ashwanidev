@@ -3,11 +3,11 @@ import React from 'react';
 // Card, CardHeader, CardTitle, CardContent, and Badge components defined here for best UI/UX
 
 const Card = ({ className = '', children }) => (
-  <div className={`rounded-xl bg-white border border-gray-200 border-solid shadow-sm${className}`}>{children}</div>
+  <div className={`rounded-xl bg-white border border-gray-200 border-solid shadow-sm ${className}`}>{children}</div>
 );
 
 const CardHeader = ({ children, className = '' }) => (
-  <div className={`px-6 pt-6 pb-2   bg-gradient-to-r from-gray-50 to-white rounded-t-xl${className}`}>
+  <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 bg-gradient-to-r from-gray-50 to-white rounded-t-xl ${className}`}>
     {children}
   </div>
 );
@@ -17,7 +17,7 @@ const CardTitle = ({ children, className = '' }) => (
 );
 
 const CardContent = ({ children, className = '' }) => (
-  <div className={`px-6 pb-6 pt-4 ${className}`}>{children}</div>
+  <div className={`px-4 sm:px-6 pb-5 sm:pb-6 pt-3 sm:pt-4 ${className}`}>{children}</div>
 );
 
 const Badge = ({ children, className = '' }) => (
@@ -82,18 +82,18 @@ export const AdministrationTab = ({ profile }) => {
   };
 
   return (
-    <div className="space-y-6 bg-gray-50">
+    <div className="space-y-4 sm:space-y-6">
       {/* Administrative Impact */}
       {stats.length > 0 && (
         <Card className="hover:shadow-lg transition-shadow duration-300">
           <CardHeader>
-            <CardTitle className="text-2xl text-gray-900 flex items-center">
-              <Settings className="w-6 h-6 mr-2 text-blue-600" />
+            <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+              <Settings className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
               Administrative Impact
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <StatTiles stats={stats} columns="sm:grid-cols-3" />
+            <StatTiles stats={stats} columns="grid-cols-2 sm:grid-cols-3" />
           </CardContent>
         </Card>
       )}
@@ -101,22 +101,22 @@ export const AdministrationTab = ({ profile }) => {
       {administrativeRoles.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <Settings className="w-6 h-6 mr-2 text-blue-600" />
+          <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+            <Settings className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
             Administrative Roles
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {administrativeRoles?.map((role, index) => (
-              <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">{role.role}</h3>
+              <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 sm:p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">{role.role}</h3>
                     {role.department && (
-                      <p className="text-blue-600 font-medium mb-1">{role.department}</p>
+                      <p className="text-blue-600 font-medium text-sm sm:text-base mb-1">{role.department}</p>
                     )}
-                    {role.institution && <p className="text-gray-700 mb-2">{role.institution}</p>}
+                    {role.institution && <p className="text-sm sm:text-base text-gray-700 mb-2">{role.institution}</p>}
                     {(role.startYear || role.endYear || role.duration) && (
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center">

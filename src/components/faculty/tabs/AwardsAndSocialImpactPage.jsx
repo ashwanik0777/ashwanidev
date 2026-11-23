@@ -10,13 +10,13 @@ const Card = ({ className = "", children }) => (
   </div>
 );
 
-const CardHeader = ({ children }) => <div className="px-6 pt-6 pb-2">{children}</div>;
+const CardHeader = ({ children }) => <div className="px-4 sm:px-6 pt-5 sm:pt-6 pb-2">{children}</div>;
 
 const CardTitle = ({ className = "", children }) => (
   <h2 className={`font-bold ${className}`}>{children}</h2>
 );
 
-const CardContent = ({ children }) => <div className="px-6 py-4">{children}</div>;
+const CardContent = ({ children }) => <div className="px-4 sm:px-6 py-4">{children}</div>;
 
 const Badge = ({ className = "", children }) => (
   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${className}`}>
@@ -91,22 +91,22 @@ const AwardsAndSocialImpactPage = ({ profile }) => {
 
   return (
     <div className="w-full">
-      <div className="w-full px-2 sm:px-4 lg:px-6 py-6">
+      <div className="w-full px-0 sm:px-2 py-4">
         <SubTabs tabs={subTabs} active={current} onChange={setActiveTab} />
 
         {current === "awards" ? (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {stats.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-2xl text-gray-900">Awards Summary</CardTitle>
+                  <CardTitle className="text-xl sm:text-2xl text-gray-900">Awards Summary</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
                     {stats.map((stat) => (
-                      <div key={stat.label} className={`rounded-lg border p-4 text-center ${AWARD_TONES[stat.tone]}`}>
-                        <div className="text-2xl font-bold">{stat.value}</div>
-                        <div className="text-sm">{stat.label}</div>
+                      <div key={stat.label} className={`rounded-lg border p-2.5 sm:p-4 text-center ${AWARD_TONES[stat.tone]}`}>
+                        <div className="text-lg sm:text-2xl font-bold leading-tight">{stat.value}</div>
+                        <div className="text-[11px] sm:text-sm mt-0.5 sm:mt-1 leading-tight">{stat.label}</div>
                       </div>
                     ))}
                   </div>

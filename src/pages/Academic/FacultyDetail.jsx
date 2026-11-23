@@ -8,6 +8,7 @@ import { FileText, FlaskConical, GraduationCap, Newspaper } from 'lucide-react';
 import { fetchFacultyPublicProfile } from '../../services/facultyDashboardService';
 import { facultySections, TAB_HAS_DATA } from '../../components/faculty/tabs/facultyTabData';
 import { calculateExperienceMonths, formatExperience } from '../../utils/facultyExperience';
+import { getDevFallbackFaculty } from '../../Data/demoFacultyProfile';
 
 import SearchableWrapper from "../../components/Searchbar/SearchableWrapper.jsx";
 
@@ -90,12 +91,18 @@ const FacultyDetail = () => {
         const backendProfile = await fetchFacultyPublicProfile(id);
         if (backendProfile) {
           setFaculty(normalizeFacultyProfile(backendProfile));
+        } else if (import.meta.env.DEV) {
+          setFaculty(normalizeFacultyProfile(getDevFallbackFaculty(id)));
         } else {
           setFaculty(null); // Explicitly handle null if not found
         }
       } catch (backendErr) {
         console.warn('Backend fetch failed:', backendErr?.response?.status);
-        setFaculty(null);
+        if (import.meta.env.DEV) {
+          setFaculty(normalizeFacultyProfile(getDevFallbackFaculty(id)));
+        } else {
+          setFaculty(null);
+        }
       } finally {
         setLoading(false);
       }

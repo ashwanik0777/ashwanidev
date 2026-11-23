@@ -3,13 +3,13 @@ import { parseImageUrl } from '../../../utils/imageUtils';
 // Minimal UI components with Tailwind CSS, matching usage and effects
 
  export const Card = ({ className = "", children, ...props }) => (
-   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm${className}`} {...props}>
+   <div className={`bg-white rounded-xl border border-gray-200 border-solid shadow-sm ${className}`} {...props}>
      {children}
    </div>
  );
  
  export const CardHeader = ({ className = "", children, ...props }) => (
-   <div className={`px-6 pt-6 pb-2  `} {...props}>
+   <div className={`px-4 sm:px-6 pt-5 sm:pt-6 pb-2 ${className}`} {...props}>
      {children}
    </div>
  );
@@ -21,7 +21,7 @@ import { parseImageUrl } from '../../../utils/imageUtils';
  );
  
  export const CardContent = ({ className = "", children, ...props }) => (
-   <div className={`px-6 py-4 ${className}`} {...props}>
+   <div className={`px-4 sm:px-6 py-4 ${className}`} {...props}>
      {children}
    </div>
  );
@@ -139,26 +139,19 @@ export const TalksTab = ({ profile }) => {
   if (!invitedTalks.length) return null;
 
   return (
-    <div className="space-y-6 bg-gray-50">
+    <div className="space-y-4 sm:space-y-6">
       {/* Talks Overview */}
       {stats.length > 0 && (
       <Card className="hover:shadow-lg transition-shadow duration-300">
-        
          <CardHeader>
-          <CardTitle className="text-2xl text-gray-900 flex items-center">
-            <Mic className="w-6 h-6 mr-2 text-blue-600" />
+          <CardTitle className="text-xl sm:text-2xl text-gray-900 flex items-center">
+            <Mic className="w-5 h-5 sm:w-6 sm:h-6 mr-2 text-blue-600 shrink-0" />
             Invited Talks & Presentations
           </CardTitle>
         </CardHeader>
         
         <CardContent>
           <StatTiles stats={stats} />
-
-          {/* <p className="text-gray-700 leading-relaxed">
-            {pickText(profile, ['name'], 'This faculty member')} delivers invited talks, keynotes and
-            guest lectures, sharing research insights and their practical applications with academic
-            and industry audiences.
-          </p> */}
         </CardContent>
       </Card>
       )}
@@ -166,31 +159,31 @@ export const TalksTab = ({ profile }) => {
       {/* Talk Details */}
       <Card className="hover:shadow-lg transition-shadow duration-300">
         <CardHeader>
-          <CardTitle className="text-xl text-gray-900">Speaking Engagements</CardTitle>
+          <CardTitle className="text-lg sm:text-xl text-gray-900">Speaking Engagements</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {invitedTalks?.map((talk, index) => (
-              <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-                  <div className="flex-1">
-                    {talk.title && <h3 className="text-lg font-semibold text-gray-900 mb-2">{talk.title}</h3>}
+              <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-lg p-4 sm:p-6 border border-gray-200 border-solid hover:shadow-md transition-shadow">
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
+                  <div className="flex-1 min-w-0">
+                    {talk.title && <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2">{talk.title}</h3>}
                     {talk.description && (
-                      <p className="text-gray-700 mb-4 leading-relaxed">{talk.description}</p>
+                      <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4 leading-relaxed">{talk.description}</p>
                     )}
 
-                    <div className="grid sm:grid-cols-2 gap-4 text-sm text-gray-600 mb-4 empty:hidden">
+                    <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 empty:hidden">
                       <div className="space-y-2 empty:hidden">
                         {talk.event && <p className="font-medium text-blue-600">{talk.event}</p>}
                         {talk.date && (
                           <p className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-1" />
+                            <Calendar className="w-3.5 h-3.5 mr-1" />
                             {talk.date}
                           </p>
                         )}
                         {talk.venue && (
                           <p className="flex items-center">
-                            <MapPin className="w-4 h-4 mr-1" />
+                            <MapPin className="w-3.5 h-3.5 mr-1" />
                             {talk.venue}
                           </p>
                         )}
@@ -203,13 +196,13 @@ export const TalksTab = ({ profile }) => {
                     </div>
 
                     {talk.photos && talk.photos.length > 0 && (
-                      <div className="flex flex-wrap gap-4 mt-4">
+                      <div className="flex flex-wrap gap-2.5 sm:gap-4 mt-3 sm:mt-4">
                         {talk.photos.map((photoUrl, pIdx) => (
                           <img
                             key={pIdx}
                             src={parseImageUrl(photoUrl)}
                             alt={`Talk photo ${pIdx + 1}`}
-                            className="h-32 w-auto object-cover rounded-md border border-gray-200 shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
+                            className="h-24 sm:h-32 w-auto object-cover rounded-md border border-gray-200 shadow-sm cursor-pointer hover:opacity-90 transition-opacity"
                             onClick={() => setSelectedPhoto(parseImageUrl(photoUrl))}
                           />
                         ))}
@@ -217,7 +210,7 @@ export const TalksTab = ({ profile }) => {
                     )}
                   </div>
 
-                  <div className="flex flex-col items-start lg:items-end gap-2">
+                  <div className="flex flex-col items-start lg:items-end gap-2 shrink-0">
                     <Badge className={getTypeColor(talk.type)}>
                       {formatType(talk.type)}
                     </Badge>

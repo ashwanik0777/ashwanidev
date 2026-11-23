@@ -14,7 +14,7 @@ function App() {
   // Enable cross-page hash-based scrolling (used by search)
   useHashScroll();
   const [isPreloadComplete, setIsPreloadComplete] = useState(() => {
-    return localStorage.getItem("preloadComplete") === "true";
+    return localStorage.getItem("preloadComplete") === "true" || (typeof window !== "undefined" && new URLSearchParams(window.location.search).has("nopreload"));
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(() => {

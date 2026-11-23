@@ -48,7 +48,7 @@ const TabContent = ({ activeTab , profile}) => {
   };
 
   return (
-    <div className="animate-fade-in w-5/6 mx-auto">
+    <div className="animate-fade-in w-full max-w-7xl px-3 sm:px-6 lg:w-5/6 mx-auto pb-12 min-w-0">
       {renderContent()}
     </div>
   );

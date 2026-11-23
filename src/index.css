@@ -2,6 +2,9 @@
 
 @theme {
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  /* wide: 1366px, the most common laptop width. A named breakpoint is sorted with sm/lg/xl;
+     an arbitrary min-[1366px]: is emitted before them, so sm:/lg: would override it. */
+  --breakpoint-wide: 85.375rem;
 }
 
 /* Base styles */

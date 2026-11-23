@@ -150,7 +150,9 @@ html, body {
  */
 @layer components {
   .justify-text,
-  .justify-all :where(p, li):not(:where(.text-center, .text-center *)) {
+  .justify-all :where(p, li):not(:where(.text-center, .text-center *)),
+  /* Set by src/utils/autoJustify.js on description text across the public pages */
+  [data-auto-justify] {
     text-align: justify;
     text-justify: inter-word;
   }

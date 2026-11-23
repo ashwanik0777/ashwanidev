@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import AppRouter from "./routes/router";
 import PreLoad from "../src/components/home/preLoad.jsx";
@@ -8,6 +8,7 @@ import DepartmentNavbar from "../src/components/departments/Navbar.jsx";
 import Footer from "../src/components/home/Footer.jsx";
 import ScrollToTop from "./hooks/scrollToTop.jsx";
 import useHashScroll from "./hooks/useHashScroll.js";
+import { watchJustify } from "./utils/autoJustify.js";
 
 function App() {
   // Enable cross-page hash-based scrolling (used by search)
@@ -38,6 +39,14 @@ function App() {
     }
   }, [isPreloadComplete]);
 
+  // Justified description text on the public pages (see utils/autoJustify.js).
+  // Dashboards and login pages are left as they are.
+  const pageContentRef = useRef(null);
+  useEffect(() => {
+    if (!isPreloadComplete || shouldHideChrome) return undefined;
+    return watchJustify(pageContentRef.current);
+  }, [isPreloadComplete, shouldHideChrome]);
+
 
   return (
     <div className="App">
@@ -56,7 +65,7 @@ function App() {
               ) : (
                 <Navbar />
               ))}
-            <div className={shouldHideChrome ? "pt-0" : isICTPage ? "pt-9 sm:pt-14 xl:pt-14" : "pt-[5.5rem] sm:pt-24 xl:pt-[6.1rem]"}>
+            <div ref={pageContentRef} className={shouldHideChrome ? "pt-0" : isICTPage ? "pt-9 sm:pt-14 xl:pt-14" : "pt-[5.5rem] sm:pt-24 xl:pt-[6.1rem]"}>
               <AppRouter />
             </div>
             {!shouldHideChrome && <Footer />}

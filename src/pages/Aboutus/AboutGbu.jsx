@@ -451,11 +451,12 @@ const AboutGbu = () => {
         {/* Vision & Mission Section */}
         <section className="py-6 sm:py-8 bg-slate-50 border-y border-slate-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Vision is one short statement and Mission a list of goals, so Vision takes a third
-                of the row and Mission two thirds; both cards end up with little empty space. */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+            {/* Vision is one short statement and Mission a list of goals, so from 1280px Vision takes a
+                third of the row and Mission two thirds. Below that a third is too narrow for justified
+                text (wide gaps between words), so the two cards stack at full width. */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 xl:gap-8 items-stretch">
               {/* Vision Card */}
-              <div className="lg:col-span-1 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-center group">
+              <div className="xl:col-span-1 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-center group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">
@@ -465,16 +466,18 @@ const AboutGbu = () => {
                       {aboutData.vision.title}
                     </h3>
                   </div>
-                  {/* Justified on phones and tablets; in the narrow desktop column justified text
-                      opens wide gaps between words, so it is left-aligned there. */}
-                  <p className="justify-text lg:text-left text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed font-normal">
+                  {/* Justified from 640px up (gaps between words stay under 1em at every width). On phones
+                      the column is too narrow for this text's long words, so it stays left-aligned there,
+                      as on the Chancellor and VC message pages. In the 1280px+ column the taller line
+                      spacing fills the card. */}
+                  <p className="text-left sm:text-justify text-slate-600 text-sm sm:text-base leading-relaxed xl:leading-[1.9] font-normal">
                     {aboutData.vision.description}
                   </p>
                 </div>
               </div>
 
               {/* Mission Card */}
-              <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
+              <div className="xl:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md p-6 sm:p-8 flex flex-col justify-between group">
                 <div>
                   <div className="flex items-center space-x-4 mb-5">
                     <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 ring-1 ring-blue-100 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:ring-blue-600 flex items-center justify-center shrink-0">

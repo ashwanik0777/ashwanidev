@@ -171,8 +171,8 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
                   )}
                 </dl>
 
-                {/* Vendors and JEs no longer track progress, so they don't see the bar. */}
-                {ticket.assigned_vendor_id && !['vendor', 'je'].includes(detail.viewer) && (
+                {/* Vendors, JEs and the complainant (faculty) don't see the progress bar. */}
+                {ticket.assigned_vendor_id && !['vendor', 'je', 'owner'].includes(detail.viewer) && (
                   <div className="mt-4">
                     <div className="mb-1 flex justify-between text-xs text-slate-500">
                       <span>Progress</span>

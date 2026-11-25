@@ -316,7 +316,7 @@ const MaintenanceComplaintForm = ({ onSubmitted }) => {
         <button
           type="submit"
           disabled={submitting || wordCount > MAX_WORDS}
-          className="flex items-center justify-center rounded-xl bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex items-center justify-center rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {submitting ? 'Submitting…' : 'Submit Complaint'}

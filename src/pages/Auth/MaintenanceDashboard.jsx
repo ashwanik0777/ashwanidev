@@ -47,7 +47,6 @@ const ROLE_DESCRIPTIONS = {
 const JE_TABS = [
   { key: "today", label: "Today's Complaints", icon: CalendarCheck, today: true, actionStages: ["pending_je_review"] },
   { key: "all", label: "All", icon: List },
-  { key: "new", label: "New Complaints", icon: Inbox, stages: ["pending_je_review"], action: true, description: "Review the complaint and assign it to a vendor." },
   { key: "vendor", label: "With Vendor", icon: Truck, stages: ["assigned_to_vendor", "work_in_progress"], description: "Vendor must visit within 2 working days, then carry out the work. Overdue visits are flagged automatically." },
   { key: "review", label: "Review & Verify", icon: ClipboardCheck, stages: ["inspection_submitted", "work_completed"], action: true, description: "Approve the completion date from the vendor's inspection report, or verify finished work and resolve / request rework." },
   { key: "delayed", label: "Delayed", icon: Clock, stages: ["delayed"], action: true, description: "Promised date passed. Review vendor remarks, then approve a revised timeline or escalate." },

@@ -14,15 +14,6 @@ const dotColor = (action) => {
   return 'bg-emerald-500';
 };
 
-// Faculty (the complainant) see a short version: submitted -> vendor assigned -> closed,
-// with only the details listed here.
-const SIMPLE_EVENTS = {
-  submitted: { details: ['issue_type'], showActor: true },
-  vendor_assigned: { details: ['vendor_name', 'site_visit_due_at'] },
-  vendor_reassigned: { details: ['vendor_name', 'site_visit_due_at'] },
-  resolved_and_closed: { details: [] },
-};
-
 const TicketTimeline = ({ ticketId, events, simple = false }) => {
   const openFile = async (eventId) => {
     try {
@@ -32,7 +23,8 @@ const TicketTimeline = ({ ticketId, events, simple = false }) => {
     }
   };
 
-  const shownEvents = simple ? (events || []).filter((event) => SIMPLE_EVENTS[event.action]) : events;
+  // Faculty (the complainant) see the same timeline as the JE / vendor, without the internal routing step.
+  const shownEvents = simple ? (events || []).filter((event) => event.action !== 'routed') : events;
 
   if (!shownEvents?.length) return <p className="text-sm text-slate-500">No activity yet.</p>;
 
@@ -43,9 +35,8 @@ const TicketTimeline = ({ ticketId, events, simple = false }) => {
   return (
     <ol className="relative space-y-5 border-l-2 border-emerald-500 pl-5">
       {shownEvents.map((event) => {
-        const simpleRule = simple ? SIMPLE_EVENTS[event.action] : null;
         const details = Object.entries(event.details || {})
-          .filter(([key]) => (simpleRule ? simpleRule.details.includes(key) : !HIDDEN_DETAILS.has(key)))
+          .filter(([key]) => !HIDDEN_DETAILS.has(key))
           .map(([key, value]) => [DETAIL_LABELS[key] || key, formatDetailValue(key, value)])
           .filter(([, value]) => value !== null);
 
@@ -63,22 +54,19 @@ const TicketTimeline = ({ ticketId, events, simple = false }) => {
               <p className="text-sm font-semibold text-slate-900">{EVENT_LABELS[event.action] || event.action}</p>
               <p className="text-xs text-slate-500">{formatDateTime(event.created_at)}</p>
             </div>
-            {simpleRule ? (
-              simpleRule.showActor && <p className="text-xs text-slate-500">{event.actor_name}</p>
-            ) : (
-              <p className="text-xs text-slate-500">
-                {event.actor_name || 'System'}
-                {event.actor_role && event.actor_role !== 'system' ? ` · ${ROLE_LABELS[event.actor_role] || event.actor_role}` : ''}
-              </p>
-            )}
+            <p className="text-xs text-slate-500">
+              {event.actor_name || 'System'}
+              {event.actor_role && event.actor_role !== 'system' ? ` · ${ROLE_LABELS[event.actor_role] || event.actor_role}` : ''}
+            </p>
 
-            {!simpleRule && event.details?.inspection_report && (
+            {event.details?.inspection_report && (
               <p className="mt-2 whitespace-pre-line rounded-lg bg-slate-50 p-2.5 text-sm text-slate-700">
                 <span className="font-medium">Inspection report: </span>
                 {event.details.inspection_report}
               </p>
             )}
-            {!simpleRule && event.remarks && event.action !== 'submitted' && (
+            {/* The JE's closing remarks are internal, so the complainant doesn't see them. */}
+            {event.remarks && event.action !== 'submitted' && !(simple && event.action === 'resolved_and_closed') && (
               <p className="mt-2 whitespace-pre-line rounded-lg bg-slate-50 p-2.5 text-sm text-slate-700">{event.remarks}</p>
             )}
             {details.length > 0 && (
@@ -91,7 +79,7 @@ const TicketTimeline = ({ ticketId, events, simple = false }) => {
                 ))}
               </dl>
             )}
-            {!simpleRule && event.has_attachment && (
+            {event.has_attachment && (
               <button
                 type="button"
                 onClick={() => openFile(event.id)}

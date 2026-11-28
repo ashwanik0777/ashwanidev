@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Loader2, Paperclip, X, AlertTriangle } from 'lucide-react';
+import { Loader2, Paperclip, X, AlertTriangle, Clock, Phone } from 'lucide-react';
 import { getMaintenanceTicket, openMaintenanceAttachment, fetchMaintenanceAttachment, getApiErrorMessage } from '../../../services/maintenanceService';
 import StageBadge, { SeverityBadge } from './StageBadge';
 import TicketTimeline from './TicketTimeline';
@@ -160,6 +160,15 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
                   <Field label="Vendor">
                     {ticket.assigned_vendor_name || 'Not assigned yet'}
                     {ticket.assigned_vendor_company && <span className="block text-xs text-slate-500">{ticket.assigned_vendor_company}</span>}
+                    {ticket.assigned_vendor_phone && (
+                      <a
+                        href={`tel:${String(ticket.assigned_vendor_phone).replace(/[^\d+]/g, '')}`}
+                        className="mt-0.5 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800"
+                      >
+                        <Phone className="h-3.5 w-3.5" />
+                        {ticket.assigned_vendor_phone}
+                      </a>
+                    )}
                   </Field>
                   {ticket.site_visit_due_at && <Field label="Site visit due">{formatDateTime(ticket.site_visit_due_at)}</Field>}
                   {ticket.site_visit_at && <Field label="Site visited on">{formatDateTime(ticket.site_visit_at)}</Field>}
@@ -217,8 +226,15 @@ const TicketDetailModal = ({ ticketId, onClose, onChanged }) => {
                 </Section>
               )}
 
+              {ticket.stage === 'work_completed' && !ticket.submitter_feedback_at && detail.viewer !== 'owner' && (
+                <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0" />
+                  Waiting for the complainant's feedback. The ticket can be closed only after the complainant confirms the work.
+                </div>
+              )}
+
               {detail.allowed_actions?.length > 0 && (
-                <Section title="Take action">
+                <Section title={detail.viewer === 'owner' ? 'Your feedback' : 'Take action'}>
                   <TicketActions ticket={ticket} allowedActions={detail.allowed_actions} onUpdated={handleUpdated} />
                 </Section>
               )}

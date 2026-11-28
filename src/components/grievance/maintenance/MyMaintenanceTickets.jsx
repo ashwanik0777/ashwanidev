@@ -105,6 +105,15 @@ const MyMaintenanceTickets = ({ refreshKey = 0, openTicketId, onOpenTicket }) =>
                   </td>
                   <td className="px-4 py-3">
                     <StageBadge stage={ticket.stage} />
+                    {ticket.stage === 'work_completed' && !ticket.submitter_feedback_at && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedId(ticket.ticket_id)}
+                        className="mt-1 block text-xs font-semibold text-blue-600 hover:text-blue-800"
+                      >
+                        Feedback pending — give feedback
+                      </button>
+                    )}
                     {ticket.assigned_je_name && <p className="mt-1 text-xs text-slate-500">JE: {ticket.assigned_je_name}</p>}
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 text-sm text-slate-700">{formatDate(ticket.approved_completion_date)}</td>

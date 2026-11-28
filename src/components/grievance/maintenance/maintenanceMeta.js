@@ -31,6 +31,7 @@ export const EVENT_LABELS = {
   timeline_revised: 'Revised timeline approved',
   work_completed: 'Vendor marked work completed',
   rework_requested: 'Rework requested by JE',
+  feedback_submitted: 'Feedback given by complainant',
   resolved_and_closed: 'Verified, resolved & closed',
   escalated: 'Escalated to senior officers',
   escalation_decided: 'Senior officer decision recorded',
@@ -70,6 +71,8 @@ export const DETAIL_LABELS = {
   location: 'Location',
   exact_location: 'Exact location',
   issue_type: 'Issue type',
+  rating: 'Rating',
+  satisfied: 'Problem resolved',
 };
 
 const IST = 'Asia/Kolkata';
@@ -96,6 +99,7 @@ export const formatDetailValue = (key, value) => {
   if (key === 'site_visit_due_at') return formatDateTime(value);
   if (key.endsWith('_date')) return formatDate(value);
   if (key === 'progress_percent') return `${value}%`;
+  if (key === 'rating') return `${value} / 5`;
   if (key === 'decision') return DECISION_LABELS[value] || value;
   if (key === 'escalated_from_stage') return STAGE_META[value]?.label || value;
   return String(value);

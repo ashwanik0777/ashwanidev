@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Loader2, Upload, X, ChevronDown } from 'lucide-react';
+import { Loader2, Upload, X, ChevronDown, Star } from 'lucide-react';
 import {
   performMaintenanceAction,
   listMaintenanceVendors,
@@ -57,6 +57,20 @@ const ACTION_FORMS = {
     attachment: true,
     fields: [{ name: 'remarks', type: 'textarea', label: 'Completion remarks', required: true }],
   },
+  submit_feedback: {
+    title: 'Give your feedback on the work',
+    hint: 'The vendor has reported the work as completed. Please check it — the JE will close the complaint only after your feedback.',
+    button: 'Submit Feedback',
+    tone: 'primary',
+    attachment: true,
+    attachmentWhen: { satisfied: 'no' },
+    attachmentLabel: 'Photo of the pending work (optional)',
+    fields: [
+      { name: 'satisfied', type: 'satisfaction', label: 'Has the problem been resolved?', required: true },
+      { name: 'rating', type: 'rating', label: 'Rate the work', required: true },
+      { name: 'remarks', type: 'textarea', label: 'Comments', requiredWhen: { satisfied: 'no' } },
+    ],
+  },
   mark_resolved: {
     title: 'Work satisfactory — resolve & close',
     hint: 'Notifies the faculty member and closes the ticket.',
@@ -112,6 +126,7 @@ const ACTION_FORMS = {
 
 const TONE_CLASSES = {
   default: 'bg-slate-900 hover:bg-slate-800',
+  primary: 'bg-blue-600 hover:bg-blue-700',
   success: 'bg-emerald-600 hover:bg-emerald-700',
   warning: 'bg-orange-600 hover:bg-orange-700',
   danger: 'bg-rose-600 hover:bg-rose-700',
@@ -119,6 +134,15 @@ const TONE_CLASSES = {
 
 const isVisible = (field, values) =>
   !field.showWhen || Object.entries(field.showWhen).every(([key, value]) => values[key] === value);
+
+const isRequired = (field, values) =>
+  Boolean(field.required) ||
+  Boolean(field.requiredWhen && Object.entries(field.requiredWhen).every(([key, value]) => values[key] === value));
+
+const SATISFACTION_OPTIONS = [
+  { value: 'yes', label: 'Yes, resolved', active: 'border-emerald-500 bg-emerald-50 text-emerald-800' },
+  { value: 'no', label: 'No, still pending', active: 'border-rose-500 bg-rose-50 text-rose-800' },
+];
 
 const buildInitialValues = (form, ticket) =>
   Object.fromEntries(
@@ -140,16 +164,18 @@ const ActionForm = ({ actionName, form, ticket, staffOptions, onDone }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const visibleFields = form.fields.filter((field) => isVisible(field, values));
-    const missing = visibleFields.find((field) => field.required && !String(values[field.name] || '').trim());
+    const missing = visibleFields.find((field) => isRequired(field, values) && !String(values[field.name] || '').trim());
     if (missing) {
       toast.error(`${missing.label} is required`);
       return;
     }
 
     const payload = Object.fromEntries(visibleFields.map((field) => [field.name, values[field.name]]));
+    // Send the file only while its upload box is shown (e.g. feedback photo only when "No").
+    const sendFile = form.attachment && isVisible({ showWhen: form.attachmentWhen }, values) ? file : null;
     setSubmitting(true);
     try {
-      const detail = await performMaintenanceAction(ticket.ticket_id, actionName, payload, file);
+      const detail = await performMaintenanceAction(ticket.ticket_id, actionName, payload, sendFile);
       toast.success(`${form.title} — done`);
       onDone(detail);
     } catch (error) {
@@ -199,6 +225,42 @@ const ActionForm = ({ actionName, form, ticket, staffOptions, onDone }) => {
           </select>
         );
       }
+      case 'rating':
+        return (
+          <div className="flex items-center gap-1" role="radiogroup" aria-label={field.label}>
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                role="radio"
+                aria-checked={Number(value) === star}
+                aria-label={`${star} out of 5`}
+                onClick={() => setValue(field.name, String(star))}
+                className="rounded p-0.5 transition hover:scale-110"
+              >
+                <Star className={`h-7 w-7 ${Number(value) >= star ? 'fill-amber-400 text-amber-400' : 'text-slate-300'}`} />
+              </button>
+            ))}
+            {value && <span className="ml-2 text-sm text-slate-600">{value} / 5</span>}
+          </div>
+        );
+      case 'satisfaction':
+        return (
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {SATISFACTION_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setValue(field.name, option.value)}
+                className={`rounded-xl border px-3 py-2.5 text-sm font-medium transition ${
+                  value === option.value ? option.active : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        );
       case 'decision':
         return (
           <div className="space-y-2">
@@ -228,16 +290,16 @@ const ActionForm = ({ actionName, form, ticket, staffOptions, onDone }) => {
           <div key={field.name}>
             <label htmlFor={`${actionName}-${field.name}`} className="mb-1.5 block text-sm font-medium text-slate-700">
               {field.label}
-              {field.required && <span className="text-rose-500"> *</span>}
+              {isRequired(field, values) && <span className="text-rose-500"> *</span>}
             </label>
             {renderField(field)}
           </div>
         )
       )}
 
-      {form.attachment && (
+      {form.attachment && isVisible({ showWhen: form.attachmentWhen }, values) && (
         <div>
-          <span className="mb-1.5 block text-sm font-medium text-slate-700">Photo / supporting file (optional)</span>
+          <span className="mb-1.5 block text-sm font-medium text-slate-700">{form.attachmentLabel || 'Photo / supporting file (optional)'}</span>
           <div className="flex flex-wrap items-center gap-3">
             <label className="inline-flex cursor-pointer items-center rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
               <Upload className="mr-2 h-4 w-4" />
